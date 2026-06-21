@@ -162,7 +162,7 @@ const defaultInstructions = [
   { title: "3. Get Your Result", desc: "View the output instantly. Copy it to your clipboard or download it as a file for later use." },
 ];
 
-const defaultFaqs = [
+const defaultFaqs: { question: string; answer: string }[] = [
   { question: "Is this tool free to use?", answer: "Yes, this tool is completely free. No credit card or registration is required for standard usage." },
   { question: "How is my privacy protected?", answer: "All processing happens 100% locally in your browser. Your data is never uploaded to any server." },
   { question: "Can I use this tool offline?", answer: "Yes. Once the page has loaded, the tool runs entirely offline without requiring an internet connection." },
@@ -241,7 +241,14 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
 
   const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   const steps = tool.instructions || categoryInstructionTemplates[categoryKey] || defaultInstructions;
-  const faqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
+  const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
+  const faqs = [
+    {
+      question: `What is ${tool.name}?`,
+      answer: `${tool.name} is a free online tool that ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. It runs entirely in your browser — nothing is uploaded to any server.`
+    },
+    ...baseFaqs,
+  ];
 
   return (
     <div className="w-full mt-16 text-left space-y-16 border-t border-[var(--border-subtle)] pt-16">
