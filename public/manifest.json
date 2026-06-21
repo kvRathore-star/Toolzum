@@ -1,21 +1,27 @@
 {
-  "name": "ToolHub",
+  "name": "ToolHub — 260+ Free Privacy-First Tools",
   "short_name": "ToolHub",
-  "description": "200+ free, privacy-first web tools.",
+  "description": "260+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#020617",
   "theme_color": "#020617",
+  "scope": "/",
+  "categories": ["utilities", "productivity", "photo", "video", "education"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

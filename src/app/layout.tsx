@@ -28,6 +28,7 @@ const toolCount = toolsRegistry.length;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gotoolhub.com'),
+  alternates: { canonical: "https://gotoolhub.com" },
   title: {
     default: "ToolHub — Privacy-First Web Tools",
     template: "%s | ToolHub",
@@ -49,9 +50,11 @@ export const metadata: Metadata = {
     title: "ToolHub — Privacy-First Web Tools",
     description:
       `${toolCount}+ free web tools. Everything processed in your browser.`,
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/og-image.png"],
   },
 };
 
@@ -67,15 +70,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased dark`} suppressHydrationWarning>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col transition-colors duration-300">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-white focus:rounded-xl focus:text-sm focus:font-medium"
         >
           Skip to main content
         </a>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <Header />
 
           <main id="main-content" className="flex-1">

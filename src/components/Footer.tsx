@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Globe, Moon, Sun } from "lucide-react";
-import { GithubLogo, TwitterLogo, LinkedinLogo, YoutubeLogo } from "@phosphor-icons/react";
 import { useTheme } from "next-themes";
 
 export function Footer() {
@@ -38,7 +37,7 @@ export function Footer() {
 
           {/* Column 2: Tools */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.1em]">Tools</h4>
+            <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.1em]">Categories</h4>
             <ul className="flex flex-col gap-3 text-sm">
               <li><Link href="/tools?category=Image" className="hover:text-[var(--accent)] transition-colors">Image</Link></li>
               <li><Link href="/tools?category=PDF" className="hover:text-[var(--accent)] transition-colors">PDF</Link></li>

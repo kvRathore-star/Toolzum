@@ -17,21 +17,55 @@ async function hashKey(rawKey: string): Promise<string> {
 export async function onRequestPost(context: any) {
   const { request, env } = context;
 
-  // Verify user session
-  const auth = request.headers.get("Authorization");
-  if (!auth?.startsWith("Bearer ") && !auth?.startsWith("Session ")) {
-    // For web UI, accept session cookie-based auth
+  // Resolve userId from middleware context (set by v1/_middleware for Bearer token),
+  // or validate session cookie for web UI users
+  let userId = context.userId;
+
+  if (!userId) {
+    // Session-based auth (web UI): validate better-auth session token from Cookie
     const cookieHeader = request.headers.get("Cookie") || "";
-    if (!cookieHeader.includes("better-auth")) {
-      return new Response(JSON.stringify({ error: "Authentication required. Sign in to create API keys." }), { status: 401, headers: { "Content-Type": "application/json" } });
+    const cookies = Object.fromEntries(
+      cookieHeader.split(";").map((c: string) => {
+        const [k, ...v] = c.trim().split("=");
+        return [k, v.join("=")];
+      })
+    );
+    const sessionToken = Object.keys(cookies).find(k => k.includes("better-auth"));
+    if (sessionToken && cookies[sessionToken]) {
+      const dbSession = drizzle(env.DB, { schema });
+      const sessionResult = await dbSession
+        .select()
+        .from(schema.sessions)
+        .where(eq(schema.sessions.token, cookies[sessionToken]))
+        .get();
+      if (sessionResult && new Date(sessionResult.expiresAt) > new Date()) {
+        userId = sessionResult.userId;
+      }
     }
   }
 
-  // Extract user from session - for now use x-user-id header set by dashboard
-  // In production, validate the better-auth session token
-  const userId = request.headers.get("x-user-id");
   if (!userId) {
-    return new Response(JSON.stringify({ error: "Could not identify user" }), { status: 401, headers: { "Content-Type": "application/json" } });
+    return new Response(JSON.stringify({ error: "Authentication required. Sign in to create API keys." }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+
+  // Non-blocking Turnstile check on key creation
+  const turnstileToken = request.headers.get("x-turnstile-token");
+  if (turnstileToken && env.TURNSTILE_SECRET_KEY) {
+    try {
+      const turnstileBody = new FormData();
+      turnstileBody.append("secret", env.TURNSTILE_SECRET_KEY);
+      turnstileBody.append("response", turnstileToken);
+      const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        body: turnstileBody,
+      });
+      const turnstileResult: any = await turnstileRes.json();
+      if (!turnstileResult.success) {
+        console.warn("Turnstile verification failed for key creation");
+      }
+    } catch (tsErr) {
+      console.warn("Turnstile verification error:", tsErr);
+    }
   }
 
   const db = drizzle(env.DB, { schema });
@@ -78,9 +112,9 @@ export async function onRequestPost(context: any) {
 }
 
 export async function onRequestGet(context: any) {
-  const { request, env } = context;
+  const { env } = context;
 
-  const userId = request.headers.get("x-user-id");
+  const userId = context.userId;
   if (!userId) {
     return new Response(JSON.stringify({ error: "Could not identify user" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }

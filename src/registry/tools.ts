@@ -735,14 +735,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Whisper API"
   },
   {
-    id: "65",
-    name: "SoundCloud Downloader",
-    slug: "soundcloud-downloader",
-    category: "Downloader",
-    description: "Download audio from SoundCloud",
-    dependencies: "yt-dlp"
-  },
-  {
     id: "66",
     name: "Meme Generator",
     slug: "meme-generator",

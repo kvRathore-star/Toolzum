@@ -42,8 +42,9 @@ export async function onRequest(context: any) {
     return new Response(JSON.stringify({ error: "Rate limit exceeded for this API key" }), { status: 429, headers: { "Content-Type": "application/json" } });
   }
 
-  // Attach key info to context for downstream handlers
+  // Attach key info and userId to context for downstream handlers
   context.apiKey = keyRecord;
+  context.userId = keyRecord.userId;
 
   const response = await next();
 

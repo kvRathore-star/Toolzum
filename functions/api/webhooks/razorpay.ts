@@ -35,20 +35,54 @@ export async function onRequestPost(context: any) {
       });
     }
 
-    // 1. Signature Verification
-    if (signature) {
-      const computedSig = await computeHmacSha256Hex(rawBody, webhookSecret);
-      if (computedSig !== signature) {
-        return new Response(JSON.stringify({ error: "Invalid signature verification failed" }), {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
+    // 1. Mandatory Signature Verification
+    if (!signature) {
+      return new Response(JSON.stringify({ error: "Missing webhook signature" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    const computedSig = await computeHmacSha256Hex(rawBody, webhookSecret);
+    if (computedSig !== signature) {
+      return new Response(JSON.stringify({ error: "Invalid signature verification failed" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     // 2. Parse Event Body
     const event = JSON.parse(rawBody);
     const eventType = event.event; // e.g. 'payment.captured' or 'order.paid'
+
+    // 3. Timestamp freshness check (reject events older than 5 minutes)
+    if (event.created_at) {
+      const eventTime = Math.floor(new Date(event.created_at * 1000).getTime() / 1000);
+      if (Math.abs(Date.now() / 1000 - eventTime) > 300) {
+        console.warn(`Razorpay webhook event too old: created_at=${event.created_at}`);
+        return new Response(JSON.stringify({ status: "ignored", reason: "event too old" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    }
+
+    // 4. Idempotency check — skip if already processed
+    if (event.id) {
+      const eventId = event.id;
+      const idempotencyKey = `webhook_razorpay_${eventId}`;
+      const kv = context.env.WEBHOOK_KV || context.env.RATE_LIMIT_KV;
+      if (kv) {
+        const alreadyProcessed = await kv.get(idempotencyKey);
+        if (alreadyProcessed) {
+          console.log(`Razorpay event ${eventId} already processed, skipping`);
+          return new Response(JSON.stringify({ status: "skipped", reason: "already processed" }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+        await kv.put(idempotencyKey, "1", { expirationTtl: 604800 });
+      }
+    }
 
     // We process successful payments: payment.captured or order.paid
     if (["payment.captured", "order.paid"].includes(eventType)) {

@@ -28,8 +28,14 @@ export async function onRequestPost(context: any) {
       const authHeader = request.headers.get("Authorization") || "";
       if (authHeader.startsWith("Bearer ")) {
         const token = authHeader.slice(7);
+        if (!context.env.JWT_SECRET) {
+          return new Response(JSON.stringify({ error: "JWT secret not configured" }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
         const { jwtVerify } = await import("jose");
-        const jwtSecret = new TextEncoder().encode(context.env.JWT_SECRET || "insecure-fallback");
+        const jwtSecret = new TextEncoder().encode(context.env.JWT_SECRET);
         const { payload } = await jwtVerify(token, jwtSecret);
         if (payload?.sub) {
           userId = payload.sub as string;
@@ -52,6 +58,26 @@ export async function onRequestPost(context: any) {
         status: 400,
         headers: { "Content-Type": "application/json" },
       });
+    }
+
+    // Non-blocking Turnstile check
+    const turnstileToken = request.headers.get("x-turnstile-token");
+    if (turnstileToken && context.env.TURNSTILE_SECRET_KEY) {
+      try {
+        const turnstileBody = new FormData();
+        turnstileBody.append("secret", context.env.TURNSTILE_SECRET_KEY);
+        turnstileBody.append("response", turnstileToken);
+        const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+          method: "POST",
+          body: turnstileBody,
+        });
+        const turnstileResult: any = await turnstileRes.json();
+        if (!turnstileResult.success) {
+          console.warn("Turnstile verification failed for create-order");
+        }
+      } catch (tsErr) {
+        console.warn("Turnstile verification error:", tsErr);
+      }
     }
 
     const RAZORPAY_KEY_ID = context.env.RAZORPAY_KEY_ID;
@@ -96,7 +122,7 @@ export async function onRequestPost(context: any) {
         const order = await razorpay.orders.create({
           amount: amountInPaise,
           currency: "INR",
-          receipt: `receipt_order_${Date.now()}`,
+          receipt: `receipt_${crypto.randomUUID().slice(0, 8)}`,
         });
         orderId = order.id;
       } catch (error: any) {
@@ -111,7 +137,7 @@ export async function onRequestPost(context: any) {
       if (db) {
         try {
           await db.insert(schema.payments).values({
-            id: `pay_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+            id: crypto.randomUUID(),
             userId,
             gateway: "razorpay",
             orderId: orderId,
@@ -164,15 +190,15 @@ export async function onRequestPost(context: any) {
 
         const paymentInfo = await client.payments.create({
           billing: {
-            city: "New York",
+            city: "City",
             country: "US",
-            state: "NY",
-            street: "100 Broadway",
-            zipcode: "10005",
+            state: "State",
+            street: "123 Main St",
+            zipcode: "00000",
           },
           customer: {
-            email: "customer@toolhub.online",
-            name: "ToolHub Subscriber",
+            email: "customer@example.com",
+            name: "ToolHub User",
           },
           product_cart: [
             {
@@ -196,7 +222,7 @@ export async function onRequestPost(context: any) {
       if (db) {
         try {
           await db.insert(schema.payments).values({
-            id: `pay_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+            id: crypto.randomUUID(),
             userId,
             gateway: "dodo",
             orderId: paymentId,

@@ -172,7 +172,8 @@ export function FileUploader({
       processFiles([file]);
       setUrlInput("");
       setShowUrlInput(false);
-    } catch {
+    } catch (e) {
+      console.error("[toolhub]", e);
       setUrlError("Failed to load file from URL. Check the link and try again.");
     } finally {
       setUrlLoading(false);

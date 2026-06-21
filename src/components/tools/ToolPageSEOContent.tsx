@@ -170,6 +170,10 @@ const defaultFaqs = [
   { question: "What are the system requirements?", answer: "Any modern web browser (Chrome, Firefox, Safari, Edge) on desktop or mobile. No installation needed." },
 ];
 
+function getCategoryPath(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
 function getCategoryKey(category: string): string {
   const map: Record<string, string> = {
     "pdf": "PDF",
@@ -202,14 +206,40 @@ function getCategoryKey(category: string): string {
   return map[normalized] || category;
 }
 
+const crossCategoryMap: Record<string, string[]> = {
+  "PDF": ["Converter", "Image", "Text"],
+  "Image": ["Design", "Branding", "PDF"],
+  "Video": ["Audio", "Downloader", "Converter"],
+  "Audio": ["Video", "Converter", "Downloader"],
+  "Developer": ["SEO", "Utility", "Productivity"],
+  "Text": ["AI", "Developer", "SEO"],
+  "AI": ["Text", "Image", "Marketing"],
+  "Utility": ["Developer", "Productivity", "Finance"],
+  "Converter": ["PDF", "Image", "Video"],
+  "Downloader": ["Video", "Audio", "Extension"],
+  "Finance": ["Utility", "Productivity", "Privacy"],
+  "SEO": ["Developer", "Marketing", "Text"],
+  "Privacy": ["Developer", "Utility", "Text"],
+  "Marketing": ["AI", "SEO", "Design"],
+  "Branding": ["Design", "Image", "Marketing"],
+  "Design": ["Branding", "Image", "Productivity"],
+};
+
 export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
-  const relatedTools = toolsRegistry
+  const categoryKey = getCategoryKey(tool.category);
+
+  const sameCategoryTools = toolsRegistry
     .filter((t) => t.category === tool.category && t.slug !== tool.slug)
     .slice(0, 3);
 
-  const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-  const categoryKey = getCategoryKey(tool.category);
+  const crossCategories = crossCategoryMap[categoryKey] || [];
+  const crossCategoryTools = toolsRegistry
+    .filter((t) => crossCategories.includes(getCategoryKey(t.category)) && t.slug !== tool.slug)
+    .slice(0, 3);
 
+  const allRelated = [...sameCategoryTools, ...crossCategoryTools];
+
+  const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   const steps = tool.instructions || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const faqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
 
@@ -231,12 +261,12 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
         </div>
       </section>
 
-      {relatedTools.length > 0 && (
+      {allRelated.length > 0 && (
         <section className="space-y-6">
           <div className="flex justify-between items-center pb-2">
             <h2 className="text-2xl font-semibold text-[var(--text-primary)] flex items-center gap-2.5">
               <Layers className="w-5 h-5 text-[var(--accent)]" />
-              <span>Related {displayCategory} Tools</span>
+              <span>Similar Tools You Might Need</span>
             </h2>
             <Link 
               href={`/tools?category=${encodeURIComponent(tool.category)}`}
@@ -246,11 +276,11 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {relatedTools.map((t) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {allRelated.map((t) => (
               <Link 
                 key={t.id} 
-                href={`/${t.category.toLowerCase().replace(/\s+/g, "-")}/${t.slug}`}
+                href={`/${getCategoryPath(t.category)}/${t.slug}`}
                 className="group p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl hover:border-[var(--border-default)] transition-all flex flex-col justify-between"
               >
                 <div>

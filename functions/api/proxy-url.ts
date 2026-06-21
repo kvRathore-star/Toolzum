@@ -9,6 +9,37 @@ async function hashKey(rawKey: string): Promise<string> {
   return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
+function isPrivateIP(hostname: string): boolean {
+  if (hostname === "localhost") return true;
+  if (hostname === "127.0.0.1") return true;
+  if (hostname.startsWith("[")) {
+    const ipv6 = hostname.slice(1, -1).toLowerCase();
+    if (ipv6 === "::1") return true;
+    if (ipv6.startsWith("fc") || ipv6.startsWith("fd")) return true;
+    if (ipv6.startsWith("fe80")) return true;
+    return false;
+  }
+  const parts = hostname.split(".");
+  if (parts.length !== 4) return false;
+  const num = parts.map(p => parseInt(p, 10));
+  if (num.some(n => isNaN(n) || n < 0 || n > 255)) return false;
+  if (num[0] === 10) return true;
+  if (num[0] === 172 && num[1] >= 16 && num[1] <= 31) return true;
+  if (num[0] === 192 && num[1] === 168) return true;
+  if (num[0] === 127) return true;
+  if (num[0] === 169 && num[1] === 254) return true;
+  return false;
+}
+
+function constantTimeEqual(a: string, b: string): boolean {
+  let result = 0;
+  const maxLen = Math.max(a.length, b.length);
+  for (let i = 0; i < maxLen; i++) {
+    result |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  }
+  return result === 0;
+}
+
 export async function onRequestGet(context: any) {
   const { request, env } = context;
   const url = new URL(request.url).searchParams.get("url");
@@ -76,7 +107,7 @@ export async function onRequestGet(context: any) {
     // Internal tool auth via shared secret
     const signature = request.headers.get("X-ToolHub-Signature");
     const expectedSignature = env.PROXY_SECRET;
-    if (!signature || !expectedSignature || signature !== expectedSignature) {
+    if (!signature || !expectedSignature || !constantTimeEqual(signature, expectedSignature)) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
     }
     isAuthenticated = true;
@@ -89,32 +120,30 @@ export async function onRequestGet(context: any) {
   // --- Rate limiting ---
   // Per-IP for internal tools, per-key limits already checked above for developer keys
   const kv = env.RATE_LIMIT_KV;
-  if (kv && !isDeveloperKey) {
-    const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    const key = `ratelimit_${ip}`;
-    const current = await kv.get(key);
-    const count = current ? parseInt(current) : 0;
+  if (!isDeveloperKey) {
+    if (!kv) {
+      console.warn("RATE_LIMIT_KV binding missing — rate limiting disabled for non-developer keys");
+    } else {
+      const ip = request.headers.get("cf-connecting-ip") || "unknown";
+      const key = `ratelimit_${ip}`;
+      const current = await kv.get(key);
+      const count = current ? parseInt(current) : 0;
 
-    if (count >= 3) {
-      return new Response(JSON.stringify({ error: "Too Many Requests" }), { status: 429, headers: { "Content-Type": "application/json" } });
+      if (count >= 3) {
+        return new Response(JSON.stringify({ error: "Too Many Requests" }), { status: 429, headers: { "Content-Type": "application/json" } });
+      }
+      await kv.put(key, (count + 1).toString(), { expirationTtl: 60 });
     }
-    await kv.put(key, (count + 1).toString(), { expirationTtl: 60 });
   }
 
-  // Block localhost / internal IPs
-  if (
-    parsed.hostname === "localhost" ||
-    parsed.hostname === "127.0.0.1" ||
-    parsed.hostname === "[::1]" ||
-    parsed.hostname.startsWith("192.168.") ||
-    parsed.hostname.startsWith("10.") ||
-    parsed.hostname.startsWith("172.16.")
-  ) {
+  // Block private / internal IPs using CIDR matching
+  if (isPrivateIP(parsed.hostname)) {
     return new Response(JSON.stringify({ error: "Internal URLs blocked" }), { status: 403, headers: { "Content-Type": "application/json" } });
   }
 
   try {
     const res = await fetch(url, {
+      redirect: "manual",
       headers: {
         "User-Agent": "ToolHub/1.0 (URL-Import-Proxy)",
       },

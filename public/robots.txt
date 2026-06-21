@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gotoolhub.com/sitemap.xml

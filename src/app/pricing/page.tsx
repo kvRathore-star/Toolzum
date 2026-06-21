@@ -31,12 +31,12 @@ export default function PricingPage() {
     USD: {
       weekly: { price: "4.99", unit: "week", label: "Weekly" },
       monthly: { price: "14.99", unit: "month", label: "Monthly" },
-      yearly: { price: "149.99", unit: "year", label: "Yearly", discount: "Save 20%" },
+      yearly: { price: "99", unit: "year", label: "Yearly", discount: "Save 45%" },
     },
     INR: {
       weekly: { price: "99", unit: "week", label: "Weekly" },
       monthly: { price: "299", unit: "month", label: "Monthly" },
-      yearly: { price: "2999", unit: "year", label: "Yearly", discount: "Save 16%" },
+      yearly: { price: "1999", unit: "year", label: "Yearly", discount: "Save 44%" },
     },
   };
 
@@ -73,7 +73,7 @@ export default function PricingPage() {
             One Plan. Total Freedom.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlock the power of all 224 tools with zero limits. No maintenance, zero server logs, completely runs on your device.
+            Unlock the power of all 260+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export default function PricingPage() {
                 )}
               </div>
               <p className="text-sm text-[var(--text-secondary)] mb-6">
-                Complete access to the entire 224-tool offline suite.
+                Complete access to the entire 260+ tool offline suite.
               </p>
               <div className="flex items-baseline gap-1 mb-6">
                 <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
@@ -175,6 +175,20 @@ export default function PricingPage() {
                 </span>
                 <span className="text-sm text-[var(--text-muted)]">/{currentPlan.unit}</span>
               </div>
+
+              {/* Annual price anchor for monthly/weekly viewers */}
+              {billingInterval !== "yearly" && (
+                <p className="text-[11px] text-[var(--text-muted)] -mt-4 mb-6">
+                  or{" "}
+                  <span className="font-semibold text-[var(--text-primary)]">
+                    {currencySymbol}{activePricing.yearly.price}
+                  </span>
+                  /year{" "}
+                  <span className="text-[var(--success)] font-semibold">
+                    (save {activePricing.yearly.discount?.replace("Save ", "")})
+                  </span>
+                </p>
+              )}
 
               {/* Checkout Form */}
               <form action="/api/payments/create-order" method="POST" className="mb-8">

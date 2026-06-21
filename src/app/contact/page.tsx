@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Mail, 
   Send, 
@@ -13,6 +13,17 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function ContactPage() {
+  useEffect(() => {
+    document.title = "Contact | ToolHub";
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'description');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', 'Contact ToolHub — get in touch with our team for support, feedback, or inquiries.');
+  }, []);
+
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -30,6 +41,13 @@ export default function ContactPage() {
     }
     
     setLoading(true);
+    try {
+      const submissions = JSON.parse(localStorage.getItem("th_contact_submissions") || "[]");
+      submissions.push({ ...formData, timestamp: Date.now() });
+      localStorage.setItem("th_contact_submissions", JSON.stringify(submissions.slice(-10)));
+    } catch (e) {
+      console.error("[toolhub] Failed to store contact submission", e);
+    }
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);

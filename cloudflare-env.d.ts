@@ -3,21 +3,21 @@
 declare global {
   namespace Cloudflare {
     interface Env {
-      // D1 Database (tool metadata, user preferences)
       DB: D1Database;
-
-      // KV Namespace (global config, feature flags, rate limits)
       KV_CONFIG: KVNamespace;
-
-      // R2 Bucket (transient file processing)
       R2_STORE: R2Bucket;
-
-      // Turnstile secret key for server-side verification
       TURNSTILE_SECRET_KEY: string;
+      RATE_LIMIT_KV: KVNamespace;
+      PROXY_SECRET: string;
+      JWT_SECRET: string;
+      RAZORPAY_KEY_ID: string;
+      RAZORPAY_KEY_SECRET: string;
+      RAZORPAY_WEBHOOK_SECRET: string;
+      DODO_API_KEY: string;
+      DODO_WEBHOOK_SECRET: string;
     }
   }
 
-  // Extend the global process.env for Edge compatibility
   namespace NodeJS {
     interface ProcessEnv extends Cloudflare.Env {}
   }

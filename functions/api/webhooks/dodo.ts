@@ -83,24 +83,53 @@ export async function onRequestPost(context: any) {
       });
     }
 
-    // 1. Verify signature
-    if (webhookId && signatureHeader) {
-      const isValid = await verifyDodoSignature(
-        webhookId,
-        timestamp,
-        rawBody,
-        signatureHeader,
-        webhookSecret
-      );
-      if (!isValid) {
-        return new Response(JSON.stringify({ error: "Invalid signature verification failed" }), {
-          status: 400,
+    // 1. Mandatory signature verification
+    if (!webhookId || !signatureHeader) {
+      return new Response(JSON.stringify({ error: "Missing webhook headers" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // 2. Timestamp freshness check
+    const parsedTimestamp = parseInt(timestamp, 10);
+    if (isNaN(parsedTimestamp) || Math.abs(Date.now() / 1000 - parsedTimestamp) > 300) {
+      return new Response(JSON.stringify({ error: "Webhook timestamp too old or invalid" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const isValid = await verifyDodoSignature(
+      webhookId,
+      timestamp,
+      rawBody,
+      signatureHeader,
+      webhookSecret
+    );
+    if (!isValid) {
+      return new Response(JSON.stringify({ error: "Invalid signature verification failed" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // 3. Idempotency check — skip if already processed
+    const idempotencyKey = `webhook_dodo_${webhookId}`;
+    const kv = context.env.WEBHOOK_KV || context.env.RATE_LIMIT_KV;
+    if (kv) {
+      const alreadyProcessed = await kv.get(idempotencyKey);
+      if (alreadyProcessed) {
+        console.log(`Dodo webhook ${webhookId} already processed, skipping`);
+        return new Response(JSON.stringify({ status: "skipped", reason: "already processed" }), {
+          status: 200,
           headers: { "Content-Type": "application/json" },
         });
       }
+      await kv.put(idempotencyKey, "1", { expirationTtl: 604800 });
     }
 
-    // 2. Parse Event Body
+    // 4. Parse Event Body
     const event = JSON.parse(rawBody);
     const eventType = event.event; // e.g. 'payment.succeeded' or 'subscription.created'
 

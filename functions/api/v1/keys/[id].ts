@@ -3,14 +3,14 @@ import * as schema from "../../../../src/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function onRequestDelete(context: any) {
-  const { request, env, params } = context;
+  const { env, params } = context;
   const keyId = params.id;
 
   if (!keyId) {
     return new Response(JSON.stringify({ error: "Missing key ID" }), { status: 400, headers: { "Content-Type": "application/json" } });
   }
 
-  const userId = request.headers.get("x-user-id");
+  const userId = context.userId;
   if (!userId) {
     return new Response(JSON.stringify({ error: "Could not identify user" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }
@@ -39,7 +39,7 @@ export async function onRequestPatch(context: any) {
     return new Response(JSON.stringify({ error: "Missing key ID" }), { status: 400, headers: { "Content-Type": "application/json" } });
   }
 
-  const userId = request.headers.get("x-user-id");
+  const userId = context.userId;
   if (!userId) {
     return new Response(JSON.stringify({ error: "Could not identify user" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }

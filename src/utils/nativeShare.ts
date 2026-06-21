@@ -1,8 +1,11 @@
 import { Capacitor } from '@capacitor/core';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
+import { checkAndRecordDownload } from './freeUsageGuard';
 
 export async function downloadOrShare(blobUrl: string, fileName: string) {
+  if (!(await checkAndRecordDownload())) return;
+
   if (Capacitor.isNativePlatform()) {
     try {
       // Fetch blob from blob url

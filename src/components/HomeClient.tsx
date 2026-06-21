@@ -34,7 +34,7 @@ const STEPS = [
 const WHY_CHOOSE = [
   { icon: Lock, title: 'Zero Data Leaving', desc: 'All processing happens client-side. No servers, no logs, no uploads.' },
   { icon: Zap, title: 'Edge-Accelerated', desc: 'Powered by Cloudflare Workers & WebAssembly for near-instant execution.' },
-  { icon: Layers, title: '260+ Tools', desc: `From PDF compression to AI image generation — ${toolCount} tools and counting.` },
+  { icon: Layers, title: `${toolCount}+ Tools`, desc: `From PDF compression to AI image generation — ${toolCount} tools and counting.` },
   { icon: Globe, title: 'Works Offline', desc: 'Many tools remain functional even without an internet connection.' },
   { icon: Palette, title: 'Beautiful by Default', desc: 'Dark & light themes. Fluid animations. Typography crafted for readability.' },
   { icon: BarChart3, title: 'No Rate Limits', desc: 'Free tier gives you generous daily usage. Pro unlocks everything.' },
@@ -66,6 +66,11 @@ const USE_CASES = [
     title: 'For Business',
     items: ['Merge & split PDF contracts', 'Generate GST invoices', 'Calculate SaaS pricing', 'Create professional business cards'],
     slug: '/tools?category=Business',
+  },
+  {
+    title: 'For Students',
+    items: ['Convert documents between formats for assignments', 'Generate citations & bibliographies', 'Compress images for submissions', 'Calculate GPA, loans & budgets'],
+    slug: '/tools?category=Text',
   },
 ];
 
@@ -375,8 +380,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               href="/tools"
               className="group flex flex-col items-center justify-center p-5 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 transition-all duration-300 h-full text-center"
             >
-              <span className="text-2xl mb-2">+{toolCount - CATEGORIES.reduce((s, c) => s + toolsRegistry.filter(t => t.category === c.label || t.category === c.id).length, 0)}</span>
-              <span className="text-xs text-[var(--text-muted)]">More categories</span>
+              <span className="text-lg font-semibold mb-1">+{toolCount - CATEGORIES.reduce((s, c) => s + toolsRegistry.filter(t => t.category === c.label || t.category === c.id).length, 0)} tools</span>
+              <span className="text-xs text-[var(--text-muted)]">&amp; More categories</span>
             </Link>
           </motion.div>
         </div>
@@ -401,7 +406,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {USE_CASES.map((uc, i) => (
             <motion.div
               key={uc.title}

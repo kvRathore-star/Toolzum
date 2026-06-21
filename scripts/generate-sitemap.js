@@ -83,9 +83,12 @@ function generateSitemap() {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
+  const lastmod = new Date().toISOString().split('T')[0];
+
   for (const url of allUrls) {
     xml += `  <url>\n`;
     xml += `    <loc>${url.loc}</loc>\n`;
+    xml += `    <lastmod>${lastmod}</lastmod>\n`;
     xml += `    <changefreq>${url.changefreq}</changefreq>\n`;
     xml += `    <priority>${url.priority}</priority>\n`;
     xml += `  </url>\n`;

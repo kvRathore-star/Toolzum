@@ -15,6 +15,8 @@ const MENU_COLUMN_DEFS = [
   { title: "✍ Text", category: "Text", allHref: "/tools?category=Text", slugs: ["ai-writing-assistant", "grammar-checker-extension", "ai-paraphrasing-tool", "text-summarizer", "ai-translator"] },
   { title: "🎵 Audio", category: "Audio", allHref: "/tools?category=Audio", slugs: ["text-to-speech-tts", "audio-cutter", "ai-audio-enhancer", "speech-to-text", "ai-music-generator"] },
   { title: "🤖 AI Tools", category: "AI", allHref: "/tools?category=AI", slugs: ["ai-chat-hub", "ai-image-generator", "ai-document-chat", "ai-code-generator", "ai-video-summarizer"] },
+  { title: "💻 Developer", category: "Developer", allHref: "/tools?category=Developer", slugs: ["json-formatter", "css-minifier", "sql-formatter", "diff-checker", "html-to-markdown"] },
+  { title: "🔧 Utility", category: "Utility", allHref: "/tools?category=Utility", slugs: ["qr-code-generator", "color-picker", "lorem-ipsum-generator", "morse-code-translator", "password-strength-checker"] },
   { title: "📹 Video", category: "Video", allHref: "/tools?category=Video", slugs: ["video-compressor", "video-to-gif", "video-trimmer", "subtitle-generator"] },
   { title: "🔄 Convert", category: "Converter", allHref: "/tools?category=Converter", slugs: ["mp4-to-mp3", "youtube-downloader", "tiktok-video-downloader", "soundcloud-downloader"] },
 ];
@@ -191,9 +193,9 @@ export function Header() {
                         ))}
                       </div>
 
-                      {/* Bottom Row: Video, Convert, India */}
+                      {/* Bottom Row: Developer, Utility, Video, Convert, India */}
                       <div className="grid grid-cols-5 gap-6 mt-6 pt-6 border-t border-[var(--border-subtle)]">
-                        {MEGAMENU_COLUMNS.slice(5, 7).map((col, idx) => (
+                        {MEGAMENU_COLUMNS.slice(5, 9).map((col, idx) => (
                           <motion.div 
                             key={col.title}
                             initial={{ opacity: 0 }}
@@ -228,18 +230,18 @@ export function Header() {
                           </motion.div>
                         ))}
 
-                        {/* India Section Spans 3 columns */}
+                        {/* India Section */}
                         <motion.div 
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          transition={{ delay: 7 * 0.03 }}
-                          className="col-span-3 relative overflow-hidden rounded-xl bg-gradient-to-br from-[rgba(255,107,53,0.05)] to-transparent border border-[var(--border-subtle)] p-4"
+                          transition={{ delay: 9 * 0.03 }}
+                          className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[rgba(255,107,53,0.05)] to-transparent border border-[var(--border-subtle)] p-4"
                         >
                           <div className="absolute top-0 left-0 w-1 h-full bg-[var(--india)]" />
                           <h4 className="text-[13px] font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                            <span className="text-lg">🇮🇳</span> India Utilities
+                            <span className="text-lg">🇮🇳</span> India
                           </h4>
-                          <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+                          <div className="flex flex-col gap-y-2">
                             <Link href="/indian-utilities/passport-photo-india" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>Passport Photo Maker</Link>
                             <Link href="/indian-utilities/aadhaar-wallet-cropper" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>Aadhaar Crop & Mask</Link>
                             <Link href="/indian-utilities/pan-card-resizer" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>PAN Card Resizer</Link>
@@ -256,9 +258,9 @@ export function Header() {
                       </span>
                       <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Most used today:</span>
                       <div className="flex gap-4 text-[12px] font-medium text-[var(--text-secondary)]">
-                        <span className="hover:text-[var(--text-primary)] cursor-pointer transition-colors">BG Remover</span>
-                        <span className="hover:text-[var(--text-primary)] cursor-pointer transition-colors">PDF Compress</span>
-                        <span className="hover:text-[var(--text-primary)] cursor-pointer transition-colors">YT Download</span>
+                        <Link href="/image/background-remover" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>BG Remover</Link>
+                        <Link href="/pdf/pdf-compressor" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>PDF Compress</Link>
+                        <Link href="/downloader/youtube-downloader" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
                       </div>
                     </div>
                   </motion.div>
@@ -304,11 +306,6 @@ export function Header() {
           </button>
 
           <div className="hidden sm:flex items-center gap-3">
-            {/* Free Uses Badge */}
-            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-overlay)] cursor-help" title="Resets at midnight">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-[12px] font-mono text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">5</strong> free uses</span>
-            </div>
 
             <Button variant="ghost" size="sm" asChild>
               <Link href="/login" className="hover:scale-105 active:scale-95 transition-transform">Sign in</Link>
