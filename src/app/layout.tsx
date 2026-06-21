@@ -72,6 +72,37 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col transition-colors duration-300">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "ToolHub",
+                "url": "https://gotoolhub.com",
+                "logo": "https://gotoolhub.com/og-image.png",
+                "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
+                "sameAs": [],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "ToolHub",
+                "url": "https://gotoolhub.com",
+                "description": `${toolCount}+ free, privacy-first web tools. Everything processed in your browser — nothing uploaded.`,
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://gotoolhub.com/tools?search={search_term_string}"
+                  },
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            ])
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <a
