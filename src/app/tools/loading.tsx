@@ -1,10 +1,13 @@
+import { ToolCardSkeleton } from "@/components/ToolCardSkeleton";
+
 export default function Loading() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-8 h-8 border-2 border-[var(--border-default)] border-t-[var(--accent)] rounded-full animate-spin" />
-        <p className="text-sm text-[var(--text-muted)]">Loading...</p>
+    <div className="min-h-[60vh] max-w-7xl mx-auto px-4 py-8">
+      <div className="mb-8">
+        <div className="w-64 h-8 bg-[var(--bg-overlay)] rounded animate-pulse mb-2" />
+        <div className="w-96 h-4 bg-[var(--bg-overlay)] rounded animate-pulse" />
       </div>
+      <ToolCardSkeleton count={9} />
     </div>
   );
 }

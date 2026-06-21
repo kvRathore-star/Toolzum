@@ -42,9 +42,27 @@ export function FileUploader({
       const accepted: UploadedFile[] = [];
 
       for (const file of newFiles) {
+        if (file.size === 0) {
+          toast.error(`${file.name} is empty (0 bytes). Please choose a valid file.`);
+          continue;
+        }
         if (file.size > maxSize) {
           toast.error(`${file.name} exceeds the ${formatBytes(maxSize)} limit.`);
           continue;
+        }
+        if (accept !== "*" && !file.type) {
+          toast.error(`Could not detect file type for ${file.name}.`);
+          continue;
+        }
+        if (accept !== "*") {
+          const allowed = accept.split(",").map((a) => a.trim().toLowerCase());
+          const ext = file.name.split(".").pop()?.toLowerCase();
+          const matchesExt = ext && allowed.some((a) => a === `.${ext}`);
+          const matchesMime = allowed.some((a) => file.type.startsWith(a.replace("*", "")));
+          if (!matchesExt && !matchesMime) {
+            toast.error(`${file.name} has an unsupported format. Accepted: ${accept}`);
+            continue;
+          }
         }
 
         const uploadFile: UploadedFile = {
@@ -183,6 +201,8 @@ export function FileUploader({
   // Remove file
   const removeFile = useCallback(
     (id: string) => {
+      const removed = files.find((f) => f.id === id);
+      if (removed?.preview) URL.revokeObjectURL(removed.preview);
       const updated = files.filter((f) => f.id !== id);
       setFiles(updated);
       onFilesAccepted(updated);

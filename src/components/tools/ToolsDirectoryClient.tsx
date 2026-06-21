@@ -159,7 +159,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                         {tool.description}
                       </p>
                       <div className="h-1.5 w-full bg-[var(--bg-overlay)] rounded-full overflow-hidden">
-                        <div className={`h-full ${theme.bgTint.replace('/10', '')} opacity-50`} style={{ width: `${Math.floor(Math.random() * 60) + 20}%` }} />
+                        <div className={`h-full ${theme.bgTint.replace('/10', '')} opacity-50`} style={{ width: `${(tool.id.charCodeAt(0) % 50) + 25}%` }} />
                       </div>
                     </div>
                   </Link>

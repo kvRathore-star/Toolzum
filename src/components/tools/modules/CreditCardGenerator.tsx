@@ -14,6 +14,16 @@ interface CardInfo {
 }
 
 export default function CreditCardGenerator() {
+  const Disclaimer = () => (
+    <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-6">
+      <p className="text-xs font-semibold text-amber-500 mb-1">Legal Disclaimer</p>
+      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+        This tool generates test card numbers that pass Luhn checksum validation for development and testing purposes only. 
+        These numbers are not real, active, or usable for any financial transaction. Use only in sandbox/staging environments. 
+        Misuse for fraud, unauthorized transactions, or any illegal activity is strictly prohibited.
+      </p>
+    </div>
+  );
   const [brand, setBrand] = useState('visa');
   const [quantity, setQuantity] = useState(5);
   const [generatedCards, setGeneratedCards] = useState<CardInfo[]>([]);
@@ -141,14 +151,7 @@ export default function CreditCardGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 rounded-r-xl">
-        <div className="flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-800 dark:text-amber-200">
-            <strong>⚠️ For developer testing only.</strong> These are mathematically valid (Luhn algorithm) but not real card numbers. Using these for any real transaction is fraud.
-          </p>
-        </div>
-      </div>
+      <Disclaimer />
       
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-8">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">

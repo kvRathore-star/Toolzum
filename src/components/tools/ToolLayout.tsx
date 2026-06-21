@@ -66,8 +66,109 @@ export function ToolLayout({ title, description, category, slug, children, faqs 
   const isFreeTier = userPlan !== null && userPlan !== "pro" && !isProLocked;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-  // Use custom FAQs if provided, otherwise auto-generate them
-  const finalFaqs = faqs && faqs.length > 0 ? faqs : [];
+  const categoryFaqTemplates: Record<string, { question: string; answer: string }[]> = {
+    "PDF": [
+      { question: "Are my PDFs private when using this tool?", answer: "Yes. All PDF processing happens entirely in your browser. Your files are never uploaded to any server, ensuring complete document privacy." },
+      { question: "What PDF formats and versions are supported?", answer: "The tool works with standard PDF files. Most operations support both older and modern PDF versions." },
+      { question: "Can I process large PDF files?", answer: "Processing capacity depends on your device's available memory. Very large files (500+ pages or 100MB+) may cause slower performance on low-memory devices." },
+      { question: "Is there a limit on how many PDFs I can process?", answer: "No. You can process unlimited PDF files daily. All computation happens on your own device." },
+      { question: "Does this work offline?", answer: "Yes. After the initial page load, all PDF tools function completely offline." },
+    ],
+    "Image": [
+      { question: "Will I lose image quality during processing?", answer: "Quality depends on the operation. Lossless operations preserve original quality, while compression may slightly reduce quality based on your settings." },
+      { question: "What image formats are supported?", answer: "Most tools support PNG, JPG, WebP, HEIC, GIF, and SVG." },
+      { question: "Where are my images processed?", answer: "Completely on your device. Images never leave your browser." },
+      { question: "Is there a file size limit?", answer: "No hard limit, but very large images (4000x4000px+) may process slower on lower-end devices." },
+    ],
+    "Video": [
+      { question: "What video formats are supported?", answer: "Common formats include MP4, MOV, AVI, WebM, MKV, and GIF." },
+      { question: "How long does video processing take?", answer: "Processing time depends on file size and your device's CPU. Most conversions complete within seconds." },
+      { question: "Is video quality preserved?", answer: "Quality depends on your selected settings. Higher bitrate presets produce better quality." },
+      { question: "Can I process videos offline?", answer: "Yes. All video processing uses FFmpeg WASM locally in your browser." },
+    ],
+    "Audio": [
+      { question: "What audio formats can I convert?", answer: "Supported formats include MP3, WAV, OGG, M4A, FLAC." },
+      { question: "Does compression reduce audio quality?", answer: "Quality depends on the bitrate you choose. Higher bitrates preserve more detail." },
+      { question: "Is my audio data private?", answer: "Absolutely. All audio processing happens locally in your browser." },
+    ],
+    "Developer": [
+      { question: "What programming languages are supported?", answer: "Tools cover JavaScript, CSS, HTML, SQL, Python, JSON, XML, and CSV." },
+      { question: "Is my code sent to a server?", answer: "No. All code processing runs locally in your browser." },
+      { question: "Can I use these tools offline?", answer: "Yes. All developer tools work fully offline after the initial page load." },
+    ],
+    "Text": [
+      { question: "Will my text be saved or shared?", answer: "No. Your text stays on your device and is never sent to any server." },
+      { question: "What text transformations are available?", answer: "Options include case changes, reversal, unicode styling, binary encoding, and more." },
+      { question: "Is there a character limit?", answer: "No hard limit, but very large documents (1M+ characters) may cause slower UI responsiveness." },
+    ],
+    "SEO": [
+      { question: "Will these tools improve my search rankings?", answer: "They help generate technically correct sitemaps, meta tags, and content analysis — fundamental SEO building blocks." },
+      { question: "Is the generated code ready to use?", answer: "Yes. The output is standard XML or HTML ready to deploy." },
+      { question: "Are my website details stored?", answer: "No. All data stays in your browser." },
+    ],
+    "Finance": [
+      { question: "How accurate are the calculations?", answer: "All calculators use standard financial formulas accurate to two decimal places." },
+      { question: "Can I save my calculation history?", answer: "Some calculators include local storage. History stays on your device." },
+      { question: "Are the results financial advice?", answer: "No. These tools provide calculations for educational purposes. Consult a financial advisor." },
+    ],
+    "Privacy": [
+      { question: "How is my sensitive data protected?", answer: "All operations run locally. Passwords and keys never leave your device." },
+      { question: "Is the encryption truly secure?", answer: "Yes. Encryption uses AES via crypto-js and OpenPGP.js — industry-standard implementations." },
+      { question: "Can I use these tools offline?", answer: "Yes. All privacy tools run completely offline." },
+    ],
+    "Downloader": [
+      { question: "Is downloading videos legal?", answer: "Only download content you have the rights to access. Respect copyright." },
+      { question: "What video quality is available?", answer: "Available quality depends on the source platform." },
+      { question: "Why does my download fail?", answer: "Downloads may fail if the source platform changes its API or the content is removed." },
+    ],
+    "AI": [
+      { question: "Do I need an API key?", answer: "Some AI tools require a provider API key (OpenAI, Anthropic, etc.)." },
+      { question: "Is my prompt data private?", answer: "Prompts are sent to the AI provider you configure." },
+      { question: "Why is there a loading delay?", answer: "AI generation requires network calls to the provider's API." },
+    ],
+    "indian-utilities": [
+      { question: "Is my personal data safe?", answer: "Yes. All processing happens locally. Aadhaar and PAN data never leave your device." },
+      { question: "What Indian formats are supported?", answer: "Aadhaar masking, PAN verification, IFSC lookup, pincode finder, and Indian calculations." },
+      { question: "Can I use these for official purposes?", answer: "These tools are for personal assistance. Official verification should use government portals." },
+    ],
+    "Extension": [
+      { question: "How do I install these extensions?", answer: "Download the files and follow your browser's developer mode extension installation guide." },
+      { question: "Are the extensions safe?", answer: "All generated extensions use manifest files you can review before installing." },
+      { question: "What browsers are supported?", answer: "Manifest V3 is compatible with Chrome, Edge, Brave, and Chromium-based browsers." },
+    ],
+    "Health": [
+      { question: "Is this medical advice?", answer: "No. These tools provide informational calculations. Consult a healthcare professional." },
+      { question: "Are my health details private?", answer: "Yes. All calculations happen locally in your browser." },
+    ],
+    "HR": [
+      { question: "Are these calculations legally binding?", answer: "No. They provide estimates. Consult a legal professional for official matters." },
+      { question: "Is employee data stored?", answer: "No. All data stays on your device." },
+    ],
+    "Business": [
+      { question: "Can I use these for official business documents?", answer: "Yes, the output can be used for business purposes but verify accuracy." },
+      { question: "Is my business data private?", answer: "Yes. All processing happens locally in your browser." },
+    ],
+  };
+  const defaultFaqs: { question: string; answer: string }[] = [
+    { question: "Is this tool free to use?", answer: "Yes, this tool is completely free. No registration required." },
+    { question: "How is my privacy protected?", answer: "All processing happens 100% locally in your browser. Your data is never uploaded." },
+    { question: "Can I use this tool offline?", answer: "Yes. Once loaded, the tool runs entirely offline." },
+  ];
+  function getCategoryKey(cat: string): string {
+    const map: Record<string, string> = {
+      pdf: "PDF", image: "Image", video: "Video", audio: "Audio",
+      developer: "Developer", text: "Text", finance: "Finance",
+      utility: "Utility", converter: "Converter", downloader: "Downloader",
+      seo: "SEO", privacy: "Privacy", ai: "AI", branding: "Branding",
+      productivity: "Productivity", design: "Design", transcription: "Transcription",
+      extension: "Extension", marketing: "Marketing", health: "Health",
+      hr: "HR", business: "Business", "e-commerce": "E-commerce", lifestyle: "Lifestyle",
+    };
+    return map[cat.toLowerCase().replace(/\s+/g, "-")] || cat;
+  }
+  const finalFaqs = faqs && faqs.length > 0
+    ? faqs
+    : (tool ? (categoryFaqTemplates[getCategoryKey(tool.category)] ?? defaultFaqs) : []);
 
   const faqSchema = finalFaqs && finalFaqs.length > 0 ? {
     "@context": "https://schema.org",
