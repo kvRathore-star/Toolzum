@@ -20,7 +20,6 @@ interface ToolLayoutProps {
   category: string;
   slug: string;
   children: React.ReactNode;
-  faqs?: { question: string; answer: string }[];
 }
 
 const proToolCount = toolsRegistry.filter(t => t.isPro).length;
@@ -31,7 +30,7 @@ function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export function ToolLayout({ title, description, category, slug, children, faqs = [] }: ToolLayoutProps) {
+export function ToolLayout({ title, description, category, slug, children }: ToolLayoutProps) {
   const [userPlan, setUserPlan] = useState<string | null>(null);
   const { data: sessionData, isPending } = useSession();
 
@@ -65,74 +64,6 @@ export function ToolLayout({ title, description, category, slug, children, faqs 
   const isLocked = isProLocked || isFreeLimited;
   const isFreeTier = userPlan !== null && userPlan !== "pro" && !isProLocked;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-
-  function generateToolFaqs(t: NonNullable<ReturnType<typeof getToolByCategoryAndSlug>>): { question: string; answer: string }[] {
-    const name = t.name;
-    const dep = t.dependencies || "modern browser APIs";
-    const desc = t.description || "";
-    const faqs: { question: string; answer: string }[] = [];
-
-    faqs.push({
-      question: `What is ${name}?`,
-      answer: `${name} is a free online tool that ${desc.charAt(0).toLowerCase() + desc.slice(1)}. It runs entirely in your browser with no server uploads.`
-    });
-
-    const depLower = dep.toLowerCase();
-    if (depLower.includes("ffmpeg") || depLower.includes("wasm")) {
-      faqs.push({
-        question: `Does ${name} require an internet connection?`,
-        answer: `${name} uses WebAssembly compiled from native libraries to run locally in your browser. After the initial page load, the tool works completely offline.`
-      });
-    } else if (depLower.includes("canvas") || depLower.includes("webgl")) {
-      faqs.push({
-        question: `Does ${name} support high-resolution output?`,
-        answer: `${name} uses the ${dep} for rendering, supporting high-resolution output. Final quality depends on your input file and the settings you choose.`
-      });
-    } else if (depLower.includes("api") || depLower.includes("ai") || depLower.includes("whisper") || depLower.includes("openai")) {
-      faqs.push({
-        question: `Do I need an API key for ${name}?`,
-        answer: `${name} may require a provider API key (OpenAI, Anthropic, etc.) for AI-powered features. Configure yours in the tool's settings panel.`
-      });
-    } else if (depLower.includes("pdf-lib") || depLower.includes("pdf")) {
-      faqs.push({
-        question: `Can ${name} handle large PDF files?`,
-        answer: `${name} processes PDFs locally using ${dep}. Performance depends on your device memory — very large files (500+ pages) may be slower on low-memory devices.`
-      });
-    } else if (depLower.includes("crypto") || depLower.includes("crypto-js") || depLower.includes("openpgp")) {
-      faqs.push({
-        question: `Is ${name}'s encryption secure?`,
-        answer: `Yes. ${name} uses ${dep} — industry-standard cryptographic implementations. All operations happen locally in your browser.`
-      });
-    } else if (depLower.includes("lz-string") || depLower.includes("compressor") || depLower.includes("compress")) {
-      faqs.push({
-        question: `Does ${name} reduce file quality?`,
-        answer: `${name} uses ${dep} for compression. Quality depends on your selected settings — higher compression ratios may slightly reduce quality.`
-      });
-    } else {
-      faqs.push({
-        question: `How does ${name} protect my privacy?`,
-        answer: `${name} processes everything locally using ${dep}. Your data never leaves your device — no uploads, no servers, no logs.`
-      });
-    }
-
-    return faqs;
-  }
-  const finalFaqs = faqs && faqs.length > 0
-    ? faqs
-    : (tool ? generateToolFaqs(tool) : []);
-
-  const faqSchema = finalFaqs && finalFaqs.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": finalFaqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  } : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -186,12 +117,6 @@ export function ToolLayout({ title, description, category, slug, children, faqs 
 
   return (
     <>
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -353,28 +278,6 @@ export function ToolLayout({ title, description, category, slug, children, faqs 
 
           {/* Dynamic How-to Steps & Related Tools */}
           {tool && <ToolPageSEOContent tool={tool} />}
-
-          {/* SEO FAQs */}
-          {finalFaqs && finalFaqs.length > 0 && (
-            <section className="mt-24 w-full text-left">
-              <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-8 flex items-center gap-3 border-b border-[var(--border-subtle)] pb-4">
-                Frequently Asked Questions
-              </h2>
-              <div className="space-y-4">
-                {finalFaqs.map((faq, index) => (
-                  <details key={index} className="group bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] overflow-hidden transition-all [&_summary::-webkit-details-marker]:hidden">
-                    <summary className="flex cursor-pointer items-center justify-between p-5 text-[var(--text-primary)] font-medium select-none">
-                      <span>{faq.question}</span>
-                      <ChevronRight className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-90 transition-transform" />
-                    </summary>
-                    <div className="px-5 pb-5 pt-1 text-[var(--text-secondary)] text-sm leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
-          )}
 
           </main>
 

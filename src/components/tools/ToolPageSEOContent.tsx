@@ -244,8 +244,8 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
   const faqs = [
     {
-      question: `What is ${tool.name}?`,
-      answer: `${tool.name} is a free online tool that ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. It runs entirely in your browser — nothing is uploaded to any server.`
+      question: `What exactly does ${tool.name} do?`,
+      answer: `${tool.name} lets you ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
     },
     ...baseFaqs,
   ];

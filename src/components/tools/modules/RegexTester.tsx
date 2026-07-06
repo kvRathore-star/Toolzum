@@ -1,82 +1,72 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Search, Info, Settings2, RefreshCw } from 'lucide-react';
+import { Search, Info, Settings2, Sparkles, Crown } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import { useAiProvider } from '@/hooks/useAiProvider';
+import AiSettings from '../AiSettings';
+import Link from 'next/link';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('');
   const [flags, setFlags] = useState('g');
-  const [testString, setTestString] = useState('Enter text here to test your regular expression.\\n\\nSample: user@example.com is a valid email address.\\nPhone: 123-456-7890.');
+  const [testString, setTestString] = useState('Enter text here to test your regular expression.\n\nSample: user@example.com is a valid email address.\nPhone: 123-456-7890.');
   const [matches, setMatches] = useState<{ match: string; index: number }[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const [aiTab, setAiTab] = useState<'manual' | 'ai'>('manual');
+  const [description, setDescription] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const { isConfigured, generateCompletion } = useAiProvider();
+
   useEffect(() => {
-    if (!pattern) {
-      setMatches([]);
-      setError(null);
-      return;
-    }
-    
+    if (aiTab !== 'manual' || !pattern) { if (!pattern) { setMatches([]); setError(null); } return; }
     try {
       const regex = new RegExp(pattern, flags);
       setError(null);
-      
-      const newMatches = [];
+      const newMatches: { match: string; index: number }[] = [];
       let match;
-      
       if (flags.includes('g')) {
         let iterations = 0;
         while ((match = regex.exec(testString)) !== null && iterations < 1000) {
-          if (match[0].length === 0) {
-            regex.lastIndex++;
-          }
+          if (match[0].length === 0) regex.lastIndex++;
           newMatches.push({ match: match[0], index: match.index });
           iterations++;
         }
       } else {
         match = regex.exec(testString);
-        if (match) {
-          newMatches.push({ match: match[0], index: match.index });
-        }
+        if (match) newMatches.push({ match: match[0], index: match.index });
       }
-      
       setMatches(newMatches);
-    } catch (e) {
-      setError((e as Error).message);
-      setMatches([]);
-    }
-  }, [pattern, flags, testString]);
+    } catch (e) { setError((e as Error).message); setMatches([]); }
+  }, [pattern, flags, testString, aiTab]);
 
-  // Function to highlight matches in text
+  const handleGenerate = async () => {
+    if (!description.trim()) { toast.error('Please describe what you want to match'); return; }
+    if (!isConfigured) { toast.error('Please configure your AI Provider API key first'); return; }
+    setIsGenerating(true);
+    try {
+      const prompt = `You are an expert regex developer. Given this description: "${description}", generate ONLY the raw regex pattern (no flags, no explanation, no backticks, just the pattern). The pattern should be valid for JavaScript's RegExp constructor.`;
+      const response = await generateCompletion([{ role: 'user', content: prompt }], 0.1);
+      const cleaned = response.trim().replace(/^\/|\/[gimsu]*$/g, '').replace(/```/g, '');
+      setPattern(cleaned);
+      setAiTab('manual');
+      toast.success('Regex generated! Test it below.');
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to generate regex');
+    } finally { setIsGenerating(false); }
+  };
+
   const renderHighlightedText = () => {
-    if (!pattern || error || matches.length === 0) return testString;
-    
+    if (!pattern || error || matches.length === 0) return <span>{testString}</span>;
     let lastIndex = 0;
     const elements: React.ReactNode[] = [];
-    
-    // Sort matches by index to ensure proper sequential rendering
     const sortedMatches = [...matches].sort((a, b) => a.index - b.index);
-    
     sortedMatches.forEach((m, i) => {
-      // Add text before match
-      if (m.index > lastIndex) {
-        elements.push(testString.substring(lastIndex, m.index));
-      }
-      
-      // Add highlighted match
-      elements.push(
-        <span key={i} className="bg-emerald-500/30 text-emerald-900 dark:text-emerald-100 rounded-sm font-semibold">
-          {m.match}
-        </span>
-      );
-      
+      if (m.index > lastIndex) elements.push(<span key={`t${i}`}>{testString.substring(lastIndex, m.index)}</span>);
+      elements.push(<span key={`m${i}`} className="bg-emerald-500/30 text-emerald-900 dark:text-emerald-100 rounded-sm font-semibold">{m.match}</span>);
       lastIndex = m.index + m.match.length;
     });
-    
-    // Add remaining text
-    if (lastIndex < testString.length) {
-      elements.push(testString.substring(lastIndex));
-    }
-    
+    if (lastIndex < testString.length) elements.push(<span key="end">{testString.substring(lastIndex)}</span>);
     return elements;
   };
 
@@ -84,92 +74,100 @@ export default function RegexTester() {
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden">
         <div className="border-b border-zinc-200 dark:border-white/10 p-6">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
-              <Search className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                <Search className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Regex Generator + Tester</h2>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">AI-powered generation and real-time testing</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Regex Tester</h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">Test and debug regular expressions in real-time</p>
-            </div>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
           </div>
         </div>
 
         <div className="p-6 space-y-6">
-          {/* Expression Input */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-zinc-900 dark:text-white flex items-center gap-2">
-              <Settings2 className="w-4 h-4 text-zinc-500" />
-              Regular Expression
-            </label>
-            <div className="flex gap-2">
-              <div className="flex-1 relative flex items-center">
-                <span className="absolute left-4 text-zinc-400 text-lg">/</span>
-                <input
-                  type="text"
-                  value={pattern}
-                  onChange={(e) => setPattern(e.target.value)}
-                  placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                  className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-8 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono"
-                />
-                <span className="absolute right-4 text-zinc-400 text-lg">/</span>
-              </div>
-              <input
-                type="text"
-                value={flags}
-                onChange={(e) => setFlags(e.target.value)}
-                placeholder="gmi"
-                className="w-24 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono"
-              />
-            </div>
-            {error && (
-              <p className="text-sm text-red-500 flex items-center gap-2">
-                <Info className="w-4 h-4" />
-                {error}
-              </p>
-            )}
+          <div className="flex gap-2 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl max-w-xs">
+            <button onClick={() => setAiTab('manual')}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'manual' ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'}`}>
+              <Search className="w-3.5 h-3.5 inline mr-1" />Manual
+            </button>
+            <button onClick={() => setAiTab('ai')}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'ai' ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'}`}>
+              <Sparkles className="w-3.5 h-3.5 inline mr-1" />AI Generate
+            </button>
           </div>
 
-          {/* Test String Input */}
+          {aiTab === 'ai' && (
+            <div className="space-y-4 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-xl p-5 animate-in fade-in duration-300">
+              <AiSettings />
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-amber-500" />Describe what you want to match
+                </label>
+                <textarea value={description} onChange={e => setDescription(e.target.value)}
+                  placeholder='e.g. "Match email addresses that end with @gmail.com"'
+                  className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:border-amber-400 h-24 resize-none" />
+              </div>
+              <button onClick={handleGenerate} disabled={isGenerating}
+                className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
+                {isGenerating ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Generating...</> : <><Sparkles className="w-4 h-4" /> Generate Regex Pattern</>}
+              </button>
+              <p className="text-[10px] text-zinc-400">The generated regex will be inserted below for testing. Requires an AI provider API key.</p>
+            </div>
+          )}
+
+          {aiTab === 'manual' && (
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-zinc-900 dark:text-white flex items-center gap-2">
+                <Settings2 className="w-4 h-4 text-zinc-500" />Regular Expression
+              </label>
+              <div className="flex gap-2">
+                <div className="flex-1 relative flex items-center">
+                  <span className="absolute left-4 text-zinc-400 text-lg">/</span>
+                  <input type="text" value={pattern} onChange={e => setPattern(e.target.value)}
+                    placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                    className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-8 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
+                  <span className="absolute right-4 text-zinc-400 text-lg">/</span>
+                </div>
+                <input type="text" value={flags} onChange={e => setFlags(e.target.value)} placeholder="gmi"
+                  className="w-24 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
+              </div>
+              {error && <p className="text-sm text-red-500 flex items-center gap-2"><Info className="w-4 h-4" />{error}</p>}
+            </div>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-zinc-900 dark:text-white">Test String</label>
-                <button
-                  onClick={() => setTestString('')}
-                  className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                >
-                  Clear
-                </button>
+                <button onClick={() => setTestString('')} className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">Clear</button>
               </div>
-              <textarea
-                value={testString}
-                onChange={(e) => setTestString(e.target.value)}
+              <textarea value={testString} onChange={e => setTestString(e.target.value)}
                 className="w-full h-64 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono resize-none"
-                placeholder="Enter text to test your regular expression against..."
-                spellCheck={false}
-              />
+                placeholder="Enter text to test your regular expression against..." spellCheck={false} />
             </div>
-
-            {/* Results */}
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-zinc-900 dark:text-white">Match Results</label>
-                <span className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-md text-zinc-600 dark:text-zinc-400 font-mono">
-                  {matches.length} match{matches.length !== 1 && 'es'}
-                </span>
+                <span className="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-md text-zinc-600 dark:text-zinc-400 font-mono">{matches.length} match{matches.length !== 1 && 'es'}</span>
               </div>
               <div className="w-full h-64 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm font-mono overflow-auto whitespace-pre-wrap break-words">
                 {renderHighlightedText()}
               </div>
             </div>
           </div>
-          
+
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+            <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Save regex patterns to your library, batch test against multiple strings, export test results as CSV, share regex patterns with a link.</p>
+            <Link href="/pricing" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 underline shrink-0 ml-4">Upgrade →</Link>
+          </div>
+
           <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800/30 rounded-xl p-4 flex gap-3 text-sm text-purple-800 dark:text-purple-300">
             <Info className="w-5 h-5 shrink-0" />
-            <p>
-              Common flags: <strong>g</strong> (global match), <strong>i</strong> (ignore case), <strong>m</strong> (multiline), <strong>s</strong> (dotall).
-            </p>
+            <p>Common flags: <strong>g</strong> (global match), <strong>i</strong> (ignore case), <strong>m</strong> (multiline), <strong>s</strong> (dotall).</p>
           </div>
         </div>
       </div>

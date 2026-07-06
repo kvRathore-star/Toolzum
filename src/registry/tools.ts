@@ -41,7 +41,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "add-text-1",
     name: "Add Text to Photo",
-    description: "Overlay custom text onto your images using the HTML5 Canvas API entirely in your browser.",
+    description: 'Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Social media content creators and small business owners use it to add branding watermarks, quote overlays, or promotional call-to-action text to product photos. It renders the final output at the original image resolution, so no quality is lost during the text overlay process.',
     category: "Image",
     slug: "add-text-to-photo",
     dependencies: "Canvas API",
@@ -49,7 +49,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "batch-edit-1",
     name: "Batch Image Editor",
-    description: "Resize and watermark dozens of images instantly in your browser.",
+    description: 'Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. E-commerce managers and photographers uploading product catalogs or event galleries use it to standardize entire image sets before publishing. It provides a live preview grid of all transformation effects before you commit to processing the batch.',
     category: "Image",
     slug: "batch-image-editor",
     dependencies: "Canvas API, jszip",
@@ -73,7 +73,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "img-gif-1",
     name: "Image to GIF Maker",
-    description: "Create animated GIFs by combining multiple images together.",
+    description: 'Stitches a sequence of uploaded still images (PNG, JPG, or WebP) into a single animated GIF, with configurable frame delay, loop count, and frame order (drag-to-reorder). UI/UX designers and motion graphic artists use it to create quick interface mockup walkthroughs and before-after comparisons without learning animation software. The tool auto-detects image dimensions and warns when frames have mismatched sizes, offering to pad smaller frames to the largest canvas size.',
     category: "Video",
     slug: "image-to-gif",
     dependencies: "ffmpeg",
@@ -81,7 +81,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "mp4-gif-1",
     name: "MP4 to GIF",
-    description: "Convert MP4 video clips into animated GIFs.",
+    description: 'Transcodes an MP4 video into an animated GIF with controls for start and end time, frame-skipping rate, and output width. Game developers and community managers use it to share short looping clips of gameplay, UI animations, or bug demonstrations on platforms like Discord and GitHub issues that auto-play GIFs. The tool limits output to 15 seconds and suggests the optimal frame-skip value based on input duration to keep file sizes under 5 MB.',
     category: "Video",
     slug: "mp4-to-gif",
     dependencies: "ffmpeg",
@@ -89,7 +89,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "webm-gif-1",
     name: "WEBM to GIF",
-    description: "Convert WebM video clips into animated GIFs.",
+    description: 'Converts a WebM video into an animated GIF with adjustable quality (number of colors from 32 to 256) and optional dithering algorithms (Floyd-Steinberg, pattern, or none). Open-source contributors and video editors who work with WebM-encoded screen recordings use it to produce GIF versions for documentation and blog posts. The converter strips the audio stream (irrelevant for GIF) before processing, reducing conversion time compared to general video converters.',
     category: "Video",
     slug: "webm-to-gif",
     dependencies: "ffmpeg",
@@ -97,7 +97,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "mov-gif-1",
     name: "MOV to GIF",
-    description: "Convert Apple MOV video clips into animated GIFs.",
+    description: 'Converts an uploaded MOV video file into an animated GIF, allowing the user to trim start and end times and set the output frame rate and dimensions. Social media designers and product marketers use it to create lightweight, looped product demonstrations and memes that play in any browser without video codec support. The converter applies a palette-optimization step and dithering to reduce GIF file size while maintaining visual quality, and reports the final file size before download.',
     category: "Video",
     slug: "mov-to-gif",
     dependencies: "ffmpeg",
@@ -105,7 +105,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "vid-mp3-1",
     name: "Video to MP3 Converter",
-    description: "Extract high-quality audio tracks directly from your video files.",
+    description: 'Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. Content creators and podcasters use it to repurpose video content into audio-only formats for distribution on platforms like Spotify or Apple Podcasts. The tool preserves the original audio bitrate up to 320kbps and automatically strips all video data to produce the smallest possible MP3 file.',
     category: "Video",
     slug: "video-to-mp3",
     dependencies: "ffmpeg",
@@ -113,7 +113,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "mp3-ogg-1",
     name: "MP3 to OGG Converter",
-    description: "Convert MP3 audio files into web-friendly OGG format.",
+    description: 'Transcodes an MP3 audio file to the OGG Vorbis format with adjustable quality slider from -1 (lowest) to 10 (highest), corresponding to bitrates from 45 kbps to 500 kbps. Audiophiles and open-source software users who prefer patent-free audio codecs use it to convert their music libraries for use on Linux-based devices or Rhythmbox-compatible players. The converter preserves ID3 tags (title, artist, album) by mapping them to OGG Vorbis comments during transcoding.',
     category: "Audio",
     slug: "mp3-to-ogg",
     dependencies: "ffmpeg",
@@ -121,7 +121,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "wav-comp-1",
     name: "WAV Compressor",
-    description: "Compress heavy WAV files by downmixing to mono and reducing the sample rate.",
+    description: 'Reduces the file size of uploaded WAV audio files by lowering the bit depth (16 or 8 bit) and sample rate (44100, 22050, or 11025 Hz), with a real-time preview of estimated output size before encoding. Podcast producers and field recording hobbyists use it to shrink raw studio-quality WAV files into smaller, web-ready versions for uploading to hosting platforms with file size limits. The compressor shows a frequency-spectrum comparison of the original versus compressed audio so users can judge quality trade-offs audibly and visually.',
     category: "Audio",
     slug: "wav-compressor",
     dependencies: "ffmpeg",
@@ -137,7 +137,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "dev-json-xml-1",
     name: "JSON to XML",
-    description: "Instantly convert JSON objects to XML format.",
+    description: 'Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. API developers migrating legacy SOAP endpoints to REST and data engineers normalizing cross-format feeds use it to avoid manual transcription errors. It preserves nested object depth as nested XML elements so the structure stays lossless.',
     category: "Developer",
     slug: "json-to-xml",
     dependencies: "xml2js",
@@ -145,7 +145,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "time-conv-1",
     name: "Time Converter",
-    description: "Convert between seconds, minutes, hours, days, and more.",
+    description: 'Converts a given date and time between any two time zones from a database of 400+ IANA time zones, and simultaneously displays it in Unix timestamp, ISO 8601, and 12/24-hour formats. Remote project managers and distributed engineering teams use it to schedule meetings across time zones and translate server log timestamps into local time. The converter automatically accounts for daylight saving time changes and indicates when a queried time falls within a DST transition gap.',
     category: "Converter",
     slug: "time-converter",
     dependencies: "None",
@@ -153,7 +153,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "time-pst-est-1",
     name: "PST to EST Converter",
-    description: "Quickly convert Pacific Standard Time (PST) to Eastern Standard Time (EST).",
+    description: 'Converts a user-entered Pacific Time value to Eastern Time, displaying the result as a clock face and a calendar date that correctly advances or regresses across midnight. East-coast project managers coordinating with west-coast teams use it to avoid 3-hour scheduling errors when booking cross-country calls. The converter highlights specific business hours overlap (8 AM–5 PM PST vs 11 AM–8 PM EST) so users instantly see the feasible meeting window.',
     category: "Converter",
     slug: "pst-to-est",
     dependencies: "None",
@@ -161,7 +161,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "time-cst-est-1",
     name: "CST to EST Converter",
-    description: "Quickly convert Central Standard Time (CST) to Eastern Standard Time (EST).",
+    description: 'Converts a user-entered Central Time value to Eastern Time, showing both the direct conversion and a side-by-side comparison clock. Regional sales representatives and logistics coordinators who operate across the Central and Eastern time zones use it to accurately schedule deliveries and client calls. The tool applies DST rules for both zones independently, correctly handling edge cases like the second Sunday in March when only part of the country has sprung forward.',
     category: "Converter",
     slug: "cst-to-est",
     dependencies: "None",
@@ -169,7 +169,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "conv-lbs-kg-1",
     name: "Lbs to Kg Converter",
-    description: "Instantly convert Pounds (lbs) to Kilograms (kg).",
+    description: 'Converts a weight value from pounds to kilograms with precision up to three decimal places and displays the inverse conversion (kg to lbs) simultaneously for reference. International travelers and fitness enthusiasts using mixed equipment (US dumbbells with metric programs) rely on it to normalize weight measurements. The converter shows both the raw calculation and a common-approximation table (e.g., 1 lb ≈ 0.45 kg, 5 lb ≈ 2.27 kg) for mental estimation.',
     category: "Converter",
     slug: "lbs-to-kg",
     dependencies: "None",
@@ -177,7 +177,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "conv-kg-lbs-1",
     name: "Kg to Lbs Converter",
-    description: "Instantly convert Kilograms (kg) to Pounds (lbs).",
+    description: 'Converts a weight value from kilograms to pounds with three-decimal precision and auto-suggests common plate-loading combinations for barbell exercises. International athletes and nutrition professionals who work with metric food labels but US-based gym equipment use it for accurate weight conversions. The converter additionally lists equivalent weights in stones, a format still widely used in UK medical and fitness contexts.',
     category: "Converter",
     slug: "kg-to-lbs",
     dependencies: "None",
@@ -185,7 +185,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "conv-ft-m-1",
     name: "Feet to Meters Converter",
-    description: "Instantly convert length from Feet (ft) to Meters (m).",
+    description: 'Converts a length from feet to meters using the exact conversion factor 1 ft = 0.3048 m, displaying the result in both decimal and fractional meters. Architects and civil engineers working across imperial and metric blueprints use it to verify dimensions during international construction projects. The converter accepts compound inputs like 5’10” and parses them into decimal feet before performing the conversion, handling height measurements on a single line.',
     category: "Converter",
     slug: "feet-to-meters",
     dependencies: "None",
@@ -209,7 +209,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-crop-1",
     name: "Crop PDF Pages",
-    description: "Remove white margins from your PDF documents instantly.",
+    description: 'Removes or adjusts page margins on every page of an uploaded PDF by accepting numeric values (or presets like ‘remove 1 inch all sides’) for top, bottom, left, and right boundaries. Publishing professionals and document formatters use it to trim excess white space from slide-deck exports, remove crop marks from print PDFs, or standardize page dimensions before merging documents. The tool applies the crop non-destructively—it sets the MediaBox rather than physically discarding content—so nothing outside the crop area is permanently lost.',
     category: "PDF",
     slug: "crop-pdf",
     dependencies: "pdf-lib",
@@ -217,7 +217,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-org-1",
     name: "Organize PDF Pages",
-    description: "Drag and drop to reorder PDF pages, or remove them entirely.",
+    description: 'Lets users drag-and-drop PDF page thumbnails into a new order, rotate individual pages, and delete unwanted pages via checkboxes, then exports the modified document. Office administrators and legal professionals use it to reorganize scanned contracts, remove blank pages from scanned batches, and rotate mis-oriented phone scans before sharing. The tool renders a thumbnail strip of all pages on load and supports keyboard shortcuts (Shift+click for range selection) for bulk operations on large documents.',
     category: "PDF",
     slug: "organize-pdf",
     dependencies: "pdf-lib",
@@ -225,7 +225,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-ext-1",
     name: "Extract PDF Pages",
-    description: "Pull specific pages out of a large PDF to create a smaller document.",
+    description: 'Accepts a PDF along with a page range or a comma-separated list of individual page numbers and extracts only those pages into a new PDF file. Legal assistants and academic researchers use it to pull specific chapters, exhibits, or appendices from large multi-page documents without opening a PDF editor. The extraction preserves all original formatting, embedded fonts, hyperlinks, and interactive form fields from the source pages.',
     category: "PDF",
     slug: "extract-pages-from-pdf",
     dependencies: "pdf-lib",
@@ -233,7 +233,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-heic-1",
     name: "HEIC to PDF",
-    description: "Convert Apple iOS HEIC/HEIF photos directly into a PDF document.",
+    description: 'Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents. Mac and iOS users who need to submit device photos to insurance claims, rental applications, or school portals that reject HEIC format use it to avoid manual re-export. It preserves EXIF orientation metadata so vertical photos do not appear rotated in the resulting PDF.',
     category: "PDF",
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
@@ -257,7 +257,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "yt-dl-1",
     name: "YouTube Downloader",
-    description: "Download YouTube videos as MP4 or extract audio as MP3. Paste URL and save instantly.",
+    description: 'Downloads YouTube videos as MP4 files or extracts audio as MP3 by parsing the video page for available stream URLs. Content creators, educators, and offline viewers use it to save tutorials, music videos, or lectures for playback without an internet connection. It supports multiple resolutions up to 4K and preserves the original audio quality when extracting MP3 tracks.',
     category: "Downloader",
     slug: "youtube-downloader",
     dependencies: "yt-dlp"
@@ -283,7 +283,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Facebook Video Downloader",
     slug: "facebook-video-downloader",
     category: "Downloader",
-    description: "Download FB videos",
+    description: 'Downloads public Facebook videos by parsing the page source to extract the highest-quality MP4 stream. Social media managers and content curators use it to archive videos or repurpose content offline. It supports both single videos and album embeds without requiring any login or API key.',
     dependencies: "yt-dlp"
   },
   {
@@ -291,7 +291,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Translator",
     slug: "ai-translator",
     category: "AI",
-    description: "100+ languages (22 Indian languages)",
+    description: 'Detects source language automatically and translates text between 100+ languages using advanced neural machine translation. Marketing teams, customer support agents, and travelers use it to communicate across language barriers in real time. It preserves formatting, idioms, and tone better than generic translators by contextualizing each sentence against the full document.',
     dependencies: "Google Cloud Translation API"
   },
   {
@@ -299,7 +299,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Grammar Checker Extension",
     slug: "grammar-checker-extension",
     category: "Extension",
-    description: "Check grammar as you type",
+    description: 'Generates a complete, installable browser extension (Chrome, Edge, Firefox) that highlights grammar, punctuation, and style errors in any text input field on the web. Freelance writers and content marketers use it to proofread emails, blog posts, and social media captions without leaving their browser tab. The extension checks text locally for basic errors first before making API calls for advanced stylistic suggestions, keeping sensitive content on-device.',
     dependencies: "LanguageTool API"
   },
   {
@@ -307,7 +307,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to Word",
     slug: "pdf-to-word",
     category: "PDF",
-    description: "Convert PDF to editable DOCX",
+    description: 'Extracts text content and basic formatting from PDF files and assembles them into editable .docx Word documents. Office workers, students, and researchers who receive read-only PDF contracts or papers and need to quote, annotate, or rewrite sections use it to regain editability. It preserves hyperlinks and list numbering from the source PDF so reformatting effort is minimal.',
     dependencies: "pdf2docx / PDF.js"
   },
   {
@@ -315,7 +315,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Image Generator",
     slug: "ai-image-generator",
     category: "AI",
-    description: "Generate images from text prompts",
+    description: 'Transforms text prompts into high-resolution images using advanced diffusion models. Designers, marketers, and content creators use it to rapidly prototype visuals without needing graphic design skills. It supports multiple aspect ratios and artistic styles, from photorealistic to oil painting.',
     dependencies: "Stable Diffusion API"
   },
   {
@@ -323,7 +323,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Speed Test",
     slug: "speed-test",
     category: "Utility",
-    description: "Test internet connection speed",
+    description: 'Measures your internet connection’s download speed, upload speed, and latency by transferring real test data to geographically distributed servers. Anyone troubleshooting slow Wi-Fi, verifying ISP performance, or deciding whether their connection supports 4K streaming uses this tool. It runs a multi-threaded test that saturates high-bandwidth connections (1 Gbps+), unlike single-threaded speed tests that under-report fiber speeds.',
     dependencies: "WebSockets / WebRTC"
   },
   {
@@ -331,7 +331,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Twitter Video Downloader",
     slug: "twitter-video-downloader",
     category: "Downloader",
-    description: "Download X videos",
+    description: 'Extracts native video files from tweets by resolving the embedded media URL from Twitter’s CDN. Marketers and journalists use it to save viral clips, interviews, or announcements for offline reference. It preserves the original resolution and audio track without re-encoding.',
     dependencies: "yt-dlp"
   },
   {
@@ -347,7 +347,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Compress Image to 50KB",
     slug: "compress-image-to-50kb",
     category: "Image",
-    description: "Target size image compression",
+    description: 'Reduces image file size to 50 KB or below by adjusting JPEG quality, reducing pixel dimensions, or stripping metadata—whichever combination hits the target. Web developers and e-commerce sellers use it to meet strict upload limits on listing portals and CMS platforms. It shows a live preview slider so you can balance quality against file size before exporting.',
     dependencies: "browser-image-compression"
   },
   {
@@ -355,7 +355,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Currency Converter",
     slug: "currency-converter",
     category: "Finance",
-    description: "Live exchange rates conversion",
+    description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Travelers, e-commerce sellers, and international freelancers use it to get accurate live rates without manually searching the web. It auto-detects your local currency via IP geolocation and caches the latest rates for offline use.',
     dependencies: "ExchangeRate-API"
   },
   {
@@ -363,7 +363,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Logo Maker",
     slug: "logo-maker",
     category: "Branding",
-    description: "Create custom logos online",
+    description: 'Logo Maker provides a drag-and-drop canvas with shape libraries, text tools, and icon collections for building brand logos. Small business owners and startup founders use it to quickly prototype logo concepts without hiring a designer. It auto-generates color palette suggestions based on your chosen shape and font combinations.',
     dependencies: "Fabric.js / Canvas API"
   },
   {
@@ -371,13 +371,13 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP4 to MP3",
     slug: "mp4-to-mp3",
     category: "Converter",
-    description: "Convert MP4 videos to MP3 audio",
+    description: 'Extracts the audio track from MP4 video files and saves it as a standalone MP3 file, preserving original bitrate and sample rate. Content creators, podcasters, and music enthusiasts use it to grab soundtracks, interview audio, or lecture recordings from video files without re-encoding. It supports batch processing and lets you preview audio before downloading.',
     dependencies: "FFmpeg"
   },
   {
     id: "pdf-comp-1",
     name: "PDF Compressor",
-    description: "Reduce PDF file size by up to 90% — free, instant, entirely in your browser. No upload, no signup.",
+    description: 'Reduces PDF file size by intelligently compressing embedded images, removing redundant metadata, and optimizing object streams. Anyone who emails PDFs or uploads them to portals with strict size limits uses this to fit files within attachment restrictions. It offers three compression tiers (low, medium, high) with a live before/after size preview so you pick the right trade-off.',
     category: "PDF",
     slug: "pdf-compressor",
     dependencies: "Ghostscript / PDF-lib"
@@ -387,7 +387,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Word to PDF",
     slug: "word-to-pdf",
     category: "PDF",
-    description: "Convert Word documents to PDF",
+    description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Office workers, legal professionals, and publishers use it to lock document layout before sharing or printing. The conversion engine runs locally—files never leave your machine, which is critical for confidential legal or HR documents.',
     dependencies: "LibreOffice API / CloudConvert API"
   },
   {
@@ -395,7 +395,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Writing Assistant",
     slug: "ai-writing-assistant",
     category: "AI",
-    description: "Long-form blog, email, and essay writer",
+    description: 'Provides real-time suggestions to refine grammar, tone, and structure across any text input. Bloggers, copywriters, and students rely on it to overcome writer’s block and polish their drafts. Its context-aware engine adapts suggestions to match your specific audience and industry vocabulary.',
     dependencies: "OpenAI API / LangChain"
   },
   {
@@ -403,7 +403,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Percentage Calculator",
     slug: "percentage-calculator",
     category: "Finance",
-    description: "Calculate percentages and discounts",
+    description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Shoppers comparing discounts, sales teams calculating commission splits, and analysts normalizing data rely on it for quick mental-math verification. It supports chain calculations so each result feeds into the next operation without re-entering numbers.',
     dependencies: "Vanilla JS"
   },
   {
@@ -411,7 +411,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to PDF",
     slug: "jpg-to-pdf",
     category: "PDF",
-    description: "Combine JPG images into PDF",
+    description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. Photographers, real-estate agents, and administrative assistants use it to bundle scan pages or photo portfolios into a single shareable document. You can adjust image compression per page to balance file size against print-quality output.',
     dependencies: "jsPDF / Canvas API"
   },
   {
@@ -427,7 +427,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Plagiarism Checker",
     slug: "plagiarism-checker",
     category: "Text",
-    description: "Check text for duplicate content",
+    description: 'Compares submitted text against an offline reference corpus and highlights passages that match existing sources with a similarity percentage. Teachers, editors, and content publishers use it to screen submissions before publication or grading. It runs entirely in the browser—no text is ever uploaded to a server, keeping sensitive documents private.',
     dependencies: "Copyscape API / Custom API"
   },
   {
@@ -435,7 +435,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Age Calculator",
     slug: "age-calculator",
     category: "Utility",
-    description: "Calculate exact age in years/months/days",
+    description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. HR professionals, healthcare administrators, and parents use it for eligibility checks, milestone tracking, or simply satisfying curiosity. It handles leap years, timezone offsets, and historical calendar quirks so the result is legally precise.',
     dependencies: "Date-fns / Moment.js"
   },
   {
@@ -443,7 +443,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to JPG",
     slug: "heic-to-jpg",
     category: "Image",
-    description: "Convert iPhone photos to JPG",
+    description: 'Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. iPhone and iPad users who share photos with Windows or Android contacts use this to eliminate compatibility issues. It processes Live Photos by extracting the primary still frame rather than throwing errors like most converters.',
     dependencies: "heic2any"
   },
   {
@@ -451,7 +451,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to JPG",
     slug: "pdf-to-jpg",
     category: "PDF",
-    description: "Convert PDF pages to JPG images",
+    description: 'Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. Presenters and educators use it to extract single slides or pages for embedding into slide decks, social media posts, or thumbnails. It supports custom DPI settings up to 600 so you can produce print-ready images from any PDF.',
     dependencies: "PDF.js / Canvas API"
   },
   {
@@ -459,7 +459,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to PPT",
     slug: "pdf-to-ppt",
     category: "PDF",
-    description: "Convert PDF to PowerPoint",
+    description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Business professionals and consultants who receive reports as PDFs but need to present or remix the content in PowerPoint rely on this. It maintains text as editable placeholder boxes rather than flattening everything into background images.',
     dependencies: "pdf2json / PptxGenJS"
   },
   {
@@ -467,7 +467,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Fancy Text Generator",
     slug: "fancy-text-generator",
     category: "Text",
-    description: "Create stylish fonts for social media",
+    description: 'Creates stylized Unicode text in 40+ decorative styles including double-struck, bubble, cursive, gothic, and small caps. Social-media influencers and Discord/Telegram users use it to make their handles and messages stand out in crowded feeds. Every style includes a one-tap copy button and a preview showing how it renders across different platforms.',
     dependencies: "Unicode mapping"
   },
   {
@@ -475,7 +475,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Stopwatch",
     slug: "stopwatch",
     category: "Productivity",
-    description: "Online stopwatch with lap times",
+    description: 'Stopwatch offers precision timing with lap recording, split tracking, and a clean full-screen display mode. Athletes and QA engineers rely on it for interval training or performance benchmarking. It keeps a persistent lap history within the session so you can review splits without external logging.',
     dependencies: "Vanilla JS"
   },
   {
@@ -483,7 +483,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Reddit Video Downloader",
     slug: "reddit-video-downloader",
     category: "Downloader",
-    description: "Download videos from Reddit",
+    description: 'Fetches Reddit-hosted videos and their associated audio tracks from the v.redd.it CDN, then merges them client-side. Community managers and meme archivists use it to save posts before they are deleted or removed. It handles both Reddit-native uploads and Gfycat or Imgur hosted clips.',
     dependencies: "yt-dlp"
   },
   {
@@ -491,7 +491,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Background Remover",
     slug: "background-remover",
     category: "Image",
-    description: "AI one-click background removal",
+    description: 'Segments the foreground subject from an image using a neural network trained on portrait, product, and animal datasets, producing a transparent PNG. E-commerce sellers and graphic designers use it to cut out models or objects for listing photos and composite artwork. It outputs a full-resolution file and also provides a refined edge mask for manual touch-up.',
     dependencies: "rembg / OpenCV / TensorFlow.js"
   },
   {
@@ -499,7 +499,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to JPG",
     slug: "webp-to-jpg",
     category: "Image",
-    description: "Convert WebP images to JPG",
+    description: 'Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google’s modern format. Web developers and designers who receive WebP assets from performance-optimized sites or Chrome downloads use this for backward compatibility. It preserves the original color profile and EXIF data so the conversion is visually lossless despite the format change.',
     dependencies: "Canvas API"
   },
   {
@@ -507,7 +507,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Wheel of Names",
     slug: "wheel-of-names",
     category: "Utility",
-    description: "Random name picker wheel",
+    description: 'Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Teachers and giveaway hosts use it for classroom participation, prize draws, or deciding who does the next chore. You can save wheels as shareable URLs and adjust spin speed, sound effects, and color themes.',
     dependencies: "Canvas API / GSAP"
   },
   {
@@ -515,7 +515,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Compressor",
     slug: "image-compressor",
     category: "Image",
-    description: "Lossless & lossy compression for JPG/PNG/WEBP",
+    description: 'Reduces JPG, PNG, and WebP file sizes using smart compression algorithms that balance quality against byte reduction. Web developers and site owners optimizing page load speeds use this to shrink hero images and thumbnails before deployment. It offers a side-by-side preview slider so you can visually verify the quality before accepting a smaller file.',
     dependencies: "HTML5 Canvas / libjpeg-turbo"
   },
   {
@@ -523,7 +523,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Object Remover",
     slug: "object-remover",
     category: "Image",
-    description: "Remove unwanted objects from photos",
+    description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels via a diffusion-based inpainting model. Real-estate photographers and listing agents use it to remove trash cans, signs, or power lines from property photos. It supports multi-stroke edits so you can fix several objects without restarting.',
     dependencies: "Lama Cleaner"
   },
   {
@@ -531,7 +531,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PPT to PDF",
     slug: "ppt-to-pdf",
     category: "PDF",
-    description: "Convert PowerPoint to PDF",
+    description: 'Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. Presenters distributing slide decks to attendees and recruiters submitting pitch decks to application portals that require PDF format use it before sharing. It processes multi-megabyte .pptx files entirely in the browser so no slide data is uploaded to a server.',
     dependencies: "LibreOffice API"
   },
   {
@@ -539,7 +539,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Temporary Email Generator",
     slug: "temporary-email-generator",
     category: "Privacy",
-    description: "Generate disposable email addresses",
+    description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Privacy-conscious users and developers use it to sign up for services, verify accounts, or test registration flows without exposing their primary address. Each inbox supports attachments and can receive email from any sender—no registration or personal data required.',
     dependencies: "Mailinator API / Custom Backend"
   },
   {
@@ -547,7 +547,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Screen Recorder Extension",
     slug: "screen-recorder-extension",
     category: "Extension",
-    description: "Record screen and audio",
+    description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate, and audio source selection. Remote educators and software QA engineers use it to create software tutorials or record bug reproduction steps without installing heavyweight desktop applications. Recordings are saved directly to the user’s downloads folder in WebM format, with an optional pause-and-resume feature.',
     dependencies: "MediaRecorder API"
   },
   {
@@ -555,7 +555,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF Merger",
     slug: "pdf-merger",
     category: "PDF",
-    description: "Combine multiple PDFs into one",
+    description: 'Combines two or more PDF files into one contiguous document with a drag-and-drop reorder interface for the input list. Legal assistants compiling exhibit bundles, teachers assembling handout packets, and anyone consolidating scanned documents use it to avoid desktop software installation. It accepts up to 20 files per session and preserves each source PDF’s internal bookmarks as a merged outline.',
     dependencies: "pdf-lib"
   },
   {
@@ -563,7 +563,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "QR Code Generator",
     slug: "qr-code-generator",
     category: "Utility",
-    description: "Create custom QR codes with logos",
+    description: 'Renders a QR code from any text, URL, vCard, Wi-Fi config, or plain string using a client-side Reed-Solomon encoder. Marketing teams and event coordinators use it to generate scannable codes for landing pages, digital menus, or check-in links. It supports color customization, embedded logos, and SVG export for print-ready output.',
     dependencies: "qrcode.js"
   },
   {
@@ -571,7 +571,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "To-Do List",
     slug: "to-do-list",
     category: "Productivity",
-    description: "Simple task management",
+    description: 'To Do List provides a flat task manager with drag-to-reorder, completion toggling, and localStorage persistence. Freelancers and students use it to track daily priorities without sign-up friction. All tasks survive page refreshes automatically via browser storage.',
     dependencies: "React / LocalStorage"
   },
   {
@@ -579,7 +579,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Excel to PDF",
     slug: "excel-to-pdf",
     category: "PDF",
-    description: "Convert Excel spreadsheets to PDF",
+    description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Accountants and project managers use this to share financial statements, Gantt charts, or data tables in a universally printable format that cannot be accidentally altered. It handles merged cells, conditional formatting colors, and multi-worksheet workbooks in a single conversion.',
     dependencies: "SheetJS / jsPDF"
   },
   {
@@ -587,7 +587,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "EMI Calculator",
     slug: "emi-calculator",
     category: "Finance",
-    description: "Calculate home/car loan EMI",
+    description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Home buyers, auto loan shoppers, and small-business owners use it to compare lender offers before committing to financing. It generates a full amortization schedule table that breaks down principal vs. interest for every single payment.',
     dependencies: "Vanilla JS"
   },
   {
@@ -595,7 +595,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Character Counter",
     slug: "character-counter",
     category: "Text",
-    description: "Count characters with/without spaces",
+    description: 'Counts characters (with and without spaces), words, sentences, paragraphs, and estimated reading time in real time as you type. Social-media managers and copywriters use it to fit character-limited platforms like Twitter, SMS campaigns, or meta-descriptions. It highlights the exact characters that exceed a user-configurable limit so you know what to trim.',
     dependencies: "Vanilla JS"
   },
   {
@@ -603,7 +603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Video to Text Transcription",
     slug: "video-to-text-transcription",
     category: "Transcription",
-    description: "Extract text from video files",
+    description: 'Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. Content creators and journalists use it to generate rough transcripts for editing or captioning. It processes entirely in-browser, so no video data ever leaves your machine.',
     dependencies: "Whisper API"
   },
   {
@@ -611,7 +611,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Word Counter",
     slug: "word-counter",
     category: "Text",
-    description: "Count words/characters/paragraphs",
+    description: 'Provides a live dashboard of word count, sentence count, syllable count, readability scores (Flesch-Kincaid), and speaking time. Authors, bloggers, and ESL learners use it to hit editorial word budgets and gauge how accessible their writing is. The readability graph updates character-by-character so you see the trend before you finish a paragraph.',
     dependencies: "Vanilla JS"
   },
   {
@@ -619,7 +619,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Crop Image",
     slug: "crop-image",
     category: "Image",
-    description: "Online image cropper",
+    description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like 1080×1080. Social-media managers and advertisers use it to reformat one source image across Instagram, Twitter, LinkedIn, and Facebook simultaneously. It overlays rule-of-thirds and center guides for precise composition.',
     dependencies: "Cropper.js"
   },
   {
@@ -627,7 +627,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Social Media Post Maker",
     slug: "social-media-post-maker",
     category: "Branding",
-    description: "Create graphics for social media",
+    description: 'Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. Social media managers and marketers use it to produce consistent branded posts without Photoshop. It includes preset dimensions for Instagram, Twitter, LinkedIn, and Facebook.',
     dependencies: "Fabric.js"
   },
   {
@@ -635,7 +635,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MKV to MP4",
     slug: "mkv-to-mp4",
     category: "Converter",
-    description: "Convert MKV videos to MP4",
+    description: 'Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. Anyone who needs to play MKV files on devices like smart TVs, iPhones, or game consoles uses this to avoid format rejection. It preserves all original video quality, subtitles, and multiple audio tracks in a single pass.',
     dependencies: "FFmpeg"
   },
   {
@@ -651,7 +651,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Paraphrasing Tool",
     slug: "ai-paraphrasing-tool",
     category: "AI",
-    description: "Rewrite articles and sentences",
+    description: 'Rewrites sentences and paragraphs while preserving the original meaning and intent. Academics and content creators use it to avoid plagiarism, simplify complex language, or adapt text for different platforms. It offers multiple rewriting modes ranging from formal to conversational tone.',
     dependencies: "HuggingFace"
   },
   {
@@ -659,7 +659,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Random Number Generator",
     slug: "random-number-generator",
     category: "Utility",
-    description: "Generate random numbers in range",
+    description: 'Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Game masters and statisticians use it for dice rolls, lottery simulations, Monte Carlo sampling, or impartial group assignments. It logs a timestamped history of every generated number for auditability.',
     dependencies: "Math.random()"
   },
   {
@@ -667,7 +667,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "URL Shortener",
     slug: "url-shortener",
     category: "Utility",
-    description: "Shorten long URLs with analytics",
+    description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support. Social media managers and SMS marketers use this to fit links into character-limited posts and track click performance. It offers QR code generation alongside every short link so print and digital distribution are covered in one step.',
     dependencies: "Node.js / Redis"
   },
   {
@@ -675,7 +675,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text Summarizer",
     slug: "text-summarizer",
     category: "Text",
-    description: "AI-powered article summarization",
+    description: 'Uses extractive and abstractive summarization to reduce long articles or documents to a configurable number of sentences or bullet points. Journalists, executives, and students use it to quickly grasp the key arguments of a piece before deciding to read the full version. It also generates a one-sentence TL;DR summary positioned at the very top for the fastest possible scan.',
     dependencies: "OpenAI API / HuggingFace"
   },
   {
@@ -683,7 +683,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to Excel",
     slug: "pdf-to-excel",
     category: "PDF",
-    description: "Extract tables from PDF to Excel",
+    description: 'Extracts tabular data from PDF files and reconstructs it into editable Excel spreadsheets with proper column alignment. Data analysts and auditors use this to pull financial tables, inventory lists, or survey results trapped inside locked or scanned PDFs. It applies OCR on scanned tables and uses column-detection heuristics that recover multi-level headers and merged cells.',
     dependencies: "pdf2json / SheetJS"
   },
   {
@@ -691,7 +691,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Unlock PDF",
     slug: "unlock-pdf",
     category: "PDF",
-    description: "Remove password from PDF",
+    description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. Researchers, office staff, and students use it when they lose the original author password or receive a restricted file from a colleague. It decrypts the PDF on-device using the owner password hash—no cloud round-trip is required.',
     dependencies: "qpdf"
   },
   {
@@ -699,7 +699,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Enhancer",
     slug: "image-enhancer",
     category: "Image",
-    description: "Enhance image quality and resolution",
+    description: 'Applies an AI super-resolution model to upscale images by 2x or 4x while sharpening detail, reducing noise, and correcting color cast. Portrait photographers and print-shop operators use it to rescue low-resolution source files for large-format output. It also includes one-click adjustments for brightness, contrast, saturation, and white balance.',
     dependencies: "Real-ESRGAN"
   },
   {
@@ -707,7 +707,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SIP Calculator",
     slug: "sip-calculator",
     category: "Finance",
-    description: "Mutual fund returns calculator",
+    description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Long-term retail investors and first-time SIP planners use it to set realistic monthly contribution targets for goals like retirement or education. It lets you toggle step-up SIP amounts (annual increase) to model income-growth scenarios.',
     dependencies: "Vanilla JS"
   },
   {
@@ -715,7 +715,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMI Calculator",
     slug: "bmi-calculator",
     category: "Health",
-    description: "Body Mass Index calculator",
+    description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight, or obese ranges per WHO standards. Fitness trainers and primary care patients use it as a quick screening tool during health assessments or progress tracking. The calculator displays both the numeric BMI value and a color-coded gauge visualization, and optionally saves past results to localStorage for trend tracking.',
     dependencies: "Vanilla JS"
   },
   {
@@ -723,7 +723,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Pinterest Image Downloader",
     slug: "pinterest-image-downloader",
     category: "Downloader",
-    description: "Download high-res Pinterest pins",
+    description: 'Scrapes the highest-resolution version of an image from a Pinterest pin page by inspecting the Open Graph and JSON-LD metadata. Graphic designers and mood-board creators use it to source reference imagery without screenshot artifacts. It strips the Pinterest overlay and watermark-free original when available.',
     dependencies: "Vanilla JS"
   },
   {
@@ -731,7 +731,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Audio to Text Transcription",
     slug: "audio-to-text-transcription",
     category: "Transcription",
-    description: "Transcribe audio files to text",
+    description: 'Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs. Podcasters and researchers use it to create searchable text from interviews or recordings. It supports multiple audio formats including MP3, WAV, and OGG.',
     dependencies: "Whisper API"
   },
   {
@@ -739,7 +739,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Meme Generator",
     slug: "meme-generator",
     category: "Image",
-    description: "Add custom text to meme templates",
+    description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. Social media users and community managers use it to create shareable reaction memes or promotional graphics in seconds without launching Photoshop. It includes a library of 50+ popular meme templates (Drake, Distracted Boyfriend, etc.) for instant starting points.',
     dependencies: "Canvas API"
   },
   {
@@ -747,7 +747,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MOV to MP4",
     slug: "mov-to-mp4",
     category: "Converter",
-    description: "Convert MOV videos to MP4",
+    description: 'Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. Video editors and social media managers rely on it to prepare footage for platforms like YouTube, Twitter, and Instagram that favor MP4. It intelligently handles Apple ProRes and other high-bitrate codecs that typical converters fail to process.',
     dependencies: "FFmpeg"
   },
   {
@@ -755,7 +755,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Resume Builder",
     slug: "resume-builder",
     category: "Utility",
-    description: "Create professional resumes online",
+    description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Job seekers and career changers use it to produce ATS-friendly resumes that pass automated screening systems. It includes real-time section reordering and one-click template switching without losing any entered data.',
     dependencies: "React / html2pdf.js"
   },
   {
@@ -763,7 +763,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Image Upscaler",
     slug: "ai-image-upscaler",
     category: "AI",
-    description: "Upscale images without losing quality",
+    description: 'Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses. Photographers and e-commerce sellers use it to prepare low-res assets for print or high-res displays. It denoises images during upscaling, restoring clarity to old or compressed photos.',
     dependencies: "Real-ESRGAN"
   },
   {
@@ -771,7 +771,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GST Calculator",
     slug: "gst-calculator",
     category: "Finance",
-    description: "Calculate GST inclusive/exclusive prices",
+    description: 'Computes GST-inclusive and GST-exclusive amounts for Indian tax slabs (5%, 12%, 18%, 28%) with automatic HSN/SAC code hints. Small-business owners, freelancers, and accountants in India use it to generate tax-ready invoice figures without memorizing rate tables. It splits the output into central CGST and state SGST components as required by Indian tax law.',
     dependencies: "Vanilla JS"
   },
   {
@@ -779,7 +779,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Resizer",
     slug: "image-resizer",
     category: "Image",
-    description: "Social media templates & custom resizing",
+    description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness. Graphic designers and web developers preparing assets for responsive layouts, social media cover images, or print specifications use this for pixel-perfect output. It supports maintaining aspect ratio via lock-button, canvas cropping, and batch resizing of multiple images at once.',
     dependencies: "Canvas API / Sharp"
   },
   {
@@ -787,7 +787,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Password Generator",
     slug: "password-generator",
     category: "Utility",
-    description: "Generate secure random passwords",
+    description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Security-conscious individuals and system administrators use it to create credentials for accounts, servers, or API keys that resist brute-force attacks. It excludes visually ambiguous characters (like 1/l/I and 0/O) by default and rates each password’s entropy score.',
     dependencies: "Crypto API"
   },
   {
@@ -795,7 +795,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Diff Checker",
     slug: "diff-checker",
     category: "Developer",
-    description: "Compare two text files for differences",
+    description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Developers and technical writers use it to review code changes, compare document drafts, or verify configuration file modifications before deployment. The tool supports unified and split-view modes and detects indentation-level changes that word-level diff checkers typically miss.',
     dependencies: "diff-match-patch"
   },
   {
@@ -803,7 +803,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBM to MP4",
     slug: "webm-to-mp4",
     category: "Converter",
-    description: "Convert WEBM videos to MP4",
+    description: 'Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. Designers and web developers who receive screen recordings or animations in WebM from Chrome-based tools use this for downstream compatibility. It strips the VP8/VP9 codec and repackages into H.264, achieving playability on virtually every modern device.',
     dependencies: "FFmpeg"
   },
   {
@@ -811,7 +811,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "IP Address Lookup",
     slug: "ip-address-lookup",
     category: "Utility",
-    description: "Find geolocation of IP address",
+    description: 'Displays your current public IPv4 and IPv6 addresses along with geolocation data (city, ISP, ASN, timezone) fetched via a WebRTC STUN request and a geolocation API. Network engineers and remote workers use it to verify VPN connectivity, diagnose routing issues, or confirm their public-facing IP. It also exposes your local LAN IP and browser-reported location for comparison.',
     dependencies: "MaxMind / IP-API"
   },
   {
@@ -819,7 +819,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Brand Name Generator",
     slug: "brand-name-generator",
     category: "Branding",
-    description: "Generate unique brand names",
+    description: 'Brand Name Generator combines keyword inputs with syllable patterns and suffix rules to produce creative name ideas. Entrepreneurs and naming committees use it to brainstorm brand names before domain availability checks. It lets you lock preferred words and regenerate variations around them.',
     dependencies: "OpenAI API"
   },
   {
@@ -827,7 +827,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Content Humanizer",
     slug: "ai-content-humanizer",
     category: "AI",
-    description: "Bypass AI detectors and make text human-like",
+    description: 'Replaces robotic phrasing, repetitive patterns, and awkward constructions typical of AI-generated text. Bloggers and SEO writers use it to make published content pass AI-detection tools and sound genuinely human. It varies sentence rhythm and vocabulary while keeping facts and structure intact.',
     dependencies: "OpenAI API / Custom NLP"
   },
   {
@@ -835,7 +835,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Photo Retoucher",
     slug: "photo-retoucher",
     category: "Image",
-    description: "Retouch photos automatically",
+    description: 'Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. Wedding photographers and real-estate listing agents use it to clean up images without launching Photoshop. It preserves EXIF data and outputs a lossless PNG so no quality is lost between edits.',
     dependencies: "OpenCV"
   },
   {
@@ -843,7 +843,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF Splitter",
     slug: "pdf-splitter",
     category: "PDF",
-    description: "Extract pages from PDF",
+    description: 'Divides a single PDF into multiple files by page range, bookmark level, or a specified page count per split. Paralegals, accountants, and data managers use it to extract specific sections from large reports or separate combined submissions. You can preview each page as a thumbnail before splitting and optionally rename output files in bulk.',
     dependencies: "pdf-lib"
   },
   {
@@ -867,7 +867,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Font Generator",
     slug: "font-generator",
     category: "Text",
-    description: "Generate cool text fonts",
+    description: 'Converts plain ASCII text into dozens of Unicode-stylized variants including bold, script, fraktur, monospace, and decorative letter forms. Social-media users, graphic designers, and gamers use it to create distinctive display names, bios, and captions where custom fonts are not natively supported. Every generated style is copy-paste compatible with Instagram, TikTok, Discord, and Steam.',
     dependencies: "Vanilla JS"
   },
   {
@@ -891,7 +891,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Pomodoro Timer",
     slug: "pomodoro-timer",
     category: "Productivity",
-    description: "25-minute focus timer",
+    description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Students and remote workers use it to maintain focus using the Pomodoro technique. It fires desktop notification alerts when sessions end, even if the browser tab is backgrounded.',
     dependencies: "Web Audio API / Vanilla JS"
   },
   {
@@ -899,7 +899,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Video Summarizer",
     slug: "ai-video-summarizer",
     category: "AI",
-    description: "Summarize long YouTube videos",
+    description: 'Extracts key scenes, dialogue, and concepts from long-form video into a structured text summary. Researchers and busy professionals use it to digest hour-long recordings, lectures, or meetings in minutes. It generates timestamps for each summary point so you can jump directly to the source segment.',
     dependencies: "YouTube API / OpenAI API"
   },
   {
@@ -907,7 +907,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "YouTube Transcript Generator",
     slug: "youtube-transcript-generator",
     category: "Transcription",
-    description: "Get transcripts from YouTube videos",
+    description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Researchers and content analysts use it to extract readable text for quoting or translation. It preserves timestamps alongside each line for easy navigation back to the original video.',
     dependencies: "YouTube Data API"
   },
   {
@@ -915,7 +915,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Audio Enhancer",
     slug: "ai-audio-enhancer",
     category: "AI",
-    description: "Remove background noise from audio",
+    description: 'Removes background noise, hiss, and hum from recordings while preserving vocal clarity. Podcasters and remote workers use it to clean up recordings made in untreated rooms or through poor microphones. It can also normalize volume levels across an entire audio file in one pass.',
     dependencies: "Adobe Podcast API / Custom Model"
   },
   {
@@ -923,7 +923,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "EPUB to PDF",
     slug: "epub-to-pdf",
     category: "PDF",
-    description: "Convert EPUB to PDF format",
+    description: 'Converts EPUB ebooks to PDF with full control over page size, margins, font, and line spacing. Readers, self-publishing authors, and educators use it to create print-ready versions of digital books or to read EPUB files on devices with poor EPUB support. It preserves chapter headings, table of contents hyperlinks, and embedded images during conversion.',
     dependencies: "Calibre API"
   },
   {
@@ -939,7 +939,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Voice Cloning",
     slug: "ai-voice-cloning",
     category: "AI",
-    description: "Clone voices from short audio samples",
+    description: 'Analyzes a short voice sample to synthesize new speech that matches the original speaker’s tone, pitch, and cadence. Voice actors and indie game developers use it to generate narration or dialogue without repeated studio sessions. It can clone a voice from as little as 30 seconds of source audio.',
     dependencies: "ElevenLabs API"
   },
   {
@@ -947,7 +947,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Essay Writer",
     slug: "ai-essay-writer",
     category: "AI",
-    description: "Generate high-quality academic essays",
+    description: 'Generates thesis-driven essays with coherent arguments, citations, and properly structured paragraphs. Students and academics use it to produce first drafts on unfamiliar topics or to overcome analysis paralysis. It lets you specify essay type—argumentative, compare-contrast, or expository—and target word count.',
     dependencies: "OpenAI API"
   },
   {
@@ -955,7 +955,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Protect PDF",
     slug: "protect-pdf",
     category: "PDF",
-    description: "Add password to PDF",
+    description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. HR departments distributing confidential offer letters and legal teams sharing discovery documents use it before emailing attachments. It does not transmit the file to any server—all encryption happens client-side via a WebCrypto implementation.',
     dependencies: "pdf-lib"
   },
   {
@@ -963,7 +963,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Invoice Generator",
     slug: "invoice-generator",
     category: "Finance",
-    description: "Generate PDF invoices for freelancers",
+    description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Freelancers, sole proprietors, and agency owners use it to send professional billing documents without subscribing to full accounting software. It auto-fills sequential invoice numbers, due dates, and the sender’s saved profile between sessions.',
     dependencies: "PDF-lib / Vue.js"
   },
   {
@@ -971,7 +971,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Business Card Maker",
     slug: "business-card-maker",
     category: "Branding",
-    description: "Design custom business cards",
+    description: 'Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Freelancers and sales professionals use it to design double-sided business cards for home printing. It exports directly to a print-ready PDF with cut-line guides.',
     dependencies: "React / Canvas API"
   },
   {
@@ -979,7 +979,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Regex Tester",
     slug: "regex-tester",
     category: "Developer",
-    description: "Test regular expressions online",
+    description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match highlights with capture group breakdowns. Developers and data analysts use it to craft and debug regex patterns for search-and-replace operations, log parsing, or form validation before deploying them in production code. The tester includes a pattern library with 50+ common regex recipes and flags any catastrophic backtracking risks by analyzing the pattern structure.',
     dependencies: "regex.js"
   },
   {
@@ -987,7 +987,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Avatar Generator",
     slug: "ai-avatar-generator",
     category: "AI",
-    description: "Generate custom avatars from selfies",
+    description: 'Creates stylized or photorealistic digital avatars from a single uploaded selfie. Social media users and virtual-event organizers use it to build consistent profile imagery without a photoshoot. It offers hundreds of art styles including anime, 3D render, and classic portrait painting.',
     dependencies: "Stable Diffusion API"
   },
   {
@@ -995,7 +995,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Dice Roller",
     slug: "dice-roller",
     category: "Utility",
-    description: "Virtual 3D dice roller",
+    description: 'Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Tabletop RPG players and game masters use it when physical dice are not available or when they need to roll complex expressions like 3d6+2. It provides a full probability breakdown showing the mathematical likelihood of each outcome.',
     dependencies: "Three.js"
   },
   {
@@ -1003,7 +1003,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Profit Margin Calculator",
     slug: "profit-margin-calculator",
     category: "Finance",
-    description: "Calculate gross and net profit margins",
+    description: 'Computes gross profit, net profit, and margin percentages from revenue and cost inputs, and can work backwards to find required sell price given a target margin. Small-business owners and freelancers use it to price products or services before sending quotes. It displays both markup and margin side-by-side so you never confuse the two metrics.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1027,7 +1027,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Vimeo Video Downloader",
     slug: "vimeo-video-downloader",
     category: "Downloader",
-    description: "Download videos from Vimeo",
+    description: 'Resolves Vimeo’s progressive-download and HLS streaming URLs from the video config object to offer direct MP4 downloads. Video editors and production teams use it to download review cuts or offline proxies. It surfaces every available resolution from 360p to 4K without transcoding.',
     dependencies: "yt-dlp"
   },
   {
@@ -1035,7 +1035,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to EPUB",
     slug: "pdf-to-epub",
     category: "PDF",
-    description: "Convert PDF to EPUB format",
+    description: 'Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. Students and avid readers use this to transfer textbooks, research papers, or manuals onto e-readers like Kindle and Kobo. It preserves chapter bookmarks, hyperlinks, and image alt text that migration tools typically discard.',
     dependencies: "Calibre API"
   },
   {
@@ -1043,7 +1043,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Coin Flipper",
     slug: "coin-flipper",
     category: "Utility",
-    description: "Virtual coin toss",
+    description: 'Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Decision-makers and game players use it to settle disputes, choose between two options, or add randomness to board games. It tracks flip history with a running tally so you can verify fairness over thousands of flips.',
     dependencies: "CSS3 Animations"
   },
   {
@@ -1051,7 +1051,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Colorizer",
     slug: "image-colorizer",
     category: "Image",
-    description: "Colorize black and white photos",
+    description: 'Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. Genealogists and history enthusiasts use it to bring old family portraits and archival photographs to life. It lets you tint specific regions (skin, sky, foliage) manually when the AI is uncertain.',
     dependencies: "DeOldify"
   },
   {
@@ -1059,7 +1059,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "EXIF Data Remover",
     slug: "exif-data-remover",
     category: "Privacy",
-    description: "Strip metadata from images",
+    description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Journalists, privacy advocates, and real-estate photographers use it to scrub location and device data before publishing photos online. The removal is done completely on-device via WebAssembly—images are never transmitted or stored on a server.',
     dependencies: "exifr / Piexifjs"
   },
   {
@@ -1067,7 +1067,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVI to MP4",
     slug: "avi-to-mp4",
     category: "Converter",
-    description: "Convert AVI videos to MP4",
+    description: 'Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. Archivists and anyone digitizing old home videos or DVD rips use this to future-proof their media libraries. It applies smart deinterlacing and aspect-ratio correction automatically, saving hours of manual video preprocessing.',
     dependencies: "FFmpeg"
   },
   {
@@ -1083,7 +1083,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Face Swap",
     slug: "ai-face-swap",
     category: "AI",
-    description: "Swap faces in photos for fun",
+    description: 'Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle. Content creators and meme-makers use it for humorous edits or to place themselves into historical photos. It automatically adjusts facial expression to match the original image’s context.',
     dependencies: "InsightFace"
   },
   {
@@ -1091,7 +1091,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON Formatter",
     slug: "json-formatter",
     category: "Developer",
-    description: "Format and validate JSON data",
+    description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact line-level messages. Backend developers debugging API responses and data analysts inspecting large config files use it before feeding data into downstream tools. It includes a minimized side-by-side view that halves character count for copying into logs.',
     dependencies: "JSONLint"
   },
   {
@@ -1099,7 +1099,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML Sitemap Generator",
     slug: "xml-sitemap-generator",
     category: "SEO",
-    description: "Generate sitemap.xml for websites",
+    description: 'Accepts a list of URLs with optional priority, change frequency, and last-modified dates, then emits a standards-compliant XML sitemap with proper namespace declarations. SEO specialists and site owners use it to submit a complete page inventory to Google Search Console. It validates all URLs for syntax correctness and flags duplicate or malformed entries before export.',
     dependencies: "Node.js / Cheerio"
   },
   {
@@ -1107,7 +1107,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Meeting Minutes Generator",
     slug: "meeting-minutes-generator",
     category: "Transcription",
-    description: "AI summaries of meeting transcripts",
+    description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Project managers and team leads use it to produce consistent meeting artifacts without manual formatting. It includes a templating system so recurring meetings keep the same structure.',
     dependencies: "OpenAI API"
   },
   {
@@ -1115,7 +1115,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Cover Letter Generator",
     slug: "ai-cover-letter-generator",
     category: "AI",
-    description: "Create tailored cover letters for jobs",
+    description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s language. Job seekers and career changers use it to overcome writer’s block and customize applications at scale. It scores each generated draft against ATS keyword patterns so your letter passes automated screening systems.',
     dependencies: "OpenAI API"
   },
   {
@@ -1123,7 +1123,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Excel Formula Generator",
     slug: "ai-excel-formula-generator",
     category: "AI",
-    description: "Generate Excel/Sheets formulas",
+    description: 'Converts plain-English descriptions of spreadsheet logic into ready-to-paste Excel or Google Sheets formulas. Business analysts, accountants, and data analysts use it to avoid syntax errors and learn complex functions like XLOOKUP or nested IFs interactively. Each formula includes an inline explanation of how it works and a link to the official Microsoft or Google documentation.',
     dependencies: "OpenAI API"
   },
   {
@@ -1131,7 +1131,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Product Description Generator",
     slug: "ai-product-description-generator",
     category: "AI",
-    description: "Write descriptions for products",
+    description: 'Generates SEO-optimized product descriptions from a few keywords, a URL, or an image of the product. E-commerce sellers and Shopify store owners use it to create consistent, persuasive copy across hundreds of SKUs without hiring a copywriter. It outputs multiple tone variants—professional, casual, or luxury—so you can A/B test which converts better.',
     dependencies: "OpenAI API"
   },
   {
@@ -1147,7 +1147,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Presentation Generator",
     slug: "ai-presentation-generator",
     category: "AI",
-    description: "Generate PowerPoint slides from text",
+    description: 'Converts a topic sentence or rough outline into a complete slide deck with design, layout, and bullet points. Sales teams and educators use it to build professional presentations in minutes instead of hours. It applies consistent themes across all slides and can export directly to PowerPoint or Google Slides.',
     dependencies: "OpenAI API / PptxGenJS"
   },
   {
@@ -1155,7 +1155,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to CSV",
     slug: "json-to-csv",
     category: "Converter",
-    description: "Convert JSON data to CSV format",
+    description: 'Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. Data analysts and engineers use this to move API responses, database exports, or configuration files into tools like Excel, Google Sheets, or pandas. It handles deeply nested JSON by intelligently flattening keys into descriptive column names rather than dropping data.',
     dependencies: "PapaParse"
   },
   {
@@ -1163,7 +1163,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Watermark PDF",
     slug: "watermark-pdf",
     category: "PDF",
-    description: "Add text/image watermark to PDF",
+    description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Legal professionals and photographers use it to add confidential markings, copyright notices, or document stamps before distribution. It supports variable watermark fields like {date}, {page-number}, or {username} that populate dynamically per recipient.',
     dependencies: "pdf-lib"
   },
   {
@@ -1171,7 +1171,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF Page Delete",
     slug: "pdf-page-delete",
     category: "PDF",
-    description: "Remove pages from PDF files",
+    description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Administrative assistants cleaning up scanned documents that include blank separator sheets and authors removing unwanted appendix pages use it to produce clean final files. It displays a visual thumbnail preview of every page before deletion so users can confirm their selection.',
     dependencies: "pdf-lib"
   },
   {
@@ -1179,7 +1179,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to SVG",
     slug: "png-to-svg",
     category: "Image",
-    description: "Vectorize PNG images",
+    description: 'Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold, and speckle suppression. Icon designers and frontend developers use it to convert hand-drawn sketches or raster logos into resolution-independent vectors. The result is editable in any vector application and typically 80-90% smaller than the source PNG.',
     dependencies: "Potrace"
   },
   {
@@ -1187,7 +1187,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Email Signature Generator",
     slug: "email-signature-generator",
     category: "Branding",
-    description: "Create professional email signatures",
+    description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. Salespeople and corporate employees use it to create professional signatures without editing raw HTML. The preview renders live so every field change shows the result immediately.',
     dependencies: "React"
   },
   {
@@ -1195,7 +1195,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Music Generator",
     slug: "ai-music-generator",
     category: "AI",
-    description: "Generate royalty-free background music",
+    description: 'Composes original music tracks from text descriptions of genre, mood, tempo, and instrumentation. Indie filmmakers and game developers use it to create royalty-free background scores without hiring a composer. It generates stems (individual instrument tracks) for flexible post-production editing.',
     dependencies: "Suno API / Custom Model"
   },
   {
@@ -1211,7 +1211,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Margin Calculator",
     slug: "margin-calculator",
     category: "Finance",
-    description: "Calculate profit margins",
+    description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables using standard retail formulas. E-commerce sellers, product managers, and wholesalers use it to price inventory while ensuring target profitability. It includes a breakeven-quantity sub-calculator that shows how many units must sell at a given margin.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1219,7 +1219,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Morse Code Translator",
     slug: "morse-code-translator",
     category: "Utility",
-    description: "Convert text to Morse code and back",
+    description: 'Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals back to text via keyboard or microphone input. Ham-radio operators and aviation students use it for practice or to decode recorded transmissions. It adjusts the Farnsworth speed and tone frequency to match your skill level.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1227,7 +1227,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Cursive Text Generator",
     slug: "cursive-text-generator",
     category: "Text",
-    description: "Generate cursive text",
+    description: 'Converts plain text into flowing cursive and script-style Unicode characters that resemble handwritten calligraphy. Wedding-invitation designers, journalers, and Instagram story creators use it to add an elegant hand-lettered aesthetic without design software. It offers multiple cursive variants—formal Spencerian, casual looped, and connected italic—each with realistic letter joins.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1235,7 +1235,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ROI Calculator",
     slug: "roi-calculator",
     category: "Finance",
-    description: "Calculate Return on Investment",
+    description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Startup founders, marketing managers, and real-estate investors use it to evaluate which channels or assets deliver the highest yield. It supports multi-period comparison so you can paste several investments at once and see a ranked table.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1243,7 +1243,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "VAT Calculator",
     slug: "vat-calculator",
     category: "Finance",
-    description: "Calculate Value Added Tax",
+    description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. E-commerce merchants, SaaS operators, and EU freelancers use it to generate compliant invoices across multiple jurisdictions. It automatically applies the correct rate when a country is selected and flags reverse-charge scenarios.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1259,7 +1259,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Password Strength Checker",
     slug: "password-strength-checker",
     category: "Privacy",
-    description: "Test password strength and entropy",
+    description: 'Evaluates passwords against 10+ criteria: length, character diversity, dictionary words, pattern repetition, known-breach database lookup, and entropy. Security-conscious users and system administrators use it to enforce strong password policies without sending plaintext passwords over the network. The breach check uses a k-anonymity model so only a partial hash prefix is transmitted, preserving your password’s secrecy.',
     dependencies: "zxcvbn"
   },
   {
@@ -1267,7 +1267,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JS Minifier",
     slug: "js-minifier",
     category: "Developer",
-    description: "Compress JavaScript code",
+    description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. Web-performance engineers and build-pipeline maintainers use it to reduce bundle size before deployment to production CDNs. It shows a before/after byte-count comparison and estimates the percentage savings achieved by minification.',
     dependencies: "Terser"
   },
   {
@@ -1275,7 +1275,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Base64 Encode/Decode",
     slug: "base64-encode-decode",
     category: "Developer",
-    description: "Encode or decode Base64 strings",
+    description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Developers embedding images in CSS/data URIs and security engineers inspecting encoded payloads use it for quick round-trip verification. It detects and strips common padding variants automatically so pasted strings from any source decode correctly on first try.',
     dependencies: "btoa/atob"
   },
   {
@@ -1283,7 +1283,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to Handwriting",
     slug: "text-to-handwriting",
     category: "Text",
-    description: "Convert digital text to handwriting",
+    description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. Students and content creators use it to generate handwritten-style notes, assignments, or social-media posts that look natural. The output can be downloaded as a PDF or PNG with optional lined or ruled paper backgrounds.',
     dependencies: "Canvas API"
   },
   {
@@ -1291,7 +1291,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Receipt Generator",
     slug: "receipt-generator",
     category: "Finance",
-    description: "Create custom receipts",
+    description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Retail pop-up vendors, tradespeople, and service providers use it to hand receipts to customers on the spot without a POS system. It supports same-session reprint so the last receipt can be duplicated with a single click.',
     dependencies: "Canvas API / jsPDF"
   },
   {
@@ -1299,7 +1299,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Thumbnail Maker",
     slug: "ai-thumbnail-maker",
     category: "AI",
-    description: "Generate clickbait YouTube thumbnails",
+    description: 'Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. YouTubers and video marketers use it to increase click-through rates without learning Photoshop. It analyzes top-performing thumbnails in your niche to suggest color palettes and layout patterns.',
     dependencies: "Canvas API / OpenAI API"
   },
   {
@@ -1307,7 +1307,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Secure Note Sharer",
     slug: "secure-note-sharer",
     category: "Privacy",
-    description: "Share self-destructing notes",
+    description: 'Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. Journalists, legal teams, and system administrators use it to securely transmit passwords, API keys, or confidential instructions without leaving a persistent record. The note is encrypted with AES-256-GCM before transmission and the decryption key is never stored on the server.',
     dependencies: "Crypto API / Redis"
   },
   {
@@ -1323,7 +1323,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image to Base64",
     slug: "image-to-base64",
     category: "Developer",
-    description: "Convert image to Base64 string",
+    description: 'Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON. API developers and backend engineers use it to inline small images in responses, generate placeholder blobs for database seeding, or encode assets for email templates. The tool optionally strips the MIME-type prefix for raw Base64 output and shows the character count and estimated size inflation ratio.',
     dependencies: "FileReader API"
   },
   {
@@ -1331,7 +1331,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Subtitle Translator",
     slug: "subtitle-translator",
     category: "Video",
-    description: "Translate SRT/VTT files",
+    description: 'Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame synchronization. Video editors and localization teams use it to localize foreign-language films and online courses without manually retiming subtitles. The translation engine recognizes speaker labels, sound effects in brackets, and formatting tags, leaving them untranslated so only dialogue is modified.',
     dependencies: "Google Translate API"
   },
   {
@@ -1339,7 +1339,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "IBAN Validator",
     slug: "iban-validator",
     category: "Finance",
-    description: "Validate International Bank Account Numbers",
+    description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. Payment operations teams and accounts-payable clerks use it to catch typos before they cause wire-transfer failures or bank rejection fees. It displays the parsed bank identifier, branch code, and account number so users can verify the parts visually.',
     dependencies: "ibantools"
   },
   {
@@ -1347,7 +1347,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Flowchart Maker",
     slug: "ai-flowchart-maker",
     category: "AI",
-    description: "Generate flowcharts from text",
+    description: 'Parses process descriptions and automatically generates a connected flowchart with labeled nodes and decision branches. Product managers and technical writers use it to document workflows, algorithms, or decision trees instantly. It supports swimlane diagrams and can export to Mermaid, Lucidchart, and SVG formats.',
     dependencies: "Mermaid.js / OpenAI API"
   },
   {
@@ -1355,7 +1355,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Code Explainer",
     slug: "ai-code-explainer",
     category: "AI",
-    description: "Explain complex code snippets",
+    description: 'Accepts any code snippet and returns a plain-English breakdown of what each section does and why. Junior developers and code-review participants use it to understand unfamiliar libraries or legacy codebases. It can also translate explanations between programming languages, showing equivalent logic in Python, JavaScript, or Rust.',
     dependencies: "OpenAI API"
   },
   {
@@ -1363,7 +1363,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI SQL Generator",
     slug: "ai-sql-generator",
     category: "AI",
-    description: "Generate SQL queries from natural language",
+    description: 'Translates plain-English database queries into optimized SQL statements with proper joins and indexing hints. Data analysts and product managers use it to query databases without memorizing SQL syntax or table schemas. It explains the generated query step by step so users learn SQL as they go.',
     dependencies: "OpenAI API"
   },
   {
@@ -1371,7 +1371,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Recipe Generator",
     slug: "ai-recipe-generator",
     category: "AI",
-    description: "Generate recipes based on ingredients",
+    description: 'Suggests complete recipes based on a list of ingredients you already have in your kitchen. Home cooks and meal-preppers use it to reduce food waste and avoid last-minute grocery runs. It filters by dietary restrictions (vegan, keto, gluten-free) and scales servings automatically.',
     dependencies: "OpenAI API"
   },
   {
@@ -1379,7 +1379,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Domain Name Generator",
     slug: "ai-domain-name-generator",
     category: "AI",
-    description: "Generate available domain names",
+    description: 'Combines seed keywords with current TLD availability data, linguistic patterns, and brandability heuristics to propose available domain names. Startup founders and side-project builders use it to brainstorm names that are short, memorable, and pronounceable. Each suggestion shows instant WHOIS availability and highlights domains that are still unregistered with popular extensions like .com and .io.',
     dependencies: "OpenAI API / Domain API"
   },
   {
@@ -1387,7 +1387,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Mind Map Generator",
     slug: "ai-mind-map-generator",
     category: "AI",
-    description: "Create mind maps from prompts",
+    description: 'Parses a block of text, a URL, or bullet points and renders a hierarchical mind map that can be exported as PNG, SVG, or Markdown. Students, project managers, and writers use it to visually organize research, brainstorm ideas, or outline complex topics. It auto-layouts nodes to minimize crossing lines and lets you collapse subtrees to focus on high-level structure.',
     dependencies: "OpenAI API / React Flow"
   },
   {
@@ -1395,7 +1395,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to JSON",
     slug: "csv-to-json",
     category: "Converter",
-    description: "Convert CSV data to JSON format",
+    description: 'Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. Backend developers and data pipeline builders use this to transform spreadsheet exports into API-friendly payloads or database seed files. It auto-detects delimiters (commas, tabs, semicolons) and encoding schemes so malformed CSV never breaks the output.',
     dependencies: "PapaParse"
   },
   {
@@ -1403,7 +1403,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Rotate PDF",
     slug: "rotate-pdf",
     category: "PDF",
-    description: "Rotate PDF pages",
+    description: 'Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. Office workers dealing with scanned documents that came in sideways and designers fixing mixed-orientation PDFs use it to make reading natural. It applies rotation metadata-only when possible so the operation completes in under a second for most files.',
     dependencies: "pdf-lib"
   },
   {
@@ -1411,7 +1411,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Extract Images from PDF",
     slug: "extract-images-from-pdf",
     category: "PDF",
-    description: "Extract all images from a PDF",
+    description: 'Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. Graphic designers reclaiming assets from client PDFs and archivists pulling figures from research-paper PDFs use it to avoid recreating graphics from scratch. It shows a thumbnail grid of all found images and lets users download them individually or as a ZIP archive.',
     dependencies: "pdf.js"
   },
   {
@@ -1419,7 +1419,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SQL Formatter",
     slug: "sql-formatter",
     category: "Developer",
-    description: "Beautify SQL queries",
+    description: 'Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. Data analysts and backend engineers reviewing complex joins or long CTEs use it before committing queries to shared codebases. It highlights syntax errors inline and warns about implicit grouping or missing WHERE clauses as it formats.',
     dependencies: "sql-formatter"
   },
   {
@@ -1427,7 +1427,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "UUID Generator",
     slug: "uuid-generator",
     category: "Developer",
-    description: "Generate v4 UUIDs",
+    description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Software engineers provisioning database primary keys, creating API resource IDs, or assigning session tokens use it to avoid collisions without a central authority. It produces a batch of up to 50 UUIDs at once so users can copy an entire seed set in one action.',
     dependencies: "uuid"
   },
   {
@@ -1435,7 +1435,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEX to RGB Converter",
     slug: "hex-to-rgb-converter",
     category: "Design",
-    description: "Convert color codes",
+    description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. Frontend developers and designers use it for precise color translation between CSS formats. It also shows a color swatch preview and converts back from RGB to hex.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1443,7 +1443,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMR Calculator",
     slug: "bmr-calculator",
     category: "Health",
-    description: "Basal Metabolic Rate calculator",
+    description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation, accepting age, sex, height, and weight to estimate daily caloric expenditure at rest. Nutritionists and weight-loss clients use it to determine baseline calorie targets for diet planning and body composition goals. This tool surfaces both BMR in calories per day and estimated maintenance calories adjusted for five activity levels from sedentary to extra active.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1451,7 +1451,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Meta Tag Generator",
     slug: "meta-tag-generator",
     category: "SEO",
-    description: "Generate SEO meta tags",
+    description: 'Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form. Content marketers and web developers use it to craft preview snippets that control how pages appear in search results and social feeds. It live-previews the Google SERP snippet and the Facebook/Twitter card as you type.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1459,7 +1459,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to Binary",
     slug: "text-to-binary",
     category: "Developer",
-    description: "Convert text to binary code",
+    description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Computer-science students learning data representation and embedded-systems developers verifying bit patterns use it for teaching and debugging. It highlights the ASCII-range bytes in a different color so readable characters stand out from control codes.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1467,7 +1467,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Binary to Text",
     slug: "binary-to-text",
     category: "Developer",
-    description: "Convert binary code to text",
+    description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error indicator. Firmware engineers reading memory dumps and students checking homework solutions use it to reverse binary encoding without writing a script. It accepts variable-length binary groups (7-bit or 8-bit) and infers the intended encoding automatically.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1475,7 +1475,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Break-Even Calculator",
     slug: "break-even-calculator",
     category: "Finance",
-    description: "Calculate break-even point",
+    description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Entrepreneurs writing business plans, product managers launching new SKUs, and investors reviewing unit economics use it to de-risk spending decisions. It draws an interactive chart that shades the loss and profit regions relative to the break-even point.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1483,7 +1483,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Conversion Rate Calculator",
     slug: "conversion-rate-calculator",
     category: "Marketing",
-    description: "Calculate website conversion rates",
+    description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. Marketers and ecommerce operators use it to measure campaign or landing page performance. It optionally computes the statistical margin of error for the given sample size.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1491,7 +1491,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CPM Calculator",
     slug: "cpm-calculator",
     category: "Marketing",
-    description: "Calculate Cost Per Mille for ads",
+    description: 'CPM Calculator computes cost per mille by dividing total ad spend by impressions and multiplying by 1000. Media buyers and advertisers use it to compare campaign efficiency across different publishers. It includes a reverse mode that estimates required impressions from a target CPM.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1499,7 +1499,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ROAS Calculator",
     slug: "roas-calculator",
     category: "Marketing",
-    description: "Calculate Return on Ad Spend",
+    description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate campaign profitability. It shows both the ratio and the percentage return in a single result panel.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1507,7 +1507,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Podcast Transcription",
     slug: "podcast-transcription",
     category: "Transcription",
-    description: "Transcribe podcast episodes",
+    description: 'Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations. Podcasters and accessibility teams use it to generate show transcripts for SEO and hearing-impaired listeners. It automatically segments the transcript by detected speaker changes.',
     dependencies: "Whisper API"
   },
   {
@@ -1515,7 +1515,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSS Minifier",
     slug: "css-minifier",
     category: "Developer",
-    description: "Compress CSS code",
+    description: 'Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Frontend developers and build-toolchain authors use it to shrink stylesheet payloads for faster page loads in production. It reports the exact number of duplicate declarations eliminated and the final file-size reduction percentage.',
     dependencies: "clean-css"
   },
   {
@@ -1523,7 +1523,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Markdown to HTML",
     slug: "markdown-to-html",
     category: "Converter",
-    description: "Convert Markdown to HTML code",
+    description: 'Renders GitHub-Flavored Markdown into semantic, accessible HTML with proper heading hierarchy, code syntax highlighting, and table markup. Technical writers and documentation maintainers use it to publish READMEs, wiki pages, or blog posts without touching raw HTML. It supports extended syntax like task lists, footnotes, and strikethrough that standard Markdown parsers omit.',
     dependencies: "marked.js"
   },
   {
@@ -1531,7 +1531,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Compare PDF Files",
     slug: "compare-pdf-files",
     category: "PDF",
-    description: "Compare two PDFs for differences",
+    description: 'Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. Contract reviewers and compliance officers use it to spot unauthorized changes between document revisions without reading every page. It generates a side-by-side diff report that marks additions in green, deletions in red, and layout shifts in yellow.',
     dependencies: "pdf.js"
   },
   {
@@ -1539,7 +1539,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Favicon Generator",
     slug: "favicon-generator",
     category: "Design",
-    description: "Convert images to .ico and app icons",
+    description: 'Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. Developers and site owners use it to create favicons without needing image editing software. It outputs all required sizes (16×16, 32×32, 48×48) in a single download.',
     dependencies: "Sharp / jimp"
   },
   {
@@ -1547,7 +1547,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Case Converter",
     slug: "case-converter",
     category: "Text",
-    description: "Convert to UPPER/lower/Title/camel case",
+    description: 'Transforms text between uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case, and kebab-case with a single click. Developers, editors, and data-entry operators use it to normalize inconsistent formatting in bulk or to reformat code identifiers. It intelligently handles edge cases like apostrophes in title case and preserves acronyms in camelCase conversion.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1555,7 +1555,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Keyword Density Checker",
     slug: "keyword-density-checker",
     category: "SEO",
-    description: "Analyze text for keyword frequency",
+    description: 'Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. Copywriters and content strategists use it to detect keyword stuffing and ensure natural distribution across blog posts and landing pages. It highlights every occurrence of a selected keyword directly in the source text for contextual review.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1563,7 +1563,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Base64 to Image",
     slug: "base64-to-image",
     category: "Developer",
-    description: "Convert Base64 string to image",
+    description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. Frontend developers and QA engineers use it to inspect encoded image data embedded in API responses, CSS data URIs, or email attachments without writing a decoder script. The tool automatically detects the image MIME type from the Base64 header and warns if the string is malformed or truncated before attempting to render.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1579,7 +1579,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MD5 Hash Generator",
     slug: "md5-hash-generator",
     category: "Developer",
-    description: "Generate MD5 hash from string",
+    description: 'Computes the 128-bit MD5 hash of any input text or uploaded file, returned as a 32-character hexadecimal string with optional uppercase. Developers verifying file integrity after downloads and QA engineers checking that test artifacts have not mutated use it as a quick checksum tool. It accepts file uploads up to 50 MB so users can hash binaries without a command-line utility.',
     dependencies: "CryptoJS"
   },
   {
@@ -1587,7 +1587,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HTML Minifier",
     slug: "html-minifier",
     category: "Developer",
-    description: "Compress HTML code",
+    description: 'Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Web performance engineers and static-site deployers use it to optimize pages before publishing, improving load times and Core Web Vitals scores. The minifier intelligently preserves conditional comments, server-side includes, and data attributes while aggressively removing all other non-functional markup.',
     dependencies: "html-minifier"
   },
   {
@@ -1595,7 +1595,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Barcode Generator",
     slug: "barcode-generator",
     category: "Utility",
-    description: "Generate EAN/UPC/Code39 barcodes",
+    description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Retailers, warehouse managers, and product designers use it to create labels without specialized hardware or expensive licensing. It validates check digits automatically and guarantees compliance with GS1 formatting rules.',
     dependencies: "JsBarcode"
   },
   {
@@ -1603,7 +1603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Regex Generator",
     slug: "ai-regex-generator",
     category: "AI",
-    description: "Generate regular expressions from text",
+    description: 'Accepts a natural-language sentence describing a text-matching rule—such as ‘find all US phone numbers with area codes’—and returns a ready-to-use regular expression. Non-technical professionals and junior developers use it to generate accurate regex patterns without learning regex syntax. The generator explains each token in the output pattern with inline comments so users can verify and customize the generated expression.',
     dependencies: "OpenAI API"
   },
   {
@@ -1611,7 +1611,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Business Idea Generator",
     slug: "ai-business-idea-generator",
     category: "AI",
-    description: "Generate startup ideas",
+    description: 'Synthesizes market trends, technological capabilities, and pain-point databases to generate concrete business concepts with rough TAM estimates. Aspiring entrepreneurs and innovation teams use it to discover underserved niches and validate assumptions before building a prototype. Each idea includes a one-sentence pitch, a suggested business model (SaaS, marketplace, etc.), and three hypothetical competitors.',
     dependencies: "OpenAI API"
   },
   {
@@ -1619,7 +1619,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Slogan Generator",
     slug: "ai-slogan-generator",
     category: "AI",
-    description: "Create catchy slogans for brands",
+    description: 'Generates catchy, brand-aligned taglines from a brief description of your product, audience, and tone preference. Startup founders and marketing teams use it to brainstorm positioning before investing in ad creative. It groups slogans by emotional angle—humorous, authoritative, aspirational—so you can pick the right voice.',
     dependencies: "OpenAI API"
   },
   {
@@ -1627,7 +1627,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Poem Generator",
     slug: "ai-poem-generator",
     category: "AI",
-    description: "Write poems in various styles",
+    description: 'Writes original poetry in forms ranging from haiku and sonnet to free verse, matching a requested mood or theme. Poets and event planners use it to draft personalized verses for invitations, memorials, or creative projects. It respects syllable counts for structured forms and offers rhyme-scheme options.',
     dependencies: "OpenAI API"
   },
   {
@@ -1635,7 +1635,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PGP Key Generator",
     slug: "pgp-key-generator",
     category: "Privacy",
-    description: "Generate PGP public and private keys",
+    description: 'Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. Developers, security researchers, and privacy advocates use it to create PGP keys for email encryption, software signing, or SSH authentication. All key generation happens in the browser using Web Crypto API—the private key material is never exposed to the network.',
     dependencies: "OpenPGP.js"
   },
   {
@@ -1643,7 +1643,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Add Page Numbers to PDF",
     slug: "add-page-numbers-to-pdf",
     category: "PDF",
-    description: "Add page numbers to PDF documents",
+    description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Law-firm paralegals preparing exhibits with Bates-style numbering and academic authors formatting theses use it to meet submission guidelines. It skips the first page automatically when the user marks it as a cover sheet so numbering starts on the correct page.',
     dependencies: "pdf-lib"
   },
   {
@@ -1651,7 +1651,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HTML to Markdown",
     slug: "html-to-markdown",
     category: "Converter",
-    description: "Convert HTML to Markdown text",
+    description: 'Parses arbitrary HTML and converts it into clean, readable Markdown while intelligently stripping inline styles and scripts. Content migrators and web scrapers use it to transfer articles, documentation, or email templates from HTML-heavy sources into Markdown-based CMS platforms like Ghost or Obsidian. It preserves image alt text, link titles, and nested lists that naive converters routinely lose.',
     dependencies: "Turndown"
   },
   {
@@ -1659,7 +1659,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Reverse Text Generator",
     slug: "reverse-text-generator",
     category: "Text",
-    description: "Reverse text or words",
+    description: 'Applies multiple text-transformation effects: reverse order, reverse each word, flip upside down, mirror horizontally, and rotate 180 degrees. Puzzle makers, coders, and meme creators use it to create cryptic messages or visually interesting text effects. Each transformation shows a live preview and the Unicode code points used so you understand the mechanics behind the effect.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1667,7 +1667,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Zalgo Text Generator",
     slug: "zalgo-text-generator",
     category: "Text",
-    description: "Generate glitch text",
+    description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. Discord moderators, horror-game developers, and internet culture enthusiasts use it to create unsettling usernames or thematic visual effects. You can independently control the intensity of marks above, below, and inside the text for fine-grained distortion.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1675,7 +1675,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Invisible Text Generator",
     slug: "invisible-text-generator",
     category: "Text",
-    description: "Generate invisible characters",
+    description: 'Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. Privacy-conscious users and developers use it to hide metadata in text, test rendering engines, or create seemingly blank social-media bios. Each generated character includes its Unicode hex code and a visible-mode toggle so you can confirm what is actually there.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1683,7 +1683,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "LTV Calculator",
     slug: "ltv-calculator",
     category: "Finance",
-    description: "Calculate Customer Lifetime Value",
+    description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. Subscription-business founders, growth marketers, and finance analysts use it to gauge whether customer-acquisition spend will pay back over time. It compares LTV against a user-supplied CAC figure and flags whether the ratio falls below the healthy 3:1 benchmark.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1691,7 +1691,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CAC Calculator",
     slug: "cac-calculator",
     category: "Finance",
-    description: "Calculate Customer Acquisition Cost",
+    description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startup operators and VC-funded growth teams use it to track unit-economics health month over month. It breaks down the total into channel-level subtotals (paid ads, referrals, content) so users can see which pipeline is cheapest.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1699,7 +1699,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Burn Rate Calculator",
     slug: "burn-rate-calculator",
     category: "Finance",
-    description: "Calculate startup burn rate and runway",
+    description: 'Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. Startup founders and CFOs use it to project how long their capital will last before the next fundraise. It supports scenario modeling so you can adjust expense cuts or revenue growth assumptions in real time.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1707,7 +1707,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Net Promoter Score Calculator",
     slug: "net-promoter-score-calculator",
     category: "Marketing",
-    description: "Calculate NPS from survey data",
+    description: 'Net Promoter Score Calculator categorizes survey responses into promoters, passives, and detractors, then subtracts the detractor percentage from the promoter percentage. Customer experience teams and product managers use it to track loyalty metrics from raw survey data. It accepts bulk input so you can paste an entire column of 0–10 ratings at once.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1715,7 +1715,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML to CSV",
     slug: "xml-to-csv",
     category: "Converter",
-    description: "Convert XML data to CSV format",
+    description: 'Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. Database administrators and ETL developers use this to migrate legacy XML data into relational databases or analytics tools that require flat inputs. It resolves repeating elements into multiple rows while keeping sibling context intact, avoiding the one-row-per-file trap.',
     dependencies: "xml2js / PapaParse"
   },
   {
@@ -1723,7 +1723,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF Metadata Editor",
     slug: "pdf-metadata-editor",
     category: "PDF",
-    description: "Edit PDF properties and metadata",
+    description: 'Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. Librarians cataloging digital archives and compliance officers who need to stamp documents with department tags use it directly in the browser. It preserves all XMP metadata already present in the file and only overwrites the field the user explicitly changes.',
     dependencies: "pdf-lib"
   },
   {
@@ -1731,7 +1731,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG Editor",
     slug: "svg-editor",
     category: "Design",
-    description: "Edit and optimize SVG files online",
+    description: 'SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. Icon designers and frontend developers use it to tweak SVG assets without launching a full vector tool. The editor exports clean, non-prettified SVG markup that matches your visual adjustments exactly.',
     dependencies: "SVGO / Fabric.js"
   },
   {
@@ -1739,7 +1739,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Robots.txt Generator",
     slug: "robots-txt-generator",
     category: "SEO",
-    description: "Create robots.txt files",
+    description: 'Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references per user-agent. Webmasters and site-launch teams use it to block staging environments from search engines while keeping the live domain fully indexable. It validates the output against Google’s official robots.txt parser before you download.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1747,7 +1747,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SaaS Pricing Calculator",
     slug: "saas-pricing-calculator",
     category: "Finance",
-    description: "Optimize SaaS pricing tiers",
+    description: 'Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue per user. Product managers and growth teams use it to compare the impact of pricing changes on MRR, ARR, and customer lifetime value. It plots a waterfall chart showing how each tier contributes to total revenue.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1763,7 +1763,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MAC Address Generator",
     slug: "mac-address-generator",
     category: "Privacy",
-    description: "Generate random MAC addresses",
+    description: 'Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI prefix filtering. Network engineers and QA testers use it to create spoofed addresses for device testing, network simulation, or privacy masking. You can specify a custom OUI to generate addresses that appear to belong to a specific hardware vendor.',
     dependencies: "Vanilla JS"
   },
   {
@@ -1779,7 +1779,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML to JSON",
     slug: "xml-to-json",
     category: "Developer",
-    description: "Convert XML data to JSON format",
+    description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key name. Integration engineers migrating SOAP-based integrations to RESTful APIs and data pipeline developers use it to normalize legacy payloads. It detects repeated sibling elements and converts them into JSON arrays automatically to preserve cardinality.',
     dependencies: "xml2js"
   },
   {
@@ -1787,7 +1787,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Braille Translator",
     slug: "braille-translator",
     category: "Text",
-    description: "Translate text to Braille",
+    description: 'Bidirectional converter between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille. Accessibility specialists, educators of visually impaired students, and transcribers use it to prepare learning materials and verify Braille correctness. It renders the Braille output both as Unicode Braille patterns and as a visual dot diagram for learning purposes.',
     dependencies: "Vanilla JS"
   }  ,{
     id: "201",
@@ -1802,7 +1802,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Aadhaar Wallet Cropper",
     slug: "aadhaar-wallet-cropper",
     category: "indian-utilities",
-    description: "Client-side wallet sizing and masking helper",
+    description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. Indian citizens and HR teams use it to prepare identification photos for government forms, PF accounts, and employee records. It applies a white background and meets the exact pixel dimensions required by UIDAI guidelines.',
     dependencies: "Canvas API"
   },
   {
@@ -1810,7 +1810,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PAN Card Resizer",
     slug: "pan-card-resizer",
     category: "indian-utilities",
-    description: "NSDL photo/signature formatting",
+    description: 'Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. Tax consultants and CA firms use it to prepare client PAN cards for ITR filings and KYC documentation. It keeps the original DPI at 300 so the resized card remains crisp when printed.',
     dependencies: "Canvas API"
   },
   {
@@ -1818,7 +1818,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "KB Image Compressor",
     slug: "kb-image-compressor",
     category: "indian-utilities",
-    description: "Strict 20KB/50KB/100KB target compression",
+    description: 'Compresses JPEG and PNG images to a specific kilobyte target (e.g., 20 KB, 100 KB, 200 KB) using binary-search quantization until the file size falls just under the limit. Government-job applicants and exam portals use it to resize photographs and signatures for online application forms. It never crops or stretches the image—only adjusts quality and strips metadata to stay within the bound.',
     dependencies: "browser-image-compression"
   }
 
@@ -1828,7 +1828,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Live Transcription",
     slug: "live-transcription",
     category: "Transcription",
-    description: "Real-time mic-to-text using Web Speech API",
+    description: 'Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. Remote meeting participants and journalists use it to capture spoken dialogue as it happens. It maintains a rolling buffer so you can scroll back through the session without losing the current stream.',
     dependencies: "Web Speech API"
   },
   {
@@ -1836,7 +1836,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Bulk Converter",
     slug: "image-bulk-converter",
     category: "Image",
-    description: "Convert 100s of images at once + ZIP download",
+    description: 'Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. Graphic designers and print-shop operators use it to standardize a folder of mixed-format assets before delivery. It runs entirely in your browser via WebAssembly—nothing is uploaded to a server.',
     dependencies: "browser-image-compression / jszip"
   },
   {
@@ -1844,7 +1844,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "eSign PDF",
     slug: "esign-pdf",
     category: "PDF",
-    description: "Legally sign PDF documents online",
+    description: 'Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. Contract managers closing agreements remotely and freelancers signing engagement letters use it to finalize documents without printing or scanning. It generates a signed-timestamp footer that records the browser’s approximate signing time so the PDF shows evidence of when it was completed.',
     dependencies: "pdf-lib / fabric"
   },
   {
@@ -1852,7 +1852,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF OCR (Scanned Docs)",
     slug: "pdf-ocr",
     category: "PDF",
-    description: "Extract text from scanned PDFs",
+    description: 'Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. Archivists and digitization teams use it to make scanned books, invoices, or historical records text-searchable and copy-pasteable. It supports 130+ languages and outputs a text layer directly embedded back into the PDF for full searchability.',
     dependencies: "tesseract.js"
   },
   {
@@ -1860,7 +1860,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF Form Filler",
     slug: "pdf-form-filler",
     category: "PDF",
-    description: "Fill & sign PDF forms online",
+    description: 'Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed document. Recruiters, insurance agents, and HR staff use it to fill standard forms without printing, scanning, or buying Acrobat Pro. Filled forms can be flattened into a non-editable PDF to prevent tampering after submission.',
     dependencies: "pdf-lib"
   },
   {
@@ -1876,7 +1876,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Document Chat (RAG)",
     slug: "ai-document-chat",
     category: "AI",
-    description: "Upload PDF/doc and ask questions",
+    description: 'Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents. Researchers, legal professionals, and students use it to extract facts from long reports or contracts without reading every page. It cites the exact source paragraph for every answer so you can verify claims instantly.',
     dependencies: "CF Vectorize"
   },
   {
@@ -1884,7 +1884,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Video Subtitler",
     slug: "ai-video-subtitler",
     category: "AI",
-    description: "Auto-generate burned-in subtitles on video",
+    description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Content creators and accessibility teams use it to caption videos for hearing-impaired viewers or multi-language audiences. It supports dual-language subtitle tracks so viewers can read translations alongside the original audio.',
     dependencies: "Whisper API"
   },
   {
@@ -1962,7 +1962,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
-    description: 'Generate valid GST invoices for India.',
+    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply, and tax breakdown (CGST, SGST, IGST). Small business owners and freelancers registered under GST use it to create professional invoices without subscribing to paid accounting software. The generator auto-calculates tax amounts based on the selected GST rate and reverse-charges mechanism, and exports a ZIP archive of all invoices when processing in batch mode.',
     category: 'indian-utilities',
     id:  "227",
     dependencies: 'None'
@@ -2034,7 +2034,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
-    description: 'Lookup bank branch details, address, and contact using IFSC.',
+    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details from the official RBI database. Indian banking customers and fintech developers use it to validate account routing details before initiating NEFT, RTGS, or IMPS transfers. The lookup caches results locally for 24 hours and supports partial matches, returning up to five candidate branches when the full code is uncertain.',
     category: 'indian-utilities',
     id:  "236",
     dependencies: 'IFSC API'

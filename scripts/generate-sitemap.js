@@ -25,6 +25,7 @@ function parseToolsRegistry() {
   const count = Math.min(slugs.length, categories.length, names.length);
 
   for (let i = 0; i < count; i++) {
+    if (names[i].includes('(Moved)')) continue;
     tools.push({
       name: names[i],
       slug: slugs[i],
