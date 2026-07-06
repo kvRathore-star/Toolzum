@@ -217,8 +217,30 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
   'indian-utilities': { label: 'Lifestyle', order: 5 },
 };
 
+export const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
+  'indian-utilities': 'India 🇮🇳',
+  'e-commerce': 'E-Commerce',
+  'ai': 'AI Tools',
+  'transcription': 'Transcription',
+  'branding': 'Branding',
+  'productivity': 'Productivity',
+  'marketing': 'Marketing',
+};
+
+export const GROUP_ORDER = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+
 export function getCategoryGroup(category: string): string {
   return CATEGORY_GROUPS[category]?.label ?? 'Other';
+}
+
+export function getGroupedCategories(categories: string[]): Record<string, string[]> {
+  const groups: Record<string, string[]> = {};
+  [...categories].sort().forEach(c => {
+    const group = getCategoryGroup(c);
+    if (!groups[group]) groups[group] = [];
+    groups[group].push(c);
+  });
+  return groups;
 }
 
 export function getCategoryTheme(category: string): CategoryTheme {
