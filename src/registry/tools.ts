@@ -248,11 +248,11 @@ const rawToolsRegistry: ToolMetadata[] = [
   },
   {
     id: "2",
-    name: "Ad Blocker Extension",
-    slug: "ad-blocker-extension",
-    category: "Extension",
-    description: "Block ads and trackers",
-    dependencies: "Vanilla JS"
+    name: 'Privacy Cleaner',
+    slug: 'privacy-cleaner',
+    category: 'Utility',
+    description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. Privacy-conscious users in India use it to remove tracking data, clear login sessions, and free up browser storage across multiple domains. Everything runs locally on-device: no data is transmitted or stored on any server.',
+    dependencies: 'Vanilla JS'
   },
   {
     id: "yt-dl-1",
@@ -269,14 +269,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Downloader",
     description: "Download IG Reels and Videos",
     dependencies: "Instaloader / API"
-  },
-  {
-    id: "5",
-    name: "YouTube Video Downloader Extension",
-    slug: "youtube-video-downloader-extension",
-    category: "Extension",
-    description: "Download videos directly from browser",
-    dependencies: "Vanilla JS"
   },
   {
     id: "6",
@@ -333,14 +325,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Downloader",
     description: 'Extracts native video files from tweets by resolving the embedded media URL from Twitter’s CDN. Marketers and journalists use it to save viral clips, interviews, or announcements for offline reference. It preserves the original resolution and audio track without re-encoding.',
     dependencies: "yt-dlp"
-  },
-  {
-    id: "13",
-    name: "SoundCloud Downloader",
-    slug: "soundcloud-downloader",
-    category: "Downloader",
-    description: "Download SoundCloud tracks",
-    dependencies: "API / yt-dlp"
   },
   {
     id: "14",
@@ -413,14 +397,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. Photographers, real-estate agents, and administrative assistants use it to bundle scan pages or photo portfolios into a single shareable document. You can adjust image compression per page to balance file size against print-quality output.',
     dependencies: "jsPDF / Canvas API"
-  },
-  {
-    id: "24",
-    name: "Online Timer",
-    slug: "online-timer",
-    category: "Productivity",
-    description: "Countdown timer with alarm",
-    dependencies: "Web Audio API"
   },
   {
     id: "25",
@@ -847,22 +823,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "pdf-lib"
   },
   {
-    id: "82",
-    name: "Twitch Clip Downloader",
-    slug: "twitch-clip-downloader",
-    category: "Downloader",
-    description: "Download clips from Twitch",
-    dependencies: "Twitch API"
-  },
-  {
-    id: "83",
-    name: "Color Picker Extension",
-    slug: "color-picker-extension",
-    category: "Extension",
-    description: "Pick colors from any webpage",
-    dependencies: "Vanilla JS"
-  },
-  {
     id: "84",
     name: "Font Generator",
     slug: "font-generator",
@@ -925,14 +885,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts EPUB ebooks to PDF with full control over page size, margins, font, and line spacing. Readers, self-publishing authors, and educators use it to create print-ready versions of digital books or to read EPUB files on devices with poor EPUB support. It preserves chapter headings, table of contents hyperlinks, and embedded images during conversion.',
     dependencies: "Calibre API"
-  },
-  {
-    id: "93",
-    name: "Color Picker Web",
-    slug: "color-picker",
-    category: "Design",
-    description: "Extract colors from images or screen",
-    dependencies: "Canvas API / EyeDropper API"
   },
   {
     id: "94",
@@ -1004,14 +956,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "profit-margin-calculator",
     category: "Finance",
     description: 'Computes gross profit, net profit, and margin percentages from revenue and cost inputs, and can work backwards to find required sell price given a target margin. Small-business owners and freelancers use it to price products or services before sending quotes. It displays both markup and margin side-by-side so you never confuse the two metrics.',
-    dependencies: "Vanilla JS"
-  },
-  {
-    id: "103",
-    name: "Credit Card Generator",
-    slug: "credit-card-generator",
-    category: "Developer",
-    description: "Generate valid test credit card numbers",
     dependencies: "Vanilla JS"
   },
   {
@@ -1135,14 +1079,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "OpenAI API"
   },
   {
-    id: "119",
-    name: "AI Story Generator",
-    slug: "ai-story-generator",
-    category: "AI",
-    description: "Write creative stories and plots",
-    dependencies: "OpenAI API"
-  },
-  {
     id: "120",
     name: "AI Presentation Generator",
     slug: "ai-presentation-generator",
@@ -1199,14 +1135,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Suno API / Custom Model"
   },
   {
-    id: "127",
-    name: "Lorem Ipsum Generator",
-    slug: "lorem-ipsum-generator",
-    category: "Design",
-    description: "Generate dummy text for layouts",
-    dependencies: "Vanilla JS"
-  },
-  {
     id: "128",
     name: "Margin Calculator",
     slug: "margin-calculator",
@@ -1245,14 +1173,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Finance",
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. E-commerce merchants, SaaS operators, and EU freelancers use it to generate compliant invoices across multiple jurisdictions. It automatically applies the correct rate when a country is selected and flags reverse-charge scenarios.',
     dependencies: "Vanilla JS"
-  },
-  {
-    id: "133",
-    name: "Bilibili Video Downloader",
-    slug: "bilibili-video-downloader",
-    category: "Downloader",
-    description: "Download videos from Bilibili",
-    dependencies: "yt-dlp"
   },
   {
     id: "134",
@@ -1567,14 +1487,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
-    id: "173",
-    name: "Flip Image",
-    slug: "flip-image",
-    category: "Image",
-    description: "Flip image horizontally/vertically",
-    dependencies: "Canvas API"
-  },
-  {
     id: "174",
     name: "MD5 Hash Generator",
     slug: "md5-hash-generator",
@@ -1864,14 +1776,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "pdf-lib"
   },
   {
-    id: "215",
-    name: "Multi-Model AI Chat",
-    slug: "multi-model-ai-chat",
-    category: "AI",
-    description: "Claude + GPT-4o + Gemini in one interface",
-    dependencies: "AI APIs"
-  },
-  {
     id: "216",
     name: "AI Document Chat (RAG)",
     slug: "ai-document-chat",
@@ -1949,14 +1853,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Browse and generate AI prompts.',
     category: 'AI',
     id:  "225",
-    dependencies: 'None'
-  },
-  {
-    name: 'AI Chat Hub',
-    slug: 'ai-chat-hub',
-    description: 'Centralized dashboard for all AI models.',
-    category: 'AI',
-    id:  "226",
     dependencies: 'None'
   },
   {
@@ -2103,23 +1999,288 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "244",
     dependencies: 'pdf-lib'
   },
+  {
+    name: 'WebP to PNG Converter',
+    slug: 'webp-to-png',
+    description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced assets in applications or contexts that only accept PNG. It preserves the original resolution and all alpha channel data during conversion.',
+    category: 'Image',
+    id:  "245",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'JFIF to PNG Converter',
+    slug: 'jfif-to-png',
+    description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. Photographers and graphic designers use it to normalize JPEG-derived formats before editing or archival. It strips the JFIF wrapper and saves as a clean PNG with sRGB color profile.',
+    category: 'Image',
+    id:  "246",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'HEIC to PNG Converter',
+    slug: 'heic-to-png',
+    description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. iPhone users and cross-platform workers who need to share HEIC photos with Windows or Android recipients use it for seamless compatibility. It preserves EXIF metadata and processes Live Photos by extracting the primary still frame.',
+    category: 'Image',
+    id:  "247",
+    dependencies: 'libheif WASM'
+  },
+  {
+    name: 'Image to JPG Converter',
+    slug: 'convert-to-jpg',
+    description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. Social media managers and web developers use it to unify mixed-format image sets into JPG before uploading to bandwidth-sensitive platforms. It automatically fills transparency with a white background since JPG does not support alpha channels.',
+    category: 'Image',
+    id:  "248",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'Rotate Image Online',
+    slug: 'rotate-image',
+    description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required. Photography editors and graphic designers fixing horizon-alignment issues or reorienting mobile-captured photos use it for quick corrections. The tool preserves the full image resolution and EXIF orientation metadata after rotation.',
+    category: 'Image',
+    id:  "249",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'Blur Face Online',
+    slug: 'blur-face',
+    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. Privacy-conscious journalists, content creators, and real-estate photographers use it to anonymize people in public photos before publishing. It supports multiple face detection and lets you toggle individual face blur on or off.',
+    category: 'Image',
+    id:  "250",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'HTML to Image Converter',
+    slug: 'html-to-image',
+    description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Frontend developers and marketers use it to generate dynamic social-media cards, email headers, or quote graphics without a design tool. It captures the DOM at the exact pixel dimensions specified and supports Google Fonts and CSS animations.',
+    category: 'Developer',
+    id:  "251",
+    dependencies: 'html2canvas'
+  },
+  {
+    name: 'Apple Music Preview Extractor',
+    slug: 'apple-music-preview-extractor',
+    description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Music curators, reviewers, and content creators use it to obtain short audio snippets for commentary, reviews, or playlist previews. The extractor pulls the highest-bitrate AAC preview available from Apple\'s CDN.',
+    category: 'Audio',
+    id:  "252",
+    dependencies: 'fetch API'
+  },
+  {
+    name: 'Twitch Thumbnail Downloader',
+    slug: 'twitch-thumbnail-downloader',
+    description: 'Downloads the publicly cached preview thumbnail images from Twitch streams, clips, and videos by parsing the Twitch CDN URL pattern. Streamers and content managers use it to grab high-resolution thumbnails for promotional posts, video compilations, or social media. It offers all available thumbnail sizes from 160x90 up to 1920x1080.',
+    category: 'Downloader',
+    id:  "253",
+    dependencies: 'fetch API'
+  },
+  {
+    name: 'Dailymotion Downloader',
+    slug: 'dailymotion-downloader',
+    description: 'Downloads Dailymotion videos in multiple quality options by extracting direct MP4 stream URLs from the video metadata. Video archivists and content curators use it to save embedded Dailymotion clips before they are removed or made private. It lists every available resolution from 240p to 4K and reports file sizes before download.',
+    category: 'Video',
+    id:  "254",
+    dependencies: 'fetch API'
+  },
+  {
+    name: 'AI Placeholder Content Generator',
+    slug: 'ai-placeholder-content-generator',
+    description: 'Generates realistic placeholder text, blog posts, product descriptions, and website copy using AI from a few keyword prompts. Web designers and content strategists use it to populate wireframes and mockups with natural-sounding filler content instead of lorem ipsum. Each generation includes configurable tone options, word count, and section headings.',
+    category: 'AI',
+    id:  "255",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'AI Brand Color Palette Generator',
+    slug: 'brand-color-palette-generator',
+    description: 'Generates harmonious brand color palettes with hex codes, color meanings, and suggested usage contexts based on industry and mood inputs. Startup founders and graphic designers use it to build professional color systems without color theory expertise. Each palette includes primary, secondary, accent, neutral, and surface colors with contrast ratio validation.',
+    category: 'Design',
+    id:  "256",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'Marriage Biodata Maker',
+    slug: 'marriage-biodata-maker',
+    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Indian families and matchmaking services use it to prepare standardized biodata sheets for rishta portals and matrimonial events. The output is a clean A4-printable PDF with customizable accent colors and photo placement.',
+    category: 'indian-utilities',
+    id:  "257",
+    dependencies: 'jsPDF'
+  },
+  {
+    name: 'Rental Agreement Generator',
+    slug: 'rental-agreement-generator',
+    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. Landlords, tenants, and property managers in India use it to draft standardized rental contracts without lawyer fees. It covers key clauses: security deposit, maintenance responsibilities, notice period, rent escalation, and stamp duty reference.',
+    category: 'indian-utilities',
+    id:  "258",
+    dependencies: 'jsPDF'
+  },
+  {
+    name: 'Resume ATS Score Checker',
+    slug: 'resume-ats-score-checker',
+    description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. Job seekers and career coaches use it to optimize resumes before applying to roles that use automated screening systems. It returns keyword match analysis, formatting recommendations, and a section-by-section breakdown of strengths.',
+    category: 'AI',
+    id:  "259",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'Instagram Media Downloader',
+    slug: 'instagram-story-downloader',
+    description: 'Downloads Instagram posts, reels, and stories by resolving media URLs through Instagram\'s public oEmbed API. Social media managers and content creators use it to archive their own content or save public posts for offline reference. It supports both single and carousel posts and extracts the highest-resolution version of each image or video.',
+    category: 'Downloader',
+    id:  "260",
+    dependencies: 'fetch API'
+  },
+  {
+    name: 'WhatsApp Toolkit',
+    slug: 'whatsapp-toolkit',
+    description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text designer. Small business owners and customer support teams use it to streamline WhatsApp-based customer interactions and marketing campaigns. The chat analyzer extracts call-volume patterns from exported chat logs without uploading any data.',
+    category: 'Utility',
+    id:  "261",
+    dependencies: 'QRCode.js'
+  },
+  {
+    name: 'Indian Document Enhancer',
+    slug: 'indian-document-enhancer',
+    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government and banking portals. Indian citizens and CA firms use it to adjust brightness, contrast, and DPI to meet the specific pixel and file-size requirements of each portal. It auto-crops to the document boundary and strips unnecessary background.',
+    category: 'indian-utilities',
+    id:  "262",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'AI Complaint Letter Generator',
+    slug: 'ai-complaint-letter-generator',
+    description: 'Generates AI-powered formal complaint letters and legal notices tailored to Indian consumer protection, banking, and service scenarios. Indian consumers and legal aid professionals use it to draft structured complaints to companies, banks, insurance providers, and government authorities. Each letter references the applicable Indian law or regulation and includes placeholders for supporting document attachments.',
+    category: 'indian-utilities',
+    id:  "263",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'Indian Voice Transcriber',
+    slug: 'indian-voice-transcriber',
+    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. Journalists, researchers, and field workers in India use it to convert interviews, meetings, and dictations in Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Urdu, Odia, and English. It segments the transcript by detected speaker changes and exports as SRT or plain text.',
+    category: 'indian-utilities',
+    id:  "264",
+    dependencies: 'Web Speech API'
+  },
+  {
+    name: 'Bank Statement Analyser',
+    slug: 'bank-statement-analyser',
+    description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending breakdowns. Personal finance managers and small business owners use it to understand spending patterns and create budgets without manually tagging transactions. It generates monthly trend charts, top-merchant reports, and an exportable categorized transaction table.',
+    category: 'Utility',
+    id:  "265",
+    dependencies: 'PDF.js'
+  },
+  {
+    name: 'AI Resume Tailor',
+    slug: 'ai-resume-tailor',
+    description: 'Rewrites resume sections to better match a specific job description by highlighting relevant keywords, reordering bullet points, and adjusting tone. Job seekers and recruitment consultants use it to customize applications for each role without rewriting the entire resume from scratch. It preserves factual accuracy while optimizing for ATS keyword matching and recruiter scanning patterns.',
+    category: 'AI',
+    id:  "266",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'AI Legal Agreement Generator',
+    slug: 'ai-legal-agreement-generator',
+    description: 'Generates legally sound agreement templates for Indian contexts including NDAs, rental agreements, employment contracts, service level agreements, and partnership deeds. Startup founders and freelancers in India use it to create enforceable legal documents without engaging a lawyer for routine contracts. Each generated agreement includes jurisdiction-specific clauses, dispute resolution mechanisms, and e-signature placeholders.',
+    category: 'indian-utilities',
+    id:  "267",
+    dependencies: 'AI API'
+  },
+  {
+    name: 'Social Media Calendar',
+    slug: 'social-media-calendar',
+    description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled, and published status tracking. Social media managers and content teams use it to maintain a consistent posting cadence across Instagram, Twitter, LinkedIn, and Facebook. It supports drag-to-reorder posts, content templates, and CSV export of the full content plan.',
+    category: 'Utility',
+    id:  "268",
+    dependencies: 'localStorage'
+  },
+  {
+    name: 'Bulk Background Changer',
+    slug: 'bulk-bg-changer',
+    description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. E-commerce photographers and product listing teams use it to standardize product photo backgrounds across an entire catalog in one operation. It supports color replacement, transparent background removal, and uniform color fill with configurable tolerance.',
+    category: 'Image',
+    id:  "269",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'AI Background Changer',
+    slug: 'ai-bg-changer',
+    description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Content creators and real-estate photographers use it to swap backgrounds on portraits, product shots, and property photos for listings or social media. It offers a manual refine mode for touch-ups on complex edges like hair or foliage.',
+    category: 'Image',
+    id:  "270",
+    dependencies: 'Canvas API'
+  },
+  {
+    name: 'Link in Bio Builder',
+    slug: 'link-in-bio-builder',
+    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Instagram creators and TikTok influencers use it to build a central hub linking to all their content, stores, and affiliate pages. The output is a self-contained HTML file that can be hosted on GitHub Pages, Vercel, or any static host.',
+    category: 'Branding',
+    id:  "271",
+    dependencies: 'None'
+  },
+  {
+    name: 'IST Time Converter',
+    slug: 'ist-time-converter',
+    description: 'Converts Indian Standard Time (IST) to other major world time zones and performs UTC-to-IST and IST-to-UTC conversions with DST awareness. Remote teams working with Indian colleagues and travelers planning calls or flights to/from India use it to accurately translate time across zones. It displays the current IST offset and highlights overlapping business hours between IST and the selected target zone.',
+    category: 'Utility',
+    id:  "272",
+    dependencies: 'None'
+  },
+  {
+    name: 'Audio Converter',
+    slug: 'audio-converter',
+    description: 'Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser. Podcasters and audio editors use it to normalize file formats across a production pipeline without installing desktop software. It preserves ID3 metadata tags during conversion and displays estimated file size changes before processing.',
+    category: 'Audio',
+    id:  "273",
+    dependencies: 'FFmpeg WASM'
+  },
+  {
+    name: 'PDF Page Manager',
+    slug: 'pdf-page-manager',
+    description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Office administrators and legal professionals use it to clean up scanned PDFs, reorder pages, and prepare documents for submission. It renders a thumbnail strip of all pages and supports keyboard shortcuts for bulk operations on large documents.',
+    category: 'PDF',
+    id:  "274",
+    dependencies: 'pdf-lib'
+  },
+  {
+    name: 'Bulk QR Code Generator',
+    slug: 'bulk-qr-code-generator',
+    description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Event organizers and inventory managers use it to create batch-printed QR codes for nametags, asset tags, or product labels without manual repetition. The generator supports four encoding modes (URL, text, vCard, WiFi credentials) and appends a sequential filename prefix so each QR code maps back to its original CSV row.',
+    category: 'Utility',
+    id:  "275",
+    dependencies: 'qrcode.js, JSZip'
+  },
+  {
+    name: 'PDF AI Summariser',
+    slug: 'pdf-ai-summariser',
+    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key findings and conclusions. Researchers and business analysts use it to extract actionable insights from lengthy reports, whitepapers, or academic papers in seconds instead of hours. The summariser handles scanned PDFs with embedded images and allows the user to specify summary length and tone (executive, technical, or plain language).',
+    category: 'AI',
+    id:  "276",
+    dependencies: 'AI API, PDF.js'
+  },
+  {
+    name: 'YouTube Thumbnail Downloader',
+    slug: 'youtube-thumbnail-downloader',
+    description: 'Fetches and displays all available resolution variants of a YouTube video thumbnail — from default (120x90) up to maxresdefault (1920x1080) — given a video URL or ID. Content creators and social media managers use it to download high-resolution thumbnails for repurposing in video ads, blog embeds, or portfolio showcases. The tool extracts the video ID from any YouTube URL format and exposes all four thumbnail qualities plus the three storyboard frames in a single gallery view.',
+    category: 'Downloader',
+    id:  "277",
+    dependencies: 'fetch API'
+  }
 ];
 
 const proSlugs = [
   "tiktok-video-downloader", "youtube-downloader", "instagram-video-downloader",
-  "facebook-video-downloader", "twitter-video-downloader", "soundcloud-downloader",
+  "facebook-video-downloader", "twitter-video-downloader",
   "ai-translator", "pdf-to-word", "ai-image-generator", "logo-maker", "mp4-to-mp3",
   "pdf-compressor", "word-to-pdf", "ai-writing-assistant", "jpg-to-pdf",
   "plagiarism-checker", "pdf-to-jpg", "pdf-to-ppt", "background-remover",
   "object-remover", "ppt-to-pdf", "pdf-merger", "excel-to-pdf", "video-to-text-transcription",
   "social-media-post-maker", "svg-editor", "business-card-maker", "pdf-to-excel",
   "unlock-pdf", "protect-pdf", "epub-to-pdf", "pdf-to-epub", "compare-pdf-files",
-  "extract-images-from-pdf", "email-signature-generator", "color-picker",
+  "extract-images-from-pdf", "email-signature-generator",
   "ai-thumbnail-maker", "mp3-compressor", "gif-to-mp4", "video-trimmer",
   "video-watermark-adder", "ai-blog-title-generator", "ai-hashtag-generator",
-  "prompt-library-generator", "ai-chat-hub", "ai-changelog-generator",
+  "prompt-library-generator", "ai-changelog-generator",
   "saas-pricing-calculator", "employee-turnover-calculator",
-  "pdf-to-html", "html-to-pdf", "generic-pdf-processor"
+  "pdf-to-html", "html-to-pdf", "generic-pdf-processor",
+  "youtube-thumbnail-downloader"
 ];
 
 export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
@@ -2129,5 +2290,5 @@ export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
 
 export const getToolBySlug = (slug: string) => toolsRegistry.find(t => t.slug === slug);
 export const getToolsByCategory = (category: string) => toolsRegistry.filter(t => t.category === category);
-
 export const getToolByCategoryAndSlug = (category: string, slug: string) => toolsRegistry.find(t => t.category.toLowerCase().replace(/\s+/g, '-') === category && t.slug === slug);
+

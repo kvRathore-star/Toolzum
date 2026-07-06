@@ -27,12 +27,8 @@ export function Footer() {
               <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">Hub</span></span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Every tool you need. Nothing you don't. The internet's fastest utility command center.
+              PDF, images, video, AI and more — in one place. Zero uploads. Starts in seconds.
             </p>
-
-            <div className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-3 py-1.5 rounded-full border border-[var(--border-subtle)]">
-              Made with ❤️ in India 🇮🇳
-            </div>
           </div>
 
           {/* Column 2: Tools */}
@@ -84,7 +80,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-[var(--text-muted)] text-center md:text-left">
-            <span>&copy; {currentYear} ToolHub Inc.</span>
+            <span>&copy; {currentYear} ToolHub Inc. Made with ❤️ in India 🇮🇳</span>
             <span className="hidden md:block w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
             <span>All processing happens in your browser — your files never leave your device.</span>
           </div>

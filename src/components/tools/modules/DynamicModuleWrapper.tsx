@@ -97,7 +97,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType> = {
   'gif-to-mp4': dynamic(() => import('@/components/tools/modules/GifToMp4'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'video-trimmer': dynamic(() => import('@/components/tools/modules/VideoTrimmer'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'tiktok-video-downloader': dynamic(() => import('@/components/tools/modules/TiktokVideoDownloader'), { ssr: false, loading: () => <SkeletonLoader /> }),
-  'ad-blocker-extension': dynamic(() => import('@/components/tools/modules/AdBlockerExtension'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'privacy-cleaner': dynamic(() => import('@/components/tools/modules/PrivacyCleaner'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'youtube-downloader': dynamic(() => import('@/components/tools/modules/YoutubeDownloader'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'instagram-video-downloader': dynamic(() => import('@/components/tools/modules/InstagramVideoDownloader'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'facebook-video-downloader': dynamic(() => import('@/components/tools/modules/FacebookVideoDownloader'), { ssr: false, loading: () => <SkeletonLoader /> }),
