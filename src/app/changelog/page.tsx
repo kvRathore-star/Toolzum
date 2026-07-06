@@ -16,15 +16,15 @@ const RELEASES = [
   {
     version: "v1.2.0",
     date: "May 25, 2026",
-    title: "Golden Master Release — 260+ Browser Tools",
+    title: "Golden Master Release — 200+ Browser Tools",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Our largest release to date. Complete expansion to 260+ offline tools, comprising full PDF compilers, browser vector canvas designers, local AI operations, and comprehensive developers/finance calculators.",
+    description: "Our largest release to date. Complete expansion to 200+ offline tools, comprising full PDF compilers, browser vector canvas designers, local AI operations, and comprehensive developers/finance calculators.",
     updates: [
       { type: "feature", text: "Added client-side PDF conversions (Word-to-PDF, PDF-to-Word, PDF-to-JPG)." },
       { type: "feature", text: "Introduced SVG Vector Editor, Logo Maker, and AI Thumbnail Maker suite." },
       { type: "performance", text: "Migrated background image removers to use 100% local WebGL tensor execution, speedups of up to 4x." },
-      { type: "security", text: "Implemented offline-first zero telemetry framework across all 260+ tools." }
+      { type: "security", text: "Implemented offline-first zero telemetry framework across all 200+ tools." }
     ]
   },
   {

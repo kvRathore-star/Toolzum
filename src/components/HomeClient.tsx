@@ -1,22 +1,23 @@
 "use client";
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight, Play,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import {
-  CATEGORIES, STEPS, FEATURES, USE_CASES, STATS_BAR, INDIA_TOOLS,
-  getWhyChoose
+  CATEGORIES, STEPS, FEATURES, USE_CASES, INDIA_TOOLS,
+  getWhyChoose, getStatsBar
 } from '@/data/homepage';
 
 const toolCount = toolsRegistry.length;
 const WHY_CHOOSE = getWhyChoose(toolCount);
+const STATS_BAR = getStatsBar(toolCount);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -177,23 +178,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                   ))}
                 </div>
 
-                <div className="flex-1 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-overlay)] flex flex-col items-center justify-center gap-4 transition-colors hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)] cursor-pointer group">
-                  <div className="w-16 h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent)]/5 transition-all">
-                    <Upload className="w-6 h-6 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm font-medium text-[var(--text-primary)]">Drop file here</p>
-                    <p className="text-xs text-[var(--text-muted)] mt-1">100% client-side processing</p>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex justify-between items-center bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Output Size</span>
-                    <span className="text-sm font-mono text-[var(--success)]">-74% smaller</span>
-                  </div>
-                  <Button size="sm">Export</Button>
-                </div>
+                <FileDropZone activeTab={activeTab} />
               </div>
             </div>
           </motion.div>
@@ -595,5 +580,93 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
       </section>
 
     </div>
+  );
+}
+
+function FileDropZone({ activeTab }: { activeTab: string }) {
+  const [file, setFile] = useState<File | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  const formatSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    const f = e.dataTransfer.files[0];
+    if (f) setFile(f);
+  }, []);
+
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (f) setFile(f);
+  }, []);
+
+  const getExportUrl = () => {
+    switch (activeTab) {
+      case 'compress': return '/tools/image-compressor';
+      case 'resize': return '/tools/image-resizer';
+      default: return '/tools/document-converter';
+    }
+  };
+
+  return (
+    <>
+      <div
+        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={handleDrop}
+        onClick={() => document.getElementById('hero-file-input')?.click()}
+        className={`flex-1 border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-4 transition-colors cursor-pointer group ${
+          dragOver
+            ? 'border-[var(--accent)] bg-[var(--accent)]/5'
+            : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
+        }`}
+      >
+        <input id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} />
+        {file ? (
+          <div className="flex flex-col items-center gap-2 p-4">
+            <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center">
+              <FileText className="w-5 h-5 text-[var(--accent)]" />
+            </div>
+            <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
+            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)}</p>
+            <button
+              onClick={(e) => { e.stopPropagation(); setFile(null); }}
+              className="text-[10px] text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
+            >
+              Remove
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="w-16 h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent)]/5 transition-all">
+              <Upload className="w-6 h-6 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-medium text-[var(--text-primary)]">Drop file here</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">100% client-side processing</p>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="mt-6 flex justify-between items-center bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
+        <div className="flex flex-col">
+          <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
+            {file ? `File size` : 'Output Size'}
+          </span>
+          <span className="text-sm font-mono text-[var(--success)]">
+            {file ? formatSize(file.size) : '-74% smaller'}
+          </span>
+        </div>
+        <Button size="sm" asChild>
+          <Link href={getExportUrl()}>Export</Link>
+        </Button>
+      </div>
+    </>
   );
 }

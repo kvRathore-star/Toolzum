@@ -1,47 +1,24 @@
 "use client";
-import React, { useState } from 'react';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { Scale } from 'lucide-react';
 
-export default function LbsToKg() {
-  const [lbs, setLbs] = useState('');
-  const [kg, setKg] = useState('');
-
-  const handleLbsChange = (value: string) => {
-    setLbs(value);
-    const num = parseFloat(value);
-    if (!isNaN(num)) setKg((num * 0.45359237).toFixed(3));
-    else setKg('');
-  };
-
-  const handleKgChange = (value: string) => {
-    setKg(value);
-    const num = parseFloat(value);
-    if (!isNaN(num)) setLbs((num / 0.45359237).toFixed(3));
-    else setLbs('');
-  };
+export default function LbsToKgRedirect() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots'; meta.content = 'noindex';
+    document.head.appendChild(meta);
+    const t = setTimeout(() => window.location.replace('/tools/unit-converter'), 3000);
+    return () => { clearTimeout(t); meta.remove(); };
+  }, []);
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Lbs to Kg Converter</h2>
-        <p className="text-zinc-500 text-sm">Convert pounds to kilograms and vice versa with 3-decimal precision.</p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="text-xs font-semibold text-zinc-400 mb-1 block">Pounds (lbs)</label>
-            <input type="number" value={lbs} onChange={e => handleLbsChange(e.target.value)} placeholder="0" step="any" className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-lg text-zinc-900 dark:text-white outline-none" />
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-zinc-400 mb-1 block">Kilograms (kg)</label>
-            <input type="number" value={kg} onChange={e => handleKgChange(e.target.value)} placeholder="0" step="any" className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-lg text-zinc-900 dark:text-white outline-none" />
-          </div>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
-          <p className="text-xs text-indigo-600 dark:text-indigo-400">
-            <strong>Reference:</strong> 1 lb = 0.4536 kg &nbsp;·&nbsp; 5 lb ≈ 2.27 kg &nbsp;·&nbsp; 10 lb ≈ 4.54 kg &nbsp;·&nbsp; 100 lb ≈ 45.36 kg
-          </p>
-        </div>
-      </div>
+    <div className="max-w-2xl mx-auto text-center py-24 animate-in fade-in duration-500">
+      <Scale className="w-12 h-12 text-emerald-500 mx-auto mb-4" />
+      <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Lbs to Kg Converter has moved</h2>
+      <p className="text-sm text-zinc-500 mb-4">This tool is now part of the <strong>Unit Converter</strong> — convert between pounds, kilograms, feet, meters, and more in one place.</p>
+      <Link href="/tools/unit-converter" className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition-colors">Go to Unit Converter</Link>
+      <p className="text-[10px] text-zinc-400 mt-4">Redirecting in 3 seconds...</p>
     </div>
   );
 }

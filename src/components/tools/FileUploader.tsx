@@ -2,41 +2,57 @@
 
 import React, { useCallback, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useSession } from '@/lib/auth-client';
 
 interface FileUploaderProps {
   accept?: string;
   maxSizeMB?: number;
+  freeMaxSizeMB?: number;
   onFileSelect: (file: File, dataUrl: string) => void;
   title?: string;
   subtitle?: string;
 }
 
+function smartMax(accept: string): { signed: number; free: number } {
+  if (accept.includes('video/')) return { signed: 500, free: 100 };
+  if (accept.includes('application/pdf')) return { signed: 50, free: 20 };
+  if (accept.includes('audio/')) return { signed: 100, free: 50 };
+  return { signed: 20, free: 10 };
+}
+
 export function FileUploader({ 
   accept = "image/*,application/pdf", 
-  maxSizeMB = 10,
+  maxSizeMB,
+  freeMaxSizeMB,
   onFileSelect,
   title = "Upload your file",
   subtitle = "Drag and drop or click to browse"
 }: FileUploaderProps) {
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const limits = smartMax(accept);
+  const signedLimit = maxSizeMB ?? limits.signed;
+  const freeLimit = freeMaxSizeMB ?? limits.free;
+  const effectiveLimit = isSignedIn ? signedLimit : freeLimit;
 
   const processFile = useCallback((file: File | undefined) => {
     if (!file) return;
     setError(null);
-    
-    // Validate size
-    if (file.size > maxSizeMB * 1024 * 1024) {
-      const msg = `File must be smaller than ${maxSizeMB}MB`;
+
+    if (file.size > effectiveLimit * 1024 * 1024) {
+      const msg = isSignedIn
+        ? `File exceeds ${effectiveLimit}MB limit`
+        : `Free users limited to ${effectiveLimit}MB. Sign in for up to ${signedLimit}MB.`;
       setError(msg);
       toast.error(msg);
       return;
     }
 
-    // Validate type against accept string
     if (accept) {
       const acceptedTypes = accept.split(',').map(t => t.trim());
-      // Handle simple matching (e.g. image/* or application/pdf)
       const isAccepted = acceptedTypes.some(type => {
         if (type.endsWith('/*')) {
           const base = type.replace('/*', '');
@@ -53,7 +69,6 @@ export function FileUploader({
       }
     }
 
-    // Client-side File to Data URL conversion
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataUrl = e.target?.result as string;
@@ -67,7 +82,7 @@ export function FileUploader({
       toast.error("Failed to read file from disk.");
     };
     reader.readAsDataURL(file);
-  }, [maxSizeMB, accept, onFileSelect]);
+  }, [effectiveLimit, signedLimit, isSignedIn, accept, onFileSelect]);
 
   const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -102,7 +117,7 @@ export function FileUploader({
     };
     window.addEventListener('paste', handlePaste);
     return () => window.removeEventListener('paste', handlePaste);
-  }, [accept, maxSizeMB]);
+  }, [processFile]);
 
   return (
     <div className="w-full">

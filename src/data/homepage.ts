@@ -49,7 +49,7 @@ export const CATEGORIES: CategoryDef[] = [
 ];
 
 export const STEPS: StepDef[] = [
-  { num: '01', icon: Upload, title: 'Open a Tool', desc: 'Browse 260+ utilities. Pick one. No sign-up needed.' },
+  { num: '01', icon: Upload, title: 'Open a Tool', desc: 'Browse hundreds of utilities. Pick one. No sign-up needed.' },
   { num: '02', icon: Zap, title: 'Process Instantly', desc: 'Everything runs in your browser via WebAssembly & TF.js. Zero uploads.' },
   { num: '03', icon: Download, title: 'Download Results', desc: 'Your data never leaves your machine. Export clean, processed files.' },
 ];
@@ -99,12 +99,14 @@ export const USE_CASES: UseCaseDef[] = [
   },
 ];
 
-export const STATS_BAR = [
-  { value: '278+', label: 'Browser Tools', sub: 'And counting every week' },
-  { value: '25', label: 'Categories', sub: 'From PDF to AI generation' },
-  { value: '100%', label: 'Client-Side', sub: 'Zero data leaves your device' },
-  { value: 'Free', label: 'To Start', sub: 'No credit card required' },
-];
+export function getStatsBar(toolCount: number) {
+  return [
+    { value: `${toolCount}+`, label: 'Browser Tools', sub: 'And counting every week' },
+    { value: '25', label: 'Categories', sub: 'From PDF to AI generation' },
+    { value: '100%', label: 'Client-Side', sub: 'Zero data leaves your device' },
+    { value: 'Free', label: 'To Start', sub: 'No credit card required' },
+  ];
+}
 
 export const INDIA_TOOLS = [
   { id: 'passport', title: 'Passport Photo Maker', desc: '35×45mm, white background, ICAO compliant', slug: 'passport-photo-india' },

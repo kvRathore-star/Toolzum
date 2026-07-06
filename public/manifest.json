@@ -1,7 +1,7 @@
 {
-  "name": "ToolHub — 278+ Free Privacy-First Tools",
+  "name": "ToolHub — 260+ Free Privacy-First Tools",
   "short_name": "ToolHub",
-  "description": "278+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
+  "description": "260+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],

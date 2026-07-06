@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ShieldCheck, Check, Zap, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toolsRegistry } from "@/registry/tools";
 
 type BillingInterval = "weekly" | "monthly" | "yearly";
 
@@ -69,7 +70,7 @@ export default function PricingPage() {
             One Plan. Total Freedom.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlock the power of all 260+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
+            Unlock the power of all {toolsRegistry.length}+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
           </p>
         </div>
 
@@ -164,7 +165,7 @@ export default function PricingPage() {
                 )}
               </div>
               <p className="text-sm text-[var(--text-secondary)] mb-6">
-                Complete access to the entire 260+ tool offline suite.
+                Complete access to the entire {toolsRegistry.length}+ tool offline suite.
               </p>
               <div className="flex items-baseline gap-1 mb-6">
                 <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
