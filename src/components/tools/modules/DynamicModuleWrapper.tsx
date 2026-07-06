@@ -347,7 +347,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType> = {
   'bulk-bg-changer': dynamic(() => import('@/components/tools/modules/BulkBgChanger'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'ai-bg-changer': dynamic(() => import('@/components/tools/modules/AiBgChanger'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'link-in-bio-builder': dynamic(() => import('@/components/tools/modules/LinkInBioBuilder'), { ssr: false, loading: () => <SkeletonLoader /> }),
-  'ist-time-converter': dynamic(() => import('@/components/tools/modules/IstTimeConverter'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'ist-time-converter': dynamic(() => import('@/components/tools/modules/TimezoneConverter'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'audio-converter': dynamic(() => import('@/components/tools/modules/AudioConverter'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'pdf-page-manager': dynamic(() => import('@/components/tools/modules/PdfPageManager'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'bulk-qr-code-generator': dynamic(() => import('@/components/tools/modules/BulkQrCodeGenerator'), { ssr: false, loading: () => <SkeletonLoader /> }),

@@ -25,15 +25,14 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
 
   const verifyLicense = async (token: string) => {
     try {
-      // Securely verify signature — no fallback; fail loudly if env var is missing
-      const jwtSecret = process.env.NEXT_PUBLIC_JWT_SECRET;
-      if (!jwtSecret) {
-        console.error("JWT_SECRET is not configured");
-        return false;
-      }
-      const secret = new TextEncoder().encode(jwtSecret);
-      const { payload: claims } = await jose.jwtVerify(token, secret);
-      
+      // Asymmetric ES256 verification — public key can only verify, never sign
+      const publicKeyPem = `-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmPcFjUMBzuGWNexNe+ylzscMuNRt
+6OIAbddZIJp9O4xz7SyyitTU3EHTL9jWhmr8IriJzazGK+kwGX/EORgvfg==
+-----END PUBLIC KEY-----`;
+      const publicKey = await jose.importSPKI(publicKeyPem, 'ES256');
+      const { payload: claims } = await jose.jwtVerify(token, publicKey);
+
       if (claims && claims.tier === 'pro') {
         const isExpired = claims.exp && claims.exp < Date.now() / 1000;
         if (!isExpired) {

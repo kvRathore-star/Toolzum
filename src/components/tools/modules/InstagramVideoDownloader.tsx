@@ -91,7 +91,7 @@ export default function InstagramProfilePicDownloader() {
         {profileUrl && (
           <div className="space-y-4">
             <div className="flex items-center justify-center bg-zinc-50 dark:bg-black/30 rounded-xl p-6 border border-zinc-200 dark:border-zinc-800">
-              <img src={profileUrl} alt={`@${username} profile`}
+              <img loading="lazy" src={profileUrl} alt={`@${username} profile`}
                 className="w-48 h-48 rounded-full object-cover border-4 border-zinc-200 dark:border-zinc-700 shadow-xl" />
             </div>
             <button onClick={handleDownload}

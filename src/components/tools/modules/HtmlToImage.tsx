@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { toPng, toJpeg, toSvg } from 'html-to-image';
+import DOMPurify from 'dompurify';
 import { downloadOrShare } from '@/utils/nativeShare';
 
 export default function HtmlToImage() {
@@ -13,8 +14,9 @@ export default function HtmlToImage() {
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe || !iframe.contentDocument) return;
+    const sanitized = DOMPurify.sanitize(htmlContent);
     iframe.contentDocument.open();
-    iframe.contentDocument.write(htmlContent);
+    iframe.contentDocument.write(sanitized);
     iframe.contentDocument.close();
   }, [htmlContent]);
 

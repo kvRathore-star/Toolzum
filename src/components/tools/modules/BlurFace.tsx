@@ -91,7 +91,7 @@ export default function BlurFace() {
          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
            <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
            {image ? (
-             <img src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
+             <img loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
            ) : (
              <div className="text-zinc-500">Click or Drag Image Here</div>
            )}

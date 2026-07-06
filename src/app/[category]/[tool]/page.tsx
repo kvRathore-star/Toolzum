@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { toolsRegistry, getToolByCategoryAndSlug } from "@/registry/tools";
 import { ToolLayout } from "@/components/tools/ToolLayout";
+import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
-import { ToolErrorBoundary } from "@/components/ToolErrorBoundary";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 
 export async function generateStaticParams() {
@@ -46,11 +47,12 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         description={toolMetadata.description}
         category={params.category}
         slug={toolMetadata.slug}
+        seoSection={<ToolPageSEOContent tool={toolMetadata} />}
       >
         <MemoryWatchdog />
-        <ToolErrorBoundary>
+        <ErrorBoundary>
           <DynamicModuleWrapper slug={toolMetadata.slug} category={toolMetadata.category} />
-        </ToolErrorBoundary>
+        </ErrorBoundary>
       </ToolLayout>
     </>
   );

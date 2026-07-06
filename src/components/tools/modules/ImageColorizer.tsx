@@ -81,7 +81,7 @@ export default function ImageColorizer() {
           ) : (
             <div className="space-y-4">
               <div className="border border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center p-2">
-                <img 
+                <img loading="lazy" 
                   ref={imageRef}
                   src={imageSrc} 
                   alt="Source" 
@@ -122,7 +122,7 @@ export default function ImageColorizer() {
           {colorizedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
-                <img 
+                <img loading="lazy" 
                   src={colorizedUrl} 
                   alt="Tinted" 
                   className="shadow-lg max-w-full max-h-[280px] object-contain rounded"

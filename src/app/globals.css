@@ -31,10 +31,15 @@
   --radius-2xl: 24px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.2);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
   --shadow-lg: 0 16px 40px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.2);
   --shadow-glow-accent: 0 0 20px rgba(99,102,241,0.25);
+  --shadow-glow-accent-sm: 0 0 10px rgba(99,102,241,0.15);
+  --shadow-inner: inset 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03);
+  --shadow-card-hover: 0 8px 28px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 :root {
@@ -100,6 +105,19 @@ body {
   text-decoration: none;
 }
 .skip-link:focus { top: 0; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-default); }
+
+/* Focus */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

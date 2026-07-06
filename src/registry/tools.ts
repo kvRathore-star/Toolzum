@@ -2216,9 +2216,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: 'None'
   },
   {
-    name: 'IST Time Converter',
+    name: 'Timezone Converter',
     slug: 'ist-time-converter',
-    description: 'Converts Indian Standard Time (IST) to other major world time zones and performs UTC-to-IST and IST-to-UTC conversions with DST awareness. Remote teams working with Indian colleagues and travelers planning calls or flights to/from India use it to accurately translate time across zones. It displays the current IST offset and highlights overlapping business hours between IST and the selected target zone.',
+    description: 'Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks. Remote teams and travelers use it to schedule across time zones and convert between time units (hours, minutes, seconds). It displays live clocks updated every second and handles DST automatically.',
     category: 'Utility',
     id:  "272",
     dependencies: 'None'

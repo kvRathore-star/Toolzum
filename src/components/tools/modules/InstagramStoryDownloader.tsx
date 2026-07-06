@@ -160,7 +160,7 @@ export default function InstagramStoryDownloader() {
               {mediaType === 'video' ? (
                 <video src={mediaUrl} controls className="w-full rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 max-h-[400px] object-contain bg-black" />
               ) : (
-                <img src={mediaUrl} alt="Instagram media" className="w-full rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 max-h-[400px] object-contain bg-black" crossOrigin="anonymous" />
+                <img loading="lazy" src={mediaUrl} alt="Instagram media" className="w-full rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 max-h-[400px] object-contain bg-black" crossOrigin="anonymous" />
               )}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">

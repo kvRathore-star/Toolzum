@@ -267,7 +267,7 @@ export default function AiBgChanger() {
 
             <div className="lg:col-span-2 space-y-3">
               <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-2 border border-zinc-200 dark:border-zinc-800 relative">
-                <img ref={imageRef} src={image} alt="" className="hidden" onLoad={() => {
+                <img loading="lazy" ref={imageRef} src={image} alt="" className="hidden" onLoad={() => {
                   const img = imageRef.current;
                   const canvas = canvasRef.current;
                   const overlay = overlayRef.current;

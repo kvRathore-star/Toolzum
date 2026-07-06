@@ -170,12 +170,7 @@ export function FileUploader({
       }
 
       const res = await fetch(
-        `/api/proxy-url?url=${encodeURIComponent(url)}`,
-        {
-          headers: {
-            "X-ToolHub-Signature": "v1_valid_signature_placeholder"
-          }
-        }
+        `/api/proxy-url?url=${encodeURIComponent(url)}`
       );
       if (!res.ok) {
         throw new Error(`Failed to fetch (HTTP ${res.status})`);

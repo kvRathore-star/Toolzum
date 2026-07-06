@@ -189,7 +189,7 @@ export default function FaviconGenerator() {
                       }
                     }
                   `}} />
-                  <img src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
+                  <img loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
                 </div>
              </div>
           )}

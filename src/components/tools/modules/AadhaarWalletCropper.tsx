@@ -135,7 +135,7 @@ export default function AadhaarWalletCropper() {
           ) : (
             <div className="space-y-4">
               <div className="relative border border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center">
-                <img 
+                <img loading="lazy" 
                   ref={imageRef}
                   src={imageSrc} 
                   alt="Scanned card source" 
@@ -203,7 +203,7 @@ export default function AadhaarWalletCropper() {
           {croppedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
-                <img 
+                <img loading="lazy" 
                   src={croppedUrl} 
                   alt="Cropped card side" 
                   className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"

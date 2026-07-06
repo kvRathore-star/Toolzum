@@ -4,9 +4,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Grid3X3, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCategoryTheme } from "@/lib/categoryTheme";
+import { getCategoryTheme, getCategoryGroup, CATEGORY_GROUPS } from "@/lib/categoryTheme";
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'indian-utilities': 'India 🇮🇳',
@@ -24,10 +24,24 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  const categories = useMemo(() => {
+  const groupedCategories = useMemo(() => {
     const source = initialTools ?? toolsRegistry;
     const cats = Array.from(new Set(source.map(t => t.category).filter(Boolean)));
+    const groups: Record<string, string[]> = {};
+    cats.sort().forEach(c => {
+      const group = getCategoryGroup(c);
+      if (!groups[group]) groups[group] = [];
+      groups[group].push(c);
+    });
+    return groups;
+  }, [initialTools]);
+
+  const groupOrder = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+
+  const allCategories = useMemo(() => {
+    const cats = Array.from(new Set((initialTools ?? toolsRegistry).map(t => t.category).filter(Boolean)));
     return ["All", ...cats.sort()];
   }, [initialTools]);
 
@@ -36,11 +50,11 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       const urlParams = new URLSearchParams(window.location.search);
       const categoryParam = urlParams.get("category");
       if (categoryParam) {
-        const match = categories.find(c => c.toLowerCase() === categoryParam.toLowerCase());
+        const match = allCategories.find(c => c.toLowerCase() === categoryParam.toLowerCase());
         if (match) setActiveCategory(match);
       }
     }
-  }, [categories]);
+  }, [allCategories]);
 
   const filteredTools = useMemo(() => {
     return (initialTools ?? toolsRegistry).filter(tool => {
@@ -80,7 +94,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
               placeholder="Search directory..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-12 pr-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--border-default)] transition-colors text-base"
+              className="w-full h-12 pl-12 pr-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all text-base"
             />
           </div>
         </div>
@@ -88,26 +102,54 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row gap-8 lg:gap-12">
         
-        {/* Sticky Sidebar */}
+        {/* Sticky Sidebar — Grouped */}
         <aside className="w-full md:w-64 shrink-0">
-          <div className="md:sticky md:top-[100px] flex flex-col gap-1">
-            <h3 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2 px-3">
-              Categories
-            </h3>
-            {categories.map(category => {
-              const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
+          <div className="md:sticky md:top-[100px] flex flex-col gap-4">
+            <div>
+              <button
+                onClick={() => setActiveCategory("All")}
+                className={`w-full text-left px-3 py-2 text-sm rounded-[var(--radius-md)] transition-colors ${
+                  activeCategory === "All"
+                    ? "bg-[var(--accent-soft)] text-[var(--accent)] font-medium border-l-2 border-[var(--accent)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] border-l-2 border-transparent"
+                }`}
+              >
+                All Tools
+              </button>
+            </div>
+
+            {groupOrder.map(group => {
+              const cats = groupedCategories[group];
+              if (!cats || cats.length === 0) return null;
               return (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`text-left px-3 py-2 text-sm rounded-[var(--radius-md)] transition-colors border-l-2 ${
-                    activeCategory === category
-                      ? "bg-[var(--bg-surface)] text-[var(--text-primary)] border-[var(--accent)] font-medium"
-                      : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]"
-                  }`}
-                >
-                  {displayName}
-                </button>
+                <div key={group}>
+                  <h3 className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1 px-3">
+                    {group}
+                  </h3>
+                  <div className="flex flex-col gap-0.5">
+                    {cats.map(category => {
+                      const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
+                      const theme = getCategoryTheme(category);
+                      const Icon = theme.icon;
+                      const count = (initialTools ?? toolsRegistry).filter(t => t.category === category).length;
+                      return (
+                        <button
+                          key={category}
+                          onClick={() => setActiveCategory(category)}
+                          className={`flex items-center gap-2 text-left px-3 py-1.5 text-sm rounded-[var(--radius-md)] transition-colors border-l-2 ${
+                            activeCategory === category
+                              ? "bg-[var(--bg-surface)] text-[var(--text-primary)] border-[var(--accent)] font-medium"
+                              : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]"
+                          }`}
+                        >
+                          <Icon className={`w-3.5 h-3.5 ${theme.iconColor} shrink-0`} />
+                          <span className="flex-1">{displayName}</span>
+                          <span className="text-[10px] font-mono text-[var(--text-muted)]">{count}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -116,20 +158,33 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
         {/* Main Grid */}
         <main className="flex-1">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-medium text-[var(--text-primary)]">
-              {activeCategory === "All" ? "All Tools" : activeCategory}
-            </h2>
-            <span className="text-sm text-[var(--text-muted)]">{filteredTools.length} results</span>
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-medium text-[var(--text-primary)]">
+                {activeCategory === "All" ? "All Tools" : activeCategory}
+              </h2>
+              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} results</span>
+            </div>
+            <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+              <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Grid view">
+                <Grid3X3 className="w-4 h-4" />
+              </button>
+              <button onClick={() => setViewMode('list')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'list' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="List view">
+                <List className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           {filteredTools.length === 0 ? (
             <div className="py-20 text-center border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-overlay)]">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--bg-surface)] flex items-center justify-center">
+                <Search className="w-6 h-6 text-[var(--text-muted)]" />
+              </div>
               <p className="text-[var(--text-muted)] mb-4">No tools found matching your criteria.</p>
               <Button variant="secondary" onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}>
                 Clear filters
               </Button>
             </div>
-          ) : (
+          ) : viewMode === 'grid' ? (
             <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {paginatedTools.map((tool) => {
@@ -142,9 +197,9 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                     href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
                     className="group block h-full"
                   >
-                    <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-sm hover:shadow-[var(--shadow-md)] hover:border-[var(--border-default)] hover:-translate-y-1 ${theme.gradientHover}`}>
+                    <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${theme.gradientHover}`}>
                       <div className="flex items-start justify-between mb-4">
-                        <div className={`w-8 h-8 rounded-full ${theme.bgTint} flex items-center justify-center`}>
+                        <div className={`w-9 h-9 rounded-xl ${theme.bgTint} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
                           <Icon className={`w-4 h-4 ${theme.iconColor}`} />
                         </div>
                         <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
@@ -155,7 +210,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                         {tool.name}
                         <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
                       </h3>
-                      <p className="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">
+                      <p className="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4 leading-relaxed">
                         {tool.description}
                       </p>
                       <div className="h-1.5 w-full bg-[var(--bg-overlay)] rounded-full overflow-hidden">
@@ -166,31 +221,58 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                 );
               })}
             </div>
+            </>
+          ) : (
+            <div className="space-y-2">
+              {paginatedTools.map((tool) => {
+                const theme = getCategoryTheme(tool.category);
+                const Icon = theme.icon;
+                return (
+                  <Link
+                    key={tool.id}
+                    href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+                    className="group flex items-center gap-4 p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5"
+                  >
+                    <div className={`w-10 h-10 rounded-xl ${theme.bgTint} flex items-center justify-center shrink-0 ring-1 ring-[var(--border-subtle)]`}>
+                      <Icon className={`w-5 h-5 ${theme.iconColor}`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
+                        <span className="text-[9px] font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-1.5 py-0.5 rounded">{tool.category}</span>
+                      </div>
+                      <p className="text-xs text-[var(--text-secondary)] truncate">{tool.description}</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
+                  </Link>
+                );
+              })}
+            </div>
+          )}
 
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <button
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="flex items-center gap-1.5 px-4 py-2 text-sm rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  Previous
-                </button>
-                <span className="text-sm text-[var(--text-secondary)]">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                  className="flex items-center gap-1.5 px-4 py-2 text-sm rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Next
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-          </>)}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1.5 px-4 py-2 text-sm rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Previous
+              </button>
+              <span className="text-sm text-[var(--text-secondary)]">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-1.5 px-4 py-2 text-sm rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </main>
       </div>
     </div>

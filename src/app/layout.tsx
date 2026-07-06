@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import { PageTransition } from "@/components/PageTransition";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -62,6 +61,8 @@ export const viewport: Viewport = {
   themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
+  minimumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -103,6 +104,12 @@ export default function RootLayout({
             ])
           }}
         />
+        {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
+          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`} />
+        )}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <a
@@ -115,9 +122,7 @@ export default function RootLayout({
           <Header />
 
           <main id="main-content" className="flex-1">
-            <PageTransition>
-              {children}
-            </PageTransition>
+            {children}
           </main>
 
           <Toaster 

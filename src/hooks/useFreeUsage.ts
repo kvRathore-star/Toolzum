@@ -10,9 +10,16 @@ const STORAGE_KEYS = {
   resetDate: "th_reset",
 };
 
-export const ANON_LIMIT = 2;
-export const SIGNED_IN_EXTRA = 3;
+export const ANON_LIMIT = 5;
+export const SIGNED_IN_EXTRA = 5;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
+
+// Tools in these categories count toward the free limit
+const PAID_CATEGORIES = new Set(["pdf", "video", "ai", "image", "audio"]);
+
+function isPaidCategory(category?: string): boolean {
+  return category ? PAID_CATEGORIES.has(category.toLowerCase()) : true;
+}
 
 function getFingerprint(): string {
   if (typeof window === "undefined") return "ssr";
@@ -69,10 +76,11 @@ function detectTampering(): boolean {
   }
 }
 
-export function useFreeUsage() {
+export function useFreeUsage(category?: string) {
   const { data: session } = useSession();
   const isSignedIn = !!session?.user;
   const [remaining, setRemaining] = useState(TOTAL_FREE);
+  const isFreeCategory = !isPaidCategory(category);
 
   const sync = useCallback(() => {
     try {
@@ -103,7 +111,6 @@ export function useFreeUsage() {
     sync();
   }, [sync]);
 
-  // Multi-tab sync: listen for storage changes from other tabs
   useEffect(() => {
     const handler = (e: StorageEvent) => {
       if (e.key === STORAGE_KEYS.count || e.key === STORAGE_KEYS.signedInCount) {
@@ -115,6 +122,7 @@ export function useFreeUsage() {
   }, [sync]);
 
   const recordUse = useCallback(() => {
+    if (isFreeCategory) return;
     try {
       if (isNewMonth(localStorage.getItem(STORAGE_KEYS.resetDate))) {
         localStorage.setItem(STORAGE_KEYS.resetDate, getResetMonth());
@@ -137,11 +145,11 @@ export function useFreeUsage() {
     } catch (e) {
       console.error("[toolhub]", e);
     }
-  }, [isSignedIn, sync]);
+  }, [isSignedIn, sync, isFreeCategory]);
 
-  const canUse = remaining > 0;
-  const showSignInPrompt = remaining === 0 && !isSignedIn;
-  const showProPrompt = remaining === 0 && isSignedIn;
+  const canUse = isFreeCategory || remaining > 0;
+  const showSignInPrompt = !isFreeCategory && remaining === 0 && !isSignedIn;
+  const showProPrompt = !isFreeCategory && remaining === 0 && isSignedIn;
 
   return { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn };
 }

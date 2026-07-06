@@ -41,7 +41,7 @@ export default function EmailSignatureGenerator() {
     <!-- Left: Profile Image -->
     ${logoUrl ? `
     <td valign="top" style="padding-right: 20px; border-right: 2px solid ${primaryColor};">
-      <img src="${logoUrl}" alt="${name}" width="90" height="90" style="border-radius: 50%; display: block; object-fit: cover;" />
+      <img loading="lazy" src="${logoUrl}" alt="${name}" width="90" height="90" style="border-radius: 50%; display: block; object-fit: cover;" />
     </td>
     ` : ''}
     

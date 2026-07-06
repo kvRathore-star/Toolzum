@@ -103,7 +103,7 @@ export default function ImageToBase64() {
                 }
               }
             `}} />
-            <img src={dataUrl} alt="Preview" className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+            <img loading="lazy" src={dataUrl} alt="Preview" className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
           </div>
         </div>
 

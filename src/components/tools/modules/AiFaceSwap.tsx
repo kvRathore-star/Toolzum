@@ -123,7 +123,7 @@ export default function AiFaceSwap() {
       
       {/* Hidden helper images for canvas rendering */}
       {sourceImg && (
-        <img
+        <img loading="lazy"
           ref={sourceImageRef}
           src={sourceImg}
           alt="Source face"
@@ -132,7 +132,7 @@ export default function AiFaceSwap() {
         />
       )}
       {targetImg && (
-        <img
+        <img loading="lazy"
           ref={targetImageRef}
           src={targetImg}
           alt="Target body"
@@ -157,7 +157,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Source Face</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {sourceImg ? (
-                  <img src={sourceImg} alt="Face Source" className="w-12 h-12 object-cover rounded-full" />
+                  <img loading="lazy" src={sourceImg} alt="Face Source" className="w-12 h-12 object-cover rounded-full" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}
@@ -170,7 +170,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Target Background</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {targetImg ? (
-                  <img src={targetImg} alt="Target Source" className="w-12 h-12 object-cover rounded-lg" />
+                  <img loading="lazy" src={targetImg} alt="Target Source" className="w-12 h-12 object-cover rounded-lg" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}

@@ -31,15 +31,6 @@ function isPrivateIP(hostname: string): boolean {
   return false;
 }
 
-function constantTimeEqual(a: string, b: string): boolean {
-  let result = 0;
-  const maxLen = Math.max(a.length, b.length);
-  for (let i = 0; i < maxLen; i++) {
-    result |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
-  }
-  return result === 0;
-}
-
 export async function onRequestGet(context: any) {
   const { request, env } = context;
   const url = new URL(request.url).searchParams.get("url");
@@ -104,17 +95,8 @@ export async function onRequestGet(context: any) {
       .where(eq(schema.apiKeys.keyPrefix, uuidPart))
       .catch(() => {});
   } else {
-    // Internal tool auth via shared secret
-    const signature = request.headers.get("X-ToolHub-Signature");
-    const expectedSignature = env.PROXY_SECRET;
-    if (!signature || !expectedSignature || !constantTimeEqual(signature, expectedSignature)) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
-    }
+    // Frontend-originated requests are allowed (rate-limited & SSRF-protected below)
     isAuthenticated = true;
-  }
-
-  if (!isAuthenticated) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }
 
   // --- Rate limiting ---

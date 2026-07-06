@@ -196,7 +196,7 @@ export default function ColorPaletteExtractor() {
           <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-purple-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
             onClick={() => fileInputRef.current?.click()}>
             {imageUrl ? (
-              <img src={imageUrl} alt="Uploaded" className="max-h-40 mx-auto rounded-lg shadow-sm" />
+              <img loading="lazy" src={imageUrl} alt="Uploaded" className="max-h-40 mx-auto rounded-lg shadow-sm" />
             ) : (
               <>
                 <Upload className="w-10 h-10 mx-auto mb-2 text-zinc-400" />

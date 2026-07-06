@@ -1,23 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
 import { ShieldCheck, Check, Zap, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type BillingInterval = "weekly" | "monthly" | "yearly";
 
 export default function PricingPage() {
-  const [isIndia, setIsIndia] = useState(false);
+  const tz = typeof window !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "";
+  const cookies = typeof window !== "undefined" ? document.cookie.split(";") : [];
+  const countryCookie = cookies.find((c) => c.trim().startsWith("user-country="));
+  const country = countryCookie ? countryCookie.split("=")[1] : null;
+  const [isIndia] = useState(country === "IN" || tz === "Asia/Kolkata");
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("monthly");
-
-  useEffect(() => {
-    const cookies = document.cookie.split(";");
-    const countryCookie = cookies.find((c) => c.trim().startsWith("user-country="));
-    const country = countryCookie ? countryCookie.split("=")[1] : null;
-
-    const isIndiaTZ = Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Kolkata";
-    setIsIndia(country === "IN" || isIndiaTZ);
-  }, []);
 
   interface PricingPlan {
     price: string;
@@ -145,9 +141,11 @@ export default function PricingPage() {
                 </li>
               </ul>
             </div>
-            <Button variant="secondary" className="w-full" size="lg">
-              Use Free Tools
-            </Button>
+            <Link href="/tools" className="block">
+              <Button variant="secondary" className="w-full" size="lg">
+                Use Free Tools
+              </Button>
+            </Link>
           </div>
 
           {/* Pro Tier */}

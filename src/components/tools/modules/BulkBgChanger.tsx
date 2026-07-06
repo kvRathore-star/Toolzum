@@ -211,7 +211,7 @@ export default function BulkBgChanger() {
                       selectedImageId === item.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500'
                     }`}>
                     <div className="w-10 h-10 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
-                      <img src={item.processedUrl || item.originalUrl} alt="" className="w-full h-full object-cover" />
+                      <img loading="lazy" src={item.processedUrl || item.originalUrl} alt="" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-[10px] text-zinc-700 dark:text-zinc-300 truncate">{item.name}</p>
@@ -250,7 +250,7 @@ export default function BulkBgChanger() {
                       }}
                       className="max-w-full max-h-[500px] rounded-lg cursor-crosshair"
                       style={{ width: '100%', height: 'auto' }} />
-                    <img src={selectedImage.processedUrl || selectedImage.originalUrl} alt=""
+                    <img loading="lazy" src={selectedImage.processedUrl || selectedImage.originalUrl} alt=""
                       onLoad={(e) => {
                         const canvas = sampleCanvasRef.current;
                         if (!canvas) return;

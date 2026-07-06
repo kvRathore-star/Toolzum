@@ -135,7 +135,7 @@ export default function YoutubeThumbnailDownloader() {
           <div className="md:col-span-7 flex flex-col items-center justify-center bg-zinc-50 dark:bg-black/30 rounded-2xl p-4 border border-zinc-200 dark:border-zinc-800 min-h-[280px]">
             {thumbUrl ? (
               <div className="w-full space-y-3">
-                <img src={thumbUrl} alt="YouTube Thumbnail" className="w-full rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700" crossOrigin="anonymous" />
+                <img loading="lazy" src={thumbUrl} alt="YouTube Thumbnail" className="w-full rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700" crossOrigin="anonymous" />
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">
                     <Check className="w-3.5 h-3.5" /><span>Loaded — {videoId}</span>

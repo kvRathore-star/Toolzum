@@ -67,7 +67,7 @@ export default function RotateImage() {
            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
            {image ? (
              <div className="relative inline-block transition-transform duration-300" style={{ transform: `rotate(${rotation}deg)` }}>
-               <img src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
+               <img loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
              </div>
            ) : (
              <div className="text-zinc-500">Click or Drag Image Here</div>

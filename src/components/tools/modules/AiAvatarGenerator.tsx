@@ -100,7 +100,7 @@ export default function AiAvatarGenerator() {
               <div className="flex items-center gap-4">
                 {imagePreview ? (
                   <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src={imagePreview} alt="Reference Preview" className="w-full h-full object-cover" />
+                    <img loading="lazy" src={imagePreview} alt="Reference Preview" className="w-full h-full object-cover" />
                     <button 
                       onClick={() => setImagePreview(null)} 
                       className="absolute inset-0 bg-black/60 text-white text-xs font-bold flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
@@ -213,7 +213,7 @@ export default function AiAvatarGenerator() {
                 <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">This typically takes 3 to 6 seconds.</p>
               </div>
             ) : avatarUrl ? (
-              <img
+              <img loading="lazy"
                 src={avatarUrl}
                 alt="AI Avatar Output"
                 className="w-80 h-80 object-cover rounded-full shadow-lg border-4 border-white dark:border-zinc-800 animate-in zoom-in-95 duration-300"

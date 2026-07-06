@@ -189,6 +189,38 @@ const DEFAULT_THEME: CategoryTheme = {
   gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-orange-500/5",
 };
 
+export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> = {
+  PDF: { label: 'Media', order: 0 },
+  Image: { label: 'Media', order: 0 },
+  Video: { label: 'Media', order: 0 },
+  Audio: { label: 'Media', order: 0 },
+  Text: { label: 'Text & AI', order: 1 },
+  Transcription: { label: 'Text & AI', order: 1 },
+  AI: { label: 'Text & AI', order: 1 },
+  Developer: { label: 'Developer & Tech', order: 2 },
+  SEO: { label: 'Developer & Tech', order: 2 },
+  Extension: { label: 'Developer & Tech', order: 2 },
+  Finance: { label: 'Business & Finance', order: 3 },
+  Business: { label: 'Business & Finance', order: 3 },
+  HR: { label: 'Business & Finance', order: 3 },
+  'E-commerce': { label: 'Business & Finance', order: 3 },
+  Marketing: { label: 'Business & Finance', order: 3 },
+  Branding: { label: 'Business & Finance', order: 3 },
+  Utility: { label: 'Tools & Converters', order: 4 },
+  Converter: { label: 'Tools & Converters', order: 4 },
+  Downloader: { label: 'Tools & Converters', order: 4 },
+  Design: { label: 'Lifestyle', order: 5 },
+  Productivity: { label: 'Lifestyle', order: 5 },
+  Privacy: { label: 'Lifestyle', order: 5 },
+  Health: { label: 'Lifestyle', order: 5 },
+  Lifestyle: { label: 'Lifestyle', order: 5 },
+  'indian-utilities': { label: 'Lifestyle', order: 5 },
+};
+
+export function getCategoryGroup(category: string): string {
+  return CATEGORY_GROUPS[category]?.label ?? 'Other';
+}
+
 export function getCategoryTheme(category: string): CategoryTheme {
   return CATEGORY_THEMES[category] ?? DEFAULT_THEME;
 }

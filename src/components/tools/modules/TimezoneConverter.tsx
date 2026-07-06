@@ -25,7 +25,7 @@ const TIME_UNITS = [
   { label: 'Year', ms: 31557600000 },
 ];
 
-export default function IstTimeConverter() {
+export default function TimezoneConverter() {
   const [currentTimes, setCurrentTimes] = useState<Record<string, string>>({});
   const [tab, setTab] = useState<'timezone' | 'convert'>('timezone');
 
@@ -94,7 +94,7 @@ export default function IstTimeConverter() {
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Clock className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">IST Timezone Converter</h3>
+        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Timezone Converter</h3>
       </div>
 
       <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-fit">
@@ -115,20 +115,20 @@ export default function IstTimeConverter() {
             ))}
           </div>
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Add custom timezones, save frequently used conversions, meeting scheduler with calendar integration, world clock widget for your website.</p>
+            <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Add custom timezones, save frequently used conversions (CET, AEST, BRT, etc.), meeting scheduler with calendar integration, world clock widget for your website.</p>
           </div>
         </div>
       ) : (
         <div className="space-y-4">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
-            <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300">IST → Other Timezones</h4>
+            <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300">From IST → Other Timezones</h4>
             <div className="flex gap-3 flex-wrap">
               <div>
                 <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Date</label>
                 <input type="date" value={istDate} onChange={e => setIstDate(e.target.value)} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none" />
               </div>
               <div>
-                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">IST Time</label>
+                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Time (IST)</label>
                 <input type="time" value={istInput} onChange={e => setIstInput(e.target.value)} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none" />
               </div>
             </div>

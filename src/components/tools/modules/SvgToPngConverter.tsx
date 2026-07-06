@@ -119,7 +119,7 @@ export default function SvgToPngConverter() {
               background-position: 0 0, 10px 10px;
             }
           `}} />
-          <img src={URL.createObjectURL(file)} className="max-h-[300px] object-contain drop-shadow-2xl" alt="SVG Preview" />
+          <img loading="lazy" src={URL.createObjectURL(file)} className="max-h-[300px] object-contain drop-shadow-2xl" alt="SVG Preview" />
         </div>
 
         <div className="space-y-6">
