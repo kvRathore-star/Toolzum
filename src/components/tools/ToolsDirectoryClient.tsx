@@ -4,9 +4,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
-import { Search, ChevronLeft, ChevronRight, Grid3X3, List } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getCategoryTheme, getCategoryGroup, CATEGORY_GROUPS } from "@/lib/categoryTheme";
+import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'indian-utilities': 'India 🇮🇳',
@@ -19,12 +19,35 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
 };
 
 const ITEMS_PER_PAGE = 30;
+const GROUP_ORDER = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
 
 export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMetadata[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [navMode, setNavMode] = useState<'sidebar' | 'menubar'>('sidebar');
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('toolhub:navMode');
+    if (saved === 'sidebar' || saved === 'menubar') setNavMode(saved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('toolhub:navMode', navMode);
+  }, [navMode]);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpenGroup(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
   const groupedCategories = useMemo(() => {
     const source = initialTools ?? toolsRegistry;
@@ -37,8 +60,6 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
     });
     return groups;
   }, [initialTools]);
-
-  const groupOrder = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
 
   const allCategories = useMemo(() => {
     const cats = Array.from(new Set((initialTools ?? toolsRegistry).map(t => t.category).filter(Boolean)));
@@ -75,6 +96,124 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
     setCurrentPage(1);
   }, [searchQuery, activeCategory]);
 
+  const CategoryMenubar = () => (
+    <div ref={menuRef} className="mb-8">
+      <div className="flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none">
+        <button
+          onClick={() => setActiveCategory("All")}
+          className={`shrink-0 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
+            activeCategory === "All"
+              ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+              : "border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)]"
+          }`}
+        >
+          All
+        </button>
+        {GROUP_ORDER.map(groupLabel => {
+          const cats = groupedCategories[groupLabel];
+          if (!cats || cats.length === 0) return null;
+          return (
+            <div key={groupLabel} className="relative shrink-0">
+              <button
+                onClick={() => setOpenGroup(openGroup === groupLabel ? null : groupLabel)}
+                className={`flex items-center gap-1 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
+                  activeCategory !== "All" && cats.includes(activeCategory)
+                    ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
+                    : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)]'
+                }`}
+              >
+                {groupLabel}
+                <ChevronDown className={`w-3 h-3 transition-transform ${openGroup === groupLabel ? 'rotate-180' : ''}`} />
+              </button>
+              {openGroup === groupLabel && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-52 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-2 z-50"
+                  onMouseLeave={() => setOpenGroup(null)}
+                >
+                  {cats.map(cat => {
+                    const theme = getCategoryTheme(cat);
+                    const Icon = theme.icon;
+                    const isCatActive = cat === activeCategory;
+                    const catDisplay = CATEGORY_DISPLAY_NAMES[cat.toLowerCase()] || cat;
+                    const count = (initialTools ?? toolsRegistry).filter(t => t.category === cat).length;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => { setActiveCategory(cat); setOpenGroup(null); }}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs transition-colors ${
+                          isCatActive
+                            ? 'text-[var(--accent)] bg-[var(--accent-soft)] font-medium'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'
+                        }`}
+                      >
+                        <Icon className={`w-3.5 h-3.5 ${theme.iconColor}`} />
+                        <span className="flex-1 text-left">{catDisplay}</span>
+                        <span className="text-[10px] font-mono text-[var(--text-muted)]">{count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  const Sidebar = () => (
+    <aside className="w-full md:w-64 shrink-0">
+      <div className="md:sticky md:top-[100px] flex flex-col gap-4">
+        <div>
+          <button
+            onClick={() => setActiveCategory("All")}
+            className={`w-full text-left px-3 py-2 text-sm rounded-[var(--radius-md)] transition-colors ${
+              activeCategory === "All"
+                ? "bg-[var(--accent-soft)] text-[var(--accent)] font-medium border-l-2 border-[var(--accent)]"
+                : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] border-l-2 border-transparent"
+            }`}
+          >
+            All Tools
+          </button>
+        </div>
+        {GROUP_ORDER.map(group => {
+          const cats = groupedCategories[group];
+          if (!cats || cats.length === 0) return null;
+          return (
+            <div key={group}>
+              <h3 className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1 px-3">
+                {group}
+              </h3>
+              <div className="flex flex-col gap-0.5">
+                {cats.map(category => {
+                  const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
+                  const theme = getCategoryTheme(category);
+                  const Icon = theme.icon;
+                  const count = (initialTools ?? toolsRegistry).filter(t => t.category === category).length;
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => setActiveCategory(category)}
+                      className={`flex items-center gap-2 text-left px-3 py-1.5 text-sm rounded-[var(--radius-md)] transition-colors border-l-2 ${
+                        activeCategory === category
+                          ? "bg-[var(--bg-surface)] text-[var(--text-primary)] border-[var(--accent)] font-medium"
+                          : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]"
+                      }`}
+                    >
+                      <Icon className={`w-3.5 h-3.5 ${theme.iconColor} shrink-0`} />
+                      <span className="flex-1">{displayName}</span>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)]">{count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </aside>
+  );
+
   return (
     <div className="min-h-screen bg-[var(--bg-base)]">
       {/* Header Area */}
@@ -102,61 +241,11 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row gap-8 lg:gap-12">
         
-        {/* Sticky Sidebar — Grouped */}
-        <aside className="w-full md:w-64 shrink-0">
-          <div className="md:sticky md:top-[100px] flex flex-col gap-4">
-            <div>
-              <button
-                onClick={() => setActiveCategory("All")}
-                className={`w-full text-left px-3 py-2 text-sm rounded-[var(--radius-md)] transition-colors ${
-                  activeCategory === "All"
-                    ? "bg-[var(--accent-soft)] text-[var(--accent)] font-medium border-l-2 border-[var(--accent)]"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] border-l-2 border-transparent"
-                }`}
-              >
-                All Tools
-              </button>
-            </div>
+        {/* Navigation: Sidebar or Menubar */}
+        {navMode === 'sidebar' ? <Sidebar /> : null}
 
-            {groupOrder.map(group => {
-              const cats = groupedCategories[group];
-              if (!cats || cats.length === 0) return null;
-              return (
-                <div key={group}>
-                  <h3 className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-1 px-3">
-                    {group}
-                  </h3>
-                  <div className="flex flex-col gap-0.5">
-                    {cats.map(category => {
-                      const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
-                      const theme = getCategoryTheme(category);
-                      const Icon = theme.icon;
-                      const count = (initialTools ?? toolsRegistry).filter(t => t.category === category).length;
-                      return (
-                        <button
-                          key={category}
-                          onClick={() => setActiveCategory(category)}
-                          className={`flex items-center gap-2 text-left px-3 py-1.5 text-sm rounded-[var(--radius-md)] transition-colors border-l-2 ${
-                            activeCategory === category
-                              ? "bg-[var(--bg-surface)] text-[var(--text-primary)] border-[var(--accent)] font-medium"
-                              : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]"
-                          }`}
-                        >
-                          <Icon className={`w-3.5 h-3.5 ${theme.iconColor} shrink-0`} />
-                          <span className="flex-1">{displayName}</span>
-                          <span className="text-[10px] font-mono text-[var(--text-muted)]">{count}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </aside>
-
-        {/* Main Grid */}
         <main className="flex-1">
+          {/* Top controls row */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <h2 className="text-xl font-medium text-[var(--text-primary)]">
@@ -164,16 +253,32 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
               </h2>
               <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} results</span>
             </div>
-            <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
-              <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Grid view">
-                <Grid3X3 className="w-4 h-4" />
-              </button>
-              <button onClick={() => setViewMode('list')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'list' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="List view">
-                <List className="w-4 h-4" />
-              </button>
+            <div className="flex items-center gap-2">
+              {/* Nav mode toggle */}
+              <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+                <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Sidebar navigation">
+                  <PanelLeft className="w-4 h-4" />
+                </button>
+                <button onClick={() => setNavMode('menubar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'menubar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Horizontal menu navigation">
+                  <AlignJustify className="w-4 h-4" />
+                </button>
+              </div>
+              {/* View mode toggle */}
+              <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Grid view">
+                  <Grid3X3 className="w-4 h-4" />
+                </button>
+                <button onClick={() => setViewMode('list')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'list' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="List view">
+                  <List className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
 
+          {/* Horizontal menubar when active */}
+          {navMode === 'menubar' && <CategoryMenubar />}
+
+          {/* Empty / Grid / List */}
           {filteredTools.length === 0 ? (
             <div className="py-20 text-center border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-overlay)]">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--bg-surface)] flex items-center justify-center">
