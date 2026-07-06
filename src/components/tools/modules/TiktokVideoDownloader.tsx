@@ -1,147 +1,143 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Copy, Check, ExternalLink, Hash, MessageCircle, Music, Eye, Calendar, Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import { fetchCobaltDownload, CobaltResponse } from '@/utils/cobaltApi';
 
-export default function TikTokVideoDownloader() {
+interface TikTokMeta {
+  caption: string;
+  author: string;
+  likes: string;
+  plays: string;
+  hashtags: string[];
+  sound: string;
+  url: string;
+}
+
+export default function TikTokCaptionExtractor() {
   const [url, setUrl] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [result, setResult] = useState<CobaltResponse | null>(null);
-  
-  const [isNoWatermark, setIsNoWatermark] = useState(true);
-  const [isAudioOnly, setIsAudioOnly] = useState(false);
+  const [meta, setMeta] = useState<TikTokMeta | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleDownload = async () => {
-    if (!url.trim()) {
-      toast.error('Please enter a TikTok URL');
-      return;
+  const extractCaption = async () => {
+    if (!url.trim()) return toast.error('Enter a TikTok URL');
+    setIsLoading(true);
+    setError('');
+    setMeta(null);
+
+    try {
+      const cleanUrl = url.trim().split('?')[0];
+      const response = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(cleanUrl)}`);
+
+      if (!response.ok) throw new Error('Could not fetch video data');
+
+      const data: any = await response.json();
+
+      const hashtags = (data.title || '')
+        .split(' ')
+        .filter((w: string) => w.startsWith('#'))
+        .map((h: string) => h.replace('#', ''));
+
+      setMeta({
+        caption: data.title || 'No caption',
+        author: data.author_name || 'Unknown',
+        likes: data.author_url || 'N/A',
+        plays: 'N/A',
+        hashtags: hashtags.length > 0 ? hashtags : [],
+        sound: data.author_name || 'Original Sound',
+        url: cleanUrl,
+      });
+      toast.success('Caption extracted!');
+    } catch (err: any) {
+      setError(err.message || 'Failed to extract. Make sure the video is public.');
+    } finally {
+      setIsLoading(false);
     }
-    
-    if (!url.includes('tiktok.com')) {
-      toast.error('Please enter a valid TikTok link');
-      return;
-    }
+  };
 
-    setIsProcessing(true);
-    setResult(null);
-
-    const res = await fetchCobaltDownload({
-      url,
-      isAudioOnly,
-      isNoTTWatermark: isNoWatermark,
-    });
-
-    if (res.status === 'error' || res.status === 'rate-limit') {
-      toast.error(res.text || 'Failed to generate download link');
-    } else {
-      toast.success('Download link ready!');
-      setResult(res);
-    }
-
-    setIsProcessing(false);
+  const handleCopy = () => {
+    if (!meta) return;
+    const text = `Caption: ${meta.caption}\nAuthor: ${meta.author}\nHashtags: ${meta.hashtags.map(h => '#' + h).join(' ')}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    toast.success('Copied!');
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      
-      {/* Header */}
-      <div className="text-center space-y-2">
-         <div className="inline-flex items-center justify-center p-4 bg-zinc-900 rounded-full mb-4">
-            <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-               <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.23-.9 4.48-2.52 6.06-1.74 1.7-4.32 2.58-6.72 2.1-2.4-.46-4.5-2.02-5.46-4.25-.97-2.22-.88-4.91.24-7.07 1.13-2.17 3.32-3.7 5.72-4.14 0 1.34.01 2.68 0 4.02-1.28.18-2.51.84-3.28 1.87-.77 1.02-1 2.4-.62 3.63.38 1.25 1.45 2.29 2.72 2.6 1.3.33 2.72.07 3.78-.73 1.06-.8 1.62-2.1 1.62-3.44.02-5.74.01-11.49.02-17.23h-.03z"/>
-            </svg>
-         </div>
-         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">TikTok Downloader</h2>
-         <p className="text-zinc-500 dark:text-zinc-400">Download TikTok videos without watermarks instantly, or extract audio.</p>
+    <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
+      <div className="flex items-center gap-2">
+        <Music className="w-5 h-5 text-emerald-500" />
+        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">TikTok Caption Extractor</h3>
       </div>
 
-      {/* Input Form */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 relative overflow-hidden">
-        
-        {/* Glow effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-blue-500/5 dark:bg-blue-500/10 blur-3xl rounded-full pointer-events-none"></div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          Extract captions, hashtags, and metadata from public TikTok videos. Uses TikTok&apos;s public oEmbed API — no login required, completely legal.
+        </p>
 
-        <div className="relative">
-          <label className="text-sm font-bold text-zinc-700 dark:text-zinc-300 block mb-2">TikTok Video Link</label>
-          <input
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://www.tiktok.com/@user/video/123456789"
-            className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-zinc-900 dark:focus:border-white rounded-xl px-4 py-4 text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none transition-colors"
-          />
+        <div className="flex gap-2">
+          <input value={url} onChange={e => setUrl(e.target.value)} placeholder="https://www.tiktok.com/@user/video/123456..."
+            className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30"
+            onKeyDown={e => e.key === 'Enter' && extractCaption()} />
+          <button onClick={extractCaption} disabled={isLoading}
+            className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors whitespace-nowrap">
+            {isLoading ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="32" strokeDashoffset="32" strokeLinecap="round" /></svg> Loading...</> : <>Extract</>}
+          </button>
         </div>
 
-        <div className="flex flex-wrap gap-4 pt-2">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input 
-              type="checkbox" 
-              checked={isNoWatermark}
-              onChange={(e) => setIsNoWatermark(e.target.checked)}
-              disabled={isAudioOnly}
-              className="w-5 h-5 accent-zinc-900 dark:accent-white"
-            />
-            <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Remove Watermark</span>
-          </label>
-          
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input 
-              type="checkbox" 
-              checked={isAudioOnly}
-              onChange={(e) => {
-                setIsAudioOnly(e.target.checked);
-                if (e.target.checked) setIsNoWatermark(true);
-              }}
-              className="w-5 h-5 accent-zinc-900 dark:accent-white"
-            />
-            <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Extract Audio Only (MP3)</span>
-          </label>
-        </div>
+        {error && (
+          <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl">
+            <p className="text-[10px] text-amber-600 dark:text-amber-400">{error}</p>
+          </div>
+        )}
 
-        <button
-          onClick={handleDownload}
-          disabled={isProcessing}
-          className="w-full bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-bold py-4 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-70"
-        >
-          {isProcessing ? (
-            <>
-              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Processing Video...
-            </>
-          ) : (
-            <>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-              Generate Download Link
-            </>
-          )}
-        </button>
+        {meta && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h5 className="text-[10px] font-bold text-zinc-400 uppercase">Extracted Metadata</h5>
+              <button onClick={handleCopy}
+                className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1 hover:bg-emerald-600 transition-colors">
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                {copied ? 'Copied' : 'Copy All'}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
+                <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1 flex items-center gap-1"><MessageCircle className="w-3 h-3" /> Caption</p>
+                <p className="text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed">{meta.caption}</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
+                <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1 flex items-center gap-1"><Eye className="w-3 h-3" /> Author</p>
+                <p className="text-xs text-zinc-800 dark:text-zinc-200">{meta.author}</p>
+                <a href={meta.url} target="_blank" rel="noopener noreferrer"
+                  className="text-[10px] text-emerald-500 hover:underline mt-1 inline-flex items-center gap-1">
+                  View on TikTok <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+              {meta.hashtags.length > 0 && (
+                <div className="md:col-span-2 bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
+                  <p className="text-[9px] font-bold text-zinc-400 uppercase mb-2 flex items-center gap-1"><Hash className="w-3 h-3" /> Hashtags</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {meta.hashtags.map(h => (
+                      <span key={h} className="text-[10px] px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full font-semibold">#{h}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+              <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+                <strong>Pro:</strong> Bulk extract captions from multiple URLs, export to CSV, hashtag analytics, competitor research, trending sound tracker, AI-powered caption rewriting.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* Results */}
-      {result && result.url && (
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-2xl animate-in zoom-in-95 duration-300 flex flex-col items-center space-y-4">
-           <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center shadow-inner">
-             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-           </div>
-           
-           <h3 className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">Ready to Download</h3>
-           
-           <a 
-             href={result.url} 
-             target="_blank" 
-             rel="noreferrer"
-             className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl transition-colors shadow-lg flex items-center justify-center gap-2"
-           >
-             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-             {isAudioOnly ? 'Download MP3' : 'Download Video (No Watermark)'}
-           </a>
-        </div>
-      )}
-
     </div>
   );
 }

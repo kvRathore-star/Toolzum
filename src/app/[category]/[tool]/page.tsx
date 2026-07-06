@@ -27,7 +27,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
       description: toolMetadata.description,
       type: 'website',
     },
-    robots: params.tool === 'credit-card-generator' ? { index: false, follow: false } : undefined,
+
   };
 }
 

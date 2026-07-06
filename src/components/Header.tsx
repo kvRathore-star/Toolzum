@@ -14,11 +14,11 @@ const MENU_COLUMN_DEFS = [
   { title: "📄 PDF", category: "PDF", allHref: "/tools?category=PDF", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel"] },
   { title: "✍ Text", category: "Text", allHref: "/tools?category=Text", slugs: ["ai-writing-assistant", "grammar-checker-extension", "ai-paraphrasing-tool", "text-summarizer", "ai-translator"] },
   { title: "🎵 Audio", category: "Audio", allHref: "/tools?category=Audio", slugs: ["text-to-speech-tts", "audio-cutter", "ai-audio-enhancer", "speech-to-text", "ai-music-generator"] },
-  { title: "🤖 AI Tools", category: "AI", allHref: "/tools?category=AI", slugs: ["ai-chat-hub", "ai-image-generator", "ai-document-chat", "ai-code-generator", "ai-video-summarizer"] },
+  { title: "🤖 AI Tools", category: "AI", allHref: "/tools?category=AI", slugs: ["ai-image-generator", "ai-document-chat", "ai-code-generator", "ai-video-summarizer"] },
   { title: "💻 Developer", category: "Developer", allHref: "/tools?category=Developer", slugs: ["json-formatter", "css-minifier", "sql-formatter", "diff-checker", "html-to-markdown"] },
-  { title: "🔧 Utility", category: "Utility", allHref: "/tools?category=Utility", slugs: ["qr-code-generator", "color-picker", "lorem-ipsum-generator", "morse-code-translator", "password-strength-checker"] },
+  { title: "🔧 Utility", category: "Utility", allHref: "/tools?category=Utility", slugs: ["qr-code-generator", "morse-code-translator", "password-strength-checker"] },
   { title: "📹 Video", category: "Video", allHref: "/tools?category=Video", slugs: ["video-compressor", "video-to-gif", "video-trimmer", "subtitle-generator"] },
-  { title: "🔄 Convert", category: "Converter", allHref: "/tools?category=Converter", slugs: ["mp4-to-mp3", "youtube-downloader", "tiktok-video-downloader", "soundcloud-downloader"] },
+  { title: "🔄 Convert", category: "Converter", allHref: "/tools?category=Converter", slugs: ["mp4-to-mp3", "youtube-downloader", "tiktok-video-downloader"] },
 ];
 
 function buildMegamenuColumns() {

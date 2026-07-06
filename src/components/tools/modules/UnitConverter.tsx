@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 const unitTypes = {
   Length: {
@@ -47,8 +47,25 @@ const unitTypes = {
   }
 };
 
+const TYPE_MAP: Record<string, keyof typeof unitTypes> = {
+  weight: 'Weight',
+  length: 'Length',
+  temperature: 'Temperature',
+  data: 'Data',
+};
+
 export default function UnitConverter() {
   const [category, setCategory] = useState<keyof typeof unitTypes>('Length');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const typeParam = params.get('type');
+      if (typeParam && TYPE_MAP[typeParam]) {
+        handleCategoryChange(TYPE_MAP[typeParam]);
+      }
+    }
+  }, []);
   
   const [fromUnit, setFromUnit] = useState(Object.keys(unitTypes['Length'].units)[0]);
   const [toUnit, setToUnit] = useState(Object.keys(unitTypes['Length'].units)[1]);

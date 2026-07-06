@@ -1,15 +1,36 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
-import { Music, Upload, Download, Loader2 } from 'lucide-react';
+import { Music, Upload, Download, Loader2, Crown } from 'lucide-react';
+import Link from 'next/link';
+
+const DAILY_LIMIT = 3;
 
 export default function VideoToMp3() {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const [usage, setUsage] = useState(0);
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    const stored = localStorage.getItem('videoToMp3Usage');
+    if (stored) {
+      try {
+        const { date, count } = JSON.parse(stored);
+        setUsage(date === today ? count : 0);
+      } catch { setUsage(0); }
+    }
+  }, []);
+
+  const trackUsage = (count: number) => {
+    const today = new Date().toISOString().split('T')[0];
+    localStorage.setItem('videoToMp3Usage', JSON.stringify({ date: today, count }));
+    setUsage(count);
+  };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -22,25 +43,30 @@ export default function VideoToMp3() {
 
   const processVideo = async () => {
     if (!file || !ffmpeg || !isLoaded) return;
-    
+    if (usage >= DAILY_LIMIT) {
+      toast.error(`You've used all ${DAILY_LIMIT} free extracts today. Upgrade to Pro for unlimited audio extraction.`);
+      return;
+    }
+
     setIsProcessing(true);
     try {
       const inputName = `input_${file.name.replace(/\s+/g, '_')}`;
       const outputName = 'output.mp3';
 
       await ffmpeg.writeFile(inputName, await fetchFile(file));
-      
-      // Extract audio with high quality (-q:a 0)
       await ffmpeg.exec(['-i', inputName, '-q:a', '0', '-map', 'a', outputName]);
-      
+
       const data = await ffmpeg.readFile(outputName);
       const blob = new Blob([data as unknown as BlobPart], { type: 'audio/mp3' });
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
 
-      // Cleanup
       await ffmpeg.deleteFile(inputName);
       await ffmpeg.deleteFile(outputName);
+      trackUsage(usage + 1);
+      if (usage + 1 >= DAILY_LIMIT) {
+        toast(`Upgrade to Pro for unlimited audio extraction.`, { icon: '👑' });
+      }
     } catch (e) {
       console.error(e);
       toast.error("Failed to process video. Make sure the file contains an audio track.");
@@ -49,15 +75,32 @@ export default function VideoToMp3() {
     }
   };
 
+  const remaining = DAILY_LIMIT - usage;
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <div className="flex items-center justify-center gap-3 mb-2">
            <Music className="w-8 h-8 text-fuchsia-500" />
-           <h2 className="text-2xl font-bold">Video to MP3 Converter</h2>
+           <h2 className="text-2xl font-bold">Audio Extractor</h2>
          </div>
-         <p className="text-zinc-500">Extract high-quality audio tracks directly from your video files using in-browser processing.</p>
-         
+         <div className="flex items-center justify-center gap-2">
+           <span className="text-zinc-500 text-xs">Extract high-quality audio from video files</span>
+           <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
+         </div>
+
+         <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 max-w-md mx-auto">
+           <p className="text-xs text-zinc-500">Daily free extractions:</p>
+           <div className="flex items-center gap-2">
+             <div className="flex gap-1">
+               {Array.from({ length: DAILY_LIMIT }, (_, i) => (
+                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-fuchsia-500'}`} />
+               ))}
+             </div>
+             <span className="text-[10px] font-bold text-zinc-500">{remaining} / {DAILY_LIMIT} remaining</span>
+           </div>
+         </div>
+
          {!file ? (
            <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative mt-8">
              <input type="file" accept="video/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
@@ -84,11 +127,9 @@ export default function VideoToMp3() {
              )}
 
              {isLoaded && !outputUrl && !isProcessing && (
-               <button 
-                 onClick={processVideo}
-                 className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
-               >
-                 Extract MP3
+               <button onClick={processVideo} disabled={remaining === 0}
+                 className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+                 {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Extract MP3'}
                </button>
              )}
 
@@ -107,11 +148,8 @@ export default function VideoToMp3() {
              {outputUrl && (
                <div className="space-y-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
                  <audio controls className="w-full" src={outputUrl}></audio>
-                 <a 
-                   href={outputUrl} 
-                   download={`${file.name.replace(/\.[^/.]+$/, "")}.mp3`}
-                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
-                 >
+                 <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}.mp3`}
+                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
                    <Download className="w-5 h-5" />
                    Download MP3
                  </a>
@@ -119,6 +157,11 @@ export default function VideoToMp3() {
              )}
            </div>
          )}
+
+         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+           <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Unlimited extractions, batch process multiple files, select specific audio track, export as MP3/FLAC/WAV/AAC.</p>
+           <Link href="/pricing" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 underline shrink-0 ml-4">Upgrade →</Link>
+         </div>
       </div>
     </div>
   );

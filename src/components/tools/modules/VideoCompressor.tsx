@@ -93,10 +93,10 @@ export default function VideoCompressor() {
           <strong>100% Client-Side FFmpeg:</strong> Compress large video files directly in your browser without uploading them to any server. Your videos never leave your device.
         </div>
         <FileUploader 
-          accept="video/mp4,video/quicktime,video/x-matroska,video/webm"
+          accept="video/mp4,video/quicktime,video/x-matroska,video/webm,image/gif"
           onFileSelect={handleFileSelect} 
-          title="Upload Video"
-          subtitle="Select a video file to compress"
+          title="Upload Video or GIF"
+          subtitle="MP4, MOV, MKV, WEBM, or GIF"
         />
       </div>
     );

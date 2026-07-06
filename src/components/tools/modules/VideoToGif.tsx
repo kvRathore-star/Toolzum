@@ -1,16 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { Film, Image } from 'lucide-react';
+
+type InputMode = 'video' | 'image';
 
 export default function VideoToGif() {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
-  
-  const [file, setFile] = useState<File | null>(null);
+  const [mode, setMode] = useState<InputMode>('video');
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [fps, setFps] = useState(10);
   const [width, setWidth] = useState(320);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -22,43 +26,30 @@ export default function VideoToGif() {
   }, []);
 
   useEffect(() => {
-    return () => {
-      if (outputUrl) URL.revokeObjectURL(outputUrl);
-    };
+    return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
   }, [outputUrl]);
 
-  const handleFileSelect = (selectedFile: File) => {
-    setFile(selectedFile);
-    setOutputUrl(null);
-    setOutputSize(null);
-  };
-
-  const clearAll = () => {
-    setFile(null);
-    setOutputUrl(null);
-    setOutputSize(null);
-  };
-
   const convertToGif = async () => {
-    if (!file || !ffmpeg || !isLoaded) return;
-
+    if (!ffmpeg || !isLoaded) return;
     setIsProcessing(true);
     try {
-      await ffmpeg.writeFile('input.mp4', await fetchFile(file));
-      
-      // High-quality GIF generation using palettegen
-      const filterGraph = `fps=${fps},scale=${width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
-      
-      await ffmpeg.exec([
-        '-i', 'input.mp4', 
-        '-vf', filterGraph,
-        '-loop', '0', // Infinite loop
-        'output.gif'
-      ]);
-      
+      if (mode === 'video') {
+        if (!videoFile) return;
+        await ffmpeg.writeFile('input.mp4', await fetchFile(videoFile));
+        const filterGraph = `fps=${fps},scale=${width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
+        await ffmpeg.exec(['-i', 'input.mp4', '-vf', filterGraph, '-loop', '0', 'output.gif']);
+      } else {
+        if (imageFiles.length === 0) return;
+        for (let i = 0; i < imageFiles.length; i++) {
+          await ffmpeg.writeFile(`img${i}.png`, await fetchFile(imageFiles[i]));
+        }
+        const vfArgs = `scale=${width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
+        await ffmpeg.exec(['-framerate', fps.toString(), '-i', 'img%d.png', '-vf', vfArgs, '-loop', '0', 'output.gif']);
+        for (let i = 0; i < imageFiles.length; i++) await ffmpeg.deleteFile(`img${i}.png`);
+      }
+
       const data = await ffmpeg.readFile('output.gif');
       const blob = new Blob([data as any], { type: 'image/gif' });
-      
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       setOutputSize(blob.size);
@@ -70,6 +61,8 @@ export default function VideoToGif() {
       setIsProcessing(false);
     }
   };
+
+  const isReady = mode === 'video' ? !!videoFile : imageFiles.length > 0;
 
   if (!isLoaded) {
     return (
@@ -83,151 +76,92 @@ export default function VideoToGif() {
     );
   }
 
-  if (!file) {
-    return (
-      <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-pink-500/10 border border-pink-500/20 p-4 rounded-xl text-pink-500 text-sm">
-          <strong>Make Memes Offline:</strong> Convert any video clip into a high-quality looping GIF instantly. Powered by browser-native FFmpeg WASM.
-        </div>
-        <FileUploader 
-          accept="video/mp4,video/quicktime,video/webm"
-          onFileSelect={handleFileSelect} 
-          title="Upload Video"
-          subtitle="Select a video to convert to GIF"
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
-        <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-        </div>
-        <button 
-          onClick={clearAll}
-          disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
-        >
-          Change File
-        </button>
+    <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
+      <div className="flex items-center gap-2">
+        <svg className="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Video & Image to GIF Converter</h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        {/* Settings Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">GIF Settings</h4>
-          
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Frames per Second</label>
-              <span className="text-xs font-bold text-pink-500">{fps} FPS</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {[5, 10, 15].map((val) => (
-                <button
-                  key={val}
-                  onClick={() => setFps(val)}
-                  disabled={isProcessing}
-                  className={`py-2 text-xs font-bold border rounded-lg transition-colors ${fps === val ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}
-                >
-                  {val} FPS
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Width (Resolution)</label>
-              <span className="text-xs font-bold text-pink-500">{width}px</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {[320, 480, 640].map((val) => (
-                <button
-                  key={val}
-                  onClick={() => setWidth(val)}
-                  disabled={isProcessing}
-                  className={`py-2 text-xs font-bold border rounded-lg transition-colors ${width === val ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}
-                >
-                  {val}px
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
-             {isProcessing ? (
-               <div className="space-y-2">
-                 <div className="flex justify-between text-xs font-bold text-pink-500">
-                    <span>Generating GIF...</span>
-                    <span>{progress}%</span>
-                 </div>
-                 <div className="w-full bg-pink-100 dark:bg-pink-900/30 rounded-full h-3 overflow-hidden">
-                   <div 
-                     className="bg-pink-500 h-3 rounded-full transition-all duration-300"
-                     style={{ width: `${progress}%` }}
-                   ></div>
-                 </div>
-               </div>
-             ) : (
-               <button 
-                 onClick={convertToGif}
-                 className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
-               >
-                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                 Convert to GIF
-               </button>
-             )}
-          </div>
-        </div>
-
-        {/* Output Panel */}
-        <div className="space-y-6">
-          {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
-                  <h4 className="font-bold text-pink-500">GIF Created</h4>
-               </div>
-               
-               <div className="bg-zinc-100 dark:bg-black rounded-xl overflow-hidden shadow-inner flex flex-col items-center justify-center relative p-4 chess-bg">
-                  <style dangerouslySetInnerHTML={{__html: `
-                    .chess-bg {
-                      background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-                      background-size: 20px 20px; background-position: 0 0, 10px 10px;
-                    }
-                    @media (prefers-color-scheme: dark) { .chess-bg { background-image: linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111); } }
-                  `}} />
-                  <img src={outputUrl} alt="Generated GIF" className="max-w-full max-h-[250px] object-contain rounded z-10 drop-shadow-md" />
-               </div>
-               
-               {outputSize && (
-                 <div className="flex justify-between text-sm">
-                   <span className="text-zinc-500">File Size:</span>
-                   <span className="font-bold text-pink-500">{(outputSize / 1024 / 1024).toFixed(2)} MB</span>
-                 </div>
-               )}
-
-               <button 
-                  onClick={() => downloadOrShare(outputUrl, `animated_${file.name.replace(/\.[^/.]+$/, "")}.gif`)}
-                  className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                  Download GIF
-                </button>
-            </div>
-          ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
-               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-              <p className="text-center text-sm px-4">Your animated GIF will appear here.</p>
-            </div>
-          )}
-        </div>
-
+      <div className="flex gap-1.5 bg-zinc-100 dark:bg-zinc-800/50 p-1 rounded-2xl w-fit">
+        <button onClick={() => { setMode('video'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'video' ? 'bg-white dark:bg-zinc-700 text-pink-600 dark:text-pink-400 shadow-sm' : 'text-zinc-500'}`}><Film className="w-3.5 h-3.5" /> Video</button>
+        <button onClick={() => { setMode('image'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'image' ? 'bg-white dark:bg-zinc-700 text-pink-600 dark:text-pink-400 shadow-sm' : 'text-zinc-500'}`}><Image className="w-3.5 h-3.5" /> Images</button>
       </div>
+
+      {mode === 'video' ? (
+        !videoFile ? (
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+            <div className="bg-pink-500/10 border-b border-pink-500/20 p-3 px-5 text-pink-500 text-xs"><strong>Make Memes Offline:</strong> Convert any video clip into a high-quality looping GIF.</div>
+            <div className="p-5">
+              <FileUploader accept="video/mp4,video/quicktime,video/webm" onFileSelect={(f: File) => { setVideoFile(f); setOutputUrl(null); }} title="Upload Video" subtitle="MP4, MOV, or WEBM" />
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-zinc-200 dark:border-zinc-800">
+              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{videoFile.name}</h4><p className="text-[10px] text-zinc-400">{(videoFile.size / 1024 / 1024).toFixed(2)} MB</p></div>
+              <button onClick={() => { setVideoFile(null); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Change</button>
+            </div>
+            <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v} FPS</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v}px</button>)}</div></div>
+              </div>
+              <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} disabled={isProcessing} className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">{isProcessing ? 'Generating...' : 'Convert to GIF'}</button>}</div>
+            </div>
+          </div>
+        )
+      ) : (
+        imageFiles.length === 0 ? (
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+            <div className="bg-fuchsia-500/10 border-b border-fuchsia-500/20 p-3 px-5 text-fuchsia-500 text-xs"><strong>Animate Images:</strong> Combine multiple images into a single animated GIF.</div>
+            <div className="p-5">
+              <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
+                <input type="file" multiple accept="image/png,image/jpeg,image/webp" onChange={e => { if (e.target.files) { setImageFiles(Array.from(e.target.files!)); setOutputUrl(null); } }} className="absolute inset-0 opacity-0 cursor-pointer" />
+                <svg className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <p className="text-xs text-zinc-500">Select multiple images (PNG, JPG, WebP)</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-zinc-200 dark:border-zinc-800">
+              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{imageFiles.length} Images</h4><p className="text-[10px] text-zinc-400">Click to add more</p></div>
+              <button onClick={() => { setImageFiles([]); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Clear</button>
+            </div>
+            <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v} FPS</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v}px</button>)}</div></div>
+              </div>
+              <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} disabled={isProcessing} className="w-full bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">{isProcessing ? 'Generating...' : 'Create Animated GIF'}</button>}</div>
+            </div>
+          </div>
+        )
+      )}
+
+      {isProcessing && (
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-2">
+          <div className="flex justify-between text-[10px] font-semibold text-pink-600 dark:text-pink-400"><span>Generating GIF...</span><span>{progress}%</span></div>
+          <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+        </div>
+      )}
+
+      {outputUrl && (
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-4">
+          <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3"><h4 className="text-xs font-bold text-emerald-500">GIF Ready</h4>{outputSize && <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}</div>
+          <div className="bg-zinc-100 dark:bg-black rounded-xl overflow-hidden p-4 flex items-center justify-center" style={{backgroundImage: 'linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee)', backgroundSize: '20px 20px', backgroundPosition: '0 0,10px 10px'}}>
+            <img src={outputUrl} alt="Generated GIF" className="max-w-full max-h-[250px] object-contain rounded drop-shadow-md" />
+          </div>
+          <button onClick={() => downloadOrShare(outputUrl, `animated.gif`)} className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            Download GIF
+          </button>
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+            <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> No watermark, HD resolution (1080p+), batch convert multiple videos, custom loop count, add text overlays to GIFs.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
