@@ -55,14 +55,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Canvas API, jszip",
     isPro: true,
   },
-  {
-    id: "brand-kit-1",
-    name: "Brand Kit",
-    description: "Save your brand colors and fonts locally to easily copy them when needed.",
-    category: "Developer",
-    slug: "brand-kit",
-    dependencies: "localStorage",
-  },
+
   {
     id: "gif-comp-1",
     name: "GIF Compressor",
@@ -287,14 +280,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.',
     dependencies: "Google Cloud Translation API"
   },
-  {
-    id: "8",
-    name: "Grammar Checker Extension",
-    slug: "grammar-checker-extension",
-    category: "Extension",
-    description: 'Generates a complete, installable browser extension (Chrome, Edge, Firefox) that highlights grammar, punctuation, and style errors in any text input.',
-    dependencies: "LanguageTool API"
-  },
+
   {
     id: "9",
     name: "PDF to Word",
@@ -375,14 +361,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting.',
     dependencies: "LibreOffice API / CloudConvert API"
   },
-  {
-    id: "20",
-    name: "AI Writing Assistant",
-    slug: "ai-writing-assistant",
-    category: "AI",
-    description: 'Provides real-time suggestions to refine grammar, tone, and structure across any text input.',
-    dependencies: "OpenAI API / LangChain"
-  },
+
   {
     id: "21",
     name: "Percentage Calculator",
@@ -399,14 +378,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them.',
     dependencies: "jsPDF / Canvas API"
   },
-  {
-    id: "25",
-    name: "Plagiarism Checker",
-    slug: "plagiarism-checker",
-    category: "Text",
-    description: 'Compares submitted text against an offline reference corpus and highlights passages that match existing sources with a similarity percentage.',
-    dependencies: "Copyscape API / Custom API"
-  },
+
   {
     id: "26",
     name: "Age Calculator",
@@ -543,14 +515,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Renders a QR code from any text, URL, vCard, Wi-Fi config, or plain string using a client-side Reed-Solomon encoder.',
     dependencies: "qrcode.js"
   },
-  {
-    id: "43",
-    name: "To-Do List",
-    slug: "to-do-list",
-    category: "Productivity",
-    description: 'To Do List provides a flat task manager with drag-to-reorder, completion toggling, and localStorage persistence.',
-    dependencies: "React / LocalStorage"
-  },
+
   {
     id: "44",
     name: "Excel to PDF",
@@ -647,14 +612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support.',
     dependencies: "Node.js / Redis"
   },
-  {
-    id: "56",
-    name: "Text Summarizer",
-    slug: "text-summarizer",
-    category: "Text",
-    description: 'Uses extractive and abstractive summarization to reduce long articles or documents to a configurable number of sentences or bullet points.',
-    dependencies: "OpenAI API / HuggingFace"
-  },
+
   {
     id: "58",
     name: "PDF to Excel",
@@ -791,22 +749,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity.',
     dependencies: "MaxMind / IP-API"
   },
-  {
-    id: "77",
-    name: "Brand Name Generator",
-    slug: "brand-name-generator",
-    category: "Branding",
-    description: 'Brand Name Generator combines keyword inputs with syllable patterns and suffix rules to produce creative name ideas.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "78",
-    name: "AI Content Humanizer",
-    slug: "ai-content-humanizer",
-    category: "AI",
-    description: 'Replaces robotic phrasing, repetitive patterns, and awkward constructions typical of AI-generated text.',
-    dependencies: "OpenAI API / Custom NLP"
-  },
+
+
   {
     id: "79",
     name: "Photo Retoucher",
@@ -855,14 +799,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options.',
     dependencies: "Web Audio API / Vanilla JS"
   },
-  {
-    id: "89",
-    name: "AI Video Summarizer",
-    slug: "ai-video-summarizer",
-    category: "AI",
-    description: 'Extracts key scenes, dialogue, and concepts from long-form video into a structured text summary.',
-    dependencies: "YouTube API / OpenAI API"
-  },
+
   {
     id: "90",
     name: "YouTube Transcript Generator",
@@ -871,14 +808,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL.',
     dependencies: "YouTube Data API"
   },
-  {
-    id: "91",
-    name: "AI Audio Enhancer",
-    slug: "ai-audio-enhancer",
-    category: "AI",
-    description: 'Removes background noise, hiss, and hum from recordings while preserving vocal clarity. Podcasters and remote workers use it to clean up recordings.',
-    dependencies: "Adobe Podcast API / Custom Model"
-  },
+
   {
     id: "92",
     name: "EPUB to PDF",
@@ -887,22 +817,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Converts EPUB ebooks to PDF with full control over page size, margins, font, and line spacing.',
     dependencies: "Calibre API"
   },
-  {
-    id: "94",
-    name: "AI Voice Cloning",
-    slug: "ai-voice-cloning",
-    category: "AI",
-    description: 'Analyzes a short voice sample to synthesize new speech that matches the original speaker’s tone, pitch, and cadence.',
-    dependencies: "ElevenLabs API"
-  },
-  {
-    id: "95",
-    name: "AI Essay Writer",
-    slug: "ai-essay-writer",
-    category: "AI",
-    description: 'Generates thesis-driven essays with coherent arguments, citations, and properly structured paragraphs.',
-    dependencies: "OpenAI API"
-  },
+
+
   {
     id: "96",
     name: "Protect PDF",
@@ -935,14 +851,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match.',
     dependencies: "regex.js"
   },
-  {
-    id: "100",
-    name: "AI Avatar Generator",
-    slug: "ai-avatar-generator",
-    category: "AI",
-    description: 'Creates stylized or photorealistic digital avatars from a single uploaded selfie. Social media users and virtual-event organizers use it to build.',
-    dependencies: "Stable Diffusion API"
-  },
+
   {
     id: "101",
     name: "Dice Roller",
@@ -1063,30 +972,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s.',
     dependencies: "OpenAI API"
   },
-  {
-    id: "117",
-    name: "AI Excel Formula Generator",
-    slug: "ai-excel-formula-generator",
-    category: "AI",
-    description: 'Converts plain-English descriptions of spreadsheet logic into ready-to-paste Excel or Google Sheets formulas.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "118",
-    name: "AI Product Description Generator",
-    slug: "ai-product-description-generator",
-    category: "AI",
-    description: 'Generates SEO-optimized product descriptions from a few keywords, a URL, or an image of the product.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "120",
-    name: "AI Presentation Generator",
-    slug: "ai-presentation-generator",
-    category: "AI",
-    description: 'Converts a topic sentence or rough outline into a complete slide deck with design, layout, and bullet points.',
-    dependencies: "OpenAI API / PptxGenJS"
-  },
+
+
+
   {
     id: "121",
     name: "JSON to CSV",
@@ -1127,14 +1015,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles.',
     dependencies: "React"
   },
-  {
-    id: "126",
-    name: "AI Music Generator",
-    slug: "ai-music-generator",
-    category: "AI",
-    description: 'Composes original music tracks from text descriptions of genre, mood, tempo, and instrumentation.',
-    dependencies: "Suno API / Custom Model"
-  },
+
   {
     id: "128",
     name: "Margin Calculator",
@@ -1263,54 +1144,12 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm.',
     dependencies: "ibantools"
   },
-  {
-    id: "145",
-    name: "AI Flowchart Maker",
-    slug: "ai-flowchart-maker",
-    category: "AI",
-    description: 'Parses process descriptions and automatically generates a connected flowchart with labeled nodes and decision branches.',
-    dependencies: "Mermaid.js / OpenAI API"
-  },
-  {
-    id: "146",
-    name: "AI Code Explainer",
-    slug: "ai-code-explainer",
-    category: "AI",
-    description: 'Accepts any code snippet and returns a plain-English breakdown of what each section does and why.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "147",
-    name: "AI SQL Generator",
-    slug: "ai-sql-generator",
-    category: "AI",
-    description: 'Translates plain-English database queries into optimized SQL statements with proper joins and indexing hints.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "148",
-    name: "AI Recipe Generator",
-    slug: "ai-recipe-generator",
-    category: "AI",
-    description: 'Suggests complete recipes based on a list of ingredients you already have in your kitchen. Home cooks and meal-preppers use it to reduce food waste.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "149",
-    name: "AI Domain Name Generator",
-    slug: "ai-domain-name-generator",
-    category: "AI",
-    description: 'Combines seed keywords with current TLD availability data, linguistic patterns, and brandability heuristics to propose available domain names.',
-    dependencies: "OpenAI API / Domain API"
-  },
-  {
-    id: "150",
-    name: "AI Mind Map Generator",
-    slug: "ai-mind-map-generator",
-    category: "AI",
-    description: 'Parses a block of text, a URL, or bullet points and renders a hierarchical mind map that can be exported as PNG, SVG, or Markdown.',
-    dependencies: "OpenAI API / React Flow"
-  },
+
+
+
+
+
+
   {
     id: "151",
     name: "CSV to JSON",
@@ -1511,38 +1350,10 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data.',
     dependencies: "JsBarcode"
   },
-  {
-    id: "177",
-    name: "AI Regex Generator",
-    slug: "ai-regex-generator",
-    category: "AI",
-    description: 'Accepts a natural-language sentence describing a text-matching rule—such as ‘find all US phone numbers with area codes’—and returns a ready-to-use.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "178",
-    name: "AI Business Idea Generator",
-    slug: "ai-business-idea-generator",
-    category: "AI",
-    description: 'Synthesizes market trends, technological capabilities, and pain-point databases to generate concrete business concepts with rough TAM estimates.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "179",
-    name: "AI Slogan Generator",
-    slug: "ai-slogan-generator",
-    category: "AI",
-    description: 'Generates catchy, brand-aligned taglines from a brief description of your product, audience, and tone preference.',
-    dependencies: "OpenAI API"
-  },
-  {
-    id: "180",
-    name: "AI Poem Generator",
-    slug: "ai-poem-generator",
-    category: "AI",
-    description: 'Writes original poetry in forms ranging from haiku and sonnet to free verse, matching a requested mood or theme.',
-    dependencies: "OpenAI API"
-  },
+
+
+
+
   {
     id: "181",
     name: "PGP Key Generator",
@@ -1793,14 +1604,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance.',
     dependencies: "Whisper API"
   },
-  {
-    name: 'AI Code Generator',
-    slug: 'ai-code-generator',
-    description: 'Generate code in 50+ languages.',
-    category: 'AI',
-    id:  "218",
-    dependencies: 'None'
-  },
+
   {
     name: 'Subtitle Generator',
     slug: 'subtitle-generator',
@@ -1825,14 +1629,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "221",
     dependencies: 'None'
   },
-  {
-    name: 'AI Blog Title Generator',
-    slug: 'ai-blog-title-generator',
-    description: 'Generate viral blog titles.',
-    category: 'AI',
-    id:  "222",
-    dependencies: 'None'
-  },
+
   {
     name: 'Video Watermark Adder',
     slug: 'video-watermark-adder',
@@ -1841,14 +1638,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "223",
     dependencies: 'None'
   },
-  {
-    name: 'AI Hashtag Generator',
-    slug: 'ai-hashtag-generator',
-    description: 'Generate viral hashtags for social media.',
-    category: 'AI',
-    id:  "224",
-    dependencies: 'None'
-  },
+
   {
     name: 'Prompt Library & Generator',
     slug: 'prompt-library-generator',
@@ -1873,14 +1663,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "228",
     dependencies: 'None'
   },
-  {
-    name: 'AI Changelog Generator',
-    slug: 'ai-changelog-generator',
-    description: 'Generate release notes from commits.',
-    category: 'AI',
-    id:  "229",
-    dependencies: 'None'
-  },
+
   {
     name: 'Browser Extension',
     slug: 'browser-extension',
@@ -2081,22 +1864,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "254",
     dependencies: 'fetch API'
   },
-  {
-    name: 'AI Placeholder Content Generator',
-    slug: 'ai-placeholder-content-generator',
-    description: 'Generates realistic placeholder text, blog posts, product descriptions, and website copy using AI from a few keyword prompts.',
-    category: 'AI',
-    id:  "255",
-    dependencies: 'AI API'
-  },
-  {
-    name: 'AI Brand Color Palette Generator',
-    slug: 'brand-color-palette-generator',
-    description: 'Generates harmonious brand color palettes with hex codes, color meanings, and suggested usage contexts based on industry and mood inputs.',
-    category: 'Design',
-    id:  "256",
-    dependencies: 'AI API'
-  },
+
+
   {
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
@@ -2145,14 +1914,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "262",
     dependencies: 'Canvas API'
   },
-  {
-    name: 'AI Complaint Letter Generator',
-    slug: 'ai-complaint-letter-generator',
-    description: 'Generates AI-powered formal complaint letters and legal notices tailored to Indian consumer protection, banking, and service scenarios.',
-    category: 'indian-utilities',
-    id:  "263",
-    dependencies: 'AI API'
-  },
+
   {
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
@@ -2169,22 +1931,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "265",
     dependencies: 'PDF.js'
   },
-  {
-    name: 'AI Resume Tailor',
-    slug: 'ai-resume-tailor',
-    description: 'Rewrites resume sections to better match a specific job description by highlighting relevant keywords, reordering bullet points, and adjusting tone.',
-    category: 'AI',
-    id:  "266",
-    dependencies: 'AI API'
-  },
-  {
-    name: 'AI Legal Agreement Generator',
-    slug: 'ai-legal-agreement-generator',
-    description: 'Generates legally sound agreement templates for Indian contexts including NDAs, rental agreements, employment contracts, service level agreements.',
-    category: 'indian-utilities',
-    id:  "267",
-    dependencies: 'AI API'
-  },
+
+
   {
     name: 'Social Media Calendar',
     slug: 'social-media-calendar',
@@ -2393,16 +2141,14 @@ const proSlugs = [
   "tiktok-video-downloader", "youtube-downloader", "instagram-video-downloader",
   "facebook-video-downloader", "twitter-video-downloader",
   "ai-translator", "pdf-to-word", "ai-image-generator", "logo-maker", "mp4-to-mp3",
-  "pdf-compressor", "word-to-pdf", "ai-writing-assistant", "jpg-to-pdf",
-  "plagiarism-checker", "pdf-to-jpg", "pdf-to-ppt", "background-remover",
+  "pdf-compressor", "word-to-pdf",  "jpg-to-pdf",
+   "pdf-to-jpg", "pdf-to-ppt", "background-remover",
   "object-remover", "ppt-to-pdf", "pdf-merger", "excel-to-pdf", "video-to-text-transcription",
   "social-media-post-maker", "svg-editor", "business-card-maker", "pdf-to-excel",
   "unlock-pdf", "protect-pdf", "epub-to-pdf", "pdf-to-epub", "compare-pdf-files",
   "extract-images-from-pdf", "email-signature-generator",
   "ai-thumbnail-maker", "mp3-compressor", "gif-to-mp4", "video-trimmer",
-  "video-watermark-adder", "ai-blog-title-generator", "ai-hashtag-generator",
-  "prompt-library-generator", "ai-changelog-generator",
-  "saas-pricing-calculator", "employee-turnover-calculator",
+  "video-watermark-adder",    "prompt-library-generator",   "saas-pricing-calculator", "employee-turnover-calculator",
   "pdf-to-html", "html-to-pdf", "generic-pdf-processor",
   "youtube-thumbnail-downloader",
   "batch-image-editor", "image-bulk-converter", "bulk-bg-changer", "bulk-qr-code-generator",
@@ -2411,23 +2157,13 @@ const proSlugs = [
   "bulk-pdf-size-reducer", "bulk-image-resizer", "bulk-video-compressor",
   "bulk-pdf-merger", "bulk-face-anonymizer", "bulk-pdf-form-extractor",
   "bulk-video-size-reducer", "bulk-audio-normalizer", "bulk-video-subtitle-burner",
-  "grammar-checker-extension", "currency-converter", "reddit-video-downloader",
+   "currency-converter", "reddit-video-downloader",
   "temporary-email-generator", "text-to-speech-tts", "ai-paraphrasing-tool",
-  "text-summarizer", "audio-to-text-transcription", "ip-address-lookup",
-  "brand-name-generator", "ai-content-humanizer", "ai-video-summarizer",
-  "youtube-transcript-generator", "ai-audio-enhancer", "ai-voice-cloning",
-  "ai-essay-writer", "ai-avatar-generator", "speech-to-text", "vimeo-video-downloader",
-  "meeting-minutes-generator", "ai-cover-letter-generator", "ai-excel-formula-generator",
-  "ai-product-description-generator", "ai-presentation-generator", "ai-music-generator",
-  "subtitle-translator", "ai-flowchart-maker", "ai-code-explainer", "ai-sql-generator",
-  "ai-recipe-generator", "ai-domain-name-generator", "ai-mind-map-generator",
-  "podcast-transcription", "ai-regex-generator", "ai-business-idea-generator",
-  "ai-slogan-generator", "ai-poem-generator", "ai-document-chat", "ai-video-subtitler",
-  "ifsc-code-lookup", "india-pincode-finder", "blur-face", "ai-placeholder-content-generator",
-  "brand-color-palette-generator", "resume-ats-score-checker", "ai-complaint-letter-generator",
-  "ai-resume-tailor", "ai-legal-agreement-generator", "pdf-ai-summariser",
-  "url-shortener", "secure-note-sharer", "ai-code-generator",
-  "gif-compressor", "image-to-gif", "mp4-to-gif", "webm-to-gif", "mov-to-gif",
+   "audio-to-text-transcription", "ip-address-lookup",
+      "youtube-transcript-generator",      "speech-to-text", "vimeo-video-downloader",
+  "meeting-minutes-generator", "ai-cover-letter-generator",       "subtitle-translator",         "podcast-transcription",      "ai-document-chat", "ai-video-subtitler",
+  "ifsc-code-lookup", "india-pincode-finder", "blur-face",    "resume-ats-score-checker",     "pdf-ai-summariser",
+  "url-shortener", "secure-note-sharer",   "gif-compressor", "image-to-gif", "mp4-to-gif", "webm-to-gif", "mov-to-gif",
   "video-to-mp3", "mp3-to-ogg", "wav-compressor", "crop-video", "mkv-to-mp4",
   "mov-to-mp4", "webm-to-mp4", "audio-cutter", "avi-to-mp4", "video-compressor",
   "video-to-gif", "audio-converter", "image-colorizer", "png-to-svg",
