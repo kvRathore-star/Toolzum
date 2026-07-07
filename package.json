@@ -127,7 +127,6 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10",
-    "wrangler": "^4.94.0",
-    "esbuild": "^0.28.1"
+    "wrangler": "^4.94.0"
   }
 }
