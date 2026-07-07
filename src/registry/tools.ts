@@ -2214,6 +2214,38 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer",
     description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview.",
     dependencies: "Vanilla JS, jszip",
+  },
+  {
+    id: "303",
+    name: "Bulk Image to Text (OCR)",
+    slug: "bulk-image-to-text-ocr",
+    category: "Image",
+    description: "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually.",
+    dependencies: "Tesseract.js, jszip",
+  },
+  {
+    id: "304",
+    name: "Bulk E-Book Converter",
+    slug: "bulk-ebook-converter",
+    category: "Converter",
+    description: "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Heavy readers use it instead of single-file converters that limit you to 2 files at a time.",
+    dependencies: "EPUB.js, jszip",
+  },
+  {
+    id: "305",
+    name: "Bulk YouTube Thumbnail Downloader",
+    slug: "bulk-youtube-thumbnail-downloader",
+    category: "Downloader",
+    description: "Drop a playlist link or 50 video URLs and grab max-resolution thumbnails for every video into a tidy ZIP. Content creators and marketers study competitor designs without manual clicks.",
+    dependencies: "fetch API, jszip",
+  },
+  {
+    id: "306",
+    name: "Bulk HEIC to JPG",
+    slug: "bulk-heic-to-jpg",
+    category: "Image",
+    description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library.",
+    dependencies: "libheif WASM, jszip",
   }
 ];
 const proSlugs = [
@@ -2254,7 +2286,9 @@ const proSlugs = [
   "bulk-invoice-receipt-parser", "bulk-csv-excel-to-json", "bulk-url-status-checker",
   "bulk-webp-avif-modernizer", "bulk-exif-stripper-injector", "bulk-app-icon-generator",
   "bulk-markdown-to-pdf-html", "bulk-font-subsetter", "bulk-subtitle-time-shifter",
-  "bulk-regex-extractor-replacer"
+  "bulk-regex-extractor-replacer",
+  "bulk-image-to-text-ocr", "bulk-ebook-converter",
+  "bulk-youtube-thumbnail-downloader", "bulk-heic-to-jpg"
 ];
 
 export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
