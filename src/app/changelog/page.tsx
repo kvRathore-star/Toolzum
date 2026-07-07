@@ -19,12 +19,11 @@ const RELEASES = [
     title: "Architecture Hardening — Error Boundaries, Memory Warnings & Web Worker Foundation",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Production-hardened all 30 bulk processing modules with memory-pressure detection, graceful error boundaries, and large-file warnings. Removed AI Hub. Retrofitted withErrorHandling into every critical processing path.",
+    description: "Production-hardened all 30 bulk processing modules with memory-pressure detection, graceful error boundaries, and large-file warnings. Retrofitted withErrorHandling into every critical processing path.",
     updates: [
       { type: "feature", text: "Added memory-pressure detection across all bulk tools — warns users with <4GB RAM before processing large files." },
       { type: "feature", text: "Large file (>100MB) confirmation dialogs with device memory info in all video, PDF, and image processing modules." },
       { type: "performance", text: "withErrorHandling wrapper retrofitted into BulkToolShell, all 3 video modules, PDF merger, and image watermark — failed per-file no longer kills entire batch." },
-      { type: "fix", text: "Removed AI Hub page and all navigation references — streamlined to core tool offering only." },
       { type: "security", text: "Catch blocks across all bulk modules now show OOM-specific messages instead of silent freezes." }
     ]
   },

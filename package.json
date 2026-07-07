@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit --skipLibCheck",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "wasm:optimize": "bash scripts/optimize-wasm.sh",
     "cf:deploy": "npm run build && npx wrangler pages deploy out/ --project-name=tool-hub",
     "cf:dev": "npx wrangler pages dev out/",
