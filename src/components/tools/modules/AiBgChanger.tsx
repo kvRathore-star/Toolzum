@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { Upload, Download, RotateCcw, Scissors, Image, Eraser, RefreshCw, ZoomIn } from 'lucide-react';
+import { Upload, Download, RotateCcw, Scissors, Image, Eraser, RefreshCw, ZoomIn, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useSession } from '@/lib/auth-client';
 
 export default function AiBgChanger() {
   const [image, setImage] = useState<string | null>(null);
@@ -19,6 +20,19 @@ export default function AiBgChanger() {
   const overlayRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const { data: session } = useSession();
+  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+
+  const addWatermark = (canvas: HTMLCanvasElement) => {
+    if (isPro) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.font = '12px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('Processed with ToolHub', canvas.width - 12, canvas.height - 12);
+  };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -88,6 +102,7 @@ export default function AiBgChanger() {
       }
 
       ctx.putImageData(imageData, 0, 0);
+      addWatermark(canvas);
       setResult(canvas.toDataURL('image/png'));
       setIsProcessing(false);
       toast.success('Background removed!');
@@ -163,6 +178,7 @@ export default function AiBgChanger() {
       }
 
       ctx.putImageData(imageData, 0, 0);
+      addWatermark(mainCanvas);
       setResult(mainCanvas.toDataURL('image/png'));
       setIsProcessing(false);
       toast.success('Mask applied!');
@@ -218,7 +234,7 @@ export default function AiBgChanger() {
                     </div>
                     <button onClick={removeBackgroundAuto} disabled={isProcessing}
                       className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
-                      {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Scissors className="w-3.5 h-3.5" /> Auto Remove BG</>}
+                      {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Scissors className="w-3.5 h-3.5" /> Remove BG {!isPro ? '(Standard)' : ''}</>}
                     </button>
                   </>
                 ) : (
@@ -302,9 +318,11 @@ export default function AiBgChanger() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
-            <strong>Pro:</strong> AI-powered smart detection with subject isolation, advanced edge refinement, batch processing, shadows & reflections, 4K export, API access for e-commerce platforms.
+        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3">
+          <p className="text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1.5">
+            <Crown className="w-3 h-3" />
+            {!isPro ? 'Free output includes a subtle "Processed with ToolHub" watermark. ' : ''}
+            <strong>Pro:</strong> No watermark • 4K export • AI-powered subject isolation • Batch processing • Shadows & reflections • API access.
           </p>
         </div>
       </div>

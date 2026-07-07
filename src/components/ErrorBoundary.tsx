@@ -65,15 +65,20 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       const canRetry = this.retryCount < MAX_RETRIES;
+      const isMemoryError = this.state.error?.message?.toLowerCase().includes('memory') ||
+        this.state.error?.message?.toLowerCase().includes('allocation') ||
+        this.state.error?.message?.toLowerCase().includes('out of memory');
 
       return (
         <div className="w-full bg-red-50 dark:bg-red-950/20 rounded-2xl border border-red-200 dark:border-red-900/50 p-8 flex flex-col items-center justify-center min-h-[400px] text-center">
           <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/50 mb-6 flex items-center justify-center">
             <span className="text-red-500 text-2xl font-bold">!</span>
           </div>
-          <h2 className="text-xl font-bold text-red-700 dark:text-red-400 mb-2">Failed to load this tool</h2>
+          <h2 className="text-xl font-bold text-red-700 dark:text-red-400 mb-2">{isMemoryError ? 'Browser memory limit reached' : 'Failed to load this tool'}</h2>
           <p className="text-red-600 dark:text-red-300 max-w-md mx-auto mb-2">
-            {this.state.error?.message || "There was a problem loading or rendering this module."}
+            {isMemoryError
+              ? 'Large files may exceed browser memory limits on some devices. Try processing in smaller batches or close other browser tabs to free up memory.'
+              : (this.state.error?.message || "There was a problem loading or rendering this module.")}
           </p>
           <p className="text-xs text-red-500 dark:text-red-400 mb-6 max-w-md font-mono opacity-60">
             {this.state.error?.name || "Error"} {canRetry ? `· ${MAX_RETRIES - this.retryCount} retries left` : "· No more retries"}

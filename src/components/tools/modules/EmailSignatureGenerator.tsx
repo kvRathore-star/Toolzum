@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Copy, Layout, Sliders, Layers, Sparkles, Check, CheckCircle2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 
 interface SignatureTemplate {
   id: string;
@@ -193,7 +194,7 @@ export default function EmailSignatureGenerator() {
             <div 
               id="signature-preview"
               className="p-4"
-              dangerouslySetInnerHTML={{ __html: generateSignatureHtml() }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateSignatureHtml()) }}
             />
           </div>
 

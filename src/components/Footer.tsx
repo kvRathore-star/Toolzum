@@ -35,18 +35,17 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.1em]">Categories</h4>
             <ul className="flex flex-col gap-3 text-sm">
-              <li><Link href="/tools?category=Image" className="hover:text-[var(--accent)] transition-colors">Image</Link></li>
-              <li><Link href="/tools?category=PDF" className="hover:text-[var(--accent)] transition-colors">PDF</Link></li>
-              <li><Link href="/tools?category=AI" className="hover:text-[var(--accent)] transition-colors">AI Tools</Link></li>
-              <li><Link href="/tools?category=Video" className="hover:text-[var(--accent)] transition-colors">Video</Link></li>
-              <li><Link href="/tools?category=Audio" className="hover:text-[var(--accent)] transition-colors">Audio</Link></li>
-              <li><Link href="/tools?category=Converter" className="hover:text-[var(--accent)] transition-colors">Converter</Link></li>
-              <li><Link href="/tools?category=Downloader" className="hover:text-[var(--accent)] transition-colors">Downloader</Link></li>
-              <li><Link href="/tools?category=Text" className="hover:text-[var(--accent)] transition-colors">Text</Link></li>
-              <li><Link href="/tools?category=Developer" className="hover:text-[var(--accent)] transition-colors">Developer</Link></li>
-              <li><Link href="/tools?category=Finance" className="hover:text-[var(--accent)] transition-colors">Finance</Link></li>
-              <li><Link href="/tools?category=Utility" className="hover:text-[var(--accent)] transition-colors">Utility</Link></li>
-              <li><Link href="/tools?category=indian-utilities" className="hover:text-[var(--india)] transition-colors">India 🇮🇳</Link></li>
+              <li><Link href="/image" className="hover:text-[var(--accent)] transition-colors">Image</Link></li>
+              <li><Link href="/pdf" className="hover:text-[var(--accent)] transition-colors">PDF</Link></li>
+              <li><Link href="/ai" className="hover:text-[var(--accent)] transition-colors">AI Tools</Link></li>
+              <li><Link href="/video" className="hover:text-[var(--accent)] transition-colors">Video</Link></li>
+              <li><Link href="/audio" className="hover:text-[var(--accent)] transition-colors">Audio</Link></li>
+              <li><Link href="/converter" className="hover:text-[var(--accent)] transition-colors">Converter</Link></li>
+              <li><Link href="/text" className="hover:text-[var(--accent)] transition-colors">Text</Link></li>
+              <li><Link href="/developer" className="hover:text-[var(--accent)] transition-colors">Developer</Link></li>
+              <li><Link href="/finance" className="hover:text-[var(--accent)] transition-colors">Finance</Link></li>
+              <li><Link href="/utility" className="hover:text-[var(--accent)] transition-colors">Utility</Link></li>
+              <li><Link href="/indian-utilities" className="hover:text-[var(--india)] transition-colors">India 🇮🇳</Link></li>
             </ul>
           </div>
 

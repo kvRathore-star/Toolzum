@@ -3,16 +3,20 @@
 import imageCompression from 'browser-image-compression';
 import * as pdfjsLib from 'pdfjs-dist';
 
+const dev = process.env.NODE_ENV === 'development';
+const log = dev ? console.log : () => {};
+const err = dev ? console.error : () => {};
+
 export async function runSanityCheck() {
-  console.log("=========================================");
-  console.log("🧪 RUNNING CLIENT-SIDE SMOKE TESTS 🧪");
-  console.log("=========================================");
+  log("=========================================");
+  log("🧪 RUNNING CLIENT-SIDE SMOKE TESTS 🧪");
+  log("=========================================");
 
   let errors = 0;
 
   // 1. Test browser-image-compression
   try {
-    console.log("[TEST 1/2] Verifying browser-image-compression worker...");
+    log("[TEST 1/2] Verifying browser-image-compression worker...");
     // Create a tiny dummy 10x10 transparent png
     const canvas = document.createElement('canvas');
     canvas.width = 10;
@@ -24,33 +28,33 @@ export async function runSanityCheck() {
     const compressed = await imageCompression(dummyFile, { maxSizeMB: 0.01, useWebWorker: true });
     
     if (compressed.size > 0) {
-      console.log(`✅ browser-image-compression passed! (Worker spawned, compressed 10x10 to ${compressed.size} bytes)`);
+      log(`✅ browser-image-compression passed! (Worker spawned, compressed 10x10 to ${compressed.size} bytes)`);
     } else {
       throw new Error("Output size was 0 bytes.");
     }
   } catch (e: any) {
-    console.error(`❌ browser-image-compression failed: ${e.message}`);
+    err(`❌ browser-image-compression failed: ${e.message}`);
     errors++;
   }
 
   // 2. Test PDF.js worker execution
   try {
-    console.log("[TEST 2/2] Verifying pdfjs-dist WASM worker...");
+    log("[TEST 2/2] Verifying pdfjs-dist WASM worker...");
     // Just test that the library loaded successfully and the worker can theoretically be configured
     const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
     pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-    console.log(`✅ pdfjs-dist passed! (Worker path configured: ${workerSrc})`);
+    log(`✅ pdfjs-dist passed! (Worker path configured: ${workerSrc})`);
   } catch (e: any) {
-    console.error(`❌ pdfjs-dist failed: ${e.message}`);
+    err(`❌ pdfjs-dist failed: ${e.message}`);
     errors++;
   }
 
-  console.log("=========================================");
+  log("=========================================");
   if (errors > 0) {
-    console.error(`🚨 DIAGNOSTICS FAILED WITH ${errors} ERRORS.`);
+    err(`🚨 DIAGNOSTICS FAILED WITH ${errors} ERRORS.`);
     return false;
   } else {
-    console.log("🚀 ALL CLIENT-SIDE MODULES OPERATIONAL!");
+    log("🚀 ALL CLIENT-SIDE MODULES OPERATIONAL!");
     return true;
   }
 }

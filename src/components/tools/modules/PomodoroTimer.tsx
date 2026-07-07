@@ -45,8 +45,8 @@ export default function PomodoroTimer() {
       gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
       osc.start();
       setTimeout(() => osc.stop(), 800);
-    } catch (e) {
-      console.log(e);
+    } catch (_e) {
+      /* noop */
     }
   };
 

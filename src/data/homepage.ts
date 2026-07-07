@@ -75,27 +75,27 @@ export const USE_CASES: UseCaseDef[] = [
   {
     title: 'For Designers',
     items: ['Remove image backgrounds instantly', 'Batch resize product photos', 'Generate AI avatars & thumbnails', 'Extract colors from any image'],
-    slug: '/tools?category=Image',
+    slug: '/image',
   },
   {
     title: 'For Developers',
     items: ['Format & minify JSON/CSS/JS', 'Generate regex patterns with AI', 'Convert Markdown to HTML', 'Create fake JSON data for testing'],
-    slug: '/tools?category=Developer',
+    slug: '/developer',
   },
   {
     title: 'For Content Creators',
     items: ['Compress videos for social media', 'Transcribe audio to text', 'Generate blog titles with AI', 'Create branded social media posts'],
-    slug: '/tools?category=AI',
+    slug: '/ai',
   },
   {
     title: 'For Business',
     items: ['Merge & split PDF contracts', 'Generate GST invoices', 'Calculate SaaS pricing', 'Create professional business cards'],
-    slug: '/tools?category=Business',
+    slug: '/business',
   },
   {
     title: 'For Students',
     items: ['Convert documents between formats for assignments', 'Generate citations & bibliographies', 'Compress images for submissions', 'Calculate GPA, loans & budgets'],
-    slug: '/tools?category=Text',
+    slug: '/text',
   },
 ];
 

@@ -5,8 +5,9 @@ import Link from "next/link";
 import { ShieldCheck, Check, Zap, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toolsRegistry } from "@/registry/tools";
+import { EnterpriseCompliance } from "@/components/EnterpriseCompliance";
 
-type BillingInterval = "weekly" | "monthly" | "yearly";
+type BillingInterval = "pass" | "monthly" | "yearly";
 
 export default function PricingPage() {
   const tz = typeof window !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "";
@@ -26,14 +27,14 @@ export default function PricingPage() {
   // Pricing structure
   const pricingData: Record<"USD" | "INR", Record<BillingInterval, PricingPlan>> = {
     USD: {
-      weekly: { price: "4.99", unit: "week", label: "Weekly" },
+      pass: { price: "3.99", unit: "7 days", label: "7-Day Project Pass" },
       monthly: { price: "14.99", unit: "month", label: "Monthly" },
       yearly: { price: "99", unit: "year", label: "Yearly", discount: "Save 45%" },
     },
     INR: {
-      weekly: { price: "99", unit: "week", label: "Weekly" },
-      monthly: { price: "299", unit: "month", label: "Monthly" },
-      yearly: { price: "1999", unit: "year", label: "Yearly", discount: "Save 44%" },
+      pass: { price: "99", unit: "7 days", label: "7-Day Project Pass" },
+      monthly: { price: "249", unit: "month", label: "Monthly" },
+      yearly: { price: "1999", unit: "year", label: "Yearly", discount: "Save 33%" },
     },
   };
 
@@ -84,7 +85,7 @@ export default function PricingPage() {
 
         {/* Pricing Segmented Control */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-1 rounded-xl flex gap-1 mb-16 relative z-20 shadow-sm">
-          {(["weekly", "monthly", "yearly"] as BillingInterval[]).map((interval) => (
+          {(["pass", "monthly", "yearly"] as BillingInterval[]).map((interval) => (
             <button
               key={interval}
               onClick={() => setBillingInterval(interval)}
@@ -104,58 +105,61 @@ export default function PricingPage() {
           ))}
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full items-stretch relative z-10">
-          {/* Free Tier */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 hover:border-[var(--text-muted)] hover:shadow-lg">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Free Plan</h3>
-              <p className="text-sm text-[var(--text-secondary)] mb-6">
-                Essential utilities for occasional, daily use.
-              </p>
-              <div className="flex items-baseline gap-1 mb-6">
-                <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
-                  {currencySymbol}0
-                </span>
-                <span className="text-sm text-[var(--text-muted)]">/forever</span>
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full items-stretch relative z-10">
+            {/* Free Tier */}
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 hover:border-[var(--text-muted)] hover:shadow-lg">
+              <div>
+                <h3 className="text-xl font-semibold mb-2">Free Plan</h3>
+                <p className="text-sm text-[var(--text-secondary)] mb-6">
+                  Essential utilities for occasional use.
+                </p>
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
+                    {currencySymbol}0
+                  </span>
+                  <span className="text-sm text-[var(--text-muted)]">/forever</span>
+                </div>
+                <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                    <span>Access ~180 standard utilities offline</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                    <span>100% private, on-device processing</span>
+                  </li>
+                  <li className="flex items-center gap-3 opacity-50">
+                    <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
+                    <span className="line-through">Premium Canvas & Document editing suite</span>
+                  </li>
+                  <li className="flex items-center gap-3 opacity-50">
+                    <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
+                    <span className="line-through">High-traffic Video/Audio downloaders</span>
+                  </li>
+                  <li className="flex items-center gap-3 opacity-50">
+                    <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
+                    <span className="line-through">Interactive SaaS & Finance tools</span>
+                  </li>
+                </ul>
               </div>
-              <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
-                <li className="flex items-center gap-3">
-                  <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                  <span>Access ~180 standard utilities offline</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                  <span>100% private, on-device processing</span>
-                </li>
-                <li className="flex items-center gap-3 opacity-50">
-                  <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                  <span className="line-through">Premium Canvas & Document editing suite</span>
-                </li>
-                <li className="flex items-center gap-3 opacity-50">
-                  <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                  <span className="line-through">High-traffic Video/Audio downloaders</span>
-                </li>
-                <li className="flex items-center gap-3 opacity-50">
-                  <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                  <span className="line-through">Interactive SaaS & Finance tools</span>
-                </li>
-              </ul>
-            </div>
-            <Link href="/tools" className="block">
-              <Button variant="secondary" className="w-full" size="lg">
-                Use Free Tools
-              </Button>
-            </Link>
-          </div>
-
-          {/* Pro Tier */}
-          <div className="bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 sm:p-10 flex flex-col justify-between relative shadow-[var(--shadow-glow-accent)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(var(--accent-rgb),0.15)] transform md:-translate-y-4">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
-              <Zap className="w-3.5 h-3.5 fill-white" /> Pro Plan
+              <Link href="/tools" className="block">
+                <Button variant="secondary" className="w-full" size="lg">
+                  Use Free Tools
+                </Button>
+              </Link>
             </div>
 
-            <div>
+            {/* Pro Tier */}
+            <div className="bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 sm:p-10 flex flex-col justify-between relative shadow-[var(--shadow-glow-accent)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(var(--accent-rgb),0.15)] transform md:-translate-y-4">
+              <div className="absolute -top-3 -right-3 bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-lg z-10">
+                MOST POPULAR
+              </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                <Zap className="w-3.5 h-3.5 fill-white" /> Pro Plan
+              </div>
+
+              <div>
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-semibold text-[var(--text-primary)]">Full Engine Access</h3>
                 {billingInterval === "yearly" && (
@@ -165,7 +169,11 @@ export default function PricingPage() {
                 )}
               </div>
               <p className="text-sm text-[var(--text-secondary)] mb-6">
-                Complete access to the entire {toolsRegistry.length}+ tool offline suite.
+                {billingInterval === "pass"
+                  ? (isIndia ? 'Instant bulk processing for a single project. Pay securely with UPI.' : 'Perfect for a one-off heavy workload. One-time payment, expires automatically.')
+                  : billingInterval === "yearly"
+                  ? (isIndia ? 'Ultimate long-term utility. Breaks down to just ₹166/month.' : 'Best for teams and power users. Save 45% off monthly.')
+                  : (isIndia ? `Less than ₹9/day. Unlimited access for growing businesses. Recommended for Indian freelancers.` : `The standard for active freelancers and developers. Cancel anytime in 1-click.`)}
               </p>
               <div className="flex items-baseline gap-1 mb-6">
                 <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
@@ -175,17 +183,21 @@ export default function PricingPage() {
                 <span className="text-sm text-[var(--text-muted)]">/{currentPlan.unit}</span>
               </div>
 
-              {/* Annual price anchor for monthly/weekly viewers */}
+              {/* Annual price anchor for monthly/pass viewers */}
               {billingInterval !== "yearly" && (
                 <p className="text-[11px] text-[var(--text-muted)] -mt-4 mb-6">
-                  or{" "}
+                  or{' '}
                   <span className="font-semibold text-[var(--text-primary)]">
                     {currencySymbol}{activePricing.yearly.price}
                   </span>
-                  /year{" "}
+                  /year{' '}
                   <span className="text-[var(--success)] font-semibold">
                     (save {activePricing.yearly.discount?.replace("Save ", "")})
-                  </span>
+                  </span>{' '}
+                  —{' '}
+                  <button onClick={() => setBillingInterval('pass')} className="text-[var(--accent)] hover:underline">
+                    or grab a {currencySymbol}{activePricing.pass.price} Project Pass
+                  </button>
                 </p>
               )}
 
@@ -194,7 +206,7 @@ export default function PricingPage() {
                 <input type="hidden" name="plan" value={billingInterval} />
                 <input type="hidden" name="gateway" value={isIndia ? "razorpay" : "dodo"} />
                 <Button variant="primary" className="w-full whitespace-nowrap" size="lg" type="submit">
-                  Upgrade to Pro ({currentPlan.label})
+                  {billingInterval === 'pass' ? `Get Project Pass — ${currencySymbol}${currentPlan.price}` : `Upgrade to Pro (${currentPlan.label})`}
                 </Button>
               </form>
 
@@ -227,6 +239,58 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
+
+        {/* Feature Comparison Table */}
+        <div className="w-full max-w-4xl mt-20">
+          <h2 className="text-2xl font-bold text-center mb-8 font-[family-name:var(--font-serif)]">Compare Plans</h2>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
+                  <th className="text-left px-6 py-4 font-semibold text-[var(--text-primary)]">Feature</th>
+                  <th className="text-center px-4 py-4 font-semibold text-[var(--text-muted)]">Free</th>
+                  <th className="text-center px-4 py-4 font-semibold text-[var(--accent)]">Pro</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border-subtle)]">
+                {[
+                  ['Max file size', '10MB', '2GB'],
+                  ['Batch processing', '1 file', '500 files'],
+                  ['Processing speed', 'Standard (1 thread)', 'Parallel (6 threads)'],
+                  ['ZIP batch download', '—', '✓'],
+                  ['Watermark-free export', '—', '✓'],
+                  ['Workflow presets', '—', 'Unlimited'],
+                  ['AI-powered tools', 'Limited', 'Full access'],
+                  ['API access', '—', '10K req/day'],
+                  ['Priority support', '—', 'Email 4h response'],
+                  ['White-label export', '—', '✓'],
+                  ['Team seats', '1', '1 (Team plan coming)'],
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-[var(--bg-overlay)]/50' : ''}>
+                    <td className="px-6 py-3.5 text-[var(--text-primary)] font-medium">{row[0]}</td>
+                    <td className="text-center px-4 py-3.5 text-[var(--text-muted)]">{row[1]}</td>
+                    <td className="text-center px-4 py-3.5 text-emerald-600 dark:text-emerald-400 font-semibold">{row[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="text-center mt-6">
+            <Link
+              href={billingInterval === 'yearly' ? `/api/payments/create-order?plan=${billingInterval}&gateway=${isIndia ? 'razorpay' : 'dodo'}` : '#'}
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all shadow-sm text-sm"
+              onClick={e => {
+                if (billingInterval !== 'yearly') return;
+                // form submission handled by the button below
+              }}
+            >
+              Upgrade to Pro — {currencySymbol}{currentPlan.price}/{currentPlan.unit}{billingInterval === 'pass' ? ' (auto-cancels)' : ''}
+            </Link>
+          </div>
+        </div>
+
+        {/* Enterprise Compliance */}
+        <EnterpriseCompliance />
 
         {/* Money Back & Security Guarantee */}
         <div className="mt-20 flex flex-col items-center gap-4 max-w-xl text-center">

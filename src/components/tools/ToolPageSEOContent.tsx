@@ -274,7 +274,7 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
               <span>Similar Tools You Might Need</span>
             </h2>
             <Link 
-              href={`/tools?category=${encodeURIComponent(tool.category)}`}
+              href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}`}
               className="text-xs font-semibold text-[var(--accent)] hover:underline flex items-center gap-1"
             >
               See all <ArrowRight className="w-3.5 h-3.5" />

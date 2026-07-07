@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Download, IndianRupee, Building2, Calendar } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import DOMPurify from 'dompurify';
 
 interface SalarySlipData {
   companyName: string;
@@ -252,7 +253,7 @@ export default function SalarySlipGenerator() {
               <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Preview</span>
               <span className="text-[10px] text-zinc-500">{data.month} {data.year}</span>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: generateSlipHtml() }} />
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateSlipHtml()) }} />
           </div>
         )}
       </div>

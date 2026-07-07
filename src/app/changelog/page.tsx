@@ -14,6 +14,52 @@ import { Button } from "@/components/ui/button";
 
 const RELEASES = [
   {
+    version: "v1.5.0",
+    date: "July 7, 2026",
+    title: "Architecture Hardening — Error Boundaries, Memory Warnings & Web Worker Foundation",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Production-hardened all 30 bulk processing modules with memory-pressure detection, graceful error boundaries, and large-file warnings. Removed AI Hub. Retrofitted withErrorHandling into every critical processing path.",
+    updates: [
+      { type: "feature", text: "Added memory-pressure detection across all bulk tools — warns users with <4GB RAM before processing large files." },
+      { type: "feature", text: "Large file (>100MB) confirmation dialogs with device memory info in all video, PDF, and image processing modules." },
+      { type: "performance", text: "withErrorHandling wrapper retrofitted into BulkToolShell, all 3 video modules, PDF merger, and image watermark — failed per-file no longer kills entire batch." },
+      { type: "fix", text: "Removed AI Hub page and all navigation references — streamlined to core tool offering only." },
+      { type: "security", text: "Catch blocks across all bulk modules now show OOM-specific messages instead of silent freezes." }
+    ]
+  },
+  {
+    version: "v1.4.0",
+    date: "June 18, 2026",
+    title: "30 Bulk Tools Complete — FFmpeg WASM Video Processing & Pro Gating",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Completed all 30 bulk processing tools including FFmpeg WASM-based video processing. Full Pro gating with parallel processing, ZIP downloads, workflow presets, and watermark-free export.",
+    updates: [
+      { type: "feature", text: "Implemented 3 FFmpeg WASM video tools: BulkVideoCompressor, BulkVideoSizeReducer, BulkVideoSubtitleBurner — ~30MB WASM lazy-loaded on first use." },
+      { type: "feature", text: "Completed remaining 20+ bulk modules — SVG to PNG, image resizer/compressor, PDF merger/reducer, OCR, ebook converter, audio tools, face anonymizer, and more." },
+      { type: "feature", text: "ProDownloadButton locking ZIP download behind Pro tier with per-file download for free users." },
+      { type: "feature", text: "PostProcessUpgrade popup after 3rd tool use, ProComparisonChart on every tool page, ShareTool social sharing." },
+      { type: "performance", text: "Pro users get 6× parallel processing via Promise.all chunks; free users process sequentially with animated speed indicator." },
+    ]
+  },
+  {
+    version: "v1.3.0",
+    date: "May 30, 2026",
+    title: "Privacy & Enterprise Compliance — Security Page, CSP, Offline Mode",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    description: "Enterprise-ready security posture with dedicated /security page, CSP headers, offline mode indicator, and zero-data retention notices. Pricing rebranded with 7-Day Project Pass and India pricing.",
+    updates: [
+      { type: "feature", text: "Published /security page with architecture diagram, data flow, compliance, and third-party dependency details." },
+      { type: "feature", text: "Added Content-Security-Policy headers via public/_headers restricting script-src, connect-src, and worker-src." },
+      { type: "feature", text: "OfflineIndicator component — shows 'processing still works' banner when WiFi drops." },
+      { type: "fix", text: "Rebranded Weekly plan to 7-Day Project Pass ($3.99/₹99 auto-cancel) across pricing, paywall, and checkout." },
+      { type: "fix", text: "3 XSS vectors fixed via DOMPurify.sanitize(); 11 console.log statements removed; Gemini API key moved to header." },
+      { type: "security", text: "Zero-data retention notices in all bulk tool upload zones with Zero-Trust badge." }
+    ]
+  },
+  {
     version: "v1.2.0",
     date: "May 25, 2026",
     title: "Golden Master Release — 200+ Browser Tools",

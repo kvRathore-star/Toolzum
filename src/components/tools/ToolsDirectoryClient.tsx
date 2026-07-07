@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
-import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, Image, FileText, Code2, Briefcase, Wrench, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
@@ -20,6 +20,14 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
 
 const ITEMS_PER_PAGE = 30;
 const GROUP_ORDER = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+const GROUP_ICONS: Record<string, React.ReactNode> = {
+  'Media': <Image className="w-3.5 h-3.5" />,
+  'Text & AI': <FileText className="w-3.5 h-3.5" />,
+  'Developer & Tech': <Code2 className="w-3.5 h-3.5" />,
+  'Business & Finance': <Briefcase className="w-3.5 h-3.5" />,
+  'Tools & Converters': <Wrench className="w-3.5 h-3.5" />,
+  'Lifestyle': <Compass className="w-3.5 h-3.5" />,
+};
 
 export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMetadata[] }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -116,12 +124,15 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
             <div key={groupLabel} className="relative shrink-0">
               <button
                 onClick={() => setOpenGroup(openGroup === groupLabel ? null : groupLabel)}
-                className={`flex items-center gap-1 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
+                className={`flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
                   activeCategory !== "All" && cats.includes(activeCategory)
                     ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
                     : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)]'
                 }`}
               >
+                <span className={activeCategory !== "All" && cats.includes(activeCategory) ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'}>
+                  {GROUP_ICONS[groupLabel]}
+                </span>
                 {groupLabel}
                 <ChevronDown className={`w-3 h-3 transition-transform ${openGroup === groupLabel ? 'rotate-180' : ''}`} />
               </button>

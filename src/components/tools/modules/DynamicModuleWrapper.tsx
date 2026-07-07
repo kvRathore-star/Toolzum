@@ -352,17 +352,54 @@ const MODULE_REGISTRY: Record<string, React.ComponentType> = {
   'pdf-page-manager': dynamic(() => import('@/components/tools/modules/PdfPageManager'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'bulk-qr-code-generator': dynamic(() => import('@/components/tools/modules/BulkQrCodeGenerator'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'pdf-ai-summariser': dynamic(() => import('@/components/tools/modules/PdfAiSummariser'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-app-icon-generator': dynamic(() => import('@/components/tools/modules/BulkAppIconGenerator'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-image-watermark': dynamic(() => import('@/components/tools/modules/BulkImageWatermark'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-svg-to-png': dynamic(() => import('@/components/tools/modules/BulkSvgToPng'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-image-resizer': dynamic(() => import('@/components/tools/modules/BulkImageResizer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-image-compressor': dynamic(() => import('@/components/tools/modules/BulkImageCompressor'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-image-to-pdf': dynamic(() => import('@/components/tools/modules/BulkImageToPdf'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-pdf-merger': dynamic(() => import('@/components/tools/modules/BulkPdfMerger'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-pdf-size-reducer': dynamic(() => import('@/components/tools/modules/BulkPdfSizeReducer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-csv-excel-to-json': dynamic(() => import('@/components/tools/modules/BulkCsvExcelToJson'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-url-status-checker': dynamic(() => import('@/components/tools/modules/BulkUrlStatusChecker'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-regex-extractor-replacer': dynamic(() => import('@/components/tools/modules/BulkRegexExtractorReplacer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-subtitle-time-shifter': dynamic(() => import('@/components/tools/modules/BulkSubtitleTimeShifter'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-markdown-to-pdf-html': dynamic(() => import('@/components/tools/modules/BulkMarkdownToPdfHtml'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-exif-stripper-injector': dynamic(() => import('@/components/tools/modules/BulkExifStripperInjector'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-audio-converter': dynamic(() => import('@/components/tools/modules/BulkAudioConverter'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-audio-normalizer': dynamic(() => import('@/components/tools/modules/BulkAudioNormalizer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-heic-to-jpg': dynamic(() => import('@/components/tools/modules/BulkHeicToJpg'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-ebook-converter': dynamic(() => import('@/components/tools/modules/BulkEbookConverter'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-pdf-data-extractor': dynamic(() => import('@/components/tools/modules/BulkPdfDataExtractor'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-pdf-form-extractor': dynamic(() => import('@/components/tools/modules/BulkPdfFormExtractor'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-face-anonymizer': dynamic(() => import('@/components/tools/modules/BulkFaceAnonymizer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-image-to-text-ocr': dynamic(() => import('@/components/tools/modules/BulkImageToTextOcr'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-font-subsetter': dynamic(() => import('@/components/tools/modules/BulkFontSubsetter'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-invoice-receipt-parser': dynamic(() => import('@/components/tools/modules/BulkInvoiceReceiptParser'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/BulkWebpAvifModernizer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-video-compressor': dynamic(() => import('@/components/tools/modules/BulkVideoCompressor'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-video-size-reducer': dynamic(() => import('@/components/tools/modules/BulkVideoSizeReducer'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'bulk-video-subtitle-burner': dynamic(() => import('@/components/tools/modules/BulkVideoSubtitleBurner'), { ssr: false, loading: () => <SkeletonLoader /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
+const BulkSeoLandingPage = dynamic(() => import('@/components/tools/modules/BulkSeoLandingPage'), { ssr: false, loading: () => <SkeletonLoader /> });
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { SEO_PERMUTATIONS } from '@/registry/tools';
 
 export function DynamicModuleWrapper({ slug, category }: { slug: string, category: string }) {
   const DynamicModule = MODULE_REGISTRY[slug];
   
   if (!DynamicModule) {
-    // Generate a readable tool name from slug (e.g., "youtube-downloader" -> "Youtube Downloader")
+    const seoPage = SEO_PERMUTATIONS.find(p => p.slug === slug);
+    if (seoPage) {
+      return (
+        <ErrorBoundary>
+          <BulkSeoLandingPage slug={slug} category={category} />
+        </ErrorBoundary>
+      );
+    }
     const toolName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     return (
       <ErrorBoundary>

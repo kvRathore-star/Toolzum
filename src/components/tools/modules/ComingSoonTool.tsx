@@ -12,8 +12,6 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
     e.preventDefault();
     if (!email) return;
     
-    // In the future, this will push to a real API endpoint
-    console.log(`[Waitlist] Added ${email} for tool: ${toolName}`);
     setSubmitted(true);
     setEmail('');
   };

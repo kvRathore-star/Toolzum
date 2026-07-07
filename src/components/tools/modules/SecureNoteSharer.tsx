@@ -34,8 +34,8 @@ export default function SecureNoteSharer() {
             toast.success('Secure note decrypted and self-destructed!');
           }
         }
-      } catch (err) {
-        console.log(err);
+      } catch (_e) {
+        /* noop */
       }
     }
   }, []);

@@ -49,7 +49,6 @@ textAreas.forEach(area => {
     // Simple basic checks for common double words/typos
     if (/\\b(the the|and and|is is|a a)\\b/i.test(text)) {
       area.style.border = "2px solid #ef4444";
-      console.log("GrammarChecker Alert: Found repeated words.");
     }
   });
 });`;

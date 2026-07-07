@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight, Play,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText,
+  Building2
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
@@ -286,7 +287,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                 transition={{ delay: i * 0.06 }}
               >
                 <Link
-                  href={`/tools?category=${cat.label}`}
+                  href={`/${cat.id.toLowerCase()}`}
                   className="group flex flex-col items-start p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.06)] transition-all duration-300 h-full"
                 >
                   <div className="w-10 h-10 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)]/10 group-hover:border-[var(--accent)]/30 transition-all">
@@ -442,9 +443,21 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                       <div className={`w-8 h-8 rounded-full ${theme.bgTint} flex items-center justify-center`}>
                         <Icon className={`w-4 h-4 ${theme.iconColor}`} />
                       </div>
-                      <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
-                        {tool.category}
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        {tool.slug.startsWith('bulk-') && (
+                          <span className="text-[10px] font-mono text-blue-500 uppercase tracking-wider bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 px-2 py-0.5 rounded">
+                            Bulk
+                          </span>
+                        )}
+                        {tool.isPro && !tool.slug.startsWith('bulk-') && (
+                          <span className="text-[10px] font-mono text-amber-600 uppercase tracking-wider bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded">
+                            Pro
+                          </span>
+                        )}
+                        <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
+                          {tool.category}
+                        </span>
+                      </div>
                     </div>
                     <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                       {tool.name}
@@ -473,6 +486,86 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             View all tools <ChevronRight className="w-4 h-4" />
           </Link>
         </motion.div>
+      </section>
+
+      {/* ===== PRO PRICING PREVIEW ===== */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="text-center mb-12"
+        >
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--accent)] uppercase tracking-wider mb-4">
+            <Crown className="w-3.5 h-3.5" /> Pro
+          </span>
+          <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] mb-3">
+            Free today. Pro when you need more.
+          </h2>
+          <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
+            All tools run in your browser completely free.{' '}
+            Upgrade when you hit a limit — bulk processing, larger files, and AI extras.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
+          <div className="p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
+            <div className="flex items-center gap-2 mb-1">
+              <Users className="w-4 h-4 text-zinc-400" />
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Free</span>
+            </div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">$0</div>
+            <ul className="space-y-2.5 text-sm">
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (20-100MB)</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>5 uses per month</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Bulk batch processing</span></li>
+              <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>AI generation & extraction</span></li>
+            </ul>
+          </div>
+          <div className="p-6 bg-[var(--accent)]/5 border-2 border-[var(--accent)] rounded-[var(--radius-xl)] relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[var(--accent)] text-white text-[10px] font-mono uppercase tracking-wider rounded-full">Popular</div>
+            <div className="flex items-center gap-2 mb-1">
+              <Crown className="w-4 h-4 text-amber-500" />
+              <span className="text-xs font-mono text-amber-500 uppercase tracking-wider">Pro</span>
+            </div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">$8</div>
+            <div className="text-xs text-[var(--text-muted)] mb-4">/month, cancel anytime</div>
+            <ul className="space-y-2.5 text-sm">
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited monthly uses</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Bulk batch processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>AI generation & extraction</span></li>
+            </ul>
+          </div>
+          <div className="p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
+            <div className="flex items-center gap-2 mb-1">
+              <Building2 className="w-4 h-4 text-zinc-400" />
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Team</span>
+            </div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">Contact</div>
+            <ul className="space-y-2.5 text-sm">
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>All Pro features</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Dedicated onboarding</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Priority feature requests</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>SSO & audit logging</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Custom SLA</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>API access</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-xl hover:bg-[var(--accent-hover)] transition-colors"
+          >
+            See full pricing <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </section>
 
       {/* ===== 8. STATS BAR ===== */}

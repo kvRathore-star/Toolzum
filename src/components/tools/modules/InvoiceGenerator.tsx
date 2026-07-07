@@ -184,7 +184,8 @@ export default function InvoiceGenerator() {
 
         {/* Items Table */}
         <div className="mb-12 overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[600px]">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-y border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white">
                 <th className="py-3 px-2 font-semibold">Description</th>
@@ -240,6 +241,7 @@ export default function InvoiceGenerator() {
               ))}
             </tbody>
           </table>
+          </div>
           
           <button
             onClick={handleAddItem}

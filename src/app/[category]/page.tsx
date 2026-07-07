@@ -28,6 +28,9 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   return {
     title: `${categoryKey} Tools — Free Online Utilities`,
     description: `Free online ${categoryKey} tools — ${toolCount} utilities. Process files locally, nothing leaves your browser.`,
+    alternates: {
+      canonical: `https://gotoolhub.com/${params.category}`,
+    },
   };
 }
 

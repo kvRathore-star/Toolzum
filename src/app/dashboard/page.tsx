@@ -106,7 +106,7 @@ export default function DashboardPage() {
                 {session.user.plan || "Free Tier"}
               </span>
             </div>
-            <Link href="/pricing" className="text-sm font-medium text-[var(--accent)] hover:underline mt-4 inline-block">
+            <Link href="/billing" className="text-sm font-medium text-[var(--accent)] hover:underline mt-4 inline-block">
               Manage subscription →
             </Link>
           </div>

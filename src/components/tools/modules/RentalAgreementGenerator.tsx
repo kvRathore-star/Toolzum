@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { Download, FileText, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 
 interface AgreementForm {
   propertyType: string;
@@ -265,7 +266,7 @@ export default function RentalAgreementGenerator() {
               </button>
             </div>
             <div className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden max-h-[80vh] overflow-y-auto">
-              <div ref={previewRef} dangerouslySetInnerHTML={{ __html: generateAgreementHtml(form) }} />
+              <div ref={previewRef} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateAgreementHtml(form)) }} />
             </div>
           </div>
         )}

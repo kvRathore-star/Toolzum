@@ -46,7 +46,7 @@ export async function onRequestPost(context: any) {
     }
 
     // Validation
-    if (!["weekly", "monthly", "yearly"].includes(plan)) {
+    if (!["pass", "monthly", "yearly"].includes(plan)) {
       return new Response(JSON.stringify({ error: "Invalid plan selection" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
@@ -109,8 +109,8 @@ export async function onRequestPost(context: any) {
     // --- RAZORPAY CHECKOUT (INDIA - INR) ---
     if (gateway === "razorpay") {
       // Pricing in INR (paise)
-      let amountInPaise = 29900; // Default Monthly: ₹299
-      if (plan === "weekly") amountInPaise = 9900; // ₹99
+      let amountInPaise = 24900; // Default Monthly: ₹249
+      if (plan === "pass") amountInPaise = 9900; // ₹99
       if (plan === "yearly") amountInPaise = 299900; // ₹2999
 
       let orderId: string;
@@ -171,9 +171,9 @@ export async function onRequestPost(context: any) {
       // Map plans to Dodo product/price IDs
       let productId = "prod_monthly_pro";
       let amount = 14.99;
-      if (plan === "weekly") {
+      if (plan === "pass") {
         productId = "prod_weekly_pro";
-        amount = 4.99;
+        amount = 3.99;
       }
       if (plan === "yearly") {
         productId = "prod_yearly_pro";

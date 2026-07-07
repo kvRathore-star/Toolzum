@@ -6,7 +6,6 @@ export type ToolCategory =
   | "Finance"
   | "Utility"
   | "Converter"
-  | "Downloader"
   | "Video"
   | "Audio"
   | "Branding"
@@ -233,44 +232,12 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "pdf-lib, heic2any",
   },
   {
-    id: "1",
-    name: "TikTok Video Downloader",
-    slug: "tiktok-video-downloader",
-    category: "Downloader",
-    description: "Download TikTok without watermark",
-    dependencies: "API / yt-dlp"
-  },
-  {
     id: "2",
     name: 'Privacy Cleaner',
     slug: 'privacy-cleaner',
     category: 'Utility',
     description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site.',
     dependencies: 'Vanilla JS'
-  },
-  {
-    id: "yt-dl-1",
-    name: "YouTube Downloader",
-    description: 'Downloads YouTube videos as MP4 files or extracts audio as MP3 by parsing the video page for available stream URLs.',
-    category: "Downloader",
-    slug: "youtube-downloader",
-    dependencies: "yt-dlp"
-  },
-  {
-    id: "4",
-    name: "Instagram Video Downloader",
-    slug: "instagram-video-downloader",
-    category: "Downloader",
-    description: "Download IG Reels and Videos",
-    dependencies: "Instaloader / API"
-  },
-  {
-    id: "6",
-    name: "Facebook Video Downloader",
-    slug: "facebook-video-downloader",
-    category: "Downloader",
-    description: 'Downloads public Facebook videos by parsing the page source to extract the highest-quality MP4 stream.',
-    dependencies: "yt-dlp"
   },
   {
     id: "7",
@@ -304,14 +271,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility",
     description: 'Measures your internet connection’s download speed, upload speed, and latency by transferring real test data to geographically distributed servers.',
     dependencies: "WebSockets / WebRTC"
-  },
-  {
-    id: "12",
-    name: "Twitter Video Downloader",
-    slug: "twitter-video-downloader",
-    category: "Downloader",
-    description: 'Extracts native video files from tweets by resolving the embedded media URL from Twitter’s CDN.',
-    dependencies: "yt-dlp"
   },
   {
     id: "14",
@@ -426,14 +385,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Productivity",
     description: 'Stopwatch offers precision timing with lap recording, split tracking, and a clean full-screen display mode.',
     dependencies: "Vanilla JS"
-  },
-  {
-    id: "32",
-    name: "Reddit Video Downloader",
-    slug: "reddit-video-downloader",
-    category: "Downloader",
-    description: 'Fetches Reddit-hosted videos and their associated audio tracks from the v.redd.it CDN, then merges them client-side.',
-    dependencies: "yt-dlp"
   },
   {
     id: "33",
@@ -654,14 +605,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
-    id: "63",
-    name: "Pinterest Image Downloader",
-    slug: "pinterest-image-downloader",
-    category: "Downloader",
-    description: 'Scrapes the highest-resolution version of an image from a Pinterest pin page by inspecting the Open Graph and JSON-LD metadata.',
-    dependencies: "Vanilla JS"
-  },
-  {
     id: "64",
     name: "Audio to Text Transcription",
     slug: "audio-to-text-transcription",
@@ -875,14 +818,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Audio",
     description: "Transcribe audio to text in multiple languages",
     dependencies: "Whisper API / Web Speech API"
-  },
-  {
-    id: "105",
-    name: "Vimeo Video Downloader",
-    slug: "vimeo-video-downloader",
-    category: "Downloader",
-    description: 'Resolves Vimeo’s progressive-download and HLS streaming URLs from the video config object to offer direct MP4 downloads.',
-    dependencies: "yt-dlp"
   },
   {
     id: "106",
@@ -1849,24 +1784,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: 'fetch API'
   },
   {
-    name: 'Twitch Thumbnail Downloader',
-    slug: 'twitch-thumbnail-downloader',
-    description: 'Downloads the publicly cached preview thumbnail images from Twitch streams, clips, and videos by parsing the Twitch CDN URL pattern.',
-    category: 'Downloader',
-    id:  "253",
-    dependencies: 'fetch API'
-  },
-  {
-    name: 'Dailymotion Downloader',
-    slug: 'dailymotion-downloader',
-    description: 'Downloads Dailymotion videos in multiple quality options by extracting direct MP4 stream URLs from the video metadata.',
-    category: 'Video',
-    id:  "254",
-    dependencies: 'fetch API'
-  },
-
-
-  {
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
     description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences.',
@@ -1889,14 +1806,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: 'AI',
     id:  "259",
     dependencies: 'AI API'
-  },
-  {
-    name: 'Instagram Media Downloader',
-    slug: 'instagram-story-downloader',
-    description: 'Downloads Instagram posts, reels, and stories by resolving media URLs through Instagram\'s public oEmbed API.',
-    category: 'Downloader',
-    id:  "260",
-    dependencies: 'fetch API'
   },
   {
     name: 'WhatsApp Toolkit',
@@ -2006,14 +1915,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js'
-  },
-  {
-    name: 'YouTube Thumbnail Downloader',
-    slug: 'youtube-thumbnail-downloader',
-    description: 'Fetches and displays all available resolution variants of a YouTube video thumbnail — from default (120x90) up to maxresdefault (1920x1080) — given.',
-    category: 'Downloader',
-    id:  "277",
-    dependencies: 'fetch API'
   },
   {
     id: "278",
@@ -2232,14 +2133,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "EPUB.js, jszip",
   },
   {
-    id: "305",
-    name: "Bulk YouTube Thumbnail Downloader",
-    slug: "bulk-youtube-thumbnail-downloader",
-    category: "Downloader",
-    description: "Drop a playlist link or 50 video URLs and grab max-resolution thumbnails for every video into a tidy ZIP. Content creators and marketers study competitor designs without manual clicks.",
-    dependencies: "fetch API, jszip",
-  },
-  {
     id: "306",
     name: "Bulk HEIC to JPG",
     slug: "bulk-heic-to-jpg",
@@ -2249,8 +2142,6 @@ const rawToolsRegistry: ToolMetadata[] = [
   }
 ];
 const proSlugs = [
-  "tiktok-video-downloader", "youtube-downloader", "instagram-video-downloader",
-  "facebook-video-downloader", "twitter-video-downloader",
   "ai-translator", "pdf-to-word", "ai-image-generator", "logo-maker", "mp4-to-mp3",
   "pdf-compressor", "word-to-pdf", "jpg-to-pdf",
   "pdf-to-jpg", "pdf-to-ppt", "background-remover",
@@ -2261,17 +2152,16 @@ const proSlugs = [
   "ai-thumbnail-maker", "mp3-compressor", "gif-to-mp4", "video-trimmer",
   "video-watermark-adder", "prompt-library-generator", "saas-pricing-calculator",
   "employee-turnover-calculator", "pdf-to-html", "html-to-pdf", "generic-pdf-processor",
-  "youtube-thumbnail-downloader",
   "batch-image-editor", "image-bulk-converter", "bulk-bg-changer", "bulk-qr-code-generator",
   "bulk-image-watermark", "bulk-pdf-data-extractor", "bulk-image-to-pdf",
   "bulk-audio-converter", "bulk-svg-to-png", "bulk-image-compressor",
   "bulk-pdf-size-reducer", "bulk-image-resizer", "bulk-video-compressor",
   "bulk-pdf-merger", "bulk-face-anonymizer", "bulk-pdf-form-extractor",
   "bulk-video-size-reducer", "bulk-audio-normalizer", "bulk-video-subtitle-burner",
-  "currency-converter", "reddit-video-downloader",
+  "currency-converter",
   "temporary-email-generator", "text-to-speech-tts", "ai-paraphrasing-tool",
   "audio-to-text-transcription", "ip-address-lookup",
-  "youtube-transcript-generator", "speech-to-text", "vimeo-video-downloader",
+  "youtube-transcript-generator", "speech-to-text",
   "meeting-minutes-generator", "ai-cover-letter-generator",
   "subtitle-translator", "podcast-transcription", "ai-document-chat", "ai-video-subtitler",
   "ifsc-code-lookup", "india-pincode-finder", "blur-face",
@@ -2288,8 +2178,86 @@ const proSlugs = [
   "bulk-markdown-to-pdf-html", "bulk-font-subsetter", "bulk-subtitle-time-shifter",
   "bulk-regex-extractor-replacer",
   "bulk-image-to-text-ocr", "bulk-ebook-converter",
-  "bulk-youtube-thumbnail-downloader", "bulk-heic-to-jpg"
+  "bulk-heic-to-jpg"
 ];
+
+export interface SeoPermutation {
+  slug: string;
+  name: string;
+  category: ToolCategory;
+  description: string;
+  parentSlug: string;
+}
+
+export const SEO_PERMUTATIONS: SeoPermutation[] = [
+  // Image → Image format conversions
+  { slug: "bulk-png-to-webp", name: "Bulk PNG to WebP", category: "Image", description: "Convert all your PNG images to modern WebP format in one batch. Shrinks file sizes by 30% without losing quality — essential for Pagespeed scores.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-jpg-to-webp", name: "Bulk JPG to WebP", category: "Image", description: "Batch convert JPEG images to WebP format for faster websites. Keeps directory structure intact and generates fallback PNGs automatically.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-png-to-avif", name: "Bulk PNG to AVIF", category: "Image", description: "Convert PNG images to next-gen AVIF format in bulk. AVIF offers 50% smaller files than JPEG at same quality — best for modern browsers.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-jpg-to-avif", name: "Bulk JPG to AVIF", category: "Image", description: "Batch convert JPEG photos to AVIF format. Unlock Google Pagespeed's perfect score by serving AVIF with automatic fallback generation.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-webp-to-png", name: "Bulk WebP to PNG", category: "Image", description: "Need WebP files back to PNG? Convert entire folders of WebP images to universal PNG format in one click — zero quality loss.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-heic-to-webp", name: "Bulk HEIC to WebP", category: "Image", description: "iPhone HEIC photos too large for the web? Batch convert them to WebP directly in browser — no uploads, no privacy risk.", parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-heic-to-png", name: "Bulk HEIC to PNG", category: "Image", description: "Convert hundreds of Apple HEIC photos to universal PNG format in one batch. Fully client-side — your photos never leave your device.", parentSlug: "bulk-heic-to-jpg" },
+  { slug: "bulk-png-to-jpg", name: "Bulk PNG to JPG", category: "Image", description: "Batch convert PNG images to JPEG format. Perfect when you need smaller file sizes for email or web upload at the cost of transparency.", parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-jpg-to-png", name: "Bulk JPG to PNG", category: "Image", description: "Convert JPEG photos to lossless PNG format in bulk. Essential for graphics needing transparency or when preserving every pixel matters.", parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-webp-to-jpg", name: "Bulk WebP to JPG", category: "Image", description: "Batch convert WebP images back to universal JPEG format. For platforms and devices that still don't support Google's modern image format.", parentSlug: "bulk-image-compressor" },
+  // Batch resize / compress
+  { slug: "bulk-resize-images", name: "Bulk Resize Images", category: "Image", description: "Resize hundreds of photos to exact pixel dimensions in one pass. Photographers standardize client galleries before delivery with this tool.", parentSlug: "bulk-image-resizer" },
+  { slug: "bulk-compress-png", name: "Bulk PNG Compressor", category: "Image", description: "Compress dozens of PNG files at once with smart lossy compression. E-commerce sellers optimize product images while keeping transparency.", parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-compress-jpg", name: "Bulk JPG Compressor", category: "Image", description: "Batch compress JPEG photos to smaller file sizes with consistent quality. Bloggers and web devs optimize entire image libraries before deployment.", parentSlug: "bulk-image-compressor" },
+  // Audio format conversions
+  { slug: "bulk-mp3-to-wav", name: "Bulk MP3 to WAV", category: "Audio", description: "Convert your MP3 music library to lossless WAV format in one batch. Audio editors and podcasters need WAV for professional production workflows.", parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-wav-to-mp3", name: "Bulk WAV to MP3", category: "Audio", description: "Batch compress WAV recordings to space-saving MP3 files. Podcasters shrinking raw studio recordings for distribution on Spotify and Apple Podcasts.", parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-flac-to-mp3", name: "Bulk FLAC to MP3", category: "Audio", description: "Convert FLAC audio files to universally compatible MP3 format in bulk. Perfect for building a portable music library from your lossless archives.", parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-ogg-to-mp3", name: "Bulk OGG to MP3", category: "Audio", description: "Batch convert OGG Vorbis files to MP3. For users moving from open-source audio players to devices that only support the MP3 codec.", parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-m4a-to-mp3", name: "Bulk M4A to MP3", category: "Audio", description: "Convert Apple M4A audio files to MP3 in one batch. Android and Windows users converting their iTunes library for cross-platform playback.", parentSlug: "bulk-audio-converter" },
+  // Video format conversions
+  { slug: "bulk-mp4-to-mov", name: "Bulk MP4 to MOV", category: "Video", description: "Batch convert MP4 videos to QuickTime MOV format. Video editors receiving MP4 files for Final Cut Pro or Premiere Pro workflows.", parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-mov-to-mp4", name: "Bulk MOV to MP4", category: "Video", description: "Convert dozens of QuickTime MOV files to web-friendly MP4 in one batch. Social media managers preparing footage for YouTube and Instagram.", parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-mkv-to-mp4", name: "Bulk MKV to MP4", category: "Video", description: "Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues.", parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-avi-to-mp4", name: "Bulk AVI to MP4", category: "Video", description: "Convert AVI video files to modern MP4 format in bulk. Archivists digitizing old video libraries for long-term preservation and easy playback.", parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-webm-to-mp4", name: "Bulk WebM to MP4", category: "Video", description: "Batch convert WebM screen recordings to MP4. Designers and developers who receive Loom or Chrome recordings need MP4 for editing software.", parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", parentSlug: "bulk-video-compressor" },
+  // PDF operations
+  { slug: "bulk-pdf-to-word", name: "Bulk PDF to Word", category: "PDF", description: "Convert dozens of PDF files to editable Word documents in one batch. Legal teams and researchers extract text from multiple contracts simultaneously.", parentSlug: "bulk-pdf-data-extractor" },
+  { slug: "bulk-pdf-to-excel", name: "Bulk PDF to Excel", category: "PDF", description: "Extract tables from multiple PDFs and export to Excel in one click. Accountants processing monthly financial statements from vendor PDFs.", parentSlug: "bulk-pdf-data-extractor" },
+  { slug: "bulk-pdf-to-jpg", name: "Bulk PDF to JPG", category: "PDF", description: "Convert each page of multiple PDFs to high-res JPG images. Presenters extracting slides from decks for social media or thumbnails.", parentSlug: "bulk-pdf-data-extractor" },
+  { slug: "bulk-image-to-pdf-v2", name: "Bulk JPG/PNG to PDF", category: "PDF", description: "Merge hundreds of scanned images into a single multi-page PDF. Real estate agents and HR teams bundle property photos or applicant documents.", parentSlug: "bulk-image-to-pdf" },
+  { slug: "bulk-compress-pdf", name: "Bulk PDF Compressor", category: "PDF", description: "Reduce file size of multiple PDFs at once by compressing images and removing metadata. Law firms preparing document batches for email.", parentSlug: "bulk-pdf-size-reducer" },
+  // Document conversions
+  { slug: "bulk-epub-to-pdf", name: "Bulk EPUB to PDF", category: "Converter", description: "Convert your entire e-book library from EPUB to PDF format. Students and researchers who need to annotate academic texts on any device.", parentSlug: "bulk-ebook-converter" },
+  { slug: "bulk-mobi-to-pdf", name: "Bulk MOBI to PDF", category: "Converter", description: "Batch convert Kindle MOBI files to universal PDF. Kindle users switching to iPad or other tablets need their library in a readable format.", parentSlug: "bulk-ebook-converter" },
+  { slug: "bulk-pdf-to-epub", name: "Bulk PDF to EPUB", category: "Converter", description: "Convert PDF documents to reflowable EPUB format for e-readers. Academics converting paper scans for comfortable reading on Kindle or Kobo.", parentSlug: "bulk-ebook-converter" },
+  { slug: "bulk-markdown-to-pdf", name: "Bulk Markdown to PDF", category: "Developer", description: "Generate styled PDF documents from your Markdown files. Technical writers and developers produce documentation releases from markdown source.", parentSlug: "bulk-markdown-to-pdf-html" },
+  { slug: "bulk-markdown-to-html", name: "Bulk Markdown to HTML", category: "Developer", description: "Convert Markdown files to clean HTML in batch. Documentation teams building static knowledge bases from markdown source files.", parentSlug: "bulk-markdown-to-pdf-html" },
+  // Bulk workflow pages
+  { slug: "bulk-add-watermark", name: "Add Watermark to Multiple Images", category: "Image", description: "Apply a text logo, timestamp, or copyright symbol to dozens of product photos at once. E-commerce sellers protect their catalog images.", parentSlug: "bulk-image-watermark" },
+  { slug: "bulk-anonymize-faces", name: "Blur Faces in Multiple Photos", category: "Image", description: "Redact faces across hundreds of images for GDPR compliance. Journalists and researchers use it to protect subject identities in batch.", parentSlug: "bulk-face-anonymizer" },
+  { slug: "bulk-ocr-documents", name: "OCR Scan Multiple Documents", category: "Image", description: "Extract text from scanned document images in bulk. Digitize your paper archives with browser-based OCR that never uploads to any server.", parentSlug: "bulk-image-to-text-ocr" },
+  { slug: "bulk-invoice-to-csv", name: "Bulk Invoice to CSV", category: "Finance", description: "Parse invoice numbers, dates, totals, and vendor names from receipt images into a clean CSV spreadsheet. Accountants process monthly expense batches.", parentSlug: "bulk-invoice-receipt-parser" },
+  { slug: "bulk-spreadsheet-to-json", name: "Bulk Spreadsheet to JSON", category: "Developer", description: "Convert CSV and Excel files to structured JSON in one batch. API developers ingest spreadsheet data without writing ETL pipelines.", parentSlug: "bulk-csv-excel-to-json" },
+  { slug: "bulk-check-broken-links", name: "Bulk Broken Link Checker", category: "SEO", description: "Scan hundreds of URLs for broken links and HTTP errors. SEO professionals audit entire sitemaps for 404s before Google crawls them.", parentSlug: "bulk-url-status-checker" },
+  { slug: "bulk-font-minifier", name: "Bulk Font File Reducer", category: "Developer", description: "Subset web fonts to include only the characters your site needs. Slash font file sizes by 80%+ for faster Core Web Vitals.", parentSlug: "bulk-font-subsetter" },
+  { slug: "bulk-sync-subtitles", name: "Bulk Subtitle Syncer", category: "Video", description: "Shift SRT subtitle timestamps forward or backward across multiple language tracks. Video publishers sync subtitles to re-edited episodes.", parentSlug: "bulk-subtitle-time-shifter" },
+  { slug: "bulk-regex-cleaner", name: "Bulk Regex Data Cleaner", category: "Developer", description: "Extract or replace regex patterns across hundreds of text files. Data engineers sanitize logs, CSVs, and config files in one pass.", parentSlug: "bulk-regex-extractor-replacer" },
+  { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", parentSlug: "bulk-exif-stripper-injector" },
+  { slug: "bulk-normalize-audio", name: "Bulk Audio Normalizer", category: "Audio", description: "Level loudness across your podcast episodes or music library. Consistent volume means listeners don't reach for the volume knob between tracks.", parentSlug: "bulk-audio-normalizer" },
+  { slug: "bulk-pdf-text-extractor", name: "Bulk PDF Text Extractor", category: "PDF", description: "Extract text from hundreds of PDFs at once. Researchers and legal teams mine document collections for keywords and citations.", parentSlug: "bulk-pdf-data-extractor" },
+  { slug: "bulk-pdf-form-data", name: "Bulk PDF Form Data Export", category: "PDF", description: "Export form field data from fillable PDFs to structured CSV. HR teams batch-process employee forms without manual data entry.", parentSlug: "bulk-pdf-form-extractor" },
+  { slug: "bulk-svg-to-png-converter", name: "Bulk SVG to PNG", category: "Image", description: "Convert SVG vector icons to PNG images at any resolution. Designers generate asset libraries for mobile apps and websites.", parentSlug: "bulk-svg-to-png" },
+];
+
+// Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
+for (const p of SEO_PERMUTATIONS) {
+  (rawToolsRegistry as ToolMetadata[]).push({
+    id: `seo-${p.slug}`,
+    name: p.name,
+    slug: p.slug,
+    category: p.category,
+    description: p.description,
+    dependencies: "Browser API (landing page)",
+  });
+}
 
 export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
   ...tool,
@@ -2299,4 +2267,8 @@ export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
 export const getToolBySlug = (slug: string) => toolsRegistry.find(t => t.slug === slug);
 export const getToolsByCategory = (category: string) => toolsRegistry.filter(t => t.category === category);
 export const getToolByCategoryAndSlug = (category: string, slug: string) => toolsRegistry.find(t => t.category.toLowerCase().replace(/\s+/g, '-') === category && t.slug === slug);
+
+export function getSeoParentSlug(slug: string): string | undefined {
+  return SEO_PERMUTATIONS.find(p => p.slug === slug)?.parentSlug;
+}
 

@@ -7,10 +7,20 @@
     "build": "next build --webpack && node scripts/generate-sitemap.js",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "husky",
     "wasm:optimize": "bash scripts/optimize-wasm.sh",
     "cf:deploy": "npm run build && npx wrangler pages deploy out/ --project-name=tool-hub",
     "cf:dev": "npx wrangler pages dev out/",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "tsc --noEmit --skipLibCheck --pretty"
+    ]
   },
   "dependencies": {
     "@capacitor/android": "^6.2.1",
@@ -23,8 +33,8 @@
     "@ducanh2912/next-pwa": "^10.2.9",
     "@emnapi/core": "1.10.0",
     "@emnapi/runtime": "1.10.0",
-    "@ffmpeg/ffmpeg": "^0.12.10",
-    "@ffmpeg/util": "^0.12.1",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "@opennextjs/cloudflare": "^1.19.11",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -70,6 +80,7 @@
     "next": "16.2.6",
     "next-themes": "^0.4.6",
     "openpgp": "^5.11.1",
+    "opentype.js": "^2.0.0",
     "papaparse": "^5.4.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^4.2.67",
@@ -110,9 +121,12 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
     "puppeteer": "^25.0.4",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vitest": "^4.1.10",
     "wrangler": "^4.94.0"
   }
 }

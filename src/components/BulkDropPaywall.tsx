@@ -1,0 +1,73 @@
+"use client";
+import React, { useState } from 'react';
+import { FileText, Crown, X, Zap, Download } from 'lucide-react';
+import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+
+export function BulkDropPaywall() {
+  const [files, setFiles] = useState<File[]>([]);
+  const [showModal, setShowModal] = useState(false);
+
+  React.useEffect(() => {
+    const handler = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.files;
+      if (items && items.length > 1) {
+        e.preventDefault();
+        const fileList = Array.from(items);
+        setFiles(fileList);
+        setShowModal(true);
+      }
+    };
+    document.addEventListener('paste', handler);
+    return () => document.removeEventListener('paste', handler);
+  }, []);
+
+  return (
+    <>
+      {showModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl">
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                <FileText className="w-6 h-6 text-amber-500" />
+              </div>
+              <button onClick={() => setShowModal(false)} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">Bulk Processing Detected</h3>
+            <p className="text-sm text-[var(--text-secondary)] mb-2">
+              You dropped <strong>{files.length} files</strong>. This tool processes 1 file at a time on the Free plan.
+            </p>
+            <p className="text-xs text-[var(--text-muted)] mb-5">
+              Pro processes up to <strong>500 files in parallel</strong>. Or grab a <strong>7-Day Project Pass</strong> for this batch.
+            </p>
+            <div className="space-y-2.5">
+              <Link
+                href="/pricing"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
+              >
+                <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? '$14.99/mo' : 'Batch 500 files'}
+              </Link>
+              <Link
+                href="/api/payments/create-order?plan=pass&gateway=dodo"
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium rounded-[var(--radius-lg)] transition-all text-xs"
+              >
+                <Zap className="w-3.5 h-3.5" /> $3.99 7-Day Project Pass (auto-cancels)
+              </Link>
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  toast.success('Drop individual files one at a time');
+                }}
+                className="w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors"
+              >
+                Continue with 1 file at a time
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

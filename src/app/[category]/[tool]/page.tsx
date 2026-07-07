@@ -23,6 +23,9 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     title: `${toolMetadata.name} — Free Online Tool`,
     description: `Use the free online ${toolMetadata.name} tool. ${toolMetadata.description}. 100% secure, fast, and processed entirely on your device.`,
     keywords: `${toolMetadata.name.toLowerCase()}, free online ${toolMetadata.name.toLowerCase()}, ${toolMetadata.category.toLowerCase()} tool`,
+    alternates: {
+      canonical: `https://gotoolhub.com/${params.category}/${params.tool}`,
+    },
     openGraph: {
       title: `${toolMetadata.name} - Free Online Tool`,
       description: toolMetadata.description,

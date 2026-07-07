@@ -22,8 +22,8 @@ export default function ToDoList() {
     if (saved) {
       try {
         setItems(JSON.parse(saved));
-      } catch (e) {
-        console.log(e);
+      } catch (_e) {
+        // ignore
       }
     }
   }, []);

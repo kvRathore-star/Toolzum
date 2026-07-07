@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { ChevronRight, Shield, Zap, Info, Crown, ArrowLeft, RefreshCw, Sparkles } from 'lucide-react';
@@ -12,6 +12,11 @@ import { PostDownloadBar } from '@/components/PostDownloadBar';
 import { PostDownloadSurvey } from '@/components/PostDownloadSurvey';
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
+import { ShareTool } from '@/components/ShareTool';
+import { ProComparisonChart } from '@/components/ProComparisonChart';
+import { PostProcessUpgrade } from '@/components/PostProcessUpgrade';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
+import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import type { SessionUser } from '@/types/tool';
 
 interface ToolLayoutProps {
@@ -48,25 +53,13 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     }
   }, [sessionData, isPending]);
 
-  const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn } = useFreeUsage(category);
+  const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn, freeMaxSizeMB, freeMaxBatch } = useFreeUsage(category);
   const { recordTool } = useToolHistory();
-  const [blockedByEvent, setBlockedByEvent] = useState(false);
-
-  const handleBlocked = useCallback(() => {
-    setBlockedByEvent(true);
-    recordUse();
-  }, [recordUse]);
-
-  useEffect(() => {
-    window.addEventListener("toolhub:download-blocked", handleBlocked);
-    return () => window.removeEventListener("toolhub:download-blocked", handleBlocked);
-  }, [handleBlocked]);
 
   const tool = getToolByCategoryAndSlug(category, slug);
   const isPro = tool?.isPro || false;
   const isProLocked = isPro && userPlan !== "pro";
-  const isFreeLimited = !isPro && userPlan !== "pro" && (!canUse || blockedByEvent);
-  const isLocked = isProLocked || isFreeLimited;
+  const isLocked = isProLocked;
   const isFreeTier = userPlan !== null && userPlan !== "pro" && !isProLocked;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
@@ -143,6 +136,9 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
       )}
 
       <div className="min-h-screen bg-[var(--bg-base)]">
+
+          <OfflineIndicator />
+          <BulkDropPaywall />
         
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -184,6 +180,8 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> {proToolCount}+ Pro Tools</span>
+            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+            <ShareTool title={title} slug={slug} category={category} />
           </div>
 
           {/* Tool Container */}
@@ -201,6 +199,11 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 {children}
               </ToolPaywall>
             </GlobalErrorBoundary>
+          </div>
+
+          {/* Pro Comparison Chart */}
+          <div className="w-full mt-10">
+            <ProComparisonChart toolName={title} category={category} />
           </div>
 
           {seoSection}
@@ -244,6 +247,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           <PostDownloadBar />
           <PostDownloadSurvey />
+          <PostProcessUpgrade toolName={title} />
         </div>
       </>
     );
