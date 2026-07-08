@@ -254,8 +254,8 @@ export default function PricingPage() {
               </thead>
               <tbody className="divide-y divide-[var(--border-subtle)]">
                 {[
-                  ['Max file size', '25MB', '2GB'],
-                  ['Batch processing', '1 file', '500 files'],
+                  ['Max file size', '10MB / 25MB', '2GB'],
+                  ['Batch processing', '1 / 3 files', '500 files'],
                   ['Processing speed', 'Standard (1 thread)', 'Parallel (6 threads)'],
                   ['ZIP batch download', '—', '✓'],
                   ['Watermark-free export', '—', '✓'],

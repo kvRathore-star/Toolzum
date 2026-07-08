@@ -81,7 +81,7 @@ export function Footer() {
               <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">Hub</span></span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Privacy first web tools
+              Privacy first web tools — PDF, images, video, AI and more — in one place. Zero uploads. Starts in seconds.
             </p>
           </div>
 
