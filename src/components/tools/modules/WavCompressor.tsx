@@ -8,7 +8,7 @@ export default function WavCompressorRedirect() {
     const meta = document.createElement('meta');
     meta.name = 'robots'; meta.content = 'noindex';
     document.head.appendChild(meta);
-    const t = setTimeout(() => window.location.replace('/tools/audio-converter'), 3000);
+    const t = setTimeout(() => window.location.replace('/audio/audio-converter'), 3000);
     return () => { clearTimeout(t); meta.remove(); };
   }, []);
 
@@ -17,7 +17,7 @@ export default function WavCompressorRedirect() {
       <Music className="w-12 h-12 text-emerald-500 mx-auto mb-4" />
       <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">WAV Compressor has moved</h2>
       <p className="text-sm text-zinc-500 mb-4">This tool is now part of the <strong>Audio Converter</strong> — compress and convert between WAV, MP3, OGG, FLAC, and more in one place.</p>
-      <Link href="/tools/audio-converter" className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition-colors">Go to Audio Converter</Link>
+      <Link href="/audio/audio-converter" className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition-colors">Go to Audio Converter</Link>
       <p className="text-[10px] text-zinc-400 mt-4">Redirecting in 3 seconds...</p>
     </div>
   );
