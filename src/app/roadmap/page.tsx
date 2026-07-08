@@ -11,6 +11,7 @@ import {
   FolderOpen
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 interface RoadmapItem {
   id: string;
@@ -233,7 +234,7 @@ export default function RoadmapPage() {
               placeholder="e.g. SVG pattern generator..." 
               className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
             />
-            <Button onClick={() => alert("Simulated request received! Thank you.")} className="shrink-0">Submit Request</Button>
+            <Button onClick={() => { toast.success("Request received! Thank you."); }} className="shrink-0">Submit Request</Button>
           </div>
         </div>
 

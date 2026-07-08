@@ -11,6 +11,7 @@ import {
   Bug
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 export default function ContactPage() {
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      alert("Please fill out all required fields.");
+      toast.error("Please fill out all required fields.");
       return;
     }
     

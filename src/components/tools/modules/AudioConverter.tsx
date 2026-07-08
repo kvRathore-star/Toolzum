@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Music, Upload, Download, Loader2, ArrowRight } from 'lucide-react';
+import { usePresetContext } from '@/context/WorkflowPresetContext';
 
 const FORMATS = ['mp3', 'wav', 'ogg', 'flac'] as const;
 type Format = typeof FORMATS[number];
@@ -37,6 +38,17 @@ export default function AudioConverter() {
   const [outputFormat, setOutputFormat] = useState<Format>('wav');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const { registerConfig } = usePresetContext();
+
+  useEffect(() => {
+    registerConfig(
+      () => ({ outputFormat, inputFormat }),
+      (cfg) => {
+        if (cfg.outputFormat && FORMATS.includes(cfg.outputFormat as Format)) setOutputFormat(cfg.outputFormat as Format);
+        if (cfg.inputFormat && FORMATS.includes(cfg.inputFormat as Format)) setInputFormat(cfg.inputFormat as Format);
+      },
+    );
+  }, [registerConfig, outputFormat, inputFormat]);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];

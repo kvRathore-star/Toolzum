@@ -16,6 +16,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 export default function ChromeExtensionPage() {
   const [activeTab, setActiveTab] = useState<"picker" | "tools" | "qr">("picker");
@@ -200,7 +201,7 @@ export default function ChromeExtensionPage() {
                       </div>
                     </div>
 
-                    <Button className="w-full text-xs py-2 h-auto" onClick={() => alert("Select a color anywhere on your screen. (Simulated)")}>
+                    <Button className="w-full text-xs py-2 h-auto" onClick={() => toast("Select a color anywhere on your screen.", { icon: "🎨" })}>
                       <Pipette className="w-3.5 h-3.5 mr-2" /> Launch Pipette Eyedropper
                     </Button>
                   </div>
@@ -211,17 +212,17 @@ export default function ChromeExtensionPage() {
                   <div className="flex-1 space-y-2">
                     <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">Instant Operations</h4>
                     
-                    <button onClick={() => alert("Page snapshot capturing queued... (Simulated)")} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <button onClick={() => toast("Page snapshot capturing queued.", { icon: "📸" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Camera className="w-3.5 h-3.5 text-[var(--accent)]" /> Capture Full Page</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
-                    <button onClick={() => alert("Redirecting to Text Base64 encode... (Simulated)")} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <button onClick={() => toast("Opening Base64 Encoder...", { icon: "🔗" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Copy className="w-3.5 h-3.5 text-blue-400" /> Base64 Encoder</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
-                    <button onClick={() => alert("Redirecting to Password Checker... (Simulated)")} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <button onClick={() => toast("Opening Password Generator...", { icon: "🔑" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Settings className="w-3.5 h-3.5 text-emerald-400" /> Password Generator</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
                     </button>
@@ -251,7 +252,7 @@ export default function ChromeExtensionPage() {
                       </div>
                     </div>
                     
-                    <Button variant="secondary" className="w-full text-xs py-2 h-auto mt-2" onClick={() => alert("Copied simulated QR code to clipboard")}>
+                    <Button variant="secondary" className="w-full text-xs py-2 h-auto mt-2" onClick={() => toast("Copied simulated QR code to clipboard", { icon: "✅" })}>
                       Copy Image
                     </Button>
                   </div>

@@ -17,6 +17,7 @@ import { ProComparisonChart } from '@/components/ProComparisonChart';
 import { PostProcessUpgrade } from '@/components/PostProcessUpgrade';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
+import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
 import type { SessionUser } from '@/types/tool';
 
 interface ToolLayoutProps {
@@ -196,7 +197,9 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 toolCount={toolCount}
                 title={title}
               >
-                {children}
+                <WorkflowPresetPanel toolSlug={slug}>
+                  {children}
+                </WorkflowPresetPanel>
               </ToolPaywall>
             </GlobalErrorBoundary>
           </div>

@@ -156,7 +156,7 @@ export default function ApiDocsPage() {
               <h3 className="text-sm font-semibold">Code Examples</h3>
 
               <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-4 font-mono text-xs text-[var(--text-secondary)] overflow-x-auto">
-                <pre className="leading-relaxed">curl -X GET "https://toolhub.com/api/proxy-url?url=https://example.com/file.pdf" \
+                <pre className="leading-relaxed">curl -X GET "https://gotoolhub.com/api/proxy-url?url=https://example.com/file.pdf" \
   -H "Authorization: Bearer th_live_your_key_here" \
   --output file.pdf</pre>
               </div>
@@ -170,7 +170,7 @@ const blob = await res.blob();`}</pre>
 
               <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-4 font-mono text-xs text-[var(--text-secondary)] overflow-x-auto">
                 <pre className="leading-relaxed">{`import requests
-url = "https://toolhub.com/api/proxy-url"
+url = "https://gotoolhub.com/api/proxy-url"
 params = {"url": "https://example.com/file.pdf"}
 headers = {"Authorization": "Bearer th_live_your_key_here"}
 response = requests.get(url, params=params, headers=headers)`}</pre>

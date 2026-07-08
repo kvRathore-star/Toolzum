@@ -6,6 +6,7 @@ import imageCompression from 'browser-image-compression';
 import { Download, RefreshCw, Sliders, Image as ImageIcon, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { usePresetContext } from '@/context/WorkflowPresetContext';
 
 export default function ImageCompressor() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -15,6 +16,17 @@ export default function ImageCompressor() {
   const [scale, setScale] = useState<number>(1.0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [compressedSize, setCompressedSize] = useState<number | null>(null);
+  const { registerConfig } = usePresetContext();
+
+  useEffect(() => {
+    registerConfig(
+      () => ({ quality: String(quality), scale: String(scale) }),
+      (cfg) => {
+        if (cfg.quality) setQuality(Number(cfg.quality));
+        if (cfg.scale) setScale(Number(cfg.scale));
+      },
+    );
+  }, [registerConfig, quality, scale]);
 
   const handleFileSelect = (file: File, url: string) => {
     setImageFile(file);

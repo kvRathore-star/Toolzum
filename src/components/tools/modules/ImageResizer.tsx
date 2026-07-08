@@ -1,13 +1,25 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { usePresetContext } from '@/context/WorkflowPresetContext';
 
 export default function ImageResizer() {
   const [image, setImage] = useState<string | null>(null);
   const [width, setWidth] = useState('800');
   const [height, setHeight] = useState('600');
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { registerConfig } = usePresetContext();
+
+  useEffect(() => {
+    registerConfig(
+      () => ({ width, height }),
+      (cfg) => {
+        if (cfg.width) setWidth(String(cfg.width));
+        if (cfg.height) setHeight(String(cfg.height));
+      },
+    );
+  }, [registerConfig, width, height]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
