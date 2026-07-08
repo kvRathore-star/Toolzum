@@ -2433,6 +2433,7 @@ export interface SeoPermutation {
   name: string;
   category: ToolCategory;
   description: string;
+  seoDescription?: string;
   parentSlug: string;
 }
 
@@ -2495,16 +2496,17 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
 ];
 
 // Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
-for (const p of SEO_PERMUTATIONS) {
-  (rawToolsRegistry as ToolMetadata[]).push({
-    id: `seo-${p.slug}`,
-    name: p.name,
-    slug: p.slug,
-    category: p.category,
-    description: p.description,
-    dependencies: "Browser API (landing page)",
-  });
-}
+  for (const p of SEO_PERMUTATIONS) {
+    (rawToolsRegistry as ToolMetadata[]).push({
+      id: `seo-${p.slug}`,
+      name: p.name,
+      slug: p.slug,
+      category: p.category,
+      description: p.description,
+      seoDescription: p.seoDescription,
+      dependencies: "Browser API (landing page)",
+    });
+  }
 
 export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
   ...tool,
