@@ -125,27 +125,27 @@ export default function PricingPage() {
                 <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
                   <li className="flex items-center gap-3">
                     <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                    <span>Access ~180 tools with daily free usage (10MB files, 1 batch)</span>
+                    <span>Single-file processing — 10MB limit (25MB after signing in)</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                    <span>Sequential execution + manual individual downloads</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
                     <span>100% private, on-device processing — zero server uploads</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                    <span>Sign in for daily bonus: 25MB files, 10 batches, 3 downloads</span>
+                  <li className="flex items-center gap-3 opacity-50">
+                    <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
+                    <span className="line-through">Pro: Unlimited bulk folders, parallel 6-thread cores, expanded memory</span>
                   </li>
                   <li className="flex items-center gap-3 opacity-50">
                     <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">Pro: 2GB files, 500-file batch, ZIP exports</span>
+                    <span className="line-through">Pro: 1-Click ZIP downloads, workflow presets, 2GB files</span>
                   </li>
                   <li className="flex items-center gap-3 opacity-50">
                     <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">Pro: Parallel 6-thread processing, workflow presets</span>
-                  </li>
-                  <li className="flex items-center gap-3 opacity-50">
-                    <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">Pro: Bulk PDF extraction, invoice parsing, AI tools</span>
+                    <span className="line-through">Pro: 30+ advanced B2B media, document & data engines</span>
                   </li>
                 </ul>
               </div>
@@ -205,15 +205,15 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Unlimited Multi-File Bulk Processing (Up to 100+ assets at once)</span>
+                  <span>Unlimited Bulk Processing: drop folders, expanded memory, parallel 6-thread cores</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>1-Click "Download All" ZIP Archive automation</span>
+                  <span>1-Click "Download All as ZIP Archive" + save workflow presets</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Advanced B2B Engines: Bulk PDF Form Extractor & Invoice Parsers</span>
+                  <span>Advanced B2B Engines: 30 Bulk tools access</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
@@ -221,7 +221,7 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>100% Client-Side Private Processing — secure for enterprise data</span>
+                  <span>100% Client-Side Private Processing — fully secure for enterprise data</span>
                 </li>
               </ul>
             </div>
@@ -236,7 +236,7 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
                   <th className="text-left px-6 py-4 font-semibold text-[var(--text-primary)]">Feature</th>
-                  <th className="text-center px-4 py-4 font-semibold text-[var(--text-muted)]">Free / Logged in</th>
+                  <th className="text-center px-4 py-4 font-semibold text-[var(--text-muted)]">Free / Sign in</th>
                   <th className="text-center px-4 py-4 font-semibold text-[var(--accent)]">Pro</th>
                 </tr>
               </thead>

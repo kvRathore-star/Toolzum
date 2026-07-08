@@ -31,16 +31,13 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
             className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none z-10"
             style={{ background: "linear-gradient(to bottom, transparent, var(--bg-elevated))" }}
           />
-          <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 pb-3">
+          <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-center pb-3">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[var(--accent)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
+              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[var(--accent)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
             >
               <Crown className="w-3 h-3" />
               Upgrade to Pro
-            </Link>
-            <Link href="/api/payments/create-order?plan=pass&gateway=dodo" className="text-[10px] text-amber-400/80 hover:text-amber-300 underline">
-              or $3.99 7-Day Project Pass
             </Link>
           </div>
         </>
@@ -89,13 +86,7 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
                   Upgrade to Pro <Crown className="w-4 h-4 ml-1.5" />
                 </Button>
               </Link>
-              <Link
-                href="/api/payments/create-order?plan=pass&gateway=dodo"
-                className="block w-full text-center text-xs text-amber-400 hover:text-amber-300 underline transition-colors"
-              >
-                Or grab a $3.99 7-Day Project Pass for this batch
-              </Link>
-              <div className="text-xs text-[var(--text-muted)] pt-1">
+              <div className="text-xs text-[var(--text-muted)] pt-1 text-center">
                 Already subscribed?{' '}
                 <Link href="/dashboard" className="text-[var(--accent)] hover:underline font-semibold">
                   Log in to unlock

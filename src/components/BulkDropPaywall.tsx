@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { FileText, Crown, X, Zap, Download } from 'lucide-react';
+import { FileText, Crown, X } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
@@ -40,7 +40,7 @@ export function BulkDropPaywall() {
               You dropped <strong>{files.length} files</strong>. This tool processes 1 file at a time on the Free plan.
             </p>
             <p className="text-xs text-[var(--text-muted)] mb-5">
-              Pro processes up to <strong>500 files in parallel</strong>. Or grab a <strong>7-Day Project Pass</strong> for this batch.
+              Pro processes up to <strong>500 files in parallel</strong>.
             </p>
             <div className="space-y-2.5">
               <Link
@@ -48,12 +48,6 @@ export function BulkDropPaywall() {
                 className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
               >
                 <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? '$14.99/mo' : 'Batch 500 files'}
-              </Link>
-              <Link
-                href="/api/payments/create-order?plan=pass&gateway=dodo"
-                className="flex items-center justify-center gap-2 w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium rounded-[var(--radius-lg)] transition-all text-xs"
-              >
-                <Zap className="w-3.5 h-3.5" /> $3.99 7-Day Project Pass (auto-cancels)
               </Link>
               <button
                 onClick={() => {
