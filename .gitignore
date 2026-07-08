@@ -60,3 +60,4 @@ docs/ToolHub_MasterPrompt.md
 
 # wrangler config with D1 database ID
 wrangler.jsonc
+# wrangler.toml without secrets IS committed
