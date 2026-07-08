@@ -31,15 +31,15 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
             className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none z-10"
             style={{ background: "linear-gradient(to bottom, transparent, var(--bg-elevated))" }}
           />
-          <div className="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-center gap-1 pb-3">
+          <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 pb-3">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[10px] font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/20 transition-colors"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[var(--accent)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
             >
               <Crown className="w-3 h-3" />
-              Upgrade to Pro for full access
+              Upgrade to Pro
             </Link>
-            <Link href="/api/payments/create-order?plan=pass&gateway=dodo" className="text-[9px] text-amber-400/70 hover:text-amber-300 underline">
+            <Link href="/api/payments/create-order?plan=pass&gateway=dodo" className="text-[10px] text-amber-400/80 hover:text-amber-300 underline">
               or $3.99 7-Day Project Pass
             </Link>
           </div>

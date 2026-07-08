@@ -13,7 +13,7 @@ import { PostDownloadSurvey } from '@/components/PostDownloadSurvey';
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import { ShareTool } from '@/components/ShareTool';
-import { ProComparisonChart } from '@/components/ProComparisonChart';
+
 import { PostProcessUpgrade } from '@/components/PostProcessUpgrade';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
@@ -202,11 +202,6 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 </WorkflowPresetPanel>
               </ToolPaywall>
             </GlobalErrorBoundary>
-          </div>
-
-          {/* Pro Comparison Chart */}
-          <div className="w-full mt-10">
-            <ProComparisonChart toolName={title} category={category} />
           </div>
 
           {seoSection}

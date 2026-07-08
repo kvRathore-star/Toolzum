@@ -114,7 +114,7 @@ export default function PricingPage() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Free Plan</h3>
                 <p className="text-sm text-[var(--text-secondary)] mb-6">
-                  Essential utilities for occasional use.
+                  Core utilities with daily usage limits. Sign in to unlock higher free quotas.
                 </p>
                 <div className="flex items-baseline gap-1 mb-6">
                   <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">
@@ -125,23 +125,27 @@ export default function PricingPage() {
                 <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
                   <li className="flex items-center gap-3">
                     <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                    <span>Access ~180 standard utilities offline</span>
+                    <span>Access ~180 tools with daily free usage (10MB files, 1 batch)</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                    <span>100% private, on-device processing</span>
+                    <span>100% private, on-device processing — zero server uploads</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                    <span>Sign in for daily bonus: 25MB files, 10 batches, 3 downloads</span>
                   </li>
                   <li className="flex items-center gap-3 opacity-50">
                     <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">Premium Canvas & Document editing suite</span>
+                    <span className="line-through">Pro: 2GB files, 500-file batch, ZIP exports</span>
                   </li>
                   <li className="flex items-center gap-3 opacity-50">
                     <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">High-traffic Video/Audio downloaders</span>
+                    <span className="line-through">Pro: Parallel 6-thread processing, workflow presets</span>
                   </li>
                   <li className="flex items-center gap-3 opacity-50">
                     <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                    <span className="line-through">Interactive SaaS & Finance tools</span>
+                    <span className="line-through">Pro: Bulk PDF extraction, invoice parsing, AI tools</span>
                   </li>
                 </ul>
               </div>
@@ -232,7 +236,7 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
                   <th className="text-left px-6 py-4 font-semibold text-[var(--text-primary)]">Feature</th>
-                  <th className="text-center px-4 py-4 font-semibold text-[var(--text-muted)]">Free</th>
+                  <th className="text-center px-4 py-4 font-semibold text-[var(--text-muted)]">Free / Logged in</th>
                   <th className="text-center px-4 py-4 font-semibold text-[var(--accent)]">Pro</th>
                 </tr>
               </thead>
@@ -260,18 +264,7 @@ export default function PricingPage() {
               </tbody>
             </table>
           </div>
-          <div className="text-center mt-6">
-            <Link
-              href={billingInterval === 'yearly' ? `/api/payments/create-order?plan=${billingInterval}&gateway=${isIndia ? 'razorpay' : 'dodo'}` : '#'}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all shadow-sm text-sm"
-              onClick={e => {
-                if (billingInterval !== 'yearly') return;
-                // form submission handled by the button below
-              }}
-            >
-              Upgrade to Pro — {currencySymbol}{currentPlan.price}/{currentPlan.unit}{billingInterval === 'pass' ? ' (auto-cancels)' : ''}
-            </Link>
-          </div>
+          <p className="text-xs text-[var(--text-muted)] text-center mt-3">First value: anonymous users • Second value: after signing in for free</p>
         </div>
 
         {/* Enterprise Compliance */}
