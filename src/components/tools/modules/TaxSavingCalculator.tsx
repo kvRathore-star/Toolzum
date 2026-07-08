@@ -80,7 +80,7 @@ export default function TaxSavingCalculator() {
     let recommendation = '';
     if (oldResult.total < newResult.total) {
       const save = newResult.total - oldResult.total;
-      recommendation = `Old regime saves you ${formatINR(save)}. Invest in 80C/80D/NPS/HRA to maximise deductions.`;
+      recommendation = `Old regime saves you ${formatINR(save)}. Invest in 80C/80D/NPS/HRA to maximize deductions.`;
     } else if (newResult.total < oldResult.total) {
       const save = oldResult.total - newResult.total;
       recommendation = `New regime saves you ${formatINR(save)}. No need to track investments for deductions.`;
@@ -210,7 +210,7 @@ export default function TaxSavingCalculator() {
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
             <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
-              <strong>Pro:</strong> Personalised investment plan PDF with exact 80C/80D/NPS allocation, HRA optimisation calculator, multiple income sources (freelance + salary), share with CA report, and side-by-side budget comparison.
+              <strong>Pro:</strong> Personalized investment plan PDF with exact 80C/80D/NPS allocation, HRA optimization calculator, multiple income sources (freelance + salary), share with CA report, and side-by-side budget comparison.
             </p>
           </div>
         </div>

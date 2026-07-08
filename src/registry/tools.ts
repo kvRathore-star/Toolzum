@@ -2268,8 +2268,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Tax Saving Calculator",
     slug: "tax-saving-calculator",
     category: "indian-utilities",
-    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalised tax-saving report for Indian salaried employees.",
-    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalised tax-saving report for Indian salaried employees. 100% browser-based, no uploads.',
+    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees.",
+    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. 100% browser-based, no uploads.',
     dependencies: "None",
   },
   {

@@ -50,7 +50,7 @@ export default function TermsOfServicePage() {
             ToolHub is an offline-first browser utility catalog. All processing (including PDF compilation, code formatting, canvas editing, and image transformation) occurs client-side inside your browser sandbox.
           </p>
           <p>
-            We reserves the right to modify, suspend, or terminate any component of the Service (including individual tools) at any time without notice.
+            We reserve the right to modify, suspend, or terminate any component of the Service (including individual tools) at any time without notice.
           </p>
         </>
       )

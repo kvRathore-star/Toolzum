@@ -158,9 +158,11 @@ export default function PricingPage() {
 
             {/* Pro Tier */}
             <div className="bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 sm:p-10 flex flex-col justify-between relative shadow-[var(--shadow-glow-accent)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(var(--accent-rgb),0.15)] transform md:-translate-y-4">
-              <div className="absolute -top-3 -right-3 bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-lg z-10">
-                MOST POPULAR
-              </div>
+              {billingInterval === "monthly" && (
+                <div className="absolute -top-3 -right-3 bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-lg z-10">
+                  MOST POPULAR
+                </div>
+              )}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
                 <Zap className="w-3.5 h-3.5 fill-white" /> Pro Plan
               </div>
