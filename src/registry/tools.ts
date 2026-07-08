@@ -261,7 +261,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Privacy Cleaner',
     slug: 'privacy-cleaner',
     category: 'Utility',
-    description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site.',
+    description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site.'
+    seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. 100% browser-based, no uploads.',,
     dependencies: 'Vanilla JS'
   },
   {
@@ -1631,6 +1632,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "braille-translator",
     category: "Text",
     description: 'Bidirectional converter between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille.',
+    seoDescription: 'Free online Braille Translator — Bidirectional converter between standard English text and Grade 1 or Grade 2 Braille. 100% browser-based, no uploads.',
     dependencies: "Vanilla JS"
   }  ,{
     id: "201",
@@ -1738,7 +1740,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Subtitle Generator',
     slug: 'subtitle-generator',
-    description: 'Generate SRT files from video.',
+    description: 'Generate SRT files from video.'
+    seoDescription: 'Free online Subtitle Generator — Generate SRT files from video. 100% browser-based, no uploads.',,
     category: 'Video',
     id:  "219",
     dependencies: 'None'
@@ -1746,7 +1749,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'SVG to PNG Converter',
     slug: 'svg-to-png-converter',
-    description: 'Convert vector SVG to raster PNG.',
+    description: 'Convert vector SVG to raster PNG.'
+    seoDescription: 'Free online SVG to PNG Converter — Convert vector SVG to raster PNG. 100% browser-based, no uploads.',,
     category: 'Converter',
     id:  "220",
     dependencies: 'None'
@@ -1754,7 +1758,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Unit Converter',
     slug: 'unit-converter',
-    description: 'Universal unit conversion tool.',
+    description: 'Universal unit conversion tool.'
+    seoDescription: 'Free online Unit Converter — Universal unit conversion tool. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "221",
     dependencies: 'None'
@@ -1763,7 +1768,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Video Watermark Adder',
     slug: 'video-watermark-adder',
-    description: 'Add logo or text watermark to video.',
+    description: 'Add logo or text watermark to video.'
+    seoDescription: 'Free online Video Watermark Adder — Add logo or text watermark to video. 100% browser-based, no uploads.',,
     category: 'Video',
     id:  "223",
     dependencies: 'None'
@@ -1772,7 +1778,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Prompt Library & Generator',
     slug: 'prompt-library-generator',
-    description: 'Browse and generate AI prompts.',
+    description: 'Browse and generate AI prompts.'
+    seoDescription: 'Free online Prompt Library & Generator — Browse and generate AI prompts. 100% browser-based, no uploads.',,
     category: 'AI',
     id:  "225",
     dependencies: 'None'
@@ -1780,7 +1787,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
-    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply.',
+    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply.'
+    seoDescription: 'Free online GST Invoice Generator — Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "227",
     dependencies: 'None'
@@ -1788,7 +1796,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'ITR Filing Helper',
     slug: 'itr-filing-helper',
-    description: 'Helper for India Income Tax Returns.',
+    description: 'Helper for India Income Tax Returns.'
+    seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "228",
     dependencies: 'None'
@@ -1797,7 +1806,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Browser Extension',
     slug: 'browser-extension',
-    description: 'All-in-one sidebar AI assistant.',
+    description: 'All-in-one sidebar AI assistant.'
+    seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. 100% browser-based, no uploads.',,
     category: 'Extension',
     id:  "230",
     dependencies: 'None'
@@ -1805,7 +1815,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'MP3 Compressor',
     slug: 'mp3-compressor',
-    description: 'Reduce MP3 size with bitrate control',
+    description: 'Reduce MP3 size with bitrate control'
+    seoDescription: 'Free online MP3 Compressor — Reduce MP3 size with bitrate control 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "231",
     dependencies: 'FFmpeg WASM'
@@ -1813,7 +1824,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'GIF to MP4 Converter',
     slug: 'gif-to-mp4',
-    description: 'Convert GIF animations to MP4 videos',
+    description: 'Convert GIF animations to MP4 videos'
+    seoDescription: 'Free online GIF to MP4 Converter — Convert GIF animations to MP4 videos 100% browser-based, no uploads.',,
     category: 'Converter',
     id:  "232",
     dependencies: 'FFmpeg WASM'
@@ -1821,7 +1833,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Video Trimmer',
     slug: 'video-trimmer',
-    description: 'Trim and cut video clips locally',
+    description: 'Trim and cut video clips locally'
+    seoDescription: 'Free online Video Trimmer — Trim and cut video clips locally 100% browser-based, no uploads.',,
     category: 'Video',
     id:  "233",
     dependencies: 'FFmpeg WASM'
@@ -1829,7 +1842,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Aadhaar Card Masker',
     slug: 'aadhaar-card-masker',
-    description: 'Mask the first 8 digits of your Aadhaar card for secure sharing.',
+    description: 'Mask the first 8 digits of your Aadhaar card for secure sharing.'
+    seoDescription: 'Free online Aadhaar Card Masker — Mask the first 8 digits of your Aadhaar card for secure sharing. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "234",
     dependencies: 'Canvas API'
@@ -1837,7 +1851,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'PAN Card Verification',
     slug: 'pan-verification',
-    description: 'Verify PAN format and extract taxpayer category locally.',
+    description: 'Verify PAN format and extract taxpayer category locally.'
+    seoDescription: 'Free online PAN Card Verification — Verify PAN format and extract taxpayer category locally. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "235",
     dependencies: 'None'
@@ -1845,7 +1860,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
-    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details.',
+    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details.'
+    seoDescription: 'Free online IFSC Code Lookup — Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "236",
     dependencies: 'IFSC API'
@@ -1853,7 +1869,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Voter ID Form Helper',
     slug: 'voter-id-form-helper',
-    description: 'Get document checklists and guidance for Form 6/7/8 registration.',
+    description: 'Get document checklists and guidance for Form 6/7/8 registration.'
+    seoDescription: 'Free online Voter ID Form Helper — Get document checklists and guidance for Form 6/7/8 registration. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "237",
     dependencies: 'None'
@@ -1861,7 +1878,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'India Pincode Finder',
     slug: 'india-pincode-finder',
-    description: 'Search pincodes and post office branches across India.',
+    description: 'Search pincodes and post office branches across India.'
+    seoDescription: 'Free online India Pincode Finder — Search pincodes and post office branches across India. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "238",
     dependencies: 'Postal API'
@@ -1869,7 +1887,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Hindi / Regional Font Generator',
     slug: 'hindi-regional-font-generator',
-    description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts.',
+    description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts.'
+    seoDescription: 'Free online Hindi / Regional Font Generator — Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "239",
     dependencies: 'None'
@@ -1877,7 +1896,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Indian Age Calculator',
     slug: 'indian-age-calculator',
-    description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check.',
+    description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check.'
+    seoDescription: 'Free online Indian Age Calculator — Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "240",
     dependencies: 'None'
@@ -1885,7 +1905,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'CGPA to Percentage Converter',
     slug: 'cgpa-to-percentage-converter',
-    description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas.',
+    description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas.'
+    seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage based on CBSE, MU, and university formulas. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "241",
     dependencies: 'None'
@@ -1893,7 +1914,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'PDF to HTML',
     slug: 'pdf-to-html',
-    description: 'Convert PDF pages into a clean, responsive HTML5 document.',
+    description: 'Convert PDF pages into a clean, responsive HTML5 document.'
+    seoDescription: 'Free online PDF to HTML — Convert PDF pages into a clean, responsive HTML5 document. 100% browser-based, no uploads.',,
     category: 'PDF',
     id:  "242",
     dependencies: 'PDF.js'
@@ -1901,7 +1923,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'HTML to PDF',
     slug: 'html-to-pdf',
-    description: 'Convert HTML source code into a downloadable PDF document.',
+    description: 'Convert HTML source code into a downloadable PDF document.'
+    seoDescription: 'Free online HTML to PDF — Convert HTML source code into a downloadable PDF document. 100% browser-based, no uploads.',,
     category: 'PDF',
     id:  "243",
     dependencies: 'jsPDF'
@@ -1909,7 +1932,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Generic PDF Processor',
     slug: 'generic-pdf-processor',
-    description: 'Compress, rotate pages, or strip metadata from PDFs in one unified tool.',
+    description: 'Compress, rotate pages, or strip metadata from PDFs in one unified tool.'
+    seoDescription: 'Free online Generic PDF Processor — Compress, rotate pages, or strip metadata from PDFs in one unified tool. 100% browser-based, no uploads.',,
     category: 'PDF',
     id:  "244",
     dependencies: 'pdf-lib'
@@ -1917,7 +1941,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'WebP to PNG Converter',
     slug: 'webp-to-png',
-    description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced.',
+    description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced.'
+    seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "245",
     dependencies: 'Canvas API'
@@ -1925,7 +1950,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'JFIF to PNG Converter',
     slug: 'jfif-to-png',
-    description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss.',
+    description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss.'
+    seoDescription: 'Free online JFIF to PNG Converter — Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "246",
     dependencies: 'Canvas API'
@@ -1933,7 +1959,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'HEIC to PNG Converter',
     slug: 'heic-to-png',
-    description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos.',
+    description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos.'
+    seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "247",
     dependencies: 'libheif WASM'
@@ -1941,7 +1968,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Image to JPG Converter',
     slug: 'convert-to-jpg',
-    description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings.',
+    description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings.'
+    seoDescription: 'Free online Image to JPG Converter — Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "248",
     dependencies: 'Canvas API'
@@ -1949,7 +1977,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Rotate Image Online',
     slug: 'rotate-image',
-    description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required.',
+    description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required.'
+    seoDescription: 'Free online Rotate Image Online — Rotates images left or right by 90-degree increments instantly in the browser with no upload required. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "249",
     dependencies: 'Canvas API'
@@ -1957,7 +1986,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Blur Face Online',
     slug: 'blur-face',
-    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face.',
+    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face.'
+    seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "250",
     dependencies: 'AI API'
@@ -1965,7 +1995,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'HTML to Image Converter',
     slug: 'html-to-image',
-    description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser.',
+    description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser.'
+    seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. 100% browser-based, no uploads.',,
     category: 'Developer',
     id:  "251",
     dependencies: 'html2canvas'
@@ -1973,7 +2004,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Apple Music Preview Extractor',
     slug: 'apple-music-preview-extractor',
-    description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL.',
+    description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL.'
+    seoDescription: 'Free online Apple Music Preview Extractor — Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. 100% browser-based, no uploads.',,
     category: 'Audio',
     id:  "252",
     dependencies: 'fetch API'
@@ -1981,7 +2013,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
-    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences.',
+    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences.'
+    seoDescription: 'Free online Marriage Biodata Maker — Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "257",
     dependencies: 'jsPDF'
@@ -1989,7 +2022,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Rental Agreement Generator',
     slug: 'rental-agreement-generator',
-    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats.',
+    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats.'
+    seoDescription: 'Free online Rental Agreement Generator — Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "258",
     dependencies: 'jsPDF'
@@ -1997,7 +2031,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Resume ATS Score Checker',
     slug: 'resume-ats-score-checker',
-    description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions.',
+    description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions.'
+    seoDescription: 'Free online Resume ATS Score Checker — Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. 100% browser-based, no uploads.',,
     category: 'AI',
     id:  "259",
     dependencies: 'AI API'
@@ -2005,7 +2040,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'WhatsApp Toolkit',
     slug: 'whatsapp-toolkit',
-    description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text.',
+    description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text.'
+    seoDescription: 'Free online WhatsApp Toolkit — Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "261",
     dependencies: 'QRCode.js'
@@ -2013,7 +2049,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Indian Document Enhancer',
     slug: 'indian-document-enhancer',
-    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals.',
+    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals.'
+    seoDescription: 'Free online Indian Document Enhancer — Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "262",
     dependencies: 'Canvas API'
@@ -2022,7 +2059,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
-    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition.',
+    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition.'
+    seoDescription: 'Free online Indian Voice Transcriber — Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. 100% browser-based, no uploads.',,
     category: 'indian-utilities',
     id:  "264",
     dependencies: 'Web Speech API'
@@ -2030,7 +2068,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Bank Statement Analyser',
     slug: 'bank-statement-analyser',
-    description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending.',
+    description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending.'
+    seoDescription: 'Free online Bank Statement Analyser — Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "265",
     dependencies: 'PDF.js'
@@ -2040,7 +2079,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Social Media Calendar',
     slug: 'social-media-calendar',
-    description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled.',
+    description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled.'
+    seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "268",
     dependencies: 'localStorage'
@@ -2048,7 +2088,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Bulk Background Changer',
     slug: 'bulk-bg-changer',
-    description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing.',
+    description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing.'
+    seoDescription: 'Free online Bulk Background Changer — Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "269",
     dependencies: 'Canvas API',
@@ -2057,7 +2098,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'AI Background Changer',
     slug: 'ai-bg-changer',
-    description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen.',
+    description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen.'
+    seoDescription: 'Free online AI Background Changer — Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. 100% browser-based, no uploads.',,
     category: 'Image',
     id:  "270",
     dependencies: 'Canvas API'
@@ -2065,7 +2107,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Link in Bio Builder',
     slug: 'link-in-bio-builder',
-    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection.',
+    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection.'
+    seoDescription: 'Free online Link in Bio Builder — Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. 100% browser-based, no uploads.',,
     category: 'Branding',
     id:  "271",
     dependencies: 'None'
@@ -2073,7 +2116,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Timezone Converter',
     slug: 'ist-time-converter',
-    description: 'Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks.',
+    description: 'Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks.'
+    seoDescription: 'Free online Timezone Converter — Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "272",
     dependencies: 'None'
@@ -2081,7 +2125,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Audio Converter',
     slug: 'audio-converter',
-    description: 'Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser.',
+    description: 'Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser.'
+    seoDescription: 'Free online Audio Converter — Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser. 100% browser-based, no uploads.',,
     category: 'Audio',
     id:  "273",
     dependencies: 'FFmpeg WASM'
@@ -2089,7 +2134,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'PDF Page Manager',
     slug: 'pdf-page-manager',
-    description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails.',
+    description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails.'
+    seoDescription: 'Free online PDF Page Manager — Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. 100% browser-based, no uploads.',,
     category: 'PDF',
     id:  "274",
     dependencies: 'pdf-lib'
@@ -2097,7 +2143,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Bulk QR Code Generator',
     slug: 'bulk-qr-code-generator',
-    description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive.',
+    description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive.'
+    seoDescription: 'Free online Bulk QR Code Generator — Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. 100% browser-based, no uploads.',,
     category: 'Utility',
     id:  "275",
     dependencies: 'qrcode.js, JSZip',
@@ -2106,7 +2153,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
-    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key.',
+    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key.'
+    seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. 100% browser-based, no uploads.',,
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js'

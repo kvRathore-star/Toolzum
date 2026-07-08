@@ -9,6 +9,8 @@ import { EnterpriseCompliance } from "@/components/EnterpriseCompliance";
 
 type BillingInterval = "pass" | "monthly" | "yearly";
 
+const proCount = toolsRegistry.filter(t => t.isPro).length;
+
 export default function PricingPage() {
   const tz = typeof window !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "";
   const cookies = typeof window !== "undefined" ? document.cookie.split(";") : [];
@@ -213,7 +215,7 @@ export default function PricingPage() {
               <ul className="space-y-4 text-sm text-[var(--text-secondary)] border-t border-[var(--border-subtle)] pt-6">
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span className="text-[var(--text-primary)] font-medium">Unlock all 48+ Pro tools</span>
+                  <span className="text-[var(--text-primary)] font-medium">Unlock all {proCount}+ Pro tools</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />

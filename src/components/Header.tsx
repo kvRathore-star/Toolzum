@@ -414,7 +414,7 @@ export function Header() {
               {/* Free uses badge (mobile) */}
               <div className="flex items-center justify-center gap-1.5 px-3 py-2 mx-4 mt-4 mb-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-[12px] font-mono text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">5</strong> free uses</span>
+                <span className="text-[12px] font-mono text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">Client-side tools unlimited</strong></span>
               </div>
 
               {/* Pro CTA */}
