@@ -4,9 +4,8 @@ import React, { useState, useMemo, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-  Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight, Play,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText,
-  Building2
+  Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
@@ -507,7 +506,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
           <div className="p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
             <div className="flex items-center gap-2 mb-1">
               <Users className="w-4 h-4 text-zinc-400" />
@@ -538,21 +537,6 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Bulk batch processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>AI generation & extraction</span></li>
-            </ul>
-          </div>
-          <div className="p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
-            <div className="flex items-center gap-2 mb-1">
-              <Building2 className="w-4 h-4 text-zinc-400" />
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Team</span>
-            </div>
-            <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">Contact</div>
-            <ul className="space-y-2.5 text-sm">
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>All Pro features</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Dedicated onboarding</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Priority feature requests</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>SSO & audit logging</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Custom SLA</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>API access</span></li>
             </ul>
           </div>
         </div>
