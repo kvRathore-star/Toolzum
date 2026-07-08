@@ -2262,6 +2262,42 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library.",
     seoDescription: 'Free online Bulk HEIC to JPG — Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. 100% browser-based, no uploads.',
     dependencies: "libheif WASM, jszip",
+  },
+  {
+    id: "307",
+    name: "Tax Saving Calculator",
+    slug: "tax-saving-calculator",
+    category: "indian-utilities",
+    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalised tax-saving report for Indian salaried employees.",
+    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalised tax-saving report for Indian salaried employees. 100% browser-based, no uploads.',
+    dependencies: "None",
+  },
+  {
+    id: "308",
+    name: "GSTIN Lookup",
+    slug: "gstin-lookup",
+    category: "indian-utilities",
+    description: "Verify any GSTIN instantly — get legal name, trade name, address, registration date, and filing status. Bulk verification via CSV export for accounts teams.",
+    seoDescription: 'Free online GSTIN Lookup — Verify any GSTIN instantly with legal name, trade name, address, registration date, and filing status. 100% browser-based, no uploads.',
+    dependencies: "None",
+  },
+  {
+    id: "309",
+    name: "Seller Profit Calculator",
+    slug: "seller-profit-calculator",
+    category: "indian-utilities",
+    description: "Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. Made for Indian e-commerce sellers.",
+    seoDescription: 'Free online Seller Profit Calculator — Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. 100% browser-based, no uploads.',
+    dependencies: "None",
+  },
+  {
+    id: "310",
+    name: "Complaint Letter Generator",
+    slug: "complaint-letter-generator",
+    category: "indian-utilities",
+    description: "Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). AI-powered with your API key.",
+    seoDescription: 'Free online Complaint Letter Generator — Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). 100% browser-based, no uploads.',
+    dependencies: "AI API",
   }
 ];
 const proSlugs = [

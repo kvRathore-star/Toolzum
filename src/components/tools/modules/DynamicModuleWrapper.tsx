@@ -361,6 +361,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType> = {
   'bulk-video-compressor': dynamic(() => import('@/components/tools/modules/BulkVideoCompressor'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'bulk-video-size-reducer': dynamic(() => import('@/components/tools/modules/BulkVideoSizeReducer'), { ssr: false, loading: () => <SkeletonLoader /> }),
   'bulk-video-subtitle-burner': dynamic(() => import('@/components/tools/modules/BulkVideoSubtitleBurner'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'tax-saving-calculator': dynamic(() => import('@/components/tools/modules/TaxSavingCalculator'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'gstin-lookup': dynamic(() => import('@/components/tools/modules/GstinLookup'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'seller-profit-calculator': dynamic(() => import('@/components/tools/modules/SellerProfitCalculator'), { ssr: false, loading: () => <SkeletonLoader /> }),
+  'complaint-letter-generator': dynamic(() => import('@/components/tools/modules/ComplaintLetterGenerator'), { ssr: false, loading: () => <SkeletonLoader /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
