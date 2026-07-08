@@ -11,9 +11,20 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ChangelogShowcase from "@/components/ChangelogShowcase";
+import ChangelogShowcase, { DemoType } from "@/components/ChangelogShowcase";
 
-const RELEASES = [
+interface Release {
+  version: string;
+  date: string;
+  title: string;
+  tag: string;
+  tagColor: string;
+  description: string;
+  demo?: DemoType;
+  updates: { type: string; text: string }[];
+}
+
+const RELEASES: Release[] = [
   {
     version: "v1.5.0",
     date: "July 7, 2026",

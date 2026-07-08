@@ -181,7 +181,7 @@ function ToolExpansionDemo() {
 
 // ─── Runner ───
 
-type DemoType = "fault-tolerance" | "batch-processing" | "tool-expansion";
+export type DemoType = "fault-tolerance" | "batch-processing" | "tool-expansion";
 
 export default function ChangelogShowcase({ demo }: { demo: DemoType }) {
   return (

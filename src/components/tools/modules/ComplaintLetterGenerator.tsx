@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FileText, AlertCircle, Building, Smartphone, ShoppingCart, Shield, Home, Zap, Droplets, Loader2, Download, Copy, Check, Sparkles, Info } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
-import { AiSettings } from '@/components/tools/AiSettings';
+import AiSettings from '@/components/tools/AiSettings';
 import { useAiProvider } from '@/hooks/useAiProvider';
 
 const COMPLAINT_TYPES = [
