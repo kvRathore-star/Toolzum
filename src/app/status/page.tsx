@@ -201,6 +201,12 @@ export default function StatusPage() {
           <div className="space-y-6">
             <div className="relative pl-6 before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4">
               <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
+              <h4 className="text-sm font-semibold text-[var(--text-secondary)]">June 2026</h4>
+              <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
+            </div>
+
+            <div className="relative pl-6 before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4">
+              <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
               <h4 className="text-sm font-semibold text-[var(--text-secondary)]">May 2026</h4>
               <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
             </div>
