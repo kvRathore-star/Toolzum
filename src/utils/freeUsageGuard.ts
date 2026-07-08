@@ -5,8 +5,8 @@ const STORAGE_KEYS = {
   resetDate: "th_reset",
 };
 
-const ANON_LIMIT = 2;
-const SIGNED_IN_EXTRA = 3;
+const ANON_LIMIT = 3;
+const SIGNED_IN_EXTRA = 7;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 
 function getFingerprint(): string {
@@ -27,13 +27,13 @@ function getFingerprint(): string {
   return hash.toString(36);
 }
 
-function getResetMonth(): string {
+function getResetDay(): string {
   const now = new Date();
-  return `${now.getFullYear()}-${now.getMonth()}`;
+  return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
 }
 
-function isNewMonth(stored: string | null): boolean {
-  return stored !== getResetMonth();
+function isNewDay(stored: string | null): boolean {
+  return stored !== getResetDay();
 }
 
 function readCount(key: string): number {
@@ -74,7 +74,7 @@ export function getRemainingDownloads(): number {
   if (typeof window === "undefined") return TOTAL_FREE;
   try {
     if (detectTampering()) resetCounts();
-    if (isNewMonth(localStorage.getItem(STORAGE_KEYS.resetDate))) resetCounts();
+    if (isNewDay(localStorage.getItem(STORAGE_KEYS.resetDate))) resetCounts();
 
     const isSignedIn = getSignedInStatus();
     const anonUsed = readCount(STORAGE_KEYS.count);
@@ -101,7 +101,7 @@ function detectTampering(): boolean {
 function resetCounts() {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(STORAGE_KEYS.resetDate, getResetMonth());
+    localStorage.setItem(STORAGE_KEYS.resetDate, getResetDay());
     writeCount(STORAGE_KEYS.count, 0);
     writeCount(STORAGE_KEYS.signedInCount, 0);
     localStorage.setItem(STORAGE_KEYS.fingerprint, getFingerprint());
@@ -113,7 +113,7 @@ function resetCounts() {
 export function incrementDownloadCount(): void {
   if (typeof window === "undefined") return;
   try {
-    if (isNewMonth(localStorage.getItem(STORAGE_KEYS.resetDate))) resetCounts();
+    if (isNewDay(localStorage.getItem(STORAGE_KEYS.resetDate))) resetCounts();
     if (detectTampering()) resetCounts();
 
     const isSignedIn = getSignedInStatus();

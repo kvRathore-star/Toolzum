@@ -2,15 +2,15 @@
 
 import { useSession } from "@/lib/auth-client";
 
-export const ANON_LIMIT = 999; // unlimited
-export const SIGNED_IN_EXTRA = 999; // unlimited
+export const ANON_LIMIT = 999; // unlimited client-side (server enforces daily)
+export const SIGNED_IN_EXTRA = 999; // unlimited client-side
 
 export const ANON_MAX_SIZE_MB = 10;
 export const SIGNED_MAX_SIZE_MB = 25;
 export const PRO_MAX_SIZE_MB = 2000;
 
 export const ANON_MAX_BATCH = 1;
-export const SIGNED_MAX_BATCH = 3;
+export const SIGNED_MAX_BATCH = 10;
 export const PRO_MAX_BATCH = 500;
 
 export function useFreeUsage(_category?: string) {

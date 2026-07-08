@@ -23,7 +23,7 @@ const ICON_SIZES = [
   { size: 16, label: 'Favicon Small', file: 'favicon-16x16.png' },
 ];
 
-const FREE_LIMIT = 1;
+const FREE_LIMIT = 5;
 const PRO_MAX = 100;
 
 export default function BulkAppIconGenerator() {

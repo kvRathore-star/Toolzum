@@ -5,7 +5,7 @@ import { Search, MapPin, Loader2, AlertCircle, Eye, Info, CheckCircle2, Crown } 
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 
-const DAILY_LIMIT = 10;
+const DAILY_LIMIT = 20;
 
 export default function PincodeFinder() {
   const [searchMode, setSearchMode] = useState<'pincode' | 'postoffice'>('pincode');

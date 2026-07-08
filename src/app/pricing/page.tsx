@@ -233,7 +233,7 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Proxy API access with 10,000 requests/day</span>
+                  <span>Server API access — 10,000 requests/day</span>
                 </li>
               </ul>
             </div>
@@ -255,7 +255,8 @@ export default function PricingPage() {
               <tbody className="divide-y divide-[var(--border-subtle)]">
                 {[
                   ['Max file size', '10MB / 25MB', '2GB'],
-                  ['Batch processing', '1 / 3 files', '500 files'],
+                  ['Server downloads (daily)', '3 / 10 per day', 'Unlimited'],
+                  ['Batch processing', '1 / 10 files', '500 files'],
                   ['Processing speed', 'Standard (1 thread)', 'Parallel (6 threads)'],
                   ['ZIP batch download', '—', '✓'],
                   ['Watermark-free export', '—', '✓'],

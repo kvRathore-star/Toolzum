@@ -74,7 +74,7 @@ export const apiKeys = sqliteTable("api_keys", {
   name: text("name").notNull().default("My API Key"),
   plan: text("plan").notNull().default("free"), // 'free' | 'pro'
   requestsUsed: integer("requests_used").notNull().default(0),
-  requestsLimit: integer("requests_limit").notNull().default(50),
+  requestsLimit: integer("requests_limit").notNull().default(10000),
   lastUsedAt: integer("last_used_at", { mode: "timestamp" }),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   revokedAt: integer("revoked_at", { mode: "timestamp" }),

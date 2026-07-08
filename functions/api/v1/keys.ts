@@ -97,9 +97,9 @@ export async function onRequestPost(context: any) {
     keyPrefix: uuid,
     keyHash,
     name,
-    plan: "free",
+    plan,
     requestsUsed: 0,
-    requestsLimit: 50,
+    requestsLimit: plan === "pro" ? 10000 : 100,
     createdAt: new Date(),
   });
 

@@ -1,12 +1,12 @@
-const ANON_LIMIT = 2;
-const SIGNED_IN_EXTRA = 3;
+const ANON_LIMIT = 3;
+const SIGNED_IN_EXTRA = 7;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 const KV_KEY_PREFIX = "dl_counter:";
-const MONTHLY_TTL = 30 * 24 * 60 * 60;
+const DAILY_TTL = 24 * 60 * 60;
 
-function getResetMonth(): string {
+function getResetDay(): string {
   const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
 }
 
 function getFingerprint(request: Request): string {
@@ -26,8 +26,8 @@ export async function onRequestPost(context: any) {
   try {
     const fp = getFingerprint(request);
     const signedIn = isSignedIn(request);
-    const month = getResetMonth();
-    const kvKey = `${KV_KEY_PREFIX}${fp}:${month}`;
+    const day = getResetDay();
+    const kvKey = `${KV_KEY_PREFIX}${fp}:${day}`;
 
     let used = 0;
     try {
@@ -46,9 +46,9 @@ export async function onRequestPost(context: any) {
     }
 
     used++;
-    await env.KV_CONFIG.put(kvKey, String(used), { expirationTtl: MONTHLY_TTL });
+    await env.KV_CONFIG.put(kvKey, String(used), { expirationTtl: DAILY_TTL });
 
-    return new Response(JSON.stringify({ allowed: true, remaining: Math.max(0, limit - used), month }), {
+    return new Response(JSON.stringify({ allowed: true, remaining: Math.max(0, limit - used), day }), {
       headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
     });
   } catch (e) {

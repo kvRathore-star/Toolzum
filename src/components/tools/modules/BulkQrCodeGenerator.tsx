@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Link from 'next/link';
 
-const DAILY_LIMIT = 1;
+const DAILY_LIMIT = 5;
 const PRO_MAX = 100;
 
 export default function BulkQrCodeGenerator() {

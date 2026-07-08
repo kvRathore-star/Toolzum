@@ -17,7 +17,7 @@ export function ProComparisonChart({ toolName, category }: { toolName?: string; 
 
   const rows: ComparisonRow[] = [
     { feature: 'Max file size', free: '10MB', pro: '2GB', highlight: true },
-    { feature: 'Batch processing', free: '1 file', pro: '500 files', highlight: true },
+    { feature: 'Batch processing', free: '1 / 10 files', pro: '500 files', highlight: true },
     { feature: 'Processing speed', free: 'Standard (1 thread)', pro: 'Parallel (6 threads)', highlight: true },
     { feature: 'ZIP batch download', free: false, pro: true, highlight: true },
     { feature: 'Watermark-free export', free: false, pro: true },

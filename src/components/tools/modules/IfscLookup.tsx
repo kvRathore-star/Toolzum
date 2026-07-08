@@ -25,7 +25,7 @@ const COMMON_BANKS: Record<string, string> = {
   INDB: 'IndusInd Bank',
 };
 
-const DAILY_LIMIT = 10;
+const DAILY_LIMIT = 20;
 
 export default function IfscLookup() {
   const [ifsc, setIfsc] = useState('');

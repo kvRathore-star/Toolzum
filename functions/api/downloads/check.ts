@@ -1,12 +1,12 @@
-const ANON_LIMIT = 2;
-const SIGNED_IN_EXTRA = 3;
+const ANON_LIMIT = 3;
+const SIGNED_IN_EXTRA = 7;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 const KV_KEY_PREFIX = "dl_counter:";
-const MONTHLY_TTL = 30 * 24 * 60 * 60; // 30 days in seconds
+const DAILY_TTL = 24 * 60 * 60; // 24 hours in seconds — auto-resets daily
 
-function getResetMonth(): string {
+function getResetDay(): string {
   const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
 }
 
 function getFingerprint(request: Request): string {
@@ -26,8 +26,8 @@ export async function onRequestGet(context: any) {
   try {
     const fp = getFingerprint(request);
     const signedIn = isSignedIn(request);
-    const month = getResetMonth();
-    const kvKey = `${KV_KEY_PREFIX}${fp}:${month}`;
+    const day = getResetDay();
+    const kvKey = `${KV_KEY_PREFIX}${fp}:${day}`;
 
     let used = 0;
     try {
@@ -45,7 +45,7 @@ export async function onRequestGet(context: any) {
       remaining,
       total: totalAllowed,
       signedIn,
-      month,
+      day,
     }), {
       headers: {
         "Content-Type": "application/json",
