@@ -3,9 +3,8 @@
 import { useState, useRef, useCallback, type DragEvent, type ClipboardEvent } from "react";
 import { toast } from "react-hot-toast";
 import { cn, formatBytes } from "@/lib/utils";
-import { Upload, Clipboard, Link, X, FileIcon } from "lucide-react";
+import { Upload, X, FileIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export interface UploadedFile {
   id: string;
@@ -31,10 +30,6 @@ export function FileUploader({
 }: FileUploaderProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [dragOver, setDragOver] = useState(false);
-  const [urlInput, setUrlInput] = useState("");
-  const [showUrlInput, setShowUrlInput] = useState(false);
-  const [urlLoading, setUrlLoading] = useState(false);
-  const [urlError, setUrlError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const processFiles = useCallback(
@@ -155,44 +150,6 @@ export function FileUploader({
     [processFiles]
   );
 
-  // URL import handler
-  const handleUrlImport = useCallback(async () => {
-    let url = urlInput.trim();
-    if (!url) return;
-
-    setUrlLoading(true);
-    setUrlError("");
-
-    try {
-      // Enforce HTTPS
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = `https://${url}`;
-      }
-
-      const res = await fetch(
-        `/api/proxy-url?url=${encodeURIComponent(url)}`
-      );
-      if (!res.ok) {
-        throw new Error(`Failed to fetch (HTTP ${res.status})`);
-      }
-
-      const blob = await res.blob();
-      const filename = url.split("/").pop()?.split("?")[0] ?? "download";
-      const file = new File([blob], filename, {
-        type: blob.type || "application/octet-stream",
-      });
-
-      processFiles([file]);
-      setUrlInput("");
-      setShowUrlInput(false);
-    } catch (e) {
-      console.error("[toolhub]", e);
-      setUrlError("Failed to load file from URL. Check the link and try again.");
-    } finally {
-      setUrlLoading(false);
-    }
-  }, [urlInput, processFiles]);
-
   // Remove file
   const removeFile = useCallback(
     (id: string) => {
@@ -243,49 +200,6 @@ export function FileUploader({
           className="hidden"
         />
       </div>
-
-      {/* Action buttons row */}
-      <div className="flex gap-2">
-        <Button
-          type="button"
-          variant="secondary"
-          size="sm"
-          onClick={() => inputRef.current?.click()}
-        >
-          <Upload className="h-4 w-4" /> Browse
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          size="sm"
-          onClick={() => setShowUrlInput(!showUrlInput)}
-        >
-          <Link className="h-4 w-4" /> URL Import
-        </Button>
-      </div>
-
-      {/* URL input */}
-      {showUrlInput && (
-        <div className="flex gap-2">
-          <Input
-            type="url"
-            placeholder="https://example.com/file.pdf"
-            value={urlInput}
-            onChange={(e) => setUrlInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleUrlImport()}
-            className="flex-1"
-          />
-          <Button
-            type="button"
-            size="sm"
-            onClick={handleUrlImport}
-            disabled={urlLoading || !urlInput.trim()}
-          >
-            {urlLoading ? "Loading..." : "Fetch"}
-          </Button>
-        </div>
-      )}
-      {urlError && <p className="text-sm text-red-600">{urlError}</p>}
 
       {/* File list */}
       {files.length > 0 && (

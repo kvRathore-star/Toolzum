@@ -65,17 +65,4 @@ export const payments = sqliteTable("payment", {
   createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
 });
 
-// API Keys for Developer Proxy API
-export const apiKeys = sqliteTable("api_keys", {
-  id: text("id").primaryKey(),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  keyPrefix: text("key_prefix").notNull(),
-  keyHash: text("key_hash").notNull(),
-  name: text("name").notNull().default("My API Key"),
-  plan: text("plan").notNull().default("free"), // 'free' | 'pro'
-  requestsUsed: integer("requests_used").notNull().default(0),
-  requestsLimit: integer("requests_limit").notNull().default(10000),
-  lastUsedAt: integer("last_used_at", { mode: "timestamp" }),
-  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
-  revokedAt: integer("revoked_at", { mode: "timestamp" }),
-});
+

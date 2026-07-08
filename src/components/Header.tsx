@@ -103,7 +103,6 @@ export function Header() {
     { label: "Tools", href: "/tools" },
     { label: "Extension", href: "/extension" },
     { label: "Pricing", href: "/pricing" },
-    { label: "API", href: "/api" },
     { label: "Sign in", href: "/login" },
   ];
 
@@ -295,9 +294,7 @@ export function Header() {
             <Link href="/pricing" className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Pricing
             </Link>
-            <Link href="/api" className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-              API
-            </Link>
+
           </nav>
         </div>
 

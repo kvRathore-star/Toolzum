@@ -185,57 +185,39 @@ export default function PricingPage() {
                 <span className="text-sm text-[var(--text-muted)]">/{currentPlan.unit}</span>
               </div>
 
-              {/* Annual price anchor for monthly/pass viewers */}
-              {billingInterval !== "yearly" && (
-                <p className="text-[11px] text-[var(--text-muted)] -mt-4 mb-6">
-                  or{' '}
-                  <span className="font-semibold text-[var(--text-primary)]">
-                    {currencySymbol}{activePricing.yearly.price}
-                  </span>
-                  /year{' '}
-                  <span className="text-[var(--success)] font-semibold">
-                    (save {activePricing.yearly.discount?.replace("Save ", "")})
-                  </span>{' '}
-                  —{' '}
-                  <button onClick={() => setBillingInterval('pass')} className="text-[var(--accent)] hover:underline">
-                    or grab a {currencySymbol}{activePricing.pass.price} Project Pass
-                  </button>
-                </p>
-              )}
-
               {/* Checkout Form */}
               <form action="/api/payments/create-order" method="POST" className="mb-8">
                 <input type="hidden" name="plan" value={billingInterval} />
                 <input type="hidden" name="gateway" value={isIndia ? "razorpay" : "dodo"} />
                 <Button variant="primary" className="w-full whitespace-nowrap" size="lg" type="submit">
-                  {billingInterval === 'pass' ? `Get Project Pass — ${currencySymbol}${currentPlan.price}` : `Upgrade to Pro (${currentPlan.label})`}
+                  {billingInterval === 'pass' ? `Get Project Pass — ${currencySymbol}${currentPlan.price}` : `Upgrade to Pro Now`}
                 </Button>
               </form>
 
               <ul className="space-y-4 text-sm text-[var(--text-secondary)] border-t border-[var(--border-subtle)] pt-6">
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span className="text-[var(--text-primary)] font-medium">Unlock all {proCount}+ Pro tools</span>
+                  <span className="text-[var(--text-primary)] font-medium">Unlock all {proCount}+ Pro tools with zero usage throttling</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Unlimited Canvas Editors & Logo Makers</span>
+                  <span>Unlimited Multi-File Bulk Processing (Up to 100+ assets at once)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Full PDF & Document Conversion tools</span>
+                  <span>1-Click "Download All" ZIP Archive automation</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Unlimited High-Quality Audio/Video conversions</span>
+                  <span>Advanced B2B Engines: Bulk PDF Form Extractor & Invoice Parsers</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Indian local utility tools enabled</span>
+                  <span>Premium Media Suite: High-Speed Audio & Video Transcoders</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                  <span>Server API access — 10,000 requests/day</span>
+                  <span>100% Client-Side Private Processing — secure for enterprise data</span>
                 </li>
               </ul>
             </div>
@@ -264,7 +246,7 @@ export default function PricingPage() {
                   ['Watermark-free export', '—', '✓'],
                   ['Workflow presets', '—', 'Unlimited'],
                   ['AI-powered tools', 'Limited', 'Full access'],
-                  ['API access', '—', '10K req/day'],
+
                   ['Priority support', '—', 'Email 4h response'],
                   ['White-label export', '—', '✓'],
                   ['Team seats', '1', '1 (Team plan coming)'],

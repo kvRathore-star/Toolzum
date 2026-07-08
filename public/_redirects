@@ -36,6 +36,9 @@
 /productivity/to-do-list        /tools/pomodoro-timer 301
 /text/plagiarism-checker        /tools 301
 
+# Removed API docs page — 301 to pricing
+/api   /pricing 301
+
 # Merged tool redirects (301) — thin tools consolidated into parent tools
 /converter/pst-to-est           /utility/ist-time-converter     301
 /converter/cst-to-est           /utility/ist-time-converter     301

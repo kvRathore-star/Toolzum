@@ -109,7 +109,7 @@ export function Footer() {
             <ul className="flex flex-col gap-3 text-sm">
               <li><Link href="/pricing" className="hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
               <li><Link href="/extension" className="hover:text-[var(--accent)] transition-colors">Chrome Extension</Link></li>
-              <li><Link href="/api" className="hover:text-[var(--accent)] transition-colors">API & Developers</Link></li>
+
               <li><Link href="/changelog" className="hover:text-[var(--accent)] transition-colors">Changelog</Link></li>
               <li><Link href="/roadmap" className="hover:text-[var(--accent)] transition-colors">Roadmap</Link></li>
               <li><Link href="/status" className="hover:text-[var(--accent)] transition-colors">Status</Link></li>

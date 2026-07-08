@@ -23,7 +23,6 @@ export function ProComparisonChart({ toolName, category }: { toolName?: string; 
     { feature: 'Watermark-free export', free: false, pro: true },
     { feature: 'Workflow presets', free: false, pro: 'Unlimited' },
     { feature: 'AI-powered tools', free: 'Limited', pro: 'Full access' },
-    { feature: 'API access', free: false, pro: '10K req/day' },
     { feature: 'Priority support', free: false, pro: true },
   ];
 
