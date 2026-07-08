@@ -19,9 +19,12 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   
   if (!toolMetadata) return { title: 'Not Found' };
 
+  const desc = toolMetadata.seoDescription || `Free online ${toolMetadata.name}: ${toolMetadata.description.charAt(0).toLowerCase() + toolMetadata.description.slice(1)}. 100% browser-based, nothing uploaded.`;
+  const ogImageUrl = `https://gotoolhub.com/${params.category}/${params.tool}/opengraph-image`;
+
   return {
     title: `${toolMetadata.name} — Free Online Tool`,
-    description: `Use the free online ${toolMetadata.name} tool. ${toolMetadata.description}. 100% secure, fast, and processed entirely on your device.`,
+    description: desc,
     keywords: `${toolMetadata.name.toLowerCase()}, free online ${toolMetadata.name.toLowerCase()}, ${toolMetadata.category.toLowerCase()} tool`,
     alternates: {
       canonical: `https://gotoolhub.com/${params.category}/${params.tool}`,
@@ -30,8 +33,12 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
       title: `${toolMetadata.name} - Free Online Tool`,
       description: toolMetadata.description,
       type: 'website',
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
-
+    twitter: {
+      card: 'summary_large_image',
+      images: [ogImageUrl],
+    },
   };
 }
 

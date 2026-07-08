@@ -61,7 +61,7 @@ export function getWhyChoose(toolCount: number): WhyChooseDef[] {
     { icon: Layers, title: `${toolCount}+ Tools`, desc: `From PDF compression to AI image generation — ${toolCount} tools and counting.` },
     { icon: Globe, title: 'Works Offline', desc: 'Many tools remain functional even without an internet connection.' },
     { icon: Palette, title: 'Beautiful by Default', desc: 'Dark & light themes. Fluid animations. Typography crafted for readability.' },
-    { icon: BarChart3, title: 'No Rate Limits', desc: 'Free tier gives you generous daily usage. Pro unlocks everything.' },
+    { icon: BarChart3, title: 'Generous Free Limits', desc: 'Free tier gives you generous daily usage. Pro unlocks everything.' },
   ];
 }
 
@@ -90,7 +90,7 @@ export const USE_CASES: UseCaseDef[] = [
   {
     title: 'For Business',
     items: ['Merge & split PDF contracts', 'Generate GST invoices', 'Calculate SaaS pricing', 'Create professional business cards'],
-    slug: '/business',
+    slug: '/tools',
   },
   {
     title: 'For Students',

@@ -1,9 +1,63 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Globe, Moon, Sun } from "lucide-react";
+import { Globe, Moon, Sun, Check } from "lucide-react";
 import { useTheme } from "next-themes";
+
+const LANGUAGES = [
+  { code: "en", label: "English", native: "English" },
+  { code: "hi", label: "Hindi", native: "हिन्दी" },
+  { code: "es", label: "Spanish", native: "Español" },
+  { code: "fr", label: "French", native: "Français" },
+  { code: "de", label: "German", native: "Deutsch" },
+  { code: "zh", label: "Chinese", native: "中文" },
+  { code: "ja", label: "Japanese", native: "日本語" },
+  { code: "ar", label: "Arabic", native: "العربية" },
+  { code: "pt", label: "Portuguese", native: "Português" },
+  { code: "ru", label: "Russian", native: "Русский" },
+];
+
+function LanguageSelector() {
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState("en");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const lang = LANGUAGES.find((l) => l.code === current) || LANGUAGES[0];
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-xs cursor-pointer"
+      >
+        <Globe className="w-3.5 h-3.5" /> {lang.code.toUpperCase()}
+      </button>
+      {open && (
+        <div className="absolute bottom-full right-0 mb-2 w-48 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-2xl py-2 max-h-64 overflow-y-auto z-[100]">
+          {LANGUAGES.map((l) => (
+            <button
+              key={l.code}
+              onClick={() => { setCurrent(l.code); setOpen(false); }}
+              className={`w-full flex items-center justify-between px-4 py-2 text-xs text-left hover:bg-[var(--bg-overlay)] transition-colors cursor-pointer ${current === l.code ? "text-[var(--accent)] font-semibold" : "text-[var(--text-secondary)]"}`}
+            >
+              <span>{l.native}</span>
+              {current === l.code && <Check className="w-3 h-3" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,7 +81,7 @@ export function Footer() {
               <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">Hub</span></span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              PDF, images, video, AI and more — in one place. Zero uploads. Starts in seconds.
+              Privacy first web tools
             </p>
           </div>
 
@@ -85,9 +139,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-xs">
-              <Globe className="w-3.5 h-3.5" /> EN
-            </button>
+            <LanguageSelector />
             <span className="w-px h-4 bg-[var(--border-subtle)]" />
             <button 
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}

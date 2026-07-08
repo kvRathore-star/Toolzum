@@ -1,23 +1,26 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Crown, Zap, X } from 'lucide-react';
 import Link from 'next/link';
 import { useSession } from '@/lib/auth-client';
 
-const COUNT_KEY = 'th_tool_use_count';
+const SESSION_KEY = 'th_upgrade_shown_session';
 
 export function PostProcessUpgrade({ toolName }: { toolName: string }) {
   const [visible, setVisible] = useState(false);
   const { data: session } = useSession();
   const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
 
+  const dismiss = useCallback(() => {
+    setVisible(false);
+    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch { /* noop */ }
+  }, []);
+
   useEffect(() => {
     if (isPro) return;
     try {
-      const raw = localStorage.getItem(COUNT_KEY);
-      const count = raw ? parseInt(raw, 10) + 1 : 1;
-      localStorage.setItem(COUNT_KEY, String(count));
-      if (count >= 3) setVisible(true);
+      if (sessionStorage.getItem(SESSION_KEY)) return;
+      setVisible(true);
     } catch { /* noop */ }
   }, [isPro]);
 
@@ -27,7 +30,7 @@ export function PostProcessUpgrade({ toolName }: { toolName: string }) {
   return (
     <div className="fixed bottom-6 right-6 z-50 max-w-sm animate-in slide-in-from-right duration-300">
       <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border border-amber-200 dark:border-amber-800/50 rounded-[var(--radius-2xl)] shadow-2xl p-5 relative">
-        <button onClick={() => setVisible(false)} className="absolute top-3 right-3 text-amber-400 hover:text-amber-600 transition-colors">
+        <button onClick={dismiss} className="absolute top-3 right-3 text-amber-400 hover:text-amber-600 transition-colors">
           <X className="w-4 h-4" />
         </button>
         <div className="flex items-center gap-3 mb-3">
@@ -45,6 +48,7 @@ export function PostProcessUpgrade({ toolName }: { toolName: string }) {
         </div>
         <Link
           href="/pricing"
+          onClick={dismiss}
           className="block w-full text-center py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-bold rounded-[var(--radius-lg)] transition-all shadow-sm"
         >
           Try Pro Free for 7 Days

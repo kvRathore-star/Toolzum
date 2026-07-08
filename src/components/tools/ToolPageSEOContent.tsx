@@ -215,7 +215,7 @@ const crossCategoryMap: Record<string, string[]> = {
   "Utility": ["Developer", "Productivity", "Finance"],
   "Converter": ["PDF", "Image", "Video"],
   "Downloader": ["Video", "Audio", "Extension"],
-  "Finance": ["Utility", "Productivity", "Privacy"],
+  "Finance": ["Business", "indian-utilities", "Converter"],
   "SEO": ["Developer", "Marketing", "Text"],
   "Privacy": ["Developer", "Utility", "Text"],
   "Marketing": ["AI", "SEO", "Design"],

@@ -10,9 +10,7 @@ const SkeletonLoader = () => (
     <div className="h-4 bg-[var(--bg-elevated)] rounded-md w-1/2 mb-8"></div>
     <div className="w-full h-12 bg-[var(--bg-elevated)] rounded-[var(--radius-lg)] mb-4"></div>
     <div className="w-full h-12 bg-[var(--bg-elevated)] rounded-[var(--radius-lg)]"></div>
-    <div className="mt-8 text-sm text-[var(--text-muted)] font-medium animate-bounce">
-      Spinning up client-side modules...
-    </div>
+
   </div>
 );
 

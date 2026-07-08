@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GdprConsentBanner } from "@/components/GdprConsentBanner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { toolsRegistry } from "@/registry/tools";
@@ -149,6 +150,7 @@ export default function RootLayout({
             }}
           />
 
+          <GdprConsentBanner />
           <Footer />
         </ThemeProvider>
       </body>

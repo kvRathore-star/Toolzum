@@ -530,8 +530,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               <Crown className="w-4 h-4 text-amber-500" />
               <span className="text-xs font-mono text-amber-500 uppercase tracking-wider">Pro</span>
             </div>
-            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">$8</div>
-            <div className="text-xs text-[var(--text-muted)] mb-4">/month, cancel anytime</div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">{showIndia ? '₹249' : '$14.99'}</div>
+            <div className="text-xs text-[var(--text-muted)] mb-4">/{showIndia ? 'mo' : 'month'}, cancel anytime</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
@@ -700,9 +700,17 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
 
   const getExportUrl = () => {
     switch (activeTab) {
-      case 'compress': return '/tools/image-compressor';
-      case 'resize': return '/tools/image-resizer';
-      default: return '/tools/document-converter';
+      case 'compress': return '/image/image-compressor';
+      case 'resize': return '/image/image-resizer';
+      default: return '/image/image-compressor';
+    }
+  };
+
+  const getToolName = () => {
+    switch (activeTab) {
+      case 'compress': return 'Image Compressor';
+      case 'resize': return 'Image Resizer';
+      default: return 'Image Compressor';
     }
   };
 
@@ -756,9 +764,17 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
             {file ? formatSize(file.size) : '-74% smaller'}
           </span>
         </div>
-        <Button size="sm" asChild>
-          <Link href={getExportUrl()}>Export</Link>
-        </Button>
+        <div className="flex items-center gap-3">
+          <Link
+            href={getExportUrl()}
+            className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+          >
+            Full: {getToolName()} <MoveRight className="w-3 h-3 inline" />
+          </Link>
+          <Button size="sm" asChild>
+            <Link href={getExportUrl()}>Export</Link>
+          </Button>
+        </div>
       </div>
     </>
   );
