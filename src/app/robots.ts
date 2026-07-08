@@ -1,12 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const MOVED_SLUGS = [
-  "crop-pdf", "organize-pdf", "extract-pages-from-pdf",
-  "lbs-to-kg", "kg-to-lbs", "feet-to-meters",
-  "time-converter", "pst-to-est", "cst-to-est",
-  "wav-compressor", "mp3-to-ogg",
-  "gif-compressor", "image-to-gif",
-];
+const MOVED_SLUGS: string[] = [];
 
 const disallowPaths = [
   "/api/",

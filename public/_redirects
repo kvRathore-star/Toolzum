@@ -1,4 +1,4 @@
-# Removed tools — 301 to category page (SEO preservation)
+# Removed AI tools — 301 to tools directory (SEO preservation)
 /ai/ai-writing-assistant        /tools 301
 /ai/text-summarizer             /tools 301
 /ai/ai-content-humanizer        /tools 301
@@ -35,3 +35,22 @@
 /developer/brand-kit            /tools 301
 /productivity/to-do-list        /tools/pomodoro-timer 301
 /text/plagiarism-checker        /tools 301
+
+# Merged tool redirects (301) — thin tools consolidated into parent tools
+/converter/pst-to-est           /utility/ist-time-converter     301
+/converter/cst-to-est           /utility/ist-time-converter     301
+/converter/lbs-to-kg            /utility/unit-converter         301
+/converter/kg-to-lbs            /utility/unit-converter         301
+/converter/feet-to-meters       /utility/unit-converter         301
+/pdf/crop-pdf                   /pdf/pdf-page-manager           301
+/pdf/organize-pdf               /pdf/pdf-page-manager           301
+/pdf/extract-pages-from-pdf     /pdf/pdf-page-manager           301
+/pdf/flatten-pdf                /pdf/pdf-page-manager           301
+/video/mp4-to-gif               /video/video-to-gif             301
+/video/webm-to-gif              /video/video-to-gif             301
+/video/mov-to-gif               /video/video-to-gif             301
+/video/image-to-gif             /video/video-to-gif             301
+/video/gif-compressor           /video/video-compressor         301
+/audio/mp3-to-ogg               /audio/audio-converter          301
+/audio/wav-compressor           /audio/audio-converter          301
+/productivity/stopwatch         /productivity/pomodoro-timer    301

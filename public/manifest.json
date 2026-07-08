@@ -1,7 +1,7 @@
 {
-  "name": "ToolHub — 260+ Free Privacy-First Tools",
+  "name": "ToolHub — 290+ Free Privacy-First Tools",
   "short_name": "ToolHub",
-  "description": "260+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
+    "description": "290+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
@@ -30,7 +30,7 @@
       "sizes": "1200x630",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "ToolHub Home — 260+ Privacy-First Tools"
+      "label": "ToolHub Home — 290+ Privacy-First Tools"
     }
   ],
   "shortcuts": [
@@ -38,21 +38,21 @@
       "name": "PDF Tools",
       "short_name": "PDF",
       "description": "Compress, merge, split, and edit PDFs",
-      "url": "/tools/pdf-compressor",
+      "url": "/pdf/pdf-compressor",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Image Tools",
       "short_name": "Image",
       "description": "Resize, crop, compress, and convert images",
-      "url": "/tools/image-compressor",
+      "url": "/image/image-compressor",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Text Tools",
       "short_name": "Text",
       "description": "Count, summarize, paraphrase, and check text",
-      "url": "/tools/word-counter",
+      "url": "/text/word-counter",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     }
   ],
