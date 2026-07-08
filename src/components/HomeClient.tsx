@@ -517,7 +517,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">$0</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (20-100MB)</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-50MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools (PDF, images, video)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Bulk batch processing</span></li>
