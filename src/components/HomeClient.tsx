@@ -114,8 +114,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             >
               <Button size="lg" className="w-full sm:w-auto whitespace-nowrap shadow-[var(--shadow-glow-accent)]" asChild>
                 <Link href="/tools">
-                  Explore All Tools
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  Explore All Tools <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
               <Button variant="secondary" size="lg" className="w-full sm:w-auto group" asChild>
