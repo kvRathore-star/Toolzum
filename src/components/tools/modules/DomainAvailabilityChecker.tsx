@@ -32,7 +32,7 @@ export default function DomainAvailabilityChecker() {
       const fullDomain = `${name}${tld}`;
       try {
         const res = await fetch(`https://dns.google/resolve?name=${fullDomain}&type=A`);
-        const data = await res.json();
+        const data: { Answer?: { data: string }[] } = await res.json();
         checks.push({
           domain: fullDomain,
           available: !data.Answer || data.Answer.length === 0,
