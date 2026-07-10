@@ -56,7 +56,7 @@ plan.md
 toolzum_distribution_audit.md
 pre_audit_report.md
 tools_list.csv
-docs/Toolzum_MasterPrompt.md
+docs/ToolHub_MasterPrompt.md
 
 # wrangler config with D1 database ID
 wrangler.jsonc

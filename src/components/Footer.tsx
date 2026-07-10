@@ -126,6 +126,7 @@ export function Footer() {
               <li><Link href="/privacy" className="hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookies" className="hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
               <li><Link href="/terms" className="hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/faq" className="hover:text-[var(--accent)] transition-colors">FAQ</Link></li>
               <li><Link href="/contact" className="hover:text-[var(--accent)] transition-colors">Contact</Link></li>
             </ul>
           </div>
