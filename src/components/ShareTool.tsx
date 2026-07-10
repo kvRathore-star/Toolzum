@@ -21,7 +21,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const url = `${SITE_URL}/${category.toLowerCase()}/${slug}`;
-  const text = `Check out ${title} on ToolHub — 100% free, runs in your browser, no uploads needed.`;
+  const text = `Check out ${title} on Toolzum — 100% free, runs in your browser, no uploads needed.`;
 
   const shareUrl = (platform: string) => {
     const hrefs: Record<string, string> = {

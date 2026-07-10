@@ -111,10 +111,10 @@ export default function PrivacyPolicyPage() {
             <section id="intro" className="scroll-mt-28">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">1. Introduction</h3>
               <p className="mb-4">
-                Welcome to ToolHub. We value the privacy of our visitors and users above all else. This Privacy Policy details our infrastructure configuration and absolute client-side isolation architecture.
+                Welcome to Toolzum. We value the privacy of our visitors and users above all else. This Privacy Policy details our infrastructure configuration and absolute client-side isolation architecture.
               </p>
               <p>
-                By using ToolHub (the "Service"), you accept that all files, images, code, and calculation strings are processed directly inside your device's web browser, and agree to the storage guidelines listed below.
+                By using Toolzum (the "Service"), you accept that all files, images, code, and calculation strings are processed directly inside your device's web browser, and agree to the storage guidelines listed below.
               </p>
             </section>
 
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
                 <strong>Our Core Philosophy is simple:</strong> We do not upload your media.
               </p>
               <p className="mb-4">
-                Traditional utility sites transmit user documents to backend queues to run formatting scripts. ToolHub compiles C++ libraries and JavaScript tools into WebAssembly binaries that execute locally inside a sandboxed client thread.
+                Traditional utility sites transmit user documents to backend queues to run formatting scripts. Toolzum compiles C++ libraries and JavaScript tools into WebAssembly binaries that execute locally inside a sandboxed client thread.
               </p>
               <p>
                 This ensures that your files (such as confidential business PDFs, identification files, or private photo pixels) never exit your device to traverse the internet.
@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
             <section id="cookies" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">4. Cookies and Session Memory</h3>
               <p className="mb-4">
-                ToolHub utilizes browser storage mechanisms (LocalStorage, SessionStorage, and IndexedDB) to save settings, UI preferences, and user states (such as checklist items, upvotes, and custom styling themes).
+                Toolzum utilizes browser storage mechanisms (LocalStorage, SessionStorage, and IndexedDB) to save settings, UI preferences, and user states (such as checklist items, upvotes, and custom styling themes).
               </p>
               <p>
                 These states remain persistently cached on your browser and can be completely purged at any time by clearing your browser cache.
@@ -159,7 +159,7 @@ export default function PrivacyPolicyPage() {
             <section id="third-party" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">5. Third-Party Integrations</h3>
               <p className="mb-4">
-                We do not sell, rent, or lease any analytical details or user data. We host the ToolHub compiler framework on global CDN edge nodes (Cloudflare/Pages) to deliver files to your browser efficiently.
+                We do not sell, rent, or lease any analytical details or user data. We host the Toolzum compiler framework on global CDN edge nodes (Cloudflare/Pages) to deliver files to your browser efficiently.
               </p>
               <p>
                 When you initiate payment requests (such as upgraded cloud quotas), your transactions are handled directly through authorized secure portal gateways (e.g. Razorpay or Dodo) under their respective privacy parameters.
@@ -179,14 +179,14 @@ export default function PrivacyPolicyPage() {
             <section id="dpdp" className="scroll-mt-32">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">7. Data Protection (India DPDP Act 2023)</h3>
               <div className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border-subtle)] space-y-4">
-                <p>ToolHub complies with India's Digital Personal Data Protection Act, 2023.</p>
+                <p>Toolzum complies with India's Digital Personal Data Protection Act, 2023.</p>
                 <ul className="list-disc list-inside space-y-2 text-sm">
-                  <li><strong>Data Fiduciary:</strong> ToolHub Inc.</li>
-                  <li><strong>Grievance Officer:</strong> Reachable at privacy@toolhub.app</li>
+                  <li><strong>Data Fiduciary:</strong> Toolzum Inc.</li>
+                  <li><strong>Grievance Officer:</strong> Reachable at support@toolzum.com</li>
                   <li><strong>Data we collect:</strong> Usage analytics (anonymised), account email (if logged in).</li>
                   <li><strong>Your rights:</strong> Right to access, correct, and erase your personal data.</li>
                   <li><strong>Retention:</strong> Analytics data retained for 90 days. Account data retained until deletion.</li>
-                  <li><strong>Contact:</strong> For data requests, email privacy@toolhub.app within 72 hours response SLA.</li>
+                  <li><strong>Contact:</strong> For data requests, email support@toolzum.com within 72 hours response SLA.</li>
                 </ul>
               </div>
             </section>

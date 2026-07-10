@@ -132,7 +132,7 @@ export default async function Image(props: { params: Promise<{ category: string;
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: 26 }}>ToolHub</span>
+            <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: 26 }}>Toolzum</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
             <span style={{ color: '#38bdf8' }}>{toolMetadata.category}</span>

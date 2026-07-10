@@ -108,7 +108,7 @@ export default function StatusPage() {
             </div>
             <div>
               <h1 className="text-xl sm:text-2xl font-semibold text-white">All Systems Operational</h1>
-              <p className="text-sm text-emerald-400/80 mt-1">ToolHub services are running normally. Latency check healthy.</p>
+              <p className="text-sm text-emerald-400/80 mt-1">Toolzum services are running normally. Latency check healthy.</p>
             </div>
           </div>
 

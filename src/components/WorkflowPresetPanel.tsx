@@ -155,7 +155,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                     <Crown className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                     <span className="flex-1">Save your workflow presets with</span>
                     <a href="/pricing" className="text-[var(--accent)] hover:underline font-medium whitespace-nowrap">
-                      ToolHub Pro
+                      Toolzum Pro
                     </a>
                   </div>
                 )}

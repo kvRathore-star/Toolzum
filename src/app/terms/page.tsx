@@ -33,7 +33,7 @@ export default function TermsOfServicePage() {
       content: (
         <>
           <p className="mb-3">
-            By accessing or using the ToolHub platform, web application, and browser extensions (collectively, the "Service"), you agree to be bound by these Terms of Service ("Terms") and all applicable local regulations.
+            By accessing or using the Toolzum platform, web application, and browser extensions (collectively, the "Service"), you agree to be bound by these Terms of Service ("Terms") and all applicable local regulations.
           </p>
           <p>
             If you do not agree to these Terms, you are prohibited from using or accessing the Service. The materials contained in this website are protected by applicable copyright and trademark laws.
@@ -47,7 +47,7 @@ export default function TermsOfServicePage() {
       content: (
         <>
           <p className="mb-3">
-            ToolHub is an offline-first browser utility catalog. All processing (including PDF compilation, code formatting, canvas editing, and image transformation) occurs client-side inside your browser sandbox.
+            Toolzum is an offline-first browser utility catalog. All processing (including PDF compilation, code formatting, canvas editing, and image transformation) occurs client-side inside your browser sandbox.
           </p>
           <p>
             We reserve the right to modify, suspend, or terminate any component of the Service (including individual tools) at any time without notice.
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
       title: "3. Prohibited Conduct",
       content: (
         <>
-          <p className="mb-3">When using ToolHub, you agree not to:</p>
+          <p className="mb-3">When using Toolzum, you agree not to:</p>
           <ul className="list-disc pl-6 space-y-2 mb-3">
             <li>Attempt to scrape, script, or automatedly execute the tools via botting frameworks without a valid API subscription.</li>
             <li>Use local sandboxes to compile malware, construct fraudulent templates (such as fake invoices), or generate illegal materials.</li>
@@ -78,7 +78,7 @@ export default function TermsOfServicePage() {
       content: (
         <>
           <p className="mb-3">
-            The design, branding, and custom styling systems of ToolHub are the sole property of ToolHub Inc. Individual utilities that implement open-source WebAssembly libraries (such as FFmpeg, Rust decoders, or PDF writers) remain licensed under their respective original open-source boundaries (MIT, GPL, etc.).
+            The design, branding, and custom styling systems of Toolzum are the sole property of Toolzum Inc. Individual utilities that implement open-source WebAssembly libraries (such as FFmpeg, Rust decoders, or PDF writers) remain licensed under their respective original open-source boundaries (MIT, GPL, etc.).
           </p>
           <p>
             We grant you a personal, non-exclusive, non-transferable license to execute the compiled code inside your web browser for personal or commercial productivity purposes.
@@ -98,10 +98,10 @@ export default function TermsOfServicePage() {
             </div>
           </div>
           <p className="mb-3">
-            Because all file-handling operations run locally inside your browser, ToolHub Inc. has no control over, and assumes no responsibility for, the outcomes of your processed files, calculations, or data.
+            Because all file-handling operations run locally inside your browser, Toolzum Inc. has no control over, and assumes no responsibility for, the outcomes of your processed files, calculations, or data.
           </p>
           <p>
-            In no event shall ToolHub Inc. or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the Service.
+            In no event shall Toolzum Inc. or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the Service.
           </p>
         </>
       )
@@ -112,7 +112,7 @@ export default function TermsOfServicePage() {
       content: (
         <>
           <p className="mb-3">
-            ToolHub Inc. may revise these Terms of Service at any time without notice. By using the Service, you are agreeing to be bound by the then-current version of these Terms.
+            Toolzum Inc. may revise these Terms of Service at any time without notice. By using the Service, you are agreeing to be bound by the then-current version of these Terms.
           </p>
           <p>
             We advise reviewing this page periodically for updates.
@@ -141,7 +141,7 @@ export default function TermsOfServicePage() {
             Terms of Service
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            Please read these guidelines carefully before using the ToolHub client compilers.
+            Please read these guidelines carefully before using the Toolzum client compilers.
           </p>
         </div>
 

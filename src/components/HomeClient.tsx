@@ -373,7 +373,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Star className="w-3.5 h-3.5" /> Why ToolHub
+            <Star className="w-3.5 h-3.5" /> Why Toolzum
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
             Built different by design.

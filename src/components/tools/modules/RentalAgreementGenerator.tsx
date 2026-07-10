@@ -119,7 +119,7 @@ function generateAgreementHtml(data: AgreementForm): string {
 
       <div style="margin-top: 20px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;">
         <p>This is a computer-generated agreement and does not require a physical signature.</p>
-        <p>Generated via ToolHub &bull; For reference only &bull; Consult a legal professional for execution</p>
+        <p>Generated via Toolzum &bull; For reference only &bull; Consult a legal professional for execution</p>
       </div>
     </div>
   `;

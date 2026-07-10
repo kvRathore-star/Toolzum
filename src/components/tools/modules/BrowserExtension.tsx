@@ -8,7 +8,7 @@ export default function BrowserExtension() {
       </div>
       <h2 className="text-2xl font-bold text-white mb-2">Browser Extension</h2>
       <p className="text-zinc-400 max-w-md mb-8">
-        The ToolHub browser extension is currently in development. It will bring our tools directly into your browser for quick access on any webpage.
+        The Toolzum browser extension is currently in development. It will bring our tools directly into your browser for quick access on any webpage.
       </p>
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800/50 border border-zinc-700/50 text-zinc-400 text-sm">
         <span className="w-2 h-2 rounded-full bg-amber-400" />

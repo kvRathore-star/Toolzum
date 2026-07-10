@@ -35,7 +35,7 @@ export function GdprConsentBanner() {
           <Cookie className="w-5 h-5 text-[var(--text-muted)] shrink-0 mt-0.5" />
           <div id="gdpr-title" className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
             We use only essential cookies and privacy-preserving analytics (no personal data collected).
-            By using ToolHub, you agree to our{' '}
+            By using Toolzum, you agree to our{' '}
             <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>,{' '}
             <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link>, and{' '}
             <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</Link>.

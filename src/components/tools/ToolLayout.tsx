@@ -68,7 +68,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "ToolHub", "item": SITE_URL },
+      { "@type": "ListItem", "position": 1, "name": "Toolzum", "item": SITE_URL },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": `${SITE_URL}/tools` },
       { "@type": "ListItem", "position": 3, "name": displayCategory, "item": `${SITE_URL}/${getCategoryPath(category)}` },
     ],
@@ -158,7 +158,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider mb-8" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">ToolHub</Link>
+            <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Toolzum</Link>
             <ChevronRight className="w-3 h-3" />
             <Link href="/tools" className="hover:text-[var(--text-primary)] transition-colors">Tools</Link>
             <ChevronRight className="w-3 h-3" />

@@ -15,14 +15,14 @@ import { toast } from "react-hot-toast";
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = "Contact | ToolHub";
+    document.title = "Contact | Toolzum";
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
       meta.setAttribute('name', 'description');
       document.head.appendChild(meta);
     }
-    meta.setAttribute('content', 'Contact ToolHub — get in touch with our team for support, feedback, or inquiries.');
+    meta.setAttribute('content', 'Contact Toolzum — get in touch with our team for support, feedback, or inquiries.');
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function ContactPage() {
       submissions.push({ ...formData, timestamp: Date.now() });
       localStorage.setItem("th_contact_submissions", JSON.stringify(submissions.slice(-10)));
     } catch (e) {
-      console.error("[toolhub] Failed to store contact submission", e);
+      console.error("[toolzum] Failed to store contact submission", e);
     }
     setTimeout(() => {
       setLoading(false);
@@ -105,7 +105,7 @@ export default function ContactPage() {
                 <MessageSquare className="w-4.5 h-4.5 text-blue-400" /> Enterprise Devs
               </h3>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Want to host ToolHub on closed intranet networks, compile custom Docker nodes, or scale cloud relay quotas? We offer special licenses.
+                Want to host Toolzum on closed intranet networks, compile custom Docker nodes, or scale cloud relay quotas? We offer special licenses.
               </p>
             </div>
           </div>

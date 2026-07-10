@@ -5,10 +5,10 @@ const toolCount = toolsRegistry.length;
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: `ToolHub Pro — ₹249/month (or $14.99/mo) for unlimited access to ${toolCount}+ browser-based PDF, image, video, and AI tools. Free plan available. No card needed to start.`,
+  description: `Toolzum Pro — ₹249/month (or $14.99/mo) for unlimited access to ${toolCount}+ browser-based PDF, image, video, and AI tools. Free plan available. No card needed to start.`,
   openGraph: {
-    title: "ToolHub Pricing — Simple & Transparent",
-    description: `ToolHub Pro — ₹249/month (or $14.99/mo) for unlimited access to ${toolCount}+ browser-based PDF, image, video, and AI tools. Free plan available. No card needed to start.`,
+    title: "Toolzum Pricing — Simple & Transparent",
+    description: `Toolzum Pro — ₹249/month (or $14.99/mo) for unlimited access to ${toolCount}+ browser-based PDF, image, video, and AI tools. Free plan available. No card needed to start.`,
   }
 };
 

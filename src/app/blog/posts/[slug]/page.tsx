@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             author: { "@type": "Person", name: post.author },
             datePublished: post.isoDate,
             dateModified: post.isoDate,
-            publisher: { "@type": "Organization", name: "ToolHub" },
+            publisher: { "@type": "Organization", name: "Toolzum" },
           }),
         }}
       />

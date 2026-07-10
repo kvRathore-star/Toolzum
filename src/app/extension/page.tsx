@@ -36,12 +36,12 @@ export default function ChromeExtensionPage() {
 
   const handleDownloadZip = () => {
     // Generate a simple dummy zip client-side
-    const dummyContent = "ToolHub Extension Manifest & Files. Please unpack and install via Chrome Extensions Developer mode.";
+    const dummyContent = "Toolzum Extension Manifest & Files. Please unpack and install via Chrome Extensions Developer mode.";
     const blob = new Blob([dummyContent], { type: "application/zip" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "toolhub-extension.zip";
+    link.download = "toolzum-extension.zip";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -67,7 +67,7 @@ export default function ChromeExtensionPage() {
             <Globe className="w-3.5 h-3.5" /> Direct Browser Integration
           </div>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
-            ToolHub at your fingertips.
+            Toolzum at your fingertips.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
             Access your favorite utility tools without switching tabs. Take full-page screenshots, pick colors from elements, and encode text instantly.
@@ -92,7 +92,7 @@ export default function ChromeExtensionPage() {
             <div>
               <h2 className="text-3xl font-semibold mb-4">Interactive Demo Sandbox</h2>
               <p className="text-[var(--text-secondary)] leading-relaxed">
-                Interact with the browser popup mock on the right to preview how the extension brings key ToolHub features straight into your browsing workflow.
+                Interact with the browser popup mock on the right to preview how the extension brings key Toolzum features straight into your browsing workflow.
               </p>
             </div>
 
@@ -147,7 +147,7 @@ export default function ChromeExtensionPage() {
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
                 </div>
                 <div className="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--bg-base)] px-4 py-0.5 rounded border border-[var(--border-subtle)]">
-                  toolhub-extension
+                  toolzum-extension
                 </div>
                 <Settings className="w-3.5 h-3.5 text-[var(--text-muted)]" />
               </div>
@@ -159,7 +159,7 @@ export default function ChromeExtensionPage() {
                 <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
                   <div className="flex items-center gap-1.5">
                     <div className="w-6 h-6 rounded bg-[var(--accent)] text-white flex items-center justify-center font-bold text-xs">T</div>
-                    <span className="font-semibold text-sm text-[var(--text-primary)]">ToolHub Quick</span>
+                    <span className="font-semibold text-sm text-[var(--text-primary)]">Toolzum Quick</span>
                   </div>
                   <div className="flex gap-2">
                     <button onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
@@ -318,7 +318,7 @@ export default function ChromeExtensionPage() {
               <div>
                 <h4 className="font-semibold">Load Unpacked Extension</h4>
                 <p className="text-[var(--text-secondary)] mt-1">
-                  Click the <strong>Load unpacked</strong> button in the top-left and select the extracted extension folder. The ToolHub extension icon will now appear in your browser bar!
+                  Click the <strong>Load unpacked</strong> button in the top-left and select the extracted extension folder. The Toolzum extension icon will now appear in your browser bar!
                 </p>
               </div>
             </div>

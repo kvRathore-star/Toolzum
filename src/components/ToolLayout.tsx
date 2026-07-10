@@ -26,7 +26,7 @@ export function ToolLayout({
       {/* Breadcrumb + Category */}
       <nav className="mb-6 flex items-center gap-2 text-sm text-zinc-500">
         <a href="/" className="hover:text-zinc-900 dark:hover:text-zinc-100">
-          ToolHub
+          Toolzum
         </a>
         <span>/</span>
         <span className="capitalize">{category}</span>

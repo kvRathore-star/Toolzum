@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),
   alternates: { canonical: "https://toolzum.com" },
   title: {
-    default: "ToolHub — Privacy-First Web Tools",
-    template: "%s | ToolHub",
+    default: "Toolzum — Privacy-First Web Tools",
+    template: "%s | Toolzum",
   },
   description:
     `${toolCount}+ free, privacy-first web tools. PDF compression, image editing, text processing, and more — all processed in your browser. Nothing uploaded, ever.`,
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     type: "website",
-    siteName: "ToolHub",
-    title: "ToolHub — Privacy-First Web Tools",
+    siteName: "Toolzum",
+    title: "Toolzum — Privacy-First Web Tools",
     description:
       `${toolCount}+ free web tools. Everything processed in your browser.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -82,7 +82,7 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "ToolHub",
+                "name": "Toolzum",
                 "url": "https://toolzum.com",
                 "logo": "https://toolzum.com/og-image.png",
                 "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
@@ -91,7 +91,7 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "ToolHub",
+                "name": "Toolzum",
                 "url": "https://toolzum.com",
                 "description": `${toolCount}+ free, privacy-first web tools. Everything processed in your browser — nothing uploaded.`,
                 "potentialAction": {

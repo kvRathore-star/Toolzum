@@ -412,7 +412,7 @@ You can verify whether a tool actually processes locally without taking the deve
 
 ## A Private Alternative
 
-All the tools on ToolHub are built on a simple principle: your data stays on your device. Every tool runs client-side, requires no account, and works offline after the initial load. We do not have servers that process your files because we built nothing that needs them.
+All the tools on Toolzum are built on a simple principle: your data stays on your device. Every tool runs client-side, requires no account, and works offline after the initial load. We do not have servers that process your files because we built nothing that needs them.
 
 Whether you need to compress a PDF, remove an image background, convert a video, or format some code, you can do it privately without uploading your data anywhere.
 

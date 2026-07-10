@@ -13,7 +13,7 @@ export default function VideoWatermarkAdder() {
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   
-  const [watermarkText, setWatermarkText] = useState('ToolHub.ai');
+  const [watermarkText, setWatermarkText] = useState('Toolzum.ai');
   const [position, setPosition] = useState('bottomRight');
   
   const ffmpegRef = useRef(new FFmpeg());

@@ -12,7 +12,7 @@ const complianceItems = [
   {
     icon: Lock,
     title: 'GDPR & SOC2 Ready',
-    desc: 'Because files never leave your device, no data processing agreement is needed. ToolHub is inherently compliant with GDPR Article 28, HIPAA, and corporate IT policies.',
+    desc: 'Because files never leave your device, no data processing agreement is needed. Toolzum is inherently compliant with GDPR Article 28, HIPAA, and corporate IT policies.',
   },
   {
     icon: Server,
@@ -22,7 +22,7 @@ const complianceItems = [
   {
     icon: FileCheck,
     title: 'Corporate Policy Safe',
-    desc: 'IT administrators can whitelist ToolHub without data exfiltration concerns. No API calls to external AI models. No upload queues. No data leaks.',
+    desc: 'IT administrators can whitelist Toolzum without data exfiltration concerns. No API calls to external AI models. No upload queues. No data leaks.',
   },
   {
     icon: Building2,
@@ -32,7 +32,7 @@ const complianceItems = [
   {
     icon: Globe,
     title: 'Works Offline & Air-Gapped',
-    desc: 'After initial page load, ToolHub functions without internet access. Suitable for classified environments, government networks, and remote field operations.',
+    desc: 'After initial page load, Toolzum functions without internet access. Suitable for classified environments, government networks, and remote field operations.',
   },
 ];
 
@@ -48,7 +48,7 @@ export function EnterpriseCompliance() {
         </h2>
         <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
           Corporate policies forbid uploading financial data, medical records, or sensitive contracts to external servers.{' '}
-          <strong>Because ToolHub runs 100% locally in your browser, your files never leave your machine.</strong>
+          <strong>Because Toolzum runs 100% locally in your browser, your files never leave your machine.</strong>
         </p>
       </div>
 
@@ -70,7 +70,7 @@ export function EnterpriseCompliance() {
       <div className="mt-10 p-6 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-[var(--radius-xl)] text-center">
         <p className="text-sm text-emerald-700 dark:text-emerald-300">
           <strong className="font-semibold">Zero data leaves your device.</strong> No accounts needed for processing. No cloud uploads. No logs. No tracking.{' '}
-          <a href="/pricing" className="underline hover:no-underline font-semibold">ToolHub is safe for enterprise use.</a>
+          <a href="/pricing" className="underline hover:no-underline font-semibold">Toolzum is safe for enterprise use.</a>
         </p>
       </div>
     </section>

@@ -31,7 +31,7 @@ const RELEASES: Release[] = [
     title: "Fault-Tolerant Bulk Processing — No More Crashing on Bad Files",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Bulk processing now handles faults gracefully. Process 50 files at once — if one is corrupted or too large, ToolHub auto-skips it, keeps processing the rest, and flags the failure at the end. No more restarting entire batches.",
+    description: "Bulk processing now handles faults gracefully. Process 50 files at once — if one is corrupted or too large, Toolzum auto-skips it, keeps processing the rest, and flags the failure at the end. No more restarting entire batches.",
     demo: "fault-tolerance",
     updates: [
       { type: "feature", text: "Memory-pressure detection warns you before processing large files on devices with less than 4 GB RAM." },
@@ -103,7 +103,7 @@ const RELEASES: Release[] = [
     title: "Platform Launch — Privacy-First Web Utilities",
     tag: "launch",
     tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    description: "ToolHub launched with a simple premise: every tool should run in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
+    description: "Toolzum launched with a simple premise: every tool should run in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
     updates: [
       { type: "feature", text: "Initial catalog of 50 tools: hashing, text processing, image compression, format conversion, and random generators." },
       { type: "security", text: "Verified zero-data exfiltration — no packets dispatched during any tool execution. Every byte stays on your device." }
@@ -140,7 +140,7 @@ export default function ChangelogPage() {
             Changelog & Updates
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            Follow the incremental evolution of the ToolHub engine. We push changes and optimizations every week.
+            Follow the incremental evolution of the Toolzum engine. We push changes and optimizations every week.
           </p>
         </div>
 

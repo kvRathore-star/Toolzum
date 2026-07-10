@@ -78,7 +78,7 @@ export default function SecurityPage() {
           </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl mb-4">Trust Through Transparency</h1>
           <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-            Every detail of how ToolHub processes your data is documented here. No black boxes. No fine print.
+            Every detail of how Toolzum processes your data is documented here. No black boxes. No fine print.
           </p>
         </div>
 

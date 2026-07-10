@@ -132,7 +132,7 @@ function BiodataPreview({ data, previewRef }: { data: BiodataForm; previewRef: R
         )}
 
         <div className="text-center pt-3 border-t border-zinc-200 text-[9px] text-zinc-400">
-          Generated via ToolHub &bull; Not a legal document
+          Generated via Toolzum &bull; Not a legal document
         </div>
       </div>
     </div>

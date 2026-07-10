@@ -182,7 +182,7 @@ export async function onRequestPost(context: any) {
         const billingStreet = body.billingStreet || "";
         const billingZipcode = body.billingZipcode || "";
         const customerEmail = body.email || "";
-        const customerName = body.name || "ToolHub User";
+        const customerName = body.name || "Toolzum User";
 
         const paymentInfo = await client.payments.create({
           billing: {

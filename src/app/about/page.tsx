@@ -14,14 +14,14 @@ import { Button } from "@/components/ui/button";
 
 export default function AboutPage() {
   useEffect(() => {
-    document.title = "About | ToolHub";
+    document.title = "About | Toolzum";
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
       meta.setAttribute('name', 'description');
       document.head.appendChild(meta);
     }
-    meta.setAttribute('content', 'About ToolHub — privacy-first web tools, all processed in your browser. Nothing uploaded, ever.');
+    meta.setAttribute('content', 'About Toolzum — privacy-first web tools, all processed in your browser. Nothing uploaded, ever.');
   }, []);
 
   return (
@@ -43,7 +43,7 @@ export default function AboutPage() {
             The web is local.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            We believe that processing files shouldn't require sending them to remote servers. ToolHub brings state-of-the-art tools directly to your browser's sandboxed environment.
+            We believe that processing files shouldn't require sending them to remote servers. Toolzum brings state-of-the-art tools directly to your browser's sandboxed environment.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Absolute Sandbox Isolation</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                When you load ToolHub, all tool compilers (WASM binaries, ffmpeg builds, canvas nodes) execute exclusively inside your browser's sandboxed worker thread. No metadata trackers, no temporary folders, and zero risk of file leakage.
+                When you load Toolzum, all tool compilers (WASM binaries, ffmpeg builds, canvas nodes) execute exclusively inside your browser's sandboxed worker thread. No metadata trackers, no temporary folders, and zero risk of file leakage.
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Lightning-Fast Offline Access</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Because ToolHub downloads processing resources locally once, the platform requires no active internet to perform standard PDF, text, math, and converter functions. Perfect for off-grid developers, remote designers, and closed-intranet networks.
+                Because Toolzum downloads processing resources locally once, the platform requires no active internet to perform standard PDF, text, math, and converter functions. Perfect for off-grid developers, remote designers, and closed-intranet networks.
               </p>
             </div>
           </div>

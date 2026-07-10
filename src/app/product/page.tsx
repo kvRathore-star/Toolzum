@@ -123,7 +123,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Pillars of ToolHub */}
+        {/* Pillars of Toolzum */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
@@ -152,7 +152,7 @@ export default function ProductPage() {
             </div>
             <h3 className="text-xl font-medium mb-3">Runs Fully Offline</h3>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-              Lost internet connection? No problem. ToolHub is built to work fully offline once loaded, ensuring reliability.
+              Lost internet connection? No problem. Toolzum is built to work fully offline once loaded, ensuring reliability.
             </p>
           </div>
 

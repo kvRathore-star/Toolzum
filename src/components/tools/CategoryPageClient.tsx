@@ -98,7 +98,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider mb-6" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">ToolHub</Link>
+          <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Toolzum</Link>
           <ChevronRight className="w-3 h-3" />
           <Link href="/tools" className="hover:text-[var(--text-primary)] transition-colors">Tools</Link>
           <ChevronRight className="w-3 h-3" />

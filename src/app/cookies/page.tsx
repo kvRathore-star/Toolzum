@@ -110,7 +110,7 @@ export default function CookiePolicyPage() {
             <section id="intro" className="scroll-mt-28">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">1. Introduction</h3>
               <p className="mb-4">
-                ToolHub respects your privacy. This Cookie Policy explains how and why we use cookies and similar storage technologies on our website.
+                Toolzum respects your privacy. This Cookie Policy explains how and why we use cookies and similar storage technologies on our website.
               </p>
               <p>
                 We believe in minimal, transparent data practices. Our approach to cookies reflects our core commitment: your data stays yours. This policy works alongside our <a href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</a> and <a href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</a>.
@@ -126,7 +126,7 @@ export default function CookiePolicyPage() {
                 We also use browser storage mechanisms like <strong>LocalStorage</strong> and <strong>IndexedDB</strong> to save your UI preferences, theme selection, and tool settings locally on your device.
               </p>
               <p>
-                Unlike many websites, ToolHub does <strong>not</strong> use cookies for advertising, cross-site tracking, or building behavioral profiles.
+                Unlike many websites, Toolzum does <strong>not</strong> use cookies for advertising, cross-site tracking, or building behavioral profiles.
               </p>
             </section>
 
@@ -164,7 +164,7 @@ export default function CookiePolicyPage() {
             <section id="third-party" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">5. Third-Party Cookies</h3>
               <p className="mb-4">
-                ToolHub does <strong>not</strong> set any third-party cookies. We do not integrate advertising networks, social media pixels, or external tracking scripts that would place cookies from other domains.
+                Toolzum does <strong>not</strong> set any third-party cookies. We do not integrate advertising networks, social media pixels, or external tracking scripts that would place cookies from other domains.
               </p>
               <p className="mb-4">
                 If you choose to make a payment through our billing portal, your transaction is handled by an authorized payment gateway (Razorpay or Dodo Payments) under their own privacy and cookie policies. Those services may set their own cookies during the checkout process.

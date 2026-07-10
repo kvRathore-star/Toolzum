@@ -31,7 +31,7 @@ export default function AiBgChanger() {
     ctx.fillStyle = 'rgba(255,255,255,0.55)';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'bottom';
-    ctx.fillText('Processed with ToolHub', canvas.width - 12, canvas.height - 12);
+    ctx.fillText('Processed with Toolzum', canvas.width - 12, canvas.height - 12);
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -321,7 +321,7 @@ export default function AiBgChanger() {
         <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3">
           <p className="text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1.5">
             <Crown className="w-3 h-3" />
-            {!isPro ? 'Free output includes a subtle "Processed with ToolHub" watermark. ' : ''}
+            {!isPro ? 'Free output includes a subtle "Processed with Toolzum" watermark. ' : ''}
             <strong>Pro:</strong> No watermark • 4K export • AI-powered subject isolation • Batch processing • Shadows & reflections • API access.
           </p>
         </div>

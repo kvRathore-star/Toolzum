@@ -114,7 +114,7 @@ export default function LinkInBioBuilder() {
     <div class="links">
 ${linkCards}
     </div>
-    <div class="footer">Made with ToolHub</div>
+    <div class="footer">Made with Toolzum</div>
   </div>
 </body>
 </html>`;
@@ -276,7 +276,7 @@ ${linkCards}
                       </a>
                     ))}
                   </div>
-                  <p className="text-center text-zinc-600 text-xs mt-6">Made with ToolHub</p>
+                  <p className="text-center text-zinc-600 text-xs mt-6">Made with Toolzum</p>
                 </div>
               </div>
             ) : (
@@ -290,7 +290,7 @@ ${linkCards}
         <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3">
           <p className="text-[10px] text-amber-600 dark:text-amber-400">
             <strong>How to deploy:</strong> Copy the HTML and paste into any static host (GitHub Pages, Vercel, Netlify, Cloudflare Pages). Your page is fully self-contained.
-            <span className="block mt-1"><strong>Pro:</strong> Auto-hosted on ToolHub subdomain (yourname.toolhub.dev), analytics, custom domain, scheduling, email capture, theme marketplace.</span>
+            <span className="block mt-1"><strong>Pro:</strong> Auto-hosted on Toolzum subdomain (yourname.toolzum.dev), analytics, custom domain, scheduling, email capture, theme marketplace.</span>
           </p>
         </div>
       </div>
