@@ -27,7 +27,7 @@ export function useFFmpeg() {
   useEffect(() => {
     if (ffmpegGlobal && ffmpegGlobal.loaded) {
       setIsLoaded(true);
-      loadError(null);
+      setLoadError(null);
       ffmpegRef.current = ffmpegGlobal;
       setupListeners(ffmpegGlobal);
     }
