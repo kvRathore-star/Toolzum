@@ -187,7 +187,7 @@ export async function onRequestPost(context: any) {
         const paymentInfo = await client.payments.create({
           billing: {
             city: billingCity,
-            country: billingCountry,
+            country: billingCountry as 'US',
             state: billingState,
             street: billingStreet,
             zipcode: billingZipcode,
