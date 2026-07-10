@@ -68,8 +68,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-semibold font-mono tracking-tight text-[var(--text-primary)]">
-                {/* @ts-expect-error custom property */}
-                {session.user.credits || 0}
+                {(session.user as { credits?: number }).credits ?? 0}
               </span>
               <span className="text-[var(--text-muted)] text-sm">remaining</span>
             </div>
@@ -102,8 +101,7 @@ export default function DashboardPage() {
                 <h3 className="font-medium text-[var(--text-primary)]">Current Plan</h3>
               </div>
               <span className="text-2xl font-semibold capitalize text-[var(--text-primary)]">
-                {/* @ts-expect-error custom property */}
-                {session.user.plan || "Free Tier"}
+                {(session.user as { plan?: string }).plan || "Free Tier"}
               </span>
             </div>
             <Link href="/billing" className="text-sm font-medium text-[var(--accent)] hover:underline mt-4 inline-block">

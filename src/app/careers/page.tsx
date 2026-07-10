@@ -66,6 +66,10 @@ export default function CareersPage() {
           <p className="text-[var(--text-secondary)] max-w-md mx-auto">
             We are not actively hiring at the moment. Follow us on social channels or check back later for future openings.
           </p>
+          <p className="text-[var(--text-muted)] text-sm mt-6">
+            Interested in joining us?{" "}
+            <a href="mailto:careers@toolzum.com" className="text-[var(--accent)] hover:underline">Send us your resume</a> and we will keep you in mind.
+          </p>
         </div>
 
       </div>

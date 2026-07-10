@@ -33,6 +33,8 @@ export default function ContactPage() {
     message: ""
   });
 
+  const sanitize = (s: string) => s.replace(/<[^>]*>/g, "").slice(0, 1000);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
@@ -42,8 +44,9 @@ export default function ContactPage() {
     
     setLoading(true);
     try {
+      const clean = { name: sanitize(formData.name), email: sanitize(formData.email), subject: formData.subject, message: sanitize(formData.message) };
       const submissions = JSON.parse(localStorage.getItem("th_contact_submissions") || "[]");
-      submissions.push({ ...formData, timestamp: Date.now() });
+      submissions.push({ ...clean, timestamp: Date.now() });
       localStorage.setItem("th_contact_submissions", JSON.stringify(submissions.slice(-10)));
     } catch (e) {
       console.error("[toolzum] Failed to store contact submission", e);

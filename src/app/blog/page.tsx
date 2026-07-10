@@ -70,6 +70,18 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Toolzum Blog",
+            description: "Practical how-to guides, technical deep-dives, and privacy analysis for browser-based tools.",
+            url: "https://toolzum.com/blog",
+          }),
+        }}
+      />
       <div className="absolute inset-0 z-0 flex justify-center pointer-events-none opacity-[0.03]">
         <div className="w-full max-w-[1280px] h-full" style={{ backgroundImage: "linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
       </div>

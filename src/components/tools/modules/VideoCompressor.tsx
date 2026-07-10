@@ -229,7 +229,7 @@ export default function VideoCompressor() {
                 {mode === 'video' ? (
                   <video src={outputUrl} controls className="w-full max-h-[250px]" />
                 ) : (
-                  <Image src={outputUrl} alt="Compressed GIF" unoptimized={true} className="max-h-[250px] object-contain" />
+                  <Image src={outputUrl} alt="Compressed GIF" loading="lazy" unoptimized={true} className="max-h-[250px] object-contain" />
                 )}
               </div>
               {outputSize && (

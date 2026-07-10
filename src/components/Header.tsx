@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon } from "lucide-react";
@@ -40,6 +41,7 @@ export function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   const MEGAMENU_COLUMNS = useMemo(() => buildMegamenuColumns(), []);
 
@@ -288,10 +290,10 @@ export function Header() {
               </AnimatePresence>
             </div>
 
-            <Link href="/extension" className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <Link href="/extension" aria-current={pathname === "/extension" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Extension
             </Link>
-            <Link href="/pricing" className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <Link href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Pricing
             </Link>
 

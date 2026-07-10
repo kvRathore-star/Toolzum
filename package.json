@@ -15,8 +15,8 @@
     "cf:deploy": "npm run build && npx wrangler pages deploy out/ --project-name=toolzum",
     "cf:dev": "npx wrangler pages dev out/",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts'",
-    "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts'",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts' '*.{ts,mjs,json}'",
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts' '*.{ts,mjs,json}'",
     "analyze": "ANALYZE=true npm run build",
     "prepare": "husky || true"
   },

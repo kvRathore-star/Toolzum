@@ -12,7 +12,7 @@ export default function BulkFontSubsetter() {
       processFile={async (file, config) => {
         const chars = (config as Record<string, string>).chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()_+-=[]{}|;:\'"<>/`~ ';
         const arrayBuf = await file.arrayBuffer() as ArrayBuffer;
-        // @ts-expect-error - opentype.js has no types
+        // opentype.js has no types
         const opentypeModule: any = await import('opentype.js');
         const font = opentypeModule.parse(arrayBuf);
         const glyphs: unknown[] = [];

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Feature Roadmap",
-  description:
+  alternates: { canonical: "https://toolzum.com/roadmap" },  description:
     "Explore planned tools, vote for upcoming features, and track what's being built on the Toolzum roadmap.",
   openGraph: {
     title: "Feature Roadmap | Toolzum",

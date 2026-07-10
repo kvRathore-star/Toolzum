@@ -7,7 +7,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  console.error("[page-error]", error.message || error.digest || "Unknown error");
+  if (process.env.NODE_ENV === "development") console.error("[page-error]", error.message || error.digest || "Unknown error");
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-8">
       <div className="max-w-md text-center">

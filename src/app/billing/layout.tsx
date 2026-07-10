@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Billing & Subscriptions",
-  description:
+  alternates: { canonical: "https://toolzum.com/billing" },  description:
     "Manage your Toolzum billing, payment methods, invoices, and subscription plan.",
   openGraph: {
     title: "Billing & Subscriptions | Toolzum",

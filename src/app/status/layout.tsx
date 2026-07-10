@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "System Status",
-  description:
+  alternates: { canonical: "https://toolzum.com/status" },  description:
     "Check the current operational status of Toolzum's services — CDN, authentication, sandbox core, and cloud relay.",
 };
 

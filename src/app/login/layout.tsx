@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sign In",
-  description:
+  alternates: { canonical: "https://toolzum.com/login" },  description:
     "Sign in to your Toolzum account to access premium features and manage your subscription.",
 };
 

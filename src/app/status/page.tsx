@@ -25,6 +25,8 @@ interface SystemStatus {
 export default function StatusPage() {
   const [isPinging, setIsPinging] = useState(false);
   const [lastCheck, setLastCheck] = useState<string>("");
+  // NOTE: System status data below is simulated for demo purposes.
+  // Real monitoring integration coming soon.
   const [systems, setSystems] = useState<SystemStatus[]>([
     {
       id: "cdn",

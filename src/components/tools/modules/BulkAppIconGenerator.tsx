@@ -144,7 +144,7 @@ export default function BulkAppIconGenerator() {
           >
             {imagePreview ? (
               <div className="text-center">
-                <NextImage src={imagePreview} alt="Preview" unoptimized={true} className="w-24 h-24 object-contain mx-auto mb-3 rounded-lg" />
+                <NextImage src={imagePreview} alt="Preview" loading="lazy" unoptimized={true} className="w-24 h-24 object-contain mx-auto mb-3 rounded-lg" />
                 <p className="text-sm text-[var(--text-primary)]">{imageFile?.name}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Click to change</p>
               </div>

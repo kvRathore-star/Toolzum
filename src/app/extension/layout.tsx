@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Chrome Extension",
-  description:
+  alternates: { canonical: "https://toolzum.com/extension" },  description:
     "Download the Toolzum Chrome extension for instant access to color pickers, QR codes, screenshots, and more browser utilities.",
   openGraph: {
     title: "Chrome Extension | Toolzum",

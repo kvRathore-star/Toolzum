@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description:
+  alternates: { canonical: "https://toolzum.com/dashboard" },  description:
     "Your Toolzum workspace — manage your account, view usage stats, and access your tools.",
 };
 
