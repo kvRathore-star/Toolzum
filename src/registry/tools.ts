@@ -2371,7 +2371,6 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
   { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", seoDescription: 'Free online Bulk MP4 Compressor — Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings. 100% browser-based, no uploads.', parentSlug: "bulk-video-compressor" },
   { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", seoDescription: 'Free online Bulk Photo Metadata Remover — Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload. 100% browser-based, no uploads.', parentSlug: "bulk-exif-stripper-injector" },
   {
-    id: "domain-availability-checker",
     name: "Domain Availability Checker",
     slug: "domain-availability-checker",
     category: "Developer",
@@ -2380,7 +2379,6 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
     dependencies: "DNS API",
   },
   {
-    id: "pronunciation-tool",
     name: "Pronunciation Tool",
     slug: "pronunciation-tool",
     category: "Text",
