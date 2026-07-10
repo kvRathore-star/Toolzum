@@ -126,7 +126,7 @@ export default function AiFaceSwap() {
         <img loading="lazy"
           ref={sourceImageRef}
           src={sourceImg}
-          alt="Source face"
+          alt="Face preview"
           className="hidden"
           onLoad={drawComposite}
         />
@@ -135,7 +135,7 @@ export default function AiFaceSwap() {
         <img loading="lazy"
           ref={targetImageRef}
           src={targetImg}
-          alt="Target body"
+          alt="Face preview"
           className="hidden"
           onLoad={drawComposite}
         />

@@ -4,13 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack && node scripts/generate-sitemap.js",
+    "build": "node -e \"try { require('./src/lib/env').validatePublicEnv() } catch(e) { console.warn('Env validation skipped:', e.message) }\" && next build --webpack && node scripts/generate-sitemap.js",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit --strict",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "ci": "npm run lint && npm run typecheck && vitest run && npm run build",
     "wasm:optimize": "bash scripts/optimize-wasm.sh",
     "cf:deploy": "npm run build && npx wrangler pages deploy out/ --project-name=tool-hub",
     "cf:dev": "npx wrangler pages dev out/",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts'",
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,json,css,md}' 'functions/**/*.ts'",
+    "analyze": "ANALYZE=true npm run build",
     "prepare": "husky || true"
   },
   "dependencies": {
@@ -94,7 +101,8 @@
     "xlsx": "^0.18.5",
     "xml2js": "^0.6.2",
     "zxcvbn": "^4.4.2",
-    "opentype.js": "^2.0.0"
+    "opentype.js": "^2.0.0",
+    "posthog-js": "^1.230.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.0.0",
@@ -111,6 +119,9 @@
     "@types/xml2js": "^0.4.14",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
+    "vitest": "^3.1.0",
+    "prettier": "^3.4.2",
+    "@next/bundle-analyzer": "^16.2.6",
     "eslint-config-next": "16.2.6",
     "puppeteer": "^25.0.4",
     "tailwindcss": "^4",

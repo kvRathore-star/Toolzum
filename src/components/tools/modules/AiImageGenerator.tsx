@@ -187,7 +187,7 @@ export default function AiImageGenerator() {
             ) : imageUrl ? (
               <img
                 src={imageUrl}
-                alt={prompt}
+                alt="Processed result"
                 className="max-w-full max-h-[480px] object-contain rounded-lg shadow-md animate-in zoom-in-95 duration-300"
               />
             ) : (

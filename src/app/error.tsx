@@ -7,6 +7,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  console.error("[page-error]", error.message || error.digest || "Unknown error");
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-8">
       <div className="max-w-md text-center">
@@ -20,7 +21,7 @@ export default function Error({
           Something went wrong loading this page.
         </p>
         <p className="text-[var(--text-muted)] mb-8 text-xs font-mono break-words bg-[var(--bg-overlay)] p-3 rounded-xl">
-          {error.message || "An unexpected error occurred."}
+          An unexpected error occurred. Please try again.
         </p>
         <button
           onClick={() => reset()}

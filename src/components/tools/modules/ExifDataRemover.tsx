@@ -195,7 +195,7 @@ export default function ExifDataRemover() {
             
             <img loading="lazy" 
               src={outputUrl || dataUrl} 
-              alt="Preview" 
+              alt="Uploaded image preview" 
               className={`max-h-[350px] object-contain drop-shadow-md rounded z-10 ${!outputUrl ? 'opacity-50 grayscale' : ''}`} 
             />
             

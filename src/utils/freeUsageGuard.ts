@@ -176,18 +176,8 @@ async function callServerRecord(): Promise<boolean> {
 
 export async function checkAndRecordDownload(): Promise<boolean> {
   if (typeof window === "undefined") return true;
-  // 1. Fast path: client-side check
-  const remaining = getRemainingDownloads();
-  if (remaining <= 0) {
-    try {
-      window.dispatchEvent(new CustomEvent("toolhub:download-blocked"));
-    } catch (e) {
-      console.error("[toolhub]", e);
-    }
-    return false;
-  }
 
-  // 2. Server-side authoritative check (optional — non-blocking)
+  // 1. Server-side authoritative check (blocking — must pass)
   const server = await callServerCheck();
   if (server !== null && !server.allowed) {
     try {
@@ -198,11 +188,26 @@ export async function checkAndRecordDownload(): Promise<boolean> {
     return false;
   }
 
-  // 3. Record locally
-  incrementDownloadCount();
+  // 2. Client-side check (soft guard in case server is unreachable)
+  const remaining = getRemainingDownloads();
+  if (remaining <= 0) {
+    try {
+      window.dispatchEvent(new CustomEvent("toolhub:download-blocked"));
+    } catch (e) {
+      console.error("[toolhub]", e);
+    }
+    return false;
+  }
 
-  // 4. Record on server (fire-and-forget — server rejection after download won't block)
-  callServerRecord();
+  // 3. Record on server first (blocking — must succeed to authorise)
+  const serverRecorded = await callServerRecord();
+  if (!serverRecorded) {
+    console.warn("[toolhub] Server-side download record failed — rejecting to stay safe");
+    return false;
+  }
+
+  // 4. Record locally (mirror)
+  incrementDownloadCount();
 
   try {
     window.dispatchEvent(new CustomEvent("toolhub:download-completed"));

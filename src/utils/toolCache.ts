@@ -1,3 +1,5 @@
+import { trackError } from "./telemetry";
+
 const CACHE_PREFIX = "th_cache_";
 const MAX_CACHE_ITEMS = 20;
 
@@ -24,6 +26,7 @@ export function getCachedOutput(input: string, toolSlug: string): string | null 
     return data;
   } catch (e) {
     console.error("[toolhub]", e);
+    trackError(e instanceof Error ? e : new Error(String(e)), "toolcache_get");
     return null;
   }
 }
@@ -49,5 +52,6 @@ export function setCachedOutput(input: string, toolSlug: string, data: string, t
     }
   } catch (e) {
     console.error("[toolhub]", e);
+    trackError(e instanceof Error ? e : new Error(String(e)), "toolcache_set");
   }
 }

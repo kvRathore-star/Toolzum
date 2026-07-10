@@ -84,7 +84,7 @@ export default function ImageColorizer() {
                 <img loading="lazy" 
                   ref={imageRef}
                   src={imageSrc} 
-                  alt="Source" 
+                  alt="Uploaded image preview" 
                   className="max-w-full max-h-[250px] object-contain"
                 />
               </div>
@@ -124,7 +124,7 @@ export default function ImageColorizer() {
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
                 <img loading="lazy" 
                   src={colorizedUrl} 
-                  alt="Tinted" 
+                  alt="Processed result" 
                   className="shadow-lg max-w-full max-h-[280px] object-contain rounded"
                 />
               </div>

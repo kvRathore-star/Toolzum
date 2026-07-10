@@ -266,7 +266,7 @@ export default function PanCardResizer() {
           <div className="shrink-0 bg-white p-2 rounded-xl border border-zinc-200 dark:border-white/10 shadow-lg">
             <img
               src={outputUrl}
-              alt="Resized PAN Card element"
+              alt="Processed result"
               className="object-contain max-h-[160px] rounded-lg"
               style={{
                 width: docType === 'photo' ? '120px' : '240px',

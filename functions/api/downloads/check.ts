@@ -1,8 +1,10 @@
+import { jsonResponse, errorResponse, rateLimitCheck, handleOptions } from "../../_shared";
+
 const ANON_LIMIT = 3;
 const SIGNED_IN_EXTRA = 7;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 const KV_KEY_PREFIX = "dl_counter:";
-const DAILY_TTL = 24 * 60 * 60; // 24 hours in seconds — auto-resets daily
+const DAILY_TTL = 24 * 60 * 60;
 
 function getResetDay(): string {
   const now = new Date();
@@ -23,6 +25,13 @@ function isSignedIn(request: Request): boolean {
 export async function onRequestGet(context: any) {
   const { request, env } = context;
 
+  const options = handleOptions(request);
+  if (options) return options;
+
+  if (!await rateLimitCheck(context, request)) {
+    return errorResponse("Rate limit exceeded. Try again shortly.", 429, "RATE_LIMITED");
+  }
+
   try {
     const fp = getFingerprint(request);
     const signedIn = isSignedIn(request);
@@ -33,29 +42,21 @@ export async function onRequestGet(context: any) {
     try {
       const val = await env.KV_CONFIG.get(kvKey, { cacheTtl: 0 });
       if (val) used = parseInt(val, 10) || 0;
-    } catch (e) {
-      console.error("[toolhub] KV read failed", e);
+    } catch {
+      // KV read failed — treat as zero downloads
     }
 
     const remaining = Math.max(0, TOTAL_FREE - used);
     const totalAllowed = signedIn ? TOTAL_FREE : ANON_LIMIT;
 
-    return new Response(JSON.stringify({
+    return jsonResponse({
       allowed: remaining > 0,
       remaining,
       total: totalAllowed,
       signedIn,
       day,
-    }), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-store",
-      },
     });
-  } catch (e) {
-    return new Response(JSON.stringify({ error: "Internal error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+  } catch {
+    return errorResponse("Internal error", 500);
   }
 }

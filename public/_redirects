@@ -1,3 +1,24 @@
+# Tier 2: SEO format-variant perm redirects — consolidate authority into parent tools
+/audio/bulk-flac-to-mp3   /audio/bulk-audio-converter   301
+/audio/bulk-ogg-to-mp3   /audio/bulk-audio-converter   301
+/audio/bulk-m4a-to-mp3   /audio/bulk-audio-converter   301
+/video/bulk-mp4-to-mov   /video/bulk-video-compressor   301
+/video/bulk-mov-to-mp4   /video/bulk-video-compressor   301
+/video/bulk-avi-to-mp4   /video/bulk-video-compressor   301
+/video/bulk-webm-to-mp4   /video/bulk-video-compressor   301
+/pdf/bulk-pdf-to-word   /pdf/bulk-pdf-data-extractor   301
+/pdf/bulk-pdf-to-excel   /pdf/bulk-pdf-data-extractor   301
+/image/bulk-heic-to-webp   /image/bulk-webp-avif-modernizer   301
+/image/bulk-heic-to-png   /image/bulk-heic-to-jpg   301
+/pdf/bulk-image-to-pdf-v2   /pdf/bulk-image-to-pdf   301
+/image/bulk-png-to-avif   /image/bulk-webp-avif-modernizer   301
+/image/bulk-jpg-to-avif   /image/bulk-webp-avif-modernizer   301
+/image/bulk-webp-to-jpg   /image/bulk-image-compressor   301
+/image/bulk-add-watermark   /image/bulk-image-watermark   301
+/audio/bulk-normalize-audio   /audio/bulk-audio-normalizer   301
+/pdf/bulk-pdf-text-extractor   /pdf/bulk-pdf-data-extractor   301
+/image/bulk-svg-to-png-converter   /image/bulk-svg-to-png   301
+
 # Removed AI tools — 301 to tools directory (SEO preservation)
 /ai/ai-writing-assistant        /tools 301
 /ai/text-summarizer             /tools 301

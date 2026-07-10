@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, type DragEvent, type ClipboardEvent } from "react";
+import { useState, useRef, useCallback, useEffect, type DragEvent, type ClipboardEvent } from "react";
 import { toast } from "react-hot-toast";
 import { cn, formatBytes } from "@/lib/utils";
 import { Upload, X, FileIcon } from "lucide-react";
@@ -150,6 +150,13 @@ export function FileUploader({
     [processFiles]
   );
 
+  // Revoke all blob URLs on unmount
+  useEffect(() => {
+    return () => {
+      files.forEach(f => { if (f.preview) URL.revokeObjectURL(f.preview); });
+    };
+  }, []);
+
   // Remove file
   const removeFile = useCallback(
     (id: string) => {
@@ -212,7 +219,7 @@ export function FileUploader({
               {f.preview ? (
                 <img
                   src={f.preview}
-                  alt=""
+                  alt="Preview"
                   className="h-10 w-10 rounded object-cover"
                 />
               ) : (

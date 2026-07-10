@@ -134,7 +134,7 @@ export default function CompressImageTo50kb() {
             {originalUrl && (
               <img
                 src={originalUrl}
-                alt="Original"
+                alt="Uploaded image preview"
                 className="max-w-full max-h-full object-contain"
               />
             )}
@@ -159,7 +159,7 @@ export default function CompressImageTo50kb() {
             {compressedUrl ? (
               <img
                 src={compressedUrl}
-                alt="Compressed"
+                alt="Processed result"
                 className="max-w-full max-h-full object-contain"
               />
             ) : (

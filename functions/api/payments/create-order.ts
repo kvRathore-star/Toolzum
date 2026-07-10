@@ -2,37 +2,43 @@ import Razorpay from "razorpay";
 import DodoPayments from "dodopayments";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "../../../src/db/schema";
+import { jsonResponse, errorResponse, rateLimitCheck, handleOptions } from "../../_shared";
 
 export async function onRequestPost(context: any) {
   const { request } = context;
+
+  const options = handleOptions(request);
+  if (options) return options;
+
+  if (!await rateLimitCheck(context, request)) {
+    return errorResponse("Rate limit exceeded. Try again shortly.", 429, "RATE_LIMITED");
+  }
   
   try {
     let plan = "";
     let gateway = "";
+    let body: Record<string, unknown> = {};
     let userId = "guest_user";
 
-    // Support both JSON and Form Data payloads
     const contentType = request.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
-      const body = await request.json();
-      plan = body.plan || "";
-      gateway = body.gateway || "";
+      body = await request.json();
+      plan = (body.plan as string) || "";
+      gateway = (body.gateway as string) || "";
+      userId = (body.guestSessionId as string) || `guest_${crypto.randomUUID().slice(0, 12)}`;
     } else {
       const formData = await request.formData();
       plan = formData.get("plan")?.toString() || "";
       gateway = formData.get("gateway")?.toString() || "";
     }
 
-    // Derive userId from session token, never from client-provided body
+    // Derive userId from session token
     try {
       const authHeader = request.headers.get("Authorization") || "";
       if (authHeader.startsWith("Bearer ")) {
         const token = authHeader.slice(7);
         if (!context.env.JWT_SECRET) {
-          return new Response(JSON.stringify({ error: "JWT secret not configured" }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
+          return errorResponse("JWT secret not configured", 500, undefined, request);
         }
         const { jwtVerify } = await import("jose");
         const jwtSecret = new TextEncoder().encode(context.env.JWT_SECRET);
@@ -41,26 +47,19 @@ export async function onRequestPost(context: any) {
           userId = payload.sub as string;
         }
       }
-    } catch {
-      // Fall through with guest_user if token is invalid
+    } catch (jwtErr) {
+      console.warn("JWT verification failed for create-order request:", jwtErr);
     }
 
-    // Validation
     if (!["pass", "monthly", "yearly"].includes(plan)) {
-      return new Response(JSON.stringify({ error: "Invalid plan selection" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return errorResponse("Invalid plan selection", 400);
     }
 
     if (!["razorpay", "dodo"].includes(gateway)) {
-      return new Response(JSON.stringify({ error: "Invalid gateway specified" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return errorResponse("Invalid gateway specified", 400);
     }
 
-    // Non-blocking Turnstile check
+    // CAPTCHA check
     const turnstileToken = request.headers.get("x-turnstile-token");
     if (turnstileToken && context.env.TURNSTILE_SECRET_KEY) {
       try {
@@ -80,23 +79,17 @@ export async function onRequestPost(context: any) {
       }
     }
 
-    const RAZORPAY_KEY_ID = context.env.RAZORPAY_KEY_ID;
-    const RAZORPAY_KEY_SECRET = context.env.RAZORPAY_KEY_SECRET;
-    const DODO_API_KEY = context.env.DODO_API_KEY;
-    if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
-      return new Response(JSON.stringify({ error: "Payment gateway not configured" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-    if (!DODO_API_KEY) {
-      return new Response(JSON.stringify({ error: "Payment gateway not configured" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+    // Validate only the selected gateway's config
+    if (gateway === "razorpay") {
+      if (!context.env.RAZORPAY_KEY_ID || !context.env.RAZORPAY_KEY_SECRET) {
+        return errorResponse("Razorpay gateway not configured", 500);
+      }
+    } else if (gateway === "dodo") {
+      if (!context.env.DODO_API_KEY) {
+        return errorResponse("DodoPayments gateway not configured", 500);
+      }
     }
 
-    // Setup Drizzle if DB binding is available
     let db: any = null;
     if (context.env.DB) {
       try {
@@ -105,6 +98,10 @@ export async function onRequestPost(context: any) {
         console.error("Drizzle initialization failed:", dbErr);
       }
     }
+
+    const RAZORPAY_KEY_ID = context.env.RAZORPAY_KEY_ID;
+    const RAZORPAY_KEY_SECRET = context.env.RAZORPAY_KEY_SECRET;
+    const DODO_API_KEY = context.env.DODO_API_KEY;
 
     // --- RAZORPAY CHECKOUT (INDIA - INR) ---
     if (gateway === "razorpay") {
@@ -127,10 +124,7 @@ export async function onRequestPost(context: any) {
         orderId = order.id;
       } catch (error: any) {
         console.error("Razorpay order creation failed:", error.message);
-        return new Response(JSON.stringify({ error: "Payment gateway error" }), {
-          status: 502,
-          headers: { "Content-Type": "application/json" },
-        });
+        return errorResponse("Payment gateway error", 502);
       }
 
       // Record payment intent in database if available
@@ -151,19 +145,13 @@ export async function onRequestPost(context: any) {
         }
       }
 
-      return new Response(
-        JSON.stringify({
-          gateway: "razorpay",
-          key: RAZORPAY_KEY_ID,
-          orderId: orderId,
-          amount: amountInPaise,
-          currency: "INR",
-        }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return jsonResponse({
+        gateway: "razorpay",
+        key: RAZORPAY_KEY_ID,
+        orderId: orderId,
+        amount: amountInPaise,
+        currency: "INR",
+      });
     }
 
     // --- DODO PAYMENTS CHECKOUT (GLOBAL - USD) ---
@@ -188,17 +176,25 @@ export async function onRequestPost(context: any) {
           environment: "live_mode",
         });
 
+        const billingCity = body.billingCity || "City";
+        const billingCountry = body.billingCountry || "US";
+        const billingState = body.billingState || "State";
+        const billingStreet = body.billingStreet || "";
+        const billingZipcode = body.billingZipcode || "";
+        const customerEmail = body.email || "";
+        const customerName = body.name || "ToolHub User";
+
         const paymentInfo = await client.payments.create({
           billing: {
-            city: "City",
-            country: "US",
-            state: "State",
-            street: "123 Main St",
-            zipcode: "00000",
+            city: billingCity,
+            country: billingCountry,
+            state: billingState,
+            street: billingStreet,
+            zipcode: billingZipcode,
           },
           customer: {
-            email: "customer@example.com",
-            name: "ToolHub User",
+            email: customerEmail,
+            name: customerName,
           },
           product_cart: [
             {
@@ -212,10 +208,7 @@ export async function onRequestPost(context: any) {
         checkoutUrl = (paymentInfo as any).checkout_url || `https://checkout.dodopayments.com/${paymentId}`;
       } catch (error: any) {
         console.error("DodoPayments session creation failed:", error.message);
-        return new Response(JSON.stringify({ error: "Payment gateway error" }), {
-          status: 502,
-          headers: { "Content-Type": "application/json" },
-        });
+        return errorResponse("Payment gateway error", 502);
       }
 
       // Record payment intent in database if available
@@ -236,29 +229,17 @@ export async function onRequestPost(context: any) {
         }
       }
 
-      return new Response(
-        JSON.stringify({
-          gateway: "dodo",
-          paymentId: paymentId,
-          checkoutUrl: checkoutUrl,
-        }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return jsonResponse({
+        gateway: "dodo",
+        paymentId: paymentId,
+        checkoutUrl: checkoutUrl,
+      });
     }
 
-    return new Response(JSON.stringify({ error: "Invalid configuration state" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return errorResponse("Invalid configuration state", 500);
 
   } catch (err: any) {
     console.error("Checkout route internal error:", err);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return errorResponse("Internal Server Error", 500);
   }
 }

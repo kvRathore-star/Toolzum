@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import CryptoJS from 'crypto-js';
-
-const SECRET_KEY = 'toolhub_secure_key_2026'; // Obfuscation secret
 
 export type AiProvider = 'openai' | 'gemini' | 'groq';
 
@@ -13,52 +10,112 @@ export interface AiMessage {
   content: string;
 }
 
+const STORAGE_KEY = 'toolhub_ai_key_encrypted';
+const SESSION_KEY_KEY = 'toolhub_ai_session_wrapping_key';
+const PROVIDER_KEY = 'toolhub_ai_provider';
+
+async function generateWrappingKey(): Promise<CryptoKey> {
+  return await crypto.subtle.generateKey(
+    { name: 'AES-GCM', length: 256 },
+    true,
+    ['encrypt', 'decrypt']
+  );
+}
+
+async function exportWrappingKey(key: CryptoKey): Promise<string> {
+  const raw = await crypto.subtle.exportKey('raw', key);
+  const bytes = new Uint8Array(raw);
+  return btoa(String.fromCharCode(...bytes));
+}
+
+async function importWrappingKey(encoded: string): Promise<CryptoKey> {
+  const bytes = Uint8Array.from(atob(encoded), c => c.charCodeAt(0));
+  return await crypto.subtle.importKey('raw', bytes, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+}
+
+async function encryptApiKey(plaintext: string): Promise<string> {
+  const wrappingKey = await generateWrappingKey();
+  const exported = await exportWrappingKey(wrappingKey);
+  try { sessionStorage.setItem(SESSION_KEY_KEY, exported); } catch { /* noop */ }
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(plaintext);
+  const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, wrappingKey, encoded);
+  const combined = new Uint8Array(iv.length + ciphertext.byteLength);
+  combined.set(iv);
+  combined.set(new Uint8Array(ciphertext), iv.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function decryptApiKey(payload: string): Promise<string | null> {
+  const sessionKeyStr = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem(SESSION_KEY_KEY) : null;
+  if (!sessionKeyStr) return null;
+  try {
+    const wrappingKey = await importWrappingKey(sessionKeyStr);
+    const raw = Uint8Array.from(atob(payload), c => c.charCodeAt(0));
+    const iv = raw.slice(0, 12);
+    const ciphertext = raw.slice(12);
+    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, wrappingKey, ciphertext);
+    return new TextDecoder().decode(decrypted);
+  } catch {
+    return null;
+  }
+}
+
+function canUseWebCrypto(): boolean {
+  return typeof crypto !== 'undefined' && !!crypto.subtle;
+}
+
 export function useAiProvider() {
   const [provider, setProvider] = useState<AiProvider>('gemini');
   const [apiKey, setApiKey] = useState<string>('');
   const [isConfigured, setIsConfigured] = useState<boolean>(false);
 
   useEffect(() => {
-    // Load from local storage on mount
-    const savedProvider = localStorage.getItem('toolhub_ai_provider') as AiProvider;
-    const encryptedKey = localStorage.getItem('toolhub_ai_key');
-    
+    const savedProvider = localStorage.getItem(PROVIDER_KEY) as AiProvider;
     if (savedProvider) setProvider(savedProvider);
+
+    if (!canUseWebCrypto()) {
+      toast.error('This browser does not support WebCrypto. AI features unavailable.');
+      return;
+    }
+
+    const encryptedKey = localStorage.getItem(STORAGE_KEY);
     if (encryptedKey) {
-      try {
-        const bytes = CryptoJS.AES.decrypt(encryptedKey, SECRET_KEY);
-        const savedKey = bytes.toString(CryptoJS.enc.Utf8);
+      decryptApiKey(encryptedKey).then((savedKey) => {
         if (savedKey) {
           setApiKey(savedKey);
           setIsConfigured(true);
         }
-      } catch (e) {
-        // If decryption fails (e.g., old plaintext key), clear it
-        localStorage.removeItem('toolhub_ai_key');
-      }
+      });
     }
   }, []);
 
-  const saveConfiguration = (newProvider: AiProvider, newKey: string) => {
+  const saveConfiguration = async (newProvider: AiProvider, newKey: string) => {
     if (!newKey.trim()) {
       toast.error("API Key cannot be empty");
       return false;
     }
-    
-    const encryptedKey = CryptoJS.AES.encrypt(newKey.trim(), SECRET_KEY).toString();
-    localStorage.setItem('toolhub_ai_provider', newProvider);
-    localStorage.setItem('toolhub_ai_key', encryptedKey);
-    
+
+    if (!canUseWebCrypto()) {
+      toast.error('WebCrypto required but unavailable.');
+      return false;
+    }
+
+    const encrypted = await encryptApiKey(newKey.trim());
+    localStorage.setItem(PROVIDER_KEY, newProvider);
+    localStorage.setItem(STORAGE_KEY, encrypted);
+
     setProvider(newProvider);
     setApiKey(newKey.trim());
     setIsConfigured(true);
-    toast.success("API Key saved securely in your browser!");
+    toast.success("API Key saved (session-scoped encryption).");
     return true;
   };
 
   const clearConfiguration = () => {
-    localStorage.removeItem('toolhub_ai_provider');
-    localStorage.removeItem('toolhub_ai_key');
+    localStorage.removeItem(PROVIDER_KEY);
+    localStorage.removeItem(STORAGE_KEY);
+    try { sessionStorage.removeItem(SESSION_KEY_KEY); } catch { /* noop */ }
     setApiKey('');
     setIsConfigured(false);
     toast.success("API Key removed from browser.");
@@ -98,8 +155,21 @@ export function useAiProvider() {
 // API Fetchers
 // ============================================================================
 
+const API_TIMEOUT_MS = 30_000;
+
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = API_TIMEOUT_MS): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    return res;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 async function fetchOpenAICompletion(messages: AiMessage[], apiKey: string, temperature: number) {
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+  const res = await fetchWithTimeout('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -122,7 +192,7 @@ async function fetchOpenAICompletion(messages: AiMessage[], apiKey: string, temp
 }
 
 async function fetchGroqCompletion(messages: AiMessage[], apiKey: string, temperature: number) {
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const res = await fetchWithTimeout('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -145,13 +215,12 @@ async function fetchGroqCompletion(messages: AiMessage[], apiKey: string, temper
 }
 
 async function fetchGeminiCompletion(messages: AiMessage[], apiKey: string, temperature: number) {
-  // Convert standard roles to Gemini roles
   const geminiContents = messages.map(m => ({
     role: m.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: m.content }]
   }));
 
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`, {
+  const res = await fetchWithTimeout(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

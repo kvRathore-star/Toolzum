@@ -236,7 +236,7 @@ export default function AiImageUpscaler() {
                 {/* Right / Upscaled */}
                 <img
                   src={upscaledUrl}
-                  alt="Upscaled"
+                  alt="Processed result"
                   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 />
 
@@ -247,7 +247,7 @@ export default function AiImageUpscaler() {
                 >
                   <img
                     src={originalUrl || ''}
-                    alt="Original"
+                    alt="Uploaded image preview"
                     className="absolute inset-0 w-[450px] h-[450px] max-w-none object-cover pointer-events-none"
                   />
                 </div>
@@ -263,7 +263,7 @@ export default function AiImageUpscaler() {
                 {originalUrl && (
                   <img
                     src={originalUrl}
-                    alt="Source"
+                    alt="Uploaded image preview"
                     className="max-w-full max-h-full object-contain"
                   />
                 )}

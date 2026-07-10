@@ -16,4 +16,18 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: TypeCheck
+        run: npx tsc --noEmit --strict
+
+      - name: Test
+        run: npx vitest run
+
+      - name: Security Audit
+        run: npm audit --audit-level=high || true
+
+      - name: Build
+        run: npm run build

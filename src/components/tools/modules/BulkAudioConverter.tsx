@@ -2,7 +2,9 @@
 import React from 'react';
 import { BulkToolShell } from './BulkToolShell';
 
-export default function BulkAudioConverter() {
+export default function BulkAudioConverter({ defaultConfig: extraConfig }: { defaultConfig?: Record<string, unknown> } = {}) {
+  const base = { format: 'wav', sampleRate: '44100' };
+  const merged = { ...base, ...extraConfig };
   return (
     <BulkToolShell
       toolSlug="bulk-audio-converter"
@@ -60,7 +62,7 @@ export default function BulkAudioConverter() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
-            <select name="format" defaultValue="wav" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select name="format" defaultValue={merged.format as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="wav">WAV (lossless)</option>
               <option value="mp3">MP3</option>
               <option value="ogg">OGG</option>
@@ -68,7 +70,7 @@ export default function BulkAudioConverter() {
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Sample Rate</label>
-            <select name="sampleRate" defaultValue="44100" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select name="sampleRate" defaultValue={merged.sampleRate as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="8000">8 kHz (speech)</option>
               <option value="22050">22 kHz (low quality)</option>
               <option value="44100">44.1 kHz (CD quality)</option>
@@ -77,7 +79,7 @@ export default function BulkAudioConverter() {
           </div>
         </div>
       }
-      defaultConfig={{ format: 'wav', sampleRate: '44100' }}
+      defaultConfig={merged}
     />
   );
 }

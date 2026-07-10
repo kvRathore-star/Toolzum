@@ -55,7 +55,9 @@ export function initTelemetry() {
   const orig = window.onerror;
   window.onerror = (message, source, lineno, colno, error) => {
     if (error) trackError(error, "global");
-    orig?.call(window, message, source, lineno, colno, error);
+    if (typeof orig === "function") {
+      orig.call(window, message, source, lineno, colno, error);
+    }
   };
 
   window.addEventListener("unhandledrejection", (e) => {

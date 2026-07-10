@@ -10,15 +10,15 @@ import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
 
 const MENU_COLUMN_DEFS = [
-  { title: "🖼 Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "ai-image-upscaler", "heic-to-jpg"] },
-  { title: "📄 PDF", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel"] },
-  { title: "✍ Text", category: "Text", allHref: "/text", slugs: ["ai-paraphrasing-tool", "text-summarizer", "ai-translator"] },
-  { title: "🎵 Audio", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter"] },
-  { title: "🤖 AI Tools", category: "AI", allHref: "/ai", slugs: ["ai-image-generator", "ai-document-chat"] },
-  { title: "💻 Developer", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "css-minifier", "sql-formatter", "diff-checker", "html-to-markdown"] },
-  { title: "🔧 Utility", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "morse-code-translator", "password-strength-checker"] },
-  { title: "📹 Video", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-trimmer", "subtitle-generator"] },
-  { title: "🔄 Convert", category: "Converter", allHref: "/converter", slugs: ["mp4-to-mp3", "image-converter", "audio-converter"] },
+  { title: "Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "ai-image-upscaler", "heic-to-jpg"] },
+  { title: "PDF", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel"] },
+  { title: "Text", category: "Text", allHref: "/text", slugs: ["ai-paraphrasing-tool", "text-summarizer", "ai-translator"] },
+  { title: "Audio", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter"] },
+  { title: "AI Tools", category: "AI", allHref: "/ai", slugs: ["ai-image-generator", "ai-document-chat"] },
+  { title: "Developer", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "css-minifier", "sql-formatter", "diff-checker", "html-to-markdown"] },
+  { title: "Utility", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "morse-code-translator", "password-strength-checker"] },
+  { title: "Video", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-trimmer", "subtitle-generator"] },
+  { title: "Convert", category: "Converter", allHref: "/converter", slugs: ["mp4-to-mp3", "image-converter", "audio-converter"] },
 ];
 
 function buildMegamenuColumns() {
@@ -259,7 +259,7 @@ export function Header() {
                         >
                           <div className="absolute top-0 left-0 w-1 h-full bg-[var(--india)]" />
                           <h4 className="text-[13px] font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                            <span className="text-lg">🇮🇳</span> India
+                            <span className="text-lg" aria-hidden="true">🇮🇳</span> India
                           </h4>
                           <div className="flex flex-col gap-y-2">
                             <Link href="/indian-utilities/passport-photo-india" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>Passport Photo Maker</Link>
@@ -403,7 +403,7 @@ export function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--india)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
                   >
-                    🇮🇳 India
+                    <span aria-hidden="true">🇮🇳</span> India
                   </Link>
                 </div>
               </div>

@@ -29,14 +29,15 @@ export function GdprConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] shadow-2xl">
+    <div role="dialog" aria-modal="true" aria-labelledby="gdpr-title" className="fixed bottom-0 left-0 right-0 z-[9999] bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] shadow-2xl">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex items-start gap-3 flex-1">
           <Cookie className="w-5 h-5 text-[var(--text-muted)] shrink-0 mt-0.5" />
-          <div className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+          <div id="gdpr-title" className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
             We use only essential cookies and privacy-preserving analytics (no personal data collected).
             By using ToolHub, you agree to our{' '}
-            <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link> and{' '}
+            <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>,{' '}
+            <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link>, and{' '}
             <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</Link>.
           </div>
         </div>

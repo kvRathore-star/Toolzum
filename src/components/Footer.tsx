@@ -124,6 +124,7 @@ export function Footer() {
               <li><Link href="/blog" className="hover:text-[var(--accent)] transition-colors">Blog</Link></li>
               <li><Link href="/careers" className="hover:text-[var(--accent)] transition-colors flex items-center gap-2">Careers <span className="text-[10px] bg-[var(--accent)]/10 text-[var(--accent)] px-1.5 py-0.5 rounded">Hiring</span></Link></li>
               <li><Link href="/privacy" className="hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
               <li><Link href="/terms" className="hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
               <li><Link href="/contact" className="hover:text-[var(--accent)] transition-colors">Contact</Link></li>
             </ul>

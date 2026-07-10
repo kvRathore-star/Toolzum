@@ -198,20 +198,20 @@ export default function ImageCompressor() {
                 {originalUrl && (
                   <img
                     src={originalUrl}
-                    alt="Original"
-                    className="max-w-full max-h-full object-contain"
-                  />
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2 text-center">
-              <span className="text-xs font-bold text-zinc-500 uppercase block">After</span>
-              <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
-                {compressedUrl ? (
-                  <img
-                    src={compressedUrl}
-                    alt="Compressed"
+alt="Uploaded image preview"
+                     className="max-w-full max-h-full object-contain"
+                   />
+                 )}
+               </div>
+             </div>
+ 
+             <div className="space-y-2 text-center">
+               <span className="text-xs font-bold text-zinc-500 uppercase block">After</span>
+               <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
+                 {compressedUrl ? (
+                   <img
+                     src={compressedUrl}
+                     alt="Processed result"
                     className="max-w-full max-h-full object-contain"
                   />
                 ) : (

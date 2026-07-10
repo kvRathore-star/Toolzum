@@ -2,7 +2,9 @@
 import React from 'react';
 import { BulkToolShell } from './BulkToolShell';
 
-export default function BulkImageCompressor() {
+export default function BulkImageCompressor({ defaultConfig: extraConfig }: { defaultConfig?: Record<string, unknown> } = {}) {
+  const base = { quality: '80', format: 'jpeg' };
+  const merged = { ...base, ...extraConfig };
   return (
     <BulkToolShell
       toolSlug="bulk-image-compressor"
@@ -28,18 +30,18 @@ export default function BulkImageCompressor() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Quality: {50}%</label>
-            <input name="quality" type="range" min="10" max="100" defaultValue="80" className="w-full mt-1" onChange={e => { const el = e.target; const lbl = el.parentElement?.querySelector('label'); if (lbl) lbl.textContent = `Quality: ${e.target.value}%`; }} />
+            <input name="quality" type="range" min="10" max="100" defaultValue={merged.quality as string} className="w-full mt-1" onChange={e => { const el = e.target; const lbl = el.parentElement?.querySelector('label'); if (lbl) lbl.textContent = `Quality: ${e.target.value}%`; }} />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
-            <select name="format" defaultValue="jpeg" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select name="format" defaultValue={merged.format as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="jpeg">JPEG (smaller)</option>
               <option value="png">PNG (lossless)</option>
             </select>
           </div>
         </div>
       }
-      defaultConfig={{ quality: '80', format: 'jpeg' }}
+      defaultConfig={merged}
     />
   );
 }

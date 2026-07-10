@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GdprConsentBanner } from "@/components/GdprConsentBanner";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { toolsRegistry } from "@/registry/tools";
@@ -122,9 +123,11 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <Header />
 
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
+          <PostHogProvider>
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+          </PostHogProvider>
 
           <Toaster 
             position="bottom-center"
