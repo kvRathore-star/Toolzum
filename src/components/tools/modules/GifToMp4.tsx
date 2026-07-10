@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import Image from "next/image";
 
 export default function GifToMp4() {
   const [file, setFile] = useState<File | null>(null);
@@ -87,7 +88,7 @@ export default function GifToMp4() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
-          <img loading="lazy" src={URL.createObjectURL(file)} alt="Original GIF" className="max-h-[300px] object-contain rounded-lg" />
+          <Image loading="lazy" src={URL.createObjectURL(file)} alt="Original GIF" unoptimized={true} className="max-h-[300px] object-contain rounded-lg" />
         </div>
 
         <div className="space-y-6">

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Sparkles, Layout, Home, CornerDownLeft } from "lucide-react";
+import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon } from "lucide-react";
 import { CommandMenu } from "./CommandMenu";
 import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";

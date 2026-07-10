@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-react";
 import { toolsRegistry, ToolMetadata } from "@/registry/tools";

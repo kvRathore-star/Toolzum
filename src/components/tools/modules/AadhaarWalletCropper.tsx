@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { Shield, Download, RefreshCw, Upload, Crop } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import Image from "next/image";
 
 export default function AadhaarWalletCropper() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -135,12 +136,13 @@ export default function AadhaarWalletCropper() {
           ) : (
             <div className="space-y-4">
               <div className="relative border border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center">
-                <img loading="lazy" 
-                  ref={imageRef}
-                  src={imageSrc} 
-                  alt="Uploaded image preview" 
-                  className="max-w-full max-h-[350px] object-contain"
-                />
+<Image loading="lazy" 
+  ref={imageRef}
+  src={imageSrc} 
+  alt="Uploaded image preview" 
+  unoptimized={true}
+  className="max-w-full max-h-[350px] object-contain"
+/>
                 
                 {/* Simplified Crop Overlay Guides */}
                 <div 
@@ -203,12 +205,13 @@ export default function AadhaarWalletCropper() {
           {croppedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
-                <img loading="lazy" 
-                  src={croppedUrl} 
-                  alt="Processed result" 
-                  className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
-                  style={{ width: '380px', aspectRatio: '1.587' }}
-                />
+<Image loading="lazy" 
+  src={croppedUrl} 
+  alt="Processed result" 
+  unoptimized={true}
+  className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
+  style={{ width: '380px', aspectRatio: '1.587' }}
+/>
               </div>
               <button 
                 onClick={downloadCard}

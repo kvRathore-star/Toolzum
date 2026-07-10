@@ -7,6 +7,7 @@ import { FileUploader } from '../FileUploader';
 import imageCompression from 'browser-image-compression';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import Image from "next/image";
 
 type DocType = 'photo' | 'signature';
 type Portal = 'nsdl' | 'utiitsl';
@@ -264,14 +265,15 @@ export default function PanCardResizer() {
       {outputUrl && (
         <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row items-center gap-6 animate-in slide-in-from-bottom-4 duration-500">
           <div className="shrink-0 bg-white p-2 rounded-xl border border-zinc-200 dark:border-white/10 shadow-lg">
-            <img
-              src={outputUrl}
-              alt="Processed result"
-              className="object-contain max-h-[160px] rounded-lg"
-              style={{
-                width: docType === 'photo' ? '120px' : '240px',
-              }}
-            />
+<Image
+  src={outputUrl}
+  alt="Processed result"
+  unoptimized={true}
+  className="object-contain max-h-[160px] rounded-lg"
+  style={{
+    width: docType === 'photo' ? '120px' : '240px',
+  }}
+/>
           </div>
           <div className="flex-1 text-center md:text-left space-y-4">
             <div>

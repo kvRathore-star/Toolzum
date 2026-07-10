@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { ProDownloadButton } from './ProDownloadButton';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import NextImage from "next/image";
 
 const POSITIONS = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'] as const;
 
@@ -193,7 +194,7 @@ export default function BulkImageWatermark() {
           <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
             {files.map((f, i) => (
               <div key={i} className="relative group">
-                <img src={previews[i]} alt="" className="w-full h-16 object-cover rounded-[var(--radius-md)]" />
+                <NextImage src={previews[i]} alt="" unoptimized={true} className="w-full h-16 object-cover rounded-[var(--radius-md)]" />
                 <button onClick={() => removeFile(i)} className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <X className="w-3 h-3" />
                 </button>
@@ -224,7 +225,7 @@ export default function BulkImageWatermark() {
           <div onClick={() => logoRef.current?.click()} className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-lg)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors">
             {watermarkImage ? (
               <>
-                <img src={watermarkImage} alt="" className="w-10 h-10 object-contain rounded" />
+                <NextImage src={watermarkImage} alt="" unoptimized={true} className="w-10 h-10 object-contain rounded" />
                 <span className="text-sm text-[var(--text-primary)]">Logo loaded — click to change</span>
               </>
             ) : (

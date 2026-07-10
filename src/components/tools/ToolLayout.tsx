@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
-import { ChevronRight, Shield, Zap, Info, Crown, ArrowLeft, RefreshCw, Sparkles } from 'lucide-react';
+import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
 import { getToolByCategoryAndSlug, toolsRegistry } from '@/registry/tools';
 import { useSession } from '@/lib/auth-client';
 import { ToolPaywall } from './ToolPaywall';

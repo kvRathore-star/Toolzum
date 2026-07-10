@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import React from 'react';
 import { Shield, Lock, Server, FileCheck, Building2, Globe, Download, Wifi, Cpu, Code } from 'lucide-react';
 import { EnterpriseCompliance } from '@/components/EnterpriseCompliance';
 

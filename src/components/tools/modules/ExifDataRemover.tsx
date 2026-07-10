@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import NextImage from "next/image";
 
 export default function ExifDataRemover() {
   const [file, setFile] = useState<File | null>(null);
@@ -193,11 +194,12 @@ export default function ExifDataRemover() {
               @media (prefers-color-scheme: dark) { .chess-bg { background-image: linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111); } }
             `}} />
             
-            <img loading="lazy" 
-              src={outputUrl || dataUrl} 
-              alt="Uploaded image preview" 
-              className={`max-h-[350px] object-contain drop-shadow-md rounded z-10 ${!outputUrl ? 'opacity-50 grayscale' : ''}`} 
-            />
+<NextImage loading="lazy" 
+  src={outputUrl || dataUrl} 
+  alt="Uploaded image preview" 
+  unoptimized={true}
+  className={`max-h-[350px] object-contain drop-shadow-md rounded z-10 ${!outputUrl ? 'opacity-50 grayscale' : ''}`} 
+/>
             
             {!outputUrl && (
                <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">

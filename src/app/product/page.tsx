@@ -32,7 +32,7 @@ const CATEGORIES = [
       "Merge multiple documents or split pages",
       "Add watermark & passwords locally"
     ],
-    link: "/tools/pdf"
+    link: "/pdf"
   },
   {
     id: "image",

@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { Image as ImageIcon, Download, Upload, Sliders } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import Image from "next/image";
 
 export default function ImageColorizer() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -81,12 +82,13 @@ export default function ImageColorizer() {
           ) : (
             <div className="space-y-4">
               <div className="border border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center p-2">
-                <img loading="lazy" 
-                  ref={imageRef}
-                  src={imageSrc} 
-                  alt="Uploaded image preview" 
-                  className="max-w-full max-h-[250px] object-contain"
-                />
+<Image loading="lazy" 
+  ref={imageRef}
+  src={imageSrc} 
+  alt="Uploaded image preview" 
+  unoptimized={true}
+  className="max-w-full max-h-[250px] object-contain"
+/>
               </div>
 
               <div className="space-y-3">
@@ -122,11 +124,12 @@ export default function ImageColorizer() {
           {colorizedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
-                <img loading="lazy" 
-                  src={colorizedUrl} 
-                  alt="Processed result" 
-                  className="shadow-lg max-w-full max-h-[280px] object-contain rounded"
-                />
+<Image loading="lazy" 
+  src={colorizedUrl} 
+  alt="Processed result" 
+  unoptimized={true}
+  className="shadow-lg max-w-full max-h-[280px] object-contain rounded"
+/>
               </div>
               <button 
                 onClick={downloadImage}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
-import { AlertTriangle, RefreshCw, Copy, ExternalLink } from 'lucide-react';
+import { AlertTriangle, RefreshCw, Copy } from 'lucide-react';
 
 function FallbackComponent({ error, resetErrorBoundary }: FallbackProps) {
   const [copied, setCopied] = useState(false);

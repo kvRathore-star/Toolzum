@@ -5,6 +5,7 @@ import { Download, Upload, Crown, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Link from 'next/link';
+import NextImage from "next/image";
 
 const ICON_SIZES = [
   { size: 1024, label: 'App Store (iOS)', file: 'AppStore-1024x1024.png' },
@@ -143,7 +144,7 @@ export default function BulkAppIconGenerator() {
           >
             {imagePreview ? (
               <div className="text-center">
-                <img src={imagePreview} alt="Preview" className="w-24 h-24 object-contain mx-auto mb-3 rounded-lg" />
+                <NextImage src={imagePreview} alt="Preview" unoptimized={true} className="w-24 h-24 object-contain mx-auto mb-3 rounded-lg" />
                 <p className="text-sm text-[var(--text-primary)]">{imageFile?.name}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Click to change</p>
               </div>

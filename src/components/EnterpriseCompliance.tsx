@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Shield, Lock, Server, FileCheck, Building2, Globe } from 'lucide-react';
 
 const complianceItems = [

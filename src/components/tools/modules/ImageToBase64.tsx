@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FileUploader } from '../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import Image from "next/image";
 
 export default function ImageToBase64() {
   const [file, setFile] = useState<File | null>(null);
@@ -103,7 +104,7 @@ export default function ImageToBase64() {
                 }
               }
             `}} />
-            <img loading="lazy" src={dataUrl} alt="Preview" className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+            <Image loading="lazy" src={dataUrl} alt="Preview" unoptimized={true} className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
           </div>
         </div>
 

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import NextImage from "next/image";
 
 export default function Base64ToImage() {
   const [base64Input, setBase64Input] = useState('');
@@ -145,7 +146,7 @@ export default function Base64ToImage() {
             `}} />
             
             {imageUrl ? (
-              <img loading="lazy" src={imageUrl} alt="Decoded" className="max-w-full max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+              <NextImage loading="lazy" src={imageUrl} alt="Decoded" unoptimized={true} className="max-w-full max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
             ) : (
               <div className="text-zinc-400 flex flex-col items-center gap-2 z-10 bg-zinc-50/80 dark:bg-black/80 px-6 py-4 rounded-xl backdrop-blur-sm">
                 <svg className="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>

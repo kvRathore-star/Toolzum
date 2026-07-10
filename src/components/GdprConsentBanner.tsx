@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { X, Cookie } from 'lucide-react';
+import { Cookie } from 'lucide-react';
 
 const CONSENT_KEY = 'th_gdpr_consent';
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Download, Sparkles, Image as ImageIcon, Link2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import NextImage from "next/image";
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -185,11 +186,12 @@ export default function AiImageGenerator() {
                 <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">This typically takes 3 to 6 seconds.</p>
               </div>
             ) : imageUrl ? (
-              <img
-                src={imageUrl}
-                alt="Processed result"
-                className="max-w-full max-h-[480px] object-contain rounded-lg shadow-md animate-in zoom-in-95 duration-300"
-              />
+<NextImage
+  src={imageUrl}
+  alt="Processed result"
+  unoptimized={true}
+  className="max-w-full max-h-[480px] object-contain rounded-lg shadow-md animate-in zoom-in-95 duration-300"
+/>
             ) : (
               <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-400">
                 <ImageIcon className="w-10 h-10 mb-3 text-zinc-300 dark:text-zinc-700 animate-bounce" />

@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import Image from "next/image";
 
 type Mode = 'video' | 'gif';
 
@@ -228,7 +229,7 @@ export default function VideoCompressor() {
                 {mode === 'video' ? (
                   <video src={outputUrl} controls className="w-full max-h-[250px]" />
                 ) : (
-                  <img src={outputUrl} alt="Compressed GIF" className="max-h-[250px] object-contain" />
+                  <Image src={outputUrl} alt="Compressed GIF" unoptimized={true} className="max-h-[250px] object-contain" />
                 )}
               </div>
               {outputSize && (
