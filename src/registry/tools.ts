@@ -2376,7 +2376,6 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
     category: "Developer",
     description: "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
     seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
-    dependencies: "DNS API",
   },
   {
     name: "Pronunciation Tool",
@@ -2384,7 +2383,6 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
     category: "Text",
     description: "Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed.",
     seoDescription: "Free online Pronunciation Tool — Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed. Works in your browser.",
-    dependencies: "Web Speech API",
   },
 ];
 // Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
