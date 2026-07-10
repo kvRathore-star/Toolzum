@@ -55,7 +55,7 @@ const SkeletonLoader = () => (
   </div>
 );
 
-const MODULE_REGISTRY: Record<string, React.ComponentType<object>> = {
+const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'passport-photo-india': dynamic(() => import('@/components/tools/modules/PassportPhotoIndia'), { 
     ssr: false, 
     loading: () => <DynamicImportFallback slug="passport-photo-india" />
