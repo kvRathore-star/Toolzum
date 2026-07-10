@@ -15,7 +15,6 @@ import { toast } from "react-hot-toast";
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = "Contact | Toolzum";
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');

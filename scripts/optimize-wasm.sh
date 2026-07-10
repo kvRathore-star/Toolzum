@@ -19,7 +19,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 WASM_DIR="$ROOT_DIR/public/wasm"
 MANIFEST="$WASM_DIR/manifest.json"
 
-echo "=== ToolHub WASM Optimizer ==="
+echo "=== Toolzum WASM Optimizer ==="
 
 # Step 1: Build Rust crates if any exist
 if [ -d "$ROOT_DIR/crates" ]; then

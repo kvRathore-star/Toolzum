@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "toolhub-production",
+  "name": "toolzum-production",
   "compatibility_date": "2026-05-23",
   "compatibility_flags": [
     "nodejs_compat"
@@ -9,7 +9,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "toolhub-db",
+      "database_name": "toolzum-db",
       "database_id": "PASTE_YOUR_D1_DATABASE_ID_HERE"
     }
   ]

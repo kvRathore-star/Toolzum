@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/lib/blog-posts";
 import { ArrowRight, Calendar, Clock, User } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Blog — Guides & Engineering",
+  description:
+    "Read practical how-to guides, technical deep-dives, and privacy analysis for browser-based tools on the Toolzum blog.",
+  openGraph: {
+    title: "Blog | Toolzum",
+    description:
+      "Practical how-to guides, technical deep-dives, and privacy analysis for browser-based tools.",
+  },
+};
 
 const engineeringPosts: Array<{
   slug: string; title: string; excerpt: string; author: string; date: string; isoDate: string; readTime: string; tag: string; tagColor: string;

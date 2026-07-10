@@ -364,7 +364,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         </div>
       </section>
 
-      {/* ===== 6. WHY TOOLHUB ===== */}
+      {/* ===== 6. WHY TOOLZUM ===== */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

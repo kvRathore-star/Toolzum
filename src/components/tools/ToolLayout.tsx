@@ -14,7 +14,6 @@ import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import { ShareTool } from '@/components/ShareTool';
 
-import { PostProcessUpgrade } from '@/components/PostProcessUpgrade';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
@@ -245,7 +244,6 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           <PostDownloadBar />
           <PostDownloadSurvey />
-          <PostProcessUpgrade toolName={title} />
         </div>
       </>
     );

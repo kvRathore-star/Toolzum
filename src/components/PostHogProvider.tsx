@@ -27,8 +27,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!POSTHOG_KEY || !initialized) return;
-    if (lastPath.current === pathname) return;
-    lastPath.current = pathname;
     posthog.capture('$pageview');
   }, [pathname]);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { 
   ShieldCheck, 
   Cpu, 
@@ -13,16 +13,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function AboutPage() {
-  useEffect(() => {
-    document.title = "About | Toolzum";
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('name', 'description');
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', 'About Toolzum — privacy-first web tools, all processed in your browser. Nothing uploaded, ever.');
-  }, []);
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">

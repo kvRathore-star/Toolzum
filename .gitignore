@@ -53,10 +53,10 @@ next-env.d.ts
 CLAUDE.md
 implementation_plan.md
 plan.md
-toolhub_distribution_audit.md
+toolzum_distribution_audit.md
 pre_audit_report.md
 tools_list.csv
-docs/ToolHub_MasterPrompt.md
+docs/Toolzum_MasterPrompt.md
 
 # wrangler config with D1 database ID
 wrangler.jsonc

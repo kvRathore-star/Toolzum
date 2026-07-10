@@ -114,7 +114,7 @@ export function Header() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-1 group select-none">
             <span className="text-[22px] font-semibold tracking-tight text-[var(--text-primary)]">
-              Tool<span className="text-[var(--accent)]">Hub</span>
+              Tool<span className="text-[var(--accent)]">zum</span>
             </span>
           </Link>
 
@@ -280,7 +280,7 @@ export function Header() {
                       <div className="flex gap-4 text-[12px] font-medium text-[var(--text-secondary)]">
                         <Link href="/image/background-remover" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>BG Remover</Link>
                         <Link href="/pdf/pdf-compressor" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>PDF Compress</Link>
-                        <Link href="/downloader/youtube-downloader" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
+                        <Link href="/video/yt-to-mp3" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
                       </div>
                     </div>
                   </motion.div>

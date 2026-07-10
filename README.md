@@ -1,4 +1,4 @@
-# ToolHub
+# Toolzum
 
 Client-side utility toolbox with 260+ tools across image, PDF, video, audio, AI, developer, and Indian utilities. Every file operation runs in your browser — zero server uploads.
 

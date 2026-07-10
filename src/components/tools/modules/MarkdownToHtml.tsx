@@ -24,7 +24,7 @@ You can make text **bold**, *italic*, or ~~strikethrough~~.
 ### Code Block
 \`\`\`javascript
 function greet(name) {
-  console.log("Hello, " + name + "!");
+
 }
 greet("World");
 \`\`\`

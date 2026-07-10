@@ -6,23 +6,37 @@ import {
   Lock,
   Eye,
   EyeOff,
-  GitBranch,
-  Globe,
   LogIn,
+  Globe,
   ArrowRight,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { signIn } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.error("Authentication is not available in offline mode");
+    setLoading(true);
+    try {
+      const result = await signIn.email({ email, password });
+      if (result.error) {
+        toast.error(result.error.message || "Invalid credentials");
+      } else {
+        toast.success("Signed in successfully");
+        window.location.href = "/dashboard";
+      }
+    } catch {
+      toast.error("Failed to sign in. Check your credentials.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -126,9 +140,9 @@ export default function LoginPage() {
             </div>
 
             {/* Submit */}
-            <Button type="submit" variant="primary" size="md" className="w-full gap-2">
-              Sign In
-              <ArrowRight className="w-4 h-4" />
+            <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
+              {!loading && <ArrowRight className="w-4 h-4" />}
             </Button>
           </form>
 
@@ -145,25 +159,12 @@ export default function LoginPage() {
           <div className="flex flex-col gap-3">
             <button
               type="button"
-              onClick={() =>
-                toast.error("Authentication is not available in offline mode")
-              }
+              onClick={() => signIn.social({ provider: "google" })}
               className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
               style={{ borderRadius: "var(--radius-md)" }}
             >
               <Globe className="w-4 h-4" />
               Sign in with Google
-            </button>
-            <button
-              type="button"
-              onClick={() =>
-                toast.error("Authentication is not available in offline mode")
-              }
-              className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
-              style={{ borderRadius: "var(--radius-md)" }}
-            >
-              <GitBranch className="w-4 h-4" />
-              Sign in with GitHub
             </button>
           </div>
 
@@ -171,7 +172,7 @@ export default function LoginPage() {
           <p className="text-center text-xs text-[var(--text-muted)] mt-6">
             Don&apos;t have an account?{" "}
             <Link
-              href="/sign-up"
+              href="/login"
               className="text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors font-medium"
             >
               Create one

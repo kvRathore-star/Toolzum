@@ -78,7 +78,7 @@ export function Footer() {
           {/* Column 1: Brand */}
           <div className="flex flex-col items-start">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">Hub</span></span>
+              <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">zum</span></span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
               Privacy first web tools — PDF, images, video, AI and more — in one place. Zero uploads. Starts in seconds.

@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import React from 'react';
 import { Shield, Lock, Server, FileCheck, Building2, Globe, Download, Wifi, Cpu, Code } from 'lucide-react';
 import { EnterpriseCompliance } from '@/components/EnterpriseCompliance';
+
+export const metadata: Metadata = {
+  title: "Security & Architecture",
+  description:
+    "Toolzum's security architecture — everything runs in your browser via WebAssembly. Zero data uploads, complete transparency.",
+  openGraph: {
+    title: "Security & Architecture | Toolzum",
+  },
+};
 
 const sections = [
   {

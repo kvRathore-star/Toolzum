@@ -56,29 +56,42 @@ function generateSitemap() {
   }
 
   const staticPages = [
-    '', 'about', 'ai-hub', 'api', 'blog', 'careers', 'changelog',
+    '', 'about', 'ai-hub', 'blog', 'careers', 'changelog',
     'contact', 'dashboard', 'extension', 'pricing', 'privacy',
     'product', 'roadmap', 'status', 'terms', 'tools',
   ];
 
   const uniqueCategories = [...new Set(uniqueTools.map(t => slugify(t.category)))];
 
+  const seenUrls = new Set();
   const allUrls = [];
 
   // Static pages
   for (const page of staticPages) {
-    allUrls.push({ loc: page ? `${BASE_URL}/${page}` : BASE_URL, changefreq: 'daily', priority: page === '' ? '1.0' : '0.8' });
+    const loc = page ? `${BASE_URL}/${page}` : BASE_URL;
+    if (!seenUrls.has(loc)) {
+      seenUrls.add(loc);
+      allUrls.push({ loc, changefreq: 'daily', priority: page === '' ? '1.0' : '0.8' });
+    }
   }
 
   // Category pages
   for (const category of uniqueCategories.sort()) {
-    allUrls.push({ loc: `${BASE_URL}/${category}`, changefreq: 'weekly', priority: '0.7' });
+    const loc = `${BASE_URL}/${category}`;
+    if (!seenUrls.has(loc)) {
+      seenUrls.add(loc);
+      allUrls.push({ loc, changefreq: 'weekly', priority: '0.7' });
+    }
   }
 
   // Tool pages
   for (const tool of uniqueTools) {
     const categorySlug = slugify(tool.category);
-    allUrls.push({ loc: `${BASE_URL}/${categorySlug}/${tool.slug}`, changefreq: 'weekly', priority: '0.6' });
+    const loc = `${BASE_URL}/${categorySlug}/${tool.slug}`;
+    if (!seenUrls.has(loc)) {
+      seenUrls.add(loc);
+      allUrls.push({ loc, changefreq: 'weekly', priority: '0.6' });
+    }
   }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
