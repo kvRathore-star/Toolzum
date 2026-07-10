@@ -31,7 +31,7 @@ interface ToolLayoutProps {
 
 const proToolCount = toolsRegistry.filter(t => t.isPro).length;
 const toolCount = toolsRegistry.length;
-const SITE_URL = "https://gotoolhub.com";
+const SITE_URL = "https://toolzum.com";
 
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");

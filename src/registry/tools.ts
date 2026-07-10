@@ -2370,6 +2370,24 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
   { slug: "bulk-mkv-to-mp4", name: "Bulk MKV to MP4", category: "Video", description: "Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues.", seoDescription: 'Free online Bulk MKV to MP4 — Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues. 100% browser-based, no uploads.', parentSlug: "bulk-video-compressor" },
   { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", seoDescription: 'Free online Bulk MP4 Compressor — Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings. 100% browser-based, no uploads.', parentSlug: "bulk-video-compressor" },
   { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", seoDescription: 'Free online Bulk Photo Metadata Remover — Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload. 100% browser-based, no uploads.', parentSlug: "bulk-exif-stripper-injector" },
+  {
+    id: "domain-availability-checker",
+    name: "Domain Availability Checker",
+    slug: "domain-availability-checker",
+    category: "Developer",
+    description: "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
+    seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
+    dependencies: "DNS API",
+  },
+  {
+    id: "pronunciation-tool",
+    name: "Pronunciation Tool",
+    slug: "pronunciation-tool",
+    category: "Text",
+    description: "Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed.",
+    seoDescription: "Free online Pronunciation Tool — Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed. Works in your browser.",
+    dependencies: "Web Speech API",
+  },
 ];
 // Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
   for (const p of SEO_PERMUTATIONS) {

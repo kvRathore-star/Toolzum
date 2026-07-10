@@ -44,6 +44,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: disallowPaths,
       },
     ],
-    sitemap: "https://gotoolhub.com/sitemap.xml",
+    sitemap: "https://toolzum.com/sitemap.xml",
   };
 }

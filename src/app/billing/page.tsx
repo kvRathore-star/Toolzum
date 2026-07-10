@@ -45,7 +45,7 @@ export default function BillingPage() {
             </p>
             <div className="space-y-3">
               <a
-                href="mailto:support@gotoolhub.com?subject=Cancel%20Subscription"
+                href="mailto:support@toolzum.com?subject=Cancel%20Subscription"
                 className="flex items-center gap-2 w-full py-3 px-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800/30 text-red-600 dark:text-red-400 rounded-[var(--radius-lg)] text-sm font-medium hover:bg-red-100 dark:hover:bg-red-950/30 transition-colors"
               >
                 <Mail className="w-4 h-4" /> Request cancellation via email

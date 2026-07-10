@@ -20,14 +20,14 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   if (!toolMetadata) return { title: 'Not Found' };
 
   const desc = toolMetadata.seoDescription || `Free online ${toolMetadata.name}: ${toolMetadata.description.charAt(0).toLowerCase() + toolMetadata.description.slice(1)}. 100% browser-based, nothing uploaded.`;
-  const ogImageUrl = `https://gotoolhub.com/${params.category}/${params.tool}/opengraph-image`;
+  const ogImageUrl = `https://toolzum.com/${params.category}/${params.tool}/opengraph-image`;
 
   return {
     title: `${toolMetadata.name} — Free Online Tool`,
     description: desc,
     keywords: `${toolMetadata.name.toLowerCase()}, free online ${toolMetadata.name.toLowerCase()}, ${toolMetadata.category.toLowerCase()} tool`,
     alternates: {
-      canonical: `https://gotoolhub.com/${params.category}/${params.tool}`,
+      canonical: `https://toolzum.com/${params.category}/${params.tool}`,
     },
     openGraph: {
       title: `${toolMetadata.name} - Free Online Tool`,

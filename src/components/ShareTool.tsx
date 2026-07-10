@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Share2, Link as LinkIcon, Check } from 'lucide-react';
 
-const SITE_URL = 'https://gotoolhub.com';
+const SITE_URL = 'https://toolzum.com';
 
 const platforms = [
   { name: 'X (Twitter)', emoji: '𝕏', color: 'hover:bg-zinc-100 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-zinc-100' },

@@ -369,6 +369,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<object>> = {
   'bulk-mkv-to-mp4': dynamic(() => import('@/components/tools/modules/BulkMkvToMp4'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-mkv-to-mp4" /> }),
   'bulk-compress-mp4': dynamic(() => import('@/components/tools/modules/BulkCompressMp4'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-compress-mp4" /> }),
   'bulk-strip-exif': dynamic(() => import('@/components/tools/modules/BulkStripExif'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-strip-exif" /> }),
+  'domain-availability-checker': dynamic(() => import('@/components/tools/modules/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
+  'pronunciation-tool': dynamic(() => import('@/components/tools/modules/PronunciationTool'), { ssr: false, loading: () => <DynamicImportFallback slug="pronunciation-tool" /> }),
   'bulk-video-compressor': dynamic(() => import('@/components/tools/modules/BulkVideoCompressor'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-video-compressor" /> }),
   'bulk-video-size-reducer': dynamic(() => import('@/components/tools/modules/BulkVideoSizeReducer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-video-size-reducer" /> }),
   'bulk-video-subtitle-burner': dynamic(() => import('@/components/tools/modules/BulkVideoSubtitleBurner'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-video-subtitle-burner" /> }),

@@ -2,7 +2,7 @@ const RATE_LIMIT_WINDOW = 60; // 60 seconds
 const RATE_LIMIT_MAX = 30; // 30 requests per window
 
 const ALLOWED_ORIGINS = new Set([
-  "https://gotoolhub.com",
+  "https://toolzum.com",
   "http://localhost:3000",
   "http://localhost:8788",
 ]);
@@ -17,13 +17,13 @@ function getOrigin(request: Request): string {
       if (ALLOWED_ORIGINS.has(refOrigin)) return refOrigin;
     } catch { /* ignore invalid referer */ }
   }
-  return "https://gotoolhub.com";
+  return "https://toolzum.com";
 }
 
 export function jsonResponse(data: unknown, status = 200, cors = true, request?: Request) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (cors) {
-    headers["Access-Control-Allow-Origin"] = request ? getOrigin(request) : "https://gotoolhub.com";
+    headers["Access-Control-Allow-Origin"] = request ? getOrigin(request) : "https://toolzum.com";
     headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS";
     headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, x-turnstile-token, x-download-fingerprint, webhook-id, webhook-signature, webhook-timestamp, x-razorpay-signature";
     headers["Vary"] = "Origin";

@@ -23,4 +23,4 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
-Sitemap: https://gotoolhub.com/sitemap.xml
+Sitemap: https://toolzum.com/sitemap.xml

@@ -28,8 +28,8 @@ const instrumentSerif = Instrument_Serif({
 const toolCount = toolsRegistry.length;
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gotoolhub.com'),
-  alternates: { canonical: "https://gotoolhub.com" },
+  metadataBase: new URL('https://toolzum.com'),
+  alternates: { canonical: "https://toolzum.com" },
   title: {
     default: "ToolHub — Privacy-First Web Tools",
     template: "%s | ToolHub",
@@ -83,8 +83,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "ToolHub",
-                "url": "https://gotoolhub.com",
-                "logo": "https://gotoolhub.com/og-image.png",
+                "url": "https://toolzum.com",
+                "logo": "https://toolzum.com/og-image.png",
                 "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
                 "sameAs": [],
               },
@@ -92,13 +92,13 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "ToolHub",
-                "url": "https://gotoolhub.com",
+                "url": "https://toolzum.com",
                 "description": `${toolCount}+ free, privacy-first web tools. Everything processed in your browser — nothing uploaded.`,
                 "potentialAction": {
                   "@type": "SearchAction",
                   "target": {
                     "@type": "EntryPoint",
-                    "urlTemplate": "https://gotoolhub.com/tools?search={search_term_string}"
+                    "urlTemplate": "https://toolzum.com/tools?search={search_term_string}"
                   },
                   "query-input": "required name=search_term_string"
                 }

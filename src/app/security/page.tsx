@@ -145,7 +145,7 @@ export default function SecurityPage() {
             Need a formal security assessment for your procurement team? We maintain a comprehensive security questionnaire.
           </p>
           <a
-            href="mailto:security@gotoolhub.com"
+            href="mailto:security@toolzum.com"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] transition-all text-sm"
           >
             <Download className="w-4 h-4" /> Request Security Package

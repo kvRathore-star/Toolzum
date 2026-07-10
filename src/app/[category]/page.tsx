@@ -29,7 +29,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     title: `${categoryKey} Tools — Free Online Utilities`,
     description: `Free online ${categoryKey} tools — ${toolCount} utilities. Process files locally, nothing leaves your browser.`,
     alternates: {
-      canonical: `https://gotoolhub.com/${params.category}`,
+      canonical: `https://toolzum.com/${params.category}`,
     },
   };
 }

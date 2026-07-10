@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://gotoolhub.com';
+const BASE_URL = 'https://toolzum.com';
 const TOOLS_REGISTRY_PATH = path.join(__dirname, '../src/registry/tools.ts');
 const PUBLIC_DIR = path.join(__dirname, '../public');
 

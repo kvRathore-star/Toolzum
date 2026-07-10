@@ -26,7 +26,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "7 min read",
     tag: "PDF",
     tagColor: "bg-red-500/10 text-red-400 border-red-500/20",
-    canonical: "https://gotoolhub.com/blog/compress-pdf-without-losing-quality",
+    canonical: "https://toolzum.com/blog/compress-pdf-without-losing-quality",
     content: `
 Large PDF files are a common headache. Email servers reject them, websites take too long to upload them, and sharing them with colleagues becomes a waiting game. But the obvious solution — compressing the file — often comes with a hidden cost: blurry text, pixelated images, and diagrams that become unreadable.
 
@@ -101,7 +101,7 @@ Instead of uploading your next PDF to an unknown server, give our free PDF Compr
     readTime: "8 min read",
     tag: "Image",
     tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    canonical: "https://gotoolhub.com/blog/free-online-photo-editor-no-signup",
+    canonical: "https://toolzum.com/blog/free-online-photo-editor-no-signup",
     content: `
 Finding a photo editor that does not demand your email address, phone number, or credit card has become surprisingly difficult. Most free tools these days require account creation, and many upload your images to their servers — often without clearly stating what they do with them afterward.
 
@@ -180,7 +180,7 @@ Try any of the tools mentioned above. They are free, they respect your privacy, 
     readTime: "6 min read",
     tag: "AI",
     tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    canonical: "https://gotoolhub.com/blog/remove-background-from-image-free",
+    canonical: "https://toolzum.com/blog/remove-background-from-image-free",
     content: `
 Removing the background from an image used to mean spending twenty minutes with the magic wand tool in Photoshop, carefully tracing edges, and zooming in to fix stray pixels around hair. Modern AI-powered tools have changed that entirely. Now you can remove a background in seconds with a single click — no design skills required.
 
@@ -249,7 +249,7 @@ Our free Background Remover is available right now in your browser. Upload any p
     readTime: "6 min read",
     tag: "Video",
     tagColor: "bg-green-500/10 text-green-400 border-green-500/20",
-    canonical: "https://gotoolhub.com/blog/convert-video-to-mp3-audio-free",
+    canonical: "https://toolzum.com/blog/convert-video-to-mp3-audio-free",
     content: `
 There are many reasons to extract audio from a video file. You might want the soundtrack from a lecture as a study resource, the audio from a recorded meeting to share with a colleague who only needs the discussion, or the music from a video to add to your personal library.
 
@@ -344,7 +344,7 @@ Try the Video to MP3 Converter now. No sign-up, no uploads, and your video never
     readTime: "9 min read",
     tag: "Privacy",
     tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    canonical: "https://gotoolhub.com/blog/privacy-first-browser-tools-guide",
+    canonical: "https://toolzum.com/blog/privacy-first-browser-tools-guide",
     content: `
 There is a well-known saying in the tech industry: if a product is free, you are the product. Nowhere is this more true than in the world of free online tools. Every day, millions of people upload documents, images, and personal data to websites that claim to offer free processing — but behind the scenes, those files are being stored, analyzed, and sometimes used to train AI models or sold to third parties.
 
