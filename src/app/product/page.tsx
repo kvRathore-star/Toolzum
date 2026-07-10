@@ -226,7 +226,7 @@ export default function ProductPage() {
                   <span className="w-3 h-3 rounded-full bg-green-500/30" />
                 </div>
                 <div className="bg-[var(--bg-base)] px-4 py-1 rounded border border-[var(--border-subtle)] text-[10px]">
-                  toolhub://sandbox-{activeCategory.id}
+                  toolzum://sandbox-{activeCategory.id}
                 </div>
                 <Settings className="w-4 h-4 text-[var(--text-muted)]" />
               </div>

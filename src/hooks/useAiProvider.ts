@@ -10,9 +10,9 @@ export interface AiMessage {
   content: string;
 }
 
-const STORAGE_KEY = 'toolhub_ai_key_encrypted';
-const SESSION_KEY_KEY = 'toolhub_ai_session_wrapping_key';
-const PROVIDER_KEY = 'toolhub_ai_provider';
+const STORAGE_KEY = 'toolzum_ai_key_encrypted';
+const SESSION_KEY_KEY = 'toolzum_ai_session_wrapping_key';
+const PROVIDER_KEY = 'toolzum_ai_provider';
 
 async function generateWrappingKey(): Promise<CryptoKey> {
   return await crypto.subtle.generateKey(

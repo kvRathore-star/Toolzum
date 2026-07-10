@@ -17,9 +17,9 @@ export function PostDownloadBar() {
       timerRef.current = setTimeout(() => setShow(false), 8000);
     };
 
-    window.addEventListener("toolhub:download-completed", handler);
+    window.addEventListener("toolzum:download-completed", handler);
     return () => {
-      window.removeEventListener("toolhub:download-completed", handler);
+      window.removeEventListener("toolzum:download-completed", handler);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);

@@ -22,7 +22,7 @@ export default function ChromeExtensionPage() {
   const [activeTab, setActiveTab] = useState<"picker" | "tools" | "qr">("picker");
   const [selectedColor, setSelectedColor] = useState("#a855f7");
   const [copied, setCopied] = useState(false);
-  const [qrText, setQrText] = useState("https://toolhub.pages.dev");
+  const [qrText, setQrText] = useState("https://toolzum.com");
   const [copiedZip, setCopiedZip] = useState(false);
 
   const colors = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#14b8a6", "#f43f5e"];

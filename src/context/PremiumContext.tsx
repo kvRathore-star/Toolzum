@@ -23,7 +23,7 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmPcFjUMBzuGWNexNe+ylzscMuNRt
 6OIAbddZIJp9O4xz7SyyitTU3EHTL9jWhmr8IriJzazGK+kwGX/EORgvfg==
 -----END PUBLIC KEY-----`;
 
-const PRO_ISSUER = 'toolhub-license-server';
+const PRO_ISSUER = 'toolzum-license-server';
 
 function validateProClaims(claims: jose.JWTPayload): claims is ProLicensePayload {
   if (!claims || typeof claims !== 'object') return false;
@@ -58,11 +58,11 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('toolhub_pro_token');
+    const token = localStorage.getItem('toolzum_pro_token');
     if (token) {
       verifyLicense(token).then(valid => {
         if (!valid) {
-          localStorage.removeItem('toolhub_pro_token');
+          localStorage.removeItem('toolzum_pro_token');
         }
       });
     }

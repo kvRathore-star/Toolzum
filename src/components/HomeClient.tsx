@@ -159,7 +159,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                 <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
                 <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                 <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolhub — browser-supercomputer</span>
+                <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-supercomputer</span>
               </div>
 
               <div className="flex-1 p-6 flex flex-col">

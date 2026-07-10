@@ -18,7 +18,7 @@ export default function ToDoList() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('toolhub_todo_list');
+    const saved = localStorage.getItem('toolzum_todo_list');
     if (saved) {
       try {
         setItems(JSON.parse(saved));
@@ -30,7 +30,7 @@ export default function ToDoList() {
 
   const saveItems = (newItems: ToDoItem[]) => {
     setItems(newItems);
-    localStorage.setItem('toolhub_todo_list', JSON.stringify(newItems));
+    localStorage.setItem('toolzum_todo_list', JSON.stringify(newItems));
   };
 
   const addItem = () => {

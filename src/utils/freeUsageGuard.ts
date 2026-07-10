@@ -42,7 +42,7 @@ function readCount(key: string): number {
     const v = localStorage.getItem(key);
     return v ? parseInt(v, 10) || 0 : 0;
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return 0;
   }
 }
@@ -52,7 +52,7 @@ function writeCount(key: string, value: number) {
   try {
     localStorage.setItem(key, String(value));
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
   }
 }
 
@@ -65,7 +65,7 @@ function getSignedInStatus(): boolean {
     }
     return !!localStorage.getItem("better-auth.session");
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return false;
   }
 }
@@ -82,7 +82,7 @@ export function getRemainingDownloads(): number {
     const totalUsed = isSignedIn ? anonUsed + signedUsed : anonUsed;
     return Math.max(0, TOTAL_FREE - totalUsed);
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return 0;
   }
 }
@@ -93,7 +93,7 @@ function detectTampering(): boolean {
     const fp = localStorage.getItem(STORAGE_KEYS.fingerprint);
     return fp !== null && fp !== getFingerprint();
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return false;
   }
 }
@@ -106,7 +106,7 @@ function resetCounts() {
     writeCount(STORAGE_KEYS.signedInCount, 0);
     localStorage.setItem(STORAGE_KEYS.fingerprint, getFingerprint());
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
   }
 }
 
@@ -129,7 +129,7 @@ export function incrementDownloadCount(): void {
 
     localStorage.setItem(STORAGE_KEYS.fingerprint, getFingerprint());
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
   }
 }
 
@@ -152,7 +152,7 @@ async function callServerCheck(): Promise<ServerCheckResponse | null> {
     if (!res.ok) return null;
     return await res.json() as ServerCheckResponse;
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return null;
   }
 }
@@ -169,7 +169,7 @@ async function callServerRecord(): Promise<boolean> {
     const data = await res.json() as ServerRecordResponse;
     return data.allowed === true;
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return false;
   }
 }
@@ -181,9 +181,9 @@ export async function checkAndRecordDownload(): Promise<boolean> {
   const server = await callServerCheck();
   if (server !== null && !server.allowed) {
     try {
-      window.dispatchEvent(new CustomEvent("toolhub:download-blocked"));
+      window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
     } catch (e) {
-      console.error("[toolhub]", e);
+      console.error("[toolzum]", e);
     }
     return false;
   }
@@ -192,9 +192,9 @@ export async function checkAndRecordDownload(): Promise<boolean> {
   const remaining = getRemainingDownloads();
   if (remaining <= 0) {
     try {
-      window.dispatchEvent(new CustomEvent("toolhub:download-blocked"));
+      window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
     } catch (e) {
-      console.error("[toolhub]", e);
+      console.error("[toolzum]", e);
     }
     return false;
   }
@@ -202,7 +202,7 @@ export async function checkAndRecordDownload(): Promise<boolean> {
   // 3. Record on server first (blocking — must succeed to authorise)
   const serverRecorded = await callServerRecord();
   if (!serverRecorded) {
-    console.warn("[toolhub] Server-side download record failed — rejecting to stay safe");
+    console.warn("[toolzum] Server-side download record failed — rejecting to stay safe");
     return false;
   }
 
@@ -210,10 +210,10 @@ export async function checkAndRecordDownload(): Promise<boolean> {
   incrementDownloadCount();
 
   try {
-    window.dispatchEvent(new CustomEvent("toolhub:download-completed"));
+    window.dispatchEvent(new CustomEvent("toolzum:download-completed"));
     localStorage.setItem("th_last_download", Date.now().toString());
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
   }
   return true;
 }

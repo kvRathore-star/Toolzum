@@ -15,9 +15,9 @@ export function PostDownloadSurvey() {
       if (localStorage.getItem(SURVEY_KEY)) return;
       timerRef.current = setTimeout(() => setVisible(true), 2000);
     };
-    window.addEventListener("toolhub:download-completed", handler);
+    window.addEventListener("toolzum:download-completed", handler);
     return () => {
-      window.removeEventListener("toolhub:download-completed", handler);
+      window.removeEventListener("toolzum:download-completed", handler);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
@@ -26,7 +26,7 @@ export function PostDownloadSurvey() {
 
   const dismiss = () => {
     setVisible(false);
-    try { localStorage.setItem(SURVEY_KEY, "1"); } catch (e) { console.error("[toolhub]", e); }
+    try { localStorage.setItem(SURVEY_KEY, "1"); } catch (e) { console.error("[toolzum]", e); }
   };
 
   const respond = (helpful: boolean) => {
@@ -35,7 +35,7 @@ export function PostDownloadSurvey() {
       responses.push({ helpful, timestamp: Date.now() });
       localStorage.setItem("th_survey_responses", JSON.stringify(responses));
       localStorage.setItem(SURVEY_KEY, "1");
-    } catch (e) { console.error("[toolhub]", e); }
+    } catch (e) { console.error("[toolzum]", e); }
     toast.success(helpful ? "Thanks for your feedback!" : "We'll work on improving.");
     setVisible(false);
   };
@@ -46,7 +46,7 @@ export function PostDownloadSurvey() {
       emails.push({ email, timestamp: Date.now() });
       localStorage.setItem("th_email_captures", JSON.stringify(emails));
       localStorage.setItem(SURVEY_KEY, "1");
-    } catch (e) { console.error("[toolhub]", e); }
+    } catch (e) { console.error("[toolzum]", e); }
     toast.success("We'll keep you posted!");
     setVisible(false);
   };

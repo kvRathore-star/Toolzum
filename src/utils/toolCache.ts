@@ -25,7 +25,7 @@ export function getCachedOutput(input: string, toolSlug: string): string | null 
     }
     return data;
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     trackError(e instanceof Error ? e : new Error(String(e)), "toolcache_get");
     return null;
   }
@@ -51,7 +51,7 @@ export function setCachedOutput(input: string, toolSlug: string, data: string, t
       toRemove.forEach(k => localStorage.removeItem(k));
     }
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     trackError(e instanceof Error ? e : new Error(String(e)), "toolcache_set");
   }
 }

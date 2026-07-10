@@ -14,7 +14,7 @@ export async function withErrorHandling<T>(
     return await fn();
   } catch (e) {
     if (options.log && typeof e === 'object' && e !== null) {
-      console.error('[toolhub]', e);
+      console.error('[toolzum]', e);
     }
     if (options.toast) {
       toast.error(options.toast);

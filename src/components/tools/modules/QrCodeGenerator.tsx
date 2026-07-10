@@ -11,7 +11,7 @@ export default function QrCodeGenerator() {
   
   // Content states
   const [textContent, setTextContent] = useState('Hello from Toolzum!');
-  const [urlContent, setUrlContent] = useState('https://toolhub.dev');
+  const [urlContent, setUrlContent] = useState('https://toolzum.com');
   
   // Wifi states
   const [wifiSsid, setWifiSsid] = useState('MyNetwork');
@@ -116,7 +116,7 @@ export default function QrCodeGenerator() {
   const reset = () => {
     setQrType('url');
     setTextContent('Hello from Toolzum!');
-    setUrlContent('https://toolhub.dev');
+    setUrlContent('https://toolzum.com');
     setWifiSsid('MyNetwork');
     setWifiPass('MyPassword');
     setWifiSec('WPA');

@@ -39,12 +39,12 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('toolhub:navMode');
+    const saved = localStorage.getItem('toolzum:navMode');
     if (saved === 'sidebar' || saved === 'menubar') setNavMode(saved);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('toolhub:navMode', navMode);
+    localStorage.setItem('toolzum:navMode', navMode);
   }, [navMode]);
 
   useEffect(() => {

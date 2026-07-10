@@ -16,7 +16,7 @@ function readHistory(): ToolHistoryEntry[] {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
     return [];
   }
 }
@@ -25,7 +25,7 @@ function writeHistory(entries: ToolHistoryEntry[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
   } catch (e) {
-    console.error("[toolhub]", e);
+    console.error("[toolzum]", e);
   }
 }
 
