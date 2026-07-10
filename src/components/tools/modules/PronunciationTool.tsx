@@ -146,7 +146,7 @@ export default function PronunciationTool() {
         }
         return;
       }
-      const data = await res.json();
+      const data: DictionaryEntry[] = await res.json();
       setDictionaryData(data[0]);
       addToHistory(word.trim());
       speakText(word.trim());
