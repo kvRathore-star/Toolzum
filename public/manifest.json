@@ -1,8 +1,8 @@
 {
-  "name": "Toolzum — 290+ Free Privacy-First Tools",
+  "name": "Toolzum — Free Privacy-First Tools",
   "short_name": "Toolzum",
   "lang": "en",
-  "description": "290+ free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
+  "description": "Free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
@@ -37,7 +37,7 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Toolzum Home — 290+ Privacy-First Tools"
+      "label": "Toolzum Home — Free Privacy-First Tools"
     }
   ],
   "shortcuts": [

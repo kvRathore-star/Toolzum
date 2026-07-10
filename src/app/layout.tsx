@@ -21,6 +21,12 @@ const geistMono = Geist_Mono({
 
 const toolCount = toolsRegistry.length;
 
+export function reportWebVitals(metric: { name: string; value: number; label: string }) {
+  if (process.env.NODE_ENV === "production") {
+    console.log("[web-vital]", metric.name, metric.value, metric.label);
+  }
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),
   alternates: { canonical: "https://toolzum.com" },
@@ -101,7 +107,7 @@ export default function RootLayout({
           }}
         />
         {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
-          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`} />
+          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN })} />
         )}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

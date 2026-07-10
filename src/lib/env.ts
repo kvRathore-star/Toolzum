@@ -37,6 +37,12 @@ export function validateServerEnv(env: Record<string, string | undefined>): EnvR
   return missing.length > 0 ? { ok: false, missing } : { ok: true };
 }
 
+export function getRequiredEnv(name: string): string {
+  const val = process.env[name];
+  if (!val) throw new Error(`Missing required env var: ${name}`);
+  return val;
+}
+
 export function getPublicEnvVar(name: string): string | undefined {
   return process.env[name];
 }

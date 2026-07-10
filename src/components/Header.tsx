@@ -234,7 +234,7 @@ export function Header() {
                                 <li key={t.name}>
                                   <Link
                                     href={t.href}
-                                    className="block py-1.5 pl-2 text-[14px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-l-2 hover:border-[var(--accent)] transition-all border-l-2 border-transparent"
+                                    className="block py-1.5 pl-2 text-[14px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] focus:text-[var(--text-primary)] hover:border-l-2 hover:border-[var(--accent)] focus:border-l-2 focus:border-[var(--accent)] transition-all border-l-2 border-transparent"
                                     onClick={() => setMegaMenuOpen(false)}
                                   >
                                     {t.name}

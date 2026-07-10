@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "@/db/schema";
+import { getRequiredEnv } from "./env";
 
 export const auth = betterAuth({
   database: drizzleAdapter(
@@ -17,8 +18,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: getRequiredEnv("GOOGLE_CLIENT_ID"),
+      clientSecret: getRequiredEnv("GOOGLE_CLIENT_SECRET"),
     },
   },
   user: {

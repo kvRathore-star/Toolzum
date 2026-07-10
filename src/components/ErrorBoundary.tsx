@@ -32,7 +32,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error in Tool Module:", error, errorInfo);
+    console.error("[tool-module-error]", error.message, errorInfo.componentStack?.slice(0, 500));
     this.setState({ errorInfo: errorInfo.componentStack || "" });
   }
 
