@@ -176,13 +176,13 @@ export async function onRequestPost(context: any) {
           environment: "live_mode",
         });
 
-        const billingCity = body.billingCity || "City";
-        const billingCountry = body.billingCountry || "US";
-        const billingState = body.billingState || "State";
-        const billingStreet = body.billingStreet || "";
-        const billingZipcode = body.billingZipcode || "";
-        const customerEmail = body.email || "";
-        const customerName = body.name || "Toolzum User";
+        const billingCity = (body.billingCity as string) || "City";
+        const billingCountry = (body.billingCountry as string) || "US";
+        const billingState = (body.billingState as string) || "State";
+        const billingStreet = (body.billingStreet as string) || "";
+        const billingZipcode = (body.billingZipcode as string) || "";
+        const customerEmail = (body.email as string) || "";
+        const customerName = (body.name as string) || "Toolzum User";
 
         const paymentInfo = await client.payments.create({
           billing: {
