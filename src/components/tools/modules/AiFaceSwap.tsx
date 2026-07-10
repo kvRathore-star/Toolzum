@@ -124,21 +124,19 @@ export default function AiFaceSwap() {
       
       {/* Hidden helper images for canvas rendering */}
       {sourceImg && (
-<Image loading="lazy"
+<Image unoptimized={true} loading="lazy"
   ref={sourceImageRef}
   src={sourceImg}
   alt="Face preview"
-  unoptimized={true}
   className="hidden"
   onLoad={drawComposite}
 />
       )}
       {targetImg && (
-<Image loading="lazy"
+<Image unoptimized={true} loading="lazy"
   ref={targetImageRef}
   src={targetImg}
   alt="Face preview"
-  unoptimized={true}
   className="hidden"
   onLoad={drawComposite}
 />

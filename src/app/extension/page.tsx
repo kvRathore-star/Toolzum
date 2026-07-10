@@ -35,17 +35,7 @@ export default function ChromeExtensionPage() {
   };
 
   const handleDownloadZip = () => {
-    // Generate a simple dummy zip client-side
-    const dummyContent = "Toolzum Extension Manifest & Files. Please unpack and install via Chrome Extensions Developer mode.";
-    const blob = new Blob([dummyContent], { type: "application/zip" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "toolzum-extension.zip";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    toast.success("Coming soon — join the waitlist for early access.");
     
     setCopiedZip(true);
     setTimeout(() => setCopiedZip(false), 3000);
@@ -73,7 +63,7 @@ export default function ChromeExtensionPage() {
             Access your favorite utility tools without switching tabs. Take full-page screenshots, pick colors from elements, and encode text instantly.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="gap-2" onClick={handleDownloadZip}>
+            <Button size="lg" className="gap-2 opacity-60 cursor-not-allowed" disabled>
               <Download className="w-4.5 h-4.5" /> Download Extension ZIP
             </Button>
             <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener noreferrer">

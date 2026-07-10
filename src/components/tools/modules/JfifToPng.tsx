@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
+import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 
@@ -43,7 +44,7 @@ export default function JfifToPng() {
          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
            <input type="file" accept="image/jpeg, .jfif" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
            {image ? (
-             <img loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
+             <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
            ) : (
              <div className="text-zinc-500">Click or Drag JFIF Image Here</div>
            )}

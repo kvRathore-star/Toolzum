@@ -1,14 +1,5 @@
 import type { MetadataRoute } from "next";
 
-const MOVED_SLUGS: string[] = [];
-
-const disallowPaths = [
-  "/api/",
-  "/dashboard/",
-  ...MOVED_SLUGS.map(s => `/${s}`),
-  ...MOVED_SLUGS.map(s => `/tools/${s}`),
-];
-
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
@@ -41,7 +32,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: disallowPaths,
+        disallow: ["/api/", "/dashboard/"],
       },
     ],
     sitemap: "https://toolzum.com/sitemap.xml",

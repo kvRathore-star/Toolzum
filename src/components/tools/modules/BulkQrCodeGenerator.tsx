@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
+import Image from "next/image";
 import QRCode from 'qrcode';
 import JSZip from 'jszip';
 import { Download, Upload, Crown, FileSpreadsheet, Loader2 } from 'lucide-react';
@@ -135,7 +136,7 @@ export default function BulkQrCodeGenerator() {
             </button>
             {singleQrUrl && (
               <div className="flex flex-col items-center gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                <img loading="lazy" src={singleQrUrl} alt="QR Code" className="w-48 h-48 border border-zinc-200 dark:border-zinc-700 rounded-xl" />
+                <Image unoptimized={true} loading="lazy" src={singleQrUrl} alt="QR Code" className="w-48 h-48 border border-zinc-200 dark:border-zinc-700 rounded-xl" />
                 <button onClick={() => downloadOrShare(singleQrUrl, 'qrcode.png')}
                   className="flex items-center gap-1.5 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold rounded-xl text-xs hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
                   <Download className="w-3.5 h-3.5" /> Download PNG

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
+import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
 import { RotateCcw, RotateCw, Download } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -67,7 +68,7 @@ export default function RotateImage() {
            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
            {image ? (
              <div className="relative inline-block transition-transform duration-300" style={{ transform: `rotate(${rotation}deg)` }}>
-               <img loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
+               <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
              </div>
            ) : (
              <div className="text-zinc-500">Click or Drag Image Here</div>

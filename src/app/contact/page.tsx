@@ -166,6 +166,7 @@ export default function ContactPage() {
                 <div>
                   <label className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Inquiry Category</label>
                   <select
+                    aria-label="Inquiry category"
                     value={formData.subject}
                     onChange={(e) => setFormData({...formData, subject: e.target.value})}
                     className="w-full bg-[var(--bg-base)] text-xs border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)] font-mono"

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import NextImage from "next/image";
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -189,7 +190,7 @@ export default function FaviconGenerator() {
                       }
                     }
                   `}} />
-                  <img loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
+                  <NextImage unoptimized={true} loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
                 </div>
              </div>
           )}

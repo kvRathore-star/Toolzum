@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
+import NextImage from "next/image";
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -119,7 +120,7 @@ export default function SvgToPngConverter() {
               background-position: 0 0, 10px 10px;
             }
           `}} />
-          <img loading="lazy" src={URL.createObjectURL(file)} className="max-h-[300px] object-contain drop-shadow-2xl" alt="SVG Preview" />
+          <NextImage unoptimized={true} loading="lazy" src={URL.createObjectURL(file)} className="max-h-[300px] object-contain drop-shadow-2xl" alt="SVG Preview" />
         </div>
 
         <div className="space-y-6">

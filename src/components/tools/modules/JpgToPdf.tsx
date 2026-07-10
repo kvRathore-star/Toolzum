@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import NextImage from "next/image";
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -208,7 +209,7 @@ export default function JpgToPdf() {
                   <div key={img.id} className="flex items-center gap-4 bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800 group">
                     <span className="text-xs font-bold text-zinc-400 w-6">{index + 1}.</span>
                     <div className="w-16 h-16 rounded-lg overflow-hidden bg-zinc-200 dark:bg-black shrink-0 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center">
-                      <img loading="lazy" src={img.dataUrl} className="max-w-full max-h-full object-cover" alt="Preview" />
+                      <NextImage unoptimized={true} loading="lazy" src={img.dataUrl} className="max-w-full max-h-full object-cover" alt="Preview" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{img.file.name}</p>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import NextImage from "next/image";
 import { FileUploader } from '../FileUploader';
 import imageCompression from 'browser-image-compression';
 import { Download, RefreshCw, Sliders, Image as ImageIcon, Zap } from 'lucide-react';
@@ -196,7 +197,7 @@ export default function ImageCompressor() {
               <span className="text-xs font-bold text-zinc-500 uppercase block">Before</span>
               <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
                 {originalUrl && (
-                  <img
+                  <NextImage
                     src={originalUrl}
 alt="Uploaded image preview"
                      className="max-w-full max-h-full object-contain"
@@ -209,7 +210,7 @@ alt="Uploaded image preview"
                <span className="text-xs font-bold text-zinc-500 uppercase block">After</span>
                <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
                  {compressedUrl ? (
-                   <img
+                   <NextImage
                      src={compressedUrl}
                      alt="Processed result"
                     className="max-w-full max-h-full object-contain"
