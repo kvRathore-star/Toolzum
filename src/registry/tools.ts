@@ -199,6 +199,24 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Convert MP4 to MP3 online free — extract audio from video files and download as MP3. High-quality, preserves bitrate. 100% free, no uploads.'
   },
   {
+    id: "17b",
+    name: "MOV to MP3",
+    slug: "mov-to-mp3",
+    category: "Converter",
+    description: 'Extracts the audio track from QuickTime MOV video files and encodes it as a high-quality MP3 file.',
+    seoDescription: 'Free online MOV to MP3 — Extracts the audio track from QuickTime MOV video files and encodes it as a high-quality MP3 file. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg"
+  },
+  {
+    id: "17c",
+    name: "WebM to MP3",
+    slug: "webm-to-mp3",
+    category: "Converter",
+    description: 'Extracts the audio track from WebM video files and encodes it as a high-quality MP3 file.',
+    seoDescription: 'Free online WebM to MP3 — Extracts the audio track from WebM video files and encodes it as a high-quality MP3 file. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg"
+  },
+  {
     id: "pdf-comp-1",
     name: "PDF Compressor",
     description: 'Reduces PDF file size by compressing embedded images and removing redundant metadata. Offers three compression tiers. Max 50MB.',
@@ -826,6 +844,42 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "FFmpeg"
   },
   {
+    id: "mp4-mkv-1",
+    name: "MP4 to MKV Converter",
+    description: 'Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream.',
+    seoDescription: 'Free online MP4 to MKV Converter — Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream. 100% browser-based, no uploads.',
+    category: "Converter",
+    slug: "mp4-to-mkv",
+    dependencies: "ffmpeg",
+  },
+  {
+    id: "mp4-mov-1",
+    name: "MP4 to MOV Converter",
+    description: 'Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports.',
+    seoDescription: 'Free online MP4 to MOV Converter — Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports. 100% browser-based, no uploads.',
+    category: "Converter",
+    slug: "mp4-to-mov",
+    dependencies: "ffmpeg",
+  },
+  {
+    id: "mkv-mov-1",
+    name: "MKV to MOV Converter",
+    description: 'Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie.',
+    seoDescription: 'Free online MKV to MOV Converter — Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie. 100% browser-based, no uploads.',
+    category: "Converter",
+    slug: "mkv-to-mov",
+    dependencies: "ffmpeg",
+  },
+  {
+    id: "mov-mkv-1",
+    name: "MOV to MKV Converter",
+    description: 'Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility.',
+    seoDescription: 'Free online MOV to MKV Converter — Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility. 100% browser-based, no uploads.',
+    category: "Converter",
+    slug: "mov-to-mkv",
+    dependencies: "ffmpeg",
+  },
+  {
     id: "111",
     name: "Video Compressor",
     slug: "video-compressor",
@@ -1088,6 +1142,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "PapaParse"
   },
   {
+    id: "151b",
+    name: "CSV to XML",
+    slug: "csv-to-xml",
+    category: "Converter",
+    description: 'Parses CSV data and converts it into well-formed XML documents using configurable root and row element names.',
+    seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. 100% browser-based, no uploads.',
+    dependencies: "PapaParse / xml2js"
+  },
+  {
     id: "152",
     name: "Rotate PDF",
     slug: "rotate-pdf",
@@ -1232,6 +1295,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "marked.js"
   },
   {
+    id: "167b",
+    name: "Text to Markdown",
+    slug: "text-to-markdown",
+    category: "Converter",
+    description: 'Converts plain text into clean Markdown format by separating paragraphs and preserving line breaks as Markdown-compatible structure.',
+    seoDescription: 'Free online Text to Markdown — Converts plain text into clean Markdown format by separating paragraphs and preserving line breaks as Markdown-compatible structure. 100% browser-based, no uploads.',
+    dependencies: "None"
+  },
+  {
     id: "168",
     name: "Compare PDF Files",
     slug: "compare-pdf-files",
@@ -1333,6 +1405,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Parses arbitrary HTML and converts it into clean, readable Markdown while intelligently stripping inline styles and scripts.',
     seoDescription: 'Free online HTML to Markdown — Parses arbitrary HTML and converts it into clean, readable Markdown while intelligently stripping inline styles and scripts. 100% browser-based, no uploads.',
     dependencies: "Turndown"
+  },
+  {
+    id: "183b",
+    name: "Markdown to Text",
+    slug: "markdown-to-text",
+    category: "Converter",
+    description: 'Strips Markdown formatting syntax from documents and returns clean, readable plain text for copy-pasting or further processing.',
+    seoDescription: 'Free online Markdown to Text — Strips Markdown formatting syntax from documents and returns clean, readable plain text for copy-pasting or further processing. 100% browser-based, no uploads.',
+    dependencies: "None"
   },
   {
     id: "184",

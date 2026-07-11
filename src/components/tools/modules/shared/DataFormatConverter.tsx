@@ -1,0 +1,319 @@
+"use client";
+
+import React, { useState, useMemo, useCallback } from 'react';
+import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from '@/utils/nativeShare';
+
+type FormatPair = {
+  slug: string;
+  inputLabel: string;
+  outputLabel: string;
+  label: string;
+  inputAccept?: string;
+  category: 'converter' | 'developer';
+};
+
+const FORMAT_PAIRS: FormatPair[] = [
+  { slug: 'json-to-csv', inputLabel: 'JSON', outputLabel: 'CSV', label: 'JSON \u2192 CSV', inputAccept: '.json', category: 'converter' },
+  { slug: 'csv-to-json', inputLabel: 'CSV', outputLabel: 'JSON', label: 'CSV \u2192 JSON', inputAccept: '.csv', category: 'converter' },
+  { slug: 'json-to-xml', inputLabel: 'JSON', outputLabel: 'XML', label: 'JSON \u2192 XML', inputAccept: '.json', category: 'developer' },
+  { slug: 'xml-to-json', inputLabel: 'XML', outputLabel: 'JSON', label: 'XML \u2192 JSON', inputAccept: '.xml', category: 'developer' },
+  { slug: 'xml-to-csv', inputLabel: 'XML', outputLabel: 'CSV', label: 'XML \u2192 CSV', inputAccept: '.xml', category: 'developer' },
+  { slug: 'csv-to-xml', inputLabel: 'CSV', outputLabel: 'XML', label: 'CSV \u2192 XML', inputAccept: '.csv', category: 'converter' },
+  { slug: 'markdown-to-html', inputLabel: 'Markdown', outputLabel: 'HTML', label: 'MD \u2192 HTML', category: 'converter' },
+  { slug: 'html-to-markdown', inputLabel: 'HTML', outputLabel: 'Markdown', label: 'HTML \u2192 MD', category: 'converter' },
+  { slug: 'text-to-markdown', inputLabel: 'Text', outputLabel: 'Markdown', label: 'Text \u2192 MD', category: 'converter' },
+  { slug: 'markdown-to-text', inputLabel: 'Markdown', outputLabel: 'Text', label: 'MD \u2192 Text', category: 'converter' },
+];
+
+const RELATED: Record<string, string[]> = {
+  'json-to-csv': ['csv-to-json', 'json-to-xml', 'xml-to-csv'],
+  'csv-to-json': ['json-to-csv', 'csv-to-xml', 'xml-to-csv'],
+  'json-to-xml': ['xml-to-json', 'json-to-csv', 'xml-to-csv'],
+  'xml-to-json': ['json-to-xml', 'xml-to-csv', 'csv-to-json'],
+  'xml-to-csv': ['csv-to-xml', 'xml-to-json', 'json-to-csv'],
+  'csv-to-xml': ['xml-to-csv', 'csv-to-json', 'json-to-xml'],
+  'markdown-to-html': ['html-to-markdown', 'text-to-markdown', 'markdown-to-text'],
+  'html-to-markdown': ['markdown-to-html', 'text-to-markdown', 'markdown-to-text'],
+  'text-to-markdown': ['markdown-to-text', 'markdown-to-html', 'html-to-markdown'],
+  'markdown-to-text': ['text-to-markdown', 'markdown-to-html', 'html-to-markdown'],
+};
+
+type DataFormatConverterProps = {
+  slug: string;
+  description?: string;
+};
+
+export default function DataFormatConverter({ slug, description }: DataFormatConverterProps) {
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+
+  const handleConvert = useCallback(async () => {
+    if (!input.trim()) { setOutput(''); return; }
+    setIsProcessing(true);
+    try {
+      let result = '';
+      switch (slug) {
+        case 'json-to-csv': {
+          const { default: Papa } = await import('papaparse');
+          const parsed = JSON.parse(input);
+          result = Papa.unparse(Array.isArray(parsed) ? parsed : [parsed]);
+          break;
+        }
+        case 'csv-to-json': {
+          const { default: Papa } = await import('papaparse');
+          Papa.parse(input, {
+            header: true, skipEmptyLines: true,
+            complete: (r: any) => { result = JSON.stringify(r.data, null, 2); },
+            error: () => { throw new Error('Failed to parse CSV'); }
+          });
+          break;
+        }
+        case 'json-to-xml': {
+          const { Builder } = await import('xml2js');
+          const builder = new Builder();
+          result = builder.buildObject(JSON.parse(input));
+          break;
+        }
+        case 'xml-to-json': {
+          const { parseStringPromise } = await import('xml2js');
+          const parsed = await parseStringPromise(input, { explicitArray: false, mergeAttrs: true });
+          result = JSON.stringify(parsed, null, 2);
+          break;
+        }
+        case 'xml-to-csv': {
+          const { parseStringPromise } = await import('xml2js');
+          const { default: Papa } = await import('papaparse');
+          const parsed = await parseStringPromise(input, { explicitArray: false, mergeAttrs: true });
+          const findArray = (obj: any): any[] | null => {
+            if (Array.isArray(obj)) return obj;
+            if (typeof obj === 'object' && obj !== null) {
+              for (const key in obj) {
+                const val = obj[key];
+                if (Array.isArray(val)) return val;
+                if (typeof val === 'object') { const n = findArray(val); if (n) return n; }
+              }
+            }
+            return null;
+          };
+          const data = findArray(parsed) || [parsed];
+          result = Papa.unparse(data);
+          break;
+        }
+        case 'csv-to-xml': {
+          const { default: Papa } = await import('papaparse');
+          const { Builder } = await import('xml2js');
+          const parsed = await new Promise<any>((resolve, reject) => {
+            Papa.parse(input, { header: true, skipEmptyLines: true, complete: (r: any) => resolve(r.data), error: reject });
+          });
+          const builder = new Builder();
+          result = builder.buildObject({ root: { item: parsed } });
+          break;
+        }
+        case 'markdown-to-html': {
+          const { marked } = await import('marked');
+          const parsed = marked.parse(input);
+          result = typeof parsed === 'string' ? parsed : await parsed;
+          break;
+        }
+        case 'html-to-markdown': {
+          // @ts-ignore
+          const TurndownService = (await import('turndown')).default;
+          const turndown = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
+          result = turndown.turndown(input);
+          break;
+        }
+        case 'text-to-markdown': {
+          result = input.split('\n').map(line => line.trim()).filter(Boolean).join('\n\n');
+          break;
+        }
+        case 'markdown-to-text': {
+          result = input
+            .replace(/^###\s?/gm, '')
+            .replace(/^##\s?/gm, '')
+            .replace(/^#\s?/gm, '')
+            .replace(/\*\*(.*?)\*\*/g, '$1')
+            .replace(/\*(.*?)\*/g, '$1')
+            .replace(/`(.*?)`/g, '$1')
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+            .replace(/^[-\*]\s/gm, '')
+            .replace(/^\d+\.\s/gm, '')
+            .replace(/^>\s/gm, '')
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
+          break;
+        }
+      }
+      setOutput(result);
+      toast.success('Converted successfully!');
+    } catch (e: any) {
+      toast.error(e.message || 'Conversion failed. Check your input.');
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [slug, input]);
+
+  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      setInput(evt.target?.result as string);
+      setTimeout(() => handleConvert(), 100);
+    };
+    reader.readAsText(file);
+  }, [handleConvert]);
+
+  const copyOutput = useCallback(() => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Copied to clipboard!');
+  }, [output]);
+
+  const downloadOutput = useCallback(() => {
+    if (!output) return;
+    const extMap: Record<string, string> = { 'json-to-csv': 'csv', 'csv-to-json': 'json', 'json-to-xml': 'xml', 'xml-to-json': 'json', 'xml-to-csv': 'csv', 'csv-to-xml': 'xml', 'markdown-to-html': 'html', 'html-to-markdown': 'md', 'text-to-markdown': 'md', 'markdown-to-text': 'txt' };
+    const ext = extMap[slug] || 'txt';
+    const mimeMap: Record<string, string> = { csv: 'text/csv;charset=utf-8;', json: 'application/json', xml: 'text/xml', html: 'text/html', md: 'text/markdown', txt: 'text/plain' };
+    const blob = new Blob([output], { type: mimeMap[ext] || 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    downloadOrShare(url, `converted.${ext}`);
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+  }, [output, slug]);
+
+  const related = RELATED[slug] || [];
+
+  const isMarkdownOutput = pair.outputLabel === 'Markdown' || pair.outputLabel === 'HTML';
+
+  return (
+    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 items-center justify-center">
+        {FORMAT_PAIRS.map(p => {
+          const active = p.slug === slug;
+          return (
+            <Link
+              key={p.slug}
+              href={`/${p.category}/${p.slug}`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                active
+                  ? 'bg-blue-500 text-white shadow-md'
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              }`}
+            >
+              {p.label}
+            </Link>
+          );
+        })}
+      </div>
+
+      {description && (
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+      )}
+
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-xl shadow-sm gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          {pair.inputAccept && (
+            <label className="cursor-pointer bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              Upload {pair.inputLabel} File
+              <input type="file" accept={pair.inputAccept} onChange={handleFileUpload} className="hidden" />
+            </label>
+          )}
+        </div>
+
+        <button
+          onClick={handleConvert}
+          disabled={isProcessing}
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50"
+        >
+          {isProcessing ? 'Converting...' : `Convert to ${pair.outputLabel}`}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
+        <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-white/10 px-4 py-3 flex justify-between items-center">
+            <h3 className="font-bold text-zinc-700 dark:text-zinc-300 text-sm flex items-center gap-2">
+              {pair.inputLabel} Input
+            </h3>
+            <button
+              onClick={() => { setInput(''); setOutput(''); }}
+              className="text-xs text-zinc-500 hover:text-red-500 transition-colors"
+            >
+              Clear
+            </button>
+          </div>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={`Paste ${pair.inputLabel} here...`}
+            className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
+            spellCheck="false"
+          />
+        </div>
+
+        <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
+            <h3 className="font-bold text-zinc-700 dark:text-zinc-300 text-sm flex items-center gap-2">
+              {pair.outputLabel} Output
+            </h3>
+            <div className="flex gap-2">
+              <button
+                onClick={copyOutput}
+                disabled={!output}
+                className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+              >
+                Copy
+              </button>
+              <button
+                onClick={downloadOutput}
+                disabled={!output}
+                className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+              >
+                Save .{slug.includes('markdown') && pair.outputLabel === 'Text' ? 'txt' : slug.split('-').pop()}
+              </button>
+            </div>
+          </div>
+          <div className="flex-1 overflow-auto p-4">
+            {output ? (
+              <pre className="text-emerald-600 dark:text-emerald-400 m-0 font-mono text-sm whitespace-pre-wrap">
+                {output}
+              </pre>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-zinc-400 space-y-2 opacity-50">
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                <span>{pair.outputLabel} output will appear here</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {related.length > 0 && (
+        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+          <div className="flex flex-wrap gap-2">
+            {related.map(s => {
+              const p = FORMAT_PAIRS.find(fp => fp.slug === s);
+              if (!p) return null;
+              return (
+                <Link
+                  key={s}
+                  href={`/${p.category}/${s}`}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                >
+                  {p.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
