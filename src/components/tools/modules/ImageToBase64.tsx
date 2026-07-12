@@ -5,6 +5,7 @@ import { FileUploader } from '../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Image from "next/image";
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function ImageToBase64() {
   const [file, setFile] = useState<File | null>(null);
@@ -25,7 +26,7 @@ export default function ImageToBase64() {
     const text = getOutputString();
     if (!text) return;
     try {
-      await navigator.clipboard.writeText(text);
+      await clipboardWrite(text);
       toast.success("Base64 string copied to clipboard!");
     } catch (e) {
       toast.error("Failed to copy to clipboard.");

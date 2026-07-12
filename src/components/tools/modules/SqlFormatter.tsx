@@ -5,6 +5,7 @@ import { AlignLeft, Copy, Download, Check } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { format } from 'sql-formatter';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function SqlFormatter() {
   const [input, setInput] = useState('');
@@ -34,7 +35,7 @@ export default function SqlFormatter() {
 
   const handleCopy = () => {
     if (!output) return;
-    navigator.clipboard.writeText(output);
+    clipboardWrite(output);
     toast.success('Copied!');
   };
 

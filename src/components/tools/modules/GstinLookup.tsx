@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, Building2, MapPin, Calendar, Shield, FileSpreadsheet, Download, Check, X, Upload, Copy, Info } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const GSTIN_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
 const STATE_CODES: Record<string, string> = {
@@ -171,7 +172,7 @@ export default function GstinLookup() {
                     <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
                       <Download className="w-3 h-3" /> Export CSV
                     </button>
-                    <button onClick={() => { navigator.clipboard.writeText(JSON.stringify(result, null, 2)); toast.success('Copied!'); }}
+                    <button onClick={() => { clipboardWrite(JSON.stringify(result, null, 2)); toast.success('Copied!'); }}
                       className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
                       <Copy className="w-3 h-3" /> Copy JSON
                     </button>

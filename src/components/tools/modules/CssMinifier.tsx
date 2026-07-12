@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Sparkles, Copy, Download, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function CssMinifier() {
   const [input, setInput] = useState('');
@@ -47,7 +48,7 @@ export default function CssMinifier() {
 
   const handleCopy = () => {
     if (!output) return;
-    navigator.clipboard.writeText(output);
+    clipboardWrite(output);
     toast.success('Copied!');
   };
 

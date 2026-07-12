@@ -5,6 +5,7 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import { Clipboard, Download, Sparkles } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function AiCoverLetterGenerator() {
   const { isConfigured, generateCompletion } = useAiProvider();
@@ -36,7 +37,7 @@ export default function AiCoverLetterGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(outputText);
+    clipboardWrite(outputText);
     toast.success('Copied to clipboard!');
   };
 

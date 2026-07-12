@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy, Check, Code, ExternalLink } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface FontOption {
   name: string;
@@ -27,7 +28,7 @@ export default function FontGenerator() {
 
   const handleCopyCSS = () => {
     const code = `${selectedFont.importUrl}\n\n.my-text {\n  ${selectedFont.css}\n}`;
-    navigator.clipboard.writeText(code);
+    clipboardWrite(code);
     setCopied(true);
     toast.success('CSS snippets copied!');
     setTimeout(() => setCopied(false), 2000);

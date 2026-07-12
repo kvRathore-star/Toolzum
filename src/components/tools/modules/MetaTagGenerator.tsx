@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Globe, Copy, Eye } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function MetaTagGenerator() {
   const [title, setTitle] = useState('My Awesome Web App');
@@ -33,7 +34,7 @@ export default function MetaTagGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(buildMeta());
+    clipboardWrite(buildMeta());
     toast.success('Copied Meta Headers!');
   };
 

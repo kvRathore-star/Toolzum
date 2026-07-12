@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { EyeOff, Copy, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function IpAnonymizer() {
   const [ip, setIp] = useState('192.168.1.125');
@@ -72,7 +73,7 @@ export default function IpAnonymizer() {
           <span className="text-[10px] text-zinc-500 uppercase block">Anonymized Output</span>
           <p className="text-3xl font-black text-emerald-400 font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
           {anonymized && (
-            <button onClick={() => { navigator.clipboard.writeText(anonymized); toast.success('Copied!'); }} className="text-indigo-400 hover:underline">Copy Result</button>
+            <button onClick={() => { clipboardWrite(anonymized); toast.success('Copied!'); }} className="text-indigo-400 hover:underline">Copy Result</button>
           )}
         </div>
       </div>

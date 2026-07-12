@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Link as LinkIcon, Copy, ExternalLink, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function UrlShortener() {
   const [url, setUrl] = useState('');
@@ -47,7 +48,7 @@ export default function UrlShortener() {
 
   const copyToClipboard = () => {
     if (!shortUrl) return;
-    navigator.clipboard.writeText(shortUrl);
+    clipboardWrite(shortUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

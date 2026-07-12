@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function HexToRgbConverter() {
   const [hex, setHex] = useState('3B82F6');
@@ -191,7 +192,7 @@ export default function HexToRgbConverter() {
 
   const copyFormat = async (format: string, label: string) => {
     try {
-      await navigator.clipboard.writeText(format);
+      await clipboardWrite(format);
       toast.success(`${label} copied to clipboard!`);
     } catch {
       toast.error("Failed to copy color.");

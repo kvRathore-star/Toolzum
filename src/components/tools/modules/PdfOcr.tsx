@@ -6,6 +6,7 @@ import { createWorker } from 'tesseract.js';
 import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -96,7 +97,7 @@ export default function PdfOcr() {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(extractedText);
+      await clipboardWrite(extractedText);
       toast.success('Copied to clipboard!');
     } catch (err) {
       toast.error('Failed to copy text.');

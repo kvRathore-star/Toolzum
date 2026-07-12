@@ -1,15 +1,29 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { FileUploader } from '../FileUploader';
+import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 
-export default function WebmToMp4() {
+type VideoToMp4Config = {
+  fileExtension: string;
+  accept: string;
+  uploadTitle: string;
+  uploadSubtitle: string;
+  description: string;
+  iconLabel: string;
+  toastSuccess: string;
+};
+
+type VideoToMp4Props = {
+  config: VideoToMp4Config;
+};
+
+export default function VideoToMp4Converter({ config }: VideoToMp4Props) {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
-  
+
   const [file, setFile] = useState<File | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState<number | null>(null);
@@ -26,8 +40,8 @@ export default function WebmToMp4() {
   }, [outputUrl]);
 
   const handleFileSelect = (selectedFile: File) => {
-    if (!selectedFile.name.toLowerCase().endsWith('.webm')) {
-      toast.error("Please upload a .webm file.");
+    if (!selectedFile.name.toLowerCase().endsWith(config.fileExtension)) {
+      toast.error(`Please upload a ${config.fileExtension} file.`);
     }
     setFile(selectedFile);
     setOutputUrl(null);
@@ -45,24 +59,24 @@ export default function WebmToMp4() {
 
     setIsProcessing(true);
     try {
-      await ffmpeg.writeFile('input.webm', await fetchFile(file));
-      
+      await ffmpeg.writeFile(`input${config.fileExtension}`, await fetchFile(file));
+
       await ffmpeg.exec([
-        '-i', 'input.webm', 
-        '-vcodec', 'libx264', 
-        '-crf', '23', 
-        '-preset', 'fast', 
+        '-i', `input${config.fileExtension}`,
+        '-vcodec', 'libx264',
+        '-crf', '23',
+        '-preset', 'fast',
         '-pix_fmt', 'yuv420p',
         'output.mp4'
       ]);
-      
+
       const data = await ffmpeg.readFile('output.mp4');
       const blob = new Blob([data as any], { type: 'video/mp4' });
-      
+
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       setOutputSize(blob.size);
-      toast.success("Converted WEBM to MP4 successfully!");
+      toast.success(config.toastSuccess);
     } catch (e) {
       console.error(e);
       toast.error("An error occurred during conversion.");
@@ -86,14 +100,13 @@ export default function WebmToMp4() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm">
-          <strong>WEBM to MP4 Converter:</strong> Transcode modern WEBM videos into universal MP4 files securely inside your browser. Your videos never leave your device.
-        </div>
-        <FileUploader 
-          accept=".webm,video/webm"
-          onFileSelect={handleFileSelect} 
-          title="Upload WEBM Video"
-          subtitle="Select a .webm file to convert"
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: config.description }} />
+
+        <FileUploader
+          accept={config.accept}
+          onFileSelect={handleFileSelect}
+          title={config.uploadTitle}
+          subtitle={config.uploadSubtitle}
         />
       </div>
     );
@@ -106,7 +119,7 @@ export default function WebmToMp4() {
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
           <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
-        <button 
+        <button
           onClick={clearAll}
           disabled={isProcessing}
           className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
@@ -116,13 +129,12 @@ export default function WebmToMp4() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        {/* Settings Panel */}
+
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit flex flex-col justify-center">
           <div className="text-center space-y-4">
              <div className="flex justify-center items-center gap-4 text-zinc-400">
                 <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl">
-                  <span className="font-black text-xl text-zinc-800 dark:text-zinc-200">.WEBM</span>
+                  <span className="font-black text-xl text-zinc-800 dark:text-zinc-200">{config.iconLabel}</span>
                 </div>
                 <svg className="w-8 h-8 text-blue-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl border-2 border-blue-500/30">
@@ -140,14 +152,14 @@ export default function WebmToMp4() {
                     <span>{progress}%</span>
                  </div>
                  <div className="w-full bg-blue-100 dark:bg-blue-900/30 rounded-full h-3 overflow-hidden">
-                   <div 
+                   <div
                      className="bg-blue-500 h-3 rounded-full transition-all duration-300"
                      style={{ width: `${progress}%` }}
                    ></div>
                  </div>
                </div>
              ) : (
-               <button 
+               <button
                  onClick={convertVideo}
                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
                >
@@ -158,18 +170,17 @@ export default function WebmToMp4() {
           </div>
         </div>
 
-        {/* Output Panel */}
         <div className="space-y-6">
           {outputUrl ? (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
                <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
                   <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
                </div>
-               
+
                <div className="bg-zinc-900 rounded-xl overflow-hidden shadow-inner flex flex-col items-center justify-center relative">
                   <video src={outputUrl} controls className="w-full max-h-[250px]" />
                </div>
-               
+
                {outputSize && (
                  <div className="flex justify-between text-sm">
                    <span className="text-zinc-500">File Size:</span>
@@ -177,7 +188,7 @@ export default function WebmToMp4() {
                  </div>
                )}
 
-               <button 
+               <button
                   onClick={() => downloadOrShare(outputUrl, `${file.name.replace(/\.[^/.]+$/, "")}.mp4`)}
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
                 >

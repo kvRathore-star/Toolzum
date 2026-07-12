@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FileText, Copy, Play, Volume2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function MorseCodeTranslator() {
   const [text, setText] = useState('');
@@ -107,7 +108,7 @@ export default function MorseCodeTranslator() {
             <button onClick={translateToMorse} className="w-full bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Translate to Morse →
             </button>
-            <button onClick={() => { navigator.clipboard.writeText(text); toast.success('Copied text!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={() => { clipboardWrite(text); toast.success('Copied text!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Copy Text
             </button>
           </div>
@@ -132,7 +133,7 @@ export default function MorseCodeTranslator() {
             <button onClick={translateToText} className="w-full bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               ← Translate to Text
             </button>
-            <button onClick={() => { navigator.clipboard.writeText(morse); toast.success('Copied morse!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={() => { clipboardWrite(morse); toast.success('Copied morse!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Copy Morse
             </button>
           </div>

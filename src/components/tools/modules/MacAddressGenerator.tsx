@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Copy, RefreshCw, Layers } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function MacAddressGenerator() {
   const [qty, setQty] = useState(5);
@@ -36,7 +37,7 @@ export default function MacAddressGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(list.join('\n'));
+    clipboardWrite(list.join('\n'));
     toast.success('Copied all addresses!');
   };
 

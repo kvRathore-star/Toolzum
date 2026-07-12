@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function AITranslator() {
   const { isConfigured, generateCompletion } = useAiProvider();
@@ -60,7 +61,7 @@ ${inputText}`;
 
   const copyToClipboard = () => {
     if (!outputText) return;
-    navigator.clipboard.writeText(outputText);
+    clipboardWrite(outputText);
     toast.success("Copied to clipboard!");
   };
 

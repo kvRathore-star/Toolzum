@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Shield, Copy, Key } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import CryptoJS from 'crypto-js';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function Md5HashGenerator() {
   const [input, setInput] = useState('');
@@ -26,7 +27,7 @@ export default function Md5HashGenerator() {
   };
 
   const handleCopy = (txt: string, label: string) => {
-    navigator.clipboard.writeText(txt);
+    clipboardWrite(txt);
     toast.success(`${label} copied!`);
   };
 

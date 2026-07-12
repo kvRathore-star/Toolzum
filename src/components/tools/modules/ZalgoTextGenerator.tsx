@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const ZALGO_UP = [
   '\u030d', '\u030e', '\u0304', '\u0305', '\u0306', '\u0307', '\u0308', '\u0309', '\u030a', '\u030b', '\u030c',
@@ -77,7 +78,7 @@ export default function ZalgoTextGenerator() {
   const copyToClipboard = async () => {
     if (!output) return;
     try {
-      await navigator.clipboard.writeText(output);
+      await clipboardWrite(output);
       toast.success("Cursed Zalgo copied to clipboard!");
     } catch {
       toast.error("Failed to copy text.");

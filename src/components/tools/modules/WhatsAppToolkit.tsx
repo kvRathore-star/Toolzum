@@ -5,6 +5,7 @@ import { MessageCircle, Link, BarChart3, Image as ImageIcon, Copy, Check, Upload
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import QRCode from 'qrcode';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'link' | 'group' | 'analyzer' | 'status' | 'format' | 'bulk' | 'qr' | 'replies';
 
@@ -33,7 +34,7 @@ function MessageLinkTab() {
 
   const handleCopy = () => {
     if (!whatsappUrl) return toast.error('Enter a phone number first');
-    navigator.clipboard.writeText(whatsappUrl);
+    clipboardWrite(whatsappUrl);
     setCopied(true);
     toast.success('Link copied!');
     setTimeout(() => setCopied(false), 2000);
@@ -82,7 +83,7 @@ function GroupLinkTab() {
 
   const handleCopy = () => {
     if (!groupUrl) return toast.error('Enter a group ID first');
-    navigator.clipboard.writeText(groupUrl);
+    clipboardWrite(groupUrl);
     setCopied(true);
     toast.success('Group link copied!');
     setTimeout(() => setCopied(false), 2000);
@@ -131,7 +132,7 @@ function FormatTextTab() {
   }, [input]);
 
   const handleCopy = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     setCopied(label);
     toast.success(`${label} copied!`);
     setTimeout(() => setCopied(null), 2000);
@@ -215,14 +216,14 @@ function BulkLinkTab() {
 
   const copyAll = () => {
     const text = filteredData.map(d => generateLink(d)).join('\n');
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     setCopiedAll(true);
     toast.success(`Copied ${filteredData.length} links!`);
     setTimeout(() => setCopiedAll(false), 2000);
   };
 
   const handleCopy = (index: number) => {
-    navigator.clipboard.writeText(generateLink(csvData[index]));
+    clipboardWrite(generateLink(csvData[index]));
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
@@ -451,7 +452,7 @@ function QuickRepliesTab() {
   };
 
   const handleCopy = (id: string, content: string) => {
-    navigator.clipboard.writeText(content);
+    clipboardWrite(content);
     setCopiedId(id);
     toast.success('Copied!');
     setTimeout(() => setCopiedId(null), 2000);

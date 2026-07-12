@@ -5,6 +5,7 @@ import { Key, Download, Copy, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import * as openpgp from 'openpgp';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function PgpKeyGenerator() {
   const [name, setName] = useState('John Doe');
@@ -43,7 +44,7 @@ export default function PgpKeyGenerator() {
   };
 
   const handleCopy = (txt: string, label: string) => {
-    navigator.clipboard.writeText(txt);
+    clipboardWrite(txt);
     toast.success(`${label} copied!`);
   };
 

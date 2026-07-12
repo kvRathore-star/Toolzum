@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ShieldAlert, Copy, Download } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function RobotsTxtGenerator() {
   const [sitemap, setSitemap] = useState('https://mysite.com/sitemap.xml');
@@ -34,7 +35,7 @@ export default function RobotsTxtGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(buildRobotsTxt());
+    clipboardWrite(buildRobotsTxt());
     toast.success('Copied robots.txt!');
   };
 

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Edit3, Copy, Check, Calendar, Share2, Download, MessageCircle, Camera, Video, Briefcase, Globe, Image as ImageIcon, Save } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type Platform = 'instagram' | 'twitter' | 'linkedin' | 'youtube' | 'facebook' | 'other';
 
@@ -83,7 +84,7 @@ export default function SocialMediaCalendar() {
   };
 
   const copyPost = (content: string, id: string) => {
-    navigator.clipboard.writeText(content);
+    clipboardWrite(content);
     setCopiedId(id);
     toast.success('Copied!');
     setTimeout(() => setCopiedId(null), 2000);

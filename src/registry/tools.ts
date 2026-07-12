@@ -319,6 +319,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "Canvas API"
   },
   {
+    id: "34b",
+    name: "PNG to JPG",
+    slug: "png-to-jpg",
+    category: "Image",
+    description: 'Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency.',
+    seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. 100% browser-based, no uploads.',
+    dependencies: "Canvas API"
+  },
+  {
     id: "35",
     name: "Wheel of Names",
     slug: "wheel-of-names",
@@ -702,6 +711,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Trim and cut audio files online",
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online 100% browser-based, no uploads.',
     dependencies: "Web Audio API / FFmpeg"
+  },
+  {
+    id: "86b",
+    name: "MP3 to WAV",
+    slug: "mp3-to-wav",
+    category: "Audio",
+    description: 'Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity.',
+    seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm"
   },
   {
     id: "87",

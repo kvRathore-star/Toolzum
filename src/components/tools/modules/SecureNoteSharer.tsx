@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Shield, Copy, RefreshCw, Key, Trash2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import CryptoJS from 'crypto-js';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function SecureNoteSharer() {
   const [note, setNote] = useState('');
@@ -100,7 +101,7 @@ export default function SecureNoteSharer() {
               <span className="text-[10px] text-zinc-400 font-bold uppercase block">Shareable link</span>
               <div className="flex gap-2">
                 <input readOnly type="text" value={shareLink} className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-[10px] text-zinc-300 outline-none" />
-                <button onClick={() => { navigator.clipboard.writeText(shareLink); toast.success('Link copied!'); }} className="bg-zinc-800 px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+                <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-zinc-800 px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
               </div>
             </div>
           )}

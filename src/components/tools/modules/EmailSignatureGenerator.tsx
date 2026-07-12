@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Copy, Layout, Sliders, Layers, Sparkles, Check, CheckCircle2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import DOMPurify from 'dompurify';
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface SignatureTemplate {
   id: string;
@@ -93,7 +94,7 @@ export default function EmailSignatureGenerator() {
 
   const copyHtmlCode = async () => {
     try {
-      await navigator.clipboard.writeText(generateSignatureHtml());
+      await clipboardWrite(generateSignatureHtml());
       toast.success("Raw HTML code copied to clipboard!");
     } catch (err) {
       toast.error("Failed to copy HTML code.");

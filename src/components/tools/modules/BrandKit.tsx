@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Palette, Plus, Trash2, Copy, Check } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface BrandColor {
   hex: string;
@@ -54,7 +55,7 @@ export default function BrandKit() {
   };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     setCopiedId(text);
     setTimeout(() => setCopiedId(null), 2000);
   };

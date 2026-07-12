@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function InvisibleTextGenerator() {
   const [output, setOutput] = useState('\u200B\u200B\u200B\u200B\u200B'); // 5 Zero Width Spaces
@@ -15,7 +16,7 @@ export default function InvisibleTextGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(output);
+    clipboardWrite(output);
     toast.success('Copied invisible text payload to clipboard!');
   };
 

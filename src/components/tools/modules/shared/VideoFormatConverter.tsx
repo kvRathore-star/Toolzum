@@ -1,0 +1,355 @@
+"use client";
+
+import React, { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
+import { FileUploader } from '../../FileUploader';
+import { downloadOrShare } from '@/utils/nativeShare';
+import { toast } from 'react-hot-toast';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { fetchFile } from '@ffmpeg/util';
+
+type FormatDef = {
+  ext: string;
+  mime: string;
+  name: string;
+  label: string;
+  accept: string;
+};
+
+const FORMATS: Record<string, FormatDef> = {
+  mkv: { ext: '.mkv', mime: 'video/x-matroska', name: 'MKV', label: '.MKV', accept: '.mkv,video/x-matroska' },
+  mp4: { ext: '.mp4', mime: 'video/mp4', name: 'MP4', label: '.MP4', accept: '.mp4,video/mp4' },
+  mov: { ext: '.mov', mime: 'video/quicktime', name: 'MOV', label: '.MOV', accept: '.mov,video/quicktime' },
+  webm: { ext: '.webm', mime: 'video/webm', name: 'WebM', label: '.WEBM', accept: '.webm,video/webm' },
+  avi: { ext: '.avi', mime: 'video/x-msvideo', name: 'AVI', label: '.AVI', accept: '.avi,video/x-msvideo' },
+};
+
+type FormatPair = {
+  slug: string;
+  input: string;
+  output: string;
+  label: string;
+};
+
+const FORMAT_PAIRS: FormatPair[] = [
+  { slug: 'mkv-to-mp4', input: 'mkv', output: 'mp4', label: 'MKV \u2192 MP4' },
+  { slug: 'mov-to-mp4', input: 'mov', output: 'mp4', label: 'MOV \u2192 MP4' },
+  { slug: 'webm-to-mp4', input: 'webm', output: 'mp4', label: 'WebM \u2192 MP4' },
+  { slug: 'avi-to-mp4', input: 'avi', output: 'mp4', label: 'AVI \u2192 MP4' },
+  { slug: 'mp4-to-mkv', input: 'mp4', output: 'mkv', label: 'MP4 \u2192 MKV' },
+  { slug: 'mp4-to-mov', input: 'mp4', output: 'mov', label: 'MP4 \u2192 MOV' },
+  { slug: 'mkv-to-mov', input: 'mkv', output: 'mov', label: 'MKV \u2192 MOV' },
+  { slug: 'mov-to-mkv', input: 'mov', output: 'mkv', label: 'MOV \u2192 MKV' },
+];
+
+const RELATED: Record<string, string[]> = {
+  'mkv-to-mp4': ['mov-to-mp4', 'webm-to-mp4', 'avi-to-mp4', 'mp4-to-mkv'],
+  'mov-to-mp4': ['mkv-to-mp4', 'webm-to-mp4', 'avi-to-mp4', 'mp4-to-mov'],
+  'webm-to-mp4': ['mkv-to-mp4', 'mov-to-mp4', 'avi-to-mp4', 'mp4-to-mkv'],
+  'avi-to-mp4': ['mkv-to-mp4', 'mov-to-mp4', 'webm-to-mp4', 'mp4-to-mkv'],
+  'mp4-to-mkv': ['mkv-to-mp4', 'mov-to-mkv', 'mp4-to-mov'],
+  'mp4-to-mov': ['mov-to-mp4', 'mkv-to-mov', 'mp4-to-mkv'],
+  'mkv-to-mov': ['mkv-to-mp4', 'mov-to-mkv', 'mp4-to-mov'],
+  'mov-to-mkv': ['mkv-to-mp4', 'mov-to-mp4', 'mkv-to-mov'],
+};
+
+function getFfmpegOutputArgs(outputKey: string): string[] {
+  switch (outputKey) {
+    case 'mp4':
+      return ['-vcodec', 'libx264', '-crf', '23', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-movflags', '+faststart'];
+    case 'mkv':
+      return ['-c:v', 'copy', '-c:a', 'copy'];
+    case 'mov':
+      return ['-vcodec', 'libx264', '-crf', '23', '-preset', 'fast', '-pix_fmt', 'yuv420p'];
+    case 'webm':
+      return ['-c:v', 'libvpx', '-crf', '10', '-b:v', '0', '-c:a', 'libvorbis'];
+    case 'avi':
+      return ['-vcodec', 'mpeg4', '-q:v', '5', '-c:a', 'libmp3lame'];
+    default:
+      return ['-vcodec', 'libx264', '-crf', '23', '-preset', 'fast', '-pix_fmt', 'yuv420p'];
+  }
+}
+
+type VideoFormatConverterProps = {
+  slug: string;
+  description?: string;
+};
+
+function resolveSlug(input: string, output: string): string {
+  return `${input}-to-${output}`;
+}
+
+const FORMAT_KEYS = Object.keys(FORMATS);
+
+export default function VideoFormatConverter({ slug, description }: VideoFormatConverterProps) {
+  const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+
+  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+
+  const [inputKey, setInputKey] = useState<string>(initialPair.input);
+  const [outputKey, setOutputKey] = useState<string>(initialPair.output);
+  const [file, setFile] = useState<File | null>(null);
+  const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const [outputSize, setOutputSize] = useState<number | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const inputFmt = FORMATS[inputKey];
+  const outputFmt = FORMATS[outputKey];
+
+  useEffect(() => {
+    loadFFmpeg();
+  }, []);
+
+  const swapFormats = () => {
+    setInputKey(outputKey);
+    setOutputKey(inputKey);
+    setFile(null);
+    setOutputUrl(null);
+    setOutputSize(null);
+  };
+
+  const handleFormatChange = (role: "input" | "output", value: string) => {
+    if (role === "input") {
+      setInputKey(value);
+    } else {
+      setOutputKey(value);
+    }
+    setFile(null);
+    setOutputUrl(null);
+    setOutputSize(null);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (outputUrl) URL.revokeObjectURL(outputUrl);
+    };
+  }, [outputUrl]);
+
+  const handleFileSelect = (selectedFile: File) => {
+    if (!selectedFile.name.toLowerCase().endsWith(inputFmt.ext)) {
+      toast.error(`Please upload a ${inputFmt.ext} file.`);
+      return;
+    }
+    setFile(selectedFile);
+    setOutputUrl(null);
+    setOutputSize(null);
+  };
+
+  const clearAll = () => {
+    setFile(null);
+    setOutputUrl(null);
+    setOutputSize(null);
+  };
+
+  const convertVideo = async () => {
+    if (!file || !ffmpeg || !isLoaded) return;
+
+    setIsProcessing(true);
+    try {
+      await ffmpeg.writeFile(`input${inputFmt.ext}`, await fetchFile(file));
+
+      const outputArgs = getFfmpegOutputArgs(outputKey);
+      await ffmpeg.exec([
+        '-i', `input${inputFmt.ext}`,
+        ...outputArgs,
+        `output${outputFmt.ext}`
+      ]);
+
+      const data = await ffmpeg.readFile(`output${outputFmt.ext}`);
+      const mimeType = outputFmt.ext === '.mp4' ? 'video/mp4' : 'application/octet-stream';
+      const blob = new Blob([data as unknown as BlobPart], { type: mimeType });
+
+      if (outputUrl) URL.revokeObjectURL(outputUrl);
+      setOutputUrl(URL.createObjectURL(blob));
+      setOutputSize(blob.size);
+      toast.success(`Converted ${inputFmt.name} to ${outputFmt.name} successfully!`);
+    } catch (e) {
+      console.error(e);
+      toast.error("An error occurred during conversion.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const related = useMemo(() => {
+    if (inputKey && outputKey) {
+      const s = resolveSlug(inputKey, outputKey);
+      return RELATED[s] || [];
+    }
+    return [];
+  }, [inputKey, outputKey]);
+
+  if (!isLoaded) {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 space-y-4">
+        <svg className="w-12 h-12 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p className="text-zinc-500 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6 max-w-4xl mx-auto animate-in fade-in duration-500">
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        <select
+          value={inputKey}
+          onChange={(e) => handleFormatChange("input", e.target.value)}
+          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        >
+          {FORMAT_KEYS.map(k => (
+            <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
+          ))}
+        </select>
+
+        <button
+          onClick={swapFormats}
+          className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95"
+          title="Swap formats"
+        >
+          <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        </button>
+
+        <select
+          value={outputKey}
+          onChange={(e) => handleFormatChange("output", e.target.value)}
+          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        >
+          {FORMAT_KEYS.map(k => (
+            <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
+          ))}
+        </select>
+      </div>
+
+      {description && (
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+      )}
+
+      {!file ? (
+        <FileUploader
+          accept={inputFmt.accept}
+          onFileSelect={handleFileSelect}
+          title={`Upload ${inputFmt.name} Video`}
+          subtitle={`Select a ${inputFmt.ext} file to convert to ${outputFmt.name}`}
+        />
+      ) : (
+        <div className="space-y-8">
+          <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+            <div>
+              <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            </div>
+            <button
+              onClick={clearAll}
+              disabled={isProcessing}
+              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+            >
+              Change File
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit flex flex-col justify-center">
+              <div className="text-center space-y-4">
+                <div className="flex justify-center items-center gap-4 text-zinc-400">
+                  <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl">
+                    <span className="font-black text-xl text-zinc-800 dark:text-zinc-200">{inputFmt.label}</span>
+                  </div>
+                  <svg className="w-8 h-8 text-blue-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl border-2 border-blue-500/30">
+                    <span className="font-black text-xl text-blue-500">{outputFmt.label}</span>
+                  </div>
+                </div>
+                <p className="text-sm text-zinc-500">Video will be converted to {outputFmt.name} format.</p>
+              </div>
+
+              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                {isProcessing ? (
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs font-bold text-blue-500">
+                      <span>Converting...</span>
+                      <span>{progress}%</span>
+                    </div>
+                    <div className="w-full bg-blue-100 dark:bg-blue-900/30 rounded-full h-3 overflow-hidden">
+                      <div
+                        className="bg-blue-500 h-3 rounded-full transition-all duration-300"
+                        style={{ width: `${progress}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={convertVideo}
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                    Convert to {outputFmt.name}
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {outputUrl ? (
+                <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+                  <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                    <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
+                  </div>
+
+                  <div className="bg-zinc-900 rounded-xl overflow-hidden shadow-inner flex flex-col items-center justify-center relative">
+                    <video src={outputUrl} controls className="w-full max-h-[250px]" />
+                  </div>
+
+                  {outputSize && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-zinc-500">File Size:</span>
+                      <span className="font-bold text-emerald-500">{(outputSize / 1024 / 1024).toFixed(2)} MB</span>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => downloadOrShare(outputUrl, `${file!.name.replace(/\.[^/.]+$/, "")}${outputFmt.ext}`)}
+                    className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                    Download {outputFmt.name}
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+                  <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                  <p className="text-center text-sm px-4">Your {outputFmt.name} video will appear here.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {related.length > 0 && (
+        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+          <div className="flex flex-wrap gap-2">
+            {related.map(s => {
+              const p = FORMAT_PAIRS.find(fp => fp.slug === s);
+              if (!p) return null;
+              return (
+                <Link
+                  key={s}
+                  href={`/converter/${s}`}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                >
+                  {p.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

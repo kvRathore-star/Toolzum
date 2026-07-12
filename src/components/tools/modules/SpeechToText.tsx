@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function SpeechToText() {
   const [isRecording, setIsRecording] = useState(false);
@@ -103,7 +104,7 @@ export default function SpeechToText() {
 
   const copyToClipboard = () => {
     if (!transcript && !interimTranscript) return;
-    navigator.clipboard.writeText(transcript + (interimTranscript ? ' ' + interimTranscript : ''));
+    clipboardWrite(transcript + (interimTranscript ? ' ' + interimTranscript : ''));
     toast.success("Text copied to clipboard!");
   };
 

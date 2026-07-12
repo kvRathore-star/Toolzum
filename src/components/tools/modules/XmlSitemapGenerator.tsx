@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FileText, Copy, Download, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface UrlEntry {
   loc: string;
@@ -63,7 +64,7 @@ export default function XmlSitemapGenerator() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(buildXml());
+    clipboardWrite(buildXml());
     toast.success('Copied XML Sitemap!');
   };
 

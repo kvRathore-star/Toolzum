@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4, v1 as uuidv1 } from 'uuid';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type UuidVersion = 'v4' | 'v1';
 
@@ -39,7 +40,7 @@ export default function UuidGenerator() {
   const copyAll = async () => {
     if (uuids.length === 0) return;
     try {
-      await navigator.clipboard.writeText(uuids.join('\n'));
+      await clipboardWrite(uuids.join('\n'));
       toast.success("All UUIDs copied to clipboard!");
     } catch {
       toast.error("Failed to copy UUIDs.");
@@ -48,7 +49,7 @@ export default function UuidGenerator() {
 
   const copySingle = async (val: string) => {
     try {
-      await navigator.clipboard.writeText(val);
+      await clipboardWrite(val);
       toast.success("Copied UUID!");
     } catch {
       toast.error("Failed to copy.");

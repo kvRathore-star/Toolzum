@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function CursiveTextGenerator() {
   const [input, setInput] = useState('Type your text here to make it cursive');
@@ -37,7 +38,7 @@ export default function CursiveTextGenerator() {
 
   const handleCopy = () => {
     if (!cursive) return;
-    navigator.clipboard.writeText(cursive);
+    clipboardWrite(cursive);
     toast.success('Copied cursive text!');
   };
 

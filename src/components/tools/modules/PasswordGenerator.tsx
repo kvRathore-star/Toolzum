@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState('');
@@ -36,7 +37,7 @@ export default function PasswordGenerator() {
   }, [length, includeUppercase, includeLowercase, includeNumbers, includeSymbols]);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(password);
+    clipboardWrite(password);
     toast.success("Password copied!");
   };
 

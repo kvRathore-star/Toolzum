@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Hash, Settings2, RefreshCw, Copy, CheckCircle2 } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function RandomNumberGenerator() {
   const [min, setMin] = useState(1);
@@ -48,7 +49,7 @@ export default function RandomNumberGenerator() {
 
   const copyToClipboard = () => {
     if (results.length === 0) return;
-    navigator.clipboard.writeText(results.join(', '));
+    clipboardWrite(results.join(', '));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

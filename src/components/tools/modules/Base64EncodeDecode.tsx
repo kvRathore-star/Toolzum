@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type Mode = 'encode' | 'decode';
 
@@ -121,7 +122,7 @@ export default function Base64EncodeDecode() {
   const copyToClipboard = async () => {
     if (!output) return;
     try {
-      await navigator.clipboard.writeText(output);
+      await clipboardWrite(output);
       toast.success('Copied output to clipboard!');
     } catch (err) {
       toast.error('Failed to copy.');

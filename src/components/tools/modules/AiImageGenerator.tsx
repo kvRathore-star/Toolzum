@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Download, Sparkles, Image as ImageIcon, Link2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import NextImage from "next/image";
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -77,7 +78,7 @@ export default function AiImageGenerator() {
 
   const handleCopyLink = () => {
     if (!imageUrl) return;
-    navigator.clipboard.writeText(imageUrl);
+    clipboardWrite(imageUrl);
     toast.success('Link copied to clipboard!');
   };
 

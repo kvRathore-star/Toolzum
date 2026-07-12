@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import AiSettings from '@/components/tools/AiSettings';
 import { useAiProvider } from '@/hooks/useAiProvider';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const COMPLAINT_TYPES = [
   { id: 'bank', label: 'Bank Fraud', icon: <Building className="w-3.5 h-3.5" />, statute: 'Banking Ombudsman Scheme 2006, RBI Guidelines' },
@@ -161,7 +162,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
 
   const handleCopy = () => {
     if (!generatedLetter) return;
-    navigator.clipboard.writeText(generatedLetter);
+    clipboardWrite(generatedLetter);
     setCopied(true);
     toast.success('Copied to clipboard!');
     setTimeout(() => setCopied(false), 2000);

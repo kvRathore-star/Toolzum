@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function BinaryToText() {
   const [binary, setBinary] = useState('');
@@ -42,7 +43,7 @@ export default function BinaryToText() {
 
   const handleCopy = () => {
     if (!text) return;
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     toast.success('Copied text!');
   };
 

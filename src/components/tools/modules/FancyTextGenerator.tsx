@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy, Check, Star, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const SYMBOL_DECORATIONS = [
   { name: 'Star Sparkle', format: (t: string) => `★彡 ${t} 彡★` },
@@ -90,7 +91,7 @@ export default function FancyTextGenerator() {
   };
 
   const handleCopy = (text: string, key: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     setCopiedKey(key);
     toast.success('Copied style!');
     setTimeout(() => setCopiedKey(null), 2500);

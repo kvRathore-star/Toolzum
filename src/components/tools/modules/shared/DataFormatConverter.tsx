@@ -6,26 +6,34 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
 
+type FormatDef = {
+  key: string;
+  label: string;
+  ext: string;
+  mime: string;
+  accept: string;
+};
+
+const FORMATS: Record<string, FormatDef> = {
+  json: { key: 'json', label: 'JSON', ext: 'json', mime: 'application/json', accept: '.json' },
+  csv: { key: 'csv', label: 'CSV', ext: 'csv', mime: 'text/csv;charset=utf-8;', accept: '.csv' },
+  xml: { key: 'xml', label: 'XML', ext: 'xml', mime: 'text/xml', accept: '.xml' },
+};
+
 type FormatPair = {
   slug: string;
-  inputLabel: string;
-  outputLabel: string;
+  input: string;
+  output: string;
   label: string;
-  inputAccept?: string;
-  category: 'converter' | 'developer';
 };
 
 const FORMAT_PAIRS: FormatPair[] = [
-  { slug: 'json-to-csv', inputLabel: 'JSON', outputLabel: 'CSV', label: 'JSON \u2192 CSV', inputAccept: '.json', category: 'converter' },
-  { slug: 'csv-to-json', inputLabel: 'CSV', outputLabel: 'JSON', label: 'CSV \u2192 JSON', inputAccept: '.csv', category: 'converter' },
-  { slug: 'json-to-xml', inputLabel: 'JSON', outputLabel: 'XML', label: 'JSON \u2192 XML', inputAccept: '.json', category: 'developer' },
-  { slug: 'xml-to-json', inputLabel: 'XML', outputLabel: 'JSON', label: 'XML \u2192 JSON', inputAccept: '.xml', category: 'developer' },
-  { slug: 'xml-to-csv', inputLabel: 'XML', outputLabel: 'CSV', label: 'XML \u2192 CSV', inputAccept: '.xml', category: 'developer' },
-  { slug: 'csv-to-xml', inputLabel: 'CSV', outputLabel: 'XML', label: 'CSV \u2192 XML', inputAccept: '.csv', category: 'converter' },
-  { slug: 'markdown-to-html', inputLabel: 'Markdown', outputLabel: 'HTML', label: 'MD \u2192 HTML', category: 'converter' },
-  { slug: 'html-to-markdown', inputLabel: 'HTML', outputLabel: 'Markdown', label: 'HTML \u2192 MD', category: 'converter' },
-  { slug: 'text-to-markdown', inputLabel: 'Text', outputLabel: 'Markdown', label: 'Text \u2192 MD', category: 'converter' },
-  { slug: 'markdown-to-text', inputLabel: 'Markdown', outputLabel: 'Text', label: 'MD \u2192 Text', category: 'converter' },
+  { slug: 'json-to-csv', input: 'json', output: 'csv', label: 'JSON \u2192 CSV' },
+  { slug: 'csv-to-json', input: 'csv', output: 'json', label: 'CSV \u2192 JSON' },
+  { slug: 'json-to-xml', input: 'json', output: 'xml', label: 'JSON \u2192 XML' },
+  { slug: 'xml-to-json', input: 'xml', output: 'json', label: 'XML \u2192 JSON' },
+  { slug: 'xml-to-csv', input: 'xml', output: 'csv', label: 'XML \u2192 CSV' },
+  { slug: 'csv-to-xml', input: 'csv', output: 'xml', label: 'CSV \u2192 XML' },
 ];
 
 const RELATED: Record<string, string[]> = {
@@ -35,11 +43,13 @@ const RELATED: Record<string, string[]> = {
   'xml-to-json': ['json-to-xml', 'xml-to-csv', 'csv-to-json'],
   'xml-to-csv': ['csv-to-xml', 'xml-to-json', 'json-to-csv'],
   'csv-to-xml': ['xml-to-csv', 'csv-to-json', 'json-to-xml'],
-  'markdown-to-html': ['html-to-markdown', 'text-to-markdown', 'markdown-to-text'],
-  'html-to-markdown': ['markdown-to-html', 'text-to-markdown', 'markdown-to-text'],
-  'text-to-markdown': ['markdown-to-text', 'markdown-to-html', 'html-to-markdown'],
-  'markdown-to-text': ['text-to-markdown', 'markdown-to-html', 'html-to-markdown'],
 };
+
+const FORMAT_KEYS = Object.keys(FORMATS);
+
+function resolveSlug(input: string, output: string): string {
+  return `${input}-to-${output}`;
+}
 
 type DataFormatConverterProps = {
   slug: string;
@@ -51,14 +61,21 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
   const [output, setOutput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+
+  const [inputKey, setInputKey] = useState<string>(initialPair.input);
+  const [outputKey, setOutputKey] = useState<string>(initialPair.output);
+
+  const activeSlug = resolveSlug(inputKey, outputKey);
+  const inputFmt = FORMATS[inputKey];
+  const outputFmt = FORMATS[outputKey];
 
   const handleConvert = useCallback(async () => {
     if (!input.trim()) { setOutput(''); return; }
     setIsProcessing(true);
     try {
       let result = '';
-      switch (slug) {
+      switch (activeSlug) {
         case 'json-to-csv': {
           const { default: Papa } = await import('papaparse');
           const parsed = JSON.parse(input);
@@ -115,39 +132,6 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
           result = builder.buildObject({ root: { item: parsed } });
           break;
         }
-        case 'markdown-to-html': {
-          const { marked } = await import('marked');
-          const parsed = marked.parse(input);
-          result = typeof parsed === 'string' ? parsed : await parsed;
-          break;
-        }
-        case 'html-to-markdown': {
-          // @ts-ignore
-          const TurndownService = (await import('turndown')).default;
-          const turndown = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
-          result = turndown.turndown(input);
-          break;
-        }
-        case 'text-to-markdown': {
-          result = input.split('\n').map(line => line.trim()).filter(Boolean).join('\n\n');
-          break;
-        }
-        case 'markdown-to-text': {
-          result = input
-            .replace(/^###\s?/gm, '')
-            .replace(/^##\s?/gm, '')
-            .replace(/^#\s?/gm, '')
-            .replace(/\*\*(.*?)\*\*/g, '$1')
-            .replace(/\*(.*?)\*/g, '$1')
-            .replace(/`(.*?)`/g, '$1')
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-            .replace(/^[-\*]\s/gm, '')
-            .replace(/^\d+\.\s/gm, '')
-            .replace(/^>\s/gm, '')
-            .replace(/\n{3,}/g, '\n\n')
-            .trim();
-          break;
-        }
       }
       setOutput(result);
       toast.success('Converted successfully!');
@@ -156,18 +140,27 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
     } finally {
       setIsProcessing(false);
     }
-  }, [slug, input]);
+  }, [activeSlug, input]);
 
-  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      setInput(evt.target?.result as string);
-      setTimeout(() => handleConvert(), 100);
-    };
-    reader.readAsText(file);
-  }, [handleConvert]);
+  const swapFormats = () => {
+    setInputKey(outputKey);
+    setOutputKey(inputKey);
+    setOutput('');
+  };
+
+  const handleFormatChange = (role: "input" | "output", value: string) => {
+    if (role === "input") {
+      setInputKey(value);
+    } else {
+      setOutputKey(value);
+    }
+    setOutput('');
+  };
+
+  const related = useMemo(() => {
+    const r = RELATED[activeSlug] || [];
+    return r.map(s => FORMAT_PAIRS.find(p => p.slug === s)).filter(Boolean) as FormatPair[];
+  }, [activeSlug]);
 
   const copyOutput = useCallback(() => {
     if (!output) return;
@@ -177,38 +170,45 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
 
   const downloadOutput = useCallback(() => {
     if (!output) return;
-    const extMap: Record<string, string> = { 'json-to-csv': 'csv', 'csv-to-json': 'json', 'json-to-xml': 'xml', 'xml-to-json': 'json', 'xml-to-csv': 'csv', 'csv-to-xml': 'xml', 'markdown-to-html': 'html', 'html-to-markdown': 'md', 'text-to-markdown': 'md', 'markdown-to-text': 'txt' };
-    const ext = extMap[slug] || 'txt';
-    const mimeMap: Record<string, string> = { csv: 'text/csv;charset=utf-8;', json: 'application/json', xml: 'text/xml', html: 'text/html', md: 'text/markdown', txt: 'text/plain' };
-    const blob = new Blob([output], { type: mimeMap[ext] || 'text/plain' });
+    const ext = outputFmt.ext;
+    const blob = new Blob([output], { type: outputFmt.mime });
     const url = URL.createObjectURL(blob);
     downloadOrShare(url, `converted.${ext}`);
     setTimeout(() => URL.revokeObjectURL(url), 100);
-  }, [output, slug]);
-
-  const related = RELATED[slug] || [];
-
-  const isMarkdownOutput = pair.outputLabel === 'Markdown' || pair.outputLabel === 'HTML';
+  }, [output, outputFmt]);
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 items-center justify-center">
-        {FORMAT_PAIRS.map(p => {
-          const active = p.slug === slug;
-          return (
-            <Link
-              key={p.slug}
-              href={`/${p.category}/${p.slug}`}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                active
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-              }`}
-            >
-              {p.label}
-            </Link>
-          );
-        })}
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        <select
+          value={inputKey}
+          onChange={(e) => handleFormatChange("input", e.target.value)}
+          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        >
+          {FORMAT_KEYS.map(k => (
+            <option key={k} value={k}>{FORMATS[k].label}</option>
+          ))}
+        </select>
+
+        <button
+          onClick={swapFormats}
+          className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95"
+          title="Swap formats"
+        >
+          <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        </button>
+
+        <select
+          value={outputKey}
+          onChange={(e) => handleFormatChange("output", e.target.value)}
+          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        >
+          {FORMAT_KEYS.map(k => (
+            <option key={k} value={k}>{FORMATS[k].label}</option>
+          ))}
+        </select>
       </div>
 
       {description && (
@@ -217,13 +217,20 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
 
       <div className="flex flex-col sm:flex-row justify-between items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-xl shadow-sm gap-4">
         <div className="flex items-center gap-4 w-full sm:w-auto">
-          {pair.inputAccept && (
-            <label className="cursor-pointer bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-              Upload {pair.inputLabel} File
-              <input type="file" accept={pair.inputAccept} onChange={handleFileUpload} className="hidden" />
-            </label>
-          )}
+          <label className="cursor-pointer bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+            Upload {inputFmt.label} File
+            <input type="file" accept={inputFmt.accept} onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              const reader = new FileReader();
+              reader.onload = (evt) => {
+                setInput(evt.target?.result as string);
+                setTimeout(() => handleConvert(), 100);
+              };
+              reader.readAsText(file);
+            }} className="hidden" />
+          </label>
         </div>
 
         <button
@@ -231,7 +238,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
           disabled={isProcessing}
           className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50"
         >
-          {isProcessing ? 'Converting...' : `Convert to ${pair.outputLabel}`}
+          {isProcessing ? 'Converting...' : `Convert to ${outputFmt.label}`}
         </button>
       </div>
 
@@ -239,7 +246,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
         <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-white/10 px-4 py-3 flex justify-between items-center">
             <h3 className="font-bold text-zinc-700 dark:text-zinc-300 text-sm flex items-center gap-2">
-              {pair.inputLabel} Input
+              {inputFmt.label} Input
             </h3>
             <button
               onClick={() => { setInput(''); setOutput(''); }}
@@ -251,7 +258,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Paste ${pair.inputLabel} here...`}
+            placeholder={`Paste ${inputFmt.label} here...`}
             className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
             spellCheck="false"
           />
@@ -260,7 +267,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
         <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
             <h3 className="font-bold text-zinc-700 dark:text-zinc-300 text-sm flex items-center gap-2">
-              {pair.outputLabel} Output
+              {outputFmt.label} Output
             </h3>
             <div className="flex gap-2">
               <button
@@ -275,7 +282,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
                 disabled={!output}
                 className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
               >
-                Save .{slug.includes('markdown') && pair.outputLabel === 'Text' ? 'txt' : slug.split('-').pop()}
+                Save .{outputFmt.ext}
               </button>
             </div>
           </div>
@@ -287,7 +294,7 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
             ) : (
               <div className="h-full flex flex-col items-center justify-center text-zinc-400 space-y-2 opacity-50">
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                <span>{pair.outputLabel} output will appear here</span>
+                <span>{outputFmt.label} output will appear here</span>
               </div>
             )}
           </div>
@@ -298,19 +305,15 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
         <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
           <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
           <div className="flex flex-wrap gap-2">
-            {related.map(s => {
-              const p = FORMAT_PAIRS.find(fp => fp.slug === s);
-              if (!p) return null;
-              return (
-                <Link
-                  key={s}
-                  href={`/${p.category}/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
-                >
-                  {p.label}
-                </Link>
-              );
-            })}
+            {related.map(p => (
+              <Link
+                key={p.slug}
+                href={`/converter/${p.slug}`}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+              >
+                {p.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function ReverseTextGenerator() {
   const [input, setInput] = useState('Mirror and invert this text string');
@@ -37,7 +38,7 @@ export default function ReverseTextGenerator() {
 
   const handleCopy = () => {
     if (!reversed) return;
-    navigator.clipboard.writeText(reversed);
+    clipboardWrite(reversed);
     toast.success('Copied processed text!');
   };
 

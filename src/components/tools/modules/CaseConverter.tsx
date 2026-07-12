@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 export default function CaseConverter() {
   const [inputText, setInputText] = useState('');
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     toast.success("Copied to clipboard!");
   };
 

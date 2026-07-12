@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 // Define Web Speech API types
 declare global {
@@ -115,7 +116,7 @@ export default function LiveTranscription() {
   const copyToClipboard = async () => {
     if (!transcript) return;
     try {
-      await navigator.clipboard.writeText(transcript);
+      await clipboardWrite(transcript);
       toast.success('Transcript copied to clipboard!');
     } catch (err) {
       toast.error('Failed to copy text.');

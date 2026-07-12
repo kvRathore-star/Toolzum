@@ -5,6 +5,7 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import { Clipboard, Download, Sparkles, Target, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface AtsResult {
   score: number;
@@ -75,7 +76,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
     const text = result
       ? `ATS Score: ${result.score}/100\n\n${result.summary}\n\nStrengths:\n${result.strengths.map(s => `• ${s}`).join('\n')}\n\nImprovements Needed:\n${result.weaknesses.map(w => `• ${w}`).join('\n')}\n\nMissing Keywords:\n${result.keywordGaps.map(k => `• ${k}`).join('\n')}\n\nSuggestions:\n${result.suggestions.map(s => `• ${s}`).join('\n')}`
       : rawOutput;
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     toast.success('Copied!');
   };
 

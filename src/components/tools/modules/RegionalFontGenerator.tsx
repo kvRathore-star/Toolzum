@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Type, Copy, Check, RefreshCw, Star, Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const SYMBOL_WRAPPERS = [
   { name: 'Swastik Border', format: (t: string) => `卍 ${t} 卍` },
@@ -89,7 +90,7 @@ export default function RegionalFontGenerator() {
   };
 
   const handleCopy = (text: string, idxKey: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     setCopiedIndex(idxKey);
     toast.success('Copied text to clipboard!');
     setTimeout(() => setCopiedIndex(null), 2000);

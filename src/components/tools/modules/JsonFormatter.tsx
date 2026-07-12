@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
 // Using standard JSON.parse for basic formatting. jsonlint could be added for detailed error lines if needed.
 
 export default function JsonFormatter() {
@@ -39,7 +40,7 @@ export default function JsonFormatter() {
   const copyToClipboard = async () => {
     if (!output) return;
     try {
-      await navigator.clipboard.writeText(output);
+      await clipboardWrite(output);
       toast.success('JSON copied to clipboard!');
     } catch (err) {
       toast.error('Failed to copy text.');

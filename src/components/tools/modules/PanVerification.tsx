@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Shield, CheckCircle, AlertTriangle, Info, Copy, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const STATUS_MAP: Record<string, string> = {
   P: 'Individual (P)',
@@ -75,7 +76,7 @@ export default function PanVerification() {
   };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    clipboardWrite(text);
     toast.success('Copied to clipboard');
   };
 

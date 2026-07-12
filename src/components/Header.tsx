@@ -11,15 +11,20 @@ import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
 
 const MENU_COLUMN_DEFS = [
-  { title: "Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "ai-image-upscaler", "heic-to-jpg"] },
-  { title: "PDF", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel"] },
-  { title: "Text", category: "Text", allHref: "/text", slugs: ["ai-paraphrasing-tool", "text-summarizer", "ai-translator"] },
-  { title: "Audio", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter"] },
-  { title: "AI Tools", category: "AI", allHref: "/ai", slugs: ["ai-image-generator", "ai-document-chat"] },
-  { title: "Developer", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "css-minifier", "sql-formatter", "diff-checker", "html-to-markdown"] },
-  { title: "Utility", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "morse-code-translator", "password-strength-checker"] },
-  { title: "Video", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-trimmer", "subtitle-generator"] },
-  { title: "Convert", category: "Converter", allHref: "/converter", slugs: ["mp4-to-mp3", "image-converter", "audio-converter"] },
+  { title: "Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "ai-image-upscaler", "png-to-jpg"] },
+  { title: "PDF", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel", "word-to-pdf", "jpg-to-pdf", "pdf-to-jpg"] },
+  { title: "Video", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-to-mp3", "crop-video", "subtitle-translator", "video-trimmer"] },
+  { title: "Audio", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter", "apple-music-preview-extractor", "bulk-audio-converter"] },
+  { title: "AI", category: "AI", allHref: "/ai", slugs: ["ai-image-generator", "ai-paraphrasing-tool", "ai-translator", "ai-image-upscaler", "ai-face-swap", "ai-cover-letter-generator", "ai-thumbnail-maker", "ai-document-chat"] },
+  { title: "Developer", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "sql-formatter", "css-minifier", "diff-checker", "base64-encode-decode", "regex-tester", "js-minifier", "json-to-xml"] },
+  { title: "Text", category: "Text", allHref: "/text", slugs: ["character-counter", "word-counter", "fancy-text-generator", "font-generator", "cursive-text-generator", "text-to-handwriting", "case-converter", "reverse-text-generator"] },
+  { title: "Finance", category: "Finance", allHref: "/finance", slugs: ["currency-converter", "percentage-calculator", "emi-calculator", "sip-calculator", "gst-calculator", "invoice-generator", "profit-margin-calculator", "roi-calculator"] },
+  { title: "Utility", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "url-shortener", "resume-builder", "ip-address-lookup"] },
+  { title: "Converter", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-to-html"] },
+  { title: "Privacy", category: "Privacy", allHref: "/privacy", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
+  { title: "SEO & Marketing", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "conversion-rate-calculator", "cpm-calculator"] },
+  { title: "Branding", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "favicon-generator", "svg-editor"] },
+  { title: "Health & Productivity", category: "Health", allHref: "/health", slugs: ["bmi-calculator", "bmr-calculator", "salary-calculator", "pomodoro-timer", "morse-code-translator", "dice-roller"] },
 ];
 
 function buildMegamenuColumns() {
@@ -27,7 +32,7 @@ function buildMegamenuColumns() {
     const tools = slugs
       .map(slug => toolsRegistry.find(t => t.slug === slug))
       .filter(Boolean)
-      .map(t => ({ name: t!.name, href: `/${category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
+      .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
     const allCount = toolsRegistry.filter(t => t.category === category).length;
     return { title, tools, allCount, allHref };
   });
@@ -157,13 +162,13 @@ export function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
-                    className="absolute left-0 top-[100%] mt-4 w-[1000px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden z-[1000]"
+                    className="absolute left-0 top-[100%] mt-4 w-[1000px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000]"
                   >
                     {/* Inline Search — opens CommandMenu */}
                     <button
                       onClick={() => {
                         setMegaMenuOpen(false);
-                        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+                        document.dispatchEvent(new CustomEvent('opencode-command'));
                       }}
                       className="w-full p-4 border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)] flex items-center justify-between hover:bg-[var(--bg-surface)] transition-colors cursor-pointer text-left"
                     >
@@ -282,7 +287,7 @@ export function Header() {
                       <div className="flex gap-4 text-[12px] font-medium text-[var(--text-secondary)]">
                         <Link href="/image/background-remover" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>BG Remover</Link>
                         <Link href="/pdf/pdf-compressor" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>PDF Compress</Link>
-                        <Link href="/video/yt-to-mp3" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
+                        <Link href="/video/video-to-mp3" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
                       </div>
                     </div>
                   </motion.div>
@@ -362,7 +367,7 @@ export function Header() {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }));
+                    document.dispatchEvent(new CustomEvent("opencode-command"));
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 text-sm text-[var(--text-secondary)] bg-[var(--bg-overlay)] rounded-[var(--radius-lg)] border border-[var(--border-subtle)]"
                 >

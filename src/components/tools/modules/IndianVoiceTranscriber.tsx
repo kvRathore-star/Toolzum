@@ -5,6 +5,7 @@ import { Upload, Download, Copy, Check, Mic, FileText, Clock, Languages, AlertCi
 import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '@/components/tools/AiSettings';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const INDIAN_LANGUAGES = [
   { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
@@ -94,7 +95,7 @@ export default function IndianVoiceTranscriber() {
 
   const handleCopy = () => {
     if (!transcript) return;
-    navigator.clipboard.writeText(transcript);
+    clipboardWrite(transcript);
     setCopied(true);
     toast.success('Copied!');
     setTimeout(() => setCopied(false), 2000);

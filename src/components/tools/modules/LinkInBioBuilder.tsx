@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Copy, Check, Download, Plus, Trash2, GripVertical, Image as ImageIcon, Link, Palette, Eye, Code, Smartphone, MoveUp, MoveDown, Globe, Camera, Video, Music, ShoppingBag, MessageCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import NextImage from "next/image";
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface LinkItem {
   id: string;
@@ -122,7 +123,7 @@ ${linkCards}
   }, [links, profileName, profileBio, profileImage, bgColor, cardColor, textColor, accentColor]);
 
   const handleCopyHtml = () => {
-    navigator.clipboard.writeText(generateHtml);
+    clipboardWrite(generateHtml);
     setCopied(true);
     toast.success('HTML copied! Deploy on GitHub Pages, Vercel, or Netlify.');
     setTimeout(() => setCopied(false), 2000);
