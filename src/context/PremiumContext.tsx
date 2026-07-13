@@ -64,7 +64,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
         if (!valid) {
           localStorage.removeItem('toolzum_pro_token');
         }
-      });
+      }).catch(() => {});
     }
   }, [verifyLicense]);
 

@@ -3,9 +3,9 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Copy, Check, Mic, FileText, Clock, Languages, AlertCircle, Loader2, Play, Square } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '@/components/tools/AiSettings';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const INDIAN_LANGUAGES = [
   { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
@@ -23,7 +23,6 @@ const INDIAN_LANGUAGES = [
 ];
 
 export default function IndianVoiceTranscriber() {
-  const { apiKey, provider, isConfigured } = useAiProvider();
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isTranscribing, setIsTranscribing] = useState(false);
@@ -55,7 +54,6 @@ export default function IndianVoiceTranscriber() {
 
   const transcribe = async () => {
     if (!audioFile) return toast.error('Upload an audio file first');
-    if (!isConfigured || !apiKey) return toast.error('Configure your AI provider first');
 
     setIsTranscribing(true);
     setTranscript(null);
@@ -70,11 +68,8 @@ export default function IndianVoiceTranscriber() {
         formData.append('language', selectedLanguage);
       }
 
-      const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      const response = await fetch('/api/ai/transcribe', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-        },
         body: formData,
       });
 
@@ -122,6 +117,7 @@ export default function IndianVoiceTranscriber() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
+      <AiPrivacyBanner />
       <div className="flex items-center gap-2">
         <Mic className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Indian Multilingual Voice Transcriber</h3>
@@ -132,7 +128,7 @@ export default function IndianVoiceTranscriber() {
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
           Upload a voice note, audio recording, or video to get transcript in Indian languages. 
-          Uses OpenAI Whisper via your API key — no data leaves your browser except the API call.
+          Powered by server-side Gemini — your audio is sent to our server for transcription.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">

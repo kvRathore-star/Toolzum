@@ -136,6 +136,8 @@ export default function CompressImageTo50kb() {
               <Image
                 src={originalUrl}
                 alt="Uploaded image preview"
+                unoptimized={true}
+                width={800} height={600}
                 className="max-w-full max-h-full object-contain"
               />
             )}
@@ -161,6 +163,8 @@ export default function CompressImageTo50kb() {
               <Image
                 src={compressedUrl}
                 alt="Processed result"
+                unoptimized={true}
+                width={800} height={600}
                 className="max-w-full max-h-full object-contain"
               />
             ) : (

@@ -8,6 +8,8 @@ const PRICES: Record<string, { amount: number; currency: string }> = {
   yearly: { amount: 3999, currency: 'INR' },
 };
 
+const VALID_GATEWAYS = ['razorpay', 'dodo'];
+
 const RATE_LIMIT = 5;
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
@@ -16,16 +18,21 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
 
     const recent = await DB.prepare(
-      "SELECT COUNT(*) as c FROM payment WHERE id LIKE ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`${ip}%`).first<{ c: number }>();
+      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
+    ).bind(`payment_rate:${ip}`).first<{ c: number }>();
 
     if (recent && recent.c >= RATE_LIMIT) {
-      return new Response('Too many requests', { status: 429 });
+      return new Response(JSON.stringify({ error: 'Too many requests' }), { status: 429, headers: { 'Content-Type': 'application/json' } });
     }
+
+    DB.prepare(
+      "INSERT INTO analytics_event (path, fingerprint, clientType, createdAt) VALUES (?, ?, 'payment-rate', datetime('now'))"
+    ).bind('/api/payments/create-order', `payment_rate:${ip}`).run().catch(() => {});
 
     const formData = await context.request.formData();
     const plan = (formData.get('plan') as string) || 'pass';
-    const gateway = (formData.get('gateway') as string) || 'razorpay';
+    let gateway = (formData.get('gateway') as string) || 'razorpay';
+    if (!VALID_GATEWAYS.includes(gateway)) gateway = 'razorpay';
     const price = PRICES[plan] || PRICES.pass;
 
     const orderId = `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -79,7 +86,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     return new Response(html, {
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
-  } catch (err) {
-    return new Response(String(err), { status: 500 });
+  } catch {
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 }

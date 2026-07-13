@@ -130,7 +130,7 @@ export default function PassportPhotoIndia() {
       {outputUrl && (
         <div className="mt-8 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col sm:flex-row items-center gap-8 animate-in slide-in-from-bottom-4 duration-500">
           <div className="shrink-0 rounded-lg overflow-hidden border-4 border-white shadow-xl w-[140px] h-[180px] bg-white">
-            <Image loading="lazy" src={outputUrl} alt="Processed Passport" unoptimized={true} className="w-full h-full object-cover" />
+            <Image loading="lazy" src={outputUrl} alt="Processed Passport" unoptimized={true} width={140} height={180} className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h4 className="text-lg font-bold text-emerald-400 mb-2">Success! Ready for Upload</h4>

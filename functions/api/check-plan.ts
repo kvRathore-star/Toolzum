@@ -31,7 +31,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch {
-    return new Response(JSON.stringify({ plan: 'free', maxFileSizeMB: 10, maxBatchSize: 1, threads: 1 }), {
+    return new Response(JSON.stringify({ error: 'Service unavailable' }), {
+      status: 503,
       headers: { 'Content-Type': 'application/json' },
     });
   }

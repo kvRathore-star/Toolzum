@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import Link from 'next/link';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const FREE_PAGE_LIMIT = 3;
 
@@ -15,7 +16,7 @@ export default function PdfAiSummariser() {
   const [pageCount, setPageCount] = useState(0);
   const [isExtracting, setIsExtracting] = useState(false);
   const [isSummarizing, setIsSummarizing] = useState(false);
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [usage, setUsage] = useState(0);
   const [showFullText, setShowFullText] = useState(false);
 
@@ -73,7 +74,6 @@ export default function PdfAiSummariser() {
 
   const handleSummarize = async () => {
     if (!extractedText.trim()) { toast.error('Extract PDF text first'); return; }
-    if (!isConfigured) { toast.error('Configure your AI Provider API key first'); return; }
     setIsSummarizing(true);
     try {
       const prompt = `Summarize the following text in 5 key bullet points. Be concise and capture the main ideas:\n\n${extractedText.substring(0, 8000)}`;
@@ -87,6 +87,7 @@ export default function PdfAiSummariser() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <AiPrivacyBanner />
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">

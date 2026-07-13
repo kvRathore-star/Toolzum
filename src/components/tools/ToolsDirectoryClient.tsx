@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
-import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, Image, FileText, Code2, Briefcase, Wrench, Compass } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, ArrowUpDown, Crown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
@@ -36,6 +36,10 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [navMode, setNavMode] = useState<'sidebar' | 'menubar'>('sidebar');
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'name-asc' | 'name-desc'>('name-asc');
+  const [proFilter, setProFilter] = useState<'all' | 'free' | 'pro'>('all');
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -51,6 +55,9 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
     const handleClick = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setOpenGroup(null);
+      }
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setShowSortMenu(false);
       }
     };
     document.addEventListener('mousedown', handleClick);
@@ -86,14 +93,19 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
   }, [allCategories]);
 
   const filteredTools = useMemo(() => {
-    return (initialTools ?? toolsRegistry).filter(tool => {
+    const source = (initialTools ?? toolsRegistry).filter(tool => {
       if (tool.showInCategory === false) return false;
       const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             tool.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
-      return matchesSearch && matchesCategory;
+      const matchesPro = proFilter === 'all' || (proFilter === 'pro' ? tool.isPro : !tool.isPro);
+      return matchesSearch && matchesCategory && matchesPro;
     });
-  }, [searchQuery, activeCategory, initialTools]);
+    return source.sort((a, b) => {
+      if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
+      return b.name.localeCompare(a.name);
+    });
+  }, [searchQuery, activeCategory, initialTools, sortBy, proFilter]);
 
   const totalPages = Math.max(1, Math.ceil(filteredTools.length / ITEMS_PER_PAGE));
   const paginatedTools = useMemo(() => {
@@ -103,7 +115,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, activeCategory]);
+  }, [searchQuery, activeCategory, proFilter, sortBy]);
 
   const CategoryMenubar = () => (
     <div ref={menuRef} className="mb-8">
@@ -235,18 +247,19 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
             Ecosystem Directory
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            Explore {(initialTools ?? toolsRegistry).filter(t => t.showInCategory !== false).length}+ offline-first utilities. Everything runs locally in your browser.
+            Explore {(initialTools ?? toolsRegistry).length}+ offline-first utilities. Everything runs locally in your browser.
           </p>
           
           <div className="mt-8 relative max-w-2xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
-            <input 
-              type="text"
-              placeholder="Search directory..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-12 pr-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all text-base"
-            />
+              <input 
+                type="text"
+                placeholder="Search directory..."
+                aria-label="Search tools"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-12 pl-12 pr-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all text-base"
+              />
           </div>
         </div>
       </div>
@@ -266,12 +279,41 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
               <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} results</span>
             </div>
             <div className="flex items-center gap-2">
+              {/* Pro/Free toggle */}
+              <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+                <button onClick={() => setProFilter('all')} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
+                  All
+                </button>
+                <button onClick={() => setProFilter('free')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
+                  <Sparkles className="w-3 h-3" /> Free
+                </button>
+                <button onClick={() => setProFilter('pro')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
+                  <Crown className="w-3 h-3" /> Pro
+                </button>
+              </div>
+              {/* Sort */}
+              <div className="relative" ref={sortRef}>
+                <button onClick={() => setShowSortMenu(!showSortMenu)} className="flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-mono border border-[var(--border-subtle)] rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+                  <ArrowUpDown className="w-3 h-3" />
+                  {sortBy === 'name-asc' ? 'A–Z' : 'Z–A'}
+                </button>
+                {showSortMenu && (
+                  <div className="absolute right-0 top-full mt-1 w-36 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-1 z-50">
+                    <button onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                      A → Z
+                    </button>
+                    <button onClick={() => { setSortBy('name-desc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                      Z → A
+                    </button>
+                  </div>
+                )}
+              </div>
               {/* Nav mode toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
-                <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Sidebar navigation">
+                <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Sidebar navigation">
                   <PanelLeft className="w-4 h-4" />
                 </button>
-                <button onClick={() => setNavMode('menubar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'menubar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Horizontal menu navigation">
+                <button onClick={() => setNavMode('menubar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'menubar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Horizontal menu navigation">
                   <AlignJustify className="w-4 h-4" />
                 </button>
               </div>
@@ -322,6 +364,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                         <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
                           {tool.category}
                         </span>
+                        {tool.isPro && <span className="text-[9px] font-mono text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
                       </div>
                       <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                         {tool.name}
@@ -357,6 +400,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
                         <span className="text-[9px] font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-1.5 py-0.5 rounded">{tool.category}</span>
+                          {tool.isPro && <span className="text-[9px] font-mono text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
                       </div>
                       <p className="text-xs text-[var(--text-secondary)] truncate">{tool.description}</p>
                     </div>

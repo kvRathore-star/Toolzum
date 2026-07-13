@@ -6,6 +6,7 @@ import AiSettings from '../AiSettings';
 import { Palette, Clipboard, Download, Sparkles } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const STYLES = [
   'Minimal & Modern', 'Bold & Vibrant', 'Luxury & Elegant', 
@@ -14,7 +15,7 @@ const STYLES = [
 ];
 
 export default function BrandColorPaletteGenerator() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputText, setOutputText] = useState('');
 
@@ -23,7 +24,6 @@ export default function BrandColorPaletteGenerator() {
 
   const handleGenerate = async () => {
     if (!brandDesc.trim()) return toast.error('Please describe your brand');
-    if (!isConfigured) return toast.error('Please configure your AI Provider API key first');
 
     setIsProcessing(true);
     try {
@@ -79,6 +79,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <AiPrivacyBanner />
       <AiSettings />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -138,10 +139,10 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
             <h4 className="font-semibold text-zinc-900 dark:text-white">Generated Palette</h4>
             {outputText && (
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" title="Copy to Clipboard">
+                <button onClick={handleCopy} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Copy to Clipboard">
                   <Clipboard className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" title="Download as JSON">
+                <button onClick={handleDownload} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Download as JSON">
                   <Download className="w-4 h-4" />
                 </button>
               </div>

@@ -16,11 +16,13 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
     let plan: string | null = null;
+    let userId: string | null = null;
     if (token) {
       const user = await DB.prepare(
-        "SELECT u.plan FROM session s JOIN user u ON u.id = s.userId WHERE s.token = ? AND s.expiresAt > unixepoch()"
-      ).bind(token).first<{ plan: string }>();
+        "SELECT u.plan, s.userId FROM session s JOIN user u ON u.id = s.userId WHERE s.token = ? AND s.expiresAt > unixepoch()"
+      ).bind(token).first<{ plan: string; userId: string }>();
       plan = user?.plan || null;
+      userId = user?.userId || null;
     }
 
     const limit = getUserLimit(plan);
@@ -30,7 +32,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const fingerprint = token || request.headers.get('x-download-fingerprint') || 'unknown';
+    const fingerprint = userId || request.headers.get('x-download-fingerprint') || 'unknown';
     const today = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
 
     const existing = await DB.prepare(
@@ -58,7 +60,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch {
-    return new Response(JSON.stringify({ allowed: true, remaining: 3 }), {
+    return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
+      status: 503,
       headers: { 'Content-Type': 'application/json' },
     });
   }

@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
-import { FileText, AlertCircle, Building, Smartphone, ShoppingCart, Shield, Home, Zap, Droplets, Loader2, Download, Copy, Check, Sparkles, Info } from 'lucide-react';
+import { FileText, AlertCircle, Building, Smartphone, ShoppingCart, Shield, Home, Zap, Droplets, Loader2, Download, Copy, Check, Sparkles } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import AiSettings from '@/components/tools/AiSettings';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const COMPLAINT_TYPES = [
   { id: 'bank', label: 'Bank Fraud', icon: <Building className="w-3.5 h-3.5" />, statute: 'Banking Ombudsman Scheme 2006, RBI Guidelines' },
@@ -71,7 +72,7 @@ Enclosures:
 }
 
 export default function ComplaintLetterGenerator() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [form, setForm] = useState<FormData>({
     type: 'bank', fullName: '', address: '', email: '', phone: '',
     againstName: '', againstAddress: '', transactionId: '', amount: '',
@@ -79,38 +80,20 @@ export default function ComplaintLetterGenerator() {
   });
   const [generatedLetter, setGeneratedLetter] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showAiSettings, setShowAiSettings] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [dailyCount, setDailyCount] = useState(0);
 
   const ct = COMPLAINT_TYPES.find(t => t.id === form.type) || COMPLAINT_TYPES[0];
-
-  React.useEffect(() => {
-    const data = localStorage.getItem('complaint_letter_count');
-    if (data) {
-      const { date, count } = JSON.parse(data);
-      if (date === new Date().toDateString()) setDailyCount(count);
-    }
-  }, []);
-
-  const incrementDaily = () => {
-    const newCount = dailyCount + 1;
-    setDailyCount(newCount);
-    localStorage.setItem('complaint_letter_count', JSON.stringify({ date: new Date().toDateString(), count: newCount }));
-  };
 
   const update = (key: keyof FormData, val: string) => setForm(prev => ({ ...prev, [key]: val }));
 
   const handleGenerate = async () => {
     if (!form.fullName.trim() || !form.description.trim()) return toast.error('Enter your name and complaint details');
-    if (dailyCount >= 1 && !isConfigured) return toast.error('Daily free limit (1) reached. Configure AI API key below for unlimited use.');
 
     setIsGenerating(true);
     setGeneratedLetter(null);
 
-    if (isConfigured) {
-      try {
-        const prompt = `You are a legal complaint letter drafting assistant for Indian consumer law. Generate a formal complaint letter in English with the following details:
+    try {
+      const prompt = `You are a legal complaint letter drafting assistant for Indian consumer law. Generate a formal complaint letter in English with the following details:
 
 Complainant: ${form.fullName}
 Address: ${form.address || '[Not provided]'}
@@ -134,20 +117,15 @@ The letter must:
 
 Format as plain text with proper line breaks. Do NOT include markdown.`;
 
-        const letter = await generateCompletion([
-          { role: 'system', content: 'You are a legal document assistant specializing in Indian consumer complaint letters. Generate only the letter text, no commentary.' },
-          { role: 'user', content: prompt }
-        ]);
-        setGeneratedLetter(letter);
-        incrementDaily();
-        toast.success('AI complaint letter generated!');
-      } catch (err: unknown) {
-        toast.error(err instanceof Error ? err.message : 'Failed to generate letter');
-        setGeneratedLetter(getDefaultLetter(form, ct));
-      }
-    } else {
+      const letter = await generateCompletion([
+        { role: 'system', content: 'You are a legal document assistant specializing in Indian consumer complaint letters. Generate only the letter text, no commentary.' },
+        { role: 'user', content: prompt }
+      ]);
+      setGeneratedLetter(letter);
+      toast.success('AI complaint letter generated!');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Failed to generate letter');
       setGeneratedLetter(getDefaultLetter(form, ct));
-      incrementDaily();
     }
     setIsGenerating(false);
   };
@@ -170,6 +148,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
+      <AiPrivacyBanner />
       <div className="flex items-center gap-2 mb-1">
         <FileText className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI Complaint Letter Generator</h3>
@@ -177,21 +156,9 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
 
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate legally sound complaint letters citing Indian consumer law. Free: 1 letter/day. AI-powered letter with your API key: unlimited.</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate legally sound complaint letters citing Indian consumer law, powered by AI.</p>
 
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3 flex items-center justify-between">
-            <p className="text-[10px] text-amber-600 dark:text-amber-400 flex items-center gap-1"><Info className="w-3 h-3" /> Daily free limit: {dailyCount}/1 used{isConfigured ? ' · AI configured → unlimited' : ''}</p>
-            <button onClick={() => setShowAiSettings(!showAiSettings)}
-              className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
-              {isConfigured ? 'Change API Key' : 'Set AI Key for Unlimited'}
-            </button>
-          </div>
-
-          {showAiSettings && (
-            <div className="animate-in fade-in slide-in-from-top-2 duration-200">
-              <AiSettings />
-            </div>
-          )}
+          <AiSettings />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">

@@ -5,6 +5,7 @@ import { toBlobURL } from '@ffmpeg/util';
 // Global singleton instance so we don't re-download the 30MB wasm 
 // every time the user switches between video tools.
 let ffmpegGlobal: FFmpeg | null = null;
+let hasLoadedOnce = false;
 
 const LOAD_TIMEOUT_MS = 60_000;
 
@@ -21,6 +22,7 @@ export function useFFmpeg() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
+  const [isFirstLoad, setIsFirstLoad] = useState(false);
   const ffmpegRef = useRef<FFmpeg | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -88,6 +90,7 @@ export function useFFmpeg() {
     }
 
     if (isLoading) return;
+    if (!hasLoadedOnce) setIsFirstLoad(true);
     setIsLoading(true);
     setLoadError(null);
     setProgress(0);
@@ -97,6 +100,8 @@ export function useFFmpeg() {
         const loaded = await attemptLoad(CDN_FALLBACKS[i]);
         if (loaded) {
           setIsLoaded(true);
+          hasLoadedOnce = true;
+          setIsFirstLoad(false);
           return;
         }
       }
@@ -117,6 +122,7 @@ export function useFFmpeg() {
     loadError,
     progress,
     logs,
+    isFirstLoad,
     loadFFmpeg,
   };
 }

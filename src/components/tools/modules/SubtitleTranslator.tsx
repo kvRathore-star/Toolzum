@@ -6,9 +6,10 @@ import AiSettings from '../AiSettings';
 import { Clipboard, Download, Sparkles } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function SubtitleTranslator() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputText, setOutputText] = useState('');
   
@@ -17,7 +18,6 @@ export default function SubtitleTranslator() {
 
   const handleGenerate = async () => {
     if (!subtitleText.trim()) return toast.error('Please fill in the Subtitles (SRT or VTT) field');
-    if (!isConfigured) return toast.error('Please configure your AI Provider API key at the top first!');
 
     setIsProcessing(true);
     try {
@@ -48,6 +48,7 @@ ${subtitleText}`;
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <AiPrivacyBanner />
       <AiSettings />
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

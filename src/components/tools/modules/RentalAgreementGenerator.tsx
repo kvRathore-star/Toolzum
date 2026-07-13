@@ -133,7 +133,7 @@ export default function RentalAgreementGenerator() {
   const update = (key: keyof AgreementForm, value: string) => setForm(prev => ({ ...prev, [key]: value }));
 
   const handlePrint = () => {
-    const html = generateAgreementHtml(form);
+    const html = DOMPurify.sanitize(generateAgreementHtml(form));
     const win = window.open('', '_blank');
     if (!win) return toast.error('Please allow pop-ups to print');
     win.document.write(`<html><head><title>Rental Agreement</title>

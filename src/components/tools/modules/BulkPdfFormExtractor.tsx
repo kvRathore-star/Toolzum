@@ -26,7 +26,7 @@ export default function BulkPdfFormExtractor() {
             } else if (field.constructor.name === 'PDFCheckBox' || field.constructor.name === 'PDFRadioGroup') {
               data[name] = (field as unknown as { isSelected(): boolean }).isSelected() ? 'Yes' : 'No';
             }
-          } catch { data[name] = 'ERROR'; }
+          } catch (e) { data[name] = 'ERROR'; console.warn('PDF form field extraction error:', e); }
         }
         const csv = Object.entries(data).map(([k, v]) => `"${k}","${v}"`).join('\n');
         return { name: file.name.replace(/\.pdf$/i, '-form-data.csv'), blob: new Blob([csv], { type: 'text/csv' }) };

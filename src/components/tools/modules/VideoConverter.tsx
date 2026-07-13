@@ -144,7 +144,7 @@ export default function VideoConverter({ defaultInput = 'mkv', defaultOutput = '
           <button
             onClick={swapFormats}
             className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            title="Swap formats"
+            aria-label="Swap formats"
           >
             <svg className="w-5 h-5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
@@ -202,7 +202,7 @@ export default function VideoConverter({ defaultInput = 'mkv', defaultOutput = '
               <button
                 onClick={swapFormats}
                 className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                title="Swap formats"
+                aria-label="Swap formats"
               >
                 <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />

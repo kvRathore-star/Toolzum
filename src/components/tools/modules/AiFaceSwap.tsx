@@ -128,6 +128,7 @@ export default function AiFaceSwap() {
   ref={sourceImageRef}
   src={sourceImg}
   alt="Face preview"
+  width={1} height={1}
   className="hidden"
   onLoad={drawComposite}
 />
@@ -137,6 +138,7 @@ export default function AiFaceSwap() {
   ref={targetImageRef}
   src={targetImg}
   alt="Face preview"
+  width={1} height={1}
   className="hidden"
   onLoad={drawComposite}
 />
@@ -158,7 +160,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Source Face</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {sourceImg ? (
-                  <Image loading="lazy" src={sourceImg} alt="Face Source" unoptimized={true} className="w-12 h-12 object-cover rounded-full" />
+                  <Image loading="lazy" src={sourceImg} alt="Face Source" unoptimized={true} width={48} height={48} className="w-12 h-12 object-cover rounded-full" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}
@@ -171,7 +173,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Target Background</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {targetImg ? (
-                  <Image loading="lazy" src={targetImg} alt="Target Source" unoptimized={true} className="w-12 h-12 object-cover rounded-lg" />
+                  <Image loading="lazy" src={targetImg} alt="Target Source" unoptimized={true} width={48} height={48} className="w-12 h-12 object-cover rounded-lg" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}

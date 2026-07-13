@@ -45,6 +45,13 @@ export function BulkToolShell({
   const [presetName, setPresetName] = useState('');
   const [showLargeFileWarning, setShowLargeFileWarning] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const blobUrlsRef = useRef<string[]>([]);
+
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, []);
 
   const { process, abort, maxConcurrency, isPro } = useParallelProcessor();
   const { presets, savePreset, loadPreset, deletePreset, isPro: canSavePresets } = useWorkflowPresets(toolSlug);
@@ -64,7 +71,11 @@ export function BulkToolShell({
       toast.error(`Some files exceed ${maxSizeMB}MB limit. ${valid.length} of ${accepted.length} accepted.`);
     }
     setFiles(prev => [...prev, ...valid]);
-    valid.forEach(f => setPreviews(prev => [...prev, URL.createObjectURL(f)]));
+    valid.forEach(f => {
+      const url = URL.createObjectURL(f);
+      blobUrlsRef.current.push(url);
+      setPreviews(prev => [...prev, url]);
+    });
     toast.success(`Added ${valid.length} file(s)`);
     if (hasLargeFiles(valid)) {
       setShowLargeFileWarning(true);
@@ -169,7 +180,7 @@ export function BulkToolShell({
             <h2 className="text-xl font-bold text-[var(--text-primary)]">{title}</h2>
             <p className="text-sm text-[var(--text-secondary)] mt-1">{description}</p>
           </div>
-          <button onClick={() => setShowPresets(!showPresets)} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all" title="Workflow Presets">
+          <button onClick={() => setShowPresets(!showPresets)} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all" aria-label="Workflow Presets">
             <Save className="w-3.5 h-3.5" /> Presets
           </button>
         </div>

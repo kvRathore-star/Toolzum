@@ -276,7 +276,11 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {CATEGORIES.map((cat, i) => {
-            const count = toolsRegistry.filter(t => (t.category === cat.label || t.category === cat.id) && t.showInCategory !== false).length;
+            const count = toolsRegistry.filter(t => {
+              if (t.category === cat.label || t.category === cat.id) return t.showInCategory !== false;
+              if (cat.id === 'Converter' && ['video-converter', 'audio-converter', 'image-format-converter', 'document-converter'].includes(t.slug)) return true;
+              return false;
+            }).length;
             return (
               <motion.div
                 key={cat.id}
@@ -289,9 +293,14 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                   href={`/${cat.id.toLowerCase()}`}
                   className="group flex flex-col items-start p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.06)] transition-all duration-300 h-full"
                 >
-                  <div className="w-10 h-10 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)]/10 group-hover:border-[var(--accent)]/30 transition-all">
-                    <cat.icon className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
-                  </div>
+                  {(() => {
+                    const theme = getCategoryTheme(cat.id);
+                    return (
+                      <div className={`w-10 h-10 rounded-[var(--radius-lg)] ${theme.bgTint} border border-[var(--border-subtle)] flex items-center justify-center mb-4 group-hover:border-[var(--accent)]/30 transition-all`}>
+                        <cat.icon className={`w-5 h-5 ${theme.iconColor} transition-all`} />
+                      </div>
+                    );
+                  })()}
                   <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-1 group-hover:text-[var(--accent)] transition-colors">{cat.label}</h3>
                   <p className="text-xs text-[var(--text-muted)] mb-3 leading-relaxed">{cat.desc}</p>
                   <span className="text-[11px] font-mono text-[var(--accent)] mt-auto">{count} tools &rarr;</span>
@@ -309,8 +318,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               href="/tools"
               className="group flex flex-col items-center justify-center p-5 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 transition-all duration-300 h-full text-center"
             >
-              <span className="text-lg font-semibold mb-1">+{toolCount - CATEGORIES.reduce((s, c) => s + toolsRegistry.filter(t => (t.category === c.label || t.category === c.id) && t.showInCategory !== false).length, 0)} tools</span>
-              <span className="text-xs text-[var(--text-muted)]">&amp; More categories</span>
+              <span className="text-lg font-semibold mb-1">{toolCount}+ tools</span>
+              <span className="text-xs text-[var(--text-muted)]">&amp; counting</span>
             </Link>
           </motion.div>
         </div>

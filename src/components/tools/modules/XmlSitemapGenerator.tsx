@@ -155,7 +155,7 @@ export default function XmlSitemapGenerator() {
           eventSourceRef.current = null;
           setState({ status: 'error', message: data.message });
         }
-      } catch {}
+      } catch (e) { console.warn('Sitemap crawl failed for URL:', e); }
     };
 
     es.onerror = () => {

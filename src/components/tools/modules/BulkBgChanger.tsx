@@ -119,14 +119,19 @@ export default function BulkBgChanger() {
     if (images.length === 0) return toast.error('No images to process');
     if (!sampleColor) return toast.error('Click on the image to sample a background color first');
     setIsProcessing(true);
-    let count = 0;
-    for (const item of images) {
-      const result = await processImage(item);
-      setImages(prev => prev.map(p => p.id === item.id ? { ...p, processedUrl: result } : p));
-      count++;
+    try {
+      let count = 0;
+      for (const item of images) {
+        const result = await processImage(item);
+        setImages(prev => prev.map(p => p.id === item.id ? { ...p, processedUrl: result } : p));
+        count++;
+      }
+      toast.success(`Processed ${count} images!`);
+    } catch (err: any) {
+      toast.error('Processing failed: ' + (err.message || 'Unknown error'));
+    } finally {
+      setIsProcessing(false);
     }
-    setIsProcessing(false);
-    toast.success(`Processed ${count} images!`);
   };
 
   const downloadImage = (url: string, name: string) => {

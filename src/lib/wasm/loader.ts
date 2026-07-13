@@ -59,11 +59,14 @@ export function isWasmSupported(): boolean {
 export function preloadWasm(name: string): void {
   if (moduleCache.has(name)) return;
   fetch(`/wasm/${name}`)
-    .then((r) => r.arrayBuffer())
-    .then((buf) => WebAssembly.compile(buf))
-    .then((mod) => moduleCache.set(name, mod))
-    .catch(() => {
-      // Preload is best-effort; failures are non-fatal
+    .then((r) => {
+      if (!r.ok) return;
+      return r.arrayBuffer();
+    })
+    .then((buf) => buf && WebAssembly.compile(buf))
+    .then((mod) => mod && moduleCache.set(name, mod))
+    .catch((e) => {
+      console.warn('Wasm preload failed:', e);
     });
 }
 

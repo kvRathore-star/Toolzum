@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function AiParaphrasingTool() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleGenerate = async () => {
     if (!inputText.trim()) return toast.error('Enter text to paraphrase');
-    if (!isConfigured) return toast.error('Configure AI Provider');
 
     setIsProcessing(true);
     try {
@@ -28,6 +28,7 @@ export default function AiParaphrasingTool() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <AiPrivacyBanner />
       <AiSettings />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <textarea value={inputText} onChange={e => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()} placeholder="Paste text to paraphrase..." className="w-full h-96 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent outline-none" />

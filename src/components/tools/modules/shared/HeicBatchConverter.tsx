@@ -80,16 +80,21 @@ export default function HeicBatchConverter({ config }: HeicBatchProps) {
     }
 
     setIsProcessing(true);
-    let updatedQueue = [...queue];
+    try {
+      let updatedQueue = [...queue];
 
-    for (const item of pendingItems) {
-      const result = await convertSingle(item);
-      updatedQueue = updatedQueue.map((i) => (i.id === item.id ? result : i));
-      setQueue(updatedQueue);
+      for (const item of pendingItems) {
+        const result = await convertSingle(item);
+        updatedQueue = updatedQueue.map((i) => (i.id === item.id ? result : i));
+        setQueue(updatedQueue);
+      }
+
+      toast.success('Batch conversion complete!');
+    } catch (err: any) {
+      toast.error('Conversion failed: ' + (err.message || 'Unknown error'));
+    } finally {
+      setIsProcessing(false);
     }
-
-    setIsProcessing(false);
-    toast.success('Batch conversion complete!');
   };
 
   const handleDownloadAll = async () => {

@@ -269,6 +269,8 @@ export default function PanCardResizer() {
   src={outputUrl}
   alt="Processed result"
   unoptimized={true}
+  width={docType === 'photo' ? 120 : 240}
+  height={160}
   className="object-contain max-h-[160px] rounded-lg"
   style={{
     width: docType === 'photo' ? '120px' : '240px',

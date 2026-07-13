@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import Link from 'next/link';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('');
@@ -16,7 +17,7 @@ export default function RegexTester() {
   const [aiTab, setAiTab] = useState<'manual' | 'ai'>('manual');
   const [description, setDescription] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
 
   useEffect(() => {
     if (aiTab !== 'manual' || !pattern) { if (!pattern) { setMatches([]); setError(null); } return; }
@@ -42,7 +43,6 @@ export default function RegexTester() {
 
   const handleGenerate = async () => {
     if (!description.trim()) { toast.error('Please describe what you want to match'); return; }
-    if (!isConfigured) { toast.error('Please configure your AI Provider API key first'); return; }
     setIsGenerating(true);
     try {
       const prompt = `You are an expert regex developer. Given this description: "${description}", generate ONLY the raw regex pattern (no flags, no explanation, no backticks, just the pattern). The pattern should be valid for JavaScript's RegExp constructor.`;
@@ -72,6 +72,7 @@ export default function RegexTester() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <AiPrivacyBanner />
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden">
         <div className="border-b border-zinc-200 dark:border-white/10 p-6">
           <div className="flex items-center justify-between">

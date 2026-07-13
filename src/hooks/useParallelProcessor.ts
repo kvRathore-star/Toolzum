@@ -23,6 +23,7 @@ export function useParallelProcessor() {
   const { data: session } = useSession();
   const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
   const abortRef = useRef<AbortController | null>(null);
+  const processingRef = useRef(false);
 
   const getMaxConcurrency = useCallback(() => {
     return isPro ? 6 : 1;
@@ -33,6 +34,8 @@ export function useParallelProcessor() {
     processFn,
     onProgress,
   }: ParallelProcessorOptions<T>): Promise<(T | undefined)[]> => {
+    if (processingRef.current) return [];
+    processingRef.current = true;
     abortRef.current = new AbortController();
     const signal = abortRef.current.signal;
     const concurrency = getMaxConcurrency();
@@ -68,6 +71,7 @@ export function useParallelProcessor() {
       }
     }
 
+    processingRef.current = false;
     return results;
   }, [getMaxConcurrency]);
 

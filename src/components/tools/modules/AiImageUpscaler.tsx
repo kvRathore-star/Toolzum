@@ -13,6 +13,7 @@ export default function AiImageUpscaler() {
   const [upscaledUrl, setUpscaledUrl] = useState<string | null>(null);
   const [factor, setFactor] = useState<number>(2);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [sliderPos, setSliderPos] = useState<number>(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
@@ -73,8 +74,10 @@ export default function AiImageUpscaler() {
       const destImgData = destCtx.createImageData(destW, destH);
       const destData = destImgData.data;
 
-      // Lanczos scale
+      // Lanczos scale (chunked to avoid UI freeze)
       const filterSize = 3;
+      const yieldInterval = destH > 1000 ? 1 : 4;
+      const totalRows = destH;
       for (let y = 0; y < destH; y++) {
         const srcY = y / factor;
         const yMin = Math.floor(srcY) - filterSize + 1;
@@ -113,6 +116,11 @@ export default function AiImageUpscaler() {
           destData[destIdx + 1] = Math.max(0, Math.min(255, g / totalWeight));
           destData[destIdx + 2] = Math.max(0, Math.min(255, b / totalWeight));
           destData[destIdx + 3] = Math.max(0, Math.min(255, a / totalWeight));
+        }
+
+        if (y % yieldInterval === 0) {
+          setProgress(Math.round((y / totalRows) * 100));
+          await new Promise(r => setTimeout(r, 0));
         }
       }
 
@@ -213,12 +221,17 @@ export default function AiImageUpscaler() {
             </div>
           </div>
 
+          {isProcessing && progress > 0 && (
+            <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-1.5 mb-2">
+              <div className="bg-[var(--accent)] h-1.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+            </div>
+          )}
           <button
             onClick={processUpscale}
             disabled={isProcessing}
             className="w-full bg-[var(--accent)] hover:bg-indigo-600 disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
           >
-            {isProcessing ? 'Upscaling Image...' : 'Enhance & Scale'}
+            {isProcessing ? `Upscaling... ${progress}%` : 'Enhance & Scale'}
           </button>
         </div>
 

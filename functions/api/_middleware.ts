@@ -13,9 +13,11 @@ function isAllowed(header: string | null): boolean {
 export async function onRequest(context: { request: Request; next: () => Promise<Response> }) {
   const { request } = context;
 
-  if (request.method === 'POST') {
+  if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
     const origin = request.headers.get('Origin');
-    if (origin && !isAllowed(origin)) {
+    const referer = request.headers.get('Referer');
+    const check = origin || referer;
+    if (check && !isAllowed(check)) {
       return new Response(JSON.stringify({ error: 'Forbidden' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },

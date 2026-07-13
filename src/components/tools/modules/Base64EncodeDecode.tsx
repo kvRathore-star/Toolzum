@@ -243,7 +243,7 @@ export default function Base64EncodeDecode() {
                 onClick={handleSwap}
                 disabled={!output}
                 className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white font-semibold disabled:opacity-50"
-                title="Swap inputs"
+                aria-label="Swap inputs"
               >
                 🔄 Swap
               </button>

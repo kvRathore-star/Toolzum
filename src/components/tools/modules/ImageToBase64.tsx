@@ -105,7 +105,7 @@ export default function ImageToBase64() {
                 }
               }
             `}} />
-            <Image loading="lazy" src={dataUrl} alt="Preview" unoptimized={true} className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+            <Image loading="lazy" src={dataUrl} alt="Preview" unoptimized={true} width={800} height={600} className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
           </div>
         </div>
 

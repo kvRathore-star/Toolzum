@@ -173,7 +173,7 @@ export default function LoginPage() {
           <p className="text-center text-xs text-[var(--text-muted)] mt-6">
             Don&apos;t have an account?{" "}
             <Link
-              href="/login"
+              href="/sign-in"
               className="text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors font-medium"
             >
               Create one

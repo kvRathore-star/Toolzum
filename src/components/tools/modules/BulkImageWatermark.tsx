@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import { Upload, Download, Type, Image as ImageIcon, X, Loader2, AlertTriangle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -22,6 +22,14 @@ export default function BulkImageWatermark() {
   const [processedBlobs, setProcessedBlobs] = useState<Blob[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
   const logoRef = useRef<HTMLInputElement>(null);
+  const blobUrlsRef = useRef<string[]>([]);
+
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
+      if (watermarkImage?.startsWith('blob:')) URL.revokeObjectURL(watermarkImage);
+    };
+  }, [watermarkImage]);
 
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
@@ -29,6 +37,7 @@ export default function BulkImageWatermark() {
     setFiles(prev => [...prev, ...accepted]);
     accepted.forEach(f => {
       const url = URL.createObjectURL(f);
+      blobUrlsRef.current.push(url);
       setPreviews(prev => [...prev, url]);
     });
     toast.success(`Added ${accepted.length} file(s)`);
@@ -47,6 +56,7 @@ export default function BulkImageWatermark() {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
+    blobUrlsRef.current.push(url);
     setWatermarkImage(url);
     toast.success('Logo loaded');
   };
@@ -194,7 +204,7 @@ export default function BulkImageWatermark() {
           <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
             {files.map((f, i) => (
               <div key={i} className="relative group">
-                <NextImage src={previews[i]} alt="Image preview" loading="lazy" unoptimized={true} className="w-full h-16 object-cover rounded-[var(--radius-md)]" />
+                <NextImage src={previews[i]} alt="Image preview" loading="lazy" unoptimized={true} width={100} height={64} className="w-full h-16 object-cover rounded-[var(--radius-md)]" />
                 <button onClick={() => removeFile(i)} className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <X className="w-3 h-3" />
                 </button>
@@ -225,7 +235,7 @@ export default function BulkImageWatermark() {
           <div onClick={() => logoRef.current?.click()} className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-lg)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors">
             {watermarkImage ? (
               <>
-                <NextImage src={watermarkImage} alt="Watermark logo" loading="lazy" unoptimized={true} className="w-10 h-10 object-contain rounded" />
+                <NextImage src={watermarkImage} alt="Watermark logo" loading="lazy" unoptimized={true} width={40} height={40} className="w-10 h-10 object-contain rounded" />
                 <span className="text-sm text-[var(--text-primary)]">Logo loaded — click to change</span>
               </>
             ) : (

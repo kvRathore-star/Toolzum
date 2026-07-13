@@ -11,7 +11,7 @@ import Image from "next/image";
 type Mode = 'video' | 'gif';
 
 export default function VideoCompressor() {
-  const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+  const { ffmpeg, isLoaded, isLoading, progress, isFirstLoad, loadFFmpeg } = useFFmpeg();
   const [mode, setMode] = useState<Mode>('video');
   const [file, setFile] = useState<File | null>(null);
   const [crf, setCrf] = useState(28);
@@ -91,6 +91,11 @@ export default function VideoCompressor() {
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
         <p className="text-zinc-500 dark:text-zinc-400 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+        {isFirstLoad && (
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center max-w-sm">
+            First load downloads a ~30MB engine. May take a few seconds on slower connections.
+          </p>
+        )}
       </div>
     );
   }
@@ -229,7 +234,7 @@ export default function VideoCompressor() {
                 {mode === 'video' ? (
                   <video src={outputUrl} controls className="w-full max-h-[250px]" />
                 ) : (
-                  <Image src={outputUrl} alt="Compressed GIF" loading="lazy" unoptimized={true} className="max-h-[250px] object-contain" />
+                  <Image src={outputUrl} alt="Compressed GIF" loading="lazy" unoptimized={true} width={400} height={250} className="max-h-[250px] object-contain" />
                 )}
               </div>
               {outputSize && (

@@ -140,6 +140,7 @@ export default function AadhaarWalletCropper() {
   ref={imageRef}
   src={imageSrc} 
   alt="Uploaded image preview" 
+  width={800} height={600}
   className="max-w-full max-h-[350px] object-contain"
 />
                 
@@ -207,6 +208,7 @@ export default function AadhaarWalletCropper() {
 <Image unoptimized={true} loading="lazy" 
   src={croppedUrl} 
   alt="Processed result" 
+  width={800} height={600}
   className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
 />
               </div>

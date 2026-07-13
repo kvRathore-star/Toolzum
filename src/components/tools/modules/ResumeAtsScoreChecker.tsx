@@ -6,6 +6,7 @@ import AiSettings from '../AiSettings';
 import { Clipboard, Download, Sparkles, Target, TrendingUp, AlertTriangle, CheckCircle } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 interface AtsResult {
   score: number;
@@ -18,7 +19,7 @@ interface AtsResult {
 }
 
 export default function ResumeAtsScoreChecker() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState<AtsResult | null>(null);
   const [rawOutput, setRawOutput] = useState('');
@@ -30,7 +31,6 @@ export default function ResumeAtsScoreChecker() {
   const handleAnalyze = async () => {
     if (!resumeText.trim()) return toast.error('Paste your resume text first');
     if (!jobTitle.trim()) return toast.error('Enter the target job title');
-    if (!isConfigured) return toast.error('Configure your AI Provider API key first');
 
     setIsProcessing(true);
     setResult(null);
@@ -103,6 +103,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <AiPrivacyBanner />
       <AiSettings />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -165,10 +166,10 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
             <h4 className="font-semibold text-zinc-900 dark:text-white">ATS Analysis Report</h4>
             {(result || rawOutput) && (
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" title="Copy">
+                <button onClick={handleCopy} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Copy">
                   <Clipboard className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" title="Download">
+                <button onClick={handleDownload} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Download">
                   <Download className="w-4 h-4" />
                 </button>
               </div>

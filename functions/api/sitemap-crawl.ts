@@ -247,7 +247,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
     headers: {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'https://toolzum.com',
     },
   });
 }

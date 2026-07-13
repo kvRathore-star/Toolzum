@@ -181,7 +181,32 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             {displayName} Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg">
-{category === 'Converter' ? 'Free online file converter — video, audio, image, data, and document formats. Nothing uploaded, processed in your browser.' : `${tools.length} free online ${category.toLowerCase()} tools — all processed locally in your browser.`}
+{{
+  Image: `${tools.length} free online image tools — resize, crop, compress, convert, and edit images in your browser. Nothing uploaded.`,
+  PDF: `${tools.length} free online PDF tools — compress, merge, split, convert, and edit PDFs. All processing happens locally.`,
+  Video: `${tools.length} free online video tools — trim, compress, convert between formats, and enhance videos. Zero uploads.`,
+  Audio: `${tools.length} free online audio tools — convert between MP3, WAV, FLAC, OGG, trim, and enhance audio files locally.`,
+  AI: `${tools.length} free online AI tools — generate images, summarize text, analyze content, and more. Powered by browser-based AI.`,
+  Converter: 'Free online file converter — video, audio, image, data, and document formats. Nothing uploaded, processed in your browser.',
+  Developer: `${tools.length} free online developer tools — format JSON, minify CSS/JS, debug regex, encode/decode, and more.`,
+  Text: `${tools.length} free online text tools — word counter, case converter, text diff, markdown editor, and text generators.`,
+  Finance: `${tools.length} free online finance tools — GST calculator, EMI calculator, currency converter, and financial utilities.`,
+  Privacy: `${tools.length} free online privacy tools — encrypt text, redact images, generate secure passwords, and more. All local.`,
+  SEO: `${tools.length} free online SEO tools — meta tag analyzer, keyword density checker, sitemap generator, and SEO audit utilities.`,
+  Utility: `${tools.length} free online utility tools — unit converters, QR code generator, color picker, and everyday essentials.`,
+  'indian-utilities': `${tools.length} free online tools for India — Aadhaar masking, PAN card validation, UPI payment helpers, and Indian utility tools.`,
+  Transcription: `${tools.length} free online transcription tools — convert speech to text, generate captions, and transcribe audio files locally.`,
+  Branding: `${tools.length} free online branding tools — create logos, generate mockups, design business cards, and brand assets.`,
+  Business: `${tools.length} free online business tools — invoice generator, contract templates, business name generator, and more.`,
+  Marketing: `${tools.length} free online marketing tools — social media schedulers, link shorteners, analytics, and campaign helpers.`,
+  Productivity: `${tools.length} free online productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities.`,
+  Design: `${tools.length} free online design tools — color palette generator, gradient maker, typography checker, and design utilities.`,
+  HR: `${tools.length} free online HR tools — resume builder, salary calculator, leave calculator, and HR utilities.`,
+  Health: `${tools.length} free online health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities.`,
+  Extension: `${tools.length} free online browser extension tools — enhance your browsing with utility extensions. All local.`,
+  'E-commerce': `${tools.length} free online e-commerce tools — product price tracker, store analytics, and e-commerce utilities.`,
+  Lifestyle: `${tools.length} free online lifestyle tools — habit tracker, mood journal, and daily life utilities.`,
+}[category] ?? `${tools.length} free online ${category.toLowerCase()} tools — all processed locally in your browser.`}
           </p>
         </div>
 

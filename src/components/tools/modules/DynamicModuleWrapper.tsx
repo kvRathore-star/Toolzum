@@ -366,11 +366,7 @@ import ConverterRouter from './ConverterRouter';
 
 export function DynamicModuleWrapper({ slug, category }: { slug: string, category: string }) {
   if (CONVERTER_CONFIG[slug]) {
-    return (
-      <ErrorBoundary>
-        <ConverterRouter slug={slug} />
-      </ErrorBoundary>
-    );
+    return <ConverterRouter slug={slug} />;
   }
 
   const DynamicModule = MODULE_REGISTRY[slug];

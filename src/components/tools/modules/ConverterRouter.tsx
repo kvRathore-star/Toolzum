@@ -8,6 +8,7 @@ import ImageCatchAllConverter from './shared/ImageCatchAllConverter';
 import DataFormatConverter from './shared/DataFormatConverter';
 import DocumentFormatConverter from './shared/DocumentFormatConverter';
 import { ComponentType } from 'react';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; description?: string }>> = {
   "video-format": VideoFormatConverter,
@@ -27,5 +28,9 @@ export default function ConverterRouter({ slug }: ConverterRouterProps) {
   if (!config) return null;
 
   const Component = COMPONENT_MAP[config.category];
-  return <Component slug={slug} description={config.description} />;
+  return (
+    <ErrorBoundary>
+      <Component slug={slug} description={config.description} />
+    </ErrorBoundary>
+  );
 }

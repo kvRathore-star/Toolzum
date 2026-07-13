@@ -48,7 +48,7 @@ export function trackPageView() {
   push("page_view", { url: location.pathname });
 }
 
-// Install global error handler (call once in root layout)
+// Install global error handler (call once in root layout). Returns a cleanup function.
 export function initTelemetry() {
   if (typeof window === "undefined") return;
 
@@ -60,9 +60,15 @@ export function initTelemetry() {
     }
   };
 
-  window.addEventListener("unhandledrejection", (e) => {
+  const onRejection = (e: PromiseRejectionEvent) => {
     trackError(e.reason instanceof Error ? e.reason : new Error(String(e.reason)), "promise");
-  });
+  };
+  window.addEventListener("unhandledrejection", onRejection);
+
+  return () => {
+    window.onerror = orig;
+    window.removeEventListener("unhandledrejection", onRejection);
+  };
 }
 
 // For debugging — dump events to console

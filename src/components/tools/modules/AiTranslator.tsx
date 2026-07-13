@@ -5,9 +5,10 @@ import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function AITranslator() {
-  const { isConfigured, generateCompletion } = useAiProvider();
+  const { generateCompletion } = useAiProvider();
   
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
@@ -24,11 +25,6 @@ export default function AITranslator() {
   const handleTranslate = async () => {
     if (!inputText.trim()) {
       toast.error('Please enter some text to translate');
-      return;
-    }
-
-    if (!isConfigured) {
-      toast.error('Please configure your AI Provider first');
       return;
     }
 
@@ -67,9 +63,10 @@ ${inputText}`;
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500">
+      <AiPrivacyBanner />
       <AiSettings />
 
-      <div className={`space-y-6 transition-all duration-300 ${!isConfigured ? 'opacity-50 pointer-events-none blur-[1px]' : ''}`}>
+      <div className="space-y-6 transition-all duration-300">
         
         {/* Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-xl shadow-sm">
