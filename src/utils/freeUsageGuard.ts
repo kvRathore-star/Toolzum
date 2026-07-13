@@ -133,6 +133,13 @@ export function incrementDownloadCount(): void {
   }
 }
 
+interface PlanLimits {
+  plan: string;
+  maxFileSizeMB: number;
+  maxBatchSize: number;
+  threads: number;
+}
+
 interface ServerCheckResponse {
   allowed: boolean;
   remaining: number;
@@ -140,6 +147,17 @@ interface ServerCheckResponse {
 
 interface ServerRecordResponse {
   allowed: boolean;
+}
+
+async function callPlanCheck(): Promise<PlanLimits | null> {
+  if (typeof window === "undefined") return null;
+  try {
+    const res = await fetch("/api/check-plan");
+    if (!res.ok) return null;
+    return await res.json() as PlanLimits;
+  } catch {
+    return null;
+  }
 }
 
 async function callServerCheck(): Promise<ServerCheckResponse | null> {
@@ -174,8 +192,21 @@ async function callServerRecord(): Promise<boolean> {
   }
 }
 
-export async function checkAndRecordDownload(): Promise<boolean> {
+export async function checkAndRecordDownload(options?: { fileSizeMB?: number; batchSize?: number }): Promise<boolean> {
   if (typeof window === "undefined") return true;
+
+  // 0. Check plan limits from server
+  const plan = await callPlanCheck();
+  if (plan) {
+    if (options?.fileSizeMB && options.fileSizeMB > plan.maxFileSizeMB) {
+      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "file_size", limit: plan.maxFileSizeMB, actual: options.fileSizeMB } })); } catch {}
+      return false;
+    }
+    if (options?.batchSize && options.batchSize > plan.maxBatchSize) {
+      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "batch_size", limit: plan.maxBatchSize, actual: options.batchSize } })); } catch {}
+      return false;
+    }
+  }
 
   // 1. Server-side authoritative check (blocking — must pass)
   const server = await callServerCheck();

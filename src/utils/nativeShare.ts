@@ -3,33 +3,40 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { checkAndRecordDownload } from './freeUsageGuard';
 
+async function getBlobSizeMB(blobUrl: string): Promise<number | undefined> {
+  try {
+    const res = await fetch(blobUrl, { method: 'HEAD' });
+    const size = parseInt(res.headers.get('Content-Length') || '0', 10);
+    return size > 0 ? size / (1024 * 1024) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export async function downloadOrShare(blobUrl: string, fileName: string) {
-  if (!(await checkAndRecordDownload())) return;
+  const fileSizeMB = await getBlobSizeMB(blobUrl);
+  if (!(await checkAndRecordDownload({ fileSizeMB }))) return;
 
   if (Capacitor.isNativePlatform()) {
     try {
-      // Fetch blob from blob url
       const response = await fetch(blobUrl);
       const blob = await response.blob();
-      
-      // Convert to base64
+
       const reader = new FileReader();
       reader.readAsDataURL(blob);
       reader.onloadend = async () => {
         const base64data = reader.result as string;
-        
-        // Write to Cache
+
         const savedFile = await Filesystem.writeFile({
           path: fileName,
           data: base64data,
-          directory: Directory.Cache
+          directory: Directory.Cache,
         });
-        
-        // Trigger native share bottom sheet
+
         await Share.share({
           title: fileName,
           url: savedFile.uri,
-          dialogTitle: 'Share or Save File'
+          dialogTitle: 'Share or Save File',
         });
       };
     } catch (e) {
@@ -37,7 +44,6 @@ export async function downloadOrShare(blobUrl: string, fileName: string) {
       window.open(blobUrl, '_blank');
     }
   } else {
-    // Standard web browser download fallback
     const a = document.createElement('a');
     a.href = blobUrl;
     a.download = fileName;
