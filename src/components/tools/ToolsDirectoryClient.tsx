@@ -87,6 +87,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
   const filteredTools = useMemo(() => {
     return (initialTools ?? toolsRegistry).filter(tool => {
+      if (tool.showInCategory === false) return false;
       const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             tool.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = activeCategory === "All" || tool.category === activeCategory;
@@ -146,7 +147,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                     const Icon = theme.icon;
                     const isCatActive = cat === activeCategory;
                     const catDisplay = CATEGORY_DISPLAY_NAMES[cat.toLowerCase()] || cat;
-                    const count = (initialTools ?? toolsRegistry).filter(t => t.category === cat).length;
+                    const count = (initialTools ?? toolsRegistry).filter(t => t.category === cat && t.showInCategory !== false).length;
                     return (
                       <button
                         key={cat}
@@ -200,7 +201,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                   const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
                   const theme = getCategoryTheme(category);
                   const Icon = theme.icon;
-                  const count = (initialTools ?? toolsRegistry).filter(t => t.category === category).length;
+                  const count = (initialTools ?? toolsRegistry).filter(t => t.category === category && t.showInCategory !== false).length;
                   return (
                     <button
                       key={category}
@@ -234,7 +235,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
             Ecosystem Directory
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            Explore {(initialTools ?? toolsRegistry).length}+ offline-first utilities. Everything runs locally in your browser.
+            Explore {(initialTools ?? toolsRegistry).filter(t => t.showInCategory !== false).length}+ offline-first utilities. Everything runs locally in your browser.
           </p>
           
           <div className="mt-8 relative max-w-2xl">

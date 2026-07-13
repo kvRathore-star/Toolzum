@@ -99,10 +99,10 @@ export const USE_CASES: UseCaseDef[] = [
   },
 ];
 
-export function getStatsBar(toolCount: number) {
+export function getStatsBar(toolCount: number, categoryCount?: number) {
   return [
     { value: `${toolCount}+`, label: 'Browser Tools', sub: 'And counting every week' },
-    { value: '25', label: 'Categories', sub: 'From PDF to AI generation' },
+    { value: `${categoryCount || 21}`, label: 'Categories', sub: 'From PDF to AI generation' },
     { value: '100%', label: 'Client-Side', sub: 'Zero data leaves your device' },
     { value: 'Free', label: 'To Start', sub: 'No credit card required' },
   ];

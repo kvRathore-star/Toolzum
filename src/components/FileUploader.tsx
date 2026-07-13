@@ -29,6 +29,8 @@ export function FileUploader({
   className,
 }: FileUploaderProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
+  const filesRef = useRef(files);
+  filesRef.current = files;
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -153,7 +155,7 @@ export function FileUploader({
   // Revoke all blob URLs on unmount
   useEffect(() => {
     return () => {
-      files.forEach(f => { if (f.preview) URL.revokeObjectURL(f.preview); });
+      filesRef.current.forEach(f => { if (f.preview) URL.revokeObjectURL(f.preview); });
     };
   }, []);
 

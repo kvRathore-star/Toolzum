@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { toolsRegistry } from "@/registry/tools";
 
 export default function AboutPage() {
 
@@ -39,7 +40,7 @@ export default function AboutPage() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-24">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">224</div>
+            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">{toolsRegistry.length}</div>
             <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Active Tools</div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">

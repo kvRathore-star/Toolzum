@@ -35,6 +35,7 @@ export interface ToolMetadata {
   instructions?: { title: string; desc: string }[];
   faqs?: { question: string; answer: string }[];
   seoDescription?: string;
+  showInCategory?: boolean;
 }
 
 const rawToolsRegistry: ToolMetadata[] = [
@@ -83,9 +84,10 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to XML",
     description: 'Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules.',
     seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. 100% browser-based, no uploads.',
-    category: "Developer",
+    category: "Converter",
     slug: "json-to-xml",
     dependencies: "xml2js",
+    showInCategory: false,
   },
   {
     id: "time-conv-1",
@@ -100,8 +102,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "arch-conv-1",
     name: "Archive Converter",
-    description: "Convert ZIP files to TAR, RAR, or uncompressed archives directly in your browser.",
-    seoDescription: 'Free online Archive Converter — Convert ZIP files to TAR, RAR, or uncompressed archives directly in your browser. 100% browser-based, no uploads.',
+    description: "Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive — no uploads to servers, no file size limits.",
+    seoDescription: 'Free online Archive Converter — Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive. 100% browser-based, no uploads.',
     category: "Converter",
     slug: "archive-converter",
     dependencies: "jszip",
@@ -115,6 +117,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
+    showInCategory: false,
   },
   {
     id: "2",
@@ -142,7 +145,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts text content and basic formatting from PDF files and assembles them into editable .docx Word documents.',
     dependencies: "pdf2docx / PDF.js",
-    seoDescription: 'Convert PDF to Word online free — extract PDF content into editable DOCX files. Preserves formatting. 100% client-side, no uploads needed.'
+    seoDescription: 'Convert PDF to Word online free — extract PDF content into editable DOCX files. Preserves formatting. 100% client-side, no uploads needed.',
+    showInCategory: false
   },
   {
     id: "10",
@@ -190,33 +194,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free logo maker online — design professional logos with drag-and-drop tools. Choose from shape libraries, icons, and text styles. No design skills needed.'
   },
   {
-    id: "17",
-    name: "MP4 to MP3",
-    slug: "mp4-to-mp3",
-    category: "Converter",
-    description: 'Extracts the audio track from MP4 video files and saves it as a standalone MP3 file, preserving original bitrate and sample rate.',
-    dependencies: "FFmpeg",
-    seoDescription: 'Convert MP4 to MP3 online free — extract audio from video files and download as MP3. High-quality, preserves bitrate. 100% free, no uploads.'
-  },
-  {
-    id: "17b",
-    name: "MOV to MP3",
-    slug: "mov-to-mp3",
-    category: "Converter",
-    description: 'Extracts the audio track from QuickTime MOV video files and encodes it as a high-quality MP3 file.',
-    seoDescription: 'Free online MOV to MP3 — Extracts the audio track from QuickTime MOV video files and encodes it as a high-quality MP3 file. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
-  },
-  {
-    id: "17c",
-    name: "WebM to MP3",
-    slug: "webm-to-mp3",
-    category: "Converter",
-    description: 'Extracts the audio track from WebM video files and encodes it as a high-quality MP3 file.',
-    seoDescription: 'Free online WebM to MP3 — Extracts the audio track from WebM video files and encodes it as a high-quality MP3 file. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
-  },
-  {
     id: "pdf-comp-1",
     name: "PDF Compressor",
     description: 'Reduces PDF file size by compressing embedded images and removing redundant metadata. Offers three compression tiers. Max 50MB.',
@@ -232,7 +209,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting.',
     seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. 100% browser-based, no uploads.',
-    dependencies: "LibreOffice API / CloudConvert API"
+    dependencies: "LibreOffice API / CloudConvert API",
+    showInCategory: false
   },
 
   {
@@ -251,7 +229,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them.',
     seoDescription: 'Free online JPG to PDF — Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. 100% browser-based, no uploads.',
-    dependencies: "jsPDF / Canvas API"
+    dependencies: "jsPDF / Canvas API",
+    showInCategory: false
   },
 
   {
@@ -270,7 +249,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings.',
     seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. 100% browser-based, no uploads.',
-    dependencies: "heic2any"
+    dependencies: "heic2any",
+    showInCategory: false
   },
   {
     id: "28",
@@ -279,7 +259,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear.',
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. 100% browser-based, no uploads.',
-    dependencies: "PDF.js / Canvas API"
+    dependencies: "PDF.js / Canvas API",
+    showInCategory: false
   },
   {
     id: "29",
@@ -288,7 +269,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure.',
     seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. 100% browser-based, no uploads.',
-    dependencies: "pdf2json / PptxGenJS"
+    dependencies: "pdf2json / PptxGenJS",
+    showInCategory: false
   },
   {
     id: "30",
@@ -314,9 +296,10 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to JPG",
     slug: "webp-to-jpg",
     category: "Image",
-    description: 'Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google’s modern format.',
-    seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google’s modern format. 100% browser-based, no uploads.',
-    dependencies: "Canvas API"
+    description: 'Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format.',
+    seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
   },
   {
     id: "34b",
@@ -325,7 +308,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency.',
     seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. 100% browser-based, no uploads.',
-    dependencies: "Canvas API"
+    dependencies: "Canvas API",
+    showInCategory: false
   },
   {
     id: "35",
@@ -361,7 +345,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout.',
     seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. 100% browser-based, no uploads.',
-    dependencies: "LibreOffice API"
+    dependencies: "LibreOffice API",
+    showInCategory: false
   },
   {
     id: "39",
@@ -407,7 +392,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting.',
     seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. 100% browser-based, no uploads.',
-    dependencies: "SheetJS / jsPDF"
+    dependencies: "SheetJS / jsPDF",
+    showInCategory: false
   },
   {
     id: "45",
@@ -470,7 +456,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream.',
     seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
+    dependencies: "FFmpeg",
+    showInCategory: false
   },
   {
     id: "52",
@@ -516,7 +503,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts tabular data from PDF files and reconstructs it into editable Excel spreadsheets with proper column alignment.',
     dependencies: "pdf2json / SheetJS",
-    seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. 100% browser-based.'
+    seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. 100% browser-based.',
+    showInCategory: false
   },
   {
     id: "59",
@@ -579,7 +567,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads.',
     seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
+    dependencies: "FFmpeg",
+    showInCategory: false
   },
   {
     id: "68",
@@ -654,7 +643,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM.',
     seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
+    dependencies: "FFmpeg",
+    showInCategory: false
   },
   {
     id: "76",
@@ -719,7 +709,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Audio",
     description: 'Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity.',
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg.wasm"
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
   },
   {
     id: "87",
@@ -748,7 +739,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts EPUB ebooks to PDF with full control over page size, margins, font, and line spacing.',
     seoDescription: 'Free online EPUB to PDF — Converts EPUB ebooks to PDF with full control over page size, margins, font, and line spacing. 100% browser-based, no uploads.',
-    dependencies: "Calibre API"
+    dependencies: "Calibre API",
+    showInCategory: false
   },
 
 
@@ -823,7 +815,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation.',
     seoDescription: 'Free online PDF to EPUB — Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. 100% browser-based, no uploads.',
-    dependencies: "Calibre API"
+    dependencies: "Calibre API",
+    showInCategory: false
   },
   {
     id: "107",
@@ -859,7 +852,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes.',
     seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. 100% browser-based, no uploads.',
-    dependencies: "FFmpeg"
+    dependencies: "FFmpeg",
+    showInCategory: false
   },
   {
     id: "mp4-mkv-1",
@@ -869,6 +863,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     slug: "mp4-to-mkv",
     dependencies: "ffmpeg",
+    showInCategory: false
   },
   {
     id: "mp4-mov-1",
@@ -878,6 +873,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     slug: "mp4-to-mov",
     dependencies: "ffmpeg",
+    showInCategory: false
   },
   {
     id: "mkv-mov-1",
@@ -887,6 +883,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     slug: "mkv-to-mov",
     dependencies: "ffmpeg",
+    showInCategory: false
   },
   {
     id: "mov-mkv-1",
@@ -896,6 +893,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     slug: "mov-to-mkv",
     dependencies: "ffmpeg",
+    showInCategory: false
   },
   {
     id: "111",
@@ -929,9 +927,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML Sitemap Generator",
     slug: "xml-sitemap-generator",
     category: "SEO",
-    description: 'Accepts a list of URLs with optional priority, change frequency, and last-modified dates, then emits a standards-compliant XML sitemap with proper.',
-    seoDescription: 'Free online XML Sitemap Generator — Accepts a list of URLs with optional priority, change frequency, and last-modified dates, then emits a standards-compliant XML sitemap with proper. 100% browser-based, no uploads.',
-    dependencies: "Node.js / Cheerio"
+    description: 'Crawls any website and generates a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights.',
+    seoDescription: 'Free online XML Sitemap Generator — Crawl any website and generate a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights. 100% browser-based, no uploads.',
+    dependencies: "Fetch API / DOMParser"
   },
   {
     id: "115",
@@ -961,7 +959,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers.',
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. 100% browser-based, no uploads.',
-    dependencies: "PapaParse"
+    dependencies: "PapaParse",
+    showInCategory: false
   },
   {
     id: "122",
@@ -1157,7 +1156,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields.',
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. 100% browser-based, no uploads.',
-    dependencies: "PapaParse"
+    dependencies: "PapaParse",
+    showInCategory: false
   },
   {
     id: "151b",
@@ -1166,7 +1166,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Parses CSV data and converts it into well-formed XML documents using configurable root and row element names.',
     seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. 100% browser-based, no uploads.',
-    dependencies: "PapaParse / xml2js"
+    dependencies: "PapaParse / xml2js",
+    showInCategory: false
   },
   {
     id: "152",
@@ -1308,6 +1309,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Markdown to HTML",
     slug: "markdown-to-html",
     category: "Converter",
+    showInCategory: false,
     description: 'Renders GitHub-Flavored Markdown into semantic, accessible HTML with proper heading hierarchy, code syntax highlighting, and table markup.',
     seoDescription: 'Free online Markdown to HTML — Renders GitHub-Flavored Markdown into semantic, accessible HTML with proper heading hierarchy, code syntax highlighting, and table markup. 100% browser-based, no uploads.',
     dependencies: "marked.js"
@@ -1317,6 +1319,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to Markdown",
     slug: "text-to-markdown",
     category: "Converter",
+    showInCategory: false,
     description: 'Converts plain text into clean Markdown format by separating paragraphs and preserving line breaks as Markdown-compatible structure.',
     seoDescription: 'Free online Text to Markdown — Converts plain text into clean Markdown format by separating paragraphs and preserving line breaks as Markdown-compatible structure. 100% browser-based, no uploads.',
     dependencies: "None"
@@ -1420,6 +1423,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HTML to Markdown",
     slug: "html-to-markdown",
     category: "Converter",
+    showInCategory: false,
     description: 'Parses arbitrary HTML and converts it into clean, readable Markdown while intelligently stripping inline styles and scripts.',
     seoDescription: 'Free online HTML to Markdown — Parses arbitrary HTML and converts it into clean, readable Markdown while intelligently stripping inline styles and scripts. 100% browser-based, no uploads.',
     dependencies: "Turndown"
@@ -1429,9 +1433,19 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Markdown to Text",
     slug: "markdown-to-text",
     category: "Converter",
+    showInCategory: false,
     description: 'Strips Markdown formatting syntax from documents and returns clean, readable plain text for copy-pasting or further processing.',
     seoDescription: 'Free online Markdown to Text — Strips Markdown formatting syntax from documents and returns clean, readable plain text for copy-pasting or further processing. 100% browser-based, no uploads.',
     dependencies: "None"
+  },
+  {
+    id: "167c",
+    name: "Markdown Tools",
+    slug: "markdown-tools",
+    category: "Converter",
+    description: 'Renders GitHub-Flavored Markdown to HTML, converts text/HTML to Markdown, or strips Markdown to plain text — all in one tool.',
+    seoDescription: 'Free online Markdown Tools — Render GitHub-Flavored Markdown to HTML, convert text or HTML to Markdown, or strip Markdown formatting to plain text. 100% browser-based, no uploads.',
+    dependencies: "marked.js, Turndown"
   },
   {
     id: "184",
@@ -1503,7 +1517,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths.',
     seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. 100% browser-based, no uploads.',
-    dependencies: "xml2js / PapaParse"
+    dependencies: "xml2js / PapaParse",
+    showInCategory: false
   },
   {
     id: "192",
@@ -1572,10 +1587,11 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "199",
     name: "XML to JSON",
     slug: "xml-to-json",
-    category: "Developer",
+    category: "Converter",
     description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key.',
     seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. 100% browser-based, no uploads.',
-    dependencies: "xml2js"
+    dependencies: "xml2js",
+    showInCategory: false
   },
   {
     id: "200",
@@ -1700,8 +1716,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'SVG to PNG Converter',
     slug: 'svg-to-png-converter',
-    description: 'Convert vector SVG to raster PNG.',
-    seoDescription: 'Free online SVG to PNG Converter — Convert vector SVG to raster PNG. 100% browser-based, no uploads.',
+    description: 'Convert vector SVG to raster PNG at any resolution. Designers use this to export icons, logos, and illustrations for social media, websites, and print — no design software needed.',
+    seoDescription: 'Free online SVG to PNG Converter — Convert vector SVG to raster PNG at any resolution. Export icons, logos, and illustrations for social media, websites, and print. 100% browser-based, no uploads.',
     category: 'Converter',
     id:  "220",
     dependencies: 'None'
@@ -1775,8 +1791,8 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'GIF to MP4 Converter',
     slug: 'gif-to-mp4',
-    description: 'Convert GIF animations to MP4 videos',
-    seoDescription: 'Free online GIF to MP4 Converter — Convert GIF animations to MP4 videos 100% browser-based, no uploads.',
+    description: 'Convert GIF animations to MP4 videos for drastically smaller file sizes. Content creators use this to shrink animated GIFs by up to 90% for social media, Discord, and web pages — all in your browser, nothing uploaded.',
+    seoDescription: 'Free online GIF to MP4 Converter — Convert GIF animations to MP4 videos for drastically smaller file sizes. Shrink animated GIFs by up to 90% for social media, Discord, and web pages. 100% browser-based, no uploads.',
     category: 'Converter',
     id:  "232",
     dependencies: 'FFmpeg WASM'
@@ -1892,6 +1908,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'WebP to PNG Converter',
     slug: 'webp-to-png',
+    showInCategory: false,
     description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced.',
     seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. 100% browser-based, no uploads.',
     category: 'Image',
@@ -1901,6 +1918,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'JFIF to PNG Converter',
     slug: 'jfif-to-png',
+    showInCategory: false,
     description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss.',
     seoDescription: 'Free online JFIF to PNG Converter — Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. 100% browser-based, no uploads.',
     category: 'Image',
@@ -1910,6 +1928,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'HEIC to PNG Converter',
     slug: 'heic-to-png',
+    showInCategory: false,
     description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos.',
     seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. 100% browser-based, no uploads.',
     category: 'Image',
@@ -1919,6 +1938,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Image to JPG Converter',
     slug: 'convert-to-jpg',
+    showInCategory: false,
     description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings.',
     seoDescription: 'Free online Image to JPG Converter — Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. 100% browser-based, no uploads.',
     category: 'Image',
@@ -2080,6 +2100,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online Audio Converter — Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser. 100% browser-based, no uploads.',
     category: 'Audio',
     id:  "273",
+    showInCategory: false,
     dependencies: 'FFmpeg WASM'
   },
   {
@@ -2349,8 +2370,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Bulk E-Book Converter",
     slug: "bulk-ebook-converter",
     category: "Converter",
-    description: "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Heavy readers use it instead of single-file converters that limit you to 2 files at a time.",
-    seoDescription: 'Free online Bulk E-Book Converter — Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Heavy readers use it instead of single-file converters that limit you to 2 files at a time. 100% browser-based, no uploads.',
+    description: "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Note: This is a basic client-side conversion — complex EPUB/MOBI layouts may not render perfectly. For professional results, use a dedicated e-book tool like Calibre.",
+    seoDescription: 'Free online Bulk E-Book Converter — Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Basic client-side conversion — complex layouts may not render perfectly. 100% browser-based, no uploads.',
     dependencies: "EPUB.js, jszip",
   },
   {
@@ -2443,6 +2464,58 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: "Free online Pronunciation Tool — Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed. Works in your browser.",
     dependencies: "Web Speech API",
   },
+
+  // Consolidated converter entries
+  {
+    id: "video-converter-1",
+    name: "Video Format Converter",
+    slug: "video-converter",
+    category: "Video",
+    description: 'Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format from the dropdown — your files never leave your device.',
+    seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg",
+    showInCategory: true,
+  },
+  {
+    id: "audio-converter-1",
+    name: "Audio Format Converter",
+    slug: "audio-converter",
+    category: "Audio",
+    description: 'Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format — your files never leave your device.',
+    seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg",
+    showInCategory: true,
+  },
+  {
+    id: "image-format-converter-1",
+    name: "Image Format Converter",
+    slug: "image-format-converter",
+    category: "Image",
+    description: 'Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format — your files never leave your device.',
+    seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. 100% browser-based, no uploads.',
+    dependencies: "Sharp / Browser Canvas",
+    showInCategory: true,
+  },
+  {
+    id: "data-converter-1",
+    name: "Data Converter",
+    slug: "data-converter",
+    category: "Converter",
+    description: 'Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format — your files never leave your device.',
+    seoDescription: 'Free online Data Converter — Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format. 100% browser-based, no uploads.',
+    dependencies: "PapaParse / SheetJS / js-yaml",
+    showInCategory: true,
+  },
+  {
+    id: "document-converter-1",
+    name: "Document Converter",
+    slug: "document-converter",
+    category: "PDF",
+    description: 'Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format — your files never leave your device.',
+    seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib / pdf2docx / SheetJS / PptxGenJS",
+    showInCategory: true,
+  },
 ];
 
 const proSlugs = [
@@ -2458,7 +2531,7 @@ const proSlugs = [
   "bulk-webp-avif-modernizer", "bulk-exif-stripper-injector", "bulk-app-icon-generator",
   "bulk-markdown-to-pdf-html", "bulk-font-subsetter", "bulk-subtitle-time-shifter",
   "bulk-regex-extractor-replacer", "bulk-image-to-text-ocr", "bulk-ebook-converter",
-  "bulk-heic-to-jpg"
+  "bulk-heic-to-jpg",
 ];
 
 export interface SeoPermutation {
@@ -2507,7 +2580,7 @@ export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
 }));
 
 export const getToolBySlug = (slug: string) => toolsRegistry.find(t => t.slug === slug);
-export const getToolsByCategory = (category: string) => toolsRegistry.filter(t => t.category === category);
+export const getToolsByCategory = (category: string) => toolsRegistry.filter(t => t.category === category && t.showInCategory !== false);
 export const getToolByCategoryAndSlug = (category: string, slug: string) => toolsRegistry.find(t => t.category.toLowerCase().replace(/\s+/g, '-') === category && t.slug === slug);
 
 export function getSeoParentSlug(slug: string): string | undefined {

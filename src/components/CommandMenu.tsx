@@ -12,17 +12,21 @@ export function CommandMenu() {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
 
-  // Toggle the menu when Cmd+K or Ctrl+K is pressed
   useEffect(() => {
-    const down = (e: KeyboardEvent) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
       }
     };
+    const onCommand = () => setOpen(true);
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("opencode-command", onCommand);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("opencode-command", onCommand);
+    };
   }, []);
 
   const runCommand = (command: () => void) => {

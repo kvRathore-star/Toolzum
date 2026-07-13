@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { toolsRegistry } from "@/registry/tools";
 import ChangelogShowcase, { DemoType } from "@/components/ChangelogShowcase";
 
 interface Release {
@@ -72,16 +73,16 @@ const RELEASES: Release[] = [
   {
     version: "v1.2.0",
     date: "May 25, 2026",
-    title: "200+ Tools — Full Office Suite in Your Browser",
+    title: `${toolsRegistry.length}+ Tools — Full Office Suite in Your Browser`,
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "The biggest expansion yet. Edit documents, design logos, run AI models, process images, calculate finances — all 200+ tools run completely offline with zero data leaving your machine. No subscriptions, no uploads, no limits.",
+    description: `The biggest expansion yet. Edit documents, design logos, run AI models, process images, calculate finances — all ${toolsRegistry.length}+ tools run completely offline with zero data leaving your machine. No subscriptions, no uploads, no limits.`,
     demo: "tool-expansion",
     updates: [
       { type: "feature", text: "Full PDF office suite: Word-to-PDF, PDF-to-Word, PDF-to-JPG, and PDF page editing — 100% client-side, no server round trip." },
       { type: "feature", text: "Design studio: SVG Vector Editor, Logo Maker, AI Thumbnail Maker with drag-and-drop canvas, templates, and export presets." },
       { type: "performance", text: "Background image removal migrated to 100% local WebGL tensor execution — up to 4× faster than the previous pipeline, still zero uploads." },
-      { type: "security", text: "Offline-first zero-telemetry framework enforced across all 200+ tools. No analytics pings, no data collection, no third-party requests." }
+        { type: "security", text: `Offline-first zero-telemetry framework enforced across all ${toolsRegistry.length}+ tools. No analytics pings, no data collection, no third-party requests.` }
     ]
   },
   {

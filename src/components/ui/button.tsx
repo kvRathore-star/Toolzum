@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cloneElement, isValidElement } from "react";
 import { cn } from "@/lib/utils";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", asChild, children, ...props }, ref) => {
     const baseStyles =
       "inline-flex items-center justify-center font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base disabled:pointer-events-none disabled:opacity-50";
 
@@ -28,13 +28,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const compSize = variant === "icon" ? sizes.icon : sizes[size];
+    const styles = cn(baseStyles, variants[variant], compSize, className);
+
+    if (asChild && isValidElement(children)) {
+      const childProps = children.props as Record<string, unknown>;
+      return cloneElement(children, {
+        className: cn(styles, childProps.className as string | undefined),
+      } as Record<string, unknown>);
+    }
 
     return (
       <button
         ref={ref}
-        className={cn(baseStyles, variants[variant], compSize, className)}
+        className={styles}
         {...props}
-      />
+      >
+        {children}
+      </button>
     );
   }
 );

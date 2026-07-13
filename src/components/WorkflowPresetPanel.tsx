@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Save, FolderOpen, Trash2, X, Crown, Check, ChevronDown } from 'lucide-react';
+import { Save, FolderOpen, Trash2, X, Crown, Check, ChevronDown, Lock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useWorkflowPresets } from '@/hooks/useWorkflowPresets';
 import { PresetContext } from '@/context/WorkflowPresetContext';
@@ -151,11 +151,35 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                     )}
                   </>
                 ) : (
-                  <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-md)] px-3 py-2.5">
-                    <Crown className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                    <span className="flex-1">Save your workflow presets with</span>
-                    <a href="/pricing" className="text-[var(--accent)] hover:underline font-medium whitespace-nowrap">
-                      Toolzum Pro
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-1">
+                      <Crown className="w-3.5 h-3.5 text-amber-500" />
+                      <span>Unlock with Pro to save and load custom presets</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {[
+                        { name: 'Optimized 800x800', desc: 'Square crop, WebP, 80% quality' },
+                        { name: 'Social Media Banner', desc: '1200x630, JPG, max quality' },
+                        { name: 'Email Safe', desc: 'PNG, under 500KB, no metadata' },
+                        { name: 'Quick Compress', desc: 'Reduce size 60%, keep format' },
+                      ].map((preset) => (
+                        <div
+                          key={preset.name}
+                          className="flex items-center gap-2 text-xs bg-[var(--bg-base)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-md)] px-3 py-2 opacity-50 cursor-not-allowed"
+                        >
+                          <Lock className="w-3 h-3 text-amber-500/60 shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[var(--text-muted)] truncate font-medium">{preset.name}</div>
+                            <div className="text-[10px] text-[var(--text-muted)]/60 truncate">{preset.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <a
+                      href="/pricing"
+                      className="block text-center text-xs text-[var(--accent)] hover:underline font-medium pt-1"
+                    >
+                      Upgrade to Pro →
                     </a>
                   </div>
                 )}

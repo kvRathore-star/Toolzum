@@ -14,57 +14,8 @@ export const metadata: Metadata = {
   },
 };
 
-const engineeringPosts: Array<{
-  slug: string; title: string; excerpt: string; author: string; date: string; isoDate: string; readTime: string; tag: string; tagColor: string;
-}> = [
-  {
-    slug: "wasm-converters",
-    title: "How WebAssembly is Replacing Server-Side Converters",
-    excerpt: "Explore the compilation of LLVM utilities to WASM binaries that execute file compressions instantly in-browser.",
-    author: "Arjun Mehta",
-    date: "May 18, 2026",
-    isoDate: "2026-05-18",
-    readTime: "6 min read",
-    tag: "WebAssembly",
-    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  },
-  {
-    slug: "offline-first-web",
-    title: "The Future of Offline-First Web Applications",
-    excerpt: "How Service Workers, LocalStorage, and local canvas architectures allow complete utility usage without network access.",
-    author: "Rohan Sen",
-    date: "April 29, 2026",
-    isoDate: "2026-04-29",
-    readTime: "8 min read",
-    tag: "Architecture",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  },
-  {
-    slug: "zero-telemetry-privacy",
-    title: "Why Zero-Telemetry is Vital for Document Tools",
-    excerpt: "Analyzing the security vulnerabilities of uploading sensitive legal PDFs to third-party server queues, and how to stay isolated.",
-    author: "Sanjay Dixit",
-    date: "March 15, 2026",
-    isoDate: "2026-03-15",
-    readTime: "5 min read",
-    tag: "Privacy",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  },
-  {
-    slug: "webgl-image-tensors",
-    title: "Optimizing Neural Networks on WebGL Canvas",
-    excerpt: "How local execution of background-removal models runs directly on client GPUs using modern WebGL canvas engines.",
-    author: "Mira Roy",
-    date: "February 4, 2026",
-    isoDate: "2026-02-04",
-    readTime: "7 min read",
-    tag: "AI Engineering",
-    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  },
-];
-
 export default function BlogPage() {
-  const allPosts = [...blogPosts, ...engineeringPosts].sort(
+  const allPosts = [...blogPosts].sort(
     (a, b) => new Date(b.isoDate || b.date).getTime() - new Date(a.isoDate || a.date).getTime()
   );
 

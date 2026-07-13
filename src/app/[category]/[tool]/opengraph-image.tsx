@@ -1,8 +1,7 @@
-import { ImageResponse } from 'next/og';
 import { getToolByCategoryAndSlug, toolsRegistry } from "@/registry/tools";
 
+export const contentType = 'image/svg+xml';
 export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
 const toolCount = toolsRegistry.length;
 const proCount = toolsRegistry.filter(t => t.isPro).length;
@@ -18,132 +17,46 @@ export default async function Image(props: { params: Promise<{ category: string;
   const params = await props.params;
   const toolMetadata = getToolByCategoryAndSlug(params.category, params.tool);
 
-  if (!toolMetadata) {
-    return new Response('Not Found', { status: 404 });
-  }
+  if (!toolMetadata) return new Response('Not Found', { status: 404 });
 
-  const proBadge = toolMetadata.isPro ? (
-    <div
-      style={{
-        position: 'absolute',
-        top: 40,
-        right: 40,
-        background: 'linear-gradient(to right, #f59e0b, #d97706)',
-        color: 'white',
-        fontSize: 24,
-        fontWeight: 700,
-        padding: '12px 28px',
-        borderRadius: '100px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-      }}
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      </svg>
-      PRO
-    </div>
-  ) : null;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="proGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#020617"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" opacity="0.04">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="600" cy="315" r="300" fill="url(#brand)" opacity="0.08"/>
+  ${toolMetadata.isPro ? `
+  <g transform="translate(1090, 40)">
+    <rect x="-68" y="-12" width="136" height="48" rx="24" fill="url(#proGrad)"/>
+    <text x="0" y="14" fill="white" font-family="sans-serif" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="0.5">PRO</text>
+  </g>` : ''}
+  <text x="600" y="240" fill="url(#brand)" font-family="sans-serif" font-size="80" font-weight="800" text-anchor="middle">${escapeXml(toolMetadata.name)}</text>
+  <text x="600" y="320" fill="#94a3b8" font-family="sans-serif" font-size="28" text-anchor="middle" max-width="800">${escapeXml(toolMetadata.description)}</text>
+  <line x1="64" y1="530" x2="1136" y2="530" stroke="#1e293b" stroke-width="1"/>
+  <text x="64" y="570" fill="#f8fafc" font-family="sans-serif" font-size="24" font-weight="700">Toolzum</text>
+  <text x="1136" y="570" fill="#38bdf8" font-family="sans-serif" font-size="20" text-anchor="end">${escapeXml(toolMetadata.category)}</text>
+  <circle cx="1100" cy="562" r="3" fill="#475569"/>
+  <text x="1084" y="570" fill="#64748b" font-family="sans-serif" font-size="18" text-anchor="end">${toolCount} Free Tools</text>
+  <circle cx="1042" cy="562" r="3" fill="#475569"/>
+  <text x="1026" y="570" fill="#64748b" font-family="sans-serif" font-size="18" text-anchor="end">${proCount} Pro</text>
+</svg>`;
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          background: '#020617',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          padding: '64px',
-          position: 'relative',
-        }}
-      >
-        {/* Subtle grid background */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: 0.04,
-            backgroundImage: 'linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-        {/* Accent glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 600,
-            height: 400,
-            background: 'radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%)',
-            borderRadius: '100%',
-          }}
-        />
+  return new Response(svg, {
+    headers: { 'Content-Type': 'image/svg+xml' },
+  });
+}
 
-        {proBadge}
-
-        <div
-          style={{
-            fontSize: 88,
-            fontWeight: 800,
-            backgroundImage: 'linear-gradient(to right, #38bdf8, #818cf8)',
-            backgroundClip: 'text',
-            color: 'transparent',
-            textAlign: 'center',
-            marginBottom: 24,
-            lineHeight: 1.1,
-          }}
-        >
-          {toolMetadata.name}
-        </div>
-        <div
-          style={{
-            fontSize: 32,
-            color: '#94a3b8',
-            textAlign: 'center',
-            maxWidth: '80%',
-            lineHeight: 1.4,
-            marginBottom: 16,
-          }}
-        >
-          {toolMetadata.description}
-        </div>
-
-        {/* Bottom bar */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 48,
-            left: 64,
-            right: 64,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: 22,
-            color: '#64748b',
-            borderTop: '1px solid #1e293b',
-            paddingTop: 32,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: 26 }}>Toolzum</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-            <span style={{ color: '#38bdf8' }}>{toolMetadata.category}</span>
-            <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#475569' }} />
-            <span>{toolCount} Free Tools</span>
-            <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#475569' }} />
-            <span>{proCount} Pro</span>
-          </div>
-        </div>
-      </div>
-    ),
-    { ...size }
-  );
+function escapeXml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }

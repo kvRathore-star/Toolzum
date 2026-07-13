@@ -15,6 +15,7 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'indian-utilities': 'India 🇮🇳',
   'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
+  'converter': 'File Converter',
 };
 
 function getIconBg(tool: ToolMetadata) {
@@ -180,7 +181,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             {displayName} Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg">
-            {tools.length} free online {category.toLowerCase()} utilities — all processed locally in your browser.
+{category === 'Converter' ? 'Free online file converter — video, audio, image, data, and document formats. Nothing uploaded, processed in your browser.' : `${tools.length} free online ${category.toLowerCase()} tools — all processed locally in your browser.`}
           </p>
         </div>
 

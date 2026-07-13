@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Play, Pause, FileType, CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { toolsRegistry } from "@/registry/tools";
 
 // ─── Batch Fault Tolerance Demo (v1.5.0) ───
 
@@ -146,16 +147,23 @@ function ToolExpansionDemo() {
     return () => clearInterval(t);
   }, [isVisible]);
 
-  const categories = [
-    { label: "Image", count: 48, color: "bg-blue-500" },
-    { label: "Video", count: 35, color: "bg-purple-500" },
-    { label: "PDF", count: 28, color: "bg-rose-500" },
-    { label: "Audio", count: 22, color: "bg-amber-500" },
-    { label: "Dev", count: 31, color: "bg-emerald-500" },
-    { label: "Finance", count: 26, color: "bg-cyan-500" },
-    { label: "AI", count: 18, color: "bg-violet-500" },
-    { label: "India", count: 14, color: "bg-orange-500" },
-  ];
+  const categories = useMemo(() => {
+    const map: { label: string; registryCat: string; color: string }[] = [
+      { label: "Image", registryCat: "Image", color: "bg-blue-500" },
+      { label: "Video", registryCat: "Video", color: "bg-purple-500" },
+      { label: "PDF", registryCat: "PDF", color: "bg-rose-500" },
+      { label: "Audio", registryCat: "Audio", color: "bg-amber-500" },
+      { label: "Dev", registryCat: "Developer", color: "bg-emerald-500" },
+      { label: "Finance", registryCat: "Finance", color: "bg-cyan-500" },
+      { label: "AI", registryCat: "AI", color: "bg-violet-500" },
+      { label: "India", registryCat: "indian-utilities", color: "bg-orange-500" },
+    ];
+    return map.map(({ label, registryCat, color }) => ({
+      label,
+      count: toolsRegistry.filter(t => t.category === registryCat && t.showInCategory !== false).length,
+      color,
+    }));
+  }, []);
 
   return (
     <div ref={ref} className="bg-[var(--bg-base)] rounded-[var(--radius-xl)] border border-[var(--border-subtle)] p-4 sm:p-6 my-6">

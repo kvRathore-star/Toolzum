@@ -65,4 +65,22 @@ export const payments = sqliteTable("payment", {
   createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
 });
 
+export const downloadUsage = sqliteTable("download_usage", {
+  id: text("id").primaryKey(),
+  fingerprint: text("fingerprint").notNull(),
+  date: text("date").notNull(), // "YYYY-M-D"
+  count: integer("count").notNull().default(0),
+  createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
+  updatedAt: integer("updatedAt", { mode: "timestamp" }).notNull(),
+});
+
+export const analyticsEvents = sqliteTable("analytics_event", {
+  id: text("id").primaryKey(),
+  path: text("path").notNull(),
+  fingerprint: text("fingerprint"),
+  clientType: text("clientType"), // 'web' | 'extension'
+  viewport: text("viewport"),
+  createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
+});
+
 

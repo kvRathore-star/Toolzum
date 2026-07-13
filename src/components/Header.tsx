@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
 
 const MENU_COLUMN_DEFS = [
-  { title: "Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "ai-image-upscaler", "png-to-jpg"] },
+  { title: "Image", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg"] },
   { title: "PDF", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel", "word-to-pdf", "jpg-to-pdf", "pdf-to-jpg"] },
   { title: "Video", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-to-mp3", "crop-video", "subtitle-translator", "video-trimmer"] },
   { title: "Audio", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter", "apple-music-preview-extractor", "bulk-audio-converter"] },
@@ -20,11 +20,12 @@ const MENU_COLUMN_DEFS = [
   { title: "Text", category: "Text", allHref: "/text", slugs: ["character-counter", "word-counter", "fancy-text-generator", "font-generator", "cursive-text-generator", "text-to-handwriting", "case-converter", "reverse-text-generator"] },
   { title: "Finance", category: "Finance", allHref: "/finance", slugs: ["currency-converter", "percentage-calculator", "emi-calculator", "sip-calculator", "gst-calculator", "invoice-generator", "profit-margin-calculator", "roi-calculator"] },
   { title: "Utility", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "url-shortener", "resume-builder", "ip-address-lookup"] },
-  { title: "Converter", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-to-html"] },
+  { title: "Converter", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-tools"] },
   { title: "Privacy", category: "Privacy", allHref: "/privacy", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
   { title: "SEO & Marketing", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "conversion-rate-calculator", "cpm-calculator"] },
   { title: "Branding", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "favicon-generator", "svg-editor"] },
   { title: "Health & Productivity", category: "Health", allHref: "/health", slugs: ["bmi-calculator", "bmr-calculator", "salary-calculator", "pomodoro-timer", "morse-code-translator", "dice-roller"] },
+  { title: "India", category: "indian-utilities", allHref: "/indian-utilities", slugs: ["passport-photo-india", "aadhaar-wallet-cropper", "pan-card-resizer", "gst-invoice-generator"] },
 ];
 
 function buildMegamenuColumns() {
@@ -33,7 +34,7 @@ function buildMegamenuColumns() {
       .map(slug => toolsRegistry.find(t => t.slug === slug))
       .filter(Boolean)
       .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
-    const allCount = toolsRegistry.filter(t => t.category === category).length;
+    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
     return { title, tools, allCount, allHref };
   });
 }
@@ -162,7 +163,7 @@ export function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
-                    className="absolute left-0 top-[100%] mt-4 w-[1000px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000]"
+                    className="absolute left-0 top-[100%] mt-4 w-[1100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000]"
                   >
                     {/* Inline Search — opens CommandMenu */}
                     <button
@@ -182,9 +183,9 @@ export function Header() {
                     </button>
 
                     <div className="p-6">
-                      {/* Top Row: 5 columns */}
-                      <div className="grid grid-cols-5 gap-6">
-                        {MEGAMENU_COLUMNS.slice(0, 5).map((col, idx) => (
+                      {/* Top Row: 7 columns */}
+                      <div className="grid grid-cols-7 gap-3">
+                        {MEGAMENU_COLUMNS.slice(0, 7).map((col, idx) => (
                           <motion.div 
                             key={col.title}
                             initial={{ opacity: 0 }}
@@ -220,14 +221,14 @@ export function Header() {
                         ))}
                       </div>
 
-                      {/* Bottom Row: Developer, Utility, Video, Convert, India */}
-                      <div className="grid grid-cols-5 gap-6 mt-6 pt-6 border-t border-[var(--border-subtle)]">
-                        {MEGAMENU_COLUMNS.slice(5, 9).map((col, idx) => (
+                      {/* Bottom Row: 7 columns */}
+                      <div className="grid grid-cols-7 gap-3 mt-6 pt-6 border-t border-[var(--border-subtle)]">
+                        {MEGAMENU_COLUMNS.slice(7, 14).map((col, idx) => (
                           <motion.div 
                             key={col.title}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: (idx + 5) * 0.03 }}
+                            transition={{ delay: (idx + 7) * 0.03 }}
                             className="flex flex-col"
                           >
                             <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.08em] mb-3 flex items-center gap-2">
@@ -256,25 +257,6 @@ export function Header() {
                             </Link>
                           </motion.div>
                         ))}
-
-                        {/* India Section */}
-                        <motion.div 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 9 * 0.03 }}
-                          className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[rgba(255,107,53,0.05)] to-transparent border border-[var(--border-subtle)] p-4"
-                        >
-                          <div className="absolute top-0 left-0 w-1 h-full bg-[var(--india)]" />
-                          <h4 className="text-[13px] font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                            <span className="text-lg" aria-hidden="true">🇮🇳</span> India
-                          </h4>
-                          <div className="flex flex-col gap-y-2">
-                            <Link href="/indian-utilities/passport-photo-india" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>Passport Photo Maker</Link>
-                            <Link href="/indian-utilities/aadhaar-wallet-cropper" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>Aadhaar Crop & Mask</Link>
-                            <Link href="/indian-utilities/pan-card-resizer" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>PAN Card Resizer</Link>
-                            <Link href="/indian-utilities/gst-invoice-generator" className="text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors block" onClick={() => setMegaMenuOpen(false)}>GST Invoice Gen</Link>
-                          </div>
-                        </motion.div>
                       </div>
                     </div>
 
@@ -405,13 +387,6 @@ export function Header() {
                       {col.title}
                     </Link>
                   ))}
-                  <Link
-                    href="/indian-utilities"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--india)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
-                  >
-                    <span aria-hidden="true">🇮🇳</span> India
-                  </Link>
                 </div>
               </div>
 

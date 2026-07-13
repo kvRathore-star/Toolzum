@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -35,6 +35,41 @@ const FORMAT_PAIRS: DocFormatPair[] = [
   { slug: 'heic-to-pdf', title: 'HEIC to PDF', description: 'Convert iPhone HEIC/HEIF photos to PDF for document submission.', accept: '.heic,.heif', uploadTitle: 'Upload HEIC/HEIF', uploadSubtitle: 'Convert to PDF', actionLabel: 'Convert to PDF', successMessage: 'HEIC to PDF done!', outputFileName: (n) => `${n.replace(/\.(heic|heif)$/i, '.pdf')}`, iconLabel: 'HEIC' },
 ];
 
+type FormatDef = {
+  key: string;
+  label: string;
+  ext: string;
+  accept: string;
+};
+
+const FORMATS: Record<string, FormatDef> = {
+  pdf: { key: 'pdf', label: 'PDF', ext: '.pdf', accept: 'application/pdf' },
+  word: { key: 'word', label: 'Word', ext: '.docx', accept: '.docx' },
+  excel: { key: 'excel', label: 'Excel', ext: '.xlsx', accept: '.xlsx,.xls,.csv' },
+  ppt: { key: 'ppt', label: 'PowerPoint', ext: '.pptx', accept: '.pptx' },
+  jpg: { key: 'jpg', label: 'Image', ext: '.jpg/.png/.webp', accept: 'image/jpeg,image/png,image/webp' },
+  html: { key: 'html', label: 'HTML', ext: '.html', accept: '.html,.htm' },
+  epub: { key: 'epub', label: 'EPUB', ext: '.epub', accept: '.epub' },
+  heic: { key: 'heic', label: 'HEIC', ext: '.heic', accept: '.heic,.heif' },
+};
+
+const FORMAT_KEYS = Object.keys(FORMATS);
+
+const VALID_OUTPUTS: Record<string, string[]> = {
+  word: ['pdf'],
+  pdf: ['word', 'excel', 'ppt', 'jpg', 'html', 'epub'],
+  excel: ['pdf'],
+  ppt: ['pdf'],
+  jpg: ['pdf'],
+  html: ['pdf'],
+  epub: ['pdf'],
+  heic: ['pdf'],
+};
+
+function resolveSlug(input: string, output: string): string {
+  return `${input}-to-${output}`;
+}
+
 const RELATED: Record<string, string[]> = {
   'word-to-pdf': ['pdf-to-word', 'excel-to-pdf', 'ppt-to-pdf'],
   'pdf-to-word': ['word-to-pdf', 'pdf-to-excel', 'pdf-to-ppt'],
@@ -54,12 +89,37 @@ const RELATED: Record<string, string[]> = {
 type DocumentFormatConverterProps = { slug: string };
 
 export default function DocumentFormatConverter({ slug }: DocumentFormatConverterProps) {
-  const pair = FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0];
+  const initialSlug = useMemo(() => {
+    const p = FORMAT_PAIRS.find(p => p.slug === slug);
+    return p ? p.slug : 'pdf-to-word';
+  }, [slug]);
+
+  const [inputKey, setInputKey] = useState<string>(initialSlug.split('-to-')[0]);
+  const [outputKey, setOutputKey] = useState<string>(initialSlug.split('-to-')[1]);
   const [file, setFile] = useState<File | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('');
+
+  const resolvedSlug = useMemo(() => resolveSlug(inputKey, outputKey), [inputKey, outputKey]);
+  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === resolvedSlug) || FORMAT_PAIRS[0], [resolvedSlug]);
+
+  const handleFormatChange = (role: "input" | "output", value: string) => {
+    if (role === "input") setInputKey(value);
+    else setOutputKey(value);
+    setFile(null);
+    setOutputUrl(null);
+    setProgress(0);
+  };
+
+  const swapFormats = () => {
+    setInputKey(outputKey);
+    setOutputKey(inputKey);
+    setFile(null);
+    setOutputUrl(null);
+    setProgress(0);
+  };
 
   useEffect(() => {
     return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
@@ -87,7 +147,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       const arrayBuffer = await file.arrayBuffer();
       let blob: Blob | null = null;
 
-      switch (slug) {
+      switch (resolvedSlug) {
         case 'word-to-pdf': {
           setStatusText('Reading Word file structure...');
           const JSZip = (await import('jszip')).default;
@@ -592,11 +652,49 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
     }
   };
 
-  const related = RELATED[slug] || [];
+  const related = RELATED[resolvedSlug] || [];
+
+  const inputFmt = FORMATS[inputKey];
+  const outputFmt = FORMATS[outputKey];
+
+  const formatPicker = (
+    <div className="flex items-center justify-center gap-3 flex-wrap">
+      <select
+        value={inputKey}
+        onChange={(e) => handleFormatChange("input", e.target.value)}
+        className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+      >
+        {FORMAT_KEYS.map(k => (
+          <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
+        ))}
+      </select>
+
+      <button
+        onClick={swapFormats}
+        className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95"
+        title="Swap formats"
+      >
+        <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        </svg>
+      </button>
+
+      <select
+        value={outputKey}
+        onChange={(e) => handleFormatChange("output", e.target.value)}
+        className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+      >
+        {(VALID_OUTPUTS[inputKey] || []).map(k => (
+          <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
+        ))}
+      </select>
+    </div>
+  );
 
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
+        {formatPicker}
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
           <Sparkles className="w-5 h-5 flex-shrink-0" />
           <span><strong>100% Client-Side:</strong> {pair.description}</span>
@@ -613,6 +711,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      {formatPicker}
       <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-indigo-500" />

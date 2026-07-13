@@ -97,8 +97,6 @@ export function Footer() {
               <li><Link href="/converter" className="hover:text-[var(--accent)] transition-colors">Converter</Link></li>
               <li><Link href="/text" className="hover:text-[var(--accent)] transition-colors">Text</Link></li>
               <li><Link href="/developer" className="hover:text-[var(--accent)] transition-colors">Developer</Link></li>
-              <li><Link href="/finance" className="hover:text-[var(--accent)] transition-colors">Finance</Link></li>
-              <li><Link href="/utility" className="hover:text-[var(--accent)] transition-colors">Utility</Link></li>
               <li><Link href="/indian-utilities" className="hover:text-[var(--india)] transition-colors">India 🇮🇳</Link></li>
             </ul>
           </div>
@@ -135,7 +133,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-[var(--text-muted)] text-center md:text-left">
-            <span>&copy; {currentYear} Toolzum Inc. Made with ❤️ in India 🇮🇳</span>
+            <span>&copy; {currentYear} Toolzum Inc. Made with ❤️ 🇮🇳</span>
             <span className="hidden md:block w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
             <span>All processing happens in your browser — your files never leave your device.</span>
           </div>

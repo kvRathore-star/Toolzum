@@ -89,6 +89,10 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
   const relatedTools = useMemo(() => {
     if (!tool) return [];
+    const markdownSlugs = ['markdown-to-html', 'html-to-markdown', 'text-to-markdown', 'markdown-to-text'];
+    if (markdownSlugs.includes(tool.slug)) {
+      return toolsRegistry.filter(t => markdownSlugs.includes(t.slug) && t.slug !== tool.slug);
+    }
     return toolsRegistry
       .filter(t => t.category === tool.category && t.slug !== tool.slug)
       .slice(0, 6);
@@ -179,7 +183,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
-            <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> {proToolCount}+ Pro Tools</span>
+            <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk Actions &amp; Workflow Presets ✦ Pro</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <ShareTool title={title} slug={slug} category={category} />
           </div>

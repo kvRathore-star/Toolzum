@@ -349,10 +349,11 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'gstin-lookup': dynamic(() => import('@/components/tools/modules/GstinLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="gstin-lookup" /> }),
   'seller-profit-calculator': dynamic(() => import('@/components/tools/modules/SellerProfitCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="seller-profit-calculator" /> }),
   'complaint-letter-generator': dynamic(() => import('@/components/tools/modules/ComplaintLetterGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="complaint-letter-generator" /> }),
-  'markdown-to-html': dynamic(() => import('@/components/tools/modules/MarkdownToHtml'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-html" /> }),
-  'html-to-markdown': dynamic(() => import('@/components/tools/modules/HtmlToMarkdown'), { ssr: false, loading: () => <DynamicImportFallback slug="html-to-markdown" /> }),
-  'text-to-markdown': dynamic(() => import('@/components/tools/modules/TextToMarkdown'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-markdown" /> }),
-  'markdown-to-text': dynamic(() => import('@/components/tools/modules/MarkdownToText'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-text" /> }),
+  'markdown-tools': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-tools" /> }),
+  'markdown-to-html': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-html" /> }),
+  'html-to-markdown': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="html-to-markdown" /> }),
+  'text-to-markdown': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-markdown" /> }),
+  'markdown-to-text': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-text" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });

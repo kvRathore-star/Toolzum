@@ -419,4 +419,203 @@ Whether you need to compress a PDF, remove an image background, convert a video,
 Browse the full collection of privacy-first tools or check our about page to learn more about our architecture.
 `,
   },
+  {
+    slug: "wasm-converters",
+    title: "How WebAssembly is Replacing Server-Side Converters",
+    excerpt: "Explore the compilation of LLVM utilities to WASM binaries that execute file compressions instantly in-browser.",
+    author: "Arjun Mehta",
+    authorTitle: "Product Engineer",
+    date: "May 18, 2026",
+    isoDate: "2026-05-18",
+    readTime: "6 min read",
+    tag: "WebAssembly",
+    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    canonical: "https://toolzum.com/blog/wasm-converters",
+    content: `
+## The Shift to Client-Side Processing
+
+For years, online file converters relied on heavy server infrastructure. You uploaded a file, it traveled across the internet, a server processed it, and the result came back. This model worked but introduced latency, privacy concerns, and operational costs.
+
+WebAssembly (WASM) changes everything. By compiling C/C++ libraries like FFmpeg, libpng, and ImageMagick to WASM binaries, we can run the same high-performance conversion logic directly in the browser — with zero server involvement.
+
+## How WASM Converters Work
+
+The process starts with the original C source code of well-known utilities. Using Emscripten or similar toolchains, the C code is compiled to a .wasm binary. This binary is loaded by the browser alongside a small JavaScript glue layer.
+
+When a user picks a file:
+
+1. The file is read into memory using the File API
+2. The WASM module receives a pointer to the file data in its linear memory
+3. The conversion function runs natively in the browser's WASM runtime
+4. The result is read back from WASM memory and presented as a download
+
+All of this happens at near-native speed. Benchmarks show WASM-based image conversion outperforms pure JavaScript alternatives by 3-10x.
+
+## Privacy Benefits
+
+Since no data ever leaves the device, WASM converters eliminate the most common privacy risk of online tools. There are no server logs, no file caches, and no third-party processors. This makes WASM-based tools ideal for sensitive documents.
+
+## Handling Large Files
+
+One limitation of WASM is the browser's memory ceiling. A 4K video or a 500-page PDF may not fit comfortably in the available WASM memory. Modern implementations handle this through streaming APIs and chunked processing — splitting large files into segments that are processed independently and reassembled client-side.
+
+## The Bottom Line
+
+WebAssembly is not just a performance optimization. It represents a fundamental shift in how we build web applications — moving computation from the cloud to the edge of the network, which is the user's own device. For file conversion tools, this means faster processing, stronger privacy, and lower infrastructure costs.
+`,
+  },
+  {
+    slug: "offline-first-web",
+    title: "The Future of Offline-First Web Applications",
+    excerpt: "How Service Workers, LocalStorage, and local canvas architectures allow complete utility usage without network access.",
+    author: "Rohan Sen",
+    authorTitle: "Engineering Lead",
+    date: "April 29, 2026",
+    isoDate: "2026-04-29",
+    readTime: "8 min read",
+    tag: "Architecture",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    canonical: "https://toolzum.com/blog/offline-first-web",
+    content: `
+## Why Offline-First Matters
+
+The average web user experiences network interruptions daily. Dropped connections, slow roaming, and restrictive data plans are facts of life across much of the world. Offline-first architecture treats these not as edge cases but as primary design constraints.
+
+For online tools, the offline-first approach is especially powerful. A user editing an image or converting a document should not lose functionality when their internet connection drops.
+
+## Service Workers as the Backbone
+
+Service Workers act as a programmable proxy between the browser and the network. For offline-first tools, they serve three critical roles:
+
+1. **Pre-caching application shells** — HTML, CSS, and JavaScript are installed on first visit
+2. **Intercepting network requests** — Failed requests fall back to cached responses
+3. **Background sync** — Queued operations are retried when connectivity returns
+
+## LocalStorage and IndexedDB
+
+Persistent storage is where offline tools keep user data and application state. The choice between LocalStorage, IndexedDB, and the Cache API depends on data size and access patterns:
+
+- **LocalStorage** — Simple key-value storage for small preferences (2-5MB limit)
+- **IndexedDB** — Structured storage for larger datasets (hundreds of MB)
+- **Cache API** — Binary file storage for WASM binaries and assets
+
+## Local Canvas Architecture
+
+The most demanding offline tools use a canvas-based rendering architecture. Image editors, PDF viewers, and video processors render content to an HTML Canvas element. All operations modify the canvas pixels locally. The network is only needed to load the initial tool assets.
+
+## The Toolzum Approach
+
+Every tool on Toolzum is designed to work without an active internet connection after the first load. WASM binaries are cached via Service Workers. Tool state is persisted to IndexedDB. The result is a seamless experience that works on airplanes, in remote areas, and during network outages.
+`,
+  },
+  {
+    slug: "zero-telemetry-privacy",
+    title: "Why Zero-Telemetry is Vital for Document Tools",
+    excerpt: "Analyzing the security vulnerabilities of uploading sensitive legal PDFs to third-party server queues, and how to stay isolated.",
+    author: "Sanjay Dixit",
+    authorTitle: "Security Researcher",
+    date: "March 15, 2026",
+    isoDate: "2026-03-15",
+    readTime: "5 min read",
+    tag: "Privacy",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    canonical: "https://toolzum.com/blog/zero-telemetry-privacy",
+    content: `
+## The Hidden Cost of Free Converters
+
+Most free online document converters run on a simple business model: you upload your file, they process it on their servers, and they collect data along the way. This data might include your IP address, file metadata, and in some cases, the actual contents of your documents.
+
+For a personal photo, this might be acceptable. For a legal contract, a medical record, or a financial statement, it is not.
+
+## How Server-Side Processing Exposes Your Data
+
+When you upload a document to a traditional converter:
+
+- Your file travels over the internet to a third-party server
+- The server may store temporary copies in queues or caches
+- Server logs record your IP, timestamp, and file size
+- Staff with server access could view your documents
+- Data breaches could expose your files
+
+Even with promises of "automatic deletion," you have no way to verify compliance.
+
+## Zero-Telemetry Architecture
+
+Zero-telemetry means the application collects nothing. No analytics pings, no error reports, no usage statistics, and no file uploads. Every operation completes entirely on your device.
+
+Implementing zero-telemetry requires discipline:
+
+- No analytics SDKs in the codebase
+- No server-side processing endpoints
+- No logging of user actions
+- No cookies or fingerprinting scripts
+
+## Verifying Zero-Telemetry
+
+Users can verify a tool's claims by:
+
+1. Opening browser DevTools and checking the Network tab
+2. Confirming no data is sent after the initial page load
+3. Testing with flight mode enabled
+4. Reviewing the site's JavaScript bundles for tracking code
+
+## The Toolzum Standard
+
+All tools on Toolzum operate under zero-telemetry by design. We do not have servers that receive your files. We do not track your usage. We do not store your documents. This is not a feature we added later — it is the foundation of the architecture.
+`,
+  },
+  {
+    slug: "webgl-image-tensors",
+    title: "Optimizing Neural Networks on WebGL Canvas",
+    excerpt: "How local execution of background-removal models runs directly on client GPUs using modern WebGL canvas engines.",
+    author: "Mira Roy",
+    authorTitle: "ML Engineer",
+    date: "February 4, 2026",
+    isoDate: "2026-02-04",
+    readTime: "7 min read",
+    tag: "AI Engineering",
+    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    canonical: "https://toolzum.com/blog/webgl-image-tensors",
+    content: `
+## Running AI Models in the Browser
+
+Running neural networks in the browser was once considered impractical. Models were too large, inference was too slow, and GPU access was unreliable. WebGL and WebGL 2 changed this by exposing GPU compute capabilities to JavaScript.
+
+Today, browser-based AI can perform real-time background removal, image enhancement, and object detection — all without sending data to a server.
+
+## From TensorFlow to WebGL
+
+TensorFlow.js was the first major framework to bring neural networks to the browser. It supports two backends:
+
+1. **CPU backend** — Pure JavaScript execution using Web Workers
+2. **WebGL backend** — GPU-accelerated execution via WebGL shaders
+
+The WebGL backend works by encoding tensors as texture data. Each pixel in a WebGL texture can store four floating-point values (RGBA). A convolutional layer becomes a series of fragment shader operations applied to these textures.
+
+## Optimizing for Consumer GPUs
+
+Consumer GPUs differ significantly from datacenter hardware. Key optimizations include:
+
+- **Texture cache optimization** — Arranging tensors to maximize GPU cache hits
+- **Shader complexity limits** — Keeping fragment shaders within device constraints
+- **Precision management** — Using 16-bit floats where full 32-bit precision is unnecessary
+- **Batch size tuning** — Processing single images rather than batches
+
+## Memory Management
+
+GPU memory is limited on consumer devices. A single 4K image can consume significant texture memory. Efficient memory management requires:
+
+- Reusing texture slots across layers
+- Releasing GPU resources immediately after inference
+- Chunking large input images into overlapping tiles
+
+## Real-World Performance
+
+On a mid-range 2024 smartphone, a U2Net background removal model running via WebGL completes in under 3 seconds. On a desktop with a discrete GPU, the same model runs in under 500ms. This is fast enough for interactive use.
+
+## The Future
+
+WebGPU, the successor to WebGL, promises even better performance with explicit compute shader support and lower driver overhead. As browser GPU APIs mature, we can expect increasingly sophisticated AI models to run entirely on-device.
+`,
+  },
 ];

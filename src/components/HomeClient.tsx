@@ -16,8 +16,9 @@ import {
 } from '@/data/homepage';
 
 const toolCount = toolsRegistry.length;
+const categoryCount = [...new Set(toolsRegistry.map(t => t.category))].length;
 const WHY_CHOOSE = getWhyChoose(toolCount);
-const STATS_BAR = getStatsBar(toolCount);
+const STATS_BAR = getStatsBar(toolCount, categoryCount);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -266,7 +267,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             <Layers className="w-3.5 h-3.5" /> Everything You Need
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            {toolCount} tools, 25 categories
+            {toolCount} tools, {categoryCount} categories
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
             From PDF wrangling to AI generation — one platform does it all.
@@ -275,7 +276,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {CATEGORIES.map((cat, i) => {
-            const count = toolsRegistry.filter(t => t.category === cat.label || t.category === cat.id).length;
+            const count = toolsRegistry.filter(t => (t.category === cat.label || t.category === cat.id) && t.showInCategory !== false).length;
             return (
               <motion.div
                 key={cat.id}
@@ -308,7 +309,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               href="/tools"
               className="group flex flex-col items-center justify-center p-5 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 transition-all duration-300 h-full text-center"
             >
-              <span className="text-lg font-semibold mb-1">+{toolCount - CATEGORIES.reduce((s, c) => s + toolsRegistry.filter(t => t.category === c.label || t.category === c.id).length, 0)} tools</span>
+              <span className="text-lg font-semibold mb-1">+{toolCount - CATEGORIES.reduce((s, c) => s + toolsRegistry.filter(t => (t.category === c.label || t.category === c.id) && t.showInCategory !== false).length, 0)} tools</span>
               <span className="text-xs text-[var(--text-muted)]">&amp; More categories</span>
             </Link>
           </motion.div>

@@ -6,6 +6,12 @@ export type ConverterConfigEntry = {
 };
 
 export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
+  // Consolidated converters
+  "video-converter": { category: "video-format", description: "Convert between MKV, MP4, MOV, WebM, and AVI video formats." },
+  "audio-converter": { category: "audio-format", description: "Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats." },
+  "image-format-converter": { category: "image-format", description: "Convert between PNG, JPG, WebP, HEIC, and AVIF image formats." },
+  "data-converter": { category: "data", description: "Convert between JSON, CSV, and XML data formats." },
+  "document-converter": { category: "document", description: "Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats." },
   // Video format converters
   "mkv-to-mp4": {
     category: "video-format",
@@ -39,10 +45,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
     category: "video-format",
     description: "<strong>MOV to MKV Converter:</strong> Convert QuickTime MOV videos into the open-source MKV container format. MKV offers broader codec support, embedded subtitles, and chapter markers — perfect for media archiving. Your files never leave your device.",
   },
-  // Video to audio converters
-  "mp4-to-mp3": { category: "video-to-audio" },
-  "mov-to-mp3": { category: "video-to-audio" },
-  "webm-to-mp3": { category: "video-to-audio" },
   // Audio format converters
   "mp3-to-wav": { category: "audio-format", description: "<strong>MP3 to WAV Converter:</strong> Transform compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity — essential for music production, podcast mastering, and audio restoration. Your files never leave your device." },
   "wav-to-mp3": { category: "audio-format", description: "<strong>WAV to MP3 Converter:</strong> Compress large WAV audio files into space-saving MP3 format. Perfect for sharing music, podcasts, and voice recordings online where file size matters. Your files never leave your device." },

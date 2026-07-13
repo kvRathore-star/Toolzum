@@ -35,7 +35,7 @@ Copy `.env.example` to `.env.local` and fill in the required variables. See `.en
 |------|---------|
 | `src/components/tools/modules/` | Individual tool implementations (~270 files) |
 | `src/registry/tools.ts` | Central tool registry with metadata |
-| `functions/api/` | Cloudflare Functions (payments, proxy, webhooks) |
+| `src/app/api/` | Next.js API Routes (analytics, downloads, payments) |
 | `scripts/` | Build-time generation (sitemap, registry) |
 
 ## Architecture
