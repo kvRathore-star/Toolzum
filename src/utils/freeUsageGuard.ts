@@ -195,22 +195,24 @@ async function callServerRecord(): Promise<boolean> {
 export async function checkAndRecordDownload(options?: { fileSizeMB?: number; batchSize?: number }): Promise<boolean> {
   if (typeof window === "undefined") return true;
 
-  // 0. Check plan limits from server
+  // 0. Check plan limits from server (defensive: block if server unreachable)
   const plan = await callPlanCheck();
-  if (plan) {
-    if (options?.fileSizeMB && options.fileSizeMB > plan.maxFileSizeMB) {
-      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "file_size", limit: plan.maxFileSizeMB, actual: options.fileSizeMB } })); } catch {}
-      return false;
-    }
-    if (options?.batchSize && options.batchSize > plan.maxBatchSize) {
-      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "batch_size", limit: plan.maxBatchSize, actual: options.batchSize } })); } catch {}
-      return false;
-    }
+  if (!plan) {
+    console.warn("[toolzum] Plan server unreachable — blocking download to stay safe");
+    return false;
+  }
+  if (options?.fileSizeMB && options.fileSizeMB > plan.maxFileSizeMB) {
+    try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "file_size", limit: plan.maxFileSizeMB, actual: options.fileSizeMB } })); } catch {}
+    return false;
+  }
+  if (options?.batchSize && options.batchSize > plan.maxBatchSize) {
+    try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "batch_size", limit: plan.maxBatchSize, actual: options.batchSize } })); } catch {}
+    return false;
   }
 
-  // 1. Server-side authoritative check (blocking — must pass)
+  // 1. Server-side quota check (defensive: block if server unreachable)
   const server = await callServerCheck();
-  if (server !== null && !server.allowed) {
+  if (!server || !server.allowed) {
     try {
       window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
     } catch (e) {
@@ -219,25 +221,14 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
     return false;
   }
 
-  // 2. Client-side check (soft guard in case server is unreachable)
-  const remaining = getRemainingDownloads();
-  if (remaining <= 0) {
-    try {
-      window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
-    } catch (e) {
-      console.error("[toolzum]", e);
-    }
-    return false;
-  }
-
-  // 3. Record on server first (blocking — must succeed to authorise)
+  // 2. Record on server (blocking — must succeed to authorise)
   const serverRecorded = await callServerRecord();
   if (!serverRecorded) {
     console.warn("[toolzum] Server-side download record failed — rejecting to stay safe");
     return false;
   }
 
-  // 4. Record locally (mirror)
+  // 3. Record locally (mirror)
   incrementDownloadCount();
 
   try {
