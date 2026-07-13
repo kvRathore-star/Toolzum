@@ -1,3 +1,7 @@
+interface Env {
+  DB?: D1Database;
+}
+
 interface CrawledPage {
   url: string;
   lastmod: string;
@@ -110,13 +114,28 @@ async function fetchWithTimeout(url: string, timeoutMs = 10000): Promise<Respons
   try { return await fetch(url, { signal: controller.signal }); } finally { clearTimeout(timeout); }
 }
 
-export async function onRequestGet({ request }: { request: Request }): Promise<Response> {
+export async function onRequestGet({ request, env }: { request: Request; env: Env }): Promise<Response> {
   const url = new URL(request.url);
   const urlParam = url.searchParams.get('url');
   const excludeParam = url.searchParams.get('exclude');
   const maxParam = url.searchParams.get('max');
 
   if (!urlParam) return new Response('Missing url parameter', { status: 400 });
+
+  // Rate limit: 3 crawls/min per IP
+  if (env.DB) {
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const recent = await env.DB.prepare(
+      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
+    ).bind(`crawl:${ip}`).first<{ c: number }>();
+    if (recent && recent.c >= 3) {
+      return new Response('Too many requests. Try again in a minute.', { status: 429 });
+    }
+    // Record this crawl attempt for rate tracking (fire-and-forget)
+    env.DB.prepare(
+      "INSERT INTO analytics_event (path, fingerprint, clientType, createdAt) VALUES (?, ?, 'sitemap-crawl', datetime('now'))"
+    ).bind('/api/sitemap-crawl', `crawl:${ip}`).run().catch(() => {});
+  }
 
   let inputUrl = urlParam.trim();
   if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) inputUrl = 'https://' + inputUrl;

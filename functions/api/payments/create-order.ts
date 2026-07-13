@@ -8,9 +8,21 @@ const PRICES: Record<string, { amount: number; currency: string }> = {
   yearly: { amount: 3999, currency: 'INR' },
 };
 
+const RATE_LIMIT = 5;
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
+    const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+
+    const recent = await DB.prepare(
+      "SELECT COUNT(*) as c FROM payment WHERE id LIKE ? AND createdAt > datetime('now', '-1 minute')"
+    ).bind(`${ip}%`).first<{ c: number }>();
+
+    if (recent && recent.c >= RATE_LIMIT) {
+      return new Response('Too many requests', { status: 429 });
+    }
+
     const formData = await context.request.formData();
     const plan = (formData.get('plan') as string) || 'pass';
     const gateway = (formData.get('gateway') as string) || 'razorpay';
@@ -18,7 +30,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const orderId = `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
-    // Try to find user by auth token cookie
     const cookies = context.request.headers.get('cookie') || '';
     const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
