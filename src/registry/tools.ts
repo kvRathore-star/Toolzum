@@ -490,7 +490,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "55",
     name: "URL Shortener",
     slug: "url-shortener",
-    category: "Utility",
+    category: "Branding",
     description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. 100% browser-based, no uploads.',
     dependencies: "Node.js / Redis"
@@ -1263,7 +1263,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "162",
     name: "Conversion Rate Calculator",
     slug: "conversion-rate-calculator",
-    category: "Marketing",
+    category: "Branding",
     description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision.',
     seoDescription: 'Free online Conversion Rate Calculator — Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. 100% browser-based, no uploads.',
     dependencies: "Vanilla JS"
@@ -1272,7 +1272,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "163",
     name: "CPM Calculator",
     slug: "cpm-calculator",
-    category: "Marketing",
+    category: "Branding",
     description: 'CPM Calculator computes cost per mille by dividing total ad spend by impressions and multiplying by 1000.',
     seoDescription: 'Free online CPM Calculator — CPM Calculator computes cost per mille by dividing total ad spend by impressions and multiplying by 1000. 100% browser-based, no uploads.',
     dependencies: "Vanilla JS"
@@ -1281,7 +1281,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "164",
     name: "ROAS Calculator",
     slug: "roas-calculator",
-    category: "Marketing",
+    category: "Branding",
     description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate.',
     seoDescription: 'Free online ROAS Calculator — ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. 100% browser-based, no uploads.',
     dependencies: "Vanilla JS"
@@ -1505,7 +1505,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "190",
     name: "Net Promoter Score Calculator",
     slug: "net-promoter-score-calculator",
-    category: "Marketing",
+    category: "Branding",
     description: 'Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics.',
     seoDescription: 'Free online Net Promoter Score Calculator — Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. 100% browser-based, no uploads.',
     dependencies: "Vanilla JS"
@@ -1742,15 +1742,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: 'None'
   },
 
-  {
-    name: 'Prompt Library & Generator',
-    slug: 'prompt-library-generator',
-    description: 'Browse and generate AI prompts.',
-    seoDescription: 'Free online Prompt Library & Generator — Browse and generate AI prompts. 100% browser-based, no uploads.',
-    category: 'AI',
-    id:  "225",
-    dependencies: 'None'
-  },
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
@@ -2052,7 +2043,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'social-media-calendar',
     description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled.',
     seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. 100% browser-based, no uploads.',
-    category: 'Utility',
+    category: 'Branding',
     id:  "268",
     dependencies: 'localStorage'
   },

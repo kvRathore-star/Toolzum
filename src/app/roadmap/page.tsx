@@ -24,6 +24,22 @@ interface RoadmapItem {
 
 const PLANNED: RoadmapItem[] = [
   {
+    id: "temp-email",
+    title: "Temporary Email Generator",
+    description: "Generate disposable email addresses that receive mail in-browser. Requires a server-side SMTP relay — planned for next release cycle.",
+    tag: "Utility",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    votes: 342
+  },
+  {
+    id: "browser-ext",
+    title: "Toolzum Browser Extension",
+    description: "Chrome extension bringing color picker, screenshot capture, QR encoding, and quick tool access into your browser toolbar.",
+    tag: "Extension",
+    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    votes: 287
+  },
+  {
     id: "whisper-wasm",
     title: "Offline Audio Transcriber",
     description: "Utilize localized Whisper.js neural models running on WebGPU for speech-to-text dictation without any API usage.",

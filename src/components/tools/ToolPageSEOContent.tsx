@@ -190,7 +190,6 @@ function getCategoryKey(category: string): string {
     "transcription": "Transcription",
     "extension": "Extension",
     "seo": "SEO",
-    "marketing": "Marketing",
     "indian-utilities": "indian-utilities",
     "ai": "AI",
     "health": "Health",
@@ -215,10 +214,9 @@ const crossCategoryMap: Record<string, string[]> = {
   "Converter": ["PDF", "Image", "Video"],
   "Downloader": ["Video", "Audio", "Extension"],
   "Finance": ["Business", "indian-utilities", "Converter"],
-  "SEO": ["Developer", "Marketing", "Text"],
+  "SEO": ["Developer", "Branding", "Text"],
   "Privacy": ["Developer", "Utility", "Text"],
-  "Marketing": ["AI", "SEO", "Design"],
-  "Branding": ["Design", "Image", "Marketing"],
+  "Branding": ["Design", "Image", "SEO", "Utility"],
   "Design": ["Branding", "Image", "Productivity"],
 };
 

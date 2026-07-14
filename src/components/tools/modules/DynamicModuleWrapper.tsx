@@ -272,7 +272,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'svg-to-png-converter': dynamic(() => import('@/components/tools/modules/SvgToPngConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="svg-to-png-converter" /> }),
   'unit-converter': dynamic(() => import('@/components/tools/modules/UnitConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="unit-converter" /> }),
   'video-watermark-adder': dynamic(() => import('@/components/tools/modules/VideoWatermarkAdder'), { ssr: false, loading: () => <DynamicImportFallback slug="video-watermark-adder" /> }),
-  'prompt-library-generator': dynamic(() => import('@/components/tools/modules/PromptLibraryGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="prompt-library-generator" /> }),
   'gst-invoice-generator': dynamic(() => import('@/components/tools/modules/GstInvoiceGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="gst-invoice-generator" /> }),
   'itr-filing-helper': dynamic(() => import('@/components/tools/modules/ItrFilingHelper'), { ssr: false, loading: () => <DynamicImportFallback slug="itr-filing-helper" /> }),
   'browser-extension': dynamic(() => import('@/components/tools/modules/BrowserExtension'), { ssr: false, loading: () => <DynamicImportFallback slug="browser-extension" /> }),

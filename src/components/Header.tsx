@@ -19,11 +19,11 @@ const MENU_COLUMN_DEFS = [
   { title: "Developer", icon: "💻", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "sql-formatter", "css-minifier", "diff-checker", "base64-encode-decode", "regex-tester", "js-minifier"] },
   { title: "Text", icon: "✍", category: "Text", allHref: "/text", slugs: ["character-counter", "word-counter", "fancy-text-generator", "font-generator", "cursive-text-generator", "text-to-handwriting", "case-converter"] },
   { title: "Finance", icon: "💰", category: "Finance", allHref: "/finance", slugs: ["currency-converter", "percentage-calculator", "emi-calculator", "sip-calculator", "gst-calculator", "invoice-generator", "profit-margin-calculator"] },
-  { title: "Utility", icon: "🔧", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "url-shortener", "resume-builder"] },
+  { title: "Utility", icon: "🔧", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "resume-builder", "dice-roller"] },
   { title: "Converter", icon: "🔄", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-tools"] },
   { title: "Privacy", icon: "🔒", category: "Privacy", allHref: "/privacy", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
-  { title: "SEO & Marketing", icon: "📈", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "conversion-rate-calculator", "cpm-calculator"] },
-  { title: "Branding", icon: "🎨", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "favicon-generator", "svg-editor"] },
+  { title: "SEO", icon: "📈", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "bulk-url-status-checker"] },
+  { title: "Branding & Marketing", icon: "🎨", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "url-shortener", "social-media-calendar", "link-in-bio-builder"] },
   { title: "India", icon: "🇮🇳", category: "indian-utilities", allHref: "/indian-utilities", slugs: ["passport-photo-india", "aadhaar-wallet-cropper", "pan-card-resizer", "gst-invoice-generator"] },
 ];
 
@@ -34,7 +34,7 @@ function buildMegamenuColumns() {
       .map(slug => toolsRegistry.find(t => t.slug === slug))
       .filter(Boolean)
       .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
-    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
+    const allCount = tools.length;
     const isIndia = title === "India";
     return { title, icon, tools, allCount, allHref, isIndia };
   });

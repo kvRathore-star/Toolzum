@@ -13,9 +13,8 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
   'transcription': 'Transcription',
-  'branding': 'Branding',
+  'branding': 'Branding & Marketing',
   'productivity': 'Productivity',
-  'marketing': 'Marketing',
 };
 
 const ITEMS_PER_PAGE = 30;

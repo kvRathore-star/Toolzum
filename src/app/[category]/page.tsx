@@ -8,6 +8,7 @@ const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 const CONVERTER_CROSSLIST = new Set(['video-converter', 'audio-converter', 'image-format-converter', 'document-converter']);
 
 function normalizeCategory(category: string): string {
+  if (category === "marketing") return "Branding";
   const match = toolsRegistry.find(
     t => t.category.toLowerCase().replace(/\s+/g, '-') === category
   );
@@ -16,9 +17,11 @@ function normalizeCategory(category: string): string {
 
 export async function generateStaticParams() {
   const categories = [...new Set(toolsRegistry.map(t => t.category))];
-  return categories.map((cat) => ({
+  const params = categories.map((cat) => ({
     category: cat.toLowerCase().replace(/\s+/g, '-'),
   }));
+  params.push({ category: 'marketing' });
+  return params;
 }
 
 export async function generateMetadata(props: { params: Promise<{ category: string }> }) {
@@ -42,9 +45,8 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Utility: { title: 'Free Online Utility Tools — Everyday Essentials | Toolzum', description: 'Free online utility tools — unit converters, QR code generator, color picker, and everyday essentials for quick tasks online.' },
     'indian-utilities': { title: 'Free Online India Tools — Aadhaar, PAN & More | Toolzum', description: 'Free online tools for India — Aadhaar masking, PAN card validation, UPI payment helpers, and Indian utility tools. All processed locally.' },
     Transcription: { title: 'Free Online Transcription Tools — Speech to Text | Toolzum', description: 'Free online transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.' },
-    Branding: { title: 'Free Online Branding Tools — Logo, Mockup & Design | Toolzum', description: 'Free online branding tools — create logos, generate mockups, design business cards, and brand assets. No design skills needed.' },
+    Branding: { title: 'Free Online Branding & Marketing Tools — Logo, Analytics & Design | Toolzum', description: 'Free online branding and marketing tools — create logos, design social media posts, shorten URLs, schedule content, and measure campaign performance with analytics calculators.' },
     Business: { title: 'Free Online Business Tools — Invoicing, Contracts & More | Toolzum', description: 'Free online business tools — invoice generator, contract templates, business name generator, and more. Streamline your workflow.' },
-    Marketing: { title: 'Free Online Marketing Tools — Social Media & Analytics | Toolzum', description: 'Free online marketing tools — social media schedulers, link shorteners, analytics, and campaign helpers to grow your audience.' },
     Productivity: { title: 'Free Online Productivity Tools — Notes, Timers & More | Toolzum', description: 'Free online productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.' },
     Design: { title: 'Free Online Design Tools — Graphics & Visuals | Toolzum', description: 'Free online design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.' },
     HR: { title: 'Free Online HR Tools — Resume, Salary & HR Utilities | Toolzum', description: 'Free online HR tools — resume builder, salary calculator, leave calculator, and HR utilities for professionals and teams.' },
@@ -58,7 +60,9 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     title: seo.title,
     description: seo.description,
     alternates: {
-      canonical: `https://toolzum.com/${params.category}`,
+      canonical: categoryKey === "Branding" && params.category === "marketing"
+        ? "https://toolzum.com/branding"
+        : `https://toolzum.com/${params.category}`,
     },
   };
 }

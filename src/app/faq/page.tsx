@@ -24,11 +24,11 @@ const faqs = [
   },
   {
     q: "Is there a file size limit?",
-    a: "Free tier supports files up to ~50MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
+    a: "Free anonymous users can process files up to 10MB. Signing in increases the limit to 25MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
   },
   {
     q: "How many files can I process?",
-    a: "Free users get 10 downloads per day with single-file processing. Pro users get unlimited processing with 6x parallel threads.",
+    a: "Anonymous users get 3 downloads per day. Signing in increases the limit to 10 downloads per day with single-file processing. Pro users get unlimited processing with 6x parallel threads.",
   },
   {
     q: "Is Toolzum accessible on mobile?",

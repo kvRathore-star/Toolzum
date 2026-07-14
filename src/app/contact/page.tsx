@@ -8,7 +8,8 @@ import {
   Check,
   MessageSquare,
   HelpCircle,
-  Bug
+  Bug,
+  Lightbulb
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
@@ -178,6 +179,7 @@ export default function ContactPage() {
                     <option value="api">API & Developers Sandbox</option>
                     <option value="licensing">Commercial & Licensing</option>
                     <option value="bug">Report a Bug / Vulnerability</option>
+                    <option value="suggestion">Suggest a Tool</option>
                   </select>
                 </div>
 
@@ -215,6 +217,24 @@ export default function ContactPage() {
 
           </div>
 
+        </div>
+
+        {/* Suggest a Tool Section */}
+        <div className="max-w-3xl mx-auto mt-20 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <Lightbulb className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
+          <h3 className="text-2xl font-semibold mb-3">Suggest a tool</h3>
+          <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
+            If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input 
+              type="text" 
+              placeholder="e.g. SVG pattern generator..." 
+              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
+            />
+            <Button disabled className="shrink-0 opacity-60 cursor-not-allowed">Submit Request</Button>
+          </div>
         </div>
 
       </div>
