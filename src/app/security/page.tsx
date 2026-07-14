@@ -96,7 +96,7 @@ export default function SecurityPage() {
             <Shield className="w-3.5 h-3.5" /> Security & Data Protection
           </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl mb-4 leading-tight">
-            Your Files Never Leave Your Device
+            There is No Server.
           </h1>
           <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
             Traditional web tools upload your documents to a server, process them, and promise to delete them later. 
@@ -122,7 +122,7 @@ export default function SecurityPage() {
           <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 rounded-[var(--radius-xl)] p-6">
             <div className="flex items-center gap-2 mb-3">
               <Cpu className="w-5 h-5 text-emerald-500" />
-              <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Toolzum (Zero-Upload)</span>
+              <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">No Server to Breach.</span>
             </div>
             <ul className="space-y-2 text-sm text-emerald-600 dark:text-emerald-300">
               <li className="flex items-start gap-2">— Files loaded into browser memory via File API</li>

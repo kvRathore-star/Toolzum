@@ -37,6 +37,16 @@ export default function AboutPage() {
           </p>
         </div>
 
+        {/* Core Insight */}
+        <div className="max-w-4xl mx-auto mb-16 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
+          <p className="text-lg font-semibold text-[var(--text-primary)]">
+            The Browser is the Data Center.
+          </p>
+          <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl mx-auto">
+            Every tool compiles to WebAssembly and executes on your machine. No server racks, no cloud bills, no data leaving your device.
+          </p>
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">

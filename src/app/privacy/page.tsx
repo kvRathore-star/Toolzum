@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
         {/* Super Strength Statement */}
         <div className="max-w-4xl mx-auto mb-12 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] font-mono uppercase tracking-wider mb-3">
-            <ShieldAlert className="w-3 h-3" /> Our Core Promise
+            <ShieldAlert className="w-3 h-3" /> Privacy by Architecture, Not Policy
           </div>
           <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
             We Cannot See Your Files. Period.
