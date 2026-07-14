@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
@@ -626,7 +626,24 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         </section>
       )}
 
-      {/* ===== 10. FINAL CTA ===== */}
+      {/* ===== 10. FEEDBACK FORM ===== */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl text-[var(--text-primary)] mb-3">
+            Suggest a tool
+          </h2>
+          <p className="text-sm text-[var(--text-secondary)] mb-8">
+            Have an idea for a new tool or improvement? Let us know — we read every suggestion.
+          </p>
+          <a href="/contact">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
+              <HelpCircle className="w-4 h-4" /> Send Feedback
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* ===== 11. FINAL CTA ===== */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[60%] h-[80%] rounded-full bg-[var(--accent)]/5 blur-[100px]" />

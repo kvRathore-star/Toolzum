@@ -94,7 +94,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Time Converter",
     description: 'Converts a given date and time between any two time zones from a database of 400+ IANA time zones, and simultaneously displays it in Unix timestamp.',
     seoDescription: 'Free online Time Converter — Converts a given date and time between any two time zones from a database of 400+ IANA time zones, and simultaneously displays it in Unix timestamp. 100% browser-based, no uploads.',
-    category: "Converter",
+    category: "Utility",
     slug: "time-converter",
     dependencies: "None",
   },
@@ -1784,7 +1784,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'mp3-compressor',
     description: 'Reduce MP3 size with bitrate control',
     seoDescription: 'Free online MP3 Compressor — Reduce MP3 size with bitrate control 100% browser-based, no uploads.',
-    category: 'Utility',
+    category: 'Audio',
     id:  "231",
     dependencies: 'FFmpeg WASM'
   },
@@ -2084,15 +2084,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "271",
     dependencies: 'None'
   },
-  {
-    name: 'Timezone Converter',
-    slug: 'ist-time-converter',
-    description: 'Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks.',
-    seoDescription: 'Free online Timezone Converter — Converts between 8+ major world time zones including IST, PST, EST, CST, GMT, UTC, JST, and SGT with live clocks. 100% browser-based, no uploads.',
-    category: 'Utility',
-    id:  "272",
-    dependencies: 'None'
-  },
+
   {
     name: 'Audio Converter',
     slug: 'audio-converter',

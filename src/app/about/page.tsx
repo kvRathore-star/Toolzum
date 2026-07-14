@@ -4,12 +4,9 @@ import {
   ShieldCheck, 
   Cpu, 
   Zap, 
-  HelpCircle, 
-  FileCode,
+  HelpCircle,
   Sparkles
 } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { toolsRegistry } from "@/registry/tools";
 
 export default function AboutPage() {
@@ -99,24 +96,19 @@ export default function AboutPage() {
         </div>
 
         {/* Call to Actions */}
-        <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-semibold">Join the Open Source Engine</h3>
-            <p className="text-sm text-[var(--text-secondary)] max-w-md">
-              Check out our public repository, request new features, or contribute local WASM tools.
+        <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-semibold">Have a suggestion?</h3>
+            <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">
+              We're always looking for ideas to improve. Reach out and tell us what you'd like to see next.
             </p>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              <Button variant="secondary" className="gap-2">
-                <FileCode className="w-4 h-4" /> Github Repository
-              </Button>
+          <div className="mt-6">
+            <a href="/contact">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
+                <HelpCircle className="w-4 h-4" /> Send Feedback
+              </div>
             </a>
-            <Link href="/contact">
-              <Button className="gap-2">
-                <HelpCircle className="w-4 h-4" /> Get in Touch
-              </Button>
-            </Link>
           </div>
         </div>
 

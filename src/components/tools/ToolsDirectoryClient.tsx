@@ -136,7 +136,14 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
           return (
             <div key={groupLabel} className="relative shrink-0">
               <button
-                onClick={() => setOpenGroup(openGroup === groupLabel ? null : groupLabel)}
+                onClick={() => {
+                  if (openGroup === groupLabel) {
+                    setOpenGroup(null);
+                  } else {
+                    setOpenGroup(groupLabel);
+                    if (!cats.includes(activeCategory)) setActiveCategory(cats[0]);
+                  }
+                }}
                 className={`flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
                   activeCategory !== "All" && cats.includes(activeCategory)
                     ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
@@ -187,7 +194,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
   const Sidebar = () => (
     <aside className="w-full md:w-64 shrink-0">
-      <div className="md:sticky md:top-[100px] flex flex-col gap-4">
+      <div className="md:sticky md:top-[100px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto flex flex-col gap-4">
         <div>
           <button
             onClick={() => setActiveCategory("All")}

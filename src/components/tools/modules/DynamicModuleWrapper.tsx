@@ -297,7 +297,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-bg-changer': dynamic(() => import('@/components/tools/modules/BulkBgChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-bg-changer" /> }),
   'ai-bg-changer': dynamic(() => import('@/components/tools/modules/AiBgChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="ai-bg-changer" /> }),
   'link-in-bio-builder': dynamic(() => import('@/components/tools/modules/LinkInBioBuilder'), { ssr: false, loading: () => <DynamicImportFallback slug="link-in-bio-builder" /> }),
-  'ist-time-converter': dynamic(() => import('@/components/tools/modules/TimezoneConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="ist-time-converter" /> }),
   'audio-converter': dynamic(() => import('@/components/tools/modules/AudioConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="audio-converter" /> }),
   'pdf-page-manager': dynamic(() => import('@/components/tools/modules/PdfPageManager'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-page-manager" /> }),
   'bulk-qr-code-generator': dynamic(() => import('@/components/tools/modules/BulkQrCodeGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-qr-code-generator" /> }),

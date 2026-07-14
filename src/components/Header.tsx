@@ -194,11 +194,13 @@ export function Header() {
                             transition={{ delay: idx * 0.03 }}
                             className={`flex flex-col ${col.isIndia ? 'p-3 rounded-xl border border-orange-500/30 bg-orange-500/5' : ''}`}
                           >
-                            <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5">
-                              <span className="text-[14px]">{col.icon}</span>
-                              {col.title}
-                              <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
-                            </h4>
+                            <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
+                              <h4 className="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5 transition-colors">
+                                <span className="text-[14px]">{col.icon}</span>
+                                {col.title}
+                                <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
+                              </h4>
+                            </Link>
                             <ul className="space-y-1 flex-1">
                               {col.tools.map((t) => (
                                 <li key={t.name}>
@@ -233,11 +235,13 @@ export function Header() {
                             transition={{ delay: (idx + 7) * 0.03 }}
                             className={`flex flex-col ${col.isIndia ? 'p-3 rounded-xl border border-orange-500/30 bg-orange-500/5' : ''}`}
                           >
-                            <h4 className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5">
-                              <span className="text-[14px]">{col.icon}</span>
-                              {col.title}
-                              <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
-                            </h4>
+                            <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
+                              <h4 className="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5 transition-colors">
+                                <span className="text-[14px]">{col.icon}</span>
+                                {col.title}
+                                <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
+                              </h4>
+                            </Link>
                             <ul className="space-y-1 flex-1">
                               {col.tools.map((t) => (
                                 <li key={t.name}>

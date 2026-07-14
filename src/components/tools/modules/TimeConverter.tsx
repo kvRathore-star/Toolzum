@@ -17,6 +17,8 @@ const TIMEZONES = [
   { label: 'BRT (Brasília Time)', tz: 'America/Sao_Paulo', offset: '-03:00' },
 ];
 
+const QUICK_ZONES = TIMEZONES.slice(0, 8);
+
 const TIME_UNITS = [
   { label: 'Millisecond', ms: 1 },
   { label: 'Second', ms: 1000 },
@@ -30,7 +32,7 @@ const TIME_UNITS = [
 
 export default function TimeConverter() {
   const [currentTimes, setCurrentTimes] = useState<Record<string, string>>({});
-  const [tab, setTab] = useState<'live' | 'convert' | 'units'>('live');
+  const [tab, setTab] = useState<'live' | 'quick' | 'convert' | 'units'>('live');
   const [fromIndex, setFromIndex] = useState(0);
   const [toIndex, setToIndex] = useState(2);
   const [inputTime, setInputTime] = useState('12:00');
@@ -102,8 +104,9 @@ export default function TimeConverter() {
         <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Time Zone Converter</h3>
       </div>
 
-      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-fit">
+      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-fit flex-wrap">
         <button onClick={() => setTab('live')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'live' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Live Clocks</button>
+        <button onClick={() => setTab('quick')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'quick' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Quick Zones</button>
         <button onClick={() => setTab('convert')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'convert' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Convert</button>
         <button onClick={() => setTab('units')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'units' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Time Units</button>
       </div>
@@ -113,6 +116,19 @@ export default function TimeConverter() {
           <p className="text-xs text-zinc-500 dark:text-zinc-400">Live time across 12 major timezones — updated every second.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {TIMEZONES.map(({ label, offset }) => (
+              <div key={label} className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 text-center">
+                <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
+                <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-mono">{currentTimes[label] || '--:--:--'}</p>
+                <p className="text-[10px] text-zinc-400 mt-0.5">{offset}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : tab === 'quick' ? (
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">Quick view of 8 major world time zones — updated every second.</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {QUICK_ZONES.map(({ label, offset }) => (
               <div key={label} className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 text-center">
                 <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
                 <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-mono">{currentTimes[label] || '--:--:--'}</p>
