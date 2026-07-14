@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     template: "%s | Toolzum",
   },
   description:
-    `${toolCount}+ free privacy-first web tools — PDF compression, image editing, text processing, and more — all processed in your browser. Zero uploads, zero storage, instant utility.`,
+    `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
   robots: "index, follow",
   openGraph: {
     type: "website",
     siteName: "Toolzum",
     title: "Toolzum — Privacy-First Web Tools",
     description:
-      `${toolCount}+ free privacy-first web tools — PDF compression, image editing, text processing, and more — all processed in your browser. Zero uploads, zero storage, instant utility.`,
+      `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
