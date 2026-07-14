@@ -119,7 +119,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
   const CategoryMenubar = () => (
     <div ref={menuRef} className="mb-8">
-      <div className="flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none">
+      <div className={`flex items-center gap-1 scrollbar-none ${openGroup ? 'overflow-visible flex-wrap pb-20' : 'overflow-x-auto pb-1'}`}>
         <button
           onClick={() => setActiveCategory("All")}
           className={`shrink-0 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
@@ -136,14 +136,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
           return (
             <div key={groupLabel} className="relative shrink-0">
               <button
-                onClick={() => {
-                  if (openGroup === groupLabel) {
-                    setOpenGroup(null);
-                  } else {
-                    setOpenGroup(groupLabel);
-                    if (!cats.includes(activeCategory)) setActiveCategory(cats[0]);
-                  }
-                }}
+                onClick={() => setOpenGroup(openGroup === groupLabel ? null : groupLabel)}
                 className={`flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
                   activeCategory !== "All" && cats.includes(activeCategory)
                     ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
