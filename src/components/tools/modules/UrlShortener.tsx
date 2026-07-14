@@ -31,7 +31,7 @@ export default function UrlShortener() {
     setCopied(false);
 
     try {
-      const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(url.startsWith('http') ? url : 'https://' + url)}`);
+      const response = await fetch(`/api/url-shorten?url=${encodeURIComponent(url.startsWith('http') ? url : 'https://' + url)}`);
       
       if (!response.ok) {
         throw new Error('Failed to shorten URL');
@@ -73,19 +73,19 @@ export default function UrlShortener() {
             <label className="text-sm font-medium text-zinc-900 dark:text-white">
               Paste your long URL here
             </label>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && shortenUrl()}
                 placeholder="https://example.com/very/long/path/to/something"
-                className="flex-1 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                className="w-full sm:flex-1 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
               />
               <button
                 onClick={shortenUrl}
                 disabled={!url || isLoading}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

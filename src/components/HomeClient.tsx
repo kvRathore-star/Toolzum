@@ -75,7 +75,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
       <section ref={heroRef} className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent)]/8 blur-[140px] pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           <div className="flex flex-col items-start text-left">
             <motion.div
               initial={{ opacity: 0, y: 10 }}

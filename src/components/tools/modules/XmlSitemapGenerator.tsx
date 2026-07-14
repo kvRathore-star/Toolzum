@@ -77,6 +77,11 @@ export default function XmlSitemapGenerator() {
   const [maxPages, setMaxPages] = useState(50);
   const [showSettings, setShowSettings] = useState(false);
   const abortRef = useRef(false);
+  const blobUrlsRef = useRef<string[]>([]);
+
+  React.useEffect(() => {
+    return () => blobUrlsRef.current.forEach(u => URL.revokeObjectURL(u));
+  }, []);
 
   const isCrawling = state.status === 'detecting' || state.status === 'crawling';
 
@@ -181,28 +186,27 @@ export default function XmlSitemapGenerator() {
     toast.success('Copied XML Sitemap!');
   };
 
+  const makeBlobUrl = (content: string, type: string): string => {
+    blobUrlsRef.current.forEach(u => URL.revokeObjectURL(u));
+    blobUrlsRef.current = [];
+    const url = URL.createObjectURL(new Blob([content], { type }));
+    blobUrlsRef.current.push(url);
+    return url;
+  };
+
   const handleDownloadXml = () => {
     if (state.status !== 'complete') return;
-    const blob = new Blob([state.xml], { type: 'application/xml' });
-    const blobUrl = URL.createObjectURL(blob);
-    downloadOrShare(blobUrl, 'sitemap.xml');
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+    downloadOrShare(makeBlobUrl(state.xml, 'application/xml'), 'sitemap.xml');
   };
 
   const handleDownloadHtml = () => {
     if (state.status !== 'complete') return;
-    const blob = new Blob([state.html], { type: 'text/html' });
-    const blobUrl = URL.createObjectURL(blob);
-    downloadOrShare(blobUrl, 'sitemap.html');
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+    downloadOrShare(makeBlobUrl(state.html, 'text/html'), 'sitemap.html');
   };
 
   const handleDownloadTxt = () => {
     if (state.status !== 'complete') return;
-    const blob = new Blob([state.txt], { type: 'text/plain' });
-    const blobUrl = URL.createObjectURL(blob);
-    downloadOrShare(blobUrl, 'urls.txt');
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+    downloadOrShare(makeBlobUrl(state.txt, 'text/plain'), 'urls.txt');
   };
 
   return (

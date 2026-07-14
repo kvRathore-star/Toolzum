@@ -66,7 +66,7 @@ export default function CurrencyConverter() {
   const fetchRates = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://open.er-api.com/v6/latest/USD');
+      const res = await fetch('/api/currency-rates');
       if (!res.ok) throw new Error('Failed to fetch from API');
       const data = await res.json() as any;
       if (data && data.rates) {

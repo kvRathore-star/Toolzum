@@ -104,11 +104,11 @@ export default function TimeConverter() {
         <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Time Zone Converter</h3>
       </div>
 
-      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-fit flex-wrap">
-        <button onClick={() => setTab('live')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'live' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Live Clocks</button>
-        <button onClick={() => setTab('quick')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'quick' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Quick Zones</button>
-        <button onClick={() => setTab('convert')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'convert' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Convert</button>
-        <button onClick={() => setTab('units')} className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${tab === 'units' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Time Units</button>
+      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-full sm:w-fit overflow-x-auto scrollbar-none">
+        <button onClick={() => setTab('live')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'live' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Live Clocks</button>
+        <button onClick={() => setTab('quick')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'quick' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Quick Zones</button>
+        <button onClick={() => setTab('convert')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'convert' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Convert</button>
+        <button onClick={() => setTab('units')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'units' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Time Units</button>
       </div>
 
       {tab === 'live' ? (

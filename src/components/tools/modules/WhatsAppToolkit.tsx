@@ -258,21 +258,23 @@ function BulkLinkTab() {
 
       {csvData.length > 0 && (
         <>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search contacts..."
                 className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
-            <button onClick={copyAll}
-              className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors whitespace-nowrap">
-              {copiedAll ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              Copy All ({filteredData.length})
-            </button>
-            <button onClick={downloadCsv}
-              className="px-4 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors whitespace-nowrap">
-              <Download className="w-3.5 h-3.5" /> CSV
-            </button>
+            <div className="flex gap-2">
+              <button onClick={copyAll}
+                className="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
+                {copiedAll ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                Copy All ({filteredData.length})
+              </button>
+              <button onClick={downloadCsv}
+                className="flex-1 sm:flex-none px-4 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
+                <Download className="w-3.5 h-3.5" /> CSV
+              </button>
+            </div>
           </div>
 
           <div className="max-h-80 overflow-y-auto space-y-1.5 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2">
@@ -650,7 +652,7 @@ function ChatAnalyzerTab() {
 
       {stats && (
         <div className="space-y-3">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
               <p className="text-2xl font-black text-zinc-800 dark:text-white">{stats.totalMessages.toLocaleString()}</p>
               <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Total Messages</p>
@@ -681,8 +683,8 @@ function ChatAnalyzerTab() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-            <div className="flex items-center gap-3 text-xs text-zinc-600 dark:text-zinc-400">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-zinc-400">
               <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Peak day: <strong>{stats.mostActiveDay}</strong></span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> Peak hour: <strong>{stats.mostActiveHour}</strong></span>
             </div>

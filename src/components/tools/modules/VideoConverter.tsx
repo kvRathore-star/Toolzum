@@ -19,7 +19,7 @@ const FORMATS: Record<string, FormatConfig> = {
   mkv: { ext: 'mkv', mime: 'video/x-matroska', label: 'MKV', name: 'Matroska', description: 'Matroska video container' },
   mov: { ext: 'mov', mime: 'video/quicktime', label: 'MOV', name: 'QuickTime', description: 'Apple QuickTime video' },
   webm: { ext: 'webm', mime: 'video/webm', label: 'WEBM', name: 'WebM', description: 'WebM video format' },
-  avi: { ext: 'avi', mime: 'video/avi,video/x-msvideo', label: 'AVI', name: 'AVI', description: 'Legacy AVI container' },
+  avi: { ext: 'avi', mime: 'video/x-msvideo', label: 'AVI', name: 'AVI', description: 'Legacy AVI container' },
   mp4: { ext: 'mp4', mime: 'video/mp4', label: 'MP4', name: 'MP4', description: 'Universal MP4 video' },
 };
 
@@ -59,8 +59,10 @@ export default function VideoConverter({ defaultInput = 'mkv', defaultOutput = '
   const handleFileSelect = (selectedFile: File) => {
     const parts = selectedFile.name.split('.');
     const detected = parts.length > 1 ? parts.pop()?.toLowerCase() : '';
-    if (detected && detected !== inputFormat) {
-      toast.error(`Please upload a .${inputFormat} file (detected .${detected}).`);
+    if (detected && detected !== inputFormat && VIDEO_INPUTS.includes(detected)) {
+      setInputFormat(detected);
+    } else if (detected && detected !== inputFormat) {
+      toast.error(`Please upload a ${VIDEO_INPUTS.map(f => `.${f}`).join(', ')} file (detected .${detected}).`);
       return;
     }
     setFile(selectedFile);
@@ -91,17 +93,20 @@ export default function VideoConverter({ defaultInput = 'mkv', defaultOutput = '
       await ffmpeg.writeFile(`input.${inputFormat}`, await fetchFile(file));
 
       const outputExt = outputFormat;
+      const codec = outputExt === 'webm' ? 'libvpx' : outputExt === 'avi' ? 'mpeg4' : 'libx264';
+      const pixFmt = outputExt === 'webm' ? 'yuv420p' : 'yuv420p';
       await ffmpeg.exec([
         '-i', `input.${inputFormat}`,
-        '-vcodec', 'libx264',
+        '-vcodec', codec,
         '-crf', '23',
         '-preset', 'fast',
-        '-pix_fmt', 'yuv420p',
+        '-pix_fmt', pixFmt,
         `output.${outputExt}`
       ]);
 
       const data = await ffmpeg.readFile(`output.${outputExt}`);
-      const blob = new Blob([data as any], { type: `video/${outputExt === 'mp4' ? 'mp4' : outputExt}` });
+      const mimeMap: Record<string, string> = { mp4: 'video/mp4', webm: 'video/webm', mov: 'video/quicktime', avi: 'video/x-msvideo' };
+      const blob = new Blob([data as any], { type: mimeMap[outputExt] || 'video/mp4' });
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
