@@ -21,7 +21,7 @@ const MENU_COLUMN_DEFS = [
   { title: "Finance", icon: "💰", category: "Finance", allHref: "/finance", slugs: ["currency-converter", "percentage-calculator", "emi-calculator", "sip-calculator", "gst-calculator", "invoice-generator", "profit-margin-calculator"] },
   { title: "Utility", icon: "🔧", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "resume-builder", "dice-roller"] },
   { title: "Converter", icon: "🔄", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-tools"] },
-  { title: "Privacy", icon: "🔒", category: "Privacy", allHref: "/privacy", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
+  { title: "Privacy", icon: "🔒", category: "Privacy", allHref: "/tools", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
   { title: "SEO", icon: "📈", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "bulk-url-status-checker"] },
   { title: "Branding & Marketing", icon: "🎨", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "url-shortener", "social-media-calendar", "link-in-bio-builder"] },
   { title: "India", icon: "🇮🇳", category: "indian-utilities", allHref: "/indian-utilities", slugs: ["passport-photo-india", "aadhaar-wallet-cropper", "pan-card-resizer", "gst-invoice-generator"] },

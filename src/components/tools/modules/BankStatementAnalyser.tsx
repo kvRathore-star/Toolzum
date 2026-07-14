@@ -326,7 +326,7 @@ export default function BankStatementAnalyser() {
               </button>
             </div>
 
-            <div className="max-h-[400px] overflow-y-auto border border-zinc-200 dark:border-zinc-800 rounded-xl">
+            <div className="max-h-[400px] overflow-y-auto overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded-xl">
               <table className="w-full text-xs">
                 <thead className="bg-zinc-50 dark:bg-black/30 sticky top-0">
                   <tr className="text-[9px] font-bold text-zinc-400 uppercase">

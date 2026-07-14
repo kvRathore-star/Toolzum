@@ -118,7 +118,7 @@ export default function PrivacyCleaner() {
           View and clear your browser storage for this site. Cookies, localStorage, sessionStorage — all in one place. Everything runs locally, nothing leaves your device.
         </p>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
             <Cookie className="w-4 h-4 mx-auto text-orange-500 mb-1" />
             <p className="text-lg font-black text-zinc-800 dark:text-white">{stats.cookies}</p>

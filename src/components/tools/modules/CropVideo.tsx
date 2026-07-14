@@ -121,7 +121,7 @@ export default function ReelShortsMaker() {
             </div>
 
             <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block">Aspect Ratio</label>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {RATIOS.map((r, i) => {
                   const Icon = r.icon;
                   return (

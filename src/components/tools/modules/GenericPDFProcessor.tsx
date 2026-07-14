@@ -160,7 +160,7 @@ export default function GenericPDFProcessor() {
 
             <div className="space-y-1">
               <label className="text-xs text-zinc-400 font-bold uppercase tracking-wider">Operation</label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {(['compress', 'rotate', 'remove-metadata'] as Operation[]).map((op) => (
                   <button
                     key={op}
@@ -183,7 +183,7 @@ export default function GenericPDFProcessor() {
             {operation === 'rotate' && (
               <div className="space-y-1">
                 <label className="text-xs text-zinc-400 font-bold uppercase tracking-wider">Rotation Angle</label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {([90, 180, 270] as const).map((angle) => (
                     <button
                       key={angle}

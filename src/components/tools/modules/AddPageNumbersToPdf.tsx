@@ -148,7 +148,7 @@ export default function AddPageNumbersToPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Position</label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button onClick={() => setPosition('top-left')} className={`py-2 text-xs font-bold border rounded-lg ${position === 'top-left' ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>Top Left</button>
               <button onClick={() => setPosition('top-center')} className={`py-2 text-xs font-bold border rounded-lg ${position === 'top-center' ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>Top Center</button>
               <button onClick={() => setPosition('top-right')} className={`py-2 text-xs font-bold border rounded-lg ${position === 'top-right' ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>Top Right</button>

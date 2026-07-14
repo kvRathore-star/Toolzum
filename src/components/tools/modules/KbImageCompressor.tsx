@@ -83,7 +83,7 @@ export default function KbImageCompressor() {
       <div className="p-6 border border-zinc-200 dark:border-white/10 bg-white dark:bg-black rounded-2xl shadow-xl">
         <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-4">Target File Size (KB)</h4>
         
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[20, 50, 100].map(preset => (
             <button
               key={preset}

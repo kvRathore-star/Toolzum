@@ -105,12 +105,12 @@ export default function UnitConverter() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
       
-      <div className="flex justify-center space-x-2 bg-zinc-50 dark:bg-zinc-900/50 p-2 rounded-2xl border border-zinc-200 dark:border-white/5 overflow-x-auto">
+      <div className="flex justify-center space-x-2 bg-zinc-50 dark:bg-zinc-900/50 p-2 rounded-2xl border border-zinc-200 dark:border-white/5 overflow-x-auto scrollbar-none">
         {(Object.keys(unitTypes) as Array<keyof typeof unitTypes>).map(cat => (
           <button
             key={cat}
             onClick={() => handleCategoryChange(cat)}
-            className={`px-6 py-3 rounded-xl font-bold transition-all ${category === cat ? 'bg-blue-600 text-white shadow-lg' : 'text-zinc-600 dark:text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+            className={`px-4 sm:px-6 py-3 rounded-xl font-bold text-sm sm:text-base whitespace-nowrap transition-all ${category === cat ? 'bg-blue-600 text-white shadow-lg' : 'text-zinc-600 dark:text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
           >
             {cat}
           </button>

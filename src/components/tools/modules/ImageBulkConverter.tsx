@@ -129,7 +129,7 @@ export default function ImageBulkConverter() {
             
             <div>
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Convert to Format</label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   onClick={() => setTargetFormat('image/jpeg')}
                   className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/jpeg' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-700'}`}
