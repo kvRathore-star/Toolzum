@@ -4,6 +4,7 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 const nextConfig: NextConfig = {
   output: "export",
   poweredByHeader: false,
+  trailingSlash: true,
 };
 
 const withBA = withBundleAnalyzer({

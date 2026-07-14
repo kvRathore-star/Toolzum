@@ -25,28 +25,20 @@ const toolCount = toolsRegistry.length;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),
-  alternates: { canonical: "https://toolzum.com" },
+  alternates: { canonical: "https://toolzum.com/" },
   title: {
     default: "Toolzum — Privacy-First Web Tools",
     template: "%s | Toolzum",
   },
   description:
-    `${toolCount}+ free, privacy-first web tools. PDF compression, image editing, text processing, and more — all processed in your browser. Nothing uploaded, ever.`,
-  keywords: [
-    "web tools",
-    "pdf compressor",
-    "image background remover",
-    "text humanizer",
-    "privacy first",
-    "free tools",
-  ],
+    `${toolCount}+ free privacy-first web tools — PDF compression, image editing, text processing, and more — all processed in your browser. Zero uploads, zero storage, instant utility.`,
   robots: "index, follow",
   openGraph: {
     type: "website",
     siteName: "Toolzum",
     title: "Toolzum — Privacy-First Web Tools",
     description:
-      `${toolCount}+ free web tools. Everything processed in your browser.`,
+      `${toolCount}+ free privacy-first web tools — PDF compression, image editing, text processing, and more — all processed in your browser. Zero uploads, zero storage, instant utility.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {

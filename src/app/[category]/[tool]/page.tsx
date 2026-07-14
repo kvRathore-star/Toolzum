@@ -25,9 +25,8 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   return {
     title: `${toolMetadata.name} — Free Online Tool`,
     description: desc,
-    keywords: `${toolMetadata.name.toLowerCase()}, free online ${toolMetadata.name.toLowerCase()}, ${toolMetadata.category.toLowerCase()} tool`,
     alternates: {
-      canonical: `https://toolzum.com/${params.category}/${params.tool}`,
+      canonical: `https://toolzum.com/${params.category}/${params.tool}/`,
     },
     openGraph: {
       title: `${toolMetadata.name} - Free Online Tool`,

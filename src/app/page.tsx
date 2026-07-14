@@ -7,11 +7,11 @@ const toolCount = toolsRegistry.length;
 export const metadata: Metadata = {
   title: `Toolzum — ${toolCount}+ Free Online Tools, All in Your Browser`,
   description:
-    `${toolCount}+ privacy-first online tools for PDF, image, video, audio, AI, and more. All processing runs in your browser — nothing uploaded, ever. Free to use.`,
+    `${toolCount}+ privacy-first online tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
   openGraph: {
-    title: `Toolzum — ${toolCount}+ Free Browser-Based Tools`,
+    title: `Toolzum — ${toolCount}+ Free Online Tools, All in Your Browser`,
     description:
-      `Compress PDFs, edit images, convert video, generate AI content, and more — all 100% client-side. No uploads. No accounts required.`,
+      `${toolCount}+ privacy-first online tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
 };
