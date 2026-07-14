@@ -1,4 +1,4 @@
-const ALLOWED = ['toolzum.com', 'tool-hub-a86.pages.dev', 'localhost', '127.0.0.1'];
+const ALLOWED = ['toolzum.com'];
 
 function isAllowed(header: string | null): boolean {
   if (!header) return false;

@@ -76,7 +76,7 @@ export default function CurrencyConverter() {
         toast.success('Rates updated successfully!');
       }
     } catch (error) {
-      console.warn('Using offline fallback rates:', error);
+      if (process.env.NODE_ENV !== 'production') console.warn('Using offline fallback rates:', error);
       setLastUpdated('Offline (Using Fallback Rates)');
       toast.error('Network error. Using offline fallback rates.');
     } finally {

@@ -75,7 +75,7 @@ export function useFFmpeg() {
       await ffmpegGlobal.load({ coreURL, wasmURL, classWorkerURL });
       return true;
     } catch (err) {
-      if (entry.mt) console.warn('Multi-threaded fallback also failed:', err);
+      if (entry.mt && process.env.NODE_ENV !== 'production') console.warn('Multi-threaded fallback also failed:', err);
       return false;
     } finally {
       clearTimeout(timeoutId);

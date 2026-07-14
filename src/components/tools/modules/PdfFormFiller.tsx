@@ -85,7 +85,7 @@ export default function PdfFormFiller() {
             field.select(f.value);
           }
         } catch (e) {
-          console.warn(`Could not fill field ${f.name}`, e);
+          if (process.env.NODE_ENV !== 'production') console.warn(`Could not fill field ${f.name}`, e);
         }
       });
       

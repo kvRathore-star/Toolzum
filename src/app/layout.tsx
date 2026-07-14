@@ -21,11 +21,7 @@ const geistMono = Geist_Mono({
 
 const toolCount = toolsRegistry.length;
 
-export function reportWebVitals(metric: { name: string; value: number; label: string }) {
-  if (process.env.NODE_ENV === "production") {
-    console.log("[web-vital]", metric.name, metric.value, metric.label);
-  }
-}
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),

@@ -66,7 +66,7 @@ export function preloadWasm(name: string): void {
     .then((buf) => buf && WebAssembly.compile(buf))
     .then((mod) => mod && moduleCache.set(name, mod))
     .catch((e) => {
-      console.warn('Wasm preload failed:', e);
+      if (process.env.NODE_ENV !== 'production') console.warn('Wasm preload failed:', e);
     });
 }
 

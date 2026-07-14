@@ -104,7 +104,7 @@ export default function ExtractImagesFromPdf() {
               zip.file(`extracted_img_${extractedCount}.png`, base64Data, { base64: true });
             }
           } catch (imgErr) {
-            console.warn(`Failed to extract image object with key ${key}:`, imgErr);
+            if (process.env.NODE_ENV !== 'production') console.warn(`Failed to extract image object with key ${key}:`, imgErr);
           }
         }
         

@@ -7,27 +7,27 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "GPTBot",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "ClaudeBot",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "Google-Extended",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "CCBot",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "PerplexityBot",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "Amazonbot",
-        allow: "/",
+        disallow: "/",
       },
       {
         userAgent: "*",
