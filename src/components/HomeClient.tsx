@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
@@ -628,18 +628,25 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
       {/* ===== 10. FEEDBACK FORM ===== */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <Lightbulb className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
           <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl text-[var(--text-primary)] mb-3">
             Suggest a tool
           </h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-8">
-            Have an idea for a new tool or improvement? Let us know — we read every suggestion.
+          <p className="text-sm text-[var(--text-secondary)] mb-8 max-w-lg mx-auto">
+            If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>
-          <a href="/contact">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
-              <HelpCircle className="w-4 h-4" /> Send Feedback
-            </div>
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input 
+              type="text" 
+              placeholder="e.g. SVG pattern generator..." 
+              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
+            />
+            <Link href="/contact">
+              <Button className="shrink-0 w-full sm:w-auto">Submit Request</Button>
+            </Link>
+          </div>
         </div>
       </section>
 

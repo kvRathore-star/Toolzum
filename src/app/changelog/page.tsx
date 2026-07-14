@@ -108,6 +108,18 @@ const RELEASES: Release[] = [
     ]
   },
   {
+    version: "v1.0.0",
+    date: "March 15, 2026",
+    title: "Platform Launch — Privacy-First Web Utilities",
+    tag: "launch",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    description: "Toolzum launched with a simple premise: every tool should run in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
+    updates: [
+      { type: "feature", text: "Initial catalog of 50 tools: hashing, text processing, image compression, format conversion, and random generators." },
+      { type: "security", text: "Verified zero-data exfiltration — no packets dispatched during any tool execution. Every byte stays on your device." }
+    ]
+  },
+  {
     version: "v0.10.0",
     date: "February 18, 2026",
     title: "Tool Expansion & User Feedback Integration",
@@ -119,18 +131,6 @@ const RELEASES: Release[] = [
       { type: "feature", text: "Razorpay payment integration hardened — subscription webhooks, retry logic, and invoice generation now fully automated." },
       { type: "fix", text: "Memory leak in PDF.js worker pool fixed — prolonged use no longer degrades browser performance." },
       { type: "performance", text: "Code-splitting improved: each tool module now loads independently, reducing initial bundle by 40%." }
-    ]
-  },
-  {
-    version: "v1.0.0",
-    date: "March 15, 2026",
-    title: "Platform Launch — Privacy-First Web Utilities",
-    tag: "launch",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    description: "Toolzum launched with a simple premise: every tool should run in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
-    updates: [
-      { type: "feature", text: "Initial catalog of 50 tools: hashing, text processing, image compression, format conversion, and random generators." },
-      { type: "security", text: "Verified zero-data exfiltration — no packets dispatched during any tool execution. Every byte stays on your device." }
     ]
   },
   {

@@ -34,7 +34,7 @@ function buildMegamenuColumns() {
       .map(slug => toolsRegistry.find(t => t.slug === slug))
       .filter(Boolean)
       .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
-    const allCount = tools.length;
+    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
     const isIndia = title === "India";
     return { title, icon, tools, allCount, allHref, isIndia };
   });
