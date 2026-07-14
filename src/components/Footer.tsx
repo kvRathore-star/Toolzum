@@ -93,7 +93,6 @@ export function Footer() {
               <li><Link href="/pricing" className="hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
               <li><Link href="/extension" className="hover:text-[var(--accent)] transition-colors">Chrome Extension</Link></li>
               <li><Link href="/changelog" className="hover:text-[var(--accent)] transition-colors">Changelog</Link></li>
-              <li><Link href="/roadmap" className="hover:text-[var(--accent)] transition-colors">Roadmap</Link></li>
               <li><Link href="/status" className="hover:text-[var(--accent)] transition-colors">Status</Link></li>
               <li><Link href="/faq" className="hover:text-[var(--accent)] transition-colors">FAQ</Link></li>
             </ul>
@@ -106,6 +105,7 @@ export function Footer() {
               <li><Link href="/about" className="hover:text-[var(--accent)] transition-colors">About</Link></li>
               <li><Link href="/blog" className="hover:text-[var(--accent)] transition-colors">Blog</Link></li>
               <li><Link href="/careers" className="hover:text-[var(--accent)] transition-colors flex items-center gap-2">Careers <span className="text-[10px] bg-[var(--accent)]/10 text-[var(--accent)] px-1.5 py-0.5 rounded">Hiring</span></Link></li>
+              <li><Link href="/roadmap" className="hover:text-[var(--accent)] transition-colors">Roadmap</Link></li>
               <li><Link href="/contact" className="hover:text-[var(--accent)] transition-colors">Contact</Link></li>
             </ul>
           </div>

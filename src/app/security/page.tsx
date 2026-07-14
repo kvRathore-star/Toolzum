@@ -1,77 +1,86 @@
 import type { Metadata } from "next";
-import { Shield, Lock, Server, FileCheck, Building2, Globe, Download, Wifi, Cpu, Code } from 'lucide-react';
+import { Shield, Lock, Cpu, Globe, FileCheck, Download, Server, EyeOff, Wifi, Ban } from 'lucide-react';
 import { EnterpriseCompliance } from '@/components/EnterpriseCompliance';
 
 export const metadata: Metadata = {
-  title: "Security & Architecture",
+  title: "Security & Data Protection",
   description:
-    "Toolzum's security architecture — everything runs in your browser via WebAssembly. Zero data uploads, complete transparency.",
+    "Toolzum processes files in your browser — zero uploads, zero server storage, zero data retention. No data to breach.",
   openGraph: {
-    title: "Security & Architecture | Toolzum",
+    title: "Security & Data Protection | Toolzum",
   },
 };
 
-const sections = [
+const trustMetrics = [
+  { value: "0", label: "Bytes Uploaded", sub: "All processing is client-side" },
+  { value: "100%", label: "Client-Side", sub: "No server round trips" },
+  { value: "0s", label: "Data Retention", sub: "Processed then garbage collected" },
+  { value: "Always", label: "Offline Capable", sub: "No internet required after load" },
+];
+
+const comparisonPoints = [
   {
-    icon: Shield,
-    title: 'Architecture Overview',
-    items: [
-      'Static site hosted on Cloudflare Pages — no application server',
-      'All file processing runs in your browser via WebAssembly (WASM)',
-      'Zero data transmitted to external servers during processing',
-      'Authentication handled by Better Auth with D1 database (no 3rd-party auth proxy)',
-    ],
+    icon: Ban,
+    title: "Zero-Upload Architecture",
+    desc: "Your files are loaded directly into browser memory via the File API. They never traverse a network, never reach a server, and never exist anywhere but your device."
   },
   {
     icon: Lock,
-    title: 'Data Flow',
+    title: "No Data to Breach",
+    desc: "Competitors advertise 'auto-delete after 2 hours' — but that 2-hour window is a breach risk. If there is no server, there is no server to breach. Your files exist only in your browser session."
+  },
+  {
+    icon: EyeOff,
+    title: "No Telemetry on Your Content",
+    desc: "We run zero analytics on file contents, filenames, or processing outcomes. No tracking pixels, no session replays, no metadata collection on what you process."
+  },
+  {
+    icon: Wifi,
+    title: "Works Offline & Air-Gapped",
+    desc: "After the initial page load, Toolzum functions without any internet connection. Suitable for classified environments, government networks, and remote field operations."
+  },
+];
+
+const securitySections = [
+  {
+    icon: Cpu,
+    title: "Architecture",
     items: [
-      'Your file → Browser memory (via File API) → WASM processing → Browser memory → Download',
-      'Files are never uploaded, cached, logged, or stored on any server',
-      'After download, file data is garbage-collected by the browser',
-      'No background analytics track file contents or metadata',
+      "All processing via WebAssembly (WASM) — compiled C++, Rust, and Python libraries execute in your browser's sandboxed worker thread",
+      "Zero data transmitted to external servers during file operations",
+      "Static edge delivery via global CDN — no application servers, no file storage buckets",
+      "Session management and payments are the only server-side operations, and they never touch your files"
     ],
   },
   {
-    icon: Server,
-    title: 'Infrastructure',
+    icon: Shield,
+    title: "Encryption & Data Flow",
     items: [
-      'CDN: Cloudflare Pages (edge network, 330+ locations)',
-      'Authentication: Better Auth (D1 database on Cloudflare)',
-      'Payments: Stripe (global) + Razorpay (India) — PCI-DSS compliant',
-      'No application servers, no databases storing user content, no file storage buckets',
-    ],
-  },
-  {
-    icon: FileCheck,
-    title: 'Compliance',
-    items: [
-      'GDPR Article 28 compliant — no data processing agreement needed',
-      'HIPAA-friendly — no PHI transmitted or stored',
-      'SOC2-type architecture — all compute client-side',
-      'CCPA compliant — no personal data collected from file operations',
-    ],
-  },
-  {
-    icon: Building2,
-    title: 'Enterprise Security',
-    items: [
-      'Content Security Policy (CSP) headers restrict all outbound connections',
-      'X-Content-Type-Options: nosniff prevents MIME-type sniffing',
-      'X-Frame-Options: DENY prevents clickjacking',
-      'Referrer-Policy: strict-origin-when-cross-origin protects URL leaks',
-      'All assets served over HTTPS with HSTS',
+      "Your file → Browser memory (File API) → WASM processing → Browser memory → Download",
+      "Files are never uploaded, cached, logged, or stored on any server",
+      "After download, file data is garbage-collected by the browser — no retention window",
+      "All network communication encrypted via TLS 1.3 with HSTS"
     ],
   },
   {
     icon: Globe,
-    title: 'Third-Party Dependencies',
+    title: "Infrastructure & Compliance",
     items: [
-      'Open source libraries loaded via CDN with integrity hashes (SRI)',
-      'FFmpeg.wasm — compiled to WebAssembly, runs entirely client-side',
-      'TensorFlow.js — client-side ML, no data leaves browser',
-      'PDF.js, pdf-lib — client-side PDF processing',
-      'No third-party cookies, no tracking pixels, no analytics scripts on tool pages',
+      "Global edge CDN with 330+ locations for fast static delivery — no application servers",
+      "GDPR Article 28 compliant — no data processing agreement needed (zero data to process)",
+      "HIPAA-friendly — no PHI transmitted or stored at any point",
+      "SOC2-type architecture — all compute client-side, inherently auditable",
+      "CCPA compliant — no personal data collected from file operations"
+    ],
+  },
+  {
+    icon: FileCheck,
+    title: "Enterprise Security Controls",
+    items: [
+      "Content Security Policy (CSP) headers — restricts all outbound connections by policy",
+      "Subresource Integrity (SRI) — all open source libraries loaded with cryptographic integrity hashes",
+      "X-Content-Type-Options: nosniff, X-Frame-Options: DENY, strict Referrer-Policy",
+      "No third-party cookies, no advertising scripts, no external tracking on tool pages"
     ],
   },
 ];
@@ -80,52 +89,85 @@ export default function SecurityPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
       <div className="max-w-[960px] mx-auto pt-32 pb-24 px-4 sm:px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
+
+        {/* Hero */}
+        <div className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-4">
-            <Shield className="w-3.5 h-3.5" /> Security & Architecture
+            <Shield className="w-3.5 h-3.5" /> Security & Data Protection
           </span>
-          <h1 className="font-[family-name:var(--font-serif)] text-5xl mb-4">Trust Through Transparency</h1>
-          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-            Every detail of how Toolzum processes your data is documented here. No black boxes. No fine print.
+          <h1 className="font-[family-name:var(--font-serif)] text-5xl mb-4 leading-tight">
+            Your Files Never Leave Your Device
+          </h1>
+          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
+            Traditional web tools upload your documents to a server, process them, and promise to delete them later. 
+            Toolzum skips the server entirely — your files load into browser memory, process locally via WebAssembly, 
+            and are downloaded directly. There is nothing to intercept, no server to breach, no file to delete.
           </p>
         </div>
 
-        {/* Architecture Diagram (text-based) */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 mb-12">
-          <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-            <Cpu className="w-5 h-5 text-[var(--accent)]" /> System Architecture
-          </h2>
-          <div className="font-mono text-xs leading-relaxed text-[var(--text-secondary)] space-y-1 bg-[var(--bg-overlay)] p-4 rounded-[var(--radius-lg)] overflow-x-auto">
-            <p className="text-emerald-500 font-semibold">┌─────────────────────────────────────────────────┐</p>
-            <p className="text-emerald-500 font-semibold">│              Your Browser (Client)                │</p>
-            <p className="text-emerald-500 font-semibold">│  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │</p>
-            <p className="text-emerald-500 font-semibold">│  │ File API │─→│  WASM    │─→│ Canvas/Memory │  │</p>
-            <p className="text-emerald-500 font-semibold">│  │ (Upload) │  │ (Process)│  │  (Output)     │  │</p>
-            <p className="text-emerald-500 font-semibold">│  └──────────┘  └──────────┘  └──────┬───────┘  │</p>
-            <p className="text-emerald-500 font-semibold">│                                     │          │</p>
-            <p className="text-emerald-500 font-semibold">│                              ┌──────▼───────┐  │</p>
-            <p className="text-emerald-500 font-semibold">│                              │   Download   │  │</p>
-            <p className="text-emerald-500 font-semibold">│                              └──────────────┘  │</p>
-            <p className="text-emerald-500 font-semibold">└─────────────────────────────────────────────────┘</p>
-            <p className="text-zinc-500">         │</p>
-            <p className="text-zinc-500">         │ (no data flows downward)</p>
-            <p className="text-zinc-500">         ▼</p>
-            <p className="text-red-400 font-semibold">┌─────────────────────────────────────────────────┐</p>
-            <p className="text-red-400 font-semibold">│              ❌ No Server/Cloud                 │</p>
-            <p className="text-red-400 font-semibold">│    Files NEVER uploaded, stored, or logged      │</p>
-            <p className="text-red-400 font-semibold">└─────────────────────────────────────────────────┘</p>
+        {/* Key Differentiator — Comparison */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-[var(--radius-xl)] p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Server className="w-5 h-5 text-red-500" />
+              <span className="text-sm font-semibold text-red-700 dark:text-red-400">Server-Based Competitors</span>
+            </div>
+            <ul className="space-y-2 text-sm text-red-600 dark:text-red-300">
+              <li className="flex items-start gap-2">— Upload your file to a cloud server</li>
+              <li className="flex items-start gap-2">— Process on remote infrastructure</li>
+              <li className="flex items-start gap-2">— Promise to delete after 2 hours</li>
+              <li className="flex items-start gap-2">— 2-hour breach window exists</li>
+            </ul>
+          </div>
+          <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900 rounded-[var(--radius-xl)] p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Cpu className="w-5 h-5 text-emerald-500" />
+              <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Toolzum (Zero-Upload)</span>
+            </div>
+            <ul className="space-y-2 text-sm text-emerald-600 dark:text-emerald-300">
+              <li className="flex items-start gap-2">— Files loaded into browser memory via File API</li>
+              <li className="flex items-start gap-2">— Process locally via WebAssembly</li>
+              <li className="flex items-start gap-2">— Nothing to delete — no server, no upload</li>
+              <li className="flex items-start gap-2">— Zero breach surface for file data</li>
+            </ul>
           </div>
         </div>
 
+        {/* Trust Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {trustMetrics.map((m) => (
+            <div key={m.label} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-5 text-center">
+              <div className="text-2xl font-bold text-[var(--accent)] font-mono">{m.value}</div>
+              <div className="text-[11px] font-semibold text-[var(--text-primary)] mt-1">{m.label}</div>
+              <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{m.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Comparison Detail Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {comparisonPoints.map((point) => {
+            const Icon = point.icon;
+            return (
+              <div key={point.title} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-emerald-500" />
+                </div>
+                <h3 className="text-base font-semibold text-[var(--text-primary)] mb-2">{point.title}</h3>
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{point.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+
         {/* Detail Sections */}
-        <div className="space-y-8">
-          {sections.map((section, i) => {
+        <div className="space-y-6 mb-16">
+          {securitySections.map((section) => {
             const Icon = section.icon;
             return (
-              <div key={i} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6">
+              <div key={section.title} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-[var(--radius-lg)] bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
                     <Icon className="w-5 h-5 text-emerald-500" />
                   </div>
                   <h2 className="text-lg font-bold">{section.title}</h2>
@@ -144,11 +186,9 @@ export default function SecurityPage() {
         </div>
 
         {/* Enterprise Compliance */}
-        <div className="mt-12">
-          <EnterpriseCompliance />
-        </div>
+        <EnterpriseCompliance />
 
-        {/* Report Download */}
+        {/* CTA */}
         <div className="mt-12 text-center p-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)]">
           <p className="text-sm text-[var(--text-secondary)] mb-4">
             Need a formal security assessment for your procurement team? We maintain a comprehensive security questionnaire.
