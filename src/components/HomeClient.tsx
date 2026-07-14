@@ -93,7 +93,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="font-[family-name:var(--font-serif)] text-6xl sm:text-7xl lg:text-[84px] leading-[0.95] tracking-tight mb-8"
             >
               The browser<br />
-              <span className="text-[var(--accent)]">powerhouse.</span>
+              <span className="text-[var(--accent)]">supercomputer.</span>
             </motion.h1>
 
             <motion.p
@@ -160,7 +160,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                 <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
                 <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                 <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-powerhouse</span>
+                <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-supercomputer</span>
               </div>
 
               <div className="flex-1 p-6 flex flex-col">

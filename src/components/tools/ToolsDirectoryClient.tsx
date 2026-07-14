@@ -270,14 +270,14 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
 
         <main className="flex-1">
           {/* Top controls row */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
               <h2 className="text-xl font-medium text-[var(--text-primary)]">
                 {activeCategory === "All" ? "All Tools" : activeCategory}
               </h2>
               <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} results</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
                 <button onClick={() => setProFilter('all')} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
