@@ -81,7 +81,7 @@ export function Footer() {
               <span className="font-semibold text-lg text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">zum</span></span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Privacy first web tools — PDF, images, video, AI and more — in one place. Zero uploads. Starts in seconds.
+              Privacy-first tools. All in one place. Zero servers, zero uploads, zero storage.
             </p>
           </div>
 

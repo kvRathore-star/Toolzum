@@ -102,8 +102,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-md mb-10 leading-relaxed"
             >
-              {toolCount}+ tools — PDF, image, video, AI — that run entirely in your browser.
-              Nothing uploaded. Nothing stored. Just instant, private utility.
+              {toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.
             </motion.p>
 
             <motion.div
