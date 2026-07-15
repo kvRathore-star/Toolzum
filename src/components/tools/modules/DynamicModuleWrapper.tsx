@@ -404,6 +404,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'social-caption-generator': dynamic(() => import('@/components/tools/modules/AiSocialCaption'), { ssr: false, loading: () => <DynamicImportFallback slug="social-caption-generator" /> }),
   'mobi-converter': dynamic(() => import('@/components/tools/modules/MobiConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="mobi-converter" /> }),
   'odt-rtf-to-pdf': dynamic(() => import('@/components/tools/modules/OdtRtfConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="odt-rtf-to-pdf" /> }),
+  'website-screenshot': dynamic(() => import('@/components/tools/modules/WebsiteScreenshot'), { ssr: false, loading: () => <DynamicImportFallback slug="website-screenshot" /> }),
+  'gif-to-webp-webm': dynamic(() => import('@/components/tools/modules/GifToWebpWebm'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-webp-webm" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });

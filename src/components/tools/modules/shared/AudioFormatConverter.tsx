@@ -21,6 +21,9 @@ const FORMATS: Record<string, FormatDef> = {
   ogg: { key: 'ogg', label: 'OGG', ext: 'ogg', mime: 'audio/ogg', accept: '.ogg' },
   m4a: { key: 'm4a', label: 'M4A', ext: 'm4a', mime: 'audio/mp4', accept: '.m4a' },
   aac: { key: 'aac', label: 'AAC', ext: 'aac', mime: 'audio/aac', accept: '.aac' },
+  wma: { key: 'wma', label: 'WMA', ext: 'wma', mime: 'audio/x-ms-wma', accept: '.wma' },
+  opus: { key: 'opus', label: 'Opus', ext: 'opus', mime: 'audio/ogg', accept: '.opus' },
+  aiff: { key: 'aiff', label: 'AIFF', ext: 'aiff', mime: 'audio/aiff', accept: '.aiff' },
 };
 
 type FormatPair = {
@@ -37,6 +40,9 @@ const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'ogg-to-mp3', input: 'ogg', output: 'mp3', label: 'OGG \u2192 MP3' },
   { slug: 'm4a-to-mp3', input: 'm4a', output: 'mp3', label: 'M4A \u2192 MP3' },
   { slug: 'aac-to-mp3', input: 'aac', output: 'mp3', label: 'AAC \u2192 MP3' },
+  { slug: 'wma-to-mp3', input: 'wma', output: 'mp3', label: 'WMA \u2192 MP3' },
+  { slug: 'opus-to-mp3', input: 'opus', output: 'mp3', label: 'Opus \u2192 MP3' },
+  { slug: 'aiff-to-mp3', input: 'aiff', output: 'mp3', label: 'AIFF \u2192 MP3' },
 ];
 
 const FORMAT_KEYS = Object.keys(FORMATS);

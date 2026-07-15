@@ -19,6 +19,12 @@ const FORMATS: Record<string, FormatDef> = {
   webp: { key: 'webp', label: 'WebP', ext: 'webp', mime: 'image/webp', accept: '.webp', hasAlpha: true },
   heic: { key: 'heic', label: 'HEIC', ext: 'heic', mime: 'image/heic', accept: '.heic,.heif', hasAlpha: false },
   avif: { key: 'avif', label: 'AVIF', ext: 'avif', mime: 'image/avif', accept: '.avif', hasAlpha: true },
+  svg: { key: 'svg', label: 'SVG', ext: 'svg', mime: 'image/svg+xml', accept: '.svg', hasAlpha: true },
+  bmp: { key: 'bmp', label: 'BMP', ext: 'bmp', mime: 'image/bmp', accept: '.bmp', hasAlpha: false },
+  tiff: { key: 'tiff', label: 'TIFF', ext: 'tiff', mime: 'image/tiff', accept: '.tiff,.tif', hasAlpha: false },
+  gif: { key: 'gif', label: 'GIF', ext: 'gif', mime: 'image/gif', accept: '.gif', hasAlpha: true },
+  ico: { key: 'ico', label: 'ICO', ext: 'ico', mime: 'image/x-icon', accept: '.ico', hasAlpha: true },
+  jxl: { key: 'jxl', label: 'JXL', ext: 'jxl', mime: 'image/jxl', accept: '.jxl', hasAlpha: true },
 };
 
 type FormatPair = {
@@ -39,6 +45,20 @@ const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'png-to-avif', input: 'png', output: 'avif', label: 'PNG \u2192 AVIF' },
   { slug: 'jpg-to-avif', input: 'jpg', output: 'avif', label: 'JPG \u2192 AVIF' },
   { slug: 'webp-to-jpg', input: 'webp', output: 'jpg', label: 'WebP \u2192 JPG' },
+  { slug: 'png-to-gif', input: 'png', output: 'gif', label: 'PNG \u2192 GIF' },
+  { slug: 'jpg-to-gif', input: 'jpg', output: 'gif', label: 'JPG \u2192 GIF' },
+  { slug: 'webp-to-gif', input: 'webp', output: 'gif', label: 'WebP \u2192 GIF' },
+  { slug: 'svg-to-png', input: 'svg', output: 'png', label: 'SVG \u2192 PNG' },
+  { slug: 'svg-to-jpg', input: 'svg', output: 'jpg', label: 'SVG \u2192 JPG' },
+  { slug: 'bmp-to-jpg', input: 'bmp', output: 'jpg', label: 'BMP \u2192 JPG' },
+  { slug: 'bmp-to-png', input: 'bmp', output: 'png', label: 'BMP \u2192 PNG' },
+  { slug: 'tiff-to-jpg', input: 'tiff', output: 'jpg', label: 'TIFF \u2192 JPG' },
+  { slug: 'tiff-to-png', input: 'tiff', output: 'png', label: 'TIFF \u2192 PNG' },
+  { slug: 'gif-to-jpg', input: 'gif', output: 'jpg', label: 'GIF \u2192 JPG' },
+  { slug: 'gif-to-png', input: 'gif', output: 'png', label: 'GIF \u2192 PNG' },
+  { slug: 'ico-to-png', input: 'ico', output: 'png', label: 'ICO \u2192 PNG' },
+  { slug: 'jxl-to-png', input: 'jxl', output: 'png', label: 'JXL \u2192 PNG' },
+  { slug: 'jxl-to-jpg', input: 'jxl', output: 'jpg', label: 'JXL \u2192 JPG' },
 ];
 
 const FORMAT_KEYS = Object.keys(FORMATS);
@@ -128,7 +148,19 @@ export default function ImageFormatConverter({ slug, description }: ImageFormatC
           img.onerror = reject;
           img.src = dataUrl;
         });
-        blob = await convertCanvas(img);
+        if (inputKey === 'svg') {
+          img.width = img.naturalWidth;
+          img.height = img.naturalHeight;
+        }
+        if (inputKey === 'tiff' || inputKey === 'jxl') {
+          try {
+            blob = await convertCanvas(img);
+          } catch {
+            throw new Error('Your browser does not support decoding this format. Try using Chrome or Edge.');
+          }
+        } else {
+          blob = await convertCanvas(img);
+        }
         URL.revokeObjectURL(dataUrl);
       }
 

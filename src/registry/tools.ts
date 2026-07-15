@@ -3019,6 +3019,196 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "pdf-lib, jszip",
     showInCategory: true,
   },
+  {
+    id: "363",
+    name: "SVG to PNG",
+    slug: "svg-to-png",
+    category: "Image",
+    description: 'Convert scalable vector graphics (SVG) into raster PNG images.',
+    seoDescription: 'Free online SVG to PNG — Convert scalable vector graphics (SVG) into raster PNG images. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "364",
+    name: "SVG to JPG",
+    slug: "svg-to-jpg",
+    category: "Image",
+    description: 'Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats.',
+    seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "365",
+    name: "PNG to GIF",
+    slug: "png-to-gif",
+    category: "Image",
+    description: 'Convert PNG images into GIF format for compatibility with older platforms and software.',
+    seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "366",
+    name: "JPG to GIF",
+    slug: "jpg-to-gif",
+    category: "Image",
+    description: 'Convert JPEG photos into GIF format for legacy applications and platforms with limited format support.',
+    seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "367",
+    name: "WebP to GIF",
+    slug: "webp-to-gif",
+    category: "Image",
+    description: 'Convert modern WebP images into the widely compatible GIF format.',
+    seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "368",
+    name: "BMP to JPG",
+    slug: "bmp-to-jpg",
+    category: "Image",
+    description: 'Convert uncompressed BMP bitmap images into space-efficient JPEG files.',
+    seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "369",
+    name: "BMP to PNG",
+    slug: "bmp-to-png",
+    category: "Image",
+    description: 'Convert BMP bitmap images into compressed PNG format with optional transparency.',
+    seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "370",
+    name: "TIFF to JPG",
+    slug: "tiff-to-jpg",
+    category: "Image",
+    description: 'Convert TIFF images into universally compatible JPEG format for sharing on the web or via email.',
+    seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "371",
+    name: "TIFF to PNG",
+    slug: "tiff-to-png",
+    category: "Image",
+    description: 'Convert TIFF images into lossless PNG format for graphic design workflows.',
+    seoDescription: 'Free online TIFF to PNG — Convert TIFF images into lossless PNG format for graphic design workflows. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "372",
+    name: "GIF to JPG",
+    slug: "gif-to-jpg",
+    category: "Image",
+    description: 'Convert GIF images into JPEG format with millions of colors instead of GIF\'s limited 256-color palette.',
+    seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "373",
+    name: "GIF to PNG",
+    slug: "gif-to-png",
+    category: "Image",
+    description: 'Convert GIF images into lossless PNG format with superior color depth and compression.',
+    seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "374",
+    name: "ICO to PNG",
+    slug: "ico-to-png",
+    category: "Image",
+    description: 'Extract Windows icon (.ico) files and convert them into universal PNG images for web and design use.',
+    seoDescription: 'Free online ICO to PNG — Extract Windows icon (.ico) files and convert them into universal PNG images. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "375",
+    name: "JXL to PNG",
+    slug: "jxl-to-png",
+    category: "Image",
+    description: 'Convert JPEG XL images into universally compatible PNG format for use in software without JXL support.',
+    seoDescription: 'Free online JXL to PNG — Convert JPEG XL images into universally compatible PNG format. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "376",
+    name: "JXL to JPG",
+    slug: "jxl-to-jpg",
+    category: "Image",
+    description: 'Convert JPEG XL images into standard JPEG format for maximum compatibility across all platforms.',
+    seoDescription: 'Free online JXL to JPEG — Convert JPEG XL images into standard JPEG format for maximum compatibility. 100% browser-based, no uploads.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "377",
+    name: "WMA to MP3",
+    slug: "wma-to-mp3",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) files into universally compatible MP3 format.',
+    seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "378",
+    name: "Opus to MP3",
+    slug: "opus-to-mp3",
+    category: "Audio",
+    description: 'Convert Opus audio files into the more widely supported MP3 format for broad compatibility.',
+    seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "379",
+    name: "AIFF to MP3",
+    slug: "aiff-to-mp3",
+    category: "Audio",
+    description: 'Convert Apple\'s AIFF audio files into space-saving MP3 format while preserving good audio quality.',
+    seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "380",
+    name: "Website Screenshot",
+    slug: "website-screenshot",
+    category: "Converter",
+    description: 'Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.',
+    seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. 100% browser-based, no uploads.',
+    dependencies: "html2canvas",
+    showInCategory: true,
+  },
+  {
+    id: "381",
+    name: "GIF to WebP/WebM",
+    slug: "gif-to-webp-webm",
+    category: "Converter",
+    description: 'Convert animated GIFs to modern WebP (animated image, ~10x smaller) or WebM video formats. Preserves transparency with WebP output.',
+    seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. 100% browser-based, no uploads.',
+    dependencies: "@ffmpeg/ffmpeg",
+    showInCategory: true,
+  },
 ];
 
 const proSlugs = [
