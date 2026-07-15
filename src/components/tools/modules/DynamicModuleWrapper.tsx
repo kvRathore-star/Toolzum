@@ -376,6 +376,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bookmark-pdf': dynamic(() => import('@/components/tools/modules/BookmarkPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="bookmark-pdf" /> }),
   'eml-to-pdf': dynamic(() => import('@/components/tools/modules/EmlToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="eml-to-pdf" /> }),
   'raw-image-converter': dynamic(() => import('@/components/tools/modules/RawImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="raw-image-converter" /> }),
+  'collage-maker': dynamic(() => import('@/components/tools/modules/CollageMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="collage-maker" /> }),
+  'chart-maker': dynamic(() => import('@/components/tools/modules/ChartMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="chart-maker" /> }),
+  'bg-changer': dynamic(() => import('@/components/tools/modules/BgChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="bg-changer" /> }),
+  'unblur-sharpen': dynamic(() => import('@/components/tools/modules/UnblurSharpen'), { ssr: false, loading: () => <DynamicImportFallback slug="unblur-sharpen" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
