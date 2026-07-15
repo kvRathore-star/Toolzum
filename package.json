@@ -70,6 +70,7 @@
     "html-to-image": "^1.11.13",
     "ibantools": "^4.3.4",
     "ical": "^0.8.0",
+    "ical.js": "^2.2.1",
     "jose": "^6.2.3",
     "jsbarcode": "^3.11.6",
     "jsonlint-mod": "^1.6.1",

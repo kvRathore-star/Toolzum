@@ -10,7 +10,7 @@ export function AiPrivacyBanner() {
         <p className="font-medium mb-0.5">Data leaves your browser</p>
         <p className="text-amber-500/80 dark:text-amber-400/80 text-xs leading-relaxed">
           This tool sends your content to our server for processing with Google Gemini.{" "}
-          <a href="/privacy" className="underline hover:no-underline">Privacy policy</a>
+           <a href="/privacy-policy" className="underline hover:no-underline">Privacy policy</a>
         </p>
       </div>
     </div>

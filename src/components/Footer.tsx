@@ -114,7 +114,7 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/privacy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Cookie Policy</Link></li>
               <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Terms of Service</Link></li>
               <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Security</Link></li>

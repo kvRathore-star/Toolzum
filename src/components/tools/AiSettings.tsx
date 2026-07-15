@@ -10,7 +10,7 @@ export default function AiSettings() {
         <p className="font-medium mb-0.5">Powered by Google Gemini</p>
         <p className="text-blue-500/80 dark:text-blue-400/80 text-xs leading-relaxed">
           AI features are free and server-powered — no API key needed. Your data is sent to our server for processing with Gemini.
-          {" "}<a href="/privacy" className="underline hover:no-underline">Privacy policy</a>
+           {" "}<a href="/privacy-policy" className="underline hover:no-underline">Privacy policy</a>
         </p>
       </div>
     </div>

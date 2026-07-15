@@ -171,9 +171,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Compress Image to 50KB",
     slug: "compress-image-to-50kb",
     category: "Image",
-    description: 'Reduces image file size to 50 KB or below by adjusting JPEG quality, reducing pixel dimensions, or stripping metadata.',
-    seoDescription: 'Free online Compress Image to 50KB — Reduces image file size to 50 KB or below by adjusting JPEG quality, reducing pixel dimensions, or stripping metadata. 100% browser-based, no uploads.',
-    dependencies: "browser-image-compression"
+    description: 'Reduces image file size to a specific target — 50 KB, 100 KB, or 200 KB — by automatically adjusting JPEG quality, reducing pixel dimensions, or stripping EXIF metadata. Ideal for government forms, job applications, and upload portals with strict file size limits.',
+    seoDescription: 'Free online Compress Image to 50KB — reduce any image to exactly 50 KB, 100 KB, or 200 KB for government forms, job applications, and upload portals with strict limits. 100% browser-based, no uploads.',
+    dependencies: "browser-image-compression",
+    instructions: [
+      { title: "1. Upload Your Image", desc: "Select a JPG or PNG image from your device. The tool works best with photos and scanned documents." },
+      { title: "2. Set Your Target Size", desc: "Choose your target: 50 KB, 100 KB, or 200 KB. The compressor automatically adjusts quality and dimensions to hit the target precisely." },
+      { title: "3. Download the Result", desc: "Your compressed image is ready instantly. All processing happens locally — your image never leaves your device, keeping sensitive documents private." },
+    ],
+    faqs: [
+      { question: "Why would I need an exact file size?", answer: "Many government portals, job application systems, and university submission forms enforce strict file size limits — often 50 KB, 100 KB, or 200 KB for photos and scanned documents. This tool hits your target automatically." },
+      { question: "How is this different from the regular Image Compressor?", answer: "Image Compressor gives you a quality slider with a side-by-side preview — you decide the tradeoff visually. Compress Image to 50KB works toward an exact file size target automatically, prioritizing hitting the size limit over visual tuning." },
+      { question: "What happens if my image can't compress to 50 KB?", answer: "The compressor reduces quality progressively and also scales down dimensions if needed. Most photos under 5MB can reach 50 KB. If the result quality is too low, try the 100 KB target or resize your image first with the Image Resizer tool." },
+      { question: "Does this work for scanned documents?", answer: "Yes. Scanned documents in JPEG format compress particularly well since they contain large uniform areas. For scanned documents, 50 KB is usually achievable while keeping text readable." },
+    ]
   },
   {
     id: "15",
@@ -196,11 +207,22 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-comp-1",
     name: "PDF Compressor",
-    description: 'Reduces PDF file size by compressing embedded images and removing redundant metadata. Offers three compression tiers. Max 50MB.',
+    description: 'Reduces PDF file size by compressing embedded images, removing redundant metadata, and optimizing object streams. Three compression tiers let you choose between maximum size reduction and high-quality preservation. Handles PDFs up to 50MB.',
     category: "PDF",
     slug: "pdf-compressor",
     dependencies: "Ghostscript / PDF-lib",
-    seoDescription: 'Reduce PDF file size by up to 90% — free, instant, and 100% in your browser. Compress, shrink, and optimize PDFs with zero uploads, zero data leaving your device.'
+    seoDescription: 'Free online PDF Compressor — reduce PDF file size by up to 90% with three compression tiers. Compress embedded images, remove metadata, optimize streams. 100% browser-based, no uploads.',
+    instructions: [
+      { title: "1. Upload Your PDF", desc: "Drag and drop or select a PDF file up to 50MB. The tool shows the current file size before compression." },
+      { title: "2. Choose Compression Tier", desc: "Select from three tiers: Maximum Compression (smallest file, lower image quality), Balanced (good size/quality tradeoff), or High Quality (minimal visual loss)." },
+      { title: "3. Download the Compressed PDF", desc: "Your compressed PDF is ready instantly. All processing runs locally — your document never leaves your device, ensuring complete privacy." },
+    ],
+    faqs: [
+      { question: "How much can PDF compression reduce file size?", answer: "Typical reductions range from 40% to 90% depending on content. Image-heavy PDFs (scanned documents, brochures) compress the most. Text-only PDFs compress less since the text content itself is already efficient." },
+      { question: "What's the difference between PDF, image, and video compressors?", answer: "PDF Compressor optimizes document files by compressing embedded images, removing metadata, and streamlining internal structures. Image Compressor works on standalone JPG/PNG/WebP files. Video Compressor reduces MP4/MOV/WebM files using video encoding. Each is specialized for its format." },
+      { question: "Does compression affect text readability?", answer: "Text within PDFs remains fully readable at all compression tiers since it's stored as text (not images). Only embedded images are affected by compression. For maximum text clarity, choose the High Quality tier." },
+      { question: "Is my document data private?", answer: "Yes. All PDF compression happens entirely in your browser. Your document is never uploaded, stored, or transmitted to any server. This is especially important for sensitive documents like contracts, reports, and financial statements." },
+    ],
   },
   {
     id: "19",
@@ -218,9 +240,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Percentage Calculator",
     slug: "percentage-calculator",
     category: "Finance",
-    description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic.',
-    seoDescription: 'Free online Percentage Calculator — Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.',
+    seoDescription: 'Free online Percentage Calculator — compute percentages, increases, decreases, and what-percent-of-what relationships. Perfect for tips, discounts, taxes, and everyday math. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Choose Your Calculation Type", desc: "Select from three modes: find what percent of Y is X, calculate percentage increase/decrease, or determine what X% of Y equals." },
+      { title: "2. Enter Your Numbers", desc: "Type in the values for your calculation. Results update instantly as you type — no button to press." },
+      { title: "3. Read Your Result", desc: "The exact percentage is displayed with decimal precision. Copy the result or adjust your inputs for a new calculation." },
+    ],
+    faqs: [
+      { question: "Is this different from the Profit Margin or ROI calculators?", answer: "Yes. Percentage Calculator handles general everyday percentage math — tips, discounts, grade scores, statistics. Profit Margin Calculator focuses on pricing (revenue vs cost). ROI Calculator measures return on investment. Each serves a different business or personal need." },
+      { question: "Can I calculate percentage increase over time?", answer: "Yes. Use the increase/decrease mode to compute the percentage change between two values — useful for comparing prices, salaries, or scores across time periods." },
+      { question: "Does it handle decimal percentages like 8.5%?", answer: "Yes. The calculator supports decimal percentage values like 8.5%, 12.75%, or 0.5% with precise floating-point arithmetic." },
+      { question: "Can I use this for tax calculations?", answer: "Yes. Calculate what a specific tax percentage adds to a purchase price, or work backwards from a total to find the original price before tax." },
+    ],
   },
   {
     id: "22",
@@ -277,9 +310,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Fancy Text Generator",
     slug: "fancy-text-generator",
     category: "Text",
-    description: 'Creates stylized Unicode text in 40+ decorative styles including double-struck, bubble, cursive, gothic, and small caps.',
-    seoDescription: 'Free online Fancy Text Generator — Creates stylized Unicode text in 40+ decorative styles including double-struck, bubble, cursive, gothic, and small caps. 100% browser-based, no uploads.',
-    dependencies: "Unicode mapping"
+    description: 'Creates stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.',
+    seoDescription: 'Free online Fancy Text Generator — create stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, and profile customization. 100% browser-based, no uploads.',
+    dependencies: "Unicode mapping",
+    instructions: [
+      { title: "1. Type or Paste Your Text", desc: "Enter the text you want to transform. The generator instantly shows previews in all 40+ Unicode font styles — no waiting or button clicks." },
+      { title: "2. Browse Font Styles", desc: "Scroll through the gallery of styles including double-struck, bubble, cursive, gothic, small caps, fraktur, and monospace. Each style renders your text in real time." },
+      { title: "3. Copy and Use Anywhere", desc: "Click any style to copy the transformed text to your clipboard. Use it in social media bios, game profiles, Discord names, Instagram captions, and anywhere that supports Unicode text." },
+    ],
+    faqs: [
+      { question: "How is this different from Font Generator?", answer: "Fancy Text Generator offers 40+ decorative Unicode styles like double-struck (mathematical letters), bubble (circled characters), cursive (script-like), and gothic (fraktur). Font Generator focuses on bold, italic, monospace, and serif/sans-serif variants — more practical for formatting, less decorative." },
+      { question: "Will the fancy text display on all devices?", answer: "The decorative Unicode characters render on most modern devices and platforms including iOS, Android, Windows, and macOS. The 40+ styles are chosen for broad Unicode support across social media, messaging apps, and games." },
+      { question: "Can I use these for gaming usernames?", answer: "Yes. Many games and platforms (Minecraft, Roblox, Discord, Steam, Epic Games) support Unicode characters, letting you create unique display names that stand out with fancy styling in chat, leaderboards, and profiles." },
+      { question: "Does this work on Instagram or Twitter bios?", answer: "Yes. Social media bios support Unicode text, so you can use fancy styles to customize your profile name, bio, highlights, and captions — adding visual flair where the platform only permits plain text entry." },
+    ]
   },
 
   {
@@ -325,9 +369,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image Compressor",
     slug: "image-compressor",
     category: "Image",
-    description: 'Reduces JPG, PNG, WebP file sizes using smart compression. Side-by-side quality preview. Max 20MB per image.',
+    description: 'Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider. Balance file size and visual quality visually — max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.',
     dependencies: "HTML5 Canvas / libjpeg-turbo",
-    seoDescription: 'Compress JPG, PNG, and WebP images online for free. Reduce file size without losing quality — side-by-side preview. 100% browser-based, nothing uploaded.'
+    seoDescription: 'Free online Image Compressor — reduce JPG, PNG, and WebP file sizes with a side-by-side quality preview slider. Perfect for web optimization, email, and social media. 100% browser-based, no uploads.',
+    instructions: [
+      { title: "1. Upload Your Image", desc: "Drag and drop a JPG, PNG, or WebP image up to 20MB. The tool immediately shows the original file size and preview." },
+      { title: "2. Adjust Compression Level", desc: "Use the quality slider to find the sweet spot between file size and visual quality. The side-by-side preview helps you compare instantly." },
+      { title: "3. Download the Compressed Image", desc: "Once satisfied, download the compressed image. All processing happens locally — no uploads, no server storage, complete privacy." },
+    ],
+    faqs: [
+      { question: "How much can this compress an image?", answer: "Typical compression reduces JPG files by 40-80% and PNG files by 50-90% depending on the quality setting. Complex photographs compress less than simple graphics. Use the preview slider to find the right balance for your use case." },
+      { question: "What's the difference between image, PDF, and video compressors?", answer: "Image Compressor works on JPG/PNG/WebP photos and graphics using perceptual quality settings. PDF Compressor targets document files by compressing embedded images and stripping metadata. Video Compressor reduces MP4/MOV/WebM file size using H.264/AV1 encoding. Each is optimized for its media type." },
+      { question: "Does compression reduce image quality permanently?", answer: "The compressed image is a new file — your original remains untouched. If the quality is too low, adjust the slider higher and re-download. Lossy compression (JPG, WebP) discards data permanently, so keep your original for archival." },
+      { question: "What's the maximum file size?", answer: "The image compressor handles files up to 20MB. For larger images or bulk processing, use the Bulk Image Compressor which supports multiple files simultaneously." },
+    ]
   },
   {
     id: "37",
@@ -409,9 +464,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Character Counter",
     slug: "character-counter",
     category: "Text",
-    description: 'Counts characters (with and without spaces), words, sentences, paragraphs, and estimated reading time in real time as you type.',
-    seoDescription: 'Free online Character Counter — Counts characters (with and without spaces), words, sentences, paragraphs, and estimated reading time in real time as you type. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Counts characters with and without spaces and compares your text against platform-specific limits — Twitter/X posts (280), SMS messages (160), SEO meta descriptions (160), Facebook posts (63,206), and LinkedIn summaries (2,600). Real-time counting with space/no-space toggle.',
+    seoDescription: 'Free online Character Counter — count characters with and without spaces for Twitter (280), SMS (160), SEO meta descriptions, Facebook, and LinkedIn limits. Real-time counting as you type. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Text", desc: "Type or paste the content you want to measure. The character counter updates instantly — no buttons to press or pages to reload." },
+      { title: "2. Check Platform Limits", desc: "Each section shows how your text fits into specific platform limits: Twitter (280), SMS (160), SEO meta descriptions (160), Facebook posts (63,206), and LinkedIn (2,600)." },
+      { title: "3. Toggle Space Counting", desc: "Use the with/without spaces toggle to match the requirement of your target platform. Some count spaces, others don't — the tool shows both." },
+    ],
+    faqs: [
+      { question: "What character limits does this tool check?", answer: "The character counter shows limits for Twitter/X posts (280 characters), single SMS messages (160), Google meta descriptions (160), Facebook posts (63,206), and LinkedIn headlines (2,600). These cover the most common character-constrained platforms." },
+      { question: "What's the difference between Character Counter and Word Counter?", answer: "Character Counter focuses on fitting text into platform-specific space constraints with real-time progress bars for each limit. Word Counter focuses on writing quality — readability scores, grade levels, syllable counts, and speaking time. They complement each other." },
+      { question: "Why count characters instead of words?", answer: "Many platforms enforce character limits, not word limits. A tweet can hold up to 280 characters regardless of word count. SMS messages split at 160 characters. Meta descriptions get truncated past 160 characters. Character counting ensures your content stays within each platform's constraint." },
+      { question: "Does the count include spaces?", answer: "The tool shows both counts — with spaces and without spaces — because different platforms and submission forms count differently. The toggle lets you switch between views to match the requirement of your target platform." },
+    ]
   },
   {
     id: "47",
@@ -427,9 +493,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Word Counter",
     slug: "word-counter",
     category: "Text",
-    description: 'Provides a live dashboard of word count, sentence count, syllable count, readability scores (Flesch-Kincaid), and speaking time.',
+    description: 'Analyzes your writing with real-time word count, sentence count, syllable count, paragraphs, and advanced readability metrics — Flesch-Kincaid Reading Ease, Grade Level, estimated speaking time, and keyword density. Essential for writers, students, and SEO professionals optimizing content for readability.',
     dependencies: "Vanilla JS",
-    seoDescription: 'Free word counter online — count words, characters, sentences, syllables, and readability scores in real time. Perfect for writers, students, and SEO.'
+    seoDescription: 'Free online Word Counter — analyze writing with real-time word, sentence, syllable, and paragraph counts plus Flesch-Kincaid readability scores, grade level, speaking time, and keyword density. 100% browser-based, no uploads.',
+    instructions: [
+      { title: "1. Type or Paste Your Content", desc: "Enter your text directly or paste from Word, Google Docs, or any writing app. The dashboard updates in real time as you type or edit." },
+      { title: "2. Review Readability & Stats", desc: "The dashboard shows word count, sentence count, syllable count, paragraphs, and advanced metrics including Flesch-Kincaid Grade Level and Reading Ease scores." },
+      { title: "3. Optimize Your Writing", desc: "Use the readability insights to adjust your content for your target audience. Aim for a grade level matching your readers — the tool highlights areas for improvement." },
+    ],
+    faqs: [
+      { question: "What readability scores does this tool provide?", answer: "This word counter calculates Flesch-Kincaid Reading Ease (0-100 scale where 60-70 is plain English) and Flesch-Kincaid Grade Level (US school grade equivalent). It also estimates speaking time at 150 words per minute and tracks keyword density for SEO content optimization." },
+      { question: "What's the difference between Word Counter and Character Counter?", answer: "Word Counter focuses on writing quality and readability analysis — word/sentence/paragraph counts, syllable counts, grade level, and speaking time. Character Counter focuses on platform-specific character limits like Twitter (280), SMS (160), and meta descriptions (160). Both are useful but serve different purposes." },
+      { question: "Can I use this for SEO content?", answer: "Yes. The word counter displays total words, unique words, and keyword density percentages — essential for SEO writing where word counts and readability directly impact search rankings. Use it alongside our SEO tools for comprehensive content optimization." },
+      { question: "Does it update in real time?", answer: "Yes. The word counter updates instantly as you type, paste, or delete text. Every keystroke triggers a fresh analysis of all metrics — word count, readability, syllable count, and speaking time." },
+    ]
   },
   {
     id: "49",
@@ -680,9 +757,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Font Generator",
     slug: "font-generator",
     category: "Text",
-    description: 'Converts plain ASCII text into dozens of Unicode-stylized variants including bold, script, fraktur, monospace, and decorative letter forms.',
-    seoDescription: 'Free online Font Generator — Converts plain ASCII text into dozens of Unicode-stylized variants including bold, script, fraktur, monospace, and decorative letter forms. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Generates Unicode-styled text variants for bold, italic, monospace, fraktur, script, serif, and sans-serif — optimized for code comments, design mockups, Discord formatting, and technical documentation where visual emphasis matters beyond standard fonts.',
+    seoDescription: 'Free online Font Generator — generate Unicode-styled text in bold, italic, monospace, fraktur, script, serif, and sans-serif. Perfect for design mockups, code comments, Discord, and technical docs. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Text", desc: "Type or paste the text you want to style. All font variants appear instantly — no waiting for processing." },
+      { title: "2. Browse Font Variants", desc: "Choose from bold serif, bold sans, italic, monospace (typewriter-style), fraktur (gothic), double-struck, script, and more. Each serves a distinct visual purpose." },
+      { title: "3. Copy for Your Platform", desc: "Click any variant to copy. Use monospace for code snippets, bold sans for emphasis, or fraktur for a classic academic look. Paste anywhere that supports Unicode." },
+    ],
+    faqs: [
+      { question: "How is this different from Fancy Text Generator?", answer: "Font Generator focuses on practical Unicode font variants — bold, italic, monospace, serif, sans-serif — useful for design mockups, code documentation, and formatting. Fancy Text Generator offers 40+ decorative styles (bubble, gothic, etc.) for social media and creative use." },
+      { question: "Can I use monospace text for code?", answer: "Yes. The monospace variant uses Unicode mathematical monospace characters — ideal for inline code in documentation, Discord code blocks, or emphasizing technical terms in plain text environments where HTML isn't available." },
+      { question: "What platforms support these styled characters?", answer: "Most modern platforms including Discord, WhatsApp, Instagram, Twitter, and web browsers render Unicode mathematical alphanumerics correctly. The font generator variants are tested for broad compatibility across social media and messaging apps." },
+      { question: "Is bold text the same as HTML <b>?", answer: "Unicode bold characters are visual-only — they appear bold but don't carry semantic weight like HTML tags. For SEO and accessibility, use actual HTML. For plain text environments (Discord, bios), Unicode bold is the only option." },
+    ]
   },
   {
     id: "85",
@@ -795,9 +883,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Profit Margin Calculator",
     slug: "profit-margin-calculator",
     category: "Finance",
-    description: 'Computes gross profit, net profit, and margin percentages from revenue and cost inputs. Small-business owners use it to price products.',
-    seoDescription: 'Free online Profit Margin Calculator — Computes gross profit, net profit, and margin percentages from revenue and cost inputs. Small-business owners use it to price products. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Computes gross profit, net profit, and margin percentages from revenue and cost inputs. Small-business owners use it to price products, evaluate supplier deals, and ensure healthy margins across their product lines.',
+    seoDescription: 'Free online Profit Margin Calculator — compute gross profit, net profit, and margin percentages from revenue and cost. Perfect for product pricing, supplier evaluation, and business planning. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Revenue", desc: "Input your total revenue or selling price per unit. This is the money coming in from sales." },
+      { title: "2. Enter Costs", desc: "Input your cost of goods sold (COGS) — what you pay to produce or acquire each unit." },
+      { title: "3. Review Your Margins", desc: "The calculator shows gross profit, gross margin %, net profit, and net margin %. Use these numbers to set pricing and evaluate profitability." },
+    ],
+    faqs: [
+      { question: "How is this different from the Margin Calculator?", answer: "Profit Margin Calculator gives you gross and net profit from revenue and cost. Margin Calculator works backwards — calculate selling price or cost from any two known variables (margin %, cost, or price). Use Profit Margin for overall business analysis, Margin Calculator for pricing." },
+      { question: "What's a good profit margin?", answer: "Healthy margins vary by industry: retail typically runs 20-50% gross margin, software/SaaS targets 70-90%, restaurants operate on 3-10% net margin. Compare against industry benchmarks for your sector." },
+      { question: "Should I use gross or net margin for pricing?", answer: "Gross margin includes only direct production costs — use it for product-level pricing decisions. Net margin accounts for all operating expenses — use it for overall business health assessment." },
+      { question: "Can I calculate margin for multiple products?", answer: "This tool handles one product at a time. For multi-product analysis, calculate each product individually and compare the margin percentages across your product line." },
+    ]
   },
   {
     id: "104",
@@ -900,9 +999,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Video Compressor",
     slug: "video-compressor",
     category: "Video",
-    description: "Reduce video file size without losing quality. Max 500MB per file.",
+    description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles files up to 500MB.",
     dependencies: "FFmpeg / WebCodecs API",
-    seoDescription: 'Compress video files online free — reduce MP4, MOV, and WebM file size without losing quality. Up to 500MB. 100% browser-based, no uploads.'
+    seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. Up to 500MB. 100% browser-based, no uploads.',
+    instructions: [
+      { title: "1. Upload Your Video", desc: "Select an MP4, MOV, or WebM video file from your device. The tool accepts videos up to 500MB." },
+      { title: "2. Configure Compression", desc: "Adjust the CRF value (lower = better quality, larger file), target resolution, or bitrate. A preview helps you see the quality tradeoff before processing." },
+      { title: "3. Download the Compressed Video", desc: "Process the video locally in your browser using FFmpeg WASM. Download the compressed result — your original stays untouched." },
+    ],
+    faqs: [
+      { question: "How much can this compress a video?", answer: "Typical compression reduces video file sizes by 50-80% depending on the CRF setting and source quality. A 100MB video can often be reduced to 20-30MB with minimal visible quality loss at CRF 23." },
+      { question: "What's the difference between video, image, and PDF compressors?", answer: "Video Compressor uses H.264/AV1 encoding via FFmpeg to reduce MP4/MOV/WebM files — the most compute-intensive compression. Image Compressor uses Canvas API for JPG/PNG/WebP. PDF Compressor optimizes document internals. Each uses format-appropriate compression algorithms." },
+      { question: "What is CRF and what value should I use?", answer: "CRF (Constant Rate Factor) controls quality: 0 is lossless, 51 is worst. For web uploads, CRF 23-28 is typical (good quality, small file). For archival, use CRF 18-22. For maximum compression (social media), CRF 28-32 works well." },
+      { question: "Does compression work on my device without uploading?", answer: "Yes. All video compression runs locally using FFmpeg WASM compiled to WebAssembly. Your video never leaves your browser — no uploads, no server processing, complete privacy for your content." },
+    ]
   },
   {
     id: "112",
@@ -1004,9 +1114,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Margin Calculator",
     slug: "margin-calculator",
     category: "Finance",
-    description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables using standard retail formulas.',
-    seoDescription: 'Free online Margin Calculator — Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables using standard retail formulas. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.',
+    seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter What You Know", desc: "Fill in any two of the four fields: cost, selling price, margin %, or markup %. The calculator infers the missing values automatically." },
+      { title: "2. Adjust to Target Margin", desc: "If you know your desired margin %, enter it with either cost or price to find the missing number — perfect for pricing new products." },
+      { title: "3. Read the Complete Picture", desc: "The tool displays all four values: cost, price, margin %, and markup %. Use the results to set profitable prices." },
+    ],
+    faqs: [
+      { question: "How is this different from the Profit Margin Calculator?", answer: "Margin Calculator works backwards from any two known values to derive the others — ideal for pricing decisions (I want 40% margin on a $50 cost, what should I charge?). Profit Margin Calculator analyzes existing revenue and costs to show your current margins." },
+      { question: "What's the difference between margin and markup?", answer: "Margin is the percentage of the selling price that is profit (profit/selling price). Markup is the percentage added to cost (profit/cost). A 25% margin equals a 33% markup. The calculator shows both so you understand your pricing from both perspectives." },
+      { question: "Can I use this for wholesale pricing?", answer: "Yes. Enter your wholesale cost and desired margin to find the retail price. Or enter your retail price and see what margin you're making — essential for negotiating with suppliers and distributors." },
+      { question: "Is this useful for e-commerce sellers?", answer: "Absolutely. E-commerce sellers on Amazon, Shopify, and Etsy use this to ensure their product pricing covers platform fees, fulfillment costs, and still delivers their target profit margin." },
+    ]
   },
   {
     id: "129",
@@ -1022,18 +1143,40 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Cursive Text Generator",
     slug: "cursive-text-generator",
     category: "Text",
-    description: 'Converts plain text into flowing cursive and script-style Unicode characters that resemble handwritten calligraphy.',
-    seoDescription: 'Free online Cursive Text Generator — Converts plain text into flowing cursive and script-style Unicode characters that resemble handwritten calligraphy. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Transforms plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Ideal for wedding invitations, greeting cards, elegant Instagram captions, signatures, and any content needing a personal hand-written touch.',
+    seoDescription: 'Free online Cursive Text Generator — transform plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Perfect for wedding invites, signatures, and elegant social captions. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Base Text", desc: "Type or paste the words you want in cursive. The generator converts each letter to its script-style Unicode equivalent while keeping full readability." },
+      { title: "2. Choose Cursive Style", desc: "Browse cursive variants including standard script, bold script, and calligraphy-style letters. Each style gives a different hand-written feel." },
+      { title: "3. Copy for Your Project", desc: "Click to copy the cursive text and paste it into invitations, social posts, bio descriptions, or any platform that needs an elegant handwritten look." },
+    ],
+    faqs: [
+      { question: "How is this different from Fancy Text Generator?", answer: "Cursive Text Generator specializes in flowing, script-style characters that resemble handwriting — perfect for formal and personal content. Fancy Text Generator offers a broader range of 40+ decorative styles including bubble, gothic, and mathematical." },
+      { question: "Is this real cursive handwriting?", answer: "The output uses Unicode mathematical script characters that visually resemble cursive handwriting. They render as italic, connected-looking letters on most devices, giving the appearance of calligraphy without requiring actual font files to be installed." },
+      { question: "Can I use cursive text in professional documents?", answer: "Cursive text is best for informal and decorative use — social media bios, invitations, usernames. For professional documents, use actual cursive fonts installed in your word processor for better formatting control and print quality." },
+      { question: "Does it support uppercase and numbers?", answer: "Yes. The cursive generator converts both uppercase and lowercase letters to their script-style equivalents. Numbers and symbols remain in standard form to maintain readability of addresses and dates." },
+    ]
   },
   {
     id: "131",
     name: "ROI Calculator",
     slug: "roi-calculator",
     category: "Finance",
-    description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount.',
-    seoDescription: 'Free online ROI Calculator — Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Essential for marketing campaign evaluation, equipment purchase decisions, real estate investment analysis, and comparing investment opportunities.',
+    seoDescription: 'Free online ROI Calculator — measure return on investment as percentage and dollar amount. Perfect for marketing campaigns, equipment purchases, real estate, and investment analysis. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Investment", desc: "Input the total amount you invested — whether it's marketing spend, equipment cost, stock purchase, or project budget." },
+      { title: "2. Enter Your Return", desc: "Input the total return or gain from the investment. This is the revenue or value generated minus any ongoing costs." },
+      { title: "3. Review Your ROI", desc: "The calculator shows both ROI % and net profit/loss in dollars. Use it to compare different investment opportunities side by side." },
+    ],
+    faqs: [
+      { question: "How is this different from the Profit Margin or Break-Even calculators?", answer: "ROI Calculator measures the efficiency of an investment by comparing return to cost — useful for evaluating marketing campaigns, equipment, or projects. Profit Margin focuses on product pricing. Break-Even finds the volume needed to cover costs. Each serves a different business decision." },
+      { question: "What's a good ROI?", answer: "A positive ROI means you made money. A 100% ROI means you doubled your investment. Compare against your cost of capital: if your ROI exceeds your borrowing rate, the investment is worthwhile. Typical target ROIs vary by industry and risk level." },
+      { question: "Can I compare multiple investments?", answer: "This tool evaluates one investment at a time. Calculate ROI for each option individually, then compare the percentages — higher ROI generally indicates a more efficient use of capital." },
+      { question: "Does this account for time?", answer: "This is a simple ROI calculation without time adjustment. For investments spanning multiple years, consider using annualized ROI or the NPV (net present value) method for time-value-of-money analysis." },
+    ]
   },
   {
     id: "132",
@@ -1255,9 +1398,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Break-Even Calculator",
     slug: "break-even-calculator",
     category: "Finance",
-    description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes.',
-    seoDescription: 'Free online Break-Even Calculator — Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.',
+    seoDescription: 'Free online Break-Even Calculator — find the exact unit volume or revenue needed to cover fixed and variable costs. Price sensitivity slider for what-if analysis. Perfect for startups and product launches. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Fixed Costs", desc: "Input your total fixed costs — rent, salaries, equipment, insurance — costs that don't change with production volume." },
+      { title: "2. Enter Variable Costs & Price", desc: "Input your per-unit variable cost (materials, labor, shipping) and your selling price per unit." },
+      { title: "3. Find Your Break-Even Point", desc: "The calculator shows the number of units you need to sell and the revenue required to break even. Use the price sensitivity slider to see how pricing affects your break-even." },
+    ],
+    faqs: [
+      { question: "How is this different from the ROI or Profit Margin calculators?", answer: "Break-Even Calculator tells you how many units you must sell before you start making a profit — essential for pricing and production decisions. ROI measures the return on an investment. Profit Margin shows your percentage profit per sale. They work together for complete business analysis." },
+      { question: "What happens if I change my selling price?", answer: "Use the price sensitivity slider to simulate different price points. A higher price means fewer units needed to break even, but may reduce demand. A lower price means more units needed but potentially higher volume." },
+      { question: "Can I include multiple products?", answer: "This calculator is designed for a single product or service. For multi-product businesses, calculate break-even for each product line separately, or use average contribution margin across your product mix." },
+      { question: "Is break-even analysis only for startups?", answer: "No. Established businesses use break-even analysis for new product launches, pricing changes, cost reduction decisions, expansion planning, and evaluating whether to accept large orders or enter new markets." },
+    ]
   },
   {
     id: "162",
@@ -1273,9 +1427,40 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CPM Calculator",
     slug: "cpm-calculator",
     category: "Branding",
-    description: 'CPM Calculator computes cost per mille by dividing total ad spend by impressions and multiplying by 1000.',
-    seoDescription: 'Free online CPM Calculator — CPM Calculator computes cost per mille by dividing total ad spend by impressions and multiplying by 1000. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Computes cost per mille (CPM) — the cost advertisers pay per 1,000 ad impressions. Includes platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn with average rates, plus RPM (revenue per mille) calculation for creators.',
+    seoDescription: 'Free online CPM Calculator — compute cost per mille for ad campaigns with platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn. Includes RPM for creators. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Select a Platform", desc: "Choose a preset for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, or LinkedIn — each pre-fills typical CPM and RPM averages for reference. Or select Custom for manual entry." },
+      { title: "2. Enter Your Numbers", desc: "In CPM mode, enter total ad spend and impressions. In RPM mode, enter creator revenue and views. The result updates instantly." },
+      { title: "3. Read Both Metrics", desc: "The tool shows both CPM and RPM side by side regardless of which mode you're in. Use CPM for advertiser planning and RPM for creator earnings analysis." },
+    ],
+    faqs: [
+      { question: "What's the difference between CPM and RPM?", answer: "CPM (Cost Per Mille) is what advertisers pay per 1,000 ad impressions — the cost side. RPM (Revenue Per Mille) is what publishers and creators earn per 1,000 views — the revenue side. RPM is typically 40-60% of CPM because platforms take a revenue share." },
+      { question: "What CPM should I expect for my platform?", answer: "Typical average CPMs vary: LinkedIn ~$9, Instagram ~$8, Facebook ~$6, Twitter ~$5, Twitch ~$4, YouTube ~$3.50, TikTok ~$1.50. Actual rates depend on your niche, audience location, ad format, and season." },
+      { question: "How is RPM different from CPM for creators?", answer: "A creator earning $150 from 100,000 YouTube views has an RPM of $1.50, even though the advertiser CPM might be $3.50. The difference is the platform's revenue share (~45% for YouTube). RPM shows what you actually earn." },
+      { question: "Can I use this for campaign planning?", answer: "Yes. Advertisers use CPM to budget campaigns: if your target CPM is $5 and you want 1M impressions, budget $5,000. Use the platform presets as starting points and adjust based on your actual campaign data." },
+    ]
+  },
+  {
+    id: "495",
+    name: "RPM Calculator",
+    slug: "rpm-calculator",
+    category: "Branding",
+    description: 'Computes revenue per mille (RPM) — the earnings creators and publishers make per 1,000 views or impressions. Includes platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn with average rates, plus CPM calculation for advertisers.',
+    seoDescription: 'Free online RPM Calculator — compute revenue per mille for creators with platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn. Includes CPM for advertisers. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Select a Platform", desc: "Choose a preset to load average RPM and CPM rates for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, or LinkedIn. Custom mode lets you enter your own numbers." },
+      { title: "2. Enter Your Revenue and Views", desc: "In RPM mode, type your total creator revenue and the number of views or impressions. The calculator instantly computes your RPM." },
+      { title: "3. Compare with CPM", desc: "The tool always shows both RPM (your earnings) and CPM (what advertisers pay). Use the gap to understand the platform's revenue share." },
+    ],
+    faqs: [
+      { question: "What does RPM stand for?", answer: "RPM stands for Revenue Per Mille (per thousand). It measures how much money a creator or publisher earns for every 1,000 views or impressions of their content." },
+      { question: "How is RPM different from CPM?", answer: "CPM is what advertisers pay for 1,000 ad impressions. RPM is what creators earn from 1,000 views. The platform takes a cut of the ad revenue, so RPM is typically 40-60% of CPM." },
+      { question: "What's a good RPM for YouTube?", answer: "Average YouTube RPM ranges from $0.50 to $4.00 depending on niche. Finance and business channels can earn $5-12 RPM, while gaming and entertainment are often $0.50-2.00. RPM also varies by viewer country and video length." },
+      { question: "Why does TikTok have such low RPM?", answer: "TikTok's RPM is typically $0.02-0.15 because the Creator Fund pays a very small share of ad revenue, and TikTok's ad model favors volume over per-view payouts. Many creators earn more through brand sponsorships than platform payouts." },
+    ]
   },
   {
     id: "164",
@@ -1452,9 +1637,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Reverse Text Generator",
     slug: "reverse-text-generator",
     category: "Text",
-    description: 'Applies multiple text-transformation effects: reverse order, reverse each word, flip upside down, mirror horizontally, and rotate 180 degrees.',
-    seoDescription: 'Free online Reverse Text Generator — Applies multiple text-transformation effects: reverse order, reverse each word, flip upside down, mirror horizontally, and rotate 180 degrees. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Applies five distinct text transformations: reverse entire string order, reverse each word individually, flip upside down using rot180 Unicode, mirror horizontally, and rotate 180 degrees. Perfect for creating puzzles, secret messages, palindromes, and attention-grabbing social media content.',
+    seoDescription: 'Free online Reverse Text Generator — reverse text order, reverse words one by one, flip upside down, mirror horizontally, or rotate 180 degrees. Perfect for puzzles, secret messages, and unique social content. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Text", desc: "Type or paste the text you want to transform. Each transformation previews instantly — no waiting or processing time." },
+      { title: "2. Pick a Transformation", desc: "Choose from reverse entire order, reverse each word, flip upside down (using Unicode rot180 characters), mirror left-to-right, or full 180-degree rotation." },
+      { title: "3. Copy & Share", desc: "Click any result to copy. Use reversed text for puzzles and riddles, flipped text for attention-grabbing social posts, or mirrored text for creative designs." },
+    ],
+    faqs: [
+      { question: "What's the use of reverse text?", answer: "Reverse text is popular for puzzles (write a message backwards and challenge friends to read it), secret codes (reversed words are hard to skim), social media content that stops the scroll, and creative writing exercises that play with language structure." },
+      { question: "How does the upside-down flip work?", answer: "The upside-down flip uses Unicode rot180 characters that rotate each letter 180 degrees (like ʇxǝʇ). This is different from CSS rotation — it uses dedicated Unicode characters so it works anywhere Unicode is supported, not just on web pages." },
+      { question: "Can I use this for puzzle design?", answer: "Yes. Reverse Text Generator is ideal for puzzle makers. Write clues in reverse, create mirror messages, or use the upside-down effect for treasure hunts, escape rooms, brain teasers, and social media engagement challenges." },
+      { question: "Is mirrored text readable?", answer: "Mirrored text reverses left-to-right — it's readable when held up to a mirror. It's popular for creative social media posts (car window reflections, glass surfaces) and design elements that need a reflection effect." },
+    ]
   },
   {
     id: "185",
@@ -1479,18 +1675,40 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "LTV Calculator",
     slug: "ltv-calculator",
     category: "Finance",
-    description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months.',
-    seoDescription: 'Free online LTV Calculator — Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.',
+    seoDescription: 'Free online LTV Calculator — project customer lifetime value from order value, purchase frequency, margin, and lifespan. SaaS and e-commerce essential for acquisition budgeting and revenue forecasting. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Purchase Behavior", desc: "Input average order value (AOV), purchase frequency per month, and gross margin percentage." },
+      { title: "2. Enter Customer Lifespan", desc: "Input the average customer lifespan in months — how long customers typically stay active." },
+      { title: "3. Review LTV Metrics", desc: "The calculator shows LTV per customer, LTV-to-CAC ratio (when paired with your CAC), and revenue projection. Use these to optimize your acquisition spend." },
+    ],
+    faqs: [
+      { question: "How is this different from the CAC Calculator?", answer: "LTV Calculator projects the total revenue a customer generates over their lifetime. CAC Calculator totals the cost to acquire a new customer. Together (LTV:CAC ratio) they tell you whether your acquisition spending is efficient — a 3:1 ratio is typically healthy." },
+      { question: "What's a good LTV:CAC ratio?", answer: "A ratio of 3:1 is considered healthy — you earn 3x what you spent to acquire the customer. Below 1:1 means you're losing money on each customer. Above 5:1 suggests you may be under-investing in growth." },
+      { question: "Can I use this for subscription businesses?", answer: "Yes. For subscriptions, use monthly subscription fee as average order value, set frequency to 1 (monthly), and enter your typical churn-based lifespan. SaaS businesses rely heavily on LTV analysis." },
+      { question: "Does LTV include upsells and referrals?", answer: "This calculator uses base values. For more accurate LTV, factor in expansion revenue (upsells, cross-sells) by increasing the average order value, and referral revenue by adjusting purchase frequency upward." },
+    ]
   },
   {
     id: "188",
     name: "CAC Calculator",
     slug: "cac-calculator",
     category: "Finance",
-    description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startup.',
-    seoDescription: 'Free online CAC Calculator — Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startup. 100% browser-based, no uploads.',
-    dependencies: "Vanilla JS"
+    description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startups and growth teams use CAC to evaluate marketing channel efficiency, optimize ad spend, and benchmark against LTV.',
+    seoDescription: 'Free online CAC Calculator — divide total sales and marketing spend by new customers acquired to find your customer acquisition cost. Essential for startup growth, ad spend optimization, and LTV benchmarking. 100% browser-based, no uploads.',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Marketing Spend", desc: "Input your total sales and marketing costs for the period — ad spend, salaries, tools, agency fees, and overhead." },
+      { title: "2. Enter New Customers", desc: "Input the number of new customers acquired during the same period." },
+      { title: "3. Review Your CAC", desc: "The calculator shows your blended cost per acquisition. Compare this against your LTV to determine if your acquisition strategy is profitable." },
+    ],
+    faqs: [
+      { question: "How is this different from the LTV Calculator?", answer: "CAC Calculator tells you what it costs to acquire each new customer — critical for budget allocation. LTV Calculator projects how much revenue each customer generates over their lifetime. The LTV:CAC ratio (target 3:1) tells you whether your acquisition spend is efficient." },
+      { question: "What's a good CAC?", answer: "A good CAC depends on your industry and business model. SaaS companies typically target CAC under $200 for self-serve and up to $2,000+ for enterprise sales. E-commerce CAC varies from $10-$100+ per customer. The key metric is LTV:CAC ratio, not the raw number." },
+      { question: "Should I include all marketing costs?", answer: "Include all direct and indirect costs: ad spend, content creation, salaries of marketing and sales team, software tools, agency fees, and allocated overhead. A fully-loaded CAC gives you an accurate picture of acquisition efficiency." },
+      { question: "Can I calculate CAC by channel?", answer: "This calculator provides blended CAC across all channels. For channel-specific analysis, run the tool separately for each channel's spend and customer count to compare which channels are most efficient." },
+    ]
   },
   {
     id: "189",
@@ -1633,9 +1851,20 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "KB Image Compressor",
     slug: "kb-image-compressor",
     category: "indian-utilities",
-    description: 'Compresses JPEG and PNG images to a specific kilobyte target (e.g., 20 KB, 100 KB, 200 KB) using binary-search quantization until the file size.',
-    seoDescription: 'Free online KB Image Compressor — Compresses JPEG and PNG images to a specific kilobyte target (e.g., 20 KB, 100 KB, 200 KB) using binary-search quantization until the file size. 100% browser-based, no uploads.',
-    dependencies: "browser-image-compression"
+    description: 'Compresses JPEG and PNG images to a precise kilobyte target (20 KB, 50 KB, 100 KB, or 200 KB) using binary-search quantization. Perfect for Indian government portal uploads — Aadhaar, PAN card, passport photos, and visa applications that enforce strict size limits.',
+    seoDescription: 'Free online KB Image Compressor — compress JPEG and PNG images to exact KB targets (20, 50, 100, 200 KB) for Indian government portals, Aadhaar, PAN card, and passport photo uploads. 100% browser-based, no uploads.',
+    dependencies: "browser-image-compression",
+    instructions: [
+      { title: "1. Upload Your Document Photo", desc: "Upload a JPEG or PNG image — passport photo, PAN card scan, or Aadhaar card image. The tool works with common Indian document formats." },
+      { title: "2. Select the KB Target", desc: "Choose your target file size: 20 KB, 50 KB, 100 KB, or 200 KB. The compressor uses binary-search to find the exact quality setting that hits your target." },
+      { title: "3. Download for Upload", desc: "Download the compressed image sized exactly for your portal submission. All processing is local — your sensitive document images never leave your device." },
+    ],
+    faqs: [
+      { question: "What file sizes do Indian portals require?", answer: "Common requirements include: passport photos under 50 KB, PAN card images under 100 KB, Aadhaar card uploads under 200 KB, and visa application photos under 20 KB. This tool targets all of these." },
+      { question: "How is this different from a regular image compressor?", answer: "Regular compressors give you a quality slider and approximate size. KB Image Compressor uses binary-search quantization to iteratively find the exact quality setting that hits your target kilobyte — no guesswork, no trial-and-error." },
+      { question: "Will my document image still be readable?", answer: "For scanned documents and ID photos, the compressor prioritizes preserving legibility. Most documents remain readable at 50 KB and above. If text becomes blurry, try the next higher target size." },
+      { question: "Is my document data private?", answer: "Absolutely. All compression happens locally in your browser. Your Aadhaar, PAN card, and passport images never leave your device — they are not uploaded, stored, or transmitted anywhere." },
+    ]
   }
 
 ,
@@ -3744,10 +3973,21 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF Compressor",
     slug: "gif-compressor",
     category: "Image",
-    description: 'Compress animated GIFs by reducing colors, removing duplicate frames, and applying lossy optimization. Reduce file size by up to 80%.',
-    seoDescription: 'Free online GIF Compressor — Reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. 100% browser-based, no uploads.',
+    description: 'Compress animated GIFs by reducing colors from 256 to as few as 16, removing duplicate frames, and applying lossy optimization. Reduce file size by up to 80% while keeping animation intact. Essential for web performance, email signatures, and social media where large GIFs cause slow loading.',
+    seoDescription: 'Free online GIF Compressor — reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. Essential for faster website loading and email attachments. 100% browser-based, no uploads.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Your GIF", desc: "Select an animated GIF from your device. The tool shows the current frame count, dimensions, and file size." },
+      { title: "2. Configure Compression", desc: "Adjust color palette reduction (256 to 16 colors), enable frame deduplication to skip identical frames, and toggle lossy optimization for maximum size reduction." },
+      { title: "3. Download the Smaller GIF", desc: "Preview the compressed animation and download. All processing uses FFmpeg WASM locally — your GIF never leaves your browser." },
+    ],
+    faqs: [
+      { question: "How much can GIF compression reduce file size?", answer: "Typical reductions range from 40% to 80%. A 5MB animated GIF can be compressed to under 1MB with frame dedup and color reduction enabled. The most aggressive settings (16 colors + lossy + frame dedup) give the smallest files." },
+      { question: "What's different about GIF compression vs image compression?", answer: "GIFs are limited to 256 colors natively, so compression works differently — by reducing the color palette, removing duplicate frames, and using lossy dithering. Image Compression works on JPG/PNG quality settings. GIF Compressor is specialized for animation optimization." },
+      { question: "Will the animation still look good?", answer: "With moderate settings (128 colors, frame dedup on), quality loss is barely noticeable. Aggressive compression (16 colors) creates a retro/pixel-art look that some users actually prefer. Use the preview to check before downloading." },
+      { question: "Why would I compress a GIF instead of converting to video?", answer: "GIFs are still the most widely supported animation format — they work in email clients, Markdown documents, Slack, Discord, and platforms that don't support video. Compressing the GIF keeps compatibility while reducing loading time." },
+    ]
   },
   {
     id: "436",
@@ -3959,6 +4199,387 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "ical",
     showInCategory: true,
   },
+  // Audio format pair slugs (reverse directions for SEO)
+  {
+    id: "457",
+    name: "WAV to MP3",
+    slug: "wav-to-mp3",
+    category: "Audio",
+    description: 'Convert uncompressed WAV audio files into widely compatible MP3 format for universal playback on any device.',
+    seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "458",
+    name: "FLAC to MP3",
+    slug: "flac-to-mp3",
+    category: "Audio",
+    description: 'Convert lossless FLAC audio files into widely compatible MP3 format for universal playback on any device.',
+    seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "459",
+    name: "FLAC to WMA",
+    slug: "flac-to-wma",
+    category: "Audio",
+    description: 'Convert lossless FLAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "460",
+    name: "FLAC to Opus",
+    slug: "flac-to-opus",
+    category: "Audio",
+    description: 'Convert lossless FLAC audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "461",
+    name: "FLAC to AIFF",
+    slug: "flac-to-aiff",
+    category: "Audio",
+    description: 'Convert lossless FLAC audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "462",
+    name: "OGG to MP3",
+    slug: "ogg-to-mp3",
+    category: "Audio",
+    description: 'Convert OGG Vorbis audio files into widely compatible MP3 format for universal playback on any device.',
+    seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "463",
+    name: "OGG to WMA",
+    slug: "ogg-to-wma",
+    category: "Audio",
+    description: 'Convert OGG Vorbis audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "464",
+    name: "OGG to Opus",
+    slug: "ogg-to-opus",
+    category: "Audio",
+    description: 'Convert OGG Vorbis audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "465",
+    name: "OGG to AIFF",
+    slug: "ogg-to-aiff",
+    category: "Audio",
+    description: 'Convert OGG Vorbis audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "466",
+    name: "M4A to MP3",
+    slug: "m4a-to-mp3",
+    category: "Audio",
+    description: 'Convert M4A audio files into widely compatible MP3 format for universal playback on any device.',
+    seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "467",
+    name: "M4A to WMA",
+    slug: "m4a-to-wma",
+    category: "Audio",
+    description: 'Convert M4A audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "468",
+    name: "M4A to Opus",
+    slug: "m4a-to-opus",
+    category: "Audio",
+    description: 'Convert M4A audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "469",
+    name: "M4A to AIFF",
+    slug: "m4a-to-aiff",
+    category: "Audio",
+    description: 'Convert M4A audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "470",
+    name: "AAC to MP3",
+    slug: "aac-to-mp3",
+    category: "Audio",
+    description: 'Convert AAC audio files into widely compatible MP3 format for universal playback on any device.',
+    seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "471",
+    name: "AAC to WMA",
+    slug: "aac-to-wma",
+    category: "Audio",
+    description: 'Convert AAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "472",
+    name: "AAC to Opus",
+    slug: "aac-to-opus",
+    category: "Audio",
+    description: 'Convert AAC audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "473",
+    name: "AAC to AIFF",
+    slug: "aac-to-aiff",
+    category: "Audio",
+    description: 'Convert AAC audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "474",
+    name: "WMA to WAV",
+    slug: "wma-to-wav",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into uncompressed WAV format for professional audio editing and production.',
+    seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "475",
+    name: "WMA to FLAC",
+    slug: "wma-to-flac",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into lossless FLAC format for archival storage and audiophile playback.',
+    seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "476",
+    name: "WMA to OGG",
+    slug: "wma-to-ogg",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into OGG Vorbis format for open-source platforms and applications.',
+    seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "477",
+    name: "WMA to M4A",
+    slug: "wma-to-m4a",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into M4A format for Apple ecosystem compatibility.',
+    seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "478",
+    name: "WMA to AAC",
+    slug: "wma-to-aac",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into AAC format for modern device and platform compatibility.',
+    seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "479",
+    name: "WMA to Opus",
+    slug: "wma-to-opus",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "480",
+    name: "WMA to AIFF",
+    slug: "wma-to-aiff",
+    category: "Audio",
+    description: 'Convert Windows Media Audio (WMA) audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "481",
+    name: "Opus to WAV",
+    slug: "opus-to-wav",
+    category: "Audio",
+    description: 'Convert Opus audio files into uncompressed WAV format for professional audio editing and production.',
+    seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "482",
+    name: "Opus to FLAC",
+    slug: "opus-to-flac",
+    category: "Audio",
+    description: 'Convert Opus audio files into lossless FLAC format for archival storage and audiophile playback.',
+    seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "483",
+    name: "Opus to OGG",
+    slug: "opus-to-ogg",
+    category: "Audio",
+    description: 'Convert Opus audio files into OGG Vorbis format for open-source platforms and applications.',
+    seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "484",
+    name: "Opus to M4A",
+    slug: "opus-to-m4a",
+    category: "Audio",
+    description: 'Convert Opus audio files into M4A format for Apple ecosystem compatibility.',
+    seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "485",
+    name: "Opus to AAC",
+    slug: "opus-to-aac",
+    category: "Audio",
+    description: 'Convert Opus audio files into AAC format for modern device and platform compatibility.',
+    seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "486",
+    name: "Opus to WMA",
+    slug: "opus-to-wma",
+    category: "Audio",
+    description: 'Convert Opus audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "487",
+    name: "Opus to AIFF",
+    slug: "opus-to-aiff",
+    category: "Audio",
+    description: 'Convert Opus audio files into AIFF format for Apple professional audio workflows.',
+    seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "488",
+    name: "AIFF to WAV",
+    slug: "aiff-to-wav",
+    category: "Audio",
+    description: 'Convert AIFF audio files into uncompressed WAV format for professional audio editing and production.',
+    seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "489",
+    name: "AIFF to FLAC",
+    slug: "aiff-to-flac",
+    category: "Audio",
+    description: 'Convert AIFF audio files into lossless FLAC format for archival storage and audiophile playback.',
+    seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "490",
+    name: "AIFF to OGG",
+    slug: "aiff-to-ogg",
+    category: "Audio",
+    description: 'Convert AIFF audio files into OGG Vorbis format for open-source platforms and applications.',
+    seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "491",
+    name: "AIFF to M4A",
+    slug: "aiff-to-m4a",
+    category: "Audio",
+    description: 'Convert AIFF audio files into M4A format for Apple ecosystem compatibility.',
+    seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "492",
+    name: "AIFF to AAC",
+    slug: "aiff-to-aac",
+    category: "Audio",
+    description: 'Convert AIFF audio files into AAC format for modern device and platform compatibility.',
+    seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "493",
+    name: "AIFF to WMA",
+    slug: "aiff-to-wma",
+    category: "Audio",
+    description: 'Convert AIFF audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
+  {
+    id: "494",
+    name: "AIFF to Opus",
+    slug: "aiff-to-opus",
+    category: "Audio",
+    description: 'Convert AIFF audio files into Opus format for superior compression efficiency.',
+    seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. 100% browser-based, no uploads.',
+    dependencies: "FFmpeg.wasm",
+    showInCategory: false
+  },
 ];
 
 const proSlugs = [
@@ -4003,6 +4624,8 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
   { slug: "bulk-mkv-to-mp4", name: "Bulk MKV to MP4", category: "Video", description: "Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues.", seoDescription: 'Free online Bulk MKV to MP4 — Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues. 100% browser-based, no uploads.', parentSlug: "bulk-video-compressor" },
   { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", seoDescription: 'Free online Bulk MP4 Compressor — Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings. 100% browser-based, no uploads.', parentSlug: "bulk-video-compressor" },
   { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", seoDescription: 'Free online Bulk Photo Metadata Remover — Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload. 100% browser-based, no uploads.', parentSlug: "bulk-exif-stripper-injector" },
+  { slug: "bulk-url-checker", name: "Bulk URL Checker", category: "SEO", description: "Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site.", seoDescription: 'Free online Bulk URL Checker — Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site. 100% browser-based, no uploads.', parentSlug: "bulk-url-status-checker" },
+  { slug: "bulk-link-checker", name: "Bulk Link Checker", category: "SEO", description: "Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings.", seoDescription: 'Free online Bulk Link Checker — Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings. 100% browser-based, no uploads.', parentSlug: "bulk-url-status-checker" },
 ];
 // Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
   for (const p of SEO_PERMUTATIONS) {

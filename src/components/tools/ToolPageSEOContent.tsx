@@ -6,6 +6,42 @@ interface ToolPageSEOContentProps {
   tool: ToolMetadata;
 }
 
+const formatInfo: Record<string, { name: string; desc: string; quality: string; bestFor: string }> = {
+  mp3: { name: 'MP3', desc: 'MPEG-1 Audio Layer 3', quality: 'lossy compressed', bestFor: 'universal music playback and sharing across all devices and platforms' },
+  wav: { name: 'WAV', desc: 'Waveform Audio File Format', quality: 'uncompressed lossless', bestFor: 'professional audio editing, mastering, and archival in DAWs and production software' },
+  flac: { name: 'FLAC', desc: 'Free Lossless Audio Codec', quality: 'losslessly compressed', bestFor: 'high-fidelity music archives and audiophile listening where quality matters more than file size' },
+  ogg: { name: 'OGG', desc: 'Ogg Vorbis', quality: 'lossy compressed', bestFor: 'open-source software, Linux systems, game development, and streaming on open platforms' },
+  m4a: { name: 'M4A', desc: 'MPEG-4 Audio', quality: 'lossy or lossless (AAC/ALAC)', bestFor: 'Apple ecosystem — iTunes, iPhones, iPads, and macOS music libraries' },
+  aac: { name: 'AAC', desc: 'Advanced Audio Coding', quality: 'lossy compressed', bestFor: 'modern streaming services, YouTube, and devices where AAC is the native codec' },
+  wma: { name: 'WMA', desc: 'Windows Media Audio', quality: 'lossy compressed', bestFor: 'Windows-based media libraries, legacy devices, and corporate audio systems' },
+  opus: { name: 'Opus', desc: 'Opus Interactive Audio Codec', quality: 'lossy compressed', bestFor: 'voice-over-IP, real-time communication, and streaming at very low bitrates with excellent quality' },
+  aiff: { name: 'AIFF', desc: 'Audio Interchange File Format', quality: 'uncompressed lossless', bestFor: 'Apple professional audio — Logic Pro, GarageBand, and macOS music production workflows' },
+  mkv: { name: 'MKV', desc: 'Matroska Video', quality: 'lossless container', bestFor: 'advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file' },
+  mp4: { name: 'MP4', desc: 'MPEG-4 Part 14', quality: 'lossy compressed', bestFor: 'universal video playback on any device — phones, smart TVs, web browsers, and social media' },
+  mov: { name: 'MOV', desc: 'QuickTime Movie', quality: 'lossless or lossy', bestFor: 'Apple ecosystem — Final Cut Pro, iMovie, and macOS video editing workflows' },
+  webm: { name: 'WebM', desc: 'WebM Video', quality: 'lossy compressed', bestFor: 'web-optimized video — streaming, embedded players, and HTML5 video tags with fast loading' },
+  avi: { name: 'AVI', desc: 'Audio Video Interleave', quality: 'uncompressed or lossy', bestFor: 'legacy video compatibility — older software, embedded systems, and archival playback' },
+  png: { name: 'PNG', desc: 'Portable Network Graphics', quality: 'lossless', bestFor: 'graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds' },
+  jpg: { name: 'JPEG', desc: 'Joint Photographic Experts Group', quality: 'lossy compressed', bestFor: 'photographs, web images, and social media where smaller file size matters more than perfect quality' },
+  webp: { name: 'WebP', desc: 'Web Picture Format', quality: 'lossy or lossless', bestFor: 'modern websites — Google-recommended format with superior compression for faster page loads' },
+  heic: { name: 'HEIC', desc: 'High Efficiency Image Container', quality: 'lossy or lossless', bestFor: 'Apple device photos — iPhone and Mac default format with excellent compression efficiency' },
+  avif: { name: 'AVIF', desc: 'AV1 Image File Format', quality: 'lossy or lossless', bestFor: 'next-gen web images — royalty-free format with better compression than WebP and JPEG' },
+  svg: { name: 'SVG', desc: 'Scalable Vector Graphics', quality: 'vector (resolution-independent)', bestFor: 'logos, icons, illustrations, and any graphic that needs to scale cleanly to any size' },
+  bmp: { name: 'BMP', desc: 'Bitmap Image File', quality: 'uncompressed', bestFor: 'legacy software compatibility, raw pixel data transfers, and simple image processing tasks' },
+  tiff: { name: 'TIFF', desc: 'Tagged Image File Format', quality: 'lossless (supports layers)', bestFor: 'professional photography, print publishing, and document scanning with high color depth' },
+  gif: { name: 'GIF', desc: 'Graphics Interchange Format', quality: 'lossy (limited to 256 colors)', bestFor: 'simple animations, memes, and images on platforms that support animated GIFs natively' },
+  ico: { name: 'ICO', desc: 'Windows Icon', quality: 'lossless (multiple sizes)', bestFor: 'favicons and app icons — standard format for website bookmarks and Windows application icons' },
+  jxl: { name: 'JPEG XL', desc: 'JPEG XL', quality: 'lossy or lossless', bestFor: 'next-gen image archival — better compression than JPEG with support for wide gamut and HDR' },
+};
+
+function parseFormatPair(slug: string): { from: string; to: string } | null {
+  const match = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+  if (!match) return null;
+  const [, from, to] = match;
+  if (formatInfo[from] && formatInfo[to]) return { from, to };
+  return null;
+}
+
 const categoryInstructionTemplates: Record<string, { title: string; desc: string }[]> = {
   "PDF": [
     { title: "1. Upload Your Document", desc: "Select and upload your PDF or document file using the drag-and-drop area or the file browser. Supported formats vary by tool." },
@@ -235,13 +271,26 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   const allRelated = [...sameCategoryTools, ...crossCategoryTools];
 
   const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-  const steps = tool.instructions || categoryInstructionTemplates[categoryKey] || defaultInstructions;
+
+  const pair = parseFormatPair(tool.slug);
+  const formatSteps = pair ? [
+    { title: `1. Upload Your ${formatInfo[pair.from].name} File`, desc: `Select a ${formatInfo[pair.from].name} file from your device. ${formatInfo[pair.from].desc} files use ${formatInfo[pair.from].quality} encoding. Drag and drop or browse to upload.` },
+    { title: `2. Convert to ${formatInfo[pair.to].name}`, desc: `The tool converts your ${formatInfo[pair.from].name} file to ${formatInfo[pair.to].name} format. ${formatInfo[pair.to].desc} uses ${formatInfo[pair.to].quality} encoding — ${formatInfo[pair.to].bestFor}.` },
+    { title: "3. Download the Result", desc: `Your converted ${formatInfo[pair.to].name} file is ready instantly. Download it to your device. Everything runs locally — nothing is uploaded to any server.` },
+  ] : null;
+
+  const steps = tool.instructions || formatSteps || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
+  const formatFaq = pair ? {
+    question: `Why convert ${formatInfo[pair.from].name} to ${formatInfo[pair.to].name}?`,
+    answer: `${formatInfo[pair.from].name} (${formatInfo[pair.from].desc}) uses ${formatInfo[pair.from].quality} encoding and is best for ${formatInfo[pair.from].bestFor}. ${formatInfo[pair.to].name} (${formatInfo[pair.to].desc}) uses ${formatInfo[pair.to].quality} encoding and excels at ${formatInfo[pair.to].bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`
+  } : null;
   const faqs = [
-    {
+    ...(formatFaq ? [formatFaq] : []),
+    ...(pair ? [] : [{
       question: `What exactly does ${tool.name} do?`,
       answer: `${tool.name} lets you ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
-    },
+    }]),
     ...baseFaqs,
   ];
 

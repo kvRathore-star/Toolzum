@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { CommandMenu } from "./CommandMenu";
+import { useToolHistory } from '@/hooks/useToolHistory';
 import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
 
@@ -35,7 +36,9 @@ function buildMegamenuColumns() {
       .map(slug => toolsRegistry.find(t => t.slug === slug))
       .filter(Boolean)
       .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
-    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
+    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length + (
+      category === 'Converter' ? toolsRegistry.filter(t => ['video-converter', 'audio-converter', 'image-format-converter', 'document-converter'].includes(t.slug)).length : 0
+    );
     const isIndia = title === "India";
     return { title, icon, tools, allCount, allHref, isIndia };
   });
@@ -50,6 +53,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const { history } = useToolHistory();
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
@@ -275,11 +279,19 @@ export function Header() {
                       <span className="text-[10px] uppercase tracking-wider font-semibold text-red-500 flex items-center gap-1 animate-pulse">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span> LIVE
                       </span>
-                      <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Most used today:</span>
+                      <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">{history.length > 0 ? 'Recently used:' : 'Most used today:'}</span>
                       <div className="flex gap-4 text-[12px] font-medium text-[var(--text-secondary)]">
-                        <Link href="/image/background-remover" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>BG Remover</Link>
-                        <Link href="/pdf/pdf-compressor" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>PDF Compress</Link>
-                        <Link href="/video/video-to-mp3" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
+                        {history.length > 0 ? (
+                          history.slice(0, 4).map(h => (
+                            <Link key={h.slug} href={`/${h.category.toLowerCase().replace(/\s+/g, '-')}/${h.slug}`} className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>{h.name}</Link>
+                          ))
+                        ) : (
+                          <>
+                            <Link href="/image/background-remover" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>BG Remover</Link>
+                            <Link href="/pdf/pdf-compressor" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>PDF Compress</Link>
+                            <Link href="/video/video-to-mp3" className="hover:text-[var(--text-primary)] cursor-pointer transition-colors" onClick={() => setMegaMenuOpen(false)}>YT Download</Link>
+                          </>
+                        )}
                       </div>
                     </div>
                   </motion.div>

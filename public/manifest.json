@@ -31,15 +31,6 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Toolzum Home — Free Privacy-First Tools"
-    }
-  ],
   "shortcuts": [
     {
       "name": "PDF Tools",

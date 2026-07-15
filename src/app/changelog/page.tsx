@@ -27,6 +27,41 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "v1.7.0",
+    date: "July 16, 2026",
+    title: "Category Navigation Overhaul & CPM Suite",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Major navigation upgrades: category filters across all tool categories, A-Z alphabetical tool filter, and dynamic recently-used tools in the megamenu. Fixed critical navigation bug where 'Back to Privacy' linked to Privacy Policy instead of Privacy tools. Added CPM Calculator with 7 platform presets (YouTube, Twitch, Facebook, Instagram, TikTok, Twitter/X, LinkedIn) plus RPM (Revenue Per Mille) mode for creators.",
+    updates: [
+      { type: "feature", text: "CPM Calculator rewritten with platform presets for 7 social platforms — each pre-fills typical CPM/RPM averages. RPM mode toggle for creator earnings analysis." },
+      { type: "feature", text: "New RPM Calculator page at /rpm-calculator — dedicated SEO entry covering revenue-per-mille search intent." },
+      { type: "feature", text: "Category filter buttons (Compress, Resize, Convert, Edit, AI, etc.) now available on Audio, Video, Text, Developer, SEO, Finance, Privacy, Utility, Branding, and Health category pages — not just Image and PDF." },
+      { type: "feature", text: "A-Z alphabetical letter filter on all category pages — dimmed letters for empty letters, works alongside search." },
+      { type: "feature", text: "Megamenu 'Most used today' now shows your actual recently-used tools (from localStorage history) instead of hardcoded links. Falls back to defaults when history is empty." },
+      { type: "fix", text: "Fixed 'Back to Privacy' navigation — Privacy Policy moved from /privacy/ to /privacy-policy/ so /privacy/ now correctly shows the Privacy tools category. Same fix for /health/ → /status/ redirect to unblock Health tools category page." },
+      { type: "fix", text: "Tool cards no longer display dependency/library names (Canvas API, FFmpeg.wasm, etc.) — removes competitive exposure and cleans up card design." },
+      { type: "feature", text: "SEO permutations added for bulk-url-checker and bulk-link-checker routing to the existing bulk URL status checker tool." },
+      { type: "feature", text: "New professional SVG favicon and PWA icons — clean geometric monogram mark replaces the previous raster favicon." },
+    ]
+  },
+  {
+    version: "v1.6.0",
+    date: "July 15, 2026",
+    title: "250 Format Pair Converter Pages & Tool Differentiation",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Full format-pair coverage: all 250 directed converter pairs across image, audio, video, document, and data formats now have individual SEO-optimized pages. Every pair page has format-specific usage instructions and conversion-reason FAQs. Tool differentiation applied to 20+ high-traffic tools with unique descriptions, custom how-to steps, and cross-tool comparison FAQs.",
+    updates: [
+      { type: "feature", text: "250 format-pair converter pages completed: 110 image pairs, 72 audio pairs, 42 document pairs, 20 video pairs, 6 data pairs — each with unique slug, SEO metadata, instructions, and FAQs." },
+      { type: "feature", text: "ToolPageSEOContent.tsx rewritten to detect {format}-to-{format} slugs and generate format-specific instructions + comparison FAQs from a 25-format metadata map." },
+      { type: "feature", text: "Phase 1-4 differentiation: word-counter, character-counter, fancy-text-generator, cursive-text-generator, font-generator, reverse-text-generator, image-compressor, compress-image-to-50kb, kb-image-compressor, pdf-compressor, video-compressor, gif-compressor, percentage-calculator, profit-margin-calculator, margin-calculator, roi-calculator, break-even-calculator, ltv-calculator, and cac-calculator — each with unique descriptions, custom instructions, and 4 cross-tool comparison FAQs." },
+      { type: "feature", text: "Converter consolidation: ImageCatchAllConverter, AudioFormatConverter, DocumentFormatConverter, VideoFormatConverter, and ConverterRouter with 250 converterConfig.ts entries." },
+      { type: "performance", text: "Sidebar converter count fixed — Header.tsx now correctly adds 4 cross-listed tools to the converter category count." },
+      { type: "fix", text: "svg-to-png-converter duplicate entry removed from DynamicModuleWrapper, link-in-bio-builder duplicate entry fixed." },
+    ]
+  },
+  {
     version: "v1.5.0",
     date: "July 13, 2026",
     title: "Launch Readiness — CORS, D1 Database, Mobile UX & SEO Overhaul",

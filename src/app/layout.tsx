@@ -33,6 +33,15 @@ export const metadata: Metadata = {
   description:
     `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
   robots: "index, follow",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-384x384.png', sizes: '384x384', type: 'image/png' },
+    ],
+    apple: { url: '/icon-192x192.png' },
+  },
   openGraph: {
     type: "website",
     siteName: "Toolzum",

@@ -42,6 +42,74 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
     { label: 'Convert', icon: '🔄' },
     { label: 'Edit', icon: '✏️' },
   ],
+  Audio: [
+    { label: 'Convert', icon: '🔄' },
+    { label: 'Compress', icon: '🗜️' },
+    { label: 'Trim', icon: '✂️' },
+    { label: 'Edit', icon: '✏️' },
+    { label: 'AI', icon: '🤖' },
+  ],
+  Video: [
+    { label: 'Compress', icon: '🗜️' },
+    { label: 'Convert', icon: '🔄' },
+    { label: 'Trim', icon: '✂️' },
+    { label: 'Edit', icon: '✏️' },
+    { label: 'AI', icon: '🤖' },
+  ],
+  Converter: [
+    { label: 'Image', icon: '🖼️' },
+    { label: 'Video', icon: '🎬' },
+    { label: 'Audio', icon: '🎵' },
+    { label: 'Document', icon: '📄' },
+  ],
+  Text: [
+    { label: 'Count', icon: '🔢' },
+    { label: 'Convert', icon: '🔄' },
+    { label: 'Generate', icon: '✨' },
+    { label: 'Edit', icon: '✏️' },
+  ],
+  Developer: [
+    { label: 'Format', icon: '🔄' },
+    { label: 'Minify', icon: '🗜️' },
+    { label: 'Encode', icon: '🔐' },
+    { label: 'Regex', icon: '🔍' },
+    { label: 'Convert', icon: '🔄' },
+  ],
+  SEO: [
+    { label: 'Analyze', icon: '📊' },
+    { label: 'Audit', icon: '🔍' },
+    { label: 'Optimize', icon: '⚡' },
+    { label: 'Generate', icon: '✨' },
+  ],
+  Finance: [
+    { label: 'Calculate', icon: '🧮' },
+    { label: 'Convert', icon: '🔄' },
+    { label: 'Tax', icon: '📋' },
+    { label: 'ROI', icon: '📈' },
+  ],
+  Privacy: [
+    { label: 'Encrypt', icon: '🔒' },
+    { label: 'Redact', icon: '🖍️' },
+    { label: 'Generate', icon: '✨' },
+    { label: 'Analyze', icon: '🔍' },
+  ],
+  Utility: [
+    { label: 'Convert', icon: '🔄' },
+    { label: 'Generate', icon: '✨' },
+    { label: 'Calculate', icon: '🧮' },
+    { label: 'Format', icon: '🔄' },
+  ],
+  Branding: [
+    { label: 'Design', icon: '🎨' },
+    { label: 'Analyze', icon: '📊' },
+    { label: 'Calculate', icon: '🧮' },
+    { label: 'Generate', icon: '✨' },
+  ],
+  Health: [
+    { label: 'Calculate', icon: '🧮' },
+    { label: 'Track', icon: '📊' },
+    { label: 'Convert', icon: '🔄' },
+  ],
 };
 
 export function CategoryPageClient({ category, tools }: CategoryPageClientProps) {
@@ -52,6 +120,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
   const group = getCategoryGroup(category);
   const subCats = SUB_CATEGORIES[category];
+  const [letterFilter, setLetterFilter] = React.useState('');
 
   const allCategories = React.useMemo(() => {
     return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort();
@@ -90,6 +159,8 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
 
   const filtered = searchQuery
     ? tools.filter(t => t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase()))
+    : letterFilter
+    ? tools.filter(t => t.name.toLowerCase().startsWith(letterFilter))
     : tools;
 
   const toolCount = filtered.length;
@@ -216,20 +287,49 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             {subCats.map(sc => (
               <button
                 key={sc.label}
-                onClick={() => setSearchQuery(sc.label.toLowerCase())}
+                onClick={() => { setSearchQuery(sc.label.toLowerCase()); setLetterFilter(''); }}
                 className="text-xs px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-elevated)] transition-all"
               >
                 {sc.icon} {sc.label}
               </button>
             ))}
             <button
-              onClick={() => setSearchQuery('')}
+              onClick={() => { setSearchQuery(''); setLetterFilter(''); }}
               className="text-xs px-3 py-1.5 rounded-full border border-dashed border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] transition-all"
             >
               Clear
             </button>
           </div>
         )}
+
+        {/* A-Z Filter */}
+        <div className="flex flex-wrap gap-1 mb-6">
+          <button
+            onClick={() => setLetterFilter('')}
+            className={`text-[11px] font-mono font-bold px-2.5 py-1 rounded-md transition-all ${!letterFilter ? 'bg-[var(--accent)] text-white shadow-sm' : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'}`}
+          >
+            All
+          </button>
+          {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => {
+            const hasTools = tools.some(t => t.name.toLowerCase().startsWith(letter.toLowerCase()));
+            return (
+              <button
+                key={letter}
+                onClick={() => { setLetterFilter(letter); setSearchQuery(''); }}
+                disabled={!hasTools}
+                className={`text-[11px] font-mono font-bold w-7 h-7 rounded-md transition-all ${
+                  letterFilter === letter
+                    ? 'bg-[var(--accent)] text-white shadow-sm'
+                    : hasTools
+                    ? 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[var(--border-default)]'
+                    : 'text-[var(--text-muted)] opacity-30 cursor-not-allowed'
+                }`}
+              >
+                {letter}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Search + view toggle */}
         <div className="flex items-center gap-4 mb-10">
@@ -279,13 +379,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
                     <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
                       {tool.description}
                     </p>
-                    <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50">
-                      {tool.dependencies && tool.dependencies !== "None" && (
-                        <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
-                          {tool.dependencies}
-                        </span>
-                      )}
-                    </div>
+                    <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50"></div>
                   </div>
                 </Link>
               );
@@ -321,10 +415,10 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--bg-surface)] flex items-center justify-center">
               <Search className="w-6 h-6 text-[var(--text-muted)]" />
             </div>
-            <p className="text-[var(--text-muted)] mb-2">No tools found matching &quot;{searchQuery}&quot;.</p>
+            <p className="text-[var(--text-muted)] mb-2">No tools found{searchQuery ? ` matching "${searchQuery}"` : letterFilter ? ` starting with "${letterFilter}"` : ''}.</p>
             <p className="text-xs text-[var(--text-muted)] mb-4">Try a different search term or browse other categories.</p>
-            <button onClick={() => setSearchQuery('')} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
-              Clear search
+            <button onClick={() => { setSearchQuery(''); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
+              Clear filters
             </button>
           </div>
         )}

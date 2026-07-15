@@ -4,7 +4,42 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import ical from 'ical';
+
+function parseIcs(text: string): any[] {
+  const events: any[] = [];
+  const lines = text.split(/\r?\n/);
+  let current: Record<string, any> | null = null;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed === 'BEGIN:VEVENT') {
+      current = {};
+    } else if (trimmed === 'END:VEVENT' && current) {
+      current.type = 'VEVENT';
+      events.push(current);
+      current = null;
+    } else if (current) {
+      const colonIdx = trimmed.indexOf(':');
+      if (colonIdx > 0) {
+        const key = trimmed.slice(0, colonIdx).split(';')[0].toLowerCase();
+        const val = trimmed.slice(colonIdx + 1);
+        if (key === 'dtstart' || key === 'dtend') {
+          const dt = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/.exec(val);
+          if (dt) {
+            current[key] = new Date(Date.UTC(+dt[1], +dt[2] - 1, +dt[3], +dt[4], +dt[5], +dt[6]));
+          } else {
+            current[key] = val;
+          }
+        } else if (key === 'summary' || key === 'location' || key === 'description' || key === 'organizer') {
+          current[key] = val;
+        } else if (key === 'attendee') {
+          if (!current.attendees) current.attendees = [];
+          (current.attendees as string[]).push(val.replace(/^mailto:/i, ''));
+        }
+      }
+    }
+  }
+  return events;
+}
 
 type Direction = 'ics-to-csv' | 'csv-to-ics';
 type DateFormat = 'iso' | 'mm-dd-yyyy' | 'dd-mm-yyyy' | 'human';
@@ -132,8 +167,8 @@ function generateIcs(events: Record<string, string>[], dateFormat: DateFormat): 
 function flattenIcsEvent(event: any, selectedFields: string[], dateFmt: DateFormat): Record<string, string> {
   const record: Record<string, string> = {};
   if (selectedFields.includes('summary')) record.summary = event.summary || '';
-  if (selectedFields.includes('dtstart')) record.dtstart = formatDate(event.start, dateFmt);
-  if (selectedFields.includes('dtend')) record.dtend = formatDate(event.end, dateFmt);
+  if (selectedFields.includes('dtstart')) record.dtstart = formatDate(event.dtstart, dateFmt);
+  if (selectedFields.includes('dtend')) record.dtend = formatDate(event.dtend, dateFmt);
   if (selectedFields.includes('location')) record.location = event.location || '';
   if (selectedFields.includes('description')) record.description = event.description || '';
   if (selectedFields.includes('organizer')) record.organizer = event.organizer || '';
@@ -203,8 +238,8 @@ export default function IcsCsvConverter() {
       const text = await selectedFile.text();
 
       if (direction === 'ics-to-csv') {
-        const data = ical.parseICS(text);
-        const parsedEvents = Object.values(data).filter((e: any) => e.type === 'VEVENT');
+        const data = parseIcs(text);
+        const parsedEvents = data.filter((e: any) => e.type === 'VEVENT');
         if (parsedEvents.length === 0) {
           toast.error('No events found in the ICS file');
           return;
@@ -213,7 +248,7 @@ export default function IcsCsvConverter() {
         setEvents(flat);
         setPreview(flat.slice(0, 10));
         setFile(selectedFile);
-        const dates = parsedEvents.map((e: any) => e.start).filter(Boolean);
+        const dates = parsedEvents.map((e: any) => e.dtstart).filter(Boolean);
         const dateRange = dates.length > 0
           ? `${new Date(Math.min(...dates.map((d: Date | string) => new Date(d).getTime()))).toLocaleDateString()} - ${new Date(Math.max(...dates.map((d: Date | string) => new Date(d).getTime()))).toLocaleDateString()}`
           : 'N/A';
