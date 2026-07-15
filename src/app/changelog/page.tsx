@@ -42,7 +42,7 @@ const RELEASES: Release[] = [
       { type: "fix", text: "CurrencyConverter: exchange rate API moved to backend proxy with caching — fallback rates replaced with live data." },
       { type: "fix", text: "XmlSitemapGenerator: blob URL race condition fixed — downloads no longer fail on slow devices." },
       { type: "performance", text: "SEO meta descriptions rewritten — removed number prefixes from all 25 category descriptions, aligned with natural search intent." },
-      { type: "security", text: "AI crawler robots.txt rules updated — GPTBot, ClaudeBot, Google-Extended, and others disallowed from indexing tool pages." },
+      { type: "security", text: "AI crawler robots.txt rules updated — GPTBot, ClaudeBot, Google-Extended, and others re-enabled on tool pages to improve AI discoverability and referral traffic." },
       { type: "fix", text: "console.warn calls in 7 non-critical modules wrapped in dev-only guard — production console stays clean." },
       { type: "security", text: "auth-client fallback URL changed from localhost to toolzum.com — prevents auth redirect loops." }
     ]

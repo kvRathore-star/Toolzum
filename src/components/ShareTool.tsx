@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Share2, Link as LinkIcon, Check } from 'lucide-react';
+import { Share2, Link as LinkIcon, Check, Code } from 'lucide-react';
 
 const SITE_URL = 'https://toolzum.com';
 
@@ -19,9 +19,11 @@ interface ShareToolProps {
 
 export function ShareTool({ title, slug, category }: ShareToolProps) {
   const [copied, setCopied] = useState(false);
+  const [mdCopied, setMdCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const url = `${SITE_URL}/${category.toLowerCase()}/${slug}`;
   const text = `Check out ${title} on Toolzum — 100% free, runs in your browser, no uploads needed.`;
+  const markdown = `[Toolzum - ${title}](${url})`;
 
   const shareUrl = (platform: string) => {
     const hrefs: Record<string, string> = {
@@ -38,6 +40,14 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } catch { /* fallback */ }
+  };
+
+  const copyMarkdown = async () => {
+    try {
+      await navigator.clipboard.writeText(markdown);
+      setMdCopied(true);
+      setTimeout(() => setMdCopied(false), 2000);
     } catch { /* fallback */ }
   };
 
@@ -74,6 +84,13 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <LinkIcon className="w-3.5 h-3.5" />}
               {copied ? 'Copied!' : 'Copy link'}
+            </button>
+            <button
+              onClick={copyMarkdown}
+              className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-[var(--text-secondary)] hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-[var(--radius-md)] transition-colors"
+            >
+              {mdCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Code className="w-3.5 h-3.5" />}
+              {mdCopied ? 'Copied!' : 'Copy markdown link'}
             </button>
           </div>
         </>

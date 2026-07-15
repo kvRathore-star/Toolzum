@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "gen:og": "npx tsx scripts/generate-og-images.ts",
+    "build": "npm run gen:og && next build",
     "start": "npx serve out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --strict",

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ToolMetadata, ToolCategory } from "@/registry/tools";
-import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass } from "lucide-react";
+import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
 interface CategoryPageClientProps {
@@ -12,7 +12,6 @@ interface CategoryPageClientProps {
 }
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
-  'indian-utilities': 'India 🇮🇳',
   'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
   'converter': 'File Converter',
@@ -68,9 +67,10 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
     return groups;
   }, [allCategories]);
 
-  const GROUP_ORDER = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+  const GROUP_ORDER = ['Media', 'India 🇮🇳', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
   const GROUP_ICONS: Record<string, React.ReactNode> = {
     'Media': <Image className="w-3.5 h-3.5" />,
+    'India 🇮🇳': <Sun className="w-3.5 h-3.5" />,
     'Text & AI': <FileText className="w-3.5 h-3.5" />,
     'Developer & Tech': <Code2 className="w-3.5 h-3.5" />,
     'Business & Finance': <Briefcase className="w-3.5 h-3.5" />,
@@ -280,9 +280,11 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
                       {tool.description}
                     </p>
                     <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50">
-                      <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
-                        {tool.dependencies}
-                      </span>
+                      {tool.dependencies && tool.dependencies !== "None" && (
+                        <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                          {tool.dependencies}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Link>

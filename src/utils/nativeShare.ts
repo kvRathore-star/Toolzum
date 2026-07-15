@@ -17,6 +17,9 @@ export async function downloadOrShare(blobUrl: string, fileName: string) {
   const fileSizeMB = await getBlobSizeMB(blobUrl);
   if (!(await checkAndRecordDownload({ fileSizeMB }))) return;
 
+  // Track for social proof counter
+  try { localStorage.setItem('toolzum:processedCount', String(Number(localStorage.getItem('toolzum:processedCount') || '0') + 1)); } catch {}
+
   if (Capacitor.isNativePlatform()) {
     try {
       const response = await fetch(blobUrl);

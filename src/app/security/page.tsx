@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Security & Data Protection",
   description:
     "Toolzum processes files in your browser — zero uploads, zero server storage, zero data retention. No data to breach.",
+  alternates: { canonical: "https://toolzum.com/security/" },
   openGraph: {
     title: "Security & Data Protection | Toolzum",
   },
@@ -67,9 +68,9 @@ const securitySections = [
     title: "Infrastructure & Compliance",
     items: [
       "Global edge CDN with 330+ locations for fast static delivery — no application servers",
-      "GDPR Article 28 compliant — no data processing agreement needed (zero data to process)",
-      "HIPAA-friendly — no PHI transmitted or stored at any point",
-      "SOC2-type architecture — all compute client-side, inherently auditable",
+      "GDPR-friendly architecture — no data processing agreement needed (zero data to process)",
+      "Healthcare-safe — no PHI ever leaves your device",
+      "Client-side compute architecture — inherently auditable and transparent",
       "CCPA compliant — no personal data collected from file operations"
     ],
   },

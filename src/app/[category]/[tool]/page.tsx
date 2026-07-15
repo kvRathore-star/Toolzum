@@ -20,7 +20,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   if (!toolMetadata) return { title: 'Not Found' };
 
   const desc = toolMetadata.seoDescription || `Free online ${toolMetadata.name}: ${toolMetadata.description.charAt(0).toLowerCase() + toolMetadata.description.slice(1)}. 100% browser-based, nothing uploaded.`;
-  const ogImageUrl = `https://toolzum.com/${params.category}/${params.tool}/opengraph-image`;
+  const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.png`;
 
   return {
     title: `${toolMetadata.name} — Free Online Tool`,

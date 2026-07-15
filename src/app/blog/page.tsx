@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Blog — Guides & Engineering",
   description:
     "Read practical how-to guides, technical deep-dives, and privacy analysis for browser-based tools on the Toolzum blog.",
+  alternates: { canonical: "https://toolzum.com/blog/" },
   openGraph: {
     title: "Blog | Toolzum",
     description:

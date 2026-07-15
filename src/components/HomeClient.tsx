@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
@@ -562,6 +562,9 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
       {/* ===== 8. STATS BAR ===== */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
+        <div className="text-center mb-8">
+          <SocialProofTicker />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {STATS_BAR.map((stat, i) => (
             <motion.div
@@ -793,5 +796,23 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         </div>
       </div>
     </>
+  );
+}
+
+function SocialProofTicker() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    try {
+      const val = parseInt(localStorage.getItem('toolzum:processedCount') || '0', 10);
+      setCount(val);
+    } catch {}
+  }, []);
+
+  if (count === 0) return null;
+
+  return (
+    <p className="text-sm text-[var(--text-secondary)]">
+      <span className="font-mono font-semibold text-[var(--accent)]">{count.toLocaleString()}</span> files processed in your browser
+    </p>
   );
 }

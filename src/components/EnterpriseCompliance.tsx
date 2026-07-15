@@ -10,8 +10,8 @@ const complianceItems = [
   },
   {
     icon: Lock,
-    title: 'GDPR & SOC2 Ready',
-    desc: 'Because files never leave your device, no data processing agreement is needed. Toolzum is inherently compliant with GDPR Article 28, HIPAA, and corporate IT policies.',
+    title: 'GDPR-Friendly by Architecture',
+    desc: 'Because files never leave your device, no data processing agreement is needed. Toolzum\'s browser-native architecture aligns with GDPR requirements and keeps protected data local.',
   },
   {
     icon: Server,

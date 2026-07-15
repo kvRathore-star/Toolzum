@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "FAQ — Frequently Asked Questions",
   description:
     "Answers to common questions about Toolzum — privacy, processing, file storage, supported formats, and more.",
+  alternates: { canonical: "https://toolzum.com/faq/" },
   openGraph: {
     title: "FAQ | Toolzum",
   },

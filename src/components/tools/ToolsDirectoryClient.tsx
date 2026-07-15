@@ -4,12 +4,11 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
-import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, ArrowUpDown, Crown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sparkles } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, ArrowUpDown, Crown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sparkles, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
-  'indian-utilities': 'India 🇮🇳',
   'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
   'transcription': 'Transcription',
@@ -18,9 +17,10 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
 };
 
 const ITEMS_PER_PAGE = 30;
-const GROUP_ORDER = ['Media', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+const GROUP_ORDER = ['Media', 'India 🇮🇳', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
 const GROUP_ICONS: Record<string, React.ReactNode> = {
   'Media': <Image className="w-3.5 h-3.5" />,
+  'India 🇮🇳': <Sun className="w-3.5 h-3.5" />,
   'Text & AI': <FileText className="w-3.5 h-3.5" />,
   'Developer & Tech': <Code2 className="w-3.5 h-3.5" />,
   'Business & Finance': <Briefcase className="w-3.5 h-3.5" />,
@@ -246,7 +246,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
             Ecosystem Directory
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            Explore {(initialTools ?? toolsRegistry).length}+ offline-first utilities. Everything runs locally in your browser.
+            {(initialTools ?? toolsRegistry).length}+ local browser utilities. Zero server uploads. Everything runs on your device.
           </p>
           
           <div className="mt-8 relative max-w-2xl">

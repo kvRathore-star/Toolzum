@@ -29,7 +29,7 @@ export default function BillingPage() {
           {/* Manage Payment Methods */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6">
             <h2 className="text-lg font-bold mb-4">Payment Methods</h2>
-            <p className="text-sm text-[var(--text-secondary)] mb-4">No payment methods saved. Payment is handled securely by Stripe (global) or Razorpay (India).</p>
+            <p className="text-sm text-[var(--text-secondary)] mb-4">No payment methods saved.</p>
             <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
               <CheckCircle className="w-3.5 h-3.5 text-[var(--success)]" />
               PCI-DSS compliant — we never store card details.

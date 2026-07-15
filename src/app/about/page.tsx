@@ -1,5 +1,3 @@
-"use client";
-
 import { 
   ShieldCheck, 
   Cpu, 
@@ -65,6 +63,21 @@ export default function AboutPage() {
             <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-400 mb-2">&lt; 1s</div>
             <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Execution Speed</div>
           </div>
+        </div>
+
+        {/* The Story */}
+        <div className="max-w-3xl mx-auto mb-20 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
+            <Zap className="w-3.5 h-3.5" /> The Story
+          </div>
+          <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
+            Built by a solo developer who was tired of uploading confidential PDFs and images to random cloud servers 
+            just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{toolsRegistry.length}+ tools</strong> 
+            that never touch a server. The browser is all you need.
+          </p>
+          <p className="text-sm text-[var(--text-muted)] mt-4">
+            Bootstrapped. Zero VC funding. Zero servers. Zero compromises.
+          </p>
         </div>
 
         {/* What Sets Us Apart */}
