@@ -368,6 +368,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'add-image-to-pdf': dynamic(() => import('@/components/tools/modules/AddImageToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="add-image-to-pdf" /> }),
   'header-footer-pdf': dynamic(() => import('@/components/tools/modules/HeaderFooterPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="header-footer-pdf" /> }),
   'nup-pdf': dynamic(() => import('@/components/tools/modules/NupPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="nup-pdf" /> }),
+  'pdf-annotator': dynamic(() => import('@/components/tools/modules/PdfAnnotator'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-annotator" /> }),
+  'deskew-pdf': dynamic(() => import('@/components/tools/modules/PdfDeskew'), { ssr: false, loading: () => <DynamicImportFallback slug="deskew-pdf" /> }),
+  'url-to-pdf': dynamic(() => import('@/components/tools/modules/UrlToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="url-to-pdf" /> }),
+  'markdown-to-pdf': dynamic(() => import('@/components/tools/modules/MarkdownToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-pdf" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
