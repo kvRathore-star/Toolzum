@@ -418,6 +418,16 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'lorem-ipsum-generator': dynamic(() => import('@/components/tools/modules/LoremIpsumGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="lorem-ipsum-generator" /> }),
   'whois-lookup': dynamic(() => import('@/components/tools/modules/WhoisLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="whois-lookup" /> }),
   'ssl-checker': dynamic(() => import('@/components/tools/modules/SslChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="ssl-checker" /> }),
+  'pdf-to-tiff': dynamic(() => import('@/components/tools/modules/PdfToTiff'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-tiff" /> }),
+  'tiff-to-pdf': dynamic(() => import('@/components/tools/modules/TiffToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="tiff-to-pdf" /> }),
+  'font-converter': dynamic(() => import('@/components/tools/modules/FontConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="font-converter" /> }),
+  'font-subsetter': dynamic(() => import('@/components/tools/modules/FontSubsetter'), { ssr: false, loading: () => <DynamicImportFallback slug="font-subsetter" /> }),
+  'cbz-to-pdf': dynamic(() => import('@/components/tools/modules/CbzToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="cbz-to-pdf" /> }),
+  'epub-to-pdf': dynamic(() => import('@/components/tools/modules/EpubToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="epub-to-pdf" /> }),
+  'yaml-json-converter': dynamic(() => import('@/components/tools/modules/YamlJsonConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="yaml-json-converter" /> }),
+  'xlsx-csv-converter': dynamic(() => import('@/components/tools/modules/XlsxCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="xlsx-csv-converter" /> }),
+  'vcf-csv-converter': dynamic(() => import('@/components/tools/modules/VcfCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="vcf-csv-converter" /> }),
+  'ics-csv-converter': dynamic(() => import('@/components/tools/modules/IcsCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="ics-csv-converter" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
