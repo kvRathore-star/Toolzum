@@ -2999,6 +2999,26 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "none",
     showInCategory: true,
   },
+  {
+    id: "361",
+    name: "MOBI Converter",
+    slug: "mobi-converter",
+    category: "Converter",
+    description: 'Convert MOBI (Kindle) e-book files to PDF or EPUB, and create MOBI files from PDF. Perfect for Kindle users who need to read books on other devices or share with non-Kindle readers.',
+    seoDescription: 'Free online MOBI Converter — Convert MOBI Kindle e-books to PDF or EPUB. Create MOBI files from PDF. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib, jszip, pdfjs-dist",
+    showInCategory: true,
+  },
+  {
+    id: "362",
+    name: "ODT/RTF to PDF",
+    slug: "odt-rtf-to-pdf",
+    category: "Converter",
+    description: 'Convert OpenDocument (ODT) and Rich Text Format (RTF) files to PDF. Preserves basic formatting like bold, italic, headers, and paragraphs. Perfect for LibreOffice and WordPad users.',
+    seoDescription: 'Free online ODT/RTF to PDF — Convert OpenDocument and Rich Text Format files to PDF. Preserves formatting. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib, jszip",
+    showInCategory: true,
+  },
 ];
 
 const proSlugs = [

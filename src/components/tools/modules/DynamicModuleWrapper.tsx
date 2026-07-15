@@ -402,6 +402,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ai-detector': dynamic(() => import('@/components/tools/modules/AiDetector'), { ssr: false, loading: () => <DynamicImportFallback slug="ai-detector" /> }),
   'article-writer': dynamic(() => import('@/components/tools/modules/AiArticleWriter'), { ssr: false, loading: () => <DynamicImportFallback slug="article-writer" /> }),
   'social-caption-generator': dynamic(() => import('@/components/tools/modules/AiSocialCaption'), { ssr: false, loading: () => <DynamicImportFallback slug="social-caption-generator" /> }),
+  'mobi-converter': dynamic(() => import('@/components/tools/modules/MobiConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="mobi-converter" /> }),
+  'odt-rtf-to-pdf': dynamic(() => import('@/components/tools/modules/OdtRtfConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="odt-rtf-to-pdf" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
