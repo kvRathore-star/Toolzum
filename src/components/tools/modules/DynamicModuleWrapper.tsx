@@ -241,6 +241,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'jfif-to-png': dynamic(() => import('@/components/tools/modules/JfifToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="jfif-to-png" /> }),
   'convert-to-jpg': dynamic(() => import('@/components/tools/modules/ConvertToJpg'), { ssr: false, loading: () => <DynamicImportFallback slug="convert-to-jpg" /> }),
   'rotate-image': dynamic(() => import('@/components/tools/modules/RotateImage'), { ssr: false, loading: () => <DynamicImportFallback slug="rotate-image" /> }),
+  'psd-to-jpg-png': dynamic(() => import('@/components/tools/modules/PsdToJpgPng'), { ssr: false, loading: () => <DynamicImportFallback slug="psd-to-jpg-png" /> }),
   'blur-face': dynamic(() => import('@/components/tools/modules/BlurFace'), { ssr: false, loading: () => <DynamicImportFallback slug="blur-face" /> }),
   'html-to-image': dynamic(() => import('@/components/tools/modules/HtmlToImage'), { ssr: false, loading: () => <DynamicImportFallback slug="html-to-image" /> }),
   'time-converter': dynamic(() => import('@/components/tools/modules/TimeConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="time-converter" /> }),
@@ -372,6 +373,9 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'deskew-pdf': dynamic(() => import('@/components/tools/modules/PdfDeskew'), { ssr: false, loading: () => <DynamicImportFallback slug="deskew-pdf" /> }),
   'url-to-pdf': dynamic(() => import('@/components/tools/modules/UrlToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="url-to-pdf" /> }),
   'markdown-to-pdf': dynamic(() => import('@/components/tools/modules/MarkdownToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-pdf" /> }),
+  'bookmark-pdf': dynamic(() => import('@/components/tools/modules/BookmarkPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="bookmark-pdf" /> }),
+  'eml-to-pdf': dynamic(() => import('@/components/tools/modules/EmlToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="eml-to-pdf" /> }),
+  'raw-image-converter': dynamic(() => import('@/components/tools/modules/RawImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="raw-image-converter" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });

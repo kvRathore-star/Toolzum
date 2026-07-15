@@ -26,7 +26,6 @@
     "@capacitor/filesystem": "^6.0.4",
     "@capacitor/ios": "^6.0.0",
     "@capacitor/share": "^6.0.4",
-
     "@csstools/css-parser-algorithms": "3.0.5",
     "@csstools/css-tokenizer": "3.0.4",
     "@ducanh2912/next-pwa": "^10.2.9",
@@ -44,6 +43,7 @@
     "@tensorflow/tfjs": "^4.19.0",
     "@types/crypto-js": "^4.2.2",
     "@types/dompurify": "^3.0.5",
+    "ag-psd": "^31.0.2",
     "better-auth": "^1.6.11",
     "browser-image-compression": "^2.0.2",
     "cheerio": "^1.0.0-rc.12",
