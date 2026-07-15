@@ -364,6 +364,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'grayscale-pdf': dynamic(() => import('@/components/tools/modules/GrayscalePdf'), { ssr: false, loading: () => <DynamicImportFallback slug="grayscale-pdf" /> }),
   'whiteout-pdf': dynamic(() => import('@/components/tools/modules/WhiteoutPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="whiteout-pdf" /> }),
   'resize-pdf-pages': dynamic(() => import('@/components/tools/modules/ResizePdfPages'), { ssr: false, loading: () => <DynamicImportFallback slug="resize-pdf-pages" /> }),
+  'add-text-to-pdf': dynamic(() => import('@/components/tools/modules/AddTextToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="add-text-to-pdf" /> }),
+  'add-image-to-pdf': dynamic(() => import('@/components/tools/modules/AddImageToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="add-image-to-pdf" /> }),
+  'header-footer-pdf': dynamic(() => import('@/components/tools/modules/HeaderFooterPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="header-footer-pdf" /> }),
+  'nup-pdf': dynamic(() => import('@/components/tools/modules/NupPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="nup-pdf" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
