@@ -1,0 +1,313 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import { downloadOrShare } from '@/utils/nativeShare';
+
+interface CertInfo {
+  issuer: string;
+  subject: string;
+  validFrom: string;
+  validTo: string;
+  daysRemaining: number;
+  sans: string[];
+  protocolVersion: string;
+  serialNumber?: string;
+  fingerprint?: string;
+}
+
+interface ChainCert {
+  subject: string;
+  issuer: string;
+  validFrom: string;
+  validTo: string;
+}
+
+interface SslResult {
+  domain: string;
+  cert: CertInfo;
+  chain: ChainCert[];
+  status: 'valid' | 'expiring' | 'expired';
+}
+
+function parseSSLCheckerResponse(data: any, domain: string): SslResult | null {
+  if (!data || data.error) return null;
+  const info = data.certificate_info || data.cert || data;
+  const validTo = info.valid_to || info.validTill || info.validity?.to || '';
+  const validFrom = info.valid_from || info.validFrom || info.validity?.from || '';
+  const now = new Date();
+  const end = new Date(validTo);
+  const daysRemaining = Math.floor((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  let status: 'valid' | 'expiring' | 'expired' = 'valid';
+  if (daysRemaining < 0) status = 'expired';
+  else if (daysRemaining < 30) status = 'expiring';
+
+  const sans = info.subject_alt_names || info.extensions?.subjectAltName || info.san || [];
+  const chain: ChainCert[] = [];
+  if (data.certificate_chain || data.chain) {
+    const raw = data.certificate_chain || data.chain || [];
+    for (const c of raw) {
+      chain.push({
+        subject: c.subject || c.Subject || '',
+        issuer: c.issuer || c.Issuer || '',
+        validFrom: c.valid_from || c.validFrom || c.ValidFrom || '',
+        validTo: c.valid_to || c.validTo || c.ValidTo || '',
+      });
+    }
+  }
+
+  return {
+    domain,
+    cert: {
+      issuer: info.issuer || info.Issuer || 'N/A',
+      subject: info.subject || info.Subject || 'N/A',
+      validFrom,
+      validTo,
+      daysRemaining,
+      sans: Array.isArray(sans) ? sans : typeof sans === 'string' ? sans.split(/,\s*/) : [],
+      protocolVersion: info.protocol_version || info.version || 'N/A',
+      serialNumber: info.serial_number || info.serialNumber,
+      fingerprint: info.fingerprint,
+    },
+    chain,
+    status,
+  };
+}
+
+function parseCrtShResponse(data: any[], domain: string): SslResult | null {
+  if (!data || data.length === 0) return null;
+  const entry = data[0];
+  const validTo = entry.not_after || '';
+  const validFrom = entry.not_before || '';
+  const now = new Date();
+  const end = new Date(validTo);
+  const daysRemaining = Math.floor((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  let status: 'valid' | 'expiring' | 'expired' = 'valid';
+  if (daysRemaining < 0) status = 'expired';
+  else if (daysRemaining < 30) status = 'expiring';
+
+  return {
+    domain,
+    cert: {
+      issuer: entry.issuer_name || 'N/A',
+      subject: entry.subject_name || 'N/A',
+      validFrom: validFrom,
+      validTo: validTo,
+      daysRemaining,
+      sans: entry.name_value ? entry.name_value.split(/\n+/) : [],
+      protocolVersion: 'N/A',
+      serialNumber: entry.serial_number,
+    },
+    chain: [],
+    status,
+  };
+}
+
+function validateDomain(d: string): string | null {
+  const clean = d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+  if (!clean) return null;
+  if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(clean)) return null;
+  return clean;
+}
+
+export default function SslChecker() {
+  const [domain, setDomain] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [result, setResult] = useState<SslResult | null>(null);
+  const [error, setError] = useState('');
+  const [history, setHistory] = useState<string[]>([]);
+  const blobUrlRef = useRef<string | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+    };
+  }, []);
+
+  const check = async (d?: string) => {
+    const target = validateDomain(d || domain);
+    if (!target) { toast.error('Enter a valid domain (e.g. example.com)'); return; }
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    setIsProcessing(true);
+    setError('');
+    setResult(null);
+
+    try {
+      const res = await fetch(`https://ssl-checker.io/api/v1/check?domain=${target}`, { signal: controller.signal });
+      if (!res.ok) throw new Error('SSL Checker API failed');
+      const data = await res.json();
+      const parsed = parseSSLCheckerResponse(data, target);
+      if (!parsed) throw new Error('Invalid response');
+      setResult(parsed);
+      setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
+      const message = parsed.status === 'valid' ? 'Certificate is valid' : parsed.status === 'expiring' ? 'Certificate expiring soon' : 'Certificate expired';
+      if (parsed.status === 'valid') toast.success(message);
+      else toast(message, { icon: parsed.status === 'expiring' ? '⚠️' : '🚫' });
+    } catch (err: any) {
+      if (err.name === 'AbortError') return;
+      try {
+        const crtRes = await fetch(`https://crt.sh/?q=${target}&output=json`, { signal: controller.signal });
+        if (!crtRes.ok) throw new Error('crt.sh failed');
+        const crtData: any = await crtRes.json();
+        const parsed = parseCrtShResponse(crtData, target);
+        if (!parsed) throw new Error('No certificate data found');
+        setResult(parsed);
+        setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
+        toast.success('Certificate info retrieved (via crt.sh)');
+      } catch {
+        setError('Unable to check SSL certificate. Try again later.');
+        toast.error('SSL check failed');
+      }
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleRetry = () => {
+    if (result) check(result.domain);
+    else if (history.length > 0) check(history[0]);
+  };
+
+  const handleDownload = async () => {
+    if (!result) return;
+    try {
+      const text = [
+        `Domain: ${result.domain}`,
+        `Status: ${result.status}`,
+        `Issuer: ${result.cert.issuer}`,
+        `Subject: ${result.cert.subject}`,
+        `Valid From: ${result.cert.validFrom}`,
+        `Valid To: ${result.cert.validTo}`,
+        `Days Remaining: ${result.cert.daysRemaining}`,
+        `Protocol: ${result.cert.protocolVersion}`,
+        `SANs: ${result.cert.sans.join(', ')}`,
+      ].join('\n');
+      const blob = new Blob([text], { type: 'text/plain' });
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+      const url = URL.createObjectURL(blob);
+      blobUrlRef.current = url;
+      await downloadOrShare(url, `ssl-cert-${result.domain}.txt`);
+    } catch {
+      toast.error('Download failed');
+    }
+  };
+
+  const statusColor = (s: string) => {
+    switch (s) {
+      case 'valid': return 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20';
+      case 'expiring': return 'text-amber-500 bg-amber-500/10 border-amber-500/20';
+      case 'expired': return 'text-red-500 bg-red-500/10 border-red-500/20';
+      default: return 'text-zinc-500 bg-zinc-500/10 border-zinc-500/20';
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="bg-sky-500/10 border border-sky-500/20 p-4 rounded-2xl text-sky-400 text-sm space-y-1">
+        <h4 className="font-bold text-zinc-900 dark:text-white">SSL Certificate Checker</h4>
+        <p className="text-zinc-600 dark:text-zinc-400">Check SSL certificate details for any domain. Uses public certificate transparency APIs.</p>
+      </div>
+
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-5">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input type="text" value={domain} onChange={e => setDomain(e.target.value)} onKeyDown={e => e.key === 'Enter' && check()} placeholder="example.com" className="flex-1 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
+          <button onClick={() => check()} disabled={isProcessing} className="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 disabled:bg-sky-600/50 text-white text-sm font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer justify-center">
+            {isProcessing && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
+            {isProcessing ? 'Checking...' : 'Check SSL'}
+          </button>
+        </div>
+
+        {error && (
+          <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl p-4">
+            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            <button onClick={handleRetry} className="mt-2 text-xs text-red-500 hover:text-red-400 underline">Retry</button>
+          </div>
+        )}
+
+        {result && (
+          <div className="space-y-4">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-bold ${statusColor(result.status)}`}>
+              {result.status === 'valid' && 'Valid'}
+              {result.status === 'expiring' && `Expiring in ${result.cert.daysRemaining} days`}
+              {result.status === 'expired' && `Expired (${Math.abs(result.cert.daysRemaining)} days ago)`}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Issuer</p>
+                <p className="text-sm font-mono text-zinc-900 dark:text-white mt-1 break-all">{result.cert.issuer}</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Subject</p>
+                <p className="text-sm font-mono text-zinc-900 dark:text-white mt-1 break-all">{result.cert.subject}</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Valid From</p>
+                <p className="text-sm text-zinc-900 dark:text-white mt-1 font-mono">{result.cert.validFrom || 'N/A'}</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Valid To</p>
+                <p className="text-sm text-zinc-900 dark:text-white mt-1 font-mono">{result.cert.validTo || 'N/A'}</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Days Remaining</p>
+                <p className={`text-sm font-bold mt-1 ${result.cert.daysRemaining < 0 ? 'text-red-500' : result.cert.daysRemaining < 30 ? 'text-amber-500' : 'text-emerald-500'}`}>{result.cert.daysRemaining < 0 ? 0 : result.cert.daysRemaining} days</p>
+              </div>
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Protocol Version</p>
+                <p className="text-sm font-mono text-zinc-900 dark:text-white mt-1">{result.cert.protocolVersion}</p>
+              </div>
+            </div>
+
+            {result.cert.sans.length > 0 && (
+              <div className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2">Subject Alternative Names (SANs)</p>
+                <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
+                  {result.cert.sans.map((san, i) => (
+                    <span key={i} className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono text-zinc-600 dark:text-zinc-400">{san}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {result.chain.length > 0 && (
+              <details className="bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+                <summary className="px-4 py-3 text-xs font-bold text-zinc-500 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">Certificate Chain ({result.chain.length})</summary>
+                <div className="border-t border-zinc-200 dark:border-zinc-800 p-4 space-y-3">
+                  {result.chain.map((c, i) => (
+                    <div key={i} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 text-xs">
+                      <p><span className="text-zinc-400">Subject:</span> <span className="font-mono text-zinc-700 dark:text-zinc-300">{c.subject}</span></p>
+                      <p><span className="text-zinc-400">Issuer:</span> <span className="font-mono text-zinc-700 dark:text-zinc-300">{c.issuer}</span></p>
+                      <p><span className="text-zinc-400">Valid:</span> <span className="font-mono text-zinc-700 dark:text-zinc-300">{c.validFrom} — {c.validTo}</span></p>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
+
+            <div className="flex gap-3">
+              <button onClick={handleDownload} className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-xl transition-colors">Download</button>
+              <button onClick={() => check(result.domain)} className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-xl transition-colors">Refresh</button>
+            </div>
+          </div>
+        )}
+
+        {history.length > 0 && (
+          <div className="pt-3 border-t border-zinc-200 dark:border-white/5">
+            <p className="text-[10px] text-zinc-400 uppercase tracking-wider mb-2">Recent Checks</p>
+            <div className="flex flex-wrap gap-2">
+              {history.map(h => (
+                <button key={h} onClick={() => { setDomain(h); check(h); }} className="px-3 py-1 text-xs font-mono bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">{h}</button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

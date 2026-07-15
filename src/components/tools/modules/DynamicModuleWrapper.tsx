@@ -406,6 +406,18 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'odt-rtf-to-pdf': dynamic(() => import('@/components/tools/modules/OdtRtfConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="odt-rtf-to-pdf" /> }),
   'website-screenshot': dynamic(() => import('@/components/tools/modules/WebsiteScreenshot'), { ssr: false, loading: () => <DynamicImportFallback slug="website-screenshot" /> }),
   'gif-to-webp-webm': dynamic(() => import('@/components/tools/modules/GifToWebpWebm'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-webp-webm" /> }),
+  'gif-compressor': dynamic(() => import('@/components/tools/modules/GifCompressor'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-compressor" /> }),
+  'gif-resizer': dynamic(() => import('@/components/tools/modules/GifResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-resizer" /> }),
+  'gif-to-apng': dynamic(() => import('@/components/tools/modules/GifToApng'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-apng" /> }),
+  'mp4-to-gif': dynamic(() => import('@/components/tools/modules/VideoToGif'), { ssr: false, loading: () => <DynamicImportFallback slug="mp4-to-gif" /> }),
+  'webm-to-gif': dynamic(() => import('@/components/tools/modules/VideoToGif'), { ssr: false, loading: () => <DynamicImportFallback slug="webm-to-gif" /> }),
+  'apng-to-gif': dynamic(() => import('@/components/tools/modules/ApngToGif'), { ssr: false, loading: () => <DynamicImportFallback slug="apng-to-gif" /> }),
+  'image-to-ico': dynamic(() => import('@/components/tools/modules/ImageToIco'), { ssr: false, loading: () => <DynamicImportFallback slug="image-to-ico" /> }),
+  'color-converter': dynamic(() => import('@/components/tools/modules/ColorConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="color-converter" /> }),
+  'qr-code-reader': dynamic(() => import('@/components/tools/modules/QrCodeReader'), { ssr: false, loading: () => <DynamicImportFallback slug="qr-code-reader" /> }),
+  'lorem-ipsum-generator': dynamic(() => import('@/components/tools/modules/LoremIpsumGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="lorem-ipsum-generator" /> }),
+  'whois-lookup': dynamic(() => import('@/components/tools/modules/WhoisLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="whois-lookup" /> }),
+  'ssl-checker': dynamic(() => import('@/components/tools/modules/SslChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="ssl-checker" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
