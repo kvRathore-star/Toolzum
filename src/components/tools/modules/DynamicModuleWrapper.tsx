@@ -380,6 +380,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'chart-maker': dynamic(() => import('@/components/tools/modules/ChartMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="chart-maker" /> }),
   'bg-changer': dynamic(() => import('@/components/tools/modules/BgChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="bg-changer" /> }),
   'unblur-sharpen': dynamic(() => import('@/components/tools/modules/UnblurSharpen'), { ssr: false, loading: () => <DynamicImportFallback slug="unblur-sharpen" /> }),
+  'gif-editor': dynamic(() => import('@/components/tools/modules/GifEditor'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-editor" /> }),
+  'video-speed-changer': dynamic(() => import('@/components/tools/modules/VideoSpeedChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="video-speed-changer" /> }),
+  'reverse-video': dynamic(() => import('@/components/tools/modules/ReverseVideo'), { ssr: false, loading: () => <DynamicImportFallback slug="reverse-video" /> }),
+  'mute-video': dynamic(() => import('@/components/tools/modules/MuteVideo'), { ssr: false, loading: () => <DynamicImportFallback slug="mute-video" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
