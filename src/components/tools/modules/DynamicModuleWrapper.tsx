@@ -360,6 +360,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'crop-pdf': dynamic(() => import('@/components/tools/modules/CropPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="crop-pdf" /> }),
   'redact-pdf': dynamic(() => import('@/components/tools/modules/RedactPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="redact-pdf" /> }),
   'translate-pdf': dynamic(() => import('@/components/tools/modules/TranslatePdf'), { ssr: false, loading: () => <DynamicImportFallback slug="translate-pdf" /> }),
+  'flatten-pdf': dynamic(() => import('@/components/tools/modules/FlattenPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="flatten-pdf" /> }),
+  'grayscale-pdf': dynamic(() => import('@/components/tools/modules/GrayscalePdf'), { ssr: false, loading: () => <DynamicImportFallback slug="grayscale-pdf" /> }),
+  'whiteout-pdf': dynamic(() => import('@/components/tools/modules/WhiteoutPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="whiteout-pdf" /> }),
+  'resize-pdf-pages': dynamic(() => import('@/components/tools/modules/ResizePdfPages'), { ssr: false, loading: () => <DynamicImportFallback slug="resize-pdf-pages" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
