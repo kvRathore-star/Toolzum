@@ -352,6 +352,14 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'html-to-markdown': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="html-to-markdown" /> }),
   'text-to-markdown': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-markdown" /> }),
   'markdown-to-text': dynamic(() => import('@/components/tools/modules/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-text" /> }),
+  'pdf-to-markdown': dynamic(() => import('@/components/tools/modules/PdfToMarkdown'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-markdown" /> }),
+  'extract-pages-from-pdf': dynamic(() => import('@/components/tools/modules/ExtractPagesFromPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="extract-pages-from-pdf" /> }),
+  'scan-to-pdf': dynamic(() => import('@/components/tools/modules/ScanToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="scan-to-pdf" /> }),
+  'repair-pdf': dynamic(() => import('@/components/tools/modules/RepairPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="repair-pdf" /> }),
+  'pdf-to-pdfa': dynamic(() => import('@/components/tools/modules/PdfToPdfa'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-pdfa" /> }),
+  'crop-pdf': dynamic(() => import('@/components/tools/modules/CropPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="crop-pdf" /> }),
+  'redact-pdf': dynamic(() => import('@/components/tools/modules/RedactPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="redact-pdf" /> }),
+  'translate-pdf': dynamic(() => import('@/components/tools/modules/TranslatePdf'), { ssr: false, loading: () => <DynamicImportFallback slug="translate-pdf" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
