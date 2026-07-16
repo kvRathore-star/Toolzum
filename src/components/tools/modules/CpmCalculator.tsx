@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Target, DollarSign, TrendingUp } from 'lucide-react';
+import { useParams } from 'next/navigation';
 
 const platformPresets: Record<string, { cpm: number; rpm: number; note: string }> = {
   'youtube': { cpm: 3.50, rpm: 1.50, note: 'YouTube: CPM varies by niche (gaming ~$2, finance ~$12). RPM ~40-55% of CPM after ad rev share.' },
@@ -15,7 +16,9 @@ const platformPresets: Record<string, { cpm: number; rpm: number; note: string }
 type Mode = 'cpm' | 'rpm';
 
 export default function CpmCalculator() {
-  const [mode, setMode] = useState<Mode>('cpm');
+  const params = useParams();
+  const slug = typeof params?.tool === 'string' ? params.tool : '';
+  const [mode, setMode] = useState<Mode>(slug.startsWith('rpm') ? 'rpm' : 'cpm');
   const [platform, setPlatform] = useState<string>('custom');
   const [cost, setCost] = useState(500);
   const [impressions, setImpressions] = useState(100000);

@@ -83,6 +83,14 @@ export function Footer() {
             <p className="text-base leading-relaxed mb-6 text-[var(--text-secondary)] max-w-[240px]">
               Privacy-first tools. All in one place. Zero servers, zero uploads, zero storage.
             </p>
+            <div className="flex flex-col gap-3">
+              <h4 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</h4>
+              <div className="flex items-center gap-2">
+                <a href="https://twitter.com/intent/tweet?text=Check+out+Toolzum+—+privacy-first+browser+tools,+all+free.&url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/5 transition-all" title="Share on X/Twitter">𝕏</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] hover:text-blue-500 hover:border-blue-500/30 hover:bg-blue-500/5 transition-all" title="Share on LinkedIn">in</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] hover:text-indigo-500 hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all" title="Share on Facebook">f</a>
+              </div>
+            </div>
           </div>
 
           {/* Column 2: Product */}
@@ -125,7 +133,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-[var(--text-muted)] text-center md:text-left">
-            <span>&copy; {currentYear} Toolzum Inc. Made with ❤️</span>
+            <span>&copy; {currentYear} Toolzum Inc.</span>
             <span className="hidden md:block w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
             <span>All processing happens in your browser — your files never leave your device.</span>
           </div>

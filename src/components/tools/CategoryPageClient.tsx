@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ToolMetadata, ToolCategory } from "@/registry/tools";
-import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun } from "lucide-react";
+import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
 interface CategoryPageClientProps {
@@ -26,6 +26,10 @@ function getIconBg(tool: ToolMetadata) {
     gradient: theme.gradientHover,
   };
 }
+
+const DISPLAY_NAMES: Record<string, string> = {
+  'indian-utilities': 'Indian Utilities',
+};
 
 const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   Image: [
@@ -110,6 +114,12 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
     { label: 'Track', icon: '📊' },
     { label: 'Convert', icon: '🔄' },
   ],
+  'indian-utilities': [
+    { label: 'Aadhaar', icon: '🆔' },
+    { label: 'Finance', icon: '💰' },
+    { label: 'Generator', icon: '📄' },
+    { label: 'Convert', icon: '🔄' },
+  ],
 };
 
 export function CategoryPageClient({ category, tools }: CategoryPageClientProps) {
@@ -117,10 +127,11 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
-  const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
+  const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || DISPLAY_NAMES[category] || category;
   const group = getCategoryGroup(category);
   const subCats = SUB_CATEGORIES[category];
   const [letterFilter, setLetterFilter] = React.useState('');
+  const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
 
   const allCategories = React.useMemo(() => {
     return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort();
@@ -157,11 +168,12 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
-  const filtered = searchQuery
-    ? tools.filter(t => t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase()))
-    : letterFilter
-    ? tools.filter(t => t.name.toLowerCase().startsWith(letterFilter))
-    : tools;
+  const filtered = tools.filter(t => {
+    const matchesSearch = !searchQuery || t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesLetter = !letterFilter || t.name.toLowerCase().startsWith(letterFilter);
+    const matchesPro = proFilter === 'all' || (proFilter === 'pro' ? t.isPro : !t.isPro);
+    return matchesSearch && matchesLetter && matchesPro;
+  });
 
   const toolCount = filtered.length;
 
@@ -265,7 +277,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   Privacy: 'Free privacy tools — encrypt text, redact images, generate secure passwords, and more. Everything stays local to your device.',
   SEO: 'Free SEO tools — meta tag analyzer, keyword density checker, sitemap generator, and SEO audit utilities to improve your rankings.',
   Utility: 'Free utility tools — unit converters, QR code generator, color picker, and everyday essentials for quick tasks online.',
-  'indian-utilities': 'Free tools for India — Aadhaar masking, PAN card validation, UPI payment helpers, and Indian utility tools. All processed locally.',
+  'indian-utilities': 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.',
   Transcription: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.',
   Branding: 'Free branding tools — create logos, generate mockups, design business cards, and brand assets. No design skills needed.',
   Business: 'Free business tools — invoice generator, contract templates, business name generator, and more. Streamline your workflow.',
@@ -331,6 +343,16 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
           })}
         </div>
 
+        {/* Pro/Free toggle */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+            <button onClick={() => setProFilter('all')} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>All</button>
+            <button onClick={() => setProFilter('free')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}><Sparkles className="w-3 h-3" /> Free</button>
+            <button onClick={() => setProFilter('pro')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}><Crown className="w-3 h-3" /> Pro</button>
+          </div>
+          <span className="text-xs text-[var(--text-muted)] font-mono">{toolCount} tool{toolCount !== 1 ? 's' : ''}</span>
+        </div>
+
         {/* Search + view toggle */}
         <div className="flex items-center gap-4 mb-10">
           <div className="relative flex-1 max-w-md">
@@ -352,7 +374,6 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
               <List className="w-4 h-4" />
             </button>
           </div>
-          <span className="text-xs text-[var(--text-muted)] font-mono">{toolCount} tool{toolCount !== 1 ? 's' : ''}</span>
         </div>
 
         {/* Tool Grid/List */}

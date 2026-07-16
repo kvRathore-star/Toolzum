@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
-  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb
+  Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb,
+  Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
@@ -72,7 +73,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] overflow-hidden">
 
       {/* ===== 1. HERO ===== */}
-      <section ref={heroRef} className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+      <section ref={heroRef} className="relative pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent)]/8 blur-[140px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
@@ -192,8 +193,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Zap className="w-3.5 h-3.5" /> How It Works
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Zap className="w-4 h-4" /> How It Works
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
             Three clicks. Zero servers.
@@ -214,11 +215,11 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 hover:border-[var(--accent)]/30 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.06)] transition-all duration-500 group"
             >
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-[40px] font-mono font-bold text-[var(--text-muted)] leading-none group-hover:text-[var(--accent)] transition-colors">{step.num}</span>
+                <span className="text-[40px] font-mono font-bold text-[var(--accent)] leading-none">{step.num}</span>
                 <div className="h-px flex-1 bg-[var(--border-subtle)] group-hover:bg-[var(--accent)]/30 transition-colors" />
               </div>
-              <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center mb-5 group-hover:bg-[var(--accent)]/10 group-hover:border-[var(--accent)]/30 transition-all">
-                <step.icon className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
+              <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-5 transition-all">
+                <step.icon className="w-5 h-5 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-2">{step.title}</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
@@ -243,8 +244,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border-subtle)]">
             {FEATURES.map((feat, i) => (
               <div key={i} className="py-12 px-8 flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center mb-6 text-[var(--text-primary)] transition-all group-hover:bg-[var(--accent)]/10 group-hover:border-[var(--accent)]/30">
-                  <feat.icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-6 transition-all">
+                  <feat.icon className="w-5 h-5 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-[18px] font-medium text-[var(--text-primary)] mb-3">{feat.title}</h3>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{feat.desc}</p>
@@ -262,8 +263,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Layers className="w-3.5 h-3.5" /> Everything You Need
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Layers className="w-4 h-4" /> Everything You Need
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
             {toolCount} tools, {categoryCount} categories
@@ -332,8 +333,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Users className="w-3.5 h-3.5" /> Built for Everyone
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Users className="w-4 h-4" /> Built for Everyone
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
             One platform. Every workflow.
@@ -381,8 +382,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Star className="w-3.5 h-3.5" /> Why Toolzum
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Star className="w-4 h-4" /> Why Toolzum
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
             Built different by design.
@@ -402,8 +403,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: i * 0.06 }}
               className="group p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/20 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.05)] transition-all duration-300"
             >
-              <div className="w-10 h-10 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center mb-4 group-hover:bg-[var(--accent)]/10 group-hover:border-[var(--accent)]/30 transition-all">
-                <item.icon className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
+              <div className="w-10 h-10 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-4 transition-all">
+                <item.icon className="w-5 h-5 text-[var(--accent)]" />
               </div>
               <h3 className="text-base font-semibold text-[var(--text-primary)] mb-2">{item.title}</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
@@ -503,8 +504,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
           viewport={{ once: true, margin: "-60px" }}
           className="text-center mb-12"
         >
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--accent)] uppercase tracking-wider mb-4">
-            <Crown className="w-3.5 h-3.5" /> Pro
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-sm font-semibold text-amber-500 mb-4">
+            <Crown className="w-4 h-4" /> Pro
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] mb-3">
             Free today. Pro when you need more.
@@ -595,7 +596,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             viewport={{ once: true, margin: "-80px" }}
             className="flex flex-col items-center text-center mb-12"
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B35]/10 border border-[#FF6B35]/20 text-xs font-mono text-[#FF6B35] mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF6B35]/10 border border-[#FF6B35]/20 text-sm font-semibold text-[#FF6B35] mb-6">
               🇮🇳 Made for India
             </span>
             <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] mb-3">
@@ -705,6 +706,49 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
+  const detectFileType = (f: File): 'image' | 'video' | 'audio' | 'pdf' | 'document' | 'other' => {
+    const type = f.type;
+    const ext = f.name.split('.').pop()?.toLowerCase() || '';
+    if (type.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg', 'tiff', 'tif', 'ico', 'avif'].includes(ext)) return 'image';
+    if (type.startsWith('video/') || ['mp4', 'webm', 'mkv', 'mov', 'avi', 'wmv', 'flv'].includes(ext)) return 'video';
+    if (type.startsWith('audio/') || ['mp3', 'wav', 'flac', 'ogg', 'm4a', 'aac', 'wma', 'opus', 'aiff'].includes(ext)) return 'audio';
+    if (type === 'application/pdf' || ext === 'pdf') return 'pdf';
+    if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'epub'].includes(ext)) return 'document';
+    return 'other';
+  };
+
+  const getRoute = (fileType: ReturnType<typeof detectFileType>): string => {
+    switch (fileType) {
+      case 'image': return '/image/image-compressor';
+      case 'video': return '/video/video-compressor';
+      case 'audio': return '/audio/audio-compressor';
+      case 'pdf': return '/pdf/pdf-compressor';
+      case 'document': return '/document/document-converter';
+      default: return '/image/image-compressor';
+    }
+  };
+
+  const getToolName = (fileType: ReturnType<typeof detectFileType>): string => {
+    switch (fileType) {
+      case 'image': return 'Image Compressor';
+      case 'video': return 'Video Compressor';
+      case 'audio': return 'Audio Converter';
+      case 'pdf': return 'PDF Compressor';
+      case 'document': return 'Document Converter';
+      default: return 'All Tools';
+    }
+  };
+
+  const fileTypeIcon = (fileType: ReturnType<typeof detectFileType>) => {
+    switch (fileType) {
+      case 'image': return <FileImage className="w-5 h-5 text-[var(--accent)]" />;
+      case 'video': return <Video className="w-5 h-5 text-[var(--accent)]" />;
+      case 'audio': return <Music className="w-5 h-5 text-[var(--accent)]" />;
+      case 'pdf': return <FileText className="w-5 h-5 text-[var(--accent)]" />;
+      default: return <FileIcon className="w-5 h-5 text-[var(--accent)]" />;
+    }
+  };
+
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(false);
@@ -717,21 +761,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     if (f) setFile(f);
   }, []);
 
-  const getExportUrl = () => {
-    switch (activeTab) {
-      case 'compress': return '/image/image-compressor';
-      case 'resize': return '/image/image-resizer';
-      default: return '/image/image-compressor';
-    }
-  };
-
-  const getToolName = () => {
-    switch (activeTab) {
-      case 'compress': return 'Image Compressor';
-      case 'resize': return 'Image Resizer';
-      default: return 'Image Compressor';
-    }
-  };
+  const fileType = file ? detectFileType(file) : null;
 
   return (
     <>
@@ -747,13 +777,13 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         }`}
       >
         <input id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} />
-        {file ? (
+        {file && fileType ? (
           <div className="flex flex-col items-center gap-2 p-4">
             <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center">
-              <FileText className="w-5 h-5 text-[var(--accent)]" />
+              {fileTypeIcon(fileType)}
             </div>
             <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
-            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)}</p>
+            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)} &middot; {fileType.charAt(0).toUpperCase() + fileType.slice(1)}</p>
             <button
               onClick={(e) => { e.stopPropagation(); setFile(null); }}
               className="text-[10px] text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
@@ -777,22 +807,30 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       <div className="mt-6 flex justify-between items-center bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
         <div className="flex flex-col">
           <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
-            {file ? `File size` : 'Output Size'}
+            {file && fileType ? `Detected: ${fileType.charAt(0).toUpperCase() + fileType.slice(1)}` : 'Output Size'}
           </span>
           <span className="text-sm font-mono text-[var(--success)]">
-            {file ? formatSize(file.size) : '-74% smaller'}
+            {file && fileType ? getToolName(fileType) : '-74% smaller'}
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Link
-            href={getExportUrl()}
-            className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
-          >
-            Full: {getToolName()} <MoveRight className="w-3 h-3 inline" />
-          </Link>
-          <Button size="sm" asChild>
-            <Link href={getExportUrl()}>Export</Link>
-          </Button>
+          {file && fileType ? (
+            <Button size="sm" asChild>
+              <Link href={getRoute(fileType)}>Open Tool <MoveRight className="w-3 h-3 ml-1" /></Link>
+            </Button>
+          ) : (
+            <>
+              <Link
+                href="/image/image-compressor"
+                className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+              >
+                Full: Image Compressor <MoveRight className="w-3 h-3 inline" />
+              </Link>
+              <Button size="sm" asChild>
+                <Link href="/image/image-compressor">Export</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </>

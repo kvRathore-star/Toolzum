@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import JSZip from 'jszip';
-import { Upload, X, Loader2, Save, FileText, Settings2, Cpu, AlertTriangle } from 'lucide-react';
+import { Upload, X, Loader2, Save, FileText, Settings2, Cpu, AlertTriangle, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { ProDownloadButton } from './ProDownloadButton';
 import { useParallelProcessor } from '@/hooks/useParallelProcessor';
@@ -200,11 +201,12 @@ export function BulkToolShell({
             </div>
             <div className="flex gap-2">
               <input value={presetName} onChange={e => setPresetName(e.target.value)} placeholder="Preset name..." className="flex-1 p-2 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]" />
-              <button onClick={handleSavePreset} className="px-3 py-2 text-xs font-medium bg-[var(--accent)] text-white rounded-[var(--radius-md)] hover:bg-[var(--accent-hover)] transition-colors">
-                {canSavePresets ? 'Save' : 'Pro Only'}
-              </button>
+              {canSavePresets ? (
+                <button onClick={handleSavePreset} className="px-3 py-2 text-xs font-medium bg-[var(--accent)] text-white rounded-[var(--radius-md)] hover:bg-[var(--accent-hover)] transition-colors">Save</button>
+              ) : (
+                <Link href="/pricing" className="px-3 py-2 text-xs font-medium bg-amber-500/10 text-amber-500 rounded-[var(--radius-md)] hover:bg-amber-500/20 transition-colors whitespace-nowrap flex items-center gap-1"><Crown className="w-3 h-3" /> Pro</Link>
+              )}
             </div>
-            {!canSavePresets && <p className="text-xs text-amber-500">Upgrade to Pro to save workflow presets.</p>}
           </div>
         )}
 
