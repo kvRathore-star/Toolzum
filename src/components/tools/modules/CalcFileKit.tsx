@@ -97,15 +97,15 @@ function CalcTools() {
   const [volTo, setVolTo] = useState('1');
   const [volResult, setVolResult] = useState('');
 
-  const volUnits = [
-    { label: 'Liter (L)', toBase: v => v, fromBase: v => v },
-    { label: 'Milliliter (mL)', toBase: v => v / 1000, fromBase: v => v * 1000 },
-    { label: 'Gallon (US)', toBase: v => v * 3.78541, fromBase: v => v / 3.78541 },
-    { label: 'Quart (US)', toBase: v => v * 0.946353, fromBase: v => v / 0.946353 },
-    { label: 'Cup (US)', toBase: v => v * 0.236588, fromBase: v => v / 0.236588 },
-    { label: 'Fluid Ounce (US)', toBase: v => v * 0.0295735, fromBase: v => v / 0.0295735 },
-    { label: 'Cubic Meter', toBase: v => v * 1000, fromBase: v => v / 1000 },
-    { label: 'Cubic Foot', toBase: v => v * 28.3168, fromBase: v => v / 28.3168 },
+  const volUnits: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[] = [
+    { label: 'Liter (L)', toBase: (v: number) => v, fromBase: (v: number) => v },
+    { label: 'Milliliter (mL)', toBase: (v: number) => v / 1000, fromBase: (v: number) => v * 1000 },
+    { label: 'Gallon (US)', toBase: (v: number) => v * 3.78541, fromBase: (v: number) => v / 3.78541 },
+    { label: 'Quart (US)', toBase: (v: number) => v * 0.946353, fromBase: (v: number) => v / 0.946353 },
+    { label: 'Cup (US)', toBase: (v: number) => v * 0.236588, fromBase: (v: number) => v / 0.236588 },
+    { label: 'Fluid Ounce (US)', toBase: (v: number) => v * 0.0295735, fromBase: (v: number) => v / 0.0295735 },
+    { label: 'Cubic Meter', toBase: (v: number) => v * 1000, fromBase: (v: number) => v / 1000 },
+    { label: 'Cubic Foot', toBase: (v: number) => v * 28.3168, fromBase: (v: number) => v / 28.3168 },
   ];
 
   const convertVolume = () => {
@@ -450,7 +450,7 @@ function PdfZipTools() {
         const pages = await newDoc.copyPages(pdfDoc, indices);
         pages.forEach(p => newDoc.addPage(p));
         const bytes = await newDoc.save();
-        const blob = new Blob([bytes], { type: 'application/pdf' });
+        const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
         setPdfResult(`Removed ${removePages.length} page(s). ${totalPages} → ${pages.length} pages. Ready for download.`);
         downloadBlob(blob, `modified_${pdfFile.name}`);
       } else {
@@ -460,7 +460,7 @@ function PdfZipTools() {
         const pages = await newDoc.copyPages(pdfDoc, order);
         pages.forEach(p => newDoc.addPage(p));
         const bytes = await newDoc.save();
-        const blob = new Blob([bytes], { type: 'application/pdf' });
+        const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
         setPdfResult(`Reordered. ${totalPages} pages → ${pages.length} pages. Ready for download.`);
         downloadBlob(blob, `reordered_${pdfFile.name}`);
       }

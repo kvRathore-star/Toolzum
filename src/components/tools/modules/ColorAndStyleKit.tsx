@@ -115,21 +115,24 @@ function ColorTools() {
   const [showSim, setShowSim] = useState('');
 
   const generateShades = () => {
-    const { h, s } = rgbToHsl(...Object.values(hexToRgb(baseColor)));
+    const { r, g, b } = hexToRgb(baseColor);
+    const { h, s } = rgbToHsl(r, g, b);
     const res: string[] = [];
     for (let i = 5; i <= 95; i += 10) res.push(hslToHex(h, s, i));
     setShades(res);
   };
 
   const generateTints = () => {
-    const { h, s } = rgbToHsl(...Object.values(hexToRgb(baseColor)));
+    const { r, g, b } = hexToRgb(baseColor);
+    const { h, s } = rgbToHsl(r, g, b);
     const res: string[] = [];
-    for (let i = 100; i >= 10; i -= 10) res.push(hslToHex(h, Math.max(0, s - (100 - i) * 1.2), 90 - (90 / 10) * (0)));
+    for (let i = 5; i <= 95; i += 10) res.push(hslToHex(h, s, i));
     setTints(res);
   };
 
   const generatePalette = () => {
-    const { h } = rgbToHsl(...Object.values(hexToRgb(bc)));
+    const { r, g, b } = hexToRgb(bc);
+    const { h } = rgbToHsl(r, g, b);
     const res = [
       bc,
       hslToHex((h + 30) % 360, 65, 55),

@@ -131,6 +131,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   const [showSortMenu, setShowSortMenu] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
+  const [letterFilter, setLetterFilter] = React.useState("");
 
   const allCategories = React.useMemo(() => {
     return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort();

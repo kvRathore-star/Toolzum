@@ -56,58 +56,58 @@ function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: 
 }
 
 const AREA_UNITS = [
-  { label: 'Square Meter', toBase: v => v, fromBase: v => v },
-  { label: 'Square Kilometer', toBase: v => v * 1e6, fromBase: v => v / 1e6 },
-  { label: 'Square Foot', toBase: v => v * 0.092903, fromBase: v => v / 0.092903 },
-  { label: 'Square Yard', toBase: v => v * 0.836127, fromBase: v => v / 0.836127 },
-  { label: 'Acre', toBase: v => v * 4046.86, fromBase: v => v / 4046.86 },
-  { label: 'Hectare', toBase: v => v * 10000, fromBase: v => v / 10000 },
-  { label: 'Square Mile', toBase: v => v * 2.59e6, fromBase: v => v / 2.59e6 },
+  { label: 'Square Meter', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'Square Kilometer', toBase: (v: number) => v * 1e6, fromBase: (v: number) => v / 1e6 },
+  { label: 'Square Foot', toBase: (v: number) => v * 0.092903, fromBase: (v: number) => v / 0.092903 },
+  { label: 'Square Yard', toBase: (v: number) => v * 0.836127, fromBase: (v: number) => v / 0.836127 },
+  { label: 'Acre', toBase: (v: number) => v * 4046.86, fromBase: (v: number) => v / 4046.86 },
+  { label: 'Hectare', toBase: (v: number) => v * 10000, fromBase: (v: number) => v / 10000 },
+  { label: 'Square Mile', toBase: (v: number) => v * 2.59e6, fromBase: (v: number) => v / 2.59e6 },
 ];
 
 const COOKING_UNITS = [
-  { label: 'Teaspoon (tsp)', toBase: v => v * 4.92892, fromBase: v => v / 4.92892 },
-  { label: 'Tablespoon (tbsp)', toBase: v => v * 14.7868, fromBase: v => v / 14.7868 },
-  { label: 'Fluid Ounce (fl oz)', toBase: v => v * 29.5735, fromBase: v => v / 29.5735 },
-  { label: 'Cup', toBase: v => v * 236.588, fromBase: v => v / 236.588 },
-  { label: 'Pint (pt)', toBase: v => v * 473.176, fromBase: v => v / 473.176 },
-  { label: 'Quart (qt)', toBase: v => v * 946.353, fromBase: v => v / 946.353 },
-  { label: 'Gallon (gal)', toBase: v => v * 3785.41, fromBase: v => v / 3785.41 },
-  { label: 'Milliliter (mL)', toBase: v => v, fromBase: v => v },
-  { label: 'Liter (L)', toBase: v => v * 1000, fromBase: v => v / 1000 },
+  { label: 'Teaspoon (tsp)', toBase: (v: number) => v * 4.92892, fromBase: (v: number) => v / 4.92892 },
+  { label: 'Tablespoon (tbsp)', toBase: (v: number) => v * 14.7868, fromBase: (v: number) => v / 14.7868 },
+  { label: 'Fluid Ounce (fl oz)', toBase: (v: number) => v * 29.5735, fromBase: (v: number) => v / 29.5735 },
+  { label: 'Cup', toBase: (v: number) => v * 236.588, fromBase: (v: number) => v / 236.588 },
+  { label: 'Pint (pt)', toBase: (v: number) => v * 473.176, fromBase: (v: number) => v / 473.176 },
+  { label: 'Quart (qt)', toBase: (v: number) => v * 946.353, fromBase: (v: number) => v / 946.353 },
+  { label: 'Gallon (gal)', toBase: (v: number) => v * 3785.41, fromBase: (v: number) => v / 3785.41 },
+  { label: 'Milliliter (mL)', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'Liter (L)', toBase: (v: number) => v * 1000, fromBase: (v: number) => v / 1000 },
 ];
 
 const FUEL_UNITS = [
-  { label: 'L/100km', toBase: v => v, fromBase: v => v },
-  { label: 'MPG (US)', toBase: v => 235.215 / v, fromBase: v => 235.215 / v },
-  { label: 'MPG (UK)', toBase: v => 282.481 / v, fromBase: v => 282.481 / v },
-  { label: 'km/L', toBase: v => 100 / v, fromBase: v => 100 / v },
-  { label: 'Miles/Gallon (US)', toBase: v => 235.215 / v, fromBase: v => 235.215 / v },
+  { label: 'L/100km', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'MPG (US)', toBase: (v: number) => 235.215 / v, fromBase: (v: number) => 235.215 / v },
+  { label: 'MPG (UK)', toBase: (v: number) => 282.481 / v, fromBase: (v: number) => 282.481 / v },
+  { label: 'km/L', toBase: (v: number) => 100 / v, fromBase: (v: number) => 100 / v },
+  { label: 'Miles/Gallon (US)', toBase: (v: number) => 235.215 / v, fromBase: (v: number) => 235.215 / v },
 ];
 
 const PAPER_UNITS = [
-  { label: 'A0 (841×1189mm)', toBase: v => v, fromBase: v => v },
-  { label: 'A1 (594×841mm)', toBase: v => v * 0.5, fromBase: v => v * 2 },
-  { label: 'A4 (210×297mm)', toBase: v => v * 0.0625, fromBase: v => v * 16 },
-  { label: 'Letter (216×279mm)', toBase: v => v * 0.0625, fromBase: v => v * 16 },
-  { label: 'Legal (216×356mm)', toBase: v => v * 0.075, fromBase: v => v * 13.33 },
+  { label: 'A0 (841×1189mm)', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'A1 (594×841mm)', toBase: (v: number) => v * 0.5, fromBase: (v: number) => v * 2 },
+  { label: 'A4 (210×297mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
+  { label: 'Letter (216×279mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
+  { label: 'Legal (216×356mm)', toBase: (v: number) => v * 0.075, fromBase: (v: number) => v * 13.33 },
 ];
 
 const CLOTHING_UNITS = [
-  { label: 'US/Canada', toBase: v => v, fromBase: v => v },
-  { label: 'UK', toBase: v => v - 2, fromBase: v => v + 2 },
-  { label: 'EU', toBase: v => (v - 32) * 2.54, fromBase: v => v / 2.54 + 32 },
-  { label: 'Japan', toBase: v => v + 7, fromBase: v => v - 7 },
-  { label: 'France', toBase: v => (v - 34) * 1.5, fromBase: v => v / 1.5 + 34 },
+  { label: 'US/Canada', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'UK', toBase: (v: number) => v - 2, fromBase: (v: number) => v + 2 },
+  { label: 'EU', toBase: (v: number) => (v - 32) * 2.54, fromBase: (v: number) => v / 2.54 + 32 },
+  { label: 'Japan', toBase: (v: number) => v + 7, fromBase: (v: number) => v - 7 },
+  { label: 'France', toBase: (v: number) => (v - 34) * 1.5, fromBase: (v: number) => v / 1.5 + 34 },
 ];
 
 const STORAGE_UNITS = [
-  { label: 'Byte (B)', toBase: v => v, fromBase: v => v },
-  { label: 'Kilobyte (KB)', toBase: v => v * 1024, fromBase: v => v / 1024 },
-  { label: 'Megabyte (MB)', toBase: v => v * 1024 * 1024, fromBase: v => v / (1024 * 1024) },
-  { label: 'Gigabyte (GB)', toBase: v => v * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024) },
-  { label: 'Terabyte (TB)', toBase: v => v * 1024 * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024 * 1024) },
-  { label: 'Petabyte (PB)', toBase: v => v * 1024 * 1024 * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024 * 1024 * 1024) },
+  { label: 'Byte (B)', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'Kilobyte (KB)', toBase: (v: number) => v * 1024, fromBase: (v: number) => v / 1024 },
+  { label: 'Megabyte (MB)', toBase: (v: number) => v * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024) },
+  { label: 'Gigabyte (GB)', toBase: (v: number) => v * 1024 * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024 * 1024) },
+  { label: 'Terabyte (TB)', toBase: (v: number) => v * 1024 * 1024 * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024 * 1024 * 1024) },
+  { label: 'Petabyte (PB)', toBase: (v: number) => v * 1024 * 1024 * 1024 * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024 * 1024 * 1024 * 1024) },
 ];
 
 function ImageToAvifWebp({ format }: { format: 'avif' | 'webp' }) {

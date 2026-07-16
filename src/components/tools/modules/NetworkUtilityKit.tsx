@@ -186,7 +186,7 @@ function CryptoTools() {
     try {
       const base32chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
       const key = totpSecret.toUpperCase().replace(/\s/g, '');
-      const counter = BigInt(Math.floor(Date.now() / 30000));
+      let counter = BigInt(Math.floor(Date.now() / 30000));
       const counterBytes = new Uint8Array(8);
       for (let i = 7; i >= 0; i--) { counterBytes[i] = Number(counter & BigInt(0xff)); counter >>= BigInt(8); }
       let keyBytes = new Uint8Array(Math.floor(key.length * 5 / 8));

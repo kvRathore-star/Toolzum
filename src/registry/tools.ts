@@ -135,7 +135,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.',
     dependencies: "Google Cloud Translation API",
-    seoDescription: 'Free AI translator online — translate text between 100+ languages instantly. Automatic language detection. No sign-up needed, works in your browser.'
+    seoDescription: 'Free AI translator online — translate text between 100+ languages instantly. Automatic language detection. No sign-up needed, works in your browser.',
+    dependencies: "None",
   },
 
   {
@@ -155,7 +156,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Transforms text prompts into high-resolution images using advanced diffusion models. Designers and marketers use it for rapid visual prototyping.',
     dependencies: "Stable Diffusion API",
-    seoDescription: 'Generate stunning AI images from text prompts — free online. Turn your ideas into high-resolution visuals instantly. Powered by advanced diffusion models.'
+    seoDescription: 'Generate stunning AI images from text prompts — free online. Turn your ideas into high-resolution visuals instantly. Powered by advanced diffusion models.',
+    dependencies: "None",
   },
   {
     id: "11",
@@ -202,7 +204,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Branding",
     description: 'Logo Maker provides a drag-and-drop canvas with shape libraries, text tools, and icon collections for building brand logos.',
     dependencies: "Fabric.js / Canvas API",
-    seoDescription: 'Free logo maker online — design professional logos with drag-and-drop tools. Choose from shape libraries, icons, and text styles. No design skills needed.'
+    seoDescription: 'Free logo maker online — design professional logos with drag-and-drop tools. Choose from shape libraries, icons, and text styles. No design skills needed.',
+    dependencies: "None",
   },
   {
     id: "pdf-comp-1",
@@ -333,7 +336,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Segments the foreground subject from an image using a neural network, producing a transparent PNG. Max 20MB.',
     dependencies: "rembg / OpenCV / TensorFlow.js",
-    seoDescription: 'Remove image backgrounds automatically with AI — free online tool. Get a transparent PNG in seconds. No uploads, all processing happens in your browser.'
+    seoDescription: 'Remove image backgrounds automatically with AI — free online tool. Get a transparent PNG in seconds. No uploads, all processing happens in your browser.',
+    dependencies: "None",
   },
   {
     id: "34",
@@ -428,7 +432,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Combines two or more PDF files into one contiguous document with a drag-and-drop reorder interface for the input list. Legal assistants compiling.',
     dependencies: "pdf-lib",
-    seoDescription: 'Merge PDF files online free — combine multiple PDFs into one document with drag-and-drop reordering. No uploads, 100% secure and private.'
+    seoDescription: 'Merge PDF files online free — combine multiple PDFs into one document with drag-and-drop reordering. No uploads, 100% secure and private.',
+    dependencies: "None",
   },
   {
     id: "42",
@@ -437,7 +442,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility",
     description: 'Renders a QR code from any text, URL, vCard, Wi-Fi config, or plain string using a client-side Reed-Solomon encoder.',
     dependencies: "qrcode.js",
-    seoDescription: 'Free QR code generator online — create QR codes for URLs, vCards, Wi-Fi, and text. Download high-resolution PNG. 100% free, no account needed.'
+    seoDescription: 'Free QR code generator online — create QR codes for URLs, vCards, Wi-Fi, and text. Download high-resolution PNG. 100% free, no account needed.',
+    dependencies: "None",
   },
 
   {
@@ -543,7 +549,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Audio",
     description: "AI voice generator with Indian accents",
     dependencies: "Google Cloud TTS / ElevenLabs",
-    seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio. AI voices in Hindi, Tamil, Telugu, and more. No sign-up needed.'
+    seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio. AI voices in Hindi, Tamil, Telugu, and more. No sign-up needed.',
+    dependencies: "None",
   },
   {
     id: "53",
@@ -552,7 +559,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Rewrites sentences and paragraphs while preserving the original meaning and intent. Academics and content creators use it to avoid plagiarism.',
     dependencies: "HuggingFace",
-    seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. 100% browser-based.'
+    seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "54",
@@ -663,7 +671,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.',
     dependencies: "Real-ESRGAN",
-    seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. No uploads, 100% browser-based enhancement.'
+    seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. No uploads, 100% browser-based enhancement.',
+    dependencies: "None",
   },
   {
     id: "70",
@@ -693,7 +702,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
-    seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. 100% browser-based.'
+    seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "72",
@@ -750,7 +760,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Divides a single PDF into multiple files by page range, bookmark level, or a specified page count per split.',
     dependencies: "pdf-lib",
-    seoDescription: 'Split PDF files online free — divide PDF by page range, bookmarks, or page count. Extract specific pages into separate files. No uploads, private.'
+    seoDescription: 'Split PDF files online free — divide PDF by page range, bookmarks, or page count. Extract specific pages into separate files. No uploads, private.',
+    dependencies: "None",
   },
   {
     id: "84",
@@ -1030,7 +1041,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer",
     description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.',
     dependencies: "JSONLint",
-    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.'
+    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',
+    dependencies: "None",
   },
   {
     id: "114",
@@ -1921,7 +1933,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.',
     dependencies: "CF Vectorize",
-    seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool, 100% private and browser-based.'
+    seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool, 100% private and browser-based.',
+    dependencies: "None",
   },
   {
     id: "217",
@@ -4586,7 +4599,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hex-ascii-converter",
     category: "Developer",
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion.',
-    seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. 100% browser-based.'
+    seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "496",
@@ -4594,7 +4608,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-encoder-decoder",
     category: "Developer",
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion.',
-    seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. 100% browser-based.'
+    seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "497",
@@ -4602,7 +4617,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-entity-encoder",
     category: "Developer",
     description: 'Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text.',
-    seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. 100% browser-based.'
+    seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "498",
@@ -4610,7 +4626,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "backslash-escape",
     category: "Developer",
     description: 'Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more.',
-    seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. 100% browser-based.'
+    seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "499",
@@ -4618,7 +4635,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-string-generator",
     category: "Developer",
     description: 'Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).',
-    seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. 100% browser-based.'
+    seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "500",
@@ -4626,7 +4644,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "number-base-converter",
     category: "Developer",
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
-    seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. 100% browser-based.'
+    seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "501",
@@ -4634,7 +4653,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "line-sorter",
     category: "Developer",
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
-    seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. 100% browser-based.'
+    seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "502",
@@ -4642,7 +4662,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-parser",
     category: "Developer",
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
-    seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. 100% browser-based.'
+    seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "503",
@@ -4650,7 +4671,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "string-inspector",
     category: "Developer",
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
-    seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. 100% browser-based.'
+    seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "504",
@@ -4658,7 +4680,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "unix-time-converter",
     category: "Developer",
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
-    seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. 100% browser-based.'
+    seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "505",
@@ -4666,7 +4689,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "code-beautifier",
     category: "Developer",
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
-    seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. 100% browser-based.'
+    seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "506",
@@ -4674,7 +4698,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-to-jsx",
     category: "Developer",
     description: 'Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more.',
-    seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. 100% browser-based.'
+    seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "507",
@@ -4682,7 +4707,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "php-tools",
     category: "Developer",
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
-    seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. 100% browser-based.'
+    seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "508",
@@ -4690,7 +4716,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-css",
     category: "Developer",
     description: 'Convert SVG markup to CSS background-image data URIs. Preview the result as a rendered icon.',
-    seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. 100% browser-based.'
+    seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "509",
@@ -4698,7 +4725,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "curl-to-code",
     category: "Developer",
     description: 'Convert cURL commands to JavaScript (fetch, axios, XHR), Python (requests), and PHP (cURL) code.',
-    seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. 100% browser-based.'
+    seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "510",
@@ -4706,7 +4734,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-to-code",
     category: "Developer",
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Supports nested objects and arrays.',
-    seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. 100% browser-based.'
+    seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "511",
@@ -4714,7 +4743,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jwt-debugger",
     category: "Developer",
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
-    seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. 100% browser-based.'
+    seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "512",
@@ -4722,7 +4752,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-preview",
     category: "Developer",
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing.',
-    seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. 100% browser-based.'
+    seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "513",
@@ -4730,7 +4761,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cron-parser",
     category: "Developer",
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
-    seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. 100% browser-based.'
+    seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "514",
@@ -4738,7 +4770,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "crypto-kit",
     category: "Developer",
     description: 'Compute MD5, SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.',
-    seoDescription: 'Free online Crypto & Hash Toolkit — Compute MD5, SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. 100% browser-based.'
+    seoDescription: 'Free online Crypto & Hash Toolkit — Compute MD5, SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "515",
@@ -4746,7 +4779,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "toml-converter",
     category: "Developer",
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
-    seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. 100% browser-based.'
+    seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "516",
@@ -4754,7 +4788,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "network-toolkit",
     category: "Developer",
     description: 'IPv4 subnet calculator, IP address converter (decimal/binary/hex), IP range expander, and IPv6 ULA generator. All in one networking tool.',
-    seoDescription: 'Free online Network Toolkit — IPv4 subnet calculator, IP address converter, IP range expander, and IPv6 ULA generator. All client-side, no uploads.'
+    seoDescription: 'Free online Network Toolkit — IPv4 subnet calculator, IP address converter, IP range expander, and IPv6 ULA generator. All client-side, no uploads.',
+    dependencies: "None",
   },
   {
     id: "517",
@@ -4762,7 +4797,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "web-inspector",
     category: "Developer",
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
-    seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. 100% browser-based.'
+    seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "518",
@@ -4770,7 +4806,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-converter",
     category: "Developer",
     description: 'NATO phonetic alphabet converter, ASCII binary converter, Unicode code point viewer, Roman numeral converter, and string obfuscator with leet speak, ROT13, Base64, and shuffle.',
-    seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. 100% browser-based.'
+    seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "519",
@@ -4778,7 +4815,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "math-tools",
     category: "Utility",
     description: 'Expression evaluator with keypad and history, ETA calculator with distance and speed, and a stopwatch/chronometer with lap recording.',
-    seoDescription: 'Free online Math Tools — Expression evaluator, ETA travel time calculator, and stopwatch chronometer. All in one tool. 100% browser-based.'
+    seoDescription: 'Free online Math Tools — Expression evaluator, ETA travel time calculator, and stopwatch chronometer. All in one tool. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "520",
@@ -4786,7 +4824,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dev-utilities",
     category: "Developer",
     description: 'Random port generator, chmod calculator (numeric/symbolic), Docker run to Compose converter, YAML formatter, and email address normalizer.',
-    seoDescription: 'Free online Developer Utilities — Random port generator, chmod calculator, Docker run to Compose converter, YAML formatter, and email normalizer. 100% browser-based.'
+    seoDescription: 'Free online Developer Utilities — Random port generator, chmod calculator, Docker run to Compose converter, YAML formatter, and email normalizer. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "521",
@@ -4794,7 +4833,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "other-utilities",
     category: "Utility",
     description: 'JSON diff comparison, WiFi QR code config generator, SVG placeholder generator, international phone number parser, OTP code generator, and slugify tool.',
-    seoDescription: 'Free online Other Utilities — JSON diff, WiFi QR config, SVG placeholder generator, phone parser, OTP code generator, and slugify tool. 100% browser-based.'
+    seoDescription: 'Free online Other Utilities — JSON diff, WiFi QR config, SVG placeholder generator, phone parser, OTP code generator, and slugify tool. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "522",
@@ -4802,7 +4842,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mini-generators",
     category: "Utility",
     description: 'ULID generator, numeronym generator (a11y-style), and MAC address vendor lookup with extensive OUI database.',
-    seoDescription: 'Free online Mini Generators — ULID generator, numeronym generator, and MAC address vendor lookup. 100% browser-based.'
+    seoDescription: 'Free online Mini Generators — ULID generator, numeronym generator, and MAC address vendor lookup. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "523",
@@ -4810,7 +4851,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "list-converter",
     category: "Developer",
     description: 'Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.',
-    seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. 100% browser-based.'
+    seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "524",
@@ -4818,7 +4860,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rsa-key-generator",
     category: "Developer",
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
-    seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, 100% browser-based.'
+    seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "525",
@@ -4826,7 +4869,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "creative-tools",
     category: "Utility",
     description: 'Emoji picker with 400+ emoji grouped by category with search, and ASCII art generator with block, bubble, fancy, and digital styles.',
-    seoDescription: 'Free online Creative Tools — Emoji picker with search across 400+ emoji and ASCII art generator with multiple font styles. 100% browser-based.'
+    seoDescription: 'Free online Creative Tools — Emoji picker with search across 400+ emoji and ASCII art generator with multiple font styles. 100% browser-based.',
+    dependencies: "None",
   },
   {
     id: "526",
@@ -4834,7 +4878,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "benchmark-builder",
     category: "Utility",
     description: 'Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.',
-    seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. 100% browser-based.'
+    seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. 100% browser-based.',
+    dependencies: "None",
   },
 ];
 
