@@ -306,6 +306,9 @@ export function Header() {
             <Link href="/extension" aria-current={pathname === "/extension" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Extension
             </Link>
+            <Link href="/premium-tools" aria-current={pathname === "/premium-tools" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-amber-500/80 hover:text-amber-500 transition-colors">
+              Pro
+            </Link>
             <Link href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Pricing
             </Link>
