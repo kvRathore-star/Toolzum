@@ -128,8 +128,12 @@ export function Header() {
         
         {/* Left Section: Logo & Links */}
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-1 group select-none">
-            <span className="text-[22px] font-semibold tracking-tight text-[var(--text-primary)]">
+          <Link href="/" className="flex items-center gap-2.5 group select-none">
+            <svg width="26" height="26" viewBox="0 0 100 100" fill="none" className="shrink-0">
+              <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+              <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span className="text-[22px] font-extrabold tracking-tight text-[var(--text-primary)]">
               Tool<span className="text-[var(--accent)]">zum</span>
             </span>
           </Link>

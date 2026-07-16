@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
-  <rect x="4" y="6" width="10" height="38" rx="2" fill="currentColor" class="fill-zinc-900 dark:fill-white"/>
-  <rect x="18" y="6" width="10" height="38" rx="2" fill="currentColor" class="fill-zinc-900 dark:fill-white"/>
-  <rect x="4" y="6" width="24" height="10" rx="2" fill="#7C3AED"/>
-  <text x="42" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="currentColor" class="fill-zinc-900 dark:fill-white">Tool</text>
-  <text x="100" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#7C3AED">zum</text>
-</svg>

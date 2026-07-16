@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-384x384.png', sizes: '384x384', type: 'image/png' },
     ],
-    apple: { url: '/icon-192x192.png' },
+    apple: { url: '/icon-180x180.png' },
   },
   openGraph: {
     type: "website",
@@ -108,7 +108,7 @@ export default function RootLayout({
         )}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/icon-180x180.png" />
         <link rel="alternate" hrefLang="en" href="https://toolzum.com" />
         <a
           href="#main-content"

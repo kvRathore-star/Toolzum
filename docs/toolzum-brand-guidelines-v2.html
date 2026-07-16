@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Toolzum — Brand Guidelines v2</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0c0d12;
+    color: #e6edf3;
+    padding: 50px 20px 100px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { text-align: center; font-weight: 800; font-size: 32px; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #8b98a5; margin-bottom: 60px; font-size: 14px; letter-spacing: 0.5px; }
+  h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #6366F1;
+    border-bottom: 1px solid #2d333b;
+    padding-bottom: 12px;
+    margin: 60px 0 24px;
+  }
+  .card {
+    background: #161822;
+    border: 1px solid #2b2e3a;
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 240px; }
+  p.note { color: #8b98a5; font-size: 13px; line-height: 1.6; margin: 8px 0 0; }
+
+  .size-grid {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: #14151f;
+    border: 1px solid #2b2e3a;
+    border-radius: 14px;
+    padding: 40px 30px;
+  }
+  .size-item { text-align: center; }
+  .size-item .label { margin-top: 10px; font-size: 12px; color: #a8b1bd; font-weight: 600; }
+  .size-item .px { font-size: 11px; color: #6b7280; }
+
+  .lockup-box {
+    background: #14151f;
+    border: 1px solid #2b2e3a;
+    border-radius: 14px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .lockup-box.light { background: #fff; border: none; }
+  .lockup-box.purple { background: #6366F1; border: none; }
+
+  .swatch-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .swatch { width: 140px; border-radius: 10px; overflow: hidden; border: 1px solid #2b2e3a; }
+  .swatch .fill { height: 70px; }
+  .swatch .info { background: #14151f; padding: 10px; font-size: 11px; }
+  .swatch .info b { display: block; font-size: 12px; margin-bottom: 2px; }
+
+  .clearspace-box {
+    background: #14151f;
+    border: 1px solid #2b2e3a;
+    border-radius: 14px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .clearspace-inner {
+    position: relative;
+    display: inline-block;
+    outline: 1px dashed #4b5563;
+    padding: 22px;
+  }
+
+  .misuse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; }
+  .misuse-card { background: #14151f; border: 1px solid #2b2e3a; border-radius: 12px; padding: 20px; text-align: center; }
+  .misuse-card .x { color: #ff6b7a; font-size: 11px; font-weight: 700; margin-top: 10px; }
+
+  footer { text-align: center; color: #4b5563; font-size: 12px; margin-top: 80px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>TOOLZUM</h1>
+  <p class="subtitle">Brand Guidelines — Final Logo System · v2.1 (Indigo/Dark) · 2026</p>
+
+  <!-- PRIMARY MARK -->
+  <h2>01 — Primary Mark</h2>
+  <div class="card">
+    <div class="row">
+      <div class="col" style="max-width:200px;">
+        <svg width="160" height="160" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white"
+                stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="col">
+        <p class="note">
+          The Toolzum mark is a single continuous tapered stroke forming an abstract "Z" gesture —
+          representing precision, speed, and a signal path. Rebuilt from the original v1.0 blue 
+          system onto a vivid indigo accent, matching the brand equity already established 
+          by the original wordmark. This colorway carries more personality and stands out further 
+          from the sea of blue-branded privacy/SaaS competitors, while keeping the same abstract, 
+          non-literal, technology-agnostic mark so it continues to age well.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIZE VARIATIONS -->
+  <h2>02 — Icon at All Required Sizes</h2>
+  <div class="card">
+    <div class="size-grid">
+
+      <div class="size-item">
+        <svg width="180" height="180" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">App Store / Marketing</div>
+        <div class="px">1024 × 1024 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="120" height="120" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">PWA / App Icon</div>
+        <div class="px">512 × 512 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="90" height="90" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">Android Icon</div>
+        <div class="px">192 × 192 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="60" height="60" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">Touch Icon</div>
+        <div class="px">180 × 180 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="48" height="48" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">Toolbar / Nav</div>
+        <div class="px">48 × 48 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="32" height="32" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">Favicon (large)</div>
+        <div class="px">32 × 32 px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="16" height="16" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M26 32 H74 L28 68 H74" fill="none" stroke="white" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="label">Favicon (browser tab)</div>
+        <div class="px">16 × 16 px</div>
+      </div>
+
+    </div>
+    <p class="note">Stroke weight increased proportionally at 32px and 16px to prevent the mark from thinning out and disappearing at browser-tab scale.</p>
+  </div>
+
+  <!-- WORDMARK -->
+  <h2>03 — Wordmark</h2>
+  <div class="card">
+    <div class="lockup-box" style="justify-content:center;">
+      <svg width="260" height="60" viewBox="0 0 260 60">
+        <text x="0" y="42" font-family="Arial, sans-serif" font-weight="800" font-size="42" fill="#e6edf3">Tool</text>
+        <text x="88" y="42" font-family="Arial, sans-serif" font-weight="800" font-size="42" fill="#6366F1">zum</text>
+      </svg>
+    </div>
+    <p class="note">Custom-set wordmark restoring the original Tool/zum split-color treatment: "Tool" in off-white, 
+      "zum" in brand indigo (#6366F1) — same color logic as the original pre-icon lockup, now paired 
+      with the finalized tapered-Z icon.</p>
+  </div>
+
+  <!-- FULL LOCKUPS -->
+  <h2>04 — Primary Lockup (Icon + Wordmark)</h2>
+  <div class="card">
+    <div class="row">
+      <div class="col">
+        <div class="lockup-box">
+          <svg width="56" height="56" viewBox="0 0 100 100">
+            <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+            <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg width="170" height="46" viewBox="0 0 220 56">
+            <text x="0" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="38" fill="#e6edf3">Tool</text>
+            <text x="76" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="38" fill="#6366F1">zum</text>
+          </svg>
+        </div>
+        <p class="note"><b style="color:#e6edf3;">Primary lockup</b> — dark background. Website header, app UI, splash screens. This is the default, matching the original brand equity.</p>
+      </div>
+      <div class="col">
+        <div class="lockup-box light">
+          <svg width="56" height="56" viewBox="0 0 100 100">
+            <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+            <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg width="170" height="46" viewBox="0 0 220 56">
+            <text x="0" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="38" fill="#0f1419">Tool</text>
+            <text x="76" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="38" fill="#4F46E5">zum</text>
+          </svg>
+        </div>
+        <p class="note">Light background variant — print, light-mode UI, partner co-branding. Purple darkened slightly for AA contrast on white.</p>
+      </div>
+      <div class="col">
+        <div class="lockup-box purple">
+          <svg width="56" height="56" viewBox="0 0 100 100">
+            <rect x="0" y="0" width="100" height="100" rx="24" fill="white"/>
+            <path d="M28 34 H72 L30 66 H72" fill="none" stroke="#6366F1" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg width="170" height="46" viewBox="0 0 220 56">
+            <text x="0" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="38" fill="white">Toolzum</text>
+          </svg>
+        </div>
+        <p class="note">On-brand-color background — social banners, merch, presentation title slides.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEAR SPACE -->
+  <h2>05 — Clear Space & Minimum Size</h2>
+  <div class="card">
+    <div class="clearspace-box">
+      <div class="clearspace-inner">
+        <svg width="90" height="90" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <p class="note">Minimum clear space around the mark = the height of the "Z" stroke itself (dashed border above).
+      Never place text, other logos, or UI elements inside this zone. Minimum reproduction size: 16px digital / 8mm print — below this, use the icon-only mark without the wordmark.</p>
+  </div>
+
+  <!-- COLOR -->
+  <h2>06 — Color Palette</h2>
+  <div class="card">
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="fill" style="background:#6366F1;"></div>
+        <div class="info"><b>Toolzum Indigo</b>#6366F1<br>Primary — icon fill, wordmark accent (dark bg)</div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#4F46E5;"></div>
+        <div class="info"><b>Indigo (darker, AA on white)</b>#4F46E5<br>Wordmark accent on light backgrounds only</div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#0c0d12;"></div>
+        <div class="info"><b>Ink Black</b>#0C0D12<br>Primary background — matches original lockup</div>
+      </div>
+      <div class="swatch">
+        <div class="fill" style="background:#ffffff; border-bottom:1px solid #2b2e3a;"></div>
+        <div class="info"><b>White</b>#FFFFFF<br>Icon stroke, reversed lockups, light-mode wordmark</div>
+      </div>
+    </div>
+    <p class="note">Dark background is now the primary/default presentation, matching original brand equity. 
+      Light and full-color variants exist for contexts that require them (print, partner logos, co-branding).</p>
+  </div>
+
+  <!-- MISUSE -->
+  <h2>07 — Incorrect Usage</h2>
+  <div class="card">
+    <div class="misuse-grid">
+      <div class="misuse-card">
+        <svg width="70" height="70" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#22C1A6"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="x">✕ Do not recolor the badge</div>
+      </div>
+      <div class="misuse-card">
+        <svg width="70" height="70" viewBox="0 0 100 100" style="transform:rotate(180deg)">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="x">✕ Do not rotate or flip</div>
+      </div>
+      <div class="misuse-card">
+        <svg width="70" height="70" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="x">✕ Do not thin the stroke</div>
+      </div>
+      <div class="misuse-card">
+        <svg width="70" height="70" viewBox="0 0 100 100">
+          <rect x="0" y="0" width="100" height="100" rx="0" fill="#6366F1"/>
+          <path d="M28 34 H72 L30 66 H72" fill="none" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="x">✕ Do not square off corners</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>TOOLZUM Brand Guidelines · Logo System v2.1 (Indigo/Dark) · Finalized 2026</footer>
+
+</div>
+</body>
+</html>
