@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ToolMetadata, ToolCategory } from "@/registry/tools";
-import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown } from "lucide-react";
+import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown, ArrowUpDown } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 
 interface CategoryPageClientProps {
@@ -15,6 +15,7 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
   'converter': 'File Converter',
+  'indian-utilities': 'Indian Utilities',
 };
 
 function getIconBg(tool: ToolMetadata) {
@@ -26,10 +27,6 @@ function getIconBg(tool: ToolMetadata) {
     gradient: theme.gradientHover,
   };
 }
-
-const DISPLAY_NAMES: Record<string, string> = {
-  'indian-utilities': 'Indian Utilities',
-};
 
 const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   Image: [
@@ -127,10 +124,12 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
-  const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || DISPLAY_NAMES[category] || category;
+  const displayName = CATEGORY_DISPLAY_NAMES[category.toLowerCase()] || category;
   const group = getCategoryGroup(category);
   const subCats = SUB_CATEGORIES[category];
-  const [letterFilter, setLetterFilter] = React.useState('');
+  const [sortBy, setSortBy] = React.useState<'name-asc' | 'name-desc'>('name-asc');
+  const [showSortMenu, setShowSortMenu] = React.useState(false);
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
 
   const allCategories = React.useMemo(() => {
@@ -163,6 +162,9 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setOpenGroup(null);
       }
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setShowSortMenu(false);
+      }
     };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
@@ -170,9 +172,11 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
 
   const filtered = tools.filter(t => {
     const matchesSearch = !searchQuery || t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLetter = !letterFilter || t.name.toLowerCase().startsWith(letterFilter);
     const matchesPro = proFilter === 'all' || (proFilter === 'pro' ? t.isPro : !t.isPro);
-    return matchesSearch && matchesLetter && matchesPro;
+    return matchesSearch && matchesPro;
+  }).sort((a, b) => {
+    if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
+    return b.name.localeCompare(a.name);
   });
 
   const toolCount = filtered.length;
@@ -299,14 +303,14 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             {subCats.map(sc => (
               <button
                 key={sc.label}
-                onClick={() => { setSearchQuery(sc.label.toLowerCase()); setLetterFilter(''); }}
+                onClick={() => { setSearchQuery(sc.label.toLowerCase()); }}
                 className="text-xs px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-elevated)] transition-all"
               >
                 {sc.icon} {sc.label}
               </button>
             ))}
             <button
-              onClick={() => { setSearchQuery(''); setLetterFilter(''); }}
+              onClick={() => { setSearchQuery(''); }}
               className="text-xs px-3 py-1.5 rounded-full border border-dashed border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] transition-all"
             >
               Clear
@@ -314,33 +318,24 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
           </div>
         )}
 
-        {/* A-Z Filter */}
-        <div className="flex flex-wrap gap-1 mb-6">
-          <button
-            onClick={() => setLetterFilter('')}
-            className={`text-[11px] font-mono font-bold px-2.5 py-1 rounded-md transition-all ${!letterFilter ? 'bg-[var(--accent)] text-white shadow-sm' : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'}`}
-          >
-            All
-          </button>
-          {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => {
-            const hasTools = tools.some(t => t.name.toLowerCase().startsWith(letter.toLowerCase()));
-            return (
-              <button
-                key={letter}
-                onClick={() => { setLetterFilter(letter); setSearchQuery(''); }}
-                disabled={!hasTools}
-                className={`text-[11px] font-mono font-bold w-7 h-7 rounded-md transition-all ${
-                  letterFilter === letter
-                    ? 'bg-[var(--accent)] text-white shadow-sm'
-                    : hasTools
-                    ? 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[var(--border-default)]'
-                    : 'text-[var(--text-muted)] opacity-30 cursor-not-allowed'
-                }`}
-              >
-                {letter}
-              </button>
-            );
-          })}
+        {/* Sort */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="relative" ref={sortRef}>
+            <button onClick={() => setShowSortMenu(!showSortMenu)} className="flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-mono border border-[var(--border-subtle)] rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+              <ArrowUpDown className="w-3 h-3" />
+              {sortBy === 'name-asc' ? 'A–Z' : 'Z–A'}
+            </button>
+            {showSortMenu && (
+              <div className="absolute left-0 top-full mt-1 w-36 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-1 z-50">
+                <button onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                  A → Z
+                </button>
+                <button onClick={() => { setSortBy('name-desc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                  Z → A
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Pro/Free toggle */}

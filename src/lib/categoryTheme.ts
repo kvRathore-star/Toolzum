@@ -223,6 +223,7 @@ export const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'transcription': 'Transcription',
   'branding': 'Branding & Marketing',
   'productivity': 'Productivity',
+  'indian-utilities': 'Indian Utilities',
 };
 
 export const GROUP_ORDER = ['Media', 'India 🇮🇳', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];

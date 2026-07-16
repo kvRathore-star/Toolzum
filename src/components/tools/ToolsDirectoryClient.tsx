@@ -14,6 +14,7 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'transcription': 'Transcription',
   'branding': 'Branding & Marketing',
   'productivity': 'Productivity',
+  'indian-utilities': 'Indian Utilities',
 };
 
 const ITEMS_PER_PAGE = 30;

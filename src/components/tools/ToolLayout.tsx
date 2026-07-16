@@ -191,19 +191,19 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
           {/* Tool Container */}
           <div className="w-full text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow overflow-hidden relative">
             <GlobalErrorBoundary>
-              <ToolPaywall
-                isLocked={isLocked}
-                isFreeTier={isFreeTier}
-                isProLocked={isProLocked}
-                showSignInPrompt={showSignInPrompt}
-                proToolCount={proToolCount}
-                toolCount={toolCount}
-                title={title}
-              >
-                <WorkflowPresetPanel toolSlug={slug}>
+              <WorkflowPresetPanel toolSlug={slug}>
+                <ToolPaywall
+                  isLocked={isLocked}
+                  isFreeTier={isFreeTier}
+                  isProLocked={isProLocked}
+                  showSignInPrompt={showSignInPrompt}
+                  proToolCount={proToolCount}
+                  toolCount={toolCount}
+                  title={title}
+                >
                   {children}
-                </WorkflowPresetPanel>
-              </ToolPaywall>
+                </ToolPaywall>
+              </WorkflowPresetPanel>
             </GlobalErrorBoundary>
           </div>
 
@@ -234,7 +234,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                       </div>
                       <div className="flex-1 min-w-0 text-left">
                         <p className="text-xs font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{rt.name}</p>
-                        <p className="text-[10px] text-[var(--text-muted)] truncate">{rt.dependencies}</p>
+                        <p className="text-[10px] text-[var(--text-muted)] truncate">{rt.description}</p>
                       </div>
                       <ChevronRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
                     </Link>

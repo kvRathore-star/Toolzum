@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check } from "lucide-react";
+import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { CommandMenu } from "./CommandMenu";
 import { useToolHistory } from '@/hooks/useToolHistory';
@@ -48,8 +48,6 @@ export function Header() {
   const [mounted, setMounted] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [shareOpen, setShareOpen] = useState(false);
-  const [shareCopied, setShareCopied] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -310,68 +308,19 @@ export function Header() {
               Pricing
             </Link>
 
-            <div className="relative">
-              <button
-                onClick={(e) => { e.stopPropagation(); setShareOpen(!shareOpen); }}
-                onMouseEnter={() => setShareOpen(true)}
-                onMouseLeave={() => setShareOpen(false)}
-                className="flex items-center gap-1.5 px-3 py-2 text-[14px] font-medium text-rose-500/80 hover:text-rose-500 transition-all rounded-[var(--radius-sm)]"
-                aria-label="Share Toolzum"
-              >
-                <Heart className="w-3.5 h-3.5" />
-                <span>Share</span>
-              </button>
-
-              <AnimatePresence>
-                {shareOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-3 min-w-[200px]"
-                    onMouseEnter={() => setShareOpen(true)}
-                    onMouseLeave={() => setShareOpen(false)}
-                  >
-                    <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2 px-2">
-                      Tell the world about Toolzum
-                    </p>
-                    <div className="space-y-0.5">
-                      {[
-                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent('277+ free privacy-first browser tools. Zero servers, zero uploads.')}&url=${encodeURIComponent('https://toolzum.com')}` },
-                        { name: 'LinkedIn', emoji: 'in', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}` },
-                        { name: 'Facebook', emoji: 'f', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}` },
-                        { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent('277+ free privacy-first browser tools: https://toolzum.com')}` },
-                      ].map(p => (
-                        <a
-                          key={p.name}
-                          href={p.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => setShareOpen(false)}
-                          className="flex items-center gap-2.5 px-3 py-2 text-xs text-[var(--text-secondary)] hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-[var(--radius-md)] transition-colors w-full"
-                        >
-                          <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[10px] font-bold font-mono">{p.emoji}</span>
-                          Share on {p.name}
-                        </a>
-                      ))}
-                      <button
-                        onClick={async () => {
-                          try {
-                            await navigator.clipboard.writeText('https://toolzum.com');
-                            setShareCopied(true);
-                            setTimeout(() => setShareCopied(false), 2000);
-                          } catch {}
-                        }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-[var(--text-secondary)] hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-[var(--radius-md)] transition-colors"
-                      >
-                        {shareCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <LinkIcon className="w-3.5 h-3.5" />}
-                        {shareCopied ? 'Copied!' : 'Copy link'}
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="flex items-center gap-0.5 ml-2 pl-2 border-l border-[var(--border-subtle)]">
+              {[
+                { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent('277+ free privacy-first browser tools. Zero servers, zero uploads.')}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
+                { emoji: 'in', title: 'Share on LinkedIn', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-blue-600 hover:border-blue-500/30' },
+                { emoji: 'f', title: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-indigo-600 hover:border-indigo-500/30' },
+                { emoji: 'IG', title: 'Share on Instagram', href: 'https://www.instagram.com/', hover: 'hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 hover:border-pink-500/30' },
+                { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent('277+ free privacy-first browser tools: https://toolzum.com')}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
+                { emoji: 'RD', title: 'Share on Reddit', href: `https://reddit.com/submit?url=https://toolzum.com&title=Toolzum+—+privacy-first+browser+tools`, hover: 'hover:text-white hover:bg-orange-600 hover:border-orange-500/30' },
+                { emoji: 'TG', title: 'Share on Telegram', href: `https://t.me/share/url?url=https://toolzum.com&text=${encodeURIComponent('Check out Toolzum — privacy-first browser tools')}`, hover: 'hover:text-white hover:bg-sky-600 hover:border-sky-500/30' },
+              ].map(p => (
+                <a key={p.emoji} href={p.href} target="_blank" rel="noopener noreferrer" className={`w-7 h-7 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[9px] font-bold font-mono text-[var(--text-muted)] transition-all ${p.hover}`} title={p.title}>{p.emoji}</a>
+              ))}
+              <button onClick={async () => { try { await navigator.clipboard.writeText('https://toolzum.com'); toast.success('Link copied!'); } catch {} }} className="w-7 h-7 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
             </div>
 
           </nav>
@@ -461,20 +410,23 @@ export function Header() {
                 </Link>
               ))}
 
-              <button
-                onClick={async () => {
-                  if (navigator.share) {
-                    try { await navigator.share({ title: 'Toolzum', text: '277+ free privacy-first browser tools', url: 'https://toolzum.com' }); } catch {}
-                  } else {
-                    try { await navigator.clipboard.writeText('https://toolzum.com'); toast.success('Link copied! Share Toolzum with the world ❤️'); } catch {}
-                  }
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center gap-2 w-full px-4 py-3 text-sm text-rose-500/80 hover:text-rose-500 hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
-              >
-                <Heart className="w-4 h-4" />
-                <span>Tell the world about Toolzum</span>
-              </button>
+              <div className="px-4 py-3">
+                <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">Share Toolzum</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {[
+                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent('277+ free privacy-first browser tools. Zero servers, zero uploads.')}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
+                    { emoji: 'in', title: 'Share on LinkedIn', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-blue-600 hover:border-blue-500/30' },
+                    { emoji: 'f', title: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-indigo-600 hover:border-indigo-500/30' },
+                    { emoji: 'IG', title: 'Share on Instagram', href: 'https://www.instagram.com/', hover: 'hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 hover:border-pink-500/30' },
+                    { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent('277+ free privacy-first browser tools: https://toolzum.com')}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
+                    { emoji: 'RD', title: 'Share on Reddit', href: `https://reddit.com/submit?url=https://toolzum.com&title=Toolzum+—+privacy-first+browser+tools`, hover: 'hover:text-white hover:bg-orange-600 hover:border-orange-500/30' },
+                    { emoji: 'TG', title: 'Share on Telegram', href: `https://t.me/share/url?url=https://toolzum.com&text=${encodeURIComponent('Check out Toolzum — privacy-first browser tools')}`, hover: 'hover:text-white hover:bg-sky-600 hover:border-sky-500/30' },
+                  ].map(p => (
+                    <a key={p.emoji} href={p.href} target="_blank" rel="noopener noreferrer" className={`w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] transition-all ${p.hover}`} title={p.title} onClick={() => setMobileMenuOpen(false)}>{p.emoji}</a>
+                  ))}
+                  <button onClick={async () => { try { await navigator.clipboard.writeText('https://toolzum.com'); toast.success('Link copied!'); } catch {} setMobileMenuOpen(false); }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[12px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
+                </div>
+              </div>
 
               {/* Category shortcuts */}
               <div className="pt-4 mt-4 border-t border-[var(--border-subtle)]">
