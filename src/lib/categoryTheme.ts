@@ -209,6 +209,7 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
   Branding: { label: 'Business & Finance', order: 4 },
   Utility: { label: 'Tools & Converters', order: 5 },
   Converter: { label: 'Tools & Converters', order: 5 },
+  Calculator: { label: 'Tools & Converters', order: 5 },
   Downloader: { label: 'Tools & Converters', order: 5 },
   Design: { label: 'Lifestyle', order: 6 },
   Productivity: { label: 'Lifestyle', order: 6 },
@@ -224,6 +225,7 @@ export const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'branding': 'Branding & Marketing',
   'productivity': 'Productivity',
   'indian-utilities': 'Indian Utilities',
+  'calculator': 'Calculator',
 };
 
 export const GROUP_ORDER = ['Media', 'India 🇮🇳', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
