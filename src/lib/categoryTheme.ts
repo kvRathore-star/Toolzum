@@ -9,16 +9,12 @@ import {
   ArrowLeftRight,
   Code,
   Shield,
-  Download,
   Puzzle,
   Search,
   Wrench,
   Heart,
-  Users,
   DollarSign,
   CheckSquare,
-  Briefcase,
-  ShoppingCart,
   Calculator as CalculatorIcon,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -79,12 +75,6 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     bgTint: "bg-cyan-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-cyan-500/5",
   },
-  Downloader: {
-    icon: Download,
-    iconColor: "text-sky-500",
-    bgTint: "bg-sky-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-sky-500/5",
-  },
   Privacy: {
     icon: Shield,
     iconColor: "text-violet-500",
@@ -127,24 +117,7 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     bgTint: "bg-red-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-red-500/5",
   },
-  HR: {
-    icon: Users,
-    iconColor: "text-stone-500",
-    bgTint: "bg-stone-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-stone-500/5",
-  },
-  Business: {
-    icon: Briefcase,
-    iconColor: "text-slate-500",
-    bgTint: "bg-slate-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-slate-500/5",
-  },
-  "E-commerce": {
-    icon: ShoppingCart,
-    iconColor: "text-green-500",
-    bgTint: "bg-green-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-green-500/5",
-  },
+
   Converter: {
     icon: ArrowLeftRight,
     iconColor: "text-emerald-500",
@@ -157,12 +130,6 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     bgTint: "bg-sky-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-sky-500/5",
   },
-  Marketing: {
-    icon: Search,
-    iconColor: "text-rose-500",
-    bgTint: "bg-rose-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-rose-500/5",
-  },
   Design: {
     icon: ImageIcon,
     iconColor: "text-rose-500",
@@ -174,12 +141,6 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     iconColor: "text-fuchsia-500",
     bgTint: "bg-fuchsia-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-fuchsia-500/5",
-  },
-  Lifestyle: {
-    icon: Sun,
-    iconColor: "text-yellow-500",
-    bgTint: "bg-yellow-500/10",
-    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-yellow-500/5",
   },
   Calculator: {
     icon: CalculatorIcon,
@@ -209,24 +170,17 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
   SEO: { label: 'Developer & Tech', order: 3 },
   Extension: { label: 'Developer & Tech', order: 3 },
   Finance: { label: 'Business & Finance', order: 4 },
-  Business: { label: 'Business & Finance', order: 4 },
-  HR: { label: 'Business & Finance', order: 4 },
-  'E-commerce': { label: 'Business & Finance', order: 4 },
-  Marketing: { label: 'Business & Finance', order: 4 },
   Branding: { label: 'Business & Finance', order: 4 },
   Utility: { label: 'Tools & Converters', order: 5 },
   Converter: { label: 'Tools & Converters', order: 5 },
   Calculator: { label: 'Tools & Converters', order: 5 },
-  Downloader: { label: 'Tools & Converters', order: 5 },
   Design: { label: 'Lifestyle', order: 6 },
   Productivity: { label: 'Lifestyle', order: 6 },
   Privacy: { label: 'Lifestyle', order: 6 },
   Health: { label: 'Lifestyle', order: 6 },
-  Lifestyle: { label: 'Lifestyle', order: 6 },
 };
 
 export const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
-  'e-commerce': 'E-Commerce',
   'ai': 'AI Tools',
   'transcription': 'Transcription',
   'branding': 'Branding & Marketing',

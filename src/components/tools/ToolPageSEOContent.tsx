@@ -180,13 +180,6 @@ const categoryFaqTemplates: Record<string, { question: string; answer: string }[
     { question: "What browsers are supported?", answer: "Generated extensions follow the Manifest V3 standard, compatible with Chrome, Edge, Brave, and other Chromium-based browsers." },
     { question: "Will the extension work offline?", answer: "Most generated extensions work offline, but some features (like downloaders) require internet connectivity." },
   ],
-  "Downloader": [
-    { question: "Is downloading videos legal?", answer: "Only download content you have the rights to access. Respect copyright and terms of service of the source platform." },
-    { question: "What video quality is available?", answer: "Available quality depends on the source platform and video. Most tools attempt to fetch the highest available resolution." },
-    { question: "Can I download private or age-restricted content?", answer: "No. These tools only access publicly available content that your browser can normally access." },
-    { question: "Why does my download fail?", answer: "Downloads may fail if the source platform changes its API, the video is removed, or network restrictions apply." },
-    { question: "Are my downloads private?", answer: "Download requests go directly from your browser to the source. We don't proxy or store any downloaded content." },
-  ],
 };
 
 const defaultInstructions = [
@@ -216,7 +209,6 @@ function getCategoryKey(category: string): string {
     "finance": "Finance",
     "utility": "Utility",
     "converter": "Converter",
-    "downloader": "Downloader",
     "video": "Video",
     "audio": "Audio",
     "branding": "Branding",
@@ -229,10 +221,6 @@ function getCategoryKey(category: string): string {
     "indian-utilities": "indian-utilities",
     "ai": "AI",
     "health": "Health",
-    "hr": "HR",
-    "business": "Business",
-    "e-commerce": "E-commerce",
-    "lifestyle": "Lifestyle",
   };
   const normalized = category.toLowerCase().replace(/\s+/g, "-");
   return map[normalized] || category;
@@ -241,15 +229,14 @@ function getCategoryKey(category: string): string {
 const crossCategoryMap: Record<string, string[]> = {
   "PDF": ["Converter", "Image", "Text"],
   "Image": ["Design", "Branding", "PDF"],
-  "Video": ["Audio", "Downloader", "Converter"],
-  "Audio": ["Video", "Converter", "Downloader"],
+  "Video": ["Audio", "Converter"],
+  "Audio": ["Video", "Converter"],
   "Developer": ["SEO", "Utility", "Productivity"],
   "Text": ["AI", "Developer", "SEO"],
-  "AI": ["Text", "Image", "Marketing"],
+  "AI": ["Text", "Image"],
   "Utility": ["Developer", "Productivity", "Finance"],
   "Converter": ["PDF", "Image", "Video"],
-  "Downloader": ["Video", "Audio", "Extension"],
-  "Finance": ["Business", "indian-utilities", "Converter"],
+  "Finance": ["indian-utilities", "Converter"],
   "SEO": ["Developer", "Branding", "Text"],
   "Privacy": ["Developer", "Utility", "Text"],
   "Branding": ["Design", "Image", "SEO", "Utility"],

@@ -46,14 +46,10 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     'indian-utilities': { title: 'Indian Utilities 🇮🇳 — Aadhaar, PAN, GST & More', description: 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.' },
     Transcription: { title: 'Free Transcription Tools — Speech to Text', description: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.' },
     Branding: { title: 'Free Branding & Marketing Tools — Logo, Analytics & Design', description: 'Free branding and marketing tools — create logos, design social media posts, shorten URLs, schedule content, and measure campaign performance with analytics calculators.' },
-    Business: { title: 'Free Business Tools — Invoicing, Contracts & More', description: 'Free business tools — invoice generator, contract templates, business name generator, and more. Streamline your workflow.' },
     Productivity: { title: 'Free Productivity Tools — Notes, Timers & More', description: 'Free productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.' },
     Design: { title: 'Free Design Tools — Graphics & Visuals', description: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.' },
-    HR: { title: 'Free HR Tools — Resume, Salary & HR Utilities', description: 'Free HR tools — resume builder, salary calculator, leave calculator, and HR utilities for professionals and teams.' },
     Health: { title: 'Free Health Tools — BMI, Calorie & Wellness', description: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.' },
     Extension: { title: 'Free Browser Extension Tools', description: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.' },
-    'E-commerce': { title: 'Free E-Commerce Tools — Store & Product', description: 'Free e-commerce tools — product price tracker, store analytics, and e-commerce utilities for online sellers.' },
-    Lifestyle: { title: 'Free Lifestyle Tools — Daily Life Essentials', description: 'Free lifestyle tools — habit tracker, mood journal, and daily life utilities to improve your everyday routine.' },
     Calculator: { title: 'Free Online Calculators — Mortgage, BMI, Math & More', description: 'Free online calculators — mortgage, BMI, percentage, age, math, health, finance, and everyday calculators. All computations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools — Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.` };

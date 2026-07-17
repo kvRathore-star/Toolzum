@@ -2,35 +2,38 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Clipboard } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
-type Tab = 'css' | 'proto' | 'ts' | 'regex';
+type Tab = 'css' | 'proto' | 'ts';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'css', label: 'CSS Preprocessors' },
   { key: 'proto', label: 'Protobuf' },
   { key: 'ts', label: 'TypeScript' },
-  { key: 'regex', label: 'Regex & Strings' },
 ];
 
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
+function CopyBtn({ text, label }: { text: string; label?: string }) {
+  return (
+    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
+      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+  );
 }
 
 export default function StyleCodeKit() {
   const [tab, setTab] = useState<Tab>('css');
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-xl w-fit">
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${tab === t.key ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>{t.label}</button>
+            className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${tab === t.key ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{t.label}</button>
         ))}
       </div>
       {tab === 'css' && <CssPreprocTools />}
       {tab === 'proto' && <ProtoTools />}
       {tab === 'ts' && <TypeScriptTools />}
-      {tab === 'regex' && <RegexTools />}
     </div>
   );
 }
@@ -38,6 +41,10 @@ export default function StyleCodeKit() {
 function CssPreprocTools() {
   const [scss, setScss] = useState('$primary: #3b82f6;\n.btn {\n  color: $primary;\n  font-weight: bold;\n  &:hover {\n    opacity: 0.8;\n  }\n}');
   const [css, setCss] = useState('');
+  const [stylus, setStylus] = useState('.btn\n  color #3b82f6\n  font-weight bold\n  &:hover\n    opacity 0.8');
+  const [stylCss, setStylCss] = useState('');
+  const [tailwind, setTailwind] = useState('flex items-center justify-between p-4 bg-white shadow rounded-lg');
+  const [tailCss, setTailCss] = useState('');
 
   const convertScss = () => {
     let result = scss
@@ -49,9 +56,6 @@ function CssPreprocTools() {
       .trim();
     setCss(result);
   };
-
-  const [stylus, setStylus] = useState('.btn\n  color #3b82f6\n  font-weight bold\n  &:hover\n    opacity 0.8');
-  const [stylCss, setStylCss] = useState('');
 
   const convertStylus = () => {
     let result = '';
@@ -73,9 +77,6 @@ function CssPreprocTools() {
     while (depth > 0) { result += ' }'; depth--; }
     setStylCss(result);
   };
-
-  const [tailwind, setTailwind] = useState('flex items-center justify-between p-4 bg-white shadow rounded-lg');
-  const [tailCss, setTailCss] = useState('');
 
   const tailwindMap: Record<string, string> = {
     'flex': 'display: flex;', 'items-center': 'align-items: center;', 'justify-center': 'justify-content: center;',
@@ -114,7 +115,6 @@ function CssPreprocTools() {
     'col-span-2': 'grid-column: span 2;', 'col-span-3': 'grid-column: span 3;',
     'whitespace-nowrap': 'white-space: nowrap;', 'truncate': 'overflow: hidden; text-overflow: ellipsis; white-space: nowrap;',
   };
-
   const tailwindMapExtra: Record<string, (v: string) => string> = {
     'text-\\[([^\\]]+)\\]': v => `color: ${v};`,
     'bg-\\[([^\\]]+)\\]': v => `background-color: ${v};`,
@@ -141,9 +141,25 @@ function CssPreprocTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">SCSS → CSS</h4><textarea rows={6} value={scss} onChange={e => setScss(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={convertScss} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{css && <textarea readOnly rows={4} value={css} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Stylus → CSS</h4><textarea rows={6} value={stylus} onChange={e => setStylus(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={convertStylus} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{stylCss && <textarea readOnly rows={4} value={stylCss} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card className="md:col-span-2"><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Tailwind → CSS</h4><textarea rows={3} value={tailwind} onChange={e => setTailwind(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" /><button onClick={convertTailwind} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button><p className="text-xs text-zinc-400 mt-1">Supports 80+ common classes + arbitrary values like text-[#ff0000]</p>{tailCss && <textarea readOnly rows={5} value={tailCss} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">SCSS → CSS</h5>
+        <textarea rows={5} value={scss} onChange={e => setScss(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={convertScss} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {css && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{css}</pre><div className="mt-1"><CopyBtn text={css} label="CSS" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Stylus → CSS</h5>
+        <textarea rows={5} value={stylus} onChange={e => setStylus(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={convertStylus} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {stylCss && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{stylCss}</pre><div className="mt-1"><CopyBtn text={stylCss} label="CSS" /></div></div>}
+      </div>
+      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Tailwind → CSS</h5>
+        <textarea rows={3} value={tailwind} onChange={e => setTailwind(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder="space-separated Tailwind classes" />
+        <p className="text-xs text-zinc-400">Supports 80+ common classes + arbitrary values like text-[#ff0000]</p>
+        <button onClick={convertTailwind} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {tailCss && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{tailCss}</pre><div className="mt-1"><CopyBtn text={tailCss} label="CSS" /></div></div>}
+      </div>
     </div>
   );
 }
@@ -164,7 +180,7 @@ function ProtoTools() {
     while ((m = fieldRe.exec(schema)) !== null) {
       fields.push({ type: m[1], name: m[2], id: m[3], repeated: schema.slice(m.index - 20, m.index).includes('repeated') });
     }
-    const ts = `interface ${name} {\n${fields.map(f => `  ${f.name}${f.type === 'string' ? '' : f.type.startsWith('int') || f.type === 'float' || f.type === 'double' ? '' : ''}: ${f.type === 'string' ? 'string' : f.type.startsWith('int') || f.type === 'float' || f.type === 'double' ? 'number' : f.type};`).join('\n')}\n}`;
+    const ts = `interface ${name} {\n${fields.map(f => `  ${f.name}: ${f.type === 'string' ? 'string' : f.type.startsWith('int') || f.type === 'float' || f.type === 'double' ? 'number' : f.type};`).join('\n')}\n}`;
     const json = JSON.stringify(fields.reduce((acc: Record<string, any>, f) => { acc[f.name] = f.type === 'string' ? 'example' : f.type.startsWith('int') ? 42 : f.type === 'float' ? 3.14 : true; return acc; }, {}), null, 2);
     setSchemaOut(`TypeScript:\n${ts}\n\nJSON Sample:\n${json}`);
   };
@@ -182,8 +198,19 @@ function ProtoTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Proto Schema Generator</h4><textarea rows={8} value={schema} onChange={e => setSchema(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={generateSchema} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Generate TS + JSON</button>{schemaOut && <textarea readOnly rows={8} value={schemaOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Protobuf Decoder</h4><textarea rows={4} value={binary} onChange={e => setBinary(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={decodeProto} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Decode</button>{decoded && <textarea readOnly rows={6} value={decoded} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Proto Schema → TS + JSON</h5>
+        <textarea rows={7} value={schema} onChange={e => setSchema(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={generateSchema} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate TS + JSON</button>
+        {schemaOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{schemaOut}</pre><div className="mt-1"><CopyBtn text={schemaOut} label="Schema" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Protobuf Decoder</h5>
+        <textarea rows={4} value={binary} onChange={e => setBinary(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
+          className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={decodeProto} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Decode</button>
+        {decoded && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{decoded}</pre><div className="mt-1"><CopyBtn text={decoded} label="Decoded" /></div></div>}
+      </div>
     </div>
   );
 }
@@ -264,37 +291,41 @@ function TypeScriptTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">tsconfig Generator / Analyzer</h4><textarea rows={5} value={tsconfig} onChange={e => setTsconfig(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={generateTsconfig} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Analyze</button>{tsconfigOut && <textarea readOnly rows={6} value={tsconfigOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">TypeScript Formatter</h4><textarea rows={5} value={tsCode} onChange={e => setTsCode(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={formatTypeScript} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Format</button>{tsFormatted && <textarea readOnly rows={6} value={tsFormatted} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">String Template Tester</h4><input type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" /><textarea rows={3} value={templateVars} onChange={e => setTemplateVars(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={testStringTemplate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Test</button>{templateOut && <div className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">{templateOut}</div>}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Test Data Generator</h4><textarea rows={4} value={testDataSchema} onChange={e => setTestDataSchema(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={generateTestData} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Generate</button>{testDataOut && <textarea readOnly rows={4} value={testDataOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-    </div>
-  );
-}
-
-function RegexTools() {
-  const [regex, setRegex] = useState('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$');
-  const [english, setEnglish] = useState('');
-  const [testString, setTestString] = useState('test@example.com');
-  const [testResult, setTestResult] = useState('');
-
-  const regexToEnglish = () => {
-    let desc = regex;
-    desc = desc.replace(/\\d/g, 'digit (0-9)').replace(/\\w/g, 'word character (a-z, A-Z, 0-9, _)').replace(/\\s/g, 'whitespace');
-    desc = desc.replace(/^/, '^ → start of string\n').replace(/$/, '\n$ → end of string');
-    desc = desc.replace(/\+/g, ' (one or more)').replace(/\*/g, ' (zero or more)').replace(/\?/g, ' (optional)');
-    desc = desc.replace(/\^ → start of string/, '^ → start of string');
-    setEnglish(desc);
-    try {
-      const re = new RegExp(regex);
-      setTestResult(re.test(testString) ? '✅ Match' : '❌ No match');
-    } catch { setTestResult('❌ Invalid regex'); }
-  };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Regex → English</h4><input type="text" value={regex} onChange={e => setRegex(e.target.value)} placeholder="Enter regex pattern" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" /><button onClick={regexToEnglish} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Translate</button>{english && <textarea readOnly rows={6} value={english} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Regex Tester</h4><input type="text" value={regex} onChange={e => setRegex(e.target.value)} placeholder="Regex pattern" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" /><input type="text" value={testString} onChange={e => setTestString(e.target.value)} placeholder="Test string" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" /><button onClick={regexToEnglish} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Test</button>{testResult && <p className={`mt-2 p-2 rounded-lg text-sm font-mono ${testResult.startsWith('✅') ? 'text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'text-red-500 bg-red-50 dark:bg-red-900/20'}`}>{testResult}</p>}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">tsconfig Analyzer</h5>
+        <textarea rows={5} value={tsconfig} onChange={e => setTsconfig(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={generateTsconfig} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Analyze</button>
+        {tsconfigOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{tsconfigOut}</pre><div className="mt-1"><CopyBtn text={tsconfigOut} label="Analysis" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">TypeScript Formatter</h5>
+        <textarea rows={5} value={tsCode} onChange={e => setTsCode(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={formatTypeScript} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Format</button>
+        {tsFormatted && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{tsFormatted}</pre><div className="mt-1"><CopyBtn text={tsFormatted} label="Formatted" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">String Template Tester</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Template</label>
+          <input type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Variables (JSON)</label>
+          <textarea rows={3} value={templateVars} onChange={e => setTemplateVars(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={testStringTemplate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Test</button>
+        {templateOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{templateOut}</pre><div className="mt-1"><CopyBtn text={templateOut} label="Result" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Test Data Generator</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Schema: objects with name + type</label>
+          <textarea rows={4} value={testDataSchema} onChange={e => setTestDataSchema(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={generateTestData} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+        {testDataOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{testDataOut}</pre><div className="mt-1"><CopyBtn text={testDataOut} label="Data" /></div></div>}
+      </div>
     </div>
   );
 }

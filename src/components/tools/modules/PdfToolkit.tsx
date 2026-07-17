@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../FileUploader';
-import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
-type ToolAction = 'bates' | 'stamp' | 'timestamp' | 'bgcolor' | 'addblank' | 'toc';
+type ToolAction = 'bgcolor' | 'addblank';
 
 const PAGE_SIZES: Record<string, [number, number]> = {
   a4: [595.28, 841.89],
@@ -19,12 +19,8 @@ export default function PdfToolkit() {
   const [file, setFile] = useState<File | null>(null);
   const [fileBuffer, setFileBuffer] = useState<ArrayBuffer | null>(null);
   const [pageCount, setPageCount] = useState(0);
-  const [action, setAction] = useState<ToolAction>('bates');
+  const [action, setAction] = useState<ToolAction>('bgcolor');
 
-  const [prefix, setPrefix] = useState('DOC-');
-  const [startNum, setStartNum] = useState(1);
-  const [position, setPosition] = useState<'bottom-right' | 'bottom-center' | 'bottom-left' | 'top-right' | 'top-center' | 'top-left'>('bottom-right');
-  const [stampText, setStampText] = useState('DRAFT');
   const [bgColor, setBgColor] = useState('#ffffff');
   const [blankCount, setBlankCount] = useState(1);
   const [blankPosition, setBlankPosition] = useState<'before' | 'after'>('after');
@@ -60,65 +56,15 @@ export default function PdfToolkit() {
     setIsProcessing(true);
     try {
       const pdfDoc = await PDFDocument.load(fileBuffer);
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-      const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
       const pages = pdfDoc.getPages();
 
-      if (action === 'bates') {
-        for (let i = 0; i < pages.length; i++) {
-          const page = pages[i];
-          const { width, height } = page.getSize();
-          const text = `${prefix}${String(startNum + i).padStart(4, '0')}`;
-          const size = 10;
-          const margin = 20;
-          const tw = font.widthOfTextAtSize(text, size);
-          let x = width - tw - margin;
-          let y = margin;
-          if (position.includes('center')) x = (width - tw) / 2;
-          if (position.includes('left')) x = margin;
-          if (position.includes('top')) y = height - margin - size;
-          page.drawText(text, { x, y, size, font: boldFont, color: rgb(0.2, 0.2, 0.2) });
-        }
-      } else if (action === 'stamp') {
-        for (const page of pages) {
-          const { width, height } = page.getSize();
-          const size = 48;
-          page.drawText(stampText, {
-            x: width / 2 - font.widthOfTextAtSize(stampText, size) / 2,
-            y: height / 2 - size / 2,
-            size,
-            font: boldFont,
-            color: rgb(0.8, 0.2, 0.2),
-            opacity: 0.3,
-            rotate: degrees(-45),
-          });
-        }
-      } else if (action === 'timestamp') {
-        const now = new Date();
-        const ts = now.toLocaleString('en-US', {
-          year: 'numeric', month: 'short', day: 'numeric',
-          hour: '2-digit', minute: '2-digit',
-        });
-        for (const page of pages) {
-          const { width, height } = page.getSize();
-          const size = 9;
-          const text = `Generated: ${ts}`;
-          const tw = font.widthOfTextAtSize(text, size);
-          page.drawText(text, {
-            x: width - tw - 20,
-            y: 15,
-            size,
-            font,
-            color: rgb(0.5, 0.5, 0.5),
-          });
-        }
-      } else if (action === 'bgcolor') {
-        const [r, g, b] = hexToRgb(bgColor);
+      if (action === 'bgcolor') {
+        const c = hexToRgb(bgColor);
         for (const page of pages) {
           const { width, height } = page.getSize();
           page.drawRectangle({
             x: 0, y: 0, width, height,
-            color: rgb(r, g, b),
+            color: rgb(c[0], c[1], c[2]),
             opacity: 0.15,
           });
         }
@@ -133,30 +79,6 @@ export default function PdfToolkit() {
             const targetIdx = Math.min(blankPage, pages.length);
             pages.splice(targetIdx, 0, blankPageObj);
           }
-        }
-      } else if (action === 'toc') {
-        const tocPage = pdfDoc.insertPage(0, [595.28, 841.89]);
-        tocPage.drawText('Table of Contents', {
-          x: 50, y: 780, size: 24, font: boldFont, color: rgb(0.1, 0.1, 0.1),
-        });
-        tocPage.drawLine({
-          start: { x: 50, y: 770 }, end: { x: 545, y: 770 },
-          thickness: 1, color: rgb(0.2, 0.2, 0.2),
-        });
-        const totalPages = pdfDoc.getPageCount() - 1;
-        for (let i = 1; i <= totalPages; i++) {
-          const yPos = 740 - i * 22;
-          if (yPos < 50) break;
-          tocPage.drawText(`Section ${i}`, {
-            x: 50, y: yPos, size: 12, font, color: rgb(0.2, 0.2, 0.2),
-          });
-          tocPage.drawText(`Page ${i + 1}`, {
-            x: 500, y: yPos, size: 12, font, color: rgb(0.5, 0.5, 0.5),
-          });
-          tocPage.drawLine({
-            start: { x: 50, y: yPos - 8 }, end: { x: 545, y: yPos - 8 },
-            thickness: 0.3, color: rgb(0.85, 0.85, 0.85),
-          });
         }
       }
 
@@ -175,12 +97,8 @@ export default function PdfToolkit() {
 
   const actionLabel = () => {
     const labels: Record<ToolAction, string> = {
-      bates: 'Bates Numbering',
-      stamp: 'Stamp',
-      timestamp: 'Timestamp',
       bgcolor: 'Background Color',
       addblank: 'Add Blank Page',
-      toc: 'Table of Contents',
     };
     return labels[action];
   };
@@ -192,7 +110,7 @@ export default function PdfToolkit() {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
-          <strong>PDF Toolkit:</strong> Add Bates numbering, stamps, timestamps, background colors, blank pages, or a table of contents to your PDFs.
+          <strong>PDF Toolkit:</strong> Background color tints and blank pages for your PDFs.
         </div>
         <FileUploader accept="application/pdf" onFileSelect={(_f) => handleFileSelect(_f)}
           title="Upload PDF" subtitle="Select document to apply toolkit options" />
@@ -200,80 +118,7 @@ export default function PdfToolkit() {
     );
   }
 
-  const renderOptions = () => {
-    switch (action) {
-      case 'bates':
-        return (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Prefix</label>
-              <input type="text" value={prefix} onChange={(e) => setPrefix(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Start Number</label>
-              <input type="number" value={startNum} onChange={(e) => setStartNum(parseInt(e.target.value) || 1)} min={1}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-            </div>
-          </div>
-        );
-      case 'stamp':
-        return (
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Stamp Text</label>
-            <input type="text" value={stampText} onChange={(e) => setStampText(e.target.value)}
-              placeholder="DRAFT, CONFIDENTIAL, etc."
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-          </div>
-        );
-      case 'bgcolor':
-        return (
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Background Color (subtle tint)</label>
-            <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
-              className="w-full h-12 rounded-lg cursor-pointer border border-zinc-200 dark:border-zinc-700" />
-          </div>
-        );
-      case 'addblank':
-        return (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Number of Blank Pages</label>
-              <input type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Page Size</label>
-              <select value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
-                <option value="a4">A4</option>
-                <option value="letter">Letter</option>
-                <option value="legal">Legal</option>
-                <option value="a3">A3</option>
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Insert Position</label>
-              <select value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
-                <option value="after">After Page</option>
-                <option value="before">Before Page</option>
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">At Page</label>
-              <input type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-            </div>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  const needsPosition = action === 'bates';
-  const subActions: ToolAction[] = ['bates', 'stamp', 'timestamp', 'bgcolor', 'addblank', 'toc'];
+  const subActions: ToolAction[] = ['bgcolor', 'addblank'];
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
@@ -300,17 +145,42 @@ export default function PdfToolkit() {
         </div>
 
         <div className="space-y-6">
-          {renderOptions()}
-          {needsPosition && (
-            <div className="space-y-3">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Position</label>
-              <div className="grid grid-cols-3 gap-2">
-                {(['bottom-left', 'bottom-center', 'bottom-right', 'top-left', 'top-center', 'top-right'] as const).map(p => (
-                  <button key={p} onClick={() => setPosition(p)}
-                    className={`py-2 text-xs font-bold border rounded-lg ${position === p ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
-                    {p.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                  </button>
-                ))}
+          {action === 'bgcolor' && (
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Background Color (subtle tint)</label>
+              <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
+                className="w-full h-12 rounded-lg cursor-pointer border border-zinc-200 dark:border-zinc-700" />
+            </div>
+          )}
+          {action === 'addblank' && (
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Number of Blank Pages</label>
+                <input type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
+                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Page Size</label>
+                <select value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
+                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+                  <option value="a4">A4</option>
+                  <option value="letter">Letter</option>
+                  <option value="legal">Legal</option>
+                  <option value="a3">A3</option>
+                </select>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Insert Position</label>
+                <select value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
+                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+                  <option value="after">After Page</option>
+                  <option value="before">Before Page</option>
+                </select>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">At Page</label>
+                <input type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
+                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
               </div>
             </div>
           )}

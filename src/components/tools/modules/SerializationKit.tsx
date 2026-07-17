@@ -2,18 +2,22 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Clipboard } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
-type Tab = 'toml' | 'yaml' | 'xml' | 'sqltsv';
+type Tab = 'toml' | 'yaml' | 'sqltsv';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'toml', label: 'TOML' },
   { key: 'yaml', label: 'YAML' },
-  { key: 'xml', label: 'XML & SQL' },
   { key: 'sqltsv', label: 'TSV & CSS' },
 ];
 
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
+function CopyBtn({ text, label }: { text: string; label?: string }) {
+  return (
+    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
+      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+  );
 }
 
 function jsonToToml(obj: Record<string, any>, prefix = ''): string {
@@ -37,7 +41,6 @@ function jsonToToml(obj: Record<string, any>, prefix = ''): string {
 
 function tomlToJson(toml: string): Record<string, any> {
   const result: Record<string, any> = {};
-  let current: [string, Record<string, any>][] = [];
   let curr: Record<string, any> = result;
   for (const line of toml.split('\n')) {
     const tr = line.trim();
@@ -82,42 +85,18 @@ function jsonToYaml(obj: any, indent = 0): string {
   }).join('\n');
 }
 
-function basicXmlToJson(xml: string): Record<string, any> {
-  const result: Record<string, any> = {};
-  const tagRe = /<(\w+)[^>]*>([\s\S]*?)<\/\1>/g;
-  let m;
-  while ((m = tagRe.exec(xml)) !== null) {
-    const [, tag, inner] = m;
-    const innerTrimmed = inner.trim();
-    if (/^<[\s\S]+>$/.test(innerTrimmed)) result[tag] = basicXmlToJson(innerTrimmed);
-    else result[tag] = innerTrimmed;
-  }
-  return result;
-}
-
-function jsonToXml(obj: any, root = 'root'): string {
-  let xml = `<${root}>`;
-  for (const [k, v] of Object.entries(obj)) {
-    if (v !== null && typeof v === 'object') xml += jsonToXml(v, k);
-    else xml += `<${k}>${v}</${k}>`;
-  }
-  xml += `</${root}>`;
-  return xml;
-}
-
 export default function SerializationKit() {
   const [tab, setTab] = useState<Tab>('toml');
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-xl w-fit">
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${tab === t.key ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>{t.label}</button>
+            className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${tab === t.key ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{t.label}</button>
         ))}
       </div>
       {tab === 'toml' && <TomlTools />}
       {tab === 'yaml' && <YamlTools />}
-      {tab === 'xml' && <XmlSqlTools />}
       {tab === 'sqltsv' && <TsvCssTools />}
     </div>
   );
@@ -132,13 +111,28 @@ function TomlTools() {
 
   const JsonToToml = () => { try { setTomlOut(jsonToToml(JSON.parse(json))); } catch { toast.error('Invalid JSON'); } };
   const TomlToJson = () => { try { setJsonOut(JSON.stringify(tomlToJson(toml), null, 2)); } catch { toast.error('Invalid TOML'); } };
-  const validateToml = () => { try { tomlToJson(toml); setValidation('✅ Valid TOML'); } catch { setValidation('❌ Invalid TOML'); } };
+  const validateToml = () => { try { tomlToJson(toml); setValidation('Valid TOML'); } catch { setValidation('Invalid TOML'); } };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON → TOML</h4><textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={JsonToToml} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{tomlOut && <textarea readOnly rows={5} value={tomlOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">TOML → JSON</h4><textarea rows={5} value={toml} onChange={e => setToml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={TomlToJson} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{jsonOut && <textarea readOnly rows={5} value={jsonOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card className="md:col-span-2"><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">TOML Validator</h4><textarea rows={4} value={toml} onChange={e => setToml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={validateToml} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Validate</button>{validation && <p className="mt-2 p-2 rounded-lg text-sm font-mono bg-zinc-100 dark:bg-zinc-800">{validation}</p>}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">JSON → TOML</h5>
+        <textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={JsonToToml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {tomlOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{tomlOut}</pre><div className="mt-1"><CopyBtn text={tomlOut} label="TOML" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">TOML → JSON</h5>
+        <textarea rows={5} value={toml} onChange={e => setToml(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={TomlToJson} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {jsonOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{jsonOut}</pre><div className="mt-1"><CopyBtn text={jsonOut} label="JSON" /></div></div>}
+      </div>
+      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">TOML Validator</h5>
+        <textarea rows={4} value={toml} onChange={e => setToml(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={validateToml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Validate</button>
+        {validation && <p className={`text-sm font-semibold font-mono ${validation.startsWith('Valid') ? 'text-emerald-600' : 'text-red-500'}`}>{validation}</p>}
+      </div>
     </div>
   );
 }
@@ -203,102 +197,36 @@ function YamlTools() {
           if (eq > 0) obj[tr.slice(0, eq).trim()] = tr.slice(eq + 2);
         }
       });
-      setValidation(`✅ Valid (${Object.keys(obj).length} top-level keys)`);
-    } catch { setValidation('❌ Invalid YAML'); }
+      setValidation(`Valid (${Object.keys(obj).length} top-level keys)`);
+    } catch { setValidation('Invalid YAML'); }
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">YAML → JSON</h4><textarea rows={5} value={yaml} onChange={e => setYaml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={YamlToJson} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{jsonOut && <textarea readOnly rows={5} value={jsonOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON → YAML</h4><textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={JsonToYaml} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{yamlOut && <textarea readOnly rows={5} value={yamlOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON → Toon (YAML-like)</h4><textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={JsonToToon} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{toonOut && <textarea readOnly rows={5} value={toonOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">YAML Validator</h4><textarea rows={5} value={yaml} onChange={e => setYaml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={validateYaml} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Validate</button>{validation && <p className="mt-2 p-2 rounded-lg text-sm font-mono bg-zinc-100 dark:bg-zinc-800">{validation}</p>}</Card>
-    </div>
-  );
-}
-
-function XmlSqlTools() {
-  const [xml, setXml] = useState('<root><item><id>1</id><name>Alice</name></item><item><id>2</id><name>Bob</name></item></root>');
-  const [xmlOut, setXmlOut] = useState('');
-  const [validation, setValidation] = useState('');
-
-  const XmlToJson = () => { try { setXmlOut(JSON.stringify(basicXmlToJson(xml), null, 2)); } catch { toast.error('Invalid XML'); } };
-
-  const validateXml = () => {
-    try {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(xml, 'text/xml');
-      const err = doc.querySelector('parsererror');
-      setValidation(err ? `❌ ${err.textContent}` : '✅ Valid XML');
-    } catch { setValidation('❌ Invalid XML'); }
-  };
-
-  const XmlToYaml = () => { try { setXmlOut(jsonToYaml(basicXmlToJson(xml))); } catch { toast.error('Invalid XML'); } };
-
-  const XmlToToon = () => {
-    try {
-      const obj = basicXmlToJson(xml);
-      const toonify = (o: any, d = 0): string => {
-        if (typeof o !== 'object' || o === null) return JSON.stringify(o);
-        const ind = '  '.repeat(d);
-        if (Array.isArray(o)) return `[\n${o.map(v => `${ind}  ${toonify(v, d + 1)}`).join(',\n')}\n${ind}]`;
-        return `{\n${Object.entries(o).map(([k, v]) => `${ind}  ${k} → ${toonify(v, d + 1)}`).join(',\n')}\n${ind}}`;
-      };
-      setXmlOut(toonify(obj));
-    } catch { toast.error('Invalid XML'); }
-  };
-
-  const XmlToCsv = () => {
-    try {
-      const obj = basicXmlToJson(xml);
-      const extract = (o: any, prefix = ''): Record<string, string> => {
-        const row: Record<string, string> = {};
-        for (const [k, v] of Object.entries(o)) {
-          if (v && typeof v === 'object') Object.assign(row, extract(v, `${prefix}${k}_`));
-          else row[`${prefix}${k}`] = String(v);
-        }
-        return row;
-      };
-      const root = Object.keys(basicXmlToJson(xml))[0] || 'root';
-      const rows = Object.values(basicXmlToJson(xml));
-      const allRows: Record<string, string>[] = Array.isArray(obj[root]) ? (obj[root] as any[]).map((r: any) => extract(r)) : [extract(obj[root])];
-      const headers = [...new Set(allRows.flatMap(r => Object.keys(r)))];
-      const csv = [headers.join(','), ...allRows.map(r => headers.map(h => r[h] || '').join(','))].join('\n');
-      setXmlOut(csv);
-    } catch { toast.error('Could not convert XML to CSV'); }
-  };
-
-  const [sqlInsert, setSqlInsert] = useState("INSERT INTO users (id, name, email) VALUES (1, 'Alice', 'alice@test.com');");
-  const [sqlJson, setSqlJson] = useState('');
-  const [sqlCsv, setSqlCsv] = useState('');
-
-  const SqlToJson = () => {
-    try {
-      const match = sqlInsert.match(/INSERT\s+INTO\s+(\w+)\s*\(([^)]+)\)\s*VALUES\s*\(([^)]+)\)/i);
-      if (!match) { toast.error('Could not parse INSERT'); return; }
-      const table = match[1];
-      const cols = match[2].split(',').map(c => c.trim());
-      const vals = match[3].split(',').map(v => v.trim().replace(/^'|'$/g, ''));
-      const obj: Record<string, any> = { table, data: {} };
-      cols.forEach((c, i) => { obj.data[c] = isNaN(Number(vals[i])) ? vals[i] : Number(vals[i]); });
-      setSqlJson(JSON.stringify(obj, null, 2));
-      setSqlCsv([cols.join(','), vals.join(',')].join('\n'));
-    } catch { toast.error('Failed to parse SQL'); }
-  };
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">XML → JSON / YAML / CSV</h4><textarea rows={5} value={xml} onChange={e => setXml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <div className="grid grid-cols-2 gap-2 mt-2">
-          <button onClick={XmlToJson} className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ JSON</button>
-          <button onClick={XmlToYaml} className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ YAML</button>
-          <button onClick={XmlToToon} className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ Toon</button>
-          <button onClick={XmlToCsv} className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ CSV</button>
-        </div>
-        {xmlOut && <textarea readOnly rows={5} value={xmlOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">XML Validator</h4><textarea rows={5} value={xml} onChange={e => setXml(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={validateXml} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Validate</button>{validation && <p className="mt-2 p-2 rounded-lg text-sm font-mono bg-zinc-100 dark:bg-zinc-800">{validation}</p>}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">SQL INSERT → JSON & CSV</h4><textarea rows={3} value={sqlInsert} onChange={e => setSqlInsert(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={SqlToJson} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{sqlJson && <><textarea readOnly rows={3} value={sqlJson} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" /><textarea readOnly rows={3} value={sqlCsv} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" /></>}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">YAML → JSON</h5>
+        <textarea rows={5} value={yaml} onChange={e => setYaml(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={YamlToJson} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {jsonOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{jsonOut}</pre><div className="mt-1"><CopyBtn text={jsonOut} label="JSON" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">JSON → YAML</h5>
+        <textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={JsonToYaml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {yamlOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{yamlOut}</pre><div className="mt-1"><CopyBtn text={yamlOut} label="YAML" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">JSON → Toon (YAML-like)</h5>
+        <textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={JsonToToon} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {toonOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{toonOut}</pre><div className="mt-1"><CopyBtn text={toonOut} label="Toon" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">YAML Validator</h5>
+        <textarea rows={5} value={yaml} onChange={e => setYaml(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={validateYaml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Validate</button>
+        {validation && <p className={`text-sm font-semibold font-mono ${validation.startsWith('Valid') ? 'text-emerald-600' : 'text-red-500'}`}>{validation}</p>}
+      </div>
     </div>
   );
 }
@@ -354,15 +282,36 @@ function TsvCssTools() {
     };
     let css = '';
     classes.forEach(c => { if (map[c]) css += `  ${map[c]}\n`; });
-    setTailCss(css || '.no-tailwind-classes-found {\n  /* Classes not recognized — add custom mappings */\n}');
+    setTailCss(css || '.no-tailwind-classes-found {\n  /* Classes not recognized */\n}');
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">TSV → CSV</h4><textarea rows={4} value={tsv} onChange={e => setTsv(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={TsvToCsv} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{csv && <textarea readOnly rows={4} value={csv} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">SCSS → CSS</h4><textarea rows={4} value={scss} onChange={e => setScss(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={ScssToCss} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{cssOut && <textarea readOnly rows={4} value={cssOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Stylus → CSS</h4><textarea rows={4} value={stylus} onChange={e => setStylus(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" /><button onClick={StylusToCss} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{stylCss && <textarea readOnly rows={4} value={stylCss} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Tailwind → CSS</h4><textarea rows={3} value={tailwind} onChange={e => setTailwind(e.target.value)} placeholder="space-separated classes" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" /><button onClick={TailwindToCss} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>{tailCss && <textarea readOnly rows={4} value={tailCss} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}</Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">TSV → CSV</h5>
+        <textarea rows={4} value={tsv} onChange={e => setTsv(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={TsvToCsv} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {csv && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{csv}</pre><div className="mt-1"><CopyBtn text={csv} label="CSV" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">SCSS → CSS</h5>
+        <textarea rows={4} value={scss} onChange={e => setScss(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={ScssToCss} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {cssOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{cssOut}</pre><div className="mt-1"><CopyBtn text={cssOut} label="CSS" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Stylus → CSS</h5>
+        <textarea rows={4} value={stylus} onChange={e => setStylus(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={StylusToCss} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {stylCss && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{stylCss}</pre><div className="mt-1"><CopyBtn text={stylCss} label="CSS" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Tailwind → CSS</h5>
+        <textarea rows={3} value={tailwind} onChange={e => setTailwind(e.target.value)} placeholder="space-separated classes"
+          className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        <button onClick={TailwindToCss} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {tailCss && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{tailCss}</pre><div className="mt-1"><CopyBtn text={tailCss} label="CSS" /></div></div>}
+      </div>
     </div>
   );
 }

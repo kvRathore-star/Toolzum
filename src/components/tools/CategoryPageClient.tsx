@@ -392,16 +392,11 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   'indian-utilities': 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.',
   Transcription: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.',
   Branding: 'Free branding tools — create logos, generate mockups, design business cards, and brand assets. No design skills needed.',
-  Business: 'Free business tools — invoice generator, contract templates, business name generator, and more. Streamline your workflow.',
   Calculator: 'Free online calculators — mortgage, BMI, GPA, retirement, scientific, and 70+ more calculators for finance, health, math, and everyday life. 100% browser-based.',
-  Marketing: 'Free marketing tools — social media schedulers, link shorteners, analytics, and campaign helpers to grow your audience.',
   Productivity: 'Free productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.',
   Design: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.',
-  HR: 'Free HR tools — resume builder, salary calculator, leave calculator, and HR utilities for professionals and teams.',
   Health: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.',
   Extension: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.',
-  'E-commerce': 'Free e-commerce tools — product price tracker, store analytics, and e-commerce utilities for online sellers.',
-  Lifestyle: 'Free lifestyle tools — habit tracker, mood journal, and daily life utilities to improve your everyday routine.',
 }[category] ?? `Free ${category.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.`}
           </p>
         </div>

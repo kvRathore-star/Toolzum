@@ -15,14 +15,9 @@ export type ToolCategory =
   | "Transcription"
   | "Extension"
   | "SEO"
-  | "Marketing"
   | "indian-utilities"
   | "AI"
   | "Health"
-  | "HR"
-  | "Business"
-  | "E-commerce"
-  | "Lifestyle"
   | "Calculator";
 
 export interface ToolMetadata {
@@ -2304,17 +2299,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: 'Branding',
     id:  "271",
     dependencies: 'None'
-  },
-
-  {
-    name: 'Audio Converter',
-    slug: 'audio-converter',
-    description: 'Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser.',
-    seoDescription: 'Free online Audio Converter — Converts audio files between MP3, WAV, OGG, and FLAC formats using FFmpeg WASM running entirely in the browser. 100% browser-based, no uploads.',
-    category: 'Audio',
-    id:  "273",
-    showInCategory: false,
-    dependencies: 'FFmpeg WASM'
   },
   {
     name: 'PDF Page Manager',
@@ -4911,6 +4895,42 @@ const rawToolsRegistry: ToolMetadata[] = [
     showInCategory: true,
   },
   {
+    id: "950",
+    name: "PDF Bates Numbering",
+    slug: "pdf-bates-numbering",
+    category: "PDF" as ToolCategory,
+    description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
+    seoDescription: 'Free online PDF Bates Numbering — Add sequential Bates numbers to every page. Customize prefix, start number, and position. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib",
+  },
+  {
+    id: "951",
+    name: "PDF Stamp",
+    slug: "pdf-stamp",
+    category: "PDF" as ToolCategory,
+    description: 'Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF.',
+    seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib",
+  },
+  {
+    id: "952",
+    name: "PDF Timestamp",
+    slug: "pdf-timestamp",
+    category: "PDF" as ToolCategory,
+    description: 'Add a generation timestamp to the bottom-right corner of every page in your PDF.',
+    seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib",
+  },
+  {
+    id: "953",
+    name: "PDF Table of Contents",
+    slug: "pdf-table-of-contents",
+    category: "PDF" as ToolCategory,
+    description: 'Insert a table of contents page at the beginning of your PDF document.',
+    seoDescription: 'Free online PDF Table of Contents — Insert a table of contents page at the beginning of your PDF. 100% browser-based, no uploads.',
+    dependencies: "pdf-lib",
+  },
+  {
     id: "532",
     name: "Advanced PDF Tools",
     slug: "pdf-advanced",
@@ -5009,6 +5029,24 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online Design Toolkit — Color tools, border/radius CSS, and typography CSS in one tabbed interface. 100% browser-based, no uploads.',
     dependencies: "None",
     showInCategory: true,
+  },
+  {
+    id: "948",
+    name: "Border CSS Generator",
+    slug: "border-css-generator",
+    category: "Design" as ToolCategory,
+    description: 'Visual border CSS generator with width, style, color, and radius controls with live preview.',
+    seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. 100% browser-based and private.',
+    dependencies: "None",
+  },
+  {
+    id: "949",
+    name: "Typography Preview",
+    slug: "typography-preview",
+    category: "Design" as ToolCategory,
+    description: 'Typography CSS generator with font-size, line-height, letter-spacing, and font-weight controls with live preview.',
+    seoDescription: 'Free online Typography Preview — Generate typography CSS with font-size, line-height, letter-spacing, and font-weight controls with live preview. 100% browser-based and private.',
+    dependencies: "None",
   },
   {
     id: "542",

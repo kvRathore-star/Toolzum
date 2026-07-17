@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Clipboard } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'network' | 'sse' | 'crypto' | 'time';
 
@@ -12,19 +14,22 @@ const TABS: { key: Tab; label: string }[] = [
   { key: 'time', label: 'Time Tools' },
 ];
 
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
+function CopyBtn({ text, label }: { text: string; label?: string }) {
+  return (
+    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
+      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+  );
 }
 
 export default function NetworkUtilityKit() {
   const [tab, setTab] = useState<Tab>('network');
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-xl w-fit">
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${tab === t.key ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>{t.label}</button>
+            className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${tab === t.key ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{t.label}</button>
         ))}
       </div>
       {tab === 'network' && <NetworkTools />}
@@ -83,21 +88,36 @@ function NetworkTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Port Number Lookup</h4>
-        <input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2" />
-        <button onClick={lookupPort} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Lookup</button>
-        {portInfo && <p className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">{portInfo}</p>}
-      </Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">User-Agent Parser</h4>
-        <textarea rows={3} value={ua} onChange={e => setUa(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={parseUA} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Parse</button>
-        {uaInfo && <textarea readOnly rows={3} value={uaInfo} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-      <Card className="md:col-span-2"><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Query String Parser</h4>
-        <input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
-        <button onClick={parseQueryString} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Parse</button>
-        {qsParsed && <textarea readOnly rows={5} value={qsParsed} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Port Number Lookup</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Port</label>
+          <input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <button onClick={lookupPort} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Lookup</button>
+        {portInfo && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{portInfo}</pre>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">User-Agent Parser</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">User-Agent string</label>
+          <textarea rows={3} value={ua} onChange={e => setUa(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={parseUA} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Parse</button>
+        {uaInfo && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{uaInfo}</pre><div className="mt-1"><CopyBtn text={uaInfo} label="UA" /></div></div>}
+      </div>
+      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Query String Parser</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Query string</label>
+          <input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <button onClick={parseQueryString} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Parse</button>
+        {qsParsed && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{qsParsed}</pre><div className="mt-1"><CopyBtn text={qsParsed} label="Parsed" /></div></div>}
+      </div>
     </div>
   );
 }
@@ -156,21 +176,36 @@ function FormatterTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">SSE Event Formatter</h4>
-        <textarea rows={4} value={sseEvent} onChange={e => setSseEvent(e.target.value)} placeholder="SSE event text" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={formatSSE} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Format</button>
-        {sseFormatted && <textarea readOnly rows={5} value={sseFormatted} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Rate Limit Header Parser</h4>
-        <textarea rows={4} value={rlHeader} onChange={e => setRlHeader(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={parseRateLimit} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Parse</button>
-        {rlParsed && <textarea readOnly rows={6} value={rlParsed} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-      <Card className="md:col-span-2"><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Pricing Tier Builder</h4>
-        <textarea rows={4} value={pricingTiers} onChange={e => setPricingTiers(e.target.value)} placeholder='[{"name": "Free", "price": 0, "users": 1}]' className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={buildPricing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Build</button>
-        {pricingOut && <textarea readOnly rows={6} value={pricingOut} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">SSE Event Formatter</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">SSE event text</label>
+          <textarea rows={4} value={sseEvent} onChange={e => setSseEvent(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={formatSSE} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Format</button>
+        {sseFormatted && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{sseFormatted}</pre><div className="mt-1"><CopyBtn text={sseFormatted} label="SSE" /></div></div>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Rate Limit Header Parser</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Headers</label>
+          <textarea rows={4} value={rlHeader} onChange={e => setRlHeader(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={parseRateLimit} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Parse</button>
+        {rlParsed && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{rlParsed}</pre><div className="mt-1"><CopyBtn text={rlParsed} label="Rate limit" /></div></div>}
+      </div>
+      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Pricing Tier Builder</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Tiers JSON</label>
+          <textarea rows={4} value={pricingTiers} onChange={e => setPricingTiers(e.target.value)} placeholder='[{"name": "Free", "price": 0, "users": 1}]'
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+        </div>
+        <button onClick={buildPricing} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Build</button>
+        {pricingOut && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{pricingOut}</pre><div className="mt-1"><CopyBtn text={pricingOut} label="Pricing" /></div></div>}
+      </div>
     </div>
   );
 }
@@ -220,21 +255,35 @@ function CryptoTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">TOTP Generator</h4>
-        <input type="text" value={totpSecret} onChange={e => setTotpSecret(e.target.value)} placeholder="Base32 secret" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" />
-        <button onClick={generateTotp} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate TOTP</button>
-        {totpCode && <p className="mt-2 text-center text-2xl font-bold tracking-widest text-blue-600 dark:text-blue-400">{totpCode}</p>}
-      </Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">SSH Key Generator</h4>
-        <div className="grid grid-cols-2 gap-2 mb-2">
-          <select value={sshType} onChange={e => setSshType(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">
-            <option value="RSA">RSA</option><option value="ECDSA">ECDSA</option><option value="Ed25519">Ed25519</option>
-          </select>
-          <input type="number" value={sshBits} onChange={e => setSshBits(e.target.value)} min={1024} max={8192} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">TOTP Generator</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Base32 Secret</label>
+          <input type="text" value={totpSecret} onChange={e => setTotpSecret(e.target.value)} placeholder="Base32 secret"
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
         </div>
-        <button onClick={generateSshKey} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
-        {sshKey && <textarea readOnly rows={8} value={sshKey} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
+        <button onClick={generateTotp} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate TOTP</button>
+        {totpCode && <p className="text-center text-3xl font-bold tracking-widest text-blue-600 dark:text-blue-400">{totpCode}</p>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">SSH Key Generator</h5>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-zinc-500">Type</label>
+            <select value={sshType} onChange={e => setSshType(e.target.value)}
+              className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+              <option value="RSA">RSA</option><option value="ECDSA">ECDSA</option><option value="Ed25519">Ed25519</option>
+            </select>
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-zinc-500">Bits</label>
+            <input type="number" value={sshBits} onChange={e => setSshBits(e.target.value)} min={1024} max={8192}
+              className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+          </div>
+        </div>
+        <button onClick={generateSshKey} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+        {sshKey && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{sshKey}</pre><div className="mt-1"><CopyBtn text={sshKey} label="SSH key" /></div></div>}
+      </div>
     </div>
   );
 }
@@ -248,6 +297,8 @@ function TimeTools() {
   const [tzTo, setTzTo] = useState('Asia/Tokyo');
   const [tzTime, setTzTime] = useState('');
   const [tzResult, setTzResult] = useState('');
+
+  const zones = ['UTC', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Asia/Tokyo', 'Asia/Shanghai', 'Asia/Kolkata', 'Asia/Dubai', 'Australia/Sydney', 'Pacific/Auckland'];
 
   const timestampToDate = () => {
     const num = parseInt(ts);
@@ -266,10 +317,8 @@ function TimeTools() {
       const from = d.toLocaleString('en-US', { timeZone: tzFrom, dateStyle: 'full', timeStyle: 'medium' });
       const to = d.toLocaleString('en-US', { timeZone: tzTo, dateStyle: 'full', timeStyle: 'medium' });
       setTzResult(`${tzFrom}: ${from}\n${tzTo}: ${to}\n\nUTC: ${d.toUTCString()}`);
-    } catch { toast.error('Invalid timezone (use IANA names like America/New_York)'); }
+    } catch { toast.error('Invalid timezone (use IANA names)'); }
   };
-
-  const zones = ['UTC', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Asia/Tokyo', 'Asia/Shanghai', 'Asia/Kolkata', 'Asia/Dubai', 'Australia/Sydney', 'Pacific/Auckland'];
 
   const worldClock = () => {
     const now = new Date();
@@ -279,29 +328,47 @@ function TimeTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Timestamp ↔ Date</h4>
-        <div className="space-y-2">
-          <input type="number" value={ts} onChange={e => setTs(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
-          <button onClick={timestampToDate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ Date</button>
-          {dateFromTs && <p className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">{dateFromTs}</p>}
-          <input type="datetime-local" value={dateStr} onChange={e => setDateStr(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <button onClick={dateToTimestamp} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">→ Timestamp</button>
-          {tsFromDate && <p className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">{tsFromDate}</p>}
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Timestamp ↔ Date</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Unix Timestamp (s)</label>
+          <input type="number" value={ts} onChange={e => setTs(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
         </div>
-      </Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Time Zone Converter</h4>
-        <div className="grid grid-cols-2 gap-2 mb-2">
-          <select value={tzFrom} onChange={e => setTzFrom(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">{zones.map(z => <option key={z} value={z}>{z}</option>)}</select>
-          <span className="flex items-center justify-center text-zinc-400">→</span>
-          <select value={tzTo} onChange={e => setTzTo(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">{zones.map(z => <option key={z} value={z}>{z}</option>)}</select>
+        <button onClick={timestampToDate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">→ Date</button>
+        {dateFromTs && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{dateFromTs}</pre>}
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Date/time</label>
+          <input type="datetime-local" value={dateStr} onChange={e => setDateStr(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
         </div>
-        <button onClick={convertTz} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {tzResult && <textarea readOnly rows={4} value={tzResult} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-      <Card className="md:col-span-2"><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">World Clock</h4>
-        <button onClick={worldClock} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Show World Clock</button>
-        {tzResult && tzResult.includes('UTC') && <textarea readOnly rows={zones.length + 1} value={tzResult} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
+        <button onClick={dateToTimestamp} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">→ Timestamp</button>
+        {tsFromDate && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{tsFromDate}</pre>}
+      </div>
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Time Zone Converter</h5>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">From</label>
+          <select value={tzFrom} onChange={e => setTzFrom(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+            {zones.map(z => <option key={z} value={z}>{z}</option>)}
+          </select>
+        </div>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">To</label>
+          <select value={tzTo} onChange={e => setTzTo(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+            {zones.map(z => <option key={z} value={z}>{z}</option>)}
+          </select>
+        </div>
+        <button onClick={convertTz} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {tzResult && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{tzResult}</pre><div className="mt-1"><CopyBtn text={tzResult} label="Timezone" /></div></div>}
+      </div>
+      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">World Clock</h5>
+        <button onClick={worldClock} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Show World Clock</button>
+        {tzResult && tzResult.includes('UTC') && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{tzResult}</pre><div className="mt-1"><CopyBtn text={tzResult} label="World clock" /></div></div>}
+      </div>
     </div>
   );
 }

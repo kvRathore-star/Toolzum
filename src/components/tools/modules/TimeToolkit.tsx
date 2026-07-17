@@ -1,27 +1,25 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Timer, Calendar, Clock, Hourglass } from 'lucide-react';
+import { Calendar, Clock, Hourglass, Clipboard } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
-type Tab = 'timers' | 'date' | 'convert' | 'time';
+type Tab = 'date' | 'convert' | 'time';
 
 export default function TimeToolkit() {
-  const [tab, setTab] = useState<Tab>('timers');
+  const [tab, setTab] = useState<Tab>('date');
   const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
-    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
-      <Icon className="w-3.5 h-3.5" /> {label}
+    <button onClick={() => setTab(v)} className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all ${tab === v ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>
+      <Icon className="w-4 h-4" /> {label}
     </button>
   );
   return (
-    <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2">
-        <TabBtn v="timers" label="Timers" icon={Timer} />
+    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-xl w-fit">
         <TabBtn v="date" label="Date Math" icon={Calendar} />
         <TabBtn v="convert" label="Converters" icon={Clock} />
         <TabBtn v="time" label="Time Math" icon={Hourglass} />
       </div>
-      {tab === 'timers' && <TimersTab />}
       {tab === 'date' && <DateMathTab />}
       {tab === 'convert' && <ConvertersTab />}
       {tab === 'time' && <TimeMathTab />}
@@ -29,146 +27,31 @@ export default function TimeToolkit() {
   );
 }
 
-const Card = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-    <h5 className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
-    {children}
-  </div>
-);
+function Card({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
+      {children}
+    </div>
+  );
+}
 
-const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
-  <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
-);
-
-const Inp = ({ label, value, onChange, placeholder, type = 'text' }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) => (
-  <div className="flex items-center gap-1.5">
-    <label className="text-[10px] text-zinc-500 shrink-0">{label}</label>
-    <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-      className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[11px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-  </div>
-);
+function Inp({ label, value, onChange, placeholder, type = 'text' }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
+  return (
+    <div className="space-y-1">
+      <label className="text-xs font-medium text-zinc-500">{label}</label>
+      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+        className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+    </div>
+  );
+}
 
 function Output({ value }: { value: string }) {
   if (!value) return null;
   return (
     <div className="relative">
-      <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{value}</pre>
-      <button onClick={() => { clipboardWrite(value); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline mt-0.5">Copy</button>
-    </div>
-  );
-}
-
-function formatDuration(ms: number): string {
-  if (ms <= 0) return '0s';
-  const sec = Math.floor(ms / 1000) % 60;
-  const min = Math.floor(ms / 60000) % 60;
-  const hr = Math.floor(ms / 3600000) % 24;
-  const day = Math.floor(ms / 86400000);
-  const parts: string[] = [];
-  if (day) parts.push(`${day}d`);
-  if (hr) parts.push(`${hr}h`);
-  if (min) parts.push(`${min}m`);
-  if (sec || !parts.length) parts.push(`${sec}s`);
-  return parts.join(' ');
-}
-
-function TimersTab() {
-  const [cdTarget, setCdTarget] = useState(() => new Date(Date.now() + 3600000).toISOString().slice(0, 16));
-  const [cdRemaining, setCdRemaining] = useState('');
-  const [cdRunning, setCdRunning] = useState(false);
-  const cdRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const [events, setEvents] = useState<{ name: string; time: string }[]>([{ name: 'New Year', time: new Date(new Date().getFullYear() + 1, 0, 1).toISOString().slice(0, 16) }]);
-  const [eventOut, setEventOut] = useState('');
-  const [eventRunning, setEventRunning] = useState(false);
-  const evRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const [swRunning, setSwRunning] = useState(false);
-  const [swTime, setSwTime] = useState(0);
-  const [swLaps, setSwLaps] = useState<string[]>([]);
-  const swRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const swStartRef = useRef(0);
-
-  useEffect(() => {
-    if (cdRunning) {
-      cdRef.current = setInterval(() => {
-        const diff = new Date(cdTarget).getTime() - Date.now();
-        if (diff <= 0) { setCdRemaining('🎉 Time\'s up!'); setCdRunning(false); if (cdRef.current) clearInterval(cdRef.current); return; }
-        setCdRemaining(formatDuration(diff));
-      }, 200);
-    }
-    return () => { if (cdRef.current) clearInterval(cdRef.current); };
-  }, [cdRunning, cdTarget]);
-
-  useEffect(() => {
-    if (eventRunning && events.length) {
-      evRef.current = setInterval(() => {
-        const lines = events.map(e => {
-          const diff = new Date(e.time).getTime() - Date.now();
-          return `${e.name}: ${diff <= 0 ? '🎉 Passed!' : formatDuration(diff)}`;
-        });
-        setEventOut(lines.join('\n'));
-      }, 200);
-    }
-    return () => { if (evRef.current) clearInterval(evRef.current); };
-  }, [eventRunning, events]);
-
-  useEffect(() => {
-    if (swRunning) {
-      swRef.current = setInterval(() => setSwTime(Date.now() - swStartRef.current), 50);
-    }
-    return () => { if (swRef.current) clearInterval(swRef.current); };
-  }, [swRunning]);
-
-  const addEvent = () => setEvents(prev => [...prev, { name: 'Event ' + (prev.length + 1), time: new Date(Date.now() + 86400000).toISOString().slice(0, 16) }]);
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="Countdown Timer">
-        <Inp label="Target" value={cdTarget} onChange={setCdTarget} type="datetime-local" />
-        <div className="text-center py-3">
-          <span className="text-2xl font-mono font-bold text-blue-600 dark:text-blue-400">{cdRemaining || 'Set target & start'}</span>
-        </div>
-        <div className="flex gap-2">
-          <button onClick={() => { setCdRunning(true); }} disabled={cdRunning} className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-[11px] font-bold py-1.5 rounded-lg">Start</button>
-          <button onClick={() => { setCdRunning(false); if (cdRef.current) clearInterval(cdRef.current); }} className="flex-1 bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 text-[11px] font-bold py-1.5 rounded-lg">Stop</button>
-          <button onClick={() => { setCdRunning(false); setCdRemaining(''); if (cdRef.current) clearInterval(cdRef.current); }} className="px-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-[11px] font-bold py-1.5 rounded-lg">Reset</button>
-        </div>
-      </Card>
-
-      <Card title="Event Countdown Timer">
-        {events.map((e, i) => (
-          <div key={i} className="flex gap-1 items-center">
-            <input value={e.name} onChange={v => { const n = [...events]; n[i].name = v.target.value; setEvents(n); }} className="w-16 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-1 py-0.5 text-[10px] text-zinc-900 dark:text-white outline-none" />
-            <input type="datetime-local" value={e.time} onChange={v => { const n = [...events]; n[i].time = v.target.value; setEvents(n); }} className="flex-1 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-1 py-0.5 text-[10px] text-zinc-900 dark:text-white outline-none" />
-            <button onClick={() => setEvents(prev => prev.filter((_, j) => j !== i))} className="text-zinc-400 hover:text-red-500 text-[10px]">✕</button>
-          </div>
-        ))}
-        <button onClick={addEvent} className="text-[10px] text-blue-500 hover:underline">+ Add event</button>
-        <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 min-h-[2em]">{eventOut}</div>
-        <div className="flex gap-2">
-          <button onClick={() => setEventRunning(true)} disabled={eventRunning} className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-[11px] font-bold py-1.5 rounded-lg">Start</button>
-          <button onClick={() => { setEventRunning(false); if (evRef.current) clearInterval(evRef.current); }} className="px-3 bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 text-[11px] font-bold py-1.5 rounded-lg">Stop</button>
-        </div>
-      </Card>
-
-      <Card title="Stopwatch">
-        <div className="text-center py-3">
-          <span className="text-2xl font-mono font-bold text-blue-600 dark:text-blue-400">{(swTime / 1000).toFixed(2)}s</span>
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          {!swRunning ? (
-            <button onClick={() => { swStartRef.current = Date.now() - swTime; setSwRunning(true); }} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg">Start</button>
-          ) : (
-            <button onClick={() => setSwRunning(false)} className="flex-1 bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 text-[11px] font-bold py-1.5 rounded-lg">Stop</button>
-          )}
-          <button onClick={() => { if (swRunning) setSwLaps(prev => [...prev, (swTime / 1000).toFixed(2) + 's']); }} className="flex-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[11px] font-bold py-1.5 rounded-lg">Lap</button>
-          <button onClick={() => { setSwRunning(false); setSwTime(0); setSwLaps([]); }} className="px-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-[11px] font-bold py-1.5 rounded-lg">Reset</button>
-        </div>
-        {swLaps.length > 0 && (
-          <div className="max-h-20 overflow-y-auto text-[10px] font-mono text-zinc-500">
-            {swLaps.map((l, i) => <div key={i}>Lap {i + 1}: {l}</div>)}
-          </div>
-        )}
-      </Card>
+      <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap max-h-48 overflow-y-auto">{value}</pre>
+      <button onClick={() => { clipboardWrite(value); toast.success('Copied!'); }} className="mt-1 text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
     </div>
   );
 }
@@ -213,22 +96,22 @@ function DateMathTab() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card title="Date Add/Subtract">
         <Inp label="Date" value={dAddStart} onChange={setDAddStart} type="date" />
         <Inp label="Days" value={dAddDays} onChange={setDAddDays} placeholder="30" />
-        <CalcBtn onClick={dateAdd} label="Calculate" />
+        <button onClick={dateAdd} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate</button>
         <Output value={dAddOut} />
       </Card>
       <Card title="Date Difference Calculator">
         <Inp label="From" value={dDiffA} onChange={setDDiffA} type="date" />
         <Inp label="To" value={dDiffB} onChange={setDDiffB} type="date" />
-        <CalcBtn onClick={dateDiff} label="Calculate Difference" />
+        <button onClick={dateDiff} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate Difference</button>
         <Output value={dDiffOut} />
       </Card>
       <Card title="Week Number Calculator">
         <Inp label="Date" value={wnDate} onChange={setWnDate} type="date" />
-        <CalcBtn onClick={weekNum} label="Get Week Number" />
+        <button onClick={weekNum} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Get Week Number</button>
         <Output value={wnOut} />
       </Card>
     </div>
@@ -271,25 +154,25 @@ function ConvertersTab() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card title="Date to Timestamp">
         <Inp label="Date" value={tsDate} onChange={setTsDate} type="datetime-local" />
-        <CalcBtn onClick={dateToTs} label="Convert to Timestamp" />
+        <button onClick={dateToTs} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert to Timestamp</button>
         <Output value={tsOut} />
       </Card>
       <Card title="Timestamp to Date">
         <Inp label="Unix (s)" value={tsUnix} onChange={setTsUnix} placeholder="1700000000" />
-        <CalcBtn onClick={tsToDate} label="Convert to Date" />
+        <button onClick={tsToDate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert to Date</button>
         <Output value={tsUnixOut} />
       </Card>
       <Card title="Milliseconds Converter">
         <Inp label="ms" value={msIn} onChange={setMsIn} placeholder="3600000" />
-        <CalcBtn onClick={msConvert} label="Convert" />
+        <button onClick={msConvert} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         <Output value={msOut} />
       </Card>
       <Card title="Minutes to Hours Converter">
         <Inp label="Minutes" value={minIn} onChange={setMinIn} placeholder="90" />
-        <CalcBtn onClick={minToHrs} label="Convert" />
+        <button onClick={minToHrs} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         <Output value={minOut} />
       </Card>
     </div>
@@ -329,18 +212,18 @@ function TimeMathTab() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card title="Time Add/Subtract Calculator">
         <Inp label="Time" value={tAddStart} onChange={setTAddStart} type="time" />
         <Inp label="Hours" value={tAddH} onChange={setTAddH} placeholder="2" />
         <Inp label="Minutes" value={tAddM} onChange={setTAddM} placeholder="30" />
-        <CalcBtn onClick={timeAdd} label="Calculate" />
+        <button onClick={timeAdd} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate</button>
         <Output value={tAddOut} />
       </Card>
       <Card title="Time Duration Calculator">
         <Inp label="Start" value={tDurStart} onChange={setTDurStart} type="time" />
         <Inp label="End" value={tDurEnd} onChange={setTDurEnd} type="time" />
-        <CalcBtn onClick={timeDur} label="Calculate Duration" />
+        <button onClick={timeDur} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate Duration</button>
         <Output value={tDurOut} />
       </Card>
     </div>

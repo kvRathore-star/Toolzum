@@ -2,6 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
+import { Clipboard } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'everyday' | 'file' | 'generators';
 
@@ -11,8 +13,11 @@ const TABS: { key: Tab; label: string }[] = [
   { key: 'generators', label: 'Generators' },
 ];
 
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
+function CopyBtn({ text, label }: { text: string; label?: string }) {
+  return (
+    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
+      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+  );
 }
 
 function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]; defaultValue?: string }) {
@@ -31,26 +36,34 @@ function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: 
   };
 
   return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">{title}</h4>
-      <div className="flex gap-2 mb-2">
-        <input type="number" value={val} onChange={e => setVal(e.target.value)} className="w-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))} className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">
-          {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
-        </select>
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Value</label>
+          <input type="number" value={val} onChange={e => setVal(e.target.value)}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">From</label>
+          <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+            {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
+          </select>
+        </div>
       </div>
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
       {results.length > 0 && (
-        <div className="mt-2 space-y-1">
+        <div className="space-y-1.5">
           {results.map((r, i) => (
-            <div key={i} className="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-lg text-xs font-mono">
-              <span>{r.label}</span>
-              <span className="font-bold">{r.value}</span>
+            <div key={i} className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm font-mono">
+              <span className="text-zinc-600 dark:text-zinc-400">{r.label}</span>
+              <span className="font-bold text-zinc-900 dark:text-white">{r.value}</span>
             </div>
           ))}
         </div>
       )}
-    </Card>
+    </div>
   );
 }
 
@@ -81,7 +94,6 @@ const FUEL_UNITS = [
   { label: 'MPG (US)', toBase: (v: number) => 235.215 / v, fromBase: (v: number) => 235.215 / v },
   { label: 'MPG (UK)', toBase: (v: number) => 282.481 / v, fromBase: (v: number) => 282.481 / v },
   { label: 'km/L', toBase: (v: number) => 100 / v, fromBase: (v: number) => 100 / v },
-  { label: 'Miles/Gallon (US)', toBase: (v: number) => 235.215 / v, fromBase: (v: number) => 235.215 / v },
 ];
 
 const PAPER_UNITS = [
@@ -121,16 +133,17 @@ function ZipCompressor() {
   };
 
   return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">File Compressor (ZIP Sim)</h4>
-      <input type="file" multiple onChange={handleFiles} className="w-full text-xs" />
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">File Compressor (ZIP Sim)</h5>
+      <input type="file" multiple onChange={handleFiles}
+        className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
       {files.length > 0 && (
-        <div className="mt-2 space-y-1">
-          {files.map((f, i) => <p key={i} className="text-xs text-zinc-400 font-mono">{f.name} ({(f.size / 1024).toFixed(1)} KB)</p>)}
-          <p className="text-xs text-zinc-600 mt-1">Estimated ZIP: {(compressed! / 1024).toFixed(1)} KB (~30% reduction)</p>
+        <div className="space-y-1.5">
+          {files.map((f, i) => <p key={i} className="text-sm text-zinc-400 font-mono">{f.name} ({(f.size / 1024).toFixed(1)} KB)</p>)}
+          <p className="text-sm text-zinc-600 font-medium">Estimated ZIP: {(compressed! / 1024).toFixed(1)} KB (~30% reduction)</p>
         </div>
       )}
-    </Card>
+    </div>
   );
 }
 
@@ -161,17 +174,22 @@ function LargeTextViewer() {
   };
 
   return (
-    <Card className="md:col-span-2">
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Large Text File Viewer</h4>
-      <input type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile} className="w-full text-xs mb-2" />
-      <p className="text-xs text-zinc-400 mb-2">Size: {(fileSize / 1024).toFixed(1)} KB</p>
-      <div className="flex gap-2 mb-2">
-        <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..." className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <button onClick={doSearch} className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-sm">Find</button>
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Large Text File Viewer</h5>
+      <input type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
+        className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
+      <p className="text-sm text-zinc-400">Size: {(fileSize / 1024).toFixed(1)} KB</p>
+      <div className="flex gap-3">
+        <div className="flex-1 space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Search</label>
+          <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <button onClick={doSearch} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Find</button>
       </div>
-      {matches.length > 0 && <p className="text-xs text-zinc-400 mb-1">{matches.length} matches</p>}
-      <div className="max-h-60 overflow-auto bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-xs font-mono whitespace-pre-wrap">{text || 'No file loaded'}</div>
-    </Card>
+      {matches.length > 0 && <p className="text-sm text-zinc-400">{matches.length} matches</p>}
+      <div className="max-h-60 overflow-auto bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-sm font-mono whitespace-pre-wrap">{text || 'No file loaded'}</div>
+    </div>
   );
 }
 
@@ -184,25 +202,34 @@ function AvroSchemaGenerator() {
   const generate = () => {
     try {
       const parsedFields = JSON.parse(fields);
-      const result = {
-        type: 'record',
-        namespace,
-        name,
-        fields: parsedFields,
-      };
+      const result = { type: 'record', namespace, name, fields: parsedFields };
       setSchema(JSON.stringify(result, null, 2));
     } catch { toast.error('Invalid fields array'); }
   };
 
   return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Avro Schema Generator</h4>
-      <input type="text" value={namespace} onChange={e => setNamespace(e.target.value)} placeholder="Namespace" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2" />
-      <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2" />
-      <textarea rows={4} value={fields} onChange={e => setFields(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Generate</button>
-      {schema && <textarea readOnly rows={8} value={schema} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro Schema Generator</h5>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Namespace</label>
+          <input type="text" value={namespace} onChange={e => setNamespace(e.target.value)} placeholder="Namespace"
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-zinc-500">Name</label>
+          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"
+            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        </div>
+      </div>
+      <div className="space-y-1">
+        <label className="text-xs font-medium text-zinc-500">Fields JSON</label>
+        <textarea rows={4} value={fields} onChange={e => setFields(e.target.value)}
+          className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+      </div>
+      <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+      {schema && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{schema}</pre><div className="mt-1"><CopyBtn text={schema} label="Schema" /></div></div>}
+    </div>
   );
 }
 
@@ -228,12 +255,16 @@ function AvroToJsonSample() {
   };
 
   return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Avro → JSON Sample</h4>
-      <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={generateSample} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Generate</button>
-      {sample && <textarea readOnly rows={5} value={sample} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro → JSON Sample</h5>
+      <div className="space-y-1">
+        <label className="text-xs font-medium text-zinc-500">Avro schema</label>
+        <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
+          className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+      </div>
+      <button onClick={generateSample} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+      {sample && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{sample}</pre><div className="mt-1"><CopyBtn text={sample} label="Sample" /></div></div>}
+    </div>
   );
 }
 
@@ -268,22 +299,22 @@ function IcalEventGenerator() {
   };
 
   return (
-    <Card className="md:col-span-2">
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">iCal Event Generator</h4>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
-        <input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+    <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">iCal Event Generator</h5>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Summary</label><input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Start</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Start time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Location</label><input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-2">
-        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">End date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">End time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div>
       </div>
-      <textarea rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs mb-2" />
-      <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate .ics</button>
-      {ical && <textarea readOnly rows={8} value={ical} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
+      <div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Description</label><textarea rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" /></div>
+      <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate .ics</button>
+      {ical && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{ical}</pre><div className="mt-1"><CopyBtn text={ical} label=".ics" /></div></div>}
+    </div>
   );
 }
 
@@ -291,11 +322,11 @@ export default function ConvertersEverydayKit() {
   const [tab, setTab] = useState<Tab>('everyday');
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+    <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-xl w-fit">
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${tab === t.key ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>{t.label}</button>
+            className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${tab === t.key ? 'bg-blue-600 text-white shadow-md' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{t.label}</button>
         ))}
       </div>
       {tab === 'everyday' && (
