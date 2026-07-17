@@ -102,12 +102,12 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Product</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/tools" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">All Tools</Link></li>
-              <li><Link href="/pricing" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Pricing</Link></li>
-              <li><Link href="/extension" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Chrome Extension</Link></li>
-              <li><Link href="/changelog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Changelog</Link></li>
-              <li><Link href="/status" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Status</Link></li>
-              <li><Link href="/faq" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link href="/tools" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">All Tools</Link></li>
+              <li><Link href="/pricing" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
+              <li><Link href="/extension" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Chrome Extension</Link></li>
+              <li><Link href="/changelog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Changelog</Link></li>
+              <li><Link href="/status" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Status</Link></li>
+              <li><Link href="/faq" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">FAQ</Link></li>
             </ul>
           </div>
 
@@ -115,11 +115,11 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Company</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/careers" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors flex items-center gap-2">Careers <span className="text-[10px] font-semibold bg-[var(--accent)]/10 text-[var(--accent)] px-1.5 py-0.5 rounded">Hiring</span></Link></li>
-              <li><Link href="/roadmap" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Roadmap</Link></li>
-              <li><Link href="/contact" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">About</Link></li>
+              <li><Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Blog</Link></li>
+              <li><Link href="/careers" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2">Careers <span className="text-[10px] font-semibold bg-[var(--accent)]/10 text-[var(--accent)] px-1.5 py-0.5 rounded">Hiring</span></Link></li>
+              <li><Link href="/roadmap" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Roadmap</Link></li>
+              <li><Link href="/contact" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -127,10 +127,10 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Cookie Policy</Link></li>
-              <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] hover:text-white transition-colors">Security</Link></li>
+              <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
             </ul>
           </div>
         </div>
