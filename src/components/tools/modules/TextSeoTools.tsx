@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback } from 'react';
+import DOMPurify from 'dompurify';
 
 const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
 const labelClass = "block text-sm font-medium mb-1";
@@ -589,7 +590,7 @@ export function MarkdownPreviewer() {
       <div className="space-y-3">
         <div><label className={labelClass}>Markdown</label><textarea value={md} onChange={e => setMd(e.target.value)} rows={8} className={`${inputClass} font-mono text-xs`} /></div>
         <button onClick={preview} className={btnClass}>Preview</button>
-        {html && <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: html }} />}
+        {html && <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />}
       </div>
     </div>
   );

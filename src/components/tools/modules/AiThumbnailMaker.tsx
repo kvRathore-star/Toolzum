@@ -549,6 +549,7 @@ export default function AiThumbnailMaker() {
   };
 
   const exportThumbnail = () => {
+    try {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -562,6 +563,9 @@ export default function AiThumbnailMaker() {
       downloadOrShare(dataUrl, `thumbnail_${aspectRatio}.png`);
       toast.success("Thumbnail exported successfully!");
     }, 100);
+  } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Export failed');
+    }
   };
 
   return (

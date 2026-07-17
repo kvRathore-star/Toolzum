@@ -174,7 +174,7 @@ export default function FaviconGenerator() {
              <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
                 <h4 className="text-zinc-900 dark:text-white font-medium mb-4">Original Image Preview</h4>
                 <div className="bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-100 dark:border-zinc-800 flex items-center justify-center min-h-[250px] p-4 chess-bg">
-                  <style dangerouslySetInnerHTML={{__html: `
+                  <style>{`
                     .chess-bg {
                       background-image: 
                         linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
@@ -189,7 +189,7 @@ export default function FaviconGenerator() {
                           linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
                       }
                     }
-                  `}} />
+                  `}</style>
                   <NextImage unoptimized={true} loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
                 </div>
              </div>

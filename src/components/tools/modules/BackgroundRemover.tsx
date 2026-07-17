@@ -13,6 +13,7 @@ export default function BackgroundRemover() {
   const [feather, setFeather] = useState<number>(2);
   const [targetColor, setTargetColor] = useState<{ r: number, g: number, b: number } | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -42,55 +43,62 @@ export default function BackgroundRemover() {
   }, [processedUrl]);
 
   const runMask = () => {
-    const canvas = canvasRef.current;
-    const img = imageRef.current;
-    if (!canvas || !img) return;
+    setIsProcessing(true);
+    try {
+      const canvas = canvasRef.current;
+      const img = imageRef.current;
+      if (!canvas || !img) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.drawImage(img, 0, 0);
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      ctx.drawImage(img, 0, 0);
 
-    if (!targetColor) return;
+      if (!targetColor) return;
 
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imgData.data;
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
 
-    const { r: tr, g: tg, b: tb } = targetColor;
+      const { r: tr, g: tg, b: tb } = targetColor;
 
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
 
-      // Euclidean distance in RGB color space
-      const distance = Math.sqrt(
-        Math.pow(r - tr, 2) +
-        Math.pow(g - tg, 2) +
-        Math.pow(b - tb, 2)
-      );
+        // Euclidean distance in RGB color space
+        const distance = Math.sqrt(
+          Math.pow(r - tr, 2) +
+          Math.pow(g - tg, 2) +
+          Math.pow(b - tb, 2)
+        );
 
-      // Check distance against tolerance
-      if (distance <= tolerance) {
-        data[i + 3] = 0; // Transparent
-      } else if (distance <= tolerance + feather) {
-        // Apply feathering transparency gradient
-        const factor = (distance - tolerance) / feather;
-        data[i + 3] = Math.min(255, Math.floor(factor * 255));
+        // Check distance against tolerance
+        if (distance <= tolerance) {
+          data[i + 3] = 0; // Transparent
+        } else if (distance <= tolerance + feather) {
+          // Apply feathering transparency gradient
+          const factor = (distance - tolerance) / feather;
+          data[i + 3] = Math.min(255, Math.floor(factor * 255));
+        }
       }
+
+      ctx.putImageData(imgData, 0, 0);
+      
+      // Save to url
+      canvas.toBlob((blob) => {
+        if (blob) {
+          if (processedUrl) URL.revokeObjectURL(processedUrl);
+          setProcessedUrl(URL.createObjectURL(blob));
+        }
+      }, 'image/png');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Background removal failed');
+    } finally {
+      setIsProcessing(false);
     }
-
-    ctx.putImageData(imgData, 0, 0);
-    
-    // Save to url
-    canvas.toBlob((blob) => {
-      if (blob) {
-        if (processedUrl) URL.revokeObjectURL(processedUrl);
-        setProcessedUrl(URL.createObjectURL(blob));
-      }
-    }, 'image/png');
   };
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -227,8 +235,13 @@ export default function BackgroundRemover() {
             />
           </div>
 
-          <div className="w-full mt-6 h-12 flex justify-center">
-            {processedUrl && targetColor ? (
+          <div className="w-full mt-6 min-h-[48px] flex justify-center">
+            {isProcessing ? (
+              <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 py-2">
+                <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                Processing...
+              </div>
+            ) : processedUrl && targetColor ? (
               <button
                 onClick={handleDownload}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"

@@ -75,7 +75,7 @@ export default function InvoiceGenerator() {
         </button>
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style>{`
         @media print {
           body * {
             visibility: hidden;
@@ -102,7 +102,7 @@ export default function InvoiceGenerator() {
             padding: 0 !important;
           }
         }
-      `}} />
+      `}</style>
 
       <div 
         id="invoice-container"

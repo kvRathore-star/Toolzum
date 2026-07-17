@@ -11,6 +11,7 @@ export default function PodcastTranscription() {
   const [output, setOutput] = useState('');
 
   const processAudio = () => {
+    try {
     if (!file) return;
     setIsProcessing(true);
     
@@ -24,6 +25,10 @@ SPEAKER 2: Thanks for having me!");
       setIsProcessing(false);
       toast.error("API Key Missing.");
     }, 2000);
+  } catch (err: unknown) {
+      setIsProcessing(false);
+      toast.error(err instanceof Error ? err.message : 'Transcription failed');
+    }
   };
 
   if (!file) {

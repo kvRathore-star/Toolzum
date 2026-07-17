@@ -305,7 +305,7 @@ export default function ImageToIco() {
             <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-400 mb-4">ICO Ready!</h4>
               <div className="bg-zinc-100 dark:bg-black rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px] chess-bg">
-                <style dangerouslySetInnerHTML={{__html: `
+                <style>{`
                   .chess-bg {
                     background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
                       linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
@@ -318,7 +318,7 @@ export default function ImageToIco() {
                         linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222);
                     }
                   }
-                `}} />
+                `}</style>
                 {preview && (
                   <NextImage unoptimized={true} loading="lazy" src={preview} alt="Preview" width={iconSize} height={iconSize} className="drop-shadow-md rounded" />
                 )}

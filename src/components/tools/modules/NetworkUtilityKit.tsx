@@ -205,7 +205,8 @@ function CryptoTools() {
           const offset = arr[arr.length - 1] & 0xf;
           const code = ((arr[offset] & 0x7f) << 24 | (arr[offset + 1] & 0xff) << 16 | (arr[offset + 2] & 0xff) << 8 | (arr[offset + 3] & 0xff)) % 1000000;
           setTotpCode(String(code).padStart(6, '0'));
-        });
+        })
+        .catch(err => toast.error(err?.message || 'Operation failed'));
     } catch { toast.error('Invalid secret'); }
   };
 

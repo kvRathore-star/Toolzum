@@ -15,7 +15,7 @@ async function getBlobSizeMB(blobUrl: string): Promise<number | undefined> {
 
 export async function downloadOrShare(blobUrl: string, fileName: string) {
   const fileSizeMB = await getBlobSizeMB(blobUrl);
-  if (!(await checkAndRecordDownload({ fileSizeMB }))) return;
+  if (!(await checkAndRecordDownload({ fileSizeMB }))) { URL.revokeObjectURL(blobUrl); return; }
 
   // Track for social proof counter
   try { localStorage.setItem('toolzum:processedCount', String(Number(localStorage.getItem('toolzum:processedCount') || '0') + 1)); } catch {}
@@ -41,10 +41,12 @@ export async function downloadOrShare(blobUrl: string, fileName: string) {
           url: savedFile.uri,
           dialogTitle: 'Share or Save File',
         });
+        URL.revokeObjectURL(blobUrl);
       };
     } catch (e) {
       console.error('Native share failed', e);
       window.open(blobUrl, '_blank');
+      URL.revokeObjectURL(blobUrl);
     }
   } else {
     const a = document.createElement('a');
@@ -53,5 +55,6 @@ export async function downloadOrShare(blobUrl: string, fileName: string) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   }
 }

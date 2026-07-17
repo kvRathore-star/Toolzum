@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 
 export default function WebsiteScreenshot() {
   const [url, setUrl] = useState('');
@@ -142,7 +143,7 @@ export default function WebsiteScreenshot() {
       const el = contentRef.current;
       if (!el) throw new Error('Content container not found');
       el.style.width = `${effectiveWidth}px`;
-      el.innerHTML = html;
+      el.innerHTML = DOMPurify.sanitize(html);
 
       await new Promise(r => setTimeout(r, 2000 + captureDelay * 1000));
 

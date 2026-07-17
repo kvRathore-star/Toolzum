@@ -128,7 +128,7 @@ export default function Base64ToImage() {
           </div>
 
           <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 relative chess-bg">
-            <style dangerouslySetInnerHTML={{__html: `
+            <style>{`
               .chess-bg {
                 background-image: 
                   linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
@@ -143,7 +143,7 @@ export default function Base64ToImage() {
                     linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
                 }
               }
-            `}} />
+            `}</style>
             
             {imageUrl ? (
               <NextImage loading="lazy" src={imageUrl} alt="Decoded" unoptimized={true} className="max-w-full max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />

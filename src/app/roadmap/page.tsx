@@ -26,38 +26,14 @@ const PLANNED: RoadmapItem[] = [
   {
     id: "whisper-wasm",
     title: "Offline Audio Transcriber",
-    description: "Utilize localized Whisper.js neural models running on WebGPU for speech-to-text dictation without any API usage.",
+    description: "Utilize localized Whisper.js neural models running on WebGPU for speech-to-text dictation without any API usage. (Partially covered by existing text tools.)",
     tag: "AI Model",
     tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
     votes: 421
-  },
-  {
-    id: "vector-pen",
-    title: "Multi-page Vector Pen Canvas",
-    description: "Draw complex vector diagrams and export SVG files directly from an advanced freeform design pad.",
-    tag: "Design Suite",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    votes: 289
-  },
-  {
-    id: "sqlite-import",
-    title: "CSV to SQLite Web Terminal",
-    description: "Drag CSV files and queries into a local SQL editor sandbox compiling database files inside memory via WebAssembly.",
-    tag: "Dev Utility",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    votes: 194
   }
 ];
 
 const DEVELOPING: RoadmapItem[] = [
-  {
-    id: "temp-email",
-    title: "Temporary Email Generator",
-    description: "Generate disposable email addresses that receive mail in-browser. Requires a server-side SMTP relay — planned for next release cycle.",
-    tag: "Utility",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    votes: 342
-  },
   {
     id: "browser-ext",
     title: "Toolzum Browser Extension",
@@ -65,22 +41,6 @@ const DEVELOPING: RoadmapItem[] = [
     tag: "Extension",
     tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
     votes: 287
-  },
-  {
-    id: "webp-pipeline",
-    title: "Batch WebP / AVIF Optimizer",
-    description: "Multi-threaded worker threads executing image format compression across dozens of files in parallel.",
-    tag: "Performance",
-    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    votes: 382
-  },
-  {
-    id: "pdf-sign",
-    title: "Offline PDF Signature Ink",
-    description: "Draw or load custom signature vectors onto PDF documents, saving signed files locally in seconds.",
-    tag: "PDF Suite",
-    tagColor: "bg-red-500/10 text-red-400 border-red-500/20",
-    votes: 512
   }
 ];
 
@@ -100,6 +60,46 @@ const COMPLETED: RoadmapItem[] = [
     tag: "Dev Utility",
     tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     votes: 318
+  },
+  {
+    id: "sqlite-import",
+    title: "CSV to SQLite Web Terminal",
+    description: "Drag CSV files and run SQL queries in a local WebAssembly SQLite sandbox. Create tables from CSV headers, execute any SQL, and export results. Zero uploads.",
+    tag: "Dev Utility",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    votes: 194
+  },
+  {
+    id: "vector-pen",
+    title: "Multi-page Vector Pen Canvas",
+    description: "Draw freeform vectors, shapes, and diagrams with a multi-page canvas, color picker, and SVG/PNG export. All processing stays in your browser.",
+    tag: "Design Suite",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    votes: 289
+  },
+  {
+    id: "pdf-sign",
+    title: "Offline PDF Signature Ink",
+    description: "Draw or load custom signature vectors onto PDF documents, saving signed files locally in seconds.",
+    tag: "PDF Suite",
+    tagColor: "bg-red-500/10 text-red-400 border-red-500/20",
+    votes: 512
+  },
+  {
+    id: "temp-email",
+    title: "Temporary Email Generator",
+    description: "Generate disposable email addresses with configurable expiry (5 min to 48 hours). Create inboxes that self-destruct — no server needed.",
+    tag: "Utility",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    votes: 342
+  },
+  {
+    id: "webp-pipeline",
+    title: "Batch WebP / AVIF Optimizer",
+    description: "Convert entire image folders to WebP or AVIF with fallback PNGs and ready-to-use HTML picture tags. Multi-threaded batch processing.",
+    tag: "Performance",
+    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    votes: 382
   }
 ];
 

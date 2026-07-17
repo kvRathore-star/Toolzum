@@ -126,7 +126,7 @@ export default function ResumeBuilder() {
       </div>
       
       {/* CSS for printing */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style>{`
         @media print {
           body * { visibility: hidden; }
           .printable-area, .printable-area * { visibility: visible; }
@@ -134,7 +134,7 @@ export default function ResumeBuilder() {
           .no-print { display: none !important; }
           @page { margin: 0; }
         }
-      `}} />
+      `}</style>
     </div>
   );
 }

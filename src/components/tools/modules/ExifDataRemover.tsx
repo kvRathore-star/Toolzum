@@ -186,13 +186,13 @@ export default function ExifDataRemover() {
           </div>
 
           <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 min-h-[300px] chess-bg relative mb-6">
-            <style dangerouslySetInnerHTML={{__html: `
+            <style>{`
               .chess-bg {
                 background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
                 background-size: 20px 20px; background-position: 0 0, 10px 10px;
               }
               @media (prefers-color-scheme: dark) { .chess-bg { background-image: linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111); } }
-            `}} />
+            `}</style>
             
 <NextImage unoptimized={true} loading="lazy" 
   src={outputUrl || dataUrl} 

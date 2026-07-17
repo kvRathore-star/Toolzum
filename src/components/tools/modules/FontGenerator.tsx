@@ -37,7 +37,7 @@ export default function FontGenerator() {
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
       {/* Google fonts style sheets loaded dynamically */}
-      <style dangerouslySetInnerHTML={{ __html: FONTS_LIST.map(f => f.importUrl).join('\n') }} />
+      <style>{FONTS_LIST.map(f => f.importUrl).join('\n')}</style>
 
       <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">

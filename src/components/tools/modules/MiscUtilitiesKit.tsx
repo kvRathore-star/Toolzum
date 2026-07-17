@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 
 type Tab = 'security' | 'cloud' | 'convert' | 'extra';
 
@@ -262,7 +263,7 @@ function MarkdownQuickEditor() {
           <textarea rows={8} value={md} onChange={e => setMd(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
           <button onClick={renderPreview} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Preview</button>
         </div>
-        <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 prose prose-sm max-h-64 overflow-auto" dangerouslySetInnerHTML={{ __html: preview }} />
+        <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 prose prose-sm max-h-64 overflow-auto" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(preview) }} />
       </div>
     </Card>
   );

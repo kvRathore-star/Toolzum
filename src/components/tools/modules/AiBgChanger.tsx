@@ -44,6 +44,7 @@ export default function AiBgChanger() {
   };
 
   const removeBackgroundAuto = () => {
+    try {
     const img = imageRef.current;
     const canvas = canvasRef.current;
     if (!img || !canvas) return;
@@ -108,6 +109,10 @@ export default function AiBgChanger() {
       setIsProcessing(false);
       toast.success('Background removed!');
     });
+  } catch (err: unknown) {
+      setIsProcessing(false);
+      toast.error(err instanceof Error ? err.message : 'Background removal failed');
+    }
   };
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {

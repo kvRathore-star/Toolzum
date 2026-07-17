@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 
 type Tab = 'color' | 'css' | 'minify' | 'generators';
 
@@ -262,7 +263,7 @@ function CssMediaTools() {
 
   const parseTableToCsv = () => {
     const div = document.createElement('div');
-    div.innerHTML = tableInput;
+    div.innerHTML = DOMPurify.sanitize(tableInput);
     const rows = div.querySelectorAll('tr');
     const csv: string[] = [];
     rows.forEach(r => {
@@ -325,7 +326,7 @@ function CssMediaTools() {
         <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">CSV → HTML Table</h4>
         <textarea rows={3} value={csvToTable} onChange={e => setCsvToTable(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={csvToHtmlTable} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>
-        {tableFromCsv && <div className="mt-2 p-2 bg-white rounded-lg text-xs overflow-auto max-h-32" dangerouslySetInnerHTML={{ __html: tableFromCsv }} />}
+        {tableFromCsv && <div className="mt-2 p-2 bg-white rounded-lg text-xs overflow-auto max-h-32" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tableFromCsv) }} />}
       </Card>
     </div>
   );

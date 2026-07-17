@@ -249,8 +249,7 @@ export default function PsdToJpgPng() {
           {previewUrl ? (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
               <div className="overflow-hidden rounded-xl max-h-[350px] flex items-center justify-center chess-bg">
-                <style dangerouslySetInnerHTML={{
-                  __html: `
+                <style>{`
                     .chess-bg {
                       background-image:
                         linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%, #e5e7eb),
@@ -263,8 +262,7 @@ export default function PsdToJpgPng() {
                         linear-gradient(45deg, #374151 25%, transparent 25%, transparent 75%, #374151 75%, #374151),
                         linear-gradient(45deg, #374151 25%, transparent 25%, transparent 75%, #374151 75%, #374151);
                     }
-                  `,
-                }} />
+                  `}</style>
                 <img
                   src={previewUrl}
                   alt="PSD Preview"

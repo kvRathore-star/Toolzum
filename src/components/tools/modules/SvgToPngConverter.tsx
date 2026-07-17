@@ -111,7 +111,7 @@ export default function SvgToPngConverter() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px] chess-bg">
-          <style dangerouslySetInnerHTML={{__html: `
+          <style>{`
             .chess-bg {
               background-image: 
                 linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
@@ -119,7 +119,7 @@ export default function SvgToPngConverter() {
               background-size: 20px 20px;
               background-position: 0 0, 10px 10px;
             }
-          `}} />
+          `}</style>
           <NextImage unoptimized={true} loading="lazy" src={URL.createObjectURL(file)} className="max-h-[300px] object-contain drop-shadow-2xl" alt="SVG Preview" />
         </div>
 

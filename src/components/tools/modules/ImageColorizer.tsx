@@ -12,6 +12,7 @@ export default function ImageColorizer() {
   const [hue, setHue] = useState(200); // Default blue tint colorizer
   const [saturation, setSaturation] = useState(60);
   const [brightness, setBrightness] = useState(10);
+  const [isProcessing, setIsProcessing] = useState(false);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,29 +26,35 @@ export default function ImageColorizer() {
 
   const applyColorizer = () => {
     if (!imageSrc || !imageRef.current) return;
+    setIsProcessing(true);
+    try {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = imageRef.current;
+      if (!ctx) return;
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = imageRef.current;
-    if (!ctx) return;
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
 
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
+      // Draw base image
+      ctx.drawImage(img, 0, 0);
 
-    // Draw base image
-    ctx.drawImage(img, 0, 0);
+      // Apply color overlay blending mode (Hue-Rotate/HSL tint)
+      ctx.globalCompositeOperation = 'hue';
+      ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${50 + brightness}%)`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Apply color overlay blending mode (Hue-Rotate/HSL tint)
-    ctx.globalCompositeOperation = 'hue';
-    ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${50 + brightness}%)`;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Reset blending for clean export
+      ctx.globalCompositeOperation = 'source-over';
 
-    // Reset blending for clean export
-    ctx.globalCompositeOperation = 'source-over';
-
-    const output = canvas.toDataURL('image/jpeg', 0.9);
-    setColorizedUrl(output);
-    toast.success('Image color tint filter applied!');
+      const output = canvas.toDataURL('image/jpeg', 0.9);
+      setColorizedUrl(output);
+      toast.success('Image color tint filter applied!');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Colorization failed');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const downloadImage = () => {
@@ -112,8 +119,14 @@ export default function ImageColorizer() {
 
               <div className="grid grid-cols-2 gap-4 pt-2">
                 <button onClick={() => setImageSrc(null)} className="border border-zinc-800 text-zinc-400 font-bold py-3 rounded-xl text-xs cursor-pointer">Clear File</button>
-                <button onClick={applyColorizer} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer">Apply Tint</button>
+                <button onClick={applyColorizer} disabled={isProcessing} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Apply Tint</button>
               </div>
+              {isProcessing && (
+                <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 py-2">
+                  <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                  Processing...
+                </div>
+              )}
             </div>
           )}
         </div>

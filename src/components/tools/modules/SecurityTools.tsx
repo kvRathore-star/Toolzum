@@ -30,7 +30,7 @@ function Input({ label, value, onChange, placeholder, type = "text", rows }: {
 function Output({ value, label }: { value: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(() => {
-    navigator.clipboard.writeText(value).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); });
+    navigator.clipboard.writeText(value).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {});
   }, [value]);
   if (!value) return null;
   return (

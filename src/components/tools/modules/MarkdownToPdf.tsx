@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { marked } from 'marked';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import type { Token, TokensList } from 'marked';
+import DOMPurify from 'dompurify';
 
 const PAGE_SIZES: Record<string, [number, number]> = {
   A4: [595.28, 841.89],
@@ -436,7 +437,7 @@ export default function MarkdownToPdf() {
               {htmlPreview ? (
                 <div
                   className="prose prose-sm dark:prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: htmlPreview }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlPreview) }}
                 />
               ) : (
                 <p className="text-zinc-400 text-sm italic">Preview will appear here...</p>

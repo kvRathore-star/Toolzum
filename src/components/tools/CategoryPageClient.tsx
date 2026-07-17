@@ -127,6 +127,94 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
 };
 
 const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
+  Image: {
+    Compress: ['compress', 'optimize', 'reduce size', 'file size'],
+    Resize: ['resize', 'resizer', 'scale', 'dimension', 'resample'],
+    Convert: ['convert', 'to png', 'to jpg', 'to webp', 'to gif', 'format converter'],
+    Edit: ['edit', 'crop', 'rotate', 'filter', 'flip', 'adjust', 'enhance', 'retouch', 'background'],
+    AI: ['ai upscale', 'ai enhance', 'face swap', 'background remove', 'object remove', 'ai colorize'],
+  },
+  PDF: {
+    Compress: ['compress', 'reduce size', 'optimize'],
+    Merge: ['merge', 'combine', 'join'],
+    Split: ['split', 'extract', 'separate'],
+    Convert: ['convert', 'to pdf', 'from pdf', 'pdf to', 'pdf converter'],
+    Edit: ['edit', 'rotate', 'protect', 'unlock', 'watermark', 'sign', 'ocr', 'metadata', 'page', 'number', 'header', 'footer'],
+  },
+  Audio: {
+    Convert: ['convert', 'to mp3', 'to wav', 'to flac', 'to ogg', 'to aac', 'to m4a', 'format converter'],
+    Compress: ['compress', 'reduce size', 'file size'],
+    Trim: ['trim', 'cut', 'crop audio'],
+    Edit: ['edit', 'merge', 'join', 'fade', 'volume', 'normalize', 'reverse', 'equalizer', 'noise'],
+    AI: ['transcription', 'speech to text', 'vocal remove', 'ai'],
+  },
+  Video: {
+    Compress: ['compress', 'reduce size', 'file size'],
+    Convert: ['convert', 'to mp4', 'to avi', 'to mov', 'to webm', 'to gif', 'format converter'],
+    Trim: ['trim', 'cut', 'crop video'],
+    Edit: ['edit', 'merge', 'join', 'speed', 'reverse', 'stabilize', 'mute', 'filter', 'screenshot', 'watermark'],
+    AI: ['subtitler', 'ai', 'screen record'],
+  },
+  Converter: {
+    Image: ['png', 'jpg', 'jpeg', 'webp', 'gif', 'svg', 'ico', 'avif', 'heic', 'image format'],
+    Video: ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', '3gp', 'mpeg', 'vob', 'video format'],
+    Audio: ['mp3', 'wav', 'flac', 'ogg', 'aac', 'm4a', 'wma', 'aiff', 'opus', 'audio format'],
+    Document: ['pdf', 'docx', 'txt', 'html', 'markdown', 'rtf', 'odt', 'epub', 'document format'],
+  },
+  Text: {
+    Count: ['word counter', 'character counter', 'frequency', 'count', 'analyze'],
+    Convert: ['case converter', 'reverse', 'slugs', 'text converter', 'diff'],
+    Generate: ['lorem ipsum', 'fancy text', 'cursive', 'font generator', 'zalgo'],
+    Edit: ['edit', 'find replace', 'cleaner', 'splitter', 'duplicate', 'sort'],
+  },
+  Developer: {
+    Format: ['formatter', 'beautify', 'prettify', 'format'],
+    Minify: ['minifier', 'minify', 'compress code'],
+    Encode: ['encoder', 'decoder', 'base64', 'url encode', 'html entity', 'hex', 'binary'],
+    Regex: ['regex', 'regular expression'],
+    Convert: ['converter', 'json to', 'yaml to', 'xml to', 'markdown to', 'html to'],
+  },
+  SEO: {
+    Analyze: ['keyword density', 'word frequency', 'counter', 'analyzer', 'analyze'],
+    Audit: ['audit', 'checker', 'validator', 'schema', 'meta tag', 'serp'],
+    Optimize: ['optimize', 'compress', 'minify', 'pagespeed'],
+    Generate: ['sitemap', 'generator', 'utm builder', 'robots.txt'],
+  },
+  Finance: {
+    Calculate: ['calculator', 'calculate', 'loan', 'emi', 'mortgage', 'sip', 'investment', 'roi', 'cagr', 'salary'],
+    Convert: ['currency converter', 'number converter', 'unit converter'],
+    Tax: ['tax', 'gst', 'vat', 'hst', 'salary'],
+    ROI: ['roi', 'margin', 'profit', 'break-even', 'markup', 'cac', 'ltv', 'churn'],
+  },
+  Privacy: {
+    Encrypt: ['encrypt', 'encryption', 'cipher', 'aes', 'pgp'],
+    Redact: ['redact', 'redaction', 'exif', 'metadata remove'],
+    Generate: ['password generator', 'random password', 'secure', 'token'],
+    Analyze: ['password strength', 'analyze', 'checker'],
+  },
+  Utility: {
+    Convert: ['converter', 'convert', 'to'],
+    Generate: ['generator', 'generate', 'create', 'maker'],
+    Calculate: ['calculator', 'calculate', 'counter', 'timer'],
+    Format: ['formatter', 'format', 'prettify'],
+  },
+  Branding: {
+    Design: ['logo', 'brand', 'business card', 'email signature', 'social media'],
+    Analyze: ['analyze', 'checker', 'test', 'validator'],
+    Calculate: ['calculator', 'calculate', 'roi', 'cpm', 'roas'],
+    Generate: ['generator', 'generate', 'maker', 'invoice', 'receipt', 'coupon'],
+  },
+  Health: {
+    Calculate: ['calculator', 'calculate', 'bmi', 'body fat', 'calorie', 'bmr', 'heart rate', 'running pace', 'ideal weight'],
+    Track: ['track', 'tracker', 'log'],
+    Convert: ['converter', 'convert', 'unit'],
+  },
+  'indian-utilities': {
+    Aadhaar: ['aadhaar', 'uid', 'pan'],
+    Finance: ['gst', 'itr', 'income tax', 'gstin', 'sip', 'fd', 'rd'],
+    Generator: ['generator', 'generate', 'maker', 'resume', 'biodata', 'receipt', 'invoice'],
+    Convert: ['converter', 'convert'],
+  },
   Calculator: {
     Finance: ['mortgage', 'loan', 'emi', 'interest', 'sip', 'gst', 'vat', 'roi', 'cagr', 'inflation', 'tip', 'debt', 'retirement', 'tax', 'investment', 'mrr', 'runway', 'churn', 'cac', 'ltv', 'break-even', 'burn rate', 'margin', 'profit', 'percentage', 'salary'],
     Health: ['bmi', 'body fat', 'calorie', 'heart rate', 'macro', 'protein', 'water', 'sleep', 'keto', 'pregnancy', 'due date', 'ovulation', 'baby', 'running pace', 'ideal weight', 'bmr', 'lean body mass', 'body surface', 'breastfeeding'],

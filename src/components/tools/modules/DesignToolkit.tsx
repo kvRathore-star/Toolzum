@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Palette, Image, Radius, Layers } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import DOMPurify from 'dompurify';
 
 type Tab = 'color' | 'border' | 'typography' | 'svg';
 
@@ -203,7 +204,7 @@ function SvgTools() {
         <input type="color" value={svgBg} onChange={e => setSvgBg(e.target.value)} className="w-10 h-8 rounded cursor-pointer" />
       </div>
       <div className="flex items-center justify-center p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 min-h-[140px] bg-cover" style={{ backgroundColor: svgBg }}>
-        <div dangerouslySetInnerHTML={{ __html: svgCode }} />
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgCode, { USE_PROFILES: { svg: true, svgFilters: true } }) }} />
       </div>
       <textarea value={svgCode} onChange={e => setSvgCode(e.target.value)}
         className="w-full h-28 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
