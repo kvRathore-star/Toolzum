@@ -117,6 +117,13 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
     { label: 'Generator', icon: '📄' },
     { label: 'Convert', icon: '🔄' },
   ],
+  Calculator: [
+    { label: 'Finance', icon: '💰' },
+    { label: 'Health', icon: '❤️' },
+    { label: 'Math', icon: '📐' },
+    { label: 'Date/Time', icon: '📅' },
+    { label: 'Savings', icon: '🏦' },
+  ],
 };
 
 export function CategoryPageClient({ category, tools }: CategoryPageClientProps) {
