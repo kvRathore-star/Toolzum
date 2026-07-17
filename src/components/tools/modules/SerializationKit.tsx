@@ -259,13 +259,13 @@ function XmlSqlTools() {
         }
         return row;
       };
+      const root = Object.keys(basicXmlToJson(xml))[0] || 'root';
       const rows = Object.values(basicXmlToJson(xml));
       const allRows: Record<string, string>[] = Array.isArray(obj[root]) ? (obj[root] as any[]).map((r: any) => extract(r)) : [extract(obj[root])];
       const headers = [...new Set(allRows.flatMap(r => Object.keys(r)))];
       const csv = [headers.join(','), ...allRows.map(r => headers.map(h => r[h] || '').join(','))].join('\n');
       setXmlOut(csv);
     } catch { toast.error('Could not convert XML to CSV'); }
-    const root = Object.keys(basicXmlToJson(xml))[0] || 'root';
   };
 
   const [sqlInsert, setSqlInsert] = useState("INSERT INTO users (id, name, email) VALUES (1, 'Alice', 'alice@test.com');");

@@ -60,7 +60,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   const isPro = tool?.isPro || false;
   const isProLocked = isPro && userPlan !== "pro";
   const isLocked = isProLocked;
-  const isFreeTier = userPlan !== null && userPlan !== "pro" && !isProLocked;
+  const isFreeTier = userPlan !== null && userPlan !== "pro" && isPro && !isProLocked;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   const breadcrumbSchema = {

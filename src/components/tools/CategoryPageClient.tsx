@@ -126,8 +126,19 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   ],
 };
 
+const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
+  Calculator: {
+    Finance: ['mortgage', 'loan', 'emi', 'interest', 'sip', 'gst', 'vat', 'roi', 'cagr', 'inflation', 'tip', 'debt', 'retirement', 'tax', 'investment', 'mrr', 'runway', 'churn', 'cac', 'ltv', 'break-even', 'burn rate', 'margin', 'profit', 'percentage', 'salary'],
+    Health: ['bmi', 'body fat', 'calorie', 'heart rate', 'macro', 'protein', 'water', 'sleep', 'keto', 'pregnancy', 'due date', 'ovulation', 'baby', 'running pace', 'ideal weight', 'bmr', 'lean body mass', 'body surface', 'breastfeeding'],
+    Math: ['quadratic', 'pythagorean', 'fraction', 'percentage', 'circle', 'triangle', 'area', 'volume', 'exponent', 'square root', 'mean', 'median', 'mode', 'standard deviation', 'ratio', 'proportion', 'probability', 'scientific', 'trigonometry', 'logarithm', 'aspect ratio', 'rectangle', 'dpi', 'ppi'],
+    'Date/Time': ['age', 'date', 'time', 'week', 'business day', 'days between', 'pregnancy', 'due date', 'conception', 'day of week', 'leap year', 'ovulation'],
+    Savings: ['savings', 'compound', 'fd', 'rd', 'fixed deposit', 'recurring', 'goal', 'simple interest', 'net worth', 'retirement', 'investment'],
+  },
+};
+
 export function CategoryPageClient({ category, tools }: CategoryPageClientProps) {
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [activeSubcategory, setActiveSubcategory] = React.useState<string | null>(null);
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
@@ -180,8 +191,9 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
 
   const filtered = tools.filter(t => {
     const matchesSearch = !searchQuery || t.name.toLowerCase().includes(searchQuery.toLowerCase()) || t.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSub = !activeSubcategory || !SUBCATEGORY_KEYWORDS[category]?.[activeSubcategory] || SUBCATEGORY_KEYWORDS[category][activeSubcategory].some(kw => t.name.toLowerCase().includes(kw) || t.description.toLowerCase().includes(kw));
     const matchesPro = proFilter === 'all' || (proFilter === 'pro' ? t.isPro : !t.isPro);
-    return matchesSearch && matchesPro;
+    return matchesSearch && matchesSub && matchesPro;
   }).sort((a, b) => {
     if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
     return b.name.localeCompare(a.name);
@@ -312,14 +324,18 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             {subCats.map(sc => (
               <button
                 key={sc.label}
-                onClick={() => { setSearchQuery(sc.label.toLowerCase()); }}
-                className="text-xs px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-elevated)] transition-all"
+                onClick={() => { setActiveSubcategory(activeSubcategory === sc.label ? null : sc.label); setSearchQuery(''); }}
+                className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                  activeSubcategory === sc.label
+                    ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
+                    : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] hover:bg-[var(--bg-elevated)]'
+                }`}
               >
                 {sc.icon} {sc.label}
               </button>
             ))}
             <button
-              onClick={() => { setSearchQuery(''); }}
+              onClick={() => { setSearchQuery(''); setActiveSubcategory(null); }}
               className="text-xs px-3 py-1.5 rounded-full border border-dashed border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)] transition-all"
             >
               Clear
@@ -440,9 +456,9 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--bg-surface)] flex items-center justify-center">
               <Search className="w-6 h-6 text-[var(--text-muted)]" />
             </div>
-            <p className="text-[var(--text-muted)] mb-2">No tools found{searchQuery ? ` matching "${searchQuery}"` : letterFilter ? ` starting with "${letterFilter}"` : ''}.</p>
+            <p className="text-[var(--text-muted)] mb-2">No tools found{searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : letterFilter ? ` starting with "${letterFilter}"` : ''}.</p>
             <p className="text-xs text-[var(--text-muted)] mb-4">Try a different search term or browse other categories.</p>
-            <button onClick={() => { setSearchQuery(''); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
+            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
               Clear filters
             </button>
           </div>

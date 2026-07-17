@@ -216,7 +216,7 @@ function RandomValues() {
       const h = String(randInt(0, 23)).padStart(2, '0');
       const m = String(randInt(0, 59)).padStart(2, '0');
       const s = String(randInt(0, 59)).padStart(2, '0');
-      return `${h}:${m}:${s} (${h % 12 || 12}:${m} ${+h < 12 ? 'AM' : 'PM'})`;
+      return `${h}:${m}:${s} (${+h % 12 || 12}:${m} ${+h < 12 ? 'AM' : 'PM'})`;
     });
     setOut(lines.join('\n'));
     toast.success('Times generated');

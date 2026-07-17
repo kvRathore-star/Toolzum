@@ -187,7 +187,7 @@ function SecurityTools() {
     });
     if (findings.length) {
       setScanOut(`Found ${findings.length} potential secret(s):\n` + findings.join('\n'));
-      toast.warning(`${findings.length} secret(s) detected`);
+      toast.error(`${findings.length} secret(s) detected`);
     } else {
       setScanOut('✓ No common secret patterns detected');
       toast.success('Clean scan');
@@ -310,7 +310,7 @@ function ConfigTools() {
       const indent = l.search(/\S/);
       if (indent > prevIndent + 2) issues.push(`Line ${i + 1}: Over-indented (${indent} spaces)`);
       if (trimmed.includes('\t')) issues.push(`Line ${i + 1}: Contains tab (use spaces)`);
-      if (trimmed.includes(': ') && trimmed.includes(':') !== trimmed.lastIndexOf(':')) issues.push(`Line ${i + 1}: Multiple colons — missing space?`);
+      if (trimmed.includes(': ') && trimmed.indexOf(':') !== trimmed.lastIndexOf(':')) issues.push(`Line ${i + 1}: Multiple colons — missing space?`);
       prevIndent = indent;
     });
     return { valid: issues.length === 0, issues };

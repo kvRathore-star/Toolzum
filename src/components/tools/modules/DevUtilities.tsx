@@ -49,7 +49,7 @@ function toSymbolicPerm(n: string): string {
 function parseDockerRun(cmd: string): string {
   const parts = cmd.trim().split(/\s+/);
   const yaml: Record<string, unknown> = { version: '3.8', services: { app: {} } };
-  const svc = yaml.services.app as Record<string, unknown>;
+  const svc = (yaml.services as Record<string, unknown>).app as Record<string, unknown>;
   let i = 0;
   while (i < parts.length) {
     const p = parts[i];

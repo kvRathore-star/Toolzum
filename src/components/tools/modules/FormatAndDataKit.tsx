@@ -312,7 +312,7 @@ function CodeToCurlConverter() {
       method = 'POST';
     }
 
-    const bodyMatch = code.match(/body:\s*(JSON\.stringify\((.+)\)|['"](.+)['"])/s);
+    const bodyMatch = code.match(/body:\s*(JSON\.stringify\((.+)\)|['"](.+)['"])/);
     if (bodyMatch) body = bodyMatch[2] || bodyMatch[3] || '';
 
     const headerRegex = /['"]([^'"]+)['"]\s*:\s*['"]([^'"]+)['"]/g;
@@ -490,7 +490,7 @@ function MimeFinder() {
     '.otf': 'font/otf', '.zip': 'application/zip', '.gz': 'application/gzip',
     '.tar': 'application/x-tar', '.txt': 'text/plain', '.csv': 'text/csv', '.yaml': 'text/yaml',
     '.yml': 'text/yaml', '.toml': 'application/toml', '.wasm': 'application/wasm',
-    '.mjs': 'application/javascript', '.cjs': 'application/javascript',
+    '.cjs': 'application/javascript',
   };
 
   const find = () => {
