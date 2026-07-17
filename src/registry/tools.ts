@@ -2237,7 +2237,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: 'Utility',
     id:  "261",
     dependencies: 'QRCode.js',
-    showInCategory: false,
   },
   {
     name: 'Indian Document Enhancer',
