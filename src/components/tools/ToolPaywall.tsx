@@ -20,7 +20,7 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
   if (!isLocked && !isFreeTier) return <>{children}</>;
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       <div className={isLocked ? "blur-md pointer-events-none select-none opacity-40 transition-all duration-300" : "transition-all duration-300"}>
         {children}
       </div>

@@ -54,6 +54,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Extension: { title: 'Free Browser Extension Tools', description: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.' },
     'E-commerce': { title: 'Free E-Commerce Tools — Store & Product', description: 'Free e-commerce tools — product price tracker, store analytics, and e-commerce utilities for online sellers.' },
     Lifestyle: { title: 'Free Lifestyle Tools — Daily Life Essentials', description: 'Free lifestyle tools — habit tracker, mood journal, and daily life utilities to improve your everyday routine.' },
+    Calculator: { title: 'Free Online Calculators — Mortgage, BMI, Math & More', description: 'Free online calculators — mortgage, BMI, percentage, age, math, health, finance, and everyday calculators. All computations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools — Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.` };
   const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.png`;

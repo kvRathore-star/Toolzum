@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2";
-const labelClass = "block text-sm font-medium mb-1";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
-const cardClass = "max-w-xl mx-auto p-6";
-const headingClass = "text-2xl font-bold mb-6";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono whitespace-pre";
+const inputClass = "w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none";
+const labelClass = "block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-1.5";
+const btnClass = "w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg";
+const cardClass = "max-w-2xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl animate-in fade-in duration-500";
+const headingClass = "text-2xl font-bold text-zinc-900 dark:text-white mb-6";
+const resultClass = "p-5 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-sm font-mono whitespace-pre text-indigo-600 dark:text-indigo-400";
 
 export function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');

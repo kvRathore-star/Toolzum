@@ -19,6 +19,7 @@ import {
   CheckSquare,
   Briefcase,
   ShoppingCart,
+  Calculator as CalculatorIcon,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -179,6 +180,12 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     iconColor: "text-yellow-500",
     bgTint: "bg-yellow-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-yellow-500/5",
+  },
+  Calculator: {
+    icon: CalculatorIcon,
+    iconColor: "text-orange-500",
+    bgTint: "bg-orange-500/10",
+    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-orange-500/5",
   },
 };
 
