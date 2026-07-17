@@ -130,7 +130,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
                     {summary && <p className="text-sm text-[var(--text-secondary)]">{summary.desc}</p>}
                   </div>
                   <div className="ml-auto hidden sm:block">
-                    <Link href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                    <Link href={`/${category.toLowerCase().replace(/\s+/g, '-')}`}
                       className="text-sm text-[var(--accent)] hover:underline flex items-center gap-1">
                       Browse all {category} <ChevronRight className="w-3.5 h-3.5" />
                     </Link>
