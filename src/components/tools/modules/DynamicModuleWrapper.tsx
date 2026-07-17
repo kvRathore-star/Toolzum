@@ -602,10 +602,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'subdomain-finder': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.SubdomainFinder })), { ssr: false, loading: () => <DynamicImportFallback slug="subdomain-finder" /> }),
 
   'image-converter': dynamic(() => import('@/components/tools/modules/ImageConverter').then(m => ({ default: m.ImageConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="image-converter" /> }),
-  'audio-converter': dynamic(() => import('@/components/tools/modules/AudioConverter').then(m => ({ default: m.AudioConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="audio-converter" /> }),
   'video-converter-tool': dynamic(() => import('@/components/tools/modules/VideoConverter').then(m => ({ default: m.VideoConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="video-converter-tool" /> }),
-  'data-converter': dynamic(() => import('@/components/tools/modules/DataConverter').then(m => ({ default: m.DataConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="data-converter" /> }),
-  'document-converter': dynamic(() => import('@/components/tools/modules/DocumentConverter').then(m => ({ default: m.DocumentConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="document-converter" /> }),
+
   'encoder-decoder': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="encoder-decoder" /> }),
   'data-utilities': dynamic(() => import('@/components/tools/modules/DataUtilities').then(m => ({ default: m.DataUtilities })), { ssr: false, loading: () => <DynamicImportFallback slug="data-utilities" /> }),
   'csv-analyzer': dynamic(() => import('@/components/tools/modules/DataUtilities').then(m => ({ default: m.CsvAnalyzer })), { ssr: false, loading: () => <DynamicImportFallback slug="csv-analyzer" /> }),
