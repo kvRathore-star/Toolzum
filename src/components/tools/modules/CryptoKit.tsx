@@ -28,7 +28,6 @@ export default function CryptoKit() {
   const computeHashes = (val: string) => {
     if (!val.trim()) { setHashes({}); return; }
     setHashes({
-      md5: CryptoJS.MD5(val).toString(),
       sha1: CryptoJS.SHA1(val).toString(),
       sha224: CryptoJS.SHA224(val).toString(),
       sha256: CryptoJS.SHA256(val).toString(),
@@ -89,7 +88,6 @@ export default function CryptoKit() {
           <textarea value={input} onChange={e => { setInput(e.target.value); computeHashes(e.target.value); }} placeholder="Enter text to hash..." className="w-full h-[120px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono focus:border-blue-500 transition-colors" />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { key: 'md5', label: 'MD5 (128-bit)' },
               { key: 'sha1', label: 'SHA-1 (160-bit)' },
               { key: 'sha224', label: 'SHA-224 (224-bit)' },
               { key: 'sha256', label: 'SHA-256 (256-bit)' },

@@ -386,93 +386,16 @@ function SizeTools() {
 }
 
 function ImageTools() {
-  const [previewWebp, setPreviewWebp] = useState('');
-  const [previewJpg, setPreviewJpg] = useState('');
-  const [info, setInfo] = useState('');
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>, format: 'webp' | 'jpeg') => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    const img = new window.Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d')!;
-      ctx.drawImage(img, 0, 0);
-      canvas.toBlob(blob => {
-        if (blob) {
-          if (format === 'webp') setPreviewWebp(URL.createObjectURL(blob));
-          else setPreviewJpg(URL.createObjectURL(blob));
-          setInfo(`Original: ${(file.size / 1024).toFixed(1)} KB → ${format.toUpperCase()}: ${(blob.size / 1024).toFixed(1)} KB (${img.naturalWidth}x${img.naturalHeight})`);
-        }
-      }, `image/${format}`, 0.85);
-    };
-    img.src = url;
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">WebP → JPG</h4><input type="file" accept="image/webp,image/png,image/jpeg" onChange={e => handleFile(e, 'jpeg')} className="w-full text-xs mb-2" />{previewJpg && <img src={previewJpg} alt="JPG preview" className="w-full max-h-40 object-contain rounded-lg bg-zinc-100" />}</Card>
-      <Card><h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">WebP → PNG</h4><input type="file" accept="image/webp,image/jpeg,image/png" onChange={e => handleFile(e, 'webp')} className="w-full text-xs mb-2" />{previewWebp && <img src={previewWebp} alt="WebP preview" className="w-full max-h-40 object-contain rounded-lg bg-zinc-100" />}</Card>
-      {info && <div className="md:col-span-2 p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono text-center">{info}</div>}
+      <p className="md:col-span-2 text-sm text-zinc-400 text-center">Image conversion tools removed — use the standalone converter.</p>
     </div>
   );
 }
 
 function PdfZipTools() {
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [pdfAction, setPdfAction] = useState<'remove' | 'reorder'>('remove');
-  const [pageRange, setPageRange] = useState('1');
-  const [newOrder, setNewOrder] = useState('3,1,2');
-  const [pdfResult, setPdfResult] = useState('');
   const [zipFile, setZipFile] = useState<File | null>(null);
   const [zipContents, setZipContents] = useState('');
-
-  const handlePdfFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setPdfFile(file);
-  };
-
-  const processPdf = async () => {
-    if (!pdfFile) return;
-    try {
-      const { PDFDocument } = await import('pdf-lib');
-      const buf = await pdfFile.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(buf);
-      const totalPages = pdfDoc.getPageCount();
-
-      if (pdfAction === 'remove') {
-        const removePages = pageRange.split(',').map(s => parseInt(s.trim()) - 1).filter(n => n >= 0 && n < totalPages);
-        const indices = Array.from({ length: totalPages }, (_, i) => i).filter(i => !removePages.includes(i));
-        const newDoc = await PDFDocument.create();
-        const pages = await newDoc.copyPages(pdfDoc, indices);
-        pages.forEach(p => newDoc.addPage(p));
-        const bytes = await newDoc.save();
-        const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
-        setPdfResult(`Removed ${removePages.length} page(s). ${totalPages} → ${pages.length} pages. Ready for download.`);
-        downloadBlob(blob, `modified_${pdfFile.name}`);
-      } else {
-        const order = newOrder.split(',').map(s => parseInt(s.trim()) - 1).filter(n => n >= 0 && n < totalPages);
-        if (order.length === 0) { toast.error('Invalid page order'); return; }
-        const newDoc = await PDFDocument.create();
-        const pages = await newDoc.copyPages(pdfDoc, order);
-        pages.forEach(p => newDoc.addPage(p));
-        const bytes = await newDoc.save();
-        const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
-        setPdfResult(`Reordered. ${totalPages} pages → ${pages.length} pages. Ready for download.`);
-        downloadBlob(blob, `reordered_${pdfFile.name}`);
-      }
-    } catch { toast.error('Failed to process PDF'); }
-  };
-
-  const downloadBlob = (blob: Blob, name: string) => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = name; a.click();
-    URL.revokeObjectURL(url);
-  };
 
   const extractZip = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -494,26 +417,6 @@ function PdfZipTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card className="md:col-span-2">
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">PDF Page Operations</h4>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <button onClick={() => setPdfAction('remove')} className={`py-2 rounded-lg text-sm font-bold ${pdfAction === 'remove' ? 'bg-red-500 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600'}`}>Remove Pages</button>
-          <button onClick={() => setPdfAction('reorder')} className={`py-2 rounded-lg text-sm font-bold ${pdfAction === 'reorder' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600'}`}>Reorder Pages</button>
-        </div>
-        <input type="file" accept=".pdf" onChange={handlePdfFile} className="w-full text-xs mb-2" />
-        {pdfFile && (
-          <div className="space-y-2">
-            <p className="text-xs text-zinc-400">{pdfFile.name} ({(pdfFile.size / 1024).toFixed(1)} KB)</p>
-            {pdfAction === 'remove' ? (
-              <input type="text" value={pageRange} onChange={e => setPageRange(e.target.value)} placeholder="Page numbers to remove (e.g. 1,3,5)" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
-            ) : (
-              <input type="text" value={newOrder} onChange={e => setNewOrder(e.target.value)} placeholder="New order (e.g. 3,1,2)" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
-            )}
-            <button onClick={processPdf} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Apply</button>
-          </div>
-        )}
-        {pdfResult && <p className="mt-2 p-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg text-xs">{pdfResult}</p>}
-      </Card>
       <Card className="md:col-span-2">
         <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">ZIP File Extractor</h4>
         <input type="file" accept=".zip" onChange={extractZip} className="w-full text-xs mb-2" />

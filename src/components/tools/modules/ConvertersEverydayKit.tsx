@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 
-type Tab = 'everyday' | 'image' | 'file' | 'generators';
+type Tab = 'everyday' | 'file' | 'generators';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'everyday', label: 'Everyday' },
-  { key: 'image', label: 'Image & Doc' },
   { key: 'file', label: 'File Tools' },
   { key: 'generators', label: 'Generators' },
 ];
@@ -109,83 +108,6 @@ const STORAGE_UNITS = [
   { label: 'Terabyte (TB)', toBase: (v: number) => v * 1024 * 1024 * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024 * 1024 * 1024) },
   { label: 'Petabyte (PB)', toBase: (v: number) => v * 1024 * 1024 * 1024 * 1024 * 1024, fromBase: (v: number) => v / (1024 * 1024 * 1024 * 1024 * 1024) },
 ];
-
-function ImageToAvifWebp({ format }: { format: 'avif' | 'webp' }) {
-  const [preview, setPreview] = useState('');
-  const [info, setInfo] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    const img = new window.Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d')!;
-      ctx.drawImage(img, 0, 0);
-      canvas.toBlob(blob => {
-        if (blob) {
-          setPreview(URL.createObjectURL(blob));
-          setInfo(`Original: ${(file.size / 1024).toFixed(1)} KB → ${format.toUpperCase()}: ${(blob.size / 1024).toFixed(1)} KB`);
-        }
-      }, `image/${format}`, 0.8);
-    };
-    img.src = url;
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Convert to {format.toUpperCase()}</h4>
-      <input ref={inputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFile} className="w-full text-xs mb-2" />
-      {preview && <><img src={preview} alt="Preview" className="w-full max-h-40 object-contain rounded-lg bg-zinc-100" /><p className="text-xs text-zinc-400 mt-1">{info}</p></>}
-    </Card>
-  );
-}
-
-function PdfToPowerpointConv() {
-  const [pptText, setPptText] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setLoading(true);
-    try {
-      const text = await file.text();
-      const lines = text.split('\n').filter(l => l.trim()).slice(0, 50);
-      let ppt = '';
-      let slideNum = 1;
-      let currentSlide: string[] = [];
-      for (const line of lines) {
-        if (line.length < 50 && line.trim().length > 0 && !line.startsWith(' ')) {
-          if (currentSlide.length > 0) {
-            ppt += `--- Slide ${slideNum} ---\n${currentSlide.join('\n')}\n\n`;
-            slideNum++;
-          }
-          currentSlide = [line];
-        } else {
-          currentSlide.push(line);
-        }
-      }
-      if (currentSlide.length > 0) ppt += `--- Slide ${slideNum} ---\n${currentSlide.join('\n')}`;
-      setPptText(ppt || 'No text content found. Try a text-based PDF.');
-    } catch {
-      toast.error('Could not parse PDF. Try a text-based file.');
-    } finally { setLoading(false); }
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">PDF → PowerPoint</h4>
-      <input type="file" accept=".pdf" onChange={handleFile} className="w-full text-xs" />
-      {loading && <p className="text-xs text-zinc-400 mt-2">Processing...</p>}
-      {pptText && <textarea readOnly rows={8} value={pptText} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
 
 function ZipCompressor() {
   const [files, setFiles] = useState<{ name: string; size: number }[]>([]);
@@ -384,13 +306,6 @@ export default function ConvertersEverydayKit() {
           <UnitConv title="Paper Size" units={PAPER_UNITS} defaultValue="1" />
           <UnitConv title="Clothing Size" units={CLOTHING_UNITS} defaultValue="8" />
           <UnitConv title="Data Storage" units={STORAGE_UNITS} defaultValue="1" />
-        </div>
-      )}
-      {tab === 'image' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ImageToAvifWebp format="webp" />
-          <ImageToAvifWebp format="avif" />
-          <PdfToPowerpointConv />
         </div>
       )}
       {tab === 'file' && (

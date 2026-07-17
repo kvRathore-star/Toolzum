@@ -17,51 +17,6 @@ function Card({ children, className = '' }: { children: React.ReactNode; classNa
   return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
 }
 
-function PasswordEntropyCalc() {
-  const [password, setPassword] = useState('HelloWorld123!');
-  const [entropy, setEntropy] = useState(0);
-  const [strength, setStrength] = useState('');
-  const [time, setTime] = useState('');
-
-  const calcEntropy = () => {
-    let charset = 0;
-    if (/[a-z]/.test(password)) charset += 26;
-    if (/[A-Z]/.test(password)) charset += 26;
-    if (/\d/.test(password)) charset += 10;
-    if (/[^a-zA-Z0-9]/.test(password)) charset += 32;
-    const entropyBits = password.length * Math.log2(charset || 1);
-    setEntropy(parseFloat(entropyBits.toFixed(2)));
-    if (entropyBits < 30) setStrength('Very Weak');
-    else if (entropyBits < 50) setStrength('Weak');
-    else if (entropyBits < 70) setStrength('Reasonable');
-    else if (entropyBits < 90) setStrength('Strong');
-    else setStrength('Very Strong');
-    const attemptsPerSec = 1e9;
-    const seconds = Math.pow(2, entropyBits) / attemptsPerSec;
-    if (seconds < 1) setTime('Instant');
-    else if (seconds < 60) setTime(`${seconds.toFixed(0)} seconds`);
-    else if (seconds < 3600) setTime(`${(seconds / 60).toFixed(0)} minutes`);
-    else if (seconds < 86400) setTime(`${(seconds / 3600).toFixed(0)} hours`);
-    else if (seconds < 31536000) setTime(`${(seconds / 86400).toFixed(0)} days`);
-    else setTime(`${(seconds / 31536000).toFixed(0)} years`);
-  };
-
-  return (
-    <Card className="md:col-span-2">
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">Password Entropy Calculator</h4>
-      <input type="text" value={password} onChange={e => setPassword(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" />
-      <button onClick={calcEntropy} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mb-3">Calculate</button>
-      {entropy > 0 && (
-        <div className="grid grid-cols-3 gap-3 text-center">
-          <div className="bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg"><p className="text-lg font-bold">{entropy}</p><p className="text-xs text-zinc-400">Bits</p></div>
-          <div className="bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg"><p className={`text-lg font-bold ${strength === 'Very Strong' || strength === 'Strong' ? 'text-emerald-500' : strength === 'Reasonable' ? 'text-yellow-500' : 'text-red-500'}`}>{strength}</p><p className="text-xs text-zinc-400">Strength</p></div>
-          <div className="bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg"><p className="text-lg font-bold text-xs">{time}</p><p className="text-xs text-zinc-400">Crack Time (1B/s)</p></div>
-        </div>
-      )}
-    </Card>
-  );
-}
-
 function CidrCalculator() {
   const [cidr, setCidr] = useState('192.168.1.0/24');
   const [result, setResult] = useState('');
@@ -282,7 +237,6 @@ export default function MiscUtilitiesKit() {
       </div>
       {tab === 'security' && (
         <div className="grid grid-cols-1 gap-6">
-          <PasswordEntropyCalc />
           <CidrCalculator />
         </div>
       )}

@@ -4,12 +4,11 @@ import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import DOMPurify from 'dompurify';
 
-type Tab = 'color' | 'css' | 'minify' | 'generators';
+type Tab = 'color' | 'css' | 'generators';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'color', label: 'Color Tools' },
   { key: 'css', label: 'CSS & Media' },
-  { key: 'minify', label: 'Minifiers' },
   { key: 'generators', label: 'Generators' },
 ];
 
@@ -70,18 +69,6 @@ function simulateTritanopia(hex: string): string {
   return `#${Math.round(r).toString(16).padStart(2, '0')}${Math.round(0.7 * g + 0.3 * b).toString(16).padStart(2, '0')}${Math.round(0.567 * b + 0.433 * r).toString(16).padStart(2, '0')}`;
 }
 
-function minifyHTML(input: string): string {
-  return input.replace(/<!--[\s\S]*?-->/g, '').replace(/\s{2,}/g, ' ').replace(/>\s+</g, '><').trim();
-}
-
-function minifyCSS(input: string): string {
-  return input.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s{2,}/g, ' ').replace(/\s*([{}:;,])\s*/g, '$1').replace(/;}/g, '}').trim();
-}
-
-function minifyJS(input: string): string {
-  return input.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s{2,}/g, ' ').replace(/\s*([{}()=+\-*/;,:!<>])\s*/g, '$1').replace(/;}/g, '}').trim();
-}
-
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
 }
@@ -99,7 +86,6 @@ export default function ColorAndStyleKit() {
       </div>
       {tab === 'color' && <ColorTools />}
       {tab === 'css' && <CssMediaTools />}
-      {tab === 'minify' && <MinifyTools />}
       {tab === 'generators' && <GeneratorTools />}
     </div>
   );
@@ -328,53 +314,6 @@ function CssMediaTools() {
         <button onClick={csvToHtmlTable} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>
         {tableFromCsv && <div className="mt-2 p-2 bg-white rounded-lg text-xs overflow-auto max-h-32" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tableFromCsv) }} />}
       </Card>
-    </div>
-  );
-}
-
-function MinifyTools() {
-  const [htmlInput, setHtmlInput] = useState('<html>\n  <head>\n    <!-- comment -->\n    <title>Test</title>\n  </head>\n</html>');
-  const [htmlOutput, setHtmlOutput] = useState('');
-  const [cssInput, setCssInput] = useState('body {\n  margin: 0;\n  padding: 0;\n  color: red;\n}\n');
-  const [cssOutput, setCssOutput] = useState('');
-  const [jsInput, setJsInput] = useState('function hello( name ) {\n  return "Hello, " + name;\n}\n');
-  const [jsOutput, setJsOutput] = useState('');
-  const [sizes, setSizes] = useState<{ hIn: number; hOut: number; cIn: number; cOut: number; jIn: number; jOut: number } | null>(null);
-
-  const doMinify = () => {
-    const hMin = minifyHTML(htmlInput);
-    const cMin = minifyCSS(cssInput);
-    const jMin = minifyJS(jsInput);
-    setHtmlOutput(hMin);
-    setCssOutput(cMin);
-    setJsOutput(jMin);
-    setSizes({
-      hIn: new Blob([htmlInput]).size, hOut: new Blob([hMin]).size,
-      cIn: new Blob([cssInput]).size, cOut: new Blob([cMin]).size,
-      jIn: new Blob([jsInput]).size, jOut: new Blob([jMin]).size,
-    });
-  };
-
-  return (
-    <div className="space-y-6">
-      <button onClick={doMinify} className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl text-sm">Minify All</button>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">HTML</h4>
-          <textarea rows={5} value={htmlInput} onChange={e => setHtmlInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-          {htmlOutput && <><textarea readOnly rows={5} value={htmlOutput} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" /><p className="text-xs text-zinc-400 mt-1">{sizes?.hIn} → {sizes?.hOut} bytes ({Math.round((1 - (sizes?.hOut || 0) / (sizes?.hIn || 1)) * 100)}% saved)</p></>}
-        </Card>
-        <Card>
-          <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">CSS</h4>
-          <textarea rows={5} value={cssInput} onChange={e => setCssInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-          {cssOutput && <><textarea readOnly rows={5} value={cssOutput} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" /><p className="text-xs text-zinc-400 mt-1">{sizes?.cIn} → {sizes?.cOut} bytes ({Math.round((1 - (sizes?.cOut || 0) / (sizes?.cIn || 1)) * 100)}% saved)</p></>}
-        </Card>
-        <Card>
-          <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JavaScript</h4>
-          <textarea rows={5} value={jsInput} onChange={e => setJsInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-          {jsOutput && <><textarea readOnly rows={5} value={jsOutput} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" /><p className="text-xs text-zinc-400 mt-1">{sizes?.jIn} → {sizes?.jOut} bytes ({Math.round((1 - (sizes?.jOut || 0) / (sizes?.jIn || 1)) * 100)}% saved)</p></>}
-        </Card>
-      </div>
     </div>
   );
 }

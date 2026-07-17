@@ -31,7 +31,7 @@ export default function DevToolkit() {
   );
 }
 
-const LANG_EXT: Record<string, string> = { js: 'JavaScript', ts: 'TypeScript', json: 'JSON', html: 'HTML', css: 'CSS', cpp: 'C++', go: 'Go', kotlin: 'Kotlin', php: 'PHP', python: 'Python', ruby: 'Ruby', rust: 'Rust' };
+const LANG_EXT: Record<string, string> = { js: 'JavaScript', ts: 'TypeScript', html: 'HTML', css: 'CSS', cpp: 'C++', go: 'Go', kotlin: 'Kotlin', php: 'PHP', python: 'Python', ruby: 'Ruby', rust: 'Rust' };
 
 function Formatters() {
   const [input, setInput] = useState('');
@@ -42,7 +42,6 @@ function Formatters() {
   const process = () => {
     if (!input.trim()) { toast.error('Paste code first'); return; }
     try {
-      if (lang === 'json') { const p = JSON.parse(input); setOutput(mode === 'beautify' ? JSON.stringify(p, null, 2) : JSON.stringify(p)); return; }
       const lines = input.split('\n');
       if (mode === 'beautify') {
         let out = '', indent = 0;

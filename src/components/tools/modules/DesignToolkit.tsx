@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Palette, Image, Radius, Layers } from 'lucide-react';
+import { Palette, Radius, Layers } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 import DOMPurify from 'dompurify';
 
-type Tab = 'color' | 'border' | 'typography' | 'svg';
+type Tab = 'color' | 'border' | 'typography';
 
 export default function DesignToolkit() {
   const [tab, setTab] = useState<Tab>('color');
@@ -22,12 +22,10 @@ export default function DesignToolkit() {
         <TabBtn v="color" label="Color Tools" icon={Palette} />
         <TabBtn v="border" label="Border/Radius" icon={Radius} />
         <TabBtn v="typography" label="Typography" icon={Layers} />
-        <TabBtn v="svg" label="SVG Tools" icon={Image} />
       </div>
       {tab === 'color' && <ColorTools />}
       {tab === 'border' && <BorderTools />}
       {tab === 'typography' && <TypographyTools />}
-      {tab === 'svg' && <SvgTools />}
     </div>
   );
 }
@@ -179,37 +177,3 @@ function TypographyTools() {
   );
 }
 
-const SVG_SHAPES: Record<string, string> = {
-  Circle: '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="#6366f1" /></svg>',
-  Square: '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="80" height="80" fill="#6366f1" rx="8" /></svg>',
-  Triangle: '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,10 90,90 10,90" fill="#6366f1" /></svg>',
-  Star: '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 61,38 97,38 68,59 79,93 50,72 21,93 32,59 3,38 39,38" fill="#6366f1" /></svg>',
-  Heart: '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50,88 C25,65 5,45 15,25 C25,5 50,15 50,35 C50,15 75,5 85,25 C95,45 75,65 50,88Z" fill="#ef4444" /></svg>',
-};
-
-function SvgTools() {
-  const [svgCode, setSvgCode] = useState(SVG_SHAPES.Circle);
-  const [svgBg, setSvgBg] = useState('#ffffff');
-
-  return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl space-y-4">
-      <div className="flex flex-wrap gap-1">
-        {Object.keys(SVG_SHAPES).map(name => (
-          <button key={name} onClick={() => setSvgCode(SVG_SHAPES[name])}
-            className="px-2 py-1 text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700">{name}</button>
-        ))}
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-xs text-zinc-500">BG:</span>
-        <input type="color" value={svgBg} onChange={e => setSvgBg(e.target.value)} className="w-10 h-8 rounded cursor-pointer" />
-      </div>
-      <div className="flex items-center justify-center p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 min-h-[140px] bg-cover" style={{ backgroundColor: svgBg }}>
-        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgCode, { USE_PROFILES: { svg: true, svgFilters: true } }) }} />
-      </div>
-      <textarea value={svgCode} onChange={e => setSvgCode(e.target.value)}
-        className="w-full h-28 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-      <button onClick={() => { clipboardWrite(svgCode); toast.success('SVG copied!'); }}
-        className="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 rounded-xl transition-all">Copy SVG</button>
-    </div>
-  );
-}

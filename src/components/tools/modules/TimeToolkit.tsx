@@ -244,8 +244,6 @@ function ConvertersTab() {
   const [msOut, setMsOut] = useState('');
   const [minIn, setMinIn] = useState('90');
   const [minOut, setMinOut] = useState('');
-  const [secIn, setSecIn] = useState('3661');
-  const [secOut, setSecOut] = useState('');
 
   const dateToTs = () => {
     const ms = new Date(tsDate).getTime();
@@ -272,14 +270,6 @@ function ConvertersTab() {
     setMinOut(`${m} minutes\n= ${Math.floor(m / 60)}h ${m % 60}m\n= ${(m / 60).toFixed(2)} hours`);
   };
 
-  const secToTime = () => {
-    const s = parseInt(secIn) || 0;
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    const sec = s % 60;
-    setSecOut(`${s.toLocaleString()} seconds\n= ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}\n= ${h}h ${m}m ${sec}s\n= ${(s / 60).toFixed(2)} minutes\n= ${(s / 3600).toFixed(4)} hours`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       <Card title="Date to Timestamp">
@@ -301,11 +291,6 @@ function ConvertersTab() {
         <Inp label="Minutes" value={minIn} onChange={setMinIn} placeholder="90" />
         <CalcBtn onClick={minToHrs} label="Convert" />
         <Output value={minOut} />
-      </Card>
-      <Card title="Seconds to Time Converter">
-        <Inp label="Seconds" value={secIn} onChange={setSecIn} placeholder="3661" />
-        <CalcBtn onClick={secToTime} label="Convert" />
-        <Output value={secOut} />
       </Card>
     </div>
   );

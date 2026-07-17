@@ -438,8 +438,6 @@ function DateTimeCalcs() {
 }
 
 function HealthCalcs() {
-  const [bmiW, setBmiW] = useState(70); const [bmiH, setBmiH] = useState(175); const [bmiRes, setBmiRes] = useState<{ bmi: number; cat: string } | null>(null);
-  const [bmrW, setBmrW] = useState(70); const [bmrH, setBmrH] = useState(175); const [bmrA, setBmrA] = useState(30); const [bmrS, setBmrS] = useState<'male'|'female'>('male'); const [bmrRes, setBmrRes] = useState<number | null>(null);
   const [bfW, setBfW] = useState(80); const [bfN, setBfN] = useState(38); const [bfH, setBfH] = useState(175); const [bfS, setBfS] = useState<'male'|'female'>('male'); const [bfRes, setBfRes] = useState<number | null>(null);
   const [kcalW, setKcalW] = useState(70); const [kcalH, setKcalH] = useState(175); const [kcalA, setKcalA] = useState(30); const [kcalS, setKcalS] = useState<'male'|'female'>('male'); const [kcalAct, setKcalAct] = useState(1.55); const [kcalRes, setKcalRes] = useState<number | null>(null);
   const [kidsBmiW, setKidsBmiW] = useState(30); const [kidsBmiH, setKidsBmiH] = useState(130); const [kidsBmiRes, setKidsBmiRes] = useState<number | null>(null);
@@ -465,23 +463,6 @@ function HealthCalcs() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-      <Card title="BMI">
-        <Inp label="Weight" value={bmiW} onChange={setBmiW} suffix="kg" small />
-        <Inp label="Height" value={bmiH} onChange={setBmiH} suffix="cm" small />
-        <CalcBtn onClick={() => { const b = bmiW / ((bmiH / 100) ** 2); const c = b < 18.5 ? 'Underweight' : b < 25 ? 'Normal' : b < 30 ? 'Overweight' : 'Obese'; setBmiRes({ bmi: b, cat: c }); }} label="Calculate" />
-        {bmiRes && <Result value={`${bmiRes.bmi.toFixed(1)} · ${bmiRes.cat}`} />}
-      </Card>
-      <Card title="BMR">
-        <Inp label="Weight" value={bmrW} onChange={setBmrW} suffix="kg" small />
-        <Inp label="Height" value={bmrH} onChange={setBmrH} suffix="cm" small />
-        <Inp label="Age" value={bmrA} onChange={setBmrA} small />
-        <div className="flex gap-1">
-          <button onClick={() => setBmrS('male')} className={`flex-1 py-1 text-[10px] font-bold rounded-lg ${bmrS === 'male' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>M</button>
-          <button onClick={() => setBmrS('female')} className={`flex-1 py-1 text-[10px] font-bold rounded-lg ${bmrS === 'female' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>F</button>
-        </div>
-        <CalcBtn onClick={() => setBmrRes(bmrS === 'male' ? 88.362 + 13.397 * bmrW + 4.799 * bmrH - 5.677 * bmrA : 447.593 + 9.247 * bmrW + 3.098 * bmrH - 4.330 * bmrA)} label="BMR" />
-        {bmrRes !== null && <Result value={`${bmrRes.toFixed(0)} kcal/day`} />}
-      </Card>
       <Card title="Body Fat (Navy)">
         <Inp label="Waist" value={bfW} onChange={setBfW} suffix="cm" small />
         <Inp label="Neck" value={bfN} onChange={setBfN} suffix="cm" small />

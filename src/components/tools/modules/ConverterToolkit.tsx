@@ -61,8 +61,6 @@ function OutputBox({ output, onCopy }: { output: string; onCopy?: () => void }) 
 function EncoderTools() {
   const [b32In, setB32In] = useState('Hello World');
   const [b32Out, setB32Out] = useState('');
-  const [b64In, setB64In] = useState('Hello World');
-  const [b64Out, setB64Out] = useState('');
   const [b64jIn, setB64jIn] = useState('eyJuYW1lIjoiSm9obiIsImFnZSI6MzB9');
   const [b64jOut, setB64jOut] = useState('');
   const [hexIn, setHexIn] = useState('48656c6c6f20576f726c64');
@@ -72,9 +70,6 @@ function EncoderTools() {
 
   const b32enc = () => { try { const enc = (s: string) => { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; const bytes = new TextEncoder().encode(s); let bits = ''; for (const b of bytes) bits += b.toString(2).padStart(8, '0'); let result = ''; for (let i = 0; i < bits.length; i += 5) { const chunk = bits.slice(i, i + 5).padEnd(5, '0'); result += chars[parseInt(chunk, 2)]; } return result; }; setB32Out(enc(b32In)); toast.success('Encoded'); } catch { toast.error('Error'); } };
   const b32dec = () => { try { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; let bits = ''; for (const c of b32In.toUpperCase()) { const idx = chars.indexOf(c); if (idx < 0) continue; bits += idx.toString(2).padStart(5, '0'); } const bytes: number[] = []; for (let i = 0; i + 7 < bits.length; i += 8) bytes.push(parseInt(bits.slice(i, i + 8), 2)); setB32Out(new TextDecoder().decode(new Uint8Array(bytes))); toast.success('Decoded'); } catch { toast.error('Invalid base32'); } };
-
-  const b64enc = () => { try { setB64Out(btoa(b64In)); toast.success('Encoded'); } catch { toast.error('Error'); } };
-  const b64dec = () => { try { setB64Out(atob(b64In)); toast.success('Decoded'); } catch { toast.error('Invalid base64'); } };
 
   const b64toJson = () => { try { const dec = atob(b64jIn); const parsed = JSON.parse(dec); setB64jOut(JSON.stringify(parsed, null, 2)); toast.success('Decoded to JSON'); } catch { toast.error('Invalid base64 or not JSON'); } };
 
@@ -93,16 +88,6 @@ function EncoderTools() {
           <CalcBtn onClick={b32dec} label="Decode" />
         </div>
         <OutputBox output={b32Out} />
-      </Card>
-
-      <Card title="Base64 Encode/Decode">
-        <textarea value={b64In} onChange={e => setB64In(e.target.value)}
-          className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-        <div className="flex gap-2">
-          <CalcBtn onClick={b64enc} label="Encode" />
-          <CalcBtn onClick={b64dec} label="Decode" />
-        </div>
-        <OutputBox output={b64Out} />
       </Card>
 
       <Card title="Base64 to JSON">

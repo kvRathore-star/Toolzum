@@ -326,10 +326,10 @@ function CryptoTools() {
   const processHash = async () => {
     if (!hashInput.trim()) { toast.error('Enter text'); return; }
     try {
-      const map: Record<string, string> = { md5: 'MD5', sha1: 'SHA-1', sha256: 'SHA-256', sha512: 'SHA-512' };
-      const h = await crypto.subtle.digest(hashMode === 'md5' ? 'SHA-1' : map[hashMode], new TextEncoder().encode(hashInput));
+      const map: Record<string, string> = { sha1: 'SHA-1', sha256: 'SHA-256', sha512: 'SHA-512' };
+      const h = await crypto.subtle.digest(map[hashMode], new TextEncoder().encode(hashInput));
       const hex = Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
-      setHashOutput(hashMode === 'md5' ? hex.slice(0, 32) : hex);
+      setHashOutput(hex);
       toast.success(`${hashMode.toUpperCase()} computed`);
     } catch { toast.error('Error'); }
   };
@@ -429,7 +429,7 @@ function CryptoTools() {
         <textarea value={hashInput} onChange={e => setHashInput(e.target.value)}
           className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
         <div className="flex flex-wrap gap-1">
-          {[{v:'md5',l:'MD5'},{v:'sha1',l:'SHA-1'},{v:'sha256',l:'SHA-256'},{v:'sha512',l:'SHA-512'}].map(({v,l}) => (
+          {[{v:'sha1',l:'SHA-1'},{v:'sha256',l:'SHA-256'},{v:'sha512',l:'SHA-512'}].map(({v,l}) => (
             <button key={v} onClick={() => setHashMode(v)}
               className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all ${hashMode === v ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>{l}</button>
           ))}

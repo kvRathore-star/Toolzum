@@ -186,7 +186,7 @@ function AnalysisTools() {
       case 'paragraphs': setOutput(`Paragraphs: ${paragraphs.length}`); break;
       case 'sentences': setOutput(`Sentences: ${sentences.length}`); break;
       case 'syllables': setOutput(`Syllables: ${syllables}\nWords: ${words.length}\nSyllables/word: ${(syllables / words.length).toFixed(2)}\nFlesch-Kincaid grade: ${Math.round(0.39 * (words.length / sentences.length) + 11.8 * (syllables / words.length) - 15.59)}`); break;
-      case 'all': setOutput(`Lines: ${lines.length}\nParagraphs: ${paragraphs.length}\nSentences: ${sentences.length}\nWords: ${words.length}\nCharacters: ${chars}\nChars (no space): ${charsNoSpace}\nSyllables: ${syllables}\nAvg sentence: ${(words.length / sentences.length).toFixed(1)} words\nAvg word: ${(charsNoSpace / words.length).toFixed(1)} chars`); break;
+      case 'all': setOutput(`Lines: ${lines.length}\nParagraphs: ${paragraphs.length}\nSentences: ${sentences.length}\nSyllables: ${syllables}`); break;
     }
     toast.success('Analysis complete');
   };

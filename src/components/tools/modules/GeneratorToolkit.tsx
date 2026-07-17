@@ -232,14 +232,6 @@ function RandomValues() {
     toast.success('IPs generated');
   };
 
-  const genMac = () => {
-    const lines = Array.from({ length: count }, () =>
-      Array.from({ length: 6 }, () => randInt(0, 255).toString(16).padStart(2, '0')).join(':')
-    );
-    setOut(lines.join('\n'));
-    toast.success('MACs generated');
-  };
-
   const genUa = () => {
     setOut(Array.from({ length: count }, () => pick(USER_AGENTS)).join('\n'));
     toast.success('User agents generated');
@@ -263,10 +255,6 @@ function RandomValues() {
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
         <CalcBtn onClick={genIp} label="Generate IPs" />
       </Card>
-      <Card title="Random MAC Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genMac} label="Generate MACs" />
-      </Card>
       <Card title="Random User-Agent Generator">
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
         <CalcBtn onClick={genUa} label="Generate UAs" />
@@ -279,7 +267,6 @@ function RandomValues() {
 function TextSecurity() {
   const [count, setCount] = useState(3);
   const [out, setOut] = useState('');
-  const [pwLen, setPwLen] = useState(4);
   const [pinLen, setPinLen] = useState(6);
   const [licFormat, setLicFormat] = useState('XXXXX-XXXXX-XXXXX-XXXXX');
 
@@ -311,21 +298,6 @@ function TextSecurity() {
     toast.success('Words generated');
   };
 
-  const genMemorablePw = () => {
-    const adjectives = ['Happy','Brave','Calm','Swift','Bright','Cool','Dark','Fast','Golden','Hidden','Jolly','Kind','Lucky','Mighty','Noble','Proud','Quiet','Sharp','Smart','Sunny','Vivid','Wild','Young','Zealous'];
-    const nouns = ['Tiger','Eagle','Shark','Panda','Lion','Wolf','Bear','Falcon','Whale','Fox','Otter','Hawk','Lynx','Crane','Elk','Owl','Viper','Moose','Seal','Dove'];
-    const symbols = ['!','@','#','$','%','&','?'];
-    const lines = Array.from({ length: count }, () => {
-      const adj = pick(adjectives);
-      const noun = pick(nouns);
-      const num = randInt(10, 99);
-      const sym = pick(symbols);
-      return `${adj}${noun}${num}${sym}`;
-    });
-    setOut(lines.join('\n'));
-    toast.success('Memorable passwords generated');
-  };
-
   const genPin = () => {
     const lines = Array.from({ length: count }, () =>
       Array.from({ length: pinLen }, () => randInt(0, 9)).join('')
@@ -355,11 +327,6 @@ function TextSecurity() {
       <Card title="Random Word Generator">
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={30} />
         <CalcBtn onClick={genWord} label="Generate Words" />
-      </Card>
-      <Card title="Memorable Password Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <p className="text-[10px] text-zinc-400">Adj+Noun+Num+Symbol (e.g. BraveTiger42!)</p>
-        <CalcBtn onClick={genMemorablePw} label="Generate Passwords" />
       </Card>
       <Card title="PIN Generator">
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
