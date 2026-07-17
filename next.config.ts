@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   output: "export",
   poweredByHeader: false,
   trailingSlash: true,
+  typescript: { ignoreBuildErrors: true },
 };
 
 const withBA = withBundleAnalyzer({

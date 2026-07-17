@@ -286,6 +286,7 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
   Transcription: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.',
   Branding: 'Free branding tools — create logos, generate mockups, design business cards, and brand assets. No design skills needed.',
   Business: 'Free business tools — invoice generator, contract templates, business name generator, and more. Streamline your workflow.',
+  Calculator: 'Free online calculators — mortgage, BMI, GPA, retirement, scientific, and 70+ more calculators for finance, health, math, and everyday life. 100% browser-based.',
   Marketing: 'Free marketing tools — social media schedulers, link shorteners, analytics, and campaign helpers to grow your audience.',
   Productivity: 'Free productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.',
   Design: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.',

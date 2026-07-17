@@ -1,181 +1,116 @@
 "use client";
+import React, { useState } from 'react';
 
-import React, { useState, useMemo, useEffect } from 'react';
-
-const unitTypes = {
+const CATEGORIES: Record<string, { units: string[]; convert: (val: number, from: string, to: string) => number }> = {
   Length: {
-    base: 'meters',
-    units: {
-      meters: 1,
-      kilometers: 1000,
-      centimeters: 0.01,
-      millimeters: 0.001,
-      miles: 1609.34,
-      yards: 0.9144,
-      feet: 0.3048,
-      inches: 0.0254,
-    }
+    units: ['Meter', 'Kilometer', 'Centimeter', 'Millimeter', 'Mile', 'Yard', 'Foot', 'Inch', 'Nautical Mile'],
+    convert(v, f, t) {
+      const toM: Record<string, number> = { Meter: 1, Kilometer: 1000, Centimeter: 0.01, Millimeter: 0.001, Mile: 1609.344, Yard: 0.9144, Foot: 0.3048, Inch: 0.0254, 'Nautical Mile': 1852 };
+      return v * toM[f] / toM[t];
+    },
   },
-  Weight: {
-    base: 'grams',
-    units: {
-      grams: 1,
-      kilograms: 1000,
-      milligrams: 0.001,
-      pounds: 453.592,
-      ounces: 28.3495,
-      stones: 6350.29,
-    }
+  Mass: {
+    units: ['Kilogram', 'Gram', 'Milligram', 'Metric Ton', 'Pound', 'Ounce', 'Stone'],
+    convert(v, f, t) {
+      const toKg: Record<string, number> = { Kilogram: 1, Gram: 0.001, Milligram: 0.000001, 'Metric Ton': 1000, Pound: 0.453592, Ounce: 0.0283495, Stone: 6.35029 };
+      return v * toKg[f] / toKg[t];
+    },
   },
   Temperature: {
-    base: 'celsius',
-    units: {
-      celsius: 'C',
-      fahrenheit: 'F',
-      kelvin: 'K'
-    }
+    units: ['Celsius', 'Fahrenheit', 'Kelvin'],
+    convert(v, f, t) {
+      let c: number;
+      if (f === 'Celsius') c = v;
+      else if (f === 'Fahrenheit') c = (v - 32) * 5 / 9;
+      else c = v - 273.15;
+      if (t === 'Celsius') return c;
+      if (t === 'Fahrenheit') return c * 9 / 5 + 32;
+      return c + 273.15;
+    },
   },
-  Data: {
-    base: 'bytes',
-    units: {
-      bytes: 1,
-      kilobytes: 1024,
-      megabytes: 1048576,
-      gigabytes: 1073741824,
-      terabytes: 1099511627776,
-    }
-  }
+  Volume: {
+    units: ['Liter', 'Milliliter', 'Gallon (US)', 'Quart', 'Pint', 'Cup', 'Fluid Ounce', 'Cubic Meter'],
+    convert(v, f, t) {
+      const toL: Record<string, number> = { Liter: 1, Milliliter: 0.001, 'Gallon (US)': 3.78541, Quart: 0.946353, Pint: 0.473176, Cup: 0.236588, 'Fluid Ounce': 0.0295735, 'Cubic Meter': 1000 };
+      return v * toL[f] / toL[t];
+    },
+  },
+  Area: {
+    units: ['Square Meter', 'Square Kilometer', 'Square Mile', 'Square Foot', 'Square Yard', 'Acre', 'Hectare'],
+    convert(v, f, t) {
+      const toSm: Record<string, number> = { 'Square Meter': 1, 'Square Kilometer': 1e6, 'Square Mile': 2.59e6, 'Square Foot': 0.092903, 'Square Yard': 0.836127, Acre: 4046.86, Hectare: 10000 };
+      return v * toSm[f] / toSm[t];
+    },
+  },
+  Speed: {
+    units: ['km/h', 'mph', 'm/s', 'ft/s', 'Knot'],
+    convert(v, f, t) {
+      const toMps: Record<string, number> = { 'km/h': 0.277778, mph: 0.44704, 'm/s': 1, 'ft/s': 0.3048, Knot: 0.514444 };
+      return v * toMps[f] / toMps[t];
+    },
+  },
+  Time: {
+    units: ['Second', 'Minute', 'Hour', 'Day', 'Week', 'Month', 'Year'],
+    convert(v, f, t) {
+      const toS: Record<string, number> = { Second: 1, Minute: 60, Hour: 3600, Day: 86400, Week: 604800, Month: 2592000, Year: 31536000 };
+      return v * toS[f] / toS[t];
+    },
+  },
+  Digital: {
+    units: ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Bit', 'Kilobit', 'Megabit', 'Gigabit'],
+    convert(v, f, t) {
+      const toB: Record<string, number> = { Byte: 1, Kilobyte: 1024, Megabyte: 1048576, Gigabyte: 1073741824, Terabyte: 1099511627776, Petabyte: 1125899906842624, Bit: 0.125, Kilobit: 128, Megabit: 131072, Gigabit: 134217728 };
+      return v * toB[f] / toB[t];
+    },
+  },
 };
 
-const TYPE_MAP: Record<string, keyof typeof unitTypes> = {
-  weight: 'Weight',
-  length: 'Length',
-  temperature: 'Temperature',
-  data: 'Data',
-};
+export function UnitConverter() {
+  const [category, setCategory] = useState('Length');
+  const [fromUnit, setFromUnit] = useState('Meter');
+  const [toUnit, setToUnit] = useState('Kilometer');
+  const [value, setValue] = useState('1');
+  const cat = CATEGORIES[category];
 
-export default function UnitConverter() {
-  const [category, setCategory] = useState<keyof typeof unitTypes>('Length');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const typeParam = params.get('type');
-      if (typeParam && TYPE_MAP[typeParam]) {
-        handleCategoryChange(TYPE_MAP[typeParam]);
-      }
-    }
-  }, []);
-  
-  const [fromUnit, setFromUnit] = useState(Object.keys(unitTypes['Length'].units)[0]);
-  const [toUnit, setToUnit] = useState(Object.keys(unitTypes['Length'].units)[1]);
-  const [fromValue, setFromValue] = useState<string>('1');
-
-  // Handle category change
-  const handleCategoryChange = (cat: keyof typeof unitTypes) => {
-    setCategory(cat);
-    const keys = Object.keys(unitTypes[cat].units);
-    setFromUnit(keys[0]);
-    setToUnit(keys[1]);
+  const handleCategory = (c: string) => {
+    const units = CATEGORIES[c].units;
+    setCategory(c);
+    setFromUnit(units[0]);
+    setToUnit(units[1] || units[0]);
   };
 
-  const toValue = useMemo(() => {
-    if (!fromValue || isNaN(Number(fromValue))) return '';
-    const val = Number(fromValue);
-    
-    if (category === 'Temperature') {
-      let c = 0;
-      // Convert to Celsius first
-      if (fromUnit === 'celsius') c = val;
-      if (fromUnit === 'fahrenheit') c = (val - 32) * 5/9;
-      if (fromUnit === 'kelvin') c = val - 273.15;
-      
-      // Convert C to target
-      if (toUnit === 'celsius') return c.toFixed(4);
-      if (toUnit === 'fahrenheit') return ((c * 9/5) + 32).toFixed(4);
-      if (toUnit === 'kelvin') return (c + 273.15).toFixed(4);
-    } else {
-      const catData = unitTypes[category].units as Record<string, number>;
-      const baseValue = val * catData[fromUnit];
-      const result = baseValue / catData[toUnit];
-      return result % 1 !== 0 ? result.toFixed(6).replace(/\\.?0+$/, '') : result.toString();
-    }
-  }, [category, fromValue, fromUnit, toUnit]);
+  const result = value ? cat.convert(parseFloat(value) || 0, fromUnit, toUnit) : 0;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      
-      <div className="flex justify-center space-x-2 bg-zinc-50 dark:bg-zinc-900/50 p-2 rounded-2xl border border-zinc-200 dark:border-white/5 overflow-x-auto scrollbar-none">
-        {(Object.keys(unitTypes) as Array<keyof typeof unitTypes>).map(cat => (
-          <button
-            key={cat}
-            onClick={() => handleCategoryChange(cat)}
-            className={`px-4 sm:px-6 py-3 rounded-xl font-bold text-sm sm:text-base whitespace-nowrap transition-all ${category === cat ? 'bg-blue-600 text-white shadow-lg' : 'text-zinc-600 dark:text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-3xl p-8 shadow-2xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
-          
-          <div className="col-span-2 space-y-4">
-            <input 
-              type="number"
-              value={fromValue}
-              onChange={(e) => setFromValue(e.target.value)}
-              className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-6 text-3xl font-bold text-zinc-900 dark:text-white outline-none focus:border-blue-500"
-              placeholder="0"
-            />
-            <select 
-              value={fromUnit}
-              onChange={(e) => setFromUnit(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none capitalize cursor-pointer font-medium"
-            >
-              {Object.keys(unitTypes[category].units).map(u => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
+    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+        <h2 className="text-2xl font-bold">Unit Converter</h2>
+        <p className="text-sm text-zinc-500">Convert between measurement units</p>
+        <div>
+          <label className="text-xs font-medium text-zinc-500">Category</label>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {Object.keys(CATEGORIES).map(c => (
+              <button key={c} onClick={() => handleCategory(c)} className={`px-3 py-1.5 text-sm rounded-lg transition ${category === c ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{c}</button>
+            ))}
           </div>
-
-          <div className="col-span-1 flex justify-center">
-            <button 
-              onClick={() => {
-                const temp = fromUnit;
-                setFromUnit(toUnit);
-                setToUnit(temp);
-                setFromValue(toValue || '0');
-              }}
-              className="p-4 rounded-full bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white transition-all shadow-inner active:scale-90"
-            >
-              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
-            </button>
-          </div>
-
-          <div className="col-span-2 space-y-4">
-            <input 
-              type="text"
-              value={toValue || ''}
-              readOnly
-              className="w-full bg-zinc-50/50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800/50 rounded-xl px-4 py-6 text-3xl font-bold text-emerald-400 outline-none"
-              placeholder="0"
-            />
-            <select 
-              value={toUnit}
-              onChange={(e) => setToUnit(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none capitalize cursor-pointer font-medium"
-            >
-              {Object.keys(unitTypes[category].units).map(u => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </div>
-
         </div>
-        
-        <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-white/5 text-center text-sm text-zinc-500 font-medium">
-          {fromValue || '0'} {fromUnit} = <span className="text-emerald-400">{toValue || '0'}</span> {toUnit}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-xs font-medium text-zinc-500">From</label>
+            <select value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+          </div>
+          <div>
+            <label className="text-xs font-medium text-zinc-500">To</label>
+            <select value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+          </div>
+        </div>
+        <div>
+          <label className="text-xs font-medium text-zinc-500">Value</label>
+          <input type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm" />
+        </div>
+        <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
+          <p className="text-xs text-zinc-500">Result</p>
+          <p className="text-2xl font-bold">{value} {fromUnit} = {result.toFixed(6)} {toUnit}</p>
         </div>
       </div>
     </div>

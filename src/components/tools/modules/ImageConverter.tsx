@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 
-const FORMATS = ['MP4', 'AVI', 'MKV', 'MOV', 'WMV', 'FLV', 'WebM', '3GP', 'MPEG', 'VOB'];
+const FORMATS = ['PNG', 'JPG', 'WebP', 'GIF', 'BMP', 'SVG', 'ICO', 'AVIF', 'TIFF'];
 
 function detectFormat(name: string): string {
   const ext = name.split('.').pop()?.toLowerCase() || '';
-  const map: Record<string, string> = { mp4: 'MP4', avi: 'AVI', mkv: 'MKV', mov: 'MOV', wmv: 'WMV', flv: 'FLV', webm: 'WebM', '3gp': '3GP', mpeg: 'MPEG', mpg: 'MPEG', vob: 'VOB' };
-  return map[ext] || 'MP4';
+  const map: Record<string, string> = { png: 'PNG', jpg: 'JPG', jpeg: 'JPG', webp: 'WebP', gif: 'GIF', bmp: 'BMP', svg: 'SVG', ico: 'ICO', avif: 'AVIF', tiff: 'TIFF', tif: 'TIFF' };
+  return map[ext] || 'PNG';
 }
 
-export function VideoConverter({ defaultFrom, defaultTo }: { defaultFrom?: string; defaultTo?: string }) {
+export function ImageConverter({ defaultFrom, defaultTo }: { defaultFrom?: string; defaultTo?: string }) {
   const [file, setFile] = useState<File | null>(null);
-  const [srcFormat, setSrcFormat] = useState(defaultFrom || 'MP4');
-  const [dstFormat, setDstFormat] = useState(defaultTo || 'AVI');
+  const [srcFormat, setSrcFormat] = useState(defaultFrom || 'PNG');
+  const [dstFormat, setDstFormat] = useState(defaultTo || 'JPG');
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -35,10 +35,10 @@ export function VideoConverter({ defaultFrom, defaultTo }: { defaultFrom?: strin
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-        <h2 className="text-2xl font-bold">Video Converter</h2>
-        <p className="text-sm text-zinc-500">Convert video files between formats</p>
+        <h2 className="text-2xl font-bold">Image Converter</h2>
+        <p className="text-sm text-zinc-500">Convert images between formats</p>
         <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600 rounded-xl p-8 cursor-pointer hover:border-blue-500 transition">
-          <input type="file" accept="video/*" onChange={handleFile} className="hidden" />
+          <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
           <span className="text-zinc-400 text-sm">{file ? file.name : 'Click or drag to upload'}</span>
         </label>
         {file && (
@@ -60,11 +60,14 @@ export function VideoConverter({ defaultFrom, defaultTo }: { defaultFrom?: strin
   );
 }
 
-export function Mp4ToAvi() { return <VideoConverter defaultFrom="MP4" defaultTo="AVI" />; }
-export function AviToMp4() { return <VideoConverter defaultFrom="AVI" defaultTo="MP4" />; }
-export function MovToMp4() { return <VideoConverter defaultFrom="MOV" defaultTo="MP4" />; }
-export function MkvToMp4() { return <VideoConverter defaultFrom="MKV" defaultTo="MP4" />; }
-export function WebmToMp4() { return <VideoConverter defaultFrom="WebM" defaultTo="MP4" />; }
-export function FlvToMp4() { return <VideoConverter defaultFrom="FLV" defaultTo="MP4" />; }
-export function WmvToMp4() { return <VideoConverter defaultFrom="WMV" defaultTo="MP4" />; }
-export function _3gpToMp4() { return <VideoConverter defaultFrom="3GP" defaultTo="MP4" />; }
+export function PngToJpg() { return <ImageConverter defaultFrom="PNG" defaultTo="JPG" />; }
+export function JpgToPng() { return <ImageConverter defaultFrom="JPG" defaultTo="PNG" />; }
+export function WebpToPng() { return <ImageConverter defaultFrom="WebP" defaultTo="PNG" />; }
+export function PngToWebp() { return <ImageConverter defaultFrom="PNG" defaultTo="WebP" />; }
+export function GifToMp4() { return <ImageConverter defaultFrom="GIF" defaultTo="MP4" />; }
+export function SvgToPng() { return <ImageConverter defaultFrom="SVG" defaultTo="PNG" />; }
+export function BmpToPng() { return <ImageConverter defaultFrom="BMP" defaultTo="PNG" />; }
+export function IcoToPng() { return <ImageConverter defaultFrom="ICO" defaultTo="PNG" />; }
+export function TiffToJpg() { return <ImageConverter defaultFrom="TIFF" defaultTo="JPG" />; }
+export function AvifToPng() { return <ImageConverter defaultFrom="AVIF" defaultTo="PNG" />; }
+export function HeicToJpg() { return <ImageConverter defaultFrom="HEIC" defaultTo="JPG" />; }
