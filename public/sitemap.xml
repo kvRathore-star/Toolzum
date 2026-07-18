@@ -4117,12 +4117,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/developer/base64-encoder-decoder</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/image/image-converter</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -5000,12 +4994,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/developer/http-security-checker</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/jwt-decoder</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

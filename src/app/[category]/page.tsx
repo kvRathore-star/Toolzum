@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolCategory } from "@/registry/tools";
 import { CategoryPageClient } from "@/components/tools/CategoryPageClient";
+import { CATEGORY_SECTIONS, CATEGORY_INTROS } from "@/data/categorySections";
 
 const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 
@@ -43,7 +44,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Privacy: { title: 'Free Privacy Tools — Encrypt, Redact & Secure', description: 'Free privacy tools — encrypt text, redact images, generate secure passwords, and more. Everything stays local to your device.' },
     SEO: { title: 'Free SEO Tools — Analyze, Optimize & Audit', description: 'Free SEO tools — meta tag analyzer, keyword density checker, sitemap generator, and SEO audit utilities to improve your rankings.' },
     Utility: { title: 'Free Utility Tools — Everyday Essentials', description: 'Free utility tools — unit converters, QR code generator, color picker, and everyday essentials for quick tasks.' },
-    'indian-utilities': { title: 'Indian Utilities 🇮🇳 — Aadhaar, PAN, GST & More', description: 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.' },
+    'indian-utilities': { title: 'Indian Utilities — Aadhaar, PAN, GST & More', description: 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.' },
     Transcription: { title: 'Free Transcription Tools — Speech to Text', description: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.' },
     Branding: { title: 'Free Branding & Marketing Tools — Logo, Analytics & Design', description: 'Free branding and marketing tools — create logos, design social media posts, shorten URLs, schedule content, and measure campaign performance with analytics calculators.' },
     Productivity: { title: 'Free Productivity Tools — Notes, Timers & More', description: 'Free productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.' },
@@ -79,10 +80,35 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
   const categoryKey = normalizeCategory(params.category);
   if (!categoryKey || !VALID_CATEGORIES.has(categoryKey)) notFound();
 
-  const tools = toolsRegistry.filter(t =>
+  const allTools = toolsRegistry.filter(t =>
     (t.category === categoryKey && t.showInCategory !== false) ||
     (categoryKey === 'Converter' && CONVERTER_CROSSLIST.has(t.slug))
   );
 
-  return <CategoryPageClient category={categoryKey as ToolCategory} tools={tools} />;
+  const toolMap = new Map(allTools.map(t => [t.slug, t]));
+  const sections = CATEGORY_SECTIONS[categoryKey];
+  const sectionedTools = sections
+    ? sections
+        .map(s => ({
+          ...s,
+          tools: s.slugs.map(slug => toolMap.get(slug)).filter(Boolean) as typeof allTools,
+        }))
+        .filter(s => s.tools.length > 0)
+    : [];
+
+  const uncategorized = sections
+    ? allTools.filter(t => !sections.some(s => s.slugs.includes(t.slug)))
+    : allTools;
+
+  const intro = CATEGORY_INTROS[categoryKey] || '';
+
+  return (
+    <CategoryPageClient
+      category={categoryKey as ToolCategory}
+      tools={allTools}
+      sections={sectionedTools}
+      uncategorized={uncategorized}
+      intro={intro}
+    />
+  );
 }

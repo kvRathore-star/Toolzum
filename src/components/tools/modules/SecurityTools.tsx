@@ -322,27 +322,6 @@ Overall Rating: B (3 of 8 headers missing/recommended)`);
   );
 }
 
-export function JwtDecoder() {
-  const [token, setToken] = useState('');
-  const [decoded, setDecoded] = useState('');
-  const decode = () => {
-    try {
-      const parts = (token || '').split('.');
-      if (parts.length !== 3) { setDecoded('Error: Invalid JWT format (expected 3 parts)'); return; }
-      const h = JSON.parse(atob(parts[0].replace(/-/g, '+').replace(/_/g, '/')));
-      const p = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
-      setDecoded(`HEADER:\n${JSON.stringify(h, null, 2)}\n\nPAYLOAD:\n${JSON.stringify(p, null, 2)}\n\nSIGNATURE:\n${parts[2].substring(0, 40)}...`);
-    } catch { setDecoded('Error: Could not decode token'); }
-  };
-  return (
-    <Section title="JWT Decoder">
-      <Input label="JWT Token" rows={3} value={token} onChange={setToken} placeholder="eyJhbGciOiJIUzI1NiIs..." />
-      <button onClick={decode} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
-      <Output value={decoded} />
-    </Section>
-  );
-}
-
 export function JwtInspector() {
   const [token, setToken] = useState('');
   const [report, setReport] = useState('');

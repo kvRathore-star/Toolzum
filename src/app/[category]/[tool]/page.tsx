@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
-import { toolsRegistry, getToolByCategoryAndSlug } from "@/registry/tools";
+import { notFound, permanentRedirect } from "next/navigation";
+import { toolsRegistry, getToolByCategoryAndSlug, TOOL_REDIRECTS } from "@/registry/tools";
 import { ToolLayout } from "@/components/tools/ToolLayout";
 import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
@@ -7,10 +7,17 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 
 export async function generateStaticParams() {
-  return toolsRegistry.map((tool) => ({
-    category: tool.category.toLowerCase().replace(/\s+/g, '-'),
-    tool: tool.slug,
+  const redirectPages = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
+    category: target.category,
+    tool: slug,
   }));
+  return [
+    ...toolsRegistry.map((tool) => ({
+      category: tool.category.toLowerCase().replace(/\s+/g, '-'),
+      tool: tool.slug,
+    })),
+    ...redirectPages,
+  ];
 }
 
 export async function generateMetadata(props: { params: Promise<{ category: string; tool: string }> }) {
@@ -43,6 +50,12 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
 
 export default async function ToolPage(props: { params: Promise<{ category: string; tool: string }> }) {
   const params = await props.params;
+
+  const redirect = TOOL_REDIRECTS[params.tool];
+  if (redirect) {
+    permanentRedirect(`/${redirect.category}/${redirect.slug}/`);
+  }
+
   const toolMetadata = getToolByCategoryAndSlug(params.category, params.tool);
 
   if (!toolMetadata) {

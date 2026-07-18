@@ -113,7 +113,7 @@ export default function ApiToolkit() {
           <ToolCard name="Postman to OpenAPI" slug="postman-to-openapi-converter" desc="Convert Postman collections to OpenAPI 3.0 spec format." icon={GitCompare} />
           <ToolCard name="Swagger/OpenAPI Generator" slug="swagger-openapi-generator" desc="Generate complete OpenAPI 3.0 specs from title, version, and endpoint descriptions." icon={Book} />
           <ToolCard name="API Diff Checker" slug="api-diff-checker" desc="Compare two OpenAPI specs to detect new, removed, and modified endpoints." icon={GitCompare} />
-          <ToolCard name="API Docs Generator" slug="api-docs-generator" desc="Generate Markdown API documentation from OpenAPI spec JSON." icon={ClipboardList} />
+          <ToolCard name="OpenAPI Documentation Generator" slug="api-docs-generator" desc="Generate Markdown API documentation from OpenAPI spec JSON." icon={ClipboardList} />
         </div>
       </div>
 

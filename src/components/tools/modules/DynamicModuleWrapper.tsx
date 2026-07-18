@@ -590,8 +590,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'css-transform-generator': dynamic(() => import('@/components/tools/modules/CssGenerators').then(m => ({ default: m.CssTransformGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="css-transform-generator" /> }),
   'css-animation-generator': dynamic(() => import('@/components/tools/modules/CssGenerators').then(m => ({ default: m.CssAnimationGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="css-animation-generator" /> }),
   'css-filter-generator': dynamic(() => import('@/components/tools/modules/CssGenerators').then(m => ({ default: m.CssFilterGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="css-filter-generator" /> }),
-  'base64-encoder-decoder': dynamic(() => import('@/components/tools/modules/Base64EncodeDecode'), { ssr: false, loading: () => <DynamicImportFallback slug="base64-encoder-decoder" /> }),
-
   'password-entropy-calculator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.PasswordEntropyCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="password-entropy-calculator" /> }),
   'two-factor-auth-generator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.TwoFactorAuthGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="two-factor-auth-generator" /> }),
   'brute-force-time-estimator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.BruteForceTimeEstimator })), { ssr: false, loading: () => <DynamicImportFallback slug="brute-force-time-estimator" /> }),
@@ -602,7 +600,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'hmac-generator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.HmacGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="hmac-generator" /> }),
   'ssl-tls-checker': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.SslTlsChecker })), { ssr: false, loading: () => <DynamicImportFallback slug="ssl-tls-checker" /> }),
   'http-security-checker': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.HttpSecurityChecker })), { ssr: false, loading: () => <DynamicImportFallback slug="http-security-checker" /> }),
-  'jwt-decoder': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.JwtDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="jwt-decoder" /> }),
   'jwt-inspector': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.JwtInspector })), { ssr: false, loading: () => <DynamicImportFallback slug="jwt-inspector" /> }),
   'content-security-policy-generator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.ContentSecurityPolicyGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="content-security-policy-generator" /> }),
   'subnet-calculator': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.SubnetCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="subnet-calculator" /> }),

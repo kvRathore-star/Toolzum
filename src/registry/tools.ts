@@ -6235,11 +6235,11 @@ const rawToolsRegistry: ToolMetadata[] = [
   },
   {
     id: "955",
-    name: "API Documentation Generator",
+    name: "OpenAPI Documentation Generator",
     slug: "api-docs-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Markdown API documentation from OpenAPI specs. Create clean, readable docs with endpoints, parameters, and response examples.',
-    seoDescription: 'Free online API Documentation Generator — Generate Markdown API docs from OpenAPI specs with endpoints, parameters, and response examples. 100% browser-based.',
+    seoDescription: 'Free online OpenAPI Documentation Generator — Generate Markdown API docs from OpenAPI specs with endpoints, parameters, and response examples. 100% browser-based.',
     dependencies: "None",
   },
   {
@@ -6447,15 +6447,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale.',
     seoDescription: 'Free online CSS Filter Generator — Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. 100% browser-based and private.',
-    dependencies: "None",
-  },
-  {
-    id: "743",
-    name: "Base64 Encoder/Decoder",
-    slug: "base64-encoder-decoder",
-    category: "Developer" as ToolCategory,
-    description: 'Encode text to Base64 or decode Base64 back to readable text. Supports UTF-8 and ASCII.',
-    seoDescription: 'Free online Base64 Encoder/Decoder — Encode text to Base64 or decode Base64 back to readable text. 100% browser-based and private.',
     dependencies: "None",
   },
   {
@@ -7785,15 +7776,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "None",
   },
   {
-    id: "908",
-    name: "JWT Decoder",
-    slug: "jwt-decoder",
-    category: "Developer" as ToolCategory,
-    description: 'Decode and inspect JWT tokens to view header, payload, and signature information.',
-    seoDescription: 'Free online JWT Decoder \u2014 Decode and inspect JWT tokens to view header, payload, and signature information. 100% browser-based and private.',
-    dependencies: "None",
-  },
-  {
     id: "909",
     name: "JWT Inspector",
     slug: "jwt-inspector",
@@ -8002,7 +7984,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   },
   {
     id: "932",
-    name: "YAML Validator",
+    name: "YAML Syntax Validator",
     slug: "yaml-syntax-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate YAML syntax, check for indentation errors, and preview the parsed structure.',
@@ -8385,4 +8367,10 @@ export const getToolByCategoryAndSlug = (category: string, slug: string) => tool
 export function getSeoParentSlug(slug: string): string | undefined {
   return SEO_PERMUTATIONS.find(p => p.slug === slug)?.parentSlug;
 }
+
+/** Slugs that should redirect to their canonical equivalent. Key: slug → canonical slug */
+export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> = {
+  "base64-encoder-decoder": { category: "developer", slug: "base64-encode-decode" },
+  "jwt-decoder": { category: "developer", slug: "jwt-debugger" },
+};
 
