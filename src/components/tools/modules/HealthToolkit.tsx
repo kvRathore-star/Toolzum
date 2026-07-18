@@ -73,7 +73,7 @@ export default function HealthToolkit() {
           <ToolCard name="BMR Calculator" slug="bmr-calculator" desc="Basal Metabolic Rate from weight, height, age, and gender." icon={Thermometer} path="/calculator/bmr-calculator" />
           <ToolCard name="Body Fat % (Navy)" slug="body-fat-percentage-calculator" desc="Body fat percentage using Navy circumference method." icon={Weight} path="/calculator/body-fat-percentage-calculator" />
           <ToolCard name="Body Fat Estimator" slug="body-fat-estimator" desc="Estimate body fat from BMI and age." icon={Weight} path="/health/body-fat-estimator" />
-          <ToolCard name="Ideal Weight" slug="ideal-weight-calculator" desc="Ideal body weight by Devine formula." icon={Weight} path="/calculator/ideal-weight-calculator" />
+          <ToolCard name="Ideal Weight" slug="ideal-weight-calc" desc="Ideal body weight by Devine and Robinson formulas." icon={Weight} path="/health/ideal-weight-calc" />
           <ToolCard name="Lean Body Mass" slug="lean-body-mass-calculator" desc="LBM using Boer formula." icon={Weight} path="/calculator/lean-body-mass-calculator" />
           <ToolCard name="Body Surface Area" slug="body-surface-area-calculator" desc="BSA using Mosteller formula." icon={Scale} path="/calculator/body-surface-area-calculator" />
           <ToolCard name="Waist-to-Hip Ratio" slug="waist-to-hip-ratio-calculator" desc="Calculate WHR and assess health risk." icon={Scale} path="/health/waist-to-hip-ratio-calculator" />
@@ -90,7 +90,7 @@ export default function HealthToolkit() {
           <ToolCard name="Sleep Calculator" slug="sleep-calculator" desc="Recommended sleep hours by age group." icon={Moon} path="/calculator/sleep-calculator" />
           <ToolCard name="Water Intake" slug="water-intake-calculator" desc="Daily hydration needs based on weight and exercise." icon={Droplets} path="/calculator/water-intake-calculator" />
           <ToolCard name="Pregnancy Due Date" slug="pregnancy-due-date-calculator" desc="Estimated due date from last menstrual period." icon={Baby} path="/calculator/pregnancy-due-date-calculator" />
-          <ToolCard name="Ovulation Calculator" slug="ovulation-calculator" desc="Calculate fertile window and ovulation day." icon={CalendarIcon} path="/calculator/ovulation-calculator" />
+          <ToolCard name="Ovulation Tracker" slug="ovulation-tracker" desc="Track fertile window and ovulation day." icon={CalendarIcon} path="/health/ovulation-tracker" />
         </div>
       </div>
     </div>

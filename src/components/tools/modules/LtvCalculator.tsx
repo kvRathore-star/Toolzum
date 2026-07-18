@@ -39,6 +39,7 @@ export default function LtvCalculator() {
           <p className="text-5xl font-extrabold text-emerald-500">{ltv.toLocaleString()}</p>
         </div>
       </div>
+      <p className="text-xs text-zinc-500 mt-2">Uses AOV × Frequency × Lifespan (product method). For ARPU ÷ Churn (SaaS method), see <a href="/calculator/customer-ltv-calculator" className="text-blue-600 hover:underline">Customer LTV Calculator</a>.</p>
     </div>
   );
 }

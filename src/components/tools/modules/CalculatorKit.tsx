@@ -24,6 +24,8 @@ const CAT_OVERRIDES: Record<string, string> = {
   'unix-time-converter': 'developer',
   'week-number-calculator': 'developer',
   'calorie-intake-calculator': 'health',
+  'ideal-weight-calc': 'health',
+  'ovulation-tracker': 'health',
   'conversion-rate-calculator': 'branding',
 };
 
@@ -114,7 +116,7 @@ export default function CalculatorKit() {
           <span className={sectionBtn}><Calendar className="w-3.5 h-3.5" /> Date & Time Calculators</span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-          <ToolCard name="Date Difference" slug="days-between-dates-calculator" desc="Days between two dates." icon={Calendar} />
+          <ToolCard name="Date Difference" slug="date-difference-calculator" desc="Days, hours, and minutes between dates." icon={Calendar} />
           <ToolCard name="Day of Week" slug="day-of-week-calculator" desc="What day of the week a date falls on." icon={Calendar} />
           <ToolCard name="Add Days" slug="date-addition-calculator" desc="Add or subtract days from a date." icon={Calendar} />
           <ToolCard name="Week Number" slug="week-number-calculator" desc="ISO week number for any date." icon={Hash} />
@@ -133,10 +135,10 @@ export default function CalculatorKit() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
           <ToolCard name="Body Fat (Navy)" slug="body-fat-percentage-calculator" desc="Body fat % using Navy circumference method." icon={Weight} />
-          <ToolCard name="TDEE / Calorie" slug="calorie-calculator" desc="Total daily energy expenditure." icon={Flame} />
+          <ToolCard name="Calorie Intake" slug="calorie-intake-calculator" desc="BMR, maintenance, cutting, and bulking targets." icon={Flame} />
           <ToolCard name="BMI for Kids" slug="bmi-calculator-for-kids" desc="BMI percentile for children." icon={Weight} />
           <ToolCard name="Body Surface Area" slug="body-surface-area-calculator" desc="BSA using Mosteller formula." icon={Scale} />
-          <ToolCard name="Ideal Weight" slug="ideal-weight-calculator" desc="Ideal body weight by Devine formula." icon={Weight} />
+          <ToolCard name="Ideal Weight" slug="ideal-weight-calc" desc="Ideal body weight by Devine and Robinson formulas." icon={Weight} />
           <ToolCard name="Lean Body Mass" slug="lean-body-mass-calculator" desc="LBM using Boer formula." icon={Weight} />
           <ToolCard name="Heart Rate Zones" slug="heart-rate-zone-calculator" desc="Target heart rate by age and intensity." icon={Activity} />
           <ToolCard name="Calorie Needs Calculator" slug="calorie-intake-calculator" desc="Maintenance, cutting, and bulking targets from BMR." icon={Flame} />
@@ -152,7 +154,7 @@ export default function CalculatorKit() {
           <ToolCard name="Steps to Calories" slug="steps-to-calories-calculator" desc="Estimated calories burned from steps." icon={Footprints} />
           <ToolCard name="Water Intake" slug="water-intake-calculator" desc="Daily water needs by weight and exercise." icon={Droplets} />
           <ToolCard name="Pregnancy Due Date" slug="pregnancy-due-date-calculator" desc="Estimated due date from LMP." icon={Baby} />
-          <ToolCard name="Ovulation" slug="ovulation-calculator" desc="Fertile window and ovulation day." icon={Calendar} />
+          <ToolCard name="Ovulation" slug="ovulation-tracker" desc="Fertile window and ovulation day." icon={Calendar} />
         </div>
       </div>
 

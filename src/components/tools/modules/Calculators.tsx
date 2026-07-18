@@ -86,27 +86,6 @@ export function CompoundInterestCalculator() {
   );
 }
 
-export function CacCalculator() {
-  const [spend, setSpend] = useState('50000');
-  const [customers, setCustomers] = useState('100');
-  const [result, setResult] = useState('');
-  const calc = () => {
-    const cac = parseFloat(spend) / parseFloat(customers);
-    setResult(`Customer Acquisition Cost: $${cac.toFixed(2)}`);
-  };
-  return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>CAC Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Total Sales & Marketing ($)</label><input type="number" value={spend} onChange={e => setSpend(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>New Customers</label><input type="number" value={customers} onChange={e => setCustomers(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
-  );
-}
-
 export function CarLoanCalculator() {
   const [loan, setLoan] = useState('35000');
   const [rate, setRate] = useState('4.5');
@@ -324,6 +303,7 @@ export function LtvCalculator() {
         <div><label className={labelClass}>Churn Rate (%)</label><input type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
+        <p className="text-xs text-zinc-500 mt-2">Uses ARPU ÷ Churn Rate (SaaS method). For AOV × Frequency × Lifespan (product/e-commerce method), see <a href="/calculator/ltv-calculator" className="text-blue-600 hover:underline">LTV Calculator</a>.</p>
       </div>
     </div>
   );
@@ -504,6 +484,7 @@ export function RunwayCalculator() {
         <div><label className={labelClass}>Monthly Burn Rate ($)</label><input type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
+        <p className="text-xs text-zinc-500 mt-2">For a full burn-rate analysis (gross/net burn with starting/ending cash), see <a href="/calculator/burn-rate-calculator" className="text-blue-600 hover:underline">Burn Rate & Runway Calculator</a>.</p>
       </div>
     </div>
   );
@@ -1508,6 +1489,7 @@ export function HeartRateZoneCalculator() {
         <div><label className={labelClass}>Resting Heart Rate (bpm)</label><input type="number" value={restingHR} onChange={e => setRestingHR(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
+        <p className="text-xs text-zinc-500 mt-2">Uses the Karvonen method (resting HR + HR reserve). For a simpler %-of-max calculation, see <a href="/health/heart-rate-calculator" className="text-blue-600 hover:underline">Target Heart Rate Zones</a>.</p>
       </div>
     </div>
   );
@@ -1788,6 +1770,7 @@ export function StepsToCaloriesCalculator() {
         <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
+        <p className="text-xs text-zinc-500 mt-2">Uses weight-based formula (avg stride 76.2 cm). For a height-based stride estimate, see <a href="/health/steps-calculator" className="text-blue-600 hover:underline">Steps to Distance</a>.</p>
       </div>
     </div>
   );

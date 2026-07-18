@@ -2,6 +2,112 @@
 /privacy/   /privacy-policy/   301
 /privacy    /privacy-policy/   301
 
-# Old health/status page moved
-/health/    /status/   301
-/health     /status/   301
+# Removed tools — redirect to their replacements
+/developer/jwt-decoder/   /developer/jwt-debugger/   301
+/developer/jwt-decoder    /developer/jwt-debugger/   301
+/developer/base64-encoder-decoder/   /developer/base64-encode-decode/   301
+/developer/base64-encoder-decoder    /developer/base64-encode-decode/   301
+
+# Merged Health tools — redirect to canonical
+/health/body-fat-estimator/   /health/body-fat-calculator/   301
+/health/body-fat-estimator    /health/body-fat-calculator/   301
+/health/due-date-calculator/   /calculator/pregnancy-due-date-calculator/   301
+/health/due-date-calculator    /calculator/pregnancy-due-date-calculator/   301
+
+# Merged Data Utilities wrappers — redirect to canonical
+/developer/json-path-query-builder/   /utility/data-utilities/   301
+/developer/json-path-query-builder    /utility/data-utilities/   301
+/developer/json-diff-checker/   /utility/data-utilities/   301
+/developer/json-diff-checker    /utility/data-utilities/   301
+/developer/json-tree-viewer/   /utility/data-utilities/   301
+/developer/json-tree-viewer    /utility/data-utilities/   301
+/developer/json-minifier/   /developer/json-formatter/   301
+/developer/json-minifier    /developer/json-formatter/   301
+/utility/csv-analyzer/   /utility/data-utilities/   301
+/utility/csv-analyzer    /utility/data-utilities/   301
+/utility/csv-data-generator/   /utility/data-utilities/   301
+/utility/csv-data-generator    /utility/data-utilities/   301
+/utility/csv-sorter/   /utility/data-utilities/   301
+/utility/csv-sorter    /utility/data-utilities/   301
+/utility/csv-preview-generator/   /utility/data-utilities/   301
+/utility/csv-preview-generator    /utility/data-utilities/   301
+
+# Merged cross-category — redirect to canonical
+/utility/morse-code-converter/   /utility/morse-code-translator/   301
+/utility/morse-code-converter    /utility/morse-code-translator/   301
+/calculator/customer-acquisition-cost-calculator/   /calculator/cac-calculator/   301
+/calculator/customer-acquisition-cost-calculator    /calculator/cac-calculator/   301
+/utility/ratio-simplifier/   /calculator/ratio-calculator/   301
+/utility/ratio-simplifier    /calculator/ratio-calculator/   301
+/utility/proportional-calculator/   /calculator/proportion-calculator/   301
+/utility/proportional-calculator    /calculator/proportion-calculator/   301
+
+# Merged Calculator→Health — redirect to canonical
+/calculator/ideal-weight-calculator/   /health/ideal-weight-calc/   301
+/calculator/ideal-weight-calculator    /health/ideal-weight-calc/   301
+/calculator/calorie-calculator/   /health/calorie-intake-calculator/   301
+/calculator/calorie-calculator    /health/calorie-intake-calculator/   301
+/calculator/ovulation-calculator/   /health/ovulation-tracker/   301
+/calculator/ovulation-calculator    /health/ovulation-tracker/   301
+
+# Merged Video→GIF duplicates — redirect to canonical
+/video/mp4-to-gif/   /video/video-to-gif/   301
+/video/mp4-to-gif    /video/video-to-gif/   301
+/video/webm-to-gif/   /video/video-to-gif/   301
+/video/webm-to-gif    /video/video-to-gif/   301
+
+# Batch Group 1 — same-file/multi-tab consolidations
+/branding/rpm-calculator/   /branding/cpm-calculator/   301
+/branding/rpm-calculator    /branding/cpm-calculator/   301
+/converter/markdown-to-html/   /converter/markdown-tools/   301
+/converter/markdown-to-html    /converter/markdown-tools/   301
+/converter/html-to-markdown/   /converter/markdown-tools/   301
+/converter/html-to-markdown    /converter/markdown-tools/   301
+/converter/text-to-markdown/   /converter/markdown-tools/   301
+/converter/text-to-markdown    /converter/markdown-tools/   301
+/converter/markdown-to-text/   /converter/markdown-tools/   301
+/converter/markdown-to-text    /converter/markdown-tools/   301
+
+# Batch Group 1 — cross-category duplicates
+/branding/nps-survey-calculator/   /branding/net-promoter-score-calculator/   301
+/branding/nps-survey-calculator    /branding/net-promoter-score-calculator/   301
+/developer/random-password-generator/   /utility/password-generator/   301
+/developer/random-password-generator    /utility/password-generator/   301
+/developer/random-uuid-generator/   /developer/uuid-generator/   301
+/developer/random-uuid-generator    /developer/uuid-generator/   301
+/utility/guid-generator/   /developer/uuid-generator/   301
+/utility/guid-generator    /developer/uuid-generator/   301
+/seo/text-diff-checker/   /developer/diff-checker/   301
+/seo/text-diff-checker    /developer/diff-checker/   301
+/developer/hash-generator/   /developer/md5-hash-generator/   301
+/developer/hash-generator    /developer/md5-hash-generator/   301
+/utility/binary-converter/   /developer/number-base-converter/   301
+/utility/binary-converter    /developer/number-base-converter/   301
+/utility/currency-rate-calculator/   /finance/currency-converter/   301
+/utility/currency-rate-calculator    /finance/currency-converter/   301
+/utility/exchange-rate-calculator/   /finance/currency-converter/   301
+/utility/exchange-rate-calculator    /finance/currency-converter/   301
+/health/water-requirement-calculator/   /calculator/water-intake-calculator/   301
+/health/water-requirement-calculator    /calculator/water-intake-calculator/   301
+/health/heart-rate-calculator/   /calculator/heart-rate-zone-calculator/   301
+/health/heart-rate-calculator    /calculator/heart-rate-zone-calculator/   301
+/health/pregnancy-calculator/   /calculator/pregnancy-due-date-calculator/   301
+/health/pregnancy-calculator    /calculator/pregnancy-due-date-calculator/   301
+/utility/fraction-simplifier/   /calculator/fraction-calculator/   301
+/utility/fraction-simplifier    /calculator/fraction-calculator/   301
+/converter/svg-to-png-converter/   /image/svg-to-png/   301
+/converter/svg-to-png-converter    /image/svg-to-png/   301
+/indian-utilities/kb-image-compressor/   /image/compress-image-to-50kb/   301
+/indian-utilities/kb-image-compressor    /image/compress-image-to-50kb/   301
+/utility/profit-calculator/   /calculator/profit-margin-calculator/   301
+/utility/profit-calculator    /calculator/profit-margin-calculator/   301
+/developer/css-gradient-generator/   /utility/gradient-generator/   301
+/developer/css-gradient-generator    /utility/gradient-generator/   301
+/utility/percentage-change-calculator/   /calculator/percentage-calculator/   301
+/utility/percentage-change-calculator    /calculator/percentage-calculator/   301
+
+# Superset redirects — narrower → broader
+/calculator/days-between-dates-calculator/   /developer/date-difference-calculator/   301
+/calculator/days-between-dates-calculator    /developer/date-difference-calculator/   301
+/calculator/days-until-calculator/   /developer/time-until-calculator/   301
+/calculator/days-until-calculator    /developer/time-until-calculator/   301

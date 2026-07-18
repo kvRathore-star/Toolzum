@@ -411,11 +411,3 @@ export function DataUtilities() {
   );
 }
 
-export function CsvAnalyzer() { return <DataUtilities />; }
-export function CsvDataGenerator() { return <DataUtilities />; }
-export function JsonPathQueryBuilder() { return <DataUtilities />; }
-export function JsonDiffChecker() { return <DataUtilities />; }
-export function JsonMinifier() { return <DataUtilities />; }
-export function CsvSorter() { return <DataUtilities />; }
-export function JsonTreeViewer() { return <DataUtilities />; }
-export function CsvPreviewGenerator() { return <DataUtilities />; }

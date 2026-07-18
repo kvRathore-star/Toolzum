@@ -32,7 +32,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "CSS Generators",
       description: "Generate CSS code visually — box shadows, gradients, grids, animations, filters, and more.",
       slugs: [
-        "css-generator", "box-shadow-generator", "css-gradient-generator",
+        "css-generator", "box-shadow-generator",
         "border-radius-generator", "flexbox-css-generator", "css-grid-generator",
         "text-shadow-generator", "css-transform-generator", "css-animation-generator",
         "css-filter-generator", "border-css-generator",
@@ -67,7 +67,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Encryption, hashing, key generation, JWT, SSL/TLS, CORS, CSP, and security header tools.",
       slugs: [
         "crypto-kit", "password-entropy-calculator", "two-factor-auth-generator",
-        "brute-force-time-estimator", "hash-generator", "hash-verifier",
+        "brute-force-time-estimator", "hash-verifier",
         "hash-password-generator", "hash-file-generator", "hmac-generator",
         "md5-hash-generator",
         "ssl-tls-checker", "http-security-checker", "jwt-inspector",
@@ -126,10 +126,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Random Generators & Mock Data",
       description: "Generate passwords, UUIDs, tokens, fake identities, coupons, and test data.",
       slugs: [
-        "random-password-generator", "random-color-generator",
+        "random-color-generator",
         "random-team-generator", "random-picker-generator",
         "random-decision-maker", "random-username-generator",
-        "random-uuid-generator", "random-token-generator",
+        "random-token-generator",
         "random-string-generator",
         "dummy-text-generator", "fake-data-generator",
         "fake-identity-generator", "fake-credit-card-generator",
@@ -213,7 +213,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "percentage-calculator",
         "exponent-calculator", "square-root-calculator",
-        "fraction-calculator", "fraction-simplifier",
+        "fraction-calculator",
         "fraction-to-decimal-calculator", "decimal-to-fraction-calculator",
         "ratio-calculator", "proportion-calculator", "rule-of-three-calculator",
         "probability-calculator",
@@ -236,8 +236,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Date & Time Calculators",
       description: "Age calculator, days between dates, day of week, business days, and date arithmetic.",
       slugs: [
-        "age-calculator", "days-between-dates-calculator",
-        "days-until-calculator", "business-days-calculator",
+        "age-calculator", "business-days-calculator",
         "day-of-week-calculator", "day-of-year-calculator",
         "leap-year-calculator",
         "final-grade-calculator", "gpa-calculator",
@@ -266,7 +265,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "random-number-generator", "password-generator",
         "qr-code-generator", "barcode-generator",
         "bulk-qr-code-generator", "wheel-of-names",
-        "guid-generator",         "counter-tool", "list-randomizer", "list-sorter",
+        "counter-tool", "list-randomizer", "list-sorter",
         "decision-maker", "yes-no-picker",
         "coin-flipper", "dice-roller", "dice-roller-tool",
       ],
@@ -285,7 +284,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert between text formats — morse code, binary, roman numerals, number to words, and more.",
       slugs: [
         "morse-code-translator", "morse-code-converter",
-        "binary-converter", "roman-numeral-converter",
+        "roman-numeral-converter",
         "number-to-words-converter",
       ],
     },
@@ -294,11 +293,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Math & Percentage Tools",
       description: "Percentage calculators, tip calculators, currency rates, and everyday math utilities.",
       slugs: [
-        "percentage-change-calculator", "percentage-difference-calculator",
+        "percentage-difference-calculator",
         "tip-calculator", "sales-tax-calculator",
-        "markup-calculator", "profit-calculator", "cagr-calculator",
-        "currency-rate-calculator", "exchange-rate-calculator",
-        "fraction-simplifier", "fraction-to-decimal-calculator",
+        "markup-calculator", "cagr-calculator",
+        "fraction-to-decimal-calculator",
         "decimal-to-fraction-calculator", "ratio-simplifier",
         "proportional-calculator", "rule-of-three-calculator",
         "combination-calculator", "permutation-calculator", "factorial-calculator",
@@ -414,7 +412,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Reduce image file sizes while preserving quality. Compress JPEG, PNG, WebP, and more.",
       slugs: [
         "image-compressor", "compress-image-to-50kb",
-        "kb-image-compressor",
         "bulk-image-compressor",
       ],
     },
@@ -592,7 +589,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Image Converters",
       description: "Convert images between formats — SVG, PNG, GIF, WebP, ICO, and more.",
       slugs: [
-        "svg-to-png-converter", "website-screenshot",
+        "website-screenshot",
         "gif-to-webp-webm",
       ],
     },
@@ -657,7 +654,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Edit, sort, deduplicate, and convert text content for SEO optimization.",
       slugs: [
         "text-replacer", "text-sorter", "text-deduplicator",
-        "text-diff-checker",
         "text-to-html-converter", "html-to-text-converter",
         "markdown-previewer",
       ],
@@ -674,7 +670,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "body-fat-estimator", "body-fat-calculator",
         "calorie-intake-calculator", "macronutrient-calculator",
         "ideal-weight-calc", "ideal-weight-calculator",
-        "heart-rate-calculator", "heart-rate-zone-calculator",
+        "heart-rate-zone-calculator",
         "sleep-requirement-calculator",
         "waist-to-hip-ratio-calculator",
       ],
@@ -685,7 +681,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Track calories, water intake, steps, and daily wellness metrics.",
       slugs: [
         "calorie-tracker", "calories-burned-calculator",
-        "water-requirement-calculator",
         "steps-calculator", "running-pace-calculator",
         "cycling-calorie-calculator",
         "protein-calculator",
@@ -696,7 +691,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Pregnancy & Due Date",
       description: "Pregnancy calculators, ovulation trackers, and due date estimators.",
       slugs: [
-        "pregnancy-calculator", "ovulation-tracker",
+        "ovulation-tracker",
         "due-date-calculator",
         "blood-alcohol-calculator",
       ],
@@ -791,7 +786,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Marketing Calculators",
       description: "Calculate CPM, RPM, ROAS, conversion rates, and net promoter scores.",
       slugs: [
-        "cpm-calculator", "rpm-calculator",
+        "cpm-calculator",
         "roas-calculator", "conversion-rate-calculator",
         "net-promoter-score-calculator",
       ],
@@ -913,7 +908,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "complaint-letter-generator",
         "voter-id-form-helper",
         "india-pincode-finder",
-        "kb-image-compressor",
       ],
     },
     {

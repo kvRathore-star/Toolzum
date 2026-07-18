@@ -422,33 +422,6 @@ export function CoinFlipper() {
   );
 }
 
-export function DiceRoller() {
-  const [dice, setDice] = useState<number[]>([1]);
-  const [count, setCount] = useState(1);
-  const roll = () => {
-    const results = Array.from({ length: count }, () => Math.floor(Math.random() * 6) + 1);
-    setDice(results);
-  };
-  const sum = dice.reduce((a, b) => a + b, 0);
-  return (
-    <Card title="Dice Roller (1-6)">
-      <div className="flex gap-3 items-center">
-        <label className="text-sm">Dice:</label>
-        <Select value={count} onChange={e => setCount(Number(e.target.value))}>
-          {[1, 2, 3, 4, 5, 6].map(n => <option key={n} value={n}>{n}</option>)}
-        </Select>
-        <Btn onClick={roll}>Roll</Btn>
-      </div>
-      <div className="flex gap-3 flex-wrap">
-        {dice.map((d, i) => (
-          <div key={i} className="w-12 h-12 bg-white dark:bg-zinc-700 border-2 border-zinc-300 dark:border-zinc-500 rounded-lg flex items-center justify-center text-lg font-bold">{d}</div>
-        ))}
-      </div>
-      <div className="text-sm font-medium">Sum: {sum}</div>
-    </Card>
-  );
-}
-
 export function DiceRollerTool() {
   const [sides, setSides] = useState(6);
   const [result, setResult] = useState<number | null>(null);
@@ -537,24 +510,6 @@ export function HangmanGame() {
       </div>
       {wrong >= 6 && <div className="text-red-500 font-bold text-center mt-2">Game Over! Word: {word.current}</div>}
       {!display.includes('_') && <div className="text-green-600 font-bold text-center mt-2">You Win!</div>}
-    </Card>
-  );
-}
-
-export function MorseCodeConverter() {
-  const map: Record<string, string> = { 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.' };
-  const rev = Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
-  const [text, setText] = useState('');
-  const [morse, setMorse] = useState('');
-  const toMorse = () => setMorse(text.toUpperCase().split('').map(c => map[c] || c).join(' '));
-  const fromMorse = () => setText(morse.split(' ').map(c => rev[c] || c).join(''));
-  return (
-    <Card title="Morse Code Converter">
-      <label className={labelClass}>Text</label>
-      <Input value={text} onChange={e => setText(e.target.value)} />
-      <label className={labelClass}>Morse Code</label>
-      <Input value={morse} onChange={e => setMorse(e.target.value)} />
-      <div className="flex gap-2"><Btn onClick={toMorse}>To Morse</Btn><Btn onClick={fromMorse}>From Morse</Btn></div>
     </Card>
   );
 }
@@ -658,22 +613,6 @@ export function NumberBaseConverter() {
   );
 }
 
-export function PercentageCalculator() {
-  const [x, setX] = useState('20');
-  const [y, setY] = useState('100');
-  const pct = Number(y) ? (Number(x) / Number(y) * 100) : 0;
-  return (
-    <Card title="Percentage Calculator">
-      <div className="flex gap-2 items-center">
-        <Input className="w-20" value={x} onChange={e => setX(e.target.value)} />
-        <span>is what % of</span>
-        <Input className="w-20" value={y} onChange={e => setY(e.target.value)} />
-      </div>
-      <div className="text-lg font-bold">Answer: {pct.toFixed(2)}%</div>
-    </Card>
-  );
-}
-
 export function PercentageChangeCalculator() {
   const [a, setA] = useState('100');
   const [b, setB] = useState('120');
@@ -727,34 +666,6 @@ export function VatCalculator() {
   );
 }
 
-export function GstCalculator() {
-  const [amount, setAmount] = useState('1000');
-  const [rate, setRate] = useState(18);
-  const [type, setType] = useState('intra');
-  const a = Number(amount);
-  const gst = a * rate / 100;
-  const cgst = type === 'intra' ? gst / 2 : 0;
-  const sgst = type === 'intra' ? gst / 2 : 0;
-  const igst = type === 'inter' ? gst : 0;
-  return (
-    <Card title="GST Calculator (India)">
-      <Select value={rate} onChange={e => setRate(Number(e.target.value))}>
-        <option value={5}>5%</option><option value={12}>12%</option><option value={18}>18%</option><option value={28}>28%</option>
-      </Select>
-      <Select value={type} onChange={e => setType(e.target.value)}>
-        <option value="intra">Intra-state (CGST+SGST)</option><option value="inter">Inter-state (IGST)</option>
-      </Select>
-      <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>Net: Rs.{a.toFixed(2)}</div>
-        {type === 'intra' && <><div>CGST: Rs.{cgst.toFixed(2)}</div><div>SGST: Rs.{sgst.toFixed(2)}</div></>}
-        {type === 'inter' && <div>IGST: Rs.{igst.toFixed(2)}</div>}
-        <div className="font-bold">Total: Rs.{(a + gst).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
 export function TipCalculator() {
   const [bill, setBill] = useState('50');
   const [pct, setPct] = useState(15);
@@ -773,25 +684,6 @@ export function TipCalculator() {
         <div>Tip: ${tip.toFixed(2)}</div>
         <div>Total: ${total.toFixed(2)}</div>
         <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function DiscountCalculator() {
-  const [price, setPrice] = useState('100');
-  const [disc, setDisc] = useState('20');
-  const p = Number(price), d = Number(disc);
-  const saving = p * d / 100;
-  return (
-    <Card title="Discount Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>Original Price</label><Input type="number" value={price} onChange={e => setPrice(e.target.value)} /></div>
-        <div><label className={labelClass}>Discount %</label><Input type="number" value={disc} onChange={e => setDisc(e.target.value)} /></div>
-      </div>
-      <div className="text-xs space-y-1">
-        <div>You Save: ${saving.toFixed(2)}</div>
-        <div className="font-bold">Final Price: ${(p - saving).toFixed(2)}</div>
       </div>
     </Card>
   );
@@ -831,54 +723,6 @@ export function MarkupCalculator() {
         <div>Selling Price: ${price.toFixed(2)}</div>
         <div>Profit: ${profit.toFixed(2)}</div>
         <div className="font-bold">Margin: {(profit / price * 100).toFixed(1)}%</div>
-      </div>
-    </Card>
-  );
-}
-
-export function MarginCalculator() {
-  const [cost, setCost] = useState('50');
-  const [revenue, setRevenue] = useState('80');
-  const c = Number(cost), r = Number(revenue);
-  const profit = r - c;
-  const margin = r ? (profit / r * 100) : 0;
-  return (
-    <Card title="Profit Margin Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>Cost</label><Input type="number" value={cost} onChange={e => setCost(e.target.value)} /></div>
-        <div><label className={labelClass}>Revenue</label><Input type="number" value={revenue} onChange={e => setRevenue(e.target.value)} /></div>
-      </div>
-      <div className="text-xs space-y-1">
-        <div>Profit: ${profit.toFixed(2)}</div>
-        <div className="font-bold">Margin: {margin.toFixed(1)}%</div>
-      </div>
-    </Card>
-  );
-}
-
-export function BreakEvenCalculator() {
-  const [fixed, setFixed] = useState('1000');
-  const [variable, setVariable] = useState('10');
-  const [price, setPrice] = useState('25');
-  const f = Number(fixed), v = Number(variable), p = Number(price);
-  const be = p <= v ? Infinity : f / (p - v);
-  return (
-    <Card title="Break-Even Calculator">
-      <div className="flex gap-2"><div><label className={labelClass}>Fixed Cost</label><Input type="number" value={fixed} onChange={e => setFixed(e.target.value)} /></div><div><label className={labelClass}>Variable Cost/Unit</label><Input type="number" value={variable} onChange={e => setVariable(e.target.value)} /></div><div><label className={labelClass}>Price/Unit</label><Input type="number" value={price} onChange={e => setPrice(e.target.value)} /></div></div>
-      <div className="text-lg font-bold">{isFinite(be) ? Math.ceil(be) + ' units' : 'N/A (price must exceed variable cost)'}</div>
-    </Card>
-  );
-}
-
-export function ProfitCalculator() {
-  const [cost, setCost] = useState('1000');
-  const [revenue, setRevenue] = useState('1500');
-  const c = Number(cost), r = Number(revenue);
-  return (
-    <Card title="Profit / Loss Calculator">
-      <div className="flex gap-2"><div><label className={labelClass}>Cost</label><Input type="number" value={cost} onChange={e => setCost(e.target.value)} /></div><div><label className={labelClass}>Revenue</label><Input type="number" value={revenue} onChange={e => setRevenue(e.target.value)} /></div></div>
-      <div className={'text-lg font-bold ' + (r - c >= 0 ? 'text-green-600' : 'text-red-500')}>
-        {r - c >= 0 ? 'Profit' : 'Loss'}: ${Math.abs(r - c).toFixed(2)} (ROI: {c ? ((r - c) / c * 100).toFixed(1) : '0'}%)
       </div>
     </Card>
   );
@@ -1203,22 +1047,6 @@ export function ModuloCalculator() {
       </div>
       <div className="text-lg font-bold">{na} mod {nb} = {mod}</div>
       <div className="text-xs text-[var(--text-secondary)]">{na} = {nb} x {Math.floor(na / nb)} + {mod}</div>
-    </Card>
-  );
-}
-
-export function ExponentCalculator() {
-  const [base, setBase] = useState('2');
-  const [exp, setExp] = useState('10');
-  const b = Number(base), e = Number(exp);
-  return (
-    <Card title="Exponent Calculator">
-      <div className="flex gap-2 items-center">
-        <Input type="number" value={base} onChange={e => setBase(e.target.value)} className="w-20" />
-        <span className="text-lg">^</span>
-        <Input type="number" value={exp} onChange={e => setExp(e.target.value)} className="w-20" />
-      </div>
-      <div className="text-lg font-bold">{b}^{e} = {Math.pow(b, e).toLocaleString('fullwide', { useGrouping: false })}</div>
     </Card>
   );
 }
@@ -1600,6 +1428,7 @@ export function HeartRateCalculator() {
         <div>Zone 4 (80-90%): {Math.round(max * 0.8)}-{Math.round(max * 0.9)} bpm</div>
         <div>Zone 5 (90-100%): {Math.round(max * 0.9)}-{max} bpm</div>
       </div>
+      <p className="text-xs text-zinc-500 mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
     </Card>
   );
 }
@@ -1646,6 +1475,7 @@ export function StepsCalculator() {
     <Card title="Steps to Distance">
       <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div><div><label className={labelClass}>Height (cm)</label><Input type="number" value={height} onChange={e => setHeight(e.target.value)} /></div></div>
       <div className="text-xs space-y-1"><div>Distance: {distKm.toFixed(2)} km</div><div>Distance: {distMi.toFixed(2)} miles</div><div>Calories (est): {(s * 0.04).toFixed(0)} kcal</div></div>
+      <p className="text-xs text-zinc-500 mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
     </Card>
   );
 }
@@ -1700,34 +1530,27 @@ export function PregnancyCalculator() {
 
 export function OvulationTracker() {
   const [lmp, setLmp] = useState('');
+  const [cycleLength, setCycleLength] = useState('28');
   const results = lmp ? (() => {
     const start = new Date(lmp);
-    const cycleLen = 28;
+    const cycleLen = Number(cycleLength) || 28;
     const fertileStart = new Date(start.getTime() + (cycleLen - 14 - 5) * 86400000);
     const fertileEnd = new Date(start.getTime() + (cycleLen - 14 + 1) * 86400000);
     const ovulation = new Date(start.getTime() + (cycleLen - 14) * 86400000);
-    return { fertileStart, fertileEnd, ovulation };
+    const nextPeriod = new Date(start.getTime() + cycleLen * 86400000);
+    return { fertileStart, fertileEnd, ovulation, nextPeriod };
   })() : null;
   return (
     <Card title="Ovulation Tracker">
       <label className={labelClass}>First day of LMP</label>
       <Input type="date" value={lmp} onChange={e => setLmp(e.target.value)} />
+      <label className={labelClass}>Cycle Length (days)</label>
+      <Input type="number" value={cycleLength} onChange={e => setCycleLength(e.target.value)} min={20} max={45} />
       {results && <div className="text-xs space-y-1">
         <div>Fertile window: {results.fertileStart.toLocaleDateString()} - {results.fertileEnd.toLocaleDateString()}</div>
         <div className="font-bold">Ovulation: {results.ovulation.toLocaleDateString()}</div>
+        <div>Next period: {results.nextPeriod.toLocaleDateString()}</div>
       </div>}
-    </Card>
-  );
-}
-
-export function DueDateCalculator() {
-  const [lmp, setLmp] = useState('');
-  const due = lmp ? new Date(new Date(lmp).getTime() + 280 * 86400000) : null;
-  return (
-    <Card title="Due Date Calculator">
-      <label className={labelClass}>First day of last menstrual period</label>
-      <Input type="date" value={lmp} onChange={e => setLmp(e.target.value)} />
-      {due && <div className="text-lg font-bold">Due Date: {due.toLocaleDateString()}</div>}
     </Card>
   );
 }
@@ -1857,20 +1680,6 @@ export function DaylightSavingTimeChecker() {
         <div>DST ends: {dstEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
         <div>DST period: {Math.round((dstEnd.getTime() - dstStart.getTime()) / 86400000)} days</div>
       </div>
-    </Card>
-  );
-}
-
-export function BusinessDaysCalculator() {
-  const [start, setStart] = useState('');
-  const [bDays, setBDays] = useState('10');
-  const s = new Date(start);
-  let count = 0, d = new Date(s);
-  while (count < Number(bDays)) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0 && d.getDay() !== 6) count++; }
-  return (
-    <Card title="Business Days Calculator">
-      <div className="flex gap-2"><Input type="date" value={start} onChange={e => setStart(e.target.value)} /><Input type="number" value={bDays} onChange={e => setBDays(e.target.value)} /></div>
-      {start && <div className="text-lg font-bold">{d.toLocaleDateString()}</div>}
     </Card>
   );
 }
