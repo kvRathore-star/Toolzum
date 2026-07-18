@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Calendar, Clock, Hourglass, Clipboard } from 'lucide-react';
+import { Calendar, Clock, Hourglass, Clipboard, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'date' | 'convert' | 'time';
@@ -56,88 +57,29 @@ function Output({ value }: { value: string }) {
   );
 }
 
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/developer/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
+
 function DateMathTab() {
-  const [dAddStart, setDAddStart] = useState(() => new Date().toISOString().split('T')[0]);
-  const [dAddDays, setDAddDays] = useState('30');
-  const [dAddOut, setDAddOut] = useState('');
-  const [dDiffA, setDDiffA] = useState(() => new Date().toISOString().split('T')[0]);
-  const [dDiffB, setDDiffB] = useState(() => new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0]);
-  const [dDiffOut, setDDiffOut] = useState('');
-  const [wnDate, setWnDate] = useState(() => new Date().toISOString().split('T')[0]);
-  const [wnOut, setWnOut] = useState('');
-
-  const dateAdd = () => {
-    const d = new Date(dAddStart);
-    const n = parseInt(dAddDays) || 0;
-    d.setDate(d.getDate() + n);
-    setDAddOut(`Start: ${dAddStart}\n${n >= 0 ? '+ ' : ''}${n} days\nResult: ${d.toISOString().split('T')[0]} (${d.toDateString()})`);
-  };
-
-  const dateDiff = () => {
-    const a = new Date(dDiffA), b = new Date(dDiffB);
-    const ms = Math.abs(b.getTime() - a.getTime());
-    const days = Math.floor(ms / 86400000);
-    const hrs = Math.floor(ms / 3600000);
-    const mins = Math.floor(ms / 60000);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30.44);
-    const years = Math.floor(days / 365.25);
-    setDDiffOut(`From: ${dDiffA} → To: ${dDiffB}\n\n${days} days\n${hrs} hours\n${mins} minutes\n${weeks} weeks\n${months} months (~)\n${years} years (~)\n\n${ms.toLocaleString()} ms`);
-  };
-
-  const weekNum = () => {
-    const d = new Date(wnDate);
-    const start = new Date(d.getFullYear(), 0, 1);
-    const diff = d.getTime() - start.getTime();
-    const day = Math.floor(diff / 86400000);
-    const wn = Math.ceil((day + start.getDay() + 1) / 7);
-    const totalWeeks = Math.ceil((new Date(d.getFullYear(), 11, 31).getTime() - start.getTime()) / 604800000);
-    setWnOut(`Date: ${d.toDateString()}\nWeek number: ${wn}\nYear: ${d.getFullYear()} (${totalWeeks} weeks)\nDay of year: ${day + 1}\nISO week: ${wn}`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card title="Date Add/Subtract">
-        <Inp label="Date" value={dAddStart} onChange={setDAddStart} type="date" />
-        <Inp label="Days" value={dAddDays} onChange={setDAddDays} placeholder="30" />
-        <button onClick={dateAdd} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate</button>
-        <Output value={dAddOut} />
-      </Card>
-      <Card title="Date Difference Calculator">
-        <Inp label="From" value={dDiffA} onChange={setDDiffA} type="date" />
-        <Inp label="To" value={dDiffB} onChange={setDDiffB} type="date" />
-        <button onClick={dateDiff} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate Difference</button>
-        <Output value={dDiffOut} />
-      </Card>
-      <Card title="Week Number Calculator">
-        <Inp label="Date" value={wnDate} onChange={setWnDate} type="date" />
-        <button onClick={weekNum} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Get Week Number</button>
-        <Output value={wnOut} />
-      </Card>
+      <LinkCard title="Date Addition Calculator" slug="date-addition-calculator" desc="Add or subtract days from any date. Get the resulting date instantly for deadlines, scheduling, and planning." />
+      <LinkCard title="Date Difference Calculator" slug="date-difference-calculator" desc="Calculate the exact difference between two dates in days, hours, minutes, and seconds." />
+      <LinkCard title="Week Number Calculator" slug="week-number-calculator" desc="Find the ISO week number for any date. Shows day of the week and current week of the year." />
     </div>
   );
 }
 
 function ConvertersTab() {
-  const [tsDate, setTsDate] = useState(() => new Date().toISOString().slice(0, 16));
-  const [tsOut, setTsOut] = useState('');
-  const [tsUnix, setTsUnix] = useState(String(Math.floor(Date.now() / 1000)));
-  const [tsUnixOut, setTsUnixOut] = useState('');
   const [msIn, setMsIn] = useState('3600000');
   const [msOut, setMsOut] = useState('');
-  const [minIn, setMinIn] = useState('90');
-  const [minOut, setMinOut] = useState('');
-
-  const dateToTs = () => {
-    const ms = new Date(tsDate).getTime();
-    setTsOut(`UTC ISO: ${new Date(ms).toISOString()}\nUnix (s): ${Math.floor(ms / 1000)}\nUnix (ms): ${ms}\nLocal: ${new Date(ms).toLocaleString()}`);
-  };
-
-  const tsToDate = () => {
-    const ms = parseInt(tsUnix) * 1000;
-    if (isNaN(ms)) { toast.error('Invalid timestamp'); return; }
-    setTsUnixOut(`Timestamp: ${tsUnix}\nDate: ${new Date(ms).toISOString()}\nLocal: ${new Date(ms).toLocaleString()}\nUTC: ${new Date(ms).toUTCString()}`);
-  };
 
   const msConvert = () => {
     const ms = parseInt(msIn) || 0;
@@ -148,84 +90,24 @@ function ConvertersTab() {
     setMsOut(`${ms.toLocaleString()} ms\n\n= ${d}d ${h}h ${m}m ${s}s\n= ${(ms / 1000).toFixed(2)} seconds\n= ${(ms / 60000).toFixed(4)} minutes\n= ${(ms / 3600000).toFixed(6)} hours\n= ${(ms / 86400000).toFixed(6)} days`);
   };
 
-  const minToHrs = () => {
-    const m = parseInt(minIn) || 0;
-    setMinOut(`${m} minutes\n= ${Math.floor(m / 60)}h ${m % 60}m\n= ${(m / 60).toFixed(2)} hours`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card title="Date to Timestamp">
-        <Inp label="Date" value={tsDate} onChange={setTsDate} type="datetime-local" />
-        <button onClick={dateToTs} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert to Timestamp</button>
-        <Output value={tsOut} />
-      </Card>
-      <Card title="Timestamp to Date">
-        <Inp label="Unix (s)" value={tsUnix} onChange={setTsUnix} placeholder="1700000000" />
-        <button onClick={tsToDate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert to Date</button>
-        <Output value={tsUnixOut} />
-      </Card>
+      <LinkCard title="Unix Time Converter" slug="unix-time-converter" desc="Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, and locale formats." />
       <Card title="Milliseconds Converter">
         <Inp label="ms" value={msIn} onChange={setMsIn} placeholder="3600000" />
         <button onClick={msConvert} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         <Output value={msOut} />
       </Card>
-      <Card title="Minutes to Hours Converter">
-        <Inp label="Minutes" value={minIn} onChange={setMinIn} placeholder="90" />
-        <button onClick={minToHrs} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
-        <Output value={minOut} />
-      </Card>
+      <LinkCard title="Minutes to Hours Converter" slug="minutes-to-hours-converter" desc="Convert minutes to hours and minutes format. Shows decimal hours equivalent for payroll and billing." />
     </div>
   );
 }
 
 function TimeMathTab() {
-  const [tAddStart, setTAddStart] = useState('09:00');
-  const [tAddH, setTAddH] = useState('2');
-  const [tAddM, setTAddM] = useState('30');
-  const [tAddOut, setTAddOut] = useState('');
-  const [tDurStart, setTDurStart] = useState('09:00');
-  const [tDurEnd, setTDurEnd] = useState('17:00');
-  const [tDurOut, setTDurOut] = useState('');
-
-  const timeAdd = () => {
-    const [h, m] = tAddStart.split(':').map(Number);
-    const addH = parseInt(tAddH) || 0;
-    const addM = parseInt(tAddM) || 0;
-    const totalMin = h * 60 + m + addH * 60 + addM;
-    const rh = ((totalMin % 1440) + 1440) % 1440;
-    const resH = Math.floor(rh / 60);
-    const resM = rh % 60;
-    const days = Math.floor(totalMin / 1440);
-    setTAddOut(`Start: ${tAddStart}\n+ ${addH}h ${addM}m\nResult: ${String(resH).padStart(2, '0')}:${String(resM).padStart(2, '0')}${days ? ` (+${days}d)` : ''}`);
-  };
-
-  const timeDur = () => {
-    const [sh, sm] = tDurStart.split(':').map(Number);
-    const [eh, em] = tDurEnd.split(':').map(Number);
-    const startMin = sh * 60 + sm;
-    const endMin = eh * 60 + em;
-    const diff = ((endMin - startMin) % 1440 + 1440) % 1440;
-    const dh = Math.floor(diff / 60);
-    const dm = diff % 60;
-    setTDurOut(`From: ${tDurStart}\nTo: ${tDurEnd}\nDuration: ${dh}h ${dm}m\n= ${diff} minutes\n= ${(diff / 60).toFixed(2)} hours`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card title="Time Add/Subtract Calculator">
-        <Inp label="Time" value={tAddStart} onChange={setTAddStart} type="time" />
-        <Inp label="Hours" value={tAddH} onChange={setTAddH} placeholder="2" />
-        <Inp label="Minutes" value={tAddM} onChange={setTAddM} placeholder="30" />
-        <button onClick={timeAdd} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate</button>
-        <Output value={tAddOut} />
-      </Card>
-      <Card title="Time Duration Calculator">
-        <Inp label="Start" value={tDurStart} onChange={setTDurStart} type="time" />
-        <Inp label="End" value={tDurEnd} onChange={setTDurEnd} type="time" />
-        <button onClick={timeDur} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Calculate Duration</button>
-        <Output value={tDurOut} />
-      </Card>
+      <LinkCard title="Time Addition Calculator" slug="time-addition-calculator" desc="Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking." />
+      <LinkCard title="Time Duration Calculator" slug="time-duration-calculator" desc="Calculate the exact duration between two times. Handles overnight time spans and displays hours, minutes, seconds." />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { User, Shuffle, FileText, Globe } from 'lucide-react';
+import { User, Shuffle, FileText, Globe, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'fake' | 'random' | 'text' | 'web';
@@ -78,12 +79,7 @@ function RangeInput({ label, value, onChange, min, max }: { label: string; value
   );
 }
 
-const FIRST_NAMES = ['James','Mary','John','Patricia','Robert','Jennifer','Michael','Linda','David','Elizabeth','William','Barbara','Richard','Susan','Joseph','Jessica','Thomas','Sarah','Charles','Karen','Christopher','Lisa','Daniel','Nancy','Matthew','Betty','Anthony','Margaret','Mark','Sandra','Donald','Ashley','Steven','Kimberly','Paul','Emily','Andrew','Donna','Joshua','Michelle'];
-const LAST_NAMES = ['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson','White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson'];
-const CITIES = ['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','San Jose','Austin','Jacksonville','Fort Worth','Columbus','Charlotte','Indianapolis','San Francisco','Seattle','Denver','Nashville'];
-const STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
-const STREETS = ['Main St','Oak Ave','Elm St','Maple Dr','Cedar Ln','Pine Rd','Birch Way','Walnut Ct','Cherry Blvd','Park Ave','Broadway','Highland Dr','Sunset Blvd','River Rd','Lake Dr','Hill St','Forest Ave','View Dr','Spring St','Church St'];
-const DOMAINS = ['gmail.com','yahoo.com','outlook.com','hotmail.com','example.com','mail.com','proton.me','icloud.com'];
+
 const WORDS = ['lorem','ipsum','dolor','sit','amet','consectetur','adipiscing','elit','sed','do','eiusmod','tempor','incididunt','ut','labore','et','dolore','magna','aliqua','enim','ad','minim','veniam','quis','nostrud','exercitation','ullamco','laboris','nisi','aliquip','ex','ea','commodo','consequat','duis','aute','irure','in','reprehenderit','voluptate','velit','esse','cillum','eu','fugiat','nulla','pariatur','excepteur','sint','occaecat','cupidatat','non','proident','sunt','culpa','qui','officia','deserunt','mollit','anim','id','est','laborum'];
 const USER_AGENTS = [
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
@@ -102,89 +98,20 @@ function pickN<T>(arr: T[], n: number): T[] { const s = new Set<T>(); while (s.s
 function randInt(min: number, max: number): number { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function randFloat(min: number, max: number, dec = 2): string { return (Math.random() * (max - min) + min).toFixed(dec); }
 
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/developer/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
+
 function FakeIdentity() {
-  const [count, setCount] = useState(3);
-  const [out, setOut] = useState('');
-
-  const genAddress = () => {
-    const lines: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const street = `${randInt(100, 9999)} ${pick(STREETS)}`;
-      const city = pick(CITIES);
-      const state = pick(STATES);
-      const zip = `${randInt(10000, 99999)}`;
-      lines.push(`${street}\n${city}, ${state} ${zip}`);
-    }
-    setOut(lines.join('\n\n'));
-    toast.success(`Generated ${count} address(es)`);
-  };
-
-  const genEmail = () => {
-    const lines = Array.from({ length: count }, () => {
-      const fn = pick(FIRST_NAMES).toLowerCase();
-      const ln = pick(LAST_NAMES).toLowerCase();
-      const num = randInt(1, 999);
-      return `${fn}.${ln}${num}@${pick(DOMAINS)}`;
-    });
-    setOut(lines.join('\n'));
-    toast.success(`Generated ${count} email(s)`);
-  };
-
-  const genName = () => {
-    const lines = Array.from({ length: count }, () => `${pick(FIRST_NAMES)} ${pick(LAST_NAMES)}`);
-    setOut(lines.join('\n'));
-    toast.success(`Generated ${count} name(s)`);
-  };
-
-  const genPerson = () => {
-    const lines = Array.from({ length: count }, () => {
-      const fn = pick(FIRST_NAMES);
-      const ln = pick(LAST_NAMES);
-      const age = randInt(18, 80);
-      const gender = pick(['Male', 'Female']);
-      const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${randInt(1, 99)}@${pick(DOMAINS)}`;
-      const phone = `(${randInt(200, 999)}) ${randInt(200, 999)}-${randInt(1000, 9999)}`;
-      const street = `${randInt(100, 9999)} ${pick(STREETS)}`;
-      const city = pick(CITIES);
-      return `Name: ${fn} ${ln}\nAge: ${age}\nGender: ${gender}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${street}, ${city}, ${pick(STATES)} ${randInt(10000, 99999)}`;
-    });
-    setOut(lines.join('\n\n'));
-    toast.success(`Generated ${count} person profile(s)`);
-  };
-
-  const genPhone = () => {
-    const formats = ['(XXX) XXX-XXXX', 'XXX-XXX-XXXX', '+1-XXX-XXX-XXXX', 'XXX.XXX.XXXX'];
-    const lines = Array.from({ length: count }, () => {
-      const fmt = pick(formats);
-      return fmt.replace(/X/g, () => String(randInt(0, 9)));
-    });
-    setOut(lines.join('\n'));
-    toast.success(`Generated ${count} phone number(s)`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="Fake Address Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genAddress} label="Generate Addresses" />
-      </Card>
-      <Card title="Fake Email Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genEmail} label="Generate Emails" />
-      </Card>
-      <Card title="Fake Name Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genName} label="Generate Names" />
-      </Card>
-      <Card title="Fake Person Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genPerson} label="Generate Persons" />
-      </Card>
-      <Card title="Fake Phone Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genPhone} label="Generate Phones" />
-      </Card>
-      {out && <div className="md:col-span-2 lg:col-span-3"><Output value={out} /></div>}
+      <LinkCard title="Fake Identity Generator" slug="fake-identity-generator" desc="Generate complete fake identities with name, email, phone, address, date of birth, occupation, and photo placeholder." />
     </div>
   );
 }
@@ -192,15 +119,6 @@ function FakeIdentity() {
 function RandomValues() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
-
-  const genColor = () => {
-    const lines = Array.from({ length: count }, () => {
-      const r = randInt(0, 255), g = randInt(0, 255), b = randInt(0, 255);
-      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} → rgb(${r},${g},${b})`;
-    });
-    setOut(lines.join('\n'));
-    toast.success('Colors generated');
-  };
 
   const genDate = () => {
     const lines = Array.from({ length: count }, () => {
@@ -239,10 +157,7 @@ function RandomValues() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="Random Color Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
-        <CalcBtn onClick={genColor} label="Generate Colors" />
-      </Card>
+      <LinkCard title="Random Color Generator" slug="random-color-generator" desc="Generate random colors in Hex, RGB, or HSL format with visual preview swatches." />
       <Card title="Random Date Generator">
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
         <CalcBtn onClick={genDate} label="Generate Dates" />
@@ -269,19 +184,6 @@ function TextSecurity() {
   const [out, setOut] = useState('');
   const [pinLen, setPinLen] = useState(6);
   const [licFormat, setLicFormat] = useState('XXXXX-XXXXX-XXXXX-XXXXX');
-
-  const genParagraph = () => {
-    const lines = Array.from({ length: count }, () => {
-      const sentenceCount = randInt(3, 7);
-      return Array.from({ length: sentenceCount }, () => {
-        const wordCount = randInt(5, 15);
-        const words = Array.from({ length: wordCount }, () => pick(WORDS));
-        return words[0].charAt(0).toUpperCase() + words.slice(0).join(' ') + '.';
-      }).join(' ');
-    });
-    setOut(lines.join('\n\n'));
-    toast.success('Paragraphs generated');
-  };
 
   const genSentence = () => {
     const lines = Array.from({ length: count }, () => {
@@ -316,10 +218,7 @@ function TextSecurity() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="Random Paragraph Generator">
-        <RangeInput label="Count" value={count} onChange={setCount} min={1} max={10} />
-        <CalcBtn onClick={genParagraph} label="Generate Paragraphs" />
-      </Card>
+      <LinkCard title="Lorem Ipsum Generator" slug="lorem-ipsum-generator" desc="Generate placeholder text in multiple styles: Standard, Cicero, Legal, Startup, Coffee, and Pirate." />
       <Card title="Random Sentence Generator">
         <RangeInput label="Count" value={count} onChange={setCount} min={1} max={20} />
         <CalcBtn onClick={genSentence} label="Generate Sentences" />
@@ -352,9 +251,7 @@ function WebSeo() {
   const [ogDesc, setOgDesc] = useState('Discover the best content on this amazing website.');
   const [ogUrl, setOgUrl] = useState('https://example.com');
   const [ogImage, setOgImage] = useState('https://example.com/image.jpg');
-  const [prodName, setProdName] = useState('Widget Pro');
-  const [prodPrice, setProdPrice] = useState('29.99');
-  const [prodCurrency, setProdCurrency] = useState('USD');
+
 
   const genPlaceholder = () => {
     const lines = Array.from({ length: count }, () => {
@@ -398,23 +295,6 @@ function WebSeo() {
     toast.success('OG tags generated');
   };
 
-  const genSchema = () => {
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": prodName || 'Product',
-      "description": `High-quality ${prodName || 'product'} for your needs.`,
-      "offers": {
-        "@type": "Offer",
-        "price": prodPrice || '0',
-        "priceCurrency": prodCurrency || 'USD',
-        "availability": "https://schema.org/InStock",
-      },
-    };
-    setOut(JSON.stringify(schema, null, 2));
-    toast.success('Product schema generated');
-  };
-
   const genPkce = async () => {
     const verifier = btoa(crypto.getRandomValues(new Uint8Array(32)).reduce((s, b) => s + String.fromCharCode(b), '')).replace(/[+/=]/g, '').slice(0, 128);
     const challenge = btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -441,13 +321,7 @@ function WebSeo() {
         <Inp label="Image" value={ogImage} onChange={setOgImage} />
         <CalcBtn onClick={genOg} label="Generate OG Tags" />
       </Card>
-      <Card title="Product Schema Generator">
-        <Inp label="Name" value={prodName} onChange={setProdName} />
-        <Inp label="Price" value={prodPrice} onChange={setProdPrice} />
-        <Sel label="Currency" value={prodCurrency} onChange={setProdCurrency}
-          options={[{v:'USD',l:'USD'},{v:'EUR',l:'EUR'},{v:'GBP',l:'GBP'},{v:'INR',l:'INR'},{v:'JPY',l:'JPY'},{v:'AUD',l:'AUD'},{v:'CAD',l:'CAD'}]} />
-        <CalcBtn onClick={genSchema} label="Generate Schema" />
-      </Card>
+      <LinkCard title="SEO Schema Generator" slug="seo-schema-generator" desc="Generate JSON-LD structured data for Product, Article, FAQ, LocalBusiness, Recipe, and Event schema types." />
       <Card title="OAuth PKCE Generator">
         <p className="text-[10px] text-zinc-400">Generates code_verifier + code_challenge (S256)</p>
         <CalcBtn onClick={genPkce} label="Generate PKCE Pair" />

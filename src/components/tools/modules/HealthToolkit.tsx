@@ -1,147 +1,109 @@
 "use client";
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { Dumbbell, Apple } from 'lucide-react';
-import { clipboardWrite } from "@/lib/clipboard";
+import Link from "next/link";
+import {
+  Heart, Apple, Weight, Activity, Droplets, Brain, Moon, Scale,
+  Baby, Sun, Footprints, Thermometer, Calculator
+} from "lucide-react";
 
-type Tab = 'calories' | 'body';
+const sectionBtn = "inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 cursor-default";
+
+interface HubCard {
+  name: string;
+  slug: string;
+  desc: string;
+  icon: React.ElementType;
+  path?: string;
+}
+
+function ToolCard({ name, slug, desc, icon: Icon, path }: HubCard) {
+  return (
+    <Link
+      href={path || `/health/${slug}`}
+      className="group flex items-start gap-3 p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all hover:shadow-md"
+    >
+      <span className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/30 transition-colors">
+        <Icon className="w-4 h-4" />
+      </span>
+      <div className="min-w-0">
+        <div className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{name}</div>
+        <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">{desc}</div>
+      </div>
+    </Link>
+  );
+}
 
 export default function HealthToolkit() {
-  const [tab, setTab] = useState<Tab>('calories');
-
-  const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
-    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
-      <Icon className="w-3.5 h-3.5" /> {label}
-    </button>
-  );
-
   return (
-    <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2">
-        <TabBtn v="calories" label="Calorie Tracker" icon={Apple} />
-        <TabBtn v="body" label="Body Metrics" icon={Dumbbell} />
+    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div className="space-y-3">
+        <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Health Toolkit</h2>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+          A collection of health, fitness, and nutrition calculators and trackers — calorie logging,
+          body composition analysis, BMI, BMR, heart rate, sleep, hydration, and more.
+          Everything runs locally in your browser.
+        </p>
       </div>
-      {tab === 'calories' && <CalorieTracker />}
-      {tab === 'body' && <BodyMetrics />}
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Apple className="w-3.5 h-3.5" /> Nutrition & Calories</span>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="Calorie Tracker" slug="calorie-tracker" desc="Log daily food intake with a built-in common foods database." icon={Apple} />
+          <ToolCard name="Calorie Calculator" slug="calorie-intake-calculator" desc="Calculate resting BMR calorie needs based on weight, height, age, and gender." icon={Calculator} path="/health/calorie-intake-calculator" />
+          <ToolCard name="TDEE Calculator" slug="calorie-calculator" desc="Total daily energy expenditure from BMR and activity level." icon={Activity} path="/calculator/calorie-calculator" />
+          <ToolCard name="Macro Calculator" slug="macro-calculator" desc="Daily protein, carbs, and fat targets for your goals." icon={Scale} path="/calculator/macro-calculator" />
+          <ToolCard name="Protein Calculator" slug="protein-calculator" desc="Daily protein needs based on weight and activity level." icon={Weight} path="/calculator/protein-calculator" />
+          <ToolCard name="Keto Calculator" slug="keto-calculator" desc="Calorie and macro breakdown for a ketogenic diet." icon={Brain} path="/calculator/keto-calculator" />
+          <ToolCard name="Breastfeeding Calories" slug="breastfeeding-calorie-calculator" desc="Extra calories needed during nursing." icon={Baby} path="/calculator/breastfeeding-calorie-calculator" />
+          <ToolCard name="Cycling Calories" slug="cycling-calorie-calculator" desc="Calories burned cycling based on distance and weight." icon={Activity} path="/calculator/cycling-calorie-calculator" />
+          <ToolCard name="Steps to Calories" slug="steps-to-calories-calculator" desc="Estimated calories burned from step count." icon={Footprints} path="/calculator/steps-to-calories-calculator" />
+          <ToolCard name="Baby Formula" slug="baby-formula-calculator" desc="Daily formula volume by weight and age." icon={Baby} path="/calculator/baby-formula-calculator" />
+          <ToolCard name="Child Height Predictor" slug="child-height-predictor" desc="Predicted adult height from parents." icon={Sun} path="/calculator/child-height-predictor" />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Weight className="w-3.5 h-3.5" /> Body Composition</span>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="BMI Calculator" slug="bmi-calculator" desc="Body Mass Index from height and weight." icon={Scale} path="/calculator/bmi-calculator" />
+          <ToolCard name="BMI for Kids" slug="bmi-calculator-for-kids" desc="BMI percentile for children." icon={Baby} path="/calculator/bmi-calculator-for-kids" />
+          <ToolCard name="BMR Calculator" slug="bmr-calculator" desc="Basal Metabolic Rate from weight, height, age, and gender." icon={Thermometer} path="/calculator/bmr-calculator" />
+          <ToolCard name="Body Fat % (Navy)" slug="body-fat-percentage-calculator" desc="Body fat percentage using Navy circumference method." icon={Weight} path="/calculator/body-fat-percentage-calculator" />
+          <ToolCard name="Body Fat Estimator" slug="body-fat-estimator" desc="Estimate body fat from BMI and age." icon={Weight} path="/health/body-fat-estimator" />
+          <ToolCard name="Ideal Weight" slug="ideal-weight-calculator" desc="Ideal body weight by Devine formula." icon={Weight} path="/calculator/ideal-weight-calculator" />
+          <ToolCard name="Lean Body Mass" slug="lean-body-mass-calculator" desc="LBM using Boer formula." icon={Weight} path="/calculator/lean-body-mass-calculator" />
+          <ToolCard name="Body Surface Area" slug="body-surface-area-calculator" desc="BSA using Mosteller formula." icon={Scale} path="/calculator/body-surface-area-calculator" />
+          <ToolCard name="Waist-to-Hip Ratio" slug="waist-to-hip-ratio-calculator" desc="Calculate WHR and assess health risk." icon={Scale} path="/health/waist-to-hip-ratio-calculator" />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Activity className="w-3.5 h-3.5" /> Fitness & Wellness</span>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="Heart Rate Zones" slug="heart-rate-zone-calculator" desc="Target heart rate by age for different exercise intensities." icon={Activity} path="/calculator/heart-rate-zone-calculator" />
+          <ToolCard name="Running Pace" slug="running-pace-calculator" desc="Calculate pace, speed, and finish times." icon={Footprints} path="/calculator/running-pace-calculator" />
+          <ToolCard name="Sleep Calculator" slug="sleep-calculator" desc="Recommended sleep hours by age group." icon={Moon} path="/calculator/sleep-calculator" />
+          <ToolCard name="Water Intake" slug="water-intake-calculator" desc="Daily hydration needs based on weight and exercise." icon={Droplets} path="/calculator/water-intake-calculator" />
+          <ToolCard name="Pregnancy Due Date" slug="pregnancy-due-date-calculator" desc="Estimated due date from last menstrual period." icon={Baby} path="/calculator/pregnancy-due-date-calculator" />
+          <ToolCard name="Ovulation Calculator" slug="ovulation-calculator" desc="Calculate fertile window and ovulation day." icon={CalendarIcon} path="/calculator/ovulation-calculator" />
+        </div>
+      </div>
     </div>
   );
 }
 
-function CalorieTracker() {
-  const [food, setFood] = useState('');
-  const [calories, setCalories] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [entries, setEntries] = useState<{ food: string; cal: number }[]>([]);
-
-  const COMMON_FOODS: Record<string, number> = {
-    'Rice (1 cup)': 206, 'Chicken breast (100g)': 165, 'Egg (1)': 78, 'Apple': 95,
-    'Banana': 105, 'Bread (1 slice)': 75, 'Milk (1 cup)': 149, 'Pasta (1 cup)': 220,
-  };
-
-  const addFood = () => {
-    if (!food.trim()) { toast.error('Enter food name'); return; }
-    if (calories <= 0) { toast.error('Enter calories'); return; }
-    setEntries(prev => [...prev, { food: food.trim(), cal: calories }]);
-    setTotal(prev => prev + calories);
-    setFood(''); setCalories(0);
-  };
-
+function CalendarIcon(props: React.ComponentProps<"svg">) {
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl space-y-4">
-      <div className="flex flex-wrap gap-1">
-        {Object.entries(COMMON_FOODS).map(([name, cal]) => (
-          <button key={name} onClick={() => { setFood(name); setCalories(cal); }}
-            className="px-2 py-1 text-[10px] bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700">{name} ({cal})</button>
-        ))}
-      </div>
-      <div className="flex gap-2">
-        <input type="text" value={food} onChange={e => setFood(e.target.value)} placeholder="Food name"
-          className="flex-1 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-        <input type="number" value={calories || ''} onChange={e => setCalories(Number(e.target.value))} placeholder="Cal"
-          className="w-20 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-        <button onClick={addFood} className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-xl">+ Add</button>
-      </div>
-      {entries.length > 0 && (
-        <div>
-          <div className="space-y-1 max-h-32 overflow-y-auto">
-            {entries.map((e, i) => (
-              <div key={i} className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400 px-2 py-1 bg-zinc-50 dark:bg-black rounded-lg">
-                <span>{e.food}</span>
-                <span className="font-mono">{e.cal} kcal</span>
-              </div>
-            ))}
-          </div>
-          <div className="text-right text-sm font-bold text-zinc-900 dark:text-white mt-2 pt-2 border-t border-zinc-200 dark:border-white/10">
-            Total: {total} kcal
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function BodyMetrics() {
-  const [waist, setWaist] = useState(80);
-  const [hip, setHip] = useState(95);
-  const [ratio, setRatio] = useState<number | null>(null);
-  const [bodyFat, setBodyFat] = useState<number | null>(null);
-  const [bfAge, setBfAge] = useState(30);
-  const [bfGender, setBfGender] = useState<'male' | 'female'>('male');
-  const [bfBmi, setBfBmi] = useState(24);
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl space-y-4">
-        <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Waist-to-Hip Ratio</h4>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-xs text-zinc-500 block mb-1">Waist (cm)</label>
-            <input type="number" value={waist} onChange={e => setWaist(Number(e.target.value))} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-          </div>
-          <div>
-            <label className="text-xs text-zinc-500 block mb-1">Hip (cm)</label>
-            <input type="number" value={hip} onChange={e => setHip(Number(e.target.value))} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-          </div>
-        </div>
-        <button onClick={() => { if (hip > 0) setRatio(Math.round((waist / hip) * 100) / 100); else toast.error('Hip must be > 0'); }}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 rounded-xl transition-all">Calculate</button>
-        {ratio !== null && (
-          <div className="text-center py-2 bg-zinc-50 dark:bg-black rounded-xl">
-            <div className="text-2xl font-bold text-zinc-900 dark:text-white">{ratio}</div>
-            <div className={`text-xs font-medium ${ratio < 0.9 ? 'text-emerald-500' : ratio < 1.0 ? 'text-yellow-500' : 'text-red-500'}`}>
-              {ratio < 0.9 ? 'Low risk' : ratio < 1.0 ? 'Moderate risk' : 'High risk'}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl space-y-4">
-        <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Body Fat Estimate</h4>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-xs text-zinc-500 block mb-1">BMI</label>
-            <input type="number" value={bfBmi} onChange={e => setBfBmi(Number(e.target.value))} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-          </div>
-          <div>
-            <label className="text-xs text-zinc-500 block mb-1">Age</label>
-            <input type="number" value={bfAge} onChange={e => setBfAge(Number(e.target.value))} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" />
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <button onClick={() => setBfGender('male')} className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${bfGender === 'male' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>Male</button>
-          <button onClick={() => setBfGender('female')} className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${bfGender === 'female' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>Female</button>
-        </div>
-        <button onClick={() => {
-          const bf = bfGender === 'male' ? (1.20 * bfBmi) + (0.23 * bfAge) - 16.2 : (1.20 * bfBmi) + (0.23 * bfAge) - 5.4;
-          setBodyFat(Math.round(bf * 10) / 10);
-        }} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 rounded-xl transition-all">Estimate</button>
-        {bodyFat !== null && (
-          <div className="text-center py-2 bg-zinc-50 dark:bg-black rounded-xl">
-            <div className="text-2xl font-bold text-zinc-900 dark:text-white">{bodyFat}%</div>
-            <div className="text-xs text-zinc-500">Estimated body fat</div>
-          </div>
-        )}
-      </div>
-    </div>
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
   );
 }

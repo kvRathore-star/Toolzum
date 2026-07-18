@@ -34,6 +34,141 @@ const formatInfo: Record<string, { name: string; desc: string; quality: string; 
   jxl: { name: 'JPEG XL', desc: 'JPEG XL', quality: 'lossy or lossless', bestFor: 'next-gen image archival — better compression than JPEG with support for wide gamut and HDR' },
 };
 
+const CLOUD_API_PATTERNS = [
+  "OpenAI API", "Stable Diffusion", "Google Cloud", "ExchangeRate-API",
+  "YouTube Data", "Whisper API", "Mailinator", "LibreOffice", "CloudConvert",
+  "MaxMind", "Redis", "AI API", "Google Translate", "Calibre", "DNS API", "Fetch API",
+];
+
+function requiresCloudApi(deps: string): boolean {
+  return CLOUD_API_PATTERNS.some(p => deps.includes(p));
+}
+
+const broadTypes = new Set(['generator', 'checker', 'tester', 'builder']);
+
+const keywordTypeRules: [RegExp, string][] = [
+  [/hash(?!tag)|hmac|checksum|md5|sha(?!rp)|ripemd|argon2|bcrypt|pbkdf2|digest|message\s*digest/i, 'hasher'],
+  [/encrypt|decrypt|cipher/i, 'encoder'],
+  [/convert|transcode|transpil/i, 'converter'],
+  [/validate|validation|verify|verification/i, 'validator'],
+  [/format|beautify|prettify|minif/i, 'formatter'],
+  [/analyze|analyse|inspect/i, 'analyzer'],
+  [/estimate|estimator|project/i, 'estimator'],
+  [/decode|decoder/i, 'decoder'],
+  [/encode|encoder/i, 'encoder'],
+  [/build|construct|assemble/i, 'builder'],
+  [/check|audit/i, 'checker'],
+  [/lookup|search|find|resolve/i, 'lookup'],
+  [/extract|pull|scrape/i, 'extractor'],
+  [/calculate|compute|count/i, 'calculator'],
+];
+
+function keywordType(name: string, description: string): string | null {
+  const text = `${name} ${description}`.toLowerCase();
+  for (const [pattern, type] of keywordTypeRules) {
+    if (pattern.test(text)) return type;
+  }
+  return null;
+}
+
+function deriveToolType(slug: string, name: string, description: string): string {
+  const suffix = slug.split('-').pop() || '';
+  const types: Record<string, string> = {
+    generator: "generator", validator: "validator", calculator: "calculator",
+    converter: "converter", formatter: "formatter", tester: "tester",
+    analyzer: "analyzer", estimator: "estimator", hasher: "hasher",
+    decoder: "decoder", encoder: "encoder", builder: "builder",
+    maker: "builder", checker: "checker", lookup: "lookup",
+    transformer: "converter", extractor: "extractor",
+  };
+  if (types[suffix]) {
+    if (broadTypes.has(types[suffix])) {
+      const kw = keywordType(name, description);
+      if (kw) return kw;
+    }
+    return types[suffix];
+  }
+  return keywordType(name, description) || "default";
+}
+
+const typeInstructionTemplates: Record<string, { title: string; desc: string }[]> = {
+  generator: [
+    { title: "1. Configure Your Input", desc: "Set the parameters — name, length, count, or format — using the input controls provided." },
+    { title: "2. Generate", desc: "Click the generate button to create your output. Results appear instantly." },
+    { title: "3. Copy or Download", desc: "Copy the generated output to your clipboard or download it as a file." },
+  ],
+  validator: [
+    { title: "1. Paste Your Data", desc: "Enter the value you want to validate — an API key, JWT, config file, or payload." },
+    { title: "2. Run Validation", desc: "Click validate to check format, structure, length, and character constraints." },
+    { title: "3. Review Results", desc: "See whether the input passed or failed validation, with details on any issues found." },
+  ],
+  calculator: [
+    { title: "1. Enter Values", desc: "Fill in the numeric inputs — amounts, rates, counts, or time periods." },
+    { title: "2. Compute", desc: "Results update instantly as you adjust inputs. All math runs client-side." },
+    { title: "3. Export", desc: "Copy the computed result or download it for your records." },
+  ],
+  converter: [
+    { title: "1. Provide Source Data", desc: "Upload a file or paste the data you want to convert." },
+    { title: "2. Select Target Format", desc: "Choose the output format from the available options." },
+    { title: "3. Get the Result", desc: "Your converted output is ready instantly. Copy or download it." },
+  ],
+  formatter: [
+    { title: "1. Paste Unformatted Content", desc: "Enter your code, JSON, XML, or query into the input area." },
+    { title: "2. Apply Formatting", desc: "Click format to beautify indentation, spacing, and structure." },
+    { title: "3. Copy the Output", desc: "Copy the formatted result with proper indentation and line breaks." },
+  ],
+  tester: [
+    { title: "1. Configure the Request", desc: "Set the URL, method, headers, and body for the test request." },
+    { title: "2. Execute", desc: "Send the request and wait for the response." },
+    { title: "3. Inspect the Response", desc: "View status code, headers, and body. Copy the response for debugging." },
+  ],
+  analyzer: [
+    { title: "1. Provide Input", desc: "Paste the data you want to analyze — JSON, payload, or text content." },
+    { title: "2. Analyze", desc: "Click analyze to compute size, structure, nesting, and key counts." },
+    { title: "3. Review Insights", desc: "See detailed metrics about your input. Use findings to optimize." },
+  ],
+  estimator: [
+    { title: "1. Set Parameters", desc: "Enter your base values — request volume, pricing, user count, or resource usage." },
+    { title: "2. Calculate Estimate", desc: "Click estimate to compute projected costs, budgets, or usage." },
+    { title: "3. Adjust and Compare", desc: "Tweak parameters to see how changes affect the estimate." },
+  ],
+  hasher: [
+    { title: "1. Enter Input", desc: "Paste the key, text, or data you want to hash." },
+    { title: "2. Select Algorithm", desc: "Choose the hashing algorithm — SHA-256, MD5, or HMAC." },
+    { title: "3. Copy the Hash", desc: "Copy the resulting hash string for secure storage or verification." },
+  ],
+  decoder: [
+    { title: "1. Enter Encoded Data", desc: "Paste the encoded string, token, or payload you want to decode." },
+    { title: "2. Decode", desc: "Click decode to extract the original content from the encoded format." },
+    { title: "3. Inspect Contents", desc: "View the decoded output with field-by-field breakdown." },
+  ],
+  encoder: [
+    { title: "1. Enter Plain Data", desc: "Paste the text, binary, or structured data you want to encode." },
+    { title: "2. Encode", desc: "Click encode to transform the data into the target encoding format." },
+    { title: "3. Copy the Result", desc: "Copy the encoded output for transmission or storage." },
+  ],
+  builder: [
+    { title: "1. Choose Components", desc: "Select the pieces you want to assemble — fields, options, and settings." },
+    { title: "2. Build", desc: "Click build to construct the output from your configured components." },
+    { title: "3. Copy or Deploy", desc: "Copy the generated output or configuration for use in your project." },
+  ],
+  checker: [
+    { title: "1. Enter the Value to Check", desc: "Paste the URL, domain, code, or data you want to check." },
+    { title: "2. Run the Check", desc: "Click check to evaluate the input against defined criteria." },
+    { title: "3. View the Result", desc: "See the check result with pass/fail status and supporting details." },
+  ],
+  lookup: [
+    { title: "1. Enter Your Query", desc: "Type the code, name, or identifier you want to look up." },
+    { title: "2. Search", desc: "Click look up to find matching results from the built-in database." },
+    { title: "3. Review Details", desc: "View the full result with all available fields and information." },
+  ],
+  extractor: [
+    { title: "1. Upload Source File", desc: "Select the file or data you want to extract content from." },
+    { title: "2. Extract", desc: "Click extract to pull specific data types — text, audio, or metadata." },
+    { title: "3. Download", desc: "Save the extracted content as a separate file." },
+  ],
+};
+
 function parseFormatPair(slug: string): { from: string; to: string } | null {
   const match = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
   if (!match) return null;
@@ -246,16 +381,21 @@ const crossCategoryMap: Record<string, string[]> = {
 export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   const categoryKey = getCategoryKey(tool.category);
 
-  const sameCategoryTools = toolsRegistry
-    .filter((t) => t.category === tool.category && t.slug !== tool.slug)
-    .slice(0, 3);
+  function rankRelated(t: ToolMetadata): number {
+    const toolWords = new Set((tool.name + ' ' + tool.description).toLowerCase().split(/\W+/).filter(w => w.length > 2));
+    const candidateWords = (t.name + ' ' + t.description).toLowerCase().split(/\W+/).filter(w => w.length > 2);
+    const intersection = candidateWords.filter(w => toolWords.has(w)).length;
+    return intersection;
+  }
 
-  const crossCategories = crossCategoryMap[categoryKey] || [];
-  const crossCategoryTools = toolsRegistry
-    .filter((t) => crossCategories.includes(getCategoryKey(t.category)) && t.slug !== tool.slug)
-    .slice(0, 3);
+  const candidates = toolsRegistry.filter(t => t.slug !== tool.slug);
+  const sameCategory = candidates.filter(t => t.category === tool.category);
+  const crossCategory = candidates.filter(t => t.category !== tool.category);
 
-  const allRelated = [...sameCategoryTools, ...crossCategoryTools];
+  const rankedSame = sameCategory.sort((a, b) => rankRelated(b) - rankRelated(a)).slice(0, 4);
+  const rankedCross = crossCategory.sort((a, b) => rankRelated(b) - rankRelated(a)).slice(0, 3);
+
+  const allRelated = [...rankedSame.slice(0, 3), ...rankedCross.slice(0, 2)].slice(0, 6);
 
   const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
@@ -266,18 +406,39 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
     { title: "3. Download the Result", desc: `Your converted ${formatInfo[pair.to].name} file is ready instantly. Download it to your device. Everything runs locally — nothing is uploaded to any server.` },
   ] : null;
 
-  const steps = tool.instructions || formatSteps || categoryInstructionTemplates[categoryKey] || defaultInstructions;
+  const toolType = deriveToolType(tool.slug, tool.name, tool.description);
+  const steps = tool.instructions || formatSteps || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
   const formatFaq = pair ? {
     question: `Why convert ${formatInfo[pair.from].name} to ${formatInfo[pair.to].name}?`,
     answer: `${formatInfo[pair.from].name} (${formatInfo[pair.from].desc}) uses ${formatInfo[pair.from].quality} encoding and is best for ${formatInfo[pair.from].bestFor}. ${formatInfo[pair.to].name} (${formatInfo[pair.to].desc}) uses ${formatInfo[pair.to].quality} encoding and excels at ${formatInfo[pair.to].bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`
   } : null;
-  const faqs = [
-    ...(formatFaq ? [formatFaq] : []),
-    ...(pair ? [] : [{
+
+  const requiresInternet = requiresCloudApi(tool.dependencies);
+  const inputTypeFaqs: { question: string; answer: string }[] = [];
+  if (!pair) {
+    inputTypeFaqs.push({
       question: `What exactly does ${tool.name} do?`,
       answer: `${tool.name} lets you ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
-    }]),
+    });
+    inputTypeFaqs.push({
+      question: `What can I use ${tool.name} for?`,
+      answer: `${tool.description} It's ideal for developers, designers, and anyone who needs to ${tool.description.split('.')[0].toLowerCase()} without installing software or sending data to external servers.`
+    });
+    inputTypeFaqs.push({
+      question: `What kind of input does ${tool.name} accept?`,
+      answer: `Direct text entry, file upload, or URL-based input — depending on the tool. ${toolType === 'converter' || toolType === 'extractor' ? 'Common file formats are supported for upload-based tools.' : toolType === 'calculator' || toolType === 'estimator' ? 'All numeric values are entered through input fields with real-time updates.' : 'Paste or type your content directly into the provided editor area.'}`
+    });
+    inputTypeFaqs.push({
+      question: `Does ${tool.name} work offline?`,
+      answer: requiresInternet
+        ? `No. ${tool.name} requires an internet connection because it uses cloud-based processing for its core functionality.`
+        : `Yes. After the initial page load, ${tool.name} runs entirely on your device with no internet connection needed. All processing is done locally.`
+    });
+  }
+  const faqs = [
+    ...(formatFaq ? [formatFaq] : []),
+    ...inputTypeFaqs,
     ...baseFaqs,
   ];
 

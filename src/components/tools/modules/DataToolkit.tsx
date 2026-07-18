@@ -125,13 +125,6 @@ function CsvTools() {
     toast.success('Columns renamed');
   };
 
-  const dataClean = () => {
-    const p = getCsv(); if (!p) return;
-    const nr = p.rows.map(r => r.map(c => c.trim())).filter(r => r.some(c => c));
-    setOut(formatCSV(p.headers, nr));
-    toast.success('Cleaned');
-  };
-
   const typeConvert = () => {
     const p = getCsv(); if (!p) return;
     const ci = p.headers.indexOf(typeCol);
@@ -246,27 +239,6 @@ function CsvTools() {
     toast.success(`Split into ${n} parts`);
   };
 
-  const stats = () => {
-    const p = getCsv(); if (!p) return;
-    const lines: string[] = [`Rows: ${p.rows.length}`, `Columns: ${p.headers.join(', ')}`];
-    p.headers.forEach((h, i) => {
-      const vals = p.rows.map(r => Number(r[i])).filter(v => !isNaN(v));
-      if (vals.length) {
-        lines.push(`\n${h}: count=${vals.length}, sum=${vals.reduce((a, b) => a + b, 0).toFixed(2)}, avg=${(vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(2)}, min=${Math.min(...vals).toFixed(2)}, max=${Math.max(...vals).toFixed(2)}`);
-      }
-    });
-    setOut(lines.join('\n'));
-    toast.success('Statistics computed');
-  };
-
-  const toHtml = () => {
-    const p = getCsv(); if (!p) return;
-    const rows = p.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('\n');
-    const h = `<table border="1">\n<tr>${p.headers.map(h => `<th>${h}</th>`).join('')}</tr>\n${rows}\n</table>`;
-    setOut(h);
-    toast.success('HTML table generated');
-  };
-
   const toMd = () => {
     const p = getCsv(); if (!p) return;
     const sep = `|${p.headers.map(() => '---').join('|')}|`;
@@ -292,12 +264,6 @@ function CsvTools() {
     const inserts = p.rows.map(r => `INSERT INTO data (${p.headers.join(', ')}) VALUES (${r.map(c => `'${c.replace(/'/g, "''")}'`).join(', ')});`);
     setOut(inserts.join('\n'));
     toast.success('SQL generated');
-  };
-
-  const toTsv = () => {
-    const p = getCsv(); if (!p) return;
-    setOut([p.headers.join('\t'), ...p.rows.map(r => r.join('\t'))].join('\n'));
-    toast.success('TSV generated');
   };
 
   const toExcel = () => {
@@ -351,9 +317,9 @@ function CsvTools() {
           <CalcBtn onClick={colRename_} label="Rename" />
         </CsvCard>
 
-        <CsvCard title="Data Cleaner">
-          <p className="text-[10px] text-zinc-400">Trims whitespace, removes empty rows</p>
-          <CalcBtn onClick={dataClean} label="Clean" />
+        <CsvCard title="CSV Data Cleaner">
+          <p className="text-[10px] text-zinc-400">Trim, dedup, lowercase emails, strip phone digits</p>
+          <a href="/tools/csv-data-cleaner" className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg text-center transition-all active:scale-[0.98]">Open →</a>
         </CsvCard>
 
         <CsvCard title="Data Type Converter">
@@ -407,9 +373,9 @@ function CsvTools() {
           <CalcBtn onClick={splitter} label="Split" />
         </CsvCard>
 
-        <CsvCard title="Statistics Summary">
+        <CsvCard title="CSV Statistics">
           <p className="text-[10px] text-zinc-400">Count, sum, avg, min, max per column</p>
-          <CalcBtn onClick={stats} label="Compute" />
+          <a href="/tools/csv-statistics" className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg text-center transition-all active:scale-[0.98]">Open →</a>
         </CsvCard>
 
         <CsvCard title="Transpose">
@@ -422,8 +388,9 @@ function CsvTools() {
           <CalcBtn onClick={toExcel} label="Export XLS" />
         </CsvCard>
 
-        <CsvCard title="→ HTML Table">
-          <CalcBtn onClick={toHtml} label="Generate HTML" />
+        <CsvCard title="CSV ↔ HTML Table">
+          <p className="text-[10px] text-zinc-400">Bidirectional converter</p>
+          <a href="/tools/csv-html-table-converter" className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg text-center transition-all active:scale-[0.98]">Open →</a>
         </CsvCard>
 
         <CsvCard title="→ Markdown Table">
@@ -440,9 +407,9 @@ function CsvTools() {
           <CalcBtn onClick={toSql} label="Generate SQL" />
         </CsvCard>
 
-        <CsvCard title="→ TSV">
-          <p className="text-[10px] text-zinc-400">Tab-separated values</p>
-          <CalcBtn onClick={toTsv} label="Convert" />
+        <CsvCard title="TSV ↔ CSV">
+          <p className="text-[10px] text-zinc-400">Bidirectional converter</p>
+          <a href="/tools/tsv-csv-converter" className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg text-center transition-all active:scale-[0.98]">Open →</a>
         </CsvCard>
 
         <CsvCard title="→ Parquet">

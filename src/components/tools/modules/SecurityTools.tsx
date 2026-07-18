@@ -195,16 +195,18 @@ export function HashPasswordGenerator() {
   const [pwd, setPwd] = useState('');
   const [salt, setSalt] = useState('');
   const [result, setResult] = useState('');
+  const ITERATIONS = 600000;
   const gen = async () => {
+    if (!pwd.trim()) { return; }
     const s = salt || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join('');
     setSalt(s);
-    const data = new TextEncoder().encode(pwd + s);
-    const buf = await crypto.subtle.digest('SHA-256', data);
-    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    setResult(`$pbkdf2-sha256$v=1${s.length}$${s}$${hash}`);
+    const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(pwd), { name: 'PBKDF2' }, false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(s), iterations: ITERATIONS, hash: 'SHA-256' }, keyMaterial, 256);
+    const hash = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
+    setResult(`$pbkdf2-sha256$iterations=${ITERATIONS}$${s}$${hash}`);
   };
   return (
-    <Section title="Hash Password Generator">
+    <Section title={`Hash Password Generator (PBKDF2-SHA256, ${ITERATIONS.toLocaleString()} iterations)`}>
       <Input label="Password" type="password" value={pwd} onChange={setPwd} placeholder="Enter password..." />
       <Input label="Salt (leave blank to generate)" value={salt} onChange={setSalt} />
       <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>

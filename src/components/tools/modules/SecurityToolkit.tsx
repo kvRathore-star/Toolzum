@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Shield, Key, Lock, Scan } from 'lucide-react';
+import { Shield, Key, Lock, Scan, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'jwt' | 'oauth' | 'crypto' | 'ssl';
@@ -38,6 +39,16 @@ const Card = ({ title, children }: { title: string; children: React.ReactNode })
 
 const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
   <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
+);
+
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/developer/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
 );
 
 const Inp = ({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) => (
@@ -313,7 +324,6 @@ function OauthTools() {
 function CryptoTools() {
   const [hashInput, setHashInput] = useState('Hello, World!');
   const [hashOutput, setHashOutput] = useState('');
-  const [hashMode, setHashMode] = useState('sha256');
   const [aesPassword, setAesPassword] = useState('my-password');
   const [aesInput, setAesInput] = useState('Sensitive data to encrypt');
   const [aesOut, setAesOut] = useState('');
@@ -322,17 +332,6 @@ function CryptoTools() {
   const [cookieOut, setCookieOut] = useState('');
   const [cspOut, setCspOut] = useState('');
   const [cspNonce, setCspNonce] = useState('');
-
-  const processHash = async () => {
-    if (!hashInput.trim()) { toast.error('Enter text'); return; }
-    try {
-      const map: Record<string, string> = { sha1: 'SHA-1', sha256: 'SHA-256', sha512: 'SHA-512' };
-      const h = await crypto.subtle.digest(map[hashMode], new TextEncoder().encode(hashInput));
-      const hex = Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
-      setHashOutput(hex);
-      toast.success(`${hashMode.toUpperCase()} computed`);
-    } catch { toast.error('Error'); }
-  };
 
   const aesEncDec = async () => {
     try {
@@ -425,19 +424,9 @@ function CryptoTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="Hash Generator">
-        <textarea value={hashInput} onChange={e => setHashInput(e.target.value)}
-          className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-        <div className="flex flex-wrap gap-1">
-          {[{v:'sha1',l:'SHA-1'},{v:'sha256',l:'SHA-256'},{v:'sha512',l:'SHA-512'}].map(({v,l}) => (
-            <button key={v} onClick={() => setHashMode(v)}
-              className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all ${hashMode === v ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>{l}</button>
-          ))}
-        </div>
-        <CalcBtn onClick={processHash} label="Hash" />
-      </Card>
+      <LinkCard title="MD5 & Hash Generator" slug="md5-hash-generator" desc="Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input." />
 
-      <Card title="Bcrypt Hash (PBKDF2)">
+      <Card title="PBKDF2 Hash">
         <textarea value={hashInput} onChange={e => setHashInput(e.target.value)}
           className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
         <CalcBtn onClick={bcryptHash} label="Generate Hash" />
@@ -452,6 +441,10 @@ function CryptoTools() {
         <textarea value={aesInput} onChange={e => setAesInput(e.target.value)}
           className="w-full h-12 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder={aesMode === 'encrypt' ? 'Plaintext...' : 'Base64 ciphertext...'} />
         <CalcBtn onClick={aesEncDec} label={aesMode === 'encrypt' ? 'Encrypt (AES-128-CBC)' : 'Decrypt (AES-128-CBC)'} />
+        <div className="mt-2 border-t border-zinc-200 dark:border-zinc-700 pt-2 space-y-1">
+          <p className="text-[9px] text-amber-500">⚠ Already encrypted data here? Decrypt before switching — formats are incompatible.</p>
+          <Link href="/developer/aes-encrypt" className="flex items-center gap-1 text-[10px] text-blue-500 hover:underline">Need AES-256? Use AES Encrypt <ExternalLink className="w-2.5 h-2.5" /></Link>
+        </div>
       </Card>
 
       <Card title="Cookie Parser">

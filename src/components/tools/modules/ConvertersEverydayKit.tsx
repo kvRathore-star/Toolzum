@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Clipboard } from 'lucide-react';
+import { Clipboard, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'everyday' | 'file' | 'generators';
@@ -19,6 +20,16 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
       className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
   );
 }
+
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/tools/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
 
 function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]; defaultValue?: string }) {
   const [val, setVal] = useState(defaultValue);
@@ -66,16 +77,6 @@ function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: 
     </div>
   );
 }
-
-const AREA_UNITS = [
-  { label: 'Square Meter', toBase: (v: number) => v, fromBase: (v: number) => v },
-  { label: 'Square Kilometer', toBase: (v: number) => v * 1e6, fromBase: (v: number) => v / 1e6 },
-  { label: 'Square Foot', toBase: (v: number) => v * 0.092903, fromBase: (v: number) => v / 0.092903 },
-  { label: 'Square Yard', toBase: (v: number) => v * 0.836127, fromBase: (v: number) => v / 0.836127 },
-  { label: 'Acre', toBase: (v: number) => v * 4046.86, fromBase: (v: number) => v / 4046.86 },
-  { label: 'Hectare', toBase: (v: number) => v * 10000, fromBase: (v: number) => v / 10000 },
-  { label: 'Square Mile', toBase: (v: number) => v * 2.59e6, fromBase: (v: number) => v / 2.59e6 },
-];
 
 const COOKING_UNITS = [
   { label: 'Teaspoon (tsp)', toBase: (v: number) => v * 4.92892, fromBase: (v: number) => v / 4.92892 },
@@ -331,7 +332,7 @@ export default function ConvertersEverydayKit() {
       </div>
       {tab === 'everyday' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <UnitConv title="Area Converter" units={AREA_UNITS} />
+          <LinkCard title="Area Converter" slug="area-converter" desc="Convert between square meters, square feet, acres, hectares, square kilometers, and more area units." />
           <UnitConv title="Cooking Measurement" units={COOKING_UNITS} defaultValue="1" />
           <UnitConv title="Fuel Consumption" units={FUEL_UNITS} defaultValue="8" />
           <UnitConv title="Paper Size" units={PAPER_UNITS} defaultValue="1" />

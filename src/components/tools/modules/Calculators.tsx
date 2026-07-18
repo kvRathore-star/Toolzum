@@ -2019,3 +2019,46 @@ export function TrialConversionCalculator() {
     </div>
   );
 }
+
+export function TriangleAreaCalculator() {
+  const [base, setBase] = useState('6');
+  const [height, setHeight] = useState('4');
+  const [result, setResult] = useState('');
+  const calc = () => {
+    const area = 0.5 * parseFloat(base) * parseFloat(height);
+    setResult(`Area: ${area.toFixed(2)} sq units`);
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Triangle Area Calculator</h1>
+      <div className="space-y-4">
+        <div><label className={labelClass}>Base</label><input type="number" value={base} onChange={e => setBase(e.target.value)} className={inputClass} /></div>
+        <div><label className={labelClass}>Height</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
+        <button onClick={calc} className={btnClass}>Calculate Area</button>
+        {result && <pre className={resultClass}>{result}</pre>}
+      </div>
+    </div>
+  );
+}
+
+export function GasMileageCalculator() {
+  const [miles, setMiles] = useState('300');
+  const [gallons, setGallons] = useState('10');
+  const [result, setResult] = useState('');
+  const calc = () => {
+    if (parseFloat(gallons) === 0) { setResult('Gallons cannot be zero'); return; }
+    const mpg = parseFloat(miles) / parseFloat(gallons);
+    setResult(`Fuel Economy: ${mpg.toFixed(1)} MPG`);
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Gas Mileage Calculator</h1>
+      <div className="space-y-4">
+        <div><label className={labelClass}>Miles Driven</label><input type="number" value={miles} onChange={e => setMiles(e.target.value)} className={inputClass} /></div>
+        <div><label className={labelClass}>Gallons Used</label><input type="number" value={gallons} onChange={e => setGallons(e.target.value)} className={inputClass} /></div>
+        <button onClick={calc} className={btnClass}>Calculate MPG</button>
+        {result && <pre className={resultClass}>{result}</pre>}
+      </div>
+    </div>
+  );
+}

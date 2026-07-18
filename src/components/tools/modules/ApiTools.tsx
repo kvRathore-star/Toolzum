@@ -1137,6 +1137,86 @@ export function WebhookValidator() {
   );
 }
 
+export function ApiDiffChecker() {
+  const [oldSpec, setOldSpec] = useState('');
+  const [newSpec, setNewSpec] = useState('');
+  const [result, setResult] = useState('');
+  const calc = () => {
+    try {
+      const old = JSON.parse(oldSpec || '{}');
+      const fresh = JSON.parse(newSpec || '{}');
+      const oldPaths = Object.keys(old.paths || {});
+      const newPaths = Object.keys(fresh.paths || {});
+      const added = newPaths.filter(p => !oldPaths.includes(p));
+      const removed = oldPaths.filter(p => !newPaths.includes(p));
+      const common = oldPaths.filter(p => newPaths.includes(p));
+      const lines = [];
+      if (added.length) lines.push(`Added endpoints (${added.length}):`, ...added.map(p => `  + ${p}`), '');
+      if (removed.length) lines.push(`Removed endpoints (${removed.length}):`, ...removed.map(p => `  - ${p}`), '');
+      if (!added.length && !removed.length) lines.push('No endpoint changes detected.');
+      lines.push(`\nCommon endpoints: ${common.length}`);
+      lines.push('Check individual paths for schema/parameter diffs.');
+      setResult(lines.join('\n'));
+    } catch {
+      setResult('Invalid JSON in one or both specs. Paste valid OpenAPI JSON.');
+    }
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>API Diff Checker</h1>
+      <div className="space-y-4">
+        <div><label className={labelClass}>Old Spec (JSON)</label><textarea value={oldSpec} onChange={e => setOldSpec(e.target.value)} rows={6} className={inputClass} placeholder='{"openapi":"3.0.0","paths":{"/users":{"get":{}}}}' /></div>
+        <div><label className={labelClass}>New Spec (JSON)</label><textarea value={newSpec} onChange={e => setNewSpec(e.target.value)} rows={6} className={inputClass} placeholder='{"openapi":"3.0.0","paths":{"/users":{"get":{}},"/posts":{"get":{}}}}' /></div>
+        <button onClick={calc} className={btnClass}>Compare Specs</button>
+        {result && <pre className={resultClass}>{result}</pre>}
+      </div>
+    </div>
+  );
+}
+
+export function ApiDocsGenerator() {
+  const [spec, setSpec] = useState('');
+  const [result, setResult] = useState('');
+  const calc = () => {
+    try {
+      const s = JSON.parse(spec || '{}');
+      const title = s.info?.title || 'API';
+      const version = s.info?.version || '1.0.0';
+      const desc = s.info?.description || '';
+      const paths = Object.entries(s.paths || {});
+      let md = `# ${title} v${version}\n\n${desc ? desc + '\n\n' : ''}`;
+      for (const [path, methods] of paths) {
+        for (const [method, detail] of Object.entries(methods as Record<string, any>)) {
+          const d = detail as any;
+          const summary = d.summary || method.toUpperCase();
+          md += `## ${method.toUpperCase()} \`${path}\`\n\n${summary}\n\n`;
+          if (d.parameters?.length) {
+            md += '### Parameters\n\n| Name | In | Type | Required |\n|------|-----|------|----------|\n';
+            for (const p of d.parameters) {
+              md += `| ${p.name} | ${p.in} | ${p.schema?.type || 'string'} | ${p.required ? 'Yes' : 'No'} |\n`;
+            }
+            md += '\n';
+          }
+        }
+      }
+      if (!paths.length) md += '_No endpoints defined._\n';
+      setResult(md);
+    } catch {
+      setResult('Invalid JSON. Paste a valid OpenAPI spec.');
+    }
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>API Docs Generator</h1>
+      <div className="space-y-4">
+        <div><label className={labelClass}>OpenAPI Spec (JSON)</label><textarea value={spec} onChange={e => setSpec(e.target.value)} rows={8} className={inputClass} placeholder='{"openapi":"3.0.0","info":{"title":"My API","version":"1.0.0"},"paths":{"/users":{"get":{"summary":"List users"}}}}' /></div>
+        <button onClick={calc} className={btnClass}>Generate Docs</button>
+        {result && <pre className={resultClass}>{result}</pre>}
+      </div>
+    </div>
+  );
+}
+
 export function ConventionalCommitGenerator() {
   const [type, setType] = useState('feat');
   const [scope, setScope] = useState('api');

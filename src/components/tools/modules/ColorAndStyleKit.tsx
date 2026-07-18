@@ -242,40 +242,6 @@ function CssMediaTools() {
     setScssOutput(res);
   };
 
-  const [tableInput, setTableInput] = useState('<table><tr><td>A</td><td>B</td></tr></table>');
-  const [csvFromTable, setCsvFromTable] = useState('');
-  const [csvToTable, setCsvToTable] = useState('a,b,c\n1,2,3');
-  const [tableFromCsv, setTableFromCsv] = useState('');
-
-  const parseTableToCsv = () => {
-    const div = document.createElement('div');
-    div.innerHTML = DOMPurify.sanitize(tableInput);
-    const rows = div.querySelectorAll('tr');
-    const csv: string[] = [];
-    rows.forEach(r => {
-      const cells = Array.from(r.querySelectorAll('td, th')).map(c => `"${c.textContent?.replace(/"/g, '""') || ''}"`);
-      csv.push(cells.join(','));
-    });
-    setCsvFromTable(csv.join('\n'));
-  };
-
-  const csvToHtmlTable = () => {
-    const lines = csvToTable.trim().split('\n');
-    if (lines.length < 2) return;
-    const headers = lines[0].split(',');
-    let html = '<table>\n  <thead>\n    <tr>';
-    headers.forEach(h => { html += `<th>${h.trim()}</th>`; });
-    html += '</tr>\n  </thead>\n  <tbody>\n';
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',');
-      html += '    <tr>';
-      cols.forEach(c => { html += `<td>${c.trim()}</td>`; });
-      html += '</tr>\n';
-    }
-    html += '  </tbody>\n</table>';
-    setTableFromCsv(html);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
@@ -299,20 +265,6 @@ function CssMediaTools() {
         <textarea rows={3} value={cssInput} onChange={e => setCssInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convertCssToScss} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>
         {scssOutput && <textarea readOnly rows={3} value={scssOutput} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-
-      <Card>
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">HTML Table → CSV</h4>
-        <textarea rows={3} value={tableInput} onChange={e => setTableInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={parseTableToCsv} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>
-        {csvFromTable && <textarea readOnly rows={4} value={csvFromTable} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-      </Card>
-
-      <Card>
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">CSV → HTML Table</h4>
-        <textarea rows={3} value={csvToTable} onChange={e => setCsvToTable(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={csvToHtmlTable} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Convert</button>
-        {tableFromCsv && <div className="mt-2 p-2 bg-white rounded-lg text-xs overflow-auto max-h-32" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tableFromCsv) }} />}
       </Card>
     </div>
   );

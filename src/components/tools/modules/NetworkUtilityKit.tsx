@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Clipboard } from 'lucide-react';
+import { Clipboard, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'network' | 'sse' | 'crypto' | 'time';
@@ -288,87 +289,22 @@ function CryptoTools() {
   );
 }
 
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/tools/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
+
 function TimeTools() {
-  const [ts, setTs] = useState(String(Math.floor(Date.now() / 1000)));
-  const [dateFromTs, setDateFromTs] = useState('');
-  const [dateStr, setDateStr] = useState(new Date().toISOString().slice(0, 16));
-  const [tsFromDate, setTsFromDate] = useState('');
-  const [tzFrom, setTzFrom] = useState('America/New_York');
-  const [tzTo, setTzTo] = useState('Asia/Tokyo');
-  const [tzTime, setTzTime] = useState('');
-  const [tzResult, setTzResult] = useState('');
-
-  const zones = ['UTC', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Asia/Tokyo', 'Asia/Shanghai', 'Asia/Kolkata', 'Asia/Dubai', 'Australia/Sydney', 'Pacific/Auckland'];
-
-  const timestampToDate = () => {
-    const num = parseInt(ts);
-    const d = new Date(num * 1000);
-    setDateFromTs(d.toLocaleString('en-US', { timeZone: 'UTC', dateStyle: 'full', timeStyle: 'medium' }) + ' UTC');
-  };
-
-  const dateToTimestamp = () => {
-    const d = new Date(dateStr);
-    setTsFromDate(String(Math.floor(d.getTime() / 1000)));
-  };
-
-  const convertTz = () => {
-    try {
-      const d = new Date();
-      const from = d.toLocaleString('en-US', { timeZone: tzFrom, dateStyle: 'full', timeStyle: 'medium' });
-      const to = d.toLocaleString('en-US', { timeZone: tzTo, dateStyle: 'full', timeStyle: 'medium' });
-      setTzResult(`${tzFrom}: ${from}\n${tzTo}: ${to}\n\nUTC: ${d.toUTCString()}`);
-    } catch { toast.error('Invalid timezone (use IANA names)'); }
-  };
-
-  const worldClock = () => {
-    const now = new Date();
-    const lines = zones.map(z => `${z}: ${now.toLocaleString('en-US', { timeZone: z, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}`);
-    setTzResult(lines.join('\n'));
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Timestamp ↔ Date</h5>
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-zinc-500">Unix Timestamp (s)</label>
-          <input type="number" value={ts} onChange={e => setTs(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-        </div>
-        <button onClick={timestampToDate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">→ Date</button>
-        {dateFromTs && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{dateFromTs}</pre>}
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-zinc-500">Date/time</label>
-          <input type="datetime-local" value={dateStr} onChange={e => setDateStr(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-        </div>
-        <button onClick={dateToTimestamp} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">→ Timestamp</button>
-        {tsFromDate && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{tsFromDate}</pre>}
-      </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Time Zone Converter</h5>
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-zinc-500">From</label>
-          <select value={tzFrom} onChange={e => setTzFrom(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
-            {zones.map(z => <option key={z} value={z}>{z}</option>)}
-          </select>
-        </div>
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-zinc-500">To</label>
-          <select value={tzTo} onChange={e => setTzTo(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-blue-500">
-            {zones.map(z => <option key={z} value={z}>{z}</option>)}
-          </select>
-        </div>
-        <button onClick={convertTz} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
-        {tzResult && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{tzResult}</pre><div className="mt-1"><CopyBtn text={tzResult} label="Timezone" /></div></div>}
-      </div>
-      <div className="md:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">World Clock</h5>
-        <button onClick={worldClock} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Show World Clock</button>
-        {tzResult && tzResult.includes('UTC') && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{tzResult}</pre><div className="mt-1"><CopyBtn text={tzResult} label="World clock" /></div></div>}
-      </div>
+      <LinkCard title="Unix Time Converter" slug="unix-time-converter" desc="Convert Unix timestamps to human-readable dates and back. Supports multiple time zones and formats." />
+      <LinkCard title="Time Zone Converter" slug="time-zone-converter" desc="Convert time between different time zones worldwide. Handles DST, UTC offsets, and multiple display formats." />
+      <LinkCard title="World Clock" slug="world-clock" desc="View current time across multiple time zones simultaneously. Support for all major world cities." />
     </div>
   );
 }

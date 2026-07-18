@@ -105,63 +105,17 @@ function AwsIamPolicyAnalyzer() {
   );
 }
 
-function JsonToYaml() {
-  const [json, setJson] = useState('{"name": "test", "version": "1.0", "dependencies": {"express": "^4.18"}}');
-  const [yaml, setYaml] = useState('');
-
-  const convert = () => {
-    try {
-      const obj = JSON.parse(json);
-      const toYaml = (o: any, indent = 0): string => {
-        const pad = '  '.repeat(indent);
-        if (typeof o !== 'object' || o === null) return `${o}`;
-        if (Array.isArray(o)) return o.map(v => `${pad}- ${typeof v === 'object' ? '\n' + toYaml(v, indent + 1) : v}`).join('\n');
-        return Object.entries(o).map(([k, v]) => {
-          if (typeof v === 'object' && v !== null && !Array.isArray(v)) return `${pad}${k}:\n${toYaml(v, indent + 1)}`;
-          if (Array.isArray(v)) return `${pad}${k}:\n${toYaml(v, indent + 1)}`;
-          if (typeof v === 'string') return `${pad}${k}: "${v}"`;
-          return `${pad}${k}: ${v}`;
-        }).join('\n');
-      };
-      setYaml(toYaml(obj));
-    } catch { toast.error('Invalid JSON'); }
-  };
-
+function InlineLink({ href, label }: { href: string; label: string }) {
   return (
     <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON → YAML</h4>
-      <textarea rows={5} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">→ YAML</button>
-      {yaml && <textarea readOnly rows={6} value={yaml} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
+      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">{label}</h4>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">This tool has moved to its own page.</p>
+      <a href={href} className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm text-center transition-all">Open {label} →</a>
     </Card>
   );
 }
 
-function ExcelToCsv() {
-  const [data, setData] = useState('Column1\tColumn2\tColumn3\nValue1\tValue2\tValue3\nA\tB\tC');
-  const [csv, setCsv] = useState('');
 
-  const convert = () => {
-    const lines = data.trim().split('\n');
-    const result = lines.map(l => {
-      const cols = l.split('\t').map(c => {
-        const trimmed = c.trim();
-        return trimmed.includes(',') ? `"${trimmed}"` : trimmed;
-      });
-      return cols.join(',');
-    }).join('\n');
-    setCsv(result);
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Excel (TSV) → CSV</h4>
-      <textarea rows={4} value={data} onChange={e => setData(e.target.value)} placeholder="Paste tab-separated data" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">→ CSV</button>
-      {csv && <textarea readOnly rows={5} value={csv} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
 
 function HashGenerator() {
   const [input, setInput] = useState('hello world');
@@ -243,8 +197,8 @@ export default function MiscUtilitiesKit() {
       {tab === 'cloud' && <AwsIamPolicyAnalyzer />}
       {tab === 'convert' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <JsonToYaml />
-          <ExcelToCsv />
+          <InlineLink href="/tools/yaml-json-converter" label="JSON ↔ YAML Converter" />
+          <InlineLink href="/tools/tsv-csv-converter" label="TSV ↔ CSV Converter" />
         </div>
       )}
       {tab === 'extra' && (

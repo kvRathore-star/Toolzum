@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Binary, Type, Wrench, Gauge } from 'lucide-react';
+import { Binary, Type, Wrench, Gauge, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'encoders' | 'text' | 'tools' | 'units';
@@ -57,6 +58,16 @@ function OutputBox({ output, onCopy }: { output: string; onCopy?: () => void }) 
     </div>
   );
 }
+
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/developer/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
 
 function EncoderTools() {
   const [b32In, setB32In] = useState('Hello World');
@@ -229,22 +240,8 @@ function TextTools() {
 }
 
 function WebTools() {
-  const [hmacIn, setHmacIn] = useState('Hello World');
-  const [hmacKey, setHmacKey] = useState('my-secret-key');
-  const [hmacAlgo, setHmacAlgo] = useState('SHA-256');
-  const [hmacOut, setHmacOut] = useState('');
   const [svgOptIn, setSvgOptIn] = useState('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>');
   const [svgOptOut, setSvgOptOut] = useState('');
-
-  const genHmac = async () => {
-    try {
-      const algoName = hmacAlgo === 'SHA-1' ? 'SHA-1' : hmacAlgo === 'SHA-256' ? 'SHA-256' : hmacAlgo === 'SHA-384' ? 'SHA-384' : 'SHA-512';
-      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(hmacKey), { name: 'HMAC', hash: algoName }, false, ['sign']);
-      const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(hmacIn));
-      setHmacOut(Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, '0')).join(''));
-      toast.success(`HMAC-${hmacAlgo} generated`);
-    } catch { toast.error('Error generating HMAC'); }
-  };
 
   const optSvg = () => {
     try {
@@ -264,18 +261,7 @@ function WebTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-      <Card title="HMAC Generator">
-        <textarea value={hmacIn} onChange={e => setHmacIn(e.target.value)}
-          className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-        <Inp label="Key" value={hmacKey} onChange={setHmacKey} placeholder="secret" />
-        <div className="flex flex-wrap gap-1">
-          {['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'].map(a => (
-            <button key={a} onClick={() => setHmacAlgo(a)} className={`px-2 py-0.5 text-[10px] font-bold rounded-lg transition-all ${hmacAlgo === a ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>{a}</button>
-          ))}
-        </div>
-        <CalcBtn onClick={genHmac} label="Generate HMAC" />
-        <OutputBox output={hmacOut} />
-      </Card>
+      <LinkCard title="HMAC Generator" slug="hmac-generator" desc="Generate HMAC signatures using a secret key and hash algorithm for API authentication." />
 
       <Card title="SVG Optimizer">
         <textarea value={svgOptIn} onChange={e => setSvgOptIn(e.target.value)}

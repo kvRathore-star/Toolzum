@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Key, FileCheck, Globe, Clipboard } from 'lucide-react';
+import { Key, FileCheck, Globe, Clipboard, ExternalLink } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'security' | 'config' | 'validators';
@@ -260,6 +261,16 @@ function ConfigTools() {
   );
 }
 
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/tools/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
+
 function ValidatorTools() {
   const [geojsonIn, setGeojsonIn] = useState('{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[72.8777,19.0760]},"properties":{"name":"Mumbai"}}]}');
   const [geojsonOut, setGeojsonOut] = useState('');
@@ -272,11 +283,10 @@ function ValidatorTools() {
   const [xpathOut, setXpathOut] = useState('');
   const [cronIn, setCronIn] = useState('*/5 * * * *');
   const [cronOut, setCronOut] = useState('');
-  const [emailIn, setEmailIn] = useState('user@example.com');
-  const [emailOut, setEmailOut] = useState('');
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <LinkCard title="Email Validator" slug="email-format-validator" desc="Validate email addresses — check format, domain structure, TLD length, and MX record verification." />
       {[
         { title: 'GeoJSON Validator', validate: () => {
           try {
@@ -352,20 +362,6 @@ function ValidatorTools() {
           setCronOut(issues.length ? issues.join('\n') : `Valid cron: ${parts.slice(0, 5).join(' ')}\n${desc.join('\n')}${parts[5] ? `\n(Cmd: ${parts.slice(5).join(' ')})` : ''}`);
           toast.success(issues.length ? 'Issues found' : 'Valid cron');
         }, out: cronOut, custom: <><div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Cron Expression</label><input type="text" value={cronIn} onChange={e => setCronIn(e.target.value)} placeholder="*/5 * * * *" className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div><p className="text-xs text-zinc-400">5 fields: minute hour day month weekday</p></> },
-        { title: 'Email Validator', validate: () => {
-          if (!emailIn.trim()) { toast.error('Enter an email'); return; }
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          const parts = emailIn.split('@');
-          const issues: string[] = [];
-          if (!emailRegex.test(emailIn)) issues.push('Basic format check failed');
-          if (!parts[1]?.includes('.')) issues.push('Domain must contain a dot');
-          if ((parts[1]?.split('.').pop()?.length || 0) < 2) issues.push('TLD must be at least 2 characters');
-          if ((parts[0]?.length || 0) > 64) issues.push('Local part too long (max 64 chars)');
-          if (emailIn.length > 254) issues.push('Total length exceeds 254 chars');
-          const mxSuggest = parts[1] ? `\nTo verify MX records: nslookup -type=MX ${parts[1]}` : '';
-          setEmailOut(issues.length ? issues.join('\n') + mxSuggest : `Valid email format${mxSuggest}`);
-          toast.success(issues.length ? 'Issues found' : 'Valid email');
-        }, out: emailOut, custom: <><div className="space-y-1"><label className="text-xs font-medium text-zinc-500">Email Address</label><input type="text" value={emailIn} onChange={e => setEmailIn(e.target.value)} placeholder="user@example.com" className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" /></div></> },
       ].map(({ title, validate, out, input, set, rows, custom }) => (
         <Card key={title} title={title}>
           {custom || <textarea value={input} onChange={e => set(e.target.value)}

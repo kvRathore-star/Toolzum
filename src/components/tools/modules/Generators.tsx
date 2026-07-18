@@ -1,5 +1,7 @@
 "use client";
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import QRCodeLib from 'qrcode';
+import { downloadOrShare } from '@/utils/nativeShare';
 
 const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
 const labelClass = "block text-sm font-medium mb-1";
@@ -818,32 +820,37 @@ export function BarcodeGenerator() {
 }
 
 // === 18. QrCodeGenerator ===
-const QR_ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:';
 export function QrCodeGenerator() {
   const [text, setText] = useState('https://toolzum.com');
-  const [size, setSize] = useState(21);
   const [errorCorrection, setErrorCorrection] = useState('M');
-  const [matrix, setMatrix] = useState<boolean[][]>([]);
+  const [dataUrl, setDataUrl] = useState('');
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const generate = () => {
-    const s = Math.min(size, 33);
-    const m: boolean[][] = Array.from({ length: s }, () => Array(s).fill(false));
-    for (let i = 0; i < s; i++) {
-      for (let j = 0; j < s; j++) {
-        const val = (i * j + i + j) % 3 === 0 || (i + j) % 5 === 0;
-        m[i][j] = val;
-      }
-    }
-    setMatrix(m);
+  useEffect(() => {
+    if (!text.trim()) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    QRCodeLib.toCanvas(canvas, text.trim(), {
+      width: 280,
+      margin: 2,
+      color: { dark: '#000000', light: '#ffffff' },
+      errorCorrectionLevel: errorCorrection as 'L' | 'M' | 'Q' | 'H',
+    }).then(() => {
+      setDataUrl(canvas.toDataURL('image/png'));
+    }).catch(() => {});
+  }, [text, errorCorrection]);
+
+  const handleDownload = () => {
+    if (!dataUrl) return;
+    downloadOrShare(dataUrl, `qrcode_${Date.now()}.png`);
   };
 
   return (
     <div className={cardClass}>
       <h1 className={headingClass}>QR Code Generator</h1>
       <div className="space-y-3">
-        <div><label className={labelClass}>Text / URL</label><input type="text" value={text} onChange={e => setText(e.target.value)} className={inputClass} /></div>
+        <div><label className={labelClass}>Text / URL</label><input type="text" value={text} onChange={e => setText(e.target.value)} className={inputClass} placeholder="Enter text or URL to encode..." /></div>
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Size</label><input type="number" min={11} max={33} value={size} onChange={e => setSize(Number(e.target.value))} className={inputClass} /></div>
           <div className="flex-1"><label className={labelClass}>Error Correction</label>
             <select value={errorCorrection} onChange={e => setErrorCorrection(e.target.value)} className={inputClass}>
               <option value="L">Low (7%)</option>
@@ -853,14 +860,11 @@ export function QrCodeGenerator() {
             </select>
           </div>
         </div>
-        <button onClick={generate} className={btnClass}>Generate QR Code</button>
-        {matrix.length > 0 && (
-          <div className="mt-4 flex justify-center">
-            <div className="inline-grid gap-0.5" style={{ gridTemplateColumns: `repeat(${matrix.length}, 8px)` }}>
-              {matrix.map((row, i) => row.map((cell, j) => (
-                <div key={`${i}-${j}`} className={cell ? 'bg-black dark:bg-white' : 'bg-white dark:bg-black'} style={{ width: 8, height: 8 }} />
-              )))}
-            </div>
+        <canvas ref={canvasRef} className="hidden" />
+        {dataUrl && (
+          <div className="mt-4 flex flex-col items-center gap-4">
+            <img src={dataUrl} alt="QR Code" className="rounded-xl border border-zinc-200 dark:border-zinc-700" />
+            <button onClick={handleDownload} className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button>
           </div>
         )}
       </div>

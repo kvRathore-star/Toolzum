@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+import { ExternalLink } from 'lucide-react';
 
 type Tab = 'calc' | 'size' | 'image' | 'pdf';
 
@@ -44,6 +46,16 @@ function CalcCard({ title, children, className = '' }: { title: string; children
   );
 }
 
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <Link href={`/tools/${slug}`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+    <div className="flex items-center gap-1">
+      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+    </div>
+    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+  </Link>
+);
+
 function CalcTools() {
   const [studyHrs, setStudyHrs] = useState('3');
   const [studyDays, setStudyDays] = useState('30');
@@ -65,56 +77,6 @@ function CalcTools() {
     setScoreResult(`Score: ${scoreCorrect}/${scoreTotal} = ${pct.toFixed(1)}%\nGrade: ${grade}`);
   };
 
-  const [billAmt, setBillAmt] = useState('100');
-  const [tipPct, setTipPct] = useState('15');
-  const [splitBy, setSplitBy] = useState('1');
-  const [tipResult, setTipResult] = useState('');
-
-  const calcTip = () => {
-    const bill = parseFloat(billAmt);
-    const pct = parseFloat(tipPct);
-    const split = parseInt(splitBy);
-    const tip = bill * (pct / 100);
-    const total = bill + tip;
-    const perPerson = total / split;
-    setTipResult(`Tip: $${tip.toFixed(2)}\nTotal: $${total.toFixed(2)}\n${split > 1 ? `Per Person: $${perPerson.toFixed(2)}` : ''}`);
-  };
-
-  const [triA, setTriA] = useState('3');
-  const [triB, setTriB] = useState('4');
-  const [triResult, setTriResult] = useState('');
-
-  const calcTriangle = () => {
-    const a = parseFloat(triA), b = parseFloat(triB);
-    const c = Math.sqrt(a * a + b * b);
-    const area = (a * b) / 2;
-    const perimeter = a + b + c;
-    setTriResult(`Hypotenuse: ${c.toFixed(2)}\nArea: ${area.toFixed(2)}\nPerimeter: ${perimeter.toFixed(2)}`);
-  };
-
-  const [volVal, setVolVal] = useState('1');
-  const [volFrom, setVolFrom] = useState('0');
-  const [volTo, setVolTo] = useState('1');
-  const [volResult, setVolResult] = useState('');
-
-  const volUnits: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[] = [
-    { label: 'Liter (L)', toBase: (v: number) => v, fromBase: (v: number) => v },
-    { label: 'Milliliter (mL)', toBase: (v: number) => v / 1000, fromBase: (v: number) => v * 1000 },
-    { label: 'Gallon (US)', toBase: (v: number) => v * 3.78541, fromBase: (v: number) => v / 3.78541 },
-    { label: 'Quart (US)', toBase: (v: number) => v * 0.946353, fromBase: (v: number) => v / 0.946353 },
-    { label: 'Cup (US)', toBase: (v: number) => v * 0.236588, fromBase: (v: number) => v / 0.236588 },
-    { label: 'Fluid Ounce (US)', toBase: (v: number) => v * 0.0295735, fromBase: (v: number) => v / 0.0295735 },
-    { label: 'Cubic Meter', toBase: (v: number) => v * 1000, fromBase: (v: number) => v / 1000 },
-    { label: 'Cubic Foot', toBase: (v: number) => v * 28.3168, fromBase: (v: number) => v / 28.3168 },
-  ];
-
-  const convertVolume = () => {
-    const num = parseFloat(volVal);
-    const base = volUnits[parseInt(volFrom)].toBase(num);
-    const result = volUnits[parseInt(volTo)].fromBase(base);
-    setVolResult(`${num} ${volUnits[parseInt(volFrom)].label} = ${result.toFixed(4)} ${volUnits[parseInt(volTo)].label}`);
-  };
-
   const [wppWords, setWppWords] = useState('500');
   const [wppFont, setWppFont] = useState('12');
   const [wppResult, setWppResult] = useState('');
@@ -131,68 +93,6 @@ function CalcTools() {
   const [wcCogs, setWcCogs] = useState('60000');
   const [wcOpExp, setWcOpExp] = useState('25000');
   const [wcResult, setWcResult] = useState('');
-
-  const [pythA, setPythA] = useState('3');
-  const [pythB, setPythB] = useState('4');
-  const [pythResult, setPythResult] = useState('');
-
-  const calcPythagorean = () => {
-    const a = parseFloat(pythA), b = parseFloat(pythB);
-    const c = Math.sqrt(a * a + b * b);
-    const area = (a * b) / 2;
-    setPythResult(`Hypotenuse: ${c.toFixed(4)}\nArea: ${area.toFixed(4)}\nSum of squares: ${a}² + ${b}² = ${(a*a + b*b).toFixed(2)}`);
-  };
-
-  const [sciDisplay, setSciDisplay] = useState('0');
-  const [sciMemory, setSciMemory] = useState<number | null>(null);
-  const [sciOp, setSciOp] = useState<string | null>(null);
-
-  const sciPress = (val: string) => {
-    if (val === 'C') { setSciDisplay('0'); setSciMemory(null); setSciOp(null); return; }
-    if (val === '±') { setSciDisplay(prev => prev.startsWith('-') ? prev.slice(1) : '-' + prev); return; }
-    if (val === '%') { setSciDisplay(prev => String(parseFloat(prev) / 100)); return; }
-    if (['+','-','×','÷'].includes(val)) {
-      setSciMemory(parseFloat(sciDisplay));
-      setSciOp(val);
-      setSciDisplay('0');
-      return;
-    }
-    if (val === '=') {
-      if (sciMemory === null || !sciOp) return;
-      const cur = parseFloat(sciDisplay);
-      let result = 0;
-      switch (sciOp) {
-        case '+': result = sciMemory + cur; break;
-        case '-': result = sciMemory - cur; break;
-        case '×': result = sciMemory * cur; break;
-        case '÷': result = sciMemory / cur; break;
-      }
-      setSciDisplay(String(result));
-      setSciMemory(null);
-      setSciOp(null);
-      return;
-    }
-    if (val === 'x²') { setSciDisplay(prev => String(Math.pow(parseFloat(prev), 2))); return; }
-    if (val === '√') { setSciDisplay(prev => String(Math.sqrt(parseFloat(prev)))); return; }
-    if (val === '1/x') { const v = parseFloat(sciDisplay); setSciDisplay(v !== 0 ? String(1 / v) : 'Error'); return; }
-    if (val === 'sin') { setSciDisplay(prev => String(Math.sin(parseFloat(prev) * Math.PI / 180))); return; }
-    if (val === 'cos') { setSciDisplay(prev => String(Math.cos(parseFloat(prev) * Math.PI / 180))); return; }
-    if (val === 'tan') { setSciDisplay(prev => { const v = parseFloat(prev) * Math.PI / 180; return Math.abs(Math.cos(v)) < 1e-10 ? 'Error' : String(Math.tan(v)); }); return; }
-    if (val === 'ln') { setSciDisplay(prev => String(Math.log(parseFloat(prev)))); return; }
-    if (val === 'log') { setSciDisplay(prev => String(Math.log10(parseFloat(prev)))); return; }
-    if (val === 'π') { setSciDisplay(String(Math.PI)); return; }
-    if (val === 'e') { setSciDisplay(String(Math.E)); return; }
-    if (val === '!') {
-      const n = parseInt(sciDisplay);
-      if (n < 0 || n > 170) { setSciDisplay('Error'); return; }
-      let f = 1; for (let i = 2; i <= n; i++) f *= i;
-      setSciDisplay(String(f));
-      return;
-    }
-    // Number or decimal
-    if (val === '.' && sciDisplay.includes('.')) return;
-    setSciDisplay(prev => prev === '0' && val !== '.' ? val : prev + val);
-  };
 
   const calcWorkingCapital = () => {
     const rev = parseFloat(wcRevenue);
@@ -222,36 +122,9 @@ function CalcTools() {
         <button onClick={calcTestScore} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {scoreResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{scoreResult}</pre>}
       </CalcCard>
-      <CalcCard title="Tip Calculator">
-        <div className="grid grid-cols-3 gap-2 mb-2">
-          <input type="number" value={billAmt} onChange={e => setBillAmt(e.target.value)} placeholder="Bill $" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <input type="number" value={tipPct} onChange={e => setTipPct(e.target.value)} placeholder="Tip %" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <input type="number" value={splitBy} onChange={e => setSplitBy(e.target.value)} min={1} placeholder="Split" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        </div>
-        <button onClick={calcTip} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {tipResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{tipResult}</pre>}
-      </CalcCard>
-      <CalcCard title="Triangle Calculator">
-        <div className="grid grid-cols-2 gap-2 mb-2">
-          <input type="number" value={triA} onChange={e => setTriA(e.target.value)} placeholder="Side A" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <input type="number" value={triB} onChange={e => setTriB(e.target.value)} placeholder="Side B" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        </div>
-        <button onClick={calcTriangle} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {triResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{triResult}</pre>}
-      </CalcCard>
-      <CalcCard title="Volume Converter">
-        <div className="grid grid-cols-3 gap-2 mb-2">
-          <input type="number" value={volVal} onChange={e => setVolVal(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <select value={volFrom} onChange={e => setVolFrom(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-xs">
-            {volUnits.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
-          </select>
-          <select value={volTo} onChange={e => setVolTo(e.target.value)} className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-xs">
-            {volUnits.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
-          </select>
-        </div>
-        <button onClick={convertVolume} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {volResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{volResult}</pre>}
-      </CalcCard>
+      <LinkCard title="Tip Calculator" slug="tip-calculator" desc="Calculate tip amount, split bills among multiple people, and see total cost including tip percentage." />
+      <LinkCard title="Triangle Area Calculator" slug="triangle-area-calculator" desc="Calculate triangle area from base and height. Quick geometry reference for engineering and design." />
+      <LinkCard title="Volume Converter" slug="volume-converter" desc="Convert between liters, gallons, cups, fluid ounces, and more volume units with precision." />
       <CalcCard title="Words Per Page Calculator">
         <div className="grid grid-cols-2 gap-2 mb-2">
           <input type="number" value={wppWords} onChange={e => setWppWords(e.target.value)} placeholder="Word count" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
@@ -271,31 +144,8 @@ function CalcTools() {
         <button onClick={calcWorkingCapital} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {wcResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{wcResult}</pre>}
       </CalcCard>
-      <CalcCard title="Pythagorean Theorem">
-        <div className="grid grid-cols-2 gap-2 mb-2">
-          <input type="number" value={pythA} onChange={e => setPythA(e.target.value)} placeholder="Side a" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-          <input type="number" value={pythB} onChange={e => setPythB(e.target.value)} placeholder="Side b" className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
-        </div>
-        <button onClick={calcPythagorean} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {pythResult && <pre className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono whitespace-pre">{pythResult}</pre>}
-      </CalcCard>
-      <CalcCard title="Scientific Calculator" className="md:col-span-2">
-        <div className="mb-2">
-          <div className="w-full bg-zinc-900 text-green-400 font-mono text-right px-3 py-3 rounded-lg text-xl mb-2 h-10 overflow-hidden">{sciDisplay}</div>
-          <div className="grid grid-cols-5 gap-1">
-            {['C','±','%','÷','sin','7','8','9','×','cos','4','5','6','-','tan','1','2','3','+','ln','0','.','π','=','log','x²','√','1/x','!','e'].map(b => (
-              <button key={b} onClick={() => sciPress(b)}
-                className={`text-xs font-bold py-2 rounded ${
-                  ['+','-','×','÷','='].includes(b) ? 'bg-blue-600 hover:bg-blue-500 text-white' :
-                  ['C'].includes(b) ? 'bg-red-600 hover:bg-red-500 text-white' :
-                  b === '=' ? 'bg-green-600 hover:bg-green-500 text-white col-span-1' :
-                  'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                }`}
-              >{b}</button>
-            ))}
-          </div>
-        </div>
-      </CalcCard>
+      <LinkCard title="Pythagorean Theorem Calculator" slug="pythagorean-theorem-calculator" desc="Calculate the hypotenuse of a right triangle from the lengths of the other two sides." />
+      <LinkCard title="Scientific Calculator" slug="scientific-calculator" desc="Full scientific calculator with sin, cos, tan, log, sqrt, and basic arithmetic operations." />
     </div>
   );
 }

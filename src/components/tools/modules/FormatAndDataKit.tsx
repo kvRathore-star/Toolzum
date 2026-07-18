@@ -16,6 +16,16 @@ function Card({ children, className = '' }: { children: React.ReactNode; classNa
   return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
 }
 
+function LinkCard({ title, href, desc }: { title: string; href: string; desc: string }) {
+  return (
+    <Card>
+      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">{title}</h4>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">{desc}</p>
+      <a href={href} className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm text-center transition-all">Open →</a>
+    </Card>
+  );
+}
+
 function IniToJson() {
   const [ini, setIni] = useState('[database]\nhost = localhost\nport = 5432\n\n[app]\ndebug = true\nname = MyApp');
   const [json, setJson] = useState('');
@@ -50,79 +60,6 @@ function IniToJson() {
       <textarea rows={4} value={ini} onChange={e => setIni(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
       <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">→ JSON</button>
       {json && <textarea readOnly rows={4} value={json} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
-
-function JsonToToml() {
-  const [json, setJson] = useState('{"server": {"host": "localhost", "port": 8080}, "debug": true}');
-  const [toml, setToml] = useState('');
-
-  const convert = () => {
-    try {
-      const obj = JSON.parse(json);
-      const lines: string[] = [];
-      const writeObj = (o: Record<string, any>, prefix = '') => {
-        Object.entries(o).forEach(([k, v]) => {
-          const key = prefix ? `${prefix}.${k}` : k;
-          if (v && typeof v === 'object' && !Array.isArray(v)) {
-            const section = prefix ? key : k;
-            if (!prefix) { lines.push(`[${k}]`); }
-            writeObj(v, prefix ? key : k);
-          } else if (Array.isArray(v)) {
-            v.forEach(item => {
-              if (typeof item === 'object') {
-                lines.push(`[[${key}]]`);
-                writeObj(item, '');
-              } else {
-                lines.push(`${key} = ${JSON.stringify(item)}`);
-              }
-            });
-          } else {
-            lines.push(`${k} = ${JSON.stringify(v)}`);
-          }
-        });
-      };
-      writeObj(obj);
-      setToml(lines.join('\n'));
-    } catch { toast.error('Invalid JSON'); }
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON ↔ TOML</h4>
-      <textarea rows={4} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">→ TOML</button>
-      {toml && <textarea readOnly rows={5} value={toml} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
-
-function JsonToToon() {
-  const [json, setJson] = useState('{"name": "Alice", "age": 30, "city": "NYC"}');
-  const [toon, setToon] = useState('');
-
-  const convert = () => {
-    try {
-      const obj = JSON.parse(json);
-      const toonify = (o: any, depth = 0): string => {
-        if (typeof o !== 'object' || o === null) return JSON.stringify(o);
-        const indent = '  '.repeat(depth);
-        if (Array.isArray(o)) {
-          return `[\n${o.map(v => `${indent}  ${toonify(v, depth + 1)}`).join(',\n')}\n${indent}]`;
-        }
-        return `{\n${Object.entries(o).map(([k, v]) => `${indent}  ${k} → ${toonify(v, depth + 1)}`).join(',\n')}\n${indent}}`;
-      };
-      setToon(toonify(obj));
-    } catch { toast.error('Invalid JSON'); }
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">JSON → Toon</h4>
-      <textarea rows={4} value={json} onChange={e => setJson(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">→ Toon</button>
-      {toon && <textarea readOnly rows={5} value={toon} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
     </Card>
   );
 }
@@ -176,39 +113,6 @@ function CborInspector() {
   );
 }
 
-function ExcelDataCleaner() {
-  const [data, setData] = useState('Name,Email,Phone,Notes\nJohn,john@test.com,12345,  extra  \nJane,,555-1234,HELLO\n  Bob  ,bob@test.com,,');
-  const [cleaned, setCleaned] = useState('');
-
-  const clean = () => {
-    const lines = data.trim().split('\n');
-    if (lines.length < 2) return;
-    const headers = lines[0].split(',').map(h => h.trim());
-    const rows = lines.slice(1).map(line => {
-      const cols = line.split(',');
-      return headers.map((h, i) => {
-        let val = (cols[i] || '').trim();
-        if (h.toLowerCase() === 'email') val = val.toLowerCase();
-        if (h.toLowerCase() === 'phone') val = val.replace(/[^\d+\-() ]/g, '');
-        if (h.toLowerCase() === 'notes') val = val.toLowerCase();
-        return val;
-      });
-    });
-    const output = [headers.join(',')];
-    rows.forEach(r => output.push(r.join(',')));
-    setCleaned(output.join('\n'));
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Excel Data Cleaner</h4>
-      <textarea rows={5} value={data} onChange={e => setData(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={clean} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Clean Data</button>
-      {cleaned && <textarea readOnly rows={5} value={cleaned} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
-
 function ExcelSheetMerger() {
   const [sheets, setSheets] = useState('[Sheet1]\nid,name\n1,Alice\n2,Bob\n\n[Sheet2]\nid,score\n1,95\n2,87');
   const [merged, setMerged] = useState('');
@@ -233,37 +137,6 @@ function ExcelSheetMerger() {
       <textarea rows={5} value={sheets} onChange={e => setSheets(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
       <button onClick={merge} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Merge</button>
       {merged && <textarea readOnly rows={5} value={merged} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
-
-function DatasetAnalyzer() {
-  const [data, setData] = useState('name,age,salary\nAlice,30,75000\nBob,25,62000\nCharlie,35,85000');
-  const [analysis, setAnalysis] = useState('');
-
-  const analyze = () => {
-    const lines = data.trim().split('\n');
-    if (lines.length < 2) return;
-    const headers = lines[0].split(',');
-    const rows = lines.slice(1).map(l => l.split(','));
-    const result: string[] = [`Rows: ${rows.length}, Columns: ${headers.length}`, ''];
-    headers.forEach((h, i) => {
-      const vals = rows.map(r => r[i]).filter(v => v !== undefined && v !== '');
-      const nums = vals.map(Number).filter(n => !isNaN(n));
-      result.push(`• ${h}: ${vals.length} values, ${vals.length - nums.length} non-numeric`);
-      if (nums.length > 0) {
-        result.push(`  Min: ${Math.min(...nums)}, Max: ${Math.max(...nums)}, Avg: ${(nums.reduce((a, b) => a + b, 0) / nums.length).toFixed(2)}`);
-      }
-    });
-    setAnalysis(result.join('\n'));
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Dataset Analyzer (CSV)</h4>
-      <textarea rows={5} value={data} onChange={e => setData(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Analyze</button>
-      {analysis && <textarea readOnly rows={6} value={analysis} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
     </Card>
   );
 }
@@ -522,8 +395,8 @@ export default function FormatAndDataKit() {
       {tab === 'formats' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <IniToJson />
-          <JsonToToml />
-          <JsonToToon />
+          <LinkCard title="JSON ↔ TOML" href="/tools/toml-converter" desc="Bidirectional JSON to TOML conversion" />
+          <LinkCard title="JSON → Toon" href="/tools/json-toon-converter" desc="Convert JSON to human-readable Toon format" />
           <div className="grid grid-cols-2 gap-6">
             <MsgpackInspector />
             <CborInspector />
@@ -532,9 +405,9 @@ export default function FormatAndDataKit() {
       )}
       {tab === 'data' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ExcelDataCleaner />
+          <LinkCard title="CSV Data Cleaner" href="/tools/csv-data-cleaner" desc="Trim, dedup, email lowecasing, phone digit-stripping" />
           <ExcelSheetMerger />
-          <DatasetAnalyzer />
+          <LinkCard title="CSV Statistics" href="/tools/csv-statistics" desc="Per-column stats: count, sum, avg, min, max" />
           <DataAnonymizer />
         </div>
       )}
