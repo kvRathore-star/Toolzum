@@ -156,8 +156,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "dummy-text-generator", "fake-data-generator",
         "fake-identity-generator", "fake-credit-card-generator",
         "sequence-generator", "coupon-code-generator",
-        "serial-number-generator", "nickname-generator", "avatar-generator",
+        "serial-number-generator", "nickname-generator",         "avatar-generator",
         "uuid-generator",
+        "ascii-art-generator",
       ],
     },
     {
@@ -304,6 +305,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "counter-tool", "list-randomizer", "list-sorter",
         "decision-maker", "yes-no-picker",
         "coin-flipper", "dice-roller", "dice-roller-tool",
+        "ulid-generator",
       ],
     },
     {
@@ -345,7 +347,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "math-equation-solver", "algebra-calculator",
         "geometry-calculator", "coordinate-calculator",
         "slope-calculator", "midpoint-calculator", "distance-calculator",
-        "math-tools",
+        "eta-calculator",
       ],
     },
     {
@@ -378,7 +380,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "null-value-handler", "pivot-generator", "row-filter",
         "csv-row-sorter", "csv-splitter", "csv-transpose",
         "csv-to-markdown", "csv-to-ndjson", "csv-to-sql",
-        "csv-json-row-generator",
+        "csv-json-row-generator", "csv-analyzer",
       ],
     },
     {
@@ -397,8 +399,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "speed-test", "privacy-cleaner", "resume-builder",
         "bank-statement-analyser", "ip-address-lookup",
-        "whatsapp-toolkit", "creative-tools", "other-utilities",
-        "mini-generators", "benchmark-builder",
+        "whatsapp-toolkit", "benchmark-builder",
+        "numeronym-generator", "mac-vendor-lookup",
+        "wifi-qr-generator", "phone-parser", "otp-generator",
+        "slugify-tool", "emoji-picker",
       ],
     },
   ],
