@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import DOMPurify from 'dompurify';
 
 type Tab = 'security' | 'cloud' | 'convert' | 'extra';
 
@@ -117,66 +116,7 @@ function InlineLink({ href, label }: { href: string; label: string }) {
 
 
 
-function HashGenerator() {
-  const [input, setInput] = useState('hello world');
-  const [algo, setAlgo] = useState('SHA-256');
-  const [hash, setHash] = useState('');
 
-  const generate = async () => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(input);
-    const hashBuffer = await crypto.subtle.digest(algo, data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    setHash(hashArray.map(b => b.toString(16).padStart(2, '0')).join(''));
-  };
-
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Hash Generator</h4>
-      <input type="text" value={input} onChange={e => setInput(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" />
-      <select value={algo} onChange={e => setAlgo(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm mb-2">
-        <option value="SHA-1">SHA-1</option>
-        <option value="SHA-256">SHA-256</option>
-        <option value="SHA-384">SHA-384</option>
-        <option value="SHA-512">SHA-512</option>
-      </select>
-      <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
-      {hash && <div className="mt-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-xs font-mono break-all">{hash}</div>}
-    </Card>
-  );
-}
-
-function MarkdownQuickEditor() {
-  const [md, setMd] = useState('# Hello\nThis is **bold** and *italic*.\n\n- Item 1\n- Item 2\n- Item 3');
-  const [preview, setPreview] = useState('');
-
-  const renderPreview = () => {
-    let html = md
-      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/^- (.+)$/gm, '<li>$1</li>')
-      .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^(.+)$/gm, (m) => m.startsWith('<') ? m : `<p>${m}</p>`);
-    setPreview(html);
-  };
-
-  return (
-    <Card className="md:col-span-2">
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">Markdown Quick Editor</h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <textarea rows={8} value={md} onChange={e => setMd(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-          <button onClick={renderPreview} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Preview</button>
-        </div>
-        <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 prose prose-sm max-h-64 overflow-auto" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(preview) }} />
-      </div>
-    </Card>
-  );
-}
 
 export default function MiscUtilitiesKit() {
   const [tab, setTab] = useState<Tab>('security');
@@ -203,8 +143,8 @@ export default function MiscUtilitiesKit() {
       )}
       {tab === 'extra' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <HashGenerator />
-          <MarkdownQuickEditor />
+          <InlineLink href="/tools/md5-hash-generator" label="MD5 & SHA Hash Generator" />
+          <InlineLink href="/tools/markdown-tools" label="Markdown Tools" />
         </div>
       )}
     </div>

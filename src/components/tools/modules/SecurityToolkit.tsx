@@ -60,97 +60,10 @@ const Inp = ({ label, value, onChange, placeholder }: { label: string; value: st
 );
 
 function JwtTools() {
-  const [jwtInput, setJwtInput] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJyb2xlIjoiYWRtaW4ifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
-  const [jwtOut, setJwtOut] = useState('');
-  const [jwtPayload, setJwtPayload] = useState('{"sub":"1234567890","name":"John Doe","role":"admin"}');
-  const [jwtSecret, setJwtSecret] = useState('my-secret-key');
-  const [jwtValidateIn, setJwtValidateIn] = useState(jwtInput);
-  const [jwtValidOut, setJwtValidOut] = useState('');
-
-  const decodeJwt = () => {
-    try {
-      const parts = jwtInput.trim().split('.');
-      if (parts.length !== 3) { toast.error('Invalid JWT format (needs 3 parts)'); return; }
-      const h = JSON.parse(atob(parts[0]));
-      const p = JSON.parse(atob(parts[1]));
-      const s = parts[2];
-      setJwtOut(JSON.stringify({ header: h, payload: p, signature: s.slice(0, 20) + '...', expiresAt: p.exp ? new Date(p.exp * 1000).toISOString() : 'no expiry' }, null, 2));
-      toast.success('Decoded');
-    } catch { toast.error('Invalid JWT'); }
-  };
-
-  const b64url = (s: string) => btoa(s).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-  const encodeJwt = async () => {
-    try {
-      JSON.parse(jwtPayload);
-      const header = b64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-      const payload = b64url(jwtPayload);
-      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(jwtSecret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-      const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${header}.${payload}`));
-      const sigB64 = btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
-      setJwtOut(`${header}.${payload}.${sigB64}`);
-      toast.success('JWT signed');
-    } catch { toast.error('Invalid payload JSON'); }
-  };
-
-  const validateJwt = async () => {
-    try {
-      const parts = jwtValidateIn.trim().split('.');
-      if (parts.length !== 3) { toast.error('Invalid JWT'); return; }
-      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(jwtSecret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
-      const valid = await crypto.subtle.verify('HMAC', key, Uint8Array.from(atob(parts[2].replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0)), new TextEncoder().encode(`${parts[0]}.${parts[1]}`));
-      const p = JSON.parse(atob(parts[1]));
-      const now = Math.floor(Date.now() / 1000);
-      let msg = valid ? '✓ Signature valid' : '✗ Signature invalid';
-      if (p.exp && p.exp < now) msg += ', ⚠️ Token expired';
-      if (p.nbf && p.nbf > now) msg += ', ⚠️ Token not yet valid';
-      if (p.iss) msg += `\nIssuer: ${p.iss}`;
-      if (p.sub) msg += `\nSubject: ${p.sub}`;
-      setJwtValidOut(msg);
-      toast.success(valid ? 'Valid signature' : 'Invalid signature');
-    } catch { toast.error('Invalid JWT'); }
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-      <Card title="JWT Decoder">
-        <textarea value={jwtInput} onChange={e => setJwtInput(e.target.value)}
-          className="w-full h-16 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder="Paste JWT..." />
-        <CalcBtn onClick={decodeJwt} label="Decode" />
-      </Card>
-
-      <Card title="JWT Encoder / Signer">
-        <textarea value={jwtPayload} onChange={e => setJwtPayload(e.target.value)}
-          className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder='{"sub":"123","role":"admin"}' />
-        <Inp label="Secret" value={jwtSecret} onChange={setJwtSecret} placeholder="my-secret-key" />
-        <CalcBtn onClick={encodeJwt} label="Sign JWT (HS256)" />
-      </Card>
-
-      <Card title="JWT Validator">
-        <textarea value={jwtValidateIn} onChange={e => setJwtValidateIn(e.target.value)}
-          className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder="Paste JWT..." />
-        <Inp label="Secret" value={jwtSecret} onChange={setJwtSecret} placeholder="my-secret-key" />
-        <CalcBtn onClick={validateJwt} label="Validate" />
-      </Card>
-
-      {jwtOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">Output</span>
-            <button onClick={() => { clipboardWrite(jwtOut); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline">Copy</button>
-          </div>
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all">{jwtOut}</pre>
-        </div>
-      )}
-      {jwtValidOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">Validation</span>
-            <button onClick={() => { clipboardWrite(jwtValidOut); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline">Copy</button>
-          </div>
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{jwtValidOut}</pre>
-        </div>
-      )}
+      <LinkCard title="JWT Debugger" slug="jwt-debugger" desc="Decode, inspect, and debug JWT tokens. View header, payload, signature, and expiration details." />
+      <LinkCard title="JWT Inspector" slug="jwt-inspector" desc="Advanced JWT analysis with signature verification, claim validation, and security issue detection." />
     </div>
   );
 }
@@ -163,12 +76,8 @@ function OauthTools() {
   const [authUrl, setAuthUrl] = useState('');
   const [pkceVerifier, setPkceVerifier] = useState('');
   const [pkceChallenge, setPkceChallenge] = useState('');
-  const [pkceOut, setPkceOut] = useState('');
-  const [oauthState, setOauthState] = useState('');
   const [stateIn, setStateIn] = useState('');
   const [stateVerifyOut, setStateVerifyOut] = useState('');
-  const [oauthToken, setOauthToken] = useState('');
-  const [tokenValidOut, setTokenValidOut] = useState('');
   const [scopeIn, setScopeIn] = useState('openid,profile,email,offline_access');
   const [scopeOut, setScopeOut] = useState('');
 
@@ -186,27 +95,21 @@ function OauthTools() {
     const state = crypto.randomUUID();
     const url = `${base}?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri || 'https://yourapp.com/callback')}&scope=${encodeURIComponent(scope)}&response_type=code&state=${state}`;
     setAuthUrl(url + '\n\nState: ' + state);
-    setOauthState(state);
   };
 
-  const pkceGen = async () => {
-    const verifier = btoa(crypto.getRandomValues(new Uint8Array(32)).reduce((s, b) => s + String.fromCharCode(b), '')).replace(/[+/=]/g, '').slice(0, 128);
-    const challenge = btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier))))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    setPkceVerifier(verifier);
-    setPkceChallenge(challenge);
-    setPkceOut(`Verifier: ${verifier}\nChallenge: ${challenge}\nMethod: S256`);
-    toast.success('PKCE pair generated');
-  };
-
-  const pkceVerify = () => {
-    if (!pkceVerifier || !pkceChallenge) { toast.error('Generate or paste both values first'); return; }
-    const expected = btoa(String.fromCharCode(...new Uint8Array(new TextEncoder().encode(''))))
-      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    const computed = btoa(String.fromCharCode(...new Uint8Array(
-      new Uint8Array(Array.from(atob(pkceChallenge.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0)))
-    )));
-    setPkceOut(`Verifier: ${pkceVerifier}\nChallenge: ${pkceChallenge}\n\nVerify by re-computing challenge from verifier on your server.`);
-    toast.success('PKCE pair ready');
+  const pkceVerify = async () => {
+    if (!pkceVerifier || !pkceChallenge) { toast.error('Paste or generate both values first'); return; }
+    try {
+      const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pkceVerifier));
+      const computed = btoa(String.fromCharCode(...new Uint8Array(hash)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+      const match = computed === pkceChallenge;
+      toast.success(match ? 'PKCE pair verified ✓' : 'PKCE pair mismatch ✗');
+    } catch {
+      toast.error('Verification failed — check your inputs');
+    }
   };
 
   const stateValidate = () => {
@@ -219,28 +122,6 @@ function OauthTools() {
       : `✗ State too short or malformed (min 16 chars recommended)`);
   };
 
-  const tokenValidate = () => {
-    if (!oauthToken.trim()) { toast.error('Paste an access or ID token'); return; }
-    try {
-      const parts = oauthToken.trim().split('.');
-      if (parts.length === 3) {
-        const p = JSON.parse(atob(parts[1]));
-        const now = Math.floor(Date.now() / 1000);
-        const valid = !(p.exp && p.exp < now);
-        const lines = [`Token type: JWT`, `Valid: ${valid ? '✓' : '✗'}`, `Issued: ${p.iat ? new Date(p.iat * 1000).toISOString() : 'unknown'}`];
-        if (p.exp) lines.push(`Expires: ${new Date(p.exp * 1000).toISOString()}${p.exp < now ? ' (EXPIRED)' : ''}`);
-        if (p.iss) lines.push(`Issuer: ${p.iss}`);
-        if (p.aud) lines.push(`Audience: ${p.aud}`);
-        if (p.scope) lines.push(`Scope: ${p.scope}`);
-        setTokenValidOut(lines.join('\n'));
-      } else {
-        const isBase64 = /^[A-Za-z0-9+/=_*-]+$/.test(oauthToken.trim());
-        setTokenValidOut(`Token (opaque, length: ${oauthToken.length})\nFormat: ${isBase64 ? 'Base64 encoded' : 'Opaque bearer token'}\nNote: Opaque tokens require server-side introspection.`);
-      }
-      toast.success('Token analyzed');
-    } catch { setTokenValidOut('Could not parse token format'); }
-  };
-
   const scopeBuild = () => {
     const scopes = scopeIn.split(',').map(s => s.trim()).filter(Boolean);
     const str = scopes.join(' ');
@@ -251,6 +132,7 @@ function OauthTools() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <LinkCard title="OAuth PKCE Generator" slug="oauth-pkce-generator" desc="Generate PKCE code_verifier and code_challenge (S256) pairs for secure OAuth flows." />
       <Card title="OAuth Client Setup">
         <div className="flex flex-wrap gap-1">
           {Object.keys(PROVIDERS).map(p => (
@@ -263,11 +145,6 @@ function OauthTools() {
         <Inp label="Scope" value={scope} onChange={setScope} placeholder="openid profile" />
         <CalcBtn onClick={generateUrl} label="Generate Auth URL" />
         {authUrl && <pre className="text-[10px] font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 max-h-24 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{authUrl}</pre>}
-      </Card>
-
-      <Card title="PKCE Generator">
-        <p className="text-[10px] text-zinc-400">Generates code_verifier + code_challenge (S256)</p>
-        <CalcBtn onClick={pkceGen} label="Generate PKCE Pair" />
       </Card>
 
       <Card title="PKCE Verifier">
@@ -287,29 +164,10 @@ function OauthTools() {
         <CalcBtn onClick={stateValidate} label="Validate State" />
       </Card>
 
-      <Card title="OAuth Token Validator">
-        <textarea value={oauthToken} onChange={e => setOauthToken(e.target.value)}
-          className="w-full h-16 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder="Paste access/id token..." />
-        <CalcBtn onClick={tokenValidate} label="Validate Token" />
-      </Card>
-
-      {pkceOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">PKCE Output</span>
-            <button onClick={() => { clipboardWrite(pkceOut); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline">Copy</button>
-          </div>
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{pkceOut}</pre>
-        </div>
-      )}
+      <LinkCard title="OAuth Token Validator" slug="jwt-debugger" desc="Decode, inspect, and validate OAuth access tokens — verify signature, expiry, and claims using JWT Debugger." />
       {stateVerifyOut && (
         <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
           <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{stateVerifyOut}</pre>
-        </div>
-      )}
-      {tokenValidOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{tokenValidOut}</pre>
         </div>
       )}
       {scopeOut && (
@@ -324,34 +182,8 @@ function OauthTools() {
 function CryptoTools() {
   const [hashInput, setHashInput] = useState('Hello, World!');
   const [hashOutput, setHashOutput] = useState('');
-  const [aesPassword, setAesPassword] = useState('my-password');
-  const [aesInput, setAesInput] = useState('Sensitive data to encrypt');
-  const [aesOut, setAesOut] = useState('');
-  const [aesMode, setAesMode] = useState<'encrypt' | 'decrypt'>('encrypt');
   const [cookieIn, setCookieIn] = useState('session_id=abc123; Secure; HttpOnly; SameSite=Lax');
   const [cookieOut, setCookieOut] = useState('');
-  const [cspOut, setCspOut] = useState('');
-  const [cspNonce, setCspNonce] = useState('');
-
-  const aesEncDec = async () => {
-    try {
-      const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(aesPassword.padEnd(16, '0').slice(0, 16)), { name: 'AES-CBC' }, false, aesMode === 'encrypt' ? ['encrypt'] : ['decrypt']);
-      if (aesMode === 'encrypt') {
-        const iv = crypto.getRandomValues(new Uint8Array(16));
-        const enc = await crypto.subtle.encrypt({ name: 'AES-CBC', iv }, keyMaterial, new TextEncoder().encode(aesInput));
-        const combined = new Uint8Array(iv.length + enc.byteLength);
-        combined.set(iv); combined.set(new Uint8Array(enc), iv.length);
-        setAesOut(btoa(String.fromCharCode(...combined)));
-      } else {
-        const raw = Uint8Array.from(atob(aesInput.trim()), c => c.charCodeAt(0));
-        const iv = raw.slice(0, 16);
-        const data = raw.slice(16);
-        const dec = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, keyMaterial, data);
-        setAesOut(new TextDecoder().decode(dec));
-      }
-      toast.success(`${aesMode === 'encrypt' ? 'Encrypted' : 'Decrypted'}`);
-    } catch { toast.error(`${aesMode === 'encrypt' ? 'Encryption' : 'Decryption'} failed (check password)`); }
-  };
 
   const bcryptHash = async () => {
     if (!hashInput.trim()) { toast.error('Enter text'); return; }
@@ -399,29 +231,6 @@ function CryptoTools() {
     setCookieOut(flags.join('\n'));
   };
 
-  const cspNonceGen = () => {
-    const nonce = btoa(crypto.getRandomValues(new Uint8Array(32)).reduce((s, b) => s + String.fromCharCode(b), '')).replace(/[+/=]/g, '').slice(0, 32);
-    setCspNonce(nonce);
-    setCspOut(`Nonce: ${nonce}\n\nUsage:\n<script nonce="${nonce}">...</script>\nContent-Security-Policy: script-src 'nonce-${nonce}'`);
-    toast.success('Nonce generated');
-  };
-
-  const cspBuild = () => {
-    const directives: Record<string, string> = {
-      'default-src': "'self'",
-      'script-src': "'self'",
-      'style-src': "'self' 'unsafe-inline'",
-      'img-src': "'self' data: https:",
-      'font-src': "'self'",
-      'connect-src': "'self'",
-      'frame-ancestors': "'none'",
-      'form-action': "'self'",
-    };
-    if (cspNonce) directives['script-src'] += ` 'nonce-${cspNonce}'`;
-    const policy = Object.entries(directives).map(([k, v]) => `${k} ${v}`).join('; ');
-    setCspOut(`Content-Security-Policy: ${policy}\n\nMeta tag:\n<meta http-equiv="Content-Security-Policy" content="${policy}">`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       <LinkCard title="MD5 & Hash Generator" slug="md5-hash-generator" desc="Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input." />
@@ -432,21 +241,8 @@ function CryptoTools() {
         <CalcBtn onClick={bcryptHash} label="Generate Hash" />
       </Card>
 
-      <Card title="AES Encrypt / Decrypt">
-        <div className="flex gap-1">
-          <button onClick={() => setAesMode('encrypt')} className={`flex-1 py-1 text-[10px] font-bold rounded-lg ${aesMode === 'encrypt' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>Encrypt</button>
-          <button onClick={() => setAesMode('decrypt')} className={`flex-1 py-1 text-[10px] font-bold rounded-lg ${aesMode === 'decrypt' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>Decrypt</button>
-        </div>
-        <Inp label="Key" value={aesPassword} onChange={setAesPassword} />
-        <textarea value={aesInput} onChange={e => setAesInput(e.target.value)}
-          className="w-full h-12 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder={aesMode === 'encrypt' ? 'Plaintext...' : 'Base64 ciphertext...'} />
-        <CalcBtn onClick={aesEncDec} label={aesMode === 'encrypt' ? 'Encrypt (AES-128-CBC)' : 'Decrypt (AES-128-CBC)'} />
-        <div className="mt-2 border-t border-zinc-200 dark:border-zinc-700 pt-2 space-y-1">
-          <p className="text-[9px] text-amber-500">⚠ Already encrypted data here? Decrypt before switching — formats are incompatible.</p>
-          <Link href="/developer/aes-encrypt" className="flex items-center gap-1 text-[10px] text-blue-500 hover:underline">Need AES-256? Use AES Encrypt <ExternalLink className="w-2.5 h-2.5" /></Link>
-        </div>
-      </Card>
-
+      <LinkCard title="AES Encrypt" slug="aes-encrypt" desc="Encrypt and decrypt data with AES-256-GCM. More secure than the inline AES-128-CBC implementation." />
+      <LinkCard title="Content Security Policy Generator" slug="content-security-policy-generator" desc="Build CSP headers with nonce generation, directive configuration, and policy validation." />
       <Card title="Cookie Parser">
         <textarea value={cookieIn} onChange={e => setCookieIn(e.target.value)}
           className="w-full h-14 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" placeholder="Set-Cookie header..." />
@@ -459,16 +255,6 @@ function CryptoTools() {
         <CalcBtn onClick={cookieAnalyze} label="Analyze Security" />
       </Card>
 
-      <Card title="CSP Nonce Generator">
-        <p className="text-[10px] text-zinc-400">Generates a random CSP nonce for inline scripts</p>
-        <CalcBtn onClick={cspNonceGen} label="Generate Nonce" />
-      </Card>
-
-      <Card title="CSP Policy Builder">
-        <p className="text-[10px] text-zinc-400">{cspNonce ? `Using nonce: ${cspNonce.slice(0, 12)}...` : 'Generate a nonce first to include it'}</p>
-        <CalcBtn onClick={cspBuild} label="Build CSP Policy" />
-      </Card>
-
       {hashOutput && (
         <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
           <div className="flex items-center justify-between">
@@ -478,19 +264,9 @@ function CryptoTools() {
           <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all">{hashOutput}</pre>
         </div>
       )}
-      {aesOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all">{aesOut}</pre>
-        </div>
-      )}
       {cookieOut && (
         <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
           <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{cookieOut}</pre>
-        </div>
-      )}
-      {cspOut && (
-        <div className="md:col-span-2 lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-3 rounded-xl space-y-2">
-          <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{cspOut}</pre>
         </div>
       )}
     </div>
@@ -498,88 +274,10 @@ function CryptoTools() {
 }
 
 function SslTools() {
-  const [domain, setDomain] = useState('');
-  const [sslResult, setSslResult] = useState<string | null>(null);
-  const [samlXml, setSamlXml] = useState('<saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="_abc123" IssueInstant="2024-01-01T00:00:00Z" Version="2.0">\n  <saml:Issuer>https://idp.example.com</saml:Issuer>\n  <saml:Subject>\n    <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">user@example.com</saml:NameID>\n    <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">\n      <saml:SubjectConfirmationData NotOnOrAfter="2024-01-02T00:00:00Z" Recipient="https://sp.example.com/acs" />\n    </saml:SubjectConfirmation>\n  </saml:Subject>\n  <saml:Conditions NotBefore="2024-01-01T00:00:00Z" NotOnOrAfter="2024-01-02T00:00:00Z">\n    <saml:AudienceRestriction>\n      <saml:Audience>https://sp.example.com</saml:Audience>\n    </saml:AudienceRestriction>\n  </saml:Conditions>\n  <saml:AuthnStatement AuthnInstant="2024-01-01T00:00:00Z" SessionIndex="_abc123">\n    <saml:AuthnContext>\n      <saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</saml:AuthnContextClassRef>\n    </saml:AuthnContext>\n  </saml:AuthnStatement>\n  <saml:AttributeStatement>\n    <saml:Attribute Name="email" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic">\n      <saml:AttributeValue>user@example.com</saml:AttributeValue>\n    </saml:Attribute>\n  </saml:AttributeStatement>\n</saml:Assertion>');
-  const [samlOut, setSamlOut] = useState('');
-
-  const checkSsl = async () => {
-    if (!domain) { toast.error('Enter a domain'); return; }
-    try {
-      const url = domain.startsWith('http') ? domain : `https://${domain}`;
-      const start = Date.now();
-      const res = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
-      const elapsed = Date.now() - start;
-      setSslResult([
-        `Domain: ${domain}`,
-        `SSL/TLS: Active (HTTPS)`,
-        `Response time: ${elapsed}ms`,
-        `Status: ${res.status} ${res.statusText}`,
-        `URL: ${url}`,
-        `Note: Full cert details require server-side checking.`,
-      ].join('\n'));
-      toast.success('SSL check complete');
-    } catch (e: unknown) {
-      const err = e instanceof Error ? e.message : 'Check failed';
-      setSslResult(`Domain: ${domain}\nSSL/TLS: Could not verify\nError: ${err}\n\nTip: Ensure the domain has HTTPS enabled.`);
-      toast.error(err);
-    }
-  };
-
-  const decodeSaml = () => {
-    try {
-      const extract = (tag: string, xml: string) => {
-        const m = xml.match(new RegExp(`<saml:${tag}[^>]*>(.*?)</saml:${tag}>`, 's'));
-        return m ? m[1].trim() : `not found`;
-      };
-      const extractAttr = (tag: string, attr: string, xml: string) => {
-        const m = xml.match(new RegExp(`<saml:${tag}[^>]*${attr}=["']([^"']*)["']`, 's'));
-        return m ? m[1] : `not found`;
-      };
-      const extractAttribute = (xml: string) => {
-        const nameM = xml.match(/<saml:Attribute Name="([^"]*)"/);
-        const valM = xml.match(/<saml:AttributeValue>([^<]*)<\/saml:AttributeValue>/);
-        return nameM && valM ? `${nameM[1]}: ${valM[1]}` : 'none found';
-      };
-      const lines = [
-        `ID: ${extractAttr('Assertion', 'ID', samlXml)}`,
-        `Version: ${extractAttr('Assertion', 'Version', samlXml)}`,
-        `IssueInstant: ${extractAttr('Assertion', 'IssueInstant', samlXml)}`,
-        `Issuer: ${extract('Issuer', samlXml)}`,
-        `Subject: ${extract('NameID', samlXml)}`,
-        `NameID Format: ${extractAttr('NameID', 'Format', samlXml)}`,
-        `SubjectConfirmation: ${extractAttr('SubjectConfirmation', 'Method', samlXml)}`,
-        `NotOnOrAfter: ${extractAttr('SubjectConfirmationData', 'NotOnOrAfter', samlXml)}`,
-        `Recipient: ${extractAttr('SubjectConfirmationData', 'Recipient', samlXml)}`,
-        `Conditions - NotBefore: ${extractAttr('Conditions', 'NotBefore', samlXml)}`,
-        `Conditions - NotOnOrAfter: ${extractAttr('Conditions', 'NotOnOrAfter', samlXml)}`,
-        `Audience: ${extract('Audience', samlXml)}`,
-        `AuthnInstant: ${extractAttr('AuthnStatement', 'AuthnInstant', samlXml)}`,
-        `AuthnContext: ${extract('AuthnContextClassRef', samlXml)}`,
-        `Attribute: ${extractAttribute(samlXml)}`,
-      ];
-      setSamlOut(lines.join('\n'));
-      toast.success('SAML assertion decoded');
-    } catch { toast.error('Could not parse SAML XML'); }
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-      <Card title="SSL Scanner">
-        <div className="flex gap-2">
-          <input type="text" value={domain} onChange={e => setDomain(e.target.value)} placeholder="example.com"
-            className="flex-1 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1.5 text-[11px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-        </div>
-        <CalcBtn onClick={checkSsl} label="Check SSL" />
-        {sslResult && <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 text-zinc-900 dark:text-white whitespace-pre-wrap">{sslResult}</pre>}
-      </Card>
-
-      <Card title="SAML Assertion Decoder">
-        <textarea value={samlXml} onChange={e => setSamlXml(e.target.value)}
-          className="w-full h-48 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[10px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-        <CalcBtn onClick={decodeSaml} label="Decode Assertion" />
-        {samlOut && <pre className="text-xs font-mono bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{samlOut}</pre>}
-      </Card>
+      <LinkCard title="SSL/TLS Checker" slug="ssl-tls-checker" desc="Full SSL certificate inspection including chain validation, expiry dates, cipher suites, and protocol support." />
+      <LinkCard title="SAML Decoder" slug="saml-decoder" desc="Decode SAML assertions and extract issuer, subject, conditions, authentication context, and attributes." />
     </div>
   );
 }

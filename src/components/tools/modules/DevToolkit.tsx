@@ -84,7 +84,7 @@ function CssTools() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
       <LinkCard title="Box Shadow Generator" slug="box-shadow-generator" desc="Generate CSS box-shadow values with an interactive preview — offset, blur, spread, color, and inset." />
-      <LinkCard title="CSS Gradient Generator" slug="css-gradient-generator" desc="Create beautiful CSS gradients with an interactive builder. Choose direction and colors with live preview." />
+      <LinkCard title="CSS Gradient Generator" slug="gradient-generator" desc="Create beautiful CSS gradients with an interactive builder. Choose direction and colors with live preview." />
       <Card title="Glassmorphism">
         <div className="flex gap-1 items-center"><span className="text-[10px] text-zinc-500">Blur</span>
           <input type="range" min={1} max={20} defaultValue={8} onChange={e => setGlassOut(`background: rgba(255,255,255,0.15); backdrop-filter: blur(${e.target.value}px); -webkit-backdrop-filter: blur(${e.target.value}px); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px;`)} className="flex-1" /></div>

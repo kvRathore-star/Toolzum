@@ -78,26 +78,10 @@ function DateMathTab() {
 }
 
 function ConvertersTab() {
-  const [msIn, setMsIn] = useState('3600000');
-  const [msOut, setMsOut] = useState('');
-
-  const msConvert = () => {
-    const ms = parseInt(msIn) || 0;
-    const d = Math.floor(ms / 86400000);
-    const h = Math.floor((ms % 86400000) / 3600000);
-    const m = Math.floor((ms % 3600000) / 60000);
-    const s = Math.floor((ms % 60000) / 1000);
-    setMsOut(`${ms.toLocaleString()} ms\n\n= ${d}d ${h}h ${m}m ${s}s\n= ${(ms / 1000).toFixed(2)} seconds\n= ${(ms / 60000).toFixed(4)} minutes\n= ${(ms / 3600000).toFixed(6)} hours\n= ${(ms / 86400000).toFixed(6)} days`);
-  };
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <LinkCard title="Unix Time Converter" slug="unix-time-converter" desc="Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, and locale formats." />
-      <Card title="Milliseconds Converter">
-        <Inp label="ms" value={msIn} onChange={setMsIn} placeholder="3600000" />
-        <button onClick={msConvert} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
-        <Output value={msOut} />
-      </Card>
+      <LinkCard title="Time Converter" slug="time-converter" desc="Convert between milliseconds, seconds, minutes, hours, and days. Includes Unix timestamp and duration conversions." />
       <LinkCard title="Minutes to Hours Converter" slug="minutes-to-hours-converter" desc="Convert minutes to hours and minutes format. Shows decimal hours equivalent for payroll and billing." />
     </div>
   );

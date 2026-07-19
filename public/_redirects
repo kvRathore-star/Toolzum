@@ -111,3 +111,23 @@
 /calculator/days-between-dates-calculator    /developer/date-difference-calculator/   301
 /calculator/days-until-calculator/   /developer/time-until-calculator/   301
 /calculator/days-until-calculator    /developer/time-until-calculator/   301
+
+# Retired toolkits — hub pages replaced by category subsections
+/developer/text-seo-toolkit/   /seo/   301
+/developer/text-seo-toolkit    /seo/   301
+/developer/network-utility-toolkit/   /developer/   301
+/developer/network-utility-toolkit    /developer/   301
+/developer/scanner-toolkit/   /developer/   301
+/developer/scanner-toolkit    /developer/   301
+
+# Retired GeneratorToolkit — tools promoted to standalone pages
+/developer/generator-toolkit/   /developer/   301
+/developer/generator-toolkit    /developer/   301
+
+# Retired ConvertersEverydayKit — tools promoted to standalone pages
+/converter/converters-everyday-toolkit/   /converter/   301
+/converter/converters-everyday-toolkit    /converter/   301
+
+# Retired DataToolkit — tools promoted to standalone pages
+/utility/data-toolkit/   /utility/   301
+/utility/data-toolkit    /utility/   301

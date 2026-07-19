@@ -595,3 +595,195 @@ export function MarkdownPreviewer() {
     </div>
   );
 }
+
+export function DuplicateWordRemover() {
+  const [text, setText] = useState('');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const remove = () => {
+    const words = text.split(/\s+/);
+    const seen = new Set<string>();
+    const out: string[] = [];
+    words.forEach(w => { const key = w.toLowerCase(); if (!seen.has(key)) { seen.add(key); out.push(w); } });
+    setResult(out.join(' '));
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Duplicate Word Remover</h1>
+      <p className="text-sm text-zinc-500 mb-4">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <a href="/developer/text-deduplicator" className="text-blue-600 hover:underline">Text Deduplicator</a>.</p>
+      <div className="space-y-3">
+        <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
+        <button onClick={remove} className={btnClass}>Remove Duplicate Words</button>
+        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+export function TextCleaner() {
+  const [text, setText] = useState('');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const clean = () => {
+    let t = text;
+    t = t.replace(/\s+/g, ' ');
+    t = t.replace(/\n{3,}/g, '\n\n');
+    t = t.replace(/[^\S\n]+$/gm, '');
+    t = t.replace(/^[^\S\n]+/gm, '');
+    setResult(t.trim());
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Text Cleaner</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
+        <button onClick={clean} className={btnClass}>Clean Text</button>
+        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+export function TextSplitter() {
+  const [text, setText] = useState('');
+  const [delimiter, setDelimiter] = useState(' ');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const split = () => {
+    if (!delimiter) return;
+    const parts = text.split(delimiter).map(s => s.trim()).filter(Boolean);
+    setResult(parts.map((p, i) => `${i + 1}. ${p}`).join('\n'));
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Text Splitter</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
+        <div><label className={labelClass}>Delimiter</label><input type="text" value={delimiter} onChange={e => setDelimiter(e.target.value)} className={inputClass} /></div>
+        <button onClick={split} className={btnClass}>Split</button>
+        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+export function TrailingSpaceRemover() {
+  const [text, setText] = useState('');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const trim = () => {
+    setResult(text.split('\n').map(l => l.trimEnd()).join('\n').trim());
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Trailing Space Remover</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
+        <button onClick={trim} className={btnClass}>Trim Trailing Spaces</button>
+        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+export function CanonicalUrlChecker() {
+  const [url, setUrl] = useState('https://example.com/blog/my-article');
+  const [result, setResult] = useState('');
+  const check = () => {
+    try { new URL(url); } catch { setResult('Invalid URL'); return; }
+    const u = new URL(url);
+    const checks = [
+      '✓ Valid URL format',
+      `Protocol: ${u.protocol}`,
+      `Domain: ${u.hostname}`,
+      `Path: ${u.pathname}`,
+      u.hash ? '⚠️ Has fragment (#) — search engines may ignore' : '✓ No fragment',
+      u.search ? '⚠️ Has query params — ensure these are the canonical version' : '✓ No query params',
+      u.pathname.endsWith('/') ? '✓ Ends with /' : 'ℹ️ No trailing slash',
+      u.hostname.startsWith('www.') ? 'ℹ️ With www' : 'ℹ️ Without www',
+    ];
+    setResult(checks.join('\n'));
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Canonical URL Checker</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>URL</label><input type="url" value={url} onChange={e => setUrl(e.target.value)} className={inputClass} /></div>
+        <button onClick={check} className={btnClass}>Check URL</button>
+        {result && <pre className={resultClass}>{result}</pre>}
+      </div>
+    </div>
+  );
+}
+
+export function BreadcrumbSchemaGenerator() {
+  const [pages, setPages] = useState('Home,https://example.com\nProducts,https://example.com/products\nWidgets,https://example.com/widgets');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const generate = () => {
+    const items = pages.split('\n').filter(l => l.trim()).map(l => {
+      const [name, url] = l.split(',').map(s => s.trim());
+      return { name, url };
+    });
+    if (items.length < 2) return;
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": items.map((item, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": item.name,
+        "item": item.url,
+      })),
+    };
+    setResult(JSON.stringify(schema, null, 2));
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>Breadcrumb Schema Generator</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>Pages (Name,URL per line)</label><textarea value={pages} onChange={e => setPages(e.target.value)} rows={4} className={`${inputClass} font-mono text-xs`} /></div>
+        <button onClick={generate} className={btnClass}>Generate Breadcrumb Schema</button>
+        {result && <div className="mt-4"><textarea readOnly value={result} rows={8} className={`${inputClass} font-mono text-xs`} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
+
+export function UtmBuilder() {
+  const [baseUrl, setBaseUrl] = useState('https://example.com');
+  const [source, setSource] = useState('newsletter');
+  const [medium, setMedium] = useState('email');
+  const [campaign, setCampaign] = useState('spring_sale');
+  const [term, setTerm] = useState('');
+  const [content, setContent] = useState('');
+  const [result, setResult] = useState('');
+  const { copied, copy } = useCopy();
+  const build = () => {
+    try { new URL(baseUrl); } catch { return; }
+    const u = new URL(baseUrl);
+    u.searchParams.set('utm_source', source);
+    u.searchParams.set('utm_medium', medium);
+    u.searchParams.set('utm_campaign', campaign);
+    if (term) u.searchParams.set('utm_term', term);
+    if (content) u.searchParams.set('utm_content', content);
+    setResult(u.toString());
+  };
+  return (
+    <div className={cardClass}>
+      <h1 className={headingClass}>UTM Builder</h1>
+      <div className="space-y-3">
+        <div><label className={labelClass}>URL</label><input type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} className={inputClass} /></div>
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelClass}>Source</label><input type="text" value={source} onChange={e => setSource(e.target.value)} className={inputClass} /></div>
+          <div><label className={labelClass}>Medium</label><input type="text" value={medium} onChange={e => setMedium(e.target.value)} className={inputClass} /></div>
+          <div><label className={labelClass}>Campaign</label><input type="text" value={campaign} onChange={e => setCampaign(e.target.value)} className={inputClass} /></div>
+          <div><label className={labelClass}>Term (opt)</label><input type="text" value={term} onChange={e => setTerm(e.target.value)} className={inputClass} /></div>
+        </div>
+        <div><label className={labelClass}>Content (opt)</label><input type="text" value={content} onChange={e => setContent(e.target.value)} className={inputClass} /></div>
+        <button onClick={build} className={btnClass}>Build UTM URL</button>
+        {result && <div className="mt-4"><input readOnly value={result} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
+      </div>
+    </div>
+  );
+}
