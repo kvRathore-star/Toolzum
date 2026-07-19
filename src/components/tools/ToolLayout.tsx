@@ -18,6 +18,7 @@ import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
 import type { SessionUser } from '@/types/tool';
+import { getShortDescription } from '@/lib/generateToolDescription';
 
 interface ToolLayoutProps {
   title: string;

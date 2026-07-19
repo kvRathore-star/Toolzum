@@ -5,6 +5,7 @@ import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
+import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
 
 export async function generateStaticParams() {
   const redirectPages = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
@@ -26,7 +27,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   
   if (!toolMetadata) return { title: 'Not Found' };
 
-  const desc = toolMetadata.seoDescription || `Free online ${toolMetadata.name}: ${toolMetadata.description.charAt(0).toLowerCase() + toolMetadata.description.slice(1)}. 100% browser-based, nothing uploaded.`;
+  const desc = getMetaDescription(toolMetadata);
   const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.png`;
 
   return {
@@ -37,7 +38,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     },
     openGraph: {
       title: `${toolMetadata.name} - Free Online Tool`,
-      description: toolMetadata.description,
+      description: getOgDescription(toolMetadata),
       type: 'website',
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
@@ -66,7 +67,7 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
     <>
       <ToolLayout
         title={toolMetadata.name}
-        description={toolMetadata.description}
+        description={getShortDescription(toolMetadata)}
         category={params.category}
         slug={toolMetadata.slug}
         seoSection={<ToolPageSEOContent tool={toolMetadata} />}

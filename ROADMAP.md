@@ -25,6 +25,22 @@ Full sitewide audit of all 13 tool categories for duplicate/superset/overlapping
 - Manual indexing request via Google Search Console (no credentials available in agent)
 - Re-verify live pages post-deployment before submitting
 
+### 12 tools with unverified dependency classification (needs manual review)
+`generateToolDescription.ts` and `ToolPageSEOContent.tsx` now import from a shared `cloudPatterns.ts` that classifies tool dependencies as cloud/local/unverified. 12 tools have dependencies that don't match any known pattern — they get **no privacy or cloud claim** until someone verifies and adds the correct pattern. Someone needs to check each and either add to `CLOUD_API_PATTERNS` (if server-side) or `LOCAL_SAFE_PATTERNS` (if client-side):
+
+1. [AI] AI Paraphrasing Tool — `HuggingFace`
+2. [PDF] Unlock PDF — `qpdf`
+3. [AI] AI Face Swap — `InsightFace`
+4. [Image] PNG to SVG — `Potrace`
+5. [Transcription] Live Transcription — `Web Speech API`
+6. [AI] AI Document Chat (RAG) — `CF Vectorize`
+7. [indian-utilities] IFSC Code Lookup — `IFSC API`
+8. [indian-utilities] India Pincode Finder — `Postal API`
+9. [Audio] Apple Music Preview Extractor — `fetch API`
+10. [indian-utilities] Indian Voice Transcriber — `Web Speech API`
+11. [SEO] Bulk URL Status Checker — `fetch API`
+12. [Text] Pronunciation Tool — `Web Speech API`
+
 ### Fake/stub implementation sweep
 Two fake tools were found and retired (QR Code Generator — produced unscannable images; ZIP Simulator — showed fabricated "~30% reduction" with `Math.round(total * 0.7)` and no actual compression). Pattern suggests there may be more. Check every tool that:
 - Uses suspiciously simple placeholder math (hardcoded multipliers like `* 0.7`, random sample data instead of real computation)

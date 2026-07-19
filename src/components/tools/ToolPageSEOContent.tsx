@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-react";
 import { toolsRegistry, ToolMetadata } from "@/registry/tools";
+import { getShortDescription } from "@/lib/generateToolDescription";
+import { requiresCloudApi } from "@/lib/cloudPatterns";
 
 interface ToolPageSEOContentProps {
   tool: ToolMetadata;
@@ -33,16 +35,6 @@ const formatInfo: Record<string, { name: string; desc: string; quality: string; 
   ico: { name: 'ICO', desc: 'Windows Icon', quality: 'lossless (multiple sizes)', bestFor: 'favicons and app icons — standard format for website bookmarks and Windows application icons' },
   jxl: { name: 'JPEG XL', desc: 'JPEG XL', quality: 'lossy or lossless', bestFor: 'next-gen image archival — better compression than JPEG with support for wide gamut and HDR' },
 };
-
-const CLOUD_API_PATTERNS = [
-  "OpenAI API", "Stable Diffusion", "Google Cloud", "ExchangeRate-API",
-  "YouTube Data", "Whisper API", "Mailinator", "LibreOffice", "CloudConvert",
-  "MaxMind", "Redis", "AI API", "Google Translate", "Calibre", "DNS API", "Fetch API",
-];
-
-function requiresCloudApi(deps: string): boolean {
-  return CLOUD_API_PATTERNS.some(p => deps.includes(p));
-}
 
 const broadTypes = new Set(['generator', 'checker', 'tester', 'builder']);
 
@@ -415,15 +407,16 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   } : null;
 
   const requiresInternet = requiresCloudApi(tool.dependencies);
+  const generatedDesc = getShortDescription(tool);
   const inputTypeFaqs: { question: string; answer: string }[] = [];
   if (!pair) {
     inputTypeFaqs.push({
       question: `What exactly does ${tool.name} do?`,
-      answer: `${tool.name} lets you ${tool.description.charAt(0).toLowerCase() + tool.description.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
+      answer: `${tool.name} lets you ${generatedDesc.charAt(0).toLowerCase() + generatedDesc.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
     });
     inputTypeFaqs.push({
       question: `What can I use ${tool.name} for?`,
-      answer: `${tool.description} It's ideal for developers, designers, and anyone who needs to ${tool.description.split('.')[0].toLowerCase()} without installing software or sending data to external servers.`
+      answer: `${generatedDesc} It's ideal for developers, designers, and anyone who needs to ${generatedDesc.split('.')[0].toLowerCase()} without installing software or sending data to external servers.`
     });
     inputTypeFaqs.push({
       question: `What kind of input does ${tool.name} accept?`,
@@ -523,7 +516,7 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": tool.name,
-              "description": tool.description,
+              "description": generatedDesc,
               "applicationCategory": "WebApplication",
               "operatingSystem": "Web Browser",
               "offers": {
