@@ -17,6 +17,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "typescript-formatter", "jsx-formatter", "tsx-formatter",
         "scss-formatter", "python-formatter", "yaml-formatter",
         "xml-formatter", "markdown-formatter", "sql-formatter",
+        "swift-formatter",
       ],
     },
     {
@@ -118,7 +119,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "http-retry-policy-builder", "eslint-config-generator",
         "whois-lookup", "ssl-checker", "domain-availability-checker",
         "web-inspector", "network-toolkit", "network-utility-toolkit",
-        "config-toolkit", "swift-formatter",
+        "config-toolkit",
       ],
     },
     {
@@ -204,6 +205,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "baby-formula-calculator", "baby-growth-percentile-calculator",
         "baby-sleep-schedule-calculator", "child-height-predictor",
         "ovulation-calculator", "pregnancy-due-date-calculator",
+        "blood-alcohol-calculator",
       ],
     },
     {
@@ -239,6 +241,13 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "age-calculator", "business-days-calculator",
         "day-of-week-calculator", "day-of-year-calculator",
         "leap-year-calculator",
+      ],
+    },
+    {
+      id: "academic",
+      heading: "Academic Calculators",
+      description: "Grade, GPA, and academic performance calculators.",
+      slugs: [
         "final-grade-calculator", "gpa-calculator",
         "grade-calculator", "college-gpa-calculator",
       ],
@@ -693,7 +702,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "ovulation-tracker",
         "due-date-calculator",
-        "blood-alcohol-calculator",
       ],
     },
   ],
