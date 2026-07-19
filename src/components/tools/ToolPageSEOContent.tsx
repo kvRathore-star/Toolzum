@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-react";
 import { toolsRegistry, ToolMetadata } from "@/registry/tools";
 import { getShortDescription } from "@/lib/generateToolDescription";
-import { requiresCloudApi } from "@/lib/cloudPatterns";
+import { requiresCloudApi, LOCAL_TRUST_CLAIM } from "@/lib/cloudPatterns";
 
 interface ToolPageSEOContentProps {
   tool: ToolMetadata;
@@ -412,7 +412,7 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   if (!pair) {
     inputTypeFaqs.push({
       question: `What exactly does ${tool.name} do?`,
-      answer: `${tool.name} lets you ${generatedDesc.charAt(0).toLowerCase() + generatedDesc.slice(1)}. Everything runs inside your browser — nothing is uploaded to a server. It works on any device with a modern web browser.`
+      answer: `${tool.name} lets you ${generatedDesc.charAt(0).toLowerCase() + generatedDesc.slice(1)}. It works on any device with a modern web browser.`
     });
     inputTypeFaqs.push({
       question: `What can I use ${tool.name} for?`,

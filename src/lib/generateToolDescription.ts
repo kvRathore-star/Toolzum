@@ -1,5 +1,5 @@
 import type { ToolMetadata } from "@/registry/tools";
-import { requiresCloudApi, classifyDependencies } from "@/lib/cloudPatterns";
+import { requiresCloudApi, classifyDependencies, LOCAL_TRUST_CLAIM, CLOUD_TRUST_CLAIM } from "@/lib/cloudPatterns";
 
 const formatInfo: Record<string, { name: string; fullName: string; quality: string; bestFor: string }> = {
   json: { name: 'JSON', fullName: 'JavaScript Object Notation', quality: 'human-readable structured data', bestFor: 'APIs, configuration files, and data exchange between web services' },
@@ -83,92 +83,92 @@ interface DescriptionVariants {
 const formatterVariants: Record<string, (name: string, deps: string) => DescriptionVariants> = {
   'json': (name, deps) => ({
     short: `Prettifies JSON data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.`,
-    meta: `Free online ${name} — Prettifies JSON data with configurable indentation, sorting, and syntax validation. Fixes malformed JSON and makes nested structures readable. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Prettifies JSON data with configurable indentation, sorting, and syntax validation. Fixes malformed JSON and makes nested structures readable. ${LOCAL_TRUST_CLAIM}`,
     og: `JSON formatter that prettifies data with configurable indentation and sorting, validates syntax, and fixes malformed JSON — entirely client-side.`,
   }),
   'xml': (name, deps) => ({
     short: `Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes for maximum readability.`,
-    meta: `Free online ${name} — Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes. ${LOCAL_TRUST_CLAIM}`,
     og: `XML formatter that pretty-prints documents with tree indentation, validates structure, and reorganizes attributes for readability.`,
   }),
   'graphql': (name, deps) => ({
     short: `Formats GraphQL queries and mutations with consistent indentation, argument spacing, and fragment organization for readable API schemas.`,
-    meta: `Free online ${name} — Formats GraphQL queries and mutations with consistent indentation and argument spacing. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats GraphQL queries and mutations with consistent indentation and argument spacing. ${LOCAL_TRUST_CLAIM}`,
     og: `GraphQL formatter that applies consistent indentation, argument spacing, and fragment organization to queries and mutations.`,
   }),
   'code': (name, deps) => ({
     short: `Auto-formats source code across 15+ languages — JavaScript, Python, HTML, CSS, SQL, YAML — with language-aware indentation and syntax rules.`,
-    meta: `Free online ${name} — Auto-formats source code across 15+ languages with language-aware indentation and syntax rules. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Auto-formats source code across 15+ languages with language-aware indentation and syntax rules. ${LOCAL_TRUST_CLAIM}`,
     og: `Multi-language code formatter that applies language-aware indentation and syntax rules to JavaScript, Python, HTML, CSS, SQL, and more.`,
   }),
   'html': (name, deps) => ({
     short: `Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation for templates and email designs.`,
-    meta: `Free online ${name} — Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation. ${LOCAL_TRUST_CLAIM}`,
     og: `HTML formatter that indents and structures markup with proper nesting, attribute alignment, and readable indentation.`,
   }),
   'css': (name, deps) => ({
     short: `Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting for maintainable styles.`,
-    meta: `Free online ${name} — Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting. ${LOCAL_TRUST_CLAIM}`,
     og: `CSS formatter that organizes stylesheets with consistent indentation, property grouping, and selector formatting.`,
   }),
   'javascript': (name, deps) => ({
     short: `Formats JavaScript code with proper indentation, consistent spacing, and syntax structure — supports modern ES6+ features and async patterns.`,
-    meta: `Free online ${name} — Formats JavaScript code with proper indentation and syntax structure. Supports ES6+ and async patterns. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats JavaScript code with proper indentation and syntax structure. Supports ES6+ and async patterns. ${LOCAL_TRUST_CLAIM}`,
     og: `JavaScript formatter that applies proper indentation and syntax structure, supporting ES6+ features and async patterns.`,
   }),
   'typescript': (name, deps) => ({
     short: `Formats TypeScript code with type-aware indentation, interface alignment, and consistent syntax structure for large codebases.`,
-    meta: `Free online ${name} — Formats TypeScript code with type-aware indentation and interface alignment. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats TypeScript code with type-aware indentation and interface alignment. ${LOCAL_TRUST_CLAIM}`,
     og: `TypeScript formatter that applies type-aware indentation, interface alignment, and consistent syntax structure.`,
   }),
   'jsx': (name, deps) => ({
     short: `Formats JSX/React component code with proper indentation, prop alignment, and JSX expression structure for readable component definitions.`,
-    meta: `Free online ${name} — Formats JSX/React code with proper indentation, prop alignment, and JSX expression structure. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats JSX/React code with proper indentation, prop alignment, and JSX expression structure. ${LOCAL_TRUST_CLAIM}`,
     og: `JSX formatter that applies proper indentation, prop alignment, and JSX expression structure to React components.`,
   }),
   'tsx': (name, deps) => ({
     short: `Formats TSX/React TypeScript components with type-aware indentation, prop type alignment, and clean JSX structure.`,
-    meta: `Free online ${name} — Formats TSX/React TypeScript components with type-aware indentation and prop alignment. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats TSX/React TypeScript components with type-aware indentation and prop alignment. ${LOCAL_TRUST_CLAIM}`,
     og: `TSX formatter that applies type-aware indentation, prop type alignment, and clean JSX structure to React TypeScript components.`,
   }),
   'scss': (name, deps) => ({
     short: `Organizes SCSS/Sass stylesheets with proper nesting indentation, variable alignment, and mixin formatting for maintainable styles.`,
-    meta: `Free online ${name} — Organizes SCSS/Sass stylesheets with proper nesting indentation and variable alignment. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Organizes SCSS/Sass stylesheets with proper nesting indentation and variable alignment. ${LOCAL_TRUST_CLAIM}`,
     og: `SCSS formatter that organizes stylesheets with proper nesting indentation, variable alignment, and mixin formatting.`,
   }),
   'python': (name, deps) => ({
     short: `Formats Python code with PEP 8 compliant indentation, consistent spacing, and readable structure for scripts and modules.`,
-    meta: `Free online ${name} — Formats Python code with PEP 8 compliant indentation and consistent spacing. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats Python code with PEP 8 compliant indentation and consistent spacing. ${LOCAL_TRUST_CLAIM}`,
     og: `Python formatter that applies PEP 8 compliant indentation, consistent spacing, and readable structure.`,
   }),
   'yaml': (name, deps) => ({
     short: `Structures YAML configuration files with consistent indentation, proper key alignment, and readable hierarchy for Docker and CI/CD configs.`,
-    meta: `Free online ${name} — Structures YAML configuration files with consistent indentation and proper key alignment. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Structures YAML configuration files with consistent indentation and proper key alignment. ${LOCAL_TRUST_CLAIM}`,
     og: `YAML formatter that structures configuration files with consistent indentation, proper key alignment, and readable hierarchy.`,
   }),
   'markdown': (name, deps) => ({
     short: `Normalizes Markdown formatting with consistent heading spacing, list indentation, and code block structure for readable documentation.`,
-    meta: `Free online ${name} — Normalizes Markdown formatting with consistent heading spacing and list indentation. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Normalizes Markdown formatting with consistent heading spacing and list indentation. ${LOCAL_TRUST_CLAIM}`,
     og: `Markdown formatter that normalizes formatting with consistent heading spacing, list indentation, and code block structure.`,
   }),
   'swift': (name, deps) => ({
     short: `Formats Swift source code with proper indentation, spacing, and bracing style for readable iOS and macOS development.`,
-    meta: `Free online ${name} — Formats Swift source code with proper indentation and bracing style. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats Swift source code with proper indentation and bracing style. ${LOCAL_TRUST_CLAIM}`,
     og: `Swift formatter that applies proper indentation, spacing, and bracing style for readable Apple ecosystem code.`,
   }),
   'jsonl': (name, deps) => ({
     short: `Pretty-prints JSON Lines data — formats each line as indented JSON for debugging, log analysis, and streaming data inspection.`,
-    meta: `Free online ${name} — Pretty-prints JSON Lines data with formatted JSON per line for debugging and log analysis. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Pretty-prints JSON Lines data with formatted JSON per line for debugging and log analysis. ${LOCAL_TRUST_CLAIM}`,
     og: `JSON Lines formatter that pretty-prints each line as indented JSON for debugging, log analysis, and streaming data inspection.`,
   }),
   'sql': (name, deps) => ({
     short: `Formats SQL queries with proper keyword capitalization, indentation, and clause alignment for readable database operations.`,
-    meta: `Free online ${name} — Formats SQL queries with proper keyword capitalization, indentation, and clause alignment. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats SQL queries with proper keyword capitalization, indentation, and clause alignment. ${LOCAL_TRUST_CLAIM}`,
     og: `SQL formatter that applies proper keyword capitalization, indentation, and clause alignment for readable database queries.`,
   }),
   'default': (name, deps) => ({
     short: `Formats and beautifies content with proper indentation, consistent spacing, and readable structure for improved code clarity.`,
-    meta: `Free online ${name} — Formats and beautifies content with proper indentation and consistent spacing. 100% browser-based, no uploads.`,
+    meta: `Free online ${name} — Formats and beautifies content with proper indentation and consistent spacing. ${LOCAL_TRUST_CLAIM}`,
     og: `Content formatter that applies proper indentation, consistent spacing, and readable structure.`,
   }),
 };
@@ -223,7 +223,7 @@ function generateConverterDescription(tool: ToolMetadata, pair: { from: string; 
 
   return {
     short: `Converts ${fromInfo.name} files to ${toInfo.name} format — ${fromInfo.bestFor.split(' — ')[0]} to ${toInfo.bestFor.split(' — ')[0]}. All conversion happens locally in your browser with no file size limits.`,
-    meta: `Free online ${tool.name} — Converts ${fromInfo.name} (${fromInfo.fullName}) to ${toInfo.name} (${toInfo.fullName}) format. ${fromInfo.quality} to ${toInfo.quality}. 100% browser-based, no uploads.`,
+    meta: `Free online ${tool.name} — Converts ${fromInfo.name} (${fromInfo.fullName}) to ${toInfo.name} (${toInfo.fullName}) format. ${fromInfo.quality} to ${toInfo.quality}. ${LOCAL_TRUST_CLAIM}`,
     og: `${tool.name} converts ${fromInfo.name} files to ${toInfo.name} format, transforming ${fromInfo.quality} data to ${toInfo.quality} encoding for ${toInfo.bestFor}.`,
   };
 }
@@ -389,9 +389,9 @@ function generateGenericDescription(tool: ToolMetadata): DescriptionVariants {
   }
 
   return {
-    short: `${tool.name} ${action} ${target} entirely in your browser. ${requiresInternet ? 'Uses cloud-based processing for its core functionality.' : 'No data leaves your device — complete privacy guaranteed.'}`,
-    meta: `Free online ${tool.name} — ${tool.name.charAt(0).toLowerCase() + tool.name.slice(1)} ${action} ${target}. ${requiresInternet ? 'Cloud-based processing.' : '100% browser-based, no uploads.'}`,
-    og: `${tool.name} ${action} ${target} entirely in your browser with ${requiresInternet ? 'cloud-based processing' : 'no data leaving your device'}.`,
+    short: `${tool.name} ${action} ${target} entirely in your browser. ${requiresInternet ? CLOUD_TRUST_CLAIM : LOCAL_TRUST_CLAIM}`,
+    meta: `Free online ${tool.name} — ${tool.name.charAt(0).toLowerCase() + tool.name.slice(1)} ${action} ${target}. ${requiresInternet ? CLOUD_TRUST_CLAIM : LOCAL_TRUST_CLAIM}`,
+    og: `${tool.name} ${action} ${target} entirely in your browser. ${requiresInternet ? CLOUD_TRUST_CLAIM : LOCAL_TRUST_CLAIM}`,
   };
 }
 
@@ -415,13 +415,13 @@ export function generateToolDescription(tool: ToolMetadata): DescriptionVariants
 
   let suffix: string;
   if (depVerdict === "cloud") {
-    suffix = ' Uses cloud-based processing.';
+    suffix = ` ${CLOUD_TRUST_CLAIM}`;
   } else if (depVerdict === "unverified") {
     // Don't make a trust claim we can't back — omit the suffix entirely
     // and flag for manual review via the description audit
     suffix = '';
   } else {
-    suffix = ' Everything runs locally in your browser — nothing is uploaded.';
+    suffix = ` ${LOCAL_TRUST_CLAIM}`;
   }
 
   // If the original description already mentions browser/local/private, don't append

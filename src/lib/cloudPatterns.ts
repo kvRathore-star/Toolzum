@@ -194,6 +194,18 @@ const LOCAL_SAFE_PATTERNS: readonly string[] = [
 export type DependencyVerdict = "cloud" | "local" | "unverified";
 
 /**
+ * Trust-claim copy constants.
+ *
+ * IMPORTANT: Any piece of trust-relevant copy that needs to say the same
+ * true thing in multiple places must live here and be referenced everywhere,
+ * never independently authored per surface. These are the claims where
+ * wording drift isn't just untidy — it's a claim inconsistency a careful
+ * user or reviewer could catch and flag.
+ */
+export const LOCAL_TRUST_CLAIM = "Everything runs locally in your browser — nothing is uploaded.";
+export const CLOUD_TRUST_CLAIM = "Uses cloud-based processing.";
+
+/**
  * Classifies a tool's dependencies into one of three verdicts:
  *
  * - "cloud":      deps match a known cloud pattern → data leaves browser
