@@ -4623,6 +4623,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.',
     seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. 100% browser-based.',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "515",
@@ -4975,7 +4976,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Timers (countdown, event countdown, stopwatch with laps), date math (add/subtract days, difference calculator, week number), converters (date↔timestamp), and time math (add/subtract hours/minutes, duration between times). (Time converter has its own dedicated page.)',
     seoDescription: 'Free online Time Toolkit — Countdown timers, stopwatch, date difference calculator, week number, timestamp converter, and time math in one tabbed interface. (Time converter has its own dedicated page.)',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "546",
@@ -4995,7 +4996,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'HTTP headers (analyzer, generator for JSON/REST/GraphQL, cache header generator, status code checker), CORS & rate limit (CORS header generator, policy tester, rate limit header parser), env/config (.env parser, variable template generator, AMQP exchange config), and dev config (ESLint configs for React/Node/TypeScript/Next.js, HTTP retry policy builder with exponential/linear/circuit-breaker).',
     seoDescription: 'Free online Config Toolkit — HTTP header analyzer/generator, CORS header generator and policy tester, rate limit parser, .env file parser, AMQP config builder, ESLint config generator, and HTTP retry policy builder.',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "548",
@@ -5045,7 +5046,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'TOML tools (JSON to TOML, TOML to JSON, TOML validator), YAML tools (YAML to JSON, JSON to YAML, JSON to Toon, YAML validator), XML & SQL tools (XML to JSON/YAML/CSV/Toon, XML validator, SQL INSERT to JSON/CSV), and TSV tools (TSV to CSV).',
     seoDescription: 'Free online Serialization Toolkit — TOML to JSON, JSON to TOML, TOML validator, YAML to JSON, JSON to YAML, YAML validator, XML to JSON/YAML/CSV/Toon, XML validator, SQL INSERT to JSON/CSV, TSV to CSV converter.',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "553",
