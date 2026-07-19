@@ -15,22 +15,11 @@
 /health/due-date-calculator    /calculator/pregnancy-due-date-calculator/   301
 
 # Merged Data Utilities wrappers — redirect to canonical
-/developer/json-path-query-builder/   /utility/data-utilities/   301
-/developer/json-path-query-builder    /utility/data-utilities/   301
-/developer/json-diff-checker/   /utility/data-utilities/   301
-/developer/json-diff-checker    /utility/data-utilities/   301
-/developer/json-tree-viewer/   /utility/data-utilities/   301
-/developer/json-tree-viewer    /utility/data-utilities/   301
+# (json-path-query-builder, json-diff-checker, json-tree-viewer,
+#  csv-analyzer, csv-data-generator, csv-sorter, csv-preview-generator
+#  are now standalone pages — redirects removed)
 /developer/json-minifier/   /developer/json-formatter/   301
 /developer/json-minifier    /developer/json-formatter/   301
-/utility/csv-analyzer/   /utility/data-utilities/   301
-/utility/csv-analyzer    /utility/data-utilities/   301
-/utility/csv-data-generator/   /utility/data-utilities/   301
-/utility/csv-data-generator    /utility/data-utilities/   301
-/utility/csv-sorter/   /utility/data-utilities/   301
-/utility/csv-sorter    /utility/data-utilities/   301
-/utility/csv-preview-generator/   /utility/data-utilities/   301
-/utility/csv-preview-generator    /utility/data-utilities/   301
 
 # Merged cross-category — redirect to canonical
 /utility/morse-code-converter/   /utility/morse-code-translator/   301
