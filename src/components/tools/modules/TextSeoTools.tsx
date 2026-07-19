@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 
 const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
@@ -511,52 +511,60 @@ export function TextDiffChecker() {
   );
 }
 
-// === 16. TextToHtmlConverter ===
-export function TextToHtmlConverter() {
-  const [text, setText] = useState('Line 1\n\nLine 2\nLine 3');
+// === 16/17. TextToHtmlConverter / HtmlToTextConverter (shared bidirectional) ===
+function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-text' }) {
+  const [mode, setMode] = useState<'text-to-html' | 'html-to-text'>(defaultMode);
+  const [input, setInput] = useState(mode === 'text-to-html' ? 'Line 1\n\nLine 2\nLine 3' : '<p>Hello <strong>world</strong></p><p>This is a <a href="#">link</a></p>');
   const [result, setResult] = useState('');
   const { copied, copy } = useCopy();
 
+  useEffect(() => { setMode(defaultMode); setInput(''); setResult(''); }, [defaultMode]);
+
   const convert = () => {
-    const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
-    const html = paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n');
-    setResult(html);
+    const val = input.trim();
+    if (!val) { setResult(''); return; }
+    try {
+      if (mode === 'text-to-html') {
+        const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim());
+        setResult(paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n'));
+      } else {
+        setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n\s*\n/g, '\n\n').trim());
+      }
+    } catch { setResult(''); }
   };
+
+  const isTextToHtml = mode === 'text-to-html';
+  const otherMode = isTextToHtml ? 'html-to-text' : 'text-to-html';
 
   return (
     <div className={cardClass}>
-      <h1 className={headingClass}>Text to HTML Converter</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className={headingClass}>{isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'}</h1>
+      </div>
       <div className="space-y-3">
-        <div><label className={labelClass}>Plain Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
-        <button onClick={convert} className={btnClass}>Convert to HTML</button>
-        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={`${inputClass} font-mono text-xs`} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy HTML'}</button></div>}
+        <div>
+          <label className={labelClass}>{isTextToHtml ? 'Plain Text' : 'HTML'}</label>
+          <textarea value={input} onChange={e => setInput(e.target.value)} rows={6}
+            className={`${inputClass} ${!isTextToHtml ? 'font-mono text-xs' : ''}`} />
+        </div>
+        <button onClick={convert} className={btnClass}>Convert to {isTextToHtml ? 'HTML' : 'Text'}</button>
+        <button onClick={() => setMode(otherMode)}
+          className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          Need to {isTextToHtml ? 'convert HTML back to text' : 'convert text to HTML'} instead? <span className="font-semibold">Switch →</span>
+        </button>
+        {result && (
+          <div className="mt-4">
+            <textarea readOnly value={result} rows={6} className={`${inputClass} ${isTextToHtml ? 'font-mono text-xs' : ''}`} />
+            <button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : `Copy ${isTextToHtml ? 'HTML' : 'Text'}`}</button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-// === 17. HtmlToTextConverter ===
-export function HtmlToTextConverter() {
-  const [html, setHtml] = useState('<p>Hello <strong>world</strong></p><p>This is a <a href="#">link</a></p>');
-  const [result, setResult] = useState('');
-  const { copied, copy } = useCopy();
-
-  const convert = () => {
-    const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n\s*\n/g, '\n\n').trim();
-    setResult(text);
-  };
-
-  return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>HTML to Text Converter</h1>
-      <div className="space-y-3">
-        <div><label className={labelClass}>HTML</label><textarea value={html} onChange={e => setHtml(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div>
-        <button onClick={convert} className={btnClass}>Convert to Text</button>
-        {result && <div className="mt-4"><textarea readOnly value={result} rows={6} className={inputClass} /><button onClick={() => copy(result)} className={`${secondaryBtnClass} mt-2`}>{copied ? 'Copied!' : 'Copy'}</button></div>}
-      </div>
-    </div>
-  );
-}
+export function TextToHtmlConverter() { return <TextHtmlTool defaultMode="text-to-html" />; }
+export function HtmlToTextConverter() { return <TextHtmlTool defaultMode="html-to-text" />; }
 
 // === 18. MarkdownPreviewer ===
 export function MarkdownPreviewer() {

@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { Shield, Unlock, Copy } from 'lucide-react';
+import { Shield, Copy } from 'lucide-react';
 import CryptoJS from 'crypto-js';
 import { clipboardWrite } from "@/lib/clipboard";
 
@@ -41,51 +41,49 @@ function Output({ value, label }: { value: string; label?: string }) {
   );
 }
 
-export function AesEncrypt() {
+function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decrypt' }) {
+  const [mode, setMode] = useState<'encrypt' | 'decrypt'>(defaultMode);
   const [input, setInput] = useState('');
   const [pass, setPass] = useState('');
   const [result, setResult] = useState('');
 
-  const handleEncrypt = () => {
+  useEffect(() => { setMode(defaultMode); setInput(''); setPass(''); setResult(''); }, [defaultMode]);
+
+  const handleAction = () => {
     if (!input.trim() || !pass.trim()) { toast.error('Enter both text and passphrase'); return; }
-    setResult(CryptoJS.AES.encrypt(input, pass).toString());
+    if (mode === 'encrypt') {
+      setResult(CryptoJS.AES.encrypt(input, pass).toString());
+    } else {
+      try {
+        const bytes = CryptoJS.AES.decrypt(input, pass);
+        const dec = bytes.toString(CryptoJS.enc.Utf8);
+        if (!dec) { toast.error('Decryption failed — wrong passphrase or invalid ciphertext'); return; }
+        setResult(dec);
+      } catch { toast.error('Decryption failed — invalid input'); }
+    }
   };
+
+  const otherMode = mode === 'encrypt' ? 'decrypt' : 'encrypt';
+  const otherLabel = mode === 'encrypt' ? 'Decrypt' : 'Encrypt';
 
   return (
     <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-4">
-      <Section title="AES Encrypt">
+      <Section title={`AES ${mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}`}>
+        <button onClick={() => { setMode(otherMode); setInput(''); setPass(''); setResult(''); }}
+          className="mb-4 text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          Need to {otherLabel.toLowerCase()} instead? <span className="font-semibold">Switch to {otherLabel} →</span>
+        </button>
         <Input label="Passphrase" type="password" value={pass} onChange={setPass} placeholder="Enter passphrase..." />
-        <Input label="Plain text" value={input} onChange={setInput} placeholder="Enter text to encrypt..." rows={5} />
-        <button onClick={handleEncrypt} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all"><Unlock className="w-4 h-4 inline mr-1.5" /> Encrypt</button>
-        {result && <Output value={result} label="Ciphertext" />}
+        <Input label={mode === 'encrypt' ? 'Plain text' : 'Ciphertext'} value={input} onChange={setInput}
+          placeholder={mode === 'encrypt' ? 'Enter text to encrypt...' : 'Paste ciphertext...'} rows={5} />
+        <button onClick={handleAction} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">
+          <Shield className="w-4 h-4 inline mr-1.5" /> {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
+        </button>
+        {result && <Output value={result} label={mode === 'encrypt' ? 'Ciphertext' : 'Decrypted text'} />}
       </Section>
     </div>
   );
 }
 
-export function AesDecrypt() {
-  const [input, setInput] = useState('');
-  const [pass, setPass] = useState('');
-  const [result, setResult] = useState('');
-
-  const handleDecrypt = () => {
-    if (!input.trim() || !pass.trim()) { toast.error('Enter both ciphertext and passphrase'); return; }
-    try {
-      const bytes = CryptoJS.AES.decrypt(input, pass);
-      const dec = bytes.toString(CryptoJS.enc.Utf8);
-      if (!dec) { toast.error('Decryption failed — wrong passphrase or invalid ciphertext'); return; }
-      setResult(dec);
-    } catch { toast.error('Decryption failed — invalid input'); }
-  };
-
-  return (
-    <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-4">
-      <Section title="AES Decrypt">
-        <Input label="Passphrase" type="password" value={pass} onChange={setPass} placeholder="Enter passphrase..." />
-        <Input label="Ciphertext" value={input} onChange={setInput} placeholder="Paste ciphertext..." rows={5} />
-        <button onClick={handleDecrypt} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all"><Unlock className="w-4 h-4 inline mr-1.5" /> Decrypt</button>
-        {result && <Output value={result} label="Decrypted text" />}
-      </Section>
-    </div>
-  );
-}
+export function AesEncrypt() { return <AesTool defaultMode="encrypt" />; }
+export function AesDecrypt() { return <AesTool defaultMode="decrypt" />; }

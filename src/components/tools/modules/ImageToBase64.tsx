@@ -1,159 +1,174 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Image from "next/image";
 import { clipboardWrite } from "@/lib/clipboard";
 
-export default function ImageToBase64() {
+type Mode = 'image-to-base64' | 'base64-to-image';
+
+export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMode?: Mode }) {
+  const [mode, setMode] = useState<Mode>(defaultMode);
   const [file, setFile] = useState<File | null>(null);
   const [dataUrl, setDataUrl] = useState<string>('');
-  const [includePrefix, setIncludePrefix] = useState<boolean>(true);
+  const [includePrefix, setIncludePrefix] = useState(true);
+  const [base64Input, setBase64Input] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleFileSelect = (selectedFile: File, url: string) => {
-    setFile(selectedFile);
-    setDataUrl(url);
-  };
+  useEffect(() => {
+    setMode(defaultMode);
+    setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null);
+  }, [defaultMode]);
+
+  useEffect(() => {
+    return () => { if (imageUrl && imageUrl.startsWith('blob:')) URL.revokeObjectURL(imageUrl); };
+  }, [imageUrl]);
+
+  const isEncode = mode === 'image-to-base64';
+
+  const handleFileSelect = (selectedFile: File, url: string) => { setFile(selectedFile); setDataUrl(url); };
 
   const getOutputString = () => {
     if (!dataUrl) return '';
     return includePrefix ? dataUrl : dataUrl.split(',')[1] || '';
   };
 
-  const copyToClipboard = async () => {
+  const copyBase64 = async () => {
     const text = getOutputString();
     if (!text) return;
+    try { await clipboardWrite(text); toast.success('Base64 string copied!'); } catch { toast.error('Copy failed.'); }
+  };
+
+  const downloadTextFile = () => {
+    const text = getOutputString();
+    if (!text) return;
+    const blob = new Blob([text], { type: 'text/plain' });
+    downloadOrShare(URL.createObjectURL(blob), `base64_${file?.name || 'image'}.txt`);
+  };
+
+  const processBase64 = () => {
+    setError(null);
+    if (!base64Input.trim()) { setImageUrl(null); return; }
     try {
-      await clipboardWrite(text);
-      toast.success("Base64 string copied to clipboard!");
-    } catch (e) {
-      toast.error("Failed to copy to clipboard.");
-    }
+      let clean = base64Input.trim();
+      if (!clean.startsWith('data:image/')) {
+        const isJpeg = clean.startsWith('/9j/');
+        const isSvg = clean.startsWith('PHN2');
+        const isWebp = clean.startsWith('UklGR');
+        let mime = 'image/png';
+        if (isJpeg) mime = 'image/jpeg';
+        if (isSvg) mime = 'image/svg+xml';
+        if (isWebp) mime = 'image/webp';
+        clean = `data:${mime};base64,${clean}`;
+      }
+      const img = new Image();
+      img.onload = () => { setImageUrl(clean); toast.success('Image decoded!'); };
+      img.onerror = () => { setError('Invalid Base64 string.'); setImageUrl(null); };
+      img.src = clean;
+    } catch { setError('Failed to process Base64.'); setImageUrl(null); }
   };
 
-  const downloadAsTextFile = () => {
-    const text = getOutputString();
-    if (!text) return;
-    const blob = new Blob([text], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    downloadOrShare(url, `base64_${file?.name || 'image'}.txt`);
-  };
-
-  const clearAll = () => {
-    setFile(null);
-    setDataUrl('');
-  };
-
-  if (!file) {
-    return (
-      <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
-          <strong>Lightning Fast & Private:</strong> Convert any image into a Base64 string instantly in your browser. Files never touch a server.
-        </div>
-        <FileUploader 
-          accept="image/*"
-          onFileSelect={handleFileSelect} 
-          title="Upload Image"
-          subtitle="Drag & drop or click to select"
-        />
-      </div>
-    );
-  }
-
-  const outputString = getOutputString();
-  const approxSizeKb = (outputString.length * (3/4)) / 1024;
+  const otherMode: Mode = isEncode ? 'base64-to-image' : 'image-to-base64';
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
-        <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024).toFixed(2)} KB (Original File)</p>
-        </div>
-        <button 
-          onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
-        >
-          Change Image
+    <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white">
+          {isEncode ? 'Image to Base64' : 'Base64 to Image'}
+        </h2>
+        <button onClick={() => { setMode(otherMode); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
+          className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          {isEncode ? 'Need to decode Base64 to image?' : 'Need to encode an image to Base64?'} <span className="font-semibold">Switch →</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        {/* Left Col: Preview */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col space-y-4">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Image Preview</h4>
-          </div>
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        {isEncode
+          ? <><strong>Lightning Fast & Private:</strong> Convert any image into a Base64 string instantly in your browser. Files never touch a server.</>
+          : <><strong>Client-Side Only:</strong> Paste a Base64 encoded string to decode it into an image. The decoding process happens locally in your browser.</>}
+      </div>
 
-          <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 min-h-[300px] chess-bg">
-            <style>{`
-              .chess-bg {
-                background-image: 
-                  linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
-                  linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-                background-size: 20px 20px;
-                background-position: 0 0, 10px 10px;
-              }
-              @media (prefers-color-scheme: dark) {
-                .chess-bg {
-                  background-image: 
-                    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111),
-                    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
-                }
-              }
-            `}</style>
-            <Image loading="lazy" src={dataUrl} alt="Preview" unoptimized={true} width={800} height={600} className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+      {isEncode ? (
+        !file ? (
+          <div className="max-w-3xl mx-auto">
+            <FileUploader accept="image/*" onFileSelect={handleFileSelect} title="Upload Image" subtitle="Drag & drop or click to select" />
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col space-y-4">
+              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                <div>
+                  <h4 className="text-zinc-900 dark:text-white font-medium">{file.name}</h4>
+                  <p className="text-xs text-zinc-500">{(file.size / 1024).toFixed(2)} KB</p>
+                </div>
+                <button onClick={() => { setFile(null); setDataUrl(''); }} className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change</button>
+              </div>
+              <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 min-h-[300px] chess-bg">
+                <style>{`.chess-bg{background-image:linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee);background-size:20px 20px;background-position:0 0,10px 10px}@media(prefers-color-scheme:dark){.chess-bg{background-image:linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111),linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111)}}`}</style>
+                <Image loading="lazy" src={dataUrl} alt="Preview" unoptimized={true} width={800} height={600} className="max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+              </div>
+            </div>
 
-        {/* Right Col: Output Base64 */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 flex flex-col h-[500px]">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Base64 Output</h4>
-            <div className="text-xs text-zinc-500 font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">
-              ~{approxSizeKb.toFixed(2)} KB decoded
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 flex flex-col">
+              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                <h4 className="text-zinc-900 dark:text-white font-medium">Base64 Output</h4>
+                <span className="text-xs text-zinc-500 font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">~{((getOutputString().length * 3 / 4) / 1024).toFixed(2)} KB decoded</span>
+              </div>
+              <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300 font-medium cursor-pointer">
+                <input type="checkbox" checked={includePrefix} onChange={e => setIncludePrefix(e.target.checked)} className="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
+                Include URI Prefix <span className="text-xs text-zinc-400 font-normal">(data:image/jpeg;base64,...)</span>
+              </label>
+              <textarea readOnly value={getOutputString()} className="flex-1 w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-500 dark:text-zinc-400 outline-none resize-none font-mono text-xs break-all" />
+              <div className="flex gap-4 pt-2">
+                <button onClick={copyBase64} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95">Copy to Clipboard</button>
+                <button onClick={downloadTextFile} className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-bold py-3 rounded-xl shadow transition-all active:scale-95">Download .txt</button>
+              </div>
             </div>
           </div>
-          
-          <div className="flex items-center gap-2 pb-2">
-            <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300 font-medium cursor-pointer">
-              <input 
-                type="checkbox" 
-                checked={includePrefix} 
-                onChange={(e) => setIncludePrefix(e.target.checked)}
-                className="rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
-              />
-              Include URI Prefix 
-              <span className="text-xs text-zinc-400 font-normal">(data:image/jpeg;base64,...)</span>
-            </label>
+        )
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 flex flex-col min-h-[400px]">
+            <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
+              <h4 className="text-zinc-900 dark:text-white font-medium">Base64 String</h4>
+              <div className="flex gap-2">
+                <button onClick={async () => { try { setBase64Input(await navigator.clipboard.readText()); } catch { toast.error('Failed to read clipboard'); } }} className="text-xs text-blue-500 hover:text-blue-400 font-bold">Paste</button>
+                <button onClick={() => { setBase64Input(''); setImageUrl(null); setError(null); }} className="text-xs text-red-500 hover:text-red-400 font-bold">Clear</button>
+              </div>
+            </div>
+            <textarea value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-none font-mono text-sm" />
+            {error && <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm font-medium rounded-xl">{error}</div>}
+            <button onClick={processBase64} disabled={!base64Input.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">Decode to Image</button>
           </div>
 
-          <textarea 
-            className="flex-1 w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-500 dark:text-zinc-400 outline-none focus:border-blue-500 resize-none font-mono text-xs break-all"
-            readOnly
-            value={outputString}
-          />
-
-          <div className="flex gap-4 pt-2">
-            <button 
-              onClick={copyToClipboard}
-              className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
-            >
-              📋 Copy to Clipboard
-            </button>
-            <button 
-              onClick={downloadAsTextFile}
-              className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-bold py-3 rounded-xl shadow transition-all active:scale-95 flex justify-center items-center gap-2"
-            >
-              💾 Download .txt
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col space-y-6 min-h-[400px]">
+            <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
+              <h4 className="text-zinc-900 dark:text-white font-medium">Image Preview</h4>
+            </div>
+            <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 relative chess-bg">
+              <style>{`.chess-bg{background-image:linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee);background-size:20px 20px;background-position:0 0,10px 10px}@media(prefers-color-scheme:dark){.chess-bg{background-image:linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111),linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111)}}`}</style>
+              {imageUrl ? (
+                <Image loading="lazy" src={imageUrl} alt="Decoded" unoptimized={true} width={800} height={600} className="max-w-full max-h-[350px] object-contain drop-shadow-md rounded z-10 relative" />
+              ) : (
+                <div className="text-zinc-400 flex flex-col items-center gap-2 z-10 bg-zinc-50/80 dark:bg-black/80 px-6 py-4 rounded-xl backdrop-blur-sm">
+                  <svg className="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  <p>Preview will appear here</p>
+                </div>
+              )}
+            </div>
+            <button onClick={() => imageUrl && downloadOrShare(imageUrl, `decoded_image_${Date.now()}.png`)} disabled={!imageUrl}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 disabled:opacity-50">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download Image
             </button>
           </div>
         </div>
-
-      </div>
+      )}
     </div>
   );
 }
+
+export default function ImageToBase64() { return <Base64ImageTool defaultMode="image-to-base64" />; }

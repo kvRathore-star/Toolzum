@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { CheckCircle, FileType, FileCode, Clock, Clipboard } from 'lucide-react';
+import { CheckCircle, FileType, FileCode, Clock, Clipboard, ArrowRight } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 type Tab = 'html' | 'xml' | 'cron';
@@ -12,6 +12,18 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
       className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
   );
 }
+
+const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
+  <a href={`/developer/${slug}/`} className="block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 hover:border-blue-400 dark:hover:border-blue-600 transition-all group">
+    <div className="flex items-start justify-between gap-4">
+      <div className="space-y-1.5">
+        <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{title}</h4>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{desc}</p>
+      </div>
+      <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-blue-500 shrink-0 mt-0.5" />
+    </div>
+  </a>
+);
 
 export default function ValidatorKit() {
   const [tab, setTab] = useState<Tab>('html');
@@ -83,7 +95,7 @@ function HtmlLint() {
 function XmlTools() {
   const [xmlInput, setXmlInput] = useState('<root><item id="1">Hello</item><item id="2">World</item></root>');
   const [xmlOutput, setXmlOutput] = useState('');
-  const [xmlMode, setXmlMode] = useState<'format' | 'minify' | 'validate'>('format');
+  const [xmlMode, setXmlMode] = useState<'format' | 'minify' | 'validate'>('minify');
 
   const processXml = () => {
     try {
@@ -99,24 +111,6 @@ function XmlTools() {
         setXmlOutput(xmlInput.replace(/>\s+</g, '><').trim());
         return;
       }
-      const serialize = (node: Node, indent = 0): string => {
-        if (node.nodeType === 3) {
-          const text = node.textContent?.trim();
-          return text ? ' '.repeat(indent) + text + '\n' : '';
-        }
-        if (node.nodeType !== 1) return '';
-        const el = node as Element;
-        const attrs = Array.from(el.attributes).map(a => ` ${a.name}="${a.value}"`).join('');
-        const children = Array.from(el.childNodes);
-        const hasText = children.some(c => c.nodeType === 3 && c.textContent?.trim());
-        if (!hasText && children.length) {
-          return ' '.repeat(indent) + `<${el.tagName}${attrs}>\n${children.map(c => serialize(c, indent + 2)).join('')}` + ' '.repeat(indent) + `</${el.tagName}>\n`;
-        }
-        const content = hasText ? el.textContent?.trim() : '';
-        if (content) return ' '.repeat(indent) + `<${el.tagName}${attrs}>${content}</${el.tagName}>\n`;
-        return ' '.repeat(indent) + `<${el.tagName}${attrs} />\n`;
-      };
-      setXmlOutput(serialize(doc.documentElement));
     } catch (e: unknown) {
       setXmlOutput(`Error: ${e instanceof Error ? e.message : 'XML processing failed'}`);
     }
@@ -131,74 +125,32 @@ function XmlTools() {
             className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${xmlMode === v ? 'bg-blue-600 text-white shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{l}</button>
         ))}
       </div>
-      <div className="space-y-1">
-        <label className="text-xs font-medium text-zinc-500">XML content</label>
-        <textarea value={xmlInput} onChange={e => setXmlInput(e.target.value)} placeholder="Paste XML..."
-          className="w-full h-32 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
-      </div>
-      <button onClick={processXml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Process</button>
-      {xmlOutput && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{xmlOutput}</pre><div className="mt-1"><CopyBtn text={xmlOutput} label="XML result" /></div></div>}
+      {xmlMode === 'format' ? (
+        <LinkCard title="XML Formatter" slug="xml-formatter" desc="Format and beautify XML documents with proper tree indentation using the dedicated formatter with advanced options." />
+      ) : (
+        <>
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-zinc-500">XML content</label>
+            <textarea value={xmlInput} onChange={e => setXmlInput(e.target.value)} placeholder="Paste XML..."
+              className="w-full h-32 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y" />
+          </div>
+          <button onClick={processXml} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Process</button>
+          {xmlOutput && <div className="relative"><pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{xmlOutput}</pre><div className="mt-1"><CopyBtn text={xmlOutput} label="XML result" /></div></div>}
+        </>
+      )}
     </div>
   );
 }
 
 function CronTools() {
-  const [cronExpr, setCronExpr] = useState('*/5 * * * *');
-  const [cronOutput, setCronOutput] = useState('');
-
-  const CRON_EXPLAIN: Record<string, string> = {
-    '* * * * *': 'Every minute',
-    '*/5 * * * *': 'Every 5 minutes',
-    '*/15 * * * *': 'Every 15 minutes',
-    '0 * * * *': 'Every hour',
-    '0 */6 * * *': 'Every 6 hours',
-    '0 0 * * *': 'Every day at midnight',
-    '0 0 * * 0': 'Every Sunday at midnight',
-    '0 0 1 * *': 'Every 1st of the month',
-    '0 0 * * 1-5': 'Weekdays at midnight',
-    '*/30 * * * *': 'Every 30 minutes',
-    '0 */12 * * *': 'Every 12 hours',
-    '30 4 * * *': 'Daily at 4:30 AM',
-    '0 9 * * 1-5': 'Weekdays at 9 AM',
-    '0 0 * * 6,0': 'Every weekend at midnight',
-  };
-
-  const explainCron = () => {
-    const trimmed = cronExpr.trim();
-    const parts = trimmed.split(/\s+/);
-    if (parts.length !== 5) {
-      setCronOutput('Invalid: expected 5 fields (minute hour day month weekday)');
-      return;
-    }
-    if (CRON_EXPLAIN[trimmed]) {
-      setCronOutput(CRON_EXPLAIN[trimmed]);
-    } else {
-      const labels = ['minute', 'hour', 'day', 'month', 'weekday'];
-      const desc = parts.map((p, i) => `${labels[i]}: ${p}`).join(' | ');
-      setCronOutput(desc + '\n\nTip: Click a preset below for common schedules.');
-    }
-  };
-
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Cron Expression Explainer</h5>
-      <div className="flex gap-3">
-        <div className="flex-1 space-y-1">
-          <label className="text-xs font-medium text-zinc-500">Cron expression</label>
-          <input type="text" value={cronExpr} onChange={e => setCronExpr(e.target.value)} placeholder="* * * * *"
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
-        </div>
-        <button onClick={explainCron} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Explain</button>
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Cron Tools</h5>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">Cron expression tools are available on dedicated pages with more comprehensive parsing and validation.</p>
+      <div className="grid gap-3">
+        <LinkCard title="Cron Expression Parser" slug="cron-parser" desc="Parse cron expressions into human-readable descriptions. Includes common presets for quick reference." />
+        <LinkCard title="Cron Expression Validator" slug="cron-expression-validator" desc="Validate cron expressions with field-level range checking. Supports 5-field format with step values, ranges, lists, and wildcards." />
       </div>
-      <div className="flex flex-wrap gap-1.5">
-        {Object.entries(CRON_EXPLAIN).map(([expr, desc]) => (
-          <button key={expr} onClick={() => { setCronExpr(expr); setCronOutput(desc); }}
-            className="px-3 py-1.5 text-xs font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors" title={desc}>
-            {expr}
-          </button>
-        ))}
-      </div>
-      {cronOutput && <pre className="text-sm font-mono bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{cronOutput}</pre>}
     </div>
   );
 }

@@ -6,104 +6,101 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
 import { jsPDF } from 'jspdf';
-import { ShieldAlert, Lock, Download, FileText, RefreshCw } from 'lucide-react';
+import { ShieldAlert, Lock, Unlock, Download, FileText, RefreshCw } from 'lucide-react';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
-export default function ProtectPdf() {
+type Mode = 'protect' | 'unlock';
+
+export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mode }) {
+  const [mode, setMode] = useState<Mode>(defaultMode);
   const [file, setFile] = useState<File | null>(null);
+  const [fileBuffer, setFileBuffer] = useState<ArrayBuffer | null>(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('');
 
   useEffect(() => {
-    return () => {
-      if (outputUrl) URL.revokeObjectURL(outputUrl);
-    };
+    return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
   }, [outputUrl]);
 
-  const handleFileSelect = (selectedFile: File) => {
-    setFile(selectedFile);
-    setOutputUrl(null);
-    setPassword('');
-    setConfirmPassword('');
-    setProgress(0);
+  useEffect(() => {
+    setMode(defaultMode);
+    setFile(null); setFileBuffer(null); setOutputUrl(null);
+    setPassword(''); setConfirmPassword(''); setProgress(0);
+  }, [defaultMode]);
+
+  const isProtect = mode === 'protect';
+
+  const handleFileSelect = async (selectedFile: File) => {
+    try {
+      const buf = await selectedFile.arrayBuffer();
+      setFileBuffer(buf);
+      setFile(selectedFile);
+      setOutputUrl(null);
+      setPassword('');
+      setConfirmPassword('');
+      setProgress(0);
+
+      if (!isProtect) {
+        try { await pdfjsLib.getDocument({ data: buf }).promise; toast.success('PDF is not password protected.'); }
+        catch (e: any) { if (e.name === 'PasswordException') toast.success('Password-protected PDF detected.'); }
+      }
+    } catch { toast.error('Failed to load PDF.'); }
   };
 
-  const handleProtect = async (e: React.FormEvent) => {
+  const handleAction = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) return;
+    if (!file || !fileBuffer) return;
 
-    if (!password) {
-      return toast.error("Please enter a password.");
-    }
-    if (password !== confirmPassword) {
-      return toast.error("Passwords do not match.");
+    if (isProtect) {
+      if (!password) return toast.error('Enter a password.');
+      if (password !== confirmPassword) return toast.error('Passwords do not match.');
     }
 
     setIsProcessing(true);
     setProgress(0);
-    setStatusText("Initializing PDF parser...");
+    setStatusText('Initializing...');
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-      const totalPages = pdf.numPages;
+      const pdf = isProtect
+        ? await pdfjsLib.getDocument(fileBuffer).promise
+        : await pdfjsLib.getDocument({ data: fileBuffer, password: password || undefined }).promise;
 
-      // Initialize jsPDF with encryption settings
-      // jsPDF supports encryption options: userPassword, ownerPassword, userPermissions
-      const doc = new jsPDF({
-        encryption: {
-          userPassword: password,
-          ownerPassword: password,
-          userPermissions: ['print', 'copy']
-        }
-      });
+      const totalPages = pdf.numPages;
+      const doc = isProtect
+        ? new jsPDF({ encryption: { userPassword: password, ownerPassword: password, userPermissions: ['print', 'copy'] } })
+        : new jsPDF();
 
       for (let i = 1; i <= totalPages; i++) {
-        setStatusText(`Securing page ${i} of ${totalPages}...`);
+        setStatusText(`${isProtect ? 'Securing' : 'Decrypting'} page ${i} of ${totalPages}...`);
         const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 1.5 }); // Good balance of quality and size
-
+        const viewport = page.getViewport({ scale: 1.5 });
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         if (!context) continue;
-
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        await page.render({ canvasContext: context, viewport }).promise;
         const imgData = canvas.toDataURL('image/jpeg', 0.85);
-
-        // Convert page viewport dimension to jsPDF mm dimensions
-        const widthMm = viewport.width * 0.264583;
-        const heightMm = viewport.height * 0.264583;
-
-        if (i > 1) {
-          doc.addPage([widthMm, heightMm]);
-        } else {
-          // Adjust first page size to match original PDF aspect ratio
-          doc.deletePage(1);
-          doc.addPage([widthMm, heightMm]);
-        }
-
-        doc.addImage(imgData, 'JPEG', 0, 0, widthMm, heightMm);
+        const w = viewport.width * 0.264583;
+        const h = viewport.height * 0.264583;
+        if (i > 1) { doc.addPage([w, h]); } else { doc.deletePage(1); doc.addPage([w, h]); }
+        doc.addImage(imgData, 'JPEG', 0, 0, w, h);
         setProgress(Math.round((i / totalPages) * 100));
       }
 
-      setStatusText("Saving encrypted file...");
-      const pdfBlob = doc.output('blob');
-
+      setStatusText('Saving...');
+      const blob = doc.output('blob');
       if (outputUrl) URL.revokeObjectURL(outputUrl);
-      setOutputUrl(URL.createObjectURL(pdfBlob));
-      toast.success("PDF password-protected successfully!");
+      setOutputUrl(URL.createObjectURL(blob));
+      toast.success(isProtect ? 'PDF protected!' : 'PDF unlocked!');
     } catch (err: any) {
-      console.error(err);
-      toast.error("Failed to protect PDF. Try a smaller file.");
+      if (err.name === 'PasswordException') toast.error('Incorrect password.');
+      else toast.error(isProtect ? 'Failed to protect PDF.' : 'Failed to unlock PDF.');
     } finally {
       setIsProcessing(false);
       setProgress(100);
@@ -111,25 +108,35 @@ export default function ProtectPdf() {
   };
 
   const clearAll = () => {
-    setFile(null);
-    setOutputUrl(null);
-    setPassword('');
-    setConfirmPassword('');
-    setProgress(0);
+    setFile(null); setFileBuffer(null); setOutputUrl(null);
+    setPassword(''); setConfirmPassword(''); setProgress(0);
   };
+
+  const otherMode: Mode = isProtect ? 'unlock' : 'protect';
 
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
-          <ShieldAlert className="w-5 h-5 flex-shrink-0" />
-          <span><strong>Secure Client-Side Encryption:</strong> Your files never leave your computer. We encrypt your document directly in your browser.</span>
+          {isProtect ? <ShieldAlert className="w-5 h-5 flex-shrink-0" /> : <Unlock className="w-5 h-5 flex-shrink-0" />}
+          <span>
+            {isProtect
+              ? <><strong>Secure Client-Side Encryption:</strong> Your files never leave your computer.</>
+              : <><strong>100% Client-Side Decryption:</strong> All decryption happens in your browser.</>}
+          </span>
         </div>
-        <FileUploader 
+        <div className="flex justify-between items-center">
+          <p className="text-xs text-zinc-500">Need to {isProtect ? 'unlock' : 'protect'} a PDF instead?</p>
+          <button onClick={() => { setMode(otherMode); setFile(null); setFileBuffer(null); }}
+            className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-semibold">
+            Switch to {isProtect ? 'Unlock PDF' : 'Protect PDF'} →
+          </button>
+        </div>
+        <FileUploader
           accept="application/pdf"
-          onFileSelect={handleFileSelect} 
-          title="Upload PDF to Protect"
-          subtitle="Add password encryption to your PDF"
+          onFileSelect={handleFileSelect}
+          title={isProtect ? 'Upload PDF to Protect' : 'Upload Password Protected PDF'}
+          subtitle={isProtect ? 'Add password encryption to your PDF' : 'Select file to decrypt'}
         />
       </div>
     );
@@ -145,91 +152,69 @@ export default function ProtectPdf() {
             <p className="text-zinc-500 text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
-        <button 
-          onClick={clearAll}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-        >
+        <button onClick={clearAll} disabled={isProcessing}
+          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50">
           Change File
         </button>
       </div>
 
+      <button onClick={() => { setMode(otherMode); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
+        className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors -mt-3">
+        Need to {isProtect ? 'unlock' : 'protect'} this PDF instead? <span className="font-semibold">Switch to {isProtect ? 'Unlock' : 'Protect'} →</span>
+      </button>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Form Panel */}
-        <form onSubmit={handleProtect} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
+        <form onSubmit={handleAction} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
           <div className="space-y-4">
             <h4 className="text-zinc-900 dark:text-white font-bold text-base flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
-              <Lock className="w-4 h-4 text-indigo-500" />
-              Set Encryption Password
+              {isProtect ? <Lock className="w-4 h-4 text-indigo-500" /> : <Lock className="w-4 h-4 text-rose-500" />}
+              {isProtect ? 'Set Encryption Password' : 'Enter PDF Password'}
             </h4>
-
             <div className="space-y-1">
               <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password (minimum 4 characters)..."
-                minLength={4}
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)}
+                placeholder={isProtect ? 'Enter password (minimum 4 characters)...' : 'Enter password (leave empty if none)...'}
+                minLength={isProtect ? 4 : undefined}
                 className="w-full bg-zinc-50 dark:bg-black border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-[var(--border-subtle)]"
-                required
-              />
+                required={isProtect} />
             </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Confirm Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm password..."
-                className="w-full bg-zinc-50 dark:bg-black border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-[var(--border-subtle)]"
-                required
-              />
-            </div>
+            {isProtect && (
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Confirm Password</label>
+                <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm password..." minLength={4} required
+                  className="w-full bg-zinc-50 dark:bg-black border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-[var(--border-subtle)]" />
+              </div>
+            )}
           </div>
-
-          <button 
-            type="submit"
-            disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
-          >
+          <button type="submit" disabled={isProcessing}
+            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2">
             {isProcessing ? (
-              <>
-                <RefreshCw className="w-5 h-5 animate-spin" />
-                <span>{statusText} ({progress}%)</span>
-              </>
+              <><RefreshCw className="w-5 h-5 animate-spin" /><span>{statusText} ({progress}%)</span></>
             ) : (
-              <>
-                <Lock className="w-4 h-4" />
-                <span>Encrypt & Protect PDF</span>
-              </>
+              <>{isProtect ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
+                <span>{isProtect ? 'Encrypt & Protect PDF' : 'Unlock & Remove Password'}</span></>
             )}
           </button>
         </form>
 
-        {/* Output Panel */}
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-               <div className="bg-indigo-500/10 rounded-xl overflow-hidden border border-indigo-500/20 flex flex-col items-center justify-center p-8 text-indigo-500">
-                  <Lock className="w-16 h-16 mb-4" />
-                  <p className="font-bold text-center">protected_{file.name}</p>
-                  <p className="text-xs text-indigo-500/80 mt-1">Ready for download with password protection.</p>
-               </div>
-
-               <button 
-                  onClick={() => downloadOrShare(outputUrl, `protected_${file.name}`)}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Protected PDF
-                </button>
+              <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-500' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'}`}>
+                {isProtect ? <Lock className="w-16 h-16 mb-4" /> : <Unlock className="w-16 h-16 mb-4" />}
+                <p className="font-bold text-center">{isProtect ? `protected_${file!.name}` : `unlocked_${file!.name}`}</p>
+                <p className="text-xs mt-1 opacity-80">{isProtect ? 'Ready with password protection.' : 'Ready without encryption.'}</p>
+              </div>
+              <button onClick={() => downloadOrShare(outputUrl, `${isProtect ? 'protected' : 'unlocked'}_${file!.name}`)}
+                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer">
+                <Download className="w-5 h-5" /> Download {isProtect ? 'Protected' : 'Unlocked'} PDF
+              </button>
             </div>
           ) : (
             <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-zinc-400 text-center">
-               <Lock className="w-12 h-12 mb-4 opacity-30" />
-               <p className="text-sm font-medium">Protected PDF will appear here</p>
-               <p className="text-xs text-zinc-500 max-w-xs mt-1">Set a password and click the button to encrypt your PDF.</p>
+              {isProtect ? <Lock className="w-12 h-12 mb-4 opacity-30" /> : <Unlock className="w-12 h-12 mb-4 opacity-30" />}
+              <p className="text-sm font-medium">{isProtect ? 'Protected' : 'Unlocked'} PDF will appear here</p>
             </div>
           )}
         </div>
@@ -237,3 +222,5 @@ export default function ProtectPdf() {
     </div>
   );
 }
+
+export default function ProtectPdf() { return <PdfSecurityTool defaultMode="protect" />; }
