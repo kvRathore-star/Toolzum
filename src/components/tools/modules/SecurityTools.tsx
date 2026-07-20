@@ -225,14 +225,15 @@ export function HashFileGenerator() {
     setHash(Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''));
   };
   return (
-    <Section title="File Hash Generator (Text Simulated)">
-      <Input label="File content (paste text)" rows={4} value={text} onChange={setText} placeholder="Paste file content..." />
+    <Section title="Content Hash Generator">
+      <Input label="Text content to hash" rows={4} value={text} onChange={setText} placeholder="Paste text content..." />
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
         <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
           <option value="SHA-1">SHA-1</option><option value="SHA-256">SHA-256</option><option value="SHA-384">SHA-384</option><option value="SHA-512">SHA-512</option>
         </select>
       </div>
+      <p className="text-xs text-zinc-500 mb-3">Uses Web Crypto API to hash text content. For binary file hashing, a server-side solution is needed.</p>
       <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
       <Output value={hash} label={`${algo} Hash`} />
     </Section>
@@ -271,53 +272,31 @@ export function HmacGenerator() {
 export function SslTlsChecker() {
   const [hostname, setHostname] = useState('');
   const [port, setPort] = useState('443');
-  const [info, setInfo] = useState('');
+  const [output, setOutput] = useState('');
   const check = () => {
-    setInfo(`SSL/TLS Certificate Info for ${hostname || 'example.com'}:${port || '443'}
-
-Issuer: Simulated CA (${hostname || 'example.com'} TLS Certificate)
-Subject: CN=${hostname || 'example.com'}
-Valid From: January 1, 2025
-Valid Until: January 1, 2026
-Days Remaining: ~168
-Signature Algorithm: sha256WithRSAEncryption
-Key Size: 2048 bits
-SANs: DNS:${hostname || 'example.com'}, DNS:www.${hostname || 'example.com'}
-TLS Version: TLS 1.3
-Certificate Transparency: Yes
-OCSP Must Staple: No`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="SSL/TLS Certificate Checker">
       <Input label="Hostname" value={hostname} onChange={setHostname} placeholder="example.com" />
       <Input label="Port" value={port} onChange={setPort} placeholder="443" />
       <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check Certificate</button>
-      <Output value={info} label="Certificate Info (simulated)" />
+      <Output value={output} />
     </Section>
   );
 }
 
 export function HttpSecurityChecker() {
-  const [headers, setHeaders] = useState('');
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
   const check = () => {
-    setHeaders(`Security Headers Check — ${headers || 'your-site'}:
-
-✓ Content-Security-Policy — Present
-✓ X-Content-Type-Options: nosniff — Present
-✗ Strict-Transport-Security — Missing (recommended: max-age=31536000; includeSubDomains)
-✓ X-Frame-Options: DENY — Present
-✓ X-XSS-Protection: 0 — Present
-✗ Referrer-Policy — Missing (recommended: strict-origin-when-cross-origin)
-✗ Permissions-Policy — Missing (recommended: camera=(), microphone=(), geolocation=())
-✗ Cache-Control — Missing (recommended: no-store for sensitive pages)
-
-Overall Rating: B (3 of 8 headers missing/recommended)`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="HTTP Security Headers Checker">
-      <Input label="Website URL" value={headers} onChange={setHeaders} placeholder="https://example.com" />
+      <Input label="Website URL" value={input} onChange={setInput} placeholder="https://example.com" />
       <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Analyze Headers</button>
-      <Output value={headers ? `Results for ${headers}:\n${headers}` : 'Enter a URL and click "Analyze Headers"'} />
+      <Output value={output} />
     </Section>
   );
 }
@@ -430,23 +409,15 @@ ${'■'.repeat(cidr)}${'□'.repeat(32 - cidr)}  (${cidr} network bits / ${32 - 
 
 export function DnsLookupGenerator() {
   const [domain, setDomain] = useState('');
-  const [records, setRecords] = useState('');
+  const [output, setOutput] = useState('');
   const gen = () => {
-    const d = domain || 'example.com';
-    setRecords(`A:       ${d} → 93.184.216.34 (TTL: 3600)
-AAAA:    ${d} → 2606:2800:220:1:248:1893:25c8:1946 (TTL: 3600)
-CNAME:   www.${d} → ${d} (TTL: 3600)
-MX:      ${d} → priority 10 mail.${d} (TTL: 3600)
-TXT:     ${d} → "v=spf1 include:_spf.${d} ~all"
-         ${d} → "google-site-verification=xxx"
-NS:      ${d} → ns1.example.com, ns2.example.com
-SOA:     ${d} → ns1.example.com admin.example.com 2025010101 3600 900 604800 86400`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="DNS Lookup Record Generator">
       <Input label="Domain" value={domain} onChange={setDomain} placeholder="example.com" />
       <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Records</button>
-      <Output value={records} label="Simulated DNS Records" />
+      <Output value={output} />
     </Section>
   );
 }
@@ -456,29 +427,16 @@ SOA:     ${d} → ns1.example.com admin.example.com 2025010101 3600 900 604800 8
 export function CorsInspector() {
   const [origin, setOrigin] = useState('');
   const [methods, setMethods] = useState('');
-  const [report, setReport] = useState('');
+  const [output, setOutput] = useState('');
   const inspect = () => {
-    const o = origin || 'https://example.com';
-    const m = (methods || 'GET, POST, PUT').split(',').map(s => s.trim());
-    setReport(`CORS Configuration Check for: ${o}
-
-Request Method: ${m.join(', ')}
-
-✓ Origin allowed: ${o} matches Access-Control-Allow-Origin
-✓ Methods allowed: ${m.join(', ')}
-✓ Credentials: Not required (Access-Control-Allow-Credentials: false)
-✓ Preflight (OPTIONS) cache: 3600s
-
-${m.includes('DELETE') || m.includes('PATCH') ? '⚠ Non-simple methods detected — preflight required' : '✓ Simple request only — no preflight needed'}
-
-Headers checked: Content-Type, Authorization, X-Custom-Header`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="CORS Inspector">
       <Input label="Origin URL" value={origin} onChange={setOrigin} placeholder="https://example.com" />
       <Input label="Methods (comma separated)" value={methods} onChange={setMethods} placeholder="GET, POST, PUT" />
       <button onClick={inspect} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
-      <Output value={report} />
+      <Output value={output} />
     </Section>
   );
 }
@@ -639,31 +597,15 @@ export function EnvFileParser() {
 
 export function CveLookup() {
   const [cveId, setCveId] = useState('');
-  const [result, setResult] = useState('');
+  const [output, setOutput] = useState('');
   const lookup = () => {
-    const id = (cveId || '').trim().toUpperCase();
-    const valid = /^CVE-\d{4}-\d{4,}$/.test(id);
-    if (!valid) { setResult('Invalid CVE ID format. Expected: CVE-YYYY-NNNNN'); return; }
-    setResult(`CVE Lookup: ${id}
-
-Status: Simulated lookup
-Description: This is a simulated CVE entry for ${id}. In production, this would fetch data from the NVD (National Vulnerability Database) API.
-
-CVSS Score: 7.5 (High)
-Severity: High
-Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
-Published: 2024-06-15
-Last Modified: 2024-07-01
-
-References:
-- https://nvd.nist.gov/vuln/detail/${id}
-- https://cve.mitre.org/cgi-bin/cvename.cgi?name=${id}`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="CVE Lookup">
       <Input label="CVE ID" value={cveId} onChange={setCveId} placeholder="CVE-2024-12345" />
       <button onClick={lookup} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Lookup</button>
-      <Output value={result} label="CVE Info (simulated)" />
+      <Output value={output} />
     </Section>
   );
 }
@@ -925,29 +867,15 @@ X-XSS-Protection: 0
 
 export function IpReputationChecker() {
   const [ip, setIp] = useState('');
-  const [report, setReport] = useState('');
+  const [output, setOutput] = useState('');
   const check = () => {
-    const addr = ip || '8.8.8.8';
-    setReport(`IP Reputation Report: ${addr}
-
-Threat Score: 12/100 (Low Risk)
-Category: ${addr.startsWith('10.') || addr.startsWith('192.168.') || addr.startsWith('172.16.') ? 'Private/Internal' : 'Public'}
-
-Check Results:
-${addr.startsWith('8.8') || addr.startsWith('1.1') ? '✓ Not on known blocklists (0/100)' : 'ℹ Check blocklist status (simulated)'}
-✓ Not detected as VPN/Tor exit node
-✓ Not in known spam databases
-✓ No recent malicious activity detected
-✓ Geo: United States (simulated)
-✓ ISP: Google LLC (simulated)
-
-Note: This is a simulated check. Real API integration needed for production.`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="IP Reputation Checker">
       <Input label="IP Address" value={ip} onChange={setIp} placeholder="8.8.8.8" />
       <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check Reputation</button>
-      <Output value={report} label="Reputation Report (simulated)" />
+      <Output value={output} />
     </Section>
   );
 }
@@ -1004,54 +932,30 @@ export function EmailValidator() {
 
 export function SslCertificateDecoder() {
   const [pem, setPem] = useState('');
-  const [decoded, setDecoded] = useState('');
+  const [output, setOutput] = useState('');
   const decode = () => {
-    const p = (pem || '').trim();
-    if (!p) { setDecoded('Paste a PEM certificate to decode'); return; }
-    const b64 = p.replace(/-----BEGIN CERTIFICATE-----/g, '').replace(/-----END CERTIFICATE-----/g, '').replace(/\s/g, '');
-    try {
-      const der = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-      setDecoded(`Certificate Decoded (simulated):
-
-Serial Number: 04:AB:12:CD:34:EF:56:78:90
-Issuer: CN=Simulated Root CA
-Subject: CN=example.com, O=Example Inc
-Valid From: Jan 1 2025
-Valid Until: Dec 31 2025
-Signature Algorithm: sha256WithRSAEncryption
-Public Key: RSA 2048 bits
-Key Usage: Digital Signature, Key Encipherment
-Extended Key Usage: TLS Web Server Authentication
-Subject Alternative Names: DNS:example.com, DNS:www.example.com
-Basic Constraints: CA:FALSE
-Thumbprint (SHA-256): AB12CD34EF56AB12CD34EF56AB12CD34EF56AB12CD34EF56AB12CD34EF56AB12
-
-Raw DER length: ${der.length} bytes`);
-    } catch { setDecoded('Error: Could not decode PEM. Make sure it is a valid base64-encoded certificate.'); }
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="SSL Certificate Decoder">
       <Input label="PEM Certificate" rows={6} value={pem} onChange={setPem} placeholder="-----BEGIN CERTIFICATE-----..." />
       <button onClick={decode} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
-      <Output value={decoded} />
+      <Output value={output} />
     </Section>
   );
 }
 
 export function SubdomainFinder() {
   const [domain, setDomain] = useState('');
-  const [suggestions, setSuggestions] = useState('');
+  const [output, setOutput] = useState('');
   const find = () => {
-    const d = domain || 'example.com';
-    const common = ['www', 'mail', 'admin', 'api', 'dev', 'staging', 'blog', 'shop', 'cdn', 'app', 'm', 'status', 'support', 'docs', 'help', 'portal', 'login', 'webmail', 'vpn', 'remote', 'git', 'jenkins', 'jira', 'confluence', 'wiki', 'calendar', 'cloud', 's3', 'static', 'assets', 'images', 'video', 'media', 'download', 'forum', 'community', 'news', 'test', 'beta', 'demo', 'stage', 'prod', 'backup', 'monitor', 'adminer', 'phpmyadmin', 'console'];
-    const results = common.map(sub => `${sub}.${d}`).join('\n');
-    setSuggestions(`Common subdomains for ${d}:\n\n${results}\n\nTip: Use these as starting points for subdomain enumeration. Real discovery requires DNS brute-forcing or certificate transparency logs.`);
+    setOutput('This tool requires server-side API access and is currently under development. Real functionality will be available in a future update.');
   };
   return (
     <Section title="Subdomain Finder">
       <Input label="Domain" value={domain} onChange={setDomain} placeholder="example.com" />
       <button onClick={find} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
-      <Output value={suggestions} label="Suggested Subdomains" />
+      <Output value={output} />
     </Section>
   );
 }

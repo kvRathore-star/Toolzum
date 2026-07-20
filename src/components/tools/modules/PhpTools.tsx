@@ -19,8 +19,8 @@ export default function PhpTools() {
         result = '<?php\n\nreturn ' + jsonToPhp(obj, 0) + ';\n';
       } else if (m === 'php-to-json') {
         const cleaned = val.replace(/^<\?php/i, '').replace(/\nreturn\s+/, '').replace(/;\s*$/, '').trim();
-        const fn = new Function('return ' + cleaned.replace(/=>\s*array\s*\(/g, '=> {').replace(/array\s*\(/g, '{').replace(/\)/g, '}').replace(/=>/g, ':'));
-        result = JSON.stringify(fn(), null, 2);
+        const parsed = parsePhpArray(cleaned);
+        result = JSON.stringify(parsed, null, 2);
       } else if (m === 'serialize') {
         const obj = JSON.parse(val);
         result = serializePhp(obj);
@@ -80,6 +80,66 @@ export default function PhpTools() {
     };
     return read();
   };
+
+  function parsePhpArray(input: string): unknown {
+    let pos = 0;
+    const s = input.trim();
+    function skipWS() { while (pos < s.length && (s[pos] === ' ' || s[pos] === '\n' || s[pos] === '\r' || s[pos] === '\t')) pos++; }
+    function parseString(quote: string): string {
+      pos++;
+      let r = '';
+      while (pos < s.length && s[pos] !== quote) { if (s[pos] === '\\') { pos++; r += s[pos]; } else r += s[pos]; pos++; }
+      pos++;
+      return r;
+    }
+    function parseNumber(): number {
+      const start = pos;
+      if (s[pos] === '-') pos++;
+      while (pos < s.length && ((s[pos] >= '0' && s[pos] <= '9') || s[pos] === '.')) pos++;
+      return parseFloat(s.slice(start, pos));
+    }
+    function parseValue(): unknown {
+      skipWS();
+      if (s[pos] === "'") return parseString("'");
+      if (s[pos] === '"') return parseString('"');
+      if (s.slice(pos, pos + 5) === 'array' || s[pos] === '[') return parseArray();
+      if (s.slice(pos, pos + 4) === 'true') { pos += 4; return true; }
+      if (s.slice(pos, pos + 5) === 'false') { pos += 5; return false; }
+      if (s.slice(pos, pos + 4) === 'null') { pos += 4; return null; }
+      return parseNumber();
+    }
+    function parseArray(): Record<string, unknown> | unknown[] {
+      if (s.slice(pos, pos + 5) === 'array') pos += 5;
+      skipWS();
+      if (s[pos] === '(' || s[pos] === '[') pos++;
+      const result: Record<string, unknown> = {};
+      let index = 0;
+      while (pos < s.length && s[pos] !== ')' && s[pos] !== ']') {
+        skipWS();
+        if (s[pos] === ')' || s[pos] === ']') break;
+        const savedPos = pos;
+        const key = parseValue();
+        skipWS();
+        if (s[pos] === '=' && s[pos + 1] === '>') {
+          pos += 2;
+          skipWS();
+          const val = parseValue();
+          if (typeof key === 'string') result[key] = val;
+          else result[String(index++)] = val;
+        } else {
+          pos = savedPos;
+          const val = parseValue();
+          result[String(index++)] = val;
+        }
+        skipWS();
+        if (s[pos] === ',') pos++;
+      }
+      if (s[pos] === ')') pos++;
+      if (s[pos] === ']') pos++;
+      return Object.keys(result).every(k => !isNaN(Number(k))) ? Object.values(result) : result;
+    }
+    return parseValue();
+  }
 
   const handleInput = (val: string) => { setInput(val); process(val, mode); };
   const swap = () => {

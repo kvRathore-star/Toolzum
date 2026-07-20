@@ -1124,21 +1124,94 @@ export function SquareRootCalculator() {
   );
 }
 
+function evalScientific(input: string): number {
+  let pos = 0;
+  const s = input.replace(/\s+/g, '').toLowerCase()
+    .replace(/π/g, String(Math.PI))
+    .replace(/pi/g, String(Math.PI))
+    .replace(/\be\b(?![xp])/g, String(Math.E));
+
+  const funcs: Record<string, (x: number) => number> = {
+    sin: x => Math.sin(x * Math.PI / 180),
+    cos: x => Math.cos(x * Math.PI / 180),
+    tan: x => Math.tan(x * Math.PI / 180),
+    asin: x => Math.asin(x) * 180 / Math.PI,
+    acos: x => Math.acos(x) * 180 / Math.PI,
+    atan: x => Math.atan(x) * 180 / Math.PI,
+    sqrt: x => Math.sqrt(x),
+    log: x => Math.log10(x),
+    ln: x => Math.log(x),
+    abs: x => Math.abs(x),
+    ceil: x => Math.ceil(x),
+    floor: x => Math.floor(x),
+    round: x => Math.round(x),
+  };
+
+  function parseExpr(): number {
+    let val = parseTerm();
+    while (pos < s.length && (s[pos] === '+' || s[pos] === '-')) {
+      const op = s[pos++];
+      const right = parseTerm();
+      val = op === '+' ? val + right : val - right;
+    }
+    return val;
+  }
+
+  function parseTerm(): number {
+    let val = parseUnary();
+    while (pos < s.length && (s[pos] === '*' || s[pos] === '/')) {
+      const op = s[pos++];
+      const right = parseUnary();
+      val = op === '*' ? val * right : val / right;
+    }
+    return val;
+  }
+
+  function parseUnary(): number {
+    if (pos < s.length && s[pos] === '-') {
+      pos++;
+      return -parseAtom();
+    }
+    if (pos < s.length && s[pos] === '+') {
+      pos++;
+    }
+    return parseAtom();
+  }
+
+  function parseAtom(): number {
+    if (pos < s.length && s[pos] === '(') {
+      pos++;
+      const val = parseExpr();
+      if (pos < s.length && s[pos] === ')') pos++;
+      return val;
+    }
+    for (const [name, fn] of Object.entries(funcs)) {
+      if (s.startsWith(name + '(', pos)) {
+        pos += name.length;
+        if (pos < s.length && s[pos] === '(') pos++;
+        const arg = parseExpr();
+        if (pos < s.length && s[pos] === ')') pos++;
+        return fn(arg);
+      }
+    }
+    let numStr = '';
+    while (pos < s.length && (/[0-9.]/).test(s[pos])) {
+      numStr += s[pos++];
+    }
+    return parseFloat(numStr);
+  }
+
+  const result = parseExpr();
+  if (pos !== s.length) throw new Error('Unexpected character');
+  return result;
+}
+
 export function ScientificCalculator() {
   const [expr, setExpr] = useState('sin(30) + cos(60)');
   const [result, setResult] = useState('');
   const calc = () => {
     try {
-      const safe = expr
-        .replace(/sin\(/g, 'Math.sin(')
-        .replace(/cos\(/g, 'Math.cos(')
-        .replace(/tan\(/g, 'Math.tan(')
-        .replace(/sqrt\(/g, 'Math.sqrt(')
-        .replace(/log\(/g, 'Math.log10(')
-        .replace(/ln\(/g, 'Math.log(')
-        .replace(/π/g, 'Math.PI')
-        .replace(/pi/g, 'Math.PI');
-      const val = Function('"use strict"; return (' + safe + ')')();
+      const val = evalScientific(expr);
       setResult(`Result: ${val}`);
     } catch {
       setResult('Error: Invalid expression');

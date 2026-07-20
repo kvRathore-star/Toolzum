@@ -50,10 +50,10 @@ export default function SpeedTest() {
       
       setSpeedMbps(Math.min(950, parseFloat(speed.toFixed(1))));
     } catch (err) {
-      // Offline fallback: simulate randomized high fidelity speeds based on connection type
-      const mockSpeed = parseFloat((Math.random() * 50 + 20).toFixed(1));
-      setSpeedMbps(mockSpeed);
-      if (!latencyMs) setLatencyMs(Math.round(Math.random() * 20 + 15));
+      // CORS or network error: cannot measure speed from this environment
+      setSpeedMbps(null);
+      setLatencyMs(null);
+      toast.error('Speed test failed — CORS or network error. Try again or use a different network.');
     } finally {
       setProgress(100);
       setIsRunning(false);

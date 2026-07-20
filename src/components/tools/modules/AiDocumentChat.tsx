@@ -23,39 +23,35 @@ export default function AiDocumentChat() {
   const processDocument = () => {
     if (!file) return;
     setIsProcessing(true);
-    
-    // Stub processing
     setTimeout(() => {
       setIsProcessing(false);
       setIsDocumentReady(true);
       setMessages([
-        { role: 'ai', content: `I've analyzed "${file.name}". I'm ready to answer any questions you have about this document! (Backend currently stubbed).` }
+        { role: 'ai', content: `AI Document Chat requires a server-side vector database (e.g., Cloudflare Vectorize) and an LLM API. This tool is under development and will be available in a future update.` }
       ]);
-    }, 2000);
+    }, 1000);
   };
 
   const handleSend = () => {
     if (!input.trim()) return;
-    
     const userMsg = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsTyping(true);
-    
     setTimeout(() => {
       setMessages(prev => [...prev, { 
         role: 'ai', 
-        content: `(Backend not connected). This is a simulated RAG response based on the uploaded document. Please configure Vectorize or Pinecone to enable live document chat.`
+        content: `This feature is under development. Real document chat will be available once a vector database and LLM API are connected.`
       }]);
       setIsTyping(false);
-    }, 1500);
+    }, 800);
   };
 
   if (!file || !isDocumentReady) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
         <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
-          <strong>AI Document Chat (RAG):</strong> Upload a massive PDF or Word document and instantly ask questions to find the exact information you need.
+          <strong>AI Document Chat (Coming Soon):</strong> Upload a PDF or Word document and ask questions. Requires server-side vector database — under development.
         </div>
         
         {!file ? (

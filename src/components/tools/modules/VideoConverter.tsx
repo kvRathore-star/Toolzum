@@ -1,70 +1,15 @@
 "use client";
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { downloadOrShare } from '@/utils/nativeShare';
+import React from 'react';
 
-const FORMATS = ['MP4', 'AVI', 'MKV', 'MOV', 'WMV', 'FLV', 'WebM', '3GP', 'MPEG', 'VOB'];
-
-function detectFormat(name: string): string {
-  const ext = name.split('.').pop()?.toLowerCase() || '';
-  const map: Record<string, string> = { mp4: 'MP4', avi: 'AVI', mkv: 'MKV', mov: 'MOV', wmv: 'WMV', flv: 'FLV', webm: 'WebM', '3gp': '3GP', mpeg: 'MPEG', mpg: 'MPEG', vob: 'VOB' };
-  return map[ext] || 'MP4';
-}
-
-export function VideoConverter({ defaultFrom, defaultTo }: { defaultFrom?: string; defaultTo?: string }) {
-  const [file, setFile] = useState<File | null>(null);
-  const [srcFormat, setSrcFormat] = useState(defaultFrom || 'MP4');
-  const [dstFormat, setDstFormat] = useState(defaultTo || 'AVI');
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (!f) return;
-    setFile(f);
-    setSrcFormat(defaultFrom || detectFormat(f.name));
-  };
-
-  const handleConvert = () => {
-    if (!file) { toast.error('Select a file first'); return; }
-    if (srcFormat === dstFormat) { toast.error('Source and target formats are the same'); return; }
-    const base = file.name.replace(/\.[^.]+$/, '');
-    const outName = `${base}.${dstFormat.toLowerCase()}`;
-    downloadOrShare(URL.createObjectURL(file), outName);
-    toast.success(`Converted to ${dstFormat}`);
-  };
-
+export function VideoConverter() {
   return (
-    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-        <h2 className="text-2xl font-bold">Video Converter</h2>
-        <p className="text-sm text-zinc-500">Convert video files between formats</p>
-        <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600 rounded-xl p-8 cursor-pointer hover:border-blue-500 transition">
-          <input type="file" accept="video/*" onChange={handleFile} className="hidden" />
-          <span className="text-zinc-400 text-sm">{file ? file.name : 'Click or drag to upload'}</span>
-        </label>
-        {file && (
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-medium text-zinc-500">Source</label>
-              <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
-            </div>
-            <div>
-              <label className="text-xs font-medium text-zinc-500">Target</label>
-              <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
-            </div>
-          </div>
-        )}
-        {file && <button onClick={handleConvert} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition">Convert & Download</button>}
-        {file && <div className="text-xs text-zinc-400"><p>Source: {file.name} ({srcFormat})</p><p>Output: {file.name.replace(/\.[^.]+$/, '')}.{dstFormat.toLowerCase()}</p></div>}
+    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-300">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center space-y-3">
+        <p className="text-sm font-semibold text-amber-800">Coming Soon</p>
+        <p className="text-xs text-amber-700">
+          This tool is under development. Check back soon!
+        </p>
       </div>
     </div>
   );
 }
-
-export function Mp4ToAvi() { return <VideoConverter defaultFrom="MP4" defaultTo="AVI" />; }
-export function AviToMp4() { return <VideoConverter defaultFrom="AVI" defaultTo="MP4" />; }
-export function MovToMp4() { return <VideoConverter defaultFrom="MOV" defaultTo="MP4" />; }
-export function MkvToMp4() { return <VideoConverter defaultFrom="MKV" defaultTo="MP4" />; }
-export function WebmToMp4() { return <VideoConverter defaultFrom="WebM" defaultTo="MP4" />; }
-export function FlvToMp4() { return <VideoConverter defaultFrom="FLV" defaultTo="MP4" />; }
-export function WmvToMp4() { return <VideoConverter defaultFrom="WMV" defaultTo="MP4" />; }
-export function _3gpToMp4() { return <VideoConverter defaultFrom="3GP" defaultTo="MP4" />; }

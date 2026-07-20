@@ -31,13 +31,13 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.png`;
 
   return {
-    title: `${toolMetadata.name} — Free Online Tool`,
+    title: `${toolMetadata.name} – Free Online Tool`,
     description: desc,
     alternates: {
       canonical: `https://toolzum.com/${params.category}/${params.tool}/`,
     },
     openGraph: {
-      title: `${toolMetadata.name} - Free Online Tool`,
+      title: `${toolMetadata.name} – Free Online Tool`,
       description: getOgDescription(toolMetadata),
       type: 'website',
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],

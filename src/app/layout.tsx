@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),
   alternates: { canonical: "https://toolzum.com/" },
   title: {
-    default: "Toolzum — Privacy-First Web Tools",
+    default: "Toolzum – Privacy-First Web Tools",
     template: "%s | Toolzum",
   },
   description:
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Toolzum",
-    title: "Toolzum — Privacy-First Web Tools",
+    title: "Toolzum – Privacy-First Web Tools",
     description:
       `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],

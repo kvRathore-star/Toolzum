@@ -1,152 +1,70 @@
 "use client";
+import React from 'react';
+import { Shield, Cloud, Link2, Grid3x3 } from 'lucide-react';
 
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
+const sectionBtn = "inline-flex items-center gap-2 px-3 py-2 text-[11px] font-bold rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 cursor-default";
 
-type Tab = 'security' | 'cloud' | 'convert' | 'extra';
-
-const TABS: { key: Tab; label: string }[] = [
-  { key: 'security', label: 'Security' },
-  { key: 'cloud', label: 'Cloud Tools' },
-  { key: 'convert', label: 'Converters' },
-  { key: 'extra', label: 'Extra' },
-];
-
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 ${className}`}>{children}</div>;
+interface HubCard {
+  name: string;
+  slug: string;
+  desc: string;
+  icon: React.ElementType;
 }
 
-function CidrCalculator() {
-  const [cidr, setCidr] = useState('192.168.1.0/24');
-  const [result, setResult] = useState('');
-
-  const calc = () => {
-    const parts = cidr.split('/');
-    if (parts.length !== 2) { toast.error('Invalid CIDR format (e.g. 192.168.1.0/24)'); return; }
-    const prefix = parseInt(parts[1]);
-    if (isNaN(prefix) || prefix < 0 || prefix > 32) { toast.error('Prefix must be 0-32'); return; }
-    const octets = parts[0].split('.').map(Number);
-    if (octets.length !== 4 || octets.some(o => isNaN(o) || o < 0 || o > 255)) { toast.error('Invalid IP address'); return; }
-    const ipInt = octets.reduce((acc, o) => (acc << 8) + o, 0) >>> 0;
-    const mask = ~(2 ** (32 - prefix) - 1) >>> 0;
-    const network = ipInt & mask;
-    const broadcast = network | ~mask >>> 0;
-    const firstHost = prefix < 31 ? network + 1 : network;
-    const lastHost = prefix < 31 ? broadcast - 1 : broadcast;
-    const totalHosts = prefix < 31 ? 2 ** (32 - prefix) - 2 : 2 ** (32 - prefix);
-    const fmt = (n: number) => [24, 16, 8, 0].map(s => (n >>> s) & 255).join('.');
-    setResult(
-      `Network:   ${fmt(network)}/${prefix}\n` +
-      `Broadcast: ${fmt(broadcast)}\n` +
-      `First Host: ${fmt(firstHost)}\n` +
-      `Last Host:  ${fmt(lastHost)}\n` +
-      `Total Hosts: ${totalHosts}\n` +
-      `Netmask:   ${fmt(mask)}`
-    );
-  };
-
+function ToolCard({ name, slug, desc, icon: Icon }: HubCard) {
   return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">CIDR Calculator</h4>
-      <input type="text" value={cidr} onChange={e => setCidr(e.target.value)} placeholder="192.168.1.0/24" className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono mb-2" />
-      <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-      {result && <textarea readOnly rows={7} value={result} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
+    <a href={`/utility/${slug}/`}
+      className="group flex items-start gap-3 p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all hover:shadow-md">
+      <span className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors">
+        <Icon className="w-4 h-4" />
+      </span>
+      <div className="min-w-0">
+        <div className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{name}</div>
+        <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">{desc}</div>
+      </div>
+    </a>
   );
 }
-
-function AwsIamPolicyAnalyzer() {
-  const [policy, setPolicy] = useState('{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":"s3:ListBucket","Resource":"arn:aws:s3:::example-bucket"},{"Effect":"Allow","Action":["s3:GetObject","s3:PutObject"],"Resource":"arn:aws:s3:::example-bucket/*"}]}');
-  const [analysis, setAnalysis] = useState('');
-
-  const analyze = () => {
-    try {
-      const p = JSON.parse(policy);
-      const statements = p.Statement || [];
-      const issues: string[] = [];
-      let actions: string[] = [];
-      let resources: string[] = [];
-
-      statements.forEach((s: any, i: number) => {
-        const acts = Array.isArray(s.Action) ? s.Action : [s.Action];
-        const ress = Array.isArray(s.Resource) ? s.Resource : [s.Resource];
-        actions = [...actions, ...acts];
-        resources = [...resources, ...ress];
-
-        if (s.Effect === 'Allow' && ress.some((r: string) => r === '*')) issues.push(`⚠️ Statement ${i + 1}: Wildcard resource '*'`);
-
-        if (ress.some((r: string) => r === '*') && acts.some((a: string) => a === '*')) issues.push(`🚨 Statement ${i + 1}: Full admin access (*:* on *)`);
-
-        if (acts.some((a: string) => a === 's3:*')) issues.push(`⚠️ Statement ${i + 1}: Broad s3:* action - consider scoping`);
-      });
-
-      const uniqueActions = [...new Set(actions)];
-      const uniqueResources = [...new Set(resources)];
-
-      setAnalysis(
-        `Statements: ${statements.length}\n` +
-        `Unique Actions: ${uniqueActions.length}\n` +
-        `Unique Resources: ${uniqueResources.length}\n` +
-        `\nActions:\n${uniqueActions.map(a => `  • ${a}`).join('\n')}\n` +
-        `\nResources:\n${uniqueResources.map(r => `  • ${r}`).join('\n')}\n` +
-        (issues.length > 0 ? `\nIssues:\n${issues.join('\n')}` : '\n✅ No obvious issues'))
-      ;
-    } catch { toast.error('Invalid IAM policy JSON'); }
-  };
-
-  return (
-    <Card className="md:col-span-2">
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-3">AWS IAM Policy Analyzer</h4>
-      <textarea rows={6} value={policy} onChange={e => setPolicy(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-      <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm mt-2">Analyze</button>
-      {analysis && <textarea readOnly rows={10} value={analysis} className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
-    </Card>
-  );
-}
-
-function InlineLink({ href, label }: { href: string; label: string }) {
-  return (
-    <Card>
-      <h4 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-sm">{label}</h4>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">This tool has moved to its own page.</p>
-      <a href={href} className="inline-block w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm text-center transition-all">Open {label} →</a>
-    </Card>
-  );
-}
-
-
-
-
 
 export default function MiscUtilitiesKit() {
-  const [tab, setTab] = useState<Tab>('security');
-
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
-        {TABS.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${tab === t.key ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'}`}>{t.label}</button>
-        ))}
+      <div className="space-y-3">
+        <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Miscellaneous Utilities</h2>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+          Network calculators, cloud policy tools, converters, and extras — all running locally in your browser.
+        </p>
       </div>
-      {tab === 'security' && (
-        <div className="grid grid-cols-1 gap-6">
-          <CidrCalculator />
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Shield className="w-3.5 h-3.5" /> Network &amp; Security</span>
         </div>
-      )}
-      {tab === 'cloud' && <AwsIamPolicyAnalyzer />}
-      {tab === 'convert' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InlineLink href="/tools/yaml-json-converter" label="JSON ↔ YAML Converter" />
-          <InlineLink href="/tools/tsv-csv-converter" label="TSV ↔ CSV Converter" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="CIDR Calculator" slug="cidr-calculator" desc="Calculate subnet ranges from CIDR notation." icon={Shield} />
         </div>
-      )}
-      {tab === 'extra' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InlineLink href="/tools/md5-hash-generator" label="MD5 & SHA Hash Generator" />
-          <InlineLink href="/tools/markdown-tools" label="Markdown Tools" />
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Cloud className="w-3.5 h-3.5" /> Cloud Tools</span>
         </div>
-      )}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="AWS IAM Policy Analyzer" slug="aws-iam-policy-analyzer" desc="Check IAM policies for wildcard resources and overly broad actions." icon={Cloud} />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <span className={sectionBtn}><Link2 className="w-3.5 h-3.5" /> Converters &amp; Extras</span>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ToolCard name="JSON \u2194 YAML Converter" slug="yaml-json-converter" desc="Convert between JSON and YAML formats." icon={Link2} />
+          <ToolCard name="TSV \u2194 CSV Converter" slug="tsv-csv-converter" desc="Convert between TSV and CSV spreadsheet formats." icon={Link2} />
+          <ToolCard name="MD5 & SHA Hash Generator" slug="hash-generator" desc="Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text." icon={Grid3x3} />
+          <ToolCard name="Markdown Tools" slug="markdown-tools" desc="Quick Markdown editor with live preview." icon={Grid3x3} />
+        </div>
+      </div>
     </div>
   );
 }

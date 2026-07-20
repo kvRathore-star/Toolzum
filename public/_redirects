@@ -102,14 +102,6 @@
 /calculator/days-until-calculator    /developer/time-until-calculator/   301
 
 # Retired toolkits — hub pages replaced by category subsections
-/developer/text-seo-toolkit/   /seo/   301
-/developer/text-seo-toolkit    /seo/   301
-/developer/network-utility-toolkit/   /developer/   301
-/developer/network-utility-toolkit    /developer/   301
-/developer/scanner-toolkit/   /developer/   301
-/developer/scanner-toolkit    /developer/   301
-
-# Retired GeneratorToolkit — tools promoted to standalone pages
 /developer/generator-toolkit/   /developer/   301
 /developer/generator-toolkit    /developer/   301
 
@@ -120,3 +112,47 @@
 # Retired DataToolkit — tools promoted to standalone pages
 /utility/data-toolkit/   /utility/   301
 /utility/data-toolkit    /utility/   301
+
+# Retired hub toolkits — redirect to category pages
+/developer/serialization-toolkit/   /developer/   301
+/developer/serialization-toolkit    /developer/   301
+/developer/config-toolkit/   /developer/   301
+/developer/config-toolkit    /developer/   301
+/developer/api-toolkit/   /developer/   301
+/developer/api-toolkit    /developer/   301
+/health/health-toolkit/   /health/   301
+/health/health-toolkit    /health/   301
+/developer/crypto-kit/   /developer/   301
+/developer/crypto-kit    /developer/   301
+/finance/calculator-kit/   /finance/   301
+/finance/calculator-kit    /finance/   301
+/design/design-toolkit/   /design/   301
+/design/design-toolkit    /design/   301
+/developer/network-toolkit/   /developer/   301
+/developer/network-toolkit    /developer/   301
+/pdf/pdf-toolkit/   /pdf/   301
+/pdf/pdf-toolkit    /pdf/   301
+/developer/validator-kit/   /developer/   301
+/developer/validator-kit    /developer/   301
+/developer/style-code-toolkit/   /developer/   301
+/developer/style-code-toolkit    /developer/   301
+/developer/format-data-toolkit/   /developer/   301
+/developer/format-data-toolkit    /developer/   301
+/utility/calc-file-toolkit/   /utility/   301
+/utility/calc-file-toolkit    /utility/   301
+/utility/misc-utilities-toolkit/   /utility/   301
+/utility/misc-utilities-toolkit    /utility/   301
+/developer/converter-toolkit/   /developer/   301
+/developer/converter-toolkit    /developer/   301
+/developer/time-toolkit/   /developer/   301
+/developer/time-toolkit    /developer/   301
+/developer/text-seo-toolkit/   /developer/   301
+/developer/text-seo-toolkit    /developer/   301
+/design/color-style-toolkit/   /design/   301
+/design/color-style-toolkit    /design/   301
+/developer/network-utility-toolkit/   /developer/   301
+/developer/network-utility-toolkit    /developer/   301
+/developer/scanner-toolkit/   /developer/   301
+/developer/scanner-toolkit    /developer/   301
+/developer/dev-toolkit/   /developer/   301
+/developer/dev-toolkit    /developer/   301

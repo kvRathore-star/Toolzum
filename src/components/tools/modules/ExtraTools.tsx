@@ -157,20 +157,11 @@ export function HoursToMinutesConverter() {
 }
 
 export function ParquetToCsvConverter() {
-  const [rows, setRows] = useState('');
-  const [cols, setCols] = useState('');
   const [info, setInfo] = useState<string | null>(null);
-  const simulate = () => {
-    const r = parseInt(rows) || 0;
-    const c = parseInt(cols) || 0;
-    if (r && c) setInfo(`Simulated conversion: Parquet file with ${r} rows × ${c} columns → CSV with ${r} rows × ${c} columns (${(r * c * 8 / 1024).toFixed(1)} KB estimated). In production, use pandas: df.to_csv('output.csv', index=False)`);
-  };
   return (
     <Section title="Parquet to CSV Converter">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Explain and simulate Parquet → CSV conversion. Enter estimated dimensions.</p>
-      <Input label="Approx. Row Count" value={rows} onChange={setRows} placeholder="e.g. 10000" type="number" />
-      <Input label="Approx. Column Count" value={cols} onChange={setCols} placeholder="e.g. 20" type="number" />
-      <button onClick={simulate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Simulate</button>
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format.</p>
+      <button onClick={() => setInfo('This tool requires server-side processing (Parquet is a binary columnar format). Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
       {info && (
         <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
           <p className="text-sm text-zinc-700 dark:text-zinc-300">{info}</p>
@@ -317,38 +308,23 @@ export function TemperatureConverter() {
 }
 
 export function PdfToDocx() {
-  const [pages, setPages] = useState('');
   const [result, setResult] = useState('');
-  const convert = () => {
-    const p = parseInt(pages) || 1;
-    setResult(`Simulated conversion: PDF with ${p} page${p > 1 ? 's' : ''} → DOCX (.docx) file.
-Estimated output size: ${(p * 12).toFixed(0)} KB.
-Contains extracted text with basic formatting. Tables and images are approximated.
-In production, use a library like pdf2docx or Adobe Acrobat API.`);
-  };
   return (
     <Section title="PDF to DOCX Converter">
-      <Input label="Number of Pages" value={pages} onChange={setPages} placeholder="e.g. 5" type="number" />
-      <button onClick={convert} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Simulate Conversion</button>
-      <Output value={result} label="Simulation Result" />
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert PDF documents to editable DOCX format.</p>
+      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
+      <Output value={result} />
     </Section>
   );
 }
 
 export function PdfToTxt() {
-  const [pages, setPages] = useState('');
   const [result, setResult] = useState('');
-  const convert = () => {
-    const p = parseInt(pages) || 1;
-    setResult(`Simulated text extraction: PDF with ${p} page${p > 1 ? 's' : ''} → TXT file.
-Estimated ${p * 3} KB of extracted plain text.
-Layout and formatting are not preserved. Use pdftotext (Poppler) or PyMuPDF for real extraction.`);
-  };
   return (
     <Section title="PDF to TXT Extractor">
-      <Input label="Number of Pages" value={pages} onChange={setPages} placeholder="e.g. 5" type="number" />
-      <button onClick={convert} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Simulate Extraction</button>
-      <Output value={result} label="Simulation Result" />
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Extract plain text from PDF documents.</p>
+      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
+      <Output value={result} />
     </Section>
   );
 }

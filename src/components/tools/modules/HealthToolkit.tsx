@@ -72,7 +72,7 @@ export default function HealthToolkit() {
           <ToolCard name="BMI for Kids" slug="bmi-calculator-for-kids" desc="BMI percentile for children." icon={Baby} path="/calculator/bmi-calculator-for-kids" />
           <ToolCard name="BMR Calculator" slug="bmr-calculator" desc="Basal Metabolic Rate from weight, height, age, and gender." icon={Thermometer} path="/calculator/bmr-calculator" />
           <ToolCard name="Body Fat % (Navy)" slug="body-fat-percentage-calculator" desc="Body fat percentage using Navy circumference method." icon={Weight} path="/calculator/body-fat-percentage-calculator" />
-          <ToolCard name="Body Fat Estimator" slug="body-fat-estimator" desc="Estimate body fat from BMI and age." icon={Weight} path="/health/body-fat-estimator" />
+          <ToolCard name="Body Fat Estimator" slug="body-fat-calculator" desc="Estimate body fat from BMI and age." icon={Weight} path="/health/body-fat-calculator" />
           <ToolCard name="Ideal Weight" slug="ideal-weight-calc" desc="Ideal body weight by Devine and Robinson formulas." icon={Weight} path="/health/ideal-weight-calc" />
           <ToolCard name="Lean Body Mass" slug="lean-body-mass-calculator" desc="LBM using Boer formula." icon={Weight} path="/calculator/lean-body-mass-calculator" />
           <ToolCard name="Body Surface Area" slug="body-surface-area-calculator" desc="BSA using Mosteller formula." icon={Scale} path="/calculator/body-surface-area-calculator" />

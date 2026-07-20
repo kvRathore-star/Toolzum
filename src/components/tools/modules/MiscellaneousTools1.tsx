@@ -1157,25 +1157,118 @@ export function RoundingCalculator() {
 
 export function MathEquationSolver() {
   const [eq, setEq] = useState('2x + 3 = 7');
-  const solve = (e: string) => {
-    const m = e.match(/^([\d.]*)x\s*\+\s*([\d.]+)\s*=\s*([\d.]+)$/);
-    if (!m) return 'Enter format: ax + b = c';
-    const a = Number(m[1] || 1), b = Number(m[2]), c = Number(m[3]);
-    if (a === 0) return 'a cannot be 0';
-    return 'x = ' + ((c - b) / a).toFixed(4);
+  const [result, setResult] = useState('');
+
+  const solve = () => {
+    const e = eq.replace(/\s+/g, '');
+    // Quadratic: ax^2+bx+c=0
+    const qm = e.match(/^([+-]?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]\d*\.?\d*)=0$/);
+    if (qm) {
+      const a = Number(qm[1] || (qm[1] === '-' ? -1 : 1));
+      const b = Number(qm[2] || 0);
+      const c = Number(qm[3] || 0);
+      if (a === 0) { setResult('Not quadratic (a=0). Try linear format.'); return; }
+      const disc = b * b - 4 * a * c;
+      if (disc < 0) { setResult('No real solutions (negative discriminant)'); return; }
+      if (disc === 0) { setResult(`x = ${(-b / (2 * a)).toFixed(4)} (double root)`); return; }
+      const x1 = (-b + Math.sqrt(disc)) / (2 * a);
+      const x2 = (-b - Math.sqrt(disc)) / (2 * a);
+      setResult(`x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}`);
+      return;
+    }
+    // Linear: move all x terms to left, constants to right
+    const [left, right] = e.split('=');
+    if (!left || !right) { setResult('Use format: expression = value (e.g. 2x + 3 = 7)'); return; }
+    // Parse terms from each side
+    const parseSide = (s: string) => {
+      const terms: { coeff: number; const: number } = { coeff: 0, const: 0 };
+      const tokens = s.match(/[+-]?[^+-]+/g) || [];
+      for (const t of tokens) {
+        if (/x$/.test(t)) {
+          const c = t.replace('x', '').replace(/\+$/, '');
+          terms.coeff += Number(c || (c === '-' ? -1 : 1));
+        } else {
+          terms.const += Number(t);
+        }
+      }
+      return terms;
+    };
+    const L = parseSide(left);
+    const R = parseSide(right);
+    const totalCoeff = L.coeff - R.coeff;
+    const totalConst = R.const - L.const;
+    if (totalCoeff === 0) {
+      setResult(totalConst === 0 ? 'Infinite solutions (identity)' : 'No solution (contradiction)');
+      return;
+    }
+    setResult(`x = ${(totalConst / totalCoeff).toFixed(4)}`);
   };
+
   return (
-    <Card title="Equation Solver (Linear)">
-      <Input value={eq} onChange={e => setEq(e.target.value)} />
-      <div className="text-lg font-bold font-mono">{solve(eq)}</div>
+    <Card title="Equation Solver">
+      <Input value={eq} onChange={e => setEq(e.target.value)} placeholder="e.g. 2x + 3 = 7 or 3x^2 - 5x + 2 = 0" />
+      <button onClick={solve} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Solve</button>
+      {result && <div className="text-lg font-bold font-mono mt-2">{result}</div>}
+      <p className="text-xs text-zinc-500 mt-1">Supports linear (ax + b = cx + d) and quadratic (ax² + bx + c = 0) equations.</p>
     </Card>
   );
+}
+
+function parseExpr(input: string): number {
+  let pos = 0;
+  const s = input.replace(/\s+/g, '');
+
+  function parseExpression(): number {
+    let result = parseTerm();
+    while (pos < s.length && (s[pos] === '+' || s[pos] === '-')) {
+      const op = s[pos++];
+      const right = parseTerm();
+      result = op === '+' ? result + right : result - right;
+    }
+    return result;
+  }
+
+  function parseTerm(): number {
+    let result = parseFactor();
+    while (pos < s.length && (s[pos] === '*' || s[pos] === '/')) {
+      const op = s[pos++];
+      const right = parseFactor();
+      result = op === '*' ? result * right : result / right;
+    }
+    return result;
+  }
+
+  function parseFactor(): number {
+    if (s[pos] === '(') {
+      pos++;
+      const result = parseExpression();
+      if (s[pos] !== ')') throw new Error('Mismatched parentheses');
+      pos++;
+      return result;
+    }
+    if (s[pos] === '-') {
+      pos++;
+      return -parseFactor();
+    }
+    if (s[pos] === '+') {
+      pos++;
+      return parseFactor();
+    }
+    let start = pos;
+    while (pos < s.length && (s[pos] >= '0' && s[pos] <= '9' || s[pos] === '.')) pos++;
+    if (start === pos) throw new Error('Expected number');
+    return parseFloat(s.slice(start, pos));
+  }
+
+  const result = parseExpression();
+  if (pos < s.length) throw new Error('Unexpected character');
+  return result;
 }
 
 export function AlgebraCalculator() {
   const [expr, setExpr] = useState('2*(3+4)');
   let result: string;
-  try { result = String(eval(expr)); } catch { result = 'Invalid expression'; }
+  try { result = String(parseExpr(expr)); } catch { result = 'Invalid expression'; }
   return (
     <Card title="Algebraic Expression Evaluator">
       <Input value={expr} onChange={e => setExpr(e.target.value)} />

@@ -168,7 +168,7 @@ export default function CalculatorKit() {
           <ToolCard name="Churn Rate" slug="churn-rate-calculator" desc="Monthly and annual customer churn." icon={Percent} />
           <ToolCard name="MRR" slug="mrr-calculator" desc="Monthly recurring revenue." icon={DollarSign} />
           <ToolCard name="ARR" slug="arr-calculator" desc="Annual recurring revenue." icon={DollarSign} />
-          <ToolCard name="NPS" slug="nps-survey-calculator" desc="Net Promoter Score from survey data." icon={ChartNoAxesCombined} />
+          <ToolCard name="NPS" slug="net-promoter-score-calculator" desc="Net Promoter Score from survey data." icon={ChartNoAxesCombined} />
           <ToolCard name="Revenue Growth" slug="revenue-growth-calculator" desc="Revenue growth percentage." icon={TrendingUp} />
           <ToolCard name="Runway" slug="runway-calculator" desc="Months of runway based on burn rate." icon={Timer} />
           <ToolCard name="LTV" slug="ltv-calculator" desc="Customer lifetime value from ARPU and tenure." icon={DollarSign} />

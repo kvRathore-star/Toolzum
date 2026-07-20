@@ -221,32 +221,13 @@ export function ApiMockServerConfig() {
 }
 
 export function MockApiResponseGenerator() {
-  const [schema, setSchema] = useState('{ "id": "number", "name": "string", "email": "string" }');
-  const [result, setResult] = useState('');
-  const calc = () => {
-    try {
-      const fields = JSON.parse(schema);
-      const generate = (field: string) => {
-        if (field === 'number') return Math.floor(Math.random() * 1000);
-        if (field === 'string') return Math.random().toString(36).substring(2, 8);
-        if (field === 'email') return `${Math.random().toString(36).substring(2, 8)}@example.com`;
-        if (field === 'boolean') return Math.random() > 0.5;
-        return 'value';
-      };
-      const item: Record<string, any> = {};
-      for (const [k, v] of Object.entries(fields)) item[k] = generate(v as string);
-      setResult(JSON.stringify({ data: [item], total: 1, page: 1 }, null, 2));
-    } catch {
-      setResult('Error: Invalid schema');
-    }
-  };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Mock API Response Generator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Schema (JSON field:type)</label><textarea value={schema} onChange={e => setSchema(e.target.value)} rows={4} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Generate Response</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-300">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center space-y-3">
+        <p className="text-sm font-semibold text-amber-800">Coming Soon</p>
+        <p className="text-xs text-amber-700">
+          This tool is under development. Check back soon!
+        </p>
       </div>
     </div>
   );

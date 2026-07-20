@@ -39,7 +39,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "add-text-1",
     name: "Add Text to Photo",
     description: 'Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle.',
-    seoDescription: 'Free online Add Text to Photo — Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Add Text to Photo — Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. ',
     category: "Image",
     slug: "add-text-to-photo",
     dependencies: "Canvas API",
@@ -48,7 +48,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "batch-edit-1",
     name: "Batch Image Editor",
     description: 'Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click.',
-    seoDescription: 'Free online Batch Image Editor — Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Batch Image Editor — Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. ',
     category: "Image",
     slug: "batch-image-editor",
     dependencies: "Canvas API, jszip",
@@ -60,7 +60,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "vid-mp3-1",
     name: "Video to MP3 Converter",
     description: 'Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file.',
-    seoDescription: 'Free online Video to MP3 Converter — Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video to MP3 Converter — Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. ',
     category: "Video",
     slug: "video-to-mp3",
     dependencies: "ffmpeg",
@@ -70,7 +70,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "vid-crop-1",
     name: "Crop Video",
     description: "Crop the visual area of your MP4 video entirely in the browser.",
-    seoDescription: 'Free online Crop Video — Crop the visual area of your MP4 video entirely in the browser. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Crop Video — Crop the visual area of your MP4 video entirely in the browser. ',
     category: "Video",
     slug: "crop-video",
     dependencies: "ffmpeg",
@@ -79,7 +79,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "dev-json-xml-1",
     name: "JSON to XML",
     description: 'Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules.',
-    seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. ',
     category: "Converter",
     slug: "json-to-xml",
     dependencies: "xml2js",
@@ -89,7 +89,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "time-conv-1",
     name: "Time Converter",
     description: 'Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results.',
-    seoDescription: 'Free online Time Converter — Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Converter — Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. ',
     category: "Developer",
     slug: "time-converter",
     dependencies: "None",
@@ -99,7 +99,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "arch-conv-1",
     name: "Archive Converter",
     description: "Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive — no uploads to servers, no file size limits.",
-    seoDescription: 'Free online Archive Converter — Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Archive Converter — Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive. ',
     category: "Converter",
     slug: "archive-converter",
     dependencies: "jszip",
@@ -109,7 +109,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "pdf-heic-1",
     name: "HEIC to PDF",
     description: 'Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents.',
-    seoDescription: 'Free online HEIC to PDF — Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to PDF — Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents. ',
     category: "PDF",
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
@@ -121,7 +121,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'privacy-cleaner',
     category: 'Utility',
     description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site.',
-    seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. ',
     dependencies: 'Vanilla JS'
   },
   {
@@ -158,9 +158,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Speed Test",
     slug: "speed-test",
     category: "Utility",
-    description: 'Measures your internet connection’s download speed, upload speed, and latency by transferring real test data to geographically distributed servers.',
-    seoDescription: 'Free online Speed Test — Measures your internet connection’s download speed, upload speed, and latency by transferring real test data to geographically distributed servers. Everything runs locally in your browser — nothing is uploaded.',
-    dependencies: "WebSockets / WebRTC"
+    description: 'Measures your internet connection’s download speed and latency by downloading a test file from a CDN. Upload speed is not currently measured.',
+    seoDescription: 'Free online Speed Test — Measures your internet connection’s download speed and latency by downloading a test file from a CDN. ',
+    dependencies: "Fetch API"
   },
   {
     id: "14",
@@ -168,7 +168,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "compress-image-to-50kb",
     category: "Image",
     description: 'Reduces image file size to a specific target — 50 KB, 100 KB, or 200 KB — by automatically adjusting JPEG quality, reducing pixel dimensions, or stripping EXIF metadata. Ideal for government forms, job applications, and upload portals with strict file size limits.',
-    seoDescription: 'Free online Compress Image to 50KB — reduce any image to exactly 50 KB, 100 KB, or 200 KB for government forms, job applications, and upload portals with strict limits. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Compress Image to 50KB — reduce any image to exactly 50 KB, 100 KB, or 200 KB for government forms, job applications, and upload portals with strict limits. ',
     dependencies: "browser-image-compression",
     instructions: [
       { title: "1. Upload Your Image", desc: "Select a JPG or PNG image from your device. The tool works best with photos and scanned documents." },
@@ -188,7 +188,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "currency-converter",
     category: "Finance",
     description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers.',
-    seoDescription: 'Free online Currency Converter — Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Currency Converter — Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. ',
     dependencies: "ExchangeRate-API"
   },
   {
@@ -207,7 +207,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     slug: "pdf-compressor",
     dependencies: "Ghostscript / PDF-lib",
-    seoDescription: 'Free online PDF Compressor — reduce PDF file size by up to 90% with three compression tiers. Compress embedded images, remove metadata, optimize streams. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Compressor — reduce PDF file size by up to 90% with three compression tiers. Compress embedded images, remove metadata, optimize streams. ',
     instructions: [
       { title: "1. Upload Your PDF", desc: "Drag and drop or select a PDF file up to 50MB. The tool shows the current file size before compression." },
       { title: "2. Choose Compression Tier", desc: "Select from three tiers: Maximum Compression (smallest file, lower image quality), Balanced (good size/quality tradeoff), or High Quality (minimal visual loss)." },
@@ -226,7 +226,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "word-to-pdf",
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting.',
-    seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. ',
     dependencies: "LibreOffice API / CloudConvert API",
     showInCategory: false
   },
@@ -237,7 +237,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "percentage-calculator",
     category: "Calculator",
     description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.',
-    seoDescription: 'Free online Percentage Calculator — compute percentages, increases, decreases, and what-percent-of-what relationships. Perfect for tips, discounts, taxes, and everyday math. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Percentage Calculator — compute percentages, increases, decreases, and what-percent-of-what relationships. Perfect for tips, discounts, taxes, and everyday math. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Choose Your Calculation Type", desc: "Select from three modes: find what percent of Y is X, calculate percentage increase/decrease, or determine what X% of Y equals." },
@@ -257,7 +257,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jpg-to-pdf",
     category: "PDF",
     description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them.',
-    seoDescription: 'Free online JPG to PDF — Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JPG to PDF — Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. ',
     dependencies: "jsPDF / Canvas API",
     showInCategory: false
   },
@@ -268,7 +268,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "age-calculator",
     category: "Calculator",
     description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date.',
-    seoDescription: 'Free online Age Calculator — Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Age Calculator — Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. ',
     dependencies: "Date-fns / Moment.js"
   },
   {
@@ -277,7 +277,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "heic-to-jpg",
     category: "Image",
     description: 'Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings.',
-    seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. ',
     dependencies: "heic2any",
     showInCategory: false
   },
@@ -287,7 +287,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-jpg",
     category: "PDF",
     description: 'Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear.',
-    seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
     showInCategory: false
   },
@@ -297,7 +297,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-ppt",
     category: "PDF",
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure.',
-    seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. ',
     dependencies: "pdf2json / PptxGenJS",
     showInCategory: false
   },
@@ -307,7 +307,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fancy-text-generator",
     category: "Text",
     description: 'Creates stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.',
-    seoDescription: 'Free online Fancy Text Generator — create stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, and profile customization. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fancy Text Generator — create stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, and profile customization. ',
     dependencies: "Unicode mapping",
     instructions: [
       { title: "1. Type or Paste Your Text", desc: "Enter the text you want to transform. The generator instantly shows previews in all 40+ Unicode font styles — no waiting or button clicks." },
@@ -337,7 +337,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webp-to-jpg",
     category: "Image",
     description: 'Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format.',
-    seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -347,7 +347,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "png-to-jpg",
     category: "Image",
     description: 'Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency.',
-    seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -357,7 +357,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wheel-of-names",
     category: "Utility",
     description: 'Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options.',
-    seoDescription: 'Free online Wheel of Names — Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Wheel of Names — Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. ',
     dependencies: "Canvas API / GSAP"
   },
   {
@@ -367,7 +367,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider. Balance file size and visual quality visually — max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.',
     dependencies: "HTML5 Canvas / libjpeg-turbo",
-    seoDescription: 'Free online Image Compressor — reduce JPG, PNG, and WebP file sizes with a side-by-side quality preview slider. Perfect for web optimization, email, and social media. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Compressor — reduce JPG, PNG, and WebP file sizes with a side-by-side quality preview slider. Perfect for web optimization, email, and social media. ',
     instructions: [
       { title: "1. Upload Your Image", desc: "Drag and drop a JPG, PNG, or WebP image up to 20MB. The tool immediately shows the original file size and preview." },
       { title: "2. Adjust Compression Level", desc: "Use the quality slider to find the sweet spot between file size and visual quality. The side-by-side preview helps you compare instantly." },
@@ -386,7 +386,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "object-remover",
     category: "Image",
     description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels.',
-    seoDescription: 'Free online Object Remover — Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Object Remover — Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. ',
     dependencies: "Lama Cleaner"
   },
   {
@@ -395,7 +395,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ppt-to-pdf",
     category: "PDF",
     description: 'Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout.',
-    seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. ',
     dependencies: "LibreOffice API",
     showInCategory: false
   },
@@ -405,7 +405,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "temporary-email-generator",
     category: "Privacy",
     description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours).',
-    seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
     dependencies: "Mailinator API / Custom Backend"
   },
   {
@@ -414,7 +414,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "screen-recorder-extension",
     category: "Extension",
     description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate.',
-    seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. ',
     dependencies: "MediaRecorder API"
   },
   {
@@ -442,7 +442,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "excel-to-pdf",
     category: "PDF",
     description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting.',
-    seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. ',
     dependencies: "SheetJS / jsPDF",
     showInCategory: false
   },
@@ -452,7 +452,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "emi-calculator",
     category: "Calculator",
     description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure.',
-    seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -461,7 +461,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "character-counter",
     category: "Text",
     description: 'Counts characters with and without spaces and compares your text against platform-specific limits — Twitter/X posts (280), SMS messages (160), SEO meta descriptions (160), Facebook posts (63,206), and LinkedIn summaries (2,600). Real-time counting with space/no-space toggle.',
-    seoDescription: 'Free online Character Counter — count characters with and without spaces for Twitter (280), SMS (160), SEO meta descriptions, Facebook, and LinkedIn limits. Real-time counting as you type. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Character Counter — count characters with and without spaces for Twitter (280), SMS (160), SEO meta descriptions, Facebook, and LinkedIn limits. Real-time counting as you type. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Your Text", desc: "Type or paste the content you want to measure. The character counter updates instantly — no buttons to press or pages to reload." },
@@ -481,7 +481,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-to-text-transcription",
     category: "Transcription",
     description: 'Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition.',
-    seoDescription: 'Free online Video to Text Transcription — Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video to Text Transcription — Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. ',
     dependencies: "Whisper API"
   },
   {
@@ -491,7 +491,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Text",
     description: 'Analyzes your writing with real-time word count, sentence count, syllable count, paragraphs, and advanced readability metrics — Flesch-Kincaid Reading Ease, Grade Level, estimated speaking time, and keyword density. Essential for writers, students, and SEO professionals optimizing content for readability.',
     dependencies: "Vanilla JS",
-    seoDescription: 'Free online Word Counter — analyze writing with real-time word, sentence, syllable, and paragraph counts plus Flesch-Kincaid readability scores, grade level, speaking time, and keyword density. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Word Counter — analyze writing with real-time word, sentence, syllable, and paragraph counts plus Flesch-Kincaid readability scores, grade level, speaking time, and keyword density. ',
     instructions: [
       { title: "1. Type or Paste Your Content", desc: "Enter your text directly or paste from Word, Google Docs, or any writing app. The dashboard updates in real time as you type or edit." },
       { title: "2. Review Readability & Stats", desc: "The dashboard shows word count, sentence count, syllable count, paragraphs, and advanced metrics including Flesch-Kincaid Grade Level and Reading Ease scores." },
@@ -510,7 +510,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "crop-image",
     category: "Image",
     description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like.',
-    seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like. ',
     dependencies: "Cropper.js"
   },
   {
@@ -519,7 +519,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "social-media-post-maker",
     category: "Branding",
     description: 'Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals.',
-    seoDescription: 'Free online Social Media Post Maker — Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Social Media Post Maker — Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. ',
     dependencies: "Fabric.js"
   },
   {
@@ -528,7 +528,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mkv-to-mp4",
     category: "Converter",
     description: 'Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream.',
-    seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. ',
     dependencies: "FFmpeg",
     showInCategory: false
   },
@@ -548,7 +548,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Rewrites sentences and paragraphs while preserving the original meaning and intent. Academics and content creators use it to avoid plagiarism.',
     dependencies: "HuggingFace",
-    seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. ',
   },
   {
     id: "54",
@@ -556,7 +556,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-number-generator",
     category: "Utility",
     description: 'Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering.',
-    seoDescription: 'Free online Random Number Generator — Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Number Generator — Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. ',
     dependencies: "Math.random()"
   },
   {
@@ -565,7 +565,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-shortener",
     category: "Branding",
     description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support.',
-    seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. ',
     dependencies: "Node.js / Redis"
   },
 
@@ -576,7 +576,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts tabular data from PDF files and reconstructs it into editable Excel spreadsheets with proper column alignment.',
     dependencies: "pdf2json / SheetJS",
-    seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. ',
     showInCategory: false
   },
   {
@@ -585,7 +585,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "unlock-pdf",
     category: "PDF",
     description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents.',
-    seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. ',
     dependencies: "qpdf"
   },
   {
@@ -594,7 +594,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-enhancer",
     category: "Image",
     description: 'Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files.',
-    seoDescription: 'Free online Image Enhancer — Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Enhancer — Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. ',
     dependencies: "Real-ESRGAN"
   },
   {
@@ -603,7 +603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sip-calculator",
     category: "Calculator",
     description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates.',
-    seoDescription: 'Free online SIP Calculator — Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SIP Calculator — Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -612,7 +612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmi-calculator",
     category: "Calculator",
     description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight.',
-    seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -621,7 +621,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-to-text-transcription",
     category: "Transcription",
     description: 'Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs.',
-    seoDescription: 'Free online Audio to Text Transcription — Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio to Text Transcription — Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs. ',
     dependencies: "Whisper API"
   },
   {
@@ -630,7 +630,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "meme-generator",
     category: "Image",
     description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border.',
-    seoDescription: 'Free online Meme Generator — Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Meme Generator — Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. ',
     dependencies: "Canvas API"
   },
   {
@@ -639,7 +639,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mov-to-mp4",
     category: "Converter",
     description: 'Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads.',
-    seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. ',
     dependencies: "FFmpeg",
     showInCategory: false
   },
@@ -649,7 +649,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "resume-builder",
     category: "Utility",
     description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume.',
-    seoDescription: 'Free online Resume Builder — Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Resume Builder — Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. ',
     dependencies: "React / html2pdf.js"
   },
   {
@@ -659,7 +659,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.',
     dependencies: "Real-ESRGAN",
-    seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. ',
   },
   {
     id: "70",
@@ -689,7 +689,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
-    seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. ',
   },
   {
     id: "72",
@@ -697,7 +697,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "password-generator",
     category: "Utility",
     description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules.',
-    seoDescription: 'Free online Password Generator — Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Password Generator — Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. ',
     dependencies: "Crypto API"
   },
   {
@@ -706,7 +706,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "diff-checker",
     category: "Developer",
     description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors.',
-    seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
     dependencies: "diff-match-patch"
   },
   {
@@ -715,7 +715,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webm-to-mp4",
     category: "Converter",
     description: 'Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM.',
-    seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. ',
     dependencies: "FFmpeg",
     showInCategory: false
   },
@@ -725,7 +725,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ip-address-lookup",
     category: "Utility",
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity.',
-    seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
     dependencies: "MaxMind / IP-API"
   },
 
@@ -736,7 +736,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "photo-retoucher",
     category: "Image",
     description: 'Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos.',
-    seoDescription: 'Free online Photo Retoucher — Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Photo Retoucher — Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. ',
     dependencies: "OpenCV"
   },
   {
@@ -754,7 +754,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "font-generator",
     category: "Text",
     description: 'Generates Unicode-styled text variants for bold, italic, monospace, fraktur, script, serif, and sans-serif — optimized for code comments, design mockups, Discord formatting, and technical documentation where visual emphasis matters beyond standard fonts.',
-    seoDescription: 'Free online Font Generator — generate Unicode-styled text in bold, italic, monospace, fraktur, script, serif, and sans-serif. Perfect for design mockups, code comments, Discord, and technical docs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Font Generator — generate Unicode-styled text in bold, italic, monospace, fraktur, script, serif, and sans-serif. Perfect for design mockups, code comments, Discord, and technical docs. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Your Text", desc: "Type or paste the text you want to style. All font variants appear instantly — no waiting for processing." },
@@ -774,7 +774,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "salary-calculator",
     category: "Calculator",
     description: "Calculate net salary after taxes",
-    seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes ',
     dependencies: "Vanilla JS"
   },
   {
@@ -783,7 +783,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-cutter",
     category: "Audio",
     description: "Trim and cut audio files online",
-    seoDescription: 'Free online Audio Cutter — Trim and cut audio files online Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
     dependencies: "Web Audio API / FFmpeg"
   },
   {
@@ -792,7 +792,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-wav",
     category: "Audio",
     description: 'Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity.',
-    seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -802,7 +802,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pomodoro-timer",
     category: "Productivity",
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options.',
-    seoDescription: 'Free online Pomodoro Timer — Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Pomodoro Timer — Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. ',
     dependencies: "Web Audio API / Vanilla JS"
   },
 
@@ -812,7 +812,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "youtube-transcript-generator",
     category: "Transcription",
     description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL.',
-    seoDescription: 'Free online YouTube Transcript Generator — YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online YouTube Transcript Generator — YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. ',
     dependencies: "YouTube Data API"
   },
 
@@ -822,7 +822,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "epub-to-pdf",
     category: "Converter",
     description: 'Convert EPUB e-books to universally compatible PDF format. Preserves book structure, images, and formatting for sharing and printing.',
-    seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true
   },
@@ -834,7 +834,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "protect-pdf",
     category: "PDF",
     description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner.',
-    seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. ',
     dependencies: "pdf-lib"
   },
   {
@@ -843,7 +843,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "invoice-generator",
     category: "Finance",
     description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement.',
-    seoDescription: 'Free online Invoice Generator — Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Invoice Generator — Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. ',
     dependencies: "PDF-lib / Vue.js"
   },
   {
@@ -852,7 +852,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "business-card-maker",
     category: "Branding",
     description: 'Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions.',
-    seoDescription: 'Free online Business Card Maker — Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Business Card Maker — Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. ',
     dependencies: "React / Canvas API"
   },
   {
@@ -861,7 +861,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "regex-tester",
     category: "Developer",
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match.',
-    seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
     dependencies: "regex.js"
   },
 
@@ -871,7 +871,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dice-roller",
     category: "Utility",
     description: 'Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values.',
-    seoDescription: 'Free online Dice Roller — Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Dice Roller — Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. ',
     dependencies: "Three.js"
   },
   {
@@ -880,7 +880,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "profit-margin-calculator",
     category: "Calculator",
     description: 'Computes gross profit, net profit, and margin percentages from revenue and cost inputs. Small-business owners use it to price products, evaluate supplier deals, and ensure healthy margins across their product lines.',
-    seoDescription: 'Free online Profit Margin Calculator — compute gross profit, net profit, and margin percentages from revenue and cost. Perfect for product pricing, supplier evaluation, and business planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Profit Margin Calculator — compute gross profit, net profit, and margin percentages from revenue and cost. Perfect for product pricing, supplier evaluation, and business planning. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Revenue", desc: "Input your total revenue or selling price per unit. This is the money coming in from sales." },
@@ -900,7 +900,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "speech-to-text",
     category: "Audio",
     description: "Transcribe audio to text in multiple languages",
-    seoDescription: 'Free online Speech to Text — Transcribe audio to text in multiple languages Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Speech to Text — Transcribe audio to text in multiple languages ',
     dependencies: "Whisper API / Web Speech API"
   },
   {
@@ -909,7 +909,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-epub",
     category: "PDF",
     description: 'Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation.',
-    seoDescription: 'Free online PDF to EPUB — Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to EPUB — Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. ',
     dependencies: "Calibre API",
     showInCategory: false
   },
@@ -919,7 +919,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "coin-flipper",
     category: "Utility",
     description: 'Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation.',
-    seoDescription: 'Free online Coin Flipper — Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Coin Flipper — Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. ',
     dependencies: "CSS3 Animations"
   },
   {
@@ -928,7 +928,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-colorizer",
     category: "Image",
     description: 'Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images.',
-    seoDescription: 'Free online Image Colorizer — Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Colorizer — Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. ',
     dependencies: "DeOldify"
   },
   {
@@ -937,7 +937,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "exif-data-remover",
     category: "Privacy",
     description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images.',
-    seoDescription: 'Free online EXIF Data Remover — Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online EXIF Data Remover — Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. ',
     dependencies: "exifr / Piexifjs"
   },
   {
@@ -946,7 +946,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avi-to-mp4",
     category: "Converter",
     description: 'Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes.',
-    seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. ',
     dependencies: "FFmpeg",
     showInCategory: false
   },
@@ -954,7 +954,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "mp4-mkv-1",
     name: "MP4 to MKV Converter",
     description: 'Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream.',
-    seoDescription: 'Free online MP4 to MKV Converter — Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP4 to MKV Converter — Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream. ',
     category: "Converter",
     slug: "mp4-to-mkv",
     dependencies: "ffmpeg",
@@ -964,7 +964,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "mp4-mov-1",
     name: "MP4 to MOV Converter",
     description: 'Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports.',
-    seoDescription: 'Free online MP4 to MOV Converter — Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP4 to MOV Converter — Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports. ',
     category: "Converter",
     slug: "mp4-to-mov",
     dependencies: "ffmpeg",
@@ -974,7 +974,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "mkv-mov-1",
     name: "MKV to MOV Converter",
     description: 'Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie.',
-    seoDescription: 'Free online MKV to MOV Converter — Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MKV to MOV Converter — Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie. ',
     category: "Converter",
     slug: "mkv-to-mov",
     dependencies: "ffmpeg",
@@ -984,7 +984,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     id: "mov-mkv-1",
     name: "MOV to MKV Converter",
     description: 'Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility.',
-    seoDescription: 'Free online MOV to MKV Converter — Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MOV to MKV Converter — Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility. ',
     category: "Converter",
     slug: "mov-to-mkv",
     dependencies: "ffmpeg",
@@ -997,7 +997,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Video",
     description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles files up to 500MB.",
     dependencies: "FFmpeg / WebCodecs API",
-    seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. Up to 500MB. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. Up to 500MB. ',
     instructions: [
       { title: "1. Upload Your Video", desc: "Select an MP4, MOV, or WebM video file from your device. The tool accepts videos up to 500MB." },
       { title: "2. Configure Compression", desc: "Adjust the CRF value (lower = better quality, larger file), target resolution, or bitrate. A preview helps you see the quality tradeoff before processing." },
@@ -1016,7 +1016,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-face-swap",
     category: "AI",
     description: 'Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle.',
-    seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle. ',
     dependencies: "InsightFace"
   },
   {
@@ -1034,7 +1034,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xml-sitemap-generator",
     category: "SEO",
     description: 'Crawls any website and generates a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights.',
-    seoDescription: 'Free online XML Sitemap Generator — Crawl any website and generate a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XML Sitemap Generator — Crawl any website and generate a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights. ',
     dependencies: "Fetch API / DOMParser"
   },
   {
@@ -1043,7 +1043,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "meeting-minutes-generator",
     category: "Transcription",
     description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups.',
-    seoDescription: 'Free online Meeting Minutes Generator — Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Meeting Minutes Generator — Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. ',
     dependencies: "OpenAI API"
   },
   {
@@ -1052,7 +1052,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-cover-letter-generator",
     category: "AI",
     description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s.',
-    seoDescription: 'Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. ',
     dependencies: "OpenAI API"
   },
 
@@ -1064,7 +1064,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-to-csv",
     category: "Converter",
     description: 'Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers.',
-    seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
     showInCategory: false
   },
@@ -1074,7 +1074,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "watermark-pdf",
     category: "PDF",
     description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling.',
-    seoDescription: 'Free online Watermark PDF — Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Watermark PDF — Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1083,7 +1083,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-page-delete",
     category: "PDF",
     description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references.',
-    seoDescription: 'Free online PDF Page Delete — Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Page Delete — Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1092,7 +1092,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "png-to-svg",
     category: "Image",
     description: 'Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold.',
-    seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. ',
     dependencies: "Potrace"
   },
   {
@@ -1101,7 +1101,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "email-signature-generator",
     category: "Branding",
     description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles.',
-    seoDescription: 'Free online Email Signature Generator — Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Email Signature Generator — Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. ',
     dependencies: "React"
   },
 
@@ -1111,7 +1111,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "margin-calculator",
     category: "Calculator",
     description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.',
-    seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter What You Know", desc: "Fill in any two of the four fields: cost, selling price, margin %, or markup %. The calculator infers the missing values automatically." },
@@ -1131,7 +1131,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "morse-code-translator",
     category: "Utility",
     description: 'Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals.',
-    seoDescription: 'Free online Morse Code Translator — Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Morse Code Translator — Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1140,7 +1140,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cursive-text-generator",
     category: "Text",
     description: 'Transforms plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Ideal for wedding invitations, greeting cards, elegant Instagram captions, signatures, and any content needing a personal hand-written touch.',
-    seoDescription: 'Free online Cursive Text Generator — transform plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Perfect for wedding invites, signatures, and elegant social captions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Cursive Text Generator — transform plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Perfect for wedding invites, signatures, and elegant social captions. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Your Base Text", desc: "Type or paste the words you want in cursive. The generator converts each letter to its script-style Unicode equivalent while keeping full readability." },
@@ -1160,7 +1160,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "roi-calculator",
     category: "Calculator",
     description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Essential for marketing campaign evaluation, equipment purchase decisions, real estate investment analysis, and comparing investment opportunities.',
-    seoDescription: 'Free online ROI Calculator — measure return on investment as percentage and dollar amount. Perfect for marketing campaigns, equipment purchases, real estate, and investment analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ROI Calculator — measure return on investment as percentage and dollar amount. Perfect for marketing campaigns, equipment purchases, real estate, and investment analysis. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Your Investment", desc: "Input the total amount you invested — whether it's marketing spend, equipment cost, stock purchase, or project budget." },
@@ -1180,7 +1180,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "vat-calculator",
     category: "Calculator",
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services.',
-    seoDescription: 'Free online VAT Calculator — Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online VAT Calculator — Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1189,7 +1189,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "password-strength-checker",
     category: "Privacy",
     description: 'Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.',
-    seoDescription: 'Free online Password Strength Checker — Evaluates password strength using zxcvbn entropy analysis with score, crack time estimate, and improvement suggestions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Password Strength Checker — Evaluates password strength using zxcvbn entropy analysis with score, crack time estimate, and improvement suggestions. ',
     dependencies: "zxcvbn"
   },
   {
@@ -1198,7 +1198,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "js-minifier",
     category: "Developer",
     description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics.',
-    seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. ',
     dependencies: "Terser"
   },
   {
@@ -1207,7 +1207,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "base64-encode-decode",
     category: "Developer",
     description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety.',
-    seoDescription: 'Free online Base64 Encode/Decode — Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Base64 Encode/Decode — Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. ',
     dependencies: "btoa/atob"
   },
   {
@@ -1216,7 +1216,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-to-handwriting",
     category: "Text",
     description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations.',
-    seoDescription: 'Free online Text to Handwriting — Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text to Handwriting — Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. ',
     dependencies: "Canvas API"
   },
   {
@@ -1225,7 +1225,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "receipt-generator",
     category: "Finance",
     description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout.',
-    seoDescription: 'Free online Receipt Generator — Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Receipt Generator — Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. ',
     dependencies: "Canvas API / jsPDF"
   },
   {
@@ -1234,7 +1234,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-thumbnail-maker",
     category: "AI",
     description: 'Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas.',
-    seoDescription: 'Free online AI Thumbnail Maker — Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Thumbnail Maker — Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. ',
     dependencies: "Canvas API / OpenAI API"
   },
   {
@@ -1243,7 +1243,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "secure-note-sharer",
     category: "Privacy",
     description: 'Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it.',
-    seoDescription: 'Free online Secure Note Sharer — Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Secure Note Sharer — Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. ',
     dependencies: "Crypto API / Redis"
   },
   {
@@ -1252,7 +1252,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-to-gif",
     category: "Video",
     description: "Convert MP4/WebM to GIF animations. Max 500MB input.",
-    seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Max 500MB input. ',
     dependencies: "FFmpeg / gif.js"
   },
   {
@@ -1261,7 +1261,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-to-base64",
     category: "Developer",
     description: 'Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON.',
-    seoDescription: 'Free online Image to Base64 — Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image to Base64 — Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON. ',
     dependencies: "FileReader API"
   },
   {
@@ -1270,7 +1270,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "subtitle-translator",
     category: "Video",
     description: 'Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame.',
-    seoDescription: 'Free online Subtitle Translator — Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Subtitle Translator — Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. ',
     dependencies: "Google Translate API"
   },
   {
@@ -1279,7 +1279,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "iban-validator",
     category: "Finance",
     description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm.',
-    seoDescription: 'Free online IBAN Validator — Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online IBAN Validator — Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. ',
     dependencies: "ibantools"
   },
 
@@ -1294,7 +1294,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-to-json",
     category: "Converter",
     description: 'Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields.',
-    seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
     showInCategory: false
   },
@@ -1304,7 +1304,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-to-xml",
     category: "Converter",
     description: 'Parses CSV data and converts it into well-formed XML documents using configurable root and row element names.',
-    seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. ',
     dependencies: "PapaParse / xml2js",
     showInCategory: false
   },
@@ -1314,7 +1314,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rotate-pdf",
     category: "PDF",
     description: 'Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content.',
-    seoDescription: 'Free online Rotate PDF — Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rotate PDF — Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1323,7 +1323,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "extract-images-from-pdf",
     category: "PDF",
     description: 'Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space.',
-    seoDescription: 'Free online Extract Images from PDF — Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Extract Images from PDF — Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. ',
     dependencies: "pdf.js"
   },
   {
@@ -1332,7 +1332,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sql-formatter",
     category: "Developer",
     description: 'Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference.',
-    seoDescription: 'Free online SQL Formatter — Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SQL Formatter — Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. ',
     dependencies: "sql-formatter"
   },
   {
@@ -1341,7 +1341,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "uuid-generator",
     category: "Developer",
     description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes).',
-    seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). ',
     dependencies: "uuid"
   },
   {
@@ -1350,7 +1350,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hex-to-rgb-converter",
     category: "Design",
     description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values.',
-    seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1359,7 +1359,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmr-calculator",
     category: "Calculator",
     description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning.',
-    seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1368,7 +1368,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "meta-tag-generator",
     category: "SEO",
     description: 'Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form.',
-    seoDescription: 'Free online Meta Tag Generator — Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Meta Tag Generator — Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1377,7 +1377,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-to-binary",
     category: "Developer",
     description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators.',
-    seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1386,7 +1386,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "binary-to-text",
     category: "Developer",
     description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error.',
-    seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1395,7 +1395,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "break-even-calculator",
     category: "Calculator",
     description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.',
-    seoDescription: 'Free online Break-Even Calculator — find the exact unit volume or revenue needed to cover fixed and variable costs. Price sensitivity slider for what-if analysis. Perfect for startups and product launches. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Break-Even Calculator — find the exact unit volume or revenue needed to cover fixed and variable costs. Price sensitivity slider for what-if analysis. Perfect for startups and product launches. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Fixed Costs", desc: "Input your total fixed costs — rent, salaries, equipment, insurance — costs that don't change with production volume." },
@@ -1415,7 +1415,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "conversion-rate-calculator",
     category: "Branding",
     description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision.',
-    seoDescription: 'Free online Conversion Rate Calculator — Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Conversion Rate Calculator — Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1424,7 +1424,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cpm-calculator",
     category: "Branding",
     description: 'Computes cost per mille (CPM) — the cost advertisers pay per 1,000 ad impressions. Includes platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn with average rates, plus RPM (revenue per mille) calculation for creators.',
-    seoDescription: 'Free online CPM Calculator — compute cost per mille for ad campaigns with platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn. Includes RPM for creators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CPM Calculator — compute cost per mille for ad campaigns with platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn. Includes RPM for creators. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Select a Platform", desc: "Choose a preset for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, or LinkedIn — each pre-fills typical CPM and RPM averages for reference. Or select Custom for manual entry." },
@@ -1444,7 +1444,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "roas-calculator",
     category: "Branding",
     description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate.',
-    seoDescription: 'Free online ROAS Calculator — ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ROAS Calculator — ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1453,7 +1453,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "podcast-transcription",
     category: "Transcription",
     description: 'Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations.',
-    seoDescription: 'Free online Podcast Transcription — Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Podcast Transcription — Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations. ',
     dependencies: "Whisper API"
   },
   {
@@ -1462,7 +1462,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-minifier",
     category: "Developer",
     description: 'Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so.',
-    seoDescription: 'Free online CSS Minifier — Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Minifier — Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. ',
     dependencies: "clean-css"
   },
   {
@@ -1471,7 +1471,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "compare-pdf-files",
     category: "PDF",
     description: 'Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations.',
-    seoDescription: 'Free online Compare PDF Files — Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Compare PDF Files — Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. ',
     dependencies: "pdf.js"
   },
   {
@@ -1480,7 +1480,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "favicon-generator",
     category: "Design",
     description: 'Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files.',
-    seoDescription: 'Free online Favicon Generator — Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Favicon Generator — Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. ',
     dependencies: "Sharp / jimp"
   },
   {
@@ -1489,7 +1489,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "case-converter",
     category: "Text",
     description: 'Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click.',
-    seoDescription: 'Free online Case Converter — Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Case Converter — Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1498,7 +1498,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "keyword-density-checker",
     category: "SEO",
     description: 'Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending.',
-    seoDescription: 'Free online Keyword Density Checker — Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Keyword Density Checker — Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1507,7 +1507,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "base64-to-image",
     category: "Developer",
     description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button.',
-    seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1525,7 +1525,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-minifier",
     category: "Developer",
     description: 'Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output.',
-    seoDescription: 'Free online HTML Minifier — Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML Minifier — Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. ',
     dependencies: "html-minifier"
   },
   {
@@ -1534,7 +1534,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "barcode-generator",
     category: "Utility",
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data.',
-    seoDescription: 'Free online Barcode Generator — Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Barcode Generator — Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. ',
     dependencies: "JsBarcode"
   },
 
@@ -1547,7 +1547,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pgp-key-generator",
     category: "Privacy",
     description: 'Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection.',
-    seoDescription: 'Free online PGP Key Generator — Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PGP Key Generator — Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. ',
     dependencies: "OpenPGP.js"
   },
   {
@@ -1556,7 +1556,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "add-page-numbers-to-pdf",
     category: "PDF",
     description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset.',
-    seoDescription: 'Free online Add Page Numbers to PDF — Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Add Page Numbers to PDF — Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1565,7 +1565,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "markdown-tools",
     category: "Converter",
     description: 'Renders GitHub-Flavored Markdown to HTML, converts text/HTML to Markdown, or strips Markdown to plain text — all in one tool.',
-    seoDescription: 'Free online Markdown Tools — Render GitHub-Flavored Markdown to HTML, convert text or HTML to Markdown, or strip Markdown formatting to plain text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Markdown Tools — Render GitHub-Flavored Markdown to HTML, convert text or HTML to Markdown, or strip Markdown formatting to plain text. ',
     dependencies: "marked.js, Turndown"
   },
   {
@@ -1574,7 +1574,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "reverse-text-generator",
     category: "Text",
     description: 'Applies five distinct text transformations: reverse entire string order, reverse each word individually, flip upside down using rot180 Unicode, mirror horizontally, and rotate 180 degrees. Perfect for creating puzzles, secret messages, palindromes, and attention-grabbing social media content.',
-    seoDescription: 'Free online Reverse Text Generator — reverse text order, reverse words one by one, flip upside down, mirror horizontally, or rotate 180 degrees. Perfect for puzzles, secret messages, and unique social content. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Reverse Text Generator — reverse text order, reverse words one by one, flip upside down, mirror horizontally, or rotate 180 degrees. Perfect for puzzles, secret messages, and unique social content. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Your Text", desc: "Type or paste the text you want to transform. Each transformation previews instantly — no waiting or processing time." },
@@ -1594,7 +1594,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "zalgo-text-generator",
     category: "Text",
     description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text.',
-    seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1603,7 +1603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "invisible-text-generator",
     category: "Text",
     description: 'Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text.',
-    seoDescription: 'Free online Invisible Text Generator — Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Invisible Text Generator — Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1612,7 +1612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ltv-calculator",
     category: "Calculator",
     description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.',
-    seoDescription: 'Free online LTV Calculator — project customer lifetime value from order value, purchase frequency, margin, and lifespan. SaaS and e-commerce essential for acquisition budgeting and revenue forecasting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online LTV Calculator — project customer lifetime value from order value, purchase frequency, margin, and lifespan. SaaS and e-commerce essential for acquisition budgeting and revenue forecasting. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Purchase Behavior", desc: "Input average order value (AOV), purchase frequency per month, and gross margin percentage." },
@@ -1632,7 +1632,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cac-calculator",
     category: "Calculator",
     description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startups and growth teams use CAC to evaluate marketing channel efficiency, optimize ad spend, and benchmark against LTV.',
-    seoDescription: 'Free online CAC Calculator — divide total sales and marketing spend by new customers acquired to find your customer acquisition cost. Essential for startup growth, ad spend optimization, and LTV benchmarking. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CAC Calculator — divide total sales and marketing spend by new customers acquired to find your customer acquisition cost. Essential for startup growth, ad spend optimization, and LTV benchmarking. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Enter Marketing Spend", desc: "Input your total sales and marketing costs for the period — ad spend, salaries, tools, agency fees, and overhead." },
@@ -1652,7 +1652,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "burn-rate-calculator",
     category: "Calculator",
     description: 'Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance.',
-    seoDescription: 'Free online Burn Rate Calculator — Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Burn Rate Calculator — Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1661,7 +1661,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "net-promoter-score-calculator",
     category: "Branding",
     description: 'Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics.',
-    seoDescription: 'Free online Net Promoter Score Calculator — Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Net Promoter Score Calculator — Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1670,7 +1670,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xml-to-csv",
     category: "Converter",
     description: 'Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths.',
-    seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. ',
     dependencies: "xml2js / PapaParse",
     showInCategory: false
   },
@@ -1680,7 +1680,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-metadata-editor",
     category: "PDF",
     description: 'Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer.',
-    seoDescription: 'Free online PDF Metadata Editor — Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Metadata Editor — Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1689,7 +1689,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-editor",
     category: "Design",
     description: 'SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing.',
-    seoDescription: 'Free online SVG Editor — SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG Editor — SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. ',
     dependencies: "SVGO / Fabric.js"
   },
   {
@@ -1698,7 +1698,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "robots-txt-generator",
     category: "SEO",
     description: 'Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references.',
-    seoDescription: 'Free online Robots.txt Generator — Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Robots.txt Generator — Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1707,7 +1707,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "saas-pricing-calculator",
     category: "Calculator",
     description: 'Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue.',
-    seoDescription: 'Free online SaaS Pricing Calculator — Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SaaS Pricing Calculator — Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1716,7 +1716,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "employee-turnover-calculator",
     category: "Calculator",
     description: "Calculate employee turnover rate",
-    seoDescription: 'Free online Employee Turnover Calculator — Calculate employee turnover rate Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Employee Turnover Calculator — Calculate employee turnover rate ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1725,7 +1725,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mac-address-generator",
     category: "Privacy",
     description: 'Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI.',
-    seoDescription: 'Free online MAC Address Generator — Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MAC Address Generator — Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI. ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1734,7 +1734,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ip-anonymizer",
     category: "Privacy",
     description: "Anonymize IP addresses in logs",
-    seoDescription: 'Free online IP Anonymizer — Anonymize IP addresses in logs Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online IP Anonymizer — Anonymize IP addresses in logs ',
     dependencies: "Vanilla JS"
   },
   {
@@ -1743,7 +1743,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xml-to-json",
     category: "Converter",
     description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key.',
-    seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. ',
     dependencies: "xml2js",
     showInCategory: false
   },
@@ -1753,7 +1753,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "braille-translator",
     category: "Text",
     description: 'Bidirectional converter between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille.',
-    seoDescription: 'Free online Braille Translator — Bidirectional converter between standard English text and Grade 1 or Grade 2 Braille. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Braille Translator — Bidirectional converter between standard English text and Grade 1 or Grade 2 Braille. ',
     dependencies: "Vanilla JS"
   }  ,{
     id: "201",
@@ -1761,7 +1761,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "passport-photo-india",
     category: "indian-utilities",
     description: "3.5x4.5 cm cropper for Indian passport photos",
-    seoDescription: 'Free online Braille Translator — 3.5x4.5 cm cropper for Indian passport photos Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Braille Translator — 3.5x4.5 cm cropper for Indian passport photos ',
     dependencies: "Canvas API / react-cropper"
   },
   {
@@ -1770,7 +1770,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aadhaar-wallet-cropper",
     category: "indian-utilities",
     description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades.',
-    seoDescription: 'Free online Aadhaar Wallet Cropper — Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Aadhaar Wallet Cropper — Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. ',
     dependencies: "Canvas API"
   },
   {
@@ -1779,7 +1779,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pan-card-resizer",
     category: "indian-utilities",
     description: 'Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram.',
-    seoDescription: 'Free online PAN Card Resizer — Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PAN Card Resizer — Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. ',
     dependencies: "Canvas API"
   },
   {
@@ -1788,7 +1788,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "live-transcription",
     category: "Transcription",
     description: 'Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output.',
-    seoDescription: 'Free online Live Transcription — Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Live Transcription — Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. ',
     dependencies: "Web Speech API"
   },
   {
@@ -1797,7 +1797,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-bulk-converter",
     category: "Image",
     description: 'Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch.',
-    seoDescription: 'Free online Image Bulk Converter — Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Bulk Converter — Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. ',
     dependencies: "browser-image-compression / jszip",
     isPro: true,
   },
@@ -1807,7 +1807,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "esign-pdf",
     category: "PDF",
     description: 'Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document.',
-    seoDescription: 'Free online eSign PDF — Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online eSign PDF — Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. ',
     dependencies: "pdf-lib / fabric"
   },
   {
@@ -1816,7 +1816,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-ocr",
     category: "PDF",
     description: 'Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection.',
-    seoDescription: 'Free online PDF OCR (Scanned Docs) — Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF OCR (Scanned Docs) — Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. ',
     dependencies: "tesseract.js"
   },
   {
@@ -1825,7 +1825,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-form-filler",
     category: "PDF",
     description: 'Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed.',
-    seoDescription: 'Free online PDF Form Filler — Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Form Filler — Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. ',
     dependencies: "pdf-lib"
   },
   {
@@ -1843,7 +1843,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-video-subtitler",
     category: "AI",
     description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance.',
-    seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. ',
     dependencies: "Whisper API"
   },
 
@@ -1851,7 +1851,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Subtitle Generator',
     slug: 'subtitle-generator',
     description: 'Generate SRT files from video.',
-    seoDescription: 'Free online Subtitle Generator — Generate SRT files from video. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Subtitle Generator — Generate SRT files from video. ',
     category: 'Video',
     id:  "219",
     dependencies: 'None'
@@ -1860,7 +1860,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Unit Converter',
     slug: 'unit-converter',
     description: 'Universal unit conversion tool.',
-    seoDescription: 'Free online Unit Converter — Universal unit conversion tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Unit Converter — Universal unit conversion tool. ',
     category: 'Utility',
     id:  "221",
     dependencies: 'None'
@@ -1870,7 +1870,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Video Watermark Adder',
     slug: 'video-watermark-adder',
     description: 'Add logo or text watermark to video.',
-    seoDescription: 'Free online Video Watermark Adder — Add logo or text watermark to video. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Watermark Adder — Add logo or text watermark to video. ',
     category: 'Video',
     id:  "223",
     dependencies: 'None'
@@ -1880,7 +1880,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
     description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply.',
-    seoDescription: 'Free online GST Invoice Generator — Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GST Invoice Generator — Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. ',
     category: 'indian-utilities',
     id:  "227",
     dependencies: 'None'
@@ -1889,7 +1889,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'ITR Filing Helper',
     slug: 'itr-filing-helper',
     description: 'Helper for India Income Tax Returns.',
-    seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. ',
     category: 'indian-utilities',
     id:  "228",
     dependencies: 'None'
@@ -1899,7 +1899,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Browser Extension',
     slug: 'browser-extension',
     description: 'All-in-one sidebar AI assistant.',
-    seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. ',
     category: 'Extension',
     id:  "230",
     dependencies: 'None'
@@ -1908,7 +1908,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'MP3 Compressor',
     slug: 'mp3-compressor',
     description: 'Reduce MP3 size with bitrate control',
-    seoDescription: 'Free online MP3 Compressor — Reduce MP3 size with bitrate control Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 Compressor — Reduce MP3 size with bitrate control ',
     category: 'Audio',
     id:  "231",
     dependencies: 'FFmpeg WASM'
@@ -1917,7 +1917,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'GIF to MP4 Converter',
     slug: 'gif-to-mp4',
     description: 'Convert GIF animations to MP4 videos for drastically smaller file sizes. Content creators use this to shrink animated GIFs by up to 90% for social media, Discord, and web pages — all in your browser, nothing uploaded.',
-    seoDescription: 'Free online GIF to MP4 Converter — Convert GIF animations to MP4 videos for drastically smaller file sizes. Shrink animated GIFs by up to 90% for social media, Discord, and web pages. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to MP4 Converter — Convert GIF animations to MP4 videos for drastically smaller file sizes. Shrink animated GIFs by up to 90% for social media, Discord, and web pages. ',
     category: 'Converter',
     id:  "232",
     dependencies: 'FFmpeg WASM'
@@ -1926,7 +1926,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Video Trimmer',
     slug: 'video-trimmer',
     description: 'Trim and cut video clips locally',
-    seoDescription: 'Free online Video Trimmer — Trim and cut video clips locally Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Trimmer — Trim and cut video clips locally ',
     category: 'Video',
     id:  "233",
     dependencies: 'FFmpeg WASM'
@@ -1935,7 +1935,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Aadhaar Card Masker',
     slug: 'aadhaar-card-masker',
     description: 'Mask the first 8 digits of your Aadhaar card for secure sharing.',
-    seoDescription: 'Free online Aadhaar Card Masker — Mask the first 8 digits of your Aadhaar card for secure sharing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Aadhaar Card Masker — Mask the first 8 digits of your Aadhaar card for secure sharing. ',
     category: 'indian-utilities',
     id:  "234",
     dependencies: 'Canvas API'
@@ -1944,7 +1944,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'PAN Card Verification',
     slug: 'pan-verification',
     description: 'Verify PAN format and extract taxpayer category locally.',
-    seoDescription: 'Free online PAN Card Verification — Verify PAN format and extract taxpayer category locally. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PAN Card Verification — Verify PAN format and extract taxpayer category locally. ',
     category: 'indian-utilities',
     id:  "235",
     dependencies: 'None'
@@ -1953,7 +1953,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
     description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details.',
-    seoDescription: 'Free online IFSC Code Lookup — Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online IFSC Code Lookup — Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. ',
     category: 'indian-utilities',
     id:  "236",
     dependencies: 'IFSC API'
@@ -1962,7 +1962,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Voter ID Form Helper',
     slug: 'voter-id-form-helper',
     description: 'Get document checklists and guidance for Form 6/7/8 registration.',
-    seoDescription: 'Free online Voter ID Form Helper — Get document checklists and guidance for Form 6/7/8 registration. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Voter ID Form Helper — Get document checklists and guidance for Form 6/7/8 registration. ',
     category: 'indian-utilities',
     id:  "237",
     dependencies: 'None'
@@ -1971,7 +1971,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'India Pincode Finder',
     slug: 'india-pincode-finder',
     description: 'Search pincodes and post office branches across India.',
-    seoDescription: 'Free online India Pincode Finder — Search pincodes and post office branches across India. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online India Pincode Finder — Search pincodes and post office branches across India. ',
     category: 'indian-utilities',
     id:  "238",
     dependencies: 'Postal API'
@@ -1980,7 +1980,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Hindi / Regional Font Generator',
     slug: 'hindi-regional-font-generator',
     description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts.',
-    seoDescription: 'Free online Hindi / Regional Font Generator — Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hindi / Regional Font Generator — Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. ',
     category: 'indian-utilities',
     id:  "239",
     dependencies: 'None'
@@ -1989,7 +1989,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Indian Age Calculator',
     slug: 'indian-age-calculator',
     description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check.',
-    seoDescription: 'Free online Indian Age Calculator — Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Indian Age Calculator — Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. ',
     category: 'indian-utilities',
     id:  "240",
     dependencies: 'None'
@@ -1998,7 +1998,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'CGPA to Percentage Converter',
     slug: 'cgpa-to-percentage-converter',
     description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas.',
-    seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage based on CBSE, MU, and university formulas. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage based on CBSE, MU, and university formulas. ',
     category: 'indian-utilities',
     id:  "241",
     dependencies: 'None'
@@ -2007,7 +2007,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'PDF to HTML',
     slug: 'pdf-to-html',
     description: 'Convert PDF pages into a clean, responsive HTML5 document.',
-    seoDescription: 'Free online PDF to HTML — Convert PDF pages into a clean, responsive HTML5 document. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to HTML — Convert PDF pages into a clean, responsive HTML5 document. ',
     category: 'PDF',
     id:  "242",
     dependencies: 'PDF.js'
@@ -2016,7 +2016,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'HTML to PDF',
     slug: 'html-to-pdf',
     description: 'Convert HTML source code into a downloadable PDF document.',
-    seoDescription: 'Free online HTML to PDF — Convert HTML source code into a downloadable PDF document. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML to PDF — Convert HTML source code into a downloadable PDF document. ',
     category: 'PDF',
     id:  "243",
     dependencies: 'jsPDF'
@@ -2025,7 +2025,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Generic PDF Processor',
     slug: 'generic-pdf-processor',
     description: 'Compress, rotate pages, or strip metadata from PDFs in one unified tool.',
-    seoDescription: 'Free online Generic PDF Processor — Compress, rotate pages, or strip metadata from PDFs in one unified tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Generic PDF Processor — Compress, rotate pages, or strip metadata from PDFs in one unified tool. ',
     category: 'PDF',
     id:  "244",
     dependencies: 'pdf-lib'
@@ -2035,7 +2035,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'webp-to-png',
     showInCategory: false,
     description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced.',
-    seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. ',
     category: 'Image',
     id:  "245",
     dependencies: 'Canvas API'
@@ -2045,7 +2045,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'jfif-to-png',
     showInCategory: false,
     description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss.',
-    seoDescription: 'Free online JFIF to PNG Converter — Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JFIF to PNG Converter — Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. ',
     category: 'Image',
     id:  "246",
     dependencies: 'Canvas API'
@@ -2055,7 +2055,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'heic-to-png',
     showInCategory: false,
     description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos.',
-    seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. ',
     category: 'Image',
     id:  "247",
     dependencies: 'libheif WASM'
@@ -2065,7 +2065,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: 'convert-to-jpg',
     showInCategory: false,
     description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings.',
-    seoDescription: 'Free online Image to JPG Converter — Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image to JPG Converter — Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. ',
     category: 'Image',
     id:  "248",
     dependencies: 'Canvas API'
@@ -2074,7 +2074,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Rotate Image Online',
     slug: 'rotate-image',
     description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required.',
-    seoDescription: 'Free online Rotate Image Online — Rotates images left or right by 90-degree increments instantly in the browser with no upload required. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rotate Image Online — Rotates images left or right by 90-degree increments instantly in the browser with no upload required. ',
     category: 'Image',
     id:  "249",
     dependencies: 'Canvas API'
@@ -2083,7 +2083,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Blur Face Online',
     slug: 'blur-face',
     description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face.',
-    seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. ',
     category: 'Image',
     id:  "250",
     dependencies: 'AI API'
@@ -2092,7 +2092,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'HTML to Image Converter',
     slug: 'html-to-image',
     description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser.',
-    seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. ',
     category: 'Developer',
     id:  "251",
     dependencies: 'html2canvas'
@@ -2101,7 +2101,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Apple Music Preview Extractor',
     slug: 'apple-music-preview-extractor',
     description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL.',
-    seoDescription: 'Free online Apple Music Preview Extractor — Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Apple Music Preview Extractor — Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. ',
     category: 'Audio',
     id:  "252",
     dependencies: 'fetch API'
@@ -2110,7 +2110,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
     description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences.',
-    seoDescription: 'Free online Marriage Biodata Maker — Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Marriage Biodata Maker — Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. ',
     category: 'indian-utilities',
     id:  "257",
     dependencies: 'jsPDF'
@@ -2119,7 +2119,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Rental Agreement Generator',
     slug: 'rental-agreement-generator',
     description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats.',
-    seoDescription: 'Free online Rental Agreement Generator — Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rental Agreement Generator — Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. ',
     category: 'indian-utilities',
     id:  "258",
     dependencies: 'jsPDF'
@@ -2128,7 +2128,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Resume ATS Score Checker',
     slug: 'resume-ats-score-checker',
     description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions.',
-    seoDescription: 'Free online Resume ATS Score Checker — Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Resume ATS Score Checker — Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. ',
     category: 'AI',
     id:  "259",
     dependencies: 'AI API'
@@ -2137,7 +2137,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'WhatsApp Toolkit',
     slug: 'whatsapp-toolkit',
     description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text.',
-    seoDescription: 'Free online WhatsApp Toolkit — Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WhatsApp Toolkit — Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. ',
     category: 'Utility',
     id:  "261",
     dependencies: 'QRCode.js',
@@ -2146,7 +2146,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Indian Document Enhancer',
     slug: 'indian-document-enhancer',
     description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals.',
-    seoDescription: 'Free online Indian Document Enhancer — Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Indian Document Enhancer — Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. ',
     category: 'indian-utilities',
     id:  "262",
     dependencies: 'Canvas API'
@@ -2156,7 +2156,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
     description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition.',
-    seoDescription: 'Free online Indian Voice Transcriber — Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Indian Voice Transcriber — Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. ',
     category: 'indian-utilities',
     id:  "264",
     dependencies: 'Web Speech API'
@@ -2165,7 +2165,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Bank Statement Analyser',
     slug: 'bank-statement-analyser',
     description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending.',
-    seoDescription: 'Free online Bank Statement Analyser — Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bank Statement Analyser — Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. ',
     category: 'Utility',
     id:  "265",
     dependencies: 'PDF.js'
@@ -2176,7 +2176,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Social Media Calendar',
     slug: 'social-media-calendar',
     description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled.',
-    seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. ',
     category: 'Branding',
     id:  "268",
     dependencies: 'localStorage'
@@ -2185,7 +2185,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Bulk Background Changer',
     slug: 'bulk-bg-changer',
     description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing.',
-    seoDescription: 'Free online Bulk Background Changer — Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Background Changer — Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. ',
     category: 'Image',
     id:  "269",
     dependencies: 'Canvas API',
@@ -2195,7 +2195,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'AI Background Changer',
     slug: 'ai-bg-changer',
     description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen.',
-    seoDescription: 'Free online AI Background Changer — Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Background Changer — Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. ',
     category: 'Image',
     id:  "270",
     dependencies: 'Canvas API'
@@ -2204,7 +2204,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Link in Bio Builder',
     slug: 'link-in-bio-builder',
     description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection.',
-    seoDescription: 'Free online Link in Bio Builder — Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Link in Bio Builder — Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. ',
     category: 'Branding',
     id:  "271",
     dependencies: 'None'
@@ -2213,7 +2213,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'PDF Page Manager',
     slug: 'pdf-page-manager',
     description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails.',
-    seoDescription: 'Free online PDF Page Manager — Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Page Manager — Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. ',
     category: 'PDF',
     id:  "274",
     dependencies: 'pdf-lib'
@@ -2222,7 +2222,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'Bulk QR Code Generator',
     slug: 'bulk-qr-code-generator',
     description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive.',
-    seoDescription: 'Free online Bulk QR Code Generator — Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk QR Code Generator — Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. ',
     category: 'Utility',
     id:  "275",
     dependencies: 'qrcode.js, JSZip',
@@ -2232,7 +2232,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
     description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key.',
-    seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. ',
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js'
@@ -2243,7 +2243,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-image-watermark",
     category: "Image",
     description: "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch.",
-    seoDescription: 'Free online Bulk Image Watermark — Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Image Watermark — Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. ',
     dependencies: "Canvas API, jszip",
   },
   {
@@ -2252,7 +2252,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-pdf-data-extractor",
     category: "PDF",
     description: "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file.",
-    seoDescription: 'Free online Bulk PDF Data Extractor — Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk PDF Data Extractor — Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. ',
     dependencies: "pdf-lib, SheetJS",
   },
   {
@@ -2261,7 +2261,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-image-to-pdf",
     category: "PDF",
     description: "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch.",
-    seoDescription: 'Free online Bulk Image to PDF — Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Image to PDF — Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. ',
     dependencies: "jsPDF, Canvas API",
   },
   {
@@ -2270,7 +2270,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-audio-converter",
     category: "Audio",
     description: "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings.",
-    seoDescription: 'Free online Bulk Audio Converter — Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Audio Converter — Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. ',
     dependencies: "FFmpeg WASM",
   },
   {
@@ -2279,7 +2279,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-svg-to-png",
     category: "Image",
     description: "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines.",
-    seoDescription: 'Free online Bulk SVG to PNG — Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk SVG to PNG — Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. ',
     dependencies: "Canvas API, jszip",
   },
   {
@@ -2288,7 +2288,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-image-compressor",
     category: "Image",
     description: "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload.",
-    seoDescription: 'Free online Bulk Image Compressor — Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Image Compressor — Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. ',
     dependencies: "browser-image-compression, jszip",
   },
   {
@@ -2297,7 +2297,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-pdf-size-reducer",
     category: "PDF",
     description: "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch.",
-    seoDescription: 'Free online Bulk PDF Size Reducer — Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk PDF Size Reducer — Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. ',
     dependencies: "pdf-lib",
   },
   {
@@ -2306,7 +2306,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-image-resizer",
     category: "Image",
     description: "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery.",
-    seoDescription: 'Free online Bulk Image Resizer — Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Image Resizer — Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. ',
     dependencies: "Canvas API, jszip",
   },
   {
@@ -2315,7 +2315,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-video-compressor",
     category: "Video",
     description: "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads.",
-    seoDescription: 'Free online Bulk Video Compressor — Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Video Compressor — Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. ',
     dependencies: "FFmpeg WASM",
   },
   {
@@ -2324,7 +2324,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-pdf-merger",
     category: "PDF",
     description: "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly.",
-    seoDescription: 'Free online Bulk PDF Merger — Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk PDF Merger — Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. ',
     dependencies: "pdf-lib",
   },
   {
@@ -2333,7 +2333,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-face-anonymizer",
     category: "Image",
     description: "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication.",
-    seoDescription: 'Free online Bulk Face Anonymizer — Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Face Anonymizer — Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. ',
     dependencies: "TensorFlow.js, Canvas API, jszip",
   },
   {
@@ -2342,7 +2342,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-pdf-form-extractor",
     category: "PDF",
     description: "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it.",
-    seoDescription: 'Free online Bulk PDF Form Extractor — Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk PDF Form Extractor — Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. ',
     dependencies: "pdf-lib",
   },
   {
@@ -2351,7 +2351,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-video-size-reducer",
     category: "Video",
     description: "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this.",
-    seoDescription: 'Free online Bulk Video Size Reducer — Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Video Size Reducer — Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. ',
     dependencies: "FFmpeg WASM",
   },
   {
@@ -2360,7 +2360,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-audio-normalizer",
     category: "Audio",
     description: "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume.",
-    seoDescription: 'Free online Bulk Audio Normalizer — Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Audio Normalizer — Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. ',
     dependencies: "Web Audio API",
   },
   {
@@ -2369,7 +2369,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-video-subtitle-burner",
     category: "Video",
     description: "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles.",
-    seoDescription: 'Free online Bulk Video Subtitle Burner — Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Video Subtitle Burner — Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. ',
     dependencies: "FFmpeg WASM",
   },
   {
@@ -2378,7 +2378,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-invoice-receipt-parser",
     category: "Finance",
     description: "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees.",
-    seoDescription: 'Free online Bulk Invoice & Receipt Parser — Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Invoice & Receipt Parser — Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. ',
     dependencies: "Tesseract.js, pdf-lib, SheetJS",
   },
   {
@@ -2387,7 +2387,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-csv-excel-to-json",
     category: "Developer",
     description: "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once.",
-    seoDescription: 'Free online Bulk CSV/Excel to JSON — Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk CSV/Excel to JSON — Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. ',
     dependencies: "SheetJS",
   },
   {
@@ -2396,7 +2396,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-url-status-checker",
     category: "SEO",
     description: "Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools.",
-    seoDescription: 'Free online Bulk URL Status Checker — Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk URL Status Checker — Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. ',
     dependencies: "fetch API",
   },
   {
@@ -2405,7 +2405,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-webp-avif-modernizer",
     category: "Image",
     description: "Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch.",
-    seoDescription: 'Free online Bulk WebP/AVIF Modernizer — Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk WebP/AVIF Modernizer — Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. ',
     dependencies: "Canvas API, jszip",
   },
   {
@@ -2414,7 +2414,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-exif-stripper-injector",
     category: "Image",
     description: "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library.",
-    seoDescription: 'Free online Bulk EXIF Stripper & Injector — Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk EXIF Stripper & Injector — Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. ',
     dependencies: "exifr, piexifjs, jszip",
   },
   {
@@ -2423,7 +2423,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-app-icon-generator",
     category: "Image",
     description: "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP.",
-    seoDescription: 'Free online Bulk App Icon Generator — Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk App Icon Generator — Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. ',
     dependencies: "Canvas API, jszip",
   },
   {
@@ -2432,7 +2432,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-markdown-to-pdf-html",
     category: "Developer",
     description: "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates.",
-    seoDescription: 'Free online Bulk Markdown to PDF/HTML — Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Markdown to PDF/HTML — Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. ',
     dependencies: "marked.js, jsPDF, jszip",
   },
   {
@@ -2441,7 +2441,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-font-subsetter",
     category: "Developer",
     description: "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs.",
-    seoDescription: 'Free online Bulk Font Subsetter — Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Font Subsetter — Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. ',
     dependencies: "opentype.js, jszip",
   },
   {
@@ -2450,7 +2450,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-subtitle-time-shifter",
     category: "Video",
     description: "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches.",
-    seoDescription: 'Free online Bulk Subtitle Time-Shifter — Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Subtitle Time-Shifter — Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. ',
     dependencies: "Vanilla JS, jszip",
   },
   {
@@ -2459,7 +2459,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-regex-extractor-replacer",
     category: "Developer",
     description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview.",
-    seoDescription: 'Free online Bulk Regex Extractor & Replacer — Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Regex Extractor & Replacer — Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. ',
     dependencies: "Vanilla JS, jszip",
   },
   {
@@ -2468,7 +2468,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-image-to-text-ocr",
     category: "Image",
     description: "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually.",
-    seoDescription: 'Free online Bulk Image to Text (OCR) — Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk Image to Text (OCR) — Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. ',
     dependencies: "Tesseract.js, jszip",
   },
   {
@@ -2477,7 +2477,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-ebook-converter",
     category: "Converter",
     description: "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Note: This is a basic client-side conversion — complex EPUB/MOBI layouts may not render perfectly. For professional results, use a dedicated e-book tool like Calibre.",
-    seoDescription: 'Free online Bulk E-Book Converter — Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Basic client-side conversion — complex layouts may not render perfectly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk E-Book Converter — Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Basic client-side conversion — complex layouts may not render perfectly. ',
     dependencies: "EPUB.js, jszip",
   },
   {
@@ -2486,7 +2486,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bulk-heic-to-jpg",
     category: "Image",
     description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library.",
-    seoDescription: 'Free online Bulk HEIC to JPG — Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk HEIC to JPG — Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. ',
     dependencies: "libheif WASM, jszip",
   },
   {
@@ -2495,7 +2495,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tax-saving-calculator",
     category: "indian-utilities",
     description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees.",
-    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. ',
     dependencies: "None",
   },
   {
@@ -2504,7 +2504,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gstin-lookup",
     category: "indian-utilities",
     description: "Verify any GSTIN instantly — get legal name, trade name, address, registration date, and filing status. Bulk verification via CSV export for accounts teams.",
-    seoDescription: 'Free online GSTIN Lookup — Verify any GSTIN instantly with legal name, trade name, address, registration date, and filing status. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GSTIN Lookup — Verify any GSTIN instantly with legal name, trade name, address, registration date, and filing status. ',
     dependencies: "None",
   },
   {
@@ -2513,7 +2513,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seller-profit-calculator",
     category: "indian-utilities",
     description: "Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. Made for Indian e-commerce sellers.",
-    seoDescription: 'Free online Seller Profit Calculator — Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Seller Profit Calculator — Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. ',
     dependencies: "None",
   },
   {
@@ -2522,7 +2522,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "complaint-letter-generator",
     category: "indian-utilities",
     description: "Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). AI-powered with your API key.",
-    seoDescription: 'Free online Complaint Letter Generator — Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Complaint Letter Generator — Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). ',
     dependencies: "AI API",
   },
   {
@@ -2531,7 +2531,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "brand-color-palette-generator",
     category: "Branding",
     description: "AI-powered brand color palette generator. Describe your brand and get a complete 6-color palette with usage suggestions for designers.",
-    seoDescription: "Free online Brand Color Palette Generator — AI-powered brand color palette generator. Describe your brand and receive a complete 6-color palette with hex codes and designer usage notes. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: "Free online Brand Color Palette Generator — AI-powered brand color palette generator. Describe your brand and receive a complete 6-color palette with hex codes and designer usage notes. ",
     dependencies: "None",
   },
   {
@@ -2540,7 +2540,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "brand-kit",
     category: "Branding",
     description: "A local-first brand asset manager for colors and fonts.",
-    seoDescription: "Free online Brand Kit — A local-first brand asset manager for colors and fonts. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: "Free online Brand Kit — A local-first brand asset manager for colors and fonts. ",
     dependencies: "None",
   },
   {
@@ -2549,7 +2549,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "to-do-list",
     category: "Productivity",
     description: "A persistent task manager with priorities and filters.",
-    seoDescription: "Free online To-Do List — A persistent task manager with priorities and filters. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: "Free online To-Do List — A persistent task manager with priorities and filters. ",
     dependencies: "None",
   },
   {
@@ -2578,7 +2578,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-converter",
     category: "Video",
     description: 'Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format from the dropdown — your files never leave your device.',
-    seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
     showInCategory: true,
   },
@@ -2588,7 +2588,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-converter",
     category: "Audio",
     description: 'Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format — your files never leave your device.',
-    seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
     showInCategory: true,
   },
@@ -2598,7 +2598,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-format-converter",
     category: "Image",
     description: 'Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format — your files never leave your device.',
-    seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. ',
     dependencies: "Sharp / Browser Canvas",
     showInCategory: true,
   },
@@ -2608,7 +2608,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "data-converter",
     category: "Converter",
     description: 'Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format — your files never leave your device.',
-    seoDescription: 'Free online Data Converter — Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Data Converter — Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format. ',
     dependencies: "PapaParse / SheetJS / js-yaml",
     showInCategory: true,
   },
@@ -2618,7 +2618,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "document-converter",
     category: "PDF",
     description: 'Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format — your files never leave your device.',
-    seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. ',
     dependencies: "pdf-lib / pdf2docx / SheetJS / PptxGenJS",
     showInCategory: true,
   },
@@ -2628,7 +2628,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-markdown",
     category: "PDF",
     description: 'Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Perfect for documentation, research papers, and text extraction.',
-    seoDescription: 'Free online PDF to Markdown — Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to Markdown — Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
   },
@@ -2638,7 +2638,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "extract-pages-from-pdf",
     category: "PDF",
     description: 'Extract specific pages from a PDF document to create a new PDF. Select individual pages or page ranges like 1-3,5,7-9. Keeps original formatting intact.',
-    seoDescription: 'Free online Extract Pages from PDF — Extract specific pages from a PDF document to create a new PDF. Select individual pages or page ranges. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Extract Pages from PDF — Extract specific pages from a PDF document to create a new PDF. Select individual pages or page ranges. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2648,7 +2648,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "scan-to-pdf",
     category: "PDF",
     description: 'Turn photos and scanned images into a professional PDF document. Upload multiple images (JPG, PNG), reorder them, and combine into a single PDF file. Perfect for digitizing documents.',
-    seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2658,7 +2658,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "repair-pdf",
     category: "PDF",
     description: 'Attempts to repair corrupted or damaged PDF files by rebuilding the internal structure. Recovers readable content from broken PDFs and re-saves them as valid PDF documents.',
-    seoDescription: 'Free online Repair PDF — Attempts to repair corrupted or damaged PDF files by rebuilding the internal structure. Recovers readable content from broken PDFs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Repair PDF — Attempts to repair corrupted or damaged PDF files by rebuilding the internal structure. Recovers readable content from broken PDFs. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2668,7 +2668,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-pdfa",
     category: "PDF",
     description: 'Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Ensures long-term preservation and compliance with ISO 19005 standards.',
-    seoDescription: 'Free online PDF to PDF/A — Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to PDF/A — Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2678,7 +2678,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "crop-pdf",
     category: "PDF",
     description: 'Crop PDF pages to custom dimensions or preset sizes. Remove unwanted margins, white space, or sections from your PDF documents. Supports all standard and custom crop areas.',
-    seoDescription: 'Free online Crop PDF — Crop PDF pages to custom dimensions or preset sizes. Remove unwanted margins, white space, or sections. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Crop PDF — Crop PDF pages to custom dimensions or preset sizes. Remove unwanted margins, white space, or sections. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2688,7 +2688,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "redact-pdf",
     category: "PDF",
     description: 'Permanently remove sensitive information from PDF files. Black out text, images, or areas with permanent redaction. Perfect for legal documents, contracts, and personal data protection.',
-    seoDescription: 'Free online Redact PDF — Permanently remove sensitive information from PDF files. Black out text, images, or areas with permanent redaction. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Redact PDF — Permanently remove sensitive information from PDF files. Black out text, images, or areas with permanent redaction. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
   },
@@ -2698,7 +2698,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "translate-pdf",
     category: "PDF",
     description: 'Extract and translate PDF content between 50+ languages. Preserves document structure while converting text to your chosen language. Powered by browser-based and free translation APIs.',
-    seoDescription: 'Free online Translate PDF — Extract and translate PDF content between 50+ languages. Preserves document structure while converting text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Translate PDF — Extract and translate PDF content between 50+ languages. Preserves document structure while converting text. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
   },
@@ -2708,7 +2708,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flatten-pdf",
     category: "PDF",
     description: 'Flattens PDF files by merging all layers, removing form fields, and converting interactive elements into static content. Perfect for sharing finalized documents and reducing file complexity.',
-    seoDescription: 'Free online Flatten PDF — Flattens PDF files by merging all layers, removing form fields, and converting interactive elements into static content. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Flatten PDF — Flattens PDF files by merging all layers, removing form fields, and converting interactive elements into static content. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2718,7 +2718,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "grayscale-pdf",
     category: "PDF",
     description: 'Convert any PDF to grayscale/black and white. Perfect for printing, reducing ink usage, creating archive copies, or giving documents a professional monochrome look.',
-    seoDescription: 'Free online Grayscale PDF — Convert any PDF to grayscale/black and white. Perfect for printing and reducing ink usage. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Grayscale PDF — Convert any PDF to grayscale/black and white. Perfect for printing and reducing ink usage. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
   },
@@ -2728,7 +2728,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "whiteout-pdf",
     category: "PDF",
     description: 'Cover sensitive or unwanted content in PDF files with white rectangles. Select entire pages or custom areas to hide text, images, or sections before sharing or printing.',
-    seoDescription: 'Free online Whiteout PDF — Cover sensitive content in PDF files with white rectangles. Select entire pages or custom areas to hide text or images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Whiteout PDF — Cover sensitive content in PDF files with white rectangles. Select entire pages or custom areas to hide text or images. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2738,7 +2738,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "resize-pdf-pages",
     category: "PDF",
     description: 'Change the page size of your PDF documents. Choose from standard sizes (A4, Letter, Legal, A3) or set custom dimensions. Automatically adds white margins when enlarging.',
-    seoDescription: 'Free online Resize PDF Pages — Change page size of your PDF documents. Choose A4, Letter, Legal, A3 or custom dimensions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Resize PDF Pages — Change page size of your PDF documents. Choose A4, Letter, Legal, A3 or custom dimensions. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2748,7 +2748,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "add-text-to-pdf",
     category: "PDF",
     description: 'Add custom text labels, annotations, and captions directly onto PDF pages. Choose font size, color, and position. Perfect for signing, marking up, or adding notes to documents.',
-    seoDescription: 'Free online Add Text to PDF — Add custom text labels, annotations, and captions directly onto PDF pages. Choose font size, color, and position. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Add Text to PDF — Add custom text labels, annotations, and captions directly onto PDF pages. Choose font size, color, and position. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2758,7 +2758,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "add-image-to-pdf",
     category: "PDF",
     description: 'Insert images (PNG, JPG) onto any page of your PDF document. Position and resize images anywhere on the page. Perfect for adding signatures, logos, or photos to documents.',
-    seoDescription: 'Free online Add Image to PDF — Insert images onto any page of your PDF. Position and resize PNG/JPG images anywhere. Perfect for signatures, logos, or photos. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Add Image to PDF — Insert images onto any page of your PDF. Position and resize PNG/JPG images anywhere. Perfect for signatures, logos, or photos. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2768,7 +2768,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "header-footer-pdf",
     category: "PDF",
     description: 'Add professional headers and footers to every page of your PDF. Supports text, page numbers ({{page}}/{{total}}), dates, and custom alignment. Perfect for reports and official documents.',
-    seoDescription: 'Free online PDF Header and Footer — Add professional headers and footers to every page. Supports page numbers, dates, and custom alignment. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Header and Footer — Add professional headers and footers to every page. Supports page numbers, dates, and custom alignment. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2778,7 +2778,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "nup-pdf",
     category: "PDF",
     description: 'Combine multiple PDF pages onto a single sheet with N-up layout. Choose 2-up, 4-up, 6-up, 9-up, or booklet mode. Perfect for printing multiple slides or pages on one sheet.',
-    seoDescription: 'Free online N-up PDF — Combine multiple PDF pages onto a single sheet. Choose 2-up, 4-up, 6-up, 9-up, or booklet layout. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online N-up PDF — Combine multiple PDF pages onto a single sheet. Choose 2-up, 4-up, 6-up, 9-up, or booklet layout. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
   },
@@ -2788,7 +2788,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-annotator",
     category: "PDF",
     description: 'Add visual annotations like highlights, underlines, strikeouts, and shapes to your PDF pages. Perfect for reviewing documents, marking up text, and adding visual emphasis.',
-    seoDescription: 'Free online PDF Annotator — Add highlights, underlines, strikeouts, rectangles, circles to PDF pages. Review and markup documents visually. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Annotator — Add highlights, underlines, strikeouts, rectangles, circles to PDF pages. Review and markup documents visually. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2798,7 +2798,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "deskew-pdf",
     category: "PDF",
     description: 'Automatically detect and straighten crooked scanned PDF pages. Uses advanced image analysis to find the correct rotation angle. Perfect for fixing skewed scanned documents.',
-    seoDescription: 'Free online Deskew PDF — Automatically straighten crooked scanned PDF pages. Fix skewed documents with auto-detection or manual rotation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Deskew PDF — Automatically straighten crooked scanned PDF pages. Fix skewed documents with auto-detection or manual rotation. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
   },
@@ -2808,7 +2808,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-to-pdf",
     category: "PDF",
     description: 'Convert any webpage to PDF directly in your browser. Enter a URL and save the page as a downloadable PDF document. Perfect for archiving articles, receipts, and web content.',
-    seoDescription: 'Free online URL to PDF — Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online URL to PDF — Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2818,7 +2818,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "markdown-to-pdf",
     category: "PDF",
     description: 'Convert Markdown text to beautifully formatted PDF documents. Supports headings, bold, italic, code blocks, lists, and custom page formatting. Perfect for documentation and notes.',
-    seoDescription: 'Free online Markdown to PDF — Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Markdown to PDF — Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. ',
     dependencies: "pdf-lib, marked",
     showInCategory: true,
   },
@@ -2828,7 +2828,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bookmark-pdf",
     category: "PDF",
     description: 'Add a Table of Contents to your PDF documents. Organize pages with titled sections, create nested hierarchies, and navigate large documents with ease. Perfect for reports, ebooks, and manuals.',
-    seoDescription: 'Free online Bookmark PDF — Add Table of Contents to your PDF documents. Organize pages with titled sections and nested hierarchies. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bookmark PDF — Add Table of Contents to your PDF documents. Organize pages with titled sections and nested hierarchies. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2838,7 +2838,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "eml-to-pdf",
     category: "PDF",
     description: 'Convert email files (.eml) to PDF documents. Preserves headers (From, To, Subject, Date) and body content in a clean, printable format. Perfect for archiving important emails.',
-    seoDescription: 'Free online EML to PDF — Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online EML to PDF — Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -2848,7 +2848,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "raw-image-converter",
     category: "Image",
     description: 'Convert RAW camera images (CR2, NEF, ARW, DNG) to universal formats. Works with most modern camera RAW formats directly in your browser. Perfect for photographers on the go.',
-    seoDescription: 'Free online RAW Image Converter — Convert RAW camera images (CR2, NEF, ARW, DNG) to JPG, PNG, or WebP formats. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online RAW Image Converter — Convert RAW camera images (CR2, NEF, ARW, DNG) to JPG, PNG, or WebP formats. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2868,7 +2868,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "collage-maker",
     category: "Image",
     description: 'Combine multiple photos into beautiful collages. Choose from grid, strip, or featured layouts. Perfect for creating photo montages, mood boards, and social media posts.',
-    seoDescription: 'Free online Collage Maker — Combine multiple photos into beautiful collages. Grid, strip, and featured layouts. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Collage Maker — Combine multiple photos into beautiful collages. Grid, strip, and featured layouts. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2878,7 +2878,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "chart-maker",
     category: "Image",
     description: 'Create stunning charts and graphs online for free. Supports bar, line, pie, doughnut, area charts with custom colors, labels, and titles. Perfect for presentations and reports.',
-    seoDescription: 'Free online Chart Maker — Create stunning bar, line, pie, doughnut, and area charts with custom colors and labels. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Chart Maker — Create stunning bar, line, pie, doughnut, and area charts with custom colors and labels. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2888,7 +2888,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bg-changer",
     category: "Image",
     description: 'Replace image backgrounds with a solid color, gradient, or another image. Perfect for product photos, portraits, and creative projects. Quick and easy, right in your browser.',
-    seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2897,8 +2897,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Unblur / Sharpen",
     slug: "unblur-sharpen",
     category: "Image",
-    description: 'Fix blurry photos with smart sharpening or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur with adjustable intensity. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Unblur / Sharpen — Fix blurry photos or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur. Everything runs locally in your browser — nothing is uploaded.',
+    description: 'Fix blurry photos with smart sharpening or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur with adjustable intensity. ',
+    seoDescription: 'Free online Unblur / Sharpen — Fix blurry photos or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2908,7 +2908,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-editor",
     category: "Image",
     description: 'Edit animated GIFs — resize, change speed, reverse, optimize colors, and extract frames. Perfect for social media memes, product demos, and animated banners.',
-    seoDescription: 'Free online GIF Editor — Resize, change speed, reverse, optimize colors, and extract frames from animated GIFs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF Editor — Resize, change speed, reverse, optimize colors, and extract frames from animated GIFs. ',
     dependencies: "@ffmpeg/ffmpeg, jszip",
     showInCategory: true,
   },
@@ -2918,7 +2918,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-speed-changer",
     category: "Video",
     description: 'Speed up or slow down any video. Adjust playback speed from 0.1x to 10x with audio pitch preservation. Perfect for creating time-lapses, slow-motion replays, and quick reviews.',
-    seoDescription: 'Free online Video Speed Changer — Speed up or slow down videos from 0.1x to 10x with audio pitch preservation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Speed Changer — Speed up or slow down videos from 0.1x to 10x with audio pitch preservation. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2928,7 +2928,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "reverse-video",
     category: "Video",
     description: 'Play any video backwards. Reverse video, audio, or both independently. Create fun effects, hidden messages, and creative video edits with a single click.',
-    seoDescription: 'Free online Reverse Video — Play any video backwards. Reverse video, audio, or both. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Reverse Video — Play any video backwards. Reverse video, audio, or both. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2938,7 +2938,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mute-video",
     category: "Video",
     description: 'Remove audio from a video completely, replace it with a new audio track, or adjust the volume. Perfect for creating silent videos, adding background music, or fixing audio levels.',
-    seoDescription: 'Free online Mute Video — Remove, replace, or adjust audio volume in your videos. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Mute Video — Remove, replace, or adjust audio volume in your videos. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2948,7 +2948,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "vocal-remover",
     category: "Audio",
     description: 'Remove vocals from any song to create karaoke instrumentals. Extract acapella tracks or get both. Perfect for DJs, content creators, and karaoke enthusiasts.',
-    seoDescription: 'Free online Vocal Remover — Remove vocals from songs to create karaoke tracks. Extract instrumentals or acapella. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Vocal Remover — Remove vocals from songs to create karaoke tracks. Extract instrumentals or acapella. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2958,7 +2958,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-merger",
     category: "Audio",
     description: 'Combine multiple audio files into one continuous track. Supports crossfade between songs and automatic volume normalization. Perfect for making mixtapes, podcasts, and audiobooks.',
-    seoDescription: 'Free online Audio Merger — Combine multiple audio files into one track with crossfade and volume normalization. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Merger — Combine multiple audio files into one track with crossfade and volume normalization. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2968,7 +2968,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "voice-recorder",
     category: "Audio",
     description: 'Record audio directly in your browser using your microphone. Features real-time waveform visualization, pause/resume, and multiple export formats. No software installation needed.',
-    seoDescription: 'Free online Voice Recorder — Record audio directly in your browser with waveform visualization. No installation needed. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Voice Recorder — Record audio directly in your browser with waveform visualization. No installation needed. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -2978,7 +2978,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "noise-reducer",
     category: "Audio",
     description: 'Reduce background noise from audio recordings. Choose from mild to extreme reduction or sample a noise profile for precision cleaning. Perfect for podcasts, calls, and field recordings.',
-    seoDescription: 'Free online Audio Noise Reducer — Reduce background noise from recordings. Mild to extreme noise reduction. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Noise Reducer — Reduce background noise from recordings. Mild to extreme noise reduction. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2988,7 +2988,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-equalizer",
     category: "Audio",
     description: 'Fine-tune your audio with a 10-band graphic equalizer. Boost bass, enhance vocals, or apply professional presets. Includes real-time frequency response visualization.',
-    seoDescription: 'Free online Audio Equalizer — Fine-tune audio with 10-band graphic EQ. Boost bass, enhance vocals, apply presets. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Equalizer — Fine-tune audio with 10-band graphic EQ. Boost bass, enhance vocals, apply presets. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2998,7 +2998,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "audio-compressor",
     category: "Audio",
     description: 'Balance audio dynamics with professional compression controls. Perfect for podcasts, voice overs, and music production. Features threshold, ratio, attack, release, and makeup gain.',
-    seoDescription: 'Free online Audio Compressor — Balance audio dynamics with threshold, ratio, attack, release, and makeup gain controls. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Compressor — Balance audio dynamics with threshold, ratio, attack, release, and makeup gain controls. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3008,7 +3008,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "waveform-generator",
     category: "Audio",
     description: 'Generate beautiful audio waveform visualizations from any audio file. Choose from bar, line, filled, or circular styles. Perfect for podcast artwork, music videos, and social media.',
-    seoDescription: 'Free online Audio Waveform Generator — Create beautiful waveform visualizations from audio. Bar, line, filled, or circular styles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Waveform Generator — Create beautiful waveform visualizations from audio. Bar, line, filled, or circular styles. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3018,7 +3018,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fade-in-out",
     category: "Audio",
     description: 'Apply smooth volume fades to your audio tracks. Supports fade in, fade out, or both with linear, logarithmic, exponential, and S-curve transitions. Perfect for podcast intros and outros.',
-    seoDescription: 'Free online Audio Fade In/Out — Apply smooth volume fades with linear, log, exp, or S-curve transitions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Audio Fade In/Out — Apply smooth volume fades with linear, log, exp, or S-curve transitions. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3028,7 +3028,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-stabilizer",
     category: "Video",
     description: 'Fix shaky handheld footage with advanced video stabilization. Two-pass analysis delivers smooth, professional results. Perfect for vloggers, action cameras, and mobile videos.',
-    seoDescription: 'Free online Video Stabilizer — Fix shaky footage with advanced stabilization. Two-pass analysis for smooth results. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Stabilizer — Fix shaky footage with advanced stabilization. Two-pass analysis for smooth results. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3038,7 +3038,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-screenshot",
     category: "Video",
     description: 'Capture still frames from any video at precise timestamps. Extract single screenshots or batch capture at regular intervals. Export as JPG, PNG, or WebP. Perfect for thumbnails and previews.',
-    seoDescription: 'Free online Video Screenshot — Capture frames from videos at precise timestamps. Single or batch extraction. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Screenshot — Capture frames from videos at precise timestamps. Single or batch extraction. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3048,7 +3048,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-filters",
     category: "Video",
     description: 'Apply stunning visual effects to your videos. Choose from color filters, artistic effects, blurs, and lighting adjustments. Combine multiple filters for unique looks.',
-    seoDescription: 'Free online Video Filters — Apply color, artistic, blur, and lighting effects to videos. Combine multiple filters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Filters — Apply color, artistic, blur, and lighting effects to videos. Combine multiple filters. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3058,7 +3058,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "screen-recorder",
     category: "Video",
     description: 'Record your screen, application window, or browser tab with optional microphone audio. Choose HD, Full HD, or 2K quality. Download as WebM or MP4. No software installation needed.',
-    seoDescription: 'Free online Screen Recorder — Record screen, window, or tab with mic audio. HD to 2K quality. Download as WebM or MP4. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Screen Recorder — Record screen, window, or tab with mic audio. HD to 2K quality. Download as WebM or MP4. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3068,7 +3068,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-chat-pdf",
     category: "AI",
     description: 'Chat with your PDF documents. Ask questions, get answers, and extract insights from any document. Extract text and use intelligent search to find relevant information instantly.',
-    seoDescription: 'Free online AI Chat with PDF — Ask questions and get answers from your PDF documents. Intelligent document search. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Chat with PDF — Ask questions and get answers from your PDF documents. Intelligent document search. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
   },
@@ -3078,7 +3078,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "grammar-checker",
     category: "AI",
     description: 'Check and correct grammar, spelling, and punctuation in your text. Detects common errors including homophones, misspellings, punctuation issues, and run-on sentences.',
-    seoDescription: 'Free online Grammar Checker — Check and correct grammar, spelling, and punctuation. Detects homophones, misspellings, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Grammar Checker — Check and correct grammar, spelling, and punctuation. Detects homophones, misspellings, and more. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3088,7 +3088,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-humanizer",
     category: "AI",
     description: 'Make AI-generated text sound more natural and human-like. Choose from casual, professional, friendly, natural, or storytelling tones. Reduces robotic patterns and improves readability.',
-    seoDescription: 'Free online AI Humanizer — Make AI text sound natural. Casual, professional, friendly, or storytelling tones. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Humanizer — Make AI text sound natural. Casual, professional, friendly, or storytelling tones. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3098,7 +3098,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ai-detector",
     category: "AI",
     description: 'Detect if text was written by AI. Analyzes burstiness, repetition patterns, sentence variance, and AI trigger phrases. Get a percentage score with detailed breakdown per section.',
-    seoDescription: 'Free online AI Detector — Analyze text to detect AI-written content. Burstiness, repetition, and trigger phrase analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Detector — Analyze text to detect AI-written content. Burstiness, repetition, and trigger phrase analysis. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3108,7 +3108,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "article-writer",
     category: "AI",
     description: 'Generate well-structured articles on any topic. Choose tone, audience, and length. Includes introduction, body, conclusion, FAQ, and key takeaways sections. Export as text, markdown, or HTML.',
-    seoDescription: 'Free online AI Article Writer — Generate structured articles on any topic. Multiple tones, audience types, and export formats. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AI Article Writer — Generate structured articles on any topic. Multiple tones, audience types, and export formats. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3118,7 +3118,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "social-caption-generator",
     category: "AI",
     description: 'Generate engaging social media captions for Instagram, Twitter, LinkedIn, Facebook, TikTok, and Pinterest. Multiple moods, hashtag suggestions, and emoji support.',
-    seoDescription: 'Free online Social Media Caption Generator — Create engaging captions for Instagram, Twitter, LinkedIn, Facebook, TikTok, Pinterest. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Social Media Caption Generator — Create engaging captions for Instagram, Twitter, LinkedIn, Facebook, TikTok, Pinterest. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3128,7 +3128,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mobi-converter",
     category: "Converter",
     description: 'Convert MOBI (Kindle) e-book files to PDF or EPUB, and create MOBI files from PDF. Perfect for Kindle users who need to read books on other devices or share with non-Kindle readers.',
-    seoDescription: 'Free online MOBI Converter — Convert MOBI Kindle e-books to PDF or EPUB. Create MOBI files from PDF. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MOBI Converter — Convert MOBI Kindle e-books to PDF or EPUB. Create MOBI files from PDF. ',
     dependencies: "pdf-lib, jszip, pdfjs-dist",
     showInCategory: true,
   },
@@ -3138,7 +3138,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "odt-rtf-to-pdf",
     category: "Converter",
     description: 'Convert OpenDocument (ODT) and Rich Text Format (RTF) files to PDF. Preserves basic formatting like bold, italic, headers, and paragraphs. Perfect for LibreOffice and WordPad users.',
-    seoDescription: 'Free online ODT/RTF to PDF — Convert OpenDocument and Rich Text Format files to PDF. Preserves formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ODT/RTF to PDF — Convert OpenDocument and Rich Text Format files to PDF. Preserves formatting. ',
     dependencies: "pdf-lib, jszip",
     showInCategory: true,
   },
@@ -3148,7 +3148,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-png",
     category: "Image",
     description: 'Convert scalable vector graphics (SVG) into raster PNG images.',
-    seoDescription: 'Free online SVG to PNG — Convert scalable vector graphics (SVG) into raster PNG images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to PNG — Convert scalable vector graphics (SVG) into raster PNG images. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3158,7 +3158,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-jpg",
     category: "Image",
     description: 'Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats.',
-    seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3168,7 +3168,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "png-to-gif",
     category: "Image",
     description: 'Convert PNG images into GIF format for compatibility with older platforms and software.',
-    seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3178,7 +3178,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jpg-to-gif",
     category: "Image",
     description: 'Convert JPEG photos into GIF format for legacy applications and platforms with limited format support.',
-    seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3188,7 +3188,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webp-to-gif",
     category: "Image",
     description: 'Convert modern WebP images into the widely compatible GIF format.',
-    seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3198,7 +3198,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmp-to-jpg",
     category: "Image",
     description: 'Convert uncompressed BMP bitmap images into space-efficient JPEG files.',
-    seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3208,7 +3208,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmp-to-png",
     category: "Image",
     description: 'Convert BMP bitmap images into compressed PNG format with optional transparency.',
-    seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3218,7 +3218,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-jpg",
     category: "Image",
     description: 'Convert TIFF images into universally compatible JPEG format for sharing on the web or via email.',
-    seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3228,7 +3228,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-png",
     category: "Image",
     description: 'Convert TIFF images into lossless PNG format for graphic design workflows.',
-    seoDescription: 'Free online TIFF to PNG — Convert TIFF images into lossless PNG format for graphic design workflows. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to PNG — Convert TIFF images into lossless PNG format for graphic design workflows. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3238,7 +3238,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-jpg",
     category: "Image",
     description: 'Convert GIF images into JPEG format with millions of colors instead of GIF\'s limited 256-color palette.',
-    seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3248,7 +3248,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-png",
     category: "Image",
     description: 'Convert GIF images into lossless PNG format with superior color depth and compression.',
-    seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3258,7 +3258,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ico-to-png",
     category: "Image",
     description: 'Extract Windows icon (.ico) files and convert them into universal PNG images for web and design use.',
-    seoDescription: 'Free online ICO to PNG — Extract Windows icon (.ico) files and convert them into universal PNG images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ICO to PNG — Extract Windows icon (.ico) files and convert them into universal PNG images. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3268,7 +3268,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jxl-to-png",
     category: "Image",
     description: 'Convert JPEG XL images into universally compatible PNG format for use in software without JXL support.',
-    seoDescription: 'Free online JXL to PNG — Convert JPEG XL images into universally compatible PNG format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JXL to PNG — Convert JPEG XL images into universally compatible PNG format. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3278,7 +3278,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jxl-to-jpg",
     category: "Image",
     description: 'Convert JPEG XL images into standard JPEG format for maximum compatibility across all platforms.',
-    seoDescription: 'Free online JXL to JPEG — Convert JPEG XL images into standard JPEG format for maximum compatibility. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JXL to JPEG — Convert JPEG XL images into standard JPEG format for maximum compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3288,7 +3288,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-mp3",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) files into universally compatible MP3 format.',
-    seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3298,7 +3298,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-mp3",
     category: "Audio",
     description: 'Convert Opus audio files into the more widely supported MP3 format for broad compatibility.',
-    seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3308,7 +3308,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-mp3",
     category: "Audio",
     description: 'Convert Apple\'s AIFF audio files into space-saving MP3 format while preserving good audio quality.',
-    seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3318,7 +3318,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "website-screenshot",
     category: "Converter",
     description: 'Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.',
-    seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. ',
     dependencies: "html2canvas",
     showInCategory: true,
   },
@@ -3328,7 +3328,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-webp-webm",
     category: "Converter",
     description: 'Convert animated GIFs to modern WebP (animated image, ~10x smaller) or WebM video formats. Preserves transparency with WebP output.',
-    seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3338,7 +3338,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avif-to-jpg",
     category: "Image",
     description: 'Convert AVIF images back to universally compatible JPEG format.',
-    seoDescription: 'Free online AVIF to JPG — Convert AVIF images back to universally compatible JPEG format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AVIF to JPG — Convert AVIF images back to universally compatible JPEG format. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3348,7 +3348,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avif-to-png",
     category: "Image",
     description: 'Convert AVIF images to lossless PNG format for maximum compatibility.',
-    seoDescription: 'Free online AVIF to PNG — Convert AVIF images to lossless PNG format for maximum compatibility. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AVIF to PNG — Convert AVIF images to lossless PNG format for maximum compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3358,7 +3358,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmp-to-avif",
     category: "Image",
     description: 'Convert BMP bitmap images into next-gen AVIF format with superior compression.',
-    seoDescription: 'Free online BMP to AVIF — Convert BMP bitmap images into next-gen AVIF format with superior compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMP to AVIF — Convert BMP bitmap images into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3368,7 +3368,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmp-to-gif",
     category: "Image",
     description: 'Convert BMP bitmap images into GIF format for compatibility with legacy platforms.',
-    seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3378,7 +3378,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmp-to-webp",
     category: "Image",
     description: 'Convert BMP bitmap images into modern WebP format for dramatically smaller file sizes.',
-    seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3388,7 +3388,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-avif",
     category: "Image",
     description: 'Convert GIF images into modern AVIF format for better compression and color depth.',
-    seoDescription: 'Free online GIF to AVIF — Convert GIF images into modern AVIF format with better compression and color depth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to AVIF — Convert GIF images into modern AVIF format with better compression and color depth. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3398,7 +3398,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-webp",
     category: "Image",
     description: 'Convert GIF images into modern WebP format for smaller file sizes with optional animation support.',
-    seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3408,7 +3408,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "heic-to-avif",
     category: "Image",
     description: 'Convert Apple HEIC/HEIF photos into next-gen AVIF format for superior compression.',
-    seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3418,7 +3418,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "heic-to-gif",
     category: "Image",
     description: 'Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms.',
-    seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3428,7 +3428,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "heic-to-webp",
     category: "Image",
     description: 'Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery.',
-    seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3438,7 +3438,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ico-to-jpg",
     category: "Image",
     description: 'Convert Windows icon files into universally compatible JPEG format.',
-    seoDescription: 'Free online ICO to JPG — Convert Windows icon files into universally compatible JPEG format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ICO to JPG — Convert Windows icon files into universally compatible JPEG format. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3448,7 +3448,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ico-to-webp",
     category: "Image",
     description: 'Convert Windows icon files into modern WebP format for web use.',
-    seoDescription: 'Free online ICO to WebP — Convert Windows icon files into modern WebP format for web use. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ICO to WebP — Convert Windows icon files into modern WebP format for web use. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3458,7 +3458,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jpg-to-jxl",
     category: "Image",
     description: 'Convert JPEG photos into cutting-edge JPEG XL format for superior compression.',
-    seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3468,7 +3468,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jxl-to-gif",
     category: "Image",
     description: 'Convert JPEG XL images into GIF format for use on legacy platforms.',
-    seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3478,7 +3478,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jxl-to-webp",
     category: "Image",
     description: 'Convert JPEG XL images into modern WebP format for broader compatibility.',
-    seoDescription: 'Free online JXL to WebP — Convert JPEG XL images into modern WebP format for broader compatibility. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JXL to WebP — Convert JPEG XL images into modern WebP format for broader compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3488,7 +3488,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "png-to-jxl",
     category: "Image",
     description: 'Convert PNG images into JPEG XL format for better compression while preserving quality.',
-    seoDescription: 'Free online PNG to JXL — Convert PNG images into JPEG XL format for better compression while preserving quality. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PNG to JXL — Convert PNG images into JPEG XL format for better compression while preserving quality. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3498,7 +3498,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-avif",
     category: "Image",
     description: 'Convert SVG vector graphics into AVIF format for next-gen web delivery.',
-    seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3508,7 +3508,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-gif",
     category: "Image",
     description: 'Convert SVG vector graphics into GIF format for use in legacy applications.',
-    seoDescription: 'Free online SVG to GIF — Convert SVG vector graphics into GIF format for use in legacy applications. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to GIF — Convert SVG vector graphics into GIF format for use in legacy applications. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3518,7 +3518,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-webp",
     category: "Image",
     description: 'Convert SVG vector graphics into modern WebP format for efficient web delivery.',
-    seoDescription: 'Free online SVG to WebP — Convert SVG vector graphics into modern WebP format for efficient web delivery. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to WebP — Convert SVG vector graphics into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3528,7 +3528,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-avif",
     category: "Image",
     description: 'Convert TIFF images into next-gen AVIF format for best-in-class compression.',
-    seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3538,7 +3538,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-gif",
     category: "Image",
     description: 'Convert TIFF images into GIF format for use in applications with limited format support.',
-    seoDescription: 'Free online TIFF to GIF — Convert TIFF images into GIF format for use in applications with limited format support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to GIF — Convert TIFF images into GIF format for use in applications with limited format support. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3548,7 +3548,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-webp",
     category: "Image",
     description: 'Convert TIFF images into modern WebP format for smaller file sizes and web use.',
-    seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3558,7 +3558,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webp-to-avif",
     category: "Image",
     description: 'Convert WebP images into AVIF format for even better compression ratios.',
-    seoDescription: 'Free online WebP to AVIF — Convert WebP images into AVIF format for even better compression ratios. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WebP to AVIF — Convert WebP images into AVIF format for even better compression ratios. ',
     dependencies: "Canvas API",
     showInCategory: false
   },
@@ -3568,7 +3568,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-flac",
     category: "Audio",
     description: 'Convert AAC audio files into lossless FLAC format for archival and professional use.',
-    seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3578,7 +3578,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-m4a",
     category: "Audio",
     description: 'Convert AAC audio files into M4A container format for broader compatibility.',
-    seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3588,7 +3588,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-ogg",
     category: "Audio",
     description: 'Convert AAC audio files into OGG Vorbis format for open-source platforms.',
-    seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3598,7 +3598,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-wav",
     category: "Audio",
     description: 'Convert AAC audio files into uncompressed WAV format for professional editing.',
-    seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3608,7 +3608,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-aac",
     category: "Audio",
     description: 'Convert lossless FLAC audio into space-efficient AAC format for portable devices.',
-    seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3618,7 +3618,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-m4a",
     category: "Audio",
     description: 'Convert lossless FLAC audio into M4A format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3628,7 +3628,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-ogg",
     category: "Audio",
     description: 'Convert lossless FLAC audio into OGG Vorbis format for open-source software.',
-    seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3638,7 +3638,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-wav",
     category: "Audio",
     description: 'Convert lossless FLAC audio into uncompressed WAV format for professional audio workflows.',
-    seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3648,7 +3648,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-aac",
     category: "Audio",
     description: 'Convert M4A audio files into raw AAC format for systems that require AAC codec.',
-    seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3658,7 +3658,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-flac",
     category: "Audio",
     description: 'Convert M4A audio files into lossless FLAC format for archival storage.',
-    seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3668,7 +3668,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-ogg",
     category: "Audio",
     description: 'Convert M4A audio files into OGG Vorbis format for open-source platforms.',
-    seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3678,7 +3678,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-wav",
     category: "Audio",
     description: 'Convert M4A audio files into uncompressed WAV format for audio editing.',
-    seoDescription: 'Free online M4A to WAV — Convert M4A audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to WAV — Convert M4A audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3688,7 +3688,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-aac",
     category: "Audio",
     description: 'Convert MP3 audio files into AAC format for better quality at similar bitrates.',
-    seoDescription: 'Free online MP3 to AAC — Convert MP3 audio files into AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to AAC — Convert MP3 audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3698,7 +3698,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-aiff",
     category: "Audio",
     description: 'Convert MP3 audio files into uncompressed AIFF format for professional audio production.',
-    seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3708,7 +3708,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-flac",
     category: "Audio",
     description: 'Convert MP3 audio files into lossless FLAC format for archival storage and further editing.',
-    seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3718,7 +3718,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-m4a",
     category: "Audio",
     description: 'Convert MP3 audio files into M4A format for Apple device compatibility.',
-    seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3728,7 +3728,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-ogg",
     category: "Audio",
     description: 'Convert MP3 audio files into OGG Vorbis format for open-source applications.',
-    seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3738,7 +3738,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-opus",
     category: "Audio",
     description: 'Convert MP3 audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3748,7 +3748,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mp3-to-wma",
     category: "Audio",
     description: 'Convert MP3 audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3758,7 +3758,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-aac",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into AAC format for broader device compatibility.',
-    seoDescription: 'Free online OGG to AAC — Convert OGG Vorbis audio files into AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to AAC — Convert OGG Vorbis audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3768,7 +3768,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-flac",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into lossless FLAC format for archival purposes.',
-    seoDescription: 'Free online OGG to FLAC — Convert OGG Vorbis audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to FLAC — Convert OGG Vorbis audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3778,7 +3778,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-m4a",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into M4A format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3788,7 +3788,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-wav",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into uncompressed WAV format for professional editing.',
-    seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3798,7 +3798,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-aac",
     category: "Audio",
     description: 'Convert WAV audio files into space-efficient AAC format for portable devices.',
-    seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3808,7 +3808,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-aiff",
     category: "Audio",
     description: 'Convert WAV audio files into AIFF format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3818,7 +3818,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-flac",
     category: "Audio",
     description: 'Convert uncompressed WAV files into lossless FLAC format to save storage space.',
-    seoDescription: 'Free online WAV to FLAC — Convert uncompressed WAV files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to FLAC — Convert uncompressed WAV files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3828,7 +3828,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-m4a",
     category: "Audio",
     description: 'Convert WAV audio files into M4A format for Apple device compatibility.',
-    seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3838,7 +3838,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-ogg",
     category: "Audio",
     description: 'Convert WAV audio files into OGG Vorbis format for open-source platforms.',
-    seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3848,7 +3848,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-opus",
     category: "Audio",
     description: 'Convert WAV audio files into Opus format for best-in-class compression efficiency.',
-    seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3858,7 +3858,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-wma",
     category: "Audio",
     description: 'Convert WAV audio files into Windows Media Audio format for Windows compatibility.',
-    seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -3868,7 +3868,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-compressor",
     category: "Image",
     description: 'Compress animated GIFs by reducing colors from 256 to as few as 16, removing duplicate frames, and applying lossy optimization. Reduce file size by up to 80% while keeping animation intact. Essential for web performance, email signatures, and social media where large GIFs cause slow loading.',
-    seoDescription: 'Free online GIF Compressor — reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. Essential for faster website loading and email attachments. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF Compressor — reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. Essential for faster website loading and email attachments. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     instructions: [
@@ -3889,7 +3889,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-resizer",
     category: "Image",
     description: 'Resize animated GIFs to exact dimensions while preserving animation. Choose from presets or custom width with aspect ratio lock.',
-    seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3899,7 +3899,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gif-to-apng",
     category: "Image",
     description: 'Convert animated GIFs to APNG (animated PNG) format. APNG supports 24-bit color and 8-bit alpha transparency — better quality than GIF.',
-    seoDescription: 'Free online GIF to APNG Converter — Convert animated GIFs to APNG format with 24-bit color and alpha transparency. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GIF to APNG Converter — Convert animated GIFs to APNG format with 24-bit color and alpha transparency. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3909,7 +3909,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "apng-to-gif",
     category: "Image",
     description: 'Convert animated PNG (APNG) files into universally compatible GIF format. Preserves animation frames and timing.',
-    seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -3919,7 +3919,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-to-ico",
     category: "Image",
     description: 'Convert any image format to Windows ICO icon format. Choose from standard sizes and generate multi-resolution icons.',
-    seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. ',
     dependencies: "Canvas API",
     showInCategory: true,
   },
@@ -3929,7 +3929,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "color-converter",
     category: "Image",
     description: 'Convert colors between Hex, RGB, HSL, HSV, and CMYK formats. Real-time preview, color picker, and copy-to-clipboard.',
-    seoDescription: 'Free online Color Converter — Convert colors between Hex, RGB, HSL, HSV, and CMYK. Real-time preview with color picker. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Color Converter — Convert colors between Hex, RGB, HSL, HSV, and CMYK. Real-time preview with color picker. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3939,7 +3939,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "qr-code-reader",
     category: "Developer",
     description: 'Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL.',
-    seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
   },
@@ -3949,7 +3949,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "lorem-ipsum-generator",
     category: "Text",
     description: 'Generate placeholder text in multiple styles: Standard Lorem Ipsum, Cicero, Legal, Startup, Coffee, and Pirate. Customizable paragraphs and word count.',
-    seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in multiple styles. Custom paragraphs and word count. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in multiple styles. Custom paragraphs and word count. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3959,7 +3959,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "whois-lookup",
     category: "Developer",
     description: 'Look up domain registration information using public RDAP APIs. Check registrar, expiration date, name servers, and more.',
-    seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3969,7 +3969,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ssl-checker",
     category: "Developer",
     description: 'Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs.',
-    seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "none",
     showInCategory: true,
   },
@@ -3979,7 +3979,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-tiff",
     category: "PDF",
     description: 'Convert PDF pages to high-quality TIFF images. Supports multi-page TIFF output, DPI control, and LZW compression for document archiving.',
-    seoDescription: 'Free online PDF to TIFF — Convert PDF pages to high-quality TIFF images. Multi-page output, DPI control, LZW compression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to TIFF — Convert PDF pages to high-quality TIFF images. Multi-page output, DPI control, LZW compression. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
   },
@@ -3989,7 +3989,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tiff-to-pdf",
     category: "PDF",
     description: 'Convert TIFF images to universally compatible PDF documents. Supports multi-page TIFF with customizable page size and margins.',
-    seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. ',
     dependencies: "pdf-lib, utif",
     showInCategory: true,
   },
@@ -3999,7 +3999,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "font-converter",
     category: "Design",
     description: 'Convert fonts between TTF, OTF, WOFF, and WOFF2 formats. Preview fonts with custom text before downloading. Perfect for web developers and designers.',
-    seoDescription: 'Free online Font Converter — Convert between TTF, OTF, WOFF, and WOFF2 formats. Preview with custom text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Font Converter — Convert between TTF, OTF, WOFF, and WOFF2 formats. Preview with custom text. ',
     dependencies: "opentype.js",
     showInCategory: true,
   },
@@ -4009,7 +4009,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "font-subsetter",
     category: "Design",
     description: 'Reduce font file size by removing unused glyphs. Keep only the characters you need. Perfect for web fonts and performance optimization.',
-    seoDescription: 'Free online Font Subsetter — Reduce font file size by removing unused glyphs. Keep only needed characters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Font Subsetter — Reduce font file size by removing unused glyphs. Keep only needed characters. ',
     dependencies: "opentype.js",
     showInCategory: true,
   },
@@ -4019,7 +4019,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cbz-to-pdf",
     category: "Converter",
     description: 'Convert comic book archives (CBZ) to PDF for easy reading on any device. Supports page ranges, double-page spreads, and multiple page sizes.',
-    seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
   },
@@ -4029,7 +4029,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "yaml-json-converter",
     category: "Developer",
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
-    seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
     showInCategory: true,
   },
@@ -4039,7 +4039,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xlsx-csv-converter",
     category: "Developer",
     description: 'Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.',
-    seoDescription: 'Free online XLSX ↔ CSV Converter — Bidirectional conversion between Excel and CSV. Sheet selector, delimiter options, data preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XLSX ↔ CSV Converter — Bidirectional conversion between Excel and CSV. Sheet selector, delimiter options, data preview. ',
     dependencies: "xlsx",
     showInCategory: true,
   },
@@ -4049,7 +4049,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "vcf-csv-converter",
     category: "Utility",
     description: 'Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.',
-    seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. ',
     dependencies: "vcard-parser",
     showInCategory: true,
   },
@@ -4059,7 +4059,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ics-csv-converter",
     category: "Utility",
     description: 'Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.',
-    seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. ',
     dependencies: "ical",
     showInCategory: true,
   },
@@ -4070,7 +4070,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wav-to-mp3",
     category: "Audio",
     description: 'Convert uncompressed WAV audio files into widely compatible MP3 format for universal playback on any device.',
-    seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4080,7 +4080,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-mp3",
     category: "Audio",
     description: 'Convert lossless FLAC audio files into widely compatible MP3 format for universal playback on any device.',
-    seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4090,7 +4090,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-wma",
     category: "Audio",
     description: 'Convert lossless FLAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4100,7 +4100,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-opus",
     category: "Audio",
     description: 'Convert lossless FLAC audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4110,7 +4110,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flac-to-aiff",
     category: "Audio",
     description: 'Convert lossless FLAC audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4120,7 +4120,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-mp3",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into widely compatible MP3 format for universal playback on any device.',
-    seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4130,7 +4130,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-wma",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4140,7 +4140,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-opus",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4150,7 +4150,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ogg-to-aiff",
     category: "Audio",
     description: 'Convert OGG Vorbis audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4160,7 +4160,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-mp3",
     category: "Audio",
     description: 'Convert M4A audio files into widely compatible MP3 format for universal playback on any device.',
-    seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4170,7 +4170,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-wma",
     category: "Audio",
     description: 'Convert M4A audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4180,7 +4180,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-opus",
     category: "Audio",
     description: 'Convert M4A audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4190,7 +4190,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "m4a-to-aiff",
     category: "Audio",
     description: 'Convert M4A audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4200,7 +4200,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-mp3",
     category: "Audio",
     description: 'Convert AAC audio files into widely compatible MP3 format for universal playback on any device.',
-    seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4210,7 +4210,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-wma",
     category: "Audio",
     description: 'Convert AAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4220,7 +4220,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-opus",
     category: "Audio",
     description: 'Convert AAC audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4230,7 +4230,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aac-to-aiff",
     category: "Audio",
     description: 'Convert AAC audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4240,7 +4240,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-wav",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into uncompressed WAV format for professional audio editing and production.',
-    seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4250,7 +4250,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-flac",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into lossless FLAC format for archival storage and audiophile playback.',
-    seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4260,7 +4260,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-ogg",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into OGG Vorbis format for open-source platforms and applications.',
-    seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4270,7 +4270,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-m4a",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into M4A format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4280,7 +4280,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-aac",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into AAC format for modern device and platform compatibility.',
-    seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4290,7 +4290,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-opus",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4300,7 +4300,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wma-to-aiff",
     category: "Audio",
     description: 'Convert Windows Media Audio (WMA) audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4310,7 +4310,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-wav",
     category: "Audio",
     description: 'Convert Opus audio files into uncompressed WAV format for professional audio editing and production.',
-    seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4320,7 +4320,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-flac",
     category: "Audio",
     description: 'Convert Opus audio files into lossless FLAC format for archival storage and audiophile playback.',
-    seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4330,7 +4330,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-ogg",
     category: "Audio",
     description: 'Convert Opus audio files into OGG Vorbis format for open-source platforms and applications.',
-    seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4340,7 +4340,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-m4a",
     category: "Audio",
     description: 'Convert Opus audio files into M4A format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4350,7 +4350,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-aac",
     category: "Audio",
     description: 'Convert Opus audio files into AAC format for modern device and platform compatibility.',
-    seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4360,7 +4360,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-wma",
     category: "Audio",
     description: 'Convert Opus audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4370,7 +4370,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "opus-to-aiff",
     category: "Audio",
     description: 'Convert Opus audio files into AIFF format for Apple professional audio workflows.',
-    seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4380,7 +4380,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-wav",
     category: "Audio",
     description: 'Convert AIFF audio files into uncompressed WAV format for professional audio editing and production.',
-    seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4390,7 +4390,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-flac",
     category: "Audio",
     description: 'Convert AIFF audio files into lossless FLAC format for archival storage and audiophile playback.',
-    seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4400,7 +4400,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-ogg",
     category: "Audio",
     description: 'Convert AIFF audio files into OGG Vorbis format for open-source platforms and applications.',
-    seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4410,7 +4410,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-m4a",
     category: "Audio",
     description: 'Convert AIFF audio files into M4A format for Apple ecosystem compatibility.',
-    seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4420,7 +4420,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-aac",
     category: "Audio",
     description: 'Convert AIFF audio files into AAC format for modern device and platform compatibility.',
-    seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4430,7 +4430,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-wma",
     category: "Audio",
     description: 'Convert AIFF audio files into Windows Media Audio format for Windows ecosystem compatibility.',
-    seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4440,7 +4440,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aiff-to-opus",
     category: "Audio",
     description: 'Convert AIFF audio files into Opus format for superior compression efficiency.',
-    seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
   },
@@ -4450,7 +4450,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hex-ascii-converter",
     category: "Developer",
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion.',
-    seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
   },
   {
@@ -4459,7 +4459,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-encoder-decoder",
     category: "Developer",
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion.',
-    seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. ',
     dependencies: "None",
   },
   {
@@ -4468,7 +4468,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-entity-encoder",
     category: "Developer",
     description: 'Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text.',
-    seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. ',
     dependencies: "None",
   },
   {
@@ -4477,7 +4477,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "backslash-escape",
     category: "Developer",
     description: 'Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more.',
-    seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
   },
   {
@@ -4486,7 +4486,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-string-generator",
     category: "Developer",
     description: 'Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).',
-    seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. ',
     dependencies: "None",
   },
   {
@@ -4495,7 +4495,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "number-base-converter",
     category: "Developer",
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
-    seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. ',
     dependencies: "None",
   },
   {
@@ -4504,7 +4504,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "line-sorter",
     category: "Developer",
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
-    seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
   },
   {
@@ -4513,7 +4513,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-parser",
     category: "Developer",
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
-    seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
   },
   {
@@ -4522,7 +4522,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "string-inspector",
     category: "Developer",
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
-    seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. ',
     dependencies: "None",
   },
   {
@@ -4531,7 +4531,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "unix-time-converter",
     category: "Developer",
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
-    seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
   },
   {
@@ -4540,7 +4540,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "code-beautifier",
     category: "Developer",
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
-    seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
   },
   {
@@ -4549,7 +4549,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-to-jsx",
     category: "Developer",
     description: 'Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more.',
-    seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
   },
   {
@@ -4558,7 +4558,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "php-tools",
     category: "Developer",
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
-    seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. ',
     dependencies: "None",
   },
   {
@@ -4567,7 +4567,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "svg-to-css",
     category: "Developer",
     description: 'Convert SVG markup to CSS background-image data URIs. Preview the result as a rendered icon.',
-    seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
   },
   {
@@ -4576,7 +4576,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "curl-to-code",
     category: "Developer",
     description: 'Convert cURL commands to JavaScript (fetch, axios, XHR), Python (requests), and PHP (cURL) code.',
-    seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. ',
     dependencies: "None",
   },
   {
@@ -4585,7 +4585,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-to-code",
     category: "Developer",
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Supports nested objects and arrays.',
-    seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
   },
   {
@@ -4594,7 +4594,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jwt-debugger",
     category: "Developer",
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
-    seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
   },
   {
@@ -4603,7 +4603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-preview",
     category: "Developer",
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing.',
-    seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. ',
     dependencies: "None",
   },
   {
@@ -4612,7 +4612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cron-parser",
     category: "Developer",
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
-    seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
   },
   {
@@ -4621,7 +4621,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "crypto-kit",
     category: "Developer",
     description: 'Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.',
-    seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4631,7 +4631,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "toml-converter",
     category: "Developer",
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
-    seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. ',
     dependencies: "None",
   },
   {
@@ -4642,6 +4642,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'IPv4 subnet calculator, IP address converter (decimal/binary/hex), IP range expander, and IPv6 ULA generator. All in one networking tool.',
     seoDescription: 'Free online Network Toolkit — IPv4 subnet calculator, IP address converter, IP range expander, and IPv6 ULA generator. All client-side, no uploads.',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "517",
@@ -4649,7 +4650,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "web-inspector",
     category: "Developer",
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
-    seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
     dependencies: "None",
   },
   {
@@ -4658,7 +4659,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-converter",
     category: "Developer",
     description: 'NATO phonetic alphabet converter, ASCII binary converter, Unicode code point viewer, Roman numeral converter, and string obfuscator with leet speak, ROT13, Base64, and shuffle.',
-    seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. ',
     dependencies: "None",
   },
   {
@@ -4667,7 +4668,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "math-tools",
     category: "Utility",
     description: 'Expression evaluator with keypad and history, ETA calculator with distance and speed, and a stopwatch/chronometer with lap recording.',
-    seoDescription: 'Free online Math Tools — Expression evaluator, ETA travel time calculator, and stopwatch chronometer. All in one tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Math Tools — Expression evaluator, ETA travel time calculator, and stopwatch chronometer. All in one tool. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4677,7 +4678,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "eta-calculator",
     category: "Utility" as ToolCategory,
     description: 'Estimate travel time from distance and speed — with optional arrival time.',
-    seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
     dependencies: "None",
   },
   {
@@ -4686,7 +4687,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dev-utilities",
     category: "Developer",
     description: 'Random port generator, chmod calculator (numeric/symbolic), Docker run to Compose converter, YAML formatter, and email address normalizer.',
-    seoDescription: 'Free online Developer Utilities — Random port generator, chmod calculator, Docker run to Compose converter, YAML formatter, and email normalizer. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Developer Utilities — Random port generator, chmod calculator, Docker run to Compose converter, YAML formatter, and email normalizer. ',
     dependencies: "None",
   },
   {
@@ -4695,7 +4696,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "other-utilities",
     category: "Utility",
     description: 'JSON diff comparison, WiFi QR code config generator, SVG placeholder generator, international phone number parser, OTP code generator, and slugify tool.',
-    seoDescription: 'Free online Other Utilities — JSON diff, WiFi QR config, SVG placeholder generator, phone parser, OTP code generator, and slugify tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Other Utilities — JSON diff, WiFi QR config, SVG placeholder generator, phone parser, OTP code generator, and slugify tool. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4705,7 +4706,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "wifi-qr-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate QR codes for WiFi network credentials — scan to connect.',
-    seoDescription: 'Free online WiFi QR Generator — Generate QR codes for WiFi network credentials to share with others. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online WiFi QR Generator — Generate QR codes for WiFi network credentials to share with others. ',
     dependencies: "None",
   },
   {
@@ -4714,7 +4715,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "phone-parser",
     category: "Utility" as ToolCategory,
     description: 'Parse and validate international phone numbers with country detection.',
-    seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
   },
   {
@@ -4723,7 +4724,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "otp-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate one-time passwords with configurable length and character type.',
-    seoDescription: 'Free online OTP Generator — Generate one-time passwords with configurable length and character type. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OTP Generator — Generate one-time passwords with configurable length and character type. ',
     dependencies: "None",
   },
   {
@@ -4732,7 +4733,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "slugify-tool",
     category: "Utility" as ToolCategory,
     description: 'Convert text to URL-friendly slugs with configurable separators.',
-    seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
     dependencies: "None",
   },
   {
@@ -4741,7 +4742,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mini-generators",
     category: "Utility",
     description: 'ULID generator, numeronym generator (a11y-style), and MAC address vendor lookup with extensive OUI database.',
-    seoDescription: 'Free online Mini Generators — ULID generator, numeronym generator, and MAC address vendor lookup. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Mini Generators — ULID generator, numeronym generator, and MAC address vendor lookup. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4751,7 +4752,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ulid-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding.',
-    seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
     dependencies: "None",
   },
   {
@@ -4760,7 +4761,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "numeronym-generator",
     category: "Utility" as ToolCategory,
     description: 'Convert words to numeronyms (a11y-style) and acronyms.',
-    seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
     dependencies: "None",
   },
   {
@@ -4769,7 +4770,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mac-vendor-lookup",
     category: "Utility" as ToolCategory,
     description: 'Look up device manufacturer from MAC address OUI prefix.',
-    seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
   },
   {
@@ -4778,7 +4779,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "list-converter",
     category: "Developer",
     description: 'Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.',
-    seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. ',
     dependencies: "None",
   },
   {
@@ -4787,7 +4788,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rsa-key-generator",
     category: "Developer",
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
-    seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, ',
     dependencies: "None",
   },
   {
@@ -4796,7 +4797,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "creative-tools",
     category: "Utility",
     description: 'Emoji picker with 400+ emoji grouped by category with search, and ASCII art generator with block, bubble, fancy, and digital styles.',
-    seoDescription: 'Free online Creative Tools — Emoji picker with search across 400+ emoji and ASCII art generator with multiple font styles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Creative Tools — Emoji picker with search across 400+ emoji and ASCII art generator with multiple font styles. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4806,7 +4807,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "emoji-picker",
     category: "Utility" as ToolCategory,
     description: 'Browse 400+ emojis organized by category with search and copy.',
-    seoDescription: 'Free online Emoji Picker — Browse 400+ emojis organized by category with search and copy to clipboard. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Emoji Picker — Browse 400+ emojis organized by category with search and copy to clipboard. ',
     dependencies: "None",
   },
   {
@@ -4815,7 +4816,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ascii-art-generator",
     category: "Developer" as ToolCategory,
     description: 'Convert text to ASCII art with multiple font styles.',
-    seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
   },
   {
@@ -4824,7 +4825,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "benchmark-builder",
     category: "Utility",
     description: 'Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.',
-    seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. ',
     dependencies: "None",
   },
   // ── Restored kit entries (IDs 527-555) ─────────────────────────────────
@@ -4834,7 +4835,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-png",
     category: "PDF",
     description: 'Convert PDF pages to PNG, WebP, or BMP images with configurable DPI and color modes. Perfect for extracting slides, graphics, and document pages as standalone images.',
-    seoDescription: 'Free online PDF to PNG — Convert PDF pages to PNG, WebP, or BMP images. Extract slides and graphics with customizable DPI and color modes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to PNG — Convert PDF pages to PNG, WebP, or BMP images. Extract slides and graphics with customizable DPI and color modes. ',
     dependencies: "pdfjs-dist, jszip",
     showInCategory: true,
   },
@@ -4844,7 +4845,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "create-pdf",
     category: "PDF",
     description: 'Generate PDF documents from plain text, CSV tables, JSON data, or XML content. Includes customizable title, font size, and table formatting for the CSV mode.',
-    seoDescription: 'Free online Create PDF — Generate PDF documents from plain text, CSV tables, JSON data, or XML. Fully customizable with titles and table formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Create PDF — Generate PDF documents from plain text, CSV tables, JSON data, or XML. Fully customizable with titles and table formatting. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -4854,7 +4855,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-info",
     category: "PDF",
     description: 'View document metadata, page dimensions, extract all text content, and export structured data as JSON from any PDF. Essential for document auditing and compliance.',
-    seoDescription: 'Free online PDF Info & Analysis — View metadata, page dimensions, extract text, or export JSON from PDF. Document auditing and compliance tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Info & Analysis — View metadata, page dimensions, extract text, or export JSON from PDF. Document auditing and compliance tool. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
   },
@@ -4864,7 +4865,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-cleanup",
     category: "PDF",
     description: 'Remove annotations, strip hidden metadata, delete blank pages, reverse page order, or sanitize your PDF documents. Combine multiple cleanup operations in one pass.',
-    seoDescription: 'Free online PDF Cleanup — Remove annotations, strip metadata, delete blank pages, reverse page order, or sanitize PDFs. Combine operations in one pass. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Cleanup — Remove annotations, strip metadata, delete blank pages, reverse page order, or sanitize PDFs. Combine operations in one pass. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
   },
@@ -4874,9 +4875,27 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-toolkit",
     category: "PDF",
     description: 'Add Bates numbering, stamps, timestamps, background color tints, blank pages, or a table of contents to your PDF documents. Multiple operations available in one tool.',
-    seoDescription: 'Free online PDF Toolkit — Add Bates numbering, stamps, timestamps, background tints, blank pages, or table of contents to PDFs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Toolkit — Add Bates numbering, stamps, timestamps, background tints, blank pages, or table of contents to PDFs. ',
     dependencies: "pdf-lib",
-    showInCategory: true,
+    showInCategory: false,
+  },
+  {
+    id: "531b",
+    name: "PDF Background Color",
+    slug: "pdf-background-color",
+    category: "PDF" as ToolCategory,
+    description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
+    seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
+    dependencies: "pdf-lib",
+  },
+  {
+    id: "531c",
+    name: "PDF Add Blank Page",
+    slug: "pdf-add-blank-page",
+    category: "PDF" as ToolCategory,
+    description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position.',
+    seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
+    dependencies: "pdf-lib",
   },
   {
     id: "950",
@@ -4884,7 +4903,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-bates-numbering",
     category: "PDF" as ToolCategory,
     description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
-    seoDescription: 'Free online PDF Bates Numbering — Add sequential Bates numbers to every page. Customize prefix, start number, and position. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Bates Numbering — Add sequential Bates numbers to every page. Customize prefix, start number, and position. ',
     dependencies: "pdf-lib",
   },
   {
@@ -4893,7 +4912,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-stamp",
     category: "PDF" as ToolCategory,
     description: 'Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF.',
-    seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. ',
     dependencies: "pdf-lib",
   },
   {
@@ -4902,7 +4921,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-timestamp",
     category: "PDF" as ToolCategory,
     description: 'Add a generation timestamp to the bottom-right corner of every page in your PDF.',
-    seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. ',
     dependencies: "pdf-lib",
   },
   {
@@ -4911,7 +4930,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-table-of-contents",
     category: "PDF" as ToolCategory,
     description: 'Insert a table of contents page at the beginning of your PDF document.',
-    seoDescription: 'Free online PDF Table of Contents — Insert a table of contents page at the beginning of your PDF. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Table of Contents — Insert a table of contents page at the beginning of your PDF. ',
     dependencies: "pdf-lib",
   },
   {
@@ -4920,7 +4939,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-advanced",
     category: "PDF",
     description: 'Overlay one PDF on another, alternate-merge two documents, combine pages into sheets, apply booklet layout, invert colors, or extract pages as ZIP images.',
-    seoDescription: 'Free online Advanced PDF Tools — Overlay, alternate-merge, booklet layout, combine pages, invert colors, or extract PDF pages as ZIP images. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Advanced PDF Tools — Overlay, alternate-merge, booklet layout, combine pages, invert colors, or extract PDF pages as ZIP images. ',
     dependencies: "pdf-lib, pdfjs-dist, jszip",
     showInCategory: true,
   },
@@ -4930,7 +4949,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-attachments",
     category: "PDF",
     description: 'View, add, and extract embedded files inside PDF documents. Supports any file type as attachments — images, spreadsheets, archives, and more.',
-    seoDescription: 'Free online PDF Attachments — View, add, and extract embedded files from PDF documents. Supports any file type. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF Attachments — View, add, and extract embedded files from PDF documents. Supports any file type. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -4940,9 +4959,81 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "calculator-kit",
     category: "Finance",
     description: 'A collection of calculators including EMI, GST, ROI, SIP, percentage, age, date/time, unit conversion, and more. All in one tabbed interface.',
-    seoDescription: 'Free online Calculator Kit — EMI, GST, ROI, SIP, percentage, age, date/time, unit conversion, and more calculators in one tabbed tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Calculator Kit — EMI, GST, ROI, SIP, percentage, age, date/time, unit conversion, and more calculators in one tabbed tool. ',
     dependencies: "None",
     showInCategory: false,
+  },
+  {
+    id: "534a",
+    name: "Study Time Calculator",
+    slug: "study-time-calculator",
+    category: "Finance" as ToolCategory,
+    description: 'Calculate total study hours over a period and see monthly projections.',
+    seoDescription: 'Free online Study Time Calculator \u2014 Calculate total study hours and monthly projections. ',
+    dependencies: "None",
+  },
+  {
+    id: "534b",
+    name: "Test Score Calculator",
+    slug: "test-score-calculator",
+    category: "Finance" as ToolCategory,
+    description: 'Convert correct/total answers to percentage and letter grade.',
+    seoDescription: 'Free online Test Score Calculator \u2014 Convert correct answers to percentage and letter grade. ',
+    dependencies: "None",
+  },
+  {
+    id: "534c",
+    name: "Words Per Page Calculator",
+    slug: "words-per-page-calculator",
+    category: "Finance" as ToolCategory,
+    description: 'Estimate how many pages your word count will take at different font sizes.',
+    seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
+    dependencies: "None",
+  },
+  {
+    id: "534d",
+    name: "Working Capital Calculator",
+    slug: "working-capital-calculator",
+    category: "Finance" as ToolCategory,
+    description: 'Calculate gross profit, net income, and margin from revenue, COGS, and operating expenses.',
+    seoDescription: 'Free online Working Capital Calculator \u2014 Calculate gross profit, net income, and margin. ',
+    dependencies: "None",
+  },
+  {
+    id: "534e",
+    name: "Ring Size Converter",
+    slug: "ring-size-converter",
+    category: "Utility" as ToolCategory,
+    description: 'Convert inner diameter in millimeters to US ring sizes.',
+    seoDescription: 'Free online Ring Size Converter \u2014 Convert inner diameter in mm to US ring sizes. ',
+    dependencies: "None",
+  },
+  {
+    id: "534f",
+    name: "Screen Size Calculator",
+    slug: "screen-size-converter",
+    category: "Utility" as ToolCategory,
+    description: 'Calculate width, height, and area from diagonal screen size and aspect ratio.',
+    seoDescription: 'Free online Screen Size Calculator \u2014 Calculate width, height, and area from diagonal and aspect ratio. ',
+    dependencies: "None",
+  },
+  {
+    id: "534g",
+    name: "Shoe Size Converter",
+    slug: "shoe-size-converter",
+    category: "Utility" as ToolCategory,
+    description: 'Convert between US and UK shoe sizes.',
+    seoDescription: 'Free online Shoe Size Converter \u2014 Convert between US and UK shoe sizes. ',
+    dependencies: "None",
+  },
+  {
+    id: "534h",
+    name: "ZIP File Extractor",
+    slug: "zip-file-extractor",
+    category: "Utility" as ToolCategory,
+    description: 'View the contents and file sizes inside a ZIP archive without extracting.',
+    seoDescription: 'Free online ZIP File Extractor \u2014 View ZIP archive contents and file sizes. ',
+    dependencies: "fflate",
   },
   {
     id: "535",
@@ -4950,7 +5041,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dev-toolkit",
     category: "Developer",
     description: 'Code formatters for JS/TS/HTML/CSS, CSS generators (box-shadow, gradients, glassmorphism), HTTP status lookup, header analyzer, .gitignore generator, and conventional commits. (JSON formatter/minifier has its own dedicated page.)',
-    seoDescription: 'Free online Developer Toolkit — Code formatters for JS/TS/HTML/CSS, CSS generators, HTTP tools, git tools, and more dev utilities in one tabbed interface. Everything runs locally in your browser — nothing is uploaded. (JSON formatter/minifier has its own dedicated page.)',
+    seoDescription: 'Free online Developer Toolkit — Code formatters for JS/TS/HTML/CSS, CSS generators, HTTP tools, git tools, and more dev utilities in one tabbed interface.',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4960,7 +5051,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-toolkit",
     category: "Developer",
     description: 'API tester with method/header/body support, webhook sender with Slack/Discord payload templates, GraphQL query executor, and mock data generator.',
-    seoDescription: 'Free online API Toolkit — API tester, webhook builder, GraphQL tools, and mock data generator in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Toolkit — API tester, webhook builder, GraphQL tools, and mock data generator in one tabbed interface. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4975,12 +5066,66 @@ const rawToolsRegistry: ToolMetadata[] = [
     showInCategory: false,
   },
   {
+    id: "537a",
+    name: "OAuth Client Setup",
+    slug: "oauth-client-setup",
+    category: "Developer" as ToolCategory,
+    description: 'Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.',
+    seoDescription: 'Free online OAuth Client Setup \u2014 Generate authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn. ',
+    dependencies: "None",
+  },
+  {
+    id: "537b",
+    name: "PKCE Verifier",
+    slug: "pkce-verifier",
+    category: "Developer" as ToolCategory,
+    description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
+    seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
+    dependencies: "None",
+  },
+  {
+    id: "537c",
+    name: "OAuth Scope Builder",
+    slug: "oauth-scope-builder",
+    category: "Developer" as ToolCategory,
+    description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
+    seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
+    dependencies: "None",
+  },
+  {
+    id: "537d",
+    name: "OAuth State Validator",
+    slug: "oauth-state-validator",
+    category: "Developer" as ToolCategory,
+    description: 'Validate OAuth state parameters for format, length, and age.',
+    seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
+    dependencies: "None",
+  },
+  {
+    id: "537e",
+    name: "PBKDF2 Hash Generator",
+    slug: "pbkdf2-hash-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
+    seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
+    dependencies: "None",
+  },
+  {
+    id: "537f",
+    name: "Cookie Parser & Analyzer",
+    slug: "cookie-parser",
+    category: "Developer" as ToolCategory,
+    description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
+    seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
+    dependencies: "None",
+  },
+  {
     id: "538",
     name: "Data Toolkit",
     slug: "data-toolkit",
     category: "Utility",
     description: '21 CSV tools (extract, rename, clean, dedup, validate, merge, pivot, filter, sort, split, stats, transpose + exports to HTML/MD/NDJSON/SQL/TSV/Excel), 14 JSON tools (diff, flatten, escape, path finder, schema generator, size analyzer, TypeScript/Zod generators, JWK, JSONL, NDJSON), data converters (JSON↔YAML/XML/TOML/URL/CSV), and data generators (UUID, hex, base64, names, emails, phones, dates, IPs, CSV/JSON rows).',
-    seoDescription: 'Free online Data Toolkit — 21 CSV tools, 14 JSON tools, data format converters (JSON↔YAML/XML/TOML/URL/CSV), and 12 data generators in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Data Toolkit — 21 CSV tools, 14 JSON tools, data format converters (JSON↔YAML/XML/TOML/URL/CSV), and 12 data generators in one tabbed interface. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -4990,9 +5135,27 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "validator-kit",
     category: "Developer",
     description: 'HTML linter (tag matching, DOCTYPE), YAML validator/JSON converter/minifier, XML formatter/minifier/validator, and cron expression explainer with common presets.',
-    seoDescription: 'Free online Validator Kit — HTML linter, YAML tools, XML tools, and cron expression explainer in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Validator Kit — HTML linter, YAML tools, XML tools, and cron expression explainer in one tabbed interface. ',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
+  },
+  {
+    id: "539b",
+    name: "HTML Linter",
+    slug: "html-linter",
+    category: "Developer" as ToolCategory,
+    description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
+    seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
+    dependencies: "None",
+  },
+  {
+    id: "539c",
+    name: "XML Minifier / Validator",
+    slug: "xml-minifier-validator",
+    category: "Developer" as ToolCategory,
+    description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
+    seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
+    dependencies: "None",
   },
   {
     id: "540",
@@ -5000,7 +5163,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "health-toolkit",
     category: "Health",
     description: 'Calorie tracker with common foods database, waist-to-hip ratio calculator, and body fat percentage estimator. (BMI and BMR have their own dedicated pages.)',
-    seoDescription: 'Free online Health Toolkit — calorie tracker, waist-to-hip ratio, and body fat estimator in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Health Toolkit — calorie tracker, waist-to-hip ratio, and body fat estimator in one tabbed interface. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -5010,9 +5173,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "design-toolkit",
     category: "Design",
     description: 'Color tools (hex/rgb/hsl/conversion), border/radius CSS generator with preview, and typography CSS generator with live preview. (SVG editor has its own dedicated page.)',
-    seoDescription: 'Free online Design Toolkit — Color tools, border/radius CSS, and typography CSS in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Design Toolkit — Color tools, border/radius CSS, and typography CSS in one tabbed interface. ',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "948",
@@ -5020,7 +5183,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "border-css-generator",
     category: "Design" as ToolCategory,
     description: 'Visual border CSS generator with width, style, color, and radius controls with live preview.',
-    seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. ',
     dependencies: "None",
   },
   {
@@ -5029,7 +5192,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "typography-preview",
     category: "Design" as ToolCategory,
     description: 'Typography CSS generator with font-size, line-height, letter-spacing, and font-weight controls with live preview.',
-    seoDescription: 'Free online Typography Preview — Generate typography CSS with font-size, line-height, letter-spacing, and font-weight controls with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Typography Preview — Generate typography CSS with font-size, line-height, letter-spacing, and font-weight controls with live preview. ',
     dependencies: "None",
   },
   {
@@ -5048,9 +5211,117 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "converter-toolkit",
     category: "Developer",
     description: 'Encoders (Base32, Base64→JSON, Hex, SVG→Base64), text tools (character encoding, Unicode converter, Markdown→Slack, PX↔REM), HMAC generator (SHA-1/256/384/512), SVG optimizer, and unit converters (speed, power, pressure). (Base64 encode/decode has its own dedicated page.)',
-    seoDescription: 'Free online Converter Toolkit — Base32/Hex encoders, Markdown to Slack, PX to REM, HMAC generator, SVG optimizer, and speed/power/pressure unit converters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Converter Toolkit — Base32/Hex encoders, Markdown to Slack, PX to REM, HMAC generator, SVG optimizer, and speed/power/pressure unit converters. ',
     dependencies: "None",
     showInCategory: false,
+  },
+  {
+    id: "543a",
+    name: "Base32 Encoder / Decoder",
+    slug: "base32-encoder",
+    category: "Developer" as ToolCategory,
+    description: 'Encode text to Base32 or decode Base32 strings back to text.',
+    seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
+    dependencies: "None",
+  },
+  {
+    id: "543b",
+    name: "Base64 to JSON Decoder",
+    slug: "base64-json-decoder",
+    category: "Developer" as ToolCategory,
+    description: 'Decode Base64 strings and pretty-print the resulting JSON.',
+    seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
+    dependencies: "None",
+  },
+  {
+    id: "543c",
+    name: "Hex to Text Converter",
+    slug: "hex-text-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert between hexadecimal strings and readable text.',
+    seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
+    dependencies: "None",
+  },
+  {
+    id: "543d",
+    name: "SVG to Base64 Converter",
+    slug: "svg-base64-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert SVG markup to a Base64 data URI for embedding in HTML or CSS.',
+    seoDescription: 'Free online SVG to Base64 Converter \u2014 Convert SVG to data URIs. ',
+    dependencies: "None",
+  },
+  {
+    id: "543e",
+    name: "Character Encoding Converter",
+    slug: "character-encoding-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
+    seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
+    dependencies: "None",
+  },
+  {
+    id: "543f",
+    name: "Unicode Converter",
+    slug: "unicode-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
+    seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
+    dependencies: "None",
+  },
+  {
+    id: "543g",
+    name: "Markdown to Slack Converter",
+    slug: "markdown-slack-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert Markdown formatting to Slack mrkdwn syntax.',
+    seoDescription: 'Free online Markdown to Slack Converter \u2014 Convert Markdown to Slack mrkdwn. ',
+    dependencies: "None",
+  },
+  {
+    id: "543h",
+    name: "PX to REM Converter",
+    slug: "px-rem-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert between PX and REM units with configurable base font size.',
+    seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
+    dependencies: "None",
+  },
+  {
+    id: "543i",
+    name: "SVG Optimizer",
+    slug: "svg-optimizer",
+    category: "Developer" as ToolCategory,
+    description: 'Minify SVG by removing whitespace, comments, and redundant attributes.',
+    seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
+    dependencies: "None",
+  },
+  {
+    id: "543j",
+    name: "Speed Converter",
+    slug: "speed-converter-advanced",
+    category: "Utility" as ToolCategory,
+    description: 'Convert between km/h, mph, m/s, knots, and ft/s.',
+    seoDescription: 'Free online Speed Converter \u2014 Convert between km/h, mph, m/s, knots, and ft/s. ',
+    dependencies: "None",
+  },
+  {
+    id: "543k",
+    name: "Power Converter",
+    slug: "power-converter",
+    category: "Utility" as ToolCategory,
+    description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
+    seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
+    dependencies: "None",
+  },
+  {
+    id: "543l",
+    name: "Pressure Converter",
+    slug: "pressure-converter",
+    category: "Utility" as ToolCategory,
+    description: 'Convert between kPa, psi, bar, atm, Torr, and mbar.',
+    seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
+    dependencies: "None",
   },
   {
     id: "544",
@@ -5058,7 +5329,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "generator-toolkit",
     category: "Developer",
     description: 'Fake identity generators (address, email, name, person, phone), random value generators (color, date, time, IP, user-agent), text generators (paragraph, sentence, word), PINs, license keys, image/log placeholders, Open Graph tags, product schema (JSON-LD), and PKCE challenge pairs. (Password and MAC generators have their own dedicated pages.)',
-    seoDescription: 'Free online Generator Toolkit — Fake identity generators, random values, text generators, PINs, license keys, image placeholders, OG tags, product schema, and PKCE in one tabbed interface. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Generator Toolkit — Fake identity generators, random values, text generators, PINs, license keys, image placeholders, OG tags, product schema, and PKCE in one tabbed interface. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -5103,6 +5374,60 @@ const rawToolsRegistry: ToolMetadata[] = [
     showInCategory: false,
   },
   {
+    id: "548a",
+    name: "Color Shades & Tints",
+    slug: "color-shades-tints",
+    category: "Design" as ToolCategory,
+    description: 'Generate color shades and tints from a base color by varying lightness in HSL space.',
+    seoDescription: 'Free online Color Shades & Tints \u2014 Generate color shades and tints from a base color. ',
+    dependencies: "None",
+  },
+  {
+    id: "548b",
+    name: "Contrast Ratio Checker",
+    slug: "contrast-ratio-checker",
+    category: "Design" as ToolCategory,
+    description: 'Check foreground/background color contrast against WCAG AA and AAA accessibility standards.',
+    seoDescription: 'Free online Contrast Ratio Checker \u2014 Check color contrast against WCAG AA and AAA standards. ',
+    dependencies: "None",
+  },
+  {
+    id: "548c",
+    name: "Media Query Generator",
+    slug: "media-query-generator",
+    category: "Design" as ToolCategory,
+    description: 'Generate CSS media queries with min/max width and optional device type conditions.',
+    seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
+    dependencies: "None",
+  },
+  {
+    id: "548d",
+    name: "Markdown Table Generator",
+    slug: "markdown-table-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate Markdown table templates with configurable rows and columns.',
+    seoDescription: 'Free online Markdown Table Generator \u2014 Generate Markdown table templates with custom dimensions. ',
+    dependencies: "None",
+  },
+  {
+    id: "548e",
+    name: "Nginx Config Generator",
+    slug: "nginx-config-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate Nginx server block configurations from directive lists.',
+    seoDescription: 'Free online Nginx Config Generator \u2014 Generate Nginx server blocks from directive lists. ',
+    dependencies: "None",
+  },
+  {
+    id: "548f",
+    name: "IP Allowlist Generator",
+    slug: "ip-allowlist-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate Nginx allow/deny rules from a list of CIDR ranges.',
+    seoDescription: 'Free online IP Allowlist Generator \u2014 Generate Nginx allow/deny rules from CIDR ranges. ',
+    dependencies: "None",
+  },
+  {
     id: "549",
     name: "Format & Data Toolkit",
     slug: "format-data-toolkit",
@@ -5111,6 +5436,105 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online Format & Data Toolkit — INI to JSON, JSON to TOML, MessagePack/CBOR inspector, Excel data cleaner, dataset analyzer, data anonymizer, code to cURL converter, JSON-RPC builder, HAR/log file analyzer, package.json validator, MIME type finder.',
     dependencies: "None",
     showInCategory: false,
+  },
+  {
+    id: "549a",
+    name: "INI to JSON Converter",
+    slug: "ini-json-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert INI configuration files with sections and key-value pairs to JSON.',
+    seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
+    dependencies: "None",
+  },
+  {
+    id: "549b",
+    name: "MessagePack Inspector",
+    slug: "msgpack-inspector",
+    category: "Developer" as ToolCategory,
+    description: 'Simulate MessagePack encoding by inspecting JSON as UTF-8 bytes and hex.',
+    seoDescription: 'Free online MessagePack Inspector \u2014 Simulate MessagePack encoding from JSON. ',
+    dependencies: "None",
+  },
+  {
+    id: "549c",
+    name: "CBOR Inspector",
+    slug: "cbor-inspector",
+    category: "Developer" as ToolCategory,
+    description: 'Simulate CBOR encoding by inspecting JSON as UTF-8 bytes with major type analysis.',
+    seoDescription: 'Free online CBOR Inspector \u2014 Simulate CBOR encoding from JSON. ',
+    dependencies: "None",
+  },
+  {
+    id: "549d",
+    name: "Data Anonymizer",
+    slug: "data-anonymizer",
+    category: "Developer" as ToolCategory,
+    description: 'Anonymize emails, phone numbers, and IP addresses in text by replacing them with placeholders.',
+    seoDescription: 'Free online Data Anonymizer \u2014 Anonymize emails, phones, and IPs in text. ',
+    dependencies: "None",
+  },
+  {
+    id: "549e",
+    name: "Code to cURL Converter",
+    slug: "code-to-curl-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert fetch/axios/request code to cURL commands.',
+    seoDescription: 'Free online Code to cURL Converter \u2014 Convert fetch/axios code to cURL. ',
+    dependencies: "None",
+  },
+  {
+    id: "549f",
+    name: "cURL to Code Converter",
+    slug: "curl-to-code-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert cURL commands to fetch() JavaScript code.',
+    seoDescription: 'Free online cURL to Code Converter \u2014 Convert cURL commands to fetch(). ',
+    dependencies: "None",
+  },
+  {
+    id: "549g",
+    name: "JSON-RPC Builder",
+    slug: "jsonrpc-builder",
+    category: "Developer" as ToolCategory,
+    description: 'Build JSON-RPC 2.0 request objects with method, params, and auto-generated ID.',
+    seoDescription: 'Free online JSON-RPC Builder \u2014 Build JSON-RPC 2.0 request objects. ',
+    dependencies: "None",
+  },
+  {
+    id: "549h",
+    name: "HAR File Analyzer",
+    slug: "har-analyzer",
+    category: "Developer" as ToolCategory,
+    description: 'Analyze HAR files to see entry count, total size, total time, and URLs.',
+    seoDescription: 'Free online HAR File Analyzer \u2014 Analyze HAR files for size, time, and URLs. ',
+    dependencies: "None",
+  },
+  {
+    id: "549i",
+    name: "Log File Analyzer",
+    slug: "log-analyzer",
+    category: "Developer" as ToolCategory,
+    description: 'Count log lines by level (ERROR, INFO, WARN, DEBUG, etc.).',
+    seoDescription: 'Free online Log File Analyzer \u2014 Count log lines by level. ',
+    dependencies: "None",
+  },
+  {
+    id: "549j",
+    name: "package.json Validator",
+    slug: "package-json-validator",
+    category: "Developer" as ToolCategory,
+    description: 'Validate package.json for required fields, semver format, and dependency presence.',
+    seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
+    dependencies: "None",
+  },
+  {
+    id: "549k",
+    name: "MIME Type Finder",
+    slug: "mime-finder",
+    category: "Developer" as ToolCategory,
+    description: 'Look up MIME types for common file extensions.',
+    seoDescription: 'Free online MIME Type Finder \u2014 Look up MIME types for file extensions. ',
+    dependencies: "None",
   },
   {
     id: "550",
@@ -5128,9 +5552,27 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "misc-utilities-toolkit",
     category: "Utility",
     description: 'Cloud tools (AWS IAM policy analyzer), converters (JSON to YAML, Excel to CSV), CIDR calculator, and extras (hash generator SHA-1/256/384/512, Markdown quick editor with live preview). (Password strength checker has its own dedicated page.)',
-    seoDescription: 'Free online Misc Utilities Toolkit — CIDR calculator, AWS IAM policy analyzer, JSON to YAML converter, Excel (TSV) to CSV converter, SHA hash generator, Markdown quick editor. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Misc Utilities Toolkit — CIDR calculator, AWS IAM policy analyzer, JSON to YAML converter, Excel (TSV) to CSV converter, SHA hash generator, Markdown quick editor. ',
     dependencies: "None",
     showInCategory: false,
+  },
+  {
+    id: "551a",
+    name: "CIDR Calculator",
+    slug: "cidr-calculator",
+    category: "Utility" as ToolCategory,
+    description: 'Calculate CIDR subnet ranges — network address, broadcast, first/last host, total hosts, and netmask.',
+    seoDescription: 'Free online CIDR Calculator \u2014 Calculate subnet ranges, broadcast addresses, and host counts from CIDR notation. ',
+    dependencies: "None",
+  },
+  {
+    id: "551b",
+    name: "AWS IAM Policy Analyzer",
+    slug: "aws-iam-policy-analyzer",
+    category: "Utility" as ToolCategory,
+    description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.',
+    seoDescription: 'Free online AWS IAM Policy Analyzer \u2014 Check IAM policies for wildcard resources, overly broad actions, and admin access. ',
+    dependencies: "None",
   },
   {
     id: "552",
@@ -5150,7 +5592,88 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'CSS preprocessors (SCSS to CSS, Stylus to CSS, Tailwind to CSS with 80+ class mappings), protobuf tools (schema to TypeScript, binary hex decoder), TypeScript tools (tsconfig analyzer, TypeScript formatter, string template tester, test data generator).',
     seoDescription: 'Free online Style & Code Toolkit — SCSS to CSS, Stylus to CSS, Tailwind to CSS converter, protobuf schema generator, protobuf decoder, tsconfig analyzer, TypeScript formatter, string template tester, test data generator.',
     dependencies: "None",
-    showInCategory: true,
+    showInCategory: false,
+  },
+  {
+    id: "553a",
+    name: "SCSS to CSS Converter",
+    slug: "scss-to-css-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert SCSS variables, nesting, and parent selectors to plain CSS.',
+    seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
+    dependencies: "None",
+  },
+  {
+    id: "553b",
+    name: "Stylus to CSS Converter",
+    slug: "stylus-to-css-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert Stylus syntax with indentation-based nesting to plain CSS.',
+    seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
+    dependencies: "None",
+  },
+  {
+    id: "553c",
+    name: "Tailwind to CSS Converter",
+    slug: "tailwind-to-css-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert Tailwind CSS utility classes to plain CSS properties (40+ class mappings).',
+    seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
+    dependencies: "None",
+  },
+  {
+    id: "553d",
+    name: "Proto Schema Converter",
+    slug: "proto-schema-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert Protobuf message definitions to TypeScript interfaces and JSON samples.',
+    seoDescription: 'Free online Proto Schema Converter \u2014 Convert Protobuf to TypeScript and JSON. ',
+    dependencies: "None",
+  },
+  {
+    id: "553e",
+    name: "Protobuf Decoder",
+    slug: "protobuf-decoder",
+    category: "Developer" as ToolCategory,
+    description: 'Decode raw protobuf hex bytes to readable text.',
+    seoDescription: 'Free online Protobuf Decoder \u2014 Decode raw protobuf hex bytes to text. ',
+    dependencies: "None",
+  },
+  {
+    id: "553f",
+    name: "tsconfig Analyzer",
+    slug: "tsconfig-analyzer",
+    category: "Developer" as ToolCategory,
+    description: 'Parse and describe each option in a tsconfig.json file.',
+    seoDescription: 'Free online tsconfig Analyzer \u2014 Parse and describe tsconfig.json options. ',
+    dependencies: "None",
+  },
+  {
+    id: "553g",
+    name: "TypeScript Formatter",
+    slug: "typescript-formatter",
+    category: "Developer" as ToolCategory,
+    description: 'Auto-format TypeScript code with consistent indentation and line breaks.',
+    seoDescription: 'Free online TypeScript Formatter \u2014 Auto-format TypeScript with consistent indentation. ',
+    dependencies: "None",
+  },
+  {
+    id: "553h",
+    name: "String Template Tester",
+    slug: "string-template-tester",
+    category: "Developer" as ToolCategory,
+    description: 'Test string templates with {{variable}} placeholders against JSON variables.',
+    seoDescription: 'Free online String Template Tester \u2014 Test {{variable}} templates with JSON data. ',
+    dependencies: "None",
+  },
+  {
+    id: "553i",
+    name: "Test Data Generator",
+    slug: "test-data-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate test data objects from a schema defining field names and types.',
+    seoDescription: 'Free online Test Data Generator \u2014 Generate test data from field name/type schemas. ',
+    dependencies: "None",
   },
   {
     id: "554",
@@ -5179,7 +5702,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mortgage-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid.',
-    seoDescription: 'Free online Mortgage Calculator — Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Mortgage Calculator — Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. ',
     dependencies: "None",
   },
   {
@@ -5188,7 +5711,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "arr-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth.',
-    seoDescription: 'Free online ARR Calculator — Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ARR Calculator — Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. ',
     dependencies: "None",
   },
   {
@@ -5197,7 +5720,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "compound-interest-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies.',
-    seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. ',
     dependencies: "None",
   },
 
@@ -5207,7 +5730,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "car-loan-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture.',
-    seoDescription: 'Free online Car Loan Calculator — Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Car Loan Calculator — Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. ',
     dependencies: "None",
   },
   {
@@ -5216,7 +5739,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "car-lease-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle.',
-    seoDescription: 'Free online Car Lease Calculator — Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Car Lease Calculator — Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. ',
     dependencies: "None",
   },
   {
@@ -5225,7 +5748,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "churn-rate-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business.',
-    seoDescription: 'Free online Churn Rate Calculator — Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Churn Rate Calculator — Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. ',
     dependencies: "None",
   },
   {
@@ -5234,7 +5757,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "debt-payoff-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan.',
-    seoDescription: 'Free online Debt Payoff Calculator — Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Debt Payoff Calculator — Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. ',
     dependencies: "None",
   },
   {
@@ -5243,7 +5766,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "discount-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning.',
-    seoDescription: 'Free online Discount Calculator — Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Discount Calculator — Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. ',
     dependencies: "None",
   },
   {
@@ -5252,7 +5775,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hourly-to-salary-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income.',
-    seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. ',
     dependencies: "None",
   },
   {
@@ -5261,7 +5784,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "inflation-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates.',
-    seoDescription: 'Free online Inflation Calculator — Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Inflation Calculator — Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates. ',
     dependencies: "None",
   },
   {
@@ -5270,7 +5793,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "customer-ltv-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship.',
-    seoDescription: 'Free online Customer LTV Calculator — Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Customer LTV Calculator — Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. ',
     dependencies: "None",
   },
   {
@@ -5279,7 +5802,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mrr-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth.',
-    seoDescription: 'Free online MRR Calculator — Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MRR Calculator — Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. ',
     dependencies: "None",
   },
   {
@@ -5288,7 +5811,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "net-worth-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health.',
-    seoDescription: 'Free online Net Worth Calculator — Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Net Worth Calculator — Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. ',
     dependencies: "None",
   },
   {
@@ -5297,7 +5820,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rent-vs-buy-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth.',
-    seoDescription: 'Free online Rent vs Buy Calculator — Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rent vs Buy Calculator — Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. ',
     dependencies: "None",
   },
   {
@@ -5306,7 +5829,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "retirement-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement.',
-    seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. ',
     dependencies: "None",
   },
   {
@@ -5315,7 +5838,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "revenue-growth-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time.',
-    seoDescription: 'Free online Revenue Growth Calculator — Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Revenue Growth Calculator — Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. ',
     dependencies: "None",
   },
   {
@@ -5324,7 +5847,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "runway-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning.',
-    seoDescription: 'Free online Runway Calculator — Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Runway Calculator — Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. ',
     dependencies: "None",
   },
   {
@@ -5333,7 +5856,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ab-test-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant.',
-    seoDescription: 'Free online A/B Test Calculator — Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online A/B Test Calculator — Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. ',
     dependencies: "None",
   },
   {
@@ -5342,7 +5865,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "business-days-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately.',
-    seoDescription: 'Free online Business Days Calculator — Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Business Days Calculator — Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately. ',
     dependencies: "None",
   },
   {
@@ -5351,7 +5874,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "day-of-week-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates.',
-    seoDescription: 'Free online Day of Week Calculator — Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Day of Week Calculator — Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates. ',
     dependencies: "None",
   },
   {
@@ -5360,7 +5883,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "day-of-year-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents.',
-    seoDescription: 'Free online Day of Year Calculator — Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Day of Year Calculator — Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents. ',
     dependencies: "None",
   },
   {
@@ -5369,7 +5892,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "exponent-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool.',
-    seoDescription: 'Free online Exponent Calculator — Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Exponent Calculator — Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. ',
     dependencies: "None",
   },
   {
@@ -5378,7 +5901,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "final-grade-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage.',
-    seoDescription: 'Free online Final Grade Calculator — Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Final Grade Calculator — Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. ',
     dependencies: "None",
   },
   {
@@ -5387,7 +5910,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gpa-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale.',
-    seoDescription: 'Free online GPA Calculator — Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GPA Calculator — Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale. ',
     dependencies: "None",
   },
   {
@@ -5396,7 +5919,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "grade-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale.',
-    seoDescription: 'Free online Grade Calculator — Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Grade Calculator — Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale. ',
     dependencies: "None",
   },
   {
@@ -5405,7 +5928,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "college-gpa-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance.',
-    seoDescription: 'Free online College GPA Calculator — Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online College GPA Calculator — Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance. ',
     dependencies: "None",
   },
   {
@@ -5414,7 +5937,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "leap-year-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29.',
-    seoDescription: 'Free online Leap Year Calculator — Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Leap Year Calculator — Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29. ',
     dependencies: "None",
   },
   {
@@ -5423,7 +5946,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "probability-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds.',
-    seoDescription: 'Free online Probability Calculator — Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Probability Calculator — Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds. ',
     dependencies: "None",
   },
   {
@@ -5432,7 +5955,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "proportion-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations.',
-    seoDescription: 'Free online Proportion Calculator — Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Proportion Calculator — Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations. ',
     dependencies: "None",
   },
   {
@@ -5441,7 +5964,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ratio-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them.',
-    seoDescription: 'Free online Ratio Calculator — Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Ratio Calculator — Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them. ',
     dependencies: "None",
   },
   {
@@ -5450,7 +5973,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aspect-ratio-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens.',
-    seoDescription: 'Free online Aspect Ratio Calculator — Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Aspect Ratio Calculator — Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. ',
     dependencies: "None",
   },
   {
@@ -5459,7 +5982,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "circle-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size.',
-    seoDescription: 'Free online Circle Calculator — Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Circle Calculator — Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size. ',
     dependencies: "None",
   },
   {
@@ -5468,7 +5991,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dpi-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality.',
-    seoDescription: 'Free online DPI Calculator — Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online DPI Calculator — Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality. ',
     dependencies: "None",
   },
   {
@@ -5477,7 +6000,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fraction-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations.',
-    seoDescription: 'Free online Fraction Calculator — Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fraction Calculator — Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations. ',
     dependencies: "None",
   },
   {
@@ -5486,7 +6009,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mean-median-mode-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results.',
-    seoDescription: 'Free online Mean Median Mode Calculator — Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Mean Median Mode Calculator — Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results. ',
     dependencies: "None",
   },
   {
@@ -5495,7 +6018,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ppi-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density.',
-    seoDescription: 'Free online PPI Calculator — Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PPI Calculator — Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density. ',
     dependencies: "None",
   },
   {
@@ -5504,7 +6027,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pythagorean-theorem-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c.',
-    seoDescription: 'Free online Pythagorean Theorem Calculator — Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Pythagorean Theorem Calculator — Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c. ',
     dependencies: "None",
   },
   {
@@ -5513,7 +6036,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "quadratic-equation-solver",
     category: "Calculator" as ToolCategory,
     description: 'Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions.',
-    seoDescription: 'Free online Quadratic Equation Solver — Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Quadratic Equation Solver — Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions. ',
     dependencies: "None",
   },
   {
@@ -5522,7 +6045,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rectangle-area-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning.',
-    seoDescription: 'Free online Rectangle Area Calculator — Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rectangle Area Calculator — Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning. ',
     dependencies: "None",
   },
   {
@@ -5531,7 +6054,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "square-root-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations.',
-    seoDescription: 'Free online Square Root Calculator — Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Square Root Calculator — Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations. ',
     dependencies: "None",
   },
   {
@@ -5540,7 +6063,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "scientific-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser.',
-    seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. ',
     dependencies: "None",
   },
   {
@@ -5549,7 +6072,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fluid-typography-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly.',
-    seoDescription: 'Free online Fluid Typography Calculator — Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fluid Typography Calculator — Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly. ',
     dependencies: "None",
   },
   {
@@ -5558,7 +6081,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bmi-calculator-for-kids",
     category: "Calculator" as ToolCategory,
     description: 'Calculate BMI for children with age and gender considerations. Track childhood growth and weight status.',
-    seoDescription: 'Free online BMI Calculator for Kids — Calculate BMI for children with age and gender considerations. Track childhood growth and weight status. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online BMI Calculator for Kids — Calculate BMI for children with age and gender considerations. Track childhood growth and weight status. ',
     dependencies: "None",
   },
   {
@@ -5567,7 +6090,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "body-fat-percentage-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements.',
-    seoDescription: 'Free online Body Fat Percentage Calculator — Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Body Fat Percentage Calculator — Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. ',
     dependencies: "None",
   },
   {
@@ -5576,7 +6099,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "body-surface-area-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements.',
-    seoDescription: 'Free online Body Surface Area Calculator — Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Body Surface Area Calculator — Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements. ',
     dependencies: "None",
   },
   {
@@ -5585,7 +6108,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "baby-formula-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding.',
-    seoDescription: 'Free online Baby Formula Calculator — Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Baby Formula Calculator — Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding. ',
     dependencies: "None",
   },
   {
@@ -5594,7 +6117,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "baby-growth-percentile-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages.',
-    seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. ',
     dependencies: "None",
   },
   {
@@ -5603,7 +6126,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "baby-sleep-schedule-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration.',
-    seoDescription: 'Free online Baby Sleep Schedule Calculator — Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Baby Sleep Schedule Calculator — Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration. ',
     dependencies: "None",
   },
   {
@@ -5612,7 +6135,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "breastfeeding-calorie-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure.',
-    seoDescription: 'Free online Breastfeeding Calorie Calculator — Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Breastfeeding Calorie Calculator — Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure. ',
     dependencies: "None",
   },
   {
@@ -5621,7 +6144,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "child-height-predictor",
     category: "Calculator" as ToolCategory,
     description: 'Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls.',
-    seoDescription: 'Free online Child Height Predictor — Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Child Height Predictor — Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls. ',
     dependencies: "None",
   },
   {
@@ -5630,7 +6153,16 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cycling-calorie-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure.',
-    seoDescription: 'Free online Cycling Calorie Calculator — Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Cycling Calorie Calculator — Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure. ',
+    dependencies: "None",
+  },
+  {
+    id: "657b",
+    name: "TDEE Calculator",
+    slug: "calorie-calculator",
+    category: "Calculator" as ToolCategory,
+    description: 'Calculate your Total Daily Energy Expenditure (TDEE) from BMR and activity level. Find how many calories you burn per day.',
+    seoDescription: 'Free online TDEE Calculator \u2014 Calculate your Total Daily Energy Expenditure from BMR and activity level. Find how many calories you burn per day. ',
     dependencies: "None",
   },
   {
@@ -5639,7 +6171,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "heart-rate-zone-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels.',
-    seoDescription: 'Free online Heart Rate Zone Calculator — Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Heart Rate Zone Calculator — Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. ',
     dependencies: "None",
   },
   {
@@ -5648,7 +6180,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "keto-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet.',
-    seoDescription: 'Free online Keto Calculator — Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Keto Calculator — Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet. ',
     dependencies: "None",
   },
   {
@@ -5657,7 +6189,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "lean-body-mass-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass.',
-    seoDescription: 'Free online Lean Body Mass Calculator — Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Lean Body Mass Calculator — Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass. ',
     dependencies: "None",
   },
   {
@@ -5666,7 +6198,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "macro-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain.',
-    seoDescription: 'Free online Macro Calculator — Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Macro Calculator — Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain. ',
     dependencies: "None",
   },
   {
@@ -5675,7 +6207,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pregnancy-due-date-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones.',
-    seoDescription: 'Free online Pregnancy Due Date Calculator — Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Pregnancy Due Date Calculator — Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones. ',
     dependencies: "None",
   },
   {
@@ -5684,7 +6216,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "protein-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals.',
-    seoDescription: 'Free online Protein Calculator — Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Protein Calculator — Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals. ',
     dependencies: "None",
   },
   {
@@ -5693,7 +6225,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "running-pace-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h.',
-    seoDescription: 'Free online Running Pace Calculator — Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Running Pace Calculator — Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h. ',
     dependencies: "None",
   },
   {
@@ -5702,7 +6234,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sleep-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings.',
-    seoDescription: 'Free online Sleep Calculator — Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Sleep Calculator — Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings. ',
     dependencies: "None",
   },
   {
@@ -5711,7 +6243,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "steps-to-calories-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked.',
-    seoDescription: 'Free online Steps to Calories Calculator — Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Steps to Calories Calculator — Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. ',
     dependencies: "None",
   },
   {
@@ -5720,7 +6252,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "water-intake-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals.',
-    seoDescription: 'Free online Water Intake Calculator — Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Water Intake Calculator — Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. ',
     dependencies: "None",
   },
   {
@@ -5729,7 +6261,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "simple-interest-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations.',
-    seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. ',
     dependencies: "None",
   },
   {
@@ -5738,7 +6270,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "savings-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time.',
-    seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. ',
     dependencies: "None",
   },
   {
@@ -5747,7 +6279,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seat-license-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs.',
-    seoDescription: 'Free online Seat License Calculator — Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Seat License Calculator — Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. ',
     dependencies: "None",
   },
   {
@@ -5756,7 +6288,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "semver-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules.',
-    seoDescription: 'Free online Semver Calculator — Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Semver Calculator — Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. ',
     dependencies: "None",
   },
   {
@@ -5765,7 +6297,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "standard-deviation-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics.',
-    seoDescription: 'Free online Standard Deviation Calculator — Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Standard Deviation Calculator — Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics. ',
     dependencies: "None",
   },
   {
@@ -5774,7 +6306,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tax-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate.',
-    seoDescription: 'Free online Tax Calculator — Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Tax Calculator — Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. ',
     dependencies: "None",
   },
   {
@@ -5783,7 +6315,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tds-calculator-india",
     category: "Calculator" as ToolCategory,
     description: 'Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary.',
-    seoDescription: 'Free online TDS Calculator India — Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TDS Calculator India — Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary. ',
     dependencies: "None",
   },
   {
@@ -5792,7 +6324,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "trial-conversion-calculator",
     category: "Calculator" as ToolCategory,
     description: 'Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance.',
-    seoDescription: 'Free online Trial Conversion Calculator — Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Trial Conversion Calculator — Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. ',
     dependencies: "None",
   },
   {
@@ -5801,7 +6333,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-request-builder",
     category: "Developer" as ToolCategory,
     description: 'Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands.',
-    seoDescription: 'Free online API Request Builder — Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Request Builder — Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. ',
     dependencies: "None",
   },
   {
@@ -5810,7 +6342,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-tester",
     category: "Developer" as ToolCategory,
     description: 'Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. View response status, headers, and body.',
-    seoDescription: 'Free online API Tester — Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Tester — Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. ',
     dependencies: "None",
   },
   {
@@ -5819,7 +6351,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-response-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify JSON and XML API responses with proper indentation and syntax highlighting.',
-    seoDescription: 'Free online API Response Formatter — Format and beautify JSON and XML API responses with proper indentation and syntax highlighting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Response Formatter — Format and beautify JSON and XML API responses with proper indentation and syntax highlighting. ',
     dependencies: "None",
   },
   {
@@ -5828,7 +6360,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-error-decoder",
     category: "Developer" as ToolCategory,
     description: 'Decode HTTP status codes with full category, description, and common causes for each code from 1xx to 5xx.',
-    seoDescription: 'Free online API Error Decoder — Decode HTTP status codes with full category, description, and common causes for each code. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Error Decoder — Decode HTTP status codes with full category, description, and common causes for each code. ',
     dependencies: "None",
   },
   {
@@ -5837,7 +6369,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-payload-analyzer",
     category: "Developer" as ToolCategory,
     description: 'Analyze JSON payload size, structure, nesting depth, and key count for optimizing API request and response bodies.',
-    seoDescription: 'Free online API Payload Analyzer — Analyze JSON payload size, structure, nesting depth, and key count. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Payload Analyzer — Analyze JSON payload size, structure, nesting depth, and key count. ',
     dependencies: "None",
   },
   {
@@ -5846,7 +6378,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-mock-data-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping and frontend development without a backend.',
-    seoDescription: 'Free online API Mock Data Generator — Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Mock Data Generator — Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping. ',
     dependencies: "None",
   },
   {
@@ -5855,7 +6387,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-mock-server-config",
     category: "Developer" as ToolCategory,
     description: 'Generate JSON Server configuration files from endpoint definitions. Set up a fully functional mock API server in seconds.',
-    seoDescription: 'Free online API Mock Server Config — Generate JSON Server configuration files from endpoint definitions. Set up a mock API server. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Mock Server Config — Generate JSON Server configuration files from endpoint definitions. Set up a mock API server. ',
     dependencies: "None",
   },
   {
@@ -5864,7 +6396,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "mock-api-response-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate sample API responses from a schema definition. Create realistic mock data for frontend testing and development.',
-    seoDescription: 'Free online Mock API Response Generator — Generate sample API responses from a schema definition. Create realistic mock data for frontend testing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Mock API Response Generator — Generate sample API responses from a schema definition. Create realistic mock data for frontend testing. ',
     dependencies: "None",
   },
   {
@@ -5873,7 +6405,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-latency-budget",
     category: "Developer" as ToolCategory,
     description: 'Calculate API latency budgets from SLA requirements. Distribute response time across application, database, and external service layers.',
-    seoDescription: 'Free online API Latency Budget — Calculate API latency budgets from SLA requirements. Distribute response time across layers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Latency Budget — Calculate API latency budgets from SLA requirements. Distribute response time across layers. ',
     dependencies: "None",
   },
   {
@@ -5882,7 +6414,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-pagination-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate pagination parameters including page count, offset values, and next/previous page navigation for any API.',
-    seoDescription: 'Free online API Pagination Calculator — Calculate pagination parameters including page count, offset values, and navigation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Pagination Calculator — Calculate pagination parameters including page count, offset values, and navigation. ',
     dependencies: "None",
   },
   {
@@ -5891,7 +6423,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-key-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate secure API keys with configurable length, character set, and optional prefix. Use with any authentication scheme.',
-    seoDescription: 'Free online API Key Generator — Generate secure API keys with configurable length, character set, and optional prefix. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Key Generator — Generate secure API keys with configurable length, character set, and optional prefix. ',
     dependencies: "None",
   },
   {
@@ -5900,7 +6432,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-key-hasher",
     category: "Developer" as ToolCategory,
     description: 'Hash API keys using SHA-256 for secure storage. Never store raw API keys — hash them before persisting to your database.',
-    seoDescription: 'Free online API Key Hasher — Hash API keys using SHA-256 for secure storage. Never store raw API keys in your database. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Key Hasher — Hash API keys using SHA-256 for secure storage. Never store raw API keys in your database. ',
     dependencies: "None",
   },
   {
@@ -5909,7 +6441,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-key-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate API key format including length checks, character set validation, prefix verification, and entropy analysis.',
-    seoDescription: 'Free online API Key Validator — Validate API key format including length checks, character set validation, and entropy analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Key Validator — Validate API key format including length checks, character set validation, and entropy analysis. ',
     dependencies: "None",
   },
   {
@@ -5918,7 +6450,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-cost-estimator",
     category: "Developer" as ToolCategory,
     description: 'Estimate API costs based on monthly requests, price per million calls, and number of users. Plan your API budget with confidence.',
-    seoDescription: 'Free online API Cost Estimator — Estimate API costs based on monthly requests, price per million calls, and users. Plan your budget. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Cost Estimator — Estimate API costs based on monthly requests, price per million calls, and users. Plan your budget. ',
     dependencies: "None",
   },
   {
@@ -5927,7 +6459,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-gateway-rate-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate rate limits, burst capacities, and throttling thresholds for API gateway configurations. Plan your traffic management strategy.',
-    seoDescription: 'Free online API Gateway Rate Calculator — Calculate rate limits, burst capacities, and throttling thresholds for API gateway config. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Gateway Rate Calculator — Calculate rate limits, burst capacities, and throttling thresholds for API gateway config. ',
     dependencies: "None",
   },
   {
@@ -5936,7 +6468,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-rate-limiter-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting for your API endpoints.',
-    seoDescription: 'Free online API Rate Limiter Calculator — Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Rate Limiter Calculator — Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting. ',
     dependencies: "None",
   },
   {
@@ -5945,7 +6477,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-changelog-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate structured changelogs from API version diffs. Categorize changes as Added, Changed, Deprecated, Removed, Fixed, or Security.',
-    seoDescription: 'Free online API Changelog Generator — Generate structured changelogs from API version diffs. Categorize every change type. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Changelog Generator — Generate structured changelogs from API version diffs. Categorize every change type. ',
     dependencies: "None",
   },
   {
@@ -5954,7 +6486,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-documentation-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate clean API documentation from endpoint descriptions. Includes parameters, response examples, and curl command samples.',
-    seoDescription: 'Free online API Documentation Generator — Generate clean API docs from endpoint descriptions with parameters and response examples. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Documentation Generator — Generate clean API docs from endpoint descriptions with parameters and response examples. ',
     dependencies: "None",
   },
   {
@@ -5963,7 +6495,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rest-endpoint-documenter",
     category: "Developer" as ToolCategory,
     description: 'Document REST API endpoints with method, path, and description. Generates formatted documentation with sample request and response bodies.',
-    seoDescription: 'Free online REST Endpoint Documenter — Document REST API endpoints with method, path, and description. Generate formatted docs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online REST Endpoint Documenter — Document REST API endpoints with method, path, and description. Generate formatted docs. ',
     dependencies: "None",
   },
   {
@@ -5972,7 +6504,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-cost-estimator",
     category: "Developer" as ToolCategory,
     description: 'Estimate GraphQL query complexity based on field count and nesting depth. Identify expensive queries before they hit your server.',
-    seoDescription: 'Free online GraphQL Cost Estimator — Estimate GraphQL query complexity based on field count and nesting depth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Cost Estimator — Estimate GraphQL query complexity based on field count and nesting depth. ',
     dependencies: "None",
   },
   {
@@ -5981,7 +6513,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-query-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and prettify GraphQL queries with proper indentation. Makes complex nested queries readable and maintainable.',
-    seoDescription: 'Free online GraphQL Query Formatter — Format and prettify GraphQL queries with proper indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Query Formatter — Format and prettify GraphQL queries with proper indentation. ',
     dependencies: "None",
   },
   {
@@ -5990,7 +6522,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-schema-to-json-schema",
     category: "Developer" as ToolCategory,
     description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.',
-    seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. ',
     dependencies: "None",
   },
   {
@@ -5999,7 +6531,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-schema-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate GraphQL schema syntax and structure. Detect missing root types, unknown type references, and common schema issues.',
-    seoDescription: 'Free online GraphQL Schema Validator — Validate GraphQL schema syntax and structure. Detect missing root types and issues. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Schema Validator — Validate GraphQL schema syntax and structure. Detect missing root types and issues. ',
     dependencies: "None",
   },
   {
@@ -6008,7 +6540,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-subscription-builder",
     category: "Developer" as ToolCategory,
     description: 'Build GraphQL subscription queries with custom event names and payload fields. Generate ready-to-use subscription strings.',
-    seoDescription: 'Free online GraphQL Subscription Builder — Build GraphQL subscription queries with custom event names and payload fields. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Subscription Builder — Build GraphQL subscription queries with custom event names and payload fields. ',
     dependencies: "None",
   },
   {
@@ -6017,7 +6549,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-tester",
     category: "Developer" as ToolCategory,
     description: 'Test GraphQL queries with variables. Format queries and variables, and preview formatted responses for development and debugging.',
-    seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. ',
     dependencies: "None",
   },
   {
@@ -6026,7 +6558,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "graphql-variables-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify GraphQL variables JSON with proper indentation. Ensure your variables are correctly structured before sending queries.',
-    seoDescription: 'Free online GraphQL Variables Formatter — Format and beautify GraphQL variables JSON with proper indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GraphQL Variables Formatter — Format and beautify GraphQL variables JSON with proper indentation. ',
     dependencies: "None",
   },
   {
@@ -6035,7 +6567,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "grpc-status-code-lookup",
     category: "Developer" as ToolCategory,
     description: 'Lookup gRPC status codes from 0 (OK) to 16 (Unauthenticated) with descriptions and common causes for each error.',
-    seoDescription: 'Free online gRPC Status Code Lookup — Lookup gRPC status codes with descriptions and common causes for each error. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online gRPC Status Code Lookup — Lookup gRPC status codes with descriptions and common causes for each error. ',
     dependencies: "None",
   },
   {
@@ -6044,7 +6576,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "soap-api-tester",
     category: "Developer" as ToolCategory,
     description: 'Build and test SOAP API envelopes with WSDL URL, method name, and XML parameters. Generate complete SOAP request envelopes.',
-    seoDescription: 'Free online SOAP API Tester — Build and test SOAP API envelopes with WSDL URL, method, and XML parameters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SOAP API Tester — Build and test SOAP API envelopes with WSDL URL, method, and XML parameters. ',
     dependencies: "None",
   },
   {
@@ -6053,7 +6585,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "openapi-mock-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate mock API responses from OpenAPI spec fragments. Create realistic sample data for API development and testing.',
-    seoDescription: 'Free online OpenAPI Mock Generator — Generate mock API responses from OpenAPI spec fragments. Create realistic sample data. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OpenAPI Mock Generator — Generate mock API responses from OpenAPI spec fragments. Create realistic sample data. ',
     dependencies: "None",
   },
   {
@@ -6062,7 +6594,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "openapi-to-postman",
     category: "Developer" as ToolCategory,
     description: 'Convert OpenAPI specs to Postman collection JSON format. Import the result directly into Postman for API testing.',
-    seoDescription: 'Free online OpenAPI to Postman — Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OpenAPI to Postman — Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. ',
     dependencies: "None",
   },
   {
@@ -6071,7 +6603,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "openapi-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.',
-    seoDescription: 'Free online OpenAPI Validator — Validate OpenAPI/Swagger spec syntax. Check required fields, missing paths, and structural issues. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OpenAPI Validator — Validate OpenAPI/Swagger spec syntax. Check required fields, missing paths, and structural issues. ',
     dependencies: "None",
   },
   {
@@ -6080,7 +6612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "postman-collection-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Postman collection JSON from endpoint descriptions. Create ready-to-import collections with method and path for each endpoint.',
-    seoDescription: 'Free online Postman Collection Generator — Generate Postman collection JSON from endpoint descriptions. Ready-to-import. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Postman Collection Generator — Generate Postman collection JSON from endpoint descriptions. Ready-to-import. ',
     dependencies: "None",
   },
   {
@@ -6089,7 +6621,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "postman-to-openapi-converter",
     category: "Developer" as ToolCategory,
     description: 'Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation from Postman to OpenAPI format.',
-    seoDescription: 'Free online Postman to OpenAPI Converter — Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Postman to OpenAPI Converter — Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. ',
     dependencies: "None",
   },
   {
@@ -6098,7 +6630,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "swagger-openapi-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Swagger UI / OpenAPI specs from a simple description. Enter title, version, and endpoints to produce a complete spec JSON.',
-    seoDescription: 'Free online Swagger/OpenAPI Generator — Generate Swagger UI / OpenAPI specs from a simple description. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Swagger/OpenAPI Generator — Generate Swagger UI / OpenAPI specs from a simple description. ',
     dependencies: "None",
   },
   {
@@ -6107,7 +6639,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webhook-payload-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate realistic webhook payload examples with customizable event names and data fields. Test your webhook handlers with realistic data.',
-    seoDescription: 'Free online Webhook Payload Generator — Generate realistic webhook payload examples with customizable events and fields. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Webhook Payload Generator — Generate realistic webhook payload examples with customizable events and fields. ',
     dependencies: "None",
   },
   {
@@ -6116,7 +6648,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webhook-retry-config",
     category: "Developer" as ToolCategory,
     description: 'Configure and compare webhook retry strategies — Fixed, Linear, Exponential, and Exponential + Jitter. Calculate total delays and visualize retry patterns.',
-    seoDescription: 'Free online Webhook Retry Config — Configure and compare webhook retry strategies including exponential backoff with jitter. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Webhook Retry Config — Configure and compare webhook retry strategies including exponential backoff with jitter. ',
     dependencies: "None",
   },
   {
@@ -6125,7 +6657,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webhook-signature-verifier",
     category: "Developer" as ToolCategory,
     description: 'Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\'t been tampered with.',
-    seoDescription: 'Free online Webhook Signature Verifier — Verify webhook HMAC-SHA256 signatures. Validate webhook authenticity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Webhook Signature Verifier — Verify webhook HMAC-SHA256 signatures. Validate webhook authenticity. ',
     dependencies: "None",
   },
   {
@@ -6134,7 +6666,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webhook-tester",
     category: "Developer" as ToolCategory,
     description: 'Test webhook endpoints by sending simulated POST requests with custom JSON payloads. Verify your webhook handlers are working correctly.',
-    seoDescription: 'Free online Webhook Tester — Test webhook endpoints by sending simulated POST requests with custom JSON payloads. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Webhook Tester — Test webhook endpoints by sending simulated POST requests with custom JSON payloads. ',
     dependencies: "None",
   },
   {
@@ -6143,7 +6675,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "webhook-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate webhook payload structure including required fields (id, event, data, created). Ensure your webhooks meet the standard format.',
-    seoDescription: 'Free online Webhook Validator — Validate webhook payload structure including required fields. Ensure standard format compliance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Webhook Validator — Validate webhook payload structure including required fields. Ensure standard format compliance. ',
     dependencies: "None",
   },
   {
@@ -6152,7 +6684,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-diff-checker",
     category: "Developer" as ToolCategory,
     description: 'Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, removed fields, and modified schemas between versions.',
-    seoDescription: 'Free online API Diff Checker — Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, and modified schemas. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online API Diff Checker — Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, and modified schemas. ',
     dependencies: "None",
   },
   {
@@ -6161,7 +6693,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "api-docs-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Markdown API documentation from OpenAPI specs. Create clean, readable docs with endpoints, parameters, and response examples.',
-    seoDescription: 'Free online OpenAPI Documentation Generator — Generate Markdown API docs from OpenAPI specs with endpoints, parameters, and response examples. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OpenAPI Documentation Generator — Generate Markdown API docs from OpenAPI specs with endpoints, parameters, and response examples. ',
     dependencies: "None",
   },
   {
@@ -6170,7 +6702,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "conventional-commit-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate conventional commit messages with type, scope, description, breaking changes, and body. Follow the Conventional Commits specification.',
-    seoDescription: 'Free online Conventional Commit Generator — Generate conventional commit messages with type, scope, description, and breaking changes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Conventional Commit Generator — Generate conventional commit messages with type, scope, description, and breaking changes. ',
     dependencies: "None",
   },
   {
@@ -6179,7 +6711,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "code-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify source code in JavaScript, TypeScript, Python, HTML, CSS, SQL, YAML, XML, and Markdown.',
-    seoDescription: 'Free online Code Formatter — Format and beautify source code in JavaScript, TypeScript, Python, HTML, CSS, SQL, YAML, XML, and Markdown. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Code Formatter — Format and beautify source code in JavaScript, TypeScript, Python, HTML, CSS, SQL, YAML, XML, and Markdown. ',
     dependencies: "None",
   },
   {
@@ -6188,7 +6720,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify HTML markup with proper indentation and structure.',
-    seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. ',
     dependencies: "None",
   },
   {
@@ -6197,7 +6729,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify CSS stylesheets with proper indentation and organization.',
-    seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. ',
     dependencies: "None",
   },
   {
@@ -6206,7 +6738,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "javascript-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify JavaScript code with proper indentation and syntax structure.',
-    seoDescription: 'Free online JavaScript Formatter — Format and beautify JavaScript code with proper indentation and syntax structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JavaScript Formatter — Format and beautify JavaScript code with proper indentation and syntax structure. ',
     dependencies: "None",
   },
   {
@@ -6215,7 +6747,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "typescript-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify TypeScript code with proper indentation and type syntax.',
-    seoDescription: 'Free online TypeScript Formatter — Format and beautify TypeScript code with proper indentation and type syntax. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TypeScript Formatter — Format and beautify TypeScript code with proper indentation and type syntax. ',
     dependencies: "None",
   },
   {
@@ -6224,7 +6756,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jsx-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify JSX/React code with proper indentation and component structure.',
-    seoDescription: 'Free online JSX Formatter — Format and beautify JSX/React code with proper indentation and component structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSX Formatter — Format and beautify JSX/React code with proper indentation and component structure. ',
     dependencies: "None",
   },
   {
@@ -6233,7 +6765,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tsx-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify TSX/React TypeScript code with proper indentation.',
-    seoDescription: 'Free online TSX Formatter — Format and beautify TSX/React TypeScript code with proper indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TSX Formatter — Format and beautify TSX/React TypeScript code with proper indentation. ',
     dependencies: "None",
   },
   {
@@ -6242,7 +6774,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "scss-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify SCSS/Sass stylesheets with proper nesting and indentation.',
-    seoDescription: 'Free online SCSS Formatter — Format and beautify SCSS/Sass stylesheets with proper nesting and indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SCSS Formatter — Format and beautify SCSS/Sass stylesheets with proper nesting and indentation. ',
     dependencies: "None",
   },
   {
@@ -6251,7 +6783,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "python-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify Python code with proper indentation and structure.',
-    seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. ',
     dependencies: "None",
   },
   {
@@ -6260,7 +6792,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "yaml-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify YAML configuration files with consistent indentation.',
-    seoDescription: 'Free online YAML Formatter — Format and beautify YAML configuration files with consistent indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online YAML Formatter — Format and beautify YAML configuration files with consistent indentation. ',
     dependencies: "None",
   },
   {
@@ -6269,7 +6801,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xml-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify XML documents with proper tree indentation.',
-    seoDescription: 'Free online XML Formatter — Format and beautify XML documents with proper tree indentation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XML Formatter — Format and beautify XML documents with proper tree indentation. ',
     dependencies: "None",
   },
   {
@@ -6278,7 +6810,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "markdown-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format and beautify Markdown documents with consistent heading and list spacing.',
-    seoDescription: 'Free online Markdown Formatter — Format and beautify Markdown documents with consistent heading and list spacing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Markdown Formatter — Format and beautify Markdown documents with consistent heading and list spacing. ',
     dependencies: "None",
   },
   {
@@ -6287,7 +6819,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more.',
-    seoDescription: 'Free online CSS Generator — Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Generator — Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. ',
     dependencies: "None",
   },
   {
@@ -6296,7 +6828,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "box-shadow-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset.',
-    seoDescription: 'Free online Box Shadow Generator — Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Box Shadow Generator — Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. ',
     dependencies: "None",
   },
   {
@@ -6305,7 +6837,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "border-radius-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS border-radius values visually. Control each corner independently with live preview.',
-    seoDescription: 'Free online Border Radius Generator — Generate CSS border-radius values visually. Control each corner independently with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Border Radius Generator — Generate CSS border-radius values visually. Control each corner independently with live preview. ',
     dependencies: "None",
   },
   {
@@ -6314,7 +6846,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "flexbox-css-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview.',
-    seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. ',
     dependencies: "None",
   },
   {
@@ -6323,7 +6855,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-grid-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview.',
-    seoDescription: 'Free online CSS Grid Generator — Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Grid Generator — Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. ',
     dependencies: "None",
   },
   {
@@ -6332,7 +6864,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-shadow-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity.',
-    seoDescription: 'Free online Text Shadow Generator — Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Shadow Generator — Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. ',
     dependencies: "None",
   },
   {
@@ -6341,7 +6873,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-transform-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview.',
-    seoDescription: 'Free online CSS Transform Generator — Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Transform Generator — Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. ',
     dependencies: "None",
   },
   {
@@ -6350,7 +6882,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-animation-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations.',
-    seoDescription: 'Free online CSS Animation Generator — Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Animation Generator — Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. ',
     dependencies: "None",
   },
   {
@@ -6359,7 +6891,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "css-filter-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale.',
-    seoDescription: 'Free online CSS Filter Generator — Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSS Filter Generator — Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. ',
     dependencies: "None",
   },
   {
@@ -6368,7 +6900,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-converter",
     category: "Image" as ToolCategory,
     description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.',
-    seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. ',
     dependencies: "None",
   },
   {
@@ -6377,7 +6909,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-converter-tool",
     category: "Video" as ToolCategory,
     description: 'Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats with format auto-detection.',
-    seoDescription: 'Free online Video Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Video Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB. ',
     dependencies: "None",
   },
   {
@@ -6386,7 +6918,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "encoder-decoder",
     category: "Developer" as ToolCategory,
     description: 'Encode or decode text using Base64, Base64URL, URL encoding, HTML entities, Hex, Binary, ROT13, UTF-8, and Unicode escape schemes.',
-    seoDescription: 'Free online Encoder / Decoder — Encode or decode text with Base64, Base64URL, URL, HTML, Hex, Binary, ROT13, UTF-8, and Unicode escape. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Encoder / Decoder — Encode or decode text with Base64, Base64URL, URL, HTML, Hex, Binary, ROT13, UTF-8, and Unicode escape. ',
     dependencies: "None",
   },
   {
@@ -6395,7 +6927,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "data-utilities",
     category: "Utility" as ToolCategory,
     description: 'Analyze CSV, generate CSV data, query JSON with path expressions, compare JSON diffs, minify JSON, sort CSV, view JSON tree, and preview CSV tables.',
-    seoDescription: 'Free online Data Utilities — CSV analyzer, CSV data generator, JSON path query builder, JSON diff checker, JSON minifier, CSV sorter, JSON tree viewer, and CSV preview generator. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Data Utilities — CSV analyzer, CSV data generator, JSON path query builder, JSON diff checker, JSON minifier, CSV sorter, JSON tree viewer, and CSV preview generator. ',
     dependencies: "None",
     showInCategory: false,
   },
@@ -6405,7 +6937,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-analyzer",
     category: "Utility" as ToolCategory,
     description: 'Analyze CSV structure — column types, counts, unique values, and empty cells.',
-    seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
   },
   {
@@ -6414,7 +6946,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-path-query-builder",
     category: "Utility" as ToolCategory,
     description: 'Query JSON data using dot-notation path expressions with wildcard support.',
-    seoDescription: 'Free online JSON Path Query Builder — Query JSON data using dot-notation path expressions with wildcard support. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Path Query Builder — Query JSON data using dot-notation path expressions with wildcard support. ',
     dependencies: "None",
   },
   {
@@ -6423,7 +6955,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-tree-viewer",
     category: "Utility" as ToolCategory,
     description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.',
-    seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. ',
     dependencies: "None",
   },
   {
@@ -6432,7 +6964,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-diff-checker",
     category: "Developer" as ToolCategory,
     description: 'Compare two JSON objects side-by-side with color-coded key-level differences.',
-    seoDescription: 'Free online JSON Diff Checker — Compare two JSON objects side-by-side with color-coded key-level differences. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Diff Checker — Compare two JSON objects side-by-side with color-coded key-level differences. ',
     dependencies: "None",
   },
 
@@ -6443,7 +6975,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-color-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing.',
-    seoDescription: 'Free online Random Color Generator — Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Color Generator — Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. ',
     dependencies: "None",
   },
   {
@@ -6452,7 +6984,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-team-generator",
     category: "Developer" as ToolCategory,
     description: 'Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects.',
-    seoDescription: 'Free online Random Team Generator — Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Team Generator — Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. ',
     dependencies: "None",
   },
   {
@@ -6461,7 +6993,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-picker-generator",
     category: "Developer" as ToolCategory,
     description: 'Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection.',
-    seoDescription: 'Free online Random Picker Generator — Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Picker Generator — Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. ',
     dependencies: "None",
   },
   {
@@ -6470,7 +7002,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-decision-maker",
     category: "Developer" as ToolCategory,
     description: 'Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions.',
-    seoDescription: 'Free online Random Decision Maker — Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Decision Maker — Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. ',
     dependencies: "None",
   },
   {
@@ -6479,7 +7011,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-username-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations.',
-    seoDescription: 'Free online Random Username Generator — Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Username Generator — Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. ',
     dependencies: "None",
   },
   {
@@ -6488,7 +7020,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-token-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets.',
-    seoDescription: 'Free online Random Token Generator — Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Token Generator — Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. ',
     dependencies: "None",
   },
   {
@@ -6497,7 +7029,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dummy-text-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing.',
-    seoDescription: 'Free online Dummy Text Generator — Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Dummy Text Generator — Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. ',
     dependencies: "None",
   },
   {
@@ -6506,7 +7038,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fake-data-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development.',
-    seoDescription: 'Free online Fake Data Generator — Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fake Data Generator — Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. ',
     dependencies: "None",
   },
   {
@@ -6515,7 +7047,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fake-identity-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder.',
-    seoDescription: 'Free online Fake Identity Generator — Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fake Identity Generator — Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. ',
     dependencies: "None",
   },
   {
@@ -6524,7 +7056,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fake-credit-card-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation.',
-    seoDescription: 'Free online Fake Credit Card Generator — Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fake Credit Card Generator — Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. ',
     dependencies: "None",
   },
   {
@@ -6533,7 +7065,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sequence-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count.',
-    seoDescription: 'Free online Sequence Generator — Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Sequence Generator — Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. ',
     dependencies: "None",
   },
   {
@@ -6542,7 +7074,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "coupon-code-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters.',
-    seoDescription: 'Free online Coupon Code Generator — Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Coupon Code Generator — Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. ',
     dependencies: "None",
   },
   {
@@ -6551,7 +7083,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "serial-number-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders.',
-    seoDescription: 'Free online Serial Number Generator — Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Serial Number Generator — Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. ',
     dependencies: "None",
   },
   {
@@ -6560,7 +7092,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "nickname-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects.',
-    seoDescription: 'Free online Nickname Generator — Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Nickname Generator — Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. ',
     dependencies: "None",
   },
   {
@@ -6569,7 +7101,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avatar-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders.',
-    seoDescription: 'Free online Avatar Generator — Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Avatar Generator — Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. ',
     dependencies: "None",
   },
   // === Timers (IDs 782-793) ===
@@ -6579,7 +7111,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "timer",
     category: "Developer" as ToolCategory,
     description: 'Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar.',
-    seoDescription: 'Free online Timer — Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Timer — Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. ',
     dependencies: "None",
   },
   {
@@ -6588,7 +7120,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "stopwatch",
     category: "Developer" as ToolCategory,
     description: 'Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison.',
-    seoDescription: 'Free online Stopwatch — Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Stopwatch — Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. ',
     dependencies: "None",
   },
   {
@@ -6597,7 +7129,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "countdown-tool",
     category: "Developer" as ToolCategory,
     description: 'Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines.',
-    seoDescription: 'Free online Countdown Timer — Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Countdown Timer — Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. ',
     dependencies: "None",
   },
   {
@@ -6606,7 +7138,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "interval-timer",
     category: "Developer" as ToolCategory,
     description: 'Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling.',
-    seoDescription: 'Free online Interval Timer — Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Interval Timer — Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. ',
     dependencies: "None",
   },
   {
@@ -6615,7 +7147,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tabata-timer",
     category: "Developer" as ToolCategory,
     description: 'Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds.',
-    seoDescription: 'Free online Tabata Timer — Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Tabata Timer — Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. ',
     dependencies: "None",
   },
   {
@@ -6624,7 +7156,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "world-clock",
     category: "Developer" as ToolCategory,
     description: 'Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones.',
-    seoDescription: 'Free online World Clock — Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online World Clock — Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. ',
     dependencies: "None",
   },
   {
@@ -6633,7 +7165,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "time-duration-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds.',
-    seoDescription: 'Free online Time Duration Calculator — Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Duration Calculator — Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. ',
     dependencies: "None",
   },
   {
@@ -6642,7 +7174,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "time-addition-calculator",
     category: "Developer" as ToolCategory,
     description: 'Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking.',
-    seoDescription: 'Free online Time Addition Calculator — Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Addition Calculator — Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. ',
     dependencies: "None",
   },
   {
@@ -6651,7 +7183,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "time-until-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate the exact days, hours, and minutes remaining until a specified future date and time.',
-    seoDescription: 'Free online Time Until Calculator — Calculate the exact days, hours, and minutes remaining until a specified future date and time. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Until Calculator — Calculate the exact days, hours, and minutes remaining until a specified future date and time. ',
     dependencies: "None",
   },
   {
@@ -6660,7 +7192,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "meeting-time-planner",
     category: "Developer" as ToolCategory,
     description: 'Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously.',
-    seoDescription: 'Free online Meeting Time Planner — Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Meeting Time Planner — Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. ',
     dependencies: "None",
   },
   // === Text / SEO Tools (IDs 794-811) ===
@@ -6670,7 +7202,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "word-frequency-counter",
     category: "SEO" as ToolCategory,
     description: 'Analyze word frequency in any text. Shows top N words with count and percentage. Essential for keyword analysis and content optimization.',
-    seoDescription: 'Free online Word Frequency Counter — Analyze word frequency in any text. Shows top N words with count and percentage. Essential for keyword analysis and content optimization. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Word Frequency Counter — Analyze word frequency in any text. Shows top N words with count and percentage. Essential for keyword analysis and content optimization. ',
     dependencies: "None",
   },
   {
@@ -6679,7 +7211,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "keyword-planner-tool",
     category: "SEO" as ToolCategory,
     description: 'Extract potential SEO keywords from text with stop word filtering and frequency analysis. Shows word count, percentage, and density.',
-    seoDescription: 'Free online Keyword Planner Tool — Extract potential SEO keywords from text with stop word filtering and frequency analysis. Shows word count, percentage, and density. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Keyword Planner Tool — Extract potential SEO keywords from text with stop word filtering and frequency analysis. Shows word count, percentage, and density. ',
     dependencies: "None",
   },
   {
@@ -6688,7 +7220,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seo-meta-tag-generator",
     category: "SEO" as ToolCategory,
     description: 'Generate complete HTML meta tags including title, description, keywords, Open Graph, and Twitter Card tags from a simple form.',
-    seoDescription: 'Free online SEO Meta Tag Generator — Generate complete HTML meta tags including title, description, keywords, Open Graph, and Twitter Card tags from a simple form. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SEO Meta Tag Generator — Generate complete HTML meta tags including title, description, keywords, Open Graph, and Twitter Card tags from a simple form. ',
     dependencies: "None",
   },
   {
@@ -6697,7 +7229,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seo-preview-generator",
     category: "SEO" as ToolCategory,
     description: 'Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview.',
-    seoDescription: 'Free online SEO Preview Generator — Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SEO Preview Generator — Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. ',
     dependencies: "None",
   },
   {
@@ -6706,7 +7238,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seo-headline-analyzer",
     category: "SEO" as ToolCategory,
     description: 'Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement.',
-    seoDescription: 'Free online SEO Headline Analyzer — Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SEO Headline Analyzer — Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. ',
     dependencies: "None",
   },
   {
@@ -6715,7 +7247,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seo-schema-generator",
     category: "SEO" as ToolCategory,
     description: 'Generate JSON-LD structured data markup for Article, Product, FAQ, LocalBusiness, Recipe, and Event schema types.',
-    seoDescription: 'Free online SEO Schema Generator — Generate JSON-LD structured data markup for Article, Product, FAQ, LocalBusiness, Recipe, and Event schema types. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SEO Schema Generator — Generate JSON-LD structured data markup for Article, Product, FAQ, LocalBusiness, Recipe, and Event schema types. ',
     dependencies: "None",
   },
   {
@@ -6724,7 +7256,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seo-slug-generator",
     category: "SEO" as ToolCategory,
     description: 'Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens.',
-    seoDescription: 'Free online SEO Slug Generator — Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SEO Slug Generator — Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. ',
     dependencies: "None",
   },
   {
@@ -6733,7 +7265,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-replacer",
     category: "SEO" as ToolCategory,
     description: 'Find and replace text in any string with one click. Fast bulk text replacement for content editing and data cleanup.',
-    seoDescription: 'Free online Text Replacer — Find and replace text in any string with one click. Fast bulk text replacement for content editing and data cleanup. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Replacer — Find and replace text in any string with one click. Fast bulk text replacement for content editing and data cleanup. ',
     dependencies: "None",
   },
   {
@@ -6742,7 +7274,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-sorter",
     category: "SEO" as ToolCategory,
     description: 'Sort text lines alphabetically (A-Z, Z-A), by length, randomize, or remove duplicates. Essential for list organization and data cleanup.',
-    seoDescription: 'Free online Text Sorter — Sort text lines alphabetically (A-Z, Z-A), by length, randomize, or remove duplicates. Essential for list organization and data cleanup. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Sorter — Sort text lines alphabetically (A-Z, Z-A), by length, randomize, or remove duplicates. Essential for list organization and data cleanup. ',
     dependencies: "None",
   },
   {
@@ -6751,7 +7283,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-deduplicator",
     category: "SEO" as ToolCategory,
     description: 'Remove duplicate lines from text instantly. Perfect for cleaning up lists, CSV data, and removing redundant entries.',
-    seoDescription: 'Free online Text Deduplicator — Remove duplicate lines from text instantly. Perfect for cleaning up lists, CSV data, and removing redundant entries. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Deduplicator — Remove duplicate lines from text instantly. Perfect for cleaning up lists, CSV data, and removing redundant entries. ',
     dependencies: "None",
   },
   {
@@ -6760,7 +7292,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-to-html-converter",
     category: "SEO" as ToolCategory,
     description: 'Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators.',
-    seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. ',
     dependencies: "None",
   },
   {
@@ -6769,7 +7301,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "html-to-text-converter",
     category: "SEO" as ToolCategory,
     description: 'Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text.',
-    seoDescription: 'Free online HTML to Text Converter — Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTML to Text Converter — Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. ',
     dependencies: "None",
   },
   {
@@ -6778,7 +7310,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "markdown-previewer",
     category: "SEO" as ToolCategory,
     description: 'Preview markdown text as rendered HTML in real time. Supports headings, bold, italic, code blocks, blockquotes, and lists.',
-    seoDescription: 'Free online Markdown Previewer — Preview markdown text as rendered HTML in real time. Supports headings, bold, italic, code blocks, blockquotes, and lists. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Markdown Previewer — Preview markdown text as rendered HTML in real time. Supports headings, bold, italic, code blocks, blockquotes, and lists. ',
     dependencies: "None",
   },
   {
@@ -6787,7 +7319,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "color-picker",
     category: "Utility" as ToolCategory,
     description: 'Pick colors from a visual spectrum or enter hex values. Copy to clipboard \u2014 perfect for design palettes, CSS variables, and UI mockups.',
-    seoDescription: 'Free online Color Picker \u2014 Pick colors from a visual spectrum or enter hex values. Copy to clipboard \u2014 perfect for design palettes, CSS variables, and UI mockups. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Color Picker \u2014 Pick colors from a visual spectrum or enter hex values. Copy to clipboard \u2014 perfect for design palettes, CSS variables, and UI mockups. ',
     dependencies: "None",
   },
   {
@@ -6796,7 +7328,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "color-palette-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers.',
-    seoDescription: 'Free online Color Palette Generator \u2014 Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Color Palette Generator \u2014 Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. ',
     dependencies: "None",
   },
   {
@@ -6805,7 +7337,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gradient-generator",
     category: "Utility" as ToolCategory,
     description: 'Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs.',
-    seoDescription: 'Free online Gradient Generator \u2014 Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Gradient Generator \u2014 Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. ',
     dependencies: "None",
   },
   {
@@ -6814,7 +7346,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "contrast-checker",
     category: "Utility" as ToolCategory,
     description: 'Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design.',
-    seoDescription: 'Free online Contrast Checker \u2014 Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Contrast Checker \u2014 Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. ',
     dependencies: "None",
   },
   {
@@ -6823,7 +7355,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "counter-tool",
     category: "Utility" as ToolCategory,
     description: 'Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts.',
-    seoDescription: 'Free online Counter Tool \u2014 Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Counter Tool \u2014 Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. ',
     dependencies: "None",
   },
   {
@@ -6832,7 +7364,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "list-randomizer",
     category: "Utility" as ToolCategory,
     description: 'Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly.',
-    seoDescription: 'Free online List Randomizer \u2014 Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online List Randomizer \u2014 Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. ',
     dependencies: "None",
   },
   {
@@ -6841,7 +7373,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "list-sorter",
     category: "Utility" as ToolCategory,
     description: 'Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists.',
-    seoDescription: 'Free online List Sorter \u2014 Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online List Sorter \u2014 Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. ',
     dependencies: "None",
   },
   {
@@ -6850,7 +7382,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "decision-maker",
     category: "Utility" as ToolCategory,
     description: "Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices.",
-    seoDescription: "Free online Decision Maker \u2014 Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: "Free online Decision Maker \u2014 Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. ",
     dependencies: "None",
   },
   {
@@ -6859,7 +7391,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "yes-no-picker",
     category: "Utility" as ToolCategory,
     description: 'Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal.',
-    seoDescription: 'Free online Yes / No Picker \u2014 Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Yes / No Picker \u2014 Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. ',
     dependencies: "None",
   },
   {
@@ -6868,7 +7400,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dice-roller-tool",
     category: "Utility" as ToolCategory,
     description: 'Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results.',
-    seoDescription: 'Free online Dice Roller Tool \u2014 Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Dice Roller Tool \u2014 Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. ',
     dependencies: "None",
   },
   {
@@ -6877,7 +7409,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "number-guessing-game",
     category: "Utility" as ToolCategory,
     description: 'Guess the random number between 1 and 100. Get hints if your guess is too high or too low.',
-    seoDescription: 'Free online Number Guessing Game \u2014 Guess the random number between 1 and 100. Get hints if your guess is too high or too low. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Number Guessing Game \u2014 Guess the random number between 1 and 100. Get hints if your guess is too high or too low. ',
     dependencies: "None",
   },
   {
@@ -6886,7 +7418,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rock-paper-scissors",
     category: "Utility" as ToolCategory,
     description: 'Play rock paper scissors against the computer. Keep track of wins, losses, and ties.',
-    seoDescription: 'Free online Rock Paper Scissors \u2014 Play rock paper scissors against the computer. Keep track of wins, losses, and ties. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rock Paper Scissors \u2014 Play rock paper scissors against the computer. Keep track of wins, losses, and ties. ',
     dependencies: "None",
   },
   {
@@ -6895,7 +7427,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hangman-game",
     category: "Utility" as ToolCategory,
     description: 'Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete.',
-    seoDescription: 'Free online Hangman Game \u2014 Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hangman Game \u2014 Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. ',
     dependencies: "None",
   },
 
@@ -6905,7 +7437,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "roman-numeral-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999.',
-    seoDescription: 'Free online Roman Numeral Converter \u2014 Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Roman Numeral Converter \u2014 Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. ',
     dependencies: "None",
   },
   {
@@ -6914,7 +7446,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "number-to-words-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert any number to its English word representation. Supports large numbers up to billions.',
-    seoDescription: 'Free online Number to Words Converter \u2014 Convert any number to its English word representation. Supports large numbers up to billions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Number to Words Converter \u2014 Convert any number to its English word representation. Supports large numbers up to billions. ',
     dependencies: "None",
   },
   {
@@ -6923,7 +7455,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "percentage-difference-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements.',
-    seoDescription: 'Free online Percentage Difference Calculator \u2014 Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Percentage Difference Calculator \u2014 Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. ',
     dependencies: "None",
   },
   {
@@ -6932,7 +7464,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tip-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people.',
-    seoDescription: 'Free online Tip Calculator \u2014 Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Tip Calculator \u2014 Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. ',
     dependencies: "None",
   },
   {
@@ -6941,7 +7473,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sales-tax-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total.',
-    seoDescription: 'Free online Sales Tax Calculator \u2014 Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Sales Tax Calculator \u2014 Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. ',
     dependencies: "None",
   },
   {
@@ -6950,7 +7482,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "markup-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis.',
-    seoDescription: 'Free online Markup Calculator \u2014 Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Markup Calculator \u2014 Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. ',
     dependencies: "None",
   },
   {
@@ -6959,7 +7491,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cagr-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown.',
-    seoDescription: 'Free online CAGR Calculator \u2014 Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CAGR Calculator \u2014 Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. ',
     dependencies: "None",
   },
   {
@@ -6968,7 +7500,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fraction-to-decimal-calculator",
     category: "Utility" as ToolCategory,
     description: 'Convert fractions to decimal numbers. Shows the step-by-step division process.',
-    seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. ',
     dependencies: "None",
   },
   {
@@ -6977,7 +7509,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "decimal-to-fraction-calculator",
     category: "Utility" as ToolCategory,
     description: 'Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision.',
-    seoDescription: 'Free online Decimal to Fraction Calculator \u2014 Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Decimal to Fraction Calculator \u2014 Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. ',
     dependencies: "None",
   },
 
@@ -6987,7 +7519,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rule-of-three-calculator",
     category: "Utility" as ToolCategory,
     description: 'Solve direct and inverse rule of three problems. Essential for proportional reasoning and everyday math.',
-    seoDescription: 'Free online Rule of Three Calculator \u2014 Solve direct and inverse rule of three problems. Essential for proportional reasoning and everyday math. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rule of Three Calculator \u2014 Solve direct and inverse rule of three problems. Essential for proportional reasoning and everyday math. ',
     dependencies: "None",
   },
   {
@@ -6996,7 +7528,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "combination-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result.',
-    seoDescription: 'Free online Combination Calculator \u2014 Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Combination Calculator \u2014 Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result. ',
     dependencies: "None",
   },
   {
@@ -7005,7 +7537,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "permutation-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation.',
-    seoDescription: 'Free online Permutation Calculator \u2014 Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Permutation Calculator \u2014 Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. ',
     dependencies: "None",
   },
   {
@@ -7014,7 +7546,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "factorial-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence.',
-    seoDescription: 'Free online Factorial Calculator \u2014 Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Factorial Calculator \u2014 Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. ',
     dependencies: "None",
   },
   {
@@ -7023,7 +7555,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "prime-number-checker",
     category: "Utility" as ToolCategory,
     description: 'Check if any number is prime. Also shows all factors and whether the number is odd or even.',
-    seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. ',
     dependencies: "None",
   },
   {
@@ -7032,7 +7564,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "prime-factorization-calculator",
     category: "Utility" as ToolCategory,
     description: 'Find the prime factors of any number. Shows the complete factorization tree and exponential form.',
-    seoDescription: 'Free online Prime Factorization Calculator \u2014 Find the prime factors of any number. Shows the complete factorization tree and exponential form. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Prime Factorization Calculator \u2014 Find the prime factors of any number. Shows the complete factorization tree and exponential form. ',
     dependencies: "None",
   },
   {
@@ -7041,7 +7573,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "greatest-common-factor-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step.',
-    seoDescription: 'Free online Greatest Common Factor Calculator \u2014 Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Greatest Common Factor Calculator \u2014 Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step. ',
     dependencies: "None",
   },
   {
@@ -7050,7 +7582,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "least-common-multiple-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity.',
-    seoDescription: 'Free online Least Common Multiple Calculator \u2014 Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Least Common Multiple Calculator \u2014 Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity. ',
     dependencies: "None",
   },
   {
@@ -7059,7 +7591,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "modulo-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression.',
-    seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. ',
     dependencies: "None",
   },
   {
@@ -7068,7 +7600,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "logarithm-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases.',
-    seoDescription: 'Free online Logarithm Calculator \u2014 Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Logarithm Calculator \u2014 Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. ',
     dependencies: "None",
   },
   {
@@ -7077,7 +7609,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "trigonometry-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions.',
-    seoDescription: 'Free online Trigonometry Calculator \u2014 Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Trigonometry Calculator \u2014 Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. ',
     dependencies: "None",
   },
   {
@@ -7086,7 +7618,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "degree-radian-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert between degrees and radians. Shows the formula and step-by-step conversion process.',
-    seoDescription: 'Free online Degree / Radian Converter \u2014 Convert between degrees and radians. Shows the formula and step-by-step conversion process. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Degree / Radian Converter \u2014 Convert between degrees and radians. Shows the formula and step-by-step conversion process. ',
     dependencies: "None",
   },
   {
@@ -7095,7 +7627,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "scientific-notation-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers.',
-    seoDescription: 'Free online Scientific Notation Converter \u2014 Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Scientific Notation Converter \u2014 Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers. ',
     dependencies: "None",
   },
   {
@@ -7104,7 +7636,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "significant-figures-calculator",
     category: "Utility" as ToolCategory,
     description: 'Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations.',
-    seoDescription: 'Free online Significant Figures Calculator \u2014 Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Significant Figures Calculator \u2014 Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations. ',
     dependencies: "None",
   },
   {
@@ -7113,7 +7645,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rounding-calculator",
     category: "Utility" as ToolCategory,
     description: 'Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps.',
-    seoDescription: 'Free online Rounding Calculator \u2014 Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rounding Calculator \u2014 Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. ',
     dependencies: "None",
   },
   {
@@ -7122,7 +7654,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "math-equation-solver",
     category: "Utility" as ToolCategory,
     description: 'Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution.',
-    seoDescription: 'Free online Math Equation Solver \u2014 Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Math Equation Solver \u2014 Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. ',
     dependencies: "None",
   },
   {
@@ -7131,7 +7663,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "algebra-calculator",
     category: "Utility" as ToolCategory,
     description: 'Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations.',
-    seoDescription: 'Free online Algebra Calculator \u2014 Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Algebra Calculator \u2014 Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations. ',
     dependencies: "None",
   },
   {
@@ -7140,7 +7672,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "geometry-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube.',
-    seoDescription: 'Free online Geometry Calculator \u2014 Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Geometry Calculator \u2014 Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. ',
     dependencies: "None",
   },
   {
@@ -7149,7 +7681,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "coordinate-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the distance and midpoint between two points on a 2D coordinate plane.',
-    seoDescription: 'Free online Coordinate Calculator \u2014 Calculate the distance and midpoint between two points on a 2D coordinate plane. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Coordinate Calculator \u2014 Calculate the distance and midpoint between two points on a 2D coordinate plane. ',
     dependencies: "None",
   },
   {
@@ -7158,7 +7690,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "slope-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form.',
-    seoDescription: 'Free online Slope Calculator \u2014 Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Slope Calculator \u2014 Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form. ',
     dependencies: "None",
   },
   {
@@ -7167,7 +7699,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "midpoint-calculator",
     category: "Utility" as ToolCategory,
     description: 'Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference.',
-    seoDescription: 'Free online Midpoint Calculator \u2014 Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Midpoint Calculator \u2014 Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference. ',
     dependencies: "None",
   },
   {
@@ -7176,7 +7708,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "distance-calculator",
     category: "Utility" as ToolCategory,
     description: 'Calculate the Euclidean distance between two points on a plane using the distance formula. Shows the step-by-step calculation.',
-    seoDescription: 'Free online Distance Calculator \u2014 Calculate the Euclidean distance between two points on a plane using the distance formula. Shows the step-by-step calculation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Distance Calculator \u2014 Calculate the Euclidean distance between two points on a plane using the distance formula. Shows the step-by-step calculation. ',
     dependencies: "None",
   },
   {
@@ -7185,7 +7717,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "speed-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use.',
-    seoDescription: 'Free online Speed Converter \u2014 Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Speed Converter \u2014 Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. ',
     dependencies: "None",
   },
   {
@@ -7194,7 +7726,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "length-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive.',
-    seoDescription: 'Free online Length Converter \u2014 Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Length Converter \u2014 Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. ',
     dependencies: "None",
   },
   {
@@ -7203,7 +7735,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "weight-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems.',
-    seoDescription: 'Free online Weight Converter \u2014 Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Weight Converter \u2014 Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. ',
     dependencies: "None",
   },
   {
@@ -7212,7 +7744,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "volume-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel.',
-    seoDescription: 'Free online Volume Converter \u2014 Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Volume Converter \u2014 Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. ',
     dependencies: "None",
   },
   {
@@ -7221,7 +7753,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "area-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert area between square meters, square feet, acres, hectares, and square kilometers.',
-    seoDescription: 'Free online Area Converter \u2014 Convert area between square meters, square feet, acres, hectares, and square kilometers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Area Converter \u2014 Convert area between square meters, square feet, acres, hectares, and square kilometers. ',
     dependencies: "None",
   },
   {
@@ -7230,7 +7762,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "data-size-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units.',
-    seoDescription: 'Free online Data Size Converter \u2014 Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Data Size Converter \u2014 Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. ',
     dependencies: "None",
   },
   {
@@ -7239,7 +7771,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "body-fat-calculator",
     category: "Health" as ToolCategory,
     description: 'Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category.',
-    seoDescription: 'Free online Body Fat Estimator \u2014 Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Body Fat Estimator \u2014 Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. ',
     dependencies: "None",
   },
   {
@@ -7248,7 +7780,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "calorie-intake-calculator",
     category: "Health" as ToolCategory,
     description: 'Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning.',
-    seoDescription: 'Free online Daily Calorie Needs \u2014 Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Daily Calorie Needs \u2014 Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. ',
     dependencies: "None",
   },
   {
@@ -7257,7 +7789,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "macronutrient-calculator",
     category: "Health" as ToolCategory,
     description: 'Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split.',
-    seoDescription: 'Free online Daily Macronutrients \u2014 Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Daily Macronutrients \u2014 Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split. ',
     dependencies: "None",
   },
   {
@@ -7266,7 +7798,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sleep-requirement-calculator",
     category: "Health" as ToolCategory,
     description: 'Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior.',
-    seoDescription: 'Free online Sleep Requirements \u2014 Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Sleep Requirements \u2014 Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. ',
     dependencies: "None",
   },
   {
@@ -7275,7 +7807,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ideal-weight-calc",
     category: "Health" as ToolCategory,
     description: 'Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender.',
-    seoDescription: 'Free online Ideal Body Weight \u2014 Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Ideal Body Weight \u2014 Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender. ',
     dependencies: "None",
   },
   {
@@ -7284,7 +7816,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "steps-calculator",
     category: "Health" as ToolCategory,
     description: 'Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count.',
-    seoDescription: 'Free online Steps to Distance \u2014 Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Steps to Distance \u2014 Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. ',
     dependencies: "None",
   },
   {
@@ -7293,7 +7825,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "calories-burned-calculator",
     category: "Health" as ToolCategory,
     description: 'Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities.',
-    seoDescription: 'Free online Calories Burned Calculator \u2014 Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Calories Burned Calculator \u2014 Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities. ',
     dependencies: "None",
   },
   {
@@ -7302,7 +7834,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "blood-alcohol-calculator",
     category: "Health" as ToolCategory,
     description: 'Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only.',
-    seoDescription: 'Free online Blood Alcohol Estimator \u2014 Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Blood Alcohol Estimator \u2014 Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. ',
     dependencies: "None",
   },
   {
@@ -7311,7 +7843,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ovulation-tracker",
     category: "Health" as ToolCategory,
     description: 'Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning.',
-    seoDescription: 'Free online Ovulation Tracker \u2014 Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Ovulation Tracker \u2014 Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. ',
     dependencies: "None",
   },
 
@@ -7321,7 +7853,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "date-difference-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns.',
-    seoDescription: 'Free online Date Difference Calculator \u2014 Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Date Difference Calculator \u2014 Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. ',
     dependencies: "None",
   },
   {
@@ -7330,7 +7862,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "date-addition-calculator",
     category: "Developer" as ToolCategory,
     description: 'Add or subtract days from any date. Get the resulting date instantly \u2014 useful for deadlines, scheduling, and planning.',
-    seoDescription: 'Free online Date Addition Calculator \u2014 Add or subtract days from any date. Get the resulting date instantly \u2014 useful for deadlines, scheduling, and planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Date Addition Calculator \u2014 Add or subtract days from any date. Get the resulting date instantly \u2014 useful for deadlines, scheduling, and planning. ',
     dependencies: "None",
   },
   {
@@ -7339,7 +7871,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "week-number-calculator",
     category: "Developer" as ToolCategory,
     description: 'Find the ISO week number for any date. Also shows the day of the week and the current week of the year.',
-    seoDescription: 'Free online Week Number Calculator \u2014 Find the ISO week number for any date. Also shows the day of the week and the current week of the year. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Week Number Calculator \u2014 Find the ISO week number for any date. Also shows the day of the week and the current week of the year. ',
     dependencies: "None",
   },
   {
@@ -7348,7 +7880,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "time-since-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds.',
-    seoDescription: 'Free online Time Since Calculator \u2014 Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Since Calculator \u2014 Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. ',
     dependencies: "None",
   },
   {
@@ -7357,7 +7889,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "time-zone-converter",
     category: "Developer" as ToolCategory,
     description: 'Convert time between different time zones. Enter a time and your source/target time zones and see the converted result.',
-    seoDescription: 'Free online Time Zone Converter \u2014 Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Time Zone Converter \u2014 Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. ',
     dependencies: "None",
   },
   {
@@ -7366,7 +7898,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "daylight-saving-time-checker",
     category: "Developer" as ToolCategory,
     description: 'Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length.',
-    seoDescription: 'Free online DST Checker (US) \u2014 Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online DST Checker (US) \u2014 Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. ',
     dependencies: "None",
   },
   {
@@ -7375,7 +7907,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "work-hours-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll.',
-    seoDescription: 'Free online Work Hours Calculator \u2014 Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Work Hours Calculator \u2014 Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. ',
     dependencies: "None",
   },
   {
@@ -7384,7 +7916,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hours-minutes-calculator",
     category: "Developer" as ToolCategory,
     description: 'Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling.',
-    seoDescription: 'Free online Hours & Minutes Calculator \u2014 Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hours & Minutes Calculator \u2014 Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. ',
     dependencies: "None",
   },
   {
@@ -7393,7 +7925,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "minutes-to-hours-converter",
     category: "Developer" as ToolCategory,
     description: 'Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing.',
-    seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. ',
     dependencies: "None",
   },
   {
@@ -7402,7 +7934,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hours-to-minutes-tool",
     category: "Developer" as ToolCategory,
     description: 'Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets.',
-    seoDescription: 'Free online Hours to Minutes Tool \u2014 Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hours to Minutes Tool \u2014 Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. ',
     dependencies: "None",
   },
   {
@@ -7411,7 +7943,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "seconds-to-minutes-converter",
     category: "Developer" as ToolCategory,
     description: 'Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use.',
-    seoDescription: 'Free online Seconds to Minutes Converter \u2014 Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Seconds to Minutes Converter \u2014 Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. ',
     dependencies: "None",
   },
   {
@@ -7420,7 +7952,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "password-entropy-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate password entropy in bits to measure password strength against brute-force attacks.',
-    seoDescription: 'Free online Password Entropy Calculator \u2014 Calculate password entropy in bits to measure password strength against brute-force attacks. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Password Entropy Calculator \u2014 Calculate password entropy in bits to measure password strength against brute-force attacks. ',
     dependencies: "None",
   },
   {
@@ -7429,7 +7961,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "two-factor-auth-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate TOTP URIs for two-factor authentication setup with authenticator apps.',
-    seoDescription: 'Free online Two-Factor Auth Generator \u2014 Generate TOTP URIs for two-factor authentication setup with authenticator apps. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Two-Factor Auth Generator \u2014 Generate TOTP URIs for two-factor authentication setup with authenticator apps. ',
     dependencies: "None",
   },
   {
@@ -7438,7 +7970,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "brute-force-time-estimator",
     category: "Developer" as ToolCategory,
     description: 'Estimate the time required to brute-force a password given its length, character set, and hash rate.',
-    seoDescription: 'Free online Brute Force Time Estimator \u2014 Estimate the time required to brute-force a password given its length, character set, and hash rate. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Brute Force Time Estimator \u2014 Estimate the time required to brute-force a password given its length, character set, and hash rate. ',
     dependencies: "None",
   },
   {
@@ -7447,7 +7979,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hash-verifier",
     category: "Developer" as ToolCategory,
     description: 'Verify that a hash matches a given input to check data integrity.',
-    seoDescription: 'Free online Hash Verifier \u2014 Verify that a hash matches a given input to check data integrity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hash Verifier \u2014 Verify that a hash matches a given input to check data integrity. ',
     dependencies: "None",
   },
   {
@@ -7456,16 +7988,16 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hash-password-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage.',
-    seoDescription: 'Free online Hash Password Generator \u2014 Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hash Password Generator \u2014 Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. ',
     dependencies: "None",
   },
   {
     id: "904",
-    name: "Hash File Generator",
+    name: "Content Hash Generator",
     slug: "hash-file-generator",
     category: "Developer" as ToolCategory,
-    description: 'Compute file checksums using SHA-256, MD5, or SHA-1 to verify file integrity.',
-    seoDescription: 'Free online Hash File Generator \u2014 Compute file checksums using SHA-256, MD5, or SHA-1 to verify file integrity. Everything runs locally in your browser — nothing is uploaded.',
+    description: 'Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API.',
+    seoDescription: 'Free online Content Hash Generator \u2014 Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. ',
     dependencies: "None",
   },
   {
@@ -7474,7 +8006,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hmac-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate HMAC signatures using a secret key and hash algorithm for API authentication.',
-    seoDescription: 'Free online HMAC Generator \u2014 Generate HMAC signatures using a secret key and hash algorithm for API authentication. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HMAC Generator \u2014 Generate HMAC signatures using a secret key and hash algorithm for API authentication. ',
     dependencies: "None",
   },
   {
@@ -7483,7 +8015,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ssl-tls-checker",
     category: "Developer" as ToolCategory,
     description: 'Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols.',
-    seoDescription: 'Free online SSL/TLS Checker \u2014 Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SSL/TLS Checker \u2014 Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. ',
     dependencies: "None",
   },
   {
@@ -7492,7 +8024,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-security-checker",
     category: "Developer" as ToolCategory,
     description: 'Scan HTTP response headers for security best practices like HSTS, X-Frame-Options, and CSP.',
-    seoDescription: 'Free online HTTP Security Checker \u2014 Scan HTTP response headers for security best practices. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Security Checker \u2014 Scan HTTP response headers for security best practices. ',
     dependencies: "None",
   },
   {
@@ -7501,7 +8033,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jwt-inspector",
     category: "Developer" as ToolCategory,
     description: 'Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details.',
-    seoDescription: 'Free online JWT Inspector \u2014 Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JWT Inspector \u2014 Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. ',
     dependencies: "None",
   },
   {
@@ -7510,7 +8042,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "content-security-policy-generator",
     category: "Developer" as ToolCategory,
     description: 'Build a Content Security Policy header by selecting directives and allowed sources.',
-    seoDescription: 'Free online Content Security Policy Generator \u2014 Build a Content Security Policy header by selecting directives and allowed sources. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Content Security Policy Generator \u2014 Build a Content Security Policy header by selecting directives and allowed sources. ',
     dependencies: "None",
   },
   {
@@ -7519,7 +8051,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "subnet-calculator",
     category: "Developer" as ToolCategory,
     description: 'Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges.',
-    seoDescription: 'Free online Subnet Calculator \u2014 Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Subnet Calculator \u2014 Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. ',
     dependencies: "None",
   },
   {
@@ -7528,7 +8060,34 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "subnet-visualizer",
     category: "Developer" as ToolCategory,
     description: 'Visualize IP subnet divisions with a hierarchical tree view for network planning.',
-    seoDescription: 'Free online Subnet Visualizer \u2014 Visualize IP subnet divisions with a hierarchical tree view for network planning. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Subnet Visualizer \u2014 Visualize IP subnet divisions with a hierarchical tree view for network planning. ',
+    dependencies: "None",
+  },
+  {
+    id: "912b",
+    name: "IPv4 Address Converter",
+    slug: "ip-address-converter",
+    category: "Developer" as ToolCategory,
+    description: 'Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats.',
+    seoDescription: 'Free online IPv4 Address Converter \u2014 Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats. ',
+    dependencies: "None",
+  },
+  {
+    id: "912c",
+    name: "IP Range Expander",
+    slug: "ip-range-expander",
+    category: "Developer" as ToolCategory,
+    description: 'Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules.',
+    seoDescription: 'Free online IP Range Expander \u2014 Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. ',
+    dependencies: "None",
+  },
+  {
+    id: "912d",
+    name: "IPv6 ULA Generator",
+    slug: "ipv6-ula-generator",
+    category: "Developer" as ToolCategory,
+    description: 'Generate random IPv6 Unique Local Addresses (ULA) for internal network use.',
+    seoDescription: 'Free online IPv6 ULA Generator \u2014 Generate random IPv6 Unique Local Addresses (ULA) for internal network use. ',
     dependencies: "None",
   },
   {
@@ -7537,7 +8096,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dns-lookup-generator",
     category: "Developer" as ToolCategory,
     description: 'Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records.',
-    seoDescription: 'Free online DNS Lookup Generator \u2014 Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online DNS Lookup Generator \u2014 Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. ',
     dependencies: "None",
   },
   {
@@ -7546,7 +8105,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cors-inspector",
     category: "Developer" as ToolCategory,
     description: 'Analyze CORS headers to identify cross-origin request configuration issues.',
-    seoDescription: 'Free online CORS Inspector \u2014 Analyze CORS headers to identify cross-origin request configuration issues. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CORS Inspector \u2014 Analyze CORS headers to identify cross-origin request configuration issues. ',
     dependencies: "None",
   },
   {
@@ -7555,7 +8114,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cors-header-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate CORS headers for your API by configuring allowed origins, methods, and headers.',
-    seoDescription: 'Free online CORS Header Generator \u2014 Generate CORS headers by configuring allowed origins, methods, and headers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CORS Header Generator \u2014 Generate CORS headers by configuring allowed origins, methods, and headers. ',
     dependencies: "None",
   },
   {
@@ -7564,7 +8123,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "env-file-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate .env file templates with configurable variable names and default values.',
-    seoDescription: 'Free online Env File Generator \u2014 Generate .env file templates with configurable variable names and default values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Env File Generator \u2014 Generate .env file templates with configurable variable names and default values. ',
     dependencies: "None",
   },
   {
@@ -7573,7 +8132,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "env-file-parser",
     category: "Developer" as ToolCategory,
     description: 'Parse and validate .env files to detect missing variables, syntax errors, and duplicates.',
-    seoDescription: 'Free online Env File Parser \u2014 Parse and validate .env files to detect missing variables, syntax errors, and duplicates. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Env File Parser \u2014 Parse and validate .env files to detect missing variables, syntax errors, and duplicates. ',
     dependencies: "None",
   },
   {
@@ -7582,7 +8141,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cve-lookup",
     category: "Developer" as ToolCategory,
     description: 'Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search.',
-    seoDescription: 'Free online CVE Lookup \u2014 Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CVE Lookup \u2014 Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. ',
     dependencies: "None",
   },
   {
@@ -7591,7 +8150,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sql-injection-detector",
     category: "Developer" as ToolCategory,
     description: 'Analyze SQL queries for common injection patterns and parameterization issues.',
-    seoDescription: 'Free online SQL Injection Detector \u2014 Analyze SQL queries for common injection patterns and parameterization issues. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SQL Injection Detector \u2014 Analyze SQL queries for common injection patterns and parameterization issues. ',
     dependencies: "None",
   },
   {
@@ -7600,7 +8159,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xss-protection-checker",
     category: "Developer" as ToolCategory,
     description: 'Scan HTML/JavaScript code for reflected, stored, and DOM-based XSS vulnerabilities.',
-    seoDescription: 'Free online XSS Protection Checker \u2014 Scan HTML/JavaScript for reflected, stored, and DOM-based XSS vulnerabilities. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XSS Protection Checker \u2014 Scan HTML/JavaScript for reflected, stored, and DOM-based XSS vulnerabilities. ',
     dependencies: "None",
   },
   {
@@ -7609,7 +8168,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csrf-token-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate cryptographically secure CSRF tokens with configurable length and encoding.',
-    seoDescription: 'Free online CSRF Token Generator \u2014 Generate cryptographically secure CSRF tokens with configurable length and encoding. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSRF Token Generator \u2014 Generate cryptographically secure CSRF tokens with configurable length and encoding. ',
     dependencies: "None",
   },
   {
@@ -7618,7 +8177,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "oauth2-debugger",
     category: "Developer" as ToolCategory,
     description: 'Debug and decode OAuth2 tokens, authorization codes, and refresh token flows.',
-    seoDescription: 'Free online OAuth2 Debugger \u2014 Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OAuth2 Debugger \u2014 Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. ',
     dependencies: "None",
   },
   {
@@ -7627,7 +8186,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "saml-decoder",
     category: "Developer" as ToolCategory,
     description: 'Decode and inspect SAML assertions and responses for SSO troubleshooting.',
-    seoDescription: 'Free online SAML Decoder \u2014 Decode and inspect SAML assertions and responses for SSO troubleshooting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SAML Decoder \u2014 Decode and inspect SAML assertions and responses for SSO troubleshooting. ',
     dependencies: "None",
   },
   {
@@ -7636,7 +8195,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csp-policy-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate Content Security Policy headers against W3C spec and common pitfalls.',
-    seoDescription: 'Free online CSP Policy Validator \u2014 Validate Content Security Policy headers against W3C spec and common pitfalls. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSP Policy Validator \u2014 Validate Content Security Policy headers against W3C spec and common pitfalls. ',
     dependencies: "None",
   },
   {
@@ -7645,7 +8204,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tls-cipher-checker",
     category: "Developer" as ToolCategory,
     description: 'Check which TLS ciphers and protocol versions are supported by a server.',
-    seoDescription: 'Free online TLS Cipher Checker \u2014 Check which TLS ciphers and protocol versions are supported. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TLS Cipher Checker \u2014 Check which TLS ciphers and protocol versions are supported. ',
     dependencies: "None",
   },
   {
@@ -7654,7 +8213,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ip-reputation-checker",
     category: "Developer" as ToolCategory,
     description: 'Check an IP address against known threat intelligence and blacklist databases.',
-    seoDescription: 'Free online IP Reputation Checker \u2014 Check an IP address against known threat intelligence and blacklist databases. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online IP Reputation Checker \u2014 Check an IP address against known threat intelligence and blacklist databases. ',
     dependencies: "None",
   },
   {
@@ -7663,7 +8222,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "url-sanitizer",
     category: "Developer" as ToolCategory,
     description: 'Sanitize URLs by removing tracking parameters and normalizing the URL structure.',
-    seoDescription: 'Free online URL Sanitizer \u2014 Sanitize URLs by removing tracking parameters and normalizing the URL structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online URL Sanitizer \u2014 Sanitize URLs by removing tracking parameters and normalizing the URL structure. ',
     dependencies: "None",
   },
   {
@@ -7672,7 +8231,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ssl-certificate-decoder",
     category: "Developer" as ToolCategory,
     description: 'Decode and view SSL certificate details including subject, issuer, and validity period.',
-    seoDescription: 'Free online SSL Certificate Decoder \u2014 Decode and view SSL certificate details including subject, issuer, and validity period. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SSL Certificate Decoder \u2014 Decode and view SSL certificate details including subject, issuer, and validity period. ',
     dependencies: "None",
   },
   {
@@ -7681,7 +8240,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "subdomain-finder",
     category: "Developer" as ToolCategory,
     description: 'Discover subdomains for a given domain using common wordlists and patterns.',
-    seoDescription: 'Free online Subdomain Finder \u2014 Discover subdomains for a given domain using common wordlists and patterns. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Subdomain Finder \u2014 Discover subdomains for a given domain using common wordlists and patterns. ',
     dependencies: "None",
   },
   {
@@ -7690,7 +8249,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "email-format-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate email addresses for correct format, disposable domains, and MX record existence.',
-    seoDescription: 'Free online Email Validator \u2014 Validate email addresses for correct format, disposable domains, and MX record existence. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Email Validator \u2014 Validate email addresses for correct format, disposable domains, and MX record existence. ',
     dependencies: "None",
   },
   {
@@ -7699,7 +8258,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "syntax-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate code syntax across multiple languages including JSON, XML, and JavaScript.',
-    seoDescription: 'Free online Syntax Validator \u2014 Validate code syntax across multiple languages including JSON, XML, and JavaScript. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Syntax Validator \u2014 Validate code syntax across multiple languages including JSON, XML, and JavaScript. ',
     dependencies: "None",
   },
   {
@@ -7708,7 +8267,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "yaml-syntax-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate YAML syntax, check for indentation errors, and preview the parsed structure.',
-    seoDescription: 'Free online YAML Validator \u2014 Validate YAML syntax, check for indentation errors, and preview the parsed structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online YAML Validator \u2014 Validate YAML syntax, check for indentation errors, and preview the parsed structure. ',
     dependencies: "None",
   },
   {
@@ -7717,7 +8276,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "acv-calculator",
     category: "Finance" as ToolCategory,
     description: 'Calculate Annual Contract Value (ACV) by dividing total contract value by the contract term in years.',
-    seoDescription: 'Free online Annual Contract Value (ACV) Calculator \u2014 Calculate ACV by dividing total contract value by the contract term in years. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Annual Contract Value (ACV) Calculator \u2014 Calculate ACV by dividing total contract value by the contract term in years. ',
     dependencies: "None",
   },
   {
@@ -7726,7 +8285,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ascii-table-generator",
     category: "Text" as ToolCategory,
     description: 'Generate ASCII art tables from CSV or tabular text data with customizable formatting.',
-    seoDescription: 'Free online ASCII Table Generator \u2014 Generate ASCII art tables from CSV or tabular text data. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ASCII Table Generator \u2014 Generate ASCII art tables from CSV or tabular text data. ',
     dependencies: "None",
   },
   {
@@ -7735,7 +8294,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "git-commit-linter",
     category: "Developer" as ToolCategory,
     description: 'Validate git commit messages against the Conventional Commits specification.',
-    seoDescription: 'Free online Git Commit Linter \u2014 Validate git commit messages against the Conventional Commits specification. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Git Commit Linter \u2014 Validate git commit messages against the Conventional Commits specification. ',
     dependencies: "None",
   },
   {
@@ -7744,7 +8303,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gitignore-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.',
-    seoDescription: 'Free online .gitignore Generator \u2014 Generate .gitignore files by selecting languages, frameworks, and tools. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online .gitignore Generator \u2014 Generate .gitignore files by selecting languages, frameworks, and tools. ',
     dependencies: "None",
   },
   {
@@ -7753,7 +8312,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "hours-to-minutes-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert hours and minutes to total minutes for time tracking and scheduling.',
-    seoDescription: 'Free online Hours to Minutes Converter \u2014 Convert hours and minutes to total minutes for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Hours to Minutes Converter \u2014 Convert hours and minutes to total minutes for time tracking and scheduling. ',
     dependencies: "None",
   },
   {
@@ -7762,7 +8321,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "parquet-to-csv-converter",
     category: "Converter" as ToolCategory,
     description: 'Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats.',
-    seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. ',
     dependencies: "None",
   },
   {
@@ -7771,7 +8330,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "saas-payback-period",
     category: "Finance" as ToolCategory,
     description: 'Calculate SaaS customer payback period by dividing CAC by monthly revenue per customer.',
-    seoDescription: 'Free online SaaS Payback Period Calculator \u2014 Calculate payback period by dividing CAC by monthly revenue per customer. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SaaS Payback Period Calculator \u2014 Calculate payback period by dividing CAC by monthly revenue per customer. ',
     dependencies: "None",
   },
   {
@@ -7780,7 +8339,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "saas-quick-ratio",
     category: "Finance" as ToolCategory,
     description: 'Calculate SaaS Quick Ratio from new, expansion, reactivation, churned, and contraction MRR.',
-    seoDescription: 'Free online SaaS Quick Ratio Calculator \u2014 Calculate Quick Ratio from new, expansion, reactivation, churned, and contraction MRR. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SaaS Quick Ratio Calculator \u2014 Calculate Quick Ratio from new, expansion, reactivation, churned, and contraction MRR. ',
     dependencies: "None",
   },
   {
@@ -7789,7 +8348,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "saas-rule-of-40",
     category: "Finance" as ToolCategory,
     description: 'Calculate the Rule of 40 score by combining revenue growth rate and profit margin.',
-    seoDescription: 'Free online SaaS Rule of 40 Calculator \u2014 Calculate the Rule of 40 score by combining revenue growth rate and profit margin. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SaaS Rule of 40 Calculator \u2014 Calculate the Rule of 40 score by combining revenue growth rate and profit margin. ',
     dependencies: "None",
   },
   {
@@ -7798,7 +8357,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "swift-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format Swift source code with proper indentation and spacing for readability.',
-    seoDescription: 'Free online Swift Formatter \u2014 Format Swift source code with proper indentation and spacing for readability. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Swift Formatter \u2014 Format Swift source code with proper indentation and spacing for readability. ',
     dependencies: "None",
   },
   {
@@ -7807,7 +8366,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "temperature-converter",
     category: "Converter" as ToolCategory,
     description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly.',
-    seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
     dependencies: "None",
   },
   {
@@ -7816,7 +8375,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-docx",
     category: "PDF" as ToolCategory,
     description: 'Simulate PDF to DOCX conversion with estimated output size and format details.',
-    seoDescription: 'Free online PDF to DOCX Converter \u2014 Simulate PDF to Word conversion with estimated output size and format details. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to DOCX Converter \u2014 Simulate PDF to Word conversion with estimated output size and format details. ',
     dependencies: "None",
   },
   {
@@ -7825,7 +8384,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pdf-to-txt",
     category: "PDF" as ToolCategory,
     description: 'Extract plain text from PDF files with estimated output size and extraction details.',
-    seoDescription: 'Free online PDF to TXT Extractor \u2014 Extract plain text from PDF files with estimated output size. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PDF to TXT Extractor \u2014 Extract plain text from PDF files with estimated output size. ',
     dependencies: "None",
   },
   {
@@ -7850,7 +8409,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aes-encrypt",
     category: "Developer",
     description: 'Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored.',
-    seoDescription: 'Free online AES Encrypt — Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AES Encrypt — Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. ',
     dependencies: "CryptoJS",
   },
   {
@@ -7859,7 +8418,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "aes-decrypt",
     category: "Developer",
     description: 'Decrypt AES-encrypted ciphertext back to plain text using the original passphrase.',
-    seoDescription: 'Free online AES Decrypt — Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online AES Decrypt — Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. ',
     dependencies: "CryptoJS",
   },
   {
@@ -7868,7 +8427,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-header-analyzer",
     category: "Developer",
     description: 'Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure.',
-    seoDescription: 'Free online HTTP Header Analyzer — Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Header Analyzer — Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. ',
     dependencies: "None",
   },
   {
@@ -7877,7 +8436,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-headers-generator",
     category: "Developer",
     description: 'Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns.',
-    seoDescription: 'Free online HTTP Headers Generator — Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Headers Generator — Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. ',
     dependencies: "None",
   },
   {
@@ -7886,7 +8445,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-cache-header-generator",
     category: "Developer",
     description: 'Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options.',
-    seoDescription: 'Free online HTTP Cache Header Generator — Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Cache Header Generator — Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. ',
     dependencies: "None",
   },
   {
@@ -7895,7 +8454,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-status-code-checker",
     category: "Developer",
     description: 'Look up HTTP status codes by number — view description, label, and response class (informational, success, redirect, client error, server error).',
-    seoDescription: 'Free online HTTP Status Code Checker — Look up HTTP status codes by number — view description, label, and response class. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Status Code Checker — Look up HTTP status codes by number — view description, label, and response class. ',
     dependencies: "None",
   },
   {
@@ -7904,7 +8463,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "eslint-config-generator",
     category: "Developer",
     description: 'Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules.',
-    seoDescription: 'Free online ESLint Config Generator — Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online ESLint Config Generator — Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. ',
     dependencies: "None",
   },
   {
@@ -7913,7 +8472,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "http-retry-policy-builder",
     category: "Developer",
     description: 'Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients.',
-    seoDescription: 'Free online HTTP Retry Policy Builder — Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online HTTP Retry Policy Builder — Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. ',
     dependencies: "None",
   },
   {
@@ -7922,7 +8481,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "triangle-area-calculator",
     category: "Calculator",
     description: 'Calculate the area of a triangle given base and height using the formula 0.5 × base × height.',
-    seoDescription: 'Free online Triangle Area Calculator — Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Triangle Area Calculator — Calculate the area of a triangle given base and height using the formula 0.5 × base × height. ',
     dependencies: "None",
   },
   {
@@ -7931,7 +8490,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "gas-mileage-calculator",
     category: "Calculator",
     description: 'Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed.',
-    seoDescription: 'Free online Gas Mileage Calculator — Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Gas Mileage Calculator — Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. ',
     dependencies: "None",
   },
   {
@@ -7940,7 +8499,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "calorie-tracker",
     category: "Health",
     description: 'Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day.',
-    seoDescription: 'Free online Calorie Tracker — Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Calorie Tracker — Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day. ',
     dependencies: "None",
   },
   {
@@ -7949,7 +8508,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "waist-to-hip-ratio-calculator",
     category: "Health",
     description: 'Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender.',
-    seoDescription: 'Free online Waist-to-Hip Ratio Calculator — Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Waist-to-Hip Ratio Calculator — Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. ',
     dependencies: "None",
   },
 
@@ -7959,7 +8518,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "tsv-csv-converter",
     category: "Utility",
     description: 'Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting.',
-    seoDescription: 'Free online TSV ↔ CSV Converter — Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online TSV ↔ CSV Converter — Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. ',
     dependencies: "None",
   },
   {
@@ -7968,7 +8527,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-toon-converter",
     category: "Converter",
     description: 'Convert JSON objects into a human-readable Toon format using → arrows instead of colons.',
-    seoDescription: 'Free online JSON → Toon Converter — Convert JSON objects into a human-readable Toon format using → arrows instead of colons. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON → Toon Converter — Convert JSON objects into a human-readable Toon format using → arrows instead of colons. ',
     dependencies: "None",
   },
   {
@@ -7977,7 +8536,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-data-cleaner",
     category: "Utility",
     description: 'Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing).',
-    seoDescription: 'Free online CSV Data Cleaner — Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Data Cleaner — Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). ',
     dependencies: "None",
   },
   {
@@ -7986,7 +8545,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-statistics",
     category: "Utility",
     description: 'Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns.',
-    seoDescription: 'Free online CSV Statistics — Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Statistics — Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. ',
     dependencies: "None",
   },
   {
@@ -7995,7 +8554,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-html-table-converter",
     category: "Converter",
     description: 'Bidirectional converter between CSV data and HTML table markup with live preview.',
-    seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. ',
     dependencies: "None",
   },
   {
@@ -8004,7 +8563,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "yaml-validator",
     category: "Developer",
     description: 'Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments.',
-    seoDescription: 'Free online YAML Validator — Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online YAML Validator — Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. ',
     dependencies: "None",
   },
   {
@@ -8013,7 +8572,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "duplicate-word-remover",
     category: "SEO" as ToolCategory,
     description: 'Remove duplicate words from text while preserving first occurrence and original order. For removing duplicate lines, use Text Deduplicator.',
-    seoDescription: 'Free online Duplicate Word Remover — Remove duplicate words from text while preserving first occurrence and original order. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Duplicate Word Remover — Remove duplicate words from text while preserving first occurrence and original order. ',
     dependencies: "None",
   },
   {
@@ -8022,7 +8581,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-cleaner",
     category: "SEO" as ToolCategory,
     description: 'Normalize whitespace, trim lines, remove excess newlines, and clean up messy text with one click.',
-    seoDescription: 'Free online Text Cleaner — Normalize whitespace, trim lines, remove excess newlines, and clean up messy text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Cleaner — Normalize whitespace, trim lines, remove excess newlines, and clean up messy text. ',
     dependencies: "None",
   },
   {
@@ -8031,7 +8590,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "text-splitter",
     category: "SEO" as ToolCategory,
     description: 'Split text by any delimiter and get numbered parts. Perfect for parsing CSV-like data and structured text.',
-    seoDescription: 'Free online Text Splitter — Split text by any delimiter and get numbered parts. Perfect for parsing CSV-like data and structured text. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text Splitter — Split text by any delimiter and get numbered parts. Perfect for parsing CSV-like data and structured text. ',
     dependencies: "None",
   },
   {
@@ -8040,7 +8599,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "trailing-space-remover",
     category: "SEO" as ToolCategory,
     description: 'Remove trailing whitespace from every line in your text. Essential for code cleanup and formatting.',
-    seoDescription: 'Free online Trailing Space Remover — Remove trailing whitespace from every line. Essential for code cleanup and formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Trailing Space Remover — Remove trailing whitespace from every line. Essential for code cleanup and formatting. ',
     dependencies: "None",
   },
   {
@@ -8049,7 +8608,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "canonical-url-checker",
     category: "SEO" as ToolCategory,
     description: 'Validate canonical URLs — check protocol, domain, path, query parameters, fragments, trailing slash, and www prefix for SEO best practices.',
-    seoDescription: 'Free online Canonical URL Checker — Validate canonical URLs for SEO. Checks protocol, domain, path, query params, fragments, trailing slash, and www prefix. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Canonical URL Checker — Validate canonical URLs for SEO. Checks protocol, domain, path, query params, fragments, trailing slash, and www prefix. ',
     dependencies: "None",
   },
   {
@@ -8058,7 +8617,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "breadcrumb-schema-generator",
     category: "SEO" as ToolCategory,
     description: 'Generate JSON-LD BreadcrumbList structured data from a list of page names and URLs. Add breadcrumb schema to your website for better SEO.',
-    seoDescription: 'Free online Breadcrumb Schema Generator — Generate JSON-LD BreadcrumbList structured data from page names and URLs for better SEO. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Breadcrumb Schema Generator — Generate JSON-LD BreadcrumbList structured data from page names and URLs for better SEO. ',
     dependencies: "None",
   },
   {
@@ -8067,7 +8626,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "utm-builder",
     category: "SEO" as ToolCategory,
     description: 'Build campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters.',
-    seoDescription: 'Free online UTM Builder — Build campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online UTM Builder — Build campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. ',
     dependencies: "None",
   },
   // ── Promoted from NetworkUtilityKit (IDs 982-988) ──
@@ -8077,7 +8636,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "port-number-lookup",
     category: "Developer" as ToolCategory,
     description: 'Look up service names for TCP/UDP port numbers — well-known (0-1023), registered (1024-49151), and dynamic/private (49152-65535) ranges. Includes 25+ common services.',
-    seoDescription: 'Free online Port Number Lookup — Look up service names for TCP/UDP port numbers with 25+ common services. Well-known, registered, and dynamic ranges. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Port Number Lookup — Look up service names for TCP/UDP port numbers with 25+ common services. Well-known, registered, and dynamic ranges. ',
     dependencies: "None",
   },
   {
@@ -8086,7 +8645,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "user-agent-parser",
     category: "Developer" as ToolCategory,
     description: 'Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, Edge, and the client OS from request headers.',
-    seoDescription: 'Free online User-Agent Parser — Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, and Edge. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online User-Agent Parser — Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, and Edge. ',
     dependencies: "None",
   },
   {
@@ -8095,7 +8654,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "query-string-parser",
     category: "Developer" as ToolCategory,
     description: 'Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values and displays them in a readable JSON format.',
-    seoDescription: 'Free online Query String Parser — Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Query String Parser — Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values. ',
     dependencies: "None",
   },
   {
@@ -8104,7 +8663,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sse-event-formatter",
     category: "Developer" as ToolCategory,
     description: 'Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event fields including data, event, id, and retry directives.',
-    seoDescription: 'Free online SSE Event Formatter — Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event, data, id, and retry fields. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SSE Event Formatter — Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event, data, id, and retry fields. ',
     dependencies: "None",
   },
   {
@@ -8113,7 +8672,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rate-limit-header-parser",
     category: "Developer" as ToolCategory,
     description: 'Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. Supports standard X-RateLimit-Limit, X-RateLimit-Remaining, and X-RateLimit-Reset formats.',
-    seoDescription: 'Free online Rate Limit Header Parser — Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rate Limit Header Parser — Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. ',
     dependencies: "None",
   },
   {
@@ -8122,7 +8681,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pricing-tier-builder",
     category: "Developer" as ToolCategory,
     description: 'Build pricing tier descriptions from JSON input. Supports free/pro tiers with configurable pricing (monthly/annual), user limits, and feature lists.',
-    seoDescription: 'Free online Pricing Tier Builder — Build pricing tier descriptions from JSON. Supports free/pro tiers, pricing, user limits, and feature lists. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Pricing Tier Builder — Build pricing tier descriptions from JSON. Supports free/pro tiers, pricing, user limits, and feature lists. ',
     dependencies: "None",
   },
   {
@@ -8131,7 +8690,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ssh-key-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate RSA, ECDSA, and Ed25519 SSH key pairs with proper OpenSSH format output. RSA uses RSASSA-PKCS1-v1_5 (2048-bit). ECDSA supports P-256 and P-384. Ed25519 uses a pure-JS implementation (no server). Public keys paste directly into ~/.ssh/authorized_keys.',
-    seoDescription: 'Free online SSH Key Generator — Generate RSA (2048-bit), ECDSA (P-256/P-384), and Ed25519 SSH key pairs. OpenSSH format public keys for authorized_keys. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SSH Key Generator — Generate RSA (2048-bit), ECDSA (P-256/P-384), and Ed25519 SSH key pairs. OpenSSH format public keys for authorized_keys. ',
     dependencies: "None",
   },
   // ── Promoted from ScannerToolkit (IDs 989-1002) ──
@@ -8141,7 +8700,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "secret-scanner",
     category: "Developer" as ToolCategory,
     description: 'Scan text and code for leaked secrets and credentials. Detects Stripe keys, GitHub tokens, Slack tokens, Google API keys, AWS keys, OpenAI keys, JWT tokens, private keys, and config passwords.',
-    seoDescription: 'Free online Secret Scanner — Scan text and code for leaked API keys, tokens, and credentials. Detects Stripe, GitHub, Slack, AWS, Google, OpenAI, and more. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Secret Scanner — Scan text and code for leaked API keys, tokens, and credentials. Detects Stripe, GitHub, Slack, AWS, Google, OpenAI, and more. ',
     dependencies: "None",
   },
   {
@@ -8150,7 +8709,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "security-txt-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate a security.txt file for your website following RFC 9116 standard. Specify contact email, security policy URL, encryption key, and expiry date for vulnerability disclosure.',
-    seoDescription: 'Free online security.txt Generator — Generate RFC 9116 security.txt files with contact, policy, encryption, and expiry fields for vulnerability disclosure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online security.txt Generator — Generate RFC 9116 security.txt files with contact, policy, encryption, and expiry fields for vulnerability disclosure. ',
     dependencies: "None",
   },
   {
@@ -8159,7 +8718,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "robots-txt-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate robots.txt syntax — checks User-agent, Allow, Disallow, Sitemap, Crawl-delay directives. Identifies unknown directives, missing colons, and missing User-agent declarations.',
-    seoDescription: 'Free online robots.txt Validator — Validate robots.txt directives: User-agent, Allow, Disallow, Sitemap. Detects syntax errors and missing declarations. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online robots.txt Validator — Validate robots.txt directives: User-agent, Allow, Disallow, Sitemap. Detects syntax errors and missing declarations. ',
     dependencies: "None",
   },
   {
@@ -8168,7 +8727,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dns-record-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate DNS record syntax for A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, and PTR records. Checks IP format for A/AAAA records and domain validity for MX records.',
-    seoDescription: 'Free online DNS Record Validator — Validate DNS records: A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, PTR. Checks IP format and domain validity. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online DNS Record Validator — Validate DNS records: A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, PTR. Checks IP format and domain validity. ',
     dependencies: "None",
   },
   {
@@ -8177,7 +8736,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "docker-compose-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate docker-compose.yml files — checks YAML syntax, correct indentation, tab usage, and the presence of the services section. Identifies mixed indentation and formatting issues.',
-    seoDescription: 'Free online Docker Compose Validator — Validate docker-compose.yml YAML syntax, indentation, services section, and formatting. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Docker Compose Validator — Validate docker-compose.yml YAML syntax, indentation, services section, and formatting. ',
     dependencies: "None",
   },
   {
@@ -8186,7 +8745,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "dockerfile-linter",
     category: "Developer" as ToolCategory,
     description: 'Lint Dockerfiles against 20+ valid instructions (FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK, SHELL). Detects unknown instructions and missing FROM declaration.',
-    seoDescription: 'Free online Dockerfile Linter — Lint Dockerfiles with 20+ valid instructions. Checks FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Dockerfile Linter — Lint Dockerfiles with 20+ valid instructions. Checks FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK. ',
     dependencies: "None",
   },
   {
@@ -8195,7 +8754,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "htaccess-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.',
-    seoDescription: 'Free online htaccess Validator — Validate .htaccess files with 30+ Apache directives. Checks RewriteRule, ErrorDocument, Header, Options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online htaccess Validator — Validate .htaccess files with 30+ Apache directives. Checks RewriteRule, ErrorDocument, Header, Options. ',
     dependencies: "None",
   },
   {
@@ -8204,7 +8763,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "kubernetes-yaml-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate Kubernetes YAML manifests — checks for required fields (apiVersion, kind, metadata), correct YAML structure, indentation, and tab usage.',
-    seoDescription: 'Free online Kubernetes YAML Validator — Validate K8s manifests for apiVersion, kind, metadata, and YAML structure correctness. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Kubernetes YAML Validator — Validate K8s manifests for apiVersion, kind, metadata, and YAML structure correctness. ',
     dependencies: "None",
   },
   {
@@ -8213,7 +8772,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "github-actions-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate GitHub Actions workflow YAML — checks for workflow name, on trigger, jobs section, and correct YAML structure. Identifies formatting issues and missing fields.',
-    seoDescription: 'Free online GitHub Actions Validator — Validate workflow YAML for name, on trigger, jobs section, and YAML structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GitHub Actions Validator — Validate workflow YAML for name, on trigger, jobs section, and YAML structure. ',
     dependencies: "None",
   },
   {
@@ -8222,7 +8781,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "geojson-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.',
-    seoDescription: 'Free online GeoJSON Validator — Validate GeoJSON for feature, geometry, point coordinates, FeatureCollection, and bbox correctness. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online GeoJSON Validator — Validate GeoJSON for feature, geometry, point coordinates, FeatureCollection, and bbox correctness. ',
     dependencies: "None",
   },
   {
@@ -8231,7 +8790,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "rss-feed-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate RSS 2.0 and Atom feed XML — checks root element, channel/feed, title, link, description, items/entries, and XML declaration.',
-    seoDescription: 'Free online RSS Feed Validator — Validate RSS 2.0 and Atom feeds for root element, channel, title, link, description, items, and XML declaration. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online RSS Feed Validator — Validate RSS 2.0 and Atom feeds for root element, channel, title, link, description, items, and XML declaration. ',
     dependencies: "None",
   },
   {
@@ -8240,7 +8799,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "sitemap-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate XML sitemaps — checks urlset/sitemapindex root, loc entries, XML declaration, and URL count. Supports standard sitemap protocol formatting.',
-    seoDescription: 'Free online Sitemap Validator — Validate XML sitemaps for urlset, loc entries, XML declaration, and sitemap protocol compliance. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Sitemap Validator — Validate XML sitemaps for urlset, loc entries, XML declaration, and sitemap protocol compliance. ',
     dependencies: "None",
   },
   {
@@ -8249,7 +8808,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "xpath-validator",
     category: "Developer" as ToolCategory,
     description: 'Test XPath expressions against XML or HTML documents. Evaluates queries and displays matching results in real time. Checks XML parsing errors before evaluation.',
-    seoDescription: 'Free online XPath Validator — Test XPath expressions against XML/HTML. Evaluate queries and see matching results instantly. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online XPath Validator — Test XPath expressions against XML/HTML. Evaluate queries and see matching results instantly. ',
     dependencies: "None",
   },
   {
@@ -8258,7 +8817,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cron-expression-validator",
     category: "Developer" as ToolCategory,
     description: 'Validate cron expressions with field-level range checking. Supports 5-field format with step values, ranges, lists, and wildcards. Detects out-of-bounds values and provides readable descriptions.',
-    seoDescription: 'Free online Cron Expression Validator — Validate cron expressions with field-level range checking, step values, lists, and wildcards. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Cron Expression Validator — Validate cron expressions with field-level range checking, step values, lists, and wildcards. ',
     dependencies: "None",
   },
 
@@ -8269,7 +8828,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-date-generator",
     category: "Developer",
     description: 'Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles.',
-    seoDescription: 'Free online Random Date Generator — Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Date Generator — Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8278,7 +8837,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-time-generator",
     category: "Developer",
     description: 'Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range.',
-    seoDescription: 'Free online Random Time Generator — Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Time Generator — Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8287,7 +8846,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-ip-generator",
     category: "Developer",
     description: 'Generate random IPv4 and IPv6 addresses for network testing, development, and security research.',
-    seoDescription: 'Free online Random IP Generator — Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random IP Generator — Generate random IPv4 and IPv6 addresses for network testing, development, and security research. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8296,7 +8855,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-user-agent-generator",
     category: "Developer",
     description: 'Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers.',
-    seoDescription: 'Free online Random User-Agent Generator — Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random User-Agent Generator — Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8305,7 +8864,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-sentence-generator",
     category: "Developer",
     description: 'Generate random sentences from a curated word list, useful for placeholder text and content generation.',
-    seoDescription: 'Free online Random Sentence Generator — Generate random sentences from a curated word list, useful for placeholder text and content generation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Sentence Generator — Generate random sentences from a curated word list, useful for placeholder text and content generation. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8314,7 +8873,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "random-word-generator",
     category: "Developer",
     description: 'Generate random words from a curated vocabulary list for brainstorming, naming, and word games.',
-    seoDescription: 'Free online Random Word Generator — Generate random words from a curated vocabulary list for brainstorming, naming, and word games. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Random Word Generator — Generate random words from a curated vocabulary list for brainstorming, naming, and word games. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8323,7 +8882,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pin-generator",
     category: "Developer",
     description: 'Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens.',
-    seoDescription: 'Free online PIN Generator — Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online PIN Generator — Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. ',
     dependencies: "Crypto API",
   },
   {
@@ -8332,7 +8891,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "license-key-generator",
     category: "Developer",
     description: 'Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options.',
-    seoDescription: 'Free online License Key Generator — Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online License Key Generator — Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8341,7 +8900,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-placeholder-generator",
     category: "Developer",
     description: 'Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping.',
-    seoDescription: 'Free online Image Placeholder Generator — Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Image Placeholder Generator — Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. ',
     dependencies: "Canvas API",
   },
   {
@@ -8350,7 +8909,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "logo-placeholder-generator",
     category: "Developer",
     description: 'Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups.',
-    seoDescription: 'Free online Logo Placeholder Generator — Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Logo Placeholder Generator — Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. ',
     dependencies: "Canvas API",
   },
   {
@@ -8359,7 +8918,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "open-graph-generator",
     category: "Developer",
     description: 'Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image.',
-    seoDescription: 'Free online Open Graph Generator — Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Open Graph Generator — Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8368,7 +8927,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "oauth-pkce-generator",
     category: "Developer",
     description: 'Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256.',
-    seoDescription: 'Free online OAuth PKCE Generator — Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online OAuth PKCE Generator — Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. ',
     dependencies: "Crypto API (Web Crypto)",
   },
 
@@ -8379,7 +8938,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "cooking-measurement-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert cooking measurements between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp not found in the volume converter.',
-    seoDescription: 'Free online Cooking Measurement Converter — Convert between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Cooking Measurement Converter — Convert between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8388,7 +8947,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "fuel-consumption-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Essential for comparing vehicle efficiency across metric and imperial systems.',
-    seoDescription: 'Free online Fuel Consumption Converter — Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Fuel Consumption Converter — Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8397,7 +8956,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "paper-size-converter",
     category: "Utility" as ToolCategory,
     description: 'Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Understand how many sheets of one size fit into another.',
-    seoDescription: 'Free online Paper Size Converter — Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Paper Size Converter — Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8406,7 +8965,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "clothing-size-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\'s apparel size conversions with international standards.',
-    seoDescription: 'Free online Clothing Size Converter — Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Clothing Size Converter — Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8415,7 +8974,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "large-text-viewer",
     category: "Utility" as ToolCategory,
     description: 'View and search large text files (logs, CSVs, JSON) up to 100K characters in the browser with text search and match counting. No file upload needed — all client-side.',
-    seoDescription: 'Free online Large Text File Viewer — View and search large text files up to 100K characters with text search. All client-side, no uploads. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Large Text File Viewer — View and search large text files up to 100K characters with text search. All client-side, no uploads. ',
     dependencies: "FileReader API",
   },
   {
@@ -8424,7 +8983,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avro-schema-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate Apache Avro schemas from a JSON field definition. Configure namespace, record name, and field types — outputs valid Avro schema JSON.',
-    seoDescription: 'Free online Avro Schema Generator — Generate Apache Avro schemas from JSON field definitions. Configure namespace, record name, and field types. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Avro Schema Generator — Generate Apache Avro schemas from JSON field definitions. Configure namespace, record name, and field types. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8433,7 +8992,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "avro-to-json-sample",
     category: "Developer" as ToolCategory,
     description: 'Generate sample JSON data from an Avro schema definition. Auto-generates realistic values based on field types (string, int, float, boolean).',
-    seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8442,7 +9001,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ical-event-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate .ics calendar files for any event. Set summary, dates, times, description, and location — download or copy ready-to-import iCal (RFC 5545) format.',
-    seoDescription: 'Free online iCal Event Generator — Generate .ics calendar files for any event with summary, dates, times, description, and location. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online iCal Event Generator — Generate .ics calendar files for any event with summary, dates, times, description, and location. ',
     dependencies: "Vanilla JS",
   },
 
@@ -8453,7 +9012,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "column-extractor",
     category: "Utility" as ToolCategory,
     description: 'Extract specific columns from CSV data by header name. Select the columns you need and get a clean CSV with only your chosen fields.',
-    seoDescription: 'Free online CSV Column Extractor — Extract specific columns from CSV data by header name, output only the fields you need. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Column Extractor — Extract specific columns from CSV data by header name, output only the fields you need. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8462,7 +9021,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "column-renamer",
     category: "Utility" as ToolCategory,
     description: 'Rename CSV column headers in bulk using old:new mapping. Quickly relabel columns for data standardization and reporting.',
-    seoDescription: 'Free online CSV Column Renamer — Rename CSV column headers in bulk using old:new mapping. Relabel columns for data standardization. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Column Renamer — Rename CSV column headers in bulk using old:new mapping. Relabel columns for data standardization. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8471,7 +9030,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "data-type-converter",
     category: "Utility" as ToolCategory,
     description: 'Convert CSV column data types between number, string, integer, and float. Ensure consistent typing across your dataset.',
-    seoDescription: 'Free online CSV Data Type Converter — Convert CSV column data to number, string, integer, or float. Consistent typing across your dataset. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Data Type Converter — Convert CSV column data to number, string, integer, or float. Consistent typing across your dataset. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8480,7 +9039,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "deduplicator",
     category: "Utility" as ToolCategory,
     description: 'Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets.',
-    seoDescription: 'Free online CSV Deduplicator — Remove duplicate rows from CSV data based on a specific column. Keep only unique values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Deduplicator — Remove duplicate rows from CSV data based on a specific column. Keep only unique values. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8489,7 +9048,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "format-validator",
     category: "Utility" as ToolCategory,
     description: 'Validate CSV formatting — detect inconsistent column counts, quoting errors, and malformed rows. Get detailed issue reports.',
-    seoDescription: 'Free online CSV Format Validator — Validate CSV formatting, detect inconsistent columns, quoting errors, and malformed rows. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Format Validator — Validate CSV formatting, detect inconsistent columns, quoting errors, and malformed rows. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8498,7 +9057,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-merger",
     category: "Utility" as ToolCategory,
     description: 'Merge two CSV files on a common column. Join datasets horizontally by matching key values, like a SQL JOIN for your spreadsheets.',
-    seoDescription: 'Free online CSV Merger — Merge two CSV files on a common column. Join datasets horizontally by matching key values. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Merger — Merge two CSV files on a common column. Join datasets horizontally by matching key values. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8507,7 +9066,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "null-value-handler",
     category: "Utility" as ToolCategory,
     description: 'Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration.',
-    seoDescription: 'Free online Null Value Handler — Replace empty/null/NA values in CSV data with a custom fill value. Clean datasets for analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Null Value Handler — Replace empty/null/NA values in CSV data with a custom fill value. Clean datasets for analysis. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8516,7 +9075,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "pivot-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables.',
-    seoDescription: 'Free online CSV Pivot Generator — Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Pivot Generator — Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8525,7 +9084,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "row-filter",
     category: "Utility" as ToolCategory,
     description: 'Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.',
-    seoDescription: 'Free online CSV Row Filter — Filter CSV rows by column value with exact match, contains, and not-equal operators. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Row Filter — Filter CSV rows by column value with exact match, contains, and not-equal operators. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8534,7 +9093,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-row-sorter",
     category: "Utility" as ToolCategory,
     description: 'Sort CSV rows by any column in ascending or descending order. Quickly organize your data for analysis and reporting.',
-    seoDescription: 'Free online CSV Row Sorter — Sort CSV rows by any column in ascending or descending order. Organize data for analysis. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Row Sorter — Sort CSV rows by any column in ascending or descending order. Organize data for analysis. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8543,7 +9102,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-splitter",
     category: "Utility" as ToolCategory,
     description: 'Split a large CSV file into multiple smaller files by page count. Divide datasets into manageable chunks for processing.',
-    seoDescription: 'Free online CSV Splitter — Split large CSV files into multiple smaller files by page count. Divide datasets into manageable chunks. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Splitter — Split large CSV files into multiple smaller files by page count. Divide datasets into manageable chunks. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8552,7 +9111,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-transpose",
     category: "Utility" as ToolCategory,
     description: 'Transpose CSV data — swap rows and columns. Convert horizontal data to vertical and vice versa for reformatting.',
-    seoDescription: 'Free online CSV Transpose — Swap rows and columns in CSV data. Convert horizontal to vertical and vice versa. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Transpose — Swap rows and columns in CSV data. Convert horizontal to vertical and vice versa. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8561,7 +9120,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-to-markdown",
     category: "Utility" as ToolCategory,
     description: 'Convert CSV data into a clean GitHub-flavored Markdown table. Perfect for documentation, README files, and wiki pages.',
-    seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8570,7 +9129,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-to-ndjson",
     category: "Utility" as ToolCategory,
     description: 'Convert CSV data to Newline Delimited JSON (NDJSON). Each CSV row becomes a separate JSON object on its own line.',
-    seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8579,7 +9138,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-to-sql",
     category: "Utility" as ToolCategory,
     description: 'Generate SQL INSERT statements from CSV data. Specify a table name and get executable SQL for database import.',
-    seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8588,7 +9147,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-escape-unescape",
     category: "Developer" as ToolCategory,
     description: 'Escape or unescape JSON strings — convert special characters to their JSON-safe escaped equivalents and back.',
-    seoDescription: 'Free online JSON Escape/Unescape — Escape or unescape JSON strings. Convert special characters to safe equivalents and back. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Escape/Unescape — Escape or unescape JSON strings. Convert special characters to safe equivalents and back. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8597,7 +9156,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-flattener",
     category: "Developer" as ToolCategory,
     description: 'Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.',
-    seoDescription: 'Free online JSON Flattener — Flatten nested JSON into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Flattener — Flatten nested JSON into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8606,7 +9165,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-ld-generator",
     category: "Developer" as ToolCategory,
     description: 'Wrap JSON data in valid JSON-LD (Linked Data) structure with @context and @type. Generate schema.org-compatible structured data.',
-    seoDescription: 'Free online JSON-LD Generator — Wrap JSON data in valid JSON-LD with @context and @type. Schema.org-compatible structured data. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON-LD Generator — Wrap JSON data in valid JSON-LD with @context and @type. Schema.org-compatible structured data. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8615,7 +9174,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "merge-patch-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON objects. Show exactly what changed.',
-    seoDescription: 'Free online Merge Patch Generator — Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Merge Patch Generator — Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8624,7 +9183,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-schema-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate a JSON Schema (draft-07) from sample JSON data. Auto-detect types, required fields, and nested structures.',
-    seoDescription: 'Free online JSON Schema Generator — Generate JSON Schema (draft-07) from sample JSON. Auto-detect types and nested structures. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Schema Generator — Generate JSON Schema (draft-07) from sample JSON. Auto-detect types and nested structures. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8633,7 +9192,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-size-analyzer",
     category: "Developer" as ToolCategory,
     description: 'Analyze JSON payload size, character count, key count, and nesting depth. Understand the size profile of your data.',
-    seoDescription: 'Free online JSON Size Analyzer — Analyze JSON payload size, character count, key count, and nesting depth. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON Size Analyzer — Analyze JSON payload size, character count, key count, and nesting depth. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8642,7 +9201,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-to-zod",
     category: "Developer" as ToolCategory,
     description: 'Generate Zod validation schemas from sample JSON data. Create TypeScript-first runtime validation for your API responses.',
-    seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8651,7 +9210,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jwk-generator",
     category: "Developer" as ToolCategory,
     description: 'Generate JSON Web Keys (JWK) with RSA key sizes of 2048 or 4096 bits. Export public and private keys in JWK format.',
-    seoDescription: 'Free online JWK Generator — Generate JSON Web Keys (JWK) with 2048 or 4096 bit RSA. Export public/private key pairs. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JWK Generator — Generate JSON Web Keys (JWK) with 2048 or 4096 bit RSA. Export public/private key pairs. ',
     dependencies: "Web Crypto API",
   },
   {
@@ -8660,7 +9219,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "jsonl-formatter",
     category: "Developer" as ToolCategory,
     description: 'Format JSON Lines (JSONL) data — pretty-print each line as formatted JSON for readability and debugging.',
-    seoDescription: 'Free online JSONL Formatter — Format JSON Lines data, pretty-print each line as formatted JSON for readability. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSONL Formatter — Format JSON Lines data, pretty-print each line as formatted JSON for readability. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8669,7 +9228,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "ndjson-to-json",
     category: "Developer" as ToolCategory,
     description: 'Convert Newline Delimited JSON (NDJSON) into a standard JSON array. Wrap each line as an array element.',
-    seoDescription: 'Free online NDJSON to JSON Array — Convert Newline Delimited JSON into a standard JSON array format. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online NDJSON to JSON Array — Convert Newline Delimited JSON into a standard JSON array format. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8678,7 +9237,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "json-to-url-params",
     category: "Developer" as ToolCategory,
     description: 'Convert JSON objects into URL query string parameters. Transform `{"key":"val"}` to `key=val` format for API calls.',
-    seoDescription: 'Free online JSON to URL Parameters — Convert JSON objects into URL query string parameters for API calls and web requests. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online JSON to URL Parameters — Convert JSON objects into URL query string parameters for API calls and web requests. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -8687,7 +9246,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "csv-json-row-generator",
     category: "Utility" as ToolCategory,
     description: 'Generate realistic dummy data as CSV rows or JSON objects. Configure count (1-50) for test data, demos, and prototyping.',
-    seoDescription: 'Free online CSV Row / JSON Generator — Generate realistic dummy data as CSV rows or JSON objects for test data and prototyping. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online CSV Row / JSON Generator — Generate realistic dummy data as CSV rows or JSON objects for test data and prototyping. ',
     dependencies: "Vanilla JS",
   },
 ];
@@ -8719,23 +9278,23 @@ export interface SeoPermutation {
 
 export const SEO_PERMUTATIONS: SeoPermutation[] = [
   // Tier 1 — Built as real tools (each has a wrapper component in DynamicModuleWrapper)
-  { slug: "bulk-png-to-webp", name: "Bulk PNG to WebP", category: "Image", description: "Convert all your PNG images to modern WebP format in one batch. Shrinks file sizes by 30% without losing quality — essential for Pagespeed scores.", seoDescription: 'Free online Bulk PNG to WebP — Convert all your PNG images to modern WebP format in one batch. Shrinks file sizes by 30% without losing quality — essential for Pagespeed scores. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-webp-avif-modernizer" },
-  { slug: "bulk-jpg-to-webp", name: "Bulk JPG to WebP", category: "Image", description: "Batch convert JPEG images to WebP format for faster websites. Keeps directory structure intact and generates fallback PNGs automatically.", seoDescription: 'Free online Bulk JPG to WebP — Batch convert JPEG images to WebP format for faster websites. Keeps directory structure intact and generates fallback PNGs automatically. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-webp-avif-modernizer" },
-  { slug: "bulk-webp-to-png", name: "Bulk WebP to PNG", category: "Image", description: "Need WebP files back to PNG? Convert entire folders of WebP images to universal PNG format in one click — zero quality loss.", seoDescription: 'Free online Bulk WebP to PNG — Need WebP files back to PNG? Convert entire folders of WebP images to universal PNG format in one click — zero quality loss. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-webp-avif-modernizer" },
-  { slug: "bulk-png-to-jpg", name: "Bulk PNG to JPG", category: "Image", description: "Batch convert PNG images to JPEG format. Perfect when you need smaller file sizes for email or web upload at the cost of transparency.", seoDescription: 'Free online Bulk PNG to JPG — Batch convert PNG images to JPEG format. Perfect when you need smaller file sizes for email or web upload at the cost of transparency. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-image-compressor" },
-  { slug: "bulk-jpg-to-png", name: "Bulk JPG to PNG", category: "Image", description: "Convert JPEG photos to lossless PNG format in bulk. Essential for graphics needing transparency or when preserving every pixel matters.", seoDescription: 'Free online Bulk JPG to PNG — Convert JPEG photos to lossless PNG format in bulk. Essential for graphics needing transparency or when preserving every pixel matters. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-image-compressor" },
-  { slug: "bulk-resize-images", name: "Bulk Resize Images", category: "Image", description: "Resize hundreds of photos to exact pixel dimensions in one pass. Photographers standardize client galleries before delivery with this tool.", seoDescription: 'Free online Bulk Resize Images — Resize hundreds of photos to exact pixel dimensions in one pass. Photographers standardize client galleries before delivery with this tool. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-image-resizer" },
-  { slug: "bulk-compress-png", name: "Bulk PNG Compressor", category: "Image", description: "Compress dozens of PNG files at once with smart lossy compression. E-commerce sellers optimize product images while keeping transparency.", seoDescription: 'Free online Bulk PNG Compressor — Compress dozens of PNG files at once with smart lossy compression. E-commerce sellers optimize product images while keeping transparency. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-image-compressor" },
-  { slug: "bulk-compress-jpg", name: "Bulk JPG Compressor", category: "Image", description: "Batch compress JPEG photos to smaller file sizes with consistent quality. Bloggers and web devs optimize entire image libraries before deployment.", seoDescription: 'Free online Bulk JPG Compressor — Batch compress JPEG photos to smaller file sizes with consistent quality. Bloggers and web devs optimize entire image libraries before deployment. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-image-compressor" },
-  { slug: "bulk-compress-pdf", name: "Bulk PDF Compressor", category: "PDF", description: "Reduce file size of multiple PDFs at once by compressing images and removing metadata. Law firms preparing document batches for email.", seoDescription: 'Free online Bulk PDF Compressor — Reduce file size of multiple PDFs at once by compressing images and removing metadata. Law firms preparing document batches for email. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-pdf-size-reducer" },
-  { slug: "bulk-pdf-to-jpg", name: "Bulk PDF to JPG", category: "PDF", description: "Convert each page of multiple PDFs to high-res JPG images. Presenters extracting slides from decks for social media or thumbnails.", seoDescription: 'Free online Bulk PDF to JPG — Convert each page of multiple PDFs to high-res JPG images. Presenters extracting slides from decks for social media or thumbnails. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-pdf-data-extractor" },
-  { slug: "bulk-mp3-to-wav", name: "Bulk MP3 to WAV", category: "Audio", description: "Convert your MP3 music library to lossless WAV format in one batch. Audio editors and podcasters need WAV for professional production workflows.", seoDescription: 'Free online Bulk MP3 to WAV — Convert your MP3 music library to lossless WAV format in one batch. Audio editors and podcasters need WAV for professional production workflows. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-audio-converter" },
-  { slug: "bulk-wav-to-mp3", name: "Bulk WAV to MP3", category: "Audio", description: "Batch compress WAV recordings to space-saving MP3 files. Podcasters shrinking raw studio recordings for distribution on Spotify and Apple Podcasts.", seoDescription: 'Free online Bulk WAV to MP3 — Batch compress WAV recordings to space-saving MP3 files. Podcasters shrinking raw studio recordings for distribution on Spotify and Apple Podcasts. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-audio-converter" },
-  { slug: "bulk-mkv-to-mp4", name: "Bulk MKV to MP4", category: "Video", description: "Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues.", seoDescription: 'Free online Bulk MKV to MP4 — Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-video-compressor" },
-  { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", seoDescription: 'Free online Bulk MP4 Compressor — Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-video-compressor" },
-  { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", seoDescription: 'Free online Bulk Photo Metadata Remover — Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-exif-stripper-injector" },
-  { slug: "bulk-url-checker", name: "Bulk URL Checker", category: "SEO", description: "Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site.", seoDescription: 'Free online Bulk URL Checker — Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-url-status-checker" },
-  { slug: "bulk-link-checker", name: "Bulk Link Checker", category: "SEO", description: "Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings.", seoDescription: 'Free online Bulk Link Checker — Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings. Everything runs locally in your browser — nothing is uploaded.', parentSlug: "bulk-url-status-checker" },
+  { slug: "bulk-png-to-webp", name: "Bulk PNG to WebP", category: "Image", description: "Convert all your PNG images to modern WebP format in one batch. Shrinks file sizes by 30% without losing quality — essential for Pagespeed scores.", seoDescription: 'Free online Bulk PNG to WebP — Convert all your PNG images to modern WebP format in one batch. Shrinks file sizes by 30% without losing quality — essential for Pagespeed scores. ', parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-jpg-to-webp", name: "Bulk JPG to WebP", category: "Image", description: "Batch convert JPEG images to WebP format for faster websites. Keeps directory structure intact and generates fallback PNGs automatically.", seoDescription: 'Free online Bulk JPG to WebP — Batch convert JPEG images to WebP format for faster websites. Keeps directory structure intact and generates fallback PNGs automatically. ', parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-webp-to-png", name: "Bulk WebP to PNG", category: "Image", description: "Need WebP files back to PNG? Convert entire folders of WebP images to universal PNG format in one click — zero quality loss.", seoDescription: 'Free online Bulk WebP to PNG — Need WebP files back to PNG? Convert entire folders of WebP images to universal PNG format in one click — zero quality loss. ', parentSlug: "bulk-webp-avif-modernizer" },
+  { slug: "bulk-png-to-jpg", name: "Bulk PNG to JPG", category: "Image", description: "Batch convert PNG images to JPEG format. Perfect when you need smaller file sizes for email or web upload at the cost of transparency.", seoDescription: 'Free online Bulk PNG to JPG — Batch convert PNG images to JPEG format. Perfect when you need smaller file sizes for email or web upload at the cost of transparency. ', parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-jpg-to-png", name: "Bulk JPG to PNG", category: "Image", description: "Convert JPEG photos to lossless PNG format in bulk. Essential for graphics needing transparency or when preserving every pixel matters.", seoDescription: 'Free online Bulk JPG to PNG — Convert JPEG photos to lossless PNG format in bulk. Essential for graphics needing transparency or when preserving every pixel matters. ', parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-resize-images", name: "Bulk Resize Images", category: "Image", description: "Resize hundreds of photos to exact pixel dimensions in one pass. Photographers standardize client galleries before delivery with this tool.", seoDescription: 'Free online Bulk Resize Images — Resize hundreds of photos to exact pixel dimensions in one pass. Photographers standardize client galleries before delivery with this tool. ', parentSlug: "bulk-image-resizer" },
+  { slug: "bulk-compress-png", name: "Bulk PNG Compressor", category: "Image", description: "Compress dozens of PNG files at once with smart lossy compression. E-commerce sellers optimize product images while keeping transparency.", seoDescription: 'Free online Bulk PNG Compressor — Compress dozens of PNG files at once with smart lossy compression. E-commerce sellers optimize product images while keeping transparency. ', parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-compress-jpg", name: "Bulk JPG Compressor", category: "Image", description: "Batch compress JPEG photos to smaller file sizes with consistent quality. Bloggers and web devs optimize entire image libraries before deployment.", seoDescription: 'Free online Bulk JPG Compressor — Batch compress JPEG photos to smaller file sizes with consistent quality. Bloggers and web devs optimize entire image libraries before deployment. ', parentSlug: "bulk-image-compressor" },
+  { slug: "bulk-compress-pdf", name: "Bulk PDF Compressor", category: "PDF", description: "Reduce file size of multiple PDFs at once by compressing images and removing metadata. Law firms preparing document batches for email.", seoDescription: 'Free online Bulk PDF Compressor — Reduce file size of multiple PDFs at once by compressing images and removing metadata. Law firms preparing document batches for email. ', parentSlug: "bulk-pdf-size-reducer" },
+  { slug: "bulk-pdf-to-jpg", name: "Bulk PDF to JPG", category: "PDF", description: "Convert each page of multiple PDFs to high-res JPG images. Presenters extracting slides from decks for social media or thumbnails.", seoDescription: 'Free online Bulk PDF to JPG — Convert each page of multiple PDFs to high-res JPG images. Presenters extracting slides from decks for social media or thumbnails. ', parentSlug: "bulk-pdf-data-extractor" },
+  { slug: "bulk-mp3-to-wav", name: "Bulk MP3 to WAV", category: "Audio", description: "Convert your MP3 music library to lossless WAV format in one batch. Audio editors and podcasters need WAV for professional production workflows.", seoDescription: 'Free online Bulk MP3 to WAV — Convert your MP3 music library to lossless WAV format in one batch. Audio editors and podcasters need WAV for professional production workflows. ', parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-wav-to-mp3", name: "Bulk WAV to MP3", category: "Audio", description: "Batch compress WAV recordings to space-saving MP3 files. Podcasters shrinking raw studio recordings for distribution on Spotify and Apple Podcasts.", seoDescription: 'Free online Bulk WAV to MP3 — Batch compress WAV recordings to space-saving MP3 files. Podcasters shrinking raw studio recordings for distribution on Spotify and Apple Podcasts. ', parentSlug: "bulk-audio-converter" },
+  { slug: "bulk-mkv-to-mp4", name: "Bulk MKV to MP4", category: "Video", description: "Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues.", seoDescription: 'Free online Bulk MKV to MP4 — Batch remux MKV video files to universally compatible MP4 without re-encoding. Smart TV and iPhone users solving format compatibility issues. ', parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-compress-mp4", name: "Bulk MP4 Compressor", category: "Video", description: "Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings.", seoDescription: 'Free online Bulk MP4 Compressor — Compress multiple MP4 videos at once for email, web, or messaging. YouTube studios batch-optimize daily uploads with consistent CRF settings. ', parentSlug: "bulk-video-compressor" },
+  { slug: "bulk-strip-exif", name: "Bulk Photo Metadata Remover", category: "Privacy", description: "Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload.", seoDescription: 'Free online Bulk Photo Metadata Remover — Strip GPS coordinates, camera data, and hidden metadata from batches of photos. Real estate agents protect client privacy before upload. ', parentSlug: "bulk-exif-stripper-injector" },
+  { slug: "bulk-url-checker", name: "Bulk URL Checker", category: "SEO", description: "Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site.", seoDescription: 'Free online Bulk URL Checker — Check the status of hundreds of URLs at once — find broken links, redirects, and dead pages across your entire website. Essential for SEO audits before Google crawls your site. ', parentSlug: "bulk-url-status-checker" },
+  { slug: "bulk-link-checker", name: "Bulk Link Checker", category: "SEO", description: "Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings.", seoDescription: 'Free online Bulk Link Checker — Scan and validate every link on your site in one batch. Catch 404s, broken backlinks, and redirect chains before they hurt your search rankings. ', parentSlug: "bulk-url-status-checker" },
 ];
 // Add SEO landing pages to registry (programmatic) — MUST happen before toolsRegistry map
   for (const p of SEO_PERMUTATIONS) {
@@ -8778,7 +9337,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "ratio-simplifier": { category: "calculator", slug: "ratio-calculator" },
   "proportional-calculator": { category: "calculator", slug: "proportion-calculator" },
   "ideal-weight-calculator": { category: "health", slug: "ideal-weight-calc" },
-  "calorie-calculator": { category: "health", slug: "calorie-intake-calculator" },
   "ovulation-calculator": { category: "health", slug: "ovulation-tracker" },
   "mp4-to-gif": { category: "video", slug: "video-to-gif" },
   "webm-to-gif": { category: "video", slug: "video-to-gif" },
