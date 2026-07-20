@@ -46,7 +46,6 @@ export default function ColorAndStyleKit() {
           <ToolCard name="Color Palette Generator" slug="color-palette-generator" desc="Generate harmonious color palettes from a base color." icon={Palette} />
           <ToolCard name="Color Shades &amp; Tints" slug="color-shades-tints" desc="Generate shades and tints by varying lightness." icon={Palette} />
           <ToolCard name="Contrast Ratio Checker" slug="contrast-ratio-checker" desc="Check color contrast against WCAG AA/AAA standards." icon={Palette} />
-          <ToolCard name="Color Blindness Simulator" slug="color-blindness-simulator" desc="Simulate protanopia, deuteranopia, and tritanopia." icon={Palette} path="/design/color-blindness-simulator/" />
         </div>
       </div>
 

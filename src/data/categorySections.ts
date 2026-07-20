@@ -320,7 +320,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "random-number-generator", "password-generator",
         "qr-code-generator", "barcode-generator",
-        "bulk-qr-code-generator", "wheel-of-names",
+ "wheel-of-names",
         "counter-tool", "list-randomizer", "list-sorter",
         "decision-maker", "yes-no-picker",
         "coin-flipper", "dice-roller", "dice-roller-tool",
@@ -420,9 +420,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Everyday Utilities",
       description: "Speed test, privacy cleaner, resume builder, bank statement analyzer, and more.",
       slugs: [
-        "speed-test", "privacy-cleaner", "resume-builder",
+        "speed-test", "resume-builder",
         "bank-statement-analyser", "ip-address-lookup",
-        "whatsapp-toolkit", "benchmark-builder",
+        "benchmark-builder",
         "numeronym-generator", "mac-vendor-lookup",
         "wifi-qr-generator", "phone-parser", "otp-generator",
         "slugify-tool", "emoji-picker",
@@ -476,7 +476,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Text-to-speech, speech-to-text, and Apple Music preview extraction.",
       slugs: [
         "text-to-speech-tts", "speech-to-text",
-        "apple-music-preview-extractor",
+
       ],
     },
   ],
@@ -523,8 +523,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "background-remover", "object-remover",
         "image-enhancer", "photo-retoucher",
         "image-colorizer", "rotate-image",
-        "blur-face", "unblur-sharpen",
-        "bg-changer", "bulk-bg-changer", "ai-bg-changer",
+ "unblur-sharpen",
+        "bg-changer",  
         "collage-maker", "chart-maker",
         "gif-editor", "gif-compressor", "gif-resizer",
         "color-converter",
@@ -583,7 +583,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "url-to-pdf", "eml-to-pdf",
         "document-converter",
         "bulk-image-to-pdf",
-        "generic-pdf-processor",
+
       ],
     },
     {
@@ -634,7 +634,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "video-converter", "video-converter-tool",
         "video-to-gif", "mp4-to-gif", "webm-to-gif",
         "video-to-mp3",
-        "gif-to-mp4",
       ],
     },
     {
@@ -642,7 +641,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Video Trimmers",
       description: "Cut, trim, and crop video files to extract the segments or dimensions you need.",
       slugs: [
-        "video-trimmer", "crop-video",
+        "crop-video",
       ],
     },
     {
@@ -652,9 +651,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "video-speed-changer", "reverse-video", "mute-video",
         "video-stabilizer", "video-filters", "video-screenshot",
-        "video-watermark-adder",
+
         "screen-recorder",
-        "subtitle-translator", "subtitle-generator",
+        "subtitle-translator", 
         "bulk-video-subtitle-burner", "bulk-subtitle-time-shifter",
       ],
     },
@@ -890,7 +889,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "hex-to-rgb-converter",
         "color-style-toolkit",
         "color-palette-generator", "color-shades-tints",
-        "contrast-ratio-checker", "color-blindness-simulator",
+        "contrast-ratio-checker", 
         "media-query-generator",
       ],
     },
@@ -966,7 +965,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Crop Aadhaar photos, mask card details, verify PAN, and manage identity documents.",
       slugs: [
         "passport-photo-india", "aadhaar-wallet-cropper",
-        "pan-card-resizer", "aadhaar-card-masker",
+        "pan-card-resizer", 
         "pan-verification",
         "indian-document-enhancer",
       ],
@@ -976,10 +975,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Finance & Tax Tools",
       description: "Calculate GST, look up GSTIN/IFSC, file ITR, and save on taxes.",
       slugs: [
-        "gst-invoice-generator", "itr-filing-helper",
-        "ifsc-code-lookup", "gstin-lookup",
+        "gstin-lookup",
+
         "tax-saving-calculator", "seller-profit-calculator",
-        "bank-statement-analyser",
       ],
     },
     {
@@ -990,7 +988,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "marriage-biodata-maker", "rental-agreement-generator",
         "complaint-letter-generator",
         "voter-id-form-helper",
-        "india-pincode-finder",
+
       ],
     },
     {
@@ -998,7 +996,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "India-Specific Converters",
       description: "Convert CGPA to percentage, calculate Indian age, generate regional fonts, and more.",
       slugs: [
-        "cgpa-to-percentage-converter", "indian-age-calculator",
+ "indian-age-calculator",
         "hindi-regional-font-generator",
         "indian-voice-transcriber",
       ],

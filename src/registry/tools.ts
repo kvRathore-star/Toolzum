@@ -131,7 +131,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.',
     dependencies: "Google Cloud Translation API",
-    seoDescription: 'Free AI translator online — translate text between 100+ languages instantly. Automatic language detection. No sign-up needed, works in your browser.',
+    seoDescription: 'Free AI translator online — translate text between 100+ languages instantly. Automatic language detection. Uses cloud-based processing.',
   },
 
   {
@@ -509,8 +509,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Crop Image",
     slug: "crop-image",
     category: "Image",
-    description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like.',
-    seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset like. ',
+    description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes.',
+    seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes.',
     dependencies: "Cropper.js"
   },
   {
@@ -620,8 +620,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Audio to Text Transcription",
     slug: "audio-to-text-transcription",
     category: "Transcription",
-    description: 'Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs.',
-    seoDescription: 'Free online Audio to Text Transcription — Audio to Text Transcription converts spoken audio from uploaded files into editable text using browser-based speech APIs. ',
+    description: 'Audio to Text Transcription converts spoken audio from uploaded files into editable text.',
+    seoDescription: 'Free online Audio to Text Transcription — Convert spoken audio from uploaded files into editable text. Uses cloud-based processing.',
     dependencies: "Whisper API"
   },
   {
@@ -1452,8 +1452,8 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Podcast Transcription",
     slug: "podcast-transcription",
     category: "Transcription",
-    description: 'Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations.',
-    seoDescription: 'Free online Podcast Transcription — Podcast Transcription processes long-form audio files through browser-based speech recognition optimized for extended durations. ',
+    description: 'Podcast Transcription processes long-form audio files into text using speech recognition.',
+    seoDescription: 'Free online Podcast Transcription — Convert long-form podcast audio files into text. Uses cloud-based processing.',
     dependencies: "Whisper API"
   },
   {
@@ -1761,7 +1761,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "passport-photo-india",
     category: "indian-utilities",
     description: "3.5x4.5 cm cropper for Indian passport photos",
-    seoDescription: 'Free online Braille Translator — 3.5x4.5 cm cropper for Indian passport photos ',
+    seoDescription: 'Free online Passport Photo Maker (India) — 3.5x4.5 cm cropper for Indian passport photos.',
     dependencies: "Canvas API / react-cropper"
   },
   {
