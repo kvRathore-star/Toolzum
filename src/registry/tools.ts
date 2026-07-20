@@ -4700,15 +4700,6 @@ const rawToolsRegistry: ToolMetadata[] = [
     dependencies: "None",
   },
   {
-    id: "520",
-    name: "Developer Utilities",
-    slug: "dev-utilities",
-    category: "Developer",
-    description: 'Random port generator, chmod calculator (numeric/symbolic), Docker run to Compose converter, YAML formatter, and email address normalizer.',
-    seoDescription: 'Free online Developer Utilities — Random port generator, chmod calculator, Docker run to Compose converter, YAML formatter, and email normalizer. ',
-    dependencies: "None",
-  },
-  {
     id: "du-1",
     name: "Random Port Generator",
     slug: "random-port-generator",
@@ -4742,6 +4733,15 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.',
     seoDescription: 'Free online Email Normalizer — Normalize email addresses by removing dots, stripping +tags, and lowercasing. ',
+    dependencies: "Vanilla JS",
+  },
+  {
+    id: "du-5",
+    name: "YAML Re-indenter",
+    slug: "yaml-reindenter",
+    category: "Developer" as ToolCategory,
+    description: 'Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.',
+    seoDescription: 'Free online YAML Re-indenter — Clean up messy YAML with proper indentation, aligned colons, and normalized list formatting. ',
     dependencies: "Vanilla JS",
   },
   {
@@ -9340,5 +9340,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "generator-toolkit": { category: "developer", slug: "" },
   "converters-everyday-toolkit": { category: "converter", slug: "" },
   "data-toolkit": { category: "utility", slug: "" },
+  "dev-utilities": { category: "developer", slug: "" },
 };
 

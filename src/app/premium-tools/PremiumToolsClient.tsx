@@ -55,7 +55,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
     isIndiaFromIp().then(setIsIndia);
   }, []);
 
-  const proPrice = isIndia ? "₹749" : "$14.99";
+  const proPrice = isIndia ? "₹249" : "$14.99";
   const proPriceSuffix = isIndia ? "/month" : "/month, cancel anytime";
 
   const grouped = groupProTools(proTools);
