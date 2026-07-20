@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export default function GlobalError({
   error,
@@ -8,21 +8,16 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <html lang="en" className="h-full antialiased dark">
-      <body className="min-h-full flex flex-col items-center justify-center bg-[var(--bg-base)] p-8">
-        <div className="max-w-md text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-red-500/10 flex items-center justify-center">
-            <span className="text-red-500 text-3xl font-bold">!</span>
-          </div>
-          <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-3">
-            Something went wrong
-          </h1>
-          <p className="text-[var(--text-secondary)] mb-8 text-sm leading-relaxed">
-            A critical error occurred. Our team has been notified.
+    <html>
+      <body className="flex items-center justify-center min-h-screen bg-zinc-50 dark:bg-zinc-950">
+        <div className="text-center px-6">
+          <h1 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">Something went wrong</h1>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-6 max-w-md mx-auto">
+            An unexpected error occurred. Please try again.
           </p>
           <button
-            onClick={() => reset()}
-            className="px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors"
+            onClick={reset}
+            className="px-6 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold rounded-xl hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
           >
             Try again
           </button>

@@ -5,7 +5,6 @@ import { FileUploader } from '../FileUploader';
 import { Eye, Download, ShieldCheck, Zap, Sliders, Maximize2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
-import NextImage from "next/image";
 
 export default function AiImageUpscaler() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -248,10 +247,10 @@ export default function AiImageUpscaler() {
                 className="relative select-none w-full max-w-[450px] aspect-square border border-zinc-800 rounded-xl overflow-hidden bg-black cursor-ew-resize"
               >
                 {/* Right / Upscaled */}
-<NextImage
+<img
   src={upscaledUrl}
   alt="Processed result"
-  unoptimized={true}
+  
   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
 />
 
@@ -260,10 +259,10 @@ export default function AiImageUpscaler() {
                   className="absolute inset-y-0 left-0 overflow-hidden pointer-events-none"
                   style={{ width: `${sliderPos}%` }}
                 >
-<NextImage
+<img
   src={originalUrl || ''}
   alt="Uploaded image preview"
-  unoptimized={true}
+  
   className="absolute inset-0 w-[450px] h-[450px] max-w-none object-cover pointer-events-none"
 />
                 </div>
@@ -277,10 +276,10 @@ export default function AiImageUpscaler() {
             ) : (
               <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[280px] w-full max-w-[450px]">
                 {originalUrl && (
-<NextImage
+<img
   src={originalUrl}
   alt="Uploaded image preview"
-  unoptimized={true}
+  
   className="max-w-full max-h-full object-contain"
 />
                 )}

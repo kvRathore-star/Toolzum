@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Upload, Download, Sparkles, Move, Scale, RotateCw } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
-import Image from "next/image";
 
 export default function AiFaceSwap() {
   const [sourceImg, setSourceImg] = useState<string | null>(null);
@@ -124,7 +123,7 @@ export default function AiFaceSwap() {
       
       {/* Hidden helper images for canvas rendering */}
       {sourceImg && (
-<Image unoptimized={true} loading="lazy"
+<img  loading="lazy"
   ref={sourceImageRef}
   src={sourceImg}
   alt="Face preview"
@@ -134,7 +133,7 @@ export default function AiFaceSwap() {
 />
       )}
       {targetImg && (
-<Image unoptimized={true} loading="lazy"
+<img  loading="lazy"
   ref={targetImageRef}
   src={targetImg}
   alt="Face preview"
@@ -160,7 +159,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Source Face</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {sourceImg ? (
-                  <Image loading="lazy" src={sourceImg} alt="Face Source" unoptimized={true} width={48} height={48} className="w-12 h-12 object-cover rounded-full" />
+                  <img loading="lazy" src={sourceImg} alt="Face Source"  width={48} height={48} className="w-12 h-12 object-cover rounded-full" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}
@@ -173,7 +172,7 @@ export default function AiFaceSwap() {
               <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Target Background</label>
               <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {targetImg ? (
-                  <Image loading="lazy" src={targetImg} alt="Target Source" unoptimized={true} width={48} height={48} className="w-12 h-12 object-cover rounded-lg" />
+                  <img loading="lazy" src={targetImg} alt="Target Source"  width={48} height={48} className="w-12 h-12 object-cover rounded-lg" />
                 ) : (
                   <Upload className="w-6 h-6 text-zinc-400 mb-1" />
                 )}

@@ -103,7 +103,7 @@ export default function XmlSitemapGenerator() {
     if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) {
       inputUrl = 'https://' + inputUrl;
     }
-    try { new URL(inputUrl); } catch { toast.error('Invalid URL'); return; }
+    try { new URL(inputUrl); } catch (e) { console.error(e); toast.error('Invalid URL'); return; }
 
     abortRef.current = false;
     setState({ status: 'detecting', url: inputUrl });

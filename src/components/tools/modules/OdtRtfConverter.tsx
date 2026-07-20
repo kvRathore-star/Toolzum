@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { PDFDocument, PDFFont, StandardFonts, rgb } from 'pdf-lib';
+import type { PDFFont } from 'pdf-lib';
 import JSZip from 'jszip';
 
 function detectFileType(file: File): 'odt' | 'rtf' | null {
@@ -149,6 +149,7 @@ function wrapLines(runs: TextRun[], maxWidth: number, font: PDFFont, boldFont: P
 }
 
 async function renderPdf(options: RenderOptions): Promise<Uint8Array> {
+  const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
   const pdfDoc = await PDFDocument.create();
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);

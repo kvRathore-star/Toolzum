@@ -34,7 +34,7 @@ export default function ReelShortsMaker() {
       try {
         const { date, count } = JSON.parse(stored);
         setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
+      } catch (e) { console.error(e); setUsage(0); }
     }
   }, []);
 
@@ -77,7 +77,8 @@ export default function ReelShortsMaker() {
       if (usage + 1 >= DAILY_LIMIT) {
         toast(`Upgrade to Pro for unlimited Reel & Shorts crops.`, { icon: '👑' });
       }
-    } catch {
+    } catch (e) {
+      console.error(e);
       toast.error("Failed to crop. Ensure crop dimensions fit within original video bounds.");
     } finally { setIsProcessing(false); }
   };

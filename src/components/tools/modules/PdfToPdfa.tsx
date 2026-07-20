@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { PDFDocument } from 'pdf-lib';
-
 export default function PdfToPdfa() {
   const [file, setFile] = useState<File | null>(null);
   const [fileBytes, setFileBytes] = useState<ArrayBuffer | null>(null);
@@ -22,6 +20,7 @@ export default function PdfToPdfa() {
   const handleFileSelect = async (selectedFile: File) => {
     try {
       const arrayBuffer = await selectedFile.arrayBuffer();
+      const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(arrayBuffer);
       const title = pdfDoc.getTitle() || selectedFile.name.replace(/\.pdf$/i, '');
       const author = pdfDoc.getAuthor() || '';
@@ -48,6 +47,7 @@ export default function PdfToPdfa() {
 
     setIsProcessing(true);
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(fileBytes);
 
       if (metadata.title) pdfDoc.setTitle(metadata.title);

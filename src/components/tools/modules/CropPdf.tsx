@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { PDFDocument } from 'pdf-lib';
-
 const PRESETS = {
   a4: { label: 'A4 (210x297mm)', width: 595.28, height: 841.89 },
   letter: { label: 'Letter (8.5x11in)', width: 612, height: 792 },
@@ -33,6 +31,7 @@ export default function CropPdf() {
   const handleFileSelect = async (selectedFile: File) => {
     try {
       const arrayBuffer = await selectedFile.arrayBuffer();
+      const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(arrayBuffer);
       const totalPages = pdfDoc.getPageCount();
       setPageCount(totalPages);
@@ -58,6 +57,7 @@ export default function CropPdf() {
 
     setIsProcessing(true);
     try {
+      const { PDFDocument } = await import('pdf-lib');
       const pdfDoc = await PDFDocument.load(fileBytes);
       const pages = pdfDoc.getPages();
 

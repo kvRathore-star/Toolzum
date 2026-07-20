@@ -66,7 +66,7 @@ export function Base64ToJsonDecoder() {
       const dec = atob(input);
       const parsed = JSON.parse(dec);
       setOutput(JSON.stringify(parsed, null, 2));
-    } catch { toast.error('Invalid base64 or not JSON'); }
+    } catch (e) { console.error(e); toast.error('Invalid base64 or not JSON'); }
   };
 
   return (
@@ -90,7 +90,7 @@ export function HexTextConverter() {
     try {
       const bytes = input.match(/.{1,2}/g)?.map(b => parseInt(b, 16)) || [];
       setOutput(new TextDecoder().decode(new Uint8Array(bytes)));
-    } catch { toast.error('Invalid hex'); }
+    } catch (e) { console.error(e); toast.error('Invalid hex'); }
   };
 
   const textToHex = () => {

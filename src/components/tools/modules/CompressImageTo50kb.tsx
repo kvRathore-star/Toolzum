@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Image from "next/image";
 import { FileUploader } from '../FileUploader';
 import imageCompression from 'browser-image-compression';
 import { Download, RefreshCw, AlertTriangle, ShieldCheck, Zap } from 'lucide-react';
@@ -133,10 +132,10 @@ export default function CompressImageTo50kb() {
           <span className="text-xs font-bold text-zinc-500 uppercase block mb-3">Original Preview</span>
           <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {originalUrl && (
-              <Image
+              <img
                 src={originalUrl}
                 alt="Uploaded image preview"
-                unoptimized={true}
+                
                 width={800} height={600}
                 className="max-w-full max-h-full object-contain"
               />
@@ -160,10 +159,10 @@ export default function CompressImageTo50kb() {
           <span className="text-xs font-bold text-zinc-500 uppercase block mb-3">Compressed Output</span>
           <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {compressedUrl ? (
-              <Image
+              <img
                 src={compressedUrl}
                 alt="Processed result"
-                unoptimized={true}
+                
                 width={800} height={600}
                 className="max-w-full max-h-full object-contain"
               />

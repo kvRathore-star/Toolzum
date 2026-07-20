@@ -8,7 +8,7 @@ export default function UrlParser() {
 
   let parsed: URL | null = null;
   let error = '';
-  try { if (url.trim()) parsed = new URL(url.trim()); } catch { if (url.trim()) error = 'Invalid URL'; }
+  try { if (url.trim()) parsed = new URL(url.trim()); } catch (e) { console.error(e); if (url.trim()) error = 'Invalid URL'; }
 
   const parts = parsed ? [
     { label: 'Protocol', value: parsed.protocol },

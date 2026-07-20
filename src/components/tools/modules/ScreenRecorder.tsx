@@ -2,8 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import type { FFmpeg } from '@ffmpeg/ffmpeg';
 
 type Quality = '720p' | '1080p' | '1440p';
 
@@ -102,7 +101,8 @@ export default function ScreenRecorder() {
         try {
           audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
           tracks.push(...audioStream.getAudioTracks());
-        } catch {
+        } catch (e) {
+          console.error(e);
           toast.error('Microphone access was denied. Recording without audio.');
         }
       }
@@ -196,9 +196,11 @@ export default function ScreenRecorder() {
     setIsProcessing(true);
     setFfmpegProgress(0);
 
+    const { FFmpeg: FFmpegClass } = await import('@ffmpeg/ffmpeg');
+    const { fetchFile, toBlobURL } = await import('@ffmpeg/util');
     let ffmpeg: FFmpeg | null = null;
     try {
-      ffmpeg = new FFmpeg();
+      ffmpeg = new FFmpegClass();
 
       ffmpeg.on('progress', ({ progress }) => {
         setFfmpegProgress(Math.round(progress * 100));

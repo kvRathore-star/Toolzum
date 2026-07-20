@@ -371,7 +371,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to JPG",
     slug: "webp-to-jpg",
     category: "Image",
-    description: 'Convert WEBP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.'s modern format.',
+    description: 'Convert WEBP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -4264,7 +4264,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to JPG",
     slug: "gif-to-jpg",
     category: "Image",
-    description: 'Convert GIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.'s limited 256-color palette.',
+    description: 'Convert GIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -4334,7 +4334,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to MP3",
     slug: "aiff-to-mp3",
     category: "Audio",
-    description: 'Convert AIFF audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.'s AIFF audio files into space-saving MP3 format while preserving good audio quality.',
+    description: 'Convert AIFF audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false

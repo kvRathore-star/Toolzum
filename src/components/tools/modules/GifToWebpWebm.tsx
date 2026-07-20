@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import type { FFmpeg } from '@ffmpeg/ffmpeg';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 
@@ -24,7 +23,7 @@ export default function GifToWebpWebm() {
   const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const ffmpegRef = useRef<FFmpeg | null>(null);
 
   useEffect(() => {
     if (!file) return;
@@ -84,6 +83,11 @@ export default function GifToWebpWebm() {
 
   const loadFfmpeg = async () => {
     if (ffmpegLoaded) return;
+    const { FFmpeg } = await import('@ffmpeg/ffmpeg');
+    const { toBlobURL } = await import('@ffmpeg/util');
+    if (!ffmpegRef.current) {
+      ffmpegRef.current = new FFmpeg();
+    }
     const ffmpeg = ffmpegRef.current;
     ffmpeg.on('progress', ({ progress: p }) => {
       setProgress(Math.round(p * 100));
@@ -104,8 +108,9 @@ export default function GifToWebpWebm() {
     setOutputUrl2(null);
 
     try {
-      const ffmpeg = ffmpegRef.current;
+      const { fetchFile } = await import('@ffmpeg/util');
       await loadFfmpeg();
+      const ffmpeg = ffmpegRef.current!;
       await ffmpeg.writeFile('input.gif', await fetchFile(file));
 
       const scale = `scale=${gifInfo.width}:${gifInfo.height}:flags=lanczos`;

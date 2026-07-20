@@ -97,7 +97,8 @@ export default function AiChatPdf() {
       chunksRef.current = chunkText(text);
       setModelLoaded(true);
       toast.success(`Extracted ${text.length.toLocaleString()} characters from PDF`);
-    } catch {
+    } catch (e) {
+      console.error(e);
       toast.error('Failed to extract text from PDF. Ensure it is not scanned or image-only.');
     } finally {
       setIsProcessing(false);
@@ -114,7 +115,8 @@ export default function AiChatPdf() {
       setAnswer(ans);
       setConfidence(conf);
       setChatHistory(prev => [...prev, { question: q, answer: ans, confidence: conf }]);
-    } catch {
+    } catch (e) {
+      console.error(e);
       toast.error('Failed to process question');
     } finally {
       setIsLoading(false);

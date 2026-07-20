@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import NextImage from "next/image";
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -320,7 +319,7 @@ export default function ImageToIco() {
                   }
                 `}</style>
                 {preview && (
-                  <NextImage unoptimized={true} loading="lazy" src={preview} alt="Preview" width={iconSize} height={iconSize} className="drop-shadow-md rounded" />
+                  <img  loading="lazy" src={preview} alt="Preview" width={iconSize} height={iconSize} className="drop-shadow-md rounded" />
                 )}
               </div>
               <div className="text-xs text-zinc-500 mb-4">
@@ -335,8 +334,8 @@ export default function ImageToIco() {
             </div>
           ) : (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
-              <NextImage
-                unoptimized={true}
+              <img
+                
                 loading="lazy"
                 src={URL.createObjectURL(file)}
                 alt="Original"

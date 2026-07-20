@@ -36,7 +36,7 @@ export default function HtmlToJsx() {
         .replace(/\/>/g, ' />')
         .replace(/<!DOCTYPE[^>]*>/gi, '');
       setOutput(jsx);
-    } catch { setOutput(''); toast.error('Conversion failed'); }
+    } catch (e) { console.error(e); setOutput(''); toast.error('Conversion failed'); }
   };
 
   return (

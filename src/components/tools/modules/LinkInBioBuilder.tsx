@@ -3,7 +3,6 @@
 import React, { useState, useMemo } from 'react';
 import { Copy, Check, Download, Plus, Trash2, GripVertical, Image as ImageIcon, Link, Palette, Eye, Code, Smartphone, MoveUp, MoveDown, Globe, Camera, Video, Music, ShoppingBag, MessageCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import NextImage from "next/image";
 import { clipboardWrite } from "@/lib/clipboard";
 
 interface LinkItem {
@@ -158,7 +157,7 @@ ${linkCards}
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={() => document.getElementById('lib-profile-pic')?.click()}>
-                  {profileImage ? <NextImage loading="lazy" src={profileImage} alt="Profile photo" unoptimized={true} className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-zinc-400" style={{ paddingTop: '18px' }} />}
+                  {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-zinc-400" style={{ paddingTop: '18px' }} />}
                 </div>
                 <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="hidden" />
                 <div className="flex-1 space-y-2">
@@ -262,7 +261,7 @@ ${linkCards}
                 <div className="w-full max-w-[320px]" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
                   <div className="text-center mb-6">
                     <div className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden border-2" style={{ borderColor: accentColor }}>
-                      <NextImage loading="lazy" src={profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=${accentColor.replace('#', '')}&color=fff&size=80`} alt="Profile avatar" unoptimized={true} className="w-full h-full object-cover" />
+                      <img loading="lazy" src={profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=${accentColor.replace('#', '')}&color=fff&size=80`} alt="Profile avatar"  className="w-full h-full object-cover" />
                     </div>
                     <p className="text-white text-xl font-bold">{profileName}</p>
                     <p className="text-zinc-400 text-sm mt-1">{profileBio}</p>
