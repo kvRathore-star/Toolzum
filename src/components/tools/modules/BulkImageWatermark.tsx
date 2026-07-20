@@ -1,25 +1,32 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
-import { Upload, Download, Type, Image as ImageIcon, X, Loader2, AlertTriangle } from 'lucide-react';
+import { Upload, Download, Type, Image as ImageIcon, X, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { ProDownloadButton } from './ProDownloadButton';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import NextImage from "next/image";
+import { useBatchProgress } from '@/hooks/useBatchProgress';
+import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 
 const POSITIONS = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'] as const;
 
 export default function BulkImageWatermark() {
-  const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
+  const watermarkTypeRef = useRef<'text' | 'image'>('text');
+  const watermarkTextRef = useRef('');
+  const watermarkImageRef = useRef<string | null>(null);
+  const positionRef = useRef<'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center'>('bottom-right');
+  const opacityRef = useRef(50);
+
   const [watermarkType, setWatermarkType] = useState<'text' | 'image'>('text');
   const [watermarkText, setWatermarkText] = useState('');
   const [watermarkImage, setWatermarkImage] = useState<string | null>(null);
   const [position, setPosition] = useState<'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center'>('bottom-right');
   const [opacity, setOpacity] = useState(50);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [processedBlobs, setProcessedBlobs] = useState<Blob[]>([]);
+  const [doneBlobs, setDoneBlobs] = useState<Blob[]>([]);
+
+  const batch = useBatchProgress();
   const fileRef = useRef<HTMLInputElement>(null);
   const logoRef = useRef<HTMLInputElement>(null);
   const blobUrlsRef = useRef<string[]>([]);
@@ -34,22 +41,12 @@ export default function BulkImageWatermark() {
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
     if (accepted.length === 0) return;
-    setFiles(prev => [...prev, ...accepted]);
+    batch.addFiles(accepted);
     accepted.forEach(f => {
       const url = URL.createObjectURL(f);
       blobUrlsRef.current.push(url);
-      setPreviews(prev => [...prev, url]);
     });
     toast.success(`Added ${accepted.length} file(s)`);
-  };
-
-  const removeFile = (idx: number) => {
-    setFiles(prev => prev.filter((_, i) => i !== idx));
-    setPreviews(prev => {
-      URL.revokeObjectURL(prev[idx]);
-      return prev.filter((_, i) => i !== idx);
-    });
-    setProcessedBlobs([]);
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,109 +58,113 @@ export default function BulkImageWatermark() {
     toast.success('Logo loaded');
   };
 
+  useEffect(() => {
+    watermarkTypeRef.current = watermarkType;
+    watermarkTextRef.current = watermarkText;
+    watermarkImageRef.current = watermarkImage;
+    positionRef.current = position;
+    opacityRef.current = opacity;
+  }, [watermarkType, watermarkText, watermarkImage, position, opacity]);
+
+  const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
+    return withErrorHandling(async () => {
+      const img = await createImageBitmap(file);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d')!;
+      ctx.drawImage(img, 0, 0);
+      img.close();
+
+      const imgEl = new Image();
+      imgEl.src = canvas.toDataURL();
+      await new Promise<void>(resolve => { imgEl.onload = () => resolve(); });
+      onProgress(30);
+
+      const blob = await new Promise<Blob>(resolve => {
+        const c = document.createElement('canvas');
+        c.width = imgEl.naturalWidth;
+        c.height = imgEl.naturalHeight;
+        const cx = c.getContext('2d')!;
+        cx.drawImage(imgEl, 0, 0);
+
+        cx.globalAlpha = opacityRef.current / 100;
+        const pad = 20;
+        const mSize = Math.min(c.width, c.height) * 0.15;
+
+        if (watermarkTypeRef.current === 'text' && watermarkTextRef.current) {
+          cx.font = `bold ${mSize * 0.2}px sans-serif`;
+          cx.fillStyle = 'white';
+          cx.strokeStyle = 'black';
+          cx.lineWidth = 2;
+          const metrics = cx.measureText(watermarkTextRef.current);
+          const tw = metrics.width;
+          const th = mSize * 0.2;
+          let x: number, y: number;
+          switch (positionRef.current) {
+            case 'top-left': x = pad; y = pad + th; break;
+            case 'top-right': x = c.width - tw - pad; y = pad + th; break;
+            case 'bottom-left': x = pad; y = c.height - pad; break;
+            case 'bottom-right': x = c.width - tw - pad; y = c.height - pad; break;
+            case 'center': x = (c.width - tw) / 2; y = (c.height + th) / 2; break;
+          }
+          cx.strokeText(watermarkTextRef.current, x, y);
+          cx.fillText(watermarkTextRef.current, x, y);
+        }
+
+        if (watermarkTypeRef.current === 'image' && watermarkImageRef.current) {
+          const logo = new Image();
+          logo.onload = () => {
+            const lw = mSize;
+            const lh = (logo.naturalHeight / logo.naturalWidth) * lw;
+            let lx: number, ly: number;
+            switch (positionRef.current) {
+              case 'top-left': lx = pad; ly = pad; break;
+              case 'top-right': lx = c.width - lw - pad; ly = pad; break;
+              case 'bottom-left': lx = pad; ly = c.height - lh - pad; break;
+              case 'bottom-right': lx = c.width - lw - pad; ly = c.height - lh - pad; break;
+              case 'center': lx = (c.width - lw) / 2; ly = (c.height + lh) / 2; break;
+            }
+            cx.drawImage(logo, lx, ly, lw, lh);
+            cx.globalAlpha = 1;
+            c.toBlob(b => resolve(b!), 'image/png');
+          };
+          logo.src = watermarkImageRef.current;
+        } else {
+          cx.globalAlpha = 1;
+          c.toBlob(b => resolve(b!), 'image/png');
+        }
+      });
+      onProgress(90);
+      return blob;
+    }, { toast: 'Processing error', log: true });
+  };
+
   const handleProcess = async () => {
-    if (files.length === 0) { toast.error('Upload images first'); return; }
+    if (batch.files.length === 0) { toast.error('Upload images first'); return; }
     if (watermarkType === 'text' && !watermarkText.trim()) { toast.error('Enter watermark text'); return; }
     if (watermarkType === 'image' && !watermarkImage) { toast.error('Upload a logo image'); return; }
-    if (hasLargeFiles(files)) {
+    if (hasLargeFiles(batch.files.map(f => f.file))) {
       const mem = checkMemory();
       const proceed = window.confirm(
         `Large images detected (>100MB).${mem.low ? ` Your device has only ${mem.available} RAM.` : ''} Processing may exceed browser memory limits on low-RAM devices. Continue?`
       );
       if (!proceed) return;
     }
-    setIsProcessing(true);
-    try {
-      const blobs: Blob[] = [];
-      for (const file of files) {
-        const result = await withErrorHandling(async () => {
-          const img = await createImageBitmap(file);
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d')!;
-          ctx.drawImage(img, 0, 0);
-          img.close();
-
-          const imgEl = new Image();
-          imgEl.src = canvas.toDataURL();
-          await new Promise<void>(resolve => { imgEl.onload = () => resolve(); });
-
-          return await new Promise<Blob>(resolve => {
-            const c = document.createElement('canvas');
-            c.width = imgEl.naturalWidth;
-            c.height = imgEl.naturalHeight;
-            const cx = c.getContext('2d')!;
-
-            cx.drawImage(imgEl, 0, 0);
-
-            cx.globalAlpha = opacity / 100;
-            const pad = 20;
-            const mSize = Math.min(c.width, c.height) * 0.15;
-
-            if (watermarkType === 'text' && watermarkText) {
-              cx.font = `bold ${mSize * 0.2}px sans-serif`;
-              cx.fillStyle = 'white';
-              cx.strokeStyle = 'black';
-              cx.lineWidth = 2;
-              const metrics = cx.measureText(watermarkText);
-              const tw = metrics.width;
-              const th = mSize * 0.2;
-              let x: number, y: number;
-              switch (position) {
-                case 'top-left': x = pad; y = pad + th; break;
-                case 'top-right': x = c.width - tw - pad; y = pad + th; break;
-                case 'bottom-left': x = pad; y = c.height - pad; break;
-                case 'bottom-right': x = c.width - tw - pad; y = c.height - pad; break;
-                case 'center': x = (c.width - tw) / 2; y = (c.height + th) / 2; break;
-              }
-              cx.strokeText(watermarkText, x, y);
-              cx.fillText(watermarkText, x, y);
-            }
-
-            if (watermarkType === 'image' && watermarkImage) {
-              const logo = new Image();
-              logo.onload = () => {
-                const lw = mSize;
-                const lh = (logo.naturalHeight / logo.naturalWidth) * lw;
-                let lx: number, ly: number;
-                switch (position) {
-                  case 'top-left': lx = pad; ly = pad; break;
-                  case 'top-right': lx = c.width - lw - pad; ly = pad; break;
-                  case 'bottom-left': lx = pad; ly = c.height - lh - pad; break;
-                  case 'bottom-right': lx = c.width - lw - pad; ly = c.height - lh - pad; break;
-                  case 'center': lx = (c.width - lw) / 2; ly = (c.height + lh) / 2; break;
-                }
-                cx.drawImage(logo, lx, ly, lw, lh);
-                cx.globalAlpha = 1;
-                c.toBlob(b => resolve(b!), 'image/png');
-              };
-              logo.src = watermarkImage;
-            } else {
-              cx.globalAlpha = 1;
-              c.toBlob(b => resolve(b!), 'image/png');
-            }
-          });
-        }, { toast: `Failed to watermark ${file.name}`, log: true });
-        if (result) blobs.push(result);
+    setDoneBlobs([]);
+    await batch.processBatch(processor, {
+      onComplete: () => {
+        const blobs = batch.files.filter(f => f.status === 'done' && f.result).map(f => f.result!);
+        setDoneBlobs(blobs);
+        if (blobs.length > 0) toast.success(`Watermarked ${blobs.length} images`);
       }
-      setProcessedBlobs(blobs);
-      if (blobs.length < files.length) {
-        toast.error(`${files.length - blobs.length} image(s) failed — memory or processing error`);
-      } else {
-        toast.success(`Watermarked ${blobs.length} images`);
-      }
-    } catch {
-      toast.error('Browser memory limit reached. Try smaller batches or close other tabs.');
-    } finally {
-      setIsProcessing(false);
-    }
+    });
   };
 
   const downloadAll = async () => {
     const zip = new JSZip();
-    processedBlobs.forEach((blob, i) => {
-      zip.file(files[i].name.replace(/\.[^.]+$/, '') + '-watermarked.png', blob);
+    doneBlobs.forEach((blob, i) => {
+      zip.file(batch.files[i].file.name.replace(/\.[^.]+$/, '') + '-watermarked.png', blob);
     });
     const content = await zip.generateAsync({ type: 'blob' });
     const url = URL.createObjectURL(content);
@@ -176,18 +177,18 @@ export default function BulkImageWatermark() {
   };
 
   const downloadEach = () => {
-    processedBlobs.forEach((blob, i) => {
+    doneBlobs.forEach((blob, i) => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = files[i].name.replace(/\.[^.]+$/, '') + '-watermarked.png';
+      a.download = batch.files[i].file.name.replace(/\.[^.]+$/, '') + '-watermarked.png';
       a.click();
       URL.revokeObjectURL(url);
     });
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto space-y-6">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
         {/* Upload */}
         <div
@@ -199,20 +200,6 @@ export default function BulkImageWatermark() {
           <p className="text-xs text-[var(--text-muted)]">PNG, JPG, WebP</p>
           <input ref={fileRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
-
-        {files.length > 0 && (
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-            {files.map((f, i) => (
-              <div key={i} className="relative group">
-                <NextImage src={previews[i]} alt="Image preview" loading="lazy" unoptimized={true} width={100} height={64} className="w-full h-16 object-cover rounded-[var(--radius-md)]" />
-                <button onClick={() => removeFile(i)} className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <X className="w-3 h-3" />
-                </button>
-                <span className="text-[10px] text-[var(--text-muted)] truncate block mt-0.5">{f.name}</span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Watermark type toggle */}
         <div className="flex gap-2 p-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] w-fit">
@@ -265,23 +252,33 @@ export default function BulkImageWatermark() {
         {/* Process */}
         <button
           onClick={handleProcess}
-          disabled={isProcessing || files.length === 0}
+          disabled={batch.isProcessing || batch.files.length === 0}
           className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
-          {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
-          {isProcessing ? `Watermarking ${files.length} images...` : `Apply Watermark to ${files.length} Image(s)`}
+          {batch.isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
+          {batch.isProcessing ? `Watermarking ${batch.files.length} images...` : `Apply Watermark to ${batch.files.length} Image(s)`}
         </button>
-
-        {/* Download */}
-        {processedBlobs.length > 0 && (
-          <ProDownloadButton
-            fileCount={processedBlobs.length}
-            onDownloadAll={downloadAll}
-            onDownloadEach={downloadEach}
-            isProcessing={false}
-          />
-        )}
       </div>
+
+      {/* Batch progress panel */}
+      <BatchProgressPanel
+        files={batch.files}
+        progress={batch.progress}
+        isProcessing={batch.isProcessing}
+        onRemove={batch.removeFile}
+        onClear={() => { batch.clearFiles(); setDoneBlobs([]); }}
+        onAbort={batch.abort}
+      />
+
+      {/* Download */}
+      {doneBlobs.length > 0 && !batch.isProcessing && (
+        <ProDownloadButton
+          fileCount={doneBlobs.length}
+          onDownloadAll={downloadAll}
+          onDownloadEach={downloadEach}
+          isProcessing={false}
+        />
+      )}
     </div>
   );
 }

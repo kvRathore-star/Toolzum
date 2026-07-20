@@ -78,7 +78,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "dev-json-xml-1",
     name: "JSON to XML",
-    description: 'Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules.',
+    description: 'Convert VIDEO to MP3 online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. ',
     category: "Converter",
     slug: "json-to-xml",
@@ -143,7 +143,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "pdf-heic-1",
     name: "HEIC to PDF",
-    description: 'Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents.',
+    description: 'Extract and convert archives (ZIP, RAR, 7z, TAR, GZ) online. Extract files or convert between archive formats directly in your browser. Free and secure.',
     seoDescription: 'Free online HEIC to PDF — Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents. ',
     category: "PDF",
     slug: "heic-to-pdf",
@@ -174,7 +174,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to Word",
     slug: "pdf-to-word",
     category: "PDF",
-    description: 'Extracts text content and basic formatting from PDF files and assembles them into editable .docx Word documents.',
+    description: 'Convert PDF to WORD online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — extract PDF content into editable DOCX files. Preserves formatting. 100% client-side, no uploads needed.',
     showInCategory: false
@@ -291,7 +291,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to PDF",
     slug: "jpg-to-pdf",
     category: "PDF",
-    description: 'Merges one or more JPG images into a single multi-page PDF file in the order you arrange them.',
+    description: 'Convert JPG images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to PDF — Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. ',
     dependencies: "jsPDF / Canvas API",
     showInCategory: false
@@ -311,7 +311,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to JPG",
     slug: "heic-to-jpg",
     category: "Image",
-    description: 'Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings.',
+    description: 'Convert HEIC images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. ',
     dependencies: "heic2any",
     showInCategory: false
@@ -321,7 +321,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to JPG",
     slug: "pdf-to-jpg",
     category: "PDF",
-    description: 'Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear.',
+    description: 'Convert PDF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
     showInCategory: false
@@ -331,7 +331,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to PPT",
     slug: "pdf-to-ppt",
     category: "PDF",
-    description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure.',
+    description: 'Convert PDF to PPT online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. ',
     dependencies: "pdf2json / PptxGenJS",
     showInCategory: false
@@ -371,7 +371,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to JPG",
     slug: "webp-to-jpg",
     category: "Image",
-    description: 'Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format.',
+    description: 'Convert WEBP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.'s modern format.',
     seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -381,7 +381,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to JPG",
     slug: "png-to-jpg",
     category: "Image",
-    description: 'Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency.',
+    description: 'Convert PNG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -429,7 +429,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PPT to PDF",
     slug: "ppt-to-pdf",
     category: "PDF",
-    description: 'Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout.',
+    description: 'Convert PowerPoint presentations to PDF with accurate slide rendering. Server-side conversion preserves fonts and layouts.',
     seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. ',
     dependencies: "LibreOffice API",
     showInCategory: false
@@ -476,7 +476,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Excel to PDF",
     slug: "excel-to-pdf",
     category: "PDF",
-    description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting.',
+    description: 'Convert EXCEL to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. ',
     dependencies: "SheetJS / jsPDF",
     showInCategory: false
@@ -515,7 +515,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Video to Text Transcription",
     slug: "video-to-text-transcription",
     category: "Transcription",
-    description: 'Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition.',
+    description: 'Transcribe video audio to text using AI-powered speech recognition. Supports multiple languages and speaker diarization.',
     seoDescription: 'Free online Video to Text Transcription — Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. ',
     dependencies: "Whisper API"
   },
@@ -562,7 +562,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MKV to MP4",
     slug: "mkv-to-mp4",
     category: "Converter",
-    description: 'Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream.',
+    description: 'Convert MKV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. ',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -581,7 +581,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Paraphrasing Tool",
     slug: "ai-paraphrasing-tool",
     category: "AI",
-    description: 'Rewrites sentences and paragraphs while preserving the original meaning and intent. Academics and content creators use it to avoid plagiarism.',
+    description: 'Convert TEXT to SPEECH online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     dependencies: "HuggingFace",
     seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. ',
   },
@@ -609,7 +609,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to Excel",
     slug: "pdf-to-excel",
     category: "PDF",
-    description: 'Extracts tabular data from PDF files and reconstructs it into editable Excel spreadsheets with proper column alignment.',
+    description: 'Convert PDF to EXCEL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     dependencies: "pdf2json / SheetJS",
     seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. ',
     showInCategory: false
@@ -655,7 +655,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Audio to Text Transcription",
     slug: "audio-to-text-transcription",
     category: "Transcription",
-    description: 'Audio to Text Transcription converts spoken audio from uploaded files into editable text.',
+    description: 'Transcribe audio files to text using AI-powered speech recognition. Supports MP3, WAV, M4A, and more formats.',
     seoDescription: 'Free online Audio to Text Transcription — Convert spoken audio from uploaded files into editable text. Uses cloud-based processing.',
     dependencies: "Whisper API"
   },
@@ -673,7 +673,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MOV to MP4",
     slug: "mov-to-mp4",
     category: "Converter",
-    description: 'Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads.',
+    description: 'Convert MOV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. ',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -749,7 +749,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBM to MP4",
     slug: "webm-to-mp4",
     category: "Converter",
-    description: 'Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM.',
+    description: 'Convert WEBM video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. ',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -826,7 +826,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to WAV",
     slug: "mp3-to-wav",
     category: "Audio",
-    description: 'Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity.',
+    description: 'Calculate take-home salary after tax and deductions. Supports hourly, daily, weekly, monthly rates with customizable tax brackets.',
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -856,7 +856,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "EPUB to PDF",
     slug: "epub-to-pdf",
     category: "Converter",
-    description: 'Convert EPUB e-books to universally compatible PDF format. Preserves book structure, images, and formatting for sharing and printing.',
+    description: 'Convert EPUB to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true
@@ -943,7 +943,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to EPUB",
     slug: "pdf-to-epub",
     category: "PDF",
-    description: 'Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation.',
+    description: 'Convert PDF documents to EPUB format for e-book readers. Server-side conversion preserves layout, images, and chapter structure.',
     seoDescription: 'Free online PDF to EPUB — Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. ',
     dependencies: "Calibre API",
     showInCategory: false
@@ -980,7 +980,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVI to MP4",
     slug: "avi-to-mp4",
     category: "Converter",
-    description: 'Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes.',
+    description: 'Convert AVI video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. ',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -998,7 +998,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "mp4-mov-1",
     name: "MP4 to MOV Converter",
-    description: 'Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports.',
+    description: 'Convert MP4 video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to MOV Converter — Converts MP4 video files to QuickTime MOV format while preserving quality, ideal for Apple ecosystem workflows and Final Cut Pro imports. ',
     category: "Converter",
     slug: "mp4-to-mov",
@@ -1018,7 +1018,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     id: "mov-mkv-1",
     name: "MOV to MKV Converter",
-    description: 'Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility.',
+    description: 'Convert MKV video files to MOV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to MKV Converter — Converts QuickTime MOV videos into the open-source MKV container format, enabling advanced subtitle support and broader codec compatibility. ',
     category: "Converter",
     slug: "mov-to-mkv",
@@ -1050,7 +1050,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AI Face Swap",
     slug: "ai-face-swap",
     category: "AI",
-    description: 'Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle.',
+    description: 'Compress video files to reduce size while maintaining quality. Supports MP4, MOV, WebM. Adjust resolution, bitrate, and codec settings.',
     seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle. ',
     dependencies: "InsightFace"
   },
@@ -1097,7 +1097,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to CSV",
     slug: "json-to-csv",
     category: "Converter",
-    description: 'Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers.',
+    description: 'Convert JSON to CSV online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
   },
@@ -1124,7 +1124,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to SVG",
     slug: "png-to-svg",
     category: "Image",
-    description: 'Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold.',
+    description: 'Convert PNG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. ',
     dependencies: "Potrace"
   },
@@ -1248,7 +1248,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to Handwriting",
     slug: "text-to-handwriting",
     category: "Text",
-    description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations.',
+    description: 'Convert TEXT to HANDWRITING online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Text to Handwriting — Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. ',
     dependencies: "Canvas API"
   },
@@ -1293,7 +1293,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image to Base64",
     slug: "image-to-base64",
     category: "Developer",
-    description: 'Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON.',
+    description: 'Convert images to Base64 encoded data URIs directly in your browser. Supports PNG, JPG, WebP, SVG, and GIF. 100% client-side.',
     seoDescription: 'Free online Image to Base64 — Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON. ',
     dependencies: "FileReader API"
   },
@@ -1326,7 +1326,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to JSON",
     slug: "csv-to-json",
     category: "Converter",
-    description: 'Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields.',
+    description: 'Convert CSV to JSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
   },
@@ -1335,7 +1335,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to XML",
     slug: "csv-to-xml",
     category: "Converter",
-    description: 'Parses CSV data and converts it into well-formed XML documents using configurable root and row element names.',
+    description: 'Convert CSV to XML online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. ',
     dependencies: "PapaParse / xml2js",
     showInCategory: false
@@ -1381,7 +1381,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEX to RGB Converter",
     slug: "hex-to-rgb-converter",
     category: "Design",
-    description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values.',
+    description: 'Convert HEX to RGB online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. ',
     dependencies: "Vanilla JS",
       },
@@ -1408,7 +1408,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to Binary",
     slug: "text-to-binary",
     category: "Developer",
-    description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators.',
+    description: 'Convert TEXT to BINARY online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS",
       },
@@ -1417,7 +1417,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Binary to Text",
     slug: "binary-to-text",
     category: "Developer",
-    description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error.',
+    description: 'Convert BINARY to TEXT online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
     dependencies: "Vanilla JS",
       },
@@ -1538,7 +1538,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Base64 to Image",
     slug: "base64-to-image",
     category: "Developer",
-    description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button.',
+    description: 'Convert BASE64 to IMAGE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. ',
     dependencies: "Vanilla JS"
   },
@@ -1700,7 +1700,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML to CSV",
     slug: "xml-to-csv",
     category: "Converter",
-    description: 'Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths.',
+    description: 'Convert XML to CSV online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. ',
     dependencies: "xml2js / PapaParse",
     showInCategory: false
@@ -1755,7 +1755,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MAC Address Generator",
     slug: "mac-address-generator",
     category: "Privacy",
-    description: 'Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI.',
+    description: 'Calculate employee turnover rate for your organization. Supports voluntary and involuntary separation tracking with period analysis.',
     seoDescription: 'Free online MAC Address Generator — Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI. ',
     dependencies: "Vanilla JS"
   },
@@ -1773,7 +1773,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "XML to JSON",
     slug: "xml-to-json",
     category: "Converter",
-    description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key.',
+    description: 'Anonymize IP addresses in log files or datasets. Supports IPv4 and IPv6 masking with configurable prefix preservation.',
     seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. ',
     dependencies: "xml2js",
     showInCategory: false
@@ -1831,7 +1831,43 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online Image Bulk Converter — Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. ',
     dependencies: "browser-image-compression / jszip",
     isPro: true,
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select multiple images (JPEG, PNG, WebP, AVIF, GIF, TIFF) from your device. You can upload dozens at once."
+      },
+      {
+            "title": "2. Choose Output Format",
+            "desc": "Select the target format for all images. Every uploaded image will be converted to this format in one batch."
+      },
+      {
+            "title": "3. Download All as ZIP",
+            "desc": "All converted images are packaged into a single ZIP archive. Click download to save everything at once."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What image formats does the bulk converter support?",
+            "answer": "The bulk image converter handles JPEG, PNG, WebP, AVIF, GIF, and TIFF formats. You can convert any input format to any output format in a single batch."
+      },
+      {
+            "question": "What's the maximum number of images I can convert at once?",
+            "answer": "Free users can convert up to 10 images per batch. Pro users can convert unlimited images. All processing happens in your browser — there are no server-side upload limits."
+      },
+      {
+            "question": "Do I need to download images one by one?",
+            "answer": "No. All converted images are automatically packaged into a single ZIP file for one-click download. Each image retains its original filename with the new extension."
+      },
+      {
+            "question": "Is bulk image conversion private?",
+            "answer": "Yes. All images are processed entirely in your browser using Canvas API. Your images never leave your device, making it safe for sensitive content."
+      }
+
+    ],},
   {
     id: "212",
     name: "eSign PDF",
@@ -2221,7 +2257,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "269",
     dependencies: 'Canvas API',
     isPro: true,
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select multiple images with backgrounds you want to replace. Works best with images that have clear subject-background contrast."
+      },
+      {
+            "title": "2. Pick Background Color",
+            "desc": "Use the color picker to select a new background color, or choose transparent to remove the background entirely."
+      },
+      {
+            "title": "3. Download All",
+            "desc": "All processed images are saved as a ZIP archive. Each image keeps its original dimensions and quality."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How does the bulk background changer work?",
+            "answer": "The tool uses color-key sampling to detect and replace backgrounds. You can fine-tune the color tolerance for better results on images with complex backgrounds."
+      },
+      {
+            "question": "Can I use a custom image as the background instead of a solid color?",
+            "answer": "Currently, the bulk mode supports solid colors and transparent backgrounds. For custom image backgrounds, use the single-image background changer with more advanced editing options."
+      },
+      {
+            "question": "How many images can I process at once?",
+            "answer": "Free users can process up to 5 images per batch. Pro users can process unlimited images. All processing runs locally in your browser."
+      }
+
+    ],},
   {
     name: 'AI Background Changer',
     slug: 'ai-bg-changer',
@@ -2258,7 +2326,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     id:  "275",
     dependencies: 'qrcode.js, JSZip',
     isPro: true,
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Enter or Upload Data",
+            "desc": "Type or paste your data (URLs, text, phone numbers) one per line, or upload a CSV file with multiple entries."
+      },
+      {
+            "title": "2. Customize QR Code",
+            "desc": "Choose size, error correction level, and optional colors. Each entry gets its own QR code with identical styling."
+      },
+      {
+            "title": "3. Download ZIP",
+            "desc": "All QR codes are exported as PNG images in a ZIP archive, named by their data content for easy identification."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What can I put in a QR code?",
+            "answer": "QR codes can store URLs, plain text, phone numbers, email addresses, SMS messages, Wi-Fi credentials, vCard contacts, and geographic locations. The bulk generator supports all common data types."
+      },
+      {
+            "question": "How many QR codes can I generate at once?",
+            "answer": "Free users can generate up to 10 QR codes per batch from CSV input. Pro users can generate up to 5,000 QR codes from large CSV files."
+      },
+      {
+            "question": "What format are the QR code images?",
+            "answer": "QR codes are generated as PNG images at your chosen resolution (default 512x512). Each image is named after its content, making it easy to identify which QR code is which."
+      }
+
+    ],},
   {
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
@@ -2276,7 +2376,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch.",
     seoDescription: 'Free online Bulk Image Watermark — Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. ',
     dependencies: "Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select all images you want to watermark. Supports JPEG, PNG, and WebP formats."
+      },
+      {
+            "title": "2. Configure Watermark",
+            "desc": "Choose between text overlay, image logo, or timestamp. Adjust position, opacity, size, and rotation."
+      },
+      {
+            "title": "3. Process & Download",
+            "desc": "Click process and all watermarked images are saved in a ZIP archive. Processing is fully local."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Can I add different watermarks to different images in the same batch?",
+            "answer": "No — the bulk watermarker applies the same watermark configuration to all images in a batch. For different watermarks, process images in separate batches."
+      },
+      {
+            "question": "What watermark types are supported?",
+            "answer": "You can add text overlays (customizable font, size, color, opacity), image logos (PNG with transparency), or automatic timestamps showing the date and time."
+      },
+      {
+            "question": "Does watermarking reduce image quality?",
+            "answer": "No, the original image quality is preserved. The watermark is applied as an additional layer without recompressing the base image. Output is saved as PNG to maintain quality."
+      }
+
+    ],},
   {
     id: "279",
     name: "Bulk PDF Data Extractor",
@@ -2285,7 +2417,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file.",
     seoDescription: 'Free online Bulk PDF Data Extractor — Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. ',
     dependencies: "pdf-lib, SheetJS",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload PDFs",
+            "desc": "Select multiple PDF files containing tables, forms, or structured data. Supports up to 100 files per batch."
+      },
+      {
+            "title": "2. Select Extraction Mode",
+            "desc": "Choose between table extraction, form field extraction, or key-value pair extraction based on your document type."
+      },
+      {
+            "title": "3. Export as CSV",
+            "desc": "All extracted data is aggregated into a single CSV file. Download and open in Excel or Google Sheets."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What types of PDF data can be extracted?",
+            "answer": "The tool extracts tables (with rows and columns), form fields (filled input fields, checkboxes, dropdowns), and key-value pairs (labels with associated values like Invoice #: 12345)."
+      },
+      {
+            "question": "Are scanned PDFs supported?",
+            "answer": "Yes, if your PDF contains scanned images, the tool can use OCR to extract text. For best results, use digitally-created PDFs rather than scanned documents."
+      },
+      {
+            "question": "How is the data exported?",
+            "answer": "All extracted data is compiled into a single CSV file with consistent column headers across all documents. This makes it easy to analyze in spreadsheet software or import into databases."
+      }
+
+    ],},
   {
     id: "280",
     name: "Bulk Image to PDF",
@@ -2294,7 +2458,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch.",
     seoDescription: 'Free online Bulk Image to PDF — Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. ',
     dependencies: "jsPDF, Canvas API",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select multiple JPEG, PNG, or WebP images. They'll be combined into a single multi-page PDF."
+      },
+      {
+            "title": "2. Configure Layout",
+            "desc": "Choose page size (A4, Letter, etc.), orientation (portrait/landscape), and image fit mode."
+      },
+      {
+            "title": "3. Download PDF",
+            "desc": "Your multi-page PDF is ready for download. Each image becomes one page in the document."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How many images can I combine into one PDF?",
+            "answer": "Free users can combine up to 20 images. Pro users can combine hundreds of images. The resulting PDF is generated entirely in your browser."
+      },
+      {
+            "question": "Will I lose image quality in the PDF?",
+            "answer": "No. Images are embedded at their full resolution in the PDF. You can also choose compression level to balance file size and quality."
+      },
+      {
+            "question": "Can I rearrange the order of images?",
+            "answer": "Yes, you can drag and drop to reorder images before generating the PDF. The first image becomes page 1, and so on."
+      }
+
+    ],},
   {
     id: "281",
     name: "Bulk Audio Converter",
@@ -2303,7 +2499,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings.",
     seoDescription: 'Free online Bulk Audio Converter — Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. ',
     dependencies: "FFmpeg WASM",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Audio Files",
+            "desc": "Select multiple audio files in any supported format (MP3, WAV, OGG, FLAC, M4A, AAC)."
+      },
+      {
+            "title": "2. Choose Output Format",
+            "desc": "Select your target format. All files will be converted to the same output format with consistent settings."
+      },
+      {
+            "title": "3. Download Converted Files",
+            "desc": "All converted audio files are packaged in a ZIP archive. Processing uses FFmpeg WASM in your browser."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What audio formats can I convert between?",
+            "answer": "Supported formats include MP3, WAV, OGG, FLAC, M4A, and AAC. You can convert any input format to any output format."
+      },
+      {
+            "question": "Can I adjust audio quality settings?",
+            "answer": "Yes, you can set bitrate, sample rate, and channels for the output files. Higher bitrates preserve more quality but produce larger files."
+      },
+      {
+            "question": "How long does bulk conversion take?",
+            "answer": "Conversion speed depends on file sizes and your device. Short audio clips convert in seconds. Longer files (30+ minutes) take a few minutes since FFmpeg processing is CPU-intensive."
+      }
+
+    ],},
   {
     id: "282",
     name: "Bulk SVG to PNG",
@@ -2312,7 +2540,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines.",
     seoDescription: 'Free online Bulk SVG to PNG — Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. ',
     dependencies: "Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload SVG Files",
+            "desc": "Select multiple SVG vector files from your device. Thumbnails show a preview of each file."
+      },
+      {
+            "title": "2. Set Output Resolution",
+            "desc": "Choose the output resolution (scale or specific pixel dimensions). Higher DPI produces sharper PNGs."
+      },
+      {
+            "title": "3. Download PNGs",
+            "desc": "All converted PNG images are packaged in a ZIP archive. Each file keeps its original name with a .png extension."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Why convert SVG to PNG?",
+            "answer": "SVG is a vector format ideal for logos, icons, and illustrations. PNG is a raster format required by many platforms, email clients, and graphic design software that don't support SVG."
+      },
+      {
+            "question": "Do I lose quality when converting SVG to PNG?",
+            "answer": "SVGs are resolution-independent vectors. When converting to PNG at high resolution, the result can be crisp and sharp. We recommend 2x or 3x resolution for Retina/HiDPI displays."
+      },
+      {
+            "question": "Can I convert multiple SVGs at different sizes?",
+            "answer": "Yes, all SVGs in a batch use the same output resolution. For different sizes, run separate batches with different resolution settings."
+      }
+
+    ],},
   {
     id: "283",
     name: "Bulk Image Compressor",
@@ -2321,7 +2581,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload.",
     seoDescription: 'Free online Bulk Image Compressor — Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. ',
     dependencies: "browser-image-compression, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select JPG, PNG, or WebP images. You'll see file sizes before compression."
+      },
+      {
+            "title": "2. Adjust Quality",
+            "desc": "Use the quality slider to control the compression level. Lower quality = smaller files. A preview shows the estimated result."
+      },
+      {
+            "title": "3. Download All",
+            "desc": "All compressed images are saved in a ZIP archive. Click individual images to download them separately."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How much can bulk image compression reduce file size?",
+            "answer": "Typical compression reduces file sizes by 40-80%. JPEG images compress well at 60-80% quality. PNG compression removes unused colors and optimizes palettes. WebP compression is most efficient, often reducing size by 30-50% over JPEG."
+      },
+      {
+            "question": "What's the difference between compress and resize?",
+            "answer": "Compression reduces file size by lowering image quality (JPEG) or optimizing color data (PNG/WebP). Resizing changes pixel dimensions. For the smallest file size, compress first, then resize if needed."
+      },
+      {
+            "question": "Is bulk image compression safe for copyrighted images?",
+            "answer": "Yes. All processing happens entirely in your browser — your images never leave your device. No server upload means complete privacy for sensitive or copyrighted images."
+      }
+
+    ],},
   {
     id: "284",
     name: "Bulk PDF Size Reducer",
@@ -2330,7 +2622,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch.",
     seoDescription: 'Free online Bulk PDF Size Reducer — Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. ',
     dependencies: "pdf-lib",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload PDFs",
+            "desc": "Select multiple PDF files. The tool shows each file's current size."
+      },
+      {
+            "title": "2. Choose Compression Level",
+            "desc": "Select from Maximum, Balanced, or High Quality compression tiers."
+      },
+      {
+            "title": "3. Download Reduced PDFs",
+            "desc": "Compressed PDFs are saved individually or as a ZIP archive. Processing is 100% local."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How much can PDF file size be reduced?",
+            "answer": "Typical reduction ranges from 40-90%. Image-heavy PDFs compress the most. Text-only PDFs see smaller reductions since the text content is already compact."
+      },
+      {
+            "question": "Does PDF compression affect text readability?",
+            "answer": "Text remains fully readable at all compression tiers since it's stored as text vectors, not images. Only embedded images are affected. Choose High Quality for maximum visual fidelity."
+      },
+      {
+            "question": "Can I process scanned PDFs?",
+            "answer": "Yes, but scanned PDFs contain images of text rather than digital text. Compression reduces the image quality to shrink file size. For best results, use OCR to convert scanned content first."
+      }
+
+    ],},
   {
     id: "285",
     name: "Bulk Image Resizer",
@@ -2339,7 +2663,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery.",
     seoDescription: 'Free online Bulk Image Resizer — Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. ',
     dependencies: "Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select multiple images to resize. Shows dimensions and file sizes for each."
+      },
+      {
+            "title": "2. Set Dimensions",
+            "desc": "Choose exact pixel dimensions, a percentage scale, or a preset (Instagram, Twitter, etc.)."
+      },
+      {
+            "title": "3. Download All",
+            "desc": "All resized images are packaged in a ZIP archive. Each image keeps its original format."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What resize modes are available?",
+            "answer": "You can resize by exact dimensions (width × height), by percentage (e.g., 50% of original), or by social media presets (Instagram 1080×1080, Twitter header 1500×500, etc.)."
+      },
+      {
+            "question": "Does resizing reduce image quality?",
+            "answer": "Resizing to smaller dimensions can reduce perceived sharpness. We recommend using 'high quality' resampling. Resizing to larger dimensions (upscaling) may cause blurriness as the tool is filling in pixels."
+      },
+      {
+            "question": "Can I maintain aspect ratio?",
+            "answer": "Yes, by default the tool maintains aspect ratio. You can disable this to force exact dimensions, which may stretch or crop the image."
+      }
+
+    ],},
   {
     id: "286",
     name: "Bulk Video Compressor",
@@ -2348,7 +2704,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads.",
     seoDescription: 'Free online Bulk Video Compressor — Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. ',
     dependencies: "FFmpeg WASM",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Videos",
+            "desc": "Select multiple MP4, MOV, or WebM video files. File sizes and durations are shown."
+      },
+      {
+            "title": "2. Set Compression Settings",
+            "desc": "Choose CRF value (lower = higher quality), target resolution, and codec. Presets available for web, email, and archive."
+      },
+      {
+            "title": "3. Process & Download",
+            "desc": "Videos are compressed one at a time using FFmpeg WASM. Download individual files or all at once."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What video formats are supported?",
+            "answer": "Input formats include MP4 (H.264/H.265), MOV, WebM, AVI, and MKV. Output is always MP4 (H.264) for maximum compatibility."
+      },
+      {
+            "question": "How long does bulk video compression take?",
+            "answer": "Video compression is CPU-intensive and depends on file size, duration, resolution, and your device's processing power. A 100MB video typically takes 1-3 minutes. Files are processed sequentially, not in parallel."
+      },
+      {
+            "question": "What CRF value should I use?",
+            "answer": "CRF 23 is the default (good balance). Lower values (18-22) produce higher quality but larger files. Higher values (24-28) produce smaller files with more compression artifacts. For web uploads, try CRF 28. For archiving, use CRF 18."
+      }
+
+    ],},
   {
     id: "287",
     name: "Bulk PDF Merger",
@@ -2357,7 +2745,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly.",
     seoDescription: 'Free online Bulk PDF Merger — Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. ',
     dependencies: "pdf-lib",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload PDFs",
+            "desc": "Select multiple PDF files in the order you want them merged."
+      },
+      {
+            "title": "2. Reorder (Optional)",
+            "desc": "Drag and drop to rearrange pages before merging."
+      },
+      {
+            "title": "3. Download Merged PDF",
+            "desc": "All PDFs are combined into a single document. Download the result instantly."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How many PDFs can I merge at once?",
+            "answer": "Free users can merge up to 10 PDFs. Pro users can merge up to 100 PDFs. There is no limit on individual file size."
+      },
+      {
+            "question": "Does merging preserve bookmarks and hyperlinks?",
+            "answer": "Yes, bookmarks, hyperlinks, and internal references from the original PDFs are preserved in the merged document when possible."
+      },
+      {
+            "question": "Can I select specific pages from each PDF?",
+            "answer": "The current version merges entire PDFs. For page-level selection, use the PDF Splitter tool first, then merge the extracted pages."
+      }
+
+    ],},
   {
     id: "288",
     name: "Bulk Face Anonymizer",
@@ -2366,7 +2786,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication.",
     seoDescription: 'Free online Bulk Face Anonymizer — Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. ',
     dependencies: "TensorFlow.js, Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select multiple photos containing faces. Works best with front-facing, well-lit photos."
+      },
+      {
+            "title": "2. Choose Anonymization Method",
+            "desc": "Select blur, pixelate, or overlay for detected faces. Adjust the intensity as needed."
+      },
+      {
+            "title": "3. Download Processed Images",
+            "desc": "All anonymized images are saved as PNG in a ZIP archive. Original images are never modified on your device."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How accurate is the face detection?",
+            "answer": "The tool uses TensorFlow.js for on-device face detection. It works well on front-facing and profile photos with adequate lighting. Accuracy decreases with extreme angles, heavy shadows, or very small faces."
+      },
+      {
+            "question": "Are processed images stored anywhere?",
+            "answer": "No. All processing happens entirely in your browser using TensorFlow.js. Your images are never uploaded to any server. The original and processed images only exist in your browser's memory."
+      },
+      {
+            "question": "Can I process video frames?",
+            "answer": "The current version processes static images only. For video face blurring, consider using a dedicated video anonymization tool."
+      }
+
+    ],},
   {
     id: "289",
     name: "Bulk PDF Form Extractor",
@@ -2375,7 +2827,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it.",
     seoDescription: 'Free online Bulk PDF Form Extractor — Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. ',
     dependencies: "pdf-lib",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload PDF Forms",
+            "desc": "Select multiple PDF files with fillable form fields. All forms should have the same field structure."
+      },
+      {
+            "title": "2. Map Fields",
+            "desc": "The tool auto-detects form fields. Review and confirm the field mapping before extraction."
+      },
+      {
+            "title": "3. Export to CSV",
+            "desc": "All form responses are aggregated into a single CSV file with columns matching the form fields."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What types of PDF forms are supported?",
+            "answer": "The tool supports AcroForm and XFA forms. Both digitally created forms and those with manual fill-in fields are supported."
+      },
+      {
+            "question": "Do all PDFs need to have the same form structure?",
+            "answer": "Yes, for accurate extraction all PDFs should have identical form field names. Slight variations may cause misaligned data in the CSV output."
+      },
+      {
+            "question": "Can I extract data from scanned form images?",
+            "answer": "No, scanned form images without digital form fields are not supported. Use the bulk OCR tool to digitize scanned forms first."
+      }
+
+    ],},
   {
     id: "290",
     name: "Bulk Video Size Reducer",
@@ -2384,7 +2868,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this.",
     seoDescription: 'Free online Bulk Video Size Reducer — Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. ',
     dependencies: "FFmpeg WASM",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Videos",
+            "desc": "Select multiple video files. The tool shows current file sizes."
+      },
+      {
+            "title": "2. Set Target Size",
+            "desc": "Choose a target file size (e.g., 10MB, 25MB, 50MB for email attachments) or a target resolution."
+      },
+      {
+            "title": "3. Process & Download",
+            "desc": "Videos are compressed to fit your target size. Download individual files or as a ZIP archive."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What's the difference between Video Compressor and Video Size Reducer?",
+            "answer": "Video Compressor gives you CRF quality control for consistent quality. Video Size Reducer works toward a specific file size target, automatically adjusting quality and resolution to hit that target."
+      },
+      {
+            "question": "What target sizes work best for email?",
+            "answer": "For email attachments, aim for under 25MB per file. 10MB is safe for most email providers. Outlook limits attachments to 20MB, Gmail to 25MB."
+      },
+      {
+            "question": "Does reducing video size affect quality significantly?",
+            "answer": "The tool balances file size and quality automatically. For moderate size reductions (e.g., 100MB to 25MB), quality loss is minimal. For extreme reductions, you may notice reduced resolution and compression artifacts."
+      }
+
+    ],},
   {
     id: "291",
     name: "Bulk Audio Normalizer",
@@ -2393,7 +2909,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume.",
     seoDescription: 'Free online Bulk Audio Normalizer — Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. ',
     dependencies: "Web Audio API",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Audio Files",
+            "desc": "Select multiple audio files to normalize. Supports MP3, WAV, FLAC, OGG, and M4A."
+      },
+      {
+            "title": "2. Set Target Level",
+            "desc": "Choose your target loudness. Broadcast standard is -14 LUFS (integrated). Music typically targets -16 to -10 LUFS depending on genre."
+      },
+      {
+            "title": "3. Download Normalized Files",
+            "desc": "All normalized audio files are packaged in a ZIP archive. Each file maintains its original format."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What is LUFS normalization?",
+            "answer": "LUFS (Loudness Units relative to Full Scale) is the international standard for measuring perceived loudness. Normalization adjusts audio to a consistent loudness level, preventing sudden volume changes between tracks."
+      },
+      {
+            "question": "What target LUFS should I use?",
+            "answer": "For podcasts and broadcast, use -14 LUFS (ITU-R BS.1770 standard). For music streaming, -14 to -10 LUFS is common. For YouTube, -14 LUFS is recommended. For Spotify, -14 LUFS."
+      },
+      {
+            "question": "Does normalization affect dynamic range?",
+            "answer": "Normalization adjusts overall loudness without compressing dynamics. It's different from compression. Your audio's dynamic range (quiet-to-loud ratio) is preserved."
+      }
+
+    ],},
   {
     id: "292",
     name: "Bulk Video Subtitle Burner",
@@ -2402,7 +2950,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles.",
     seoDescription: 'Free online Bulk Video Subtitle Burner — Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. ',
     dependencies: "FFmpeg WASM",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Videos and Subtitles",
+            "desc": "Select video files and matching SRT or VTT subtitle files. File names should match for auto-matching."
+      },
+      {
+            "title": "2. Customize Appearance",
+            "desc": "Choose font, size, color, and position for burned-in subtitles. Preview before processing."
+      },
+      {
+            "title": "3. Process & Download",
+            "desc": "Subtitles are burned directly into the video stream. Download processed videos as a ZIP archive."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What subtitle formats are supported?",
+            "answer": "SRT (SubRip) and VTT (WebVTT) subtitle formats are supported. SRT is the most common format for video subtitles."
+      },
+      {
+            "question": "Does burning subtitles reduce video quality?",
+            "answer": "No, the video is re-encoded with subtitles embedded. Using the same quality settings as the source, there should be no visible quality loss."
+      },
+      {
+            "question": "Can I match subtitles to videos automatically?",
+            "answer": "The tool attempts to match subtitle and video files by filename. For example, 'video1.mp4' matches 'video1.srt'. Files without matches can be paired manually."
+      }
+
+    ],},
   {
     id: "293",
     name: "Bulk Invoice & Receipt Parser",
@@ -2411,7 +2991,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees.",
     seoDescription: 'Free online Bulk Invoice & Receipt Parser — Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. ',
     dependencies: "Tesseract.js, pdf-lib, SheetJS",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Invoices or Receipts",
+            "desc": "Upload PDF or image files of invoices and receipts. The tool auto-detects document type."
+      },
+      {
+            "title": "2. Review Extracted Data",
+            "desc": "The tool extracts date, vendor, amount, tax, and line items. Review and correct any misreads."
+      },
+      {
+            "title": "3. Export to CSV",
+            "desc": "All extracted data is compiled into a CSV file for accounting software or spreadsheet analysis."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What data fields are extracted from invoices?",
+            "answer": "The parser extracts vendor name, invoice date, invoice number, total amount, subtotal, tax amount, currency, line items (description, quantity, unit price), and payment terms."
+      },
+      {
+            "question": "Can I process multi-page invoices?",
+            "answer": "Yes, multi-page PDF invoices are fully supported. The tool processes all pages and aggregates extracted data."
+      },
+      {
+            "question": "How accurate is the OCR for handwritten receipts?",
+            "answer": "OCR accuracy depends on handwriting legibility. Printed receipts and typed invoices have high accuracy (95%+). Handwritten content varies — clear block letters work best."
+      }
+
+    ],},
   {
     id: "294",
     name: "Bulk CSV/Excel to JSON",
@@ -2420,7 +3032,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once.",
     seoDescription: 'Free online Bulk CSV/Excel to JSON — Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. ',
     dependencies: "SheetJS",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Files",
+            "desc": "Select CSV or Excel (.xlsx, .xls) files. Multiple files can be uploaded at once."
+      },
+      {
+            "title": "2. Configure Mapping",
+            "desc": "Review column mapping. Choose whether to merge all files into one JSON or keep them separate."
+      },
+      {
+            "title": "3. Download JSON",
+            "desc": "The converted data is ready as formatted JSON. Download individual files or all as a ZIP archive."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Does the tool handle nested data structures?",
+            "answer": "CSV/Excel data is inherently flat (rows and columns). For nested data, use the JSON tools to restructure after conversion. Header rows become JSON keys, data rows become JSON objects."
+      },
+      {
+            "question": "Can I convert to both array and object formats?",
+            "answer": "Yes, you can choose between JSON array format (array of objects) and keyed object format (object with ID-based keys)."
+      },
+      {
+            "question": "What if my CSV has inconsistent columns?",
+            "answer": "The tool handles inconsistent columns by using the union of all column headers across files. Missing values are set to null in the JSON output."
+      }
+
+    ],},
   {
     id: "295",
     name: "Bulk URL Status Checker",
@@ -2429,7 +3073,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools.",
     seoDescription: 'Free online Bulk URL Status Checker — Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. ',
     dependencies: "fetch API",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Enter URLs",
+            "desc": "Paste or upload a list of URLs (one per line) or upload a CSV file with URLs."
+      },
+      {
+            "title": "2. Run Check",
+            "desc": "Click 'Check URLs' to start scanning. Progress shows real-time status for each URL."
+      },
+      {
+            "title": "3. Export Results",
+            "desc": "Results are displayed in a table with status codes, response times, and page titles. Export as CSV."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How many URLs can I check at once?",
+            "answer": "Free users can check up to 50 URLs. Pro users can check up to 5,000 URLs. Rate limiting is applied to prevent overwhelming target servers."
+      },
+      {
+            "question": "What HTTP status codes does the tool detect?",
+            "answer": "The tool detects all standard HTTP status codes: 2xx (success), 3xx (redirect), 4xx (client error), 5xx (server error). It also flags timeout errors and DNS resolution failures."
+      },
+      {
+            "question": "Does the tool check mobile responsiveness?",
+            "answer": "The tool checks HTTP status, response time, and page title. For mobile responsiveness testing, use a dedicated mobile testing tool."
+      }
+
+    ],},
   {
     id: "296",
     name: "Bulk WebP/AVIF Modernizer",
@@ -2438,7 +3114,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch.",
     seoDescription: 'Free online Bulk WebP/AVIF Modernizer — Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. ',
     dependencies: "Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select image files in any common format (JPEG, PNG, WebP). They will be converted to WebP or AVIF."
+      },
+      {
+            "title": "2. Choose Output Format",
+            "desc": "Select WebP or AVIF as your target format. AVIF offers better compression, WebP offers broader browser support."
+      },
+      {
+            "title": "3. Download Converted Images",
+            "desc": "All converted images are saved in a ZIP archive. Directory structure from upload is preserved."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Why convert to WebP or AVIF?",
+            "answer": "WebP and AVIF are next-gen image formats that provide 25-50% better compression than JPEG at the same quality. This means faster page loads, lower bandwidth usage, and better Core Web Vitals scores."
+      },
+      {
+            "question": "Which format should I choose: WebP or AVIF?",
+            "answer": "WebP is supported in all modern browsers (95%+ market share). AVIF offers better compression (20% smaller than WebP) but has slightly lower browser support (90%+). For maximum compatibility, use WebP."
+      },
+      {
+            "question": "Does the tool preserve metadata?",
+            "answer": "By default, EXIF metadata is stripped for privacy and smaller file sizes. You can optionally preserve copyright and orientation metadata."
+      }
+
+    ],},
   {
     id: "297",
     name: "Bulk EXIF Stripper & Injector",
@@ -2447,7 +3155,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library.",
     seoDescription: 'Free online Bulk EXIF Stripper & Injector — Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. ',
     dependencies: "exifr, piexifjs, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select images to strip or inject EXIF metadata. Supports JPEG and TIFF formats."
+      },
+      {
+            "title": "2. Choose Mode",
+            "desc": "Select 'Strip' to remove all metadata, or 'Inject' to add custom copyright, author, and contact info."
+      },
+      {
+            "title": "3. Download Processed Images",
+            "desc": "Processed images are saved in a ZIP archive. Stripped images retain full visual quality."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What metadata is removed when stripping EXIF?",
+            "answer": "All EXIF data is removed including GPS location, camera make/model, timestamp, serial numbers, software info, and thumbnails. Only the image data itself is preserved."
+      },
+      {
+            "question": "Why would I strip EXIF data?",
+            "answer": "Privacy is the main reason. Photos taken on smartphones contain GPS coordinates, device serial numbers, and timestamps. Stripping this data protects your location and identity when sharing images online."
+      },
+      {
+            "question": "What metadata can I inject?",
+            "answer": "You can inject copyright notices, author name, creator contact info, description, keywords/tags, and usage rights. This is useful for photographers and content creators to protect their work."
+      }
+
+    ],},
   {
     id: "298",
     name: "Bulk App Icon Generator",
@@ -2456,7 +3196,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP.",
     seoDescription: 'Free online Bulk App Icon Generator — Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. ',
     dependencies: "Canvas API, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Source Icon",
+            "desc": "Upload a high-resolution SVG or PNG image. A single source image generates all required icon sizes."
+      },
+      {
+            "title": "2. Select Platforms",
+            "desc": "Choose target platforms: iOS, Android, PWA, macOS, Windows, and social media. Each platform has its own required sizes."
+      },
+      {
+            "title": "3. Download All Icons",
+            "desc": "All generated icons are organized by platform in a ZIP archive, ready to drop into your project."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What icon sizes are generated?",
+            "answer": "iOS requires 16 sizes from 40×40 to 1024×1024. Android requires 8 sizes including adaptive icons. PWAs require 192×192 and 512×512. Social media platforms have their own specific size requirements."
+      },
+      {
+            "question": "Can I generate icons for iOS and Android from the same source?",
+            "answer": "Yes, the tool generates platform-specific icons from a single source image. iOS icons use rounded corners automatically. Android adaptive icons use the foreground/background layers."
+      },
+      {
+            "question": "What file format should my source image be?",
+            "answer": "SVG is preferred as it's resolution-independent, giving the sharpest results at all sizes. If using PNG, provide at least 1024×1024 pixels for best downscaling quality."
+      }
+
+    ],},
   {
     id: "299",
     name: "Bulk Markdown to PDF/HTML",
@@ -2465,7 +3237,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates.",
     seoDescription: 'Free online Bulk Markdown to PDF/HTML — Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. ',
     dependencies: "marked.js, jsPDF, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Markdown Files",
+            "desc": "Select multiple .md files. They will be converted to styled PDF or HTML."
+      },
+      {
+            "title": "2. Choose Output Format",
+            "desc": "Select PDF for printable documents or HTML for web publishing. Apply custom CSS if needed."
+      },
+      {
+            "title": "3. Download Converted Files",
+            "desc": "All converted files are saved in a ZIP archive. PDFs include auto-generated table of contents."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What Markdown features are supported?",
+            "answer": "Full GFM (GitHub Flavored Markdown) support including headings, lists, tables, code blocks with syntax highlighting, images, links, blockquotes, and inline formatting."
+      },
+      {
+            "question": "Can I apply custom styling?",
+            "answer": "Yes, you can provide custom CSS to style the output. For HTML output, your CSS is embedded directly. For PDF, the CSS is applied during conversion."
+      },
+      {
+            "question": "Are images in Markdown files preserved?",
+            "answer": "External images (URLs) are preserved. Local image references (file:// paths) are converted to embedded base64 data for standalone documents."
+      }
+
+    ],},
   {
     id: "300",
     name: "Bulk Font Subsetter",
@@ -2474,7 +3278,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs.",
     seoDescription: 'Free online Bulk Font Subsetter — Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. ',
     dependencies: "opentype.js, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Fonts",
+            "desc": "Select TTF or OTF font files to convert and subset."
+      },
+      {
+            "title": "2. Enter Characters",
+            "desc": "Enter the specific characters your project uses. Only these characters will be kept in the subset."
+      },
+      {
+            "title": "3. Download Subset Fonts",
+            "desc": "Subset fonts are saved as WOFF2 (default) or TTF. File sizes are dramatically reduced."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "How much can font subsetting reduce file size?",
+            "answer": "A full font file (50-200KB) can be reduced to 2-15KB when subset to only the characters used on your website. This is one of the most impactful optimizations for web performance."
+      },
+      {
+            "question": "What format are the output fonts?",
+            "answer": "Default output format is WOFF2, the most efficient web font format. You can also choose TTF for desktop use and WOFF for legacy browser support."
+      },
+      {
+            "question": "Can I subset multiple fonts at once?",
+            "answer": "Yes, upload multiple font files and enter the character set once. All fonts are subset to the same character set, perfect for font families."
+      }
+
+    ],},
   {
     id: "301",
     name: "Bulk Subtitle Time-Shifter",
@@ -2483,7 +3319,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches.",
     seoDescription: 'Free online Bulk Subtitle Time-Shifter — Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. ',
     dependencies: "Vanilla JS, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Subtitle Files",
+            "desc": "Select multiple SRT or VTT subtitle files to adjust timing."
+      },
+      {
+            "title": "2. Set Time Offset",
+            "desc": "Enter the offset in seconds (positive to delay, negative to advance). Supports milliseconds for fine adjustment."
+      },
+      {
+            "title": "3. Download Adjusted Subtitles",
+            "desc": "All adjusted subtitle files are saved in a ZIP archive. Original formatting is preserved."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Why do subtitles need time shifting?",
+            "answer": "Subtitles often go out of sync due to frame rate differences, video edits (added/removed scenes), or different release versions of the same content."
+      },
+      {
+            "question": "Can I shift different subtitles by different amounts?",
+            "answer": "The current bulk mode applies the same offset to all uploaded files. For different offsets, process each group separately."
+      },
+      {
+            "question": "What subtitle formats are supported?",
+            "answer": "SRT (SubRip) and VTT (WebVTT) formats are supported. Both use standard timecode format (HH:MM:SS,mmm) that can be precisely adjusted."
+      }
+
+    ],},
   {
     id: "302",
     name: "Bulk Regex Extractor & Replacer",
@@ -2492,7 +3360,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview.",
     seoDescription: 'Free online Bulk Regex Extractor & Replacer — Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. ',
     dependencies: "Vanilla JS, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Files",
+            "desc": "Select text, code, or log files to search or replace content using regular expressions."
+      },
+      {
+            "title": "2. Enter Pattern",
+            "desc": "Enter your regex pattern. Choose between extraction (find all matches) or replacement (find and replace)."
+      },
+      {
+            "title": "3. Download Results",
+            "desc": "Extracted matches are saved to a single file. Replaced files are saved individually in a ZIP archive."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What regex syntax is supported?",
+            "answer": "JavaScript RegExp syntax is supported including flags (g, i, m, s, u). Features include capture groups, lookahead/lookbehind, character classes, and quantifiers."
+      },
+      {
+            "question": "Can I preview matches before processing?",
+            "answer": "Yes, the tool shows a preview of matched lines before you confirm the operation. This helps verify your regex pattern is correct."
+      },
+      {
+            "question": "What file types can I process?",
+            "answer": "Plain text files (.txt, .md, .csv, .log, .json, .xml, .yaml), code files (.js, .ts, .py, .java, .html, .css, .sql), and any other text-based format."
+      }
+
+    ],},
   {
     id: "303",
     name: "Bulk Image to Text (OCR)",
@@ -2501,7 +3401,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually.",
     seoDescription: 'Free online Bulk Image to Text (OCR) — Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. ',
     dependencies: "Tesseract.js, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload Images",
+            "desc": "Select scanned images, photos of documents, or PDF pages containing text."
+      },
+      {
+            "title": "2. Choose Language",
+            "desc": "Select the document language for optimal OCR accuracy. Multiple languages can be selected."
+      },
+      {
+            "title": "3. Export Results",
+            "desc": "Extracted text is compiled into a single document. Download as TXT, DOCX, or PDF."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "What languages does OCR support?",
+            "answer": "Tesseract.js supports 100+ languages including English, Spanish, French, German, Chinese, Japanese, Arabic, Hindi, and more. Multi-language documents can process multiple languages simultaneously."
+      },
+      {
+            "question": "How accurate is browser-based OCR?",
+            "answer": "Accuracy depends on image quality, resolution, and text clarity. High-resolution scans of printed documents achieve 95%+ accuracy. Handwritten text has lower accuracy (50-80%)."
+      },
+      {
+            "question": "Can I extract text from PDFs directly?",
+            "answer": "Yes, PDF pages are converted to images for OCR processing. For best results, use high-resolution PDFs. Digitally-created PDFs (not scanned) should use PDF text extraction instead of OCR."
+      }
+
+    ],},
   {
     id: "304",
     name: "Bulk E-Book Converter",
@@ -2510,7 +3442,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Note: This is a basic client-side conversion — complex EPUB/MOBI layouts may not render perfectly. For professional results, use a dedicated e-book tool like Calibre.",
     seoDescription: 'Free online Bulk E-Book Converter — Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Basic client-side conversion — complex layouts may not render perfectly. ',
     dependencies: "EPUB.js, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload E-Books",
+            "desc": "Select EPUB, MOBI, or PDF e-books. Multiple files can be uploaded at once."
+      },
+      {
+            "title": "2. Choose Output Format",
+            "desc": "Select EPUB (most readers), MOBI (Kindle), or PDF (universal)."
+      },
+      {
+            "title": "3. Download Converted Books",
+            "desc": "Converted e-books are saved in a ZIP archive. Metadata and cover images are preserved."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Does conversion preserve bookmarks and metadata?",
+            "answer": "Yes, the tool preserves metadata (title, author, ISBN), cover images, table of contents, and internal bookmarks whenever the output format supports them."
+      },
+      {
+            "question": "Can I convert DRM-protected e-books?",
+            "answer": "No, DRM-protected e-books from Kindle Store, Apple Books, or Google Play cannot be converted. Remove DRM first using authorized tools."
+      },
+      {
+            "question": "What's the difference between EPUB and MOBI?",
+            "answer": "EPUB is the industry standard format supported by most readers (Apple Books, Google Play, Kobo). MOBI is Amazon's older format for older Kindles. Newer Kindles support both MOBI and EPUB. EPUB is recommended for broad compatibility."
+      }
+
+    ],},
   {
     id: "306",
     name: "Bulk HEIC to JPG",
@@ -2519,7 +3483,39 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library.",
     seoDescription: 'Free online Bulk HEIC to JPG — Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. ',
     dependencies: "libheif WASM, jszip",
-  },
+  
+    instructions: [
+
+      {
+            "title": "1. Upload HEIC Photos",
+            "desc": "Select HEIC images from your iPhone or iPad. The tool shows thumbnails of detected files."
+      },
+      {
+            "title": "2. Configure Output",
+            "desc": "Choose JPEG output quality (higher = better quality, larger file)."
+      },
+      {
+            "title": "3. Download JPGs",
+            "desc": "All converted JPG images are saved in a ZIP archive. File names are preserved from the original HEIC files."
+      }
+
+    ],
+    faqs: [
+
+      {
+            "question": "Why convert HEIC to JPG?",
+            "answer": "HEIC/HEIF is Apple's default photo format on iOS. While efficient, it's not supported by Windows, many web platforms, social media, or older software. JPG is the universal image format."
+      },
+      {
+            "question": "Do I lose quality converting HEIC to JPG?",
+            "answer": "HEIC uses more advanced compression than JPEG. There is some quality loss during conversion, but at high quality settings (90%+), the difference is imperceptible to most users."
+      },
+      {
+            "question": "How many HEIC photos can I convert at once?",
+            "answer": "Free users can convert up to 20 photos. Pro users can convert unlimited photos. Conversion uses libheif WASM in your browser."
+      }
+
+    ],},
   {
     id: "307",
     name: "Tax Saving Calculator",
@@ -2658,7 +3654,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to Markdown",
     slug: "pdf-to-markdown",
     category: "PDF",
-    description: 'Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Perfect for documentation, research papers, and text extraction.',
+    description: 'Convert PDF to MARKDOWN online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PDF to Markdown — Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
@@ -2678,7 +3674,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Scan to PDF",
     slug: "scan-to-pdf",
     category: "PDF",
-    description: 'Turn photos and scanned images into a professional PDF document. Upload multiple images (JPG, PNG), reorder them, and combine into a single PDF file. Perfect for digitizing documents.',
+    description: 'Convert SCAN to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -2698,7 +3694,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to PDF/A",
     slug: "pdf-to-pdfa",
     category: "PDF",
-    description: 'Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Ensures long-term preservation and compliance with ISO 19005 standards.',
+    description: 'Convert PDF to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PDF to PDF/A — Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -2838,7 +3834,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "URL to PDF",
     slug: "url-to-pdf",
     category: "PDF",
-    description: 'Convert any webpage to PDF directly in your browser. Enter a URL and save the page as a downloadable PDF document. Perfect for archiving articles, receipts, and web content.',
+    description: 'Convert URL to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online URL to PDF — Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. ',
     dependencies: "none",
     showInCategory: true,
@@ -2848,7 +3844,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Markdown to PDF",
     slug: "markdown-to-pdf",
     category: "PDF",
-    description: 'Convert Markdown text to beautifully formatted PDF documents. Supports headings, bold, italic, code blocks, lists, and custom page formatting. Perfect for documentation and notes.',
+    description: 'Convert MARKDOWN to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Markdown to PDF — Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. ',
     dependencies: "pdf-lib, marked",
     showInCategory: true,
@@ -2868,7 +3864,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "EML to PDF",
     slug: "eml-to-pdf",
     category: "PDF",
-    description: 'Convert email files (.eml) to PDF documents. Preserves headers (From, To, Subject, Date) and body content in a clean, printable format. Perfect for archiving important emails.',
+    description: 'Convert EML to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online EML to PDF — Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -2888,7 +3884,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PSD to JPG/PNG",
     slug: "psd-to-jpg-png",
     category: "Image",
-    description: 'Convert Adobe Photoshop PSD files to universal image formats. Extract layers and flatten designs to JPG, PNG, or WebP. Perfect for sharing designs with non-Photoshop users.',
+    description: 'Convert PSD images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PSD to JPG/PNG — Convert Adobe Photoshop PSD files to universal image formats. No uploads, works entirely in your browser.',
     dependencies: "ag-psd",
     showInCategory: true,
@@ -3178,7 +4174,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to PNG",
     slug: "svg-to-png",
     category: "Image",
-    description: 'Convert scalable vector graphics (SVG) into raster PNG images.',
+    description: 'Convert SVG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to PNG — Convert scalable vector graphics (SVG) into raster PNG images. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3188,7 +4184,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to JPG",
     slug: "svg-to-jpg",
     category: "Image",
-    description: 'Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats.',
+    description: 'Convert SVG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3198,7 +4194,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to GIF",
     slug: "png-to-gif",
     category: "Image",
-    description: 'Convert PNG images into GIF format for compatibility with older platforms and software.',
+    description: 'Convert PNG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3208,7 +4204,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to GIF",
     slug: "jpg-to-gif",
     category: "Image",
-    description: 'Convert JPEG photos into GIF format for legacy applications and platforms with limited format support.',
+    description: 'Convert JPG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3218,7 +4214,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to GIF",
     slug: "webp-to-gif",
     category: "Image",
-    description: 'Convert modern WebP images into the widely compatible GIF format.',
+    description: 'Convert WEBP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3228,7 +4224,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to JPG",
     slug: "bmp-to-jpg",
     category: "Image",
-    description: 'Convert uncompressed BMP bitmap images into space-efficient JPEG files.',
+    description: 'Convert BMP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3238,7 +4234,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to PNG",
     slug: "bmp-to-png",
     category: "Image",
-    description: 'Convert BMP bitmap images into compressed PNG format with optional transparency.',
+    description: 'Convert BMP images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3248,7 +4244,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to JPG",
     slug: "tiff-to-jpg",
     category: "Image",
-    description: 'Convert TIFF images into universally compatible JPEG format for sharing on the web or via email.',
+    description: 'Convert TIFF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3258,7 +4254,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to PNG",
     slug: "tiff-to-png",
     category: "Image",
-    description: 'Convert TIFF images into lossless PNG format for graphic design workflows.',
+    description: 'Convert TIFF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to PNG — Convert TIFF images into lossless PNG format for graphic design workflows. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3268,7 +4264,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to JPG",
     slug: "gif-to-jpg",
     category: "Image",
-    description: 'Convert GIF images into JPEG format with millions of colors instead of GIF\'s limited 256-color palette.',
+    description: 'Convert GIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.'s limited 256-color palette.',
     seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3278,7 +4274,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to PNG",
     slug: "gif-to-png",
     category: "Image",
-    description: 'Convert GIF images into lossless PNG format with superior color depth and compression.',
+    description: 'Convert GIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3288,7 +4284,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to PNG",
     slug: "ico-to-png",
     category: "Image",
-    description: 'Extract Windows icon (.ico) files and convert them into universal PNG images for web and design use.',
+    description: 'Convert ICO images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to PNG — Extract Windows icon (.ico) files and convert them into universal PNG images. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3298,7 +4294,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to PNG",
     slug: "jxl-to-png",
     category: "Image",
-    description: 'Convert JPEG XL images into universally compatible PNG format for use in software without JXL support.',
+    description: 'Convert JXL images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to PNG — Convert JPEG XL images into universally compatible PNG format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3308,7 +4304,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to JPG",
     slug: "jxl-to-jpg",
     category: "Image",
-    description: 'Convert JPEG XL images into standard JPEG format for maximum compatibility across all platforms.',
+    description: 'Convert JXL images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to JPEG — Convert JPEG XL images into standard JPEG format for maximum compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3318,7 +4314,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to MP3",
     slug: "wma-to-mp3",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) files into universally compatible MP3 format.',
+    description: 'Convert WMA audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3328,7 +4324,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to MP3",
     slug: "opus-to-mp3",
     category: "Audio",
-    description: 'Convert Opus audio files into the more widely supported MP3 format for broad compatibility.',
+    description: 'Convert OPUS audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3338,7 +4334,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to MP3",
     slug: "aiff-to-mp3",
     category: "Audio",
-    description: 'Convert Apple\'s AIFF audio files into space-saving MP3 format while preserving good audio quality.',
+    description: 'Convert AIFF audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.'s AIFF audio files into space-saving MP3 format while preserving good audio quality.',
     seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3358,7 +4354,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to WebP/WebM",
     slug: "gif-to-webp-webm",
     category: "Converter",
-    description: 'Convert animated GIFs to modern WebP (animated image, ~10x smaller) or WebM video formats. Preserves transparency with WebP output.',
+    description: 'Convert GIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
@@ -3368,7 +4364,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to JPG",
     slug: "avif-to-jpg",
     category: "Image",
-    description: 'Convert AVIF images back to universally compatible JPEG format.',
+    description: 'Convert AVIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to JPG — Convert AVIF images back to universally compatible JPEG format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3378,7 +4374,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to PNG",
     slug: "avif-to-png",
     category: "Image",
-    description: 'Convert AVIF images to lossless PNG format for maximum compatibility.',
+    description: 'Convert AVIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to PNG — Convert AVIF images to lossless PNG format for maximum compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3388,7 +4384,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to AVIF",
     slug: "bmp-to-avif",
     category: "Image",
-    description: 'Convert BMP bitmap images into next-gen AVIF format with superior compression.',
+    description: 'Convert BMP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to AVIF — Convert BMP bitmap images into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3398,7 +4394,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to GIF",
     slug: "bmp-to-gif",
     category: "Image",
-    description: 'Convert BMP bitmap images into GIF format for compatibility with legacy platforms.',
+    description: 'Convert BMP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3408,7 +4404,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to WebP",
     slug: "bmp-to-webp",
     category: "Image",
-    description: 'Convert BMP bitmap images into modern WebP format for dramatically smaller file sizes.',
+    description: 'Convert BMP images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3418,7 +4414,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to AVIF",
     slug: "gif-to-avif",
     category: "Image",
-    description: 'Convert GIF images into modern AVIF format for better compression and color depth.',
+    description: 'Convert GIF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to AVIF — Convert GIF images into modern AVIF format with better compression and color depth. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3428,7 +4424,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to WebP",
     slug: "gif-to-webp",
     category: "Image",
-    description: 'Convert GIF images into modern WebP format for smaller file sizes with optional animation support.',
+    description: 'Convert GIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3438,7 +4434,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to AVIF",
     slug: "heic-to-avif",
     category: "Image",
-    description: 'Convert Apple HEIC/HEIF photos into next-gen AVIF format for superior compression.',
+    description: 'Convert HEIC images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3448,7 +4444,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to GIF",
     slug: "heic-to-gif",
     category: "Image",
-    description: 'Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms.',
+    description: 'Convert HEIC images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3458,7 +4454,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to WebP",
     slug: "heic-to-webp",
     category: "Image",
-    description: 'Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery.',
+    description: 'Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3468,7 +4464,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to JPG",
     slug: "ico-to-jpg",
     category: "Image",
-    description: 'Convert Windows icon files into universally compatible JPEG format.',
+    description: 'Convert ICO images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to JPG — Convert Windows icon files into universally compatible JPEG format. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3478,7 +4474,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to WebP",
     slug: "ico-to-webp",
     category: "Image",
-    description: 'Convert Windows icon files into modern WebP format for web use.',
+    description: 'Convert ICO images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to WebP — Convert Windows icon files into modern WebP format for web use. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3488,7 +4484,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to JXL",
     slug: "jpg-to-jxl",
     category: "Image",
-    description: 'Convert JPEG photos into cutting-edge JPEG XL format for superior compression.',
+    description: 'Convert JPG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3498,7 +4494,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to GIF",
     slug: "jxl-to-gif",
     category: "Image",
-    description: 'Convert JPEG XL images into GIF format for use on legacy platforms.',
+    description: 'Convert JXL images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3508,7 +4504,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to WebP",
     slug: "jxl-to-webp",
     category: "Image",
-    description: 'Convert JPEG XL images into modern WebP format for broader compatibility.',
+    description: 'Convert JXL images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to WebP — Convert JPEG XL images into modern WebP format for broader compatibility. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3518,7 +4514,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to JXL",
     slug: "png-to-jxl",
     category: "Image",
-    description: 'Convert PNG images into JPEG XL format for better compression while preserving quality.',
+    description: 'Convert PNG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to JXL — Convert PNG images into JPEG XL format for better compression while preserving quality. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3528,7 +4524,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to AVIF",
     slug: "svg-to-avif",
     category: "Image",
-    description: 'Convert SVG vector graphics into AVIF format for next-gen web delivery.',
+    description: 'Convert SVG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3538,7 +4534,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to GIF",
     slug: "svg-to-gif",
     category: "Image",
-    description: 'Convert SVG vector graphics into GIF format for use in legacy applications.',
+    description: 'Convert SVG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to GIF — Convert SVG vector graphics into GIF format for use in legacy applications. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3548,7 +4544,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to WebP",
     slug: "svg-to-webp",
     category: "Image",
-    description: 'Convert SVG vector graphics into modern WebP format for efficient web delivery.',
+    description: 'Convert SVG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to WebP — Convert SVG vector graphics into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3558,7 +4554,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to AVIF",
     slug: "tiff-to-avif",
     category: "Image",
-    description: 'Convert TIFF images into next-gen AVIF format for best-in-class compression.',
+    description: 'Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3568,7 +4564,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to GIF",
     slug: "tiff-to-gif",
     category: "Image",
-    description: 'Convert TIFF images into GIF format for use in applications with limited format support.',
+    description: 'Convert TIFF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to GIF — Convert TIFF images into GIF format for use in applications with limited format support. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3578,7 +4574,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to WebP",
     slug: "tiff-to-webp",
     category: "Image",
-    description: 'Convert TIFF images into modern WebP format for smaller file sizes and web use.',
+    description: 'Convert TIFF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3588,7 +4584,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WebP to AVIF",
     slug: "webp-to-avif",
     category: "Image",
-    description: 'Convert WebP images into AVIF format for even better compression ratios.',
+    description: 'Convert WEBP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to AVIF — Convert WebP images into AVIF format for even better compression ratios. ',
     dependencies: "Canvas API",
     showInCategory: false
@@ -3598,7 +4594,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to FLAC",
     slug: "aac-to-flac",
     category: "Audio",
-    description: 'Convert AAC audio files into lossless FLAC format for archival and professional use.',
+    description: 'Convert AAC audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3608,7 +4604,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to M4A",
     slug: "aac-to-m4a",
     category: "Audio",
-    description: 'Convert AAC audio files into M4A container format for broader compatibility.',
+    description: 'Convert AAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3618,7 +4614,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to OGG",
     slug: "aac-to-ogg",
     category: "Audio",
-    description: 'Convert AAC audio files into OGG Vorbis format for open-source platforms.',
+    description: 'Convert AAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3628,7 +4624,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to WAV",
     slug: "aac-to-wav",
     category: "Audio",
-    description: 'Convert AAC audio files into uncompressed WAV format for professional editing.',
+    description: 'Convert AAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3638,7 +4634,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to AAC",
     slug: "flac-to-aac",
     category: "Audio",
-    description: 'Convert lossless FLAC audio into space-efficient AAC format for portable devices.',
+    description: 'Convert FLAC audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3648,7 +4644,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to M4A",
     slug: "flac-to-m4a",
     category: "Audio",
-    description: 'Convert lossless FLAC audio into M4A format for Apple ecosystem compatibility.',
+    description: 'Convert FLAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3658,7 +4654,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to OGG",
     slug: "flac-to-ogg",
     category: "Audio",
-    description: 'Convert lossless FLAC audio into OGG Vorbis format for open-source software.',
+    description: 'Convert FLAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3668,7 +4664,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to WAV",
     slug: "flac-to-wav",
     category: "Audio",
-    description: 'Convert lossless FLAC audio into uncompressed WAV format for professional audio workflows.',
+    description: 'Convert FLAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3678,7 +4674,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to AAC",
     slug: "m4a-to-aac",
     category: "Audio",
-    description: 'Convert M4A audio files into raw AAC format for systems that require AAC codec.',
+    description: 'Convert M4A audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3688,7 +4684,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to FLAC",
     slug: "m4a-to-flac",
     category: "Audio",
-    description: 'Convert M4A audio files into lossless FLAC format for archival storage.',
+    description: 'Convert M4A audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3698,7 +4694,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to OGG",
     slug: "m4a-to-ogg",
     category: "Audio",
-    description: 'Convert M4A audio files into OGG Vorbis format for open-source platforms.',
+    description: 'Convert M4A audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3708,7 +4704,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to WAV",
     slug: "m4a-to-wav",
     category: "Audio",
-    description: 'Convert M4A audio files into uncompressed WAV format for audio editing.',
+    description: 'Convert M4A audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to WAV — Convert M4A audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3718,7 +4714,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to AAC",
     slug: "mp3-to-aac",
     category: "Audio",
-    description: 'Convert MP3 audio files into AAC format for better quality at similar bitrates.',
+    description: 'Convert MP3 audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to AAC — Convert MP3 audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3728,7 +4724,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to AIFF",
     slug: "mp3-to-aiff",
     category: "Audio",
-    description: 'Convert MP3 audio files into uncompressed AIFF format for professional audio production.',
+    description: 'Convert MP3 audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3738,7 +4734,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to FLAC",
     slug: "mp3-to-flac",
     category: "Audio",
-    description: 'Convert MP3 audio files into lossless FLAC format for archival storage and further editing.',
+    description: 'Convert MP3 audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3748,7 +4744,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to M4A",
     slug: "mp3-to-m4a",
     category: "Audio",
-    description: 'Convert MP3 audio files into M4A format for Apple device compatibility.',
+    description: 'Convert MP3 audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3758,7 +4754,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to OGG",
     slug: "mp3-to-ogg",
     category: "Audio",
-    description: 'Convert MP3 audio files into OGG Vorbis format for open-source applications.',
+    description: 'Convert MP3 audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3768,7 +4764,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to Opus",
     slug: "mp3-to-opus",
     category: "Audio",
-    description: 'Convert MP3 audio files into Opus format for superior compression efficiency.',
+    description: 'Convert MP3 audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3778,7 +4774,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP3 to WMA",
     slug: "mp3-to-wma",
     category: "Audio",
-    description: 'Convert MP3 audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert MP3 audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3788,7 +4784,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to AAC",
     slug: "ogg-to-aac",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into AAC format for broader device compatibility.',
+    description: 'Convert OGG audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to AAC — Convert OGG Vorbis audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3798,7 +4794,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to FLAC",
     slug: "ogg-to-flac",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into lossless FLAC format for archival purposes.',
+    description: 'Convert OGG audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to FLAC — Convert OGG Vorbis audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3808,7 +4804,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to M4A",
     slug: "ogg-to-m4a",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into M4A format for Apple ecosystem compatibility.',
+    description: 'Convert OGG audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3818,7 +4814,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to WAV",
     slug: "ogg-to-wav",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into uncompressed WAV format for professional editing.',
+    description: 'Convert OGG audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3828,7 +4824,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to AAC",
     slug: "wav-to-aac",
     category: "Audio",
-    description: 'Convert WAV audio files into space-efficient AAC format for portable devices.',
+    description: 'Convert WAV audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3838,7 +4834,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to AIFF",
     slug: "wav-to-aiff",
     category: "Audio",
-    description: 'Convert WAV audio files into AIFF format for Apple ecosystem compatibility.',
+    description: 'Convert WAV audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3848,7 +4844,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to FLAC",
     slug: "wav-to-flac",
     category: "Audio",
-    description: 'Convert uncompressed WAV files into lossless FLAC format to save storage space.',
+    description: 'Convert WAV audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to FLAC — Convert uncompressed WAV files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3858,7 +4854,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to M4A",
     slug: "wav-to-m4a",
     category: "Audio",
-    description: 'Convert WAV audio files into M4A format for Apple device compatibility.',
+    description: 'Convert WAV audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3868,7 +4864,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to OGG",
     slug: "wav-to-ogg",
     category: "Audio",
-    description: 'Convert WAV audio files into OGG Vorbis format for open-source platforms.',
+    description: 'Convert WAV audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3878,7 +4874,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to Opus",
     slug: "wav-to-opus",
     category: "Audio",
-    description: 'Convert WAV audio files into Opus format for best-in-class compression efficiency.',
+    description: 'Convert WAV audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3888,7 +4884,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to WMA",
     slug: "wav-to-wma",
     category: "Audio",
-    description: 'Convert WAV audio files into Windows Media Audio format for Windows compatibility.',
+    description: 'Convert WAV audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -3929,7 +4925,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to APNG",
     slug: "gif-to-apng",
     category: "Image",
-    description: 'Convert animated GIFs to APNG (animated PNG) format. APNG supports 24-bit color and 8-bit alpha transparency — better quality than GIF.',
+    description: 'Convert GIF images to APNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to APNG Converter — Convert animated GIFs to APNG format with 24-bit color and alpha transparency. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
@@ -3939,7 +4935,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "APNG to GIF",
     slug: "apng-to-gif",
     category: "Image",
-    description: 'Convert animated PNG (APNG) files into universally compatible GIF format. Preserves animation frames and timing.',
+    description: 'Convert APNG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
@@ -3949,7 +4945,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Image to ICO",
     slug: "image-to-ico",
     category: "Image",
-    description: 'Convert any image format to Windows ICO icon format. Choose from standard sizes and generate multi-resolution icons.',
+    description: 'Convert IMAGE images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. ',
     dependencies: "Canvas API",
     showInCategory: true,
@@ -4008,7 +5004,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to TIFF",
     slug: "pdf-to-tiff",
     category: "PDF",
-    description: 'Convert PDF pages to high-quality TIFF images. Supports multi-page TIFF output, DPI control, and LZW compression for document archiving.',
+    description: 'Convert PDF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PDF to TIFF — Convert PDF pages to high-quality TIFF images. Multi-page output, DPI control, LZW compression. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
@@ -4018,7 +5014,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to PDF",
     slug: "tiff-to-pdf",
     category: "PDF",
-    description: 'Convert TIFF images to universally compatible PDF documents. Supports multi-page TIFF with customizable page size and margins.',
+    description: 'Convert TIFF images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. ',
     dependencies: "pdf-lib, utif",
     showInCategory: true,
@@ -4048,7 +5044,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CBZ to PDF",
     slug: "cbz-to-pdf",
     category: "Converter",
-    description: 'Convert comic book archives (CBZ) to PDF for easy reading on any device. Supports page ranges, double-page spreads, and multiple page sizes.',
+    description: 'Convert CBZ to PDF online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
@@ -4095,7 +5091,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WAV to MP3",
     slug: "wav-to-mp3",
     category: "Audio",
-    description: 'Convert uncompressed WAV audio files into widely compatible MP3 format for universal playback on any device.',
+    description: 'Convert WAV audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4105,7 +5101,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to MP3",
     slug: "flac-to-mp3",
     category: "Audio",
-    description: 'Convert lossless FLAC audio files into widely compatible MP3 format for universal playback on any device.',
+    description: 'Convert FLAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4115,7 +5111,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to WMA",
     slug: "flac-to-wma",
     category: "Audio",
-    description: 'Convert lossless FLAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert FLAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4125,7 +5121,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to Opus",
     slug: "flac-to-opus",
     category: "Audio",
-    description: 'Convert lossless FLAC audio files into Opus format for superior compression efficiency.',
+    description: 'Convert FLAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4135,7 +5131,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "FLAC to AIFF",
     slug: "flac-to-aiff",
     category: "Audio",
-    description: 'Convert lossless FLAC audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert FLAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4145,7 +5141,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to MP3",
     slug: "ogg-to-mp3",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into widely compatible MP3 format for universal playback on any device.',
+    description: 'Convert OGG audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4155,7 +5151,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to WMA",
     slug: "ogg-to-wma",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert OGG audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4165,7 +5161,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to Opus",
     slug: "ogg-to-opus",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into Opus format for superior compression efficiency.',
+    description: 'Convert OGG audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4175,7 +5171,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OGG to AIFF",
     slug: "ogg-to-aiff",
     category: "Audio",
-    description: 'Convert OGG Vorbis audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert OGG audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4185,7 +5181,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to MP3",
     slug: "m4a-to-mp3",
     category: "Audio",
-    description: 'Convert M4A audio files into widely compatible MP3 format for universal playback on any device.',
+    description: 'Convert M4A audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4195,7 +5191,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to WMA",
     slug: "m4a-to-wma",
     category: "Audio",
-    description: 'Convert M4A audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert M4A audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4205,7 +5201,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to Opus",
     slug: "m4a-to-opus",
     category: "Audio",
-    description: 'Convert M4A audio files into Opus format for superior compression efficiency.',
+    description: 'Convert M4A audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4215,7 +5211,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "M4A to AIFF",
     slug: "m4a-to-aiff",
     category: "Audio",
-    description: 'Convert M4A audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert M4A audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4225,7 +5221,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to MP3",
     slug: "aac-to-mp3",
     category: "Audio",
-    description: 'Convert AAC audio files into widely compatible MP3 format for universal playback on any device.',
+    description: 'Convert AAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4235,7 +5231,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to WMA",
     slug: "aac-to-wma",
     category: "Audio",
-    description: 'Convert AAC audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert AAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4245,7 +5241,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to Opus",
     slug: "aac-to-opus",
     category: "Audio",
-    description: 'Convert AAC audio files into Opus format for superior compression efficiency.',
+    description: 'Convert AAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4255,7 +5251,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AAC to AIFF",
     slug: "aac-to-aiff",
     category: "Audio",
-    description: 'Convert AAC audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert AAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4265,7 +5261,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to WAV",
     slug: "wma-to-wav",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into uncompressed WAV format for professional audio editing and production.',
+    description: 'Convert WMA audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4275,7 +5271,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to FLAC",
     slug: "wma-to-flac",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into lossless FLAC format for archival storage and audiophile playback.',
+    description: 'Convert WMA audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4285,7 +5281,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to OGG",
     slug: "wma-to-ogg",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into OGG Vorbis format for open-source platforms and applications.',
+    description: 'Convert WMA audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4295,7 +5291,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to M4A",
     slug: "wma-to-m4a",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into M4A format for Apple ecosystem compatibility.',
+    description: 'Convert WMA audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4305,7 +5301,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to AAC",
     slug: "wma-to-aac",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into AAC format for modern device and platform compatibility.',
+    description: 'Convert WMA audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4315,7 +5311,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to Opus",
     slug: "wma-to-opus",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into Opus format for superior compression efficiency.',
+    description: 'Convert WMA audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4325,7 +5321,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WMA to AIFF",
     slug: "wma-to-aiff",
     category: "Audio",
-    description: 'Convert Windows Media Audio (WMA) audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert WMA audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4335,7 +5331,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to WAV",
     slug: "opus-to-wav",
     category: "Audio",
-    description: 'Convert Opus audio files into uncompressed WAV format for professional audio editing and production.',
+    description: 'Convert OPUS audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4345,7 +5341,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to FLAC",
     slug: "opus-to-flac",
     category: "Audio",
-    description: 'Convert Opus audio files into lossless FLAC format for archival storage and audiophile playback.',
+    description: 'Convert OPUS audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4355,7 +5351,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to OGG",
     slug: "opus-to-ogg",
     category: "Audio",
-    description: 'Convert Opus audio files into OGG Vorbis format for open-source platforms and applications.',
+    description: 'Convert OPUS audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4365,7 +5361,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to M4A",
     slug: "opus-to-m4a",
     category: "Audio",
-    description: 'Convert Opus audio files into M4A format for Apple ecosystem compatibility.',
+    description: 'Convert OPUS audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4375,7 +5371,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to AAC",
     slug: "opus-to-aac",
     category: "Audio",
-    description: 'Convert Opus audio files into AAC format for modern device and platform compatibility.',
+    description: 'Convert OPUS audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4385,7 +5381,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to WMA",
     slug: "opus-to-wma",
     category: "Audio",
-    description: 'Convert Opus audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert OPUS audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4395,7 +5391,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Opus to AIFF",
     slug: "opus-to-aiff",
     category: "Audio",
-    description: 'Convert Opus audio files into AIFF format for Apple professional audio workflows.',
+    description: 'Convert OPUS audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4405,7 +5401,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to WAV",
     slug: "aiff-to-wav",
     category: "Audio",
-    description: 'Convert AIFF audio files into uncompressed WAV format for professional audio editing and production.',
+    description: 'Convert AIFF audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4415,7 +5411,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to FLAC",
     slug: "aiff-to-flac",
     category: "Audio",
-    description: 'Convert AIFF audio files into lossless FLAC format for archival storage and audiophile playback.',
+    description: 'Convert AIFF audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4425,7 +5421,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to OGG",
     slug: "aiff-to-ogg",
     category: "Audio",
-    description: 'Convert AIFF audio files into OGG Vorbis format for open-source platforms and applications.',
+    description: 'Convert AIFF audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4435,7 +5431,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to M4A",
     slug: "aiff-to-m4a",
     category: "Audio",
-    description: 'Convert AIFF audio files into M4A format for Apple ecosystem compatibility.',
+    description: 'Convert AIFF audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4445,7 +5441,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to AAC",
     slug: "aiff-to-aac",
     category: "Audio",
-    description: 'Convert AIFF audio files into AAC format for modern device and platform compatibility.',
+    description: 'Convert AIFF audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4455,7 +5451,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to WMA",
     slug: "aiff-to-wma",
     category: "Audio",
-    description: 'Convert AIFF audio files into Windows Media Audio format for Windows ecosystem compatibility.',
+    description: 'Convert AIFF audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4465,7 +5461,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AIFF to Opus",
     slug: "aiff-to-opus",
     category: "Audio",
-    description: 'Convert AIFF audio files into Opus format for superior compression efficiency.',
+    description: 'Convert AIFF audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -4574,7 +5570,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HTML to JSX Converter",
     slug: "html-to-jsx",
     category: "Developer",
-    description: 'Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more.',
+    description: 'Convert HTML to JSX online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
         },
@@ -4592,16 +5588,16 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to CSS Converter",
     slug: "svg-to-css",
     category: "Developer",
-    description: 'Convert SVG markup to CSS background-image data URIs. Preview the result as a rendered icon.',
+    description: 'Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
         },
   {
     id: "509",
-    name: "cURL to Code Converter",
+    name: "cURL to Code",
     slug: "curl-to-code",
     category: "Developer",
-    description: 'Convert cURL commands to JavaScript (fetch, axios, XHR), Python (requests), and PHP (cURL) code.',
+    description: 'Convert CURL to CODE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. ',
     dependencies: "None",
   },
@@ -4610,7 +5606,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to Code Generator",
     slug: "json-to-code",
     category: "Developer",
-    description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Supports nested objects and arrays.',
+    description: 'Convert JSON to CODE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
         },
@@ -4850,7 +5846,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to PNG",
     slug: "pdf-to-png",
     category: "PDF",
-    description: 'Convert PDF pages to PNG, WebP, or BMP images with configurable DPI and color modes. Perfect for extracting slides, graphics, and document pages as standalone images.',
+    description: 'Convert PDF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PDF to PNG — Convert PDF pages to PNG, WebP, or BMP images. Extract slides and graphics with customizable DPI and color modes. ',
     dependencies: "pdfjs-dist, jszip",
     showInCategory: true,
@@ -5144,7 +6140,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Base64 to JSON Decoder",
     slug: "base64-json-decoder",
     category: "Developer" as ToolCategory,
-    description: 'Decode Base64 strings and pretty-print the resulting JSON.',
+    description: 'Convert BASE64 to JSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
   },
@@ -5153,7 +6149,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Hex to Text Converter",
     slug: "hex-text-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert between hexadecimal strings and readable text.',
+    description: 'Convert HEX to TEXT online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
         },
@@ -5162,7 +6158,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to Base64 Converter",
     slug: "svg-base64-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert SVG markup to a Base64 data URI for embedding in HTML or CSS.',
+    description: 'Convert SVG images to BASE64 format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to Base64 Converter \u2014 Convert SVG to data URIs. ',
     dependencies: "None",
   },
@@ -5189,7 +6185,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Markdown to Slack Converter",
     slug: "markdown-slack-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Markdown formatting to Slack mrkdwn syntax.',
+    description: 'Convert MARKDOWN to SLACK online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Markdown to Slack Converter \u2014 Convert Markdown to Slack mrkdwn. ',
     dependencies: "None",
   },
@@ -5198,7 +6194,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PX to REM Converter",
     slug: "px-rem-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert between PX and REM units with configurable base font size.',
+    description: 'Convert PX to REM online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
   },
@@ -5213,7 +6209,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   },
   {
     id: "543j",
-    name: "Speed Converter",
+    name: "Speed Converter (Advanced)",
     slug: "speed-converter-advanced",
     category: "Utility" as ToolCategory,
     description: 'Convert between km/h, mph, m/s, knots, and ft/s.',
@@ -5294,7 +6290,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "INI to JSON Converter",
     slug: "ini-json-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert INI configuration files with sections and key-value pairs to JSON.',
+    description: 'Convert INI to JSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
     dependencies: "None",
         },
@@ -5330,7 +6326,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Code to cURL Converter",
     slug: "code-to-curl-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert fetch/axios/request code to cURL commands.',
+    description: 'Convert CODE to CURL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Code to cURL Converter \u2014 Convert fetch/axios code to cURL. ',
     dependencies: "None",
         },
@@ -5339,7 +6335,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "cURL to Code Converter",
     slug: "curl-to-code-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert cURL commands to fetch() JavaScript code.',
+    description: 'Convert CURL to CODE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online cURL to Code Converter \u2014 Convert cURL commands to fetch(). ',
     dependencies: "None",
   },
@@ -5411,7 +6407,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SCSS to CSS Converter",
     slug: "scss-to-css-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert SCSS variables, nesting, and parent selectors to plain CSS.',
+    description: 'Convert SCSS to CSS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
         },
@@ -5420,7 +6416,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Stylus to CSS Converter",
     slug: "stylus-to-css-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Stylus syntax with indentation-based nesting to plain CSS.',
+    description: 'Convert STYLUS to CSS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
         },
@@ -5429,7 +6425,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Tailwind to CSS Converter",
     slug: "tailwind-to-css-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Tailwind CSS utility classes to plain CSS properties (40+ class mappings).',
+    description: 'Convert TAILWIND to CSS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
         },
@@ -5566,7 +6562,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Hourly to Salary Calculator",
     slug: "hourly-to-salary-calculator",
     category: "Calculator" as ToolCategory,
-    description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income.',
+    description: 'Convert HOURLY to SALARY online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. ',
     dependencies: "None",
   },
@@ -6034,7 +7030,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Steps to Calories Calculator",
     slug: "steps-to-calories-calculator",
     category: "Calculator" as ToolCategory,
-    description: 'Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked.',
+    description: 'Convert STEPS to CALORIES online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Steps to Calories Calculator — Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. ',
     dependencies: "None",
   },
@@ -6385,7 +7381,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "OpenAPI to Postman",
     slug: "openapi-to-postman",
     category: "Developer" as ToolCategory,
-    description: 'Convert OpenAPI specs to Postman collection JSON format. Import the result directly into Postman for API testing.',
+    description: 'Convert OPENAPI to POSTMAN online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online OpenAPI to Postman — Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. ',
     dependencies: "None",
   },
@@ -6412,7 +7408,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Postman to OpenAPI Converter",
     slug: "postman-to-openapi-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation from Postman to OpenAPI format.',
+    description: 'Convert POSTMAN to OPENAPI online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Postman to OpenAPI Converter — Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. ',
     dependencies: "None",
   },
@@ -7075,7 +8071,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Text to HTML Converter",
     slug: "text-to-html-converter",
     category: "SEO" as ToolCategory,
-    description: 'Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators.',
+    description: 'Convert TEXT to HTML online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. ',
     dependencies: "None",
         },
@@ -7084,7 +8080,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HTML to Text Converter",
     slug: "html-to-text-converter",
     category: "SEO" as ToolCategory,
-    description: 'Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text.',
+    description: 'Convert HTML to TEXT online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online HTML to Text Converter — Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. ',
     dependencies: "None",
         },
@@ -7229,7 +8225,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Number to Words Converter",
     slug: "number-to-words-converter",
     category: "Utility" as ToolCategory,
-    description: 'Convert any number to its English word representation. Supports large numbers up to billions.',
+    description: 'Convert NUMBER to WORDS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Number to Words Converter \u2014 Convert any number to its English word representation. Supports large numbers up to billions. ',
     dependencies: "None",
       },
@@ -7283,7 +8279,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Fraction to Decimal Calculator",
     slug: "fraction-to-decimal-calculator",
     category: "Utility" as ToolCategory,
-    description: 'Convert fractions to decimal numbers. Shows the step-by-step division process.',
+    description: 'Convert FRACTION to DECIMAL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. ',
     dependencies: "None",
   },
@@ -7292,7 +8288,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Decimal to Fraction Calculator",
     slug: "decimal-to-fraction-calculator",
     category: "Utility" as ToolCategory,
-    description: 'Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision.',
+    description: 'Convert DECIMAL to FRACTION online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Decimal to Fraction Calculator \u2014 Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. ',
     dependencies: "None",
   },
@@ -7593,7 +8589,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Steps to Distance",
     slug: "steps-calculator",
     category: "Health" as ToolCategory,
-    description: 'Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count.',
+    description: 'Convert STEPS to DISTANCE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Steps to Distance \u2014 Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. ',
     dependencies: "None",
   },
@@ -7702,7 +8698,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Minutes to Hours Converter",
     slug: "minutes-to-hours-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing.',
+    description: 'Convert MINUTES to HOURS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. ',
     dependencies: "None",
   },
@@ -7711,7 +8707,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Hours to Minutes Tool",
     slug: "hours-to-minutes-tool",
     category: "Developer" as ToolCategory,
-    description: 'Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets.',
+    description: 'Convert HOURS to MINUTES online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Hours to Minutes Tool \u2014 Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. ',
     dependencies: "None",
   },
@@ -7720,7 +8716,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Seconds to Minutes Converter",
     slug: "seconds-to-minutes-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use.',
+    description: 'Convert SECONDS to MINUTES online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Seconds to Minutes Converter \u2014 Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. ',
     dependencies: "None",
   },
@@ -8089,7 +9085,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Hours to Minutes Converter",
     slug: "hours-to-minutes-converter",
     category: "Utility" as ToolCategory,
-    description: 'Convert hours and minutes to total minutes for time tracking and scheduling.',
+    description: 'Convert HOURS to MINUTES online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Hours to Minutes Converter \u2014 Convert hours and minutes to total minutes for time tracking and scheduling. ',
     dependencies: "None",
   },
@@ -8098,7 +9094,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Parquet to CSV Converter",
     slug: "parquet-to-csv-converter",
     category: "Converter" as ToolCategory,
-    description: 'Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats.',
+    description: 'Convert PARQUET to CSV online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. ',
     dependencies: "None",
       },
@@ -8151,7 +9147,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to DOCX",
     slug: "pdf-to-docx",
     category: "PDF" as ToolCategory,
-    description: 'Simulate PDF to DOCX conversion with estimated output size and format details.',
+    description: 'Convert PDF to DOCX online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PDF to DOCX Converter \u2014 Simulate PDF to Word conversion with estimated output size and format details. ',
     dependencies: "None",
   },
@@ -8160,7 +9156,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PDF to TXT",
     slug: "pdf-to-txt",
     category: "PDF" as ToolCategory,
-    description: 'Extract plain text from PDF files with estimated output size and extraction details.',
+    description: 'Convert PDF to TXT online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online PDF to TXT Extractor \u2014 Extract plain text from PDF files with estimated output size. ',
     dependencies: "None",
   },
@@ -8169,7 +9165,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to SQLite Web Terminal",
     slug: "csv-to-sqlite",
     category: "Developer" as ToolCategory,
-    description: 'Upload CSV files and run SQL queries in your browser. Auto-creates tables from CSV headers, execute SELECT/INSERT/UPDATE/DELETE queries, export results. All processing stays on your device with zero uploads.',
+    description: 'Convert CSV to SQLITE online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     dependencies: "sql.js",
   },
   {
@@ -8761,7 +9757,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Avro to JSON Sample Generator",
     slug: "avro-to-json-sample",
     category: "Developer" as ToolCategory,
-    description: 'Generate sample JSON data from an Avro schema definition. Auto-generates realistic values based on field types (string, int, float, boolean).',
+    description: 'Convert AVRO to JSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. ',
     dependencies: "Vanilla JS",
   },
@@ -8889,7 +9885,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to Markdown Table",
     slug: "csv-to-markdown",
     category: "Utility" as ToolCategory,
-    description: 'Convert CSV data into a clean GitHub-flavored Markdown table. Perfect for documentation, README files, and wiki pages.',
+    description: 'Convert CSV to MARKDOWN online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
     dependencies: "Vanilla JS",        },
   {
@@ -8897,7 +9893,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to NDJSON",
     slug: "csv-to-ndjson",
     category: "Utility" as ToolCategory,
-    description: 'Convert CSV data to Newline Delimited JSON (NDJSON). Each CSV row becomes a separate JSON object on its own line.',
+    description: 'Convert CSV to NDJSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
     dependencies: "Vanilla JS",        },
   {
@@ -8905,7 +9901,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSV to SQL INSERT",
     slug: "csv-to-sql",
     category: "Utility" as ToolCategory,
-    description: 'Generate SQL INSERT statements from CSV data. Specify a table name and get executable SQL for database import.',
+    description: 'Convert CSV to SQL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. ',
     dependencies: "Vanilla JS",        },
   {
@@ -8963,7 +9959,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to Zod Schema",
     slug: "json-to-zod",
     category: "Developer" as ToolCategory,
-    description: 'Generate Zod validation schemas from sample JSON data. Create TypeScript-first runtime validation for your API responses.',
+    description: 'Convert JSON to ZOD online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. ',
     dependencies: "Vanilla JS",        },
   {
@@ -8989,7 +9985,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "NDJSON to JSON Array",
     slug: "ndjson-to-json",
     category: "Developer" as ToolCategory,
-    description: 'Convert Newline Delimited JSON (NDJSON) into a standard JSON array. Wrap each line as an array element.',
+    description: 'Convert NDJSON to JSON online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online NDJSON to JSON Array — Convert Newline Delimited JSON into a standard JSON array format. ',
     dependencies: "Vanilla JS",        },
   {
@@ -8997,7 +9993,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JSON to URL Parameters",
     slug: "json-to-url-params",
     category: "Developer" as ToolCategory,
-    description: 'Convert JSON objects into URL query string parameters. Transform `{"key":"val"}` to `key=val` format for API calls.',
+    description: 'Convert JSON to URL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online JSON to URL Parameters — Convert JSON objects into URL query string parameters for API calls and web requests. ',
     dependencies: "Vanilla JS",
   },
@@ -9042,7 +10038,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "CSS to SCSS Converter",
     slug: "css-to-scss-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert plain CSS to SCSS syntax with nesting and parent selector references. Analyze CSS structure for SCSS migration.',
+    description: 'Convert CSS to SCSS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online CSS to SCSS Converter — Convert plain CSS to SCSS syntax with nesting and parent selector references. ',
     dependencies: "None",
         },
@@ -9051,7 +10047,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Less to CSS Converter",
     slug: "less-to-css-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS.',
+    description: 'Convert LESS to CSS online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Less to CSS Converter — Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. ',
     dependencies: "None",
         },
@@ -9078,7 +10074,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Code to cURL Parser",
     slug: "code-to-curl-parser",
     category: "Developer" as ToolCategory,
-    description: 'Parse cURL commands to extract method, URL, headers, and body. Debug and inspect HTTP requests from cURL strings.',
+    description: 'Convert CODE to CURL online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Code to cURL Parser — Parse cURL commands to extract method, URL, headers, and body. Debug HTTP requests from cURL strings. ',
     dependencies: "None",
   },
@@ -9096,7 +10092,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Pug to HTML Converter",
     slug: "pug-to-html-converter",
     category: "Developer" as ToolCategory,
-    description: 'Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags with classes and IDs.',
+    description: 'Convert PUG to HTML online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Pug to HTML Converter — Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags. ',
     dependencies: "None",
   },
@@ -9142,21 +10138,11 @@ const rawToolsRegistry: ToolMetadata[] = [
     showInCategory: true,
   },
   {
-    id: "unit-converter-hub",
-    name: "Unit Converter",
-    slug: "unit-converter",
-    category: "Converter",
-    description: 'Convert between 100+ units across 16 categories — length, weight, volume, area, speed, power, pressure, temperature, time, data size, cooking, fuel consumption, paper sizes, and clothing sizes.',
-    seoDescription: 'Free online Unit Converter — Convert between 100+ units across 16 categories: length, weight, volume, area, speed, power, pressure, temperature, time, data size, cooking, fuel, paper, clothing, shoe sizes. ',
-    dependencies: "None",
-    showInCategory: true,
-  },
-  {
     id: "import-to-csv-hub",
     name: "Import to CSV",
     slug: "import-to-csv",
     category: "Converter",
-    description: 'Convert TSV, Excel (XLSX), vCard (VCF), iCalendar (ICS), and Parquet files to CSV format. One tool for all your import-to-CSV needs.',
+    description: 'Convert IMPORT to CSV online for free. Fast, browser-based conversion with no uploads needed. 100% private.',
     seoDescription: 'Free online Import to CSV Converter — Convert TSV, Excel XLSX, vCard VCF, iCalendar ICS, and Parquet files to CSV. ',
     dependencies: "None",
     showInCategory: true,
@@ -9276,7 +10262,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MKV to WEBM",
     slug: "mkv-to-webm",
     category: "Video",
-    description: 'Convert MKV video files into WEBM format. Fast browser-based video conversion.',
+    description: 'Convert MKV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to WEBM — Convert MKV video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9286,7 +10272,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MKV to AVI",
     slug: "mkv-to-avi",
     category: "Video",
-    description: 'Convert MKV video files into AVI format. Fast browser-based video conversion.',
+    description: 'Convert MKV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to AVI — Convert MKV video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9296,7 +10282,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP4 to WEBM",
     slug: "mp4-to-webm",
     category: "Video",
-    description: 'Convert MP4 video files into WEBM format. Fast browser-based video conversion.',
+    description: 'Convert MP4 video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to WEBM — Convert MP4 video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9306,7 +10292,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MP4 to AVI",
     slug: "mp4-to-avi",
     category: "Video",
-    description: 'Convert MP4 video files into AVI format. Fast browser-based video conversion.',
+    description: 'Convert MP4 video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to AVI — Convert MP4 video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9316,7 +10302,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MOV to WEBM",
     slug: "mov-to-webm",
     category: "Video",
-    description: 'Convert MOV video files into WEBM format. Fast browser-based video conversion.',
+    description: 'Convert MOV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to WEBM — Convert MOV video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9326,7 +10312,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "MOV to AVI",
     slug: "mov-to-avi",
     category: "Video",
-    description: 'Convert MOV video files into AVI format. Fast browser-based video conversion.',
+    description: 'Convert MOV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to AVI — Convert MOV video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9336,7 +10322,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBM to MKV",
     slug: "webm-to-mkv",
     category: "Video",
-    description: 'Convert WEBM video files into MKV format. Fast browser-based video conversion.',
+    description: 'Convert WEBM video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MKV — Convert WEBM video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9346,7 +10332,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBM to MOV",
     slug: "webm-to-mov",
     category: "Video",
-    description: 'Convert WEBM video files into MOV format. Fast browser-based video conversion.',
+    description: 'Convert WEBM video files to MOV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MOV — Convert WEBM video files into MOV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9356,7 +10342,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBM to AVI",
     slug: "webm-to-avi",
     category: "Video",
-    description: 'Convert WEBM video files into AVI format. Fast browser-based video conversion.',
+    description: 'Convert WEBM video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to AVI — Convert WEBM video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9366,7 +10352,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVI to MKV",
     slug: "avi-to-mkv",
     category: "Video",
-    description: 'Convert AVI video files into MKV format. Fast browser-based video conversion.',
+    description: 'Convert AVI video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MKV — Convert AVI video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9376,7 +10362,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVI to MOV",
     slug: "avi-to-mov",
     category: "Video",
-    description: 'Convert AVI video files into MOV format. Fast browser-based video conversion.',
+    description: 'Convert AVI video files to MOV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MOV — Convert AVI video files into MOV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9386,7 +10372,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVI to WEBM",
     slug: "avi-to-webm",
     category: "Video",
-    description: 'Convert AVI video files into WEBM format. Fast browser-based video conversion.',
+    description: 'Convert AVI video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to WEBM — Convert AVI video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
     showInCategory: false
@@ -9396,7 +10382,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to PNG",
     slug: "jpg-to-png",
     category: "Image",
-    description: 'Convert JPG images into PNG format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to PNG — Convert JPG images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9406,7 +10392,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to WEBP",
     slug: "png-to-webp",
     category: "Image",
-    description: 'Convert PNG images into WEBP format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to WEBP — Convert PNG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9416,7 +10402,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to WEBP",
     slug: "jpg-to-webp",
     category: "Image",
-    description: 'Convert JPG images into WEBP format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to WEBP — Convert JPG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9426,7 +10412,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to PNG",
     slug: "webp-to-png",
     category: "Image",
-    description: 'Convert WEBP images into PNG format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to PNG — Convert WEBP images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9436,7 +10422,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to PNG",
     slug: "heic-to-png",
     category: "Image",
-    description: 'Convert HEIC images into PNG format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to PNG — Convert HEIC images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9446,7 +10432,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to AVIF",
     slug: "png-to-avif",
     category: "Image",
-    description: 'Convert PNG images into AVIF format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to AVIF — Convert PNG images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9456,7 +10442,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to AVIF",
     slug: "jpg-to-avif",
     category: "Image",
-    description: 'Convert JPG images into AVIF format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to AVIF — Convert JPG images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9466,7 +10452,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to HEIC",
     slug: "png-to-heic",
     category: "Image",
-    description: 'Convert PNG images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to HEIC — Convert PNG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9476,7 +10462,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to BMP",
     slug: "png-to-bmp",
     category: "Image",
-    description: 'Convert PNG images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to BMP — Convert PNG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9486,7 +10472,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to TIFF",
     slug: "png-to-tiff",
     category: "Image",
-    description: 'Convert PNG images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to TIFF — Convert PNG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9496,7 +10482,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "PNG to ICO",
     slug: "png-to-ico",
     category: "Image",
-    description: 'Convert PNG images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert PNG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to ICO — Convert PNG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9506,7 +10492,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to HEIC",
     slug: "jpg-to-heic",
     category: "Image",
-    description: 'Convert JPG images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to HEIC — Convert JPG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9516,7 +10502,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to SVG",
     slug: "jpg-to-svg",
     category: "Image",
-    description: 'Convert JPG images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to SVG — Convert JPG images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9526,7 +10512,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to BMP",
     slug: "jpg-to-bmp",
     category: "Image",
-    description: 'Convert JPG images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to BMP — Convert JPG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9536,7 +10522,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to TIFF",
     slug: "jpg-to-tiff",
     category: "Image",
-    description: 'Convert JPG images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to TIFF — Convert JPG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9546,7 +10532,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JPG to ICO",
     slug: "jpg-to-ico",
     category: "Image",
-    description: 'Convert JPG images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert JPG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to ICO — Convert JPG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9556,7 +10542,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to HEIC",
     slug: "webp-to-heic",
     category: "Image",
-    description: 'Convert WEBP images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to HEIC — Convert WEBP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9566,7 +10552,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to SVG",
     slug: "webp-to-svg",
     category: "Image",
-    description: 'Convert WEBP images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to SVG — Convert WEBP images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9576,7 +10562,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to BMP",
     slug: "webp-to-bmp",
     category: "Image",
-    description: 'Convert WEBP images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to BMP — Convert WEBP images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9586,7 +10572,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to TIFF",
     slug: "webp-to-tiff",
     category: "Image",
-    description: 'Convert WEBP images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to TIFF — Convert WEBP images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9596,7 +10582,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to ICO",
     slug: "webp-to-ico",
     category: "Image",
-    description: 'Convert WEBP images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to ICO — Convert WEBP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9606,7 +10592,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "WEBP to JXL",
     slug: "webp-to-jxl",
     category: "Image",
-    description: 'Convert WEBP images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert WEBP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to JXL — Convert WEBP images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9616,7 +10602,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to SVG",
     slug: "heic-to-svg",
     category: "Image",
-    description: 'Convert HEIC images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to SVG — Convert HEIC images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9626,7 +10612,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to BMP",
     slug: "heic-to-bmp",
     category: "Image",
-    description: 'Convert HEIC images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to BMP — Convert HEIC images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9636,7 +10622,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to TIFF",
     slug: "heic-to-tiff",
     category: "Image",
-    description: 'Convert HEIC images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to TIFF — Convert HEIC images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9646,7 +10632,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to ICO",
     slug: "heic-to-ico",
     category: "Image",
-    description: 'Convert HEIC images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to ICO — Convert HEIC images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9656,7 +10642,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "HEIC to JXL",
     slug: "heic-to-jxl",
     category: "Image",
-    description: 'Convert HEIC images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert HEIC images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to JXL — Convert HEIC images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9666,7 +10652,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to WEBP",
     slug: "avif-to-webp",
     category: "Image",
-    description: 'Convert AVIF images into WEBP format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to WEBP — Convert AVIF images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9676,7 +10662,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to HEIC",
     slug: "avif-to-heic",
     category: "Image",
-    description: 'Convert AVIF images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to HEIC — Convert AVIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9686,7 +10672,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to SVG",
     slug: "avif-to-svg",
     category: "Image",
-    description: 'Convert AVIF images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to SVG — Convert AVIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9696,7 +10682,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to BMP",
     slug: "avif-to-bmp",
     category: "Image",
-    description: 'Convert AVIF images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to BMP — Convert AVIF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9706,7 +10692,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to TIFF",
     slug: "avif-to-tiff",
     category: "Image",
-    description: 'Convert AVIF images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to TIFF — Convert AVIF images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9716,7 +10702,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to GIF",
     slug: "avif-to-gif",
     category: "Image",
-    description: 'Convert AVIF images into GIF format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to GIF — Convert AVIF images into GIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9726,7 +10712,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to ICO",
     slug: "avif-to-ico",
     category: "Image",
-    description: 'Convert AVIF images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to ICO — Convert AVIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9736,7 +10722,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "AVIF to JXL",
     slug: "avif-to-jxl",
     category: "Image",
-    description: 'Convert AVIF images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert AVIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to JXL — Convert AVIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9746,7 +10732,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to HEIC",
     slug: "svg-to-heic",
     category: "Image",
-    description: 'Convert SVG images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert SVG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to HEIC — Convert SVG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9756,7 +10742,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to BMP",
     slug: "svg-to-bmp",
     category: "Image",
-    description: 'Convert SVG images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert SVG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to BMP — Convert SVG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9766,7 +10752,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to TIFF",
     slug: "svg-to-tiff",
     category: "Image",
-    description: 'Convert SVG images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert SVG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to TIFF — Convert SVG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9776,7 +10762,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to ICO",
     slug: "svg-to-ico",
     category: "Image",
-    description: 'Convert SVG images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert SVG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to ICO — Convert SVG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9786,7 +10772,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "SVG to JXL",
     slug: "svg-to-jxl",
     category: "Image",
-    description: 'Convert SVG images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert SVG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to JXL — Convert SVG images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9796,7 +10782,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to HEIC",
     slug: "bmp-to-heic",
     category: "Image",
-    description: 'Convert BMP images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert BMP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to HEIC — Convert BMP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9806,7 +10792,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to SVG",
     slug: "bmp-to-svg",
     category: "Image",
-    description: 'Convert BMP images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert BMP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to SVG — Convert BMP images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9816,7 +10802,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to TIFF",
     slug: "bmp-to-tiff",
     category: "Image",
-    description: 'Convert BMP images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert BMP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to TIFF — Convert BMP images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9826,7 +10812,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to ICO",
     slug: "bmp-to-ico",
     category: "Image",
-    description: 'Convert BMP images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert BMP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to ICO — Convert BMP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9836,7 +10822,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "BMP to JXL",
     slug: "bmp-to-jxl",
     category: "Image",
-    description: 'Convert BMP images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert BMP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to JXL — Convert BMP images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9846,7 +10832,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to HEIC",
     slug: "tiff-to-heic",
     category: "Image",
-    description: 'Convert TIFF images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert TIFF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to HEIC — Convert TIFF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9856,7 +10842,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to SVG",
     slug: "tiff-to-svg",
     category: "Image",
-    description: 'Convert TIFF images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert TIFF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to SVG — Convert TIFF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9866,7 +10852,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to BMP",
     slug: "tiff-to-bmp",
     category: "Image",
-    description: 'Convert TIFF images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert TIFF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to BMP — Convert TIFF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9876,7 +10862,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to ICO",
     slug: "tiff-to-ico",
     category: "Image",
-    description: 'Convert TIFF images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert TIFF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to ICO — Convert TIFF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9886,7 +10872,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "TIFF to JXL",
     slug: "tiff-to-jxl",
     category: "Image",
-    description: 'Convert TIFF images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert TIFF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to JXL — Convert TIFF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9896,7 +10882,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to HEIC",
     slug: "gif-to-heic",
     category: "Image",
-    description: 'Convert GIF images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to HEIC — Convert GIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9906,7 +10892,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to SVG",
     slug: "gif-to-svg",
     category: "Image",
-    description: 'Convert GIF images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to SVG — Convert GIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9916,7 +10902,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to BMP",
     slug: "gif-to-bmp",
     category: "Image",
-    description: 'Convert GIF images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to BMP — Convert GIF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9926,7 +10912,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to TIFF",
     slug: "gif-to-tiff",
     category: "Image",
-    description: 'Convert GIF images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to TIFF — Convert GIF images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9936,7 +10922,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to ICO",
     slug: "gif-to-ico",
     category: "Image",
-    description: 'Convert GIF images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to ICO — Convert GIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9946,7 +10932,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "GIF to JXL",
     slug: "gif-to-jxl",
     category: "Image",
-    description: 'Convert GIF images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert GIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to JXL — Convert GIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9956,7 +10942,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to HEIC",
     slug: "ico-to-heic",
     category: "Image",
-    description: 'Convert ICO images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to HEIC — Convert ICO images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9966,7 +10952,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to AVIF",
     slug: "ico-to-avif",
     category: "Image",
-    description: 'Convert ICO images into AVIF format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to AVIF — Convert ICO images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9976,7 +10962,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to SVG",
     slug: "ico-to-svg",
     category: "Image",
-    description: 'Convert ICO images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to SVG — Convert ICO images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9986,7 +10972,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to BMP",
     slug: "ico-to-bmp",
     category: "Image",
-    description: 'Convert ICO images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to BMP — Convert ICO images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -9996,7 +10982,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to TIFF",
     slug: "ico-to-tiff",
     category: "Image",
-    description: 'Convert ICO images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to TIFF — Convert ICO images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10006,7 +10992,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to GIF",
     slug: "ico-to-gif",
     category: "Image",
-    description: 'Convert ICO images into GIF format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to GIF — Convert ICO images into GIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10016,7 +11002,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "ICO to JXL",
     slug: "ico-to-jxl",
     category: "Image",
-    description: 'Convert ICO images into JXL format. Perfect for image conversion needs.',
+    description: 'Convert ICO images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to JXL — Convert ICO images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10026,7 +11012,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to HEIC",
     slug: "jxl-to-heic",
     category: "Image",
-    description: 'Convert JXL images into HEIC format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to HEIC — Convert JXL images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10036,7 +11022,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to AVIF",
     slug: "jxl-to-avif",
     category: "Image",
-    description: 'Convert JXL images into AVIF format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to AVIF — Convert JXL images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10046,7 +11032,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to SVG",
     slug: "jxl-to-svg",
     category: "Image",
-    description: 'Convert JXL images into SVG format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to SVG — Convert JXL images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10056,7 +11042,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to BMP",
     slug: "jxl-to-bmp",
     category: "Image",
-    description: 'Convert JXL images into BMP format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to BMP — Convert JXL images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10066,7 +11052,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to TIFF",
     slug: "jxl-to-tiff",
     category: "Image",
-    description: 'Convert JXL images into TIFF format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to TIFF — Convert JXL images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false
@@ -10076,29 +11062,9 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "JXL to ICO",
     slug: "jxl-to-ico",
     category: "Image",
-    description: 'Convert JXL images into ICO format. Perfect for image conversion needs.',
+    description: 'Convert JXL images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to ICO — Convert JXL images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
-  },
-  {
-    id: "1084",
-    name: "HTML to PDF",
-    slug: "html-to-pdf",
-    category: "PDF",
-    description: 'Convert HTML files into PDF format. Document conversion made easy.',
-    seoDescription: 'Free online HTML to PDF — Convert HTML files into PDF format. Document conversion made easy.',
-    dependencies: "PDF.js",
-    showInCategory: false
-  },
-  {
-    id: "1084",
-    name: "PDF to HTML",
-    slug: "pdf-to-html",
-    category: "PDF",
-    description: 'Convert PDF files into HTML format. Document conversion made easy.',
-    seoDescription: 'Free online PDF to HTML — Convert PDF files into HTML format. Document conversion made easy.',
-    dependencies: "PDF.js",
     showInCategory: false
   },
 ];
@@ -10223,5 +11189,18 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "converters-everyday-toolkit": { category: "converter", slug: "" },
   "data-toolkit": { category: "utility", slug: "" },
   "dev-utilities": { category: "developer", slug: "" },
+
+  // Stub entries with no module — redirect to nearest equivalent
+  "curl-to-code": { category: "developer", slug: "curl-to-code-converter" },
+  "color-blindness-simulator": { category: "utility", slug: "contrast-ratio-checker" },
+  "jwt-encoder-signer": { category: "developer", slug: "jwt-debugger" },
+  "memorable-password-generator": { category: "developer", slug: "password-generator" },
+  "cpp-formatter": { category: "developer", slug: "code-beautifier" },
+  "go-formatter": { category: "developer", slug: "code-beautifier" },
+  "kotlin-formatter": { category: "developer", slug: "code-beautifier" },
+  "php-beautifier": { category: "developer", slug: "code-beautifier" },
+  "ruby-formatter": { category: "developer", slug: "code-beautifier" },
+  "rust-formatter": { category: "developer", slug: "code-beautifier" },
+  "yaml-to-toon": { category: "converter", slug: "yaml-json-converter" },
 };
 

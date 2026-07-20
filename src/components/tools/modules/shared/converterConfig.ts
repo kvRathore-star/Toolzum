@@ -342,4 +342,9 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "epub-to-pdf": { category: "document" },
   "pdf-to-epub": { category: "document" },
   "heic-to-pdf": { category: "document" },
+
+  // Hub/consolidated converter entries
+  "import-to-csv": { category: "import-to-csv", description: "Convert TSV, XLSX, VCF, ICS, and Parquet files to CSV format. Fast and private." },
+  "color-tools": { category: "color", description: "Convert between HEX, RGB, and HSL color formats. Parse and generate colors visually." },
+  "number-words-tools": { category: "number", description: "Convert numbers to words, words to numbers, and to Roman numerals." },
 };

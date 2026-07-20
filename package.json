@@ -137,5 +137,10 @@
     "typescript": "^5",
     "vitest": "^3.1.0",
     "wrangler": "^4.94.0"
+  },
+  "lint-staged": {
+    "src/registry/tools.ts": [
+      "node scripts/quality-audit.js"
+    ]
   }
 }
