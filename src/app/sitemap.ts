@@ -1,9 +1,12 @@
 import type { MetadataRoute } from 'next';
+import { toolsRegistry } from '@/registry/tools';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export const dynamic = 'force-static';
+
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://toolzum.com';
 
-  const staticPages = [
+  const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1 },
     { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: `${baseUrl}/pricing`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
@@ -13,8 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/changelog`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.4 },
     { url: `${baseUrl}/extension`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.4 },
   ];
-
-  const { toolsRegistry } = await import('@/registry/tools');
 
   const categories = [...new Set(toolsRegistry.map(t => t.category?.toLowerCase().replace(/\s+/g, '-')).filter(Boolean))];
 
