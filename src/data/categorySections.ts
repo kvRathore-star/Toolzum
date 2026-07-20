@@ -200,6 +200,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "text-converter", "list-converter",
         "qr-code-reader", "html-to-image", "php-tools",
         "dev-utilities",
+        "random-port-generator", "chmod-calculator", "docker-run-to-compose", "email-normalizer",
         "conventional-commit-generator",
         "har-analyzer", "log-analyzer",
         "package-json-validator", "mime-finder",
