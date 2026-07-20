@@ -59,7 +59,7 @@ export default function QrCodeReader() {
     setIsProcessing(true);
 
     try {
-      const jsQR = (await import('jsQR')).default;
+      const jsQR = (await import('jsqr')).default;
       const bitmap = await createImageBitmap(imgFile);
       setImageDimensions({ width: bitmap.width, height: bitmap.height });
       const canvas = document.createElement('canvas');
