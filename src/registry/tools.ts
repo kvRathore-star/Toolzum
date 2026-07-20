@@ -92,8 +92,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online Time Converter — Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. ',
     category: "Developer",
     slug: "time-converter",
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
 
   {
     id: "arch-conv-1",
@@ -1026,8 +1025,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer",
     description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.',
     dependencies: "JSONLint",
-    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',    showInCategory: false,
-    },
+    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',        },
   {
     id: "114",
     name: "XML Sitemap Generator",
@@ -1352,8 +1350,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values.',
     seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. ',
     dependencies: "Vanilla JS",
-    showInCategory: false,
-  },
+      },
   {
     id: "157",
     name: "BMR Calculator",
@@ -1380,8 +1377,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators.',
     seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS",
-    showInCategory: false,
-  },
+      },
   {
     id: "160",
     name: "Binary to Text",
@@ -1390,8 +1386,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error.',
     seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
     dependencies: "Vanilla JS",
-    showInCategory: false,
-  },
+      },
   {
     id: "161",
     name: "Break-Even Calculator",
@@ -1494,8 +1489,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click.',
     seoDescription: 'Free online Case Converter — Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. ',
     dependencies: "Vanilla JS",
-    showInCategory: false,
-  },
+      },
   {
     id: "171",
     name: "Keyword Density Checker",
@@ -1599,8 +1593,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Text",
     description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text.',
     seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "186",
     name: "Invisible Text Generator",
@@ -3935,8 +3928,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert colors between Hex, RGB, HSL, HSV, and CMYK formats. Real-time preview, color picker, and copy-to-clipboard.',
     seoDescription: 'Free online Color Converter — Convert colors between Hex, RGB, HSL, HSV, and CMYK. Real-time preview with color picker. ',
     dependencies: "none",
-    showInCategory: false,
-  },
+      },
   {
     id: "443",
     name: "QR Code Reader",
@@ -4035,8 +4027,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
     seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
-    showInCategory: false,
-  },
+      },
   {
     id: "454",
     name: "XLSX ↔ CSV Converter",
@@ -4045,8 +4036,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.',
     seoDescription: 'Free online XLSX ↔ CSV Converter — Bidirectional conversion between Excel and CSV. Sheet selector, delimiter options, data preview. ',
     dependencies: "xlsx",
-    showInCategory: false,
-  },
+      },
   {
     id: "455",
     name: "VCF ↔ CSV Converter",
@@ -4055,8 +4045,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.',
     seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. ',
     dependencies: "vcard-parser",
-    showInCategory: false,
-  },
+      },
   {
     id: "456",
     name: "ICS ↔ CSV Converter",
@@ -4065,8 +4054,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.',
     seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. ',
     dependencies: "ical",
-    showInCategory: false,
-  },
+      },
   // Audio format pair slugs (reverse directions for SEO)
   {
     id: "457",
@@ -4456,8 +4444,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion.',
     seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "496",
     name: "URL Encoder / Decoder",
@@ -4502,8 +4489,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
     seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "501",
     name: "Line Sorter & Deduplicator",
@@ -4539,8 +4525,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
     seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "505",
     name: "Code Beautifier & Minifier",
@@ -4558,8 +4543,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "507",
     name: "PHP Tools",
@@ -4577,8 +4561,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert SVG markup to CSS background-image data URIs. Preview the result as a rendered icon.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "509",
     name: "cURL to Code Converter",
@@ -4596,8 +4579,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Supports nested objects and arrays.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "511",
     name: "JWT Debugger",
@@ -4643,8 +4625,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
     seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "517",
     name: "Web Inspector & HTTP Tools",
@@ -5015,8 +4996,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert between US and UK shoe sizes.',
     seoDescription: 'Free online Shoe Size Converter \u2014 Convert between US and UK shoe sizes. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "534h",
     name: "ZIP File Extractor",
@@ -5142,8 +5122,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert between hexadecimal strings and readable text.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "543d",
     name: "SVG to Base64 Converter",
@@ -5205,8 +5184,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert between km/h, mph, m/s, knots, and ft/s.',
     seoDescription: 'Free online Speed Converter \u2014 Convert between km/h, mph, m/s, knots, and ft/s. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "543k",
     name: "Power Converter",
@@ -5214,8 +5192,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "543l",
     name: "Pressure Converter",
@@ -5223,8 +5200,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "548a",
     name: "Color Shades & Tints",
@@ -5287,8 +5263,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert INI configuration files with sections and key-value pairs to JSON.',
     seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "549b",
     name: "MessagePack Inspector",
@@ -5324,8 +5299,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert fetch/axios/request code to cURL commands.',
     seoDescription: 'Free online Code to cURL Converter \u2014 Convert fetch/axios code to cURL. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "549f",
     name: "cURL to Code Converter",
@@ -5406,8 +5380,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert SCSS variables, nesting, and parent selectors to plain CSS.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "553b",
     name: "Stylus to CSS Converter",
@@ -5416,8 +5389,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert Stylus syntax with indentation-based nesting to plain CSS.',
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "553c",
     name: "Tailwind to CSS Converter",
@@ -5426,8 +5398,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert Tailwind CSS utility classes to plain CSS properties (40+ class mappings).',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "553d",
     name: "Proto Schema Converter",
@@ -7073,8 +7044,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators.',
     seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "810",
     name: "HTML to Text Converter",
@@ -7083,8 +7053,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text.',
     seoDescription: 'Free online HTML to Text Converter — Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "811",
     name: "Markdown Previewer",
@@ -7220,8 +7189,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999.',
     seoDescription: 'Free online Roman Numeral Converter \u2014 Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. ',
     dependencies: "None",
-    showInCategory: false,
-  },
+      },
   {
     id: "829",
     name: "Number to Words Converter",
@@ -7230,8 +7198,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert any number to its English word representation. Supports large numbers up to billions.',
     seoDescription: 'Free online Number to Words Converter \u2014 Convert any number to its English word representation. Supports large numbers up to billions. ',
     dependencies: "None",
-    showInCategory: false,
-  },
+      },
   {
     id: "831",
     name: "Percentage Difference Calculator",
@@ -7403,8 +7370,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert between degrees and radians. Shows the formula and step-by-step conversion process.',
     seoDescription: 'Free online Degree / Radian Converter \u2014 Convert between degrees and radians. Shows the formula and step-by-step conversion process. ',
     dependencies: "None",
-    showInCategory: false,
-  },
+      },
   {
     id: "856",
     name: "Scientific Notation Converter",
@@ -7502,8 +7468,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use.',
     seoDescription: 'Free online Speed Converter \u2014 Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "867",
     name: "Length Converter",
@@ -7511,8 +7476,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive.',
     seoDescription: 'Free online Length Converter \u2014 Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "868",
     name: "Weight Converter",
@@ -7520,8 +7484,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems.',
     seoDescription: 'Free online Weight Converter \u2014 Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "869",
     name: "Volume Converter",
@@ -7529,8 +7492,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel.',
     seoDescription: 'Free online Volume Converter \u2014 Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "870",
     name: "Area Converter",
@@ -7538,8 +7500,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert area between square meters, square feet, acres, hectares, and square kilometers.',
     seoDescription: 'Free online Area Converter \u2014 Convert area between square meters, square feet, acres, hectares, and square kilometers. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "871",
     name: "Data Size Converter",
@@ -7547,8 +7508,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units.',
     seoDescription: 'Free online Data Size Converter \u2014 Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "873",
     name: "Body Fat Estimator",
@@ -7675,8 +7635,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert time between different time zones. Enter a time and your source/target time zones and see the converted result.',
     seoDescription: 'Free online Time Zone Converter \u2014 Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "892",
     name: "DST Checker (US)",
@@ -8108,8 +8067,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats.',
     seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. ',
     dependencies: "None",
-    showInCategory: false,
-  },
+      },
   {
     id: "939",
     name: "SaaS Payback Period",
@@ -8153,8 +8111,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter" as ToolCategory,
     description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly.',
     seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "944",
     name: "PDF to DOCX",
@@ -8306,8 +8263,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting.',
     seoDescription: 'Free online TSV ↔ CSV Converter — Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. ',
     dependencies: "None",
-    showInCategory: false,
-  },
+      },
   {
     id: "970",
     name: "JSON → Toon Converter",
@@ -8324,8 +8280,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility",
     description: 'Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing).',
     seoDescription: 'Free online CSV Data Cleaner — Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "972",
     name: "CSV Statistics",
@@ -8333,8 +8288,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility",
     description: 'Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns.',
     seoDescription: 'Free online CSV Statistics — Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "973",
     name: "CSV ↔ HTML Table Converter",
@@ -8342,8 +8296,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Converter",
     description: 'Bidirectional converter between CSV data and HTML table markup with live preview.',
     seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. ',
-    dependencies: "None",    showInCategory: false,
-    },
+    dependencies: "None",        },
   {
     id: "974",
     name: "YAML Validator",
@@ -8726,8 +8679,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert cooking measurements between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp not found in the volume converter.',
     seoDescription: 'Free online Cooking Measurement Converter — Convert between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "ce-2",
     name: "Fuel Consumption Converter",
@@ -8735,8 +8687,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Essential for comparing vehicle efficiency across metric and imperial systems.',
     seoDescription: 'Free online Fuel Consumption Converter — Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "ce-3",
     name: "Paper Size Converter",
@@ -8744,8 +8695,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Understand how many sheets of one size fit into another.',
     seoDescription: 'Free online Paper Size Converter — Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "ce-4",
     name: "Clothing Size Converter",
@@ -8753,8 +8703,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\'s apparel size conversions with international standards.',
     seoDescription: 'Free online Clothing Size Converter — Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "ce-5",
     name: "Large Text File Viewer",
@@ -8908,8 +8857,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert CSV data into a clean GitHub-flavored Markdown table. Perfect for documentation, README files, and wiki pages.',
     seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-14",
     name: "CSV to NDJSON",
@@ -8917,8 +8865,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Convert CSV data to Newline Delimited JSON (NDJSON). Each CSV row becomes a separate JSON object on its own line.',
     seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-15",
     name: "CSV to SQL INSERT",
@@ -8926,8 +8873,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Utility" as ToolCategory,
     description: 'Generate SQL INSERT statements from CSV data. Specify a table name and get executable SQL for database import.',
     seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-16",
     name: "JSON Escape/Unescape",
@@ -8944,8 +8890,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.',
     seoDescription: 'Free online JSON Flattener — Flatten nested JSON into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-18",
     name: "JSON-LD Generator",
@@ -8953,8 +8898,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Wrap JSON data in valid JSON-LD (Linked Data) structure with @context and @type. Generate schema.org-compatible structured data.',
     seoDescription: 'Free online JSON-LD Generator — Wrap JSON data in valid JSON-LD with @context and @type. Schema.org-compatible structured data. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-19",
     name: "Merge Patch Generator",
@@ -8971,8 +8915,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Generate a JSON Schema (draft-07) from sample JSON data. Auto-detect types, required fields, and nested structures.',
     seoDescription: 'Free online JSON Schema Generator — Generate JSON Schema (draft-07) from sample JSON. Auto-detect types and nested structures. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-21",
     name: "JSON Size Analyzer",
@@ -8980,8 +8923,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Analyze JSON payload size, character count, key count, and nesting depth. Understand the size profile of your data.',
     seoDescription: 'Free online JSON Size Analyzer — Analyze JSON payload size, character count, key count, and nesting depth. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-22",
     name: "JSON to Zod Schema",
@@ -8989,8 +8931,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Generate Zod validation schemas from sample JSON data. Create TypeScript-first runtime validation for your API responses.',
     seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-23",
     name: "JWK Generator",
@@ -9016,8 +8957,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Developer" as ToolCategory,
     description: 'Convert Newline Delimited JSON (NDJSON) into a standard JSON array. Wrap each line as an array element.',
     seoDescription: 'Free online NDJSON to JSON Array — Convert Newline Delimited JSON into a standard JSON array format. ',
-    dependencies: "Vanilla JS",    showInCategory: false,
-    },
+    dependencies: "Vanilla JS",        },
   {
     id: "dt-26",
     name: "JSON to URL Parameters",
@@ -9071,8 +9011,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert plain CSS to SCSS syntax with nesting and parent selector references. Analyze CSS structure for SCSS migration.',
     seoDescription: 'Free online CSS to SCSS Converter — Convert plain CSS to SCSS syntax with nesting and parent selector references. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "css-5",
     name: "Less to CSS Converter",
@@ -9081,8 +9020,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     description: 'Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS.',
     seoDescription: 'Free online Less to CSS Converter — Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. ',
     dependencies: "None",
-      showInCategory: false,
-  },
+        },
   {
     id: "css-6",
     name: "CSS Validator",

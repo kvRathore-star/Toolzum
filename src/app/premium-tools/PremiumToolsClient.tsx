@@ -10,6 +10,7 @@ import {
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import type { ToolMetadata } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
+import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
 const BENEFITS = [
   { icon: Upload, title: 'Batch up to 500 files', desc: 'Process hundreds of files at once — images, PDFs, audio, and video.' },
@@ -44,6 +45,19 @@ const CATEGORY_SUMMARIES: Record<string, { icon: React.ElementType; desc: string
 const CATEGORY_ORDER = ['AI', 'PDF', 'Image', 'Video', 'Audio', 'Developer', 'SEO', 'Privacy', 'E-commerce'];
 
 export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools: ToolMetadata[]; proCount: number; toolCount: number }) {
+  const [isIndia, setIsIndia] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isIndiaFromCookie() || isIndiaFromTz()) {
+      setIsIndia(true);
+      return;
+    }
+    isIndiaFromIp().then(setIsIndia);
+  }, []);
+
+  const proPrice = isIndia ? "₹749" : "$14.99";
+  const proPriceSuffix = isIndia ? "/month" : "/month, cancel anytime";
+
   const grouped = groupProTools(proTools);
   const sortedCategories = Object.keys(grouped).sort((a, b) => {
     const ai = CATEGORY_ORDER.indexOf(a);
@@ -78,7 +92,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
                 Upgrade to Pro <Crown className="w-4 h-4 ml-1.5" />
               </Button>
             </Link>
-            <span className="text-sm text-[var(--text-muted)]">from $14.99/mo</span>
+            <span className="text-sm text-[var(--text-muted)]">from {proPrice}/mo</span>
           </div>
         </div>
       </section>
@@ -233,8 +247,8 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <Crown className="w-4 h-4 text-amber-500" />
               <span className="text-xs font-mono text-amber-500 uppercase tracking-wider">Pro</span>
             </div>
-            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">$14.99</div>
-            <div className="text-xs text-[var(--text-muted)] mb-4">/month, cancel anytime</div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">{proPrice}</div>
+            <div className="text-xs text-[var(--text-muted)] mb-4">{proPriceSuffix}</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
