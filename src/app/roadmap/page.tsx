@@ -219,9 +219,9 @@ export default function RoadmapPage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Map className="w-3.5 h-3.5" /> Interactive Roadmap
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Map className="w-4 h-4" /> Interactive Roadmap
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Feature Roadmap
           </h1>
@@ -240,7 +240,7 @@ export default function RoadmapPage() {
         {/* Suggestion CTA */}
         <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
-          <h3 className="text-2xl font-semibold mb-3">Have a feature request?</h3>
+          <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Have a feature request?</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
             If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>

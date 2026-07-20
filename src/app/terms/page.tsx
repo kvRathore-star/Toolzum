@@ -134,9 +134,9 @@ export default function TermsOfServicePage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Scale className="w-3.5 h-3.5" /> Service Agreements
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Scale className="w-4 h-4" /> Service Agreements
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Terms of Service
           </h1>
@@ -179,7 +179,7 @@ export default function TermsOfServicePage() {
 
         {/* CTA help info */}
         <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 text-center">
-          <h3 className="text-lg font-semibold mb-2 flex items-center justify-center gap-2">
+          <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2 flex items-center justify-center gap-2">
             <HelpCircle className="w-5 h-5 text-[var(--accent)]" /> Have questions?
           </h3>
           <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto mb-6">

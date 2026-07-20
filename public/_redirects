@@ -144,8 +144,7 @@
 /utility/misc-utilities-toolkit    /utility/   301
 /developer/converter-toolkit/   /developer/   301
 /developer/converter-toolkit    /developer/   301
-/developer/time-toolkit/   /developer/   301
-/developer/time-toolkit    /developer/   301
+
 /developer/text-seo-toolkit/   /developer/   301
 /developer/text-seo-toolkit    /developer/   301
 /design/color-style-toolkit/   /design/   301
@@ -154,5 +153,11 @@
 /developer/network-utility-toolkit    /developer/   301
 /developer/scanner-toolkit/   /developer/   301
 /developer/scanner-toolkit    /developer/   301
+
+/developer/security-toolkit/   /developer/   301
+/developer/security-toolkit    /developer/   301
+
 /developer/dev-toolkit/   /developer/   301
 /developer/dev-toolkit    /developer/   301
+/developer/time-toolkit/   /developer/   301
+/developer/time-toolkit    /developer/   301

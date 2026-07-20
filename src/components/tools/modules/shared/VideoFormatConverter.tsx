@@ -40,6 +40,18 @@ const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'mp4-to-mov', input: 'mp4', output: 'mov', label: 'MP4 \u2192 MOV' },
   { slug: 'mkv-to-mov', input: 'mkv', output: 'mov', label: 'MKV \u2192 MOV' },
   { slug: 'mov-to-mkv', input: 'mov', output: 'mkv', label: 'MOV \u2192 MKV' },
+  { slug: 'mkv-to-webm', input: 'mkv', output: 'webm', label: 'MKV \u2192 WebM' },
+  { slug: 'mkv-to-avi', input: 'mkv', output: 'avi', label: 'MKV \u2192 AVI' },
+  { slug: 'mp4-to-webm', input: 'mp4', output: 'webm', label: 'MP4 \u2192 WebM' },
+  { slug: 'mp4-to-avi', input: 'mp4', output: 'avi', label: 'MP4 \u2192 AVI' },
+  { slug: 'mov-to-webm', input: 'mov', output: 'webm', label: 'MOV \u2192 WebM' },
+  { slug: 'mov-to-avi', input: 'mov', output: 'avi', label: 'MOV \u2192 AVI' },
+  { slug: 'webm-to-mkv', input: 'webm', output: 'mkv', label: 'WebM \u2192 MKV' },
+  { slug: 'webm-to-mov', input: 'webm', output: 'mov', label: 'WebM \u2192 MOV' },
+  { slug: 'webm-to-avi', input: 'webm', output: 'avi', label: 'WebM \u2192 AVI' },
+  { slug: 'avi-to-mkv', input: 'avi', output: 'mkv', label: 'AVI \u2192 MKV' },
+  { slug: 'avi-to-mov', input: 'avi', output: 'mov', label: 'AVI \u2192 MOV' },
+  { slug: 'avi-to-webm', input: 'avi', output: 'webm', label: 'AVI \u2192 WebM' },
 ];
 
 const RELATED: Record<string, string[]> = {
@@ -51,6 +63,18 @@ const RELATED: Record<string, string[]> = {
   'mp4-to-mov': ['mov-to-mp4', 'mkv-to-mov', 'mp4-to-mkv'],
   'mkv-to-mov': ['mkv-to-mp4', 'mov-to-mkv', 'mp4-to-mov'],
   'mov-to-mkv': ['mkv-to-mp4', 'mov-to-mp4', 'mkv-to-mov'],
+  'mkv-to-webm': ['mkv-to-mp4', 'webm-to-mkv', 'mp4-to-webm'],
+  'mkv-to-avi': ['mkv-to-mp4', 'avi-to-mkv', 'mp4-to-avi'],
+  'mp4-to-webm': ['mkv-to-webm', 'webm-to-mp4', 'mov-to-webm'],
+  'mp4-to-avi': ['mkv-to-avi', 'avi-to-mp4', 'mov-to-avi'],
+  'mov-to-webm': ['mov-to-mp4', 'webm-to-mov', 'mkv-to-webm'],
+  'mov-to-avi': ['mov-to-mp4', 'avi-to-mov', 'mkv-to-avi'],
+  'webm-to-mkv': ['webm-to-mp4', 'mkv-to-webm', 'mov-to-mkv'],
+  'webm-to-mov': ['webm-to-mp4', 'mov-to-webm', 'mkv-to-mov'],
+  'webm-to-avi': ['webm-to-mp4', 'avi-to-webm', 'mkv-to-avi'],
+  'avi-to-mkv': ['avi-to-mp4', 'mkv-to-avi', 'webm-to-mkv'],
+  'avi-to-mov': ['avi-to-mp4', 'mov-to-avi', 'webm-to-mov'],
+  'avi-to-webm': ['avi-to-mp4', 'webm-to-avi', 'mkv-to-webm'],
 };
 
 function getFfmpegOutputArgs(outputKey: string): string[] {

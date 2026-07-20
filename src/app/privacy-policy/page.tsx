@@ -43,9 +43,9 @@ export default function PrivacyPolicyPage() {
         
         {/* Title */}
         <div className="max-w-4xl mx-auto mb-16 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Lock className="w-3.5 h-3.5" /> Privacy & Security
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Lock className="w-4 h-4" /> Privacy & Security
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl mb-4 tracking-tight leading-tight">
             Privacy Policy
           </h1>
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] font-mono uppercase tracking-wider mb-3">
             <ShieldAlert className="w-3 h-3" /> Privacy by Architecture, Not Policy
           </div>
-          <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+          <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-2">
             We Cannot See Your Files. Period.
           </h3>
           <p className="text-sm text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">

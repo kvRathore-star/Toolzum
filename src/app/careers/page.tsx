@@ -23,9 +23,9 @@ export default function CareersPage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Briefcase className="w-3.5 h-3.5" /> Work With Us
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Briefcase className="w-4 h-4" /> Work With Us
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Build the zero-upload web.
           </h1>
@@ -39,7 +39,7 @@ export default function CareersPage() {
         {/* Mission highlight */}
         <div className="max-w-3xl mx-auto mb-16 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
           <Shield className="w-8 h-8 text-[var(--accent)] mx-auto mb-3" />
-          <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Privacy is not a feature. It is the architecture.</h2>
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-2">Privacy is not a feature. It is the architecture.</h2>
           <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
             Every line of code we write serves the same principle: your data belongs on your device, not our servers. 
             We compile C++, Rust, and Python libraries into WebAssembly so they run in your browser — 
@@ -77,7 +77,7 @@ export default function CareersPage() {
         {/* No open roles */}
         <div className="max-w-4xl mx-auto text-center py-16 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-12">
           <Briefcase className="w-12 h-12 mx-auto mb-4 text-[var(--text-muted)]" />
-          <h2 className="text-2xl font-semibold mb-2">No Open Roles Right Now</h2>
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2">No Open Roles Right Now</h2>
           <p className="text-[var(--text-secondary)] max-w-md mx-auto">
             We are not actively hiring at the moment. Follow us on social channels or check back later for future openings.
           </p>

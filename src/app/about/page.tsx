@@ -24,9 +24,9 @@ export default function AboutPage() {
         
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Sparkles className="w-3.5 h-3.5" /> Our Core Philosophy
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Sparkles className="w-4 h-4" /> Our Core Philosophy
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             The browser is the new server.
           </h1>
@@ -67,9 +67,10 @@ export default function AboutPage() {
 
         {/* The Story */}
         <div className="max-w-3xl mx-auto mb-20 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Zap className="w-3.5 h-3.5" /> The Story
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Zap className="w-4 h-4" /> The Story
+          </span>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Built by you, for you.</h2>
           <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             Built by a solo developer who was tired of uploading confidential PDFs and images to random cloud servers 
             just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{toolsRegistry.length}+ tools</strong> 
@@ -82,10 +83,10 @@ export default function AboutPage() {
 
         {/* What Sets Us Apart */}
         <div className="max-w-4xl mx-auto mb-16 p-8 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-2xl)]">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] font-mono uppercase tracking-wider mb-4">
-            <Ban className="w-3 h-3" /> The Difference
-          </div>
-          <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">No Upload. No Server. No Data to Breach.</h2>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-4">
+            <Ban className="w-4 h-4" /> The Difference
+          </span>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">No Upload. No Server. No Data to Breach.</h2>
           <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
             Every other online tool asks you to upload files to their server. They process it, then promise to delete it. 
             That 2-hour deletion window is a liability — a breach waiting to happen. Toolzum eliminates the server 
@@ -152,7 +153,7 @@ export default function AboutPage() {
         {/* Call to Actions */}
         <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center">
           <div className="space-y-2">
-            <h3 className="text-2xl font-semibold">Have a suggestion?</h3>
+            <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold">Have a suggestion?</h3>
             <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto">
               We are always looking for ideas to improve. Reach out and tell us what you would like to see next.
             </p>

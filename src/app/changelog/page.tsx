@@ -232,9 +232,9 @@ export default function ChangelogPage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Bookmark className="w-3.5 h-3.5" /> Product Timeline
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Bookmark className="w-4 h-4" /> Product Timeline
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Changelog & Updates
           </h1>
@@ -302,7 +302,7 @@ export default function ChangelogPage() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+                <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
                   {release.title}
                 </h3>
                 
@@ -348,7 +348,7 @@ export default function ChangelogPage() {
         {/* Bottom newsletter section */}
         <div className="mt-24 max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
-          <h3 className="text-2xl font-semibold mb-3">Never miss a tool update</h3>
+          <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Never miss a tool update</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
             We build and deploy new offline utilities every single week. Subscribe to get our weekly release summaries.
           </p>

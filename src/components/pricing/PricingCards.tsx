@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, Zap, Sparkles, ShieldCheck, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toolsRegistry } from "@/registry/tools";
+import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from "@/lib/geo";
 
 type BillingInterval = "pass" | "monthly" | "yearly";
 
@@ -31,12 +32,16 @@ const pricingData: Record<"USD" | "INR", Record<BillingInterval, PricingPlan>> =
 };
 
 export function PricingCards() {
-  const tz = typeof window !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "";
-  const cookies = typeof window !== "undefined" ? document.cookie.split(";") : [];
-  const countryCookie = cookies.find((c) => c.trim().startsWith("user-country="));
-  const country = countryCookie ? countryCookie.split("=")[1] : null;
-  const [isIndia] = useState(country === "IN" || tz === "Asia/Kolkata");
+  const [isIndia, setIsIndia] = useState(false);
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("monthly");
+
+  React.useEffect(() => {
+    if (isIndiaFromCookie() || isIndiaFromTz()) {
+      setIsIndia(true);
+      return;
+    }
+    isIndiaFromIp().then(setIsIndia);
+  }, []);
 
   const currencySymbol = isIndia ? "₹" : "$";
   const activePricing = isIndia ? pricingData.INR : pricingData.USD;

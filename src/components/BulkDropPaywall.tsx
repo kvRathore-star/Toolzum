@@ -3,10 +3,24 @@ import React, { useState } from 'react';
 import { FileText, Crown, X } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
+
+function useIsIndia(): boolean {
+  const [isIndia, setIsIndia] = useState(false);
+  React.useEffect(() => {
+    if (isIndiaFromCookie() || isIndiaFromTz()) {
+      setIsIndia(true);
+      return;
+    }
+    isIndiaFromIp().then(setIsIndia);
+  }, []);
+  return isIndia;
+}
 
 export function BulkDropPaywall() {
   const [files, setFiles] = useState<File[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const isIndia = useIsIndia();
 
   React.useEffect(() => {
     const handler = (e: ClipboardEvent) => {
@@ -47,7 +61,7 @@ export function BulkDropPaywall() {
                 href="/pricing"
                 className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
               >
-                <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? '$14.99/mo' : 'Batch 500 files'}
+                <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? (isIndia ? '₹249/mo' : '$14.99/mo') : 'Batch 500 files'}
               </Link>
               <button
                 onClick={() => {

@@ -101,9 +101,9 @@ export default function ProductPage() {
         
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Sparkles className="w-3.5 h-3.5" /> {toolsRegistry.length}+ Client-Side Tools
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Sparkles className="w-4 h-4" /> {toolsRegistry.length}+ Client-Side Tools
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             The offline utility command center.
           </h1>

@@ -53,9 +53,9 @@ export default function ChromeExtensionPage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Globe className="w-3.5 h-3.5" /> Direct Browser Integration
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Globe className="w-4 h-4" /> Direct Browser Integration
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Toolzum at your fingertips.
           </h1>
@@ -263,7 +263,7 @@ export default function ChromeExtensionPage() {
 
         {/* Installation Instructions */}
         <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12">
-          <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-6 flex items-center gap-2">
             <Info className="w-5 h-5 text-[var(--accent)]" /> How to Install in Developer Mode
           </h2>
           

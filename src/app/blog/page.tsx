@@ -40,9 +40,9 @@ export default function BlogPage() {
 
       <div className="relative z-10 max-w-[1280px] mx-auto pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
             Guides &amp; Engineering Blog
-          </div>
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Read our latest guides.
           </h1>
@@ -68,7 +68,7 @@ export default function BlogPage() {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors leading-snug">
+                <h3 className="font-[family-name:var(--font-serif)] text-xl sm:text-2xl font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors leading-snug">
                   {post.title}
                 </h3>
 

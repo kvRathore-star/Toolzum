@@ -242,6 +242,16 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   const sortRef = React.useRef<HTMLDivElement>(null);
   const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
   const [letterFilter, setLetterFilter] = React.useState("");
+  const [expandedSections, setExpandedSections] = React.useState<Set<string>>(new Set());
+
+  const toggleSection = (id: string) => {
+    setExpandedSections(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   const allCategories = React.useMemo(() => {
     return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort();
@@ -404,11 +414,11 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
 }[category] ?? `Free ${category.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.`}
           </p>
           {intro && (
-            <div className="mt-8 max-w-3xl">
-              <h2 className="text-xl font-[family-name:var(--font-serif)] text-[var(--text-primary)] mb-3">
-                What Are {displayName} Tools?
+            <div className="mt-10 max-w-3xl pl-5 border-l-2 border-[var(--accent)]/20">
+              <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-2">
+                About {displayName} Tools
               </h2>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
                 {intro}
               </p>
             </div>
@@ -550,94 +560,113 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             </div>
           )
         ) : (
-          <div className="space-y-16">
-            {sections.map((section) => (
-              <section key={section.id} id={section.id}>
-                <div className="mb-6">
-                  <h2 className="text-2xl font-[family-name:var(--font-serif)] text-[var(--text-primary)] mb-2">
-                    {section.heading}
-                  </h2>
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    {section.description}
-                  </p>
-                  <div className="mt-3 flex items-center gap-2 text-xs text-[var(--text-muted)] font-mono">
-                    <span>{section.tools.length} tool{section.tools.length !== 1 ? 's' : ''}</span>
-                    <span className="w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
-                    <Link href={`#${section.id}`} className="text-[var(--accent)] hover:underline">
-                      Permalink
-                    </Link>
+          <div className="space-y-4">
+            {sections.map((section) => {
+              const isExpanded = expandedSections.has(section.id);
+              return (
+                <section key={section.id} id={section.id} className="border border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-elevated)] overflow-hidden">
+                  <button
+                    onClick={() => toggleSection(section.id)}
+                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[var(--bg-overlay)] transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-xl font-[family-name:var(--font-serif)] text-[var(--text-primary)]">
+                        {section.heading}
+                      </h2>
+                      <p className="text-sm text-[var(--text-secondary)] mt-1">
+                        {section.description}
+                      </p>
+                      <div className="mt-2 flex items-center gap-2 text-xs text-[var(--text-muted)] font-mono">
+                        <span>{section.tools.length} tool{section.tools.length !== 1 ? 's' : ''}</span>
+                      </div>
+                    </div>
+                    <ChevronDown className={`w-5 h-5 text-[var(--text-muted)] shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <div className="px-6 pb-6 pt-2 border-t border-[var(--border-subtle)]">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {section.tools.map((tool) => {
+                          const { icon: Icon, color, bg, gradient } = getIconBg(tool);
+                          return (
+                            <Link
+                              key={tool.id}
+                              href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+                              className="group block h-full"
+                            >
+                              <div className={`h-full p-5 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${gradient}`}>
+                                <div className="flex items-start justify-between mb-4">
+                                  <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
+                                    <Icon className={`w-4 h-4 ${color}`} />
+                                  </div>
+                                </div>
+                                <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
+                                  {tool.name}
+                                  <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
+                                </h3>
+                                <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+                                  {tool.description}
+                                </p>
+                                <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50"></div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {section.tools.map((tool) => {
-                    const { icon: Icon, color, bg, gradient } = getIconBg(tool);
-                    return (
-                      <Link
-                        key={tool.id}
-                        href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
-                        className="group block h-full"
-                      >
-                        <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${gradient}`}>
-                          <div className="flex items-start justify-between mb-4">
-                            <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
-                              <Icon className={`w-4 h-4 ${color}`} />
-                            </div>
-                          </div>
-                          <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
-                            {tool.name}
-                            <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
-                          </h3>
-                          <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                            {tool.description}
-                          </p>
-                          <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50"></div>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
+                </section>
+              );
+            })}
             {uncategorized && uncategorized.length > 0 && (
-              <section id="other-tools">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-[family-name:var(--font-serif)] text-[var(--text-primary)] mb-2">
-                    Other {displayName} Tools
-                  </h2>
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    Additional tools that didn't fit into the categories above.
-                  </p>
-                  <div className="mt-3 flex items-center gap-2 text-xs text-[var(--text-muted)] font-mono">
-                    <span>{uncategorized.length} tool{uncategorized.length !== 1 ? 's' : ''}</span>
+              <section id="other-tools" className="border border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-elevated)] overflow-hidden">
+                <button
+                  onClick={() => toggleSection('other-tools')}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[var(--bg-overlay)] transition-colors"
+                >
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-xl font-[family-name:var(--font-serif)] text-[var(--text-primary)]">
+                      Other {displayName} Tools
+                    </h2>
+                    <p className="text-sm text-[var(--text-secondary)] mt-1">
+                      Additional tools that didn't fit into the categories above.
+                    </p>
+                    <div className="mt-2 flex items-center gap-2 text-xs text-[var(--text-muted)] font-mono">
+                      <span>{uncategorized.length} tool{uncategorized.length !== 1 ? 's' : ''}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {uncategorized.map((tool) => {
-                    const { icon: Icon, color, bg, gradient } = getIconBg(tool);
-                    return (
-                      <Link
-                        key={tool.id}
-                        href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
-                        className="group block h-full"
-                      >
-                        <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${gradient}`}>
-                          <div className="flex items-start justify-between mb-4">
-                            <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
-                              <Icon className={`w-4 h-4 ${color}`} />
+                  <ChevronDown className={`w-5 h-5 text-[var(--text-muted)] shrink-0 transition-transform duration-300 ${expandedSections.has('other-tools') ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`transition-all duration-300 ease-in-out ${expandedSections.has('other-tools') ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 pb-6 pt-2 border-t border-[var(--border-subtle)]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {uncategorized.map((tool) => {
+                        const { icon: Icon, color, bg, gradient } = getIconBg(tool);
+                        return (
+                          <Link
+                            key={tool.id}
+                            href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+                            className="group block h-full"
+                          >
+                            <div className={`h-full p-5 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${gradient}`}>
+                              <div className="flex items-start justify-between mb-4">
+                                <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
+                                  <Icon className={`w-4 h-4 ${color}`} />
+                                </div>
+                              </div>
+                              <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
+                                {tool.name}
+                                <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
+                              </h3>
+                              <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+                                {tool.description}
+                              </p>
+                              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50"></div>
                             </div>
-                          </div>
-                          <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
-                            {tool.name}
-                            <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
-                          </h3>
-                          <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                            {tool.description}
-                          </p>
-                          <div className="mt-4 pt-3 border-t border-[var(--border-subtle)]/50"></div>
-                        </div>
-                      </Link>
-                    );
-                  })}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </section>
             )}

@@ -42,9 +42,9 @@ export default function CookiePolicyPage() {
         
         {/* Title */}
         <div className="max-w-4xl mx-auto mb-16 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Cookie className="w-3.5 h-3.5" /> Cookies & Privacy
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Cookie className="w-4 h-4" /> Cookies & Privacy
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl mb-4 tracking-tight leading-tight">
             Cookie Policy
           </h1>

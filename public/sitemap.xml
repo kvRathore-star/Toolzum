@@ -2947,12 +2947,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/developer/network-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/developer/web-inspector</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3097,12 +3091,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/pdf/pdf-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/pdf/pdf-background-color</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3156,6 +3144,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+
   <url>
     <loc>https://toolzum.com/finance/study-time-calculator</loc>
     <lastmod>2026-07-20</lastmod>
@@ -3205,24 +3194,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/developer/dev-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/api-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/security-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/developer/oauth-client-setup</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3259,18 +3230,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/utility/data-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/validator-kit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/developer/html-linter</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3283,18 +3242,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/health/health-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/design/design-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/design/border-css-generator</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3302,18 +3249,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/design/typography-preview</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/scanner-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/converter-toolkit</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -3391,36 +3326,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/developer/generator-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/time-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/text-seo-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/config-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/design/color-style-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/design/color-shades-tints</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3452,12 +3357,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/developer/ip-allowlist-generator</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/format-data-toolkit</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -3529,18 +3428,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/converter/converters-everyday-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/utility/misc-utilities-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/utility/cidr-calculator</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -3548,18 +3435,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/utility/aws-iam-policy-analyzer</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/serialization-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/style-code-toolkit</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -3614,18 +3489,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/developer/test-data-generator</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/developer/network-utility-toolkit</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/utility/calc-file-toolkit</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

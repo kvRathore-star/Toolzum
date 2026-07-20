@@ -70,9 +70,9 @@ export default function ContactPage() {
         
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--accent)] mb-6">
-            <Mail className="w-3.5 h-3.5" /> Support Center
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <Mail className="w-4 h-4" /> Support Center
+          </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             Get in touch.
           </h1>
@@ -124,7 +124,7 @@ export default function ContactPage() {
                   <Check className="w-8 h-8" />
                 </div>
                 
-                <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
+                <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2">Message Sent!</h3>
                 <p className="text-sm text-[var(--text-secondary)] max-w-sm mx-auto mb-6">
                   Thank you, <strong>{formData.name}</strong>. Your query has been dispatched to our support queue. We usually reply within 24 hours.
                 </p>
@@ -223,7 +223,7 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto mt-20 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
           <Lightbulb className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
-          <h3 className="text-2xl font-semibold mb-3">Suggest a tool</h3>
+          <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Suggest a tool</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
             If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>

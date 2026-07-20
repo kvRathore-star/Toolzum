@@ -15,6 +15,7 @@ import {
   CATEGORIES, STEPS, FEATURES, USE_CASES, INDIA_TOOLS,
   getWhyChoose, getStatsBar
 } from '@/data/homepage';
+import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
 const toolCount = toolsRegistry.length;
 const categoryCount = [...new Set(toolsRegistry.map(t => t.category))].length;
@@ -39,17 +40,11 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
   const [showIndia, setShowIndia] = useState(isIndia);
 
   React.useEffect(() => {
-    if (isIndia) {
+    if (isIndia || isIndiaFromCookie() || isIndiaFromTz()) {
       setShowIndia(true);
-    } else {
-      const cookies = document.cookie.split(';');
-      const countryCookie = cookies.find(c => c.trim().startsWith('user-country='));
-      const country = countryCookie ? countryCookie.split('=')[1] : null;
-      const isIndiaTZ = Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Kolkata';
-      if (country === 'IN' || isIndiaTZ) {
-        setShowIndia(true);
-      }
+      return;
     }
+    isIndiaFromIp().then(setShowIndia);
   }, [isIndia]);
 
   const popularTools = useMemo(() => {
