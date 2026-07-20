@@ -9271,6 +9271,836 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online YAML → Toon Converter — Convert YAML data into a human-readable Toon format using arrows for quick visualization of hierarchical structures. ',
     dependencies: "None",
   },
+  {
+    id: "1003",
+    name: "MKV to WEBM",
+    slug: "mkv-to-webm",
+    category: "Video",
+    description: 'Convert MKV video files into WEBM format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MKV to WEBM — Convert MKV video files into WEBM format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1004",
+    name: "MKV to AVI",
+    slug: "mkv-to-avi",
+    category: "Video",
+    description: 'Convert MKV video files into AVI format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MKV to AVI — Convert MKV video files into AVI format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1005",
+    name: "MP4 to WEBM",
+    slug: "mp4-to-webm",
+    category: "Video",
+    description: 'Convert MP4 video files into WEBM format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MP4 to WEBM — Convert MP4 video files into WEBM format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1006",
+    name: "MP4 to AVI",
+    slug: "mp4-to-avi",
+    category: "Video",
+    description: 'Convert MP4 video files into AVI format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MP4 to AVI — Convert MP4 video files into AVI format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1007",
+    name: "MOV to WEBM",
+    slug: "mov-to-webm",
+    category: "Video",
+    description: 'Convert MOV video files into WEBM format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MOV to WEBM — Convert MOV video files into WEBM format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1008",
+    name: "MOV to AVI",
+    slug: "mov-to-avi",
+    category: "Video",
+    description: 'Convert MOV video files into AVI format. Fast browser-based video conversion.',
+    seoDescription: 'Free online MOV to AVI — Convert MOV video files into AVI format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1009",
+    name: "WEBM to MKV",
+    slug: "webm-to-mkv",
+    category: "Video",
+    description: 'Convert WEBM video files into MKV format. Fast browser-based video conversion.',
+    seoDescription: 'Free online WEBM to MKV — Convert WEBM video files into MKV format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1010",
+    name: "WEBM to MOV",
+    slug: "webm-to-mov",
+    category: "Video",
+    description: 'Convert WEBM video files into MOV format. Fast browser-based video conversion.',
+    seoDescription: 'Free online WEBM to MOV — Convert WEBM video files into MOV format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1011",
+    name: "WEBM to AVI",
+    slug: "webm-to-avi",
+    category: "Video",
+    description: 'Convert WEBM video files into AVI format. Fast browser-based video conversion.',
+    seoDescription: 'Free online WEBM to AVI — Convert WEBM video files into AVI format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1012",
+    name: "AVI to MKV",
+    slug: "avi-to-mkv",
+    category: "Video",
+    description: 'Convert AVI video files into MKV format. Fast browser-based video conversion.',
+    seoDescription: 'Free online AVI to MKV — Convert AVI video files into MKV format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1013",
+    name: "AVI to MOV",
+    slug: "avi-to-mov",
+    category: "Video",
+    description: 'Convert AVI video files into MOV format. Fast browser-based video conversion.',
+    seoDescription: 'Free online AVI to MOV — Convert AVI video files into MOV format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1014",
+    name: "AVI to WEBM",
+    slug: "avi-to-webm",
+    category: "Video",
+    description: 'Convert AVI video files into WEBM format. Fast browser-based video conversion.',
+    seoDescription: 'Free online AVI to WEBM — Convert AVI video files into WEBM format. Fast browser-based video conversion.',
+    dependencies: "FFmpeg",
+    showInCategory: false
+  },
+  {
+    id: "1015",
+    name: "JPG to PNG",
+    slug: "jpg-to-png",
+    category: "Image",
+    description: 'Convert JPG images into PNG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to PNG — Convert JPG images into PNG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1016",
+    name: "PNG to WEBP",
+    slug: "png-to-webp",
+    category: "Image",
+    description: 'Convert PNG images into WEBP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to WEBP — Convert PNG images into WEBP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1017",
+    name: "JPG to WEBP",
+    slug: "jpg-to-webp",
+    category: "Image",
+    description: 'Convert JPG images into WEBP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to WEBP — Convert JPG images into WEBP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1018",
+    name: "WEBP to PNG",
+    slug: "webp-to-png",
+    category: "Image",
+    description: 'Convert WEBP images into PNG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to PNG — Convert WEBP images into PNG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1019",
+    name: "HEIC to PNG",
+    slug: "heic-to-png",
+    category: "Image",
+    description: 'Convert HEIC images into PNG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to PNG — Convert HEIC images into PNG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1020",
+    name: "PNG to AVIF",
+    slug: "png-to-avif",
+    category: "Image",
+    description: 'Convert PNG images into AVIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to AVIF — Convert PNG images into AVIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1021",
+    name: "JPG to AVIF",
+    slug: "jpg-to-avif",
+    category: "Image",
+    description: 'Convert JPG images into AVIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to AVIF — Convert JPG images into AVIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1022",
+    name: "PNG to HEIC",
+    slug: "png-to-heic",
+    category: "Image",
+    description: 'Convert PNG images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to HEIC — Convert PNG images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1023",
+    name: "PNG to BMP",
+    slug: "png-to-bmp",
+    category: "Image",
+    description: 'Convert PNG images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to BMP — Convert PNG images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1024",
+    name: "PNG to TIFF",
+    slug: "png-to-tiff",
+    category: "Image",
+    description: 'Convert PNG images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to TIFF — Convert PNG images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1025",
+    name: "PNG to ICO",
+    slug: "png-to-ico",
+    category: "Image",
+    description: 'Convert PNG images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online PNG to ICO — Convert PNG images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1026",
+    name: "JPG to HEIC",
+    slug: "jpg-to-heic",
+    category: "Image",
+    description: 'Convert JPG images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to HEIC — Convert JPG images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1027",
+    name: "JPG to SVG",
+    slug: "jpg-to-svg",
+    category: "Image",
+    description: 'Convert JPG images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to SVG — Convert JPG images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1028",
+    name: "JPG to BMP",
+    slug: "jpg-to-bmp",
+    category: "Image",
+    description: 'Convert JPG images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to BMP — Convert JPG images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1029",
+    name: "JPG to TIFF",
+    slug: "jpg-to-tiff",
+    category: "Image",
+    description: 'Convert JPG images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to TIFF — Convert JPG images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1030",
+    name: "JPG to ICO",
+    slug: "jpg-to-ico",
+    category: "Image",
+    description: 'Convert JPG images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JPG to ICO — Convert JPG images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1031",
+    name: "WEBP to HEIC",
+    slug: "webp-to-heic",
+    category: "Image",
+    description: 'Convert WEBP images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to HEIC — Convert WEBP images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1032",
+    name: "WEBP to SVG",
+    slug: "webp-to-svg",
+    category: "Image",
+    description: 'Convert WEBP images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to SVG — Convert WEBP images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1033",
+    name: "WEBP to BMP",
+    slug: "webp-to-bmp",
+    category: "Image",
+    description: 'Convert WEBP images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to BMP — Convert WEBP images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1034",
+    name: "WEBP to TIFF",
+    slug: "webp-to-tiff",
+    category: "Image",
+    description: 'Convert WEBP images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to TIFF — Convert WEBP images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1035",
+    name: "WEBP to ICO",
+    slug: "webp-to-ico",
+    category: "Image",
+    description: 'Convert WEBP images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to ICO — Convert WEBP images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1036",
+    name: "WEBP to JXL",
+    slug: "webp-to-jxl",
+    category: "Image",
+    description: 'Convert WEBP images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online WEBP to JXL — Convert WEBP images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1037",
+    name: "HEIC to SVG",
+    slug: "heic-to-svg",
+    category: "Image",
+    description: 'Convert HEIC images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to SVG — Convert HEIC images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1038",
+    name: "HEIC to BMP",
+    slug: "heic-to-bmp",
+    category: "Image",
+    description: 'Convert HEIC images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to BMP — Convert HEIC images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1039",
+    name: "HEIC to TIFF",
+    slug: "heic-to-tiff",
+    category: "Image",
+    description: 'Convert HEIC images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to TIFF — Convert HEIC images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1040",
+    name: "HEIC to ICO",
+    slug: "heic-to-ico",
+    category: "Image",
+    description: 'Convert HEIC images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to ICO — Convert HEIC images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1041",
+    name: "HEIC to JXL",
+    slug: "heic-to-jxl",
+    category: "Image",
+    description: 'Convert HEIC images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online HEIC to JXL — Convert HEIC images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1042",
+    name: "AVIF to WEBP",
+    slug: "avif-to-webp",
+    category: "Image",
+    description: 'Convert AVIF images into WEBP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to WEBP — Convert AVIF images into WEBP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1043",
+    name: "AVIF to HEIC",
+    slug: "avif-to-heic",
+    category: "Image",
+    description: 'Convert AVIF images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to HEIC — Convert AVIF images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1044",
+    name: "AVIF to SVG",
+    slug: "avif-to-svg",
+    category: "Image",
+    description: 'Convert AVIF images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to SVG — Convert AVIF images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1045",
+    name: "AVIF to BMP",
+    slug: "avif-to-bmp",
+    category: "Image",
+    description: 'Convert AVIF images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to BMP — Convert AVIF images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1046",
+    name: "AVIF to TIFF",
+    slug: "avif-to-tiff",
+    category: "Image",
+    description: 'Convert AVIF images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to TIFF — Convert AVIF images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1047",
+    name: "AVIF to GIF",
+    slug: "avif-to-gif",
+    category: "Image",
+    description: 'Convert AVIF images into GIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to GIF — Convert AVIF images into GIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1048",
+    name: "AVIF to ICO",
+    slug: "avif-to-ico",
+    category: "Image",
+    description: 'Convert AVIF images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to ICO — Convert AVIF images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1049",
+    name: "AVIF to JXL",
+    slug: "avif-to-jxl",
+    category: "Image",
+    description: 'Convert AVIF images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online AVIF to JXL — Convert AVIF images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1050",
+    name: "SVG to HEIC",
+    slug: "svg-to-heic",
+    category: "Image",
+    description: 'Convert SVG images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online SVG to HEIC — Convert SVG images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1051",
+    name: "SVG to BMP",
+    slug: "svg-to-bmp",
+    category: "Image",
+    description: 'Convert SVG images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online SVG to BMP — Convert SVG images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1052",
+    name: "SVG to TIFF",
+    slug: "svg-to-tiff",
+    category: "Image",
+    description: 'Convert SVG images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online SVG to TIFF — Convert SVG images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1053",
+    name: "SVG to ICO",
+    slug: "svg-to-ico",
+    category: "Image",
+    description: 'Convert SVG images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online SVG to ICO — Convert SVG images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1054",
+    name: "SVG to JXL",
+    slug: "svg-to-jxl",
+    category: "Image",
+    description: 'Convert SVG images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online SVG to JXL — Convert SVG images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1055",
+    name: "BMP to HEIC",
+    slug: "bmp-to-heic",
+    category: "Image",
+    description: 'Convert BMP images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online BMP to HEIC — Convert BMP images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1056",
+    name: "BMP to SVG",
+    slug: "bmp-to-svg",
+    category: "Image",
+    description: 'Convert BMP images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online BMP to SVG — Convert BMP images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1057",
+    name: "BMP to TIFF",
+    slug: "bmp-to-tiff",
+    category: "Image",
+    description: 'Convert BMP images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online BMP to TIFF — Convert BMP images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1058",
+    name: "BMP to ICO",
+    slug: "bmp-to-ico",
+    category: "Image",
+    description: 'Convert BMP images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online BMP to ICO — Convert BMP images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1059",
+    name: "BMP to JXL",
+    slug: "bmp-to-jxl",
+    category: "Image",
+    description: 'Convert BMP images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online BMP to JXL — Convert BMP images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1060",
+    name: "TIFF to HEIC",
+    slug: "tiff-to-heic",
+    category: "Image",
+    description: 'Convert TIFF images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online TIFF to HEIC — Convert TIFF images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1061",
+    name: "TIFF to SVG",
+    slug: "tiff-to-svg",
+    category: "Image",
+    description: 'Convert TIFF images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online TIFF to SVG — Convert TIFF images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1062",
+    name: "TIFF to BMP",
+    slug: "tiff-to-bmp",
+    category: "Image",
+    description: 'Convert TIFF images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online TIFF to BMP — Convert TIFF images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1063",
+    name: "TIFF to ICO",
+    slug: "tiff-to-ico",
+    category: "Image",
+    description: 'Convert TIFF images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online TIFF to ICO — Convert TIFF images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1064",
+    name: "TIFF to JXL",
+    slug: "tiff-to-jxl",
+    category: "Image",
+    description: 'Convert TIFF images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online TIFF to JXL — Convert TIFF images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1065",
+    name: "GIF to HEIC",
+    slug: "gif-to-heic",
+    category: "Image",
+    description: 'Convert GIF images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to HEIC — Convert GIF images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1066",
+    name: "GIF to SVG",
+    slug: "gif-to-svg",
+    category: "Image",
+    description: 'Convert GIF images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to SVG — Convert GIF images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1067",
+    name: "GIF to BMP",
+    slug: "gif-to-bmp",
+    category: "Image",
+    description: 'Convert GIF images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to BMP — Convert GIF images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1068",
+    name: "GIF to TIFF",
+    slug: "gif-to-tiff",
+    category: "Image",
+    description: 'Convert GIF images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to TIFF — Convert GIF images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1069",
+    name: "GIF to ICO",
+    slug: "gif-to-ico",
+    category: "Image",
+    description: 'Convert GIF images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to ICO — Convert GIF images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1070",
+    name: "GIF to JXL",
+    slug: "gif-to-jxl",
+    category: "Image",
+    description: 'Convert GIF images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online GIF to JXL — Convert GIF images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1071",
+    name: "ICO to HEIC",
+    slug: "ico-to-heic",
+    category: "Image",
+    description: 'Convert ICO images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to HEIC — Convert ICO images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1072",
+    name: "ICO to AVIF",
+    slug: "ico-to-avif",
+    category: "Image",
+    description: 'Convert ICO images into AVIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to AVIF — Convert ICO images into AVIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1073",
+    name: "ICO to SVG",
+    slug: "ico-to-svg",
+    category: "Image",
+    description: 'Convert ICO images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to SVG — Convert ICO images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1074",
+    name: "ICO to BMP",
+    slug: "ico-to-bmp",
+    category: "Image",
+    description: 'Convert ICO images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to BMP — Convert ICO images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1075",
+    name: "ICO to TIFF",
+    slug: "ico-to-tiff",
+    category: "Image",
+    description: 'Convert ICO images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to TIFF — Convert ICO images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1076",
+    name: "ICO to GIF",
+    slug: "ico-to-gif",
+    category: "Image",
+    description: 'Convert ICO images into GIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to GIF — Convert ICO images into GIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1077",
+    name: "ICO to JXL",
+    slug: "ico-to-jxl",
+    category: "Image",
+    description: 'Convert ICO images into JXL format. Perfect for image conversion needs.',
+    seoDescription: 'Free online ICO to JXL — Convert ICO images into JXL format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1078",
+    name: "JXL to HEIC",
+    slug: "jxl-to-heic",
+    category: "Image",
+    description: 'Convert JXL images into HEIC format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to HEIC — Convert JXL images into HEIC format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1079",
+    name: "JXL to AVIF",
+    slug: "jxl-to-avif",
+    category: "Image",
+    description: 'Convert JXL images into AVIF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to AVIF — Convert JXL images into AVIF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1080",
+    name: "JXL to SVG",
+    slug: "jxl-to-svg",
+    category: "Image",
+    description: 'Convert JXL images into SVG format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to SVG — Convert JXL images into SVG format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1081",
+    name: "JXL to BMP",
+    slug: "jxl-to-bmp",
+    category: "Image",
+    description: 'Convert JXL images into BMP format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to BMP — Convert JXL images into BMP format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1082",
+    name: "JXL to TIFF",
+    slug: "jxl-to-tiff",
+    category: "Image",
+    description: 'Convert JXL images into TIFF format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to TIFF — Convert JXL images into TIFF format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1083",
+    name: "JXL to ICO",
+    slug: "jxl-to-ico",
+    category: "Image",
+    description: 'Convert JXL images into ICO format. Perfect for image conversion needs.',
+    seoDescription: 'Free online JXL to ICO — Convert JXL images into ICO format. Perfect for image conversion needs.',
+    dependencies: "Canvas API",
+    showInCategory: false
+  },
+  {
+    id: "1084",
+    name: "HTML to PDF",
+    slug: "html-to-pdf",
+    category: "PDF",
+    description: 'Convert HTML files into PDF format. Document conversion made easy.',
+    seoDescription: 'Free online HTML to PDF — Convert HTML files into PDF format. Document conversion made easy.',
+    dependencies: "PDF.js",
+    showInCategory: false
+  },
+  {
+    id: "1084",
+    name: "PDF to HTML",
+    slug: "pdf-to-html",
+    category: "PDF",
+    description: 'Convert PDF files into HTML format. Document conversion made easy.',
+    seoDescription: 'Free online PDF to HTML — Convert PDF files into HTML format. Document conversion made easy.',
+    dependencies: "PDF.js",
+    showInCategory: false
+  },
 ];
 
 const proSlugs = [
