@@ -329,7 +329,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "Image",
     description: 'Segments the foreground subject from an image using a neural network, producing a transparent PNG. Max 20MB.',
     dependencies: "rembg / OpenCV / TensorFlow.js",
-    seoDescription: 'Remove image backgrounds automatically with AI — free online tool. Get a transparent PNG in seconds. No uploads, all processing happens in your browser.',
+    seoDescription: 'Remove image backgrounds automatically with AI. Coming soon.',
   },
   {
     id: "34",
@@ -1835,7 +1835,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     category: "AI",
     description: 'Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.',
     dependencies: "CF Vectorize",
-    seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool, 100% private and browser-based.',
+    seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool. Uses cloud-based processing.',
   },
   {
     id: "217",
@@ -2888,7 +2888,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "bg-changer",
     category: "Image",
     description: 'Replace image backgrounds with a solid color, gradient, or another image. Perfect for product photos, portraits, and creative projects. Quick and easy, right in your browser.',
-    seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. ',
+    seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. Coming soon.',
     dependencies: "none",
     showInCategory: true,
   },
@@ -6741,15 +6741,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     seoDescription: 'Free online JavaScript Formatter — Format and beautify JavaScript code with proper indentation and syntax structure. ',
     dependencies: "None",
   },
-  {
-    id: "723",
-    name: "TypeScript Formatter",
-    slug: "typescript-formatter",
-    category: "Developer" as ToolCategory,
-    description: 'Format and beautify TypeScript code with proper indentation and type syntax.',
-    seoDescription: 'Free online TypeScript Formatter — Format and beautify TypeScript code with proper indentation and type syntax. ',
-    dependencies: "None",
-  },
+
   {
     id: "724",
     name: "JSX Formatter",
@@ -6900,7 +6892,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "image-converter",
     category: "Image" as ToolCategory,
     description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.',
-    seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. ',
+    seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. Coming soon.',
     dependencies: "None",
   },
   {
@@ -6909,7 +6901,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     slug: "video-converter-tool",
     category: "Video" as ToolCategory,
     description: 'Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats with format auto-detection.',
-    seoDescription: 'Free online Video Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB. ',
+    seoDescription: 'Free online Video Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB. Coming soon.',
     dependencies: "None",
   },
   {
