@@ -629,7 +629,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'logo-placeholder-generator': dynamic(() => import('@/components/tools/modules/GeneratorWidgets').then(m => ({ default: m.LogoPlaceholderGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="logo-placeholder-generator" /> }),
   'open-graph-generator': dynamic(() => import('@/components/tools/modules/GeneratorWidgets').then(m => ({ default: m.OpenGraphGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="open-graph-generator" /> }),
   'oauth-pkce-generator': dynamic(() => import('@/components/tools/modules/GeneratorWidgets').then(m => ({ default: m.OauthPkceGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="oauth-pkce-generator" /> }),
-  'random-color-generator': dynamic(() => import('@/components/tools/modules/GeneratorWidgets').then(m => ({ default: m.RandomColorGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-color-generator" /> }),
   'http-header-analyzer': dynamic(() => import('@/components/tools/modules/ConfigTools').then(m => ({ default: m.HttpHeaderAnalyzer })), { ssr: false, loading: () => <DynamicImportFallback slug="http-header-analyzer" /> }),
 
   'http-headers-generator': dynamic(() => import('@/components/tools/modules/ConfigTools').then(m => ({ default: m.HttpHeadersGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="http-headers-generator" /> }),
@@ -703,7 +702,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'video-converter-tool': dynamic(() => import('@/components/tools/modules/VideoConverter').then(m => ({ default: m.VideoConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="video-converter-tool" /> }),
 
   'encoder-decoder': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="encoder-decoder" /> }),
-  'data-utilities': dynamic(() => import('@/components/tools/modules/DataUtilities').then(m => ({ default: m.DataUtilities })), { ssr: false, loading: () => <DynamicImportFallback slug="data-utilities" /> }),
+  'data-utilities': dynamic(() => import('@/components/tools/modules/DataUtilities'), { ssr: false, loading: () => <DynamicImportFallback slug="data-utilities" /> }),
 
   // Generators
   'random-number-generator': dynamic(() => import('@/components/tools/modules/Generators').then(m => ({ default: m.RandomNumberGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-number-generator" /> }),

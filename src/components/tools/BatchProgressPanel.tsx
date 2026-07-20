@@ -1,5 +1,6 @@
 "use client";
 
+import React, { memo } from 'react';
 import { Check, X, Loader2, AlertTriangle, FileText } from 'lucide-react';
 import type { BatchFile, FileStatus } from '@/hooks/useBatchProgress';
 
@@ -25,7 +26,7 @@ function formatSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-export function BatchProgressPanel({ files, progress, isProcessing, onRemove, onClear, onAbort }: BatchProgressPanelProps) {
+export const BatchProgressPanel = memo(function BatchProgressPanel({ files, progress, isProcessing, onRemove, onClear, onAbort }: BatchProgressPanelProps) {
   if (files.length === 0) return null;
 
   return (
@@ -88,4 +89,4 @@ export function BatchProgressPanel({ files, progress, isProcessing, onRemove, on
       </div>
     </div>
   );
-}
+});

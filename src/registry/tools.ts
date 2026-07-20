@@ -1917,7 +1917,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Subtitle Generator',
     slug: 'subtitle-generator',
-    description: 'Generate SRT files from video.',
+    description: 'Generate SRT subtitle files from video automatically. Supports multiple languages with accurate timestamp alignment for your videos.',
     seoDescription: 'Free online Subtitle Generator — Generate SRT files from video. ',
     category: 'Video',
     id:  "219",
@@ -1926,7 +1926,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Unit Converter',
     slug: 'unit-converter',
-    description: 'Universal unit conversion tool.',
+    description: 'Convert between hundreds of units — length, mass, volume, temperature, currency, and more with a single click.',
     seoDescription: 'Free online Unit Converter — Universal unit conversion tool. ',
     category: 'Utility',
     id:  "221",
@@ -1936,7 +1936,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Video Watermark Adder',
     slug: 'video-watermark-adder',
-    description: 'Add logo or text watermark to video.',
+    description: 'Add a logo image or custom text watermark to your videos with position and opacity controls. 100% browser-based.',
     seoDescription: 'Free online Video Watermark Adder — Add logo or text watermark to video. ',
     category: 'Video',
     id:  "223",
@@ -1955,7 +1955,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'ITR Filing Helper',
     slug: 'itr-filing-helper',
-    description: 'Helper for India Income Tax Returns.',
+    description: 'Step-by-step assistant for India Income Tax Return filing. Guides you through ITR forms, deductions, and calculations.',
     seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. ',
     category: 'indian-utilities',
     id:  "228",
@@ -1965,7 +1965,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Browser Extension',
     slug: 'browser-extension',
-    description: 'All-in-one sidebar AI assistant.',
+    description: 'All-in-one AI sidebar assistant that helps with writing, summarization, translation, and answering questions right in your browser.',
     seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. ',
     category: 'Extension',
     id:  "230",
@@ -1974,7 +1974,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'MP3 Compressor',
     slug: 'mp3-compressor',
-    description: 'Reduce MP3 size with bitrate control',
+    description: 'Reduce MP3 file size by adjusting bitrate and audio quality settings. Perfect for saving storage or faster uploads.',
     seoDescription: 'Free online MP3 Compressor — Reduce MP3 size with bitrate control ',
     category: 'Audio',
     id:  "231",
@@ -1992,7 +1992,7 @@ const rawToolsRegistry: ToolMetadata[] = [
   {
     name: 'Video Trimmer',
     slug: 'video-trimmer',
-    description: 'Trim and cut video clips locally',
+    description: 'Trim and cut video clips locally in your browser. Select start and end times, preview, and download the result.',
     seoDescription: 'Free online Video Trimmer — Trim and cut video clips locally ',
     category: 'Video',
     id:  "233",
@@ -6024,7 +6024,7 @@ const rawToolsRegistry: ToolMetadata[] = [
     name: "Shoe Size Converter",
     slug: "shoe-size-converter",
     category: "Utility" as ToolCategory,
-    description: 'Convert between US and UK shoe sizes.',
+    description: 'Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\'s, women\'s, and children\'s size charts.',
     seoDescription: 'Free online Shoe Size Converter \u2014 Convert between US and UK shoe sizes. ',
     dependencies: "None",        },
   {

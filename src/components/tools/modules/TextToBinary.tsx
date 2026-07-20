@@ -94,4 +94,3 @@ export function TextBinaryTool({ defaultMode = 'text-to-binary' }: { defaultMode
 }
 
 export default function TextToBinary() { return <TextBinaryTool defaultMode="text-to-binary" />; }
-export { TextBinaryTool };
