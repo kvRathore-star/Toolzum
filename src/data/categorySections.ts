@@ -18,6 +18,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "scss-formatter", "python-formatter", "yaml-formatter",
         "xml-formatter", "markdown-formatter", "sql-formatter",
         "swift-formatter",
+        "cpp-formatter", "go-formatter", "kotlin-formatter",
+        "php-beautifier", "ruby-formatter", "rust-formatter",
         "proto-schema-converter", "protobuf-decoder",
         "tsconfig-analyzer", "string-template-tester",
         "test-data-generator",
@@ -94,6 +96,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "oauth-state-validator", "pbkdf2-hash-generator", "cookie-parser",
         "secret-scanner", "security-txt-generator", "robots-txt-validator",
         "oauth-pkce-generator",
+        "jwt-encoder-signer",
       ],
     },
     {
@@ -179,6 +182,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "serial-number-generator", "nickname-generator",         "avatar-generator",
         "uuid-generator",
         "ascii-art-generator",
+        "memorable-password-generator",
       ],
     },
     {
@@ -699,6 +703,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "json-toon-converter", "csv-html-table-converter",
         "temperature-converter", "archive-converter",
         "markdown-tools",
+        "yaml-to-toon",
       ],
     },
   ],
@@ -892,6 +897,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "color-palette-generator", "color-shades-tints",
         "contrast-ratio-checker", 
         "media-query-generator",
+        "color-blindness-simulator",
       ],
     },
     {
