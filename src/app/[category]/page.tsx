@@ -7,6 +7,13 @@ import { CATEGORY_SECTIONS, CATEGORY_INTROS } from "@/data/categorySections";
 const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 
 const CONVERTER_CROSSLIST = new Set(['video-converter', 'audio-converter', 'image-format-converter', 'document-converter']);
+const CONVERTER_UNIT_CROSSLIST = new Set([
+  'speed-converter', 'length-converter', 'weight-converter', 'volume-converter',
+  'area-converter', 'data-size-converter', 'cooking-measurement-converter',
+  'fuel-consumption-converter', 'paper-size-converter', 'clothing-size-converter',
+  'hours-to-minutes-converter', 'speed-converter-advanced', 'power-converter',
+  'pressure-converter',
+]);
 
 function normalizeCategory(category: string): string {
   if (category === "marketing") return "Branding";
@@ -82,7 +89,7 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
 
   const allTools = toolsRegistry.filter(t =>
     (t.category === categoryKey && t.showInCategory !== false) ||
-    (categoryKey === 'Converter' && CONVERTER_CROSSLIST.has(t.slug))
+    (categoryKey === 'Converter' && (CONVERTER_CROSSLIST.has(t.slug) || CONVERTER_UNIT_CROSSLIST.has(t.slug)))
   );
 
   const toolMap = new Map(allTools.map(t => [t.slug, t]));
