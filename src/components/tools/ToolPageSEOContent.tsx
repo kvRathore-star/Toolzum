@@ -274,7 +274,7 @@ const categoryInstructionTemplates: Record<string, { title: string; desc: string
   ],
 };
 
-const categoryFaqTemplates: Record<string, { question: string; answer: string }[]> = {
+export const categoryFaqTemplates: Record<string, { question: string; answer: string }[]> = {
   "PDF": [
     { question: "Are my PDFs private when using this tool?", answer: "Yes. All PDF processing happens entirely in your browser. Your files are never uploaded to any server, ensuring complete document privacy." },
     { question: "What PDF formats and versions are supported?", answer: "The tool works with standard PDF files. Most operations support both older and modern PDF versions. Encrypted or password-protected files may need to be unlocked first." },
@@ -318,10 +318,10 @@ const categoryFaqTemplates: Record<string, { question: string; answer: string }[
     { question: "Is there a character limit?", answer: "There's no hard limit, but very large documents (1M+ characters) may cause slower UI responsiveness." },
   ],
   "SEO": [
-    { question: "Will these tools improve my search rankings?", answer: "They help with technical SEO fundamentals — generating valid sitemaps and meta tags, analyzing content, and checking URL structure." },
+    { question: "Will these tools improve my search rankings?", answer: "They help with technical SEO fundamentals — auditing site health, analyzing content structure, identifying broken links, and ensuring search engines can properly index your pages." },
     { question: "Can I test multiple URLs at once?", answer: "Yes. Several tools support batch input — add multiple URLs, analyze entire pages, or compare keywords in one go." },
-    { question: "Is the output ready to use?", answer: "Yes. Generators produce standard XML or HTML you can copy into your source code. Analyzers give you immediate results you can act on." },
-    { question: "Do I need technical knowledge to use these?", answer: "Basic understanding of HTML and XML helps for generators, but checkers and analyzers are straightforward — just paste your data and get results." },
+    { question: "Is the output ready to use?", answer: "Yes. Results are presented immediately — you can copy, export, or act on them directly." },
+    { question: "Do I need technical knowledge to use these?", answer: "Basic understanding of SEO concepts helps, but most tools are straightforward — paste your data and get results." },
     { question: "Are my website details stored anywhere?", answer: "No. All data stays in your browser and is never transmitted to our servers." },
   ],
   "Privacy": [

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry, SEO_PERMUTATIONS } from '@/registry/tools';
-import { deriveSeoInstructionType } from '@/components/tools/ToolPageSEOContent';
+import { deriveSeoInstructionType, categoryFaqTemplates } from '@/components/tools/ToolPageSEOContent';
 
 const stopwords = new Set([
   'to', 'and', 'the', 'in', 'for', 'of', 'a', 'an', 'is', 'it', 'its', 'on', 'or', 'with',
@@ -244,6 +244,17 @@ describe('tool description content integrity', () => {
         if (perm.description.toLowerCase().includes(bad.toLowerCase())) {
           failures.push(`${perm.slug} (${perm.name}): description contains cargo-culted string "${bad}"`);
         }
+      }
+    }
+    expect(failures, failures.join('\n')).toHaveLength(0);
+  });
+
+  it('SEO FAQ template answers do not reference specific tool subtypes (generators/checkers/analyzers) that mislead for other SEO tools', () => {
+    const subtypePattern = /\b(generators?|checkers?|analyzers?)\b/i;
+    const failures: string[] = [];
+    for (const faq of categoryFaqTemplates['SEO']) {
+      if (subtypePattern.test(faq.answer)) {
+        failures.push(`SEO FAQ "${faq.question.slice(0, 50)}..." answer references tool subtype: "${faq.answer}"`);
       }
     }
     expect(failures, failures.join('\n')).toHaveLength(0);
