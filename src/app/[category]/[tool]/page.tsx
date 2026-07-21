@@ -1,8 +1,9 @@
 import { notFound, permanentRedirect } from "next/navigation";
-import { toolsRegistry, getToolByCategoryAndSlug, TOOL_REDIRECTS } from "@/registry/tools";
+import { toolsRegistry, getToolByCategoryAndSlug, TOOL_REDIRECTS, SEO_PERMUTATIONS } from "@/registry/tools";
 import { ToolLayout } from "@/components/tools/ToolLayout";
 import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
+import BulkSeoLandingPage from "@/components/tools/modules/BulkSeoLandingPage";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
@@ -63,6 +64,8 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
     notFound();
   }
 
+  const isSeoLandingPage = SEO_PERMUTATIONS.some(p => p.slug === toolMetadata.slug);
+
   return (
     <>
       <ToolLayout
@@ -74,7 +77,11 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
       >
         <MemoryWatchdog />
         <ErrorBoundary>
-          <DynamicModuleWrapper slug={toolMetadata.slug} category={toolMetadata.category} />
+          {isSeoLandingPage ? (
+            <BulkSeoLandingPage slug={toolMetadata.slug} category={toolMetadata.category} />
+          ) : (
+            <DynamicModuleWrapper slug={toolMetadata.slug} category={toolMetadata.category} />
+          )}
         </ErrorBoundary>
       </ToolLayout>
     </>
