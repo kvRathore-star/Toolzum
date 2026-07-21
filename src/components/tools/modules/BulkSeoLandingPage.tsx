@@ -51,12 +51,12 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
           <span>Pro Feature — Unlock Bulk Processing</span>
         </div>
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">
-          {hasFormatPair ? `Ready to convert ${formatName} in bulk?` : `Process multiple ${formatName.toLowerCase()} entries at once?`}
+          {hasFormatPair ? `Ready to convert ${formatName} in bulk?` : 'Ready to process files in bulk?'}
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-          {hasFormatPair ? `This landing page describes the ${formatName} conversion workflow. ` : `This landing page introduces the ${formatName.toLowerCase()} workflow. `}
-          Our full Pro tool handles {page.name.replace('Bulk ', '').toLowerCase()}, multiple format pairs simultaneously, 
-          and keeps your folder structure intact — all without uploading a single file to a server.
+          {hasFormatPair
+            ? `This landing page covers the ${formatName} conversion workflow. Our full Pro tool handles ${page.name.replace('Bulk ', '').toLowerCase()}, multiple format pairs simultaneously, higher file limits, and folder structure preservation — all without uploading a single file to a server.`
+            : `This landing page introduces the ${formatName.toLowerCase()} workflow. Our full Pro tool handles batch processing, higher limits, and advanced settings — all without uploading a single file to a server.`}
         </p>
         {parentTool && (
           <Link
