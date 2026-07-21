@@ -17,7 +17,7 @@ interface DescriptionVariants {
 
 const formatterVariants: Record<string, (name: string, deps: string) => DescriptionVariants> = {
   'json': (name, deps) => ({
-    short: `Prettifies JSON data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.`,
+    short: `Prettifies JSON and API response data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.`,
     meta: `Free online ${name} — Prettifies JSON data with configurable indentation, sorting, and syntax validation. Fixes malformed JSON and makes nested structures readable. ${LOCAL_TRUST_CLAIM}`,
     og: `JSON formatter that prettifies data with configurable indentation and sorting, validates syntax, and fixes malformed JSON — entirely client-side.`,
   }),
@@ -110,27 +110,33 @@ const formatterVariants: Record<string, (name: string, deps: string) => Descript
 
 function identifyFormatterType(name: string, slug: string, description: string): string {
   const text = `${name} ${slug} ${description}`.toLowerCase();
+  const nameSlug = `${name} ${slug}`.toLowerCase();
 
-  // Specific languages first (before broad 'code' check)
+  // Multi-language / general formatters first (name/slug takes priority over description)
+  if (nameSlug.includes('code') && nameSlug.includes('formatter')) return 'code';
+  if (nameSlug.includes('beautifier') || nameSlug.includes('prettifier')) return 'code';
+  if (nameSlug.includes('multi')) return 'code';
+
+  // Specific languages — match against description (which best reflects actual capability)
   if (text.includes('json') && text.includes('xml')) return 'json';
   if (text.includes('graphql')) return 'graphql';
   if (text.includes('html')) return 'html';
   if (text.includes('css') && !text.includes('scss') && !text.includes('sass')) return 'css';
   if (text.includes('tsx')) return 'tsx';
   if (text.includes('jsx') || (text.includes('react') && !text.includes('typescript'))) return 'jsx';
-  if (text.includes('typescript') || text.includes('ts ')) return 'typescript';
-  if (text.includes('javascript') || text.includes('js ')) return 'javascript';
+  if (text.includes('typescript') || /\bts\b/.test(text)) return 'typescript';
+  if (text.includes('javascript') || /\bjs\b/.test(text)) return 'javascript';
   if (text.includes('scss') || text.includes('sass')) return 'scss';
   if (text.includes('python')) return 'python';
   if (text.includes('yaml')) return 'yaml';
-  if (text.includes('markdown') || text.includes('md ')) return 'markdown';
+  if (text.includes('markdown') || /\bmd\b/.test(text)) return 'markdown';
   if (text.includes('swift')) return 'swift';
   if (text.includes('jsonl') || text.includes('json lines')) return 'jsonl';
   if (text.includes('sql')) return 'sql';
   if (text.includes('json')) return 'json';
   if (text.includes('xml')) return 'xml';
 
-  // Multi-language formatter last
+  // Broad description-based fallback
   if (text.includes('code') || text.includes('multi') || text.includes('beautifier')) return 'code';
 
   return 'default';

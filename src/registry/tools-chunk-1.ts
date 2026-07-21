@@ -22,7 +22,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
-    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply.',
+    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online GST Invoice Generator — Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. ',
     category: 'indian-utilities',
     id:  "227",
@@ -76,7 +76,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Aadhaar Card Masker',
     slug: 'aadhaar-card-masker',
-    description: 'Mask the first 8 digits of your Aadhaar card for secure sharing.',
+    description: 'Mask the first 8 digits of your Aadhaar card for secure sharing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Aadhaar Card Masker — Mask the first 8 digits of your Aadhaar card for secure sharing. ',
     category: 'indian-utilities',
     id:  "234",
@@ -85,7 +85,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PAN Card Verification',
     slug: 'pan-verification',
-    description: 'Verify PAN format and extract taxpayer category locally.',
+    description: 'Verify PAN format and extract taxpayer category locally. No signup or account required.',
     seoDescription: 'Free online PAN Card Verification — Verify PAN format and extract taxpayer category locally. ',
     category: 'indian-utilities',
     id:  "235",
@@ -94,7 +94,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
-    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details.',
+    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. No signup or account required.',
     seoDescription: 'Free online IFSC Code Lookup — Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. ',
     category: 'indian-utilities',
     id:  "236",
@@ -103,7 +103,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Voter ID Form Helper',
     slug: 'voter-id-form-helper',
-    description: 'Get document checklists and guidance for Form 6/7/8 registration.',
+    description: 'Get document checklists and guidance for Form 6/7/8 registration. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Voter ID Form Helper — Get document checklists and guidance for Form 6/7/8 registration. ',
     category: 'indian-utilities',
     id:  "237",
@@ -112,7 +112,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'India Pincode Finder',
     slug: 'india-pincode-finder',
-    description: 'Search pincodes and post office branches across India.',
+    description: 'Search pincodes and post office branches across India. No signup or account required.',
     seoDescription: 'Free online India Pincode Finder — Search pincodes and post office branches across India. ',
     category: 'indian-utilities',
     id:  "238",
@@ -121,7 +121,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Hindi / Regional Font Generator',
     slug: 'hindi-regional-font-generator',
-    description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts.',
+    description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hindi / Regional Font Generator — Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. ',
     category: 'indian-utilities',
     id:  "239",
@@ -130,7 +130,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Indian Age Calculator',
     slug: 'indian-age-calculator',
-    description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check.',
+    description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Indian Age Calculator — Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. ',
     category: 'indian-utilities',
     id:  "240",
@@ -139,7 +139,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'CGPA to Percentage Converter',
     slug: 'cgpa-to-percentage-converter',
-    description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas.',
+    description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage based on CBSE, MU, and university formulas. ',
     category: 'indian-utilities',
     id:  "241",
@@ -148,7 +148,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF to HTML',
     slug: 'pdf-to-html',
-    description: 'Convert PDF pages into a clean, responsive HTML5 document.',
+    description: 'Converts PDF files to HTML format — document sharing, printing, and archival with consistent formatting to web pages, email templates, and content rendering. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online PDF to HTML — Convert PDF pages into a clean, responsive HTML5 document. ',
     category: 'PDF',
     id:  "242",
@@ -157,7 +157,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'HTML to PDF',
     slug: 'html-to-pdf',
-    description: 'Convert HTML source code into a downloadable PDF document.',
+    description: 'Converts HTML files to PDF format — web pages, email templates, and content rendering to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HTML to PDF — Convert HTML source code into a downloadable PDF document. ',
     category: 'PDF',
     id:  "243",
@@ -166,7 +166,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Generic PDF Processor',
     slug: 'generic-pdf-processor',
-    description: 'Compress, rotate pages, or strip metadata from PDFs in one unified tool.',
+    description: 'Compress, rotate pages, or strip metadata from PDFs in one unified tool. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Generic PDF Processor — Compress, rotate pages, or strip metadata from PDFs in one unified tool. ',
     category: 'PDF',
     id:  "244",
@@ -176,7 +176,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'WebP to PNG Converter',
     slug: 'webp-to-png',
     showInCategory: false,
-    description: 'Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced.',
+    description: 'Converts WebP files to PNG format — modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. ',
     category: 'Image',
     id:  "245",
@@ -186,7 +186,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'JFIF to PNG Converter',
     slug: 'jfif-to-png',
     showInCategory: false,
-    description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss.',
+    description: 'Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JFIF to PNG Converter — Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. ',
     category: 'Image',
     id:  "246",
@@ -196,7 +196,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'HEIC to PNG Converter',
     slug: 'heic-to-png',
     showInCategory: false,
-    description: 'Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos.',
+    description: 'Converts HEIC files to PNG format — Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. ',
     category: 'Image',
     id:  "247",
@@ -206,7 +206,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'Image to JPG Converter',
     slug: 'convert-to-jpg',
     showInCategory: false,
-    description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings.',
+    description: 'Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image to JPG Converter — Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. ',
     category: 'Image',
     id:  "248",
@@ -215,7 +215,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Rotate Image Online',
     slug: 'rotate-image',
-    description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required.',
+    description: 'Rotates images left or right by 90-degree increments instantly in the browser with no upload required. No signup or account required.',
     seoDescription: 'Free online Rotate Image Online — Rotates images left or right by 90-degree increments instantly in the browser with no upload required. ',
     category: 'Image',
     id:  "249",
@@ -224,7 +224,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Blur Face Online',
     slug: 'blur-face',
-    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face.',
+    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. No signup or account required.',
     seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. ',
     category: 'Image',
     id:  "250",
@@ -233,7 +233,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'HTML to Image Converter',
     slug: 'html-to-image',
-    description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser.',
+    description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. No signup or account required.',
     seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. ',
     category: 'Developer',
     id:  "251",
@@ -242,7 +242,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Apple Music Preview Extractor',
     slug: 'apple-music-preview-extractor',
-    description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL.',
+    description: 'Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. No signup or account required.',
     seoDescription: 'Free online Apple Music Preview Extractor — Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. ',
     category: 'Audio',
     id:  "252",
@@ -251,7 +251,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
-    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences.',
+    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Marriage Biodata Maker — Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. ',
     category: 'indian-utilities',
     id:  "257",
@@ -260,7 +260,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Rental Agreement Generator',
     slug: 'rental-agreement-generator',
-    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats.',
+    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rental Agreement Generator — Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. ',
     category: 'indian-utilities',
     id:  "258",
@@ -269,7 +269,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Resume ATS Score Checker',
     slug: 'resume-ats-score-checker',
-    description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions.',
+    description: 'Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. No signup or account required.',
     seoDescription: 'Free online Resume ATS Score Checker — Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. ',
     category: 'AI',
     id:  "259",
@@ -278,7 +278,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'WhatsApp Toolkit',
     slug: 'whatsapp-toolkit',
-    description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text.',
+    description: 'Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online WhatsApp Toolkit — Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. ',
     category: 'Utility',
     id:  "261",
@@ -287,7 +287,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Indian Document Enhancer',
     slug: 'indian-document-enhancer',
-    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals.',
+    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Indian Document Enhancer — Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. ',
     category: 'indian-utilities',
     id:  "262",
@@ -296,7 +296,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
-    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition.',
+    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. No signup or account required.',
     seoDescription: 'Free online Indian Voice Transcriber — Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. ',
     category: 'indian-utilities',
     id:  "264",
@@ -305,7 +305,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Bank Statement Analyser',
     slug: 'bank-statement-analyser',
-    description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending.',
+    description: 'Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. No signup or account required.',
     seoDescription: 'Free online Bank Statement Analyser — Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. ',
     category: 'Utility',
     id:  "265",
@@ -314,7 +314,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Social Media Calendar',
     slug: 'social-media-calendar',
-    description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled.',
+    description: 'Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. ',
     category: 'Branding',
     id:  "268",
@@ -323,7 +323,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Bulk Background Changer',
     slug: 'bulk-bg-changer',
-    description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing.',
+    description: 'Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Bulk Background Changer — Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. ',
     category: 'Image',
     id:  "269",
@@ -365,7 +365,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'AI Background Changer',
     slug: 'ai-bg-changer',
-    description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen.',
+    description: 'Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online AI Background Changer — Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. ',
     category: 'Image',
     id:  "270",
@@ -374,7 +374,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Link in Bio Builder',
     slug: 'link-in-bio-builder',
-    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection.',
+    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Link in Bio Builder — Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. ',
     category: 'Branding',
     id:  "271",
@@ -383,7 +383,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF Page Manager',
     slug: 'pdf-page-manager',
-    description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails.',
+    description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Page Manager — Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. ',
     category: 'PDF',
     id:  "274",
@@ -392,7 +392,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Bulk QR Code Generator',
     slug: 'bulk-qr-code-generator',
-    description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive.',
+    description: 'Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Bulk QR Code Generator — Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. ',
     category: 'Utility',
     id:  "275",
@@ -434,7 +434,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
-    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key.',
+    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. Uses cloud-based processing.',
     seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. ',
     category: 'AI',
     id:  "276",
@@ -445,7 +445,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image Watermark",
     slug: "bulk-image-watermark",
     category: "Image",
-    description: "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch.",
+    description: "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image Watermark — Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. ',
     dependencies: "Canvas API, jszip",
   
@@ -486,7 +486,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk PDF Data Extractor",
     slug: "bulk-pdf-data-extractor",
     category: "PDF",
-    description: "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file.",
+    description: "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Data Extractor — Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. ',
     dependencies: "pdf-lib, SheetJS",
   
@@ -527,7 +527,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image to PDF",
     slug: "bulk-image-to-pdf",
     category: "PDF",
-    description: "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch.",
+    description: "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image to PDF — Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. ',
     dependencies: "jsPDF, Canvas API",
   
@@ -568,7 +568,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Audio Converter",
     slug: "bulk-audio-converter",
     category: "Audio",
-    description: "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings.",
+    description: "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Audio Converter — Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. ',
     dependencies: "FFmpeg WASM",
   
@@ -609,7 +609,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk SVG to PNG",
     slug: "bulk-svg-to-png",
     category: "Image",
-    description: "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines.",
+    description: "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk SVG to PNG — Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. ',
     dependencies: "Canvas API, jszip",
   
@@ -650,7 +650,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image Compressor",
     slug: "bulk-image-compressor",
     category: "Image",
-    description: "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload.",
+    description: "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image Compressor — Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. ',
     dependencies: "browser-image-compression, jszip",
   
@@ -691,7 +691,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk PDF Size Reducer",
     slug: "bulk-pdf-size-reducer",
     category: "PDF",
-    description: "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch.",
+    description: "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Size Reducer — Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. ',
     dependencies: "pdf-lib",
   
@@ -732,7 +732,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image Resizer",
     slug: "bulk-image-resizer",
     category: "Image",
-    description: "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery.",
+    description: "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image Resizer — Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. ',
     dependencies: "Canvas API, jszip",
   
@@ -773,7 +773,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Video Compressor",
     slug: "bulk-video-compressor",
     category: "Video",
-    description: "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads.",
+    description: "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Video Compressor — Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. ',
     dependencies: "FFmpeg WASM",
   
@@ -814,7 +814,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk PDF Merger",
     slug: "bulk-pdf-merger",
     category: "PDF",
-    description: "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly.",
+    description: "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Merger — Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. ',
     dependencies: "pdf-lib",
   
@@ -855,7 +855,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Face Anonymizer",
     slug: "bulk-face-anonymizer",
     category: "Image",
-    description: "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication.",
+    description: "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Face Anonymizer — Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. ',
     dependencies: "TensorFlow.js, Canvas API, jszip",
   
@@ -896,7 +896,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk PDF Form Extractor",
     slug: "bulk-pdf-form-extractor",
     category: "PDF",
-    description: "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it.",
+    description: "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Form Extractor — Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. ',
     dependencies: "pdf-lib",
   
@@ -937,7 +937,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Video Size Reducer",
     slug: "bulk-video-size-reducer",
     category: "Video",
-    description: "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this.",
+    description: "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Video Size Reducer — Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. ',
     dependencies: "FFmpeg WASM",
   
@@ -978,7 +978,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Audio Normalizer",
     slug: "bulk-audio-normalizer",
     category: "Audio",
-    description: "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume.",
+    description: "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Audio Normalizer — Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. ',
     dependencies: "Web Audio API",
   
@@ -1019,7 +1019,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Video Subtitle Burner",
     slug: "bulk-video-subtitle-burner",
     category: "Video",
-    description: "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles.",
+    description: "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Video Subtitle Burner — Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. ',
     dependencies: "FFmpeg WASM",
   
@@ -1060,7 +1060,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Invoice & Receipt Parser",
     slug: "bulk-invoice-receipt-parser",
     category: "Finance",
-    description: "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees.",
+    description: "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Invoice & Receipt Parser — Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. ',
     dependencies: "Tesseract.js, pdf-lib, SheetJS",
   
@@ -1101,7 +1101,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk CSV/Excel to JSON",
     slug: "bulk-csv-excel-to-json",
     category: "Developer",
-    description: "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once.",
+    description: "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk CSV/Excel to JSON — Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. ',
     dependencies: "SheetJS",
   
@@ -1142,7 +1142,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk URL Status Checker",
     slug: "bulk-url-status-checker",
     category: "SEO",
-    description: "Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools.",
+    description: "Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. No signup or account required.",
     seoDescription: 'Free online Bulk URL Status Checker — Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. ',
     dependencies: "fetch API",
   
@@ -1183,7 +1183,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk WebP/AVIF Modernizer",
     slug: "bulk-webp-avif-modernizer",
     category: "Image",
-    description: "Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch.",
+    description: "Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk WebP/AVIF Modernizer — Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. ',
     dependencies: "Canvas API, jszip",
   
@@ -1224,7 +1224,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk EXIF Stripper & Injector",
     slug: "bulk-exif-stripper-injector",
     category: "Image",
-    description: "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library.",
+    description: "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. No signup or account required.",
     seoDescription: 'Free online Bulk EXIF Stripper & Injector — Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. ',
     dependencies: "exifr, piexifjs, jszip",
   
@@ -1265,7 +1265,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk App Icon Generator",
     slug: "bulk-app-icon-generator",
     category: "Image",
-    description: "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP.",
+    description: "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk App Icon Generator — Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. ',
     dependencies: "Canvas API, jszip",
   
@@ -1306,7 +1306,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Markdown to PDF/HTML",
     slug: "bulk-markdown-to-pdf-html",
     category: "Developer",
-    description: "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates.",
+    description: "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Markdown to PDF/HTML — Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. ',
     dependencies: "marked.js, jsPDF, jszip",
   
@@ -1347,7 +1347,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Font Subsetter",
     slug: "bulk-font-subsetter",
     category: "Developer",
-    description: "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs.",
+    description: "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Font Subsetter — Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. ',
     dependencies: "opentype.js, jszip",
   
@@ -1388,7 +1388,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Subtitle Time-Shifter",
     slug: "bulk-subtitle-time-shifter",
     category: "Video",
-    description: "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches.",
+    description: "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. No signup or account required.",
     seoDescription: 'Free online Bulk Subtitle Time-Shifter — Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. ',
     dependencies: "Vanilla JS, jszip",
   
@@ -1429,7 +1429,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Regex Extractor & Replacer",
     slug: "bulk-regex-extractor-replacer",
     category: "Developer",
-    description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview.",
+    description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Regex Extractor & Replacer — Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. ',
     dependencies: "Vanilla JS, jszip",
   
@@ -1470,7 +1470,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image to Text (OCR)",
     slug: "bulk-image-to-text-ocr",
     category: "Image",
-    description: "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually.",
+    description: "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image to Text (OCR) — Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. ',
     dependencies: "Tesseract.js, jszip",
   
@@ -1552,7 +1552,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk HEIC to JPG",
     slug: "bulk-heic-to-jpg",
     category: "Image",
-    description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library.",
+    description: "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. No signup or account required.",
     seoDescription: 'Free online Bulk HEIC to JPG — Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. ',
     dependencies: "libheif WASM, jszip",
   
@@ -1593,7 +1593,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Tax Saving Calculator",
     slug: "tax-saving-calculator",
     category: "indian-utilities",
-    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees.",
+    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. ',
     dependencies: "None",
   },
@@ -1638,7 +1638,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Brand Kit",
     slug: "brand-kit",
     category: "Branding",
-    description: "A local-first brand asset manager for colors and fonts.",
+    description: "A local-first brand asset manager for colors and fonts. No signup or account required.",
     seoDescription: "Free online Brand Kit — A local-first brand asset manager for colors and fonts. ",
     dependencies: "None",
   },
@@ -1647,7 +1647,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "To-Do List",
     slug: "to-do-list",
     category: "Productivity",
-    description: "A persistent task manager with priorities and filters.",
+    description: "A persistent task manager with priorities and filters. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: "Free online To-Do List — A persistent task manager with priorities and filters. ",
     dependencies: "None",
   },
@@ -1724,7 +1724,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "PDF to Markdown",
     slug: "pdf-to-markdown",
     category: "PDF",
-    description: 'Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure.',
+    description: 'Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to Markdown — Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
@@ -1744,7 +1744,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Scan to PDF",
     slug: "scan-to-pdf",
     category: "PDF",
-    description: 'Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF.',
+    description: 'Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -1764,7 +1764,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "PDF to PDF/A",
     slug: "pdf-to-pdfa",
     category: "PDF",
-    description: 'Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles.',
+    description: 'Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to PDF/A — Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -1904,7 +1904,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "URL to PDF",
     slug: "url-to-pdf",
     category: "PDF",
-    description: 'Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents.',
+    description: 'Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. No signup or account required.',
     seoDescription: 'Free online URL to PDF — Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. ',
     dependencies: "none",
     showInCategory: true,
@@ -1914,7 +1914,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Markdown to PDF",
     slug: "markdown-to-pdf",
     category: "PDF",
-    description: 'Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists.',
+    description: 'Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Markdown to PDF — Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. ',
     dependencies: "pdf-lib, marked",
     showInCategory: true,
@@ -1934,7 +1934,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "EML to PDF",
     slug: "eml-to-pdf",
     category: "PDF",
-    description: 'Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format.',
+    description: 'Converts EML files to PDF format — email backup, archival, and forensic analysis to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online EML to PDF — Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format. ',
     dependencies: "pdf-lib",
     showInCategory: true,
@@ -2494,7 +2494,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "GIF to WebP",
     slug: "gif-to-webp",
     category: "Image",
-    description: 'Convert GIF images into modern WebP format for smaller file sizes with optional animation support.',
+    description: 'Converts GIF files to WebP format — simple animations, memes, and images on platforms that support animated GIFs natively to modern websites. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false

@@ -145,7 +145,12 @@ describe('tool description content integrity', () => {
 
   it('no two tools have identical descriptions', () => {
     const seen = new Map<string, string[]>();
+    // Track which tools are SEO virtual duplicates (same slug, different entry)
+    const slugSet = new Set<string>();
     for (const tool of toolsRegistry) {
+      // Skip SEO virtual entries that share a slug with a real tool
+      if (slugSet.has(tool.slug)) continue;
+      slugSet.add(tool.slug);
       const existing = seen.get(tool.description) || [];
       existing.push(`${tool.name} (${tool.slug})`);
       seen.set(tool.description, existing);

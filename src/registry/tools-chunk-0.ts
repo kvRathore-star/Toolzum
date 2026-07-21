@@ -4,7 +4,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "add-text-1",
     name: "Add Text to Photo",
-    description: 'Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle.',
+    description: 'Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Add Text to Photo — Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. ',
     category: "Image",
     slug: "add-text-to-photo",
@@ -13,7 +13,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "batch-edit-1",
     name: "Batch Image Editor",
-    description: 'Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click.',
+    description: 'Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Batch Image Editor — Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. ',
     category: "Image",
     slug: "batch-image-editor",
@@ -23,7 +23,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "vid-mp3-1",
     name: "Video to MP3 Converter",
-    description: 'Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file.',
+    description: 'Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. No signup or account required.',
     seoDescription: 'Free online Video to MP3 Converter — Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. ',
     category: "Video",
     slug: "video-to-mp3",
@@ -32,7 +32,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "vid-crop-1",
     name: "Crop Video",
-    description: "Crop the visual area of your MP4 video entirely in the browser.",
+    description: "Crop the visual area of your MP4 video entirely in the browser. No signup or account required.",
     seoDescription: 'Free online Crop Video — Crop the visual area of your MP4 video entirely in the browser. ',
     category: "Video",
     slug: "crop-video",
@@ -41,7 +41,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "dev-json-xml-1",
     name: "JSON to XML",
-    description: 'Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules.',
+    description: 'Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formats like DOCX and SVG. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. ',
     category: "Converter",
     slug: "json-to-xml",
@@ -51,7 +51,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "time-conv-1",
     name: "Time Converter",
-    description: 'Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results.',
+    description: 'Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Converter — Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. ',
     category: "Developer",
     slug: "time-converter",
@@ -105,7 +105,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "pdf-heic-1",
     name: "HEIC to PDF",
-    description: 'Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents.',
+    description: 'Converts HEIC files to PDF format — Apple device photos to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HEIC to PDF — Converts High-Efficiency Image Container (HEIC) photos from iPhones and iPads into standard PDF documents. ',
     category: "PDF",
     slug: "heic-to-pdf",
@@ -117,7 +117,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: 'Privacy Cleaner',
     slug: 'privacy-cleaner',
     category: 'Utility',
-    description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site.',
+    description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. No signup or account required.',
     seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. ',
     dependencies: 'Vanilla JS'
   },
@@ -183,7 +183,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Currency Converter",
     slug: "currency-converter",
     category: "Finance",
-    description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers.',
+    description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.',
     seoDescription: 'Free online Currency Converter — Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. ',
     dependencies: "ExchangeRate-API"
   },
@@ -221,7 +221,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Word to PDF",
     slug: "word-to-pdf",
     category: "PDF",
-    description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting.',
+    description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
     seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. ',
     dependencies: "LibreOffice API / CloudConvert API",
     showInCategory: false
@@ -261,7 +261,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Age Calculator",
     slug: "age-calculator",
     category: "Calculator",
-    description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date.',
+    description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Age Calculator — Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. ',
     dependencies: "Date-fns / Moment.js"
   },
@@ -290,7 +290,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF to PPT",
     slug: "pdf-to-ppt",
     category: "PDF",
-    description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure.',
+    description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. ',
     dependencies: "pdf2json / PptxGenJS",
     showInCategory: false
@@ -349,7 +349,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Wheel of Names",
     slug: "wheel-of-names",
     category: "Utility",
-    description: 'Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options.',
+    description: 'Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Wheel of Names — Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. ',
     dependencies: "Canvas API / GSAP"
   },
@@ -378,7 +378,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Object Remover",
     slug: "object-remover",
     category: "Image",
-    description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels.',
+    description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Object Remover — Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. ',
     dependencies: "Lama Cleaner"
   },
@@ -397,7 +397,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Temporary Email Generator",
     slug: "temporary-email-generator",
     category: "Privacy",
-    description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours).',
+    description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Uses cloud-based processing.',
     seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
     dependencies: "Mailinator API / Custom Backend"
   },
@@ -406,7 +406,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Screen Recorder Extension",
     slug: "screen-recorder-extension",
     category: "Extension",
-    description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate.',
+    description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. No signup or account required.',
     seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. ',
     dependencies: "MediaRecorder API"
   },
@@ -433,7 +433,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Excel to PDF",
     slug: "excel-to-pdf",
     category: "PDF",
-    description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting.',
+    description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. ',
     dependencies: "SheetJS / jsPDF",
     showInCategory: false
@@ -443,7 +443,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "EMI Calculator",
     slug: "emi-calculator",
     category: "Calculator",
-    description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure.',
+    description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. ',
     dependencies: "Vanilla JS"
   },
@@ -501,7 +501,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Crop Image",
     slug: "crop-image",
     category: "Image",
-    description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes.',
+    description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes.',
     dependencies: "Cropper.js"
   },
@@ -510,7 +510,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Social Media Post Maker",
     slug: "social-media-post-maker",
     category: "Branding",
-    description: 'Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals.',
+    description: 'Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Social Media Post Maker — Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. ',
     dependencies: "Fabric.js"
   },
@@ -547,7 +547,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Random Number Generator",
     slug: "random-number-generator",
     category: "Utility",
-    description: 'Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering.',
+    description: 'Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Number Generator — Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. ',
     dependencies: "Math.random()"
   },
@@ -556,7 +556,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "URL Shortener",
     slug: "url-shortener",
     category: "Branding",
-    description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support.',
+    description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support. Uses cloud-based processing.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. ',
     dependencies: "Node.js / Redis"
   },
@@ -575,7 +575,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Unlock PDF",
     slug: "unlock-pdf",
     category: "PDF",
-    description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents.',
+    description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. No signup or account required.',
     seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. ',
     dependencies: "qpdf"
   },
@@ -584,7 +584,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Image Enhancer",
     slug: "image-enhancer",
     category: "Image",
-    description: 'Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files.',
+    description: 'Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Enhancer — Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. ',
     dependencies: "Real-ESRGAN"
   },
@@ -593,7 +593,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "SIP Calculator",
     slug: "sip-calculator",
     category: "Calculator",
-    description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates.',
+    description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SIP Calculator — Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. ',
     dependencies: "Vanilla JS"
   },
@@ -602,7 +602,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "BMI Calculator",
     slug: "bmi-calculator",
     category: "Calculator",
-    description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight.',
+    description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. ',
     dependencies: "Vanilla JS"
   },
@@ -620,7 +620,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Meme Generator",
     slug: "meme-generator",
     category: "Image",
-    description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border.',
+    description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. No signup or account required.',
     seoDescription: 'Free online Meme Generator — Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. ',
     dependencies: "Canvas API"
   },
@@ -639,7 +639,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Resume Builder",
     slug: "resume-builder",
     category: "Utility",
-    description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume.',
+    description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Resume Builder — Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. ',
     dependencies: "React / html2pdf.js"
   },
@@ -687,7 +687,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Password Generator",
     slug: "password-generator",
     category: "Utility",
-    description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules.',
+    description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Password Generator — Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. ',
     dependencies: "Crypto API"
   },
@@ -696,7 +696,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Diff Checker",
     slug: "diff-checker",
     category: "Developer",
-    description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors.',
+    description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
     dependencies: "diff-match-patch"
   },
@@ -715,7 +715,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "IP Address Lookup",
     slug: "ip-address-lookup",
     category: "Utility",
-    description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity.',
+    description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.',
     seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
     dependencies: "MaxMind / IP-API"
   },
@@ -724,7 +724,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Photo Retoucher",
     slug: "photo-retoucher",
     category: "Image",
-    description: 'Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos.',
+    description: 'Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Photo Retoucher — Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. ',
     dependencies: "OpenCV"
   },
@@ -762,7 +762,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Salary Calculator",
     slug: "salary-calculator",
     category: "Calculator",
-    description: "Calculate net salary after taxes",
+    description: "Calculate net salary after taxes Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes ',
     dependencies: "Vanilla JS"
   },
@@ -771,7 +771,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Audio Cutter",
     slug: "audio-cutter",
     category: "Audio",
-    description: "Trim and cut audio files online",
+    description: "Trim and cut audio files online Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
     dependencies: "Web Audio API / FFmpeg"
   },
@@ -780,7 +780,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "MP3 to WAV",
     slug: "mp3-to-wav",
     category: "Audio",
-    description: 'Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing.',
+    description: 'Converts MP3 files to WAV format — universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false
@@ -790,7 +790,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Pomodoro Timer",
     slug: "pomodoro-timer",
     category: "Productivity",
-    description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options.',
+    description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pomodoro Timer — Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. ',
     dependencies: "Web Audio API / Vanilla JS"
   },
@@ -799,7 +799,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "YouTube Transcript Generator",
     slug: "youtube-transcript-generator",
     category: "Transcription",
-    description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL.',
+    description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Uses cloud-based processing.',
     seoDescription: 'Free online YouTube Transcript Generator — YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. ',
     dependencies: "YouTube Data API"
   },
@@ -808,7 +808,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "EPUB to PDF",
     slug: "epub-to-pdf",
     category: "Converter",
-    description: 'Convert e-books to PDF format. Preserves structure, images, and formatting.',
+    description: 'Converts EPUB files to PDF format — e-readers, mobile devices, and accessible digital books to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true
@@ -818,7 +818,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Protect PDF",
     slug: "protect-pdf",
     category: "PDF",
-    description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner.',
+    description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. ',
     dependencies: "pdf-lib"
   },
@@ -827,7 +827,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Invoice Generator",
     slug: "invoice-generator",
     category: "Finance",
-    description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement.',
+    description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Invoice Generator — Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. ',
     dependencies: "PDF-lib / Vue.js"
   },
@@ -836,7 +836,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Business Card Maker",
     slug: "business-card-maker",
     category: "Branding",
-    description: 'Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions.',
+    description: 'Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Business Card Maker — Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. ',
     dependencies: "React / Canvas API"
   },
@@ -845,7 +845,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Regex Tester",
     slug: "regex-tester",
     category: "Developer",
-    description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match.',
+    description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
     dependencies: "regex.js"
   },
@@ -854,7 +854,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Dice Roller",
     slug: "dice-roller",
     category: "Utility",
-    description: 'Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values.',
+    description: 'Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Dice Roller — Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. ',
     dependencies: "Three.js"
   },
@@ -883,7 +883,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Speech to Text",
     slug: "speech-to-text",
     category: "Audio",
-    description: "Transcribe audio to text in multiple languages",
+    description: "Transcribe audio to text in multiple languages Uses cloud-based processing.",
     seoDescription: 'Free online Speech to Text — Transcribe audio to text in multiple languages ',
     dependencies: "Whisper API / Web Speech API"
   },
@@ -902,7 +902,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Coin Flipper",
     slug: "coin-flipper",
     category: "Utility",
-    description: 'Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation.',
+    description: 'Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Coin Flipper — Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. ',
     dependencies: "CSS3 Animations"
   },
@@ -911,7 +911,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Image Colorizer",
     slug: "image-colorizer",
     category: "Image",
-    description: 'Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images.',
+    description: 'Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Colorizer — Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. ',
     dependencies: "DeOldify"
   },
@@ -920,7 +920,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "EXIF Data Remover",
     slug: "exif-data-remover",
     category: "Privacy",
-    description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images.',
+    description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online EXIF Data Remover — Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. ',
     dependencies: "exifr / Piexifjs"
   },
@@ -937,7 +937,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "mp4-mkv-1",
     name: "MP4 to MKV Converter",
-    description: 'Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream.',
+    description: 'Converts MP4 files to MKV format — universal video playback on any device to advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online MP4 to MKV Converter — Re-encapsulates MP4 video files into the versatile MKV container without re-encoding the underlying video stream. ',
     category: "Converter",
     slug: "mp4-to-mkv",
@@ -957,7 +957,7 @@ export const entries_chunk_0: ToolMetadata[] = [
   {
     id: "mkv-mov-1",
     name: "MKV to MOV Converter",
-    description: 'Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie.',
+    description: 'Converts MKV files to MOV format — advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file to Apple ecosystem. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online MKV to MOV Converter — Transcodes Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications like Final Cut Pro and iMovie. ',
     category: "Converter",
     slug: "mkv-to-mov",
@@ -1025,7 +1025,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Meeting Minutes Generator",
     slug: "meeting-minutes-generator",
     category: "Transcription",
-    description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups.',
+    description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Uses cloud-based processing.',
     seoDescription: 'Free online Meeting Minutes Generator — Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. ',
     dependencies: "OpenAI API"
   },
@@ -1034,7 +1034,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Cover Letter Generator",
     slug: "ai-cover-letter-generator",
     category: "AI",
-    description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s.',
+    description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. Uses cloud-based processing.',
     seoDescription: 'Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. ',
     dependencies: "OpenAI API"
   },
@@ -1043,7 +1043,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "JSON to CSV",
     slug: "json-to-csv",
     category: "Converter",
-    description: 'Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers.',
+    description: 'Converts JSON files to CSV format — APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
   },
@@ -1052,7 +1052,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Watermark PDF",
     slug: "watermark-pdf",
     category: "PDF",
-    description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling.',
+    description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Watermark PDF — Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. ',
     dependencies: "pdf-lib"
   },
@@ -1061,7 +1061,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF Page Delete",
     slug: "pdf-page-delete",
     category: "PDF",
-    description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references.',
+    description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Page Delete — Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. ',
     dependencies: "pdf-lib"
   },
@@ -1079,7 +1079,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Email Signature Generator",
     slug: "email-signature-generator",
     category: "Branding",
-    description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles.',
+    description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Email Signature Generator — Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. ',
     dependencies: "React"
   },
@@ -1108,7 +1108,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Morse Code Translator",
     slug: "morse-code-translator",
     category: "Utility",
-    description: 'Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals.',
+    description: 'Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Morse Code Translator — Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. ',
     dependencies: "Vanilla JS"
   },
@@ -1157,7 +1157,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "VAT Calculator",
     slug: "vat-calculator",
     category: "Calculator",
-    description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services.',
+    description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online VAT Calculator — Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. ',
     dependencies: "Vanilla JS"
   },
@@ -1175,7 +1175,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "JS Minifier",
     slug: "js-minifier",
     category: "Developer",
-    description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics.',
+    description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. No signup or account required.',
     seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. ',
     dependencies: "Terser"
   },
@@ -1184,7 +1184,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Base64 Encode/Decode",
     slug: "base64-encode-decode",
     category: "Developer",
-    description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety.',
+    description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Base64 Encode/Decode — Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. ',
     dependencies: "btoa/atob"
   },
@@ -1193,7 +1193,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Text to Handwriting",
     slug: "text-to-handwriting",
     category: "Text",
-    description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations.',
+    description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to Handwriting — Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. ',
     dependencies: "Canvas API"
   },
@@ -1202,7 +1202,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Receipt Generator",
     slug: "receipt-generator",
     category: "Finance",
-    description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout.',
+    description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Receipt Generator — Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. ',
     dependencies: "Canvas API / jsPDF"
   },
@@ -1211,7 +1211,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Thumbnail Maker",
     slug: "ai-thumbnail-maker",
     category: "AI",
-    description: 'Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas.',
+    description: 'Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Uses cloud-based processing.',
     seoDescription: 'Free online AI Thumbnail Maker — Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. ',
     dependencies: "Canvas API / OpenAI API"
   },
@@ -1220,7 +1220,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Secure Note Sharer",
     slug: "secure-note-sharer",
     category: "Privacy",
-    description: 'Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it.',
+    description: 'Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. Uses cloud-based processing.',
     seoDescription: 'Free online Secure Note Sharer — Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. ',
     dependencies: "Crypto API / Redis"
   },
@@ -1229,7 +1229,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Video to GIF",
     slug: "video-to-gif",
     category: "Video",
-    description: "Convert MP4/WebM to GIF animations. Max 500MB input.",
+    description: "Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Max 500MB input. ',
     dependencies: "FFmpeg / gif.js"
   },
@@ -1247,7 +1247,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Subtitle Translator",
     slug: "subtitle-translator",
     category: "Video",
-    description: 'Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame.',
+    description: 'Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. Uses cloud-based processing.',
     seoDescription: 'Free online Subtitle Translator — Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. ',
     dependencies: "Google Translate API"
   },
@@ -1256,7 +1256,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "IBAN Validator",
     slug: "iban-validator",
     category: "Finance",
-    description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm.',
+    description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online IBAN Validator — Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. ',
     dependencies: "ibantools"
   },
@@ -1265,7 +1265,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "CSV to JSON",
     slug: "csv-to-json",
     category: "Converter",
-    description: 'Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields.',
+    description: 'Converts CSV files to JSON format — spreadsheets, database exports, and data imports to APIs, configuration files, and data exchange between web services. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
   },
@@ -1274,7 +1274,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "CSV to XML",
     slug: "csv-to-xml",
     category: "Converter",
-    description: 'Parses CSV data and converts it into well-formed XML documents using configurable root and row element names.',
+    description: 'Converts CSV files to XML format — spreadsheets, database exports, and data imports to enterprise systems, SOAP APIs, document formats like DOCX and SVG. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. ',
     dependencies: "PapaParse / xml2js",
     showInCategory: false
@@ -1284,7 +1284,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Rotate PDF",
     slug: "rotate-pdf",
     category: "PDF",
-    description: 'Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content.',
+    description: 'Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rotate PDF — Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. ',
     dependencies: "pdf-lib"
   },
@@ -1293,7 +1293,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Extract Images from PDF",
     slug: "extract-images-from-pdf",
     category: "PDF",
-    description: 'Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space.',
+    description: 'Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Extract Images from PDF — Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. ',
     dependencies: "pdf.js"
   },
@@ -1302,7 +1302,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "SQL Formatter",
     slug: "sql-formatter",
     category: "Developer",
-    description: 'Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference.',
+    description: 'Formats SQL queries with proper keyword capitalization, indentation, and clause alignment for readable database operations.',
     seoDescription: 'Free online SQL Formatter — Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. ',
     dependencies: "sql-formatter"
   },
@@ -1311,7 +1311,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "UUID Generator",
     slug: "uuid-generator",
     category: "Developer",
-    description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes).',
+    description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). ',
     dependencies: "uuid"
   },
@@ -1320,7 +1320,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "HEX to RGB Converter",
     slug: "hex-to-rgb-converter",
     category: "Design",
-    description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values.',
+    description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. ',
     dependencies: "Vanilla JS",
       },
@@ -1329,7 +1329,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "BMR Calculator",
     slug: "bmr-calculator",
     category: "Calculator",
-    description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning.',
+    description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. ',
     dependencies: "Vanilla JS"
   },
@@ -1338,7 +1338,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Meta Tag Generator",
     slug: "meta-tag-generator",
     category: "SEO",
-    description: 'Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form.',
+    description: 'Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Meta Tag Generator — Builds a complete block of HTML meta tags including title, description, Open Graph, Twitter Cards, and canonical URL from an interactive form. ',
     dependencies: "Vanilla JS"
   },
@@ -1347,7 +1347,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Text to Binary",
     slug: "text-to-binary",
     category: "Developer",
-    description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators.',
+    description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS",
       },
@@ -1356,7 +1356,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Binary to Text",
     slug: "binary-to-text",
     category: "Developer",
-    description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error.',
+    description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
     dependencies: "Vanilla JS",
       },
@@ -1385,7 +1385,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Conversion Rate Calculator",
     slug: "conversion-rate-calculator",
     category: "Branding",
-    description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision.',
+    description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Conversion Rate Calculator — Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. ',
     dependencies: "Vanilla JS"
   },
@@ -1414,7 +1414,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "ROAS Calculator",
     slug: "roas-calculator",
     category: "Branding",
-    description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate.',
+    description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ROAS Calculator — ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. ',
     dependencies: "Vanilla JS"
   },
@@ -1432,7 +1432,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "CSS Minifier",
     slug: "css-minifier",
     category: "Developer",
-    description: 'Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so.',
+    description: 'Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Minifier — Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. ',
     dependencies: "clean-css"
   },
@@ -1441,7 +1441,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Compare PDF Files",
     slug: "compare-pdf-files",
     category: "PDF",
-    description: 'Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations.',
+    description: 'Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Compare PDF Files — Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. ',
     dependencies: "pdf.js"
   },
@@ -1450,7 +1450,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Favicon Generator",
     slug: "favicon-generator",
     category: "Design",
-    description: 'Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files.',
+    description: 'Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. No signup or account required.',
     seoDescription: 'Free online Favicon Generator — Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. ',
     dependencies: "Sharp / jimp"
   },
@@ -1459,7 +1459,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Case Converter",
     slug: "case-converter",
     category: "Text",
-    description: 'Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click.',
+    description: 'Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Case Converter — Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. ',
     dependencies: "Vanilla JS",
       },
@@ -1468,7 +1468,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Keyword Density Checker",
     slug: "keyword-density-checker",
     category: "SEO",
-    description: 'Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending.',
+    description: 'Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. No signup or account required.',
     seoDescription: 'Free online Keyword Density Checker — Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. ',
     dependencies: "Vanilla JS"
   },
@@ -1477,7 +1477,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Base64 to Image",
     slug: "base64-to-image",
     category: "Developer",
-    description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button.',
+    description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. No signup or account required.',
     seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. ',
     dependencies: "Vanilla JS"
   },
@@ -1495,7 +1495,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "HTML Minifier",
     slug: "html-minifier",
     category: "Developer",
-    description: 'Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output.',
+    description: 'Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML Minifier — Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. ',
     dependencies: "html-minifier"
   },
@@ -1504,7 +1504,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Barcode Generator",
     slug: "barcode-generator",
     category: "Utility",
-    description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data.',
+    description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Barcode Generator — Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. ',
     dependencies: "JsBarcode"
   },
@@ -1513,7 +1513,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PGP Key Generator",
     slug: "pgp-key-generator",
     category: "Privacy",
-    description: 'Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection.',
+    description: 'Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PGP Key Generator — Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. ',
     dependencies: "OpenPGP.js"
   },
@@ -1522,7 +1522,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Add Page Numbers to PDF",
     slug: "add-page-numbers-to-pdf",
     category: "PDF",
-    description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset.',
+    description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Add Page Numbers to PDF — Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. ',
     dependencies: "pdf-lib"
   },
@@ -1560,7 +1560,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Zalgo Text Generator",
     slug: "zalgo-text-generator",
     category: "Text",
-    description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text.',
+    description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. ',
     dependencies: "Vanilla JS",        },
   {
@@ -1568,7 +1568,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Invisible Text Generator",
     slug: "invisible-text-generator",
     category: "Text",
-    description: 'Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text.',
+    description: 'Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Invisible Text Generator — Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. ',
     dependencies: "Vanilla JS"
   },
@@ -1617,7 +1617,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Burn Rate Calculator",
     slug: "burn-rate-calculator",
     category: "Calculator",
-    description: 'Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance.',
+    description: 'Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Burn Rate Calculator — Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. ',
     dependencies: "Vanilla JS"
   },
@@ -1626,7 +1626,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Net Promoter Score Calculator",
     slug: "net-promoter-score-calculator",
     category: "Branding",
-    description: 'Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics.',
+    description: 'Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Net Promoter Score Calculator — Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. ',
     dependencies: "Vanilla JS"
   },
@@ -1635,7 +1635,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "XML to CSV",
     slug: "xml-to-csv",
     category: "Converter",
-    description: 'Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths.',
+    description: 'Converts XML files to CSV format — enterprise systems, SOAP APIs, document formats like DOCX and SVG to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. ',
     dependencies: "xml2js / PapaParse",
     showInCategory: false
@@ -1645,7 +1645,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF Metadata Editor",
     slug: "pdf-metadata-editor",
     category: "PDF",
-    description: 'Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer.',
+    description: 'Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Metadata Editor — Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. ',
     dependencies: "pdf-lib"
   },
@@ -1654,7 +1654,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "SVG Editor",
     slug: "svg-editor",
     category: "Design",
-    description: 'SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing.',
+    description: 'SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SVG Editor — SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. ',
     dependencies: "SVGO / Fabric.js"
   },
@@ -1663,7 +1663,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Robots.txt Generator",
     slug: "robots-txt-generator",
     category: "SEO",
-    description: 'Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references.',
+    description: 'Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Robots.txt Generator — Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references. ',
     dependencies: "Vanilla JS"
   },
@@ -1672,7 +1672,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "SaaS Pricing Calculator",
     slug: "saas-pricing-calculator",
     category: "Calculator",
-    description: 'Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue.',
+    description: 'Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SaaS Pricing Calculator — Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. ',
     dependencies: "Vanilla JS"
   },
@@ -1681,7 +1681,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Employee Turnover Calculator",
     slug: "employee-turnover-calculator",
     category: "Calculator",
-    description: "Calculate employee turnover rate",
+    description: "Calculate employee turnover rate Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Employee Turnover Calculator — Calculate employee turnover rate ',
     dependencies: "Vanilla JS"
   },
@@ -1699,7 +1699,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "IP Anonymizer",
     slug: "ip-anonymizer",
     category: "Privacy",
-    description: "Anonymize IP addresses in logs",
+    description: "Anonymize IP addresses in logs Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online IP Anonymizer — Anonymize IP addresses in logs ',
     dependencies: "Vanilla JS"
   },
@@ -1736,7 +1736,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Aadhaar Wallet Cropper",
     slug: "aadhaar-wallet-cropper",
     category: "indian-utilities",
-    description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades.',
+    description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Aadhaar Wallet Cropper — Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. ',
     dependencies: "Canvas API"
   },
@@ -1745,7 +1745,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PAN Card Resizer",
     slug: "pan-card-resizer",
     category: "indian-utilities",
-    description: 'Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram.',
+    description: 'Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PAN Card Resizer — Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. ',
     dependencies: "Canvas API"
   },
@@ -1754,7 +1754,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Live Transcription",
     slug: "live-transcription",
     category: "Transcription",
-    description: 'Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output.',
+    description: 'Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. No signup or account required.',
     seoDescription: 'Free online Live Transcription — Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. ',
     dependencies: "Web Speech API"
   },
@@ -1763,7 +1763,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Image Bulk Converter",
     slug: "image-bulk-converter",
     category: "Image",
-    description: 'Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch.',
+    description: 'Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. No signup or account required.',
     seoDescription: 'Free online Image Bulk Converter — Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. ',
     dependencies: "browser-image-compression / jszip",
     isPro: true,
@@ -1809,7 +1809,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "eSign PDF",
     slug: "esign-pdf",
     category: "PDF",
-    description: 'Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document.',
+    description: 'Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. No signup or account required.',
     seoDescription: 'Free online eSign PDF — Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. ',
     dependencies: "pdf-lib / fabric"
   },
@@ -1818,7 +1818,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF OCR (Scanned Docs)",
     slug: "pdf-ocr",
     category: "PDF",
-    description: 'Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection.',
+    description: 'Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF OCR (Scanned Docs) — Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. ',
     dependencies: "tesseract.js"
   },
@@ -1827,7 +1827,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF Form Filler",
     slug: "pdf-form-filler",
     category: "PDF",
-    description: 'Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed.',
+    description: 'Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Form Filler — Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. ',
     dependencies: "pdf-lib"
   },
@@ -1845,7 +1845,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Video Subtitler",
     slug: "ai-video-subtitler",
     category: "AI",
-    description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance.',
+    description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Uses cloud-based processing.',
     seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. ',
     dependencies: "Whisper API"
   },
