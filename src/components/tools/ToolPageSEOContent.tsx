@@ -27,6 +27,37 @@ const keywordTypeRules: [RegExp, string][] = [
   [/calculate|compute|count/i, 'calculator'],
 ];
 
+function deriveInputAnswer(tool: ToolMetadata): string {
+  const deps = (tool.dependencies || '').toLowerCase();
+  const slug = tool.slug.toLowerCase();
+  const category = (tool.category || '').toLowerCase();
+
+  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract'];
+  if (fileDeps.some(d => deps.includes(d)) || ['image', 'audio', 'video', 'pdf', 'archive'].includes(category)) {
+    return 'Upload a file from your device. Drag and drop or use the file picker to select your document.';
+  }
+
+  if (/lookup|whois|dns\b/.test(slug) || slug.includes('ssl')) {
+    return 'Enter a URL, domain name, or IP address.';
+  }
+  if (slug.includes('checker') && !slug.includes('keyword') && !slug.includes('plagiarism')) {
+    return 'Enter one or more URLs to analyze.';
+  }
+  if (slug === 'url-encoder' || slug === 'url-decoder') {
+    return 'Enter a URL or text string to encode or decode.';
+  }
+
+  if (category === 'calculator' || category === 'finance' || category === 'health') {
+    return 'Enter numeric values in the input fields — amounts, rates, or percentages.';
+  }
+
+  if (['generator', 'builder'].includes(deriveToolType(slug, tool.name, tool.description))) {
+    return 'Configure your settings below — the output generates instantly.';
+  }
+
+  return 'Paste or type your content directly into the provided text area.';
+}
+
 function keywordType(name: string, description: string): string | null {
   const text = `${name} ${description}`.toLowerCase();
   for (const [pattern, type] of keywordTypeRules) {
@@ -238,10 +269,10 @@ const categoryFaqTemplates: Record<string, { question: string; answer: string }[
     { question: "Is there a character limit?", answer: "There's no hard limit, but very large documents (1M+ characters) may cause slower UI responsiveness." },
   ],
   "SEO": [
-    { question: "Will these tools improve my search rankings?", answer: "They help generate technically correct sitemaps, meta tags, and content analysis, which are fundamental technical SEO building blocks." },
-    { question: "Can I test multiple URLs at once?", answer: "Yes. Sitemap and meta tag generators support adding multiple URLs. The keyword checker analyzes entire documents." },
-    { question: "Is the generated code ready to use?", answer: "Yes. The output is standard XML or HTML that can be copied directly into your website's source code." },
-    { question: "Do I need technical knowledge to use these?", answer: "Basic understanding of HTML and XML is helpful but not required. The tools generate clean, ready-to-use code." },
+    { question: "Will these tools improve my search rankings?", answer: "They help with technical SEO fundamentals — generating valid sitemaps and meta tags, analyzing content, and checking URL structure." },
+    { question: "Can I test multiple URLs at once?", answer: "Yes. Several tools support batch input — add multiple URLs, analyze entire pages, or compare keywords in one go." },
+    { question: "Is the output ready to use?", answer: "Yes. Generators produce standard XML or HTML you can copy into your source code. Analyzers give you immediate results you can act on." },
+    { question: "Do I need technical knowledge to use these?", answer: "Basic understanding of HTML and XML helps for generators, but checkers and analyzers are straightforward — just paste your data and get results." },
     { question: "Are my website details stored anywhere?", answer: "No. All data stays in your browser and is never transmitted to our servers." },
   ],
   "Privacy": [
@@ -392,7 +423,7 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
     });
     inputTypeFaqs.push({
       question: `What kind of input does ${tool.name} accept?`,
-      answer: `Direct text entry, file upload, or URL-based input — depending on the tool. ${toolType === 'converter' || toolType === 'extractor' ? 'Common file formats are supported for upload-based tools.' : toolType === 'calculator' || toolType === 'estimator' ? 'All numeric values are entered through input fields with real-time updates.' : 'Paste or type your content directly into the provided editor area.'}`
+      answer: deriveInputAnswer(tool)
     });
     inputTypeFaqs.push({
       question: `Does ${tool.name} work offline?`,

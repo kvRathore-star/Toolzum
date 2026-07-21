@@ -11,7 +11,10 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
 
   if (!page) return null;
 
-  const formatName = slug.replace('bulk-', '').split('-to-').join(' → ').toUpperCase();
+  const hasFormatPair = slug.includes('-to-');
+  const formatName = hasFormatPair
+    ? slug.replace('bulk-', '').split('-to-').join(' → ').toUpperCase()
+    : page.name.replace(/^Bulk\s+/i, '');
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -48,10 +51,10 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
           <span>Pro Feature — Unlock Bulk Processing</span>
         </div>
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">
-          Ready to convert {formatName} in bulk?
+          {hasFormatPair ? `Ready to convert ${formatName} in bulk?` : `Process multiple ${formatName.toLowerCase()} entries at once?`}
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-          This landing page describes the {formatName} conversion workflow. 
+          {hasFormatPair ? `This landing page describes the ${formatName} conversion workflow. ` : `This landing page introduces the ${formatName.toLowerCase()} workflow. `}
           Our full Pro tool handles {page.name.replace('Bulk ', '').toLowerCase()}, multiple format pairs simultaneously, 
           and keeps your folder structure intact — all without uploading a single file to a server.
         </p>
