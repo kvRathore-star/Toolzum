@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toolsRegistry } from '@/registry/tools';
+import { toolsRegistry, SEO_PERMUTATIONS } from '@/registry/tools';
 import { deriveSeoInstructionType } from '@/components/tools/ToolPageSEOContent';
 
 const stopwords = new Set([
@@ -215,6 +215,35 @@ describe('tool description content integrity', () => {
       const actual = deriveSeoInstructionType(tool.slug, tool.name, tool.description);
       if (actual !== expected) {
         failures.push(`${tool.name} (${tool.slug}): expected "${expected}", got "${actual}"`);
+      }
+    }
+    expect(failures, failures.join('\n')).toHaveLength(0);
+  });
+
+  it('all SEO_PERMUTATIONS have a valid parent tool in the registry', () => {
+    const failures: string[] = [];
+    for (const perm of SEO_PERMUTATIONS) {
+      const resolved = toolsRegistry.find(t => t.slug === perm.parentSlug);
+      if (!resolved) {
+        failures.push(`${perm.slug}: parent "${perm.parentSlug}" not in toolsRegistry`);
+      }
+    }
+    expect(failures, failures.join('\n')).toHaveLength(0);
+  });
+
+  it('no SEO_PERMUTATIONS description contains the old hardcoded image-specific use case strings', () => {
+    const cargoCultedStrings = [
+      'optimizing images for Pagespeed',
+      'standardizing product photo formats',
+      'repurposing assets across platforms',
+      'delivering assets in multiple format specs',
+    ];
+    const failures: string[] = [];
+    for (const perm of SEO_PERMUTATIONS) {
+      for (const bad of cargoCultedStrings) {
+        if (perm.description.toLowerCase().includes(bad.toLowerCase())) {
+          failures.push(`${perm.slug} (${perm.name}): description contains cargo-culted string "${bad}"`);
+        }
       }
     }
     expect(failures, failures.join('\n')).toHaveLength(0);

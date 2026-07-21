@@ -5,6 +5,52 @@ import Link from 'next/link';
 import { ArrowRight, Lock, Shield, Zap, Upload } from 'lucide-react';
 import { SEO_PERMUTATIONS, toolsRegistry } from '@/registry/tools';
 
+const USE_CASES_BY_CATEGORY: Record<string, string[]> = {
+  Image: [
+    'Web developers optimizing images for faster page loads',
+    'E-commerce sellers standardizing product photos for their catalog',
+    'Content creators repurposing images across social media platforms',
+    'Photographers preparing client deliveries with consistent formats',
+  ],
+  SEO: [
+    'SEO agencies auditing client sites for broken or misconfigured URLs',
+    'Web developers validating redirect chains after site migrations',
+    'Content teams checking all links before publishing new pages',
+    'Site owners monitoring for 404 errors that hurt search rankings',
+  ],
+  PDF: [
+    'Law firms reducing document sizes for compliant email attachments',
+    'Accounting departments archiving financial reports efficiently',
+    'HR teams sharing policy documents with faster load times',
+    'Publishing teams extracting content from PDFs for reuse',
+  ],
+  Audio: [
+    'Podcasters preparing recordings for distribution on streaming platforms',
+    'Music producers converting tracks between lossless and compressed formats',
+    'Audio editors standardizing file formats for post-production workflows',
+    'Voice-over artists delivering files in the format clients require',
+  ],
+  Video: [
+    'Video editors standardizing footage formats before post-production',
+    'Streaming platforms optimizing videos for bandwidth-constrained viewers',
+    'Content creators preparing videos for social media uploads',
+    'Media archivists converting legacy formats to modern standards',
+  ],
+  Privacy: [
+    'Real estate agents protecting client location privacy before listing photos',
+    'Photographers stripping GPS data before sharing images online',
+    'Legal professionals removing hidden metadata from sensitive documents',
+    'Social media managers preventing location tracking from shared content',
+  ],
+};
+
+const DEFAULT_USE_CASES = [
+  'Professionals processing bulk files efficiently in a single pass',
+  'Teams standardizing output formats for consistent deliverables',
+  'Power users automating repetitive file transformations',
+  'Businesses reducing manual work with batch processing capabilities',
+];
+
 export default function BulkSeoLandingPage({ slug, category }: { slug: string; category: string }) {
   const page = SEO_PERMUTATIONS.find(p => p.slug === slug);
   const parentTool = page ? toolsRegistry.find(t => t.slug === page.parentSlug) : null;
@@ -15,6 +61,9 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
   const formatName = hasFormatPair
     ? slug.replace('bulk-', '').split('-to-').join(' → ').toUpperCase()
     : page.name.replace(/^Bulk\s+/i, '');
+
+  const parentCategory = parentTool?.category || category;
+  const useCases = USE_CASES_BY_CATEGORY[parentCategory] || DEFAULT_USE_CASES;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -72,22 +121,12 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
         <div className="border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
           <h3 className="font-semibold text-zinc-900 dark:text-white mb-3">Common Use Cases</h3>
           <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-500 mt-0.5">✓</span>
-              Web developers optimizing images for Pagespeed scores
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-500 mt-0.5">✓</span>
-              E-commerce sellers standardizing product photo formats
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-500 mt-0.5">✓</span>
-              Content creators repurposing assets across platforms
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-500 mt-0.5">✓</span>
-              Designers delivering assets in multiple format specs
-            </li>
+            {useCases.map((uc, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-emerald-500 mt-0.5">✓</span>
+                {uc}
+              </li>
+            ))}
           </ul>
         </div>
         <div className="border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
@@ -115,7 +154,7 @@ export default function BulkSeoLandingPage({ slug, category }: { slug: string; c
 
       <div className="text-center mt-12 border-t border-zinc-200 dark:border-zinc-800 pt-8">
         <p className="text-sm text-zinc-500 dark:text-zinc-500">
-          All conversion processing runs 100% in your browser via WebAssembly. 
+          All processing runs 100% in your browser via WebAssembly. 
           No files are uploaded, stored, or transmitted. 
           Your data never leaves your device.
         </p>
