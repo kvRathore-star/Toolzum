@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry } from '@/registry/tools';
+import { deriveSeoInstructionType } from '@/components/tools/ToolPageSEOContent';
 
 const stopwords = new Set([
   'to', 'and', 'the', 'in', 'for', 'of', 'a', 'an', 'is', 'it', 'its', 'on', 'or', 'with',
@@ -173,5 +174,44 @@ describe('tool description content integrity', () => {
       console.warn(`\n⚠ WARNING: ${failures.length} tools have description identical to seoDescription content.`);
       console.warn(`  This is tracked as content-opportunity work (item #5), not a regression.\n`);
     }
+  });
+
+  it('deriveSeoInstructionType returns correct type for all SEO-category tools', () => {
+    const seoTools = toolsRegistry.filter(t => t.category === 'SEO');
+    const expectedTypes: Record<string, string> = {
+      'xml-sitemap-generator': 'seo-generator',
+      'meta-tag-generator': 'seo-generator',
+      'keyword-density-checker': 'seo-analyzer',
+      'robots-txt-generator': 'seo-generator',
+      'bulk-url-status-checker': 'seo-checker',
+      'word-frequency-counter': 'seo-analyzer',
+      'keyword-planner-tool': 'seo-analyzer',
+      'seo-meta-tag-generator': 'seo-generator',
+      'seo-preview-generator': 'seo-preview',
+      'seo-headline-analyzer': 'seo-analyzer',
+      'seo-schema-generator': 'seo-generator',
+      'seo-slug-generator': 'seo-generator',
+      'text-to-html-converter': 'seo-converter',
+      'html-to-text-converter': 'seo-converter',
+      'duplicate-word-remover': 'seo-cleanup',
+      'text-cleaner': 'seo-cleanup',
+      'text-splitter': 'seo-cleanup',
+      'trailing-space-remover': 'seo-cleanup',
+      'canonical-url-checker': 'seo-checker',
+      'breadcrumb-schema-generator': 'seo-generator',
+      'utm-builder': 'seo-generator',
+      'bulk-url-checker': 'seo-checker',
+      'bulk-link-checker': 'seo-checker',
+    };
+    const failures: string[] = [];
+    for (const tool of seoTools) {
+      const expected = expectedTypes[tool.slug];
+      expect(expected, `No expected type defined for SEO tool "${tool.name}" (${tool.slug})`).toBeTruthy();
+      const actual = deriveSeoInstructionType(tool.slug, tool.name, tool.description);
+      if (actual !== expected) {
+        failures.push(`${tool.name} (${tool.slug}): expected "${expected}", got "${actual}"`);
+      }
+    }
+    expect(failures, failures.join('\n')).toHaveLength(0);
   });
 });

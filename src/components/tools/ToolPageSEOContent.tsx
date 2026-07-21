@@ -86,6 +86,22 @@ function deriveToolType(slug: string, name: string, description: string): string
   return keywordType(name, description) || "default";
 }
 
+export function deriveSeoInstructionType(slug: string, name: string, description: string): string {
+  if (slug === 'seo-preview-generator') return 'seo-preview';
+  if (slug === 'keyword-density-checker') return 'seo-analyzer';
+  if (slug.endsWith('-converter')) return 'seo-converter';
+  if (slug.endsWith('-remover') || slug.endsWith('-cleaner') || slug.endsWith('-splitter')) return 'seo-cleanup';
+  if (slug.endsWith('-checker')) return 'seo-checker';
+  if (slug.endsWith('-analyzer') || slug.endsWith('-counter') || slug === 'keyword-planner-tool') return 'seo-analyzer';
+  if (slug.endsWith('-generator') || slug.endsWith('-builder')) return 'seo-generator';
+  const text = `${name} ${description}`.toLowerCase();
+  if (text.includes('check') || text.includes('validate')) return 'seo-checker';
+  if (text.includes('analyze') || text.includes('frequency')) return 'seo-analyzer';
+  if (text.includes('clean') || text.includes('remove') || text.includes('split')) return 'seo-cleanup';
+  if (text.includes('convert') || text.includes('transform')) return 'seo-converter';
+  return 'seo-generator';
+}
+
 const typeInstructionTemplates: Record<string, { title: string; desc: string }[]> = {
   generator: [
     { title: "1. Configure Your Input", desc: "Set the parameters — name, length, count, or format — using the input controls provided." },
@@ -161,6 +177,39 @@ const typeInstructionTemplates: Record<string, { title: string; desc: string }[]
     { title: "1. Upload Source File", desc: "Select the file or data you want to extract content from." },
     { title: "2. Extract", desc: "Click extract to pull specific data types — text, audio, or metadata." },
     { title: "3. Download", desc: "Save the extracted content as a separate file." },
+  ],
+};
+
+const seoInstructionTypeTemplates: Record<string, { title: string; desc: string }[]> = {
+  'seo-generator': [
+    { title: "1. Configure Your Input", desc: "Enter or adjust the parameters — URLs, fields, options, or settings — that define what you want to generate." },
+    { title: "2. Generate", desc: "Click generate to produce the output — sitemap, meta tags, schema markup, or structured data — from your configured inputs." },
+    { title: "3. Copy or Deploy", desc: "Copy the generated code or file and paste it directly into your website, CMS, or project." },
+  ],
+  'seo-checker': [
+    { title: "1. Enter the Data to Check", desc: "Paste a URL, domain, keyword, or list of links into the input field. Some tools accept bulk upload via CSV." },
+    { title: "2. Run the Check", desc: "Click check to evaluate the input — status codes, redirects, keyword density, or canonical compliance — and get results instantly." },
+    { title: "3. Review and Act", desc: "See pass/fail status, detailed metrics, and actionable insights. Export results as CSV or copy individual items." },
+  ],
+  'seo-analyzer': [
+    { title: "1. Provide Your Content", desc: "Paste the text, headline, or keyword data you want to analyze into the input area." },
+    { title: "2. Analyze", desc: "Click analyze to compute metrics — word frequency, keyword density, sentiment, character count, or SEO score." },
+    { title: "3. Review Insights", desc: "View detailed results with charts and counts. Use the data to refine your content strategy." },
+  ],
+  'seo-cleanup': [
+    { title: "1. Paste Your Text", desc: "Enter the messy or structured text you want to clean up — duplicate words, trailing spaces, extra whitespace, or delimited data." },
+    { title: "2. Clean", desc: "Click to process — remove duplicates, normalize whitespace, split by delimiter, or strip trailing spaces." },
+    { title: "3. Copy the Result", desc: "Your cleaned text is ready instantly. Copy it to your clipboard or download as a file." },
+  ],
+  'seo-converter': [
+    { title: "1. Provide Source Content", desc: "Paste your HTML or plain text content into the input area. Both single entries and bulk text are supported." },
+    { title: "2. Convert", desc: "Click convert to transform between formats — HTML to plain text or plain text to HTML with proper markup." },
+    { title: "3. Copy the Output", desc: "Your converted content is ready to copy or download. Use it in your CMS, emails, or web pages." },
+  ],
+  'seo-preview': [
+    { title: "1. Enter Page Details", desc: "Type your page title, meta description, and URL exactly as they would appear in search results." },
+    { title: "2. Preview", desc: "See a live Google-style search snippet showing how your page will appear in SERP listings." },
+    { title: "3. Optimize", desc: "Adjust the title and description length to fit snippet limits. Copy the final version for your CMS." },
   ],
 };
 
@@ -402,7 +451,8 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
   ] : null;
 
   const toolType = deriveToolType(tool.slug, tool.name, tool.description);
-  const steps = tool.instructions || formatSteps || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
+  const seoType = tool.category === 'SEO' ? deriveSeoInstructionType(tool.slug, tool.name, tool.description) : null;
+  const steps = tool.instructions || formatSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
   const formatFaq = pair ? {
     question: `Why convert ${FORMAT_INFO[pair.from].name} to ${FORMAT_INFO[pair.to].name}?`,
