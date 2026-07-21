@@ -7,7 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
-import DOMPurify from 'dompurify';
+
 
 type FormatPair = {
   slug: string;
@@ -153,7 +153,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
       </div>
 
       {description && (
-        <div className="bg-teal-500/10 border border-teal-500/20 p-4 rounded-xl text-teal-500 text-sm" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }} />
+        <div className="bg-teal-500/10 border border-teal-500/20 p-4 rounded-xl text-teal-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">

@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
-import DOMPurify from 'dompurify';
+
 
 type FormatDef = {
   key: string;
@@ -207,7 +207,7 @@ export default function AudioFormatConverter({ slug, description }: AudioFormatC
       </div>
 
       {description && (
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }} />
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
