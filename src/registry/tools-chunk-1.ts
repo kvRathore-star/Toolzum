@@ -2424,7 +2424,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "GIF to WebP/WebM",
     slug: "gif-to-webp-webm",
     category: "Converter",
-    description: 'Convert GIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
+    description: 'Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files.',
     seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
@@ -2494,7 +2494,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "GIF to WebP",
     slug: "gif-to-webp",
     category: "Image",
-    description: 'Convert GIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
+    description: 'Convert GIF images into modern WebP format for smaller file sizes with optional animation support.',
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false

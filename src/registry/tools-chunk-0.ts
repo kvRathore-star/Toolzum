@@ -1690,7 +1690,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "MAC Address Generator",
     slug: "mac-address-generator",
     category: "Privacy",
-    description: 'Calculate employee turnover rate for your organization. Supports voluntary and involuntary separation tracking with period analysis.',
+    description: 'Generates random MAC addresses in six common formats with optional OUI prefix. Supports Unix, Windows, Cisco, and dot-separated styles.',
     seoDescription: 'Free online MAC Address Generator — Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI. ',
     dependencies: "Vanilla JS"
   },
@@ -1708,7 +1708,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "XML to JSON",
     slug: "xml-to-json",
     category: "Converter",
-    description: 'Anonymize IP addresses in log files or datasets. Supports IPv4 and IPv6 masking with configurable prefix preservation.',
+    description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content.',
     seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. ',
     dependencies: "xml2js",
     showInCategory: false
