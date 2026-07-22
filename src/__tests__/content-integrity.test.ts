@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry, SEO_PERMUTATIONS } from '@/registry/tools';
-import { deriveSeoInstructionType, categoryFaqTemplates } from '@/components/tools/ToolPageSEOContent';
+import { deriveSeoInstructionType, categoryFaqTemplates, deriveInputAnswer } from '@/components/tools/ToolPageSEOContent';
+import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 const stopwords = new Set([
   'to', 'and', 'the', 'in', 'for', 'of', 'a', 'an', 'is', 'it', 'its', 'on', 'or', 'with',
@@ -255,6 +256,25 @@ describe('tool description content integrity', () => {
     for (const faq of categoryFaqTemplates['SEO']) {
       if (subtypePattern.test(faq.answer)) {
         failures.push(`SEO FAQ "${faq.question.slice(0, 50)}..." answer references tool subtype: "${faq.answer}"`);
+      }
+    }
+    expect(failures, failures.join('\n')).toHaveLength(0);
+  });
+
+  it('unit converters (CONVERTER_CONFIG unit category) do not get "upload a file" as their input type', () => {
+    const unitSlugs = Object.entries(CONVERTER_CONFIG)
+      .filter(([, cfg]) => cfg.category === 'unit')
+      .map(([slug]) => slug);
+    const failures: string[] = [];
+    for (const slug of unitSlugs) {
+      const tool = toolsRegistry.find(t => t.slug === slug);
+      if (!tool) {
+        failures.push(`${slug}: not found in toolsRegistry`);
+        continue;
+      }
+      const answer = deriveInputAnswer(tool);
+      if (answer.toLowerCase().includes('upload a file')) {
+        failures.push(`${slug} (${tool.name}): derives as "upload a file" instead of numeric unit input`);
       }
     }
     expect(failures, failures.join('\n')).toHaveLength(0);

@@ -3,12 +3,15 @@ import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-r
 import { toolsRegistry, ToolMetadata } from "@/registry/tools";
 import { getShortDescription } from "@/lib/generateToolDescription";
 import { requiresCloudApi, LOCAL_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
+import { CONVERTER_CONFIG } from './modules/shared/converterConfig';
 
 interface ToolPageSEOContentProps {
   tool: ToolMetadata;
 }
 
 const broadTypes = new Set(['generator', 'checker', 'tester', 'builder']);
+
+const fileProcessingCategories = new Set(['image', 'audio', 'video', 'pdf', 'converter', 'archive', 'document']);
 
 const keywordTypeRules: [RegExp, string][] = [
   [/hash(?!tag)|hmac|checksum|md5|sha(?!rp)|ripemd|argon2|bcrypt|pbkdf2|digest|message\s*digest/i, 'hasher'],
@@ -27,14 +30,23 @@ const keywordTypeRules: [RegExp, string][] = [
   [/calculate|compute|count/i, 'calculator'],
 ];
 
-function deriveInputAnswer(tool: ToolMetadata): string {
+export function deriveInputAnswer(tool: ToolMetadata): string {
   const deps = (tool.dependencies || '').toLowerCase();
   const slug = tool.slug.toLowerCase();
   const category = (tool.category || '').toLowerCase();
 
   const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract'];
-  if (fileDeps.some(d => deps.includes(d)) || ['image', 'audio', 'video', 'pdf', 'archive'].includes(category)) {
+
+  if (CONVERTER_CONFIG[slug]?.category === 'unit') {
+    return 'Enter a numeric value to convert — all unit conversions update instantly.';
+  }
+
+  if (fileDeps.some(d => deps.includes(d)) || fileProcessingCategories.has(category)) {
     return 'Upload a file from your device. Drag and drop or use the file picker to select your document.';
+  }
+
+  if (slug === 'iban-validator') {
+    return 'Enter an IBAN (International Bank Account Number) to validate its format and structure.';
   }
 
   if (/lookup|whois|dns\b/.test(slug) || slug.includes('ssl')) {
@@ -51,7 +63,7 @@ function deriveInputAnswer(tool: ToolMetadata): string {
     return 'Enter numeric values in the input fields — amounts, rates, or percentages.';
   }
 
-  if (['generator', 'builder'].includes(deriveToolType(slug, tool.name, tool.description))) {
+  if (['generator', 'builder'].includes(deriveToolType(slug, tool.name, tool.description, category))) {
     return 'Configure your settings below — the output generates instantly.';
   }
 
@@ -66,7 +78,7 @@ function keywordType(name: string, description: string): string | null {
   return null;
 }
 
-function deriveToolType(slug: string, name: string, description: string): string {
+function deriveToolType(slug: string, name: string, description: string, category?: string): string {
   const suffix = slug.split('-').pop() || '';
   const types: Record<string, string> = {
     generator: "generator", validator: "validator", calculator: "calculator",
@@ -77,6 +89,9 @@ function deriveToolType(slug: string, name: string, description: string): string
     transformer: "converter", extractor: "extractor",
   };
   if (types[suffix]) {
+    if (suffix === 'converter' && CONVERTER_CONFIG[slug]?.category === 'unit') {
+      return "calculator";
+    }
     if (broadTypes.has(types[suffix])) {
       const kw = keywordType(name, description);
       if (kw) return kw;
@@ -450,7 +465,7 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
     { title: "3. Download the Result", desc: `Your converted ${FORMAT_INFO[pair.to].name} file is ready instantly. Download it to your device. Everything runs locally — nothing is uploaded to any server.` },
   ] : null;
 
-  const toolType = deriveToolType(tool.slug, tool.name, tool.description);
+  const toolType = deriveToolType(tool.slug, tool.name, tool.description, tool.category);
   const seoType = tool.category === 'SEO' ? deriveSeoInstructionType(tool.slug, tool.name, tool.description) : null;
   const steps = tool.instructions || formatSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
