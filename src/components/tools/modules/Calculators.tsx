@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Copy, Delete } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { CalculatorShell } from './shared/CalculatorShell';
 
 const inputClass = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none";
 const labelClass = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
@@ -15,24 +16,20 @@ export function MortgageCalculator() {
   const [rate, setRate] = useState('6.5');
   const [years, setYears] = useState('30');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const r = parseFloat(rate) / 100 / 12;
     const n = parseFloat(years) * 12;
     const p = parseFloat(loan);
     const pmt = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-    setResult(`Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${(pmt * n).toFixed(2)}\nTotal Interest: $${(pmt * n - p).toFixed(2)}`);
-  };
+    const total = pmt * n;
+    setResult(`Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${total.toFixed(2)}\nTotal Interest: $${(total - p).toFixed(2)}`);
+  }, [loan, rate, years]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Mortgage Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Mortgage Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
+      <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -65,26 +62,21 @@ export function CompoundInterestCalculator() {
   const [n, setN] = useState('12');
   const [t, setT] = useState('10');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const P = parseFloat(principal);
     const r = parseFloat(rate) / 100;
     const nPerYear = parseFloat(n);
     const years = parseFloat(t);
     const A = P * Math.pow(1 + r / nPerYear, nPerYear * years);
     setResult(`Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}`);
-  };
+  }, [principal, rate, n, t]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Compound Interest Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Compounds per Year</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
+      <div><label className={labelClass}>Compounds per Year</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -93,24 +85,20 @@ export function CarLoanCalculator() {
   const [rate, setRate] = useState('4.5');
   const [years, setYears] = useState('5');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const r = parseFloat(rate) / 100 / 12;
     const n = parseFloat(years) * 12;
     const p = parseFloat(loan);
     const pmt = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-    setResult(`Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${(pmt * n).toFixed(2)}\nTotal Interest: $${(pmt * n - p).toFixed(2)}`);
-  };
+    const t = pmt * n;
+    setResult(`Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${t.toFixed(2)}\nTotal Interest: $${(t - p).toFixed(2)}`);
+  }, [loan, rate, years]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Car Loan Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Car Loan Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
+      <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -224,23 +212,17 @@ export function DiscountCalculator() {
   const [price, setPrice] = useState('100');
   const [discount, setDiscount] = useState('20');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const p = parseFloat(price);
     const d = parseFloat(discount);
     const savings = p * d / 100;
-    const finalPrice = p - savings;
-    setResult(`Savings: $${savings.toFixed(2)}\nFinal Price: $${finalPrice.toFixed(2)}`);
-  };
+    setResult(`Savings: $${savings.toFixed(2)}\nFinal Price: $${(p - savings).toFixed(2)}`);
+  }, [price, discount]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Discount Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -271,21 +253,16 @@ export function InflationCalculator() {
   const [rate, setRate] = useState('3');
   const [years, setYears] = useState('10');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const fv = parseFloat(present) * Math.pow(1 + parseFloat(rate) / 100, parseFloat(years));
-    setResult(`Future Value: $${fv.toFixed(2)}`);
-  };
+    setResult(`Future Value: $${fv.toFixed(2)}\nInflation-Adjusted Loss: $${(parseFloat(present) - fv).toFixed(2)}`);
+  }, [present, rate, years]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Inflation Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
+      <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -417,14 +394,14 @@ export function RentVsBuyCalculator() {
   );
 }
 
-export function RetirementCalculator() {
+ export function RetirementCalculator() {
   const [currentAge, setCurrentAge] = useState('30');
   const [retireAge, setRetireAge] = useState('65');
   const [savings, setSavings] = useState('50000');
   const [monthly, setMonthly] = useState('1000');
   const [rate, setRate] = useState('7');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const years = parseFloat(retireAge) - parseFloat(currentAge);
     const r = parseFloat(rate) / 100 / 12;
     const n = years * 12;
@@ -432,20 +409,15 @@ export function RetirementCalculator() {
     const pmt = parseFloat(monthly);
     const fv = pv * Math.pow(1 + r, n) + pmt * (Math.pow(1 + r, n) - 1) / r;
     setResult(`Total at Retirement: $${fv.toLocaleString()}\nYears until Retirement: ${years}`);
-  };
+  }, [currentAge, retireAge, savings, monthly, rate]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Retirement Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Retirement Age</label><input type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Current Savings ($)</label><input type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Return Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Retirement Age</label><input type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Current Savings ($)</label><input type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Annual Return Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -1567,7 +1539,7 @@ export function BodyFatPercentageCalculator() {
   const [height, setHeight] = useState('70');
   const [hip, setHip] = useState('36');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     let bf: number;
     if (gender === 'male') {
       bf = 495 / (1.0324 - 0.19077 * Math.log10(parseFloat(waist) - parseFloat(neck)) + 0.15456 * Math.log10(parseFloat(height))) - 450;
@@ -1575,22 +1547,17 @@ export function BodyFatPercentageCalculator() {
       bf = 495 / (1.29579 - 0.35004 * Math.log10(parseFloat(waist) + parseFloat(hip) - parseFloat(neck)) + 0.22100 * Math.log10(parseFloat(height))) - 450;
     }
     setResult(`Body Fat: ${bf.toFixed(1)}%`);
-  };
+  }, [gender, waist, neck, height, hip]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Body Fat Percentage Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Waist (inches)</label><input type="number" value={waist} onChange={e => setWaist(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Neck (inches)</label><input type="number" value={neck} onChange={e => setNeck(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Height (inches)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        {gender === 'female' && <div><label className={labelClass}>Hip (inches)</label><input type="number" value={hip} onChange={e => setHip(e.target.value)} step="0.1" className={inputClass} /></div>}
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Body Fat Percentage Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
+        <option value="male">Male</option><option value="female">Female</option>
+      </select></div>
+      <div><label className={labelClass}>Waist (inches)</label><input type="number" value={waist} onChange={e => setWaist(e.target.value)} step="0.1" className={inputClass} /></div>
+      <div><label className={labelClass}>Neck (inches)</label><input type="number" value={neck} onChange={e => setNeck(e.target.value)} step="0.1" className={inputClass} /></div>
+      <div><label className={labelClass}>Height (inches)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} step="0.1" className={inputClass} /></div>
+      {gender === 'female' && <div><label className={labelClass}>Hip (inches)</label><input type="number" value={hip} onChange={e => setHip(e.target.value)} step="0.1" className={inputClass} /></div>}
+    </CalculatorShell>
   );
 }
 
@@ -1721,31 +1688,26 @@ export function CalorieCalculator() {
   const [age, setAge] = useState('30');
   const [activity, setActivity] = useState('1.55');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const w = parseFloat(weight);
     const h = parseFloat(height);
     const a = parseFloat(age);
     let bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
     const tdee = bmr * parseFloat(activity);
     setResult(`BMR: ${bmr.toFixed(0)} kcal/day\nTDEE: ${tdee.toFixed(0)} kcal/day`);
-  };
+  }, [gender, weight, height, age, activity]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Calorie Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Age</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Activity Level</label><select value={activity} onChange={e => setActivity(e.target.value)} className={inputClass}>
-          <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Active</option><option value="1.9">Very Active</option>
-        </select></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Calorie Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
+        <option value="male">Male</option><option value="female">Female</option>
+      </select></div>
+      <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Age</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Activity Level</label><select value={activity} onChange={e => setActivity(e.target.value)} className={inputClass}>
+        <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Active</option><option value="1.9">Very Active</option>
+      </select></div>
+    </CalculatorShell>
   );
 }
 
@@ -2146,22 +2108,16 @@ export function SimpleInterestCalculator() {
   const [rate, setRate] = useState('5');
   const [time, setTime] = useState('3');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const si = parseFloat(principal) * parseFloat(rate) * parseFloat(time) / 100;
-    const total = parseFloat(principal) + si;
-    setResult(`Simple Interest: $${si.toFixed(2)}\nTotal Amount: $${total.toFixed(2)}`);
-  };
+    setResult(`Simple Interest: $${si.toFixed(2)}\nTotal Amount: $${(parseFloat(principal) + si).toFixed(2)}`);
+  }, [principal, rate, time]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Simple Interest Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Time (years)</label><input type="number" value={time} onChange={e => setTime(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Simple Interest Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
+      <div><label className={labelClass}>Time (years)</label><input type="number" value={time} onChange={e => setTime(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -2170,25 +2126,20 @@ export function SavingsCalculator() {
   const [rate, setRate] = useState('5');
   const [years, setYears] = useState('10');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const r = parseFloat(rate) / 100 / 12;
     const n = parseFloat(years) * 12;
     const pmt = parseFloat(monthly);
     const fv = pmt * (Math.pow(1 + r, n) - 1) / r;
     const totalContributed = pmt * n;
     setResult(`Future Value: $${fv.toFixed(2)}\nTotal Contributed: $${totalContributed.toFixed(2)}\nTotal Interest: $${(fv - totalContributed).toFixed(2)}`);
-  };
+  }, [monthly, rate, years]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Savings Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Savings Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
+      <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
@@ -2271,29 +2222,24 @@ export function TaxCalculator() {
   const [income, setIncome] = useState('75000');
   const [deductions, setDeductions] = useState('13000');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const calc = useCallback(() => {
     const taxable = Math.max(0, parseFloat(income) - parseFloat(deductions));
     let tax = 0;
     if (taxable > 523600) tax = (taxable - 523600) * 0.37 + 157804.25;
     else if (taxable > 209425) tax = (taxable - 209425) * 0.35 + 47843;
-    else if (taxable > 164925) tax = (taxable - 164925) * 0.32 + 33531;
+    else if (taxable > 164925) tax = (taxable - 164925) * 0.32 + 33599;
     else if (taxable > 86775) tax = (taxable - 86775) * 0.24 + 14279;
     else if (taxable > 40675) tax = (taxable - 40675) * 0.22 + 4615;
     else if (taxable > 9950) tax = (taxable - 9950) * 0.12 + 995;
     else tax = taxable * 0.1;
     const effective = tax / parseFloat(income) * 100;
     setResult(`Taxable Income: $${taxable.toLocaleString()}\nEstimated Tax: $${Math.round(tax).toLocaleString()}\nEffective Rate: ${effective.toFixed(1)}%`);
-  };
+  }, [income, deductions]);
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Tax Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Annual Income ($)</label><input type="number" value={income} onChange={e => setIncome(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Standard Deduction ($)</label><input type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
-      </div>
-    </div>
+    <CalculatorShell title="Tax Calculator" result={result} onCalculate={calc}>
+      <div><label className={labelClass}>Annual Income ($)</label><input type="number" value={income} onChange={e => setIncome(e.target.value)} className={inputClass} /></div>
+      <div><label className={labelClass}>Standard Deduction ($)</label><input type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputClass} /></div>
+    </CalculatorShell>
   );
 }
 
