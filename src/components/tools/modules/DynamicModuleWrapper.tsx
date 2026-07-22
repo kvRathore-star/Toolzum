@@ -887,6 +887,12 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'avro-to-json-sample': dynamic(() => import('@/components/tools/modules/ConvertersEverydayWidgets').then(m => ({ default: m.AvroToJsonSample })), { ssr: false, loading: () => <DynamicImportFallback slug="avro-to-json-sample" /> }),
   'ical-event-generator': dynamic(() => import('@/components/tools/modules/ConvertersEverydayWidgets').then(m => ({ default: m.IcalEventGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="ical-event-generator" /> }),
 
+  // Standalone JSON Formatter (two-panel, replaces legacy JsonOutputConverter)
+  'json-formatter': dynamic(() => import('@/components/tools/modules/JsonFormatter'), {
+    ssr: false,
+    loading: () => <DynamicImportFallback slug="json-formatter" />
+  }),
+
   // Roadmap items
   'csv-to-sqlite': dynamic(() => import('@/components/tools/modules/CsvToSqlite'), { ssr: false, loading: () => <DynamicImportFallback slug="csv-to-sqlite" /> }),
   'vector-pen-canvas': dynamic(() => import('@/components/tools/modules/VectorPenCanvas'), { ssr: false, loading: () => <DynamicImportFallback slug="vector-pen-canvas" /> }),
@@ -901,32 +907,32 @@ import { CONVERTER_CONFIG } from './shared/converterConfig';
 import ConverterRouter from './ConverterRouter';
 
 export function DynamicModuleWrapper({ slug, category }: { slug: string, category: string }) {
-  if (CONVERTER_CONFIG[slug]) {
-    return <ConverterRouter slug={slug} />;
-  }
-
   const DynamicModule = MODULE_REGISTRY[slug];
-  
-  if (!DynamicModule) {
-    const seoPage = SEO_PERMUTATIONS.find(p => p.slug === slug);
-    if (seoPage) {
-      return (
-        <ErrorBoundary>
-          <BulkSeoLandingPage slug={slug} category={category} />
-        </ErrorBoundary>
-      );
-    }
-    const toolName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+  if (DynamicModule) {
     return (
       <ErrorBoundary>
-        <ComingSoonTool toolName={toolName} />
+        <DynamicModule />
       </ErrorBoundary>
     );
   }
 
+  if (CONVERTER_CONFIG[slug]) {
+    return <ConverterRouter slug={slug} />;
+  }
+  
+  const seoPage = SEO_PERMUTATIONS.find(p => p.slug === slug);
+  if (seoPage) {
+    return (
+      <ErrorBoundary>
+        <BulkSeoLandingPage slug={slug} category={category} />
+      </ErrorBoundary>
+    );
+  }
+  const toolName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   return (
     <ErrorBoundary>
-      <DynamicModule />
+      <ComingSoonTool toolName={toolName} />
     </ErrorBoundary>
   );
 }
