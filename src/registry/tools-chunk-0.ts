@@ -1681,7 +1681,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "SaaS Metrics Dashboard",
     slug: "saas-metrics-dashboard",
     category: "Calculator",
-    isPro: true,
+    isPro: false,
     description: 'All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis — plus scenario modeling and PDF export. Your data stays in your browser — nothing is uploaded.',
     seoDescription: 'Free online SaaS Metrics Dashboard — All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis. ',
     dependencies: "Vanilla JS"
@@ -1691,7 +1691,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF Workflow Builder",
     slug: "pdf-workflow-builder",
     category: "Developer",
-    isPro: true,
+    isPro: false,
     description: 'Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.',
     seoDescription: 'Free online PDF Workflow Builder — merge, split, fill forms, rotate pages, add passwords, and edit metadata. All processing happens in your browser — no upload needed.',
     dependencies: "pdf-lib"
@@ -1701,7 +1701,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "API Builder & Tester",
     slug: "api-builder",
     category: "Developer",
-    isPro: true,
+    isPro: false,
     description: 'Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.',
     seoDescription: 'Free online API Builder & Tester — Full-featured API client that runs in your browser. Make HTTP requests, save collections, generate code snippets. Privacy-first — your API keys never touch a server.',
     dependencies: "Browser Fetch API"
