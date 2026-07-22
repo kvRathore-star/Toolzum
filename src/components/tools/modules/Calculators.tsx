@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { Copy, Delete } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 const inputClass = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none";
 const labelClass = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
@@ -1124,20 +1126,32 @@ export function SquareRootCalculator() {
   );
 }
 
-function evalScientific(input: string): number {
+function factorial(n: number): number {
+  if (n < 0) throw new Error('Factorial of negative number');
+  if (n === 0 || n === 1) return 1;
+  if (!Number.isInteger(n)) throw new Error('Factorial of non-integer');
+  let r = 1;
+  for (let i = 2; i <= n; i++) r *= i;
+  return r;
+}
+
+function evalScientific(input: string, degMode = true): number {
   let pos = 0;
   const s = input.replace(/\s+/g, '').toLowerCase()
     .replace(/π/g, String(Math.PI))
     .replace(/pi/g, String(Math.PI))
     .replace(/\be\b(?![xp])/g, String(Math.E));
 
+  const toRad = degMode ? (x: number) => x * Math.PI / 180 : (x: number) => x;
+  const fromRad = degMode ? (x: number) => x * 180 / Math.PI : (x: number) => x;
+
   const funcs: Record<string, (x: number) => number> = {
-    sin: x => Math.sin(x * Math.PI / 180),
-    cos: x => Math.cos(x * Math.PI / 180),
-    tan: x => Math.tan(x * Math.PI / 180),
-    asin: x => Math.asin(x) * 180 / Math.PI,
-    acos: x => Math.acos(x) * 180 / Math.PI,
-    atan: x => Math.atan(x) * 180 / Math.PI,
+    sin: x => Math.sin(toRad(x)),
+    cos: x => Math.cos(toRad(x)),
+    tan: x => Math.tan(toRad(x)),
+    asin: x => fromRad(Math.asin(x)),
+    acos: x => fromRad(Math.acos(x)),
+    atan: x => fromRad(Math.atan(x)),
     sqrt: x => Math.sqrt(x),
     log: x => Math.log10(x),
     ln: x => Math.log(x),
@@ -1158,11 +1172,21 @@ function evalScientific(input: string): number {
   }
 
   function parseTerm(): number {
-    let val = parseUnary();
+    let val = parsePower();
     while (pos < s.length && (s[pos] === '*' || s[pos] === '/')) {
       const op = s[pos++];
-      const right = parseUnary();
+      const right = parsePower();
       val = op === '*' ? val * right : val / right;
+    }
+    return val;
+  }
+
+  function parsePower(): number {
+    let val = parseUnary();
+    while (pos < s.length && s[pos] === '^') {
+      pos++;
+      const right = parsePower();
+      val = Math.pow(val, right);
     }
     return val;
   }
@@ -1179,10 +1203,15 @@ function evalScientific(input: string): number {
   }
 
   function parseAtom(): number {
+    if (pos < s.length && s[pos] === '!') {
+      pos++;
+      return factorial(parseAtom());
+    }
     if (pos < s.length && s[pos] === '(') {
       pos++;
       const val = parseExpr();
       if (pos < s.length && s[pos] === ')') pos++;
+      if (pos < s.length && s[pos] === '!') { pos++; return factorial(val); }
       return val;
     }
     for (const [name, fn] of Object.entries(funcs)) {
@@ -1191,14 +1220,20 @@ function evalScientific(input: string): number {
         if (pos < s.length && s[pos] === '(') pos++;
         const arg = parseExpr();
         if (pos < s.length && s[pos] === ')') pos++;
-        return fn(arg);
+        const val = fn(arg);
+        if (pos < s.length && s[pos] === '!') { pos++; return factorial(val); }
+        return val;
       }
     }
     let numStr = '';
     while (pos < s.length && (/[0-9.]/).test(s[pos])) {
       numStr += s[pos++];
     }
-    return parseFloat(numStr);
+    if (numStr === '') throw new Error('Unexpected character');
+    let val = parseFloat(numStr);
+    if (pos < s.length && s[pos] === '!') { pos++; val = factorial(val); }
+    if (pos < s.length && s[pos] === '%') { pos++; val /= 100; }
+    return val;
   }
 
   const result = parseExpr();
@@ -1207,23 +1242,256 @@ function evalScientific(input: string): number {
 }
 
 export function ScientificCalculator() {
-  const [expr, setExpr] = useState('sin(30) + cos(60)');
+  const [expr, setExpr] = useState('');
   const [result, setResult] = useState('');
-  const calc = () => {
+  const [history, setHistory] = useState<Array<{expr: string; result: string}>>([]);
+  const [angleMode, setAngleMode] = useState<'deg' | 'rad'>('deg');
+  const [memory, setMemory] = useState<number | null>(null);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showFuncs, setShowFuncs] = useState(true);
+  const [error, setError] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  const evaluate = useCallback((expression: string) => {
+    if (!expression.trim()) return;
     try {
-      const val = evalScientific(expr);
-      setResult(`Result: ${val}`);
-    } catch {
-      setResult('Error: Invalid expression');
+      const val = evalScientific(expression, angleMode === 'deg');
+      const resultStr = formatNumber(val);
+      setResult(resultStr);
+      setError('');
+      setHistory(prev => [...prev, { expr: expression, result: resultStr }]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Error');
+      setResult('');
     }
+  }, [angleMode]);
+
+  const insertText = useCallback((text: string) => {
+    setExpr(prev => prev + text);
+    setError('');
+    inputRef.current?.focus();
+  }, []);
+
+  const handleFunction = useCallback((fn: string, suffix = '(') => {
+    setExpr(prev => prev + fn + suffix);
+    inputRef.current?.focus();
+  }, []);
+
+  const handleClear = useCallback(() => {
+    setExpr('');
+    setResult('');
+    setError('');
+  }, []);
+
+  const handleBackspace = useCallback(() => {
+    setExpr(prev => prev.slice(0, -1));
+  }, []);
+
+  const handleEquals = useCallback(() => {
+    if (!expr.trim()) return;
+    evaluate(expr);
+    setExpr('');
+  }, [expr, evaluate]);
+
+  const handleMemory = useCallback((op: 'clear' | 'recall' | 'add' | 'subtract') => {
+    if (op === 'clear') { setMemory(null); return; }
+    if (op === 'recall' && memory !== null) {
+      setExpr(prev => prev + String(memory));
+      return;
+    }
+    const current = result ? parseFloat(result) : NaN;
+    if (isNaN(current)) return;
+    if (op === 'add') setMemory(m => (m ?? 0) + current);
+    if (op === 'subtract') setMemory(m => (m ?? 0) - current);
+  }, [result, memory]);
+
+  const recallHistory = useCallback((entry: { expr: string; result: string }) => {
+    setExpr(entry.expr);
+    setResult(entry.result);
+    setShowHistory(false);
+  }, []);
+
+  const copyResult = useCallback(() => {
+    if (result) {
+      navigator.clipboard.writeText(result);
+      toast.success('Result copied');
+    }
+  }, [result]);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey) return;
+      const key = e.key;
+      if (key === 'Enter') { e.preventDefault(); handleEquals(); return; }
+      if (key === 'Escape') { handleClear(); return; }
+      if (key === 'Backspace') { e.preventDefault(); handleBackspace(); return; }
+      if (key === 'Delete') { handleClear(); return; }
+      if (/^[0-9.]$/.test(key)) { insertText(key); return; }
+      if (key === '+') { insertText('+'); return; }
+      if (key === '-') { insertText('-'); return; }
+      if (key === '*') { insertText('*'); return; }
+      if (key === '/') { insertText('/'); return; }
+      if (key === '^') { insertText('^'); return; }
+      if (key === '(' || key === ')') { insertText(key); return; }
+      if (key === '%') { insertText('%'); return; }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [insertText, handleClear, handleBackspace, handleEquals]);
+
+  const formatNumber = (n: number): string => {
+    if (Number.isInteger(n) && Math.abs(n) < 1e15) return String(n);
+    const s = n.toPrecision(12);
+    return parseFloat(s).toString();
   };
+
+  const evalDisplay = expr.replace(/\*/g, '×').replace(/\//g, '÷');
+  const btnBase = `h-10 sm:h-12 rounded-xl font-semibold text-sm sm:text-base transition-all active:scale-95 select-none flex items-center justify-center`;
+  const btnNum = `${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`;
+  const btnOp = `${btnBase} bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-400 border border-indigo-500/20`;
+  const btnEq = `${btnBase} bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg`;
+  const btnFn = `${btnBase} bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs`;
+  const btnClr = `${btnBase} bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20`;
+  const btnMem = `${btnBase} bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 text-xs`;
+
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Scientific Calculator</h1>
-      <div className="space-y-4">
-        <div><label className={labelClass}>Expression (e.g., sin(30) + cos(60))</label><input type="text" value={expr} onChange={e => setExpr(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+    <div className="max-w-2xl mx-auto">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 pt-4 pb-2">
+          <h1 className="text-lg font-bold text-[var(--text-primary)]">Scientific Calculator</h1>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowHistory(!showHistory)}
+              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+            >
+              History {history.length > 0 && `(${history.length})`}
+            </button>
+            <button
+              onClick={() => setShowFuncs(!showFuncs)}
+              className="px-3 py-1 rounded-lg text-xs font-medium bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              {showFuncs ? 'Basic' : 'Sci'}
+            </button>
+            <button
+              onClick={() => setAngleMode(m => m === 'deg' ? 'rad' : 'deg')}
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${angleMode === 'deg' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-amber-500/20 text-amber-400'}`}
+            >
+              {angleMode.toUpperCase()}
+            </button>
+          </div>
+        </div>
+
+        {/* Display */}
+        <div className="mx-4 mb-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-4 min-h-[88px] flex flex-col justify-end">
+          <div className="text-right text-sm text-[var(--text-secondary)] font-mono break-all min-h-[20px]">
+            {evalDisplay || <span className="opacity-30">0</span>}
+          </div>
+          <div className="flex items-center justify-between mt-1">
+            <div className="text-xs text-[var(--text-tertiary)]">
+              {memory !== null && <span className="text-purple-400 font-bold">M</span>}
+            </div>
+            <div className="flex items-center gap-2">
+              {result && (
+                <>
+                  <span className="text-2xl font-bold text-[var(--text-primary)] font-mono">{result}</span>
+                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result">
+                    <Copy size={16} />
+                  </button>
+                </>
+              )}
+              {error && <span className="text-sm text-red-400 font-medium">{error}</span>}
+            </div>
+          </div>
+        </div>
+
+        {/* History Panel */}
+        {showHistory && (
+          <div ref={historyRef} className="mx-4 mb-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] max-h-40 overflow-y-auto">
+            {history.length === 0 ? (
+              <div className="p-4 text-center text-sm text-[var(--text-tertiary)]">No history yet</div>
+            ) : (
+              [...history].reverse().map((entry, i) => (
+                <button
+                  key={i}
+                  onClick={() => recallHistory(entry)}
+                  className="w-full text-left px-4 py-2 hover:bg-[var(--bg-elevated)] transition-colors border-b border-[var(--border-subtle)] last:border-0"
+                >
+                  <div className="text-xs text-[var(--text-tertiary)] font-mono">{entry.expr.replace(/\*/g, '×').replace(/\//g, '÷')}</div>
+                  <div className="text-sm font-bold text-[var(--text-primary)] font-mono">= {entry.result}</div>
+                </button>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* Scientific Functions Panel */}
+        {showFuncs && (
+          <div className="px-4 pb-3">
+            <div className="grid grid-cols-6 gap-1.5">
+              <button className={btnFn} onClick={() => handleFunction('sin')}>sin</button>
+              <button className={btnFn} onClick={() => handleFunction('cos')}>cos</button>
+              <button className={btnFn} onClick={() => handleFunction('tan')}>tan</button>
+              <button className={btnFn} onClick={() => handleFunction('asin')}>sin⁻¹</button>
+              <button className={btnFn} onClick={() => handleFunction('acos')}>cos⁻¹</button>
+              <button className={btnFn} onClick={() => handleFunction('atan')}>tan⁻¹</button>
+              <button className={btnFn} onClick={() => handleFunction('log')}>log</button>
+              <button className={btnFn} onClick={() => handleFunction('ln')}>ln</button>
+              <button className={btnFn} onClick={() => handleFunction('sqrt')}>√</button>
+              <button className={btnFn} onClick={() => insertText('^')}>xⁿ</button>
+              <button className={btnFn} onClick={() => insertText('!')}>x!</button>
+              <button className={btnFn} onClick={() => insertText('1/')}>1/x</button>
+              <button className={btnFn} onClick={() => insertText('π')}>π</button>
+              <button className={btnFn} onClick={() => insertText('e')}>e</button>
+              <button className={btnFn} onClick={() => insertText('(')}>(</button>
+              <button className={btnFn} onClick={() => insertText(')')}>)</button>
+              <button className={btnFn} onClick={() => insertText('**2')}>x²</button>
+              <button className={btnFn} onClick={() => insertText('**3')}>x³</button>
+            </div>
+          </div>
+        )}
+
+        {/* Main Keypad */}
+        <div className="px-4 pb-4">
+          <div className="grid grid-cols-5 gap-1.5">
+            <button className={btnMem} onClick={() => handleMemory('clear')}>MC</button>
+            <button className={btnMem} onClick={() => handleMemory('recall')}>MR</button>
+            <button className={btnMem} onClick={() => handleMemory('add')}>M+</button>
+            <button className={btnMem} onClick={() => handleMemory('subtract')}>M-</button>
+            <button className={btnClr} onClick={handleClear}>C</button>
+
+            <button className={btnNum} onClick={() => insertText('7')}>7</button>
+            <button className={btnNum} onClick={() => insertText('8')}>8</button>
+            <button className={btnNum} onClick={() => insertText('9')}>9</button>
+            <button className={btnOp} onClick={() => insertText('/')}>÷</button>
+            <button className={`${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`} onClick={handleBackspace}>
+              <Delete size={18} />
+            </button>
+
+            <button className={btnNum} onClick={() => insertText('4')}>4</button>
+            <button className={btnNum} onClick={() => insertText('5')}>5</button>
+            <button className={btnNum} onClick={() => insertText('6')}>6</button>
+            <button className={btnOp} onClick={() => insertText('*')}>×</button>
+            <button className={btnFn} onClick={() => insertText('%')}>%</button>
+
+            <button className={btnNum} onClick={() => insertText('1')}>1</button>
+            <button className={btnNum} onClick={() => insertText('2')}>2</button>
+            <button className={btnNum} onClick={() => insertText('3')}>3</button>
+            <button className={btnOp} onClick={() => insertText('-')}>−</button>
+            <button className={btnFn} onClick={() => insertText('(-')}>±</button>
+
+            <button className={`${btnNum} col-span-2`} onClick={() => insertText('0')}>0</button>
+            <button className={btnNum} onClick={() => insertText('.')}>.</button>
+            <button className={btnOp} onClick={() => insertText('+')}>+</button>
+            <button className={btnEq} onClick={handleEquals}>=</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Keyboard hint */}
+      <div className="mt-3 text-center">
+        <span className="text-xs text-[var(--text-tertiary)]">⌨️ Keyboard supported · Enter to evaluate · Esc to clear</span>
       </div>
     </div>
   );

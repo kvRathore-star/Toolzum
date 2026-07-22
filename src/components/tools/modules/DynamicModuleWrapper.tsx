@@ -220,7 +220,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'text-to-speech-tts': dynamic(() => import('@/components/tools/modules/TextToSpeechTts'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-speech-tts" /> }),
   'ai-paraphrasing-tool': dynamic(() => import('@/components/tools/modules/AiParaphrasingTool'), { ssr: false, loading: () => <DynamicImportFallback slug="ai-paraphrasing-tool" /> }),
   'url-shortener': dynamic(() => import('@/components/tools/modules/UrlShortener'), { ssr: false, loading: () => <DynamicImportFallback slug="url-shortener" /> }),
-  'unlock-pdf': dynamic(() => import('@/components/tools/modules/UnlockPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="unlock-pdf" /> }),
+  'unlock-pdf': dynamic(() => import('@/components/tools/modules/ProtectPdf').then(m => {
+    const UnlockPdf = () => <m.PdfSecurityTool defaultMode="unlock" />;
+    return { default: UnlockPdf };
+  }), { ssr: false, loading: () => <DynamicImportFallback slug="unlock-pdf" /> }),
   'image-enhancer': dynamic(() => import('@/components/tools/modules/ImageEnhancer'), { ssr: false, loading: () => <DynamicImportFallback slug="image-enhancer" /> }),
   'sip-calculator': dynamic(() => import('@/components/tools/modules/SipCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="sip-calculator" /> }),
   'bmi-calculator': dynamic(() => import('@/components/tools/modules/BmiCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="bmi-calculator" /> }),
@@ -283,7 +286,15 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'podcast-transcription': dynamic(() => import('@/components/tools/modules/PodcastTranscription'), { ssr: false, loading: () => <DynamicImportFallback slug="podcast-transcription" /> }),
   'compare-pdf-files': dynamic(() => import('@/components/tools/modules/ComparePdfFiles'), { ssr: false, loading: () => <DynamicImportFallback slug="compare-pdf-files" /> }),
   'favicon-generator': dynamic(() => import('@/components/tools/modules/FaviconGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="favicon-generator" /> }),
-  'base64-to-image': dynamic(() => import('@/components/tools/modules/Base64ToImage'), { ssr: false, loading: () => <DynamicImportFallback slug="base64-to-image" /> }),
+  'base64-to-image': dynamic(() => import('@/components/tools/modules/ImageToBase64').then(m => {
+    const Base64ToImage = () => <m.Base64ImageTool defaultMode="base64-to-image" />;
+    return { default: Base64ToImage };
+  }), { ssr: false, loading: () => <DynamicImportFallback slug="base64-to-image" /> }),
+  'text-to-binary': dynamic(() => import('@/components/tools/modules/TextToBinary').then(m => ({ default: m.TextBinaryTool })), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-binary" /> }),
+  'binary-to-text': dynamic(() => import('@/components/tools/modules/TextToBinary').then(m => {
+    const BinaryToText = () => <m.TextBinaryTool defaultMode="binary-to-text" />;
+    return { default: BinaryToText };
+  }), { ssr: false, loading: () => <DynamicImportFallback slug="binary-to-text" /> }),
   'md5-hash-generator': dynamic(() => import('@/components/tools/modules/Md5HashGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="md5-hash-generator" /> }),
   'html-minifier': dynamic(() => import('@/components/tools/modules/HtmlMinifier'), { ssr: false, loading: () => <DynamicImportFallback slug="html-minifier" /> }),
   'jfif-to-png': dynamic(() => import('@/components/tools/modules/JfifToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="jfif-to-png" /> }),
@@ -406,7 +417,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'gif-compressor': dynamic(() => import('@/components/tools/modules/GifCompressor'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-compressor" /> }),
   'gif-resizer': dynamic(() => import('@/components/tools/modules/GifResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-resizer" /> }),
   'gif-to-apng': dynamic(() => import('@/components/tools/modules/GifToApng'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-apng" /> }),
-  'apng-to-gif': dynamic(() => import('@/components/tools/modules/ApngToGif'), { ssr: false, loading: () => <DynamicImportFallback slug="apng-to-gif" /> }),
+  'apng-to-gif': dynamic(() => import('@/components/tools/modules/GifToApng').then(m => {
+    const ApngToGif = () => <m.AnimationConverter defaultMode="apng-to-gif" />;
+    return { default: ApngToGif };
+  }), { ssr: false, loading: () => <DynamicImportFallback slug="apng-to-gif" /> }),
   'image-to-ico': dynamic(() => import('@/components/tools/modules/ImageToIco'), { ssr: false, loading: () => <DynamicImportFallback slug="image-to-ico" /> }),
   'qr-code-reader': dynamic(() => import('@/components/tools/modules/QrCodeReader'), { ssr: false, loading: () => <DynamicImportFallback slug="qr-code-reader" /> }),
   'whois-lookup': dynamic(() => import('@/components/tools/modules/WhoisLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="whois-lookup" /> }),
