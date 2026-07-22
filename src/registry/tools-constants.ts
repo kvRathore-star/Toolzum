@@ -14,6 +14,7 @@ export const proSlugs = [
   "bulk-markdown-to-pdf-html", "bulk-font-subsetter", "bulk-subtitle-time-shifter",
   "bulk-regex-extractor-replacer", "bulk-image-to-text-ocr", "bulk-ebook-converter",
   "bulk-heic-to-jpg",
+  "saas-metrics-dashboard",
 ];
 
 

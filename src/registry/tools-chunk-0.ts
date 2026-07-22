@@ -1677,6 +1677,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
+    id: "220",
+    name: "SaaS Metrics Dashboard",
+    slug: "saas-metrics-dashboard",
+    category: "Calculator",
+    isPro: true,
+    description: 'All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis — plus scenario modeling and PDF export. Your data stays in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SaaS Metrics Dashboard — All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis. ',
+    dependencies: "Vanilla JS"
+  },
+  {
     id: "196",
     name: "Employee Turnover Calculator",
     slug: "employee-turnover-calculator",

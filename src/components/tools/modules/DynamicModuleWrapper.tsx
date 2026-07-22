@@ -321,6 +321,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'svg-editor': dynamic(() => import('@/components/tools/modules/SvgEditor'), { ssr: false, loading: () => <DynamicImportFallback slug="svg-editor" /> }),
   'robots-txt-generator': dynamic(() => import('@/components/tools/modules/RobotsTxtGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="robots-txt-generator" /> }),
   'saas-pricing-calculator': dynamic(() => import('@/components/tools/modules/SaasPricingCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="saas-pricing-calculator" /> }),
+  'saas-metrics-dashboard': dynamic(() => import('@/components/tools/modules/SaaSMetricsDashboard').then(m => ({ default: m.SaaSMetricsDashboard })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-metrics-dashboard" /> }),
   'employee-turnover-calculator': dynamic(() => import('@/components/tools/modules/EmployeeTurnoverCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="employee-turnover-calculator" /> }),
   'mac-address-generator': dynamic(() => import('@/components/tools/modules/MacAddressGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="mac-address-generator" /> }),
   'ip-anonymizer': dynamic(() => import('@/components/tools/modules/IpAnonymizer'), { ssr: false, loading: () => <DynamicImportFallback slug="ip-anonymizer" /> }),
