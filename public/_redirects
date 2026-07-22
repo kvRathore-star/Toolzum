@@ -34,8 +34,6 @@
 # Merged Calculator→Health — redirect to canonical
 /calculator/ideal-weight-calculator/   /health/ideal-weight-calc/   301
 /calculator/ideal-weight-calculator    /health/ideal-weight-calc/   301
-/calculator/calorie-calculator/   /health/calorie-intake-calculator/   301
-/calculator/calorie-calculator    /health/calorie-intake-calculator/   301
 /calculator/ovulation-calculator/   /health/ovulation-tracker/   301
 /calculator/ovulation-calculator    /health/ovulation-tracker/   301
 
@@ -161,3 +159,49 @@
 /developer/dev-toolkit    /developer/   301
 /developer/time-toolkit/   /developer/   301
 /developer/time-toolkit    /developer/   301
+
+# Health tools moved from /calculator/ to /health/
+/calculator/bmi-calculator/   /health/bmi-calculator/   301
+/calculator/bmi-calculator    /health/bmi-calculator/   301
+/calculator/bmi-calculator-for-kids/   /health/bmi-calculator-for-kids/   301
+/calculator/bmi-calculator-for-kids    /health/bmi-calculator-for-kids/   301
+/calculator/bmr-calculator/   /health/bmr-calculator/   301
+/calculator/bmr-calculator    /health/bmr-calculator/   301
+/calculator/body-fat-percentage-calculator/   /health/body-fat-percentage-calculator/   301
+/calculator/body-fat-percentage-calculator    /health/body-fat-percentage-calculator/   301
+/calculator/body-surface-area-calculator/   /health/body-surface-area-calculator/   301
+/calculator/body-surface-area-calculator    /health/body-surface-area-calculator/   301
+/calculator/calorie-calculator/   /health/calorie-calculator/   301
+/calculator/calorie-calculator    /health/calorie-calculator/   301
+/calculator/breastfeeding-calorie-calculator/   /health/breastfeeding-calorie-calculator/   301
+/calculator/breastfeeding-calorie-calculator    /health/breastfeeding-calorie-calculator/   301
+/calculator/cycling-calorie-calculator/   /health/cycling-calorie-calculator/   301
+/calculator/cycling-calorie-calculator    /health/cycling-calorie-calculator/   301
+/calculator/protein-calculator/   /health/protein-calculator/   301
+/calculator/protein-calculator    /health/protein-calculator/   301
+/calculator/macro-calculator/   /health/macro-calculator/   301
+/calculator/macro-calculator    /health/macro-calculator/   301
+/calculator/keto-calculator/   /health/keto-calculator/   301
+/calculator/keto-calculator    /health/keto-calculator/   301
+/calculator/lean-body-mass-calculator/   /health/lean-body-mass-calculator/   301
+/calculator/lean-body-mass-calculator    /health/lean-body-mass-calculator/   301
+/calculator/heart-rate-zone-calculator/   /health/heart-rate-zone-calculator/   301
+/calculator/heart-rate-zone-calculator    /health/heart-rate-zone-calculator/   301
+/calculator/running-pace-calculator/   /health/running-pace-calculator/   301
+/calculator/running-pace-calculator    /health/running-pace-calculator/   301
+/calculator/sleep-calculator/   /health/sleep-calculator/   301
+/calculator/sleep-calculator    /health/sleep-calculator/   301
+/calculator/steps-to-calories-calculator/   /health/steps-to-calories-calculator/   301
+/calculator/steps-to-calories-calculator    /health/steps-to-calories-calculator/   301
+/calculator/water-intake-calculator/   /health/water-intake-calculator/   301
+/calculator/water-intake-calculator    /health/water-intake-calculator/   301
+/calculator/baby-formula-calculator/   /health/baby-formula-calculator/   301
+/calculator/baby-formula-calculator    /health/baby-formula-calculator/   301
+/calculator/baby-growth-percentile-calculator/   /health/baby-growth-percentile-calculator/   301
+/calculator/baby-growth-percentile-calculator    /health/baby-growth-percentile-calculator/   301
+/calculator/baby-sleep-schedule-calculator/   /health/baby-sleep-schedule-calculator/   301
+/calculator/baby-sleep-schedule-calculator    /health/baby-sleep-schedule-calculator/   301
+/calculator/child-height-predictor/   /health/child-height-predictor/   301
+/calculator/child-height-predictor    /health/child-height-predictor/   301
+/calculator/pregnancy-due-date-calculator/   /health/pregnancy-due-date-calculator/   301
+/calculator/pregnancy-due-date-calculator    /health/pregnancy-due-date-calculator/   301

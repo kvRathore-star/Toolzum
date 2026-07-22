@@ -601,7 +601,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "62",
     name: "BMI Calculator",
     slug: "bmi-calculator",
-    category: "Calculator",
+    category: "Health",
     description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. ',
     dependencies: "Vanilla JS"
@@ -1328,7 +1328,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "157",
     name: "BMR Calculator",
     slug: "bmr-calculator",
-    category: "Calculator",
+    category: "Health",
     description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. ',
     dependencies: "Vanilla JS"
