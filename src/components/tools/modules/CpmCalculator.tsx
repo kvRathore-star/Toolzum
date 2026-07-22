@@ -45,19 +45,19 @@ export default function CpmCalculator() {
   }, [platform]);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
       {/* Header with tabs */}
-      <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+      <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
         <div className="flex items-center gap-2">
           <Target className="w-5 h-5 text-violet-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">
             {mode === 'cpm' ? 'CPM' : mode === 'rpm' ? 'RPM' : 'Earnings'} Calculator
           </h3>
         </div>
-        <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
-          <button onClick={() => setMode('cpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'cpm' ? 'bg-white dark:bg-zinc-700 text-violet-600 dark:text-violet-400 shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700'}`}>CPM</button>
-          <button onClick={() => setMode('rpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'rpm' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700'}`}>RPM</button>
-          <button onClick={() => setMode('estimate')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'estimate' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700'}`}>Estimate</button>
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+          <button onClick={() => setMode('cpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'cpm' ? 'bg-[var(--bg-elevated)] text-violet-600 dark:text-violet-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>CPM</button>
+          <button onClick={() => setMode('rpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'rpm' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>RPM</button>
+          <button onClick={() => setMode('estimate')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'estimate' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>Estimate</button>
         </div>
       </div>
 
@@ -66,8 +66,8 @@ export default function CpmCalculator() {
         <div className="space-y-5">
           {/* Platform Preset */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Platform Preset</label>
-            <select value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none appearance-none cursor-pointer">
+            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Platform Preset</label>
+            <select value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none appearance-none cursor-pointer">
               <option value="custom">Custom (manual entry)</option>
               <option value="youtube">YouTube</option>
               <option value="twitch">Twitch</option>
@@ -78,49 +78,49 @@ export default function CpmCalculator() {
               <option value="linkedin">LinkedIn</option>
             </select>
             {platform !== 'custom' && (
-              <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-1">{platformPresets[platform].note}</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-1">{platformPresets[platform].note}</p>
             )}
           </div>
 
           {mode === 'cpm' ? (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Ad Campaign Cost ($)</label>
-                <input type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
-                {presetCpm && <p className="text-[11px] text-zinc-400 dark:text-zinc-500">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Campaign Cost ($)</label>
+                <input type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+                {presetCpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Ad Impressions Delivered</label>
-                <input type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Impressions Delivered</label>
+                <input type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
               </div>
             </>
           ) : mode === 'rpm' ? (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Creator Revenue ($)</label>
-                <input type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
-                {presetRpm && <p className="text-[11px] text-zinc-400 dark:text-zinc-500">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Creator Revenue ($)</label>
+                <input type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+                {presetRpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Views / Impressions</label>
-                <input type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
+                <input type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
               </div>
             </>
           ) : (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Views / Impressions</label>
-                <input type="number" value={estViews} onChange={e => setEstViews(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
+                <input type="number" value={estViews} onChange={e => setEstViews(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Average CPM ($) <span className="font-normal text-zinc-400">(cost per 1K)</span></label>
-                <input type="number" value={estCpm} onChange={e => setEstCpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
-                {presetCpm && <p className="text-[11px] text-zinc-400 dark:text-zinc-500">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average CPM ($) <span className="font-normal text-[var(--text-muted)]">(cost per 1K)</span></label>
+                <input type="number" value={estCpm} onChange={e => setEstCpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+                {presetCpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Average RPM ($) <span className="font-normal text-zinc-400">(earnings per 1K)</span></label>
-                <input type="number" value={estRpm} onChange={e => setEstRpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
-                {presetRpm && <p className="text-[11px] text-zinc-400 dark:text-zinc-500">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average RPM ($) <span className="font-normal text-[var(--text-muted)]">(earnings per 1K)</span></label>
+                <input type="number" value={estRpm} onChange={e => setEstRpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+                {presetRpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
               </div>
             </>
           )}
@@ -133,7 +133,7 @@ export default function CpmCalculator() {
               <div className={`rounded-2xl p-6 border flex flex-col justify-center items-center min-h-[160px] ${mode === 'cpm' ? 'bg-violet-50 dark:bg-violet-950/20 border-violet-100 dark:border-violet-900/30' : 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30'}`}>
                 <div className="flex items-center gap-2 mb-2">
                   {mode === 'cpm' ? <Target className="w-4 h-4 text-violet-500" /> : <DollarSign className="w-4 h-4 text-emerald-500" />}
-                  <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase">
+                  <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">
                     {mode === 'cpm' ? 'Cost Per 1,000 Impressions (CPM)' : 'Revenue Per 1,000 Impressions (RPM)'}
                   </span>
                 </div>
@@ -141,7 +141,7 @@ export default function CpmCalculator() {
                   ${(mode === 'cpm' ? cpm : rpm).toFixed(2)}
                 </p>
                 {platform !== 'custom' && (
-                  <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
+                  <p className="text-[11px] text-[var(--text-muted)] mt-2">
                     {platformLabel} avg: ${mode === 'cpm' ? (presetCpm ?? 0).toFixed(2) : (presetRpm ?? 0).toFixed(2)}
                   </p>
                 )}
@@ -149,12 +149,12 @@ export default function CpmCalculator() {
 
               {/* Show both metrics when in either mode */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800 text-center">
-                  <span className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase">CPM</span>
+                <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] text-center">
+                  <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">CPM</span>
                   <p className="text-lg font-bold text-violet-500">${cpm.toFixed(2)}</p>
                 </div>
-                <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-100 dark:border-zinc-800 text-center">
-                  <span className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase">RPM</span>
+                <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] text-center">
+                  <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">RPM</span>
                   <p className="text-lg font-bold text-emerald-500">${rpm.toFixed(2)}</p>
                 </div>
               </div>
@@ -164,14 +164,14 @@ export default function CpmCalculator() {
               <div className="rounded-2xl p-6 border bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30 flex flex-col justify-center items-center min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2">
                   <DollarSign className="w-4 h-4 text-blue-500" />
-                  <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase">
+                  <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">
                     Estimated Advertiser Cost
                   </span>
                 </div>
                 <p className="text-5xl font-extrabold text-blue-500">
                   ${estimatedAdCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
-                <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
+                <p className="text-[11px] text-[var(--text-muted)] mt-2">
                   {estViews.toLocaleString()} views × ${estCpm.toFixed(2)} CPM
                 </p>
               </div>
@@ -179,14 +179,14 @@ export default function CpmCalculator() {
               <div className="rounded-2xl p-6 border bg-emerald-50 dark:bg-emerald-950/20 border-emerald-100 dark:border-emerald-900/30 flex flex-col justify-center items-center min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2">
                   <TrendingUp className="w-4 h-4 text-emerald-500" />
-                  <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase">
+                  <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">
                     Estimated Creator Earnings
                   </span>
                 </div>
                 <p className="text-5xl font-extrabold text-emerald-500">
                   ${estimatedEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
-                <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2">
+                <p className="text-[11px] text-[var(--text-muted)] mt-2">
                   {estViews.toLocaleString()} views × ${estRpm.toFixed(2)} RPM
                 </p>
               </div>

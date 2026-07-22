@@ -123,17 +123,17 @@ export default function PdfOcr() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
       
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <div className="flex items-center gap-4">
           {!isProcessing && !extractedText && (
             <select 
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 text-zinc-900 dark:text-white outline-none focus:border-blue-500 text-sm"
+              className="bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
             >
               <option value="eng">English</option>
               <option value="hin">Hindi</option>
@@ -144,7 +144,7 @@ export default function PdfOcr() {
           <button 
             onClick={() => { setFile(null); setExtractedText(''); }}
             disabled={isProcessing}
-            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+            className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
           >
             Start Over
           </button>
@@ -152,8 +152,8 @@ export default function PdfOcr() {
       </div>
 
       {!extractedText && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <p className="text-zinc-700 dark:text-zinc-300 text-center text-lg">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <p className="text-[var(--text-primary)] text-center text-lg">
             Ready to extract text. Note that processing multi-page PDFs locally may take a few moments depending on your device speed.
           </p>
           
@@ -182,7 +182,7 @@ export default function PdfOcr() {
             <div className="flex gap-2">
               <button 
                 onClick={copyToClipboard}
-                className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg text-sm transition-colors"
+                className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg text-sm transition-colors"
               >
                 Copy Text
               </button>
@@ -199,7 +199,7 @@ export default function PdfOcr() {
           </div>
           
           <div className="bg-white dark:bg-black border border-emerald-500/30 rounded-2xl p-6 shadow-xl h-[500px] overflow-y-auto">
-            <pre className="whitespace-pre-wrap font-sans text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm">
+            <pre className="whitespace-pre-wrap font-sans text-[var(--text-primary)] leading-relaxed text-sm">
               {extractedText}
             </pre>
           </div>

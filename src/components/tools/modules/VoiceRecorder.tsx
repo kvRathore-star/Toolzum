@@ -264,15 +264,15 @@ export default function VoiceRecorder() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <div className="flex items-center justify-center gap-3 mb-2">
           <Mic className="w-8 h-8 text-fuchsia-500" />
           <h2 className="text-2xl font-bold">Voice Recorder</h2>
         </div>
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-start gap-2">
-          <AlertCircle className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-          <p className="text-xs text-indigo-600 dark:text-indigo-400">
+          <AlertCircle className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
+          <p className="text-xs text-[var(--accent)] dark:text-[var(--accent)]">
             Your recording stays in your browser — nothing is uploaded. Supports WebM (native) or WAV (converted browser-side).
           </p>
         </div>
@@ -302,7 +302,7 @@ export default function VoiceRecorder() {
             <div className="text-center">
               <div className="text-6xl font-mono font-bold tracking-wider tabular-nums text-zinc-800 dark:text-zinc-100">{fmt(duration)}</div>
             </div>
-            <canvas ref={canvasRef} className="w-full rounded-xl bg-zinc-100 dark:bg-zinc-800" style={{ height: '120px' }} />
+            <canvas ref={canvasRef} className="w-full rounded-xl bg-[var(--bg-surface)]" style={{ height: '120px' }} />
             <div className="flex items-center justify-center gap-6">
               {!isRecording ? (
                 <button onClick={startRecording} disabled={!isSupported}
@@ -332,31 +332,31 @@ export default function VoiceRecorder() {
               </div>
             )}
             {!isRecording && isSupported && hasPermission !== false && (
-              <p className="text-center text-xs text-zinc-400">Click the record button to start. Your browser will ask for microphone access.</p>
+              <p className="text-center text-xs text-[var(--text-muted)]">Click the record button to start. Your browser will ask for microphone access.</p>
             )}
           </div>
         ) : (
           <div className="space-y-6">
             <audio ref={audioRef} controls className="w-full" src={audioUrl || undefined} />
-            <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+            <div className="flex items-center justify-between p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               {isRenaming ? (
                 <input ref={inputRef} defaultValue={recordingName}
                   onKeyDown={e => { if (e.key === 'Enter') confirmRename(); if (e.key === 'Escape') setIsRenaming(false); }}
                   onBlur={confirmRename}
-                  className="flex-1 bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-fuchsia-500" />
+                  className="flex-1 bg-[var(--bg-elevated)] border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-fuchsia-500" />
               ) : (
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300 truncate max-w-[180px]">{recordingName}.{outputFormat}</span>
-                  <button onClick={startRename} className="text-zinc-400 hover:text-fuchsia-500 transition-colors shrink-0"><Edit3 className="w-4 h-4" /></button>
+                  <span className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[180px]">{recordingName}.{outputFormat}</span>
+                  <button onClick={startRename} className="text-[var(--text-muted)] hover:text-fuchsia-500 transition-colors shrink-0"><Edit3 className="w-4 h-4" /></button>
                 </div>
               )}
-              <div className="text-sm text-zinc-500 shrink-0 ml-3">{audioBlob && `${(audioBlob.size / 1024).toFixed(1)} KB`}</div>
+              <div className="text-sm text-[var(--text-secondary)] shrink-0 ml-3">{audioBlob && `${(audioBlob.size / 1024).toFixed(1)} KB`}</div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-sm text-zinc-500 font-medium">Format:</span>
+              <span className="text-sm text-[var(--text-secondary)] font-medium">Format:</span>
               {(['webm', 'wav'] as const).map(f => (
                 <button key={f} onClick={() => setOutputFormat(f)}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${outputFormat === f ? 'bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-300 dark:border-fuchsia-700' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${outputFormat === f ? 'bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-300 dark:border-fuchsia-700' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'}`}>
                   .{f.toUpperCase()}
                 </button>
               ))}
@@ -366,7 +366,7 @@ export default function VoiceRecorder() {
               {isProcessing ? <><Loader2 className="w-5 h-5 animate-spin" /> Converting...</> : <><Download className="w-5 h-5" /> Download {recordingName}.{outputFormat}</>}
             </button>
             <button onClick={handleRecordAgain}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+              className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2">
               <RotateCcw className="w-5 h-5" /> Record Again
             </button>
           </div>

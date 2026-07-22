@@ -79,29 +79,29 @@ export default function Mp3Compressor() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Compression Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="text-[var(--text-primary)] font-medium">Compression Settings</h4>
           
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Target Bitrate</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Target Bitrate</label>
             <select 
               value={bitrate}
               onChange={(e) => setBitrate(e.target.value)}
-              className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-3 text-zinc-900 dark:text-white outline-none font-bold"
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] outline-none font-bold"
             >
               <option value="32k">32 kbps (Smallest, Low Quality)</option>
               <option value="64k">64 kbps (Good for Voice/Podcasts)</option>
@@ -139,11 +139,11 @@ export default function Mp3Compressor() {
             </button>
           </div>
         ) : (
-          <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+          <div className="bg-white dark:bg-black border border-[var(--border-subtle)] rounded-2xl p-6 flex flex-col items-center justify-center text-center">
              <div className="w-16 h-16 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center mb-4">
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zM21 16c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2z" /></svg>
             </div>
-            <h4 className="text-zinc-900 dark:text-white font-bold mb-2">Original Audio</h4>
+            <h4 className="text-[var(--text-primary)] font-bold mb-2">Original Audio</h4>
             <audio src={URL.createObjectURL(file)} controls className="w-full opacity-80 scale-90" />
           </div>
         )}

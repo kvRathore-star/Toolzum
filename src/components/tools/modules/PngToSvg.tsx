@@ -107,49 +107,49 @@ export default function PngToSvg() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <ImageIcon className="w-5 h-5 text-indigo-500" />
+          <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           PNG to SVG Vector Converter
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Convert raster images (PNG/JPG) to scalable vector SVG layouts. Support clean embedded vector scaling.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Convert raster images (PNG/JPG) to scalable vector SVG layouts. Support clean embedded vector scaling.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-100 dark:border-zinc-800 pb-2">Image Upload</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2">Image Upload</h3>
           
-          <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 flex flex-col items-center justify-center bg-zinc-50 dark:bg-black/20 text-center">
-            <Upload className="w-10 h-10 text-zinc-400 mb-2" />
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
+            <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
             {imageFile ? (
               <div>
                 <p className="text-xs text-zinc-800 dark:text-white font-bold">{imageFile.name}</p>
-                <p className="text-[10px] text-zinc-500 mt-0.5">{(imageFile.size / 1024).toFixed(1)} KB</p>
+                <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">{(imageFile.size / 1024).toFixed(1)} KB</p>
               </div>
             ) : (
               <div>
-                <p className="text-xs text-zinc-400">Select PNG, JPG, or WebP image</p>
-                <p className="text-[9px] text-zinc-500 mt-1">Conversion works offline in your browser</p>
+                <p className="text-xs text-[var(--text-muted)]">Select PNG, JPG, or WebP image</p>
+                <p className="text-[9px] text-[var(--text-secondary)] mt-1">Conversion works offline in your browser</p>
               </div>
             )}
-            <label className="bg-[var(--accent)] hover:bg-indigo-600 px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+            <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
               Select Image File
               <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
             </label>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs text-zinc-400 font-bold uppercase">Conversion Method</label>
-            <div className="flex bg-zinc-50 dark:bg-black/30 p-1 rounded-xl gap-1">
+            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Conversion Method</label>
+            <div className="flex bg-[var(--bg-overlay)] p-1 rounded-xl gap-1">
               <button 
                 onClick={() => setMode('embedded')}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${mode === 'embedded' ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${mode === 'embedded' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}
               >
                 Embedded Vector Wrapper
               </button>
               <button 
                 onClick={() => setMode('silhouette')}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${mode === 'silhouette' ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${mode === 'silhouette' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}
               >
                 Silhouette Path Trace
               </button>
@@ -163,10 +163,10 @@ export default function PngToSvg() {
         </div>
 
         {/* Vector Display Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
           {svgContent ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full">
-              <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl min-h-[220px]">
+              <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl min-h-[220px]">
                 <div className="max-w-full max-h-full object-contain" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgContent, { USE_PROFILES: { svg: true, svgFilters: true } }) }} />
               </div>
               <button onClick={downloadSvg} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
@@ -174,7 +174,7 @@ export default function PngToSvg() {
               </button>
             </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-zinc-500">
+            <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)]">
               <ImageIcon className="w-12 h-12 mb-3 opacity-30 animate-pulse" />
               <p className="text-xs">Traced SVG preview will appear here</p>
             </div>

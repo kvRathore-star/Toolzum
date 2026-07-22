@@ -177,14 +177,14 @@ export default function AiImageUpscaler() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile.name}</h3>
           <p className="text-xs text-[var(--text-secondary)]">Original dimensions</p>
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Photo
         </button>
@@ -192,14 +192,14 @@ export default function AiImageUpscaler() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2 text-sm uppercase tracking-wider">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2 text-sm uppercase tracking-wider">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Scale Settings
           </h4>
 
           <div className="space-y-3">
-            <span className="text-xs font-bold text-zinc-500 uppercase">Upscaling Factor</span>
+            <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">Upscaling Factor</span>
             <div className="grid grid-cols-3 gap-3">
               {[2, 4, 8].map((f) => (
                 <button
@@ -211,7 +211,7 @@ export default function AiImageUpscaler() {
                   className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                     factor === f
                       ? 'bg-[var(--accent)] text-white shadow-lg'
-                      : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700'
+                      : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
                   }`}
                 >
                   {f}x
@@ -228,7 +228,7 @@ export default function AiImageUpscaler() {
           <button
             onClick={processUpscale}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:bg-indigo-600 disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
           >
             {isProcessing ? `Upscaling... ${progress}%` : 'Enhance & Scale'}
           </button>
@@ -274,7 +274,7 @@ export default function AiImageUpscaler() {
                 />
               </div>
             ) : (
-              <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[280px] w-full max-w-[450px]">
+              <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[280px] w-full max-w-[450px]">
                 {originalUrl && (
 <img
   src={originalUrl}
@@ -297,7 +297,7 @@ export default function AiImageUpscaler() {
                 Download Upscaled Photo
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] justify-center">
                 <Eye className="w-4 h-4" />
                 <span>Adjust settings and enhance to trigger slider comparison.</span>
               </div>

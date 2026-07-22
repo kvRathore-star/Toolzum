@@ -106,30 +106,30 @@ export default function ReverseVideo() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
           <video src={URL.createObjectURL(file)} controls className="w-full max-h-[350px] rounded-lg" />
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Reverse Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium">Reverse Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-3">Reverse</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-3">Reverse</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['video', 'audio', 'both'] as const).map((m) => (
                   <button
@@ -138,7 +138,7 @@ export default function ReverseVideo() {
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       mode === m
                         ? 'bg-blue-600 text-white shadow'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {m === 'video' ? 'Video' : m === 'audio' ? 'Audio' : 'Both'}
@@ -148,7 +148,7 @@ export default function ReverseVideo() {
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">Preserve Audio Pitch</span>
+              <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Preserve Audio Pitch</span>
               <button
                 type="button"
                 role="switch"

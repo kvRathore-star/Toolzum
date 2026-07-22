@@ -212,7 +212,7 @@ export default function XmlSitemapGenerator() {
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Input Section */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
         <div className="flex items-center gap-3 mb-1">
           <Globe className="w-5 h-5 text-emerald-500" />
           <h2 className="text-lg font-bold text-[var(--text-primary)]">XML Sitemap Generator</h2>
@@ -226,14 +226,14 @@ export default function XmlSitemapGenerator() {
           <>
             <div className="flex gap-3">
               <div className="flex-1 relative">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
                 <input
                   type="url"
                   value={url}
                   onChange={e => setUrl(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && startCrawl()}
                   placeholder="https://yourwebsite.com — works with React, Next.js & Vue too"
-                  className="w-full bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-700 rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-emerald-500/50 transition-colors placeholder:text-zinc-400"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]/50 transition-colors placeholder:text-[var(--text-muted)]"
                   disabled={isCrawling}
                 />
               </div>
@@ -251,7 +251,7 @@ export default function XmlSitemapGenerator() {
 
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             >
               <Settings2 className="w-3.5 h-3.5" />
               Advanced settings
@@ -259,13 +259,13 @@ export default function XmlSitemapGenerator() {
             </button>
 
             {showSettings && (
-              <div className="space-y-4 p-4 bg-zinc-50 dark:bg-black/20 rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-4 p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                 <div>
-                  <label className="text-xs font-medium text-zinc-500 mb-1.5 block">Max pages to crawl</label>
+                  <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Max pages to crawl</label>
                   <select
                     value={maxPages}
                     onChange={e => setMaxPages(Number(e.target.value))}
-                    className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs outline-none"
+                    className="bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs outline-none"
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
@@ -277,8 +277,8 @@ export default function XmlSitemapGenerator() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-medium text-zinc-500 mb-1.5 block">
-                    Exclude URL patterns <span className="text-zinc-400 font-normal">— skip matching paths</span>
+                  <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">
+                    Exclude URL patterns <span className="text-[var(--text-muted)] font-normal">— skip matching paths</span>
                   </label>
                   <div className="flex gap-2 mb-2">
                     <input
@@ -287,16 +287,16 @@ export default function XmlSitemapGenerator() {
                       onChange={e => setNewExclusion(e.target.value)}
                       onKeyDown={e => e.key === 'Enter' && addExclusion()}
                       placeholder="/tag/*, /author/*, ?page=*"
-                      className="flex-1 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs outline-none"
+                      className="flex-1 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs outline-none"
                       disabled={isCrawling}
                     />
                     <button onClick={addExclusion} className="px-3 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs transition-colors" disabled={isCrawling}>Add</button>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {exclusions.map((e, i) => (
-                      <span key={i} className="inline-flex items-center gap-1 px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-[11px] font-mono text-zinc-600 dark:text-zinc-400">
+                      <span key={i} className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--bg-surface)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">
                         {e.pattern}
-                        <button onClick={() => removeExclusion(i)} className="text-zinc-400 hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
+                        <button onClick={() => removeExclusion(i)} className="text-[var(--text-muted)] hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
                       </span>
                     ))}
                   </div>
@@ -309,27 +309,27 @@ export default function XmlSitemapGenerator() {
 
       {/* Detecting state */}
       {state.status === 'detecting' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 flex items-center justify-center gap-3">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-8 flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm text-zinc-500">Detecting site type…</span>
+          <span className="text-sm text-[var(--text-secondary)]">Detecting site type…</span>
         </div>
       )}
 
       {/* Crawling progress */}
       {state.status === 'crawling' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           <div className="p-5 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
                 <Search className="w-4 h-4 text-emerald-500" />
                 Crawling {new URL(state.url).hostname}
               </h3>
-              <span className="text-xs text-zinc-400 font-mono">
+              <span className="text-xs text-[var(--text-muted)] font-mono">
                 {state.crawled} of ~{state.max} pages
               </span>
             </div>
 
-            <div className="w-full h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
               <div
                 className="h-full bg-emerald-500 rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(100, (state.crawled / state.max) * 100)}%` }}
@@ -339,15 +339,15 @@ export default function XmlSitemapGenerator() {
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-xl font-bold text-[var(--text-primary)]">{state.discovered}</div>
-                <div className="text-[10px] text-zinc-400 uppercase tracking-wider">Discovered</div>
+                <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Discovered</div>
               </div>
               <div>
                 <div className="text-xl font-bold text-emerald-500">{state.crawled}</div>
-                <div className="text-[10px] text-zinc-400 uppercase tracking-wider">Crawled</div>
+                <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Crawled</div>
               </div>
               <div>
                 <div className="text-xl font-bold text-[var(--text-primary)]">{state.max}</div>
-                <div className="text-[10px] text-zinc-400 uppercase tracking-wider">Max</div>
+                <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">Max</div>
               </div>
             </div>
 
@@ -360,7 +360,7 @@ export default function XmlSitemapGenerator() {
 
             <div className="h-48 overflow-y-auto bg-black/5 dark:bg-white/5 rounded-xl p-3 font-mono text-[11px] leading-relaxed">
               {state.log.map((entry, i) => (
-                <div key={i} className="text-zinc-500 dark:text-zinc-400 truncate">
+                <div key={i} className="text-[var(--text-secondary)] truncate">
                   {entry}
                 </div>
               ))}
@@ -382,7 +382,7 @@ export default function XmlSitemapGenerator() {
       {/* Complete — results */}
       {state.status === 'complete' && (
         <>
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-sm">
                 <span className="text-[var(--text-primary)]"><strong className="text-lg">{state.pages.length}</strong> URLs</span>
@@ -390,7 +390,7 @@ export default function XmlSitemapGenerator() {
                 <span className="text-[var(--text-secondary)]">Generated in <strong>{(state.durationMs / 1000).toFixed(1)}s</strong></span>
               </div>
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl text-xs transition-colors">
+                <button onClick={handleCopy} className="flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-xl text-xs transition-colors">
                   <Copy className="w-3.5 h-3.5" /> Copy XML
                 </button>
                 <button onClick={handleDownloadXml} className="flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">
@@ -400,40 +400,40 @@ export default function XmlSitemapGenerator() {
             </div>
 
             <div className="flex gap-3 mt-4 flex-wrap">
-              <button onClick={handleDownloadHtml} className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-[11px] transition-colors">
+              <button onClick={handleDownloadHtml} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors">
                 <FileText className="w-3 h-3" /> HTML Sitemap
               </button>
-              <button onClick={handleDownloadTxt} className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-[11px] transition-colors">
+              <button onClick={handleDownloadTxt} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors">
                 <List className="w-3 h-3" /> URL List (.txt)
               </button>
-              <button onClick={() => setState({ status: 'idle' })} className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-[11px] transition-colors ml-auto">
+              <button onClick={() => setState({ status: 'idle' })} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors ml-auto">
                 Generate another →
               </button>
             </div>
           </div>
 
           {/* SEO Insights */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-3">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" />
               SEO Health Check
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="px-3 py-2.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl">
+              <div className="px-3 py-2.5 bg-[var(--bg-overlay)]/50 rounded-xl">
                 <div className="text-lg font-bold text-emerald-500">{state.insights.healthyPages}</div>
-                <div className="text-[10px] text-zinc-400">Healthy pages</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Healthy pages</div>
               </div>
-              <div className="px-3 py-2.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl">
+              <div className="px-3 py-2.5 bg-[var(--bg-overlay)]/50 rounded-xl">
                 <div className="text-lg font-bold text-amber-500">{state.insights.missingMeta}</div>
-                <div className="text-[10px] text-zinc-400">Missing meta description</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Missing meta description</div>
               </div>
-              <div className="px-3 py-2.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl">
+              <div className="px-3 py-2.5 bg-[var(--bg-overlay)]/50 rounded-xl">
                 <div className="text-lg font-bold text-red-500">{state.insights.brokenLinks}</div>
-                <div className="text-[10px] text-zinc-400">Broken links (4xx/5xx)</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Broken links (4xx/5xx)</div>
               </div>
-              <div className="px-3 py-2.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl">
+              <div className="px-3 py-2.5 bg-[var(--bg-overlay)]/50 rounded-xl">
                 <div className="text-lg font-bold text-amber-500">{state.insights.duplicateTitles}</div>
-                <div className="text-[10px] text-zinc-400">Duplicate page titles</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Duplicate page titles</div>
               </div>
             </div>
             {state.insights.missingMeta > 0 && (
@@ -463,12 +463,12 @@ export default function XmlSitemapGenerator() {
           </div>
 
           {/* XML Preview */}
-          <details className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-            <summary className="px-5 py-3.5 text-sm font-bold text-[var(--text-primary)] cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50 flex items-center gap-2 transition-colors">
+          <details className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+            <summary className="px-5 py-3.5 text-sm font-bold text-[var(--text-primary)] cursor-pointer hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 flex items-center gap-2 transition-colors">
               <ChevronRight className="w-4 h-4" />
               Preview XML ({state.pages.length} URLs)
             </summary>
-            <div className="border-t border-zinc-200 dark:border-zinc-800 p-4">
+            <div className="border-t border-[var(--border-subtle)] p-4">
               <pre className="bg-black/5 dark:bg-white/5 rounded-xl p-4 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 overflow-x-auto max-h-80 overflow-y-auto leading-relaxed">
                 {state.xml.slice(0, 3000)}
                 {state.xml.length > 3000 && '\n\n… (truncated for preview)'}
@@ -477,7 +477,7 @@ export default function XmlSitemapGenerator() {
           </details>
 
           {/* Next Steps */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-5">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-5">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-emerald-500" />
               What to do next
@@ -487,16 +487,16 @@ export default function XmlSitemapGenerator() {
                 <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">1</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Upload to your server root</p>
-                  <p className="text-xs text-zinc-500 mt-0.5">Upload sitemap.xml to the root of your website so search engines can find it.</p>
-                  <pre className="mt-2 px-3 py-2 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-[11px] font-mono text-zinc-600 dark:text-zinc-400">Upload sitemap.xml → /public_html/sitemap.xml</pre>
+                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">Upload sitemap.xml to the root of your website so search engines can find it.</p>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">Upload sitemap.xml → /public_html/sitemap.xml</pre>
                 </div>
               </div>
               <div className="flex gap-4">
                 <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">2</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Add to robots.txt</p>
-                  <p className="text-xs text-zinc-500 mt-0.5">Tell all search engine bots where your sitemap is.</p>
-                  <pre className="mt-2 px-3 py-2 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-[11px] font-mono text-zinc-600 dark:text-zinc-400">Sitemap: {state.url}sitemap.xml</pre>
+                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">Tell all search engine bots where your sitemap is.</p>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">Sitemap: {state.url}sitemap.xml</pre>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -531,18 +531,18 @@ export default function XmlSitemapGenerator() {
           </div>
 
           {/* FAQ */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-3">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
-              <FileText className="w-4 h-4 text-zinc-400" />
+              <FileText className="w-4 h-4 text-[var(--text-muted)]" />
               Frequently Asked Questions
             </h3>
             {FAQS.map((faq, i) => (
               <details key={i} className="group">
                 <summary className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer py-2 transition-colors">
-                  <ChevronRight className="w-3.5 h-3.5 text-zinc-400 group-open:rotate-90 transition-transform shrink-0" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-open:rotate-90 transition-transform shrink-0" />
                   {faq.q}
                 </summary>
-                <p className="pl-5.5 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pb-2">{faq.a}</p>
+                <p className="pl-5.5 text-sm text-[var(--text-secondary)] leading-relaxed pb-2">{faq.a}</p>
               </details>
             ))}
           </div>

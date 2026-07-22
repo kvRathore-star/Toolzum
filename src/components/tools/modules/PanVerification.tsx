@@ -87,19 +87,19 @@ export default function PanVerification() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <Shield className="w-6 h-6 text-indigo-500" />
+      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Shield className="w-6 h-6 text-[var(--accent)]" />
           PAN Card Format Verifier
         </h2>
-        <p className="text-sm text-[var(--text-secondary)] dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Perform a privacy-first, client-side validation of Permanent Account Number (PAN) formats, extract entity type, and visualize its structure.
         </p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
         <div className="space-y-2">
-          <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">
+          <label className="block text-sm font-bold text-[var(--text-primary)]">
             Enter 10-Digit PAN Number
           </label>
           <div className="relative">
@@ -109,7 +109,7 @@ export default function PanVerification() {
               placeholder="e.g., ABCDE1234F"
               value={pan}
               onChange={(e) => setPan(e.target.value.toUpperCase())}
-              className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-widest text-zinc-900 dark:text-white outline-none"
+              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-widest text-[var(--text-primary)] outline-none"
             />
           </div>
         </div>
@@ -117,13 +117,13 @@ export default function PanVerification() {
         <div className="flex gap-4">
           <button
             onClick={handleVerify}
-            className="flex-1 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
             Verify Format
           </button>
           <button
             onClick={resetForm}
-            className="px-5 py-3.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl transition-all cursor-pointer"
+            className="px-5 py-3.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all cursor-pointer"
             aria-label="Reset"
           >
             <RefreshCw className="w-5 h-5" />
@@ -131,14 +131,14 @@ export default function PanVerification() {
         </div>
 
         {validationResult && (
-          <div className="space-y-6 border-t border-zinc-200 dark:border-zinc-800 pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="space-y-6 border-t border-[var(--border-subtle)] pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
             {validationResult.isValid ? (
               <div className="space-y-6">
                 <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
                   <div>
                     <h4 className="font-bold text-emerald-400">Valid Format Structuring</h4>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
                       The PAN complies with the official Income Tax Department formatting rules.
                     </p>
                   </div>
@@ -151,8 +151,8 @@ export default function PanVerification() {
                   </h3>
                   
                   {/* Visually segments the PAN */}
-                  <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 bg-zinc-50 dark:bg-black/50 rounded-xl border border-zinc-200 dark:border-white/5">
-                    <span className="text-indigo-400" title="First 3 characters: Alphabetic Series">{pan.substring(0, 3)}</span>
+                  <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+                    <span className="text-[var(--accent)]" title="First 3 characters: Alphabetic Series">{pan.substring(0, 3)}</span>
                     <span className="text-rose-400 underline decoration-rose-500 decoration-2" title={`Taxpayer Status: ${validationResult.details?.statusText}`}>{pan[3]}</span>
                     <span className="text-amber-400" title={`Surname starting letter: ${validationResult.details?.surnameChar}`}>{pan[4]}</span>
                     <span className="text-emerald-400" title="4 Digits Sequential Number">{pan.substring(5, 9)}</span>
@@ -160,29 +160,29 @@ export default function PanVerification() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 space-y-1">
-                      <span className="text-xs text-zinc-500 font-bold uppercase block">Taxpayer Category (4th Digit)</span>
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                      <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Taxpayer Category (4th Digit)</span>
                       <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
                         {validationResult.details?.statusText}
                       </span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 space-y-1">
-                      <span className="text-xs text-zinc-500 font-bold uppercase block">Surname / Entity First Character (5th Digit)</span>
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                      <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Surname / Entity First Character (5th Digit)</span>
                       <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
                         Matches name starting with '{validationResult.details?.surnameChar}'
                       </span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 space-y-1">
-                      <span className="text-xs text-zinc-500 font-bold uppercase block">Alphabetic Series (1st-3rd Digits)</span>
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                      <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Alphabetic Series (1st-3rd Digits)</span>
                       <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
                         Series prefix: {pan.substring(0, 3)}
                       </span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 space-y-1">
-                      <span className="text-xs text-zinc-500 font-bold uppercase block">Sequential Numbering (6th-9th Digits)</span>
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                      <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Sequential Numbering (6th-9th Digits)</span>
                       <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
                         Serial: {validationResult.details?.serialText}
                       </span>
@@ -190,9 +190,9 @@ export default function PanVerification() {
                   </div>
                 </div>
 
-                <div className="p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-white/5 text-xs text-[var(--text-secondary)] dark:text-zinc-400 space-y-2">
+                <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] space-y-2">
                   <div className="flex items-center gap-1.5 font-bold text-zinc-800 dark:text-zinc-200">
-                    <Info className="w-4 h-4 text-indigo-500" />
+                    <Info className="w-4 h-4 text-[var(--accent)]" />
                     How to verify actual active status?
                   </div>
                   <p>
@@ -201,7 +201,7 @@ export default function PanVerification() {
                       href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/verifyYourPAN"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-400 hover:underline font-bold"
+                      className="text-[var(--accent)] hover:underline font-bold"
                     >
                       e-Filing Portal (Verify Your PAN)
                     </a>.
@@ -210,10 +210,10 @@ export default function PanVerification() {
               </div>
             ) : (
               <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-start gap-3">
-                <AlertTriangle className="w-5 h-5 text-rose-500 mt-0.5 shrink-0" />
+                <AlertTriangle className="w-5 h-5 text-[var(--accent)] mt-0.5 shrink-0" />
                 <div>
                   <h4 className="font-bold text-rose-400">Invalid Format</h4>
-                  <p className="text-sm text-[var(--text-secondary)] dark:text-zinc-400 mt-0.5">
+                  <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">
                     {validationResult.error}
                   </p>
                 </div>

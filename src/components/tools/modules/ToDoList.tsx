@@ -74,14 +74,14 @@ export default function ToDoList() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3 justify-between">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3 justify-between">
         <div className="flex items-center gap-2">
-          <CheckSquare className="w-5 h-5 text-indigo-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Productivity Task To-Do List</h3>
+          <CheckSquare className="w-5 h-5 text-[var(--accent)]" />
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Productivity Task To-Do List</h3>
         </div>
         {items.some(i => i.completed) && (
-          <button onClick={clearCompleted} className="text-xs text-rose-500 hover:underline">Clear Completed</button>
+          <button onClick={clearCompleted} className="text-xs text-[var(--accent)] hover:underline">Clear Completed</button>
         )}
       </div>
 
@@ -93,10 +93,10 @@ export default function ToDoList() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="What needs to be accomplished today?"
-            className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-xs outline-none focus:border-zinc-300"
+            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs outline-none focus:border-zinc-300"
           />
           <div className="flex gap-2">
-            <select value={priority} onChange={e => setPriority(e.target.value as any)} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 text-zinc-900 dark:text-white text-xs outline-none">
+            <select value={priority} onChange={e => setPriority(e.target.value as any)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 text-[var(--text-primary)] text-xs outline-none">
               <option value="high">High Priority</option>
               <option value="medium">Medium Priority</option>
               <option value="low">Low Priority</option>
@@ -111,7 +111,7 @@ export default function ToDoList() {
         <div className="space-y-2 pt-2">
           {items.length > 0 ? (
             items.map(item => (
-              <div key={item.id} className="flex justify-between items-center bg-zinc-50 dark:bg-black/10 p-3.5 rounded-xl border border-[var(--border-subtle)] hover:border-zinc-700 transition-all">
+              <div key={item.id} className="flex justify-between items-center bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] hover:border-zinc-700 transition-all">
                 <label className="flex items-center gap-3 cursor-pointer text-xs flex-1 select-none">
                   <input 
                     type="checkbox" 
@@ -119,7 +119,7 @@ export default function ToDoList() {
                     onChange={() => toggleItem(item.id)}
                     className="rounded text-[var(--accent)]" 
                   />
-                  <span className={`text-zinc-900 dark:text-zinc-200 ${item.completed ? 'line-through text-zinc-500' : ''}`}>
+                  <span className={`text-zinc-900 dark:text-zinc-200 ${item.completed ? 'line-through text-[var(--text-secondary)]' : ''}`}>
                     {item.text}
                   </span>
                   
@@ -127,19 +127,19 @@ export default function ToDoList() {
                   <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase ${
                     item.priority === 'high' ? 'bg-rose-500/10 text-rose-400' :
                     item.priority === 'medium' ? 'bg-amber-500/10 text-amber-400' :
-                    'bg-zinc-500/10 text-zinc-400'
+                    'bg-[var(--bg-overlay)]0/10 text-[var(--text-muted)]'
                   }`}>
                     {item.priority}
                   </span>
                 </label>
 
-                <button onClick={() => deleteItem(item.id)} className="p-1.5 text-zinc-500 hover:text-rose-500 rounded-lg cursor-pointer" aria-label="Delete">
+                <button onClick={() => deleteItem(item.id)} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] rounded-lg cursor-pointer" aria-label="Delete">
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             ))
           ) : (
-            <div className="text-center py-12 text-zinc-500 text-xs">
+            <div className="text-center py-12 text-[var(--text-secondary)] text-xs">
               No tasks registered yet. Add action items above to schedule your workday.
             </div>
           )}

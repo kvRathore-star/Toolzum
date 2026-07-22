@@ -329,10 +329,10 @@ export default function IcsCsvConverter() {
           <strong>No server uploads — </strong>Convert calendar events between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and any spreadsheet.
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
             ICS → CSV
           </button>
-          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
             CSV → ICS
           </button>
         </div>
@@ -347,29 +347,29 @@ export default function IcsCsvConverter() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{events.length} event(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'ics-to-csv' ? 'ICS → CSV' : 'CSV → ICS'}</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{events.length} event(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'ics-to-csv' ? 'ICS → CSV' : 'CSV → ICS'}</p>
         </div>
-        <button onClick={() => { setFile(null); setOutputUrl(null); setEvents([]); setPreview([]); setError(null); }} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+        <button onClick={() => { setFile(null); setOutputUrl(null); setEvents([]); setPreview([]); setError(null); }} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       {direction === 'ics-to-csv' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Fields to Export</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h4 className="text-[var(--text-primary)] font-medium">Fields to Export</h4>
           <div className="flex flex-wrap gap-2">
             {ICS_FIELDS.map(f => (
-              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}>
+              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
                 {f.label}
               </button>
             ))}
           </div>
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Date Format</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>
@@ -377,13 +377,13 @@ export default function IcsCsvConverter() {
       )}
 
       {direction === 'csv-to-ics' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Column Mapping</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h4 className="text-[var(--text-primary)] font-medium">Column Mapping</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {csvHeaders.map(h => (
               <div key={h} className="flex items-center gap-2">
-                <span className="text-sm text-zinc-600 dark:text-zinc-400 min-w-[100px]">{h}:</span>
-                <select value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
+                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)] min-w-[100px]">{h}:</span>
+                <select value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
                   <option value="">— Skip —</option>
                   {CSV_HEADERS.map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -393,10 +393,10 @@ export default function IcsCsvConverter() {
             ))}
           </div>
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Input Date Format</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Input Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>
@@ -404,23 +404,23 @@ export default function IcsCsvConverter() {
       )}
 
       {preview.length > 0 && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-3">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Preview ({preview.length} of {events.length})</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+          <h4 className="text-[var(--text-primary)] font-medium">Preview ({preview.length} of {events.length})</h4>
           <div className="overflow-x-auto max-h-64 overflow-y-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-700">
-                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-zinc-600 dark:text-zinc-400 font-medium whitespace-nowrap">{h}</th>)}
+                <tr className="border-b border-[var(--border-subtle)]">
+                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-zinc-600 dark:text-[var(--text-muted)] font-medium whitespace-nowrap">{h}</th>)}
                 </tr>
               </thead>
               <tbody>
                 {preview.map((row, i) => (
-                  <tr key={i} className="border-b border-zinc-100 dark:border-zinc-800">
+                  <tr key={i} className="border-b border-[var(--border-subtle)]">
                     {displayHeaders.map(h => {
                       const val = direction === 'ics-to-csv'
                         ? row[ICS_FIELDS.find(f => f.label === h)?.key || '']
                         : row[csvHeaders.find(ch => columnMapping[ch] === h) || ''];
-                      return <td key={h} className="py-2 px-3 text-zinc-700 dark:text-zinc-300 truncate max-w-[200px]">{val || '-'}</td>;
+                      return <td key={h} className="py-2 px-3 text-[var(--text-primary)] truncate max-w-[200px]">{val || '-'}</td>;
                     })}
                   </tr>
                 ))}
@@ -435,8 +435,8 @@ export default function IcsCsvConverter() {
       )}
 
       {outputUrl ? (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Conversion Ready</h4>
           </div>
           <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">

@@ -122,12 +122,12 @@ export default function TaxSavingCalculator() {
 
   const inputField = (label: string, key: keyof TaxInputs, icon: React.ReactNode, placeholder = '0') => (
     <div className="space-y-1">
-      <label className="flex items-center gap-1.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">
+      <label className="flex items-center gap-1.5 text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wide">
         {icon} {label}
       </label>
       <input type="number" min="0" step="10000" value={inputs[key] || ''} onChange={e => update(key, e.target.value)}
         placeholder={placeholder} inputMode="numeric"
-        className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
     </div>
   );
 
@@ -135,21 +135,21 @@ export default function TaxSavingCalculator() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2 mb-1">
         <IndianRupee className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Tax Saving Calculator (Old vs New Regime)</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Tax Saving Calculator (Old vs New Regime)</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Compare your tax liability under Old and New tax regimes. Enter your income and investments below.</p>
+          <p className="text-xs text-[var(--text-secondary)]">Compare your tax liability under Old and New tax regimes. Enter your income and investments below.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {inputField('Annual Salary (CTC)', 'salary', <Briefcase className="w-3.5 h-3.5" />, '1200000')}
             {inputField('Other Income', 'otherIncome', <TrendingUp className="w-3.5 h-3.5" />, '0')}
           </div>
 
-          <div className="border-t border-zinc-100 dark:border-zinc-800 pt-4">
+          <div className="border-t border-[var(--border-subtle)] pt-4">
             <button onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-1.5 text-xs font-semibold text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">
+              className="flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               <PiggyBank className="w-3.5 h-3.5" /> {showAdvanced ? 'Hide' : 'Show'} Investments & Deductions
             </button>
 
@@ -167,28 +167,28 @@ export default function TaxSavingCalculator() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-zinc-100 dark:border-zinc-800 pt-4">
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-              <h4 className="text-[11px] font-bold text-zinc-400 uppercase mb-3 flex items-center gap-1.5"><FileText className="w-3 h-3" /> Old Regime</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-[var(--border-subtle)] pt-4">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <h4 className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><FileText className="w-3 h-3" /> Old Regime</h4>
               <div className="space-y-2 text-xs">
-                <div className="flex justify-between"><span className="text-zinc-500">Gross Income</span><span className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(grossIncome)}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Total Deductions</span><span className="font-semibold text-emerald-500">{formatINR(oldDeductions)}</span></div>
-                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-2 flex justify-between"><span className="text-zinc-500">Taxable Income</span><span className="font-semibold">{formatINR(Math.max(0, grossIncome - oldDeductions))}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Income Tax</span><span className="font-semibold">{formatINR(oldResult.tax)}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Cess (4%)</span><span className="font-semibold">{formatINR(oldResult.cess)}</span></div>
-                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-2 flex justify-between text-sm"><span className="font-bold text-zinc-600 dark:text-zinc-400">Total Tax</span><span className="font-bold text-zinc-900 dark:text-white text-base">{formatINR(oldResult.total)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Gross Income</span><span className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(grossIncome)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Total Deductions</span><span className="font-semibold text-emerald-500">{formatINR(oldDeductions)}</span></div>
+                <div className="border-t border-[var(--border-subtle)] pt-2 flex justify-between"><span className="text-[var(--text-secondary)]">Taxable Income</span><span className="font-semibold">{formatINR(Math.max(0, grossIncome - oldDeductions))}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Income Tax</span><span className="font-semibold">{formatINR(oldResult.tax)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Cess (4%)</span><span className="font-semibold">{formatINR(oldResult.cess)}</span></div>
+                <div className="border-t border-[var(--border-subtle)] pt-2 flex justify-between text-sm"><span className="font-bold text-zinc-600 dark:text-[var(--text-muted)]">Total Tax</span><span className="font-bold text-[var(--text-primary)] text-base">{formatINR(oldResult.total)}</span></div>
               </div>
             </div>
 
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-              <h4 className="text-[11px] font-bold text-zinc-400 uppercase mb-3 flex items-center gap-1.5"><TrendingUp className="w-3 h-3" /> New Regime</h4>
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <h4 className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><TrendingUp className="w-3 h-3" /> New Regime</h4>
               <div className="space-y-2 text-xs">
-                <div className="flex justify-between"><span className="text-zinc-500">Gross Income</span><span className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(grossIncome)}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Standard Deduction</span><span className="font-semibold text-emerald-500">{formatINR(newDeductions)}</span></div>
-                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-2 flex justify-between"><span className="text-zinc-500">Taxable Income</span><span className="font-semibold">{formatINR(Math.max(0, grossIncome - newDeductions))}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Income Tax</span><span className="font-semibold">{formatINR(newResult.tax)}</span></div>
-                <div className="flex justify-between"><span className="text-zinc-500">Cess (4%)</span><span className="font-semibold">{formatINR(newResult.cess)}</span></div>
-                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-2 flex justify-between text-sm"><span className="font-bold text-zinc-600 dark:text-zinc-400">Total Tax</span><span className="font-bold text-zinc-900 dark:text-white text-base">{formatINR(newResult.total)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Gross Income</span><span className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(grossIncome)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Standard Deduction</span><span className="font-semibold text-emerald-500">{formatINR(newDeductions)}</span></div>
+                <div className="border-t border-[var(--border-subtle)] pt-2 flex justify-between"><span className="text-[var(--text-secondary)]">Taxable Income</span><span className="font-semibold">{formatINR(Math.max(0, grossIncome - newDeductions))}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Income Tax</span><span className="font-semibold">{formatINR(newResult.tax)}</span></div>
+                <div className="flex justify-between"><span className="text-[var(--text-secondary)]">Cess (4%)</span><span className="font-semibold">{formatINR(newResult.cess)}</span></div>
+                <div className="border-t border-[var(--border-subtle)] pt-2 flex justify-between text-sm"><span className="font-bold text-zinc-600 dark:text-[var(--text-muted)]">Total Tax</span><span className="font-bold text-[var(--text-primary)] text-base">{formatINR(newResult.total)}</span></div>
               </div>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function TaxSavingCalculator() {
           </button>
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Personalized investment plan PDF with exact 80C/80D/NPS allocation, HRA optimization calculator, multiple income sources (freelance + salary), share with CA report, and side-by-side budget comparison.
             </p>
           </div>

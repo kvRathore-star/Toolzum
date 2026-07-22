@@ -225,7 +225,7 @@ export default function PdfAdvanced() {
   };
 
   const actionClass = (a: Action) =>
-    `px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${action === a ? 'bg-blue-600 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`;
+    `px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${action === a ? 'bg-blue-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
 
   const actions: Action[] = ['overlay', 'alternate-merge', 'combine', 'booklet', 'invert', 'zip'];
 
@@ -243,18 +243,18 @@ export default function PdfAdvanced() {
         ))}
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-        <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
           {actionLabel()}
         </h4>
 
         <div>
-          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Main PDF</label>
+          <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Main PDF</label>
           {mainFile ? (
-            <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800 p-3 rounded-xl">
+            <div className="flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-xl">
               <span className="text-sm text-zinc-800 dark:text-zinc-200">{mainFile.name} ({pageCount} pages)</span>
               <button onClick={() => { setMainFile(null); setMainBuffer(null); setOutputUrl(null); }}
-                className="text-xs text-zinc-500 hover:text-red-500">Remove</button>
+                className="text-xs text-[var(--text-secondary)] hover:text-red-500">Remove</button>
             </div>
           ) : (
             <FileUploader accept="application/pdf" onFileSelect={(_f, _d) => handleMainFile(_f)}
@@ -264,14 +264,14 @@ export default function PdfAdvanced() {
 
         {needsTwoFiles && (
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">
               {action === 'overlay' ? 'Overlay PDF' : 'Second PDF'}
             </label>
             {(overlayFile || secondFile) ? (
-              <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800 p-3 rounded-xl">
+              <div className="flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-xl">
                 <span className="text-sm text-zinc-800 dark:text-zinc-200">{(overlayFile || secondFile)?.name}</span>
                 <button onClick={() => { setOverlayFile(null); setOverlayBuffer(null); setSecondFile(null); setSecondBuffer(null); setOutputUrl(null); }}
-                  className="text-xs text-zinc-500 hover:text-red-500">Remove</button>
+                  className="text-xs text-[var(--text-secondary)] hover:text-red-500">Remove</button>
               </div>
             ) : (
               <FileUploader accept="application/pdf" onFileSelect={(_f, _d) => {
@@ -284,9 +284,9 @@ export default function PdfAdvanced() {
 
         {action === 'combine' && (
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Pages Per Sheet</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Pages Per Sheet</label>
             <select value={pagesPerSheet} onChange={(e) => setPagesPerSheet(Number(e.target.value))}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
               <option value={2}>2 pages per sheet</option>
               <option value={4}>4 pages per sheet</option>
             </select>
@@ -299,7 +299,7 @@ export default function PdfAdvanced() {
               <span>Processing...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
               <div className="h-full bg-blue-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           </div>
@@ -312,8 +312,8 @@ export default function PdfAdvanced() {
       </div>
 
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Complete</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, action === 'zip' ? `${mainFile?.name?.replace(/\.pdf$/i, '') || 'pages'}-pages.zip` : `advanced_${mainFile?.name || 'output.pdf'}`)}

@@ -68,27 +68,27 @@ export default function KbImageCompressor() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Original Size: {(imageFile.size / 1024).toFixed(2)} KB</h3>
         </div>
         <button 
           onClick={() => setImageFile(null)}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
         >
           Change Photo
         </button>
       </div>
 
-      <div className="p-6 border border-zinc-200 dark:border-white/10 bg-white dark:bg-black rounded-2xl shadow-xl">
-        <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-4">Target File Size (KB)</h4>
+      <div className="p-6 border border-[var(--border-subtle)] bg-white dark:bg-black rounded-2xl shadow-xl">
+        <h4 className="text-[var(--text-primary)] font-medium mb-4">Target File Size (KB)</h4>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[20, 50, 100].map(preset => (
             <button
               key={preset}
               onClick={() => setTargetKb(preset)}
-              className={`py-3 rounded-xl font-bold transition-all ${targetKb === preset ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-700'}`}
+              className={`py-3 rounded-xl font-bold transition-all ${targetKb === preset ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/40' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
             >
               &lt; {preset} KB
             </button>
@@ -96,7 +96,7 @@ export default function KbImageCompressor() {
         </div>
 
         <div className="space-y-4">
-          <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="flex justify-between text-sm text-zinc-600 dark:text-[var(--text-muted)]">
             <span>Aggressive (10KB)</span>
             <span className="text-blue-400 font-bold">{targetKb} KB</span>
             <span>High Quality (500KB)</span>
@@ -107,7 +107,7 @@ export default function KbImageCompressor() {
             max="500" 
             value={targetKb}
             onChange={(e) => setTargetKb(Number(e.target.value))}
-            className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+            className="w-full h-2 bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-500"
           />
         </div>
       </div>
@@ -124,8 +124,8 @@ export default function KbImageCompressor() {
         <div className="mt-8 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-between animate-in slide-in-from-bottom-4 duration-500 gap-4 flex-wrap">
           <div>
             <h4 className="text-lg font-bold text-emerald-400 mb-1">Target Achieved!</h4>
-            <p className="text-zinc-700 dark:text-zinc-300 text-sm">
-              Final Size: <strong className="text-zinc-900 dark:text-white">{(outputSize / 1024).toFixed(2)} KB</strong>
+            <p className="text-[var(--text-primary)] text-sm">
+              Final Size: <strong className="text-[var(--text-primary)]">{(outputSize / 1024).toFixed(2)} KB</strong>
             </p>
           </div>
           <button 

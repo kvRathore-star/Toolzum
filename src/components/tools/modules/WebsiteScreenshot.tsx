@@ -221,7 +221,7 @@ export default function WebsiteScreenshot() {
           may not load — results work best on simple or text-based pages.
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
           <div className="flex items-center gap-3">
             <input
               type="url"
@@ -229,7 +229,7 @@ export default function WebsiteScreenshot() {
               onChange={e => setUrl(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && !isProcessing && handleCapture()}
               placeholder="https://example.com"
-              className="flex-1 px-4 py-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={handleCapture}
@@ -247,7 +247,7 @@ export default function WebsiteScreenshot() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Format</label>
+              <label className="text-sm font-medium text-[var(--text-primary)]">Format</label>
               <div className="flex flex-wrap gap-2">
                 {(['png', 'jpg', 'webp', 'tiff'] as const).map(f => (
                   <button
@@ -256,7 +256,7 @@ export default function WebsiteScreenshot() {
                     className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                       format === f
                         ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
                     }`}
                   >
                     {f.toUpperCase()}
@@ -267,7 +267,7 @@ export default function WebsiteScreenshot() {
 
             {format === 'jpg' && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="text-sm font-medium text-[var(--text-primary)]">
                   Quality: {Math.round(quality * 100)}%
                 </label>
                 <input
@@ -283,7 +283,7 @@ export default function WebsiteScreenshot() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Viewport Width</label>
+            <label className="text-sm font-medium text-[var(--text-primary)]">Viewport Width</label>
             <div className="flex flex-wrap gap-2">
               {viewportPresets.map(p => (
                 <button
@@ -292,7 +292,7 @@ export default function WebsiteScreenshot() {
                   className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                     viewportWidth === p.value
                       ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                      : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
                   }`}
                 >
                   {p.label}
@@ -303,7 +303,7 @@ export default function WebsiteScreenshot() {
                 className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                   viewportWidth === -1
                     ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                    : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
                 }`}
               >
                 Custom
@@ -317,13 +317,13 @@ export default function WebsiteScreenshot() {
                 placeholder="Enter width (320-3840)"
                 min={320}
                 max={3840}
-                className="mt-2 w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-2 w-full px-3 py-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             )}
           </div>
 
           <div className="flex items-center gap-6">
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)]">
               <input
                 type="checkbox"
                 checked={fullPage}
@@ -333,7 +333,7 @@ export default function WebsiteScreenshot() {
               Full page
             </label>
 
-            <div className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+            <div className="flex items-center gap-2 text-sm text-[var(--text-primary)]">
               <span>Delay:</span>
               <input
                 type="range"
@@ -343,7 +343,7 @@ export default function WebsiteScreenshot() {
                 onChange={e => setCaptureDelay(parseInt(e.target.value))}
                 className="w-24 accent-blue-600"
               />
-              <span className="text-zinc-500 dark:text-zinc-400 w-6">{captureDelay}s</span>
+              <span className="text-[var(--text-secondary)] w-6">{captureDelay}s</span>
             </div>
           </div>
 
@@ -355,7 +355,7 @@ export default function WebsiteScreenshot() {
           )}
         </div>
 
-        <div className="bg-zinc-50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
+        <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
           <p>⚠️ <strong>Limitations:</strong> Due to browser security, pages are fetched via a CORS proxy. External CSS, images, and JavaScript may not load, resulting in a plain-HTML rendering of the page. For full-featured screenshots, consider using a browser extension or a server-side tool like Puppeteer.</p>
           <p className="pt-1">💡 <strong>Tip:</strong> Increase the delay for JavaScript-heavy sites to allow more content to render before capture.</p>
         </div>
@@ -367,7 +367,7 @@ export default function WebsiteScreenshot() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
           <svg className="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 0a9 9 0 019 9"/></svg>
           <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm truncate">{url}</span>
@@ -382,19 +382,19 @@ export default function WebsiteScreenshot() {
           </button>
           <button
             onClick={reset}
-            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl"
+            className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-2 bg-[var(--bg-surface)] rounded-xl"
           >
             Capture Another
           </button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Preview</h4>
-          <span className="text-xs text-zinc-500">{format.toUpperCase()} · {viewportWidth}px</span>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+        <div className="flex items-center justify-between p-4 border-b border-[var(--border-subtle)]">
+          <h4 className="text-[var(--text-primary)] font-medium">Preview</h4>
+          <span className="text-xs text-[var(--text-secondary)]">{format.toUpperCase()} · {viewportWidth}px</span>
         </div>
-        <div className="relative w-full bg-zinc-100 dark:bg-zinc-800 flex items-start justify-center p-4" style={{ minHeight: '50vh', maxHeight: '80vh', overflow: 'auto' }}>
+        <div className="relative w-full bg-[var(--bg-surface)] flex items-start justify-center p-4" style={{ minHeight: '50vh', maxHeight: '80vh', overflow: 'auto' }}>
           <img
             src={screenshotUrl!}
             alt="Website screenshot"
@@ -404,7 +404,7 @@ export default function WebsiteScreenshot() {
         </div>
       </div>
 
-      <div className="text-xs text-zinc-500 dark:text-zinc-400 text-center px-4">
+      <div className="text-xs text-[var(--text-secondary)] text-center px-4">
         Right-click the image to save, or use the Download button above.
       </div>
     </div>

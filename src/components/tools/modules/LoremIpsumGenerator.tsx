@@ -138,38 +138,38 @@ export default function LoremIpsumGenerator() {
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-2xl text-emerald-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white">Lorem Ipsum Generator</h4>
-        <p className="text-zinc-600 dark:text-zinc-400">Generate placeholder text in various styles and formats.</p>
+        <h4 className="font-bold text-[var(--text-primary)]">Lorem Ipsum Generator</h4>
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Generate placeholder text in various styles and formats.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-5">
-          <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-200 dark:border-white/5 pb-2">Options</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-2">Options</h4>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Paragraphs ({paragraphs})</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Paragraphs ({paragraphs})</label>
             <input type="range" min={1} max={20} value={paragraphs} onChange={e => setParagraphs(Number(e.target.value))} className="w-full" />
-            <div className="flex justify-between text-[10px] text-zinc-400"><span>1</span><span>20</span></div>
+            <div className="flex justify-between text-[10px] text-[var(--text-muted)]"><span>1</span><span>20</span></div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Words Per Paragraph</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Words Per Paragraph</label>
             <div className="flex flex-wrap gap-2">
               {[50, 100, 200].map(n => (
-                <button key={n} onClick={() => setWordsPerParagraph(n)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${wordsPerParagraph === n ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>{n}</button>
+                <button key={n} onClick={() => setWordsPerParagraph(n)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${wordsPerParagraph === n ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{n}</button>
               ))}
-              <button onClick={() => setWordsPerParagraph('custom')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${wordsPerParagraph === 'custom' ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>Custom</button>
+              <button onClick={() => setWordsPerParagraph('custom')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${wordsPerParagraph === 'custom' ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Custom</button>
             </div>
             {wordsPerParagraph === 'custom' && (
-              <input type="number" min={10} max={500} value={customWords} onChange={e => setCustomWords(Math.max(10, Math.min(500, Number(e.target.value))))} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-white outline-none" />
+              <input type="number" min={10} max={500} value={customWords} onChange={e => setCustomWords(Math.max(10, Math.min(500, Number(e.target.value))))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-[var(--text-primary)] outline-none" />
             )}
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Style</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Style</label>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(STYLES) as Array<keyof typeof STYLES>).map(s => (
-                <button key={s} onClick={() => setStyle(s)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors capitalize ${style === s ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>{s}</button>
+                <button key={s} onClick={() => setStyle(s)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors capitalize ${style === s ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{s}</button>
               ))}
             </div>
           </div>
@@ -177,22 +177,22 @@ export default function LoremIpsumGenerator() {
           <div className="space-y-3">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={includeStandard} onChange={e => setIncludeStandard(e.target.checked)} className="rounded" />
-              <span className="text-sm text-zinc-700 dark:text-zinc-300">Start with "Lorem ipsum dolor sit amet"</span>
+              <span className="text-sm text-[var(--text-primary)]">Start with "Lorem ipsum dolor sit amet"</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={includeHtml} onChange={e => setIncludeHtml(e.target.checked)} className="rounded" />
-              <span className="text-sm text-zinc-700 dark:text-zinc-300">Wrap paragraphs in &lt;p&gt; tags</span>
+              <span className="text-sm text-[var(--text-primary)]">Wrap paragraphs in &lt;p&gt; tags</span>
             </label>
           </div>
 
           <button onClick={handleGenerate} className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 rounded-xl text-sm transition-colors">Generate</button>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider">Output</h4>
+            <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Output</h4>
             {output && (
-              <div className="flex items-center gap-3 text-xs text-zinc-400">
+              <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
                 <span>{charCount} chars</span>
                 <span>{wordCount} words</span>
               </div>
@@ -201,20 +201,20 @@ export default function LoremIpsumGenerator() {
 
           {output ? (
             <div className="space-y-3">
-              <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 max-h-80 overflow-y-auto">
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 max-h-80 overflow-y-auto">
                 {includeHtml ? (
-                  <div className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: output.replace(/\n/g, '') }} />
+                  <div className="text-sm text-[var(--text-primary)] leading-relaxed" dangerouslySetInnerHTML={{ __html: output.replace(/\n/g, '') }} />
                 ) : (
-                  <pre className="text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap font-sans leading-relaxed">{output}</pre>
+                  <pre className="text-sm text-[var(--text-primary)] whitespace-pre-wrap font-sans leading-relaxed">{output}</pre>
                 )}
               </div>
               <div className="flex gap-3">
                 <button onClick={handleCopy} className="flex-1 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-sm transition-colors">Copy</button>
-                <button onClick={handleDownload} className="flex-1 px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl text-sm transition-colors">Download</button>
+                <button onClick={handleDownload} className="flex-1 px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-sm transition-colors">Download</button>
               </div>
             </div>
           ) : (
-            <div className="text-center py-12 text-zinc-400 text-sm">Adjust options and click Generate</div>
+            <div className="text-center py-12 text-[var(--text-muted)] text-sm">Adjust options and click Generate</div>
           )}
         </div>
       </div>

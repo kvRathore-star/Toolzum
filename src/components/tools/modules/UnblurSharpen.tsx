@@ -305,25 +305,25 @@ export default function UnblurSharpen() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{sourceFile?.name || 'Image'}</h3>
-          <p className="text-zinc-500 dark:text-zinc-400 text-sm">Canvas-based convolution processing — all in-browser</p>
+          <p className="text-[var(--text-secondary)] text-sm">Canvas-based convolution processing — all in-browser</p>
         </div>
         <button
           onClick={clearAll}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Image
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Settings</h4>
 
           <div className="space-y-2">
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Mode</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium">Mode</label>
             <div className="grid grid-cols-3 gap-2">
               {([
                 { key: 'sharpen', label: 'Sharpen' },
@@ -336,7 +336,7 @@ export default function UnblurSharpen() {
                   className={`py-2 px-2 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
                     mode === opt.key
                       ? 'bg-blue-600 border-blue-500 text-white shadow-md'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'
                   }`}
                 >
                   {opt.label}
@@ -346,7 +346,7 @@ export default function UnblurSharpen() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>Intensity</span>
               <span className="text-blue-400 font-bold">{intensity}</span>
             </div>
@@ -359,7 +359,7 @@ export default function UnblurSharpen() {
 
           {mode === 'motion-blur' && (
             <div className="space-y-2">
-              <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                 <span>Angle</span>
                 <span className="text-blue-400 font-bold">{angle}°</span>
               </div>
@@ -372,7 +372,7 @@ export default function UnblurSharpen() {
           )}
 
           <div className="space-y-2">
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Output Format</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium">Output Format</label>
             <div className="grid grid-cols-3 gap-2">
               {(['image/jpeg', 'image/png', 'image/webp'] as Format[]).map(f => (
                 <button
@@ -381,7 +381,7 @@ export default function UnblurSharpen() {
                   className={`py-2 px-2 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
                     format === f
                       ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-indigo-300'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-indigo-300'
                   }`}
                 >
                   {formatLabel[f]}
@@ -391,9 +391,9 @@ export default function UnblurSharpen() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>Quality</span>
-              <span className="text-indigo-400 font-bold">{Math.round(quality * 100)}%</span>
+              <span className="text-[var(--accent)] font-bold">{Math.round(quality * 100)}%</span>
             </div>
             <input
               type="range" min="0.1" max="1" step="0.01" value={quality}
@@ -441,7 +441,7 @@ export default function UnblurSharpen() {
           </div>
 
           <div className="flex flex-wrap gap-3 items-center justify-between">
-            <label className="flex items-center gap-2 text-sm text-zinc-400 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-[var(--text-muted)] cursor-pointer">
               <input
                 type="checkbox"
                 checked={showOriginal}

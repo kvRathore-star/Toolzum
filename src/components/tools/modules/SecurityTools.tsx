@@ -14,7 +14,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
-  const cls = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -37,8 +37,8 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
-        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
   );
@@ -62,11 +62,11 @@ export function PasswordEntropyCalculator() {
   return (
     <Section title="Password Entropy Calculator">
       <Input label="Password" type="password" value={password} onChange={setPassword} placeholder="Enter password..." />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate Entropy</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Entropy</button>
       {result && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Entropy: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.bits} bits</span></p>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Strength: <span className="font-semibold">{result.strength}</span></p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Entropy: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.bits} bits</span></p>
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Strength: <span className="font-semibold">{result.strength}</span></p>
         </div>
       )}
     </Section>
@@ -88,7 +88,7 @@ export function TwoFactorAuthGenerator() {
       <Input label="Secret Key" value={secret} onChange={setSecret} placeholder="Leave blank to generate" />
       <Input label="Issuer" value={issuer} onChange={setIssuer} placeholder="e.g. Toolzum" />
       <Input label="Account" value={account} onChange={setAccount} placeholder="e.g. user@example.com" />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate URI</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate URI</button>
       <Output value={uri} label="TOTP URI (scan with authenticator app)" />
     </Section>
   );
@@ -123,7 +123,7 @@ export function BruteForceTimeEstimator() {
     <Section title="Brute Force Time Estimator">
       <Input label="Password" type="password" value={pwd} onChange={setPwd} placeholder="Enter password..." />
       <Input label="Guesses per second" value={rate} onChange={setRate} placeholder="1,000,000,000" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Estimate Time</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Estimate Time</button>
       {est && <Output value={est} label="Estimated time to crack" />}
     </Section>
   );
@@ -152,7 +152,7 @@ export function HashGenerator() {
   return (
     <Section title="Hash Generator">
       <Input label="Text to hash" value={text} onChange={setText} placeholder="Enter text..." />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Hashes</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Hashes</button>
       {Object.entries(results).map(([algo, hash]) => (
         <Output key={algo} value={hash} label={algo} />
       ))}
@@ -177,11 +177,11 @@ export function HashVerifier() {
       <Input label="Hash to verify against" value={hash} onChange={setHash} placeholder="Enter hash..." />
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
-        <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
+        <select className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
           <option value="SHA-1">SHA-1</option><option value="SHA-256">SHA-256</option><option value="SHA-512">SHA-512</option>
         </select>
       </div>
-      <button onClick={verify} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Verify</button>
+      <button onClick={verify} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Verify</button>
       {match !== null && (
         <div className={`mt-4 p-4 rounded-xl text-sm font-medium ${match ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
           {match ? '✓ Hash matches!' : '✗ Hash does not match'}
@@ -209,7 +209,7 @@ export function HashPasswordGenerator() {
     <Section title={`Hash Password Generator (PBKDF2-SHA256, ${ITERATIONS.toLocaleString()} iterations)`}>
       <Input label="Password" type="password" value={pwd} onChange={setPwd} placeholder="Enter password..." />
       <Input label="Salt (leave blank to generate)" value={salt} onChange={setSalt} />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
       <Output value={result} label="Password hash" />
     </Section>
   );
@@ -229,12 +229,12 @@ export function HashFileGenerator() {
       <Input label="Text content to hash" rows={4} value={text} onChange={setText} placeholder="Paste text content..." />
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
-        <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
+        <select className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
           <option value="SHA-1">SHA-1</option><option value="SHA-256">SHA-256</option><option value="SHA-384">SHA-384</option><option value="SHA-512">SHA-512</option>
         </select>
       </div>
-      <p className="text-xs text-zinc-500 mb-3">Uses Web Crypto API to hash text content. For binary file hashing, a server-side solution is needed.</p>
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
+      <p className="text-xs text-[var(--text-secondary)] mb-3">Uses Web Crypto API to hash text content. For binary file hashing, a server-side solution is needed.</p>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
       <Output value={hash} label={`${algo} Hash`} />
     </Section>
   );
@@ -257,11 +257,11 @@ export function HmacGenerator() {
       <Input label="Secret key" value={key} onChange={setKey} placeholder="Enter secret key..." />
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
-        <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
+        <select className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={algo} onChange={e => setAlgo(e.target.value)}>
           <option value="SHA-256">SHA-256</option><option value="SHA-384">SHA-384</option><option value="SHA-512">SHA-512</option>
         </select>
       </div>
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate HMAC</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate HMAC</button>
       <Output value={hmac} label="HMAC (hex)" />
     </Section>
   );
@@ -280,7 +280,7 @@ export function SslTlsChecker() {
     <Section title="SSL/TLS Certificate Checker">
       <Input label="Hostname" value={hostname} onChange={setHostname} placeholder="example.com" />
       <Input label="Port" value={port} onChange={setPort} placeholder="443" />
-      <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check Certificate</button>
+      <button onClick={check} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Check Certificate</button>
       <Output value={output} />
     </Section>
   );
@@ -295,7 +295,7 @@ export function HttpSecurityChecker() {
   return (
     <Section title="HTTP Security Headers Checker">
       <Input label="Website URL" value={input} onChange={setInput} placeholder="https://example.com" />
-      <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Analyze Headers</button>
+      <button onClick={check} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Analyze Headers</button>
       <Output value={output} />
     </Section>
   );
@@ -327,7 +327,7 @@ export function JwtInspector() {
   return (
     <Section title="JWT Inspector">
       <Input label="JWT Token" rows={3} value={token} onChange={setToken} placeholder="eyJhbGciOiJIUzI1NiIs..." />
-      <button onClick={inspect} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
+      <button onClick={inspect} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
       <Output value={report} label="Validation Report" />
     </Section>
   );
@@ -343,7 +343,7 @@ export function ContentSecurityPolicyGenerator() {
   return (
     <Section title="Content Security Policy Generator">
       <Input label="Directives (one per line)" rows={8} value={directives} onChange={setDirectives} />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate CSP</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate CSP</button>
       <Output value={csp} label="CSP Header Value" />
     </Section>
   );
@@ -375,7 +375,7 @@ Range:     ${hosts > 0 ? toIp(network + 1) + ' — ' + toIp(broadcast - 1) : 'N/
   return (
     <Section title="Subnet Calculator">
       <Input label="IP/CIDR" value={input} onChange={setInput} placeholder="192.168.1.0/24" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate</button>
       <Output value={result} />
     </Section>
   );
@@ -401,7 +401,7 @@ ${'■'.repeat(cidr)}${'□'.repeat(32 - cidr)}  (${cidr} network bits / ${32 - 
   return (
     <Section title="Subnet Visualizer">
       <Input label="IP/CIDR" value={input} onChange={setInput} placeholder="192.168.1.0/24" />
-      <button onClick={visualize} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Visualize</button>
+      <button onClick={visualize} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Visualize</button>
       <Output value={viz} />
     </Section>
   );
@@ -416,7 +416,7 @@ export function DnsLookupGenerator() {
   return (
     <Section title="DNS Lookup Record Generator">
       <Input label="Domain" value={domain} onChange={setDomain} placeholder="example.com" />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Records</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Records</button>
       <Output value={output} />
     </Section>
   );
@@ -435,7 +435,7 @@ export function CorsInspector() {
     <Section title="CORS Inspector">
       <Input label="Origin URL" value={origin} onChange={setOrigin} placeholder="https://example.com" />
       <Input label="Methods (comma separated)" value={methods} onChange={setMethods} placeholder="GET, POST, PUT" />
-      <button onClick={inspect} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
+      <button onClick={inspect} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
       <Output value={output} />
     </Section>
   );
@@ -460,7 +460,7 @@ ${o !== '*' ? '' : '# Note: Use specific origin instead of * for credentials'}`)
     <Section title="CORS Header Generator">
       <Input label="Allowed Origin" value={origin} onChange={setOrigin} placeholder="https://example.com or *" />
       <Input label="Allowed Methods" value={methods} onChange={setMethods} placeholder="GET, POST, PUT, DELETE" />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
       <Output value={headers} label="CORS Response Headers" />
     </Section>
   );
@@ -488,11 +488,11 @@ export function Validator() {
       <Input label="Input" rows={6} value={input} onChange={setInput} placeholder="Paste JSON, YAML, or XML..." />
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
-        <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={format} onChange={e => setFormat(e.target.value)}>
+        <select className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={format} onChange={e => setFormat(e.target.value)}>
           <option value="json">JSON</option><option value="yaml">YAML</option><option value="xml">XML</option>
         </select>
       </div>
-      <button onClick={validate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={validate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       {result && <div className={`mt-4 p-4 rounded-xl text-sm font-medium ${result.startsWith('✓') ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>{result}</div>}
     </Section>
   );
@@ -508,7 +508,7 @@ export function JsonValidator() {
   return (
     <Section title="JSON Syntax Validator">
       <Input label="JSON string" rows={6} value={input} onChange={setInput} placeholder='{"key": "value"}' />
-      <button onClick={validate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={validate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       <Output value={result} />
     </Section>
   );
@@ -539,7 +539,7 @@ export function YamlValidator() {
   return (
     <Section title="YAML Syntax Validator">
       <Input label="YAML string" rows={6} value={input} onChange={setInput} placeholder="key: value" />
-      <button onClick={validate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={validate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       <Output value={result} />
     </Section>
   );
@@ -559,7 +559,7 @@ export function EnvFileGenerator() {
   return (
     <Section title=".env File Template Generator">
       <Input label="VAR_NAME=Description (one per line)" rows={6} value={descriptions} onChange={setDescriptions} />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
       <Output value={output} label=".env Template" />
     </Section>
   );
@@ -587,7 +587,7 @@ export function EnvFileParser() {
   return (
     <Section title=".env File Parser">
       <Input label="Paste .env content" rows={6} value={content} onChange={setContent} placeholder="DATABASE_URL=postgres://..." />
-      <button onClick={parse} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Parse</button>
+      <button onClick={parse} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Parse</button>
       <Output value={parsed} label="Parsed Variables" />
     </Section>
   );
@@ -604,7 +604,7 @@ export function CveLookup() {
   return (
     <Section title="CVE Lookup">
       <Input label="CVE ID" value={cveId} onChange={setCveId} placeholder="CVE-2024-12345" />
-      <button onClick={lookup} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Lookup</button>
+      <button onClick={lookup} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Lookup</button>
       <Output value={output} />
     </Section>
   );
@@ -634,7 +634,7 @@ export function SqlInjectionDetector() {
   return (
     <Section title="SQL Injection Detector">
       <Input label="Input to check" rows={4} value={input} onChange={setInput} placeholder="Enter SQL or user input..." />
-      <button onClick={detect} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Scan</button>
+      <button onClick={detect} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Scan</button>
       <Output value={detections} />
     </Section>
   );
@@ -662,7 +662,7 @@ export function XssProtectionChecker() {
   return (
     <Section title="XSS Protection Checker">
       <Input label="Response headers (paste)" rows={4} value={headers} onChange={setHeaders} placeholder="content-security-policy: default-src 'self'" />
-      <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check</button>
+      <button onClick={check} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Check</button>
       <Output value={report} />
     </Section>
   );
@@ -680,7 +680,7 @@ export function CsrfTokenGenerator() {
   return (
     <Section title="CSRF Token Generator">
       <Input label="Token length (bytes)" value={length} onChange={setLength} placeholder="32" />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Token</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Token</button>
       <Output value={token} label="CSRF Token (hex)" />
     </Section>
   );
@@ -739,14 +739,14 @@ Response:
     <Section title="OAuth2 Debugger">
       <div className="mb-3">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Flow</label>
-        <select className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={flow} onChange={e => setFlow(e.target.value)}>
+        <select className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm" value={flow} onChange={e => setFlow(e.target.value)}>
           <option value="authorization_code">Authorization Code</option>
           <option value="client_credentials">Client Credentials</option>
         </select>
       </div>
       <Input label="Client ID" value={clientId} onChange={setClientId} placeholder="your-client-id" />
       <Input label="Redirect URI" value={redirectUri} onChange={setRedirectUri} placeholder="https://example.com/callback" />
-      <button onClick={debug} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Debug Flow</button>
+      <button onClick={debug} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Debug Flow</button>
       <Output value={result} />
     </Section>
   );
@@ -772,7 +772,7 @@ Status: ${xml.match(/StatusCode[^>]*Value="([^"]+)"/)?.[1] || 'Not found'}`);
   return (
     <Section title="SAML Decoder">
       <Input label="Base64 SAML Request/Response" rows={4} value={input} onChange={setInput} placeholder="Paste base64 SAML data..." />
-      <button onClick={decode} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
+      <button onClick={decode} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
       <Output value={decoded} />
     </Section>
   );
@@ -798,7 +798,7 @@ export function CspValidator() {
   return (
     <Section title="CSP Policy Validator">
       <Input label="CSP Policy" rows={4} value={policy} onChange={setPolicy} placeholder="default-src 'self'; script-src 'self'" />
-      <button onClick={validate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={validate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       <Output value={report} label="Validation Report" />
     </Section>
   );
@@ -828,7 +828,7 @@ export function TlsCipherChecker() {
   return (
     <Section title="TLS Cipher Checker">
       <Input label="Cipher suite name" value={cipher} onChange={setCipher} placeholder="TLS_AES_256_GCM_SHA384" />
-      <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check</button>
+      <button onClick={check} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Check</button>
       <Output value={result} />
     </Section>
   );
@@ -859,7 +859,7 @@ X-XSS-Protection: 0
   return (
     <Section title="Security Header Generator">
       <Input label="Context (e.g., website, api, admin)" value={context} onChange={setContext} placeholder="website" />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
       <Output value={headers} label="Recommended Headers" />
     </Section>
   );
@@ -874,7 +874,7 @@ export function IpReputationChecker() {
   return (
     <Section title="IP Reputation Checker">
       <Input label="IP Address" value={ip} onChange={setIp} placeholder="8.8.8.8" />
-      <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Check Reputation</button>
+      <button onClick={check} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Check Reputation</button>
       <Output value={output} />
     </Section>
   );
@@ -895,7 +895,7 @@ export function UrlSanitizer() {
   return (
     <Section title="URL Sanitizer">
       <Input label="URL to clean" value={url} onChange={setUrl} placeholder="https://example.com/page?utm_source=twitter" />
-      <button onClick={sanitize} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Sanitize</button>
+      <button onClick={sanitize} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Sanitize</button>
       <Output value={result} />
     </Section>
   );
@@ -924,7 +924,7 @@ export function EmailValidator() {
   return (
     <Section title="Email Validator">
       <Input label="Email address" value={email} onChange={setEmail} placeholder="user@example.com" />
-      <button onClick={validate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={validate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       <Output value={result} />
     </Section>
   );
@@ -939,7 +939,7 @@ export function SslCertificateDecoder() {
   return (
     <Section title="SSL Certificate Decoder">
       <Input label="PEM Certificate" rows={6} value={pem} onChange={setPem} placeholder="-----BEGIN CERTIFICATE-----..." />
-      <button onClick={decode} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
+      <button onClick={decode} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
       <Output value={output} />
     </Section>
   );
@@ -954,7 +954,7 @@ export function SubdomainFinder() {
   return (
     <Section title="Subdomain Finder">
       <Input label="Domain" value={domain} onChange={setDomain} placeholder="example.com" />
-      <button onClick={find} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
+      <button onClick={find} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
       <Output value={output} />
     </Section>
   );

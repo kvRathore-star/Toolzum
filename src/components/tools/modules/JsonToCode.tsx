@@ -77,18 +77,18 @@ export default function JsonToCode() {
   return (
     <div className="max-w-5xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
           {(['typescript', 'typescript-interface', 'java', 'csharp', 'python', 'go', 'rust', 'kotlin'] as Lang[]).map(l => (
-            <button key={l} onClick={() => { setLang(l); if (input) convert(input, l, rootName); }} className={`px-2 py-1.5 text-[10px] font-bold rounded-lg transition-all ${lang === l ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>{l === 'typescript-interface' ? 'TS (interface)' : l.charAt(0).toUpperCase() + l.slice(1)}</button>
+            <button key={l} onClick={() => { setLang(l); if (input) convert(input, l, rootName); }} className={`px-2 py-1.5 text-[10px] font-bold rounded-lg transition-all ${lang === l ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{l === 'typescript-interface' ? 'TS (interface)' : l.charAt(0).toUpperCase() + l.slice(1)}</button>
           ))}
         </div>
-        <input value={rootName} onChange={e => { setRootName(e.target.value); if (input) convert(input, lang, e.target.value); }} placeholder="Root type name" className="w-28 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 text-xs outline-none font-mono" />
+        <input value={rootName} onChange={e => { setRootName(e.target.value); if (input) convert(input, lang, e.target.value); }} placeholder="Root type name" className="w-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs outline-none font-mono" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <textarea value={input} onChange={e => { setInput(e.target.value); convert(e.target.value, lang, rootName); }} placeholder="Paste JSON..." className="w-full h-[400px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono focus:border-blue-500 transition-colors" />
+        <textarea value={input} onChange={e => { setInput(e.target.value); convert(e.target.value, lang, rootName); }} placeholder="Paste JSON..." className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
-          <textarea value={output} readOnly placeholder="Generated types..." className="w-full h-[400px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
-          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>}
+          <textarea value={output} readOnly placeholder="Generated types..." className="w-full h-[400px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
         </div>
       </div>
     </div>

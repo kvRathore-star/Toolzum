@@ -146,23 +146,23 @@ export default function Base64EncodeDecode() {
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
       {/* Banner */}
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           🔒 Secure Base64 Encoder / Decoder
         </h4>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Encode standard text to Base64 (supporting Unicode characters) or decode Base64 back to plain text. Files are processed entirely in your browser memory for maximum security.
         </p>
       </div>
 
       {/* Settings Row */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-2xl border border-zinc-200 dark:border-white/5">
-        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-[var(--bg-overlay)] p-4 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)]">
           <button
             onClick={() => handleModeSwitch('encode')}
             className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
               mode === 'encode'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
             Encode
@@ -172,7 +172,7 @@ export default function Base64EncodeDecode() {
             className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
               mode === 'decode'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
             Decode
@@ -180,7 +180,7 @@ export default function Base64EncodeDecode() {
         </div>
 
         <div className="flex items-center gap-6">
-          <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-600 dark:text-zinc-400 font-semibold select-none">
+          <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-600 dark:text-[var(--text-muted)] font-semibold select-none">
             <input
               type="checkbox"
               checked={urlSafe}
@@ -194,7 +194,7 @@ export default function Base64EncodeDecode() {
             URL-Safe Base64
           </label>
 
-          <label className="flex items-center gap-2 cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+          <label className="flex items-center gap-2 cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-zinc-800 text-[var(--text-primary)] px-4 py-2 rounded-xl text-sm font-medium transition-colors">
             📁 File Import
             <input
               type="file"
@@ -208,9 +208,9 @@ export default function Base64EncodeDecode() {
       {/* Editor Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[400px]">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-            <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[400px]">
+          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+            <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
               {mode === 'encode' ? 'Input Text' : 'Base64 Hash'}
             </span>
             <button
@@ -228,21 +228,21 @@ export default function Base64EncodeDecode() {
                 ? "Enter plain text here..."
                 : "Enter Base64 encoded string here..."
             }
-            className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-900 dark:text-white"
+            className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-[var(--text-primary)]"
           />
         </div>
 
         {/* Output */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[400px]">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-            <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[400px]">
+          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+            <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
               {mode === 'encode' ? 'Base64 Hash' : 'Decoded Text'}
             </span>
             <div className="flex gap-2">
               <button
                 onClick={handleSwap}
                 disabled={!output}
-                className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white font-semibold disabled:opacity-50"
+                className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white font-semibold disabled:opacity-50"
                 aria-label="Swap inputs"
               >
                 🔄 Swap

@@ -93,28 +93,28 @@ export default function SubtitleGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex items-center justify-between bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <div className="flex gap-2">
-          <div className="flex bg-zinc-200 dark:bg-zinc-800 rounded-lg p-0.5">
-            <button onClick={() => setMode('manual')} className={`px-3 py-1.5 text-xs rounded-md font-medium transition-all ${mode === 'manual' ? 'bg-white dark:bg-zinc-700 shadow-sm' : 'text-zinc-500'}`}>
+          <div className="flex bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg p-0.5">
+            <button onClick={() => setMode('manual')} className={`px-3 py-1.5 text-xs rounded-md font-medium transition-all ${mode === 'manual' ? 'bg-[var(--bg-elevated)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
               <FileText className="w-3.5 h-3.5 inline mr-1" />Timed
             </button>
-            <button onClick={() => setMode('text')} className={`px-3 py-1.5 text-xs rounded-md font-medium transition-all ${mode === 'text' ? 'bg-white dark:bg-zinc-700 shadow-sm' : 'text-zinc-500'}`}>
+            <button onClick={() => setMode('text')} className={`px-3 py-1.5 text-xs rounded-md font-medium transition-all ${mode === 'text' ? 'bg-[var(--bg-elevated)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
               <Mic className="w-3.5 h-3.5 inline mr-1" />Dictate
             </button>
           </div>
-          <button onClick={() => { setFile(null); setEntries([]); }} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change</button>
+          <button onClick={() => { setFile(null); setEntries([]); }} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change</button>
         </div>
       </div>
 
       {mode === 'manual' ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl">
               <video
                 ref={videoRef}
                 src={URL.createObjectURL(file)}
@@ -133,9 +133,9 @@ export default function SubtitleGenerator() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-4 flex flex-col">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="flex justify-between items-center mb-3">
-              <h4 className="text-sm font-bold text-zinc-900 dark:text-white">Subtitles ({entries.length})</h4>
+              <h4 className="text-sm font-bold text-[var(--text-primary)]">Subtitles ({entries.length})</h4>
               {entries.length > 0 && (
                 <button onClick={downloadSrt} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
                   <Download className="w-3 h-3" /> SRT
@@ -144,12 +144,12 @@ export default function SubtitleGenerator() {
             </div>
             <div className="flex-1 space-y-2 overflow-y-auto max-h-[400px] pr-1">
               {entries.length === 0 && (
-                <p className="text-xs text-zinc-400 text-center py-8">Play the video and click "Add at..." to start creating subtitles</p>
+                <p className="text-xs text-[var(--text-muted)] text-center py-8">Play the video and click "Add at..." to start creating subtitles</p>
               )}
               {entries.map((entry) => (
-                <div key={entry.id} className={`bg-zinc-50 dark:bg-black/30 border rounded-xl p-3 space-y-2 ${editingId === entry.id ? 'border-emerald-400 ring-2 ring-emerald-500/20' : 'border-zinc-200 dark:border-zinc-800'}`}>
+                <div key={entry.id} className={`bg-[var(--bg-overlay)] border rounded-xl p-3 space-y-2 ${editingId === entry.id ? 'border-emerald-400 ring-2 ring-emerald-500/20' : 'border-[var(--border-subtle)]'}`}>
                   <div className="flex items-center justify-between">
-                    <div className="flex gap-2 text-[10px] font-mono text-zinc-500">
+                    <div className="flex gap-2 text-[10px] font-mono text-[var(--text-secondary)]">
                       <input type="text" value={formatTime(entry.start)} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
                         if (parts.length === 4) {
@@ -189,8 +189,8 @@ export default function SubtitleGenerator() {
           </div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-4">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Use the Web Speech API to dictate subtitles in real-time. Click "Start Dictation" and speak clearly — each pause creates a new subtitle entry.</p>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-4">
+          <p className="text-xs text-[var(--text-secondary)]">Use the Web Speech API to dictate subtitles in real-time. Click "Start Dictation" and speak clearly — each pause creates a new subtitle entry.</p>
 
           <TimedTextInput
             onAddEntry={(text: string, startOffset: number) => {
@@ -205,17 +205,17 @@ export default function SubtitleGenerator() {
           />
 
           {entries.length > 0 && (
-            <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="pt-3 border-t border-[var(--border-subtle)]">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">{entries.length} entries</span>
+                <span className="text-xs font-bold text-[var(--text-primary)]">{entries.length} entries</span>
                 <button onClick={downloadSrt} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
                   <Download className="w-3 h-3" /> Download SRT
                 </button>
               </div>
               <div className="space-y-1 max-h-[200px] overflow-y-auto">
                 {entries.map((entry) => (
-                  <div key={entry.id} className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-black/30 rounded-lg px-3 py-1.5">
-                    <span className="font-mono text-[9px] text-zinc-400 w-[150px]">{formatTime(entry.start)} → {formatTime(entry.end)}</span>
+                  <div key={entry.id} className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] bg-[var(--bg-overlay)] rounded-lg px-3 py-1.5">
+                    <span className="font-mono text-[9px] text-[var(--text-muted)] w-[150px]">{formatTime(entry.start)} → {formatTime(entry.end)}</span>
                     <span className="flex-1">{entry.text}</span>
                     <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
@@ -227,7 +227,7 @@ export default function SubtitleGenerator() {
       )}
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
-        <p className="text-xs text-indigo-600 dark:text-indigo-400"><strong>Tips:</strong> In Timed mode, press Space to play/pause and click "Add at..." to insert a subtitle at the current timestamp. In Dictate mode, the Web Speech API runs entirely in-browser — no data leaves your machine.</p>
+        <p className="text-xs text-[var(--accent)] dark:text-[var(--accent)]"><strong>Tips:</strong> In Timed mode, press Space to play/pause and click "Add at..." to insert a subtitle at the current timestamp. In Dictate mode, the Web Speech API runs entirely in-browser — no data leaves your machine.</p>
       </div>
     </div>
   );
@@ -310,7 +310,7 @@ function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset
         {isListening ? 'Stop' : 'Start'} Dictation
       </button>
       {interimText && (
-        <span className="text-xs text-zinc-400 italic">{interimText}... </span>
+        <span className="text-xs text-[var(--text-muted)] italic">{interimText}... </span>
       )}
     </div>
   );

@@ -15,42 +15,42 @@ export default function PercentageCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Calc 1 */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-           <h2 className="text-xl font-bold text-zinc-900 dark:text-white">What is X% of Y?</h2>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+           <h2 className="text-xl font-bold text-[var(--text-primary)]">What is X% of Y?</h2>
            <div className="flex items-center space-x-4">
               <input 
                 type="number" value={val1} onChange={e => setVal1(e.target.value)}
-                placeholder="X" className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
               />
-              <span className="font-bold text-zinc-500">% of</span>
+              <span className="font-bold text-[var(--text-secondary)]">% of</span>
               <input 
                 type="number" value={val2} onChange={e => setVal2(e.target.value)}
-                placeholder="Y" className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
               />
            </div>
            <button
               onClick={() => setResult1((Number(val1) / 100) * Number(val2))}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
+              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl transition-all active:scale-95"
             >
               Calculate
             </button>
             {result1 !== null && (
-              <div className="text-center text-3xl font-black text-indigo-600 dark:text-indigo-400">{result1}</div>
+              <div className="text-center text-3xl font-black text-[var(--accent)] dark:text-[var(--accent)]">{result1}</div>
             )}
         </div>
 
         {/* Calc 2 */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-           <h2 className="text-xl font-bold text-zinc-900 dark:text-white">X is what % of Y?</h2>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+           <h2 className="text-xl font-bold text-[var(--text-primary)]">X is what % of Y?</h2>
            <div className="flex items-center space-x-4">
               <input 
                 type="number" value={val3} onChange={e => setVal3(e.target.value)}
-                placeholder="X" className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
               />
-              <span className="font-bold text-zinc-500">is what % of</span>
+              <span className="font-bold text-[var(--text-secondary)]">is what % of</span>
               <input 
                 type="number" value={val4} onChange={e => setVal4(e.target.value)}
-                placeholder="Y" className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
               />
            </div>
            <button

@@ -454,15 +454,15 @@ export default function ChartMaker() {
   if (step === 'preview') {
     return (
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Chart Generated</h4>
           </div>
-          <div className="flex justify-center bg-zinc-50 dark:bg-zinc-800/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700 p-4">
+          <div className="flex justify-center bg-[var(--bg-overlay)]/50 rounded-xl overflow-hidden border border-[var(--border-subtle)] p-4">
             <canvas ref={canvasRef} className="max-w-full h-auto rounded-lg shadow-sm" />
           </div>
           <div className="flex gap-3">
-            <button onClick={handleBack} className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold px-4 py-3 rounded-xl transition-colors">
+            <button onClick={handleBack} className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold px-4 py-3 rounded-xl transition-colors">
               Back to Editor
             </button>
             <button onClick={() => outputUrl && downloadOrShare(outputUrl, `${title || 'chart'}.png`)} className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
@@ -483,36 +483,36 @@ export default function ChartMaker() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left: Data Input */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Data Entry</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Data Entry</h4>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Chart Title</label>
-            <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Title</label>
+            <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">X-Axis Label</label>
-              <input type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category" />
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">X-Axis Label</label>
+              <input type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category" />
             </div>
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Y-Axis Label</label>
-              <input type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Value" />
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Y-Axis Label</label>
+              <input type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Value" />
             </div>
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-sm text-zinc-600 dark:text-zinc-400">Data Table (Label, Value)</label>
+              <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Data Table (Label, Value)</label>
               <button onClick={addRow} className="text-xs text-blue-600 hover:text-blue-500 font-medium px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-lg transition-colors">+ Add Row</button>
             </div>
             <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
               {data.map(row => (
                 <div key={row.id} className="flex gap-2 items-center">
-                  <input type="text" value={row.label} onChange={e => updateRow(row.id, 'label', e.target.value)} className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/2" placeholder="Label" />
-                  <input type="text" value={row.value} onChange={e => updateRow(row.id, 'value', e.target.value)} className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/3" placeholder="Value" />
-                  <button onClick={() => removeRow(row.id)} className="text-zinc-400 hover:text-red-500 transition-colors p-1">
+                  <input type="text" value={row.label} onChange={e => updateRow(row.id, 'label', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/2" placeholder="Label" />
+                  <input type="text" value={row.value} onChange={e => updateRow(row.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/3" placeholder="Value" />
+                  <button onClick={() => removeRow(row.id)} className="text-[var(--text-muted)] hover:text-red-500 transition-colors p-1">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                   </button>
                 </div>
@@ -522,14 +522,14 @@ export default function ChartMaker() {
         </div>
 
         {/* Right: Chart Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Chart Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Chart Settings</h4>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Chart Type</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Type</label>
             <div className="grid grid-cols-3 gap-2">
               {CHART_TYPES.map(ct => (
-                <button key={ct.value} onClick={() => setChartType(ct.value)} className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border ${chartType === ct.value ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}>
+                <button key={ct.value} onClick={() => setChartType(ct.value)} className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border ${chartType === ct.value ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
                   <div className="text-base mb-0.5">{ct.icon}</div>
                   {ct.label}
                 </button>
@@ -538,40 +538,40 @@ export default function ChartMaker() {
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Color Palette</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Color Palette</label>
             <div className="grid grid-cols-5 gap-1.5">
               {PALETTES.map((p, i) => (
-                <button key={p.name} onClick={() => setPaletteIndex(i)} className={`h-8 rounded-lg border-2 transition-all ${paletteIndex === i ? 'border-blue-500 shadow-md scale-105' : 'border-zinc-200 dark:border-zinc-700'}`} title={p.name} style={{ background: `linear-gradient(90deg, ${p.colors.slice(0, 5).join(', ')})` }} />
+                <button key={p.name} onClick={() => setPaletteIndex(i)} className={`h-8 rounded-lg border-2 transition-all ${paletteIndex === i ? 'border-blue-500 shadow-md scale-105' : 'border-[var(--border-subtle)]'}`} title={p.name} style={{ background: `linear-gradient(90deg, ${p.colors.slice(0, 5).join(', ')})` }} />
               ))}
             </div>
-            <p className="text-xs text-zinc-500 mt-1">{PALETTES[paletteIndex].name}</p>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">{PALETTES[paletteIndex].name}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Width: {width}px</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Width: {width}px</label>
               <input type="range" min={400} max={2000} step={50} value={width} onChange={e => setWidth(Number(e.target.value))} className="w-full accent-blue-600" />
             </div>
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Height: {height}px</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Height: {height}px</label>
               <input type="range" min={300} max={1200} step={50} value={height} onChange={e => setHeight(Number(e.target.value))} className="w-full accent-blue-600" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-1.5">Background Color</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Background Color</label>
             <div className="flex gap-2 items-center">
-              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-9 w-12 rounded-lg border border-zinc-200 dark:border-zinc-700 cursor-pointer bg-transparent" />
-              <input type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
+              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-9 w-12 rounded-lg border border-[var(--border-subtle)] cursor-pointer bg-transparent" />
+              <input type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
             </div>
           </div>
 
           <div className="flex gap-4">
-            <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-[var(--text-primary)] cursor-pointer">
               <input type="checkbox" checked={showLabels} onChange={e => setShowLabels(e.target.checked)} className="rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500" />
               Data Labels
             </label>
-            <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-[var(--text-primary)] cursor-pointer">
               <input type="checkbox" checked={showLegend} onChange={e => setShowLegend(e.target.checked)} className="rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500" />
               Legend
             </label>
@@ -582,7 +582,7 @@ export default function ChartMaker() {
             {isProcessing ? 'Generating...' : 'Generate Chart'}
           </button>
 
-          <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-dashed border-zinc-200 dark:border-zinc-700 rounded-xl overflow-hidden min-h-[200px] flex items-center justify-center">
+          <div className="bg-[var(--bg-overlay)]/50 border border-dashed border-[var(--border-subtle)] rounded-xl overflow-hidden min-h-[200px] flex items-center justify-center">
             <canvas ref={canvasRef} className="max-w-full h-auto" />
           </div>
         </div>

@@ -136,23 +136,23 @@ export default function VideoStabilizer() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
             {(file.size / 1024 / 1024).toFixed(2)} MB
           </p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
           <video
             key={outputUrl || file.name}
             src={outputUrl ? outputUrl : URL.createObjectURL(file)}
@@ -162,12 +162,12 @@ export default function VideoStabilizer() {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Stabilizer Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium">Stabilizer Settings</h4>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Strength</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Strength</label>
                 <div className="grid grid-cols-4 gap-2">
                   {(['minimal', 'moderate', 'strong', 'extreme'] as Strength[]).map((s) => (
                     <button
@@ -176,7 +176,7 @@ export default function VideoStabilizer() {
                       className={`px-3 py-2 rounded-lg text-sm font-medium capitalize transition-all ${
                         strength === s
                           ? 'bg-amber-500 text-white shadow-md'
-                          : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                          : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                       }`}
                     >
                       {s}
@@ -186,14 +186,14 @@ export default function VideoStabilizer() {
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Method</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Method</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setMethod('regular')}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       method === 'regular'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     Regular (Two-Pass)
@@ -203,7 +203,7 @@ export default function VideoStabilizer() {
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       method === 'quick'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     Quick (Single-Pass)
@@ -212,7 +212,7 @@ export default function VideoStabilizer() {
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   Smoothing Window: {smoothing} frames
                 </label>
                 <input
@@ -223,21 +223,21 @@ export default function VideoStabilizer() {
                   onChange={(e) => setSmoothing(Number(e.target.value))}
                   className="w-full accent-amber-500"
                 />
-                <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-1">
                   <span>5 (less smooth)</span>
                   <span>30 (more smooth)</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Crop Mode</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Crop Mode</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setCropMode('keep')}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       cropMode === 'keep'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     Keep All (Zoom)
@@ -247,7 +247,7 @@ export default function VideoStabilizer() {
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       cropMode === 'borders'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     Black Borders Visible
@@ -256,14 +256,14 @@ export default function VideoStabilizer() {
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Output Format</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Output Format</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setOutputFormat('mp4')}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       outputFormat === 'mp4'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     MP4
@@ -273,7 +273,7 @@ export default function VideoStabilizer() {
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       outputFormat === 'webm'
                         ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     WebM

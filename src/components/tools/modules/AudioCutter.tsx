@@ -93,7 +93,7 @@ export default function AudioCutter() {
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p className="text-zinc-500 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+        <p className="text-[var(--text-secondary)] font-medium animate-pulse">Initializing WebAssembly Core...</p>
       </div>
     );
   }
@@ -116,15 +116,15 @@ export default function AudioCutter() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">Duration: {Math.round(audioDuration)}s</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Duration: {Math.round(audioDuration)}s</p>
         </div>
         <button 
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
         >
           Change File
         </button>
@@ -133,12 +133,12 @@ export default function AudioCutter() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Settings Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Trim Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Trim Settings</h4>
           
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Start Time (seconds)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Start Time (seconds)</label>
               <span className="text-xs font-bold text-violet-500">{startTime}s</span>
             </div>
             <input
@@ -155,7 +155,7 @@ export default function AudioCutter() {
 
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">End Time (seconds)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">End Time (seconds)</label>
               <span className="text-xs font-bold text-violet-500">{endTime}s</span>
             </div>
             <input
@@ -170,11 +170,11 @@ export default function AudioCutter() {
             />
           </div>
           
-          <div className="text-center text-sm font-medium text-zinc-500">
+          <div className="text-center text-sm font-medium text-[var(--text-secondary)]">
              Final Clip Length: <span className="text-violet-500 font-bold">{(endTime - startTime).toFixed(1)}s</span>
           </div>
 
-          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="pt-4 border-t border-[var(--border-subtle)]">
              {isProcessing ? (
                <div className="space-y-2">
                  <div className="flex justify-between text-xs font-bold text-violet-500">
@@ -203,12 +203,12 @@ export default function AudioCutter() {
         {/* Output Panel */}
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Audio Trimmed</h4>
                </div>
                
-               <div className="bg-zinc-50 dark:bg-black rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col items-center justify-center relative">
+               <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-6 flex flex-col items-center justify-center relative">
                   <audio src={outputUrl} controls className="w-full" />
                </div>
 
@@ -221,7 +221,7 @@ export default function AudioCutter() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
                <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
               <p className="text-center text-sm px-4">Your trimmed audio will appear here.</p>
             </div>

@@ -107,14 +107,14 @@ export default function ExifDataRemover() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button 
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Photo
         </button>
@@ -123,9 +123,9 @@ export default function ExifDataRemover() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Analysis Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col min-h-[500px]">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4 mb-4">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Metadata Analysis</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col min-h-[500px]">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
+            <h4 className="text-[var(--text-primary)] font-medium">Metadata Analysis</h4>
             {isAnalyzing ? (
               <span className="text-xs text-blue-500 font-bold animate-pulse">Scanning...</span>
             ) : (
@@ -135,9 +135,9 @@ export default function ExifDataRemover() {
             )}
           </div>
           
-          <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 overflow-y-auto font-mono text-xs">
+          <div className="flex-1 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-4 overflow-y-auto font-mono text-xs">
             {isAnalyzing ? (
-              <div className="flex justify-center items-center h-full text-zinc-400">
+              <div className="flex justify-center items-center h-full text-[var(--text-muted)]">
                 Extracting EXIF tags...
               </div>
             ) : hasExif ? (
@@ -148,8 +148,8 @@ export default function ExifDataRemover() {
                     value = JSON.stringify(value);
                   }
                   return (
-                    <div key={key} className="flex justify-between border-b border-zinc-200 dark:border-zinc-800 py-1 last:border-0">
-                      <span className="text-zinc-500">{key}</span>
+                    <div key={key} className="flex justify-between border-b border-[var(--border-subtle)] py-1 last:border-0">
+                      <span className="text-[var(--text-secondary)]">{key}</span>
                       <span className="text-zinc-900 dark:text-zinc-300 font-medium text-right break-all ml-4">
                         {String(value)}
                       </span>
@@ -161,12 +161,12 @@ export default function ExifDataRemover() {
               <div className="flex flex-col justify-center items-center h-full text-emerald-500 text-center gap-3">
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <p>No EXIF data detected.</p>
-                <p className="text-zinc-400 text-xs mt-2">This image is already clean and safe to share.</p>
+                <p className="text-[var(--text-muted)] text-xs mt-2">This image is already clean and safe to share.</p>
               </div>
             )}
           </div>
 
-          <div className="mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="mt-6 pt-6 border-t border-[var(--border-subtle)]">
              <button 
                 onClick={removeExif}
                 disabled={isProcessing || !hasExif || outputUrl !== null}
@@ -179,13 +179,13 @@ export default function ExifDataRemover() {
         </div>
 
         {/* Output Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4 mb-4">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Safe Export</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
+            <h4 className="text-[var(--text-primary)] font-medium">Safe Export</h4>
             {outputUrl && <span className="text-xs font-bold bg-emerald-500 text-white px-2 py-1 rounded">100% Clean</span>}
           </div>
 
-          <div className="flex-1 bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-4 min-h-[300px] chess-bg relative mb-6">
+          <div className="flex-1 bg-[var(--bg-overlay)] rounded-xl overflow-hidden border border-[var(--border-subtle)] flex items-center justify-center p-4 min-h-[300px] chess-bg relative mb-6">
             <style>{`
               .chess-bg {
                 background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);

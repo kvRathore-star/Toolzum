@@ -162,7 +162,7 @@ export default function RawImageConverter() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-4">
           <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,24 +171,24 @@ export default function RawImageConverter() {
           </div>
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{files.length} file{files.length > 1 ? 's' : ''}</h3>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm">{convertableCount} supported</p>
+            <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{convertableCount} supported</p>
           </div>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Clear All</button>
+        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Clear All</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl space-y-2">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-2">
             <div className="flex justify-between items-center">
-              <h4 className="text-zinc-900 dark:text-white font-medium text-sm">Files</h4>
+              <h4 className="text-[var(--text-primary)] font-medium text-sm">Files</h4>
               <button onClick={() => fileInputRef.current?.click()} className="text-xs text-blue-500 hover:text-blue-400 font-medium">+ Add More</button>
             </div>
             <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
             <div className="space-y-1 max-h-72 overflow-y-auto">
               {files.map((f, i) => (
                 <div key={i} onClick={() => { setSelectedIndex(i); setOutputUrl(null); }}
-                  className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-all ${i === selectedIndex ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/30' : 'hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300'}`}
+                  className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-all ${i === selectedIndex ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/30' : 'hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 text-[var(--text-primary)]'}`}
                 >
                   <span className="truncate flex-1 mr-2">{f.name}</span>
                   <span className={`flex-shrink-0 w-2 h-2 rounded-full ${supported[i] ? 'bg-green-500' : 'bg-red-400'}`} />
@@ -197,15 +197,15 @@ export default function RawImageConverter() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm border-b border-zinc-100 dark:border-zinc-800 pb-2">Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2">Settings</h4>
 
             <div>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider font-semibold">Output Format</p>
+              <p className="text-xs text-[var(--text-secondary)] mb-2 uppercase tracking-wider font-semibold">Output Format</p>
               <div className="grid grid-cols-3 gap-2">
                 {FORMATS.map(f => (
                   <button key={f.value} onClick={() => setFormat(f)}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border ${format.value === f.value ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border ${format.value === f.value ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                   >
                     {f.label}
                   </button>
@@ -215,7 +215,7 @@ export default function RawImageConverter() {
 
             {showQuality && (
               <div>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider font-semibold">Quality: {Math.round(quality * 100)}%</p>
+                <p className="text-xs text-[var(--text-secondary)] mb-2 uppercase tracking-wider font-semibold">Quality: {Math.round(quality * 100)}%</p>
                 <input type="range" min="0.1" max="1" step="0.01" value={quality} onChange={e => setQuality(parseFloat(e.target.value))} className="w-full accent-blue-600" />
               </div>
             )}
@@ -236,7 +236,7 @@ export default function RawImageConverter() {
               </button>
               {convertableCount > 1 && (
                 <button onClick={convertAll} disabled={isProcessing}
-                  className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium py-3 rounded-xl transition-all text-sm disabled:opacity-50"
+                  className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-medium py-3 rounded-xl transition-all text-sm disabled:opacity-50"
                 >
                   Convert All ({convertableCount} files)
                 </button>
@@ -246,10 +246,10 @@ export default function RawImageConverter() {
         </div>
 
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm border-b border-zinc-100 dark:border-zinc-800 pb-2 mb-4">Preview</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2 mb-4">Preview</h4>
             {isSupported ? (
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-xl overflow-hidden flex items-center justify-center min-h-[250px]">
+              <div className="bg-[var(--bg-surface)] rounded-xl overflow-hidden flex items-center justify-center min-h-[250px]">
                 <img src={previews[selectedIndex]} alt={currentFile.name} className="max-w-full max-h-[400px] object-contain" />
               </div>
             ) : (
@@ -259,12 +259,12 @@ export default function RawImageConverter() {
                 <p>Try opening the file in an external editor (e.g., Adobe Lightroom, RawTherapee, or your camera&apos;s software) and saving as TIFF or JPEG, then upload that file.</p>
               </div>
             )}
-            <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400 truncate">{currentFile.name} &mdash; {(currentFile.size / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="mt-3 text-xs text-[var(--text-secondary)] truncate">{currentFile.name} &mdash; {(currentFile.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
 
           {outputUrl && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Complete</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex items-center justify-center p-4 min-h-[120px]">

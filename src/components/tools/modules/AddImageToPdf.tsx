@@ -126,25 +126,25 @@ export default function AddImageToPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Image Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Image Settings</h4>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Target Page</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Target Page</label>
             <div className="flex gap-2 items-center">
               <input
                 type="number"
@@ -152,67 +152,67 @@ export default function AddImageToPdf() {
                 max={totalPages}
                 value={pageNum}
                 onChange={(e) => setPageNum(Math.min(totalPages, Math.max(1, parseInt(e.target.value) || 1)))}
-                className="w-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
-              <span className="text-sm text-zinc-500">of {totalPages}</span>
+              <span className="text-sm text-[var(--text-secondary)]">of {totalPages}</span>
             </div>
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Image (PNG or JPG)</label>
-            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl cursor-pointer bg-zinc-50 dark:bg-black/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors">
-              <svg className="w-8 h-8 mb-2 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-              <span className="text-xs text-zinc-500">{imageFile ? imageFile.name : 'Click to select image'}</span>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Image (PNG or JPG)</label>
+            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl cursor-pointer bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors">
+              <svg className="w-8 h-8 mb-2 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <span className="text-xs text-[var(--text-secondary)]">{imageFile ? imageFile.name : 'Click to select image'}</span>
               <input type="file" accept="image/png,image/jpeg" onChange={handleImageSelect} className="hidden" />
             </label>
           </div>
 
           {imageUrl && (
-            <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-black/30">
+            <div className="rounded-xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
               <img src={imageUrl} alt="Preview" className="w-full h-40 object-contain" />
             </div>
           )}
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">X Position</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
               <input
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Y Position</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
               <input
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Width (px)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Width (px)</label>
               <input
                 type="number"
                 min={1}
                 value={width}
                 onChange={(e) => setWidth(parseInt(e.target.value) || 1)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Height (px)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Height (px)</label>
               <input
                 type="number"
                 min={1}
                 value={height}
                 onChange={(e) => setHeight(parseInt(e.target.value) || 1)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function AddImageToPdf() {
               onChange={(e) => setAddToAllPages(e.target.checked)}
               className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500"
             />
-            <span className="text-sm text-zinc-700 dark:text-zinc-300">Add to all pages</span>
+            <span className="text-sm text-[var(--text-primary)]">Add to all pages</span>
           </label>
 
           <button
@@ -239,8 +239,8 @@ export default function AddImageToPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Image Added</h4>
               </div>
 
@@ -258,7 +258,7 @@ export default function AddImageToPdf() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               <p>Generated PDF will appear here</p>
             </div>

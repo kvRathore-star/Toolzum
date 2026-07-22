@@ -416,10 +416,10 @@ export default function EpubToPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{epubInfo?.title || file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
             {epubInfo?.author} &bull; {(epubInfo?.fileSize ?? 0) / 1024 / 1024 > 1
               ? `${((epubInfo?.fileSize ?? 0) / 1024 / 1024).toFixed(2)} MB`
               : `${((epubInfo?.fileSize ?? 0) / 1024).toFixed(1)} KB`}
@@ -428,24 +428,24 @@ export default function EpubToPdf() {
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Conversion Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Conversion Settings</h4>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Page Size</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Size</label>
             <div className="grid grid-cols-2 gap-2">
               {PAGE_SIZES.map(s => (
                 <button
                   key={s.id}
                   onClick={() => setPageSize(s.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageSize === s.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageSize === s.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {s.label}
                 </button>
@@ -454,13 +454,13 @@ export default function EpubToPdf() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Font Size</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Font Size</label>
             <div className="grid grid-cols-3 gap-2">
               {FONT_SIZES.map(f => (
                 <button
                   key={f.id}
                   onClick={() => setFontSize(f.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${fontSize === f.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${fontSize === f.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {f.label}
                 </button>
@@ -469,13 +469,13 @@ export default function EpubToPdf() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Margin</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Margin</label>
             <div className="grid grid-cols-3 gap-2">
               {MARGINS.map(m => (
                 <button
                   key={m.id}
                   onClick={() => setMargin(m.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${margin === m.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${margin === m.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {m.label}
                 </button>
@@ -491,7 +491,7 @@ export default function EpubToPdf() {
                 onChange={e => setIncludeCover(e.target.checked)}
                 className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm text-zinc-700 dark:text-zinc-300">Include Cover Page</span>
+              <span className="text-sm text-[var(--text-primary)]">Include Cover Page</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -500,7 +500,7 @@ export default function EpubToPdf() {
                 onChange={e => setIncludeToc(e.target.checked)}
                 className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm text-zinc-700 dark:text-zinc-300">Table of Contents</span>
+              <span className="text-sm text-[var(--text-primary)]">Table of Contents</span>
             </label>
           </div>
 
@@ -516,21 +516,21 @@ export default function EpubToPdf() {
 
         <div className="space-y-6">
           {isProcessing && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-3">
-              <h4 className="text-zinc-900 dark:text-white font-medium">Processing Chapters</h4>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+              <h4 className="text-[var(--text-primary)] font-medium">Processing Chapters</h4>
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                 <div
                   className="bg-blue-600 h-full rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="text-xs text-zinc-500 text-right">{progress}%</p>
+              <p className="text-xs text-[var(--text-secondary)] text-right">{progress}%</p>
             </div>
           )}
 
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -546,7 +546,7 @@ export default function EpubToPdf() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               <p>PDF will appear here after conversion</p>
             </div>

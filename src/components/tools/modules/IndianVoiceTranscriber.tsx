@@ -120,13 +120,13 @@ export default function IndianVoiceTranscriber() {
       <AiPrivacyBanner />
       <div className="flex items-center gap-2">
         <Mic className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Indian Multilingual Voice Transcriber</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Indian Multilingual Voice Transcriber</h3>
       </div>
 
       <AiSettings />
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">
           Upload a voice note, audio recording, or video to get transcript in Indian languages. 
           Powered by server-side Gemini — your audio is sent to our server for transcription.
         </p>
@@ -134,7 +134,7 @@ export default function IndianVoiceTranscriber() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div className="space-y-4 lg:col-span-1">
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5">
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5">
                 <Languages className="w-3 h-3" /> Transcription Language
               </label>
               <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto">
@@ -143,7 +143,7 @@ export default function IndianVoiceTranscriber() {
                     className={`px-3 py-2 rounded-lg border text-xs text-left transition-colors ${
                       selectedLanguage === l.code
                         ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'
-                        : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-500'
+                        : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500'
                     }`}>
                     <span className="font-semibold">{l.native}</span>
                     <span className="block text-[9px] opacity-60">{l.label}</span>
@@ -155,7 +155,7 @@ export default function IndianVoiceTranscriber() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={showTimestamps} onChange={e => setShowTimestamps(e.target.checked)}
                 className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
-              <span className="text-[11px] text-zinc-500">Include timestamps (SRT format)</span>
+              <span className="text-[11px] text-[var(--text-secondary)]">Include timestamps (SRT format)</span>
             </label>
 
             <button onClick={transcribe} disabled={isTranscribing || !audioFile}
@@ -168,25 +168,25 @@ export default function IndianVoiceTranscriber() {
             </button>
 
             <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-              <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+              <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
                 <strong>Pro:</strong> 5 hours/month, speaker identification (diarization), export as Word/PDF with timestamps, batch voice note transcription, WhatsApp voice note support.
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-2 space-y-4">
-            <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
               onClick={() => fileInputRef.current?.click()}>
-              <Upload className="w-10 h-10 mx-auto mb-2 text-zinc-400" />
-              <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+              <Upload className="w-10 h-10 mx-auto mb-2 text-[var(--text-muted)]" />
+              <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
-              <p className="text-[10px] text-zinc-500 mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)</p>
+              <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)</p>
               <input ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
             </div>
 
             {audioUrl && (
-              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
+              <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
                 <div className="flex items-center gap-3">
                   <button onClick={() => {
                     if (audioRef.current) {
@@ -202,13 +202,13 @@ export default function IndianVoiceTranscriber() {
                     {isPlaying ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                   </button>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300 truncate">{audioFile?.name}</p>
-                    <p className="text-[10px] text-zinc-500">
+                    <p className="text-xs font-medium text-[var(--text-primary)] truncate">{audioFile?.name}</p>
+                    <p className="text-[10px] text-[var(--text-secondary)]">
                       {audioFile ? formatDuration(audioFile.size / 16000) : '0:00'} • {(audioFile ? (audioFile.size / 1024 / 1024).toFixed(1) : 0)} MB
                     </p>
                   </div>
                   <button onClick={() => { setAudioFile(null); setAudioUrl(null); setTranscript(null); }}
-                    className="text-[10px] text-zinc-500 hover:text-red-500 transition-colors">Remove</button>
+                    className="text-[10px] text-[var(--text-secondary)] hover:text-red-500 transition-colors">Remove</button>
                 </div>
                 <audio ref={audioRef} src={audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
               </div>
@@ -218,8 +218,8 @@ export default function IndianVoiceTranscriber() {
               <div className="flex items-center justify-center py-12">
                 <div className="text-center">
                   <Loader2 className="w-8 h-8 mx-auto text-emerald-500 animate-spin mb-3" />
-                  <p className="text-xs text-zinc-500">Transcribing your audio...</p>
-                  <p className="text-[10px] text-zinc-400 mt-1">This may take 30-60 seconds for longer files</p>
+                  <p className="text-xs text-[var(--text-secondary)]">Transcribing your audio...</p>
+                  <p className="text-[10px] text-[var(--text-muted)] mt-1">This may take 30-60 seconds for longer files</p>
                 </div>
               </div>
             )}
@@ -227,7 +227,7 @@ export default function IndianVoiceTranscriber() {
             {transcript && !isTranscribing && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5">
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5">
                     <FileText className="w-3 h-3" /> Transcript
                   </h5>
                   <div className="flex gap-2">
@@ -242,15 +242,15 @@ export default function IndianVoiceTranscriber() {
                     </button>
                   </div>
                 </div>
-                <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 max-h-[400px] overflow-y-auto">
+                <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 max-h-[400px] overflow-y-auto">
                   {showTimestamps ? (
                     <div className="space-y-2">
                       {transcript.split('\n\n').filter(Boolean).map((block, i) => (
-                        <div key={i} className="text-xs text-zinc-700 dark:text-zinc-300 font-mono leading-relaxed whitespace-pre-wrap">{block}</div>
+                        <div key={i} className="text-xs text-[var(--text-primary)] font-mono leading-relaxed whitespace-pre-wrap">{block}</div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-xs text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap leading-relaxed">{transcript}</p>
+                    <p className="text-xs text-[var(--text-primary)] whitespace-pre-wrap leading-relaxed">{transcript}</p>
                   )}
                 </div>
               </div>

@@ -101,67 +101,67 @@ export default function TimeConverter() {
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Clock className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Time Zone Converter</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Time Zone Converter</h3>
       </div>
 
-      <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl w-full sm:w-fit overflow-x-auto scrollbar-none">
-        <button onClick={() => setTab('live')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'live' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Live Clocks</button>
-        <button onClick={() => setTab('quick')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'quick' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Quick Zones</button>
-        <button onClick={() => setTab('convert')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'convert' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Convert</button>
-        <button onClick={() => setTab('units')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'units' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Time Units</button>
+      <div className="flex gap-2 bg-[var(--bg-surface)]/50 p-1.5 rounded-2xl w-full sm:w-fit overflow-x-auto scrollbar-none">
+        <button onClick={() => setTab('live')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'live' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Live Clocks</button>
+        <button onClick={() => setTab('quick')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'quick' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Quick Zones</button>
+        <button onClick={() => setTab('convert')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'convert' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Convert</button>
+        <button onClick={() => setTab('units')} className={`shrink-0 px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${tab === 'units' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200'}`}>Time Units</button>
       </div>
 
       {tab === 'live' ? (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Live time across 12 major timezones — updated every second.</p>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
+          <p className="text-xs text-[var(--text-secondary)]">Live time across 12 major timezones — updated every second.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {TIMEZONES.map(({ label, offset }) => (
-              <div key={label} className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 text-center">
-                <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
+              <div key={label} className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] text-center">
+                <p className="text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
                 <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-mono">{currentTimes[label] || '--:--:--'}</p>
-                <p className="text-[10px] text-zinc-400 mt-0.5">{offset}</p>
+                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">{offset}</p>
               </div>
             ))}
           </div>
         </div>
       ) : tab === 'quick' ? (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Quick view of 8 major world time zones — updated every second.</p>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
+          <p className="text-xs text-[var(--text-secondary)]">Quick view of 8 major world time zones — updated every second.</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {QUICK_ZONES.map(({ label, offset }) => (
-              <div key={label} className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 text-center">
-                <p className="text-[9px] font-bold text-zinc-400 uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
+              <div key={label} className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] text-center">
+                <p className="text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{label.split('(')[1]?.replace(')', '') || label}</p>
                 <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-mono">{currentTimes[label] || '--:--:--'}</p>
-                <p className="text-[10px] text-zinc-400 mt-0.5">{offset}</p>
+                <p className="text-[10px] text-[var(--text-muted)] mt-0.5">{offset}</p>
               </div>
             ))}
           </div>
         </div>
       ) : tab === 'convert' ? (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-          <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Convert Between Timezones</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+          <h4 className="text-xs font-bold text-[var(--text-primary)]">Convert Between Timezones</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">From</label>
-              <select value={fromIndex} onChange={e => { setFromIndex(Number(e.target.value)); setConvertResult(''); }} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none">
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">From</label>
+              <select value={fromIndex} onChange={e => { setFromIndex(Number(e.target.value)); setConvertResult(''); }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none">
                 {TIMEZONES.map((tz, i) => <option key={i} value={i}>{tz.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">To</label>
-              <select value={toIndex} onChange={e => { setToIndex(Number(e.target.value)); setConvertResult(''); }} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none">
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">To</label>
+              <select value={toIndex} onChange={e => { setToIndex(Number(e.target.value)); setConvertResult(''); }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none">
                 {TIMEZONES.map((tz, i) => <option key={i} value={i}>{tz.label}</option>)}
               </select>
             </div>
           </div>
           <div className="flex gap-3 flex-wrap">
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Date</label>
-              <input type="date" value={inputDate} onChange={e => { setInputDate(e.target.value); setConvertResult(''); }} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none" />
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Date</label>
+              <input type="date" value={inputDate} onChange={e => { setInputDate(e.target.value); setConvertResult(''); }} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none" />
             </div>
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Time</label>
-              <input type="time" value={inputTime} onChange={e => { setInputTime(e.target.value); setConvertResult(''); }} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none" />
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Time</label>
+              <input type="time" value={inputTime} onChange={e => { setInputTime(e.target.value); setConvertResult(''); }} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none" />
             </div>
             <div className="flex items-end">
               <button onClick={doConvert} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all active:scale-95 flex items-center gap-1.5">
@@ -171,31 +171,31 @@ export default function TimeConverter() {
           </div>
           {convertResult && (
             <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-4">
-              <div className="text-[10px] text-zinc-500 mb-1">{TIMEZONES[fromIndex].label.split('(')[1]?.replace(')', '') || TIMEZONES[fromIndex].label}</div>
+              <div className="text-[10px] text-[var(--text-secondary)] mb-1">{TIMEZONES[fromIndex].label.split('(')[1]?.replace(')', '') || TIMEZONES[fromIndex].label}</div>
               <div className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{inputDate} {inputTime}</div>
-              <div className="text-[10px] text-zinc-500 mt-2 mb-1">{TIMEZONES[toIndex].label.split('(')[1]?.replace(')', '') || TIMEZONES[toIndex].label}</div>
+              <div className="text-[10px] text-[var(--text-secondary)] mt-2 mb-1">{TIMEZONES[toIndex].label.split('(')[1]?.replace(')', '') || TIMEZONES[toIndex].label}</div>
               <div className="text-base font-bold text-emerald-600 dark:text-emerald-400">{convertResult}</div>
             </div>
           )}
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
-          <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Time Unit Converter</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-4">
+          <h4 className="text-xs font-bold text-[var(--text-primary)]">Time Unit Converter</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-[10px] font-semibold text-zinc-400">From</label>
-              <div className="flex bg-zinc-50 dark:bg-black/50 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-                <input type="number" value={unitValue} onChange={e => setUnitValue(e.target.value)} className="w-full bg-transparent px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none" />
-                <select value={unitFrom} onChange={e => setUnitFrom(e.target.value)} className="bg-zinc-100 dark:bg-zinc-900 px-3 text-xs border-l border-zinc-200 dark:border-zinc-700 outline-none cursor-pointer text-zinc-700 dark:text-zinc-300">
+              <label className="text-[10px] font-semibold text-[var(--text-muted)]">From</label>
+              <div className="flex bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
+                <input type="number" value={unitValue} onChange={e => setUnitValue(e.target.value)} className="w-full bg-transparent px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none" />
+                <select value={unitFrom} onChange={e => setUnitFrom(e.target.value)} className="bg-zinc-100 dark:bg-zinc-900 px-3 text-xs border-l border-[var(--border-subtle)] outline-none cursor-pointer text-[var(--text-primary)]">
                   {TIME_UNITS.map(u => <option key={u.label} value={u.label}>{u.label}s</option>)}
                 </select>
               </div>
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] font-semibold text-zinc-400">To</label>
-              <div className="flex bg-zinc-50 dark:bg-black/50 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+              <label className="text-[10px] font-semibold text-[var(--text-muted)]">To</label>
+              <div className="flex bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
                 <input type="text" readOnly value={unitResult} className="w-full bg-transparent px-3 py-2.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 outline-none" />
-                <select value={unitTo} onChange={e => setUnitTo(e.target.value)} className="bg-zinc-100 dark:bg-zinc-900 px-3 text-xs border-l border-zinc-200 dark:border-zinc-700 outline-none cursor-pointer text-zinc-700 dark:text-zinc-300">
+                <select value={unitTo} onChange={e => setUnitTo(e.target.value)} className="bg-zinc-100 dark:bg-zinc-900 px-3 text-xs border-l border-[var(--border-subtle)] outline-none cursor-pointer text-[var(--text-primary)]">
                   {TIME_UNITS.map(u => <option key={u.label} value={u.label}>{u.label}s</option>)}
                 </select>
               </div>

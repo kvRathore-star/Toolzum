@@ -63,24 +63,24 @@ export default function ImageColorizer() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <ImageIcon className="w-5 h-5 text-indigo-500" />
+          <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           Colorize & Tint Image Filter
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Overlay visual color masks and HSL hue-rotate filters on photos and templates offline in your browser.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Overlay visual color masks and HSL hue-rotate filters on photos and templates offline in your browser.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
         {/* Workspace */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">Filter Parameters</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Filter Parameters</h3>
           
           {!imageSrc ? (
-            <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-12 flex flex-col items-center justify-center bg-zinc-50 dark:bg-black/20 text-center">
-              <Upload className="w-10 h-10 text-zinc-400 mb-2" />
-              <p className="text-xs text-zinc-400">Upload standard grayscale or color image</p>
-              <label className="bg-[var(--accent)] hover:bg-indigo-600 px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
+              <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
+              <p className="text-xs text-[var(--text-muted)]">Upload standard grayscale or color image</p>
+              <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
                 Choose Photo
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
               </label>
@@ -97,10 +97,10 @@ export default function ImageColorizer() {
               </div>
 
               <div className="space-y-3">
-                <span className="text-[10px] text-zinc-400 font-bold uppercase block flex items-center gap-1"><Sliders className="w-3.5 h-3.5" /> Adjust Color Hue</span>
+                <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block flex items-center gap-1"><Sliders className="w-3.5 h-3.5" /> Adjust Color Hue</span>
                 
                 <div>
-                  <div className="flex justify-between text-[10px] text-zinc-500">
+                  <div className="flex justify-between text-[10px] text-[var(--text-secondary)]">
                     <span>Hue Tone</span>
                     <span>{hue}°</span>
                   </div>
@@ -108,7 +108,7 @@ export default function ImageColorizer() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-[10px] text-zinc-500">
+                  <div className="flex justify-between text-[10px] text-[var(--text-secondary)]">
                     <span>Color Saturation</span>
                     <span>{saturation}%</span>
                   </div>
@@ -117,11 +117,11 @@ export default function ImageColorizer() {
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <button onClick={() => setImageSrc(null)} className="border border-zinc-800 text-zinc-400 font-bold py-3 rounded-xl text-xs cursor-pointer">Clear File</button>
+                <button onClick={() => setImageSrc(null)} className="border border-zinc-800 text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs cursor-pointer">Clear File</button>
                 <button onClick={applyColorizer} disabled={isProcessing} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Apply Tint</button>
               </div>
               {isProcessing && (
-                <div className="flex items-center justify-center gap-2 text-xs text-zinc-500 py-2">
+                <div className="flex items-center justify-center gap-2 text-xs text-[var(--text-secondary)] py-2">
                   <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
                   Processing...
                 </div>
@@ -131,10 +131,10 @@ export default function ImageColorizer() {
         </div>
 
         {/* Output */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
           {colorizedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
-              <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
+              <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-zinc-800 rounded-xl">
 <img  loading="lazy" 
   src={colorizedUrl} 
   alt="Processed result" 
@@ -149,7 +149,7 @@ export default function ImageColorizer() {
               </button>
             </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-zinc-500">
+            <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)]">
               <ImageIcon className="w-12 h-12 mb-3 opacity-30 text-[var(--text-muted)]" />
               <p className="text-xs">Tinted image preview will appear here</p>
             </div>

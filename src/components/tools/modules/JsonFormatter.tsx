@@ -63,17 +63,17 @@ export default function JsonFormatter() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-[var(--text-secondary)] text-sm">
         <strong>100% Client-Side Processing:</strong> Your JSON data is formatted securely in your browser. Sensitive data never leaves your device.
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Input Section */}
-        <div className="flex flex-col h-[600px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center">
-            <span className="text-zinc-700 dark:text-zinc-300 font-medium text-sm flex items-center gap-2">
-              <svg className="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+        <div className="flex flex-col h-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-black/40 px-4 py-3 border-b border-[var(--border-subtle)] flex justify-between items-center">
+            <span className="text-[var(--text-primary)] font-medium text-sm flex items-center gap-2">
+              <svg className="w-4 h-4 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
               Input JSON
             </span>
             <button 
@@ -87,31 +87,31 @@ export default function JsonFormatter() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your unformatted JSON here..."
-            className="flex-1 w-full bg-transparent p-4 text-zinc-700 dark:text-zinc-300 font-mono text-sm resize-none outline-none focus:ring-1 focus:ring-blue-500/50"
+            className="flex-1 w-full bg-transparent p-4 text-[var(--text-primary)] font-mono text-sm resize-none outline-none focus:ring-1 focus:ring-[var(--accent)]/50"
             spellCheck={false}
           />
         </div>
 
         {/* Output Section */}
-        <div className="flex flex-col h-[600px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-white/5 flex flex-wrap gap-2 items-center justify-between">
+        <div className="flex flex-col h-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl relative">
+          <div className="bg-black/40 px-4 py-3 border-b border-[var(--border-subtle)] flex flex-wrap gap-2 items-center justify-between">
             <div className="flex gap-2">
-              <button onClick={() => formatJson(2)} className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button onClick={() => formatJson(2)} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors">
                 Format (2 spaces)
               </button>
-              <button onClick={() => formatJson(4)} className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button onClick={() => formatJson(4)} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors">
                 Format (4 spaces)
               </button>
-              <button onClick={minifyJson} className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button onClick={minifyJson} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors">
                 Minify
               </button>
             </div>
             
             <div className="flex gap-2">
-              <button onClick={copyToClipboard} disabled={!output} className="p-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy">
+              <button onClick={copyToClipboard} disabled={!output} className="p-1.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
               </button>
-              <button onClick={downloadJson} disabled={!output} className="p-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg disabled:opacity-50 transition-colors" title="Download JSON file" aria-label="Download">
+              <button onClick={downloadJson} disabled={!output} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg disabled:opacity-50 transition-colors" title="Download JSON file" aria-label="Download">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               </button>
             </div>

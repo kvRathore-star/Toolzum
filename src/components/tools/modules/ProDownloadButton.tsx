@@ -36,7 +36,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
         <button
           onClick={onDownloadEach}
           disabled={isProcessing}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-zinc-800 text-zinc-200 font-medium rounded-[var(--radius-lg)] hover:bg-zinc-700 disabled:opacity-50 transition-all text-sm"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-zinc-800 text-zinc-200 font-medium rounded-[var(--radius-lg)] hover:bg-[var(--bg-elevated)] disabled:opacity-50 transition-all text-sm"
         >
           <Download className="w-4 h-4" />
           Download files individually
@@ -46,7 +46,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 rounded-[var(--radius-lg)] pointer-events-none" />
         <button
           disabled
-          className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 text-zinc-500 font-medium rounded-[var(--radius-lg)] border border-zinc-700 cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 text-[var(--text-secondary)] font-medium rounded-[var(--radius-lg)] border border-zinc-700 cursor-not-allowed"
         >
           <Lock className="w-4 h-4" />
           Download All as ZIP ({fileCount} files)

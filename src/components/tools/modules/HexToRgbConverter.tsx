@@ -203,43 +203,43 @@ export default function HexToRgbConverter() {
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       {/* Banner */}
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           🎨 Interactive Color Space Converter
         </h4>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Input color specs in HEX, RGB, HSL, or CMYK. All fields synchronize automatically, providing a live visual preview color swatch.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Swatch Display */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 flex flex-col justify-center items-center gap-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 flex flex-col justify-center items-center gap-4">
           <div 
             className="w-full h-44 rounded-xl border border-zinc-300 dark:border-zinc-800 shadow-inner transition-colors duration-200"
             style={{ backgroundColor: colorHex }}
           />
           <div className="text-center">
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Current Preview Swatch</span>
-            <strong className="text-lg font-mono text-zinc-900 dark:text-white">{colorHex}</strong>
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Current Preview Swatch</span>
+            <strong className="text-lg font-mono text-[var(--text-primary)]">{colorHex}</strong>
           </div>
         </div>
 
         {/* Inputs Panels */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 md:col-span-2 space-y-4">
-          <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-200 dark:border-white/5 pb-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 md:col-span-2 space-y-4">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-2">
             Color Formats
           </h4>
 
           {/* Hex */}
           <div className="space-y-1 relative">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">HEX Value</label>
-            <div className="flex items-center bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2 font-mono text-sm">
-              <span className="text-zinc-400 mr-1 select-none">#</span>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">HEX Value</label>
+            <div className="flex items-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 font-mono text-sm">
+              <span className="text-[var(--text-muted)] mr-1 select-none">#</span>
               <input
                 type="text"
                 value={hex}
                 onChange={handleHexChange}
-                className="flex-1 bg-transparent text-zinc-900 dark:text-white outline-none"
+                className="flex-1 bg-transparent text-[var(--text-primary)] outline-none"
               />
               <button
                 onClick={() => copyFormat(`#${hex}`, 'HEX')}
@@ -252,13 +252,13 @@ export default function HexToRgbConverter() {
 
           {/* RGB */}
           <div className="space-y-1 relative">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">RGB (R, G, B)</label>
-            <div className="flex items-center bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2 font-mono text-sm">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">RGB (R, G, B)</label>
+            <div className="flex items-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 font-mono text-sm">
               <input
                 type="text"
                 value={rgbVal}
                 onChange={handleRgbChange}
-                className="flex-1 bg-transparent text-zinc-900 dark:text-white outline-none"
+                className="flex-1 bg-transparent text-[var(--text-primary)] outline-none"
               />
               <button
                 onClick={() => copyFormat(`rgb(${rgbVal})`, 'RGB')}
@@ -271,13 +271,13 @@ export default function HexToRgbConverter() {
 
           {/* HSL */}
           <div className="space-y-1 relative">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">HSL (H, S%, L%)</label>
-            <div className="flex items-center bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2 font-mono text-sm">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">HSL (H, S%, L%)</label>
+            <div className="flex items-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 font-mono text-sm">
               <input
                 type="text"
                 value={hslVal}
                 onChange={handleHslChange}
-                className="flex-1 bg-transparent text-zinc-900 dark:text-white outline-none"
+                className="flex-1 bg-transparent text-[var(--text-primary)] outline-none"
               />
               <button
                 onClick={() => copyFormat(`hsl(${hslVal})`, 'HSL')}
@@ -290,13 +290,13 @@ export default function HexToRgbConverter() {
 
           {/* CMYK */}
           <div className="space-y-1 relative">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">CMYK (C, M, Y, K)</label>
-            <div className="flex items-center bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2 font-mono text-sm">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">CMYK (C, M, Y, K)</label>
+            <div className="flex items-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 font-mono text-sm">
               <input
                 type="text"
                 value={cmykVal}
                 onChange={handleCmykChange}
-                className="flex-1 bg-transparent text-zinc-900 dark:text-white outline-none"
+                className="flex-1 bg-transparent text-[var(--text-primary)] outline-none"
               />
               <button
                 onClick={() => copyFormat(`cmyk(${cmykVal})`, 'CMYK')}

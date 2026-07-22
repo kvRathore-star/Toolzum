@@ -3,12 +3,12 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import QRCodeLib from 'qrcode';
 import { downloadOrShare } from '@/utils/nativeShare';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
 const cardClass = "max-w-xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono break-all";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono break-all";
 const secondaryBtnClass = "px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors";
 
 function useCopy() {
@@ -249,7 +249,7 @@ export function RandomTeamGenerator() {
         {teams.length > 0 && (
           <div className="space-y-3 mt-4">
             {teams.map((team, i) => (
-              <div key={i} className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-lg">
                 <div className="font-medium text-sm mb-1">Team {i + 1} ({team.length})</div>
                 <div className="text-sm">{team.join(', ')}</div>
               </div>
@@ -381,7 +381,7 @@ export function RandomUsernameGenerator() {
         {results.length > 0 && (
           <div className="mt-4 space-y-1">
             {results.map((u, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span className="font-mono">{u}</span>
                 <button onClick={() => copy(u)} className="text-xs text-blue-600 hover:underline">{copied ? 'Copied!' : 'Copy'}</button>
               </div>
@@ -433,7 +433,7 @@ export function RandomUUIDGenerator() {
         {results.length > 0 && (
           <div className="mt-4 space-y-1">
             {results.map((u, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span className="font-mono">{u}</span>
                 <button onClick={() => copy(u)} className="text-xs text-blue-600 hover:underline">{copied ? 'Copied!' : 'Copy'}</button>
               </div>
@@ -591,7 +591,7 @@ export function FakeDataGenerator() {
         {data.length > 0 && (
           <div className="mt-4 space-y-3">
             {data.map((d, i) => (
-              <div key={i} className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm whitespace-pre">{d}</div>
+              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre">{d}</div>
             ))}
             <button onClick={() => copy(data.join('\n\n'))} className={secondaryBtnClass}>{copied ? 'Copied All!' : 'Copy All'}</button>
           </div>
@@ -627,9 +627,9 @@ export function FakeIdentityGenerator() {
         {identity && (
           <div className="mt-4 space-y-4">
             <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-3xl font-bold text-zinc-400">?</div>
+              <div className="w-24 h-24 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-3xl font-bold text-[var(--text-muted)]">?</div>
             </div>
-            <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm space-y-1">
+            <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm space-y-1">
               <div><strong>Name:</strong> {identity.name}</div>
               <div><strong>Email:</strong> {identity.email}</div>
               <div><strong>Phone:</strong> {identity.phone}</div>
@@ -699,10 +699,10 @@ export function FakeCreditCardGenerator() {
         {cards.length > 0 && (
           <div className="mt-4 space-y-3">
             {cards.map((c, i) => (
-              <div key={i} className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm space-y-1">
+              <div key={i} className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm space-y-1">
                 <div className="font-medium">{c.type}</div>
                 <div className="font-mono">{c.number.replace(/(\d{4})(?=\d)/g, '$1 ')}</div>
-                <div className="flex gap-4 text-xs text-zinc-500"><span>Exp: {c.expiry}</span><span>CVV: {c.cvv}</span></div>
+                <div className="flex gap-4 text-xs text-[var(--text-secondary)]"><span>Exp: {c.expiry}</span><span>CVV: {c.cvv}</span></div>
               </div>
             ))}
             <button onClick={() => copy(cards.map(c => `${c.number}|${c.expiry}|${c.cvv}`).join('\n'))} className={secondaryBtnClass}>{copied ? 'Copied!' : 'Copy All'}</button>
@@ -863,7 +863,7 @@ export function QrCodeGenerator() {
         <canvas ref={canvasRef} className="hidden" />
         {dataUrl && (
           <div className="mt-4 flex flex-col items-center gap-4">
-            <img src={dataUrl} alt="QR Code" className="rounded-xl border border-zinc-200 dark:border-zinc-700" />
+            <img src={dataUrl} alt="QR Code" className="rounded-xl border border-[var(--border-subtle)]" />
             <button onClick={handleDownload} className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button>
           </div>
         )}
@@ -903,7 +903,7 @@ export function CouponCodeGenerator() {
         {codes.length > 0 && (
           <div className="mt-4 space-y-1">
             {codes.map((c, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">
+              <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
                 <span>{c}</span>
                 <button onClick={() => copy(c)} className="text-xs text-blue-600 hover:underline">{copied ? 'Copied!' : 'Copy'}</button>
               </div>
@@ -947,7 +947,7 @@ export function SerialNumberGenerator() {
         {serials.length > 0 && (
           <div className="mt-4 space-y-1">
             {serials.map((s, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono">
+              <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
                 <span>{s}</span>
                 <button onClick={() => copy(s)} className="text-xs text-blue-600 hover:underline">{copied ? 'Copied!' : 'Copy'}</button>
               </div>
@@ -986,7 +986,7 @@ export function NicknameGenerator() {
         {results.length > 0 && (
           <div className="mt-4 space-y-1">
             {results.map((n, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span>{n}</span>
                 <button onClick={() => copy(n)} className="text-xs text-blue-600 hover:underline">{copied ? 'Copied!' : 'Copy'}</button>
               </div>

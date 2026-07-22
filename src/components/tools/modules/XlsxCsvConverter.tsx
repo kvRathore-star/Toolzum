@@ -175,27 +175,27 @@ export default function XlsxCsvConverter() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-1">
+        <div className="flex items-center gap-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-1">
           <button
             onClick={() => setDirection('xlsx-to-csv')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'xlsx-to-csv' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'xlsx-to-csv' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             XLSX → CSV
           </button>
           <button
             onClick={() => setDirection('csv-to-xlsx')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'csv-to-xlsx' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'csv-to-xlsx' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             CSV → XLSX
           </button>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <div className="flex flex-wrap gap-4 items-end">
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-xs text-zinc-500 mb-1 font-medium">Upload File</label>
-            <label className="cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-sm">
+            <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Upload File</label>
+            <label className="cursor-pointer flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors text-sm">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               {file ? file.name : `Choose ${direction === 'xlsx-to-csv' ? '.xlsx/.xls' : '.csv'} file`}
               <input type="file" accept={direction === 'xlsx-to-csv' ? '.xlsx,.xls' : '.csv'} onChange={handleFileChange} className="hidden" />
@@ -204,11 +204,11 @@ export default function XlsxCsvConverter() {
 
           {direction === 'xlsx-to-csv' && sheetNames.length > 0 && (
             <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Sheet</label>
+              <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Sheet</label>
               <select
                 value={sheetName}
                 onChange={(e) => { setSheetName(e.target.value); if (file) processXlsxFile(file, e.target.value, delimiter, includeHeader, range); }}
-                className="px-3 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm focus:outline-none"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
               >
                 {sheetNames.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
@@ -217,11 +217,11 @@ export default function XlsxCsvConverter() {
 
           {direction === 'xlsx-to-csv' && (
             <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Range</label>
+              <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Range</label>
               <select
                 value={range}
                 onChange={(e) => setRange(e.target.value)}
-                className="px-3 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm focus:outline-none"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
               >
                 <option value="all">All Rows</option>
                 <option value="1-100">Rows 1-100</option>
@@ -232,11 +232,11 @@ export default function XlsxCsvConverter() {
           )}
 
           <div>
-            <label className="block text-xs text-zinc-500 mb-1 font-medium">Delimiter</label>
+            <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Delimiter</label>
             <select
               value={delimiter}
               onChange={(e) => setDelimiter(e.target.value as Delimiter)}
-              className="px-3 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm focus:outline-none"
+              className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
             >
               <option value=",">Comma (,)</option>
               <option value={'\t'}>Tab</option>
@@ -254,29 +254,29 @@ export default function XlsxCsvConverter() {
                 onChange={(e) => setIncludeHeader(e.target.checked)}
                 className="rounded border-zinc-600"
               />
-              <label htmlFor="includeHeader" className="text-sm text-zinc-600 dark:text-zinc-400 cursor-pointer">Include Header</label>
+              <label htmlFor="includeHeader" className="text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">Include Header</label>
             </div>
           )}
 
           {direction === 'csv-to-xlsx' && (
             <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Sheet Name</label>
+              <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Sheet Name</label>
               <input
                 type="text"
                 value={csvSheetName}
                 onChange={(e) => setCsvSheetName(e.target.value)}
-                className="px-3 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm focus:outline-none w-32"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none w-32"
               />
             </div>
           )}
         </div>
 
         {fileInfo && (
-          <div className="flex flex-wrap gap-4 text-xs text-zinc-500 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-3">
-            <span>File: <strong className="text-zinc-700 dark:text-zinc-300">{fileInfo.name}</strong></span>
-            <span>Sheets: <strong className="text-zinc-700 dark:text-zinc-300">{fileInfo.sheetNames.join(', ')}</strong></span>
-            <span>Rows: <strong className="text-zinc-700 dark:text-zinc-300">{fileInfo.rowCount.toLocaleString()}</strong></span>
-            <span>Columns: <strong className="text-zinc-700 dark:text-zinc-300">{fileInfo.colCount}</strong></span>
+          <div className="flex flex-wrap gap-4 text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)]/50 rounded-xl p-3">
+            <span>File: <strong className="text-[var(--text-primary)]">{fileInfo.name}</strong></span>
+            <span>Sheets: <strong className="text-[var(--text-primary)]">{fileInfo.sheetNames.join(', ')}</strong></span>
+            <span>Rows: <strong className="text-[var(--text-primary)]">{fileInfo.rowCount.toLocaleString()}</strong></span>
+            <span>Columns: <strong className="text-[var(--text-primary)]">{fileInfo.colCount}</strong></span>
           </div>
         )}
       </div>
@@ -284,7 +284,7 @@ export default function XlsxCsvConverter() {
       {isProcessing && (
         <div className="flex items-center justify-center py-12">
           <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <span className="ml-3 text-zinc-500 text-sm">Processing...</span>
+          <span className="ml-3 text-[var(--text-secondary)] text-sm">Processing...</span>
         </div>
       )}
 
@@ -298,9 +298,9 @@ export default function XlsxCsvConverter() {
       )}
 
       {previewData.length > 0 && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center">
-            <span className="text-zinc-700 dark:text-zinc-300 font-medium text-sm">Preview (first {Math.min(previewData.length, 20)} rows)</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center">
+            <span className="text-[var(--text-primary)] font-medium text-sm">Preview (first {Math.min(previewData.length, 20)} rows)</span>
             {outputUrl && (
               <button
                 onClick={downloadOutput}
@@ -314,17 +314,17 @@ export default function XlsxCsvConverter() {
           <div className="overflow-auto max-h-96">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-zinc-50 dark:bg-zinc-800/50">
+                <tr className="bg-[var(--bg-overlay)]/50">
                   {previewColumns.map((col, i) => (
-                    <th key={i} className="px-4 py-2 text-left text-zinc-600 dark:text-zinc-400 font-medium text-xs border-b border-zinc-200 dark:border-zinc-700 whitespace-nowrap">{col}</th>
+                    <th key={i} className="px-4 py-2 text-left text-zinc-600 dark:text-[var(--text-muted)] font-medium text-xs border-b border-[var(--border-subtle)] whitespace-nowrap">{col}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {previewData.map((row, ri) => (
-                  <tr key={ri} className="border-b border-zinc-100 dark:border-zinc-800/50 hover:bg-zinc-50 dark:hover:bg-zinc-800/30">
+                  <tr key={ri} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/30">
                     {previewColumns.map((col, ci) => (
-                      <td key={ci} className="px-4 py-2 text-zinc-700 dark:text-zinc-300 text-xs whitespace-nowrap max-w-[200px] truncate">{row[col]}</td>
+                      <td key={ci} className="px-4 py-2 text-[var(--text-primary)] text-xs whitespace-nowrap max-w-[200px] truncate">{row[col]}</td>
                     ))}
                   </tr>
                 ))}

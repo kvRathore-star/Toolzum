@@ -572,13 +572,13 @@ export default function AiThumbnailMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl flex justify-between items-center flex-wrap gap-4">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center flex-wrap gap-4">
         <div>
           <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-indigo-500" />
+            <Sparkles className="w-5 h-5 text-[var(--accent)]" />
             AI Thumbnail & Graphic Maker
           </h2>
-          <p className="text-xs text-zinc-500 mt-1">Design clickbait backgrounds, YouTube templates, and post visual assets right in your browser.</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Design clickbait backgrounds, YouTube templates, and post visual assets right in your browser.</p>
         </div>
         <div className="flex gap-2">
           <button 
@@ -594,30 +594,30 @@ export default function AiThumbnailMaker() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Design Toolbar - Left Column */}
-        <div className="lg:col-span-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
+        <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
           
           {/* Presets & Aspect Ratios */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Layout className="w-4 h-4 text-zinc-500" />
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+              <Layout className="w-4 h-4 text-[var(--text-secondary)]" />
               Dimensions Preset
             </h3>
             <div className="grid grid-cols-3 gap-2">
               <button 
                 onClick={() => setAspectRatio('16x9')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '16x9' ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400' : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '16x9' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 16:9 YouTube
               </button>
               <button 
                 onClick={() => setAspectRatio('1x1')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '1x1' ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400' : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '1x1' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 1:1 Instagram
               </button>
               <button 
                 onClick={() => setAspectRatio('9x16')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '9x16' ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400' : 'bg-transparent border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '9x16' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 9:16 Shorts/Reel
               </button>
@@ -626,8 +626,8 @@ export default function AiThumbnailMaker() {
 
           {/* Quick Presets templates */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Palette className="w-4 h-4 text-zinc-500" />
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+              <Palette className="w-4 h-4 text-[var(--text-secondary)]" />
               Style Templates
             </h3>
             <div className="grid grid-cols-3 gap-2">
@@ -645,7 +645,7 @@ export default function AiThumbnailMaker() {
               </button>
               <button 
                 onClick={() => applyPreset('minimal')} 
-                className="py-1.5 bg-zinc-500/10 border border-zinc-500/20 text-zinc-300 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-zinc-500/20"
+                className="py-1.5 bg-[var(--bg-overlay)]0/10 border border-zinc-500/20 text-zinc-300 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-[var(--bg-overlay)]0/20"
               >
                 Minimalist
               </button>
@@ -653,24 +653,24 @@ export default function AiThumbnailMaker() {
           </div>
 
           {/* Background Settings */}
-          <div className="space-y-4 border-t border-zinc-100 dark:border-zinc-800 pt-4">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Canvas Background</h3>
-            <div className="flex bg-zinc-50 dark:bg-black/45 p-1 rounded-xl gap-1">
+          <div className="space-y-4 border-t border-[var(--border-subtle)] pt-4">
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Canvas Background</h3>
+            <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1">
               <button 
                 onClick={() => setBgType('solid')}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'solid' ? 'bg-white dark:bg-zinc-800 shadow-sm text-zinc-900 dark:text-white' : 'text-zinc-500'}`}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'solid' ? 'bg-white dark:bg-[var(--bg-surface)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}
               >
                 Solid
               </button>
               <button 
                 onClick={() => setBgType('gradient')}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'gradient' ? 'bg-white dark:bg-zinc-800 shadow-sm text-zinc-900 dark:text-white' : 'text-zinc-500'}`}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'gradient' ? 'bg-white dark:bg-[var(--bg-surface)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}
               >
                 Gradient
               </button>
               <button 
                 onClick={() => setBgType('image')}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'image' ? 'bg-white dark:bg-zinc-800 shadow-sm text-zinc-900 dark:text-white' : 'text-zinc-500'}`}
+                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${bgType === 'image' ? 'bg-white dark:bg-[var(--bg-surface)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}
               >
                 Image
               </button>
@@ -684,7 +684,7 @@ export default function AiThumbnailMaker() {
                   onChange={e => setSolidColor(e.target.value)}
                   className="w-10 h-10 rounded border-0 cursor-pointer"
                 />
-                <span className="text-xs font-mono text-zinc-400">{solidColor}</span>
+                <span className="text-xs font-mono text-[var(--text-muted)]">{solidColor}</span>
               </div>
             )}
 
@@ -692,7 +692,7 @@ export default function AiThumbnailMaker() {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[10px] text-zinc-400">Start Color</label>
+                    <label className="text-[10px] text-[var(--text-muted)]">Start Color</label>
                     <div className="flex items-center gap-2 mt-1">
                       <input 
                         type="color" 
@@ -700,11 +700,11 @@ export default function AiThumbnailMaker() {
                         onChange={e => setGradColorStart(e.target.value)}
                         className="w-8 h-8 rounded border-0 cursor-pointer"
                       />
-                      <span className="text-[10px] font-mono text-zinc-500">{gradColorStart}</span>
+                      <span className="text-[10px] font-mono text-[var(--text-secondary)]">{gradColorStart}</span>
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-zinc-400">End Color</label>
+                    <label className="text-[10px] text-[var(--text-muted)]">End Color</label>
                     <div className="flex items-center gap-2 mt-1">
                       <input 
                         type="color" 
@@ -712,12 +712,12 @@ export default function AiThumbnailMaker() {
                         onChange={e => setGradColorEnd(e.target.value)}
                         className="w-8 h-8 rounded border-0 cursor-pointer"
                       />
-                      <span className="text-[10px] font-mono text-zinc-500">{gradColorEnd}</span>
+                      <span className="text-[10px] font-mono text-[var(--text-secondary)]">{gradColorEnd}</span>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-[10px] text-zinc-400">
+                  <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                     <span>Gradient Angle</span>
                     <span>{gradAngle}°</span>
                   </div>
@@ -732,8 +732,8 @@ export default function AiThumbnailMaker() {
 
             {bgType === 'image' && (
               <div className="space-y-3">
-                <div className="border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-3 flex flex-col items-center justify-center bg-zinc-50/50 dark:bg-black/20">
-                  <ImageIcon className="w-8 h-8 text-zinc-400 mb-1" />
+                <div className="border border-dashed border-[var(--border-subtle)] rounded-xl p-3 flex flex-col items-center justify-center bg-[var(--bg-overlay)]/50 dark:bg-black/20">
+                  <ImageIcon className="w-8 h-8 text-[var(--text-muted)] mb-1" />
                   <label className="bg-indigo-600 hover:bg-indigo-500 px-3 py-1.5 rounded-lg text-[10px] text-white font-bold cursor-pointer transition-colors shadow">
                     Choose Background
                     <input 
@@ -745,10 +745,10 @@ export default function AiThumbnailMaker() {
                 
                 {backgroundImage && (
                   <div className="space-y-3 border-t border-zinc-800 pt-3">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block flex items-center gap-1"><Sliders className="w-3.5 h-3.5" /> Adjust Image</span>
+                    <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block flex items-center gap-1"><Sliders className="w-3.5 h-3.5" /> Adjust Image</span>
                     
                     <div className="space-y-2">
-                      <div className="flex justify-between text-[10px] text-zinc-400">
+                      <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                         <span>Brightness</span>
                         <span>{brightness}%</span>
                       </div>
@@ -760,7 +760,7 @@ export default function AiThumbnailMaker() {
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex justify-between text-[10px] text-zinc-400">
+                      <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                         <span>Contrast</span>
                         <span>{contrast}%</span>
                       </div>
@@ -772,7 +772,7 @@ export default function AiThumbnailMaker() {
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex justify-between text-[10px] text-zinc-400">
+                      <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                         <span>Blur</span>
                         <span>{blur}px</span>
                       </div>
@@ -789,18 +789,18 @@ export default function AiThumbnailMaker() {
           </div>
 
           {/* Add Elements Panel */}
-          <div className="space-y-3 border-t border-zinc-100 dark:border-zinc-800 pt-4">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-4 h-4 text-zinc-500" /> Overlays</h3>
+          <div className="space-y-3 border-t border-[var(--border-subtle)] pt-4">
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-4 h-4 text-[var(--text-secondary)]" /> Overlays</h3>
             <div className="grid grid-cols-2 gap-2">
               <button 
                 onClick={addTextElement}
-                className="flex items-center justify-center gap-1.5 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-2 rounded-xl text-xs cursor-pointer"
+                className="flex items-center justify-center gap-1.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-xl text-xs cursor-pointer"
               >
                 <Type className="w-3.5 h-3.5" />
                 Add Text
               </button>
               <label 
-                className="flex items-center justify-center gap-1.5 bg-[var(--bg-overlay)] dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-200 font-bold py-2 rounded-xl text-xs cursor-pointer text-center"
+                className="flex items-center justify-center gap-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-200 font-bold py-2 rounded-xl text-xs cursor-pointer text-center"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Add Overlay
@@ -815,8 +815,8 @@ export default function AiThumbnailMaker() {
         </div>
 
         {/* Live Canvas Area - Middle Column */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-white/5 p-4 rounded-2xl min-h-[350px]">
-          <span className="text-[10px] text-zinc-400 mb-2 flex items-center gap-1"><Move className="w-3 h-3" /> Click elements to select, drag to reposition on canvas</span>
+        <div className="lg:col-span-5 flex flex-col items-center justify-center bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-2xl min-h-[350px]">
+          <span className="text-[10px] text-[var(--text-muted)] mb-2 flex items-center gap-1"><Move className="w-3 h-3" /> Click elements to select, drag to reposition on canvas</span>
           
           <div className="relative border border-zinc-300 dark:border-zinc-800 shadow-2xl rounded overflow-hidden max-w-full">
             <canvas
@@ -837,18 +837,18 @@ export default function AiThumbnailMaker() {
         </div>
 
         {/* Selected Element Customizer - Right Column */}
-        <div className="lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
+        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
           
           {selectedId ? (
             <div className="space-y-5 animate-in fade-in slide-in-from-right-3 duration-300">
               
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
-                <span className="text-xs font-bold text-indigo-400 uppercase tracking-wider">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
+                <span className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">
                   Edit Selected {selectedType === 'text' ? 'Text' : 'Sticker'}
                 </span>
                 <button 
                   onClick={deleteSelectedElement}
-                  className="p-1.5 text-rose-500 hover:bg-rose-500/10 rounded-lg cursor-pointer"
+                  className="p-1.5 text-[var(--accent)] hover:bg-rose-500/10 rounded-lg cursor-pointer"
                   title="Remove Element" aria-label="Remove Element"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -859,11 +859,11 @@ export default function AiThumbnailMaker() {
                 <div className="space-y-4">
                   {/* Text Edit Box */}
                   <div className="space-y-1">
-                    <label className="text-[10px] text-zinc-400 font-bold uppercase">Text Value</label>
+                    <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Value</label>
                     <textarea 
                       value={activeText.text}
                       onChange={e => handleTextPropertyChange('text', e.target.value)}
-                      className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2.5 py-1.5 text-xs text-zinc-900 dark:text-white outline-none focus:border-zinc-400"
+                      className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] outline-none focus:border-zinc-400"
                       rows={2}
                     />
                   </div>
@@ -871,7 +871,7 @@ export default function AiThumbnailMaker() {
                   {/* Font Color */}
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] text-zinc-400 font-bold uppercase">Text Color</label>
+                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Color</label>
                       <div className="flex items-center gap-2 mt-1">
                         <input 
                           type="color" 
@@ -879,12 +879,12 @@ export default function AiThumbnailMaker() {
                           onChange={e => handleTextPropertyChange('color', e.target.value)}
                           className="w-8 h-8 rounded border-0 cursor-pointer"
                         />
-                        <span className="text-[10px] font-mono text-zinc-500">{activeText.color}</span>
+                        <span className="text-[10px] font-mono text-[var(--text-secondary)]">{activeText.color}</span>
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-[10px] text-zinc-400 font-bold uppercase">Background</label>
+                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Background</label>
                       <div className="flex items-center gap-2 mt-1">
                         <input 
                           type="color" 
@@ -893,7 +893,7 @@ export default function AiThumbnailMaker() {
                           disabled={activeText.bgColor === 'transparent'}
                           className="w-8 h-8 rounded border-0 cursor-pointer disabled:opacity-30"
                         />
-                        <label className="text-[9px] text-zinc-400 flex items-center gap-1 cursor-pointer">
+                        <label className="text-[9px] text-[var(--text-muted)] flex items-center gap-1 cursor-pointer">
                           <input 
                             type="checkbox" 
                             checked={activeText.bgColor !== 'transparent'}
@@ -908,20 +908,20 @@ export default function AiThumbnailMaker() {
                   {/* Font Size & Family */}
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] text-zinc-400 font-bold uppercase">Font Size</label>
+                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Size</label>
                       <input 
                         type="number" min="10" max="200"
                         value={activeText.fontSize}
                         onChange={e => handleTextPropertyChange('fontSize', parseInt(e.target.value) || 20)}
-                        className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs mt-1"
+                        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] text-zinc-400 font-bold uppercase">Font Family</label>
+                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Family</label>
                       <select 
                         value={activeText.fontFamily}
                         onChange={e => handleTextPropertyChange('fontFamily', e.target.value)}
-                        className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs mt-1"
+                        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
                       >
                         <option value="Impact">Impact</option>
                         <option value="Arial">Arial</option>
@@ -934,19 +934,19 @@ export default function AiThumbnailMaker() {
 
                   {/* Stroke/Outline properties */}
                   <div className="space-y-3 border-t border-zinc-800 pt-3">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Stroke Outline</span>
+                    <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Stroke Outline</span>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[9px] text-zinc-400">Outline Width</label>
+                        <label className="text-[9px] text-[var(--text-muted)]">Outline Width</label>
                         <input 
                           type="number" min="0" max="15"
                           value={activeText.strokeWidth}
                           onChange={e => handleTextPropertyChange('strokeWidth', parseInt(e.target.value) || 0)}
-                          className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs mt-1"
+                          className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
                         />
                       </div>
                       <div>
-                        <label className="text-[9px] text-zinc-400">Outline Color</label>
+                        <label className="text-[9px] text-[var(--text-muted)]">Outline Color</label>
                         <input 
                           type="color" 
                           value={activeText.strokeColor}
@@ -959,19 +959,19 @@ export default function AiThumbnailMaker() {
 
                   {/* Shadow properties */}
                   <div className="space-y-3 border-t border-zinc-800 pt-3">
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Text Drop Shadow</span>
+                    <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Text Drop Shadow</span>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[9px] text-zinc-400">Shadow Blur</label>
+                        <label className="text-[9px] text-[var(--text-muted)]">Shadow Blur</label>
                         <input 
                           type="number" min="0" max="30"
                           value={activeText.shadowBlur}
                           onChange={e => handleTextPropertyChange('shadowBlur', parseInt(e.target.value) || 0)}
-                          className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs mt-1"
+                          className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
                         />
                       </div>
                       <div>
-                        <label className="text-[9px] text-zinc-400">Shadow Color</label>
+                        <label className="text-[9px] text-[var(--text-muted)]">Shadow Color</label>
                         <input 
                           type="color" 
                           value={activeText.shadowColor.startsWith('rgba') ? '#000000' : activeText.shadowColor}
@@ -989,7 +989,7 @@ export default function AiThumbnailMaker() {
                 <div className="space-y-4">
                   {/* Scale Width/Height */}
                   <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] text-zinc-400">
+                    <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                       <span>Sticker Width</span>
                       <span>{activeImage.w}px</span>
                     </div>
@@ -1011,7 +1011,7 @@ export default function AiThumbnailMaker() {
 
                   {/* Rotation */}
                   <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] text-zinc-400">
+                    <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
                       <span>Rotation</span>
                       <span>{activeImage.rotation}°</span>
                     </div>
@@ -1026,7 +1026,7 @@ export default function AiThumbnailMaker() {
 
             </div>
           ) : (
-            <div className="text-center py-12 text-zinc-500">
+            <div className="text-center py-12 text-[var(--text-secondary)]">
               <Sparkles className="w-8 h-8 mx-auto opacity-30 mb-2" />
               <p className="text-xs">Select any element or text overlay on the canvas to configure styling parameters</p>
             </div>

@@ -56,61 +56,61 @@ export default function RandomNumberGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
-        <div className="border-b border-zinc-200 dark:border-white/10 p-6 flex items-center justify-between">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-sm">
+        <div className="border-b border-[var(--border-subtle)] p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
               <Hash className="w-5 h-5 text-orange-600 dark:text-orange-400" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Random Number Generator</h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">Generate random numbers securely</p>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">Random Number Generator</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Generate random numbers securely</p>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
           {/* Settings Sidebar */}
-          <div className="md:col-span-5 p-6 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 space-y-6">
+          <div className="md:col-span-5 p-6 border-b md:border-b-0 md:border-r border-[var(--border-subtle)] bg-[var(--bg-overlay)]/50 dark:bg-[var(--bg-overlay)] space-y-6">
             <div className="flex items-center gap-2 mb-4">
-              <Settings2 className="w-4 h-4 text-zinc-500" />
-              <h3 className="font-semibold text-zinc-900 dark:text-white">Configuration</h3>
+              <Settings2 className="w-4 h-4 text-[var(--text-secondary)]" />
+              <h3 className="font-semibold text-[var(--text-primary)]">Configuration</h3>
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Min</label>
+                <label className="text-sm font-medium text-[var(--text-primary)]">Min</label>
                 <input
                   type="number"
                   value={min}
                   onChange={(e) => setMin(parseInt(e.target.value) || 0)}
-                  className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Max</label>
+                <label className="text-sm font-medium text-[var(--text-primary)]">Max</label>
                 <input
                   type="number"
                   value={max}
                   onChange={(e) => setMax(parseInt(e.target.value) || 0)}
-                  className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
                 />
               </div>
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Count</label>
+              <label className="text-sm font-medium text-[var(--text-primary)]">Count</label>
               <input
                 type="number"
                 min="1"
                 max="1000"
                 value={count}
                 onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
+                className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500/50 outline-none transition-all"
               />
             </div>
             
-            <label className="flex items-center gap-3 p-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl cursor-pointer hover:border-orange-500/50 transition-colors">
+            <label className="flex items-center gap-3 p-3 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl cursor-pointer hover:border-orange-500/50 transition-colors">
               <div className="relative flex items-center">
                 <input
                   type="checkbox"
@@ -120,7 +120,7 @@ export default function RandomNumberGenerator() {
                 />
                 <div className="w-10 h-6 bg-zinc-200 dark:bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
               </div>
-              <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Allow Duplicates</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">Allow Duplicates</span>
             </label>
             
             {error && (
@@ -148,11 +148,11 @@ export default function RandomNumberGenerator() {
           {/* Results Area */}
           <div className="md:col-span-7 p-6 flex flex-col min-h-[300px]">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold text-zinc-900 dark:text-white">Results</h3>
+              <h3 className="font-semibold text-[var(--text-primary)]">Results</h3>
               {results.length > 0 && (
                 <button
                   onClick={copyToClipboard}
-                  className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="text-sm text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white flex items-center gap-1.5 transition-colors"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                   {copied ? 'Copied!' : 'Copy All'}
@@ -160,9 +160,9 @@ export default function RandomNumberGenerator() {
               )}
             </div>
             
-            <div className="flex-1 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col">
+            <div className="flex-1 bg-[var(--bg-overlay)]/50 rounded-xl border border-[var(--border-subtle)] p-6 flex flex-col">
               {results.length === 0 && !isGenerating ? (
-                <div className="flex-1 flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500">
+                <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-muted)]">
                   <Hash className="w-12 h-12 mb-3 opacity-20" />
                   <p>Click Generate to create random numbers</p>
                 </div>
@@ -171,7 +171,7 @@ export default function RandomNumberGenerator() {
                   {results.map((num, i) => (
                     <div 
                       key={i} 
-                      className="px-4 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-lg font-bold text-zinc-900 dark:text-white shadow-sm animate-in zoom-in duration-300"
+                      className="px-4 py-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg text-lg font-bold text-[var(--text-primary)] shadow-sm animate-in zoom-in duration-300"
                       style={{ animationDelay: `${Math.min(i * 30, 500)}ms` }}
                     >
                       {num}

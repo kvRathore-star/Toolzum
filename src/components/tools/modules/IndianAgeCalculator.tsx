@@ -97,18 +97,18 @@ export default function IndianAgeCalculator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <Calendar className="w-6 h-6 text-indigo-500" />
+      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Calendar className="w-6 h-6 text-[var(--accent)]" />
           Indian Age Calculator (DD/MM/YYYY)
         </h2>
-        <p className="text-sm text-[var(--text-secondary)] dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Calculate your exact age in years, months, and days and verify your eligibility for school, licenses, voting, and senior benefits.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-wider">Date of Birth</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -117,7 +117,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={day}
                   onChange={e => setDay(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
                 >
                   {Array.from({ length: 31 }, (_, i) => String(i + 1)).map(d => (
                     <option key={d} value={d}>{d.padStart(2, '0')}</option>
@@ -130,7 +130,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={month}
                   onChange={e => setMonth(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
                 >
                   {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m, i) => (
                     <option key={i + 1} value={String(i + 1)}>{m}</option>
@@ -143,7 +143,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={year}
                   onChange={e => setYear(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
                 >
                   {yearOptions.map(y => (
                     <option key={y} value={String(y)}>{y}</option>
@@ -154,25 +154,25 @@ export default function IndianAgeCalculator() {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">Target Date (Defaults to Today)</label>
+            <label className="block text-sm font-bold text-[var(--text-primary)]">Target Date (Defaults to Today)</label>
             <input
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
             />
           </div>
 
           <div className="flex gap-4">
             <button
               onClick={handleCalculate}
-              className="flex-1 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
             >
               Calculate Age
             </button>
             <button
               onClick={handleReset}
-              className="px-5 py-3.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl transition-all cursor-pointer"
+              className="px-5 py-3.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all cursor-pointer"
               aria-label="Reset"
             >
               <RefreshCw className="w-5 h-5" />
@@ -180,25 +180,25 @@ export default function IndianAgeCalculator() {
           </div>
 
           {result && (
-            <div className="space-y-6 border-t border-zinc-200 dark:border-zinc-800 pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
+            <div className="space-y-6 border-t border-[var(--border-subtle)] pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
               <div className="p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center space-y-2">
-                <span className="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Your exact age is</span>
-                <span className="text-3xl font-black text-indigo-500 block">
+                <span className="text-xs text-[var(--accent)] font-bold uppercase tracking-wider block">Your exact age is</span>
+                <span className="text-3xl font-black text-[var(--accent)] block">
                   {result.years} <span className="text-base font-normal">Years</span>, {result.months} <span className="text-base font-normal">Months</span>, {result.days} <span className="text-base font-normal">Days</span>
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl">
-                  <span className="text-[10px] text-zinc-500 block">Total Days</span>
+                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <span className="text-[10px] text-[var(--text-secondary)] block">Total Days</span>
                   <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalDays}</span>
                 </div>
-                <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl">
-                  <span className="text-[10px] text-zinc-500 block">Total Weeks</span>
+                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <span className="text-[10px] text-[var(--text-secondary)] block">Total Weeks</span>
                   <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalWeeks}</span>
                 </div>
-                <div className="p-3 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl">
-                  <span className="text-[10px] text-zinc-500 block">Next Birthday</span>
+                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <span className="text-[10px] text-[var(--text-secondary)] block">Next Birthday</span>
                   <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.nextBdayDays} Days</span>
                 </div>
               </div>
@@ -207,9 +207,9 @@ export default function IndianAgeCalculator() {
         </div>
 
         {/* Right Side: Eligibility Check */}
-        <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-6 rounded-2xl space-y-6">
-          <h4 className="font-bold text-sm text-zinc-900 dark:text-white flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">
-            <Milestone className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl space-y-6">
+          <h4 className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2">
+            <Milestone className="w-4 h-4 text-[var(--accent)]" />
             Milestones & Eligibility
           </h4>
 
@@ -224,7 +224,7 @@ export default function IndianAgeCalculator() {
                       ? isEligible
                         ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
                         : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                      : 'bg-white dark:bg-black border-zinc-200 dark:border-zinc-800 text-zinc-500'
+                      : 'bg-white dark:bg-black border-[var(--border-subtle)] text-[var(--text-secondary)]'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2 font-bold">

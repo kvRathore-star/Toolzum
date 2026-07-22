@@ -44,10 +44,10 @@ export default function HtmlToImage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
          <div className="text-center">
            <h2 className="text-2xl font-bold">HTML to Image Converter</h2>
-           <p className="text-zinc-500">Render custom HTML/CSS directly into a downloadable image (PNG, JPG, SVG).</p>
+           <p className="text-[var(--text-secondary)]">Render custom HTML/CSS directly into a downloadable image (PNG, JPG, SVG).</p>
          </div>
          
          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -61,12 +61,12 @@ export default function HtmlToImage() {
                placeholder="Enter HTML here..."
              />
              <div className="flex gap-4">
-               <select value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-zinc-100 dark:bg-zinc-800 border-none rounded-lg px-4 py-2 flex-1 outline-none">
+               <select value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-[var(--bg-surface)] border-none rounded-lg px-4 py-2 flex-1 outline-none">
                  <option value="png">PNG</option>
                  <option value="jpeg">JPEG</option>
                  <option value="svg">SVG</option>
                </select>
-               <button onClick={convert} className="flex-[2] bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg shadow transition-all active:scale-95">
+               <button onClick={convert} className="flex-[2] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-lg shadow transition-all active:scale-95">
                  Render & Download
                </button>
              </div>
@@ -75,7 +75,7 @@ export default function HtmlToImage() {
            {/* Preview */}
            <div className="space-y-4">
              <h3 className="font-semibold">Live Preview</h3>
-             <div ref={previewContainerRef} className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 overflow-auto bg-zinc-50 dark:bg-black/20 flex items-center justify-center min-h-[16rem]">
+             <div ref={previewContainerRef} className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 overflow-auto bg-[var(--bg-overlay)] flex items-center justify-center min-h-[16rem]">
                <iframe
                  ref={iframeRef}
                  className="w-full h-full min-h-[14rem]"

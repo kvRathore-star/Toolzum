@@ -114,22 +114,22 @@ export default function FaviconGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Image
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Included Assets</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="text-[var(--text-primary)] font-medium">Included Assets</h4>
           
           <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-300">
             <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> favicon-16x16.png</li>
@@ -152,8 +152,8 @@ export default function FaviconGenerator() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Package Ready</h4>
                </div>
                
@@ -171,9 +171,9 @@ export default function FaviconGenerator() {
                 </button>
             </div>
           ) : (
-             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-                <h4 className="text-zinc-900 dark:text-white font-medium mb-4">Original Image Preview</h4>
-                <div className="bg-zinc-50 dark:bg-black rounded-xl overflow-hidden border border-zinc-100 dark:border-zinc-800 flex items-center justify-center min-h-[250px] p-4 chess-bg">
+             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+                <h4 className="text-[var(--text-primary)] font-medium mb-4">Original Image Preview</h4>
+                <div className="bg-[var(--bg-overlay)] rounded-xl overflow-hidden border border-[var(--border-subtle)] flex items-center justify-center min-h-[250px] p-4 chess-bg">
                   <style>{`
                     .chess-bg {
                       background-image: 

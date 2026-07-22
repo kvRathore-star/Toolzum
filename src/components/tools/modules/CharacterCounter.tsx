@@ -69,12 +69,12 @@ export default function CharacterCounter() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <FileText className="w-6 h-6 text-indigo-500" />
+      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <FileText className="w-6 h-6 text-[var(--accent)]" />
           Advanced Character & Word Analyzer
         </h2>
-        <p className="text-sm text-[var(--text-secondary)] dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Detailed text metrics (letters, sentences, paragraphs, read time) and real-time word density tracker.
         </p>
       </div>
@@ -88,9 +88,9 @@ export default function CharacterCounter() {
           { label: 'Sentences', value: sentencesCount },
           { label: 'Paragraphs', value: paragraphsCount },
         ].map((stat, idx) => (
-          <div key={idx} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl text-center shadow-sm">
-            <div className="text-3xl font-black text-indigo-500">{stat.value}</div>
-            <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mt-1">{stat.label}</div>
+          <div key={idx} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl text-center shadow-sm">
+            <div className="text-3xl font-black text-[var(--accent)]">{stat.value}</div>
+            <div className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider mt-1">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -103,12 +103,12 @@ export default function CharacterCounter() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Paste or write your text here to begin analysis..."
-              className="w-full h-[400px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 text-base text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none shadow-sm focus:border-indigo-500 transition-colors"
+              className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none shadow-sm focus:border-indigo-500 transition-colors"
             />
             {text && (
               <button
                 onClick={handleClear}
-                className="absolute top-4 right-4 bg-zinc-100 hover:bg-[var(--bg-surface)] dark:bg-zinc-800 dark:hover:bg-zinc-700 text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                className="absolute top-4 right-4 bg-zinc-100 hover:bg-[var(--bg-surface)] dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-xs font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
               >
                 Clear Text
               </button>
@@ -117,45 +117,45 @@ export default function CharacterCounter() {
 
           {/* Quick case modification controls */}
           <div className="flex flex-wrap gap-2 text-xs print:hidden">
-            <button onClick={() => transformCase('upper')} className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-xl font-bold cursor-pointer">
+            <button onClick={() => transformCase('upper')} className="px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl font-bold cursor-pointer">
               UPPERCASE
             </button>
-            <button onClick={() => transformCase('lower')} className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-xl font-bold cursor-pointer">
+            <button onClick={() => transformCase('lower')} className="px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl font-bold cursor-pointer">
               lowercase
             </button>
-            <button onClick={() => transformCase('title')} className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-xl font-bold cursor-pointer">
+            <button onClick={() => transformCase('title')} className="px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl font-bold cursor-pointer">
               Title Case
             </button>
-            <button onClick={() => transformCase('sentence')} className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-xl font-bold cursor-pointer">
+            <button onClick={() => transformCase('sentence')} className="px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl font-bold cursor-pointer">
               Sentence Case
             </button>
           </div>
         </div>
 
         {/* Read time and Keyword density maps */}
-        <div className="space-y-6 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-6 rounded-2xl">
+        <div className="space-y-6 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl">
           {/* Times */}
           <div className="space-y-3">
-            <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-              <Type className="w-4 h-4 text-indigo-500" />
+            <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
+              <Type className="w-4 h-4 text-[var(--accent)]" />
               Timing Estimates
             </h4>
             <div className="grid grid-cols-2 gap-3 text-center text-xs">
-              <div className="p-3 bg-white dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-white/5">
-                <span className="text-zinc-500 block">Read Time</span>
+              <div className="p-3 bg-white dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+                <span className="text-[var(--text-secondary)] block">Read Time</span>
                 <span className="text-sm font-bold text-zinc-900 dark:text-[var(--text-secondary)] block mt-1">{readingTimeSeconds} seconds</span>
               </div>
-              <div className="p-3 bg-white dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-white/5">
-                <span className="text-zinc-500 block">Speaking Time</span>
+              <div className="p-3 bg-white dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+                <span className="text-[var(--text-secondary)] block">Speaking Time</span>
                 <span className="text-sm font-bold text-zinc-900 dark:text-[var(--text-secondary)] block mt-1">{speakingTimeSeconds} seconds</span>
               </div>
             </div>
           </div>
 
           {/* Density map */}
-          <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 pt-4">
-            <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-              <BarChart3 className="w-4 h-4 text-indigo-500" />
+          <div className="space-y-3 border-t border-[var(--border-subtle)] pt-4">
+            <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
+              <BarChart3 className="w-4 h-4 text-[var(--accent)]" />
               Keyword Density Map
             </h4>
             {densities.length > 0 ? (
@@ -168,7 +168,7 @@ export default function CharacterCounter() {
                         <span className="font-mono font-medium">{word}</span>
                         <span className="font-bold">{count}x ({pct}%)</span>
                       </div>
-                      <div className="w-full h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
                         <div 
                           className="h-full bg-indigo-500 rounded-full" 
                           style={{ width: `${Math.min(100, (count / densities[0][1]) * 100)}%` }} 

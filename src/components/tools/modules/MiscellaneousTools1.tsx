@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 const labelClass = "block text-sm font-medium mb-1 text-[var(--text-secondary)]";
-const btnClass = "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50";
+const btnClass = "px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50";
 const cardClass = "w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6 space-y-4";
 const headingClass = "text-lg font-semibold text-[var(--text-primary)]";
-const selClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
-const textAreaClass = "w-full h-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+const selClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+const textAreaClass = "w-full h-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -251,7 +251,7 @@ export function GradientGenerator() {
         <option value="to top right">Top Right</option><option value="to top left">Top Left</option>
       </Select>
       <div className="w-full h-32 rounded-lg" style={{ background: gradient }} />
-      <code className="text-xs block bg-zinc-100 dark:bg-zinc-800 p-2 rounded break-all">{gradient}</code>
+      <code className="text-xs block bg-[var(--bg-surface)] p-2 rounded break-all">{gradient}</code>
       <button className="text-xs text-blue-600 hover:underline" onClick={() => navigator.clipboard.writeText(gradient)}>Copy CSS</button>
     </Card>
   );
@@ -316,7 +316,7 @@ export function ListRandomizer() {
     <Card title="List Randomizer">
       <textarea className={textAreaClass} placeholder="Enter items (one per line)" value={input} onChange={e => setInput(e.target.value)} />
       <Btn onClick={randomize}>Randomize</Btn>
-      {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
+      {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
     </Card>
   );
 }
@@ -339,7 +339,7 @@ export function ListSorter() {
         <Btn onClick={() => sort('za')}>Z-A</Btn>
         <Btn onClick={() => sort('len')}>By Length</Btn>
       </div>
-      {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
+      {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
     </Card>
   );
 }
@@ -504,7 +504,7 @@ export function HangmanGame() {
       <div className="flex flex-wrap gap-1 justify-center max-w-xs mx-auto">
         {alphabet.map(l => (
           <button key={l} disabled={guessed.includes(l) || wrong >= 6 || !display.includes('_')}
-            className={'w-7 h-7 text-xs rounded ' + (guessed.includes(l) ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-400' : word.current.includes(l) ? 'bg-green-500 text-white' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-blue-100') + ' disabled:opacity-40'}
+            className={'w-7 h-7 text-xs rounded ' + (guessed.includes(l) ? 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-muted)]' : word.current.includes(l) ? 'bg-green-500 text-white' : 'bg-[var(--bg-surface)] hover:bg-blue-100') + ' disabled:opacity-40'}
             onClick={() => guess(l)}>{l}</button>
         ))}
       </div>
@@ -585,7 +585,7 @@ export function NumberToWordsConverter() {
   return (
     <Card title="Number to Words">
       <Input type="number" value={num} onChange={e => setNum(e.target.value)} />
-      <div className="text-sm font-medium p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg">{words}</div>
+      <div className="text-sm font-medium p-3 bg-[var(--bg-surface)] rounded-lg">{words}</div>
     </Card>
   );
 }
@@ -1207,9 +1207,9 @@ export function MathEquationSolver() {
   return (
     <Card title="Equation Solver">
       <Input value={eq} onChange={e => setEq(e.target.value)} placeholder="e.g. 2x + 3 = 7 or 3x^2 - 5x + 2 = 0" />
-      <button onClick={solve} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Solve</button>
+      <button onClick={solve} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Solve</button>
       {result && <div className="text-lg font-bold font-mono mt-2">{result}</div>}
-      <p className="text-xs text-zinc-500 mt-1">Supports linear (ax + b = cx + d) and quadratic (ax² + bx + c = 0) equations.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-1">Supports linear (ax + b = cx + d) and quadratic (ax² + bx + c = 0) equations.</p>
     </Card>
   );
 }
@@ -1521,7 +1521,7 @@ export function HeartRateCalculator() {
         <div>Zone 4 (80-90%): {Math.round(max * 0.8)}-{Math.round(max * 0.9)} bpm</div>
         <div>Zone 5 (90-100%): {Math.round(max * 0.9)}-{max} bpm</div>
       </div>
-      <p className="text-xs text-zinc-500 mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
     </Card>
   );
 }
@@ -1568,7 +1568,7 @@ export function StepsCalculator() {
     <Card title="Steps to Distance">
       <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div><div><label className={labelClass}>Height (cm)</label><Input type="number" value={height} onChange={e => setHeight(e.target.value)} /></div></div>
       <div className="text-xs space-y-1"><div>Distance: {distKm.toFixed(2)} km</div><div>Distance: {distMi.toFixed(2)} miles</div><div>Calories (est): {(s * 0.04).toFixed(0)} kcal</div></div>
-      <p className="text-xs text-zinc-500 mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
     </Card>
   );
 }

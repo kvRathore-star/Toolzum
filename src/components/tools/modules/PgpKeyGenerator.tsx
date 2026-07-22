@@ -56,32 +56,32 @@ export default function PgpKeyGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Key className="w-5 h-5 text-indigo-500" />
+          <Key className="w-5 h-5 text-[var(--accent)]" />
           PGP Key Pair Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Generate RSA-2048 public and private PGP key blocks offline using openpgp securely in-browser.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Generate RSA-2048 public and private PGP key blocks offline using openpgp securely in-browser.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Settings */}
-        <div className="lg:col-span-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 text-xs">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">User Identity</h3>
+        <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">User Identity</h3>
           
           <div className="space-y-1">
-            <label className="text-[10px] text-zinc-400 font-bold">User Name</label>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 outline-none" />
+            <label className="text-[10px] text-[var(--text-muted)] font-bold">User Name</label>
+            <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] text-zinc-400 font-bold">Email Address</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 outline-none" />
+            <label className="text-[10px] text-[var(--text-muted)] font-bold">Email Address</label>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] text-zinc-400 font-bold">Passphrase (Password Lock)</label>
-            <input type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 outline-none" />
+            <label className="text-[10px] text-[var(--text-muted)] font-bold">Passphrase (Password Lock)</label>
+            <input type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
           </div>
 
           <button onClick={generateKeys} disabled={isGenerating} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
@@ -95,31 +95,31 @@ export default function PgpKeyGenerator() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
             {/* Public Key */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-zinc-800 pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Public Key Block</span>
                 {publicKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-zinc-500 hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-zinc-500 hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>
-              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
             </div>
 
             {/* Private Key */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-zinc-800 pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Private Key Block</span>
                 {privateKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-zinc-500 hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-zinc-500 hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>
-              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
             </div>
 
           </div>

@@ -105,14 +105,14 @@ export default function ImageBulkConverter() {
           />
 
           {files.length > 0 && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/5 p-4 rounded-2xl max-h-[300px] overflow-y-auto">
-              <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-3 text-sm sticky top-0 bg-white dark:bg-zinc-900 pb-2">
+            <div className="bg-[var(--bg-elevated)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-2xl max-h-[300px] overflow-y-auto">
+              <h4 className="text-[var(--text-primary)] font-medium mb-3 text-sm sticky top-0 bg-[var(--bg-elevated)] pb-2">
                 {files.length} images queued
               </h4>
               <ul className="space-y-2">
                 {files.map((f) => (
-                  <li key={f.id} className="flex items-center justify-between bg-zinc-50/50 dark:bg-black/50 border border-zinc-200 dark:border-white/5 p-2 rounded-lg text-sm">
-                    <span className="text-zinc-600 dark:text-zinc-400 truncate flex-1 mr-2">{f.file.name}</span>
+                  <li key={f.id} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] p-2 rounded-lg text-sm">
+                    <span className="text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1 mr-2">{f.file.name}</span>
                     <button onClick={() => removeFile(f.id)} className="text-red-400 hover:text-red-300 p-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -125,26 +125,26 @@ export default function ImageBulkConverter() {
 
         {/* Controls & Action */}
         <div className="space-y-6">
-          <div className="p-6 border border-zinc-200 dark:border-white/10 bg-white dark:bg-black rounded-2xl shadow-xl space-y-6">
+          <div className="p-6 border border-[var(--border-subtle)] bg-white dark:bg-black rounded-2xl shadow-xl space-y-6">
             
             <div>
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Convert to Format</label>
+              <label className="block text-sm font-medium text-[var(--text-primary)] mb-3">Convert to Format</label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   onClick={() => setTargetFormat('image/jpeg')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/jpeg' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-700'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/jpeg' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   JPG
                 </button>
                 <button
                   onClick={() => setTargetFormat('image/png')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/png' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-700'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/png' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   PNG
                 </button>
                 <button
                   onClick={() => setTargetFormat('image/webp')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/webp' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-700'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/webp' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   WEBP
                 </button>
@@ -153,7 +153,7 @@ export default function ImageBulkConverter() {
 
             <div>
               <div className="flex justify-between mb-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Quality</label>
+                <label className="text-sm font-medium text-[var(--text-primary)]">Quality</label>
                 <span className="text-blue-400 font-bold text-sm">{Math.round(quality * 100)}%</span>
               </div>
               <input 
@@ -163,7 +163,7 @@ export default function ImageBulkConverter() {
                 step="0.05"
                 value={quality}
                 onChange={(e) => setQuality(Number(e.target.value))}
-                className="w-full h-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                className="w-full h-2 bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
             </div>
 

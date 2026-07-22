@@ -151,25 +151,25 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
       <AiPrivacyBanner />
       <div className="flex items-center gap-2 mb-1">
         <FileText className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI Complaint Letter Generator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Complaint Letter Generator</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate legally sound complaint letters citing Indian consumer law, powered by AI.</p>
+          <p className="text-xs text-[var(--text-secondary)]">Generate legally sound complaint letters citing Indian consumer law, powered by AI.</p>
 
           <AiSettings />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Complaint Type *</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Complaint Type *</label>
               <div className="grid grid-cols-2 gap-1.5">
                 {COMPLAINT_TYPES.map(t => (
                   <button key={t.id} onClick={() => update('type', t.id)}
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-semibold transition-colors border ${
                       form.type === t.id 
                         ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300' 
-                        : 'bg-zinc-50 dark:bg-black/30 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
                     }`}>
                     {t.icon} {t.label}
                   </button>
@@ -178,65 +178,65 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
             </div>
             <div className="space-y-3">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Your Full Name *</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Full Name *</label>
                 <input value={form.fullName} onChange={e => update('fullName', e.target.value)} placeholder="Rahul Sharma"
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-zinc-400 uppercase">Email</label>
+                  <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Email</label>
                   <input value={form.email} onChange={e => update('email', e.target.value)} placeholder="rahul@email.com"
-                    className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-zinc-400 uppercase">Phone</label>
+                  <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone</label>
                   <input value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="9876543210"
-                    className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 </div>
               </div>
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Against (Company/Person)</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Against (Company/Person)</label>
               <input value={form.againstName} onChange={e => update('againstName', e.target.value)} placeholder="XYZ Bank / ABC Company"
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Transaction/Reference ID</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Transaction/Reference ID</label>
               <input value={form.transactionId} onChange={e => update('transactionId', e.target.value)} placeholder="TXN123456789"
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Amount (₹)</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Amount (₹)</label>
                 <input type="number" value={form.amount} onChange={e => update('amount', e.target.value)} placeholder="5000"
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Date of Incident</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Date of Incident</label>
                 <input type="date" value={form.date} onChange={e => update('date', e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
               </div>
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Your Address</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Address</label>
             <input value={form.address} onChange={e => update('address', e.target.value)} placeholder="123, Main Street, New Delhi - 110001"
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Describe Your Complaint in Detail *</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Describe Your Complaint in Detail *</label>
             <textarea value={form.description} onChange={e => update('description', e.target.value)} rows={4}
               placeholder="Describe what happened, when, and who you contacted..."
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Relief Sought (What do you want?)</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Relief Sought (What do you want?)</label>
             <textarea value={form.relief} onChange={e => update('relief', e.target.value)} rows={2}
               placeholder="e.g. Refund of ₹5000, compensation for mental harassment,道歉..."
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
           </div>
 
           <button onClick={handleGenerate} disabled={isGenerating || !form.fullName.trim() || !form.description.trim()}
@@ -245,12 +245,12 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
           </button>
 
           {generatedLetter && (
-            <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Generated Letter</h4>
+                <h4 className="text-xs font-bold text-[var(--text-primary)]">Generated Letter</h4>
                 <div className="flex gap-1.5">
                   <button onClick={handleCopy}
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />} {copied ? 'Copied' : 'Copy'}
                   </button>
                   <button onClick={handleDownload}
@@ -259,12 +259,12 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
                   </button>
                 </div>
               </div>
-              <pre className="text-[11px] text-zinc-700 dark:text-zinc-300 font-mono whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto">{generatedLetter}</pre>
+              <pre className="text-[11px] text-[var(--text-primary)] font-mono whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto">{generatedLetter}</pre>
             </div>
           )}
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Unlimited letters, 50+ legal templates (NCDRC, banking ombudsman, SEBI, IRDA, RERA), download as PDF with professional letterhead, email directly to regulatory body.
             </p>
           </div>

@@ -33,29 +33,29 @@ export default function JwtDebugger() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <textarea value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono focus:border-blue-500 transition-colors break-all" />
+      <textarea value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[var(--accent)] transition-colors break-all" />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {header && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Header</h4>
+            <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Header</h4>
             <div className="relative">
-              <textarea value={header} readOnly className="w-full h-[200px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
-              <button onClick={() => { clipboardWrite(header); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>
+              <textarea value={header} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
+              <button onClick={() => { clipboardWrite(header); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
           <div className="space-y-1">
-            <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Payload</h4>
+            <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Payload</h4>
             <div className="relative">
-              <textarea value={payload} readOnly className="w-full h-[200px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
-              <button onClick={() => { clipboardWrite(payload); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>
+              <textarea value={payload} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
+              <button onClick={() => { clipboardWrite(payload); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
         </div>
       )}
       {payload && (
-        <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-2">
-          <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Token Info</h4>
+        <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
+          <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Token Info</h4>
           {(() => {
             try {
               const p = JSON.parse(payload);
@@ -73,7 +73,7 @@ export default function JwtDebugger() {
               if (p.jti) claims.push({ label: 'JWT ID (jti)', value: p.jti });
               return claims.map((c, i) => (
                 <div key={i} className="flex items-center gap-3 text-xs">
-                  <span className="w-[160px] font-medium text-zinc-500 shrink-0">{c.label}</span>
+                  <span className="w-[160px] font-medium text-[var(--text-secondary)] shrink-0">{c.label}</span>
                   <span className={`font-mono break-all ${c.color || 'text-zinc-800 dark:text-zinc-200'}`}>{c.value}</span>
                 </div>
               ));

@@ -160,10 +160,10 @@ export default function PsdToJpgPng() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
             {(file.size / 1024 / 1024).toFixed(2)} MB
             {psdData && (
               <>
@@ -176,20 +176,20 @@ export default function PsdToJpgPng() {
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
             Export Settings
           </h4>
 
           <div>
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-2 block">Format</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium mb-2 block">Format</label>
             <div className="grid grid-cols-3 gap-2">
               {FORMATS.map((f) => (
                 <button
@@ -198,7 +198,7 @@ export default function PsdToJpgPng() {
                   className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all border ${
                     format === f.mime
                       ? 'bg-blue-600 border-blue-500 text-white shadow-md'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'
                   }`}
                 >
                   {f.label}
@@ -209,7 +209,7 @@ export default function PsdToJpgPng() {
 
           {format === 'image/jpeg' || format === 'image/webp' ? (
             <div>
-              <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-2 block">
+              <label className="text-xs text-[var(--text-secondary)] font-medium mb-2 block">
                 Quality: {quality}%
               </label>
               <input
@@ -220,7 +220,7 @@ export default function PsdToJpgPng() {
                 onChange={(e) => setQuality(Number(e.target.value))}
                 className="w-full accent-blue-600"
               />
-              <div className="flex justify-between text-xs text-zinc-400 mt-1">
+              <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">
                 <span>Smaller</span>
                 <span>Larger</span>
               </div>
@@ -228,7 +228,7 @@ export default function PsdToJpgPng() {
           ) : null}
 
           {format === 'image/png' ? (
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-[var(--text-secondary)]">
               PNG output preserves transparency from the PSD composite image.
             </p>
           ) : null}
@@ -247,7 +247,7 @@ export default function PsdToJpgPng() {
 
         <div className="space-y-6">
           {previewUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl">
               <div className="overflow-hidden rounded-xl max-h-[350px] flex items-center justify-center chess-bg">
                 <style>{`
                     .chess-bg {
@@ -269,14 +269,14 @@ export default function PsdToJpgPng() {
                   className="max-h-[340px] w-full object-contain"
                 />
               </div>
-              <div className="flex justify-between text-xs text-zinc-500 mt-3 px-1">
+              <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-3 px-1">
                 <span>{psdData?.width}px × {psdData?.height}px</span>
                 <span>{COLOR_MODE_NAMES[psdData?.colorMode ?? 3]}</span>
                 <span>{layerCount} Layer{layerCount !== 1 ? 's' : ''}</span>
               </div>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>

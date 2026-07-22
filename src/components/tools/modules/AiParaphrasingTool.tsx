@@ -31,8 +31,8 @@ export default function AiParaphrasingTool() {
       <AiPrivacyBanner />
       <AiSettings />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <textarea value={inputText} onChange={e => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()} placeholder="Paste text to paraphrase..." className="w-full h-96 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-transparent outline-none" />
-        <textarea value={outputText} readOnly placeholder="Paraphrased text will appear here..." className="w-full h-96 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 outline-none" />
+        <textarea value={inputText} onChange={e => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()} placeholder="Paste text to paraphrase..." className="w-full h-96 p-4 rounded-xl border border-[var(--border-subtle)] bg-transparent outline-none" />
+        <textarea value={outputText} readOnly placeholder="Paraphrased text will appear here..." className="w-full h-96 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-zinc-900 outline-none" />
       </div>
       <button onClick={handleGenerate} disabled={isProcessing} className="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl">{isProcessing ? <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />

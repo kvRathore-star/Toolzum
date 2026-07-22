@@ -56,23 +56,23 @@ export default function ImageResizer() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <h2 className="text-2xl font-bold">Image Resizer</h2>
          
-         <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+         <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
            <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
-           {image ? <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg" /> : <div className="text-zinc-500">Click or Drag Image Here</div>}
+           {image ? <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg" /> : <div className="text-[var(--text-secondary)]">Click or Drag Image Here</div>}
          </div>
 
          {image && (
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                  <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Width (px)</label>
-                 <input type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 outline-none" />
+                 <input type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 outline-none" />
               </div>
               <div>
                  <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Height (px)</label>
-                 <input type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 outline-none" />
+                 <input type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 outline-none" />
               </div>
            </div>
          )}

@@ -41,47 +41,47 @@ export default function RobotsTxtGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <ShieldAlert className="w-5 h-5 text-indigo-500" />
+          <ShieldAlert className="w-5 h-5 text-[var(--accent)]" />
           Robots.txt Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Configure search spider crawler instructions and path allowances to index your pages correctly.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Configure search spider crawler instructions and path allowances to index your pages correctly.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Config panel */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">Directives</h3>
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Directives</h3>
           
           <div className="space-y-2">
-            <label className="text-xs text-zinc-400 font-bold uppercase">Sitemap URL</label>
+            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Sitemap URL</label>
             <input 
               type="text" 
               value={sitemap} 
               onChange={e => setSitemap(e.target.value)} 
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] text-xs outline-none"
             />
           </div>
 
           <div className="border-t border-[var(--border-subtle)] pt-3 space-y-3">
-            <span className="text-xs text-zinc-400 font-bold uppercase block">Block Paths (Disallow)</span>
+            <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Block Paths (Disallow)</span>
             <div className="flex gap-2">
               <input 
                 type="text" 
                 value={newDisallow} 
                 onChange={e => setNewDisallow(e.target.value)}
                 placeholder="/admin-dashboard" 
-                className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-white outline-none"
+                className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none"
               />
               <button onClick={addDisallow} className="bg-indigo-600 px-3 py-2 rounded-xl text-xs font-bold text-white cursor-pointer">Add</button>
             </div>
             
             <div className="space-y-1.5 max-h-[150px] overflow-y-auto">
               {disallows.map((path, idx) => (
-                <div key={idx} className="flex justify-between items-center text-[10px] bg-zinc-50 dark:bg-black/10 p-2 rounded-xl border border-[var(--border-subtle)]">
+                <div key={idx} className="flex justify-between items-center text-[10px] bg-[var(--bg-overlay)] p-2 rounded-xl border border-[var(--border-subtle)]">
                   <span className="font-mono text-zinc-300">Disallow: {path}</span>
-                  <button onClick={() => removeDisallow(idx)} className="text-[10px] text-rose-500 hover:underline">Remove</button>
+                  <button onClick={() => removeDisallow(idx)} className="text-[10px] text-[var(--accent)] hover:underline">Remove</button>
                 </div>
               ))}
             </div>
@@ -89,16 +89,16 @@ export default function RobotsTxtGenerator() {
         </div>
 
         {/* Output Panel */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-              <span className="text-xs text-zinc-400 font-bold uppercase">Generated Robots.txt</span>
-              <button onClick={handleCopy} className="p-1.5 text-zinc-500 hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Generated Robots.txt</span>
+              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
             </div>
             <textarea
               value={buildRobotsTxt()}
               readOnly
-              className="w-full flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
             />
           </div>
         </div>

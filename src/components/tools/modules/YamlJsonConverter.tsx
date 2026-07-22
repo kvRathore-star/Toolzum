@@ -128,16 +128,16 @@ export default function YamlJsonConverter() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-1">
+        <div className="flex items-center gap-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-1">
           <button
             onClick={() => { setDirection('yaml-to-json'); setInputFormat('yaml'); }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'yaml-to-json' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'yaml-to-json' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             YAML → JSON
           </button>
           <button
             onClick={() => { setDirection('json-to-yaml'); setInputFormat('json'); }}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'json-to-yaml' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'json-to-yaml' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             JSON → YAML
           </button>
@@ -146,7 +146,7 @@ export default function YamlJsonConverter() {
         <button
           onClick={handleFormatDetect}
           disabled={!input.trim()}
-          className="px-4 py-2 rounded-xl text-sm bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50"
+          className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
         >
           Auto-Detect Format
         </button>
@@ -154,26 +154,26 @@ export default function YamlJsonConverter() {
         <select
           value={inputFormat}
           onChange={(e) => { setInputFormat(e.target.value as InputFormat); }}
-          className="px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm focus:outline-none"
+          className="px-3 py-2 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
         >
           <option value="auto">Auto</option>
           <option value="yaml">YAML</option>
           <option value="json">JSON</option>
         </select>
 
-        <label className="cursor-pointer px-4 py-2 rounded-xl text-sm bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+        <label className="cursor-pointer px-4 py-2 rounded-xl text-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors">
           Upload File
           <input type="file" accept=".yaml,.yml,.json" onChange={handleFileUpload} className="hidden" />
         </label>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="flex flex-col h-[500px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center">
-            <span className="text-zinc-700 dark:text-zinc-300 font-medium text-sm flex items-center gap-2">
-              <svg className="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+        <div className="flex flex-col h-[500px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center">
+            <span className="text-[var(--text-primary)] font-medium text-sm flex items-center gap-2">
+              <svg className="w-4 h-4 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
               {direction === 'yaml-to-json' ? 'YAML' : 'JSON'} Input
-              <span className="text-xs text-zinc-500 font-normal">{inputCharCount} chars, {inputLineCount} lines</span>
+              <span className="text-xs text-[var(--text-secondary)] font-normal">{inputCharCount} chars, {inputLineCount} lines</span>
             </span>
             <div className="flex gap-2 items-center">
               <button onClick={() => { setInput(''); setOutput(''); setError(null); }} className="text-xs text-red-400 hover:text-red-300 px-2 py-1 bg-red-400/10 rounded-md transition-colors">Clear</button>
@@ -183,23 +183,23 @@ export default function YamlJsonConverter() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={direction === 'yaml-to-json' ? 'Paste YAML here...' : 'Paste JSON here...'}
-            className="flex-1 w-full bg-transparent p-4 text-zinc-700 dark:text-zinc-300 font-mono text-sm resize-none outline-none focus:ring-1 focus:ring-blue-500/50"
+            className="flex-1 w-full bg-transparent p-4 text-[var(--text-primary)] font-mono text-sm resize-none outline-none focus:ring-1 focus:ring-[var(--accent)]/50"
             spellCheck={false}
           />
         </div>
 
-        <div className="flex flex-col h-[500px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-white/5 flex flex-wrap gap-2 items-center justify-between">
-            <span className="text-zinc-700 dark:text-zinc-300 font-medium text-sm flex items-center gap-2">
+        <div className="flex flex-col h-[500px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl relative">
+          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex flex-wrap gap-2 items-center justify-between">
+            <span className="text-[var(--text-primary)] font-medium text-sm flex items-center gap-2">
               <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
               {direction === 'yaml-to-json' ? 'JSON' : 'YAML'} Output
-              <span className="text-xs text-zinc-500 font-normal">{outputLineCount} lines</span>
+              <span className="text-xs text-[var(--text-secondary)] font-normal">{outputLineCount} lines</span>
             </span>
             <div className="flex gap-2">
-              <button onClick={toggleDirection} className="p-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg transition-colors" title="Toggle direction" aria-label="Toggle direction">
+              <button onClick={toggleDirection} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg transition-colors" title="Toggle direction" aria-label="Toggle direction">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" /></svg>
               </button>
-              <button onClick={swapInputOutput} disabled={!output} className="p-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg disabled:opacity-50 transition-colors" title="Swap input/output" aria-label="Swap">
+              <button onClick={swapInputOutput} disabled={!output} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg disabled:opacity-50 transition-colors" title="Swap input/output" aria-label="Swap">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
               </button>
               <button onClick={copyOutput} disabled={!output} className="p-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy">
@@ -238,7 +238,7 @@ export default function YamlJsonConverter() {
           </div>
         </div>
       </div>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-2 text-center">For YAML structural formatting checks (indentation, tab detection, line-level lints), see <a href="/tools/yaml-validator" className="text-blue-600 dark:text-blue-400 hover:underline">YAML Validator</a>.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-2 text-center">For YAML structural formatting checks (indentation, tab detection, line-level lints), see <a href="/tools/yaml-validator" className="text-blue-600 dark:text-blue-400 hover:underline">YAML Validator</a>.</p>
     </div>
   );
 }

@@ -72,8 +72,8 @@ export default function CropImage() {
   if (!imageSrc) {
     return (
       <div className="space-y-6">
-        <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl text-indigo-400 text-sm flex items-center gap-2">
-          <Crop className="w-5 h-5 text-indigo-400 shrink-0" />
+        <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+          <Crop className="w-5 h-5 text-[var(--accent)] shrink-0" />
           <span><strong>Client-Side Crop:</strong> Modify and crop your images locally. We do not store or send files to a server.</span>
         </div>
         <FileUploader
@@ -87,7 +87,7 @@ export default function CropImage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-secondary)]">Upload scan or custom photo to crop</p>
@@ -95,7 +95,7 @@ export default function CropImage() {
         <div className="flex gap-2">
           <button
             onClick={handleStartOver}
-            className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+            className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
           >
             <Trash2 className="w-4 h-4" />
             Start Over
@@ -121,9 +121,9 @@ export default function CropImage() {
         </div>
 
         {/* Control toolbar */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div className="space-y-3">
-            <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider">Aspect Presets</h4>
+            <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider">Aspect Presets</h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
                 { label: 'Free Size', value: undefined },
@@ -139,7 +139,7 @@ export default function CropImage() {
                   className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer ${
                     aspectRatio === ratio.value
                       ? 'bg-[var(--accent)] border-indigo-600 text-white'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[var(--border-subtle)]'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)]'
                   }`}
                 >
                   {ratio.label}
@@ -149,32 +149,32 @@ export default function CropImage() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider">Transformations</h4>
+            <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider">Transformations</h4>
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleRotate(-90)}
-                className="py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <RefreshCcw className="w-3.5 h-3.5" />
                 Rotate -90°
               </button>
               <button
                 onClick={() => handleRotate(90)}
-                className="py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <RotateCw className="w-3.5 h-3.5" />
                 Rotate +90°
               </button>
               <button
                 onClick={() => handleFlip('h')}
-                className="py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <FlipHorizontal className="w-3.5 h-3.5" />
                 Flip Horiz
               </button>
               <button
                 onClick={() => handleFlip('v')}
-                className="py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <FlipVertical className="w-3.5 h-3.5" />
                 Flip Vert
@@ -182,16 +182,16 @@ export default function CropImage() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="flex flex-col gap-2 pt-4 border-t border-[var(--border-subtle)]">
             <button
               onClick={handleReset}
-              className="w-full py-2.5 bg-[var(--bg-overlay)] dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl text-xs transition-all cursor-pointer"
+              className="w-full py-2.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-all cursor-pointer"
             >
               Reset Crop Guides
             </button>
             <button
               onClick={handleCrop}
-              className="w-full py-3.5 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+              className="w-full py-3.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
             >
               <Download className="w-4 h-4" />
               Crop & Download

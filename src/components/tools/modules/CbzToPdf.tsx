@@ -302,10 +302,10 @@ export default function CbzToPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
             {archiveInfo?.pageCount ?? 0} pages &bull; {(archiveInfo?.totalSize ?? 0) / 1024 / 1024 > 1
               ? `${((archiveInfo?.totalSize ?? 0) / 1024 / 1024).toFixed(2)} MB`
               : `${((archiveInfo?.totalSize ?? 0) / 1024).toFixed(1)} KB`}
@@ -313,15 +313,15 @@ export default function CbzToPdf() {
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       {preview && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">First Page Preview</p>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl">
+          <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">First Page Preview</p>
           <div className="flex justify-center">
             <img src={preview} alt="First page preview" className="max-h-64 object-contain rounded-lg" />
           </div>
@@ -329,28 +329,28 @@ export default function CbzToPdf() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Conversion Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Conversion Settings</h4>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Page Range</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Range</label>
             <input
               type="text"
               value={pageRange}
               onChange={e => setPageRange(e.target.value)}
               placeholder='all, "1-10", or "1,3,5-8"'
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500 text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
             />
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Page Layout</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Layout</label>
             <div className="grid grid-cols-3 gap-2">
               {PAGE_LAYOUTS.map(l => (
                 <button
                   key={l.id}
                   onClick={() => setPageLayout(l.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageLayout === l.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageLayout === l.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {l.label}
                 </button>
@@ -359,13 +359,13 @@ export default function CbzToPdf() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Image Fit</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Image Fit</label>
             <div className="grid grid-cols-3 gap-2">
               {IMAGE_FITS.map(f => (
                 <button
                   key={f.id}
                   onClick={() => setImageFit(f.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${imageFit === f.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${imageFit === f.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {f.label}
                 </button>
@@ -374,13 +374,13 @@ export default function CbzToPdf() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Output Page Size</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Output Page Size</label>
             <div className="grid grid-cols-2 gap-2">
               {PAGE_SIZES.map(s => (
                 <button
                   key={s.id}
                   onClick={() => setPageSize(s.id)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageSize === s.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${pageSize === s.id ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {s.label}
                 </button>
@@ -400,21 +400,21 @@ export default function CbzToPdf() {
 
         <div className="space-y-6">
           {isProcessing && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-3">
-              <h4 className="text-zinc-900 dark:text-white font-medium">Processing</h4>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+              <h4 className="text-[var(--text-primary)] font-medium">Processing</h4>
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                 <div
                   className="bg-blue-600 h-full rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="text-xs text-zinc-500 text-right">{progress}%</p>
+              <p className="text-xs text-[var(--text-secondary)] text-right">{progress}%</p>
             </div>
           )}
 
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -430,7 +430,7 @@ export default function CbzToPdf() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               <p>PDF will appear here after conversion</p>
             </div>

@@ -63,22 +63,22 @@ export default function PomodoroTimer() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3 justify-between">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3 justify-between">
         <div className="flex items-center gap-2">
-          <Timer className="w-5 h-5 text-indigo-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Pomodoro Focus Timer</h3>
+          <Timer className="w-5 h-5 text-[var(--accent)]" />
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Pomodoro Focus Timer</h3>
         </div>
       </div>
 
-      <div className="flex bg-zinc-50 dark:bg-black/30 p-1.5 rounded-xl gap-1.5 max-w-md mx-auto">
-        <button onClick={() => changeMode('pomodoro')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'pomodoro' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Focus Session</button>
-        <button onClick={() => changeMode('shortBreak')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'shortBreak' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Short Break</button>
-        <button onClick={() => changeMode('longBreak')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'longBreak' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Long Break</button>
+      <div className="flex bg-[var(--bg-overlay)] p-1.5 rounded-xl gap-1.5 max-w-md mx-auto">
+        <button onClick={() => changeMode('pomodoro')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'pomodoro' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Focus Session</button>
+        <button onClick={() => changeMode('shortBreak')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'shortBreak' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Short Break</button>
+        <button onClick={() => changeMode('longBreak')} className={`flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer ${mode === 'longBreak' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Long Break</button>
       </div>
 
       <div className="flex flex-col items-center justify-center py-6">
-        <div className="text-7xl font-black font-mono tracking-wider text-zinc-900 dark:text-white mb-6">
+        <div className="text-7xl font-black font-mono tracking-wider text-[var(--text-primary)] mb-6">
           {formatTime(seconds)}
         </div>
 

@@ -25,11 +25,11 @@ export default function DiceRoller() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3 justify-between">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3 justify-between">
         <div className="flex items-center gap-2">
-          <HelpCircle className="w-5 h-5 text-indigo-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">3D CSS Dice Roller</h3>
+          <HelpCircle className="w-5 h-5 text-[var(--accent)]" />
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">3D CSS Dice Roller</h3>
         </div>
         <div className="flex gap-2">
           <button onClick={removeDice} className="px-2.5 py-1 bg-zinc-800 text-xs text-zinc-300 rounded font-semibold">- Remove</button>
@@ -37,12 +37,12 @@ export default function DiceRoller() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center space-y-12 py-10 bg-zinc-50 dark:bg-black/30 rounded-2xl border border-[var(--border-subtle)]">
+      <div className="flex flex-col items-center justify-center space-y-12 py-10 bg-[var(--bg-overlay)] rounded-2xl border border-[var(--border-subtle)]">
         <div className="flex flex-wrap justify-center gap-8 min-h-[120px] items-center">
           {dices.map((val, idx) => (
             <div 
               key={idx}
-              className={`w-16 h-16 bg-white dark:bg-[var(--bg-surface)] border-2 border-zinc-200 dark:border-zinc-700 rounded-xl shadow-lg flex items-center justify-center text-3xl font-black text-indigo-500 transition-all duration-500 ${
+              className={`w-16 h-16 bg-white dark:bg-[var(--bg-surface)] border-2 border-[var(--border-subtle)] rounded-xl shadow-lg flex items-center justify-center text-3xl font-black text-[var(--accent)] transition-all duration-500 ${
                 isRolling ? 'rotate-180 scale-95 opacity-50 animate-bounce' : ''
               }`}
             >
@@ -56,7 +56,7 @@ export default function DiceRoller() {
           <button 
             onClick={rollDices} 
             disabled={isRolling}
-            className="bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold px-8 py-3 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
+            className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold px-8 py-3 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
           >
             <RefreshCw className={`w-4 h-4 ${isRolling ? 'animate-spin' : ''}`} />
             Roll Dices

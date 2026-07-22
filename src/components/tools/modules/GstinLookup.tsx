@@ -122,15 +122,15 @@ export default function GstinLookup() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2 mb-1">
         <Search className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">GSTIN Lookup & Business Verifier</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">GSTIN Lookup & Business Verifier</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+        <div className="flex border-b border-[var(--border-subtle)]">
           {(['single', 'bulk'] as const).map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
-                activeTab === tab ? 'text-emerald-500 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300'
+                activeTab === tab ? 'text-emerald-500 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10' : 'text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}>
               {tab === 'single' ? 'Single Lookup' : 'Bulk CSV'}
             </button>
@@ -140,11 +140,11 @@ export default function GstinLookup() {
         <div className="p-5 space-y-4">
           {activeTab === 'single' ? (
             <>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Enter a 15-character GSTIN to verify business details. Free: 5 lookups/day. <strong>{5 - dailyUsed} remaining today.</strong></p>
+              <p className="text-xs text-[var(--text-secondary)]">Enter a 15-character GSTIN to verify business details. Free: 5 lookups/day. <strong>{5 - dailyUsed} remaining today.</strong></p>
               <div className="flex gap-2">
                 <input value={gstin} onChange={e => setGstin(e.target.value.toUpperCase())} placeholder="27AABCU1234D1Z5"
                   maxLength={15}
-                  className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white uppercase outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 <button onClick={handleLookup} disabled={loading || !gstin || isFreeLimitReached}
                   className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
                   {loading ? 'Searching...' : <><Search className="w-4 h-4" /> Verify</>}
@@ -152,28 +152,28 @@ export default function GstinLookup() {
               </div>
 
               {result && (
-                <div className="bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="p-4 space-y-3">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="text-sm font-bold text-zinc-900 dark:text-white">{result.legalName}</h4>
-                        <p className="text-[11px] text-zinc-500">@{result.tradeName}</p>
+                        <h4 className="text-sm font-bold text-[var(--text-primary)]">{result.legalName}</h4>
+                        <p className="text-[11px] text-[var(--text-secondary)]">@{result.tradeName}</p>
                       </div>
                       <span className="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-full">{result.status}</span>
                     </div>
                     <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="flex items-center gap-1.5"><MapPin className="w-3 h-3 text-zinc-400" /> <span className="text-zinc-600 dark:text-zinc-400">{result.address}</span></div>
-                      <div className="flex items-center gap-1.5"><Shield className="w-3 h-3 text-zinc-400" /> <span className="text-zinc-600 dark:text-zinc-400">{result.constitution}</span></div>
-                      <div className="flex items-center gap-1.5"><Calendar className="w-3 h-3 text-zinc-400" /> <span className="text-zinc-600 dark:text-zinc-400">Registered: {result.registrationDate}</span></div>
-                      <div className="flex items-center gap-1.5"><FileSpreadsheet className="w-3 h-3 text-zinc-400" /> <span className="text-zinc-600 dark:text-zinc-400">{result.taxpayerType} · {result.filingStatus}</span></div>
+                      <div className="flex items-center gap-1.5"><MapPin className="w-3 h-3 text-[var(--text-muted)]" /> <span className="text-zinc-600 dark:text-[var(--text-muted)]">{result.address}</span></div>
+                      <div className="flex items-center gap-1.5"><Shield className="w-3 h-3 text-[var(--text-muted)]" /> <span className="text-zinc-600 dark:text-[var(--text-muted)]">{result.constitution}</span></div>
+                      <div className="flex items-center gap-1.5"><Calendar className="w-3 h-3 text-[var(--text-muted)]" /> <span className="text-zinc-600 dark:text-[var(--text-muted)]">Registered: {result.registrationDate}</span></div>
+                      <div className="flex items-center gap-1.5"><FileSpreadsheet className="w-3 h-3 text-[var(--text-muted)]" /> <span className="text-zinc-600 dark:text-[var(--text-muted)]">{result.taxpayerType} · {result.filingStatus}</span></div>
                     </div>
                   </div>
-                  <div className="border-t border-zinc-200 dark:border-zinc-800 p-3 flex gap-2">
-                    <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+                  <div className="border-t border-[var(--border-subtle)] p-3 flex gap-2">
+                    <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Download className="w-3 h-3" /> Export CSV
                     </button>
                     <button onClick={() => { clipboardWrite(JSON.stringify(result, null, 2)); toast.success('Copied!'); }}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+                      className="flex items-center gap-1 px-3 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Copy className="w-3 h-3" /> Copy JSON
                     </button>
                   </div>
@@ -182,38 +182,38 @@ export default function GstinLookup() {
             </>
           ) : (
             <>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Upload a CSV or text file with one GSTIN per line. Pro feature — bulk verify up to 500 GSTINs at once.</p>
-              <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+              <p className="text-xs text-[var(--text-secondary)]">Upload a CSV or text file with one GSTIN per line. Pro feature — bulk verify up to 500 GSTINs at once.</p>
+              <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
                 onClick={() => document.getElementById('bulk-gstin-file')?.click()}>
-                <Upload className="w-8 h-8 mx-auto mb-2 text-zinc-400" />
-                <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{bulkData.length > 0 ? `${bulkData.length} GSTINs loaded` : 'Upload CSV/TXT file'}</p>
-                <p className="text-[10px] text-zinc-500 mt-1">One GSTIN per line</p>
+                <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
+                <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{bulkData.length > 0 ? `${bulkData.length} GSTINs loaded` : 'Upload CSV/TXT file'}</p>
+                <p className="text-[10px] text-[var(--text-secondary)] mt-1">One GSTIN per line</p>
                 <input id="bulk-gstin-file" type="file" accept=".csv,.txt" onChange={handleBulkFile} className="hidden" />
               </div>
               {bulkData.length > 0 && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-zinc-500">{bulkData.length} GSTINs loaded</span>
+                    <span className="text-xs text-[var(--text-secondary)]">{bulkData.length} GSTINs loaded</span>
                     <button onClick={handleBulkLookup} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">
                       Verify All
                     </button>
                   </div>
                   {bulkResults.length > 0 && (
                     <>
-                      <div className="max-h-60 overflow-y-auto border border-zinc-200 dark:border-zinc-800 rounded-xl divide-y divide-zinc-100 dark:divide-zinc-800">
+                      <div className="max-h-60 overflow-y-auto border border-[var(--border-subtle)] rounded-xl divide-y divide-zinc-100 dark:divide-zinc-800">
                         {bulkResults.map((r, i) => (
-                          <div key={i} className="p-3 bg-zinc-50 dark:bg-black/20">
+                          <div key={i} className="p-3 bg-[var(--bg-overlay)]">
                             <div className="flex items-center justify-between">
                               <div>
                                 <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{r.legalName}</p>
-                                <p className="text-[10px] text-zinc-500">{bulkData[i]}</p>
+                                <p className="text-[10px] text-[var(--text-secondary)]">{bulkData[i]}</p>
                               </div>
                               <span className="px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-[9px] font-bold rounded">{r.status}</span>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <button onClick={handleExport} className="w-full py-2.5 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                      <button onClick={handleExport} className="w-full py-2.5 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
                         <Download className="w-3.5 h-3.5" /> Export All to CSV
                       </button>
                     </>
@@ -229,7 +229,7 @@ export default function GstinLookup() {
           )}
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Unlimited lookups, bulk CSV verification (500+ GSTINs), export detailed reports, API access for automated vendor verification. <strong>₹499/mo</strong> for team plans.
             </p>
           </div>

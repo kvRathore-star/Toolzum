@@ -431,22 +431,22 @@ export function EmojiPicker() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <h1 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
         <SmilePlus className="w-6 h-6 text-blue-600 dark:text-blue-400" /> Emoji Picker
       </h1>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="text-sm text-[var(--text-secondary)]">
         Browse 400+ emoji organized by category. Click any emoji to copy it.
       </p>
       <div className="space-y-4">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search emoji..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search emoji..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
           {lastCopied && (
             <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl px-4 py-3 flex items-center gap-3">
               <span className="text-2xl">{lastCopied}</span>
               <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Copied! Click another to replace.</span>
             </div>
           )}
-          <div className="text-[11px] text-zinc-400">{filtered.length} emoji found</div>
+          <div className="text-[11px] text-[var(--text-muted)]">{filtered.length} emoji found</div>
         </div>
         <div className="space-y-2">
           {CATEGORIES.map(cat => {
@@ -454,15 +454,15 @@ export function EmojiPicker() {
             if (!items || items.length === 0) return null;
             const isOpen = expandedCategories.has(cat);
             return (
-              <div key={cat} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden">
-                <button onClick={() => toggleCategory(cat)} className="w-full flex justify-between items-center px-5 py-3 text-xs font-bold text-zinc-500 uppercase hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
+              <div key={cat} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+                <button onClick={() => toggleCategory(cat)} className="w-full flex justify-between items-center px-5 py-3 text-xs font-bold text-[var(--text-secondary)] uppercase hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
                   <span>{cat} ({items.length})</span>
                   <span className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {isOpen && (
                   <div className="px-3 pb-3 pt-1 grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 gap-1">
                     {items.map((e, i) => (
-                      <button key={i} onClick={() => copyEmoji(e.e, e.n)} title={e.n} className="text-xl p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-center cursor-pointer">
+                      <button key={i} onClick={() => copyEmoji(e.e, e.n)} title={e.n} className="text-xl p-1.5 rounded-lg hover:bg-[var(--bg-surface)] transition-colors text-center cursor-pointer">
                         {e.e}
                       </button>
                     ))}
@@ -487,45 +487,45 @@ export function ASCIIArtGenerator() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <h1 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
         <Image className="w-6 h-6 text-blue-600 dark:text-blue-400" /> ASCII Art Generator
       </h1>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="text-sm text-[var(--text-secondary)]">
         Convert text to ASCII art with block, bubble, fancy, and digital styles.
       </p>
       <div className="space-y-4">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
-          <input value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
-          <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1 flex-wrap">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+          <input value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
             {['simple', 'block', 'bubble', 'fancy', 'digital'].map(s => (
-              <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>
+              <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 {s.charAt(0).toUpperCase() + s.slice(1)}
               </button>
             ))}
           </div>
         </div>
         {asciiResult && (
-          <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
+          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-[10px] font-bold text-zinc-400 uppercase">Result</span>
-              <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-indigo-400 hover:underline">Copy</button>
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
+              <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
             </div>
-            <pre className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 text-sm text-zinc-900 dark:text-white font-mono whitespace-pre overflow-x-auto leading-tight">
+            <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
               {asciiResult}
             </pre>
           </div>
         )}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
-          <h3 className="text-[10px] font-bold text-zinc-400 uppercase mb-2">Character Map Reference</h3>
-          <div className="text-xs font-mono text-zinc-500 leading-loose">
-            <span className="text-zinc-900 dark:text-white">@</span> 80-100%{' '}
-            <span className="text-zinc-900 dark:text-white">%</span> 60-80%{' '}
-            <span className="text-zinc-900 dark:text-white">#</span> 40-60%{' '}
-            <span className="text-zinc-900 dark:text-white">*</span> 20-40%{' '}
-            <span className="text-zinc-900 dark:text-white">+</span> 10-20%{' '}
-            <span className="text-zinc-900 dark:text-white">=</span> 5-10%{' '}
-            <span className="text-zinc-900 dark:text-white">-</span> 2-5%{' '}
-            <span className="text-zinc-900 dark:text-white">.</span> 0-2%
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Character Map Reference</h3>
+          <div className="text-xs font-mono text-[var(--text-secondary)] leading-loose">
+            <span className="text-[var(--text-primary)]">@</span> 80-100%{' '}
+            <span className="text-[var(--text-primary)]">%</span> 60-80%{' '}
+            <span className="text-[var(--text-primary)]">#</span> 40-60%{' '}
+            <span className="text-[var(--text-primary)]">*</span> 20-40%{' '}
+            <span className="text-[var(--text-primary)]">+</span> 10-20%{' '}
+            <span className="text-[var(--text-primary)]">=</span> 5-10%{' '}
+            <span className="text-[var(--text-primary)]">-</span> 2-5%{' '}
+            <span className="text-[var(--text-primary)]">.</span> 0-2%
           </div>
         </div>
       </div>

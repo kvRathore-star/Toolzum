@@ -55,22 +55,22 @@ export default function UrlShortener() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden">
-        <div className="border-b border-zinc-200 dark:border-white/10 p-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+        <div className="border-b border-[var(--border-subtle)] p-6">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
               <LinkIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">URL Shortener</h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">Create short, memorable links instantly</p>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">URL Shortener</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Create short, memorable links instantly</p>
             </div>
           </div>
         </div>
 
         <div className="p-8 space-y-8">
           <div className="space-y-4">
-            <label className="text-sm font-medium text-zinc-900 dark:text-white">
+            <label className="text-sm font-medium text-[var(--text-primary)]">
               Paste your long URL here
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -80,12 +80,12 @@ export default function UrlShortener() {
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && shortenUrl()}
                 placeholder="https://example.com/very/long/path/to/something"
-                className="w-full sm:flex-1 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                className="w-full sm:flex-1 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
               />
               <button
                 onClick={shortenUrl}
                 disabled={!url || isLoading}
-                className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -113,17 +113,17 @@ export default function UrlShortener() {
                 </span>
               </div>
               
-              <div className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-2">
+              <div className="flex items-center gap-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg p-2">
                 <input
                   type="text"
                   readOnly
                   value={shortUrl}
-                  className="flex-1 bg-transparent border-none focus:outline-none text-zinc-900 dark:text-white px-2 font-medium"
+                  className="flex-1 bg-transparent border-none focus:outline-none text-[var(--text-primary)] px-2 font-medium"
                 />
                 
                 <button
                   onClick={copyToClipboard}
-                  className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-md transition-colors flex items-center gap-2"
+                  className="p-2 hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-md transition-colors flex items-center gap-2"
                   title="Copy to clipboard" aria-label="Copy"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -133,7 +133,7 @@ export default function UrlShortener() {
                   href={shortUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-md transition-colors"
+                  className="p-2 hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-md transition-colors"
                   title="Open in new tab"
                 >
                   <ExternalLink className="w-4 h-4" />

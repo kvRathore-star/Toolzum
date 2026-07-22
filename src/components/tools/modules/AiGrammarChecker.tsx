@@ -213,14 +213,14 @@ export default function AiGrammarChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           AI Grammar Checker
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Check and correct grammar, spelling, and punctuation in your text.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Check and correct grammar, spelling, and punctuation in your text.</p>
       </div>
 
       <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-xl px-4 py-3 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-2">
@@ -230,11 +230,11 @@ export default function AiGrammarChecker() {
         <span>Rules-based checker for common grammar, spelling, and punctuation errors. Not exhaustive — proofread manually.</span>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Your Text</span>
-            <span className={`text-[10px] font-mono ${input.length > 4800 ? 'text-red-500' : 'text-zinc-400'}`}>{input.length} / 5,000</span>
+            <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Text</span>
+            <span className={`text-[10px] font-mono ${input.length > 4800 ? 'text-red-500' : 'text-[var(--text-muted)]'}`}>{input.length} / 5,000</span>
           </div>
           <textarea
             value={input}
@@ -244,7 +244,7 @@ export default function AiGrammarChecker() {
             }}
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleCheck()}
             placeholder="Paste or type text to check..."
-            className="w-full h-44 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm text-zinc-900 dark:text-white outline-none resize-none focus:border-indigo-500"
+            className="w-full h-44 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] outline-none resize-none focus:border-indigo-500"
           />
         </div>
 
@@ -261,7 +261,7 @@ export default function AiGrammarChecker() {
             {isLoading ? 'Checking...' : 'Check Grammar'}
           </button>
           <button onClick={handleClear}
-            className="px-5 py-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
+            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
@@ -270,11 +270,11 @@ export default function AiGrammarChecker() {
         </div>
 
         {hasChecked && (
-          <div className="border-t border-zinc-200 dark:border-zinc-800 pt-6 space-y-5 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="border-t border-[var(--border-subtle)] pt-6 space-y-5 animate-in fade-in slide-in-from-top-4 duration-300">
             {errors.length > 0 ? (
               <>
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-sm font-bold text-zinc-900 dark:text-white">{errors.length} error{errors.length > 1 ? 's' : ''} found</span>
+                  <span className="text-sm font-bold text-[var(--text-primary)]">{errors.length} error{errors.length > 1 ? 's' : ''} found</span>
                   <div className="flex flex-wrap gap-2">
                     {categories.map((cat) => counts[cat] > 0 && (
                       <span key={cat} className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${CAT_COLORS[cat]}`}>{cat}: {counts[cat]}</span>
@@ -284,19 +284,19 @@ export default function AiGrammarChecker() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-rose-500" /> Original with Highlights
                     </span>
-                    <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm leading-relaxed max-h-60 overflow-y-auto min-h-[120px]">
-                      {input.trim() ? renderHighlighted(input, errors) : <span className="text-zinc-400 italic">No text</span>}
+                    <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm leading-relaxed max-h-60 overflow-y-auto min-h-[120px]">
+                      {input.trim() ? renderHighlighted(input, errors) : <span className="text-[var(--text-muted)] italic">No text</span>}
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500" /> Corrected Text
                     </span>
                     <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-4 text-sm leading-relaxed max-h-60 overflow-y-auto min-h-[120px] text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">
-                      {correctedText.trim() || <span className="text-zinc-400 italic">No text</span>}
+                      {correctedText.trim() || <span className="text-[var(--text-muted)] italic">No text</span>}
                     </div>
                   </div>
                 </div>
@@ -319,16 +319,16 @@ export default function AiGrammarChecker() {
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Error Details</span>
+                  <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Error Details</span>
                   <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1">
                     {errors.map((err, i) => (
-                      <div key={i} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-zinc-50 dark:bg-black/20 border border-zinc-200 dark:border-zinc-800 text-xs">
+                      <div key={i} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs">
                         <span className={`shrink-0 w-1.5 h-1.5 rounded-full mt-1.5 ${err.type === 'Spelling' ? 'bg-rose-500' : err.type === 'Grammar' ? 'bg-amber-500' : err.type === 'Punctuation' ? 'bg-blue-500' : 'bg-violet-500'}`} />
                         <div className="flex-1 min-w-0">
                           <span className="text-zinc-800 dark:text-zinc-200">
                             &ldquo;<span className="font-mono text-rose-600 dark:text-rose-400">{input.slice(err.start, err.end)}</span>&rdquo;
                           </span>
-                          <span className="text-zinc-500 dark:text-zinc-400"> &mdash; {err.message}</span>
+                          <span className="text-[var(--text-secondary)]"> &mdash; {err.message}</span>
                           {err.suggestion && <span className="block text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">Suggestion: &ldquo;{err.suggestion}&rdquo;</span>}
                         </div>
                       </div>
@@ -337,7 +337,7 @@ export default function AiGrammarChecker() {
                 </div>
               </>
             ) : (
-              <div className="text-center py-8 text-zinc-400">
+              <div className="text-center py-8 text-[var(--text-muted)]">
                 <svg className="w-12 h-12 mx-auto mb-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>

@@ -62,13 +62,13 @@ export default function AiDocumentChat() {
             subtitle="Supports PDF, DOCX (Max 50MB)"
           />
         ) : (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl text-center space-y-6">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl text-center space-y-6">
             <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{file.name}</h3>
-              <p className="text-zinc-600 dark:text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">{file.name}</h3>
+              <p className="text-zinc-600 dark:text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
             </div>
             <button 
               onClick={processDocument}
@@ -79,7 +79,7 @@ export default function AiDocumentChat() {
             </button>
             <button 
               onClick={() => setFile(null)}
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white"
+              className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
             >
               Cancel
             </button>
@@ -91,7 +91,7 @@ export default function AiDocumentChat() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto h-[800px] flex flex-col">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
+      <div className="bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -103,20 +103,20 @@ export default function AiDocumentChat() {
         </div>
         <button 
           onClick={() => { setFile(null); setIsDocumentReady(false); setMessages([]); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Upload New Document
         </button>
       </div>
 
-      <div className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col relative">
+      <div className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl overflow-hidden shadow-2xl flex flex-col relative">
         <div className="flex-1 p-6 overflow-y-auto space-y-6" ref={scrollRef}>
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[80%] rounded-2xl p-4 ${
                 msg.role === 'user' 
                   ? 'bg-emerald-600 text-white rounded-br-sm' 
-                  : 'bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/5 text-zinc-800 dark:text-zinc-200 rounded-bl-sm shadow-lg'
+                  : 'bg-[var(--bg-surface)] border border-zinc-200 dark:border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 rounded-bl-sm shadow-lg'
               }`}>
                 <div className="whitespace-pre-wrap leading-relaxed">
                   {msg.content}
@@ -127,7 +127,7 @@ export default function AiDocumentChat() {
           
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/5 text-zinc-800 dark:text-zinc-200 rounded-2xl rounded-bl-sm p-4 shadow-lg flex items-center space-x-2">
+              <div className="bg-[var(--bg-surface)] border border-zinc-200 dark:border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 rounded-2xl rounded-bl-sm p-4 shadow-lg flex items-center space-x-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -136,8 +136,8 @@ export default function AiDocumentChat() {
           )}
         </div>
 
-        <div className="p-4 bg-black/40 border-t border-zinc-200 dark:border-white/5">
-          <div className="relative flex items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-inner focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all">
+        <div className="p-4 bg-black/40 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="relative flex items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-inner focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}

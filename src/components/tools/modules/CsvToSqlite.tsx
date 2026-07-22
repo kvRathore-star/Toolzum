@@ -217,21 +217,21 @@ export default function CsvToSqlite() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-            <Database className="w-5 h-5 text-indigo-500" />
+            <Database className="w-5 h-5 text-[var(--accent)]" />
             CSV to SQLite Web Terminal
           </h2>
-          <p className="text-xs text-zinc-500 mt-1">Upload a CSV and run SQL queries in your browser. All processing stays on your device.</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Upload a CSV and run SQL queries in your browser. All processing stays on your device.</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left sidebar - Schema */}
-        <div className="lg:col-span-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-bold uppercase flex items-center gap-1.5"><Table className="w-3.5 h-3.5" /> Schema</span>
+            <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><Table className="w-3.5 h-3.5" /> Schema</span>
             {db && <button onClick={handleReset} className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Reset</button>}
           </div>
 
@@ -243,7 +243,7 @@ export default function CsvToSqlite() {
           )}
 
           {!sqlReady && !sqlError && (
-            <div className="text-xs text-zinc-500 flex items-center gap-2 py-4">
+            <div className="text-xs text-[var(--text-secondary)] flex items-center gap-2 py-4">
               <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
               Loading SQL engine...
             </div>
@@ -256,8 +256,8 @@ export default function CsvToSqlite() {
               onClick={() => fileInputRef.current?.click()}
               className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-6 text-center cursor-pointer hover:border-indigo-500 transition-colors"
             >
-              <Upload className="w-8 h-8 mx-auto text-zinc-400 mb-2" />
-              <p className="text-xs text-zinc-500 font-medium">Drop CSV/TSV/SQLite file here</p>
+              <Upload className="w-8 h-8 mx-auto text-[var(--text-muted)] mb-2" />
+              <p className="text-xs text-[var(--text-secondary)] font-medium">Drop CSV/TSV/SQLite file here</p>
               <p className="text-[10px] text-zinc-600 mt-1">or click to browse</p>
               <input ref={fileInputRef} type="file" accept=".csv,.tsv,.sqlite,.db,.sql" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
             </div>
@@ -265,9 +265,9 @@ export default function CsvToSqlite() {
 
           {db && (
             <div className="space-y-2">
-              {schema.length === 0 && <p className="text-xs text-zinc-500">No tables found.</p>}
+              {schema.length === 0 && <p className="text-xs text-[var(--text-secondary)]">No tables found.</p>}
               {schema.map(s => (
-                <div key={s.table} className="border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden">
+                <div key={s.table} className="border border-[var(--border-subtle)] rounded-lg overflow-hidden">
                   <button onClick={() => toggleTableExpand(s.table)} className="w-full flex items-center justify-between px-3 py-2 text-xs font-mono text-zinc-300 hover:bg-zinc-800/50">
                     <span className="flex items-center gap-1.5">{expandedTables.has(s.table) ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}{s.table}</span>
                     <span className="text-[10px] text-zinc-600">{s.columns.length} cols</span>
@@ -280,8 +280,8 @@ export default function CsvToSqlite() {
                           <span className="text-zinc-600">{col.type}</span>
                         </div>
                       ))}
-                      <button onClick={() => insertSampleQuery(`SELECT * FROM "${s.table}" LIMIT 50;`)} className="text-[10px] text-indigo-400 hover:text-indigo-300 mt-1">SELECT *</button>
-                      <button onClick={() => insertSampleQuery(`SELECT COUNT(*) FROM "${s.table}";`)} className="text-[10px] text-indigo-400 hover:text-indigo-300 ml-2">COUNT</button>
+                      <button onClick={() => insertSampleQuery(`SELECT * FROM "${s.table}" LIMIT 50;`)} className="text-[10px] text-[var(--accent)] hover:text-indigo-300 mt-1">SELECT *</button>
+                      <button onClick={() => insertSampleQuery(`SELECT COUNT(*) FROM "${s.table}";`)} className="text-[10px] text-[var(--accent)] hover:text-indigo-300 ml-2">COUNT</button>
                     </div>
                   )}
                 </div>
@@ -291,7 +291,7 @@ export default function CsvToSqlite() {
 
           {db && (
             <div className="space-y-2 pt-2 border-t border-zinc-800">
-              <button onClick={handleExportDb} className="w-full text-xs text-zinc-400 hover:text-white border border-zinc-800 rounded-lg py-2 flex items-center justify-center gap-1.5">
+              <button onClick={handleExportDb} className="w-full text-xs text-[var(--text-muted)] hover:text-white border border-zinc-800 rounded-lg py-2 flex items-center justify-center gap-1.5">
                 <Download className="w-3 h-3" /> Export .sqlite
               </button>
             </div>
@@ -301,13 +301,13 @@ export default function CsvToSqlite() {
         {/* Right main area - Query editor + Results */}
         <div className="lg:col-span-9 space-y-6">
           {/* Query Editor */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs text-zinc-400 font-bold uppercase flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5" /> SQL Query</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5" /> SQL Query</span>
               {db && (
                 <div className="flex gap-2">
-                  <button onClick={() => insertSampleQuery('SELECT name FROM sqlite_master WHERE type=\'table\';')} className="text-[10px] text-zinc-500 hover:text-white border border-zinc-800 rounded px-2 py-1">Tables</button>
-                  <button onClick={() => insertSampleQuery('SELECT sql FROM sqlite_master WHERE type=\'table\';')} className="text-[10px] text-zinc-500 hover:text-white border border-zinc-800 rounded px-2 py-1">Schema SQL</button>
+                  <button onClick={() => insertSampleQuery('SELECT name FROM sqlite_master WHERE type=\'table\';')} className="text-[10px] text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded px-2 py-1">Tables</button>
+                  <button onClick={() => insertSampleQuery('SELECT sql FROM sqlite_master WHERE type=\'table\';')} className="text-[10px] text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded px-2 py-1">Schema SQL</button>
                 </div>
               )}
             </div>
@@ -318,7 +318,7 @@ export default function CsvToSqlite() {
                 onChange={e => setQuery(e.target.value)}
                 onKeyDown={e => { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') handleExecute(); }}
                 placeholder="SELECT * FROM data LIMIT 50;"
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white font-mono h-28 outline-none text-xs resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-28 outline-none text-xs resize-none"
                 spellCheck={false}
               />
             </div>
@@ -335,13 +335,13 @@ export default function CsvToSqlite() {
           </div>
 
           {/* Results */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs text-zinc-400 font-bold uppercase flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> Results</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> Results</span>
               <div className="flex items-center gap-3">
                 {queryTime !== null && <span className="text-[10px] text-zinc-600 font-mono">{queryTime.toFixed(1)}ms</span>}
                 {results && results.columns.length > 0 && results.columns[0] !== 'Result' && (
-                  <button onClick={handleDownloadCsv} className="text-[10px] text-zinc-500 hover:text-white border border-zinc-800 rounded px-2 py-1 flex items-center gap-1">
+                  <button onClick={handleDownloadCsv} className="text-[10px] text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded px-2 py-1 flex items-center gap-1">
                     <Download className="w-3 h-3" /> CSV
                   </button>
                 )}
@@ -354,21 +354,21 @@ export default function CsvToSqlite() {
 
             {results && !error && (
               results.columns[0] === 'Result' ? (
-                <div className="bg-zinc-50 dark:bg-black/50 rounded-xl p-4 text-xs text-zinc-400 font-mono">{results.rows[0][0]}</div>
+                <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-xs text-[var(--text-muted)] font-mono">{results.rows[0][0]}</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-mono">
                     <thead>
-                      <tr className="border-b border-zinc-200 dark:border-zinc-800">
-                        <th className="text-left px-3 py-2 text-zinc-500 font-semibold">#</th>
+                      <tr className="border-b border-[var(--border-subtle)]">
+                        <th className="text-left px-3 py-2 text-[var(--text-secondary)] font-semibold">#</th>
                         {results.columns.map(col => (
-                          <th key={col} className="text-left px-3 py-2 text-zinc-500 font-semibold whitespace-nowrap">{col}</th>
+                          <th key={col} className="text-left px-3 py-2 text-[var(--text-secondary)] font-semibold whitespace-nowrap">{col}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
                       {results.rows.map((row, ri) => (
-                        <tr key={ri} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+                        <tr key={ri} className="border-b border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50">
                           <td className="px-3 py-1.5 text-zinc-600">{ri + 1}</td>
                           {row.map((val, vi) => (
                             <td key={vi} className="px-3 py-1.5 text-zinc-300 whitespace-nowrap max-w-[300px] overflow-hidden text-ellipsis">{val}</td>

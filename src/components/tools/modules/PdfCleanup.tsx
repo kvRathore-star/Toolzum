@@ -135,55 +135,55 @@ export default function PdfCleanup() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
         </div>
         <button onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">
           Change File
         </button>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-        <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
           Cleanup Options ({operationCount} selected)
         </h4>
 
-        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors">
           <input type="checkbox" checked={removeAnnotations} onChange={(e) => setRemoveAnnotations(e.target.checked)}
             className="mt-0.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-200">Remove Annotations</p>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Strip all comments, highlights, and markup from the document.</p>
+            <p className="text-sm text-[var(--text-secondary)]">Strip all comments, highlights, and markup from the document.</p>
           </div>
         </label>
 
-        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors">
           <input type="checkbox" checked={removeMetadata} onChange={(e) => setRemoveMetadata(e.target.checked)}
             className="mt-0.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-200">Remove Metadata</p>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Clear title, author, subject, keywords, and other document properties.</p>
+            <p className="text-sm text-[var(--text-secondary)]">Clear title, author, subject, keywords, and other document properties.</p>
           </div>
         </label>
 
-        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors">
           <input type="checkbox" checked={removeBlank} onChange={(e) => setRemoveBlank(e.target.checked)}
             className="mt-0.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-200">Remove Blank Pages</p>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Detect and delete pages that contain no visible text content.</p>
+            <p className="text-sm text-[var(--text-secondary)]">Detect and delete pages that contain no visible text content.</p>
           </div>
         </label>
 
-        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+        <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors">
           <input type="checkbox" checked={reversePages} onChange={(e) => setReversePages(e.target.checked)}
             className="mt-0.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-200">Reverse Page Order</p>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Flip the entire document so the last page becomes first.</p>
+            <p className="text-sm text-[var(--text-secondary)]">Flip the entire document so the last page becomes first.</p>
           </div>
         </label>
 
@@ -194,8 +194,8 @@ export default function PdfCleanup() {
       </div>
 
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Cleanup Complete</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `cleaned_${file.name}`)}

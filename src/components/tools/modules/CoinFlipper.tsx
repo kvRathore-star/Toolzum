@@ -22,15 +22,15 @@ export default function CoinFlipper() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
-        <HelpCircle className="w-5 h-5 text-indigo-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Interactive 3D Coin Flipper</h3>
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
+        <HelpCircle className="w-5 h-5 text-[var(--accent)]" />
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Interactive 3D Coin Flipper</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Flip coin display */}
-        <div className="flex flex-col justify-center items-center bg-zinc-50 dark:bg-black/30 rounded-2xl p-8 border border-zinc-800 min-h-[250px]">
+        <div className="flex flex-col justify-center items-center bg-[var(--bg-overlay)] rounded-2xl p-8 border border-zinc-800 min-h-[250px]">
           <div 
             className={`w-28 h-28 rounded-full border-4 border-amber-500 bg-gradient-to-tr from-amber-400 to-yellow-300 shadow-xl flex items-center justify-center font-black text-amber-800 text-sm tracking-wider transition-all duration-500 ${
               isFlipping ? 'scale-90 opacity-40 rotate-[360deg] animate-bounce' : ''
@@ -42,7 +42,7 @@ export default function CoinFlipper() {
           <button 
             onClick={flipCoin} 
             disabled={isFlipping}
-            className="mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-lg disabled:opacity-50 animate-in"
+            className="mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-3 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-lg disabled:opacity-50 animate-in"
           >
             <RefreshCw className={`w-4 h-4 ${isFlipping ? 'animate-spin' : ''}`} />
             Flip Coin
@@ -51,16 +51,16 @@ export default function CoinFlipper() {
 
         {/* Flipping stats info */}
         <div className="space-y-4 flex flex-col justify-center">
-          <span className="text-xs text-zinc-400 font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Coin Flip Statistics</span>
+          <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Coin Flip Statistics</span>
           
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-zinc-50 dark:bg-black/10 p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
-              <span className="text-[10px] text-zinc-500 block uppercase">Heads Total</span>
+            <div className="bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
+              <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Heads Total</span>
               <p className="text-2xl font-black text-amber-500 mt-1">{stats.heads}</p>
             </div>
-            <div className="bg-zinc-50 dark:bg-black/10 p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
-              <span className="text-[10px] text-zinc-500 block uppercase">Tails Total</span>
-              <p className="text-2xl font-black text-indigo-400 mt-1">{stats.tails}</p>
+            <div className="bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
+              <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Tails Total</span>
+              <p className="text-2xl font-black text-[var(--accent)] mt-1">{stats.tails}</p>
             </div>
           </div>
         </div>

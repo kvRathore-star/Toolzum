@@ -216,14 +216,14 @@ export default function EsignPdf() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-xs">{pdfFile.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">Page {currentPage} of {numPages}</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Page {currentPage} of {numPages}</p>
         </div>
         <button 
           onClick={() => { setPdfFile(null); setPdfDataUri(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
         >
           Change PDF
         </button>
@@ -232,37 +232,37 @@ export default function EsignPdf() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* PDF Preview (Left Col) */}
-        <div className="lg:col-span-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[700px]">
-          <div className="bg-zinc-50/50 dark:bg-black/50 p-3 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center">
+        <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[700px]">
+          <div className="bg-[var(--bg-overlay)]/50 dark:bg-black/50 p-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center">
             <div className="flex gap-2">
               <button 
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-zinc-900 dark:text-white rounded text-sm"
+                className="px-3 py-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] disabled:opacity-50 text-[var(--text-primary)] rounded text-sm"
               >
                 Prev
               </button>
               <button 
                 onClick={() => setCurrentPage(p => Math.min(numPages, p + 1))}
                 disabled={currentPage === numPages}
-                className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-zinc-900 dark:text-white rounded text-sm"
+                className="px-3 py-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] disabled:opacity-50 text-[var(--text-primary)] rounded text-sm"
               >
                 Next
               </button>
             </div>
-            <span className="text-zinc-600 dark:text-zinc-400 text-sm">Preview</span>
+            <span className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Preview</span>
           </div>
           <div className="flex-1 overflow-auto p-4 flex justify-center bg-black/20">
-            <canvas ref={canvasRef} className="shadow-lg border border-zinc-200 dark:border-white/10 max-w-full h-auto" />
+            <canvas ref={canvasRef} className="shadow-lg border border-[var(--border-subtle)] max-w-full h-auto" />
           </div>
         </div>
 
         {/* Signature Controls (Right Col) */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium mb-4 flex justify-between items-center">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium mb-4 flex justify-between items-center">
               Your Signature
-              <button onClick={clearSignature} className="text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded">Clear</button>
+              <button onClick={clearSignature} className="text-xs text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-2 py-1 bg-[var(--bg-surface)] rounded">Clear</button>
             </h4>
             
             <div className="bg-white rounded-xl mb-6 overflow-hidden border-2 border-dashed border-zinc-500">
@@ -281,7 +281,7 @@ export default function EsignPdf() {
               />
             </div>
 
-            <div className="text-xs text-zinc-500 mb-6 bg-black/20 p-3 rounded-lg">
+            <div className="text-xs text-[var(--text-secondary)] mb-6 bg-black/20 p-3 rounded-lg">
               The signature will be appended to the bottom right of Page {currentPage}.
             </div>
 

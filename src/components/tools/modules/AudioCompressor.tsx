@@ -160,23 +160,23 @@ export default function AudioCompressor() {
         <strong>Dynamic Range Compression:</strong> Reduce the volume gap between quiet and loud parts of your audio. All processing happens locally in your browser.
       </div>
 
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="min-w-0 flex-1">
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg shrink-0 ml-4"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg shrink-0 ml-4"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
+        <div className="lg:col-span-2 space-y-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
           <div className="flex items-center justify-between">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Compressor Settings</h4>
+            <h4 className="text-[var(--text-primary)] font-medium">Compressor Settings</h4>
             <div className="flex gap-1.5 flex-wrap">
               {PRESETS.map(p => (
                 <button
@@ -185,7 +185,7 @@ export default function AudioCompressor() {
                   className={`text-[10px] px-2.5 py-1 rounded-lg font-medium transition-all ${
                     preset === p.name
                       ? 'bg-amber-500 text-white'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {p.name}
@@ -204,7 +204,7 @@ export default function AudioCompressor() {
           </div>
 
           <div>
-            <label className="text-[10px] font-semibold text-zinc-400 mb-2 block">Output Format</label>
+            <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-2 block">Output Format</label>
             <div className="flex gap-2 flex-wrap">
               {OUTPUT_FORMATS.map(fmt => (
                 <button
@@ -213,7 +213,7 @@ export default function AudioCompressor() {
                   className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
                     outputFormat === fmt.value
                       ? 'bg-amber-500 text-white'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {fmt.label}
@@ -232,7 +232,7 @@ export default function AudioCompressor() {
           )}
 
           {!ffmpegLoaded && isProcessing && (
-            <div className="text-center text-zinc-500 py-4 flex flex-col items-center gap-2">
+            <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
               <svg className="w-5 h-5 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
               <span className="text-[10px]">Loading FFmpeg Engine...</span>
             </div>
@@ -252,13 +252,13 @@ export default function AudioCompressor() {
               <div className="flex justify-between text-[10px] font-semibold text-amber-600 dark:text-amber-400">
                 <span>Processing...</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-4 overflow-hidden relative">
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-4 overflow-hidden relative">
                 <div
                   className="bg-gradient-to-r from-amber-400 to-amber-600 h-full transition-all duration-500 rounded-full"
                   style={{ width: `${Math.min(gainReduction + 20, 100)}%` }}
                 />
               </div>
-              <div className="flex justify-between text-[9px] text-zinc-400">
+              <div className="flex justify-between text-[9px] text-[var(--text-muted)]">
                 <span>Estimated Gain Reduction: {gainReduction}%</span>
                 <span>Applying compression filter...</span>
               </div>
@@ -266,12 +266,12 @@ export default function AudioCompressor() {
           )}
 
           {isProcessing && (
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-semibold text-zinc-500">Gain Reduction</span>
+                <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Gain Reduction</span>
                 <span className="text-[10px] font-mono text-amber-500 font-bold">{gainReduction}%</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-6 overflow-hidden">
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-6 overflow-hidden">
                 <div
                   className="h-full transition-all duration-300 rounded-full"
                   style={{
@@ -284,7 +284,7 @@ export default function AudioCompressor() {
                   }}
                 />
               </div>
-              <p className="text-[9px] text-zinc-400 mt-1.5">
+              <p className="text-[9px] text-[var(--text-muted)] mt-1.5">
                 Estimated compression based on threshold ({threshold}dB), ratio ({ratio}:1) and knee ({knee}dB)
               </p>
             </div>
@@ -292,13 +292,13 @@ export default function AudioCompressor() {
         </div>
 
         <div className="space-y-5">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium mb-3">Original</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium mb-3">Original</h4>
             <audio controls className="w-full" src={originalUrl.current || undefined} />
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium mb-3">Compressed</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium mb-3">Compressed</h4>
             {outputUrl ? (
               <>
                 <audio controls className="w-full mb-4" src={outputUrl} />
@@ -307,13 +307,13 @@ export default function AudioCompressor() {
                     const fmt = OUTPUT_FORMATS.find(f => f.value === outputFormat)!;
                     downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^.]+$/, '')}.${fmt.ext}`);
                   }}
-                  className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-700 font-bold px-4 py-3 rounded-xl text-xs transition-all"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all"
                 >
                   Download {OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}
                 </button>
               </>
             ) : (
-              <div className="flex flex-col items-center justify-center py-10 text-zinc-400">
+              <div className="flex flex-col items-center justify-center py-10 text-[var(--text-muted)]">
                 <svg className="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
                 <p className="text-xs">Compress your audio to preview</p>
               </div>
@@ -323,7 +323,7 @@ export default function AudioCompressor() {
       </div>
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
-        <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+        <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>What is compression?</strong> Audio compression reduces dynamic range — it makes quiet sounds louder and loud sounds quieter. <strong>Threshold</strong> sets when compression starts. <strong>Ratio</strong> controls how much compression is applied. <strong>Attack/Release</strong> determine how fast compression responds. <strong>Makeup Gain</strong> boosts the overall level after compression. <strong>Knee</strong> smooths the transition into compression.
         </p>
       </div>
@@ -344,8 +344,8 @@ function SliderControl({ label, value, min, max, step, unit, onChange }: {
   return (
     <div>
       <div className="flex justify-between items-center mb-1">
-        <label className="text-[10px] font-semibold text-zinc-400">{label}</label>
-        <span className="text-xs font-bold text-zinc-900 dark:text-white tabular-nums">{value}{unit}</span>
+        <label className="text-[10px] font-semibold text-[var(--text-muted)]">{label}</label>
+        <span className="text-xs font-bold text-[var(--text-primary)] tabular-nums">{value}{unit}</span>
       </div>
       <div className="relative">
         <input
@@ -355,7 +355,7 @@ function SliderControl({ label, value, min, max, step, unit, onChange }: {
           step={step}
           value={value}
           onChange={e => onChange(parseFloat(e.target.value))}
-          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-zinc-200 dark:bg-zinc-800 outline-none
+          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] outline-none
             [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-amber-500 [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white
             [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:active:scale-110"

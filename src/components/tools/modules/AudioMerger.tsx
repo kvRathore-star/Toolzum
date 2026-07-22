@@ -245,7 +245,7 @@ export default function AudioMerger() {
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
-        <p className="text-zinc-500 text-sm font-medium animate-pulse">
+        <p className="text-[var(--text-secondary)] text-sm font-medium animate-pulse">
           {isLoadingFFmpeg ? 'Loading audio engine...' : 'Initializing...'}
         </p>
       </div>
@@ -274,18 +274,18 @@ export default function AudioMerger() {
         <strong>Audio Merger:</strong> Drag to reorder or use the arrows. All processing is done locally — nothing is uploaded.
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         {/* File list */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            <h4 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">
               Tracks ({order.length})
             </h4>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] text-zinc-400">{formatTime(totalDuration)}</span>
+              <span className="text-[10px] text-[var(--text-muted)]">{formatTime(totalDuration)}</span>
               <button
                 onClick={() => addMoreRef.current?.click()}
-                className="text-[10px] bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-3 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-300 transition-colors"
+                className="text-[10px] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-300 transition-colors"
               >
                 + Add More
               </button>
@@ -306,12 +306,12 @@ export default function AudioMerger() {
               return (
                 <div
                   key={`${fileIdx}-${displayIdx}`}
-                  className="flex items-center gap-2 p-2.5 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800 group"
+                  className="flex items-center gap-2 p-2.5 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] group"
                 >
-                  <span className="text-[10px] text-zinc-400 w-5 text-right font-mono">{displayIdx + 1}</span>
+                  <span className="text-[10px] text-[var(--text-muted)] w-5 text-right font-mono">{displayIdx + 1}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
-                    <p className="text-[10px] text-zinc-400">
+                    <p className="text-[10px] text-[var(--text-muted)]">
                       {(file.size / 1024 / 1024).toFixed(1)} MB
                       {durations[fileIdx] ? ` · ${formatTime(durations[fileIdx])}` : ''}
                     </p>
@@ -320,14 +320,14 @@ export default function AudioMerger() {
                     <button
                       onClick={() => moveUp(displayIdx)}
                       disabled={displayIdx === 0}
-                      className="p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
+                      className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                     </button>
                     <button
                       onClick={() => moveDown(displayIdx)}
                       disabled={displayIdx === order.length - 1}
-                      className="p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
+                      className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                     </button>
@@ -344,10 +344,10 @@ export default function AudioMerger() {
           </div>
         </div>
 
-        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-5 space-y-5">
+        <div className="border-t border-[var(--border-subtle)] pt-5 space-y-5">
           {/* Format selector */}
           <div>
-            <label className="text-[10px] font-semibold text-zinc-400 mb-1.5 block uppercase tracking-wider">Output Format</label>
+            <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1.5 block uppercase tracking-wider">Output Format</label>
             <div className="flex flex-wrap gap-1.5">
               {FORMATS.map((f) => (
                 <button
@@ -356,7 +356,7 @@ export default function AudioMerger() {
                   className={`px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                     outputFormat === f
                       ? 'bg-blue-500 text-white shadow-md'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {FORMAT_LABELS[f]}
@@ -368,7 +368,7 @@ export default function AudioMerger() {
           {/* Crossfade */}
           <div>
             <div className="flex justify-between items-center mb-1.5">
-              <label className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Crossfade</label>
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">Crossfade</label>
               <span className="text-xs font-bold text-blue-500">{crossfade}s</span>
             </div>
             <input
@@ -381,7 +381,7 @@ export default function AudioMerger() {
               disabled={isProcessing}
               className="w-full accent-blue-500"
             />
-            <p className="text-[10px] text-zinc-400 mt-1">Smooth transition between tracks</p>
+            <p className="text-[10px] text-[var(--text-muted)] mt-1">Smooth transition between tracks</p>
           </div>
 
           {/* Normalize */}
@@ -401,7 +401,7 @@ export default function AudioMerger() {
             </button>
             <div>
               <span className="text-xs font-medium text-zinc-800 dark:text-zinc-200">Normalize Volume</span>
-              <p className="text-[10px] text-zinc-400">Equalize loudness across all tracks (-16 LUFS)</p>
+              <p className="text-[10px] text-[var(--text-muted)]">Equalize loudness across all tracks (-16 LUFS)</p>
             </div>
           </label>
         </div>
@@ -424,14 +424,14 @@ export default function AudioMerger() {
               <span>Merging audio files...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
               <div className="bg-blue-500 h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }} />
             </div>
           </div>
         )}
 
         {outputUrl && !isProcessing && (
-          <div className="space-y-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="space-y-3 pt-2 border-t border-[var(--border-subtle)]">
             <audio controls className="w-full" src={outputUrl} />
             <button
               onClick={() => downloadOrShare(outputUrl, `merged_audio.${EXTENSIONS[outputFormat]}`)}
@@ -445,7 +445,7 @@ export default function AudioMerger() {
       </div>
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-        <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+        <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>Pro:</strong> Combine podcasts, merge audio chapters, create seamless DJ mixes — all in your browser. Crossfade durations up to 10s, loudness normalization, and batch mode available for power users.
         </p>
       </div>

@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 font-mono text-sm";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 font-mono text-sm";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
 const cardClass = "max-w-4xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
-const textareaClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-3 font-mono h-64 outline-none text-sm resize-y";
+const textareaClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono h-64 outline-none text-sm resize-y";
 
 function formatJson(code: string) {
   try { return JSON.stringify(JSON.parse(code), null, 2); }
@@ -127,7 +127,7 @@ export default function CodeFormatter() {
         {output && (
           <div>
             <label className={labelClass}>Formatted Output</label>
-            <pre className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
           </div>
         )}
       </div>
@@ -152,7 +152,7 @@ function createFormatter(lang: string) {
           {output && (
             <div>
               <label className={labelClass}>Formatted Output</label>
-              <pre className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+              <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
             </div>
           )}
         </div>

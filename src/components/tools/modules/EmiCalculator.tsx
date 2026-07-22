@@ -26,27 +26,27 @@ export default function EmiCalculator() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-8">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">Loan Amount ($)</label>
+              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Loan Amount ($)</label>
               <input 
                 type="number" value={principal} onChange={e => setPrincipal(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">Interest Rate (% p.a)</label>
+              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Interest Rate (% p.a)</label>
               <input 
                 type="number" value={rate} onChange={e => setRate(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">Loan Tenure (Months)</label>
+              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Loan Tenure (Months)</label>
               <input 
                 type="number" value={tenure} onChange={e => setTenure(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
               />
             </div>
          </div>

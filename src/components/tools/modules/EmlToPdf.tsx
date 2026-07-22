@@ -234,14 +234,14 @@ export default function EmlToPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -253,7 +253,7 @@ export default function EmlToPdf() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p className="text-amber-400 font-bold text-lg">MSG Format Not Supported</p>
-          <p className="text-zinc-600 dark:text-zinc-400 max-w-md mx-auto">
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] max-w-md mx-auto">
             .msg files require server-side processing and cannot be converted directly in the browser.
             Please open the file in Microsoft Outlook, export it as <strong>.eml</strong> format, and try again.
           </p>
@@ -266,28 +266,28 @@ export default function EmlToPdf() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-            <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Email Details</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+            <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Email Details</h4>
             {parsedEmail && (
               <div className="space-y-2 text-sm">
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  <span className="font-bold text-zinc-900 dark:text-white">From:</span>{' '}
+                <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--text-primary)]">From:</span>{' '}
                   {parsedEmail.headers['from'] || 'N/A'}
                 </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  <span className="font-bold text-zinc-900 dark:text-white">To:</span>{' '}
+                <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--text-primary)]">To:</span>{' '}
                   {parsedEmail.headers['to'] || 'N/A'}
                 </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  <span className="font-bold text-zinc-900 dark:text-white">Subject:</span>{' '}
+                <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--text-primary)]">Subject:</span>{' '}
                   {parsedEmail.headers['subject'] || 'N/A'}
                 </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  <span className="font-bold text-zinc-900 dark:text-white">Date:</span>{' '}
+                <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--text-primary)]">Date:</span>{' '}
                   {parsedEmail.headers['date'] || 'N/A'}
                 </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  <span className="font-bold text-zinc-900 dark:text-white">CC:</span>{' '}
+                <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+                  <span className="font-bold text-[var(--text-primary)]">CC:</span>{' '}
                   {parsedEmail.headers['cc'] || 'N/A'}
                 </p>
               </div>
@@ -313,8 +313,8 @@ export default function EmlToPdf() {
 
           <div className="space-y-6">
             {pdfUrl ? (
-              <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-                <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+              <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+                <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">PDF Ready</h4>
                 </div>
                 <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -334,7 +334,7 @@ export default function EmlToPdf() {
                 </button>
               </div>
             ) : (
-              <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+              <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
                 <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>

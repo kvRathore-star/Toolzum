@@ -69,12 +69,12 @@ ${inputText}`;
       <div className="space-y-6 transition-all duration-300">
         
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-xl shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm">
            <div className="flex-1 w-full relative">
              <select 
                value={sourceLang}
                onChange={(e) => setSourceLang(e.target.value)}
-               className="w-full bg-zinc-50 dark:bg-zinc-800 border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
              >
                {languages.map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -83,17 +83,17 @@ ${inputText}`;
 <button 
               onClick={swapLanguages}
               disabled={sourceLang === 'Auto Detect'}
-              className="bg-zinc-100 dark:bg-zinc-800 p-3 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50"
+              className="bg-[var(--bg-surface)] p-3 rounded-full hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
               aria-label="Swap"
             >
-              <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+              <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
             </button>
 
            <div className="flex-1 w-full relative">
              <select 
                value={targetLang}
                onChange={(e) => setTargetLang(e.target.value)}
-               className="w-full bg-zinc-50 dark:bg-zinc-800 border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
              >
                {languages.filter(l => l !== 'Auto Detect').map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -107,9 +107,9 @@ ${inputText}`;
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Enter text to translate..."
-              className="w-full h-[400px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 text-lg text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none shadow-sm focus:border-blue-500 transition-colors"
+              className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none shadow-sm focus:border-[var(--accent)] transition-colors"
             />
-            <div className="absolute bottom-4 right-4 text-xs text-zinc-400">
+            <div className="absolute bottom-4 right-4 text-xs text-[var(--text-muted)]">
               {inputText.length} characters
             </div>
           </div>
@@ -119,12 +119,12 @@ ${inputText}`;
               value={outputText}
               readOnly
               placeholder="Translation will appear here..."
-              className={`w-full h-[400px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 text-lg text-zinc-900 dark:text-white outline-none resize-none shadow-sm ${isTranslating ? 'animate-pulse text-zinc-400' : ''}`}
+              className={`w-full h-[400px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] outline-none resize-none shadow-sm ${isTranslating ? 'animate-pulse text-[var(--text-muted)]' : ''}`}
             />
             {outputText && (
               <button 
                 onClick={copyToClipboard}
-                className="absolute top-4 right-4 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-white/10 p-2 rounded-lg shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-600 transition-colors"
+                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors"
                 aria-label="Copy"
               >
                 <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
@@ -136,7 +136,7 @@ ${inputText}`;
         <button
           onClick={handleTranslate}
           disabled={isTranslating || !inputText.trim()}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50"
+          className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50"
         >
           {isTranslating ? (
             <>

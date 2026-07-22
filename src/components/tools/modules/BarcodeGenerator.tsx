@@ -60,33 +60,33 @@ export default function BarcodeGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Barcode className="w-5 h-5 text-indigo-500" />
+          <Barcode className="w-5 h-5 text-[var(--accent)]" />
           Multi-Format Barcode Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Generate vector standard barcodes offline (CODE128, EAN, UPC, CODE39) for printing and inventory.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Generate vector standard barcodes offline (CODE128, EAN, UPC, CODE39) for printing and inventory.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Controls */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-100 dark:border-zinc-800 pb-2">Configuration</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2">Configuration</h3>
           
           <div className="space-y-2">
-            <label className="text-xs text-zinc-400 font-bold uppercase">Barcode Value</label>
+            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Barcode Value</label>
             <input 
               type="text" 
               value={value} 
               onChange={e => setValue(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs outline-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs text-zinc-400 font-bold uppercase">Symbology Format</label>
-              <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-white text-xs outline-none">
+              <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Symbology Format</label>
+              <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-xs outline-none">
                 <option value="CODE128">CODE128 (General)</option>
                 <option value="EAN13">EAN-13 (International)</option>
                 <option value="UPC">UPC-A (Retail)</option>
@@ -96,7 +96,7 @@ export default function BarcodeGenerator() {
             </div>
             
             <div className="space-y-1 flex items-center pt-5">
-              <label className="text-xs text-zinc-400 flex items-center gap-1.5 cursor-pointer">
+              <label className="text-xs text-[var(--text-muted)] flex items-center gap-1.5 cursor-pointer">
                 <input type="checkbox" checked={displayValue} onChange={e => setDisplayValue(e.target.checked)} className="rounded" />
                 Show Code Text
               </label>
@@ -105,19 +105,19 @@ export default function BarcodeGenerator() {
 
           <div className="grid grid-cols-2 gap-4 border-t border-zinc-800 pt-3">
             <div>
-              <label className="text-[10px] text-zinc-400 font-bold">Bar Width ({barWidth}px)</label>
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Bar Width ({barWidth}px)</label>
               <input type="range" min="1" max="4" step="1" value={barWidth} onChange={e => setBarWidth(parseInt(e.target.value))} className="w-full accent-indigo-600" />
             </div>
             <div>
-              <label className="text-[10px] text-zinc-400 font-bold">Bar Height ({barHeight}px)</label>
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Bar Height ({barHeight}px)</label>
               <input type="range" min="40" max="150" value={barHeight} onChange={e => setBarHeight(parseInt(e.target.value))} className="w-full accent-indigo-600" />
             </div>
           </div>
         </div>
 
         {/* Output Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[250px]">
-          <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[250px]">
+          <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl">
             <svg ref={svgRef} className="max-w-full h-auto" />
           </div>
 

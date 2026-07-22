@@ -382,12 +382,12 @@ export default function MarkdownToPdf() {
         <div className="flex items-center justify-between">
           <button
             onClick={() => setActiveTab('editor')}
-            className="text-sm px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors flex items-center gap-2"
+            className="text-sm px-4 py-2 rounded-xl bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
             Back to Editor
           </button>
-          <h3 className="text-zinc-500 dark:text-zinc-400 text-sm font-medium">PDF Preview</h3>
+          <h3 className="text-[var(--text-secondary)] text-sm font-medium">PDF Preview</h3>
           <button
             onClick={() => downloadOrShare(pdfUrl, 'document.pdf')}
             className="text-sm px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition-colors flex items-center gap-2 shadow-lg"
@@ -396,7 +396,7 @@ export default function MarkdownToPdf() {
             Download PDF
           </button>
         </div>
-        <div className="bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 shadow-xl">
+        <div className="bg-[var(--bg-elevated)] rounded-2xl overflow-hidden border border-[var(--border-subtle)] shadow-xl">
           <iframe
             src={pdfUrl}
             className="w-full h-[85vh]"
@@ -415,10 +415,10 @@ export default function MarkdownToPdf() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-100 dark:border-zinc-800">
-              <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Markdown Editor</h3>
-              <span className="text-xs text-zinc-400">{markdown.length} chars</span>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-subtle)]">
+              <h3 className="text-sm font-semibold text-[var(--text-primary)]">Markdown Editor</h3>
+              <span className="text-xs text-[var(--text-muted)]">{markdown.length} chars</span>
             </div>
             <textarea
               value={markdown}
@@ -429,9 +429,9 @@ export default function MarkdownToPdf() {
             />
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-100 dark:border-zinc-800">
-              <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">HTML Preview</h3>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-subtle)]">
+              <h3 className="text-sm font-semibold text-[var(--text-primary)]">HTML Preview</h3>
             </div>
             <div className="p-5 min-h-[180px] max-h-[260px] overflow-y-auto">
               {htmlPreview ? (
@@ -440,24 +440,24 @@ export default function MarkdownToPdf() {
                   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlPreview) }}
                 />
               ) : (
-                <p className="text-zinc-400 text-sm italic">Preview will appear here...</p>
+                <p className="text-[var(--text-muted)] text-sm italic">Preview will appear here...</p>
               )}
             </div>
           </div>
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl space-y-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm border-b border-zinc-100 dark:border-zinc-800 pb-2">Options</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-5">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2">Options</h4>
 
             <div>
-              <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 block">Page Size</label>
+              <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Page Size</label>
               <div className="grid grid-cols-3 gap-1.5">
                 {Object.keys(PAGE_SIZES).map(s => (
                   <button
                     key={s}
                     onClick={() => setPageSize(s)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${pageSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${pageSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                   >
                     {s}
                   </button>
@@ -466,13 +466,13 @@ export default function MarkdownToPdf() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 block">Margin</label>
+              <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Margin</label>
               <div className="grid grid-cols-3 gap-1.5">
                 {Object.keys(MARGINS).map(m => (
                   <button
                     key={m}
                     onClick={() => setMargin(m)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border capitalize ${margin === m ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border capitalize ${margin === m ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                   >
                     {m}
                   </button>
@@ -481,13 +481,13 @@ export default function MarkdownToPdf() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 block">Font Size</label>
+              <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Font Size</label>
               <div className="grid grid-cols-4 gap-1.5">
                 {FONT_SIZES.map(s => (
                   <button
                     key={s}
                     onClick={() => setFontSize(s)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${fontSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${fontSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                   >
                     {s}
                   </button>
@@ -502,7 +502,7 @@ export default function MarkdownToPdf() {
                 onChange={(e) => setIncludeTitlePage(e.target.checked)}
                 className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-sm text-zinc-700 dark:text-zinc-300">Include title page</span>
+              <span className="text-sm text-[var(--text-primary)]">Include title page</span>
             </label>
 
             <button
@@ -524,8 +524,8 @@ export default function MarkdownToPdf() {
             </button>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm border-b border-zinc-100 dark:border-zinc-800 pb-2 mb-3">Import .md</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2 mb-3">Import .md</h4>
             <FileUploader
               accept=".md,.markdown,text/markdown"
               onFileSelect={handleFileSelect as any}

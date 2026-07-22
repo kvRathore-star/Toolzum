@@ -182,15 +182,15 @@ export default function WebInspector() {
   const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
   const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
-    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
+    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
       <Icon className="w-3.5 h-3.5" /> {label}
     </button>
   );
 
   const InfoRow = ({ label, val }: { label: string; val: string }) => (
-    <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800 last:border-0">
-      <span className="text-[11px] font-medium text-zinc-500">{label}</span>
-      <span className="text-[11px] font-mono text-zinc-900 dark:text-white text-right max-w-[60%] break-all">{val}</span>
+    <div className="flex justify-between items-center py-2 border-b border-[var(--border-subtle)] last:border-0">
+      <span className="text-[11px] font-medium text-[var(--text-secondary)]">{label}</span>
+      <span className="text-[11px] font-mono text-[var(--text-primary)] text-right max-w-[60%] break-all">{val}</span>
     </div>
   );
 
@@ -208,7 +208,7 @@ export default function WebInspector() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="flex flex-wrap bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+      <div className="flex flex-wrap bg-[var(--bg-surface)] rounded-xl p-1">
         <TabBtn v="device" label="Device" icon={Monitor} />
         <TabBtn v="ua" label="UA Parser" icon={Globe} />
         <TabBtn v="http" label="HTTP Codes" icon={AlertCircle} />
@@ -219,7 +219,7 @@ export default function WebInspector() {
       </div>
 
       {tab === 'device' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
           <div className="space-y-0">
             {Object.entries(deviceInfo).map(([k, v]) => <InfoRow key={k} label={k} val={v} />)}
           </div>
@@ -228,9 +228,9 @@ export default function WebInspector() {
 
       {tab === 'ua' && (
         <div className="space-y-4">
-          <input value={uaInput} onChange={e => { setUaInput(e.target.value); setUaResult(parseUA(e.target.value)); }} className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
+          <input value={uaInput} onChange={e => { setUaInput(e.target.value); setUaResult(parseUA(e.target.value)); }} className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
           {uaResult.browser && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
               <div className="space-y-0">
                 <InfoRow label="Browser" val={uaResult.browser} />
                 <InfoRow label="Version" val={uaResult.version || 'Unknown'} />
@@ -243,40 +243,40 @@ export default function WebInspector() {
       )}
 
       {tab === 'http' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
-          <input value={httpSearch} onChange={e => setHttpSearch(e.target.value)} placeholder="Search by code or name..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
+          <input value={httpSearch} onChange={e => setHttpSearch(e.target.value)} placeholder="Search by code or name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
           <div className="max-h-[400px] overflow-y-auto space-y-0.5">
             {filteredHttp.map(s => (
-              <div key={s.code} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+              <div key={s.code} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50">
                 <span className={`text-xs font-bold w-12 px-1.5 py-0.5 rounded ${s.code < 200 ? 'bg-gray-100 dark:bg-gray-800 text-gray-500' : s.code < 300 ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' : s.code < 400 ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : s.code < 500 ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' : 'bg-red-100 dark:bg-red-900/30 text-red-500'}`}>
                   {s.code}
                 </span>
-                <span className="text-xs font-semibold text-zinc-900 dark:text-white w-40">{s.name}</span>
-                <span className="text-[11px] text-zinc-500 flex-1">{s.desc}</span>
+                <span className="text-xs font-semibold text-[var(--text-primary)] w-40">{s.name}</span>
+                <span className="text-[11px] text-[var(--text-secondary)] flex-1">{s.desc}</span>
               </div>
             ))}
-            {filteredHttp.length === 0 && <p className="text-xs text-zinc-400 text-center py-4">No matching status codes.</p>}
+            {filteredHttp.length === 0 && <p className="text-xs text-[var(--text-muted)] text-center py-4">No matching status codes.</p>}
           </div>
         </div>
       )}
 
       {tab === 'mime' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
-          <input value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
+          <input value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
-              <thead><tr className="text-zinc-400 font-bold uppercase text-[10px] border-b border-zinc-200 dark:border-zinc-800"><th className="text-left py-2 px-2">Extension</th><th className="text-left py-2 px-2">MIME Type</th><th className="text-left py-2 px-2">Category</th></tr></thead>
+              <thead><tr className="text-[var(--text-muted)] font-bold uppercase text-[10px] border-b border-[var(--border-subtle)]"><th className="text-left py-2 px-2">Extension</th><th className="text-left py-2 px-2">MIME Type</th><th className="text-left py-2 px-2">Category</th></tr></thead>
               <tbody>
                 {filteredMime.map(m => (
-                  <tr key={m.ext} className="border-b border-zinc-100 dark:border-zinc-800/50 hover:bg-zinc-50 dark:hover:bg-zinc-800/30">
-                    <td className="py-1.5 px-2 font-mono text-zinc-900 dark:text-white">{m.ext}</td>
-                    <td className="py-1.5 px-2 font-mono text-zinc-600 dark:text-zinc-400">{m.mime}</td>
-                    <td className="py-1.5 px-2 text-zinc-500">{m.cat}</td>
+                  <tr key={m.ext} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/30">
+                    <td className="py-1.5 px-2 font-mono text-[var(--text-primary)]">{m.ext}</td>
+                    <td className="py-1.5 px-2 font-mono text-zinc-600 dark:text-[var(--text-muted)]">{m.mime}</td>
+                    <td className="py-1.5 px-2 text-[var(--text-secondary)]">{m.cat}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {filteredMime.length === 0 && <p className="text-xs text-zinc-400 text-center py-4">No matching MIME types.</p>}
+            {filteredMime.length === 0 && <p className="text-xs text-[var(--text-muted)] text-center py-4">No matching MIME types.</p>}
           </div>
         </div>
       )}
@@ -284,15 +284,15 @@ export default function WebInspector() {
       {tab === 'basic-auth' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <input value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
-            <input value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
+            <input value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
           </div>
           {basicUser && basicPass && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
               <div className="relative">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Authorization Header</label>
-                <input type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono outline-none" />
-                <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-0.5 rounded">Copy</button>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Authorization Header</label>
+                <input type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono outline-none" />
+                <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
               </div>
               <InfoRow label="Raw Base64" val={basicResult} />
             </div>
@@ -302,26 +302,26 @@ export default function WebInspector() {
 
       {tab === 'og' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
-            <input value={ogTitle} onChange={e => { setOgTitle(e.target.value); setTimeout(generateOG, 0); }} placeholder="Title..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
-            <textarea value={ogDesc} onChange={e => { setOgDesc(e.target.value); setTimeout(generateOG, 0); }} placeholder="Description..." rows={3} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none resize-none" />
-            <input value={ogImage} onChange={e => { setOgImage(e.target.value); setTimeout(generateOG, 0); }} placeholder="Image URL..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
-            <input value={ogUrl} onChange={e => { setOgUrl(e.target.value); setTimeout(generateOG, 0); }} placeholder="Page URL..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
-            <input value={ogSite} onChange={e => { setOgSite(e.target.value); setTimeout(generateOG, 0); }} placeholder="Site Name..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
-            <select value={ogType} onChange={e => { setOgType(e.target.value); setTimeout(generateOG, 0); }} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
+            <input value={ogTitle} onChange={e => { setOgTitle(e.target.value); setTimeout(generateOG, 0); }} placeholder="Title..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+            <textarea value={ogDesc} onChange={e => { setOgDesc(e.target.value); setTimeout(generateOG, 0); }} placeholder="Description..." rows={3} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none resize-none" />
+            <input value={ogImage} onChange={e => { setOgImage(e.target.value); setTimeout(generateOG, 0); }} placeholder="Image URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+            <input value={ogUrl} onChange={e => { setOgUrl(e.target.value); setTimeout(generateOG, 0); }} placeholder="Page URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+            <input value={ogSite} onChange={e => { setOgSite(e.target.value); setTimeout(generateOG, 0); }} placeholder="Site Name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+            <select value={ogType} onChange={e => { setOgType(e.target.value); setTimeout(generateOG, 0); }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none">
               {['website', 'article', 'product', 'video.movie', 'video.episode', 'music.song', 'profile'].map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
-          <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-2">Generated Meta Tags</label>
-            <textarea value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-zinc-400 outline-none resize-none font-mono" />
-            {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700">Copy</button>}
+          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-2">Generated Meta Tags</label>
+            <textarea value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+            {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
           </div>
         </div>
       )}
 
       {tab === 'keycode' && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
           <input placeholder="Press any key here..." onKeyDown={e => {
             setKeyInfo({
               'key': e.key,
@@ -336,7 +336,7 @@ export default function WebInspector() {
               'location': String(e.location),
               'repeat': String(e.repeat),
             });
-          }} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-5 py-4 text-sm text-zinc-900 dark:text-white outline-none font-mono text-center" />
+          }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-5 py-4 text-sm text-[var(--text-primary)] outline-none font-mono text-center" />
           {Object.keys(keyInfo).length > 0 && (
             <div className="space-y-0">
               {Object.entries(keyInfo).map(([k, v]) => <InfoRow key={k} label={k} val={v} />)}

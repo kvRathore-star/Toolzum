@@ -625,17 +625,17 @@ export function ULIDGenerator() {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
         <h1 className="text-2xl font-bold">ULID Generator</h1>
-        <p className="text-sm text-zinc-500 mt-1">Generate Universally Unique Lexicographically Sortable Identifiers.</p>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Generate Universally Unique Lexicographically Sortable Identifiers.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <div className="flex items-center gap-2">
           <Shield className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">ULID Generator</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">ULID Generator</h3>
         </div>
 
         <div className="space-y-3">
-          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Count: {count}</label>
+          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
           <input type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))}
             className="w-full accent-emerald-500" />
         </div>
@@ -648,13 +648,13 @@ export function ULIDGenerator() {
         {ulids.length > 0 && (
           <div className="space-y-2">
             {ulids.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3">
+              <div key={i} className="flex items-center gap-2 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3">
                 <div className="flex-1 min-w-0">
                   <code className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{item.ulid}</code>
-                  <div className="text-[10px] text-zinc-400 mt-0.5">{new Date(item.timestamp).toISOString()}</div>
+                  <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{new Date(item.timestamp).toISOString()}</div>
                 </div>
                 <button onClick={() => { clipboardWrite(item.ulid); toast.success('ULID copied!'); }}
-                  className="text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700 transition-colors shrink-0">Copy</button>
+                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
               </div>
             ))}
           </div>
@@ -683,47 +683,47 @@ export function NumeronymGenerator() {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
         <h1 className="text-2xl font-bold">Numeronym Generator</h1>
-        <p className="text-sm text-zinc-500 mt-1">Create numeronyms like i18n and acronyms from any text.</p>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Create numeronyms like i18n and acronyms from any text.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <div className="flex items-center gap-2">
           <Hash className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Numeronym Generator</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Numeronym Generator</h3>
         </div>
 
         <div className="space-y-2">
-          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Input Text</label>
+          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Input Text</label>
           <input type="text" value={input} onChange={e => setInput(e.target.value)}
             placeholder="e.g., internationalization"
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:border-emerald-400 transition-colors" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-emerald-400 transition-colors" />
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 cursor-pointer">
+          <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
             <input type="checkbox" checked={preserveCase} onChange={e => setPreserveCase(e.target.checked)}
               className="rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500" />
             Preserve case per word
           </label>
-          <span className="text-[10px] text-zinc-400 ml-auto">Words: {wordCount}</span>
+          <span className="text-[10px] text-[var(--text-muted)] ml-auto">Words: {wordCount}</span>
         </div>
 
         {input.trim() && (
           <div className="space-y-3">
-            <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-3">
+            <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Numeronym</span>
+                <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Numeronym</span>
                 <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }}
-                  className="text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>
+                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
               <code className="text-lg font-mono font-bold text-emerald-600 dark:text-emerald-400 break-all">{numeronym}</code>
             </div>
 
-            <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-3">
+            <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Acronym</span>
+                <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Acronym</span>
                 <button onClick={() => { clipboardWrite(acronym); toast.success('Acronym copied!'); }}
-                  className="text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>
+                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
               <code className="text-lg font-mono font-bold text-blue-600 dark:text-blue-400 break-all">{acronym}</code>
             </div>
@@ -731,12 +731,12 @@ export function NumeronymGenerator() {
         )}
 
         <div className="space-y-2">
-          <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Reference</span>
+          <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Reference</span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {NUMERONYM_REFERENCES.map(({ word, numeronym }) => (
-              <div key={numeronym} className="bg-zinc-50 dark:bg-zinc-800/30 rounded-lg px-3 py-2 text-center">
+              <div key={numeronym} className="bg-[var(--bg-overlay)]/30 rounded-lg px-3 py-2 text-center">
                 <code className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">{numeronym}</code>
-                <p className="text-[10px] text-zinc-400 mt-0.5 truncate">{word}</p>
+                <p className="text-[10px] text-[var(--text-muted)] mt-0.5 truncate">{word}</p>
               </div>
             ))}
           </div>
@@ -762,44 +762,44 @@ export function MACVendorLookup() {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
         <h1 className="text-2xl font-bold">MAC Vendor Lookup</h1>
-        <p className="text-sm text-zinc-500 mt-1">Look up the vendor associated with a MAC address OUI.</p>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Look up the vendor associated with a MAC address OUI.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <div className="flex items-center gap-2">
           <Search className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">MAC Vendor Lookup</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">MAC Vendor Lookup</h3>
         </div>
 
         <div className="space-y-2">
-          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">MAC Address</label>
+          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">MAC Address</label>
           <input type="text" value={macInput} onChange={e => setMacInput(e.target.value)}
             placeholder="00:1A:11:22:33:44 or 001A11223344"
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-emerald-400 transition-colors" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-emerald-400 transition-colors" />
         </div>
 
         {oui && (
           <div className="space-y-3">
-            <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-2">
+            <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Vendor</span>
+                <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Vendor</span>
               </div>
               <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{vendor === 'Unknown vendor' ? (
-                <span className="text-zinc-400">Unknown vendor</span>
+                <span className="text-[var(--text-muted)]">Unknown vendor</span>
               ) : vendor}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-zinc-50 dark:bg-zinc-800/30 rounded-xl p-3">
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block mb-1">OUI</span>
+              <div className="bg-[var(--bg-overlay)]/30 rounded-xl p-3">
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">OUI</span>
                 <div className="flex items-center gap-2">
                   <code className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{oui}</code>
                   <button onClick={() => { clipboardWrite(oui); toast.success('OUI copied!'); }}
-                    className="text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>
+                    className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
                 </div>
               </div>
-              <div className="bg-zinc-50 dark:bg-zinc-800/30 rounded-xl p-3">
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block mb-1">Formatted MAC</span>
+              <div className="bg-[var(--bg-overlay)]/30 rounded-xl p-3">
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Formatted MAC</span>
                 <code className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{formattedMAC || '—'}</code>
               </div>
             </div>

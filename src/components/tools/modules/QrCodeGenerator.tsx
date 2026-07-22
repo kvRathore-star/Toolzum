@@ -131,18 +131,18 @@ export default function QrCodeGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <Key className="w-6 h-6 text-indigo-500" />
+      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Key className="w-6 h-6 text-[var(--accent)]" />
           Dynamic QR Code Generator
         </h2>
-        <p className="text-sm text-[var(--text-secondary)] dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Generate high-resolution QR codes for text, website links, Wi-Fi credentials, or digital contact cards. Custom colors and center logo support.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl max-w-md">
+      <div className="flex gap-2 p-1 bg-[var(--bg-surface)] rounded-xl max-w-md">
         {[
           { id: 'url', label: 'URL Link', icon: Globe },
           { id: 'text', label: 'Plain Text', icon: FileText },
@@ -157,7 +157,7 @@ export default function QrCodeGenerator() {
               className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 ${
                 qrType === tab.id
                   ? 'bg-[var(--accent)] text-white shadow-sm'
-                  : 'text-[var(--text-secondary)] dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+                  : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -169,19 +169,19 @@ export default function QrCodeGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
-          <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1 border-b border-zinc-200 dark:border-zinc-800 pb-2">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
+          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-b border-[var(--border-subtle)] pb-2">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Content Parameters
           </h4>
 
           {/* URL Input */}
           {qrType === 'url' && (
             <div className="space-y-1 text-xs animate-in fade-in duration-300">
-              <span className="font-bold text-zinc-500 uppercase block">Website URL</span>
+              <span className="font-bold text-[var(--text-secondary)] uppercase block">Website URL</span>
               <input
                 type="url" value={urlContent} onChange={e => setUrlContent(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
               />
             </div>
           )}
@@ -189,10 +189,10 @@ export default function QrCodeGenerator() {
           {/* Text Input */}
           {qrType === 'text' && (
             <div className="space-y-1 text-xs animate-in fade-in duration-300">
-              <span className="font-bold text-zinc-500 uppercase block">Plain Text Message</span>
+              <span className="font-bold text-[var(--text-secondary)] uppercase block">Plain Text Message</span>
               <textarea
                 value={textContent} onChange={e => setTextContent(e.target.value)}
-                className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white resize-none"
+                className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)] resize-none"
               />
             </div>
           )}
@@ -201,26 +201,26 @@ export default function QrCodeGenerator() {
           {qrType === 'wifi' && (
             <div className="space-y-4 animate-in fade-in duration-300 text-xs">
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Network SSID (Name)</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Network SSID (Name)</span>
                 <input
                   type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 />
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Security Password</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Security Password</span>
                 <input
                   type="password" value={wifiPass} onChange={e => setWifiPass(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 />
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Security Type</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Security Type</span>
                 <select
                   value={wifiSec} onChange={e => setWifiSec(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 >
                   <option value="WPA">WPA / WPA2</option>
                   <option value="WEP">WEP</option>
@@ -234,58 +234,58 @@ export default function QrCodeGenerator() {
           {qrType === 'contact' && (
             <div className="space-y-4 animate-in fade-in duration-300 text-xs">
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Full Name</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Full Name</span>
                 <input
                   type="text" value={contactName} onChange={e => setContactName(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 />
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Phone Number</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number</span>
                 <input
                   type="text" value={contactPhone} onChange={e => setContactPhone(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 />
               </div>
 
               <div className="space-y-1">
-                <span className="font-bold text-zinc-500 uppercase block">Email Address</span>
+                <span className="font-bold text-[var(--text-secondary)] uppercase block">Email Address</span>
                 <input
                   type="email" value={contactEmail} onChange={e => setContactEmail(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-zinc-900 dark:text-white"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
                 />
               </div>
             </div>
           )}
 
-          <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1 border-t border-zinc-200 dark:border-zinc-800 pt-4">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Style Options
           </h4>
 
           {/* Color pickers */}
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div className="space-y-1">
-              <span className="text-zinc-500 font-bold block mb-1">Foreground</span>
+              <span className="text-[var(--text-secondary)] font-bold block mb-1">Foreground</span>
               <input
                 type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
-                className="w-full h-10 border border-zinc-200 dark:border-zinc-700 rounded-lg cursor-pointer bg-transparent"
+                className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent"
               />
             </div>
             <div className="space-y-1">
-              <span className="text-zinc-500 font-bold block mb-1">Background</span>
+              <span className="text-[var(--text-secondary)] font-bold block mb-1">Background</span>
               <input
                 type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                className="w-full h-10 border border-zinc-200 dark:border-zinc-700 rounded-lg cursor-pointer bg-transparent"
+                className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent"
               />
             </div>
           </div>
 
           {/* Logo upload */}
           <div className="space-y-1 text-xs">
-            <span className="text-zinc-500 font-bold block mb-1">Center Logo Overlay</span>
-            <label className="w-full py-2.5 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-700 dark:text-[var(--text-muted)] border border-zinc-200 dark:border-zinc-700 font-bold rounded-xl text-center cursor-pointer block">
+            <span className="text-[var(--text-secondary)] font-bold block mb-1">Center Logo Overlay</span>
+            <label className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-zinc-700 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] font-bold rounded-xl text-center cursor-pointer block">
               Choose Logo File
               <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </label>
@@ -299,10 +299,10 @@ export default function QrCodeGenerator() {
             )}
           </div>
 
-          <div className="flex flex-col gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="flex flex-col gap-2 pt-2 border-t border-[var(--border-subtle)]">
             <button
               onClick={reset}
-              className="w-full py-2.5 bg-[var(--bg-overlay)] dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+              className="w-full py-2.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer"
             >
               Reset Parameters
             </button>
@@ -310,8 +310,8 @@ export default function QrCodeGenerator() {
         </div>
 
         {/* View Workspace */}
-        <div className="lg:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-6 rounded-2xl flex flex-col justify-between items-center min-h-[350px]">
-          <div className="flex-1 flex justify-center items-center p-6 bg-white border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-inner">
+        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center min-h-[350px]">
+          <div className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner">
             <canvas ref={canvasRef} className="max-w-full max-h-[300px] object-contain" />
           </div>
 

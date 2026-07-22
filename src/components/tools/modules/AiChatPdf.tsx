@@ -167,13 +167,13 @@ export default function AiChatPdf() {
             subtitle="Browser-based processing — your file stays on your device"
           />
         ) : (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl text-center space-y-6">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl text-center space-y-6">
             <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{file.name}</h3>
-              <p className="text-zinc-600 dark:text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">{file.name}</h3>
+              <p className="text-zinc-600 dark:text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
             </div>
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 text-left text-xs text-blue-400 space-y-2">
               <p className="font-semibold">Browser-Based AI Processing</p>
@@ -188,7 +188,7 @@ export default function AiChatPdf() {
             </button>
             <button
               onClick={() => setFile(null)}
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white"
+              className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
             >
               Cancel
             </button>
@@ -200,7 +200,7 @@ export default function AiChatPdf() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto h-[800px] flex flex-col">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5 flex items-center justify-between shrink-0">
+      <div className="bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg shrink-0">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -213,13 +213,13 @@ export default function AiChatPdf() {
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setShowFullText(!showFullText)}
-            className="text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+            className="text-xs text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
           >
             {showFullText ? 'Hide Text' : 'Show Text'}
           </button>
           <button
             onClick={handleNewFile}
-            className="text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+            className="text-xs text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
           >
             New Document
           </button>
@@ -227,22 +227,22 @@ export default function AiChatPdf() {
       </div>
 
       {showFullText && (
-        <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl p-4 max-h-48 overflow-y-auto shrink-0">
-          <pre className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap font-sans leading-relaxed">
+        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto shrink-0">
+          <pre className="text-xs text-zinc-600 dark:text-[var(--text-muted)] whitespace-pre-wrap font-sans leading-relaxed">
             {pdfText.length > 500 ? pdfText.substring(0, 500) + '...' : pdfText}
           </pre>
         </div>
       )}
 
-      <div className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col relative">
+      <div className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl overflow-hidden shadow-2xl flex flex-col relative">
         {chatHistory.length === 0 ? (
           <div className="flex-1 flex items-center justify-center p-8">
             <div className="text-center max-w-md space-y-3">
               <div className="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto">
                 <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
               </div>
-              <p className="text-zinc-600 dark:text-zinc-400 font-medium">Ask a question about your document</p>
-              <p className="text-sm text-zinc-400 dark:text-zinc-500">Type your question below and get answers extracted directly from the PDF text.</p>
+              <p className="text-zinc-600 dark:text-[var(--text-muted)] font-medium">Ask a question about your document</p>
+              <p className="text-sm text-[var(--text-muted)]">Type your question below and get answers extracted directly from the PDF text.</p>
             </div>
           </div>
         ) : (
@@ -255,9 +255,9 @@ export default function AiChatPdf() {
                   </div>
                 </div>
                 <div className="flex justify-start">
-                  <div className="max-w-[80%] bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/5 text-zinc-800 dark:text-zinc-200 rounded-2xl rounded-bl-sm p-4 shadow-lg">
+                  <div className="max-w-[80%] bg-[var(--bg-surface)] border border-zinc-200 dark:border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 rounded-2xl rounded-bl-sm p-4 shadow-lg">
                     <div className="whitespace-pre-wrap leading-relaxed mb-2">{entry.answer}</div>
-                    <div className="flex items-center gap-2 pt-2 border-t border-zinc-200 dark:border-white/10">
+                    <div className="flex items-center gap-2 pt-2 border-t border-[var(--border-subtle)]">
                       <div className="flex-1 h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all ${
@@ -266,7 +266,7 @@ export default function AiChatPdf() {
                           style={{ width: `${entry.confidence}%` }}
                         />
                       </div>
-                      <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 shrink-0">
+                      <span className="text-[10px] font-bold text-[var(--text-secondary)] shrink-0">
                         {entry.confidence}% match
                       </span>
                     </div>
@@ -276,7 +276,7 @@ export default function AiChatPdf() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/5 rounded-2xl rounded-bl-sm p-4 shadow-lg flex items-center space-x-2">
+                <div className="bg-[var(--bg-surface)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl rounded-bl-sm p-4 shadow-lg flex items-center space-x-2">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -286,24 +286,24 @@ export default function AiChatPdf() {
           </div>
         )}
 
-        <div className="p-4 bg-black/40 border-t border-zinc-200 dark:border-white/5">
+        <div className="p-4 bg-black/40 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
           {chatHistory.length > 0 && (
             <div className="flex items-center justify-between mb-3">
               <button
                 onClick={handleClearChat}
-                className="text-xs text-zinc-500 hover:text-red-500 transition-colors px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+                className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
               >
                 Clear Chat
               </button>
               <button
                 onClick={handleDownloadTranscript}
-                className="text-xs text-zinc-500 hover:text-emerald-500 transition-colors px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+                className="text-xs text-[var(--text-secondary)] hover:text-emerald-500 transition-colors px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
               >
                 Download Transcript
               </button>
             </div>
           )}
-          <div className="relative flex items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-inner focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all">
+          <div className="relative flex items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-inner focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all">
             <textarea
               value={question}
               onChange={(e) => setQuestion(e.target.value)}

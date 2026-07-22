@@ -166,11 +166,11 @@ export default function NoiseReducer() {
         <svg className="w-5 h-5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m-4 0h8m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
         </svg>
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Audio Noise Reducer</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Noise Reducer</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Remove background noise using adaptive spectral subtraction and non-local means denoising. All processing is local.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">Remove background noise using adaptive spectral subtraction and non-local means denoising. All processing is local.</p>
 
         {!file ? (
           <FileUploader
@@ -185,21 +185,21 @@ export default function NoiseReducer() {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
-            <p className="text-sm text-zinc-500 font-medium">Loading audio engine...</p>
-            <p className="text-[10px] text-zinc-400 text-center max-w-xs">Downloading ~30MB WebAssembly core. First load may take a moment.</p>
+            <p className="text-sm text-[var(--text-secondary)] font-medium">Loading audio engine...</p>
+            <p className="text-[10px] text-[var(--text-muted)] text-center max-w-xs">Downloading ~30MB WebAssembly core. First load may take a moment.</p>
           </div>
         ) : (
           <div className="space-y-5">
-            <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+            <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div className="min-w-0 flex-1 mr-3">
                 <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
-                <div className="text-[10px] text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
               </div>
               <button onClick={removeFile} disabled={isProcessing} className="text-[10px] text-red-500 hover:underline disabled:opacity-50 shrink-0">Remove</button>
             </div>
 
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-2 block">Noise Reduction Level</label>
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-2 block">Noise Reduction Level</label>
               <div className="grid grid-cols-4 gap-2">
                 {LEVELS.map(l => (
                   <button
@@ -209,14 +209,14 @@ export default function NoiseReducer() {
                     className={`py-2.5 px-2 rounded-xl text-xs font-semibold transition-all ${
                       level === l
                         ? 'bg-violet-500 text-white shadow-md shadow-violet-500/20'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     } disabled:opacity-50`}
                   >
                     {LEVEL_LABELS[l]}
                   </button>
                 ))}
               </div>
-              <p className="text-[10px] text-zinc-400 mt-1.5">{`afftdn nf=${LEVEL_NF[level]}`}</p>
+              <p className="text-[10px] text-[var(--text-muted)] mt-1.5">{`afftdn nf=${LEVEL_NF[level]}`}</p>
             </div>
 
             <label className="flex items-center gap-2.5 cursor-pointer select-none">
@@ -228,15 +228,15 @@ export default function NoiseReducer() {
                 className="rounded border-zinc-300 dark:border-zinc-700 text-violet-500 focus:ring-violet-500 disabled:opacity-50"
               />
               <div>
-                <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">Sample noise profile</span>
-                <p className="text-[10px] text-zinc-400">Select a noise-only section for targeted removal using non-local means denoising</p>
+                <span className="text-xs font-semibold text-[var(--text-primary)]">Sample noise profile</span>
+                <p className="text-[10px] text-[var(--text-muted)]">Select a noise-only section for targeted removal using non-local means denoising</p>
               </div>
             </label>
 
             {useNoiseProfile && (
               <div className="grid grid-cols-2 gap-3 pl-7">
                 <div>
-                  <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Noise Start (sec)</label>
+                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise Start (sec)</label>
                   <input
                     type="number"
                     min={0}
@@ -244,12 +244,12 @@ export default function NoiseReducer() {
                     value={noiseStart}
                     onChange={e => setNoiseStart(Math.max(0, Number(e.target.value)))}
                     disabled={isProcessing}
-                    className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
                   />
-                  <span className="text-[10px] text-zinc-400 mt-1 block">{Math.floor(noiseStart / 60)}:{(noiseStart % 60).toFixed(1).padStart(4, '0')}</span>
+                  <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseStart / 60)}:{(noiseStart % 60).toFixed(1).padStart(4, '0')}</span>
                 </div>
                 <div>
-                  <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Noise End (sec)</label>
+                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise End (sec)</label>
                   <input
                     type="number"
                     min={0}
@@ -257,20 +257,20 @@ export default function NoiseReducer() {
                     value={noiseEnd}
                     onChange={e => setNoiseEnd(Math.max(0, Number(e.target.value)))}
                     disabled={isProcessing}
-                    className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-white outline-none disabled:opacity-50"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none disabled:opacity-50"
                   />
-                  <span className="text-[10px] text-zinc-400 mt-1 block">{Math.floor(noiseEnd / 60)}:{(noiseEnd % 60).toFixed(1).padStart(4, '0')}</span>
+                  <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseEnd / 60)}:{(noiseEnd % 60).toFixed(1).padStart(4, '0')}</span>
                 </div>
               </div>
             )}
 
             <div>
-              <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Output Format</label>
+              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
               <select
                 value={outputFormat}
                 onChange={e => setOutputFormat(e.target.value as OutputFormat)}
                 disabled={isProcessing}
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none disabled:opacity-50"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none disabled:opacity-50"
               >
                 {OUTPUT_FORMATS.map(f => (
                   <option key={f} value={f}>{f.toUpperCase()}</option>
@@ -296,17 +296,17 @@ export default function NoiseReducer() {
                   <span>{useNoiseProfile ? 'Analyzing noise profile & processing...' : 'Reducing noise...'}</span>
                   <span>{processingProgress}%</span>
                 </div>
-                <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
                   <div className="bg-violet-500 h-full transition-all duration-300 rounded-full" style={{ width: `${processingProgress}%` }}></div>
                 </div>
               </div>
             )}
 
             {outputUrl && originalUrlRef.current && (
-              <div className="space-y-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <p className="text-[10px] font-semibold text-zinc-400 flex items-center gap-1.5">
+                    <p className="text-[10px] font-semibold text-[var(--text-muted)] flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-zinc-400 inline-block" />
                       Original
                     </p>
@@ -338,7 +338,7 @@ export default function NoiseReducer() {
         )}
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
             <strong>How it works:</strong> Simple mode uses FFmpeg's <code className="text-[9px] px-1 py-0.5 bg-indigo-100 dark:bg-indigo-800/40 rounded">afftdn</code> adaptive frequency-domain noise reduction, automatically estimating stationary noise and suppressing it. Noise profile mode extracts the selected segment for analysis and applies <code className="text-[9px] px-1 py-0.5 bg-indigo-100 dark:bg-indigo-800/40 rounded">anlmdn</code> non-local means denoising for more aggressive reduction. Results vary by recording quality and noise characteristics.
           </p>
         </div>

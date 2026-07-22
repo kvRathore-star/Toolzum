@@ -24,44 +24,44 @@ export default function ResumeBuilder() {
         
         {/* Editor (Left) */}
         <div className="space-y-6 no-print">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-4">Personal Info</h3>
-            <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Full Name" onChange={(e) => setPersonal({...personal, name: e.target.value})} />
-            <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Professional Title" onChange={(e) => setPersonal({...personal, title: e.target.value})} />
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Personal Info</h3>
+            <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Full Name" onChange={(e) => setPersonal({...personal, name: e.target.value})} />
+            <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Professional Title" onChange={(e) => setPersonal({...personal, title: e.target.value})} />
             <div className="grid grid-cols-2 gap-4">
-              <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Email" onChange={(e) => setPersonal({...personal, email: e.target.value})} />
-              <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Phone" onChange={(e) => setPersonal({...personal, phone: e.target.value})} />
+              <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Email" onChange={(e) => setPersonal({...personal, email: e.target.value})} />
+              <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Phone" onChange={(e) => setPersonal({...personal, phone: e.target.value})} />
             </div>
-            <textarea className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white h-24" placeholder="Professional Summary" onChange={(e) => setPersonal({...personal, summary: e.target.value})} />
+            <textarea className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-24" placeholder="Professional Summary" onChange={(e) => setPersonal({...personal, summary: e.target.value})} />
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Experience</h3>
+              <h3 className="text-xl font-bold text-[var(--text-primary)]">Experience</h3>
               <button onClick={addExperience} className="text-sm text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
             </div>
             {experience.map((exp, i) => (
-              <div key={i} className="space-y-2 p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-50/50 dark:bg-black/50">
-                <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Role" onChange={(e) => { const newExp = [...experience]; newExp[i].role = e.target.value; setExperience(newExp); }} />
+              <div key={i} className="space-y-2 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
+                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Role" onChange={(e) => { const newExp = [...experience]; newExp[i].role = e.target.value; setExperience(newExp); }} />
                 <div className="grid grid-cols-2 gap-4">
-                  <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Company" onChange={(e) => { const newExp = [...experience]; newExp[i].company = e.target.value; setExperience(newExp); }} />
-                  <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white" placeholder="Duration (e.g. 2020-2023)" onChange={(e) => { const newExp = [...experience]; newExp[i].duration = e.target.value; setExperience(newExp); }} />
+                  <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Company" onChange={(e) => { const newExp = [...experience]; newExp[i].company = e.target.value; setExperience(newExp); }} />
+                  <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Duration (e.g. 2020-2023)" onChange={(e) => { const newExp = [...experience]; newExp[i].duration = e.target.value; setExperience(newExp); }} />
                 </div>
-                <textarea className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white h-20" placeholder="Description of duties" onChange={(e) => { const newExp = [...experience]; newExp[i].description = e.target.value; setExperience(newExp); }} />
+                <textarea className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-20" placeholder="Description of duties" onChange={(e) => { const newExp = [...experience]; newExp[i].description = e.target.value; setExperience(newExp); }} />
               </div>
             ))}
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Education</h3>
+              <h3 className="text-xl font-bold text-[var(--text-primary)]">Education</h3>
               <button onClick={addEducation} className="text-sm text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
             </div>
             {education.map((edu, i) => (
-              <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-50/50 dark:bg-black/50">
-                <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white md:col-span-1" placeholder="Institution" onChange={(e) => { const newEdu = [...education]; newEdu[i].institution = e.target.value; setEducation(newEdu); }} />
-                <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white md:col-span-1" placeholder="Degree" onChange={(e) => { const newEdu = [...education]; newEdu[i].degree = e.target.value; setEducation(newEdu); }} />
-                <input className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white md:col-span-1" placeholder="Year" onChange={(e) => { const newEdu = [...education]; newEdu[i].year = e.target.value; setEducation(newEdu); }} />
+              <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
+                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Institution" onChange={(e) => { const newEdu = [...education]; newEdu[i].institution = e.target.value; setEducation(newEdu); }} />
+                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Degree" onChange={(e) => { const newEdu = [...education]; newEdu[i].degree = e.target.value; setEducation(newEdu); }} />
+                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Year" onChange={(e) => { const newEdu = [...education]; newEdu[i].year = e.target.value; setEducation(newEdu); }} />
               </div>
             ))}
           </div>
@@ -76,10 +76,10 @@ export default function ResumeBuilder() {
 
         {/* Live Preview (Right) */}
         <div className="bg-white text-black p-10 min-h-[1056px] w-full max-w-[816px] shadow-2xl mx-auto printable-area print:shadow-none print:m-0 print:p-0">
-          <div className="border-b-2 border-zinc-200 dark:border-zinc-800 pb-6 mb-6">
+          <div className="border-b-2 border-[var(--border-subtle)] pb-6 mb-6">
             <h1 className="text-4xl font-black text-zinc-900 mb-1">{personal.name || 'Your Name'}</h1>
             <h2 className="text-xl text-zinc-600 font-medium mb-3">{personal.title || 'Professional Title'}</h2>
-            <div className="text-sm text-zinc-500 flex gap-4">
+            <div className="text-sm text-[var(--text-secondary)] flex gap-4">
               <span>{personal.email || 'email@example.com'}</span>
               <span>•</span>
               <span>{personal.phone || '(555) 123-4567'}</span>
@@ -98,7 +98,7 @@ export default function ResumeBuilder() {
                 <div key={i}>
                   <div className="flex justify-between items-baseline mb-1">
                     <h4 className="font-bold text-zinc-900">{exp.role || 'Job Title'}</h4>
-                    <span className="text-sm text-zinc-500 font-medium">{exp.duration || '2020 - Present'}</span>
+                    <span className="text-sm text-[var(--text-secondary)] font-medium">{exp.duration || '2020 - Present'}</span>
                   </div>
                   <div className="text-sm text-blue-600 font-medium mb-2">{exp.company || 'Company Name'}</div>
                   <p className="text-zinc-700 text-sm leading-relaxed whitespace-pre-wrap">{exp.description || '• Describe your responsibilities and achievements\n• Use bullet points for readability'}</p>
@@ -116,7 +116,7 @@ export default function ResumeBuilder() {
                     <h4 className="font-bold text-zinc-900">{edu.degree || 'Degree / Certificate'}</h4>
                     <div className="text-sm text-zinc-600">{edu.institution || 'University / Institution'}</div>
                   </div>
-                  <span className="text-sm text-zinc-500">{edu.year || '2020'}</span>
+                  <span className="text-sm text-[var(--text-secondary)]">{edu.year || '2020'}</span>
                 </div>
               ))}
             </div>

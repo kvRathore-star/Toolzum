@@ -295,25 +295,25 @@ export default function ColorConverter() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white">Color Converter</h4>
-        <p className="text-zinc-600 dark:text-zinc-400">Convert between Hex, RGB, HSL, HSV, CMYK, and named colors in real-time.</p>
+        <h4 className="font-bold text-[var(--text-primary)]">Color Converter</h4>
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Convert between Hex, RGB, HSL, HSV, CMYK, and named colors in real-time.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 flex flex-col items-center gap-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 flex flex-col items-center gap-4">
           <div className="w-full h-44 rounded-xl border border-zinc-300 dark:border-zinc-800 shadow-inner transition-colors duration-200" style={{ backgroundColor: results.hex }} />
           <input type="color" value={results.hex} onChange={handlePickerChange} className="w-10 h-10 rounded cursor-pointer border border-zinc-300 dark:border-zinc-700" />
           <div className="text-center">
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Preview</span>
-            <span className="text-lg font-mono text-zinc-900 dark:text-white">{results.hex}</span>
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Preview</span>
+            <span className="text-lg font-mono text-[var(--text-primary)]">{results.hex}</span>
           </div>
           <button onClick={handleDownload} className="mt-2 text-xs text-blue-500 hover:text-blue-400 font-bold">Download Swatch</button>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 md:col-span-2 space-y-4">
-          <div className="flex items-center gap-3 border-b border-zinc-200 dark:border-white/5 pb-3">
-            <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider">Input</h4>
-            <select value={inputFormat} onChange={e => handleFormatSelect(e.target.value)} className="text-xs bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2 py-1 outline-none">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 md:col-span-2 space-y-4">
+          <div className="flex items-center gap-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-3">
+            <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Input</h4>
+            <select value={inputFormat} onChange={e => handleFormatSelect(e.target.value)} className="text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 outline-none">
               <option value="hex">Hex</option>
               <option value="rgb">RGB</option>
               <option value="hsl">HSL</option>
@@ -324,17 +324,17 @@ export default function ColorConverter() {
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Color Value</label>
-            <input type="text" value={inputValue} onChange={e => handleInputChange(e.target.value)} placeholder="#3B82F6, rgb(59,130,246), hsl(217,91%,60%)..." className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 font-mono text-sm text-zinc-900 dark:text-white outline-none" />
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Color Value</label>
+            <input type="text" value={inputValue} onChange={e => handleInputChange(e.target.value)} placeholder="#3B82F6, rgb(59,130,246), hsl(217,91%,60%)..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 font-mono text-sm text-[var(--text-primary)] outline-none" />
             {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {(['hex', 'rgb', 'hsl', 'hsv', 'cmyk'] as const).map(key => (
               <div key={key} className="space-y-1">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">{key.toUpperCase()}</label>
-                <div className="flex items-center bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 font-mono text-sm">
-                  <span className="flex-1 text-zinc-900 dark:text-white truncate">{(results as any)[key]}</span>
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">{key.toUpperCase()}</label>
+                <div className="flex items-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 font-mono text-sm">
+                  <span className="flex-1 text-[var(--text-primary)] truncate">{(results as any)[key]}</span>
                   <button onClick={() => handleCopy((results as any)[key], key.toUpperCase())} className="text-xs text-blue-500 hover:text-blue-400 font-bold ml-2 shrink-0">Copy</button>
                 </div>
               </div>
@@ -342,9 +342,9 @@ export default function ColorConverter() {
           </div>
 
           {colorHistory.length > 0 && (
-            <div className="pt-3 border-t border-zinc-200 dark:border-white/5">
+            <div className="pt-3 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">History (last {HISTORY_MAX})</span>
+                <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">History (last {HISTORY_MAX})</span>
                 <button onClick={handleClearHistory} className="text-xs text-red-400 hover:text-red-300">Clear</button>
               </div>
               <div className="flex flex-wrap gap-2">

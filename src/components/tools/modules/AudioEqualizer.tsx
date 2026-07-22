@@ -309,10 +309,10 @@ export default function AudioEqualizer() {
           <svg className="w-5 h-5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
           </svg>
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Audio Equalizer</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Equalizer</h3>
         </div>
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+          <p className="text-xs text-[var(--text-secondary)]">
             Adjust frequency bands with a 10-band graphic equalizer. All processing happens locally in your browser.
           </p>
           <FileUploader
@@ -322,7 +322,7 @@ export default function AudioEqualizer() {
             subtitle="MP3, WAV, M4A, FLAC, OGG"
           />
           {ffmpegLoading && (
-            <div className="flex items-center justify-center gap-2 py-3 text-xs text-zinc-400">
+            <div className="flex items-center justify-center gap-2 py-3 text-xs text-[var(--text-muted)]">
               <svg className="w-4 h-4 animate-spin text-violet-500" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -346,11 +346,11 @@ export default function AudioEqualizer() {
         <svg className="w-5 h-5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
         </svg>
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Audio Equalizer</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Equalizer</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center flex-shrink-0">
               <svg className="w-4 h-4 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -359,7 +359,7 @@ export default function AudioEqualizer() {
             </div>
             <div className="min-w-0">
               <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
-              <div className="text-[10px] text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+              <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
             </div>
           </div>
           <button onClick={handleReset} disabled={isProcessing}
@@ -376,7 +376,7 @@ export default function AudioEqualizer() {
         )}
 
         {ffmpegLoading && (
-          <div className="flex items-center justify-center gap-2 py-4 text-xs text-zinc-400">
+          <div className="flex items-center justify-center gap-2 py-4 text-xs text-[var(--text-muted)]">
             <svg className="w-4 h-4 animate-spin text-violet-500" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -391,14 +391,14 @@ export default function AudioEqualizer() {
               className={`text-[10px] font-semibold px-3 py-1.5 rounded-lg border transition-all
                 ${preset === name
                   ? 'bg-violet-500 text-white border-violet-500'
-                  : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700'
+                  : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-zinc-300 border-[var(--border-subtle)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
                 }`}>
               {name}
             </button>
           ))}
         </div>
 
-        <div className="w-full h-44 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+        <div className="w-full h-44 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
           <canvas ref={canvasRef} className="w-full h-full" />
         </div>
 
@@ -406,7 +406,7 @@ export default function AudioEqualizer() {
           <div className="flex justify-between gap-1 min-w-[480px]">
             {BANDS.map((freq, i) => (
               <div key={freq} className="flex flex-col items-center gap-1 flex-1">
-                <span className="text-[9px] font-semibold text-zinc-400 dark:text-zinc-500">{BAND_LABELS[i]}</span>
+                <span className="text-[9px] font-semibold text-[var(--text-muted)]">{BAND_LABELS[i]}</span>
                 <input
                   type="range"
                   min="-12"
@@ -418,7 +418,7 @@ export default function AudioEqualizer() {
                   style={{ writingMode: 'vertical-lr', direction: 'ltr' }}
                 />
                 <span className={`text-[10px] font-mono font-semibold
-                  ${bands[i] > 0 ? 'text-emerald-500' : bands[i] < 0 ? 'text-red-400' : 'text-zinc-400'}`}>
+                  ${bands[i] > 0 ? 'text-emerald-500' : bands[i] < 0 ? 'text-red-400' : 'text-[var(--text-muted)]'}`}>
                   {bands[i] > 0 ? '+' : ''}{bands[i]}
                 </span>
               </div>
@@ -428,9 +428,9 @@ export default function AudioEqualizer() {
 
         <div className="flex items-center justify-between gap-4 pt-2">
           <div className="flex items-center gap-2">
-            <label className="text-[10px] font-semibold text-zinc-400">Output:</label>
+            <label className="text-[10px] font-semibold text-[var(--text-muted)]">Output:</label>
             <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof OUTPUT_FORMATS[number])}
-              className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1.5 text-xs text-zinc-900 dark:text-white outline-none">
+              className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-xs text-[var(--text-primary)] outline-none">
               {OUTPUT_FORMATS.map(f => <option key={f} value={f}>{f.toUpperCase()}</option>)}
             </select>
           </div>
@@ -444,7 +444,7 @@ export default function AudioEqualizer() {
 
           {isProcessing && (
             <div className="flex items-center gap-3 flex-1">
-              <div className="flex-1 bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div className="flex-1 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
                 <div id="eq-progress" className="bg-violet-500 h-full transition-all duration-300" style={{ width: '0%' }}></div>
               </div>
               <span id="eq-progress-text" className="text-[10px] font-semibold text-violet-500 w-8 text-right">0%</span>
@@ -453,11 +453,11 @@ export default function AudioEqualizer() {
         </div>
 
         {(previewUrl || outputUrl) && (
-          <div className="space-y-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="space-y-3 pt-2 border-t border-[var(--border-subtle)]">
             {previewUrl && (
               <div>
-                <div className="text-[10px] font-semibold text-zinc-400 mb-1.5 flex items-center gap-1.5">
-                  <svg className="w-3 h-3 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-[10px] font-semibold text-[var(--text-muted)] mb-1.5 flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   Original

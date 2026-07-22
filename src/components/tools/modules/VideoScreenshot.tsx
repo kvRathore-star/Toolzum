@@ -178,27 +178,27 @@ export default function VideoScreenshot() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
-        <button onClick={reset} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change Video</button>
+        <button onClick={reset} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change Video</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
           <video ref={videoRef} src={URL.createObjectURL(file)} controls className="w-full max-h-[400px] rounded-lg" />
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Capture Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium">Capture Settings</h4>
 
-            <div className="flex gap-2 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl">
+            <div className="flex gap-2 bg-[var(--bg-surface)] p-1 rounded-xl">
               {(['single', 'batch'] as const).map(m => (
                 <button key={m} onClick={() => setMode(m)}
-                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${mode === m ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'}`}
+                  className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${mode === m ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                 >
                   {m === 'single' ? 'Single Frame' : 'Batch'}
                 </button>
@@ -207,9 +207,9 @@ export default function VideoScreenshot() {
 
             {mode === 'single' ? (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
                 <input type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
                   className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
@@ -219,9 +219,9 @@ export default function VideoScreenshot() {
               </div>
             ) : (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Interval (seconds between frames)</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
                 <input type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
                   className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
@@ -232,11 +232,11 @@ export default function VideoScreenshot() {
             )}
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Output Format</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Output Format</label>
               <div className="flex gap-2">
                 {(['jpg', 'png', 'webp'] as const).map(f => (
                   <button key={f} onClick={() => setFormat(f)}
-                    className={`flex-1 py-2 rounded-lg text-sm font-medium uppercase transition-all ${format === f ? 'bg-blue-600 text-white shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}
+                    className={`flex-1 py-2 rounded-lg text-sm font-medium uppercase transition-all ${format === f ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
                   >
                     {f}
                   </button>
@@ -246,26 +246,26 @@ export default function VideoScreenshot() {
 
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <label className="text-zinc-600 dark:text-zinc-400">Quality</label>
-                <span className="text-zinc-900 dark:text-zinc-100 font-mono text-xs bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{quality}%</span>
+                <label className="text-zinc-600 dark:text-[var(--text-muted)]">Quality</label>
+                <span className="text-zinc-900 dark:text-zinc-100 font-mono text-xs bg-[var(--bg-surface)] px-2 py-0.5 rounded">{quality}%</span>
               </div>
               <input type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))}
                 className="w-full accent-blue-600"
               />
-              <div className="flex justify-between text-xs text-zinc-400 mt-1"><span>Low</span><span>High</span></div>
+              <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>Low</span><span>High</span></div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Width (0 = original)</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
                 <input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
                 />
               </div>
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Height (0 = original)</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
                 <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
                 />
               </div>
             </div>
@@ -274,9 +274,9 @@ export default function VideoScreenshot() {
       </div>
 
       {screenshots.length > 0 && (
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <div className="flex justify-between items-center">
-            <h4 className="text-zinc-900 dark:text-white font-medium">
+            <h4 className="text-[var(--text-primary)] font-medium">
               {screenshots.length} Screenshot{screenshots.length !== 1 ? 's' : ''}
             </h4>
             <button onClick={downloadAll}
@@ -289,7 +289,7 @@ export default function VideoScreenshot() {
             {screenshots.map((s, i) => (
               <div key={i} className="relative group">
                 <img src={s.blobUrl} alt={`Frame at ${s.timestamp}`}
-                  className="w-full aspect-video object-cover rounded-lg border border-zinc-200 dark:border-zinc-800 bg-black"
+                  className="w-full aspect-video object-cover rounded-lg border border-[var(--border-subtle)] bg-black"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 rounded-b-lg pointer-events-none">
                   <span className="text-white text-xs font-mono">{s.timestamp}</span>

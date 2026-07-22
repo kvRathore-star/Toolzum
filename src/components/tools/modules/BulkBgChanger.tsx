@@ -156,50 +156,50 @@ export default function BulkBgChanger() {
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Layers className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Bulk BG Changer</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Bulk BG Changer</h3>
         </div>
-        <span className="text-[9px] font-bold text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded-full">{images.length} images</span>
+        <span className="text-[9px] font-bold text-[var(--text-secondary)] bg-[var(--bg-surface)] px-2 py-1 rounded-full">{images.length} images</span>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
           onClick={() => fileInputRef.current?.click()}>
-          <ImagePlus className="w-8 h-8 mx-auto mb-2 text-zinc-400" />
-          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Upload product photos</p>
-          <p className="text-[10px] text-zinc-500 mt-1">Select a color to remove, replace with your brand background</p>
+          <ImagePlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
+          <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Upload product photos</p>
+          <p className="text-[10px] text-[var(--text-secondary)] mt-1">Select a color to remove, replace with your brand background</p>
           <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         {images.length > 0 && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div className="space-y-3 lg:col-span-1">
-              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Background Settings</h5>
+              <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
+                <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Background Settings</h5>
                 
                 <div className="space-y-1">
-                  <label className="text-[10px] text-zinc-500 flex justify-between"><span>New BG Color</span></label>
+                  <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>New BG Color</span></label>
                   <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                    className="w-full h-10 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                    className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] text-zinc-500 flex justify-between"><span>Color Tolerance</span><span className="font-mono">{tolerance}%</span></label>
+                  <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Color Tolerance</span><span className="font-mono">{tolerance}%</span></label>
                   <input type="range" min="1" max="100" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
                     className="w-full accent-emerald-500" />
                 </div>
 
                 <label className="flex items-center justify-between cursor-pointer">
-                  <span className="text-[10px] text-zinc-500">Transparent BG (PNG)</span>
+                  <span className="text-[10px] text-[var(--text-secondary)]">Transparent BG (PNG)</span>
                   <input type="checkbox" checked={useTransparent} onChange={e => setUseTransparent(e.target.checked)}
                     className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
                 </label>
 
                 {sampleColor && (
-                  <div className="flex items-center gap-2 p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+                  <div className="flex items-center gap-2 p-2 bg-[var(--bg-surface)] rounded-lg">
                     <span className="w-5 h-5 rounded border border-zinc-300" style={{ backgroundColor: sampleColor }} />
-                    <span className="text-[10px] text-zinc-500 font-mono">{sampleColor}</span>
+                    <span className="text-[10px] text-[var(--text-secondary)] font-mono">{sampleColor}</span>
                     <button onClick={() => setSampleColor(null)}
-                      className="ml-auto text-[9px] text-zinc-500 hover:text-red-500">Reset</button>
+                      className="ml-auto text-[9px] text-[var(--text-secondary)] hover:text-red-500">Reset</button>
                   </div>
                 )}
 
@@ -213,19 +213,19 @@ export default function BulkBgChanger() {
                 {images.map(item => (
                   <div key={item.id} onClick={() => setSelectedImageId(item.id)}
                     className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition-colors ${
-                      selectedImageId === item.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500'
+                      selectedImageId === item.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-[var(--border-subtle)] hover:border-zinc-400 dark:hover:border-zinc-500'
                     }`}>
-                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
+                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-[var(--bg-surface)] shrink-0">
                       <img  loading="lazy" src={item.processedUrl || item.originalUrl} alt="Image preview" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] text-zinc-700 dark:text-zinc-300 truncate">{item.name}</p>
-                      <p className="text-[8px] text-zinc-500">{item.processedUrl ? 'Done' : 'Pending'}</p>
+                      <p className="text-[10px] text-[var(--text-primary)] truncate">{item.name}</p>
+                      <p className="text-[8px] text-[var(--text-secondary)]">{item.processedUrl ? 'Done' : 'Pending'}</p>
                     </div>
                     <div className="flex gap-1">
                       {item.processedUrl && (
                         <button onClick={e => { e.stopPropagation(); downloadImage(item.processedUrl!, item.name); }}
-                          className="p-1 bg-zinc-200 dark:bg-zinc-700 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600"><Download className="w-3 h-3 text-zinc-500" /></button>
+                          className="p-1 bg-zinc-200 dark:bg-zinc-700 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600"><Download className="w-3 h-3 text-[var(--text-secondary)]" /></button>
                       )}
                       <button onClick={e => { e.stopPropagation(); removeImage(item.id); }}
                         className="p-1 bg-red-100 dark:bg-red-900/20 rounded hover:bg-red-200 dark:hover:bg-red-900/30"><Trash2 className="w-3 h-3 text-red-500" /></button>
@@ -244,7 +244,7 @@ export default function BulkBgChanger() {
 
             <div className="lg:col-span-2">
               {selectedImage && (
-                <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-2 border border-zinc-200 dark:border-zinc-800">
+                <div className="bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)]">
                   <div className="relative overflow-auto max-h-[500px] flex items-center justify-center">
                     <canvas ref={sampleCanvasRef}
                       onClick={(e) => {

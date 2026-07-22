@@ -196,7 +196,7 @@ export default function PhotoRetoucher() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-muted)]">Paint directly on the image to apply retouch treatments</p>
@@ -206,7 +206,7 @@ export default function PhotoRetoucher() {
             setImageFile(null);
             setImageSrc(null);
           }}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Photo
         </button>
@@ -214,9 +214,9 @@ export default function PhotoRetoucher() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2 text-sm uppercase tracking-wider">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2 text-sm uppercase tracking-wider">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Retouch Options
           </h4>
 
@@ -229,7 +229,7 @@ export default function PhotoRetoucher() {
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'smooth'
                     ? 'bg-[var(--accent)] text-white shadow-lg'
-                    : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 hover:bg-[var(--bg-surface)] border border-zinc-200 dark:border-zinc-700'
+                    : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
                 Skin Smoothing
@@ -239,7 +239,7 @@ export default function PhotoRetoucher() {
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'redeye'
                     ? 'bg-[var(--accent)] text-white shadow-lg'
-                    : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 hover:bg-[var(--bg-surface)] border border-zinc-200 dark:border-zinc-700'
+                    : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
                 Red-Eye Remover
@@ -249,9 +249,9 @@ export default function PhotoRetoucher() {
 
           {/* Brush Size */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Brush Size</span>
-              <span className="text-indigo-400 font-bold">{brushSize} px</span>
+              <span className="text-[var(--accent)] font-bold">{brushSize} px</span>
             </div>
             <input
               type="range" min="5" max="100" value={brushSize}
@@ -263,7 +263,7 @@ export default function PhotoRetoucher() {
           <div className="flex flex-col gap-2 pt-2">
             <button
               onClick={handleReset}
-              className="w-full py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+              className="w-full py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer"
             >
               Reset Canvas
             </button>
@@ -292,7 +292,7 @@ export default function PhotoRetoucher() {
                 Download Retouched Photo
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] justify-center">
                 <span>Hold click and paint over blemishes/red eyes to retouch.</span>
               </div>
             )}

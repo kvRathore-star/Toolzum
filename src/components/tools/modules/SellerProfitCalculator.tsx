@@ -78,23 +78,23 @@ export default function SellerProfitCalculator() {
 
   const inputField = (label: string, key: keyof ProductCalc, icon: React.ReactNode, suffix = '', placeholder = '0') => (
     <div className="space-y-1">
-      <label className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wide">{icon} {label}</label>
+      <label className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide">{icon} {label}</label>
       <div className="flex items-center gap-1">
-        {suffix === '₹' && <span className="text-zinc-400 text-xs font-medium">{suffix}</span>}
+        {suffix === '₹' && <span className="text-[var(--text-muted)] text-xs font-medium">{suffix}</span>}
         <input type="number" min="0" step="1" value={(input[key] as number) || ''} onChange={e => update(key, e.target.value)}
           placeholder={placeholder}
-          className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
-        {suffix && suffix !== '₹' && <span className="text-zinc-400 text-[10px] w-6">{suffix}</span>}
+          className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+        {suffix && suffix !== '₹' && <span className="text-[var(--text-muted)] text-[10px] w-6">{suffix}</span>}
       </div>
     </div>
   );
 
   const ProfitBadge = ({ value, label }: { value: number; label: string }) => (
-    <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
+    <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
       <p className={`text-xl font-black ${value >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
         {value >= 0 ? '+' : ''}{value.toFixed(1)}%
       </p>
-      <p className="text-[10px] text-zinc-500 uppercase mt-0.5">{label}</p>
+      <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">{label}</p>
     </div>
   );
 
@@ -102,20 +102,20 @@ export default function SellerProfitCalculator() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2 mb-1">
         <ShoppingBag className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">E-commerce Seller Profit Calculator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">E-commerce Seller Profit Calculator</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Calculate your exact profit after platform commissions, GST, shipping, and returns. Compare across Meesho, Amazon, and Flipkart.</p>
+          <p className="text-xs text-[var(--text-secondary)]">Calculate your exact profit after platform commissions, GST, shipping, and returns. Compare across Meesho, Amazon, and Flipkart.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {inputField('Product Cost', 'productCost', <Package className="w-3.5 h-3.5" />, '₹')}
             {inputField('Selling Price', 'sellingPrice', <ShoppingBag className="w-3.5 h-3.5" />, '₹')}
             <div className="space-y-1">
-              <label className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wide"><BarChart3 className="w-3.5 h-3.5" /> Platform</label>
+              <label className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide"><BarChart3 className="w-3.5 h-3.5" /> Platform</label>
               <select value={input.platform} onChange={e => update('platform', e.target.value as Platform)}
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30">
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30">
                 <option value="meesho">Meesho (0-15% commission)</option>
                 <option value="amazon">Amazon (2-35% commission)</option>
                 <option value="flipkart">Flipkart (5-25% commission)</option>
@@ -131,18 +131,18 @@ export default function SellerProfitCalculator() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <ProfitBadge value={result.marginPct} label="Profit Margin" />
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
-              <p className="text-xl font-black text-zinc-900 dark:text-white">{formatINR(result.netProfit)}</p>
-              <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Net Profit</p>
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
+              <p className="text-xl font-black text-[var(--text-primary)]">{formatINR(result.netProfit)}</p>
+              <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Net Profit</p>
             </div>
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
               <p className="text-xl font-black text-amber-500">{formatINR(result.breakevenPrice)}</p>
-              <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Breakeven Price</p>
+              <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Breakeven Price</p>
             </div>
           </div>
 
-          <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
-            <h5 className="text-[10px] font-bold text-zinc-400 uppercase mb-2">Fee Breakdown ({PLATFORM_DATA[input.platform].label})</h5>
+          <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
+            <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Fee Breakdown ({PLATFORM_DATA[input.platform].label})</h5>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
               {[
                 { label: 'Commission', value: result.commissionAmt },
@@ -152,7 +152,7 @@ export default function SellerProfitCalculator() {
                 { label: 'Return Cost', value: result.returnCost },
               ].map(f => (
                 <div key={f.label} className="bg-white dark:bg-black/40 rounded-lg p-2">
-                  <p className="text-[10px] text-zinc-500">{f.label}</p>
+                  <p className="text-[10px] text-[var(--text-secondary)]">{f.label}</p>
                   <p className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(f.value)}</p>
                 </div>
               ))}
@@ -162,7 +162,7 @@ export default function SellerProfitCalculator() {
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={comparePlatform} onChange={e => setComparePlatform(e.target.checked)}
               className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
-            <span className="text-xs text-zinc-600 dark:text-zinc-400">Compare across all platforms</span>
+            <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)]">Compare across all platforms</span>
           </label>
 
           {comparison && (
@@ -170,12 +170,12 @@ export default function SellerProfitCalculator() {
               {comparison.map((c, i) => {
                 const p = (['amazon', 'flipkart', 'meesho'] as Platform[]).filter(p => p !== input.platform)[i];
                 return (
-                  <div key={p} className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
+                  <div key={p} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">{PLATFORM_DATA[p].label}</span>
+                      <span className="text-xs font-bold text-[var(--text-primary)]">{PLATFORM_DATA[p].label}</span>
                       <span className={`text-sm font-black ${c.netProfit >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>{formatINR(c.netProfit)}</span>
                     </div>
-                    <div className="flex justify-between text-[10px] text-zinc-500">
+                    <div className="flex justify-between text-[10px] text-[var(--text-secondary)]">
                       <span>Margin: {c.marginPct.toFixed(1)}%</span>
                       <span>Fees: {formatINR(c.totalFees)}</span>
                     </div>
@@ -192,7 +192,7 @@ export default function SellerProfitCalculator() {
           </div>
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Bulk product import via CSV, profit trend tracking over time, auto-updated commission rates, export P&L report, compare same product across all 3 platforms simultaneously, team plan for agencies.
             </p>
           </div>

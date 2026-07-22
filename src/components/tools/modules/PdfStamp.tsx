@@ -12,10 +12,10 @@ export default function PdfStamp() {
         const stampText = (state?.stampText as string) || 'DRAFT';
         return (
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Stamp Text</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Stamp Text</label>
             <input type="text" value={stampText} onChange={e => setState({ ...state, stampText: e.target.value })}
               placeholder="DRAFT, CONFIDENTIAL, etc."
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
         );
       }}

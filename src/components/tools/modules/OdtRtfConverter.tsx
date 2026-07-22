@@ -288,38 +288,38 @@ export default function OdtRtfConverter() {
   const marginPresets = [{ label: 'Narrow', value: 36 }, { label: 'Normal', value: 72 }, { label: 'Wide', value: 108 }];
   const btnBase = 'py-2 px-3 rounded-xl text-xs font-bold transition-all border';
   const btnActive = 'bg-blue-600 border-blue-500 text-white shadow-md';
-  const btnInactive = 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300';
+  const btnInactive = 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300';
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{title}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{fileType?.toUpperCase()} • {(file.size / 1024).toFixed(0)} KB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{fileType?.toUpperCase()} • {(file.size / 1024).toFixed(0)} KB</p>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-3">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
         <div className="flex justify-between items-center">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Extracted Text Preview</h4>
+          <h4 className="text-[var(--text-primary)] font-medium">Extracted Text Preview</h4>
           {extractedText.length > 500 && (
             <button onClick={() => setShowAllPreview(p => !p)} className="text-xs text-blue-500 hover:text-blue-400 font-medium">
               {showAllPreview ? 'Show Less' : `Show All (${extractedText.length} chars)`}
             </button>
           )}
         </div>
-        <pre className="text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap font-sans leading-relaxed max-h-60 overflow-y-auto bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-          {previewText}{!showAllPreview && extractedText.length > 500 && <span className="text-zinc-400">...</span>}
+        <pre className="text-sm text-[var(--text-primary)] whitespace-pre-wrap font-sans leading-relaxed max-h-60 overflow-y-auto bg-[var(--bg-overlay)]/50 p-4 rounded-xl border border-[var(--border-subtle)]">
+          {previewText}{!showAllPreview && extractedText.length > 500 && <span className="text-[var(--text-muted)]">...</span>}
         </pre>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">PDF Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">PDF Settings</h4>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Page Size</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Page Size</label>
             <div className="grid grid-cols-3 gap-2">
               {['A4', 'Letter', 'Legal'].map(s => (
                 <button key={s} onClick={() => setPageSize(s)} className={`${btnBase} ${pageSize === s ? btnActive : btnInactive}`}>{s}</button>
@@ -328,13 +328,13 @@ export default function OdtRtfConverter() {
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Font Size: <span className="font-bold text-zinc-900 dark:text-white">{fontSize}pt</span></label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Font Size: <span className="font-bold text-[var(--text-primary)]">{fontSize}pt</span></label>
             <input type="range" min={8} max={16} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-blue-600" />
-            <div className="flex justify-between text-xs text-zinc-400 mt-1"><span>8pt</span><span>16pt</span></div>
+            <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>8pt</span><span>16pt</span></div>
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Margins</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Margins</label>
             <div className="grid grid-cols-3 gap-2">
               {marginPresets.map(m => (
                 <button key={m.value} onClick={() => setMargins(m.value)} className={`${btnBase} ${margins === m.value ? btnActive : btnInactive}`}>{m.label}</button>
@@ -350,8 +350,8 @@ export default function OdtRtfConverter() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">PDF Ready</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -364,7 +364,7 @@ export default function OdtRtfConverter() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
               <p>Converted PDF will appear here</p>
             </div>

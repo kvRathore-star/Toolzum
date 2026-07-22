@@ -122,14 +122,14 @@ export default function PdfMetadataEditor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -138,71 +138,71 @@ export default function PdfMetadataEditor() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Left Col: Editor */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-2">
-             <h4 className="text-zinc-900 dark:text-white font-medium">Metadata Editor</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
+             <h4 className="text-[var(--text-primary)] font-medium">Metadata Editor</h4>
              <button onClick={removeAllMetadata} className="text-xs text-red-500 hover:text-red-400 font-bold">Clear All</button>
           </div>
           
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Title</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Title</label>
               <input
                 type="text"
                 value={metadata.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
             
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Author</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Author</label>
               <input
                 type="text"
                 value={metadata.author}
                 onChange={(e) => handleInputChange('author', e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Subject</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Subject</label>
               <input
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => handleInputChange('subject', e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Keywords</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Keywords</label>
               <input
                 type="text"
                 value={metadata.keywords}
                 onChange={(e) => handleInputChange('keywords', e.target.value)}
                 placeholder="Comma separated"
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
                <div className="space-y-1">
-                 <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Creator</label>
+                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Creator</label>
                  <input
                    type="text"
                    value={metadata.creator}
                    onChange={(e) => handleInputChange('creator', e.target.value)}
-                   className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500 text-sm"
+                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
                  />
                </div>
                <div className="space-y-1">
-                 <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Producer</label>
+                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Producer</label>
                  <input
                    type="text"
                    value={metadata.producer}
                    onChange={(e) => handleInputChange('producer', e.target.value)}
-                   className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-zinc-900 dark:text-white outline-none focus:border-blue-500 text-sm"
+                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
                  />
                </div>
             </div>
@@ -220,8 +220,8 @@ export default function PdfMetadataEditor() {
         {/* Right Col: Output */}
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Document Updated</h4>
                </div>
                
@@ -239,7 +239,7 @@ export default function PdfMetadataEditor() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[300px] text-[var(--text-muted)]">
                <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               <p>Updated PDF will appear here</p>
             </div>

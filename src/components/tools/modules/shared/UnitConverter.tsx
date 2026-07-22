@@ -269,26 +269,26 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-      <h2 className="text-lg font-bold text-zinc-900 dark:text-white">{family.title}</h2>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">{family.desc}</p>
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
+      <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <div>
-        <label className="text-xs text-zinc-500 mb-1 block">Value</label>
+        <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
         <input type="number" value={value} onChange={e => setValue(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">From</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
           <select value={from} onChange={e => setFrom(e.target.value)}
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white">
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
         </div>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">To</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
           <select value={to} onChange={e => setTo(e.target.value)}
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white">
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
         </div>
@@ -297,7 +297,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
         Convert
       </button>
       {output && (
-        <div className="mt-4 p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm text-center font-mono text-emerald-600 dark:text-emerald-400"
+        <div className="mt-4 p-3 bg-[var(--bg-surface)] rounded-lg text-sm text-center font-mono text-emerald-600 dark:text-emerald-400"
           onClick={() => { clipboardWrite(output); toast.success('Copied!'); }}>
           {output}
         </div>
@@ -322,19 +322,19 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
   });
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-      <h2 className="text-lg font-bold text-zinc-900 dark:text-white">{family.title}</h2>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">{family.desc}</p>
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
+      <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <div>
-        <label className="text-xs text-zinc-500 mb-1 block">Value (in {family.baseUnit})</label>
+        <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value (in {family.baseUnit})</label>
         <input type="number" value={value} onChange={e => setValue(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="text-xs space-y-1.5">
         {results.map(r => (
-          <div key={r.label} className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
-            <span className="text-zinc-600 dark:text-zinc-400">{r.label}</span>
-            <span className="font-mono text-zinc-900 dark:text-white">{r.value.toLocaleString(undefined, { maximumFractionDigits: 4 })}</span>
+          <div key={r.label} className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg">
+            <span className="text-[var(--text-secondary)]">{r.label}</span>
+            <span className="font-mono text-[var(--text-primary)]">{r.value.toLocaleString(undefined, { maximumFractionDigits: 4 })}</span>
           </div>
         ))}
       </div>

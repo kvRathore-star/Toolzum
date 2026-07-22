@@ -85,21 +85,21 @@ export default function BlurFace() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <h2 className="text-2xl font-bold">Auto Blur Faces</h2>
-         <p className="text-zinc-500">Automatically detect and blur faces in photos using completely private, on-device AI.</p>
+         <p className="text-[var(--text-secondary)]">Automatically detect and blur faces in photos using completely private, on-device AI.</p>
          
-         <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+         <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
            <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
            {image ? (
               <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" width={800} height={600} className="max-h-64 mx-auto rounded-lg shadow-sm" />
            ) : (
-             <div className="text-zinc-500">Click or Drag Image Here</div>
+             <div className="text-[var(--text-secondary)]">Click or Drag Image Here</div>
            )}
          </div>
 
          {image && (
-           <button onClick={processFaces} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+           <button onClick={processFaces} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
              {isProcessing ? "Processing..." : "Blur Faces & Download"}
            </button>
          )}

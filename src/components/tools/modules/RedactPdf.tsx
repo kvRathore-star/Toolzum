@@ -136,25 +136,25 @@ export default function RedactPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-red-500" />
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
-            <p className="text-zinc-500 text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
+            <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
           </div>
         </div>
         <button 
           onClick={clearAll}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2 flex items-center gap-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2 flex items-center gap-2">
             <EyeOff className="w-4 h-4 text-red-500" />
             Redaction Settings
           </h4>
@@ -162,26 +162,26 @@ export default function RedactPdf() {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setMode('pages')}
-              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'pages' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}
+              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'pages' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}
             >
               Quick Redact
             </button>
             <button
               onClick={() => setMode('area')}
-              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'area' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}
+              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'area' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}
             >
               Custom Area
             </button>
           </div>
 
           {mode === 'pages' && (
-            <p className="text-xs text-zinc-500 -mt-2">
+            <p className="text-xs text-[var(--text-secondary)] -mt-2">
               Blacks out entire selected pages completely.
             </p>
           )}
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
               Page Range
             </label>
             <input
@@ -189,51 +189,51 @@ export default function RedactPdf() {
               placeholder={mode === 'pages' ? 'e.g. 1, 3, 5-10' : 'e.g. 1-5'}
               value={pageRange}
               onChange={(e) => setPageRange(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-red-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-red-500"
             />
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-[var(--text-secondary)]">
               Enter page numbers or ranges separated by commas (e.g. 1-5, 8, 11-13). Max: {totalPages}.
             </p>
           </div>
 
           {mode === 'area' && (
-            <div className="space-y-4 p-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-700">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Redaction Rectangle</label>
+            <div className="space-y-4 p-4 bg-[var(--bg-overlay)]/50 rounded-xl border border-[var(--border-subtle)]">
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Redaction Rectangle</label>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[10px] text-zinc-500">X (from left)</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">X (from left)</label>
                   <input
                     type="number"
                     value={area.x}
                     onChange={(e) => setArea(a => ({...a, x: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500">Y (from bottom)</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">Y (from bottom)</label>
                   <input
                     type="number"
                     value={area.y}
                     onChange={(e) => setArea(a => ({...a, y: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500">Width</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">Width</label>
                   <input
                     type="number"
                     value={area.w}
                     onChange={(e) => setArea(a => ({...a, w: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500">Height</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">Height</label>
                   <input
                     type="number"
                     value={area.h}
                     onChange={(e) => setArea(a => ({...a, h: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -261,8 +261,8 @@ export default function RedactPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Redaction Complete</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -279,10 +279,10 @@ export default function RedactPdf() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <EyeOff className="w-12 h-12 mb-4 opacity-30" />
               <p className="text-sm font-medium">Redacted PDF will appear here</p>
-              <p className="text-xs text-zinc-500 max-w-xs mt-1 text-center">Configure the redaction settings and click Apply to permanently black out content.</p>
+              <p className="text-xs text-[var(--text-secondary)] max-w-xs mt-1 text-center">Configure the redaction settings and click Apply to permanently black out content.</p>
             </div>
           )}
         </div>

@@ -48,25 +48,25 @@ export default function SqlFormatter() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-            <AlignLeft className="w-5 h-5 text-indigo-500" />
+            <AlignLeft className="w-5 h-5 text-[var(--accent)]" />
             SQL Query Formatter
           </h2>
-          <p className="text-xs text-zinc-500 mt-1">Beautify and indent SQL queries with customizable spacing and case conventions client-side.</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Beautify and indent SQL queries with customizable spacing and case conventions client-side.</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Settings and Input Column */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
           <div className="space-y-4">
-            <span className="text-xs text-zinc-400 font-bold uppercase block">Configuration Settings</span>
+            <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Configuration Settings</span>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] text-zinc-400 font-bold uppercase">Indent Spacing</label>
-                <select value={tabSize} onChange={e => setTabSize(parseInt(e.target.value))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-white text-xs outline-none">
+                <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Indent Spacing</label>
+                <select value={tabSize} onChange={e => setTabSize(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-xs outline-none">
                   <option value="2">2 Spaces</option>
                   <option value="4">4 Spaces</option>
                   <option value="8">8 Spaces</option>
@@ -74,7 +74,7 @@ export default function SqlFormatter() {
               </div>
 
               <div className="space-y-1 flex items-center pt-5">
-                <label className="text-xs text-zinc-400 flex items-center gap-1.5 cursor-pointer">
+                <label className="text-xs text-[var(--text-muted)] flex items-center gap-1.5 cursor-pointer">
                   <input type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
                   Uppercase Keywords
                 </label>
@@ -82,12 +82,12 @@ export default function SqlFormatter() {
             </div>
 
             <div className="space-y-2 pt-2 border-t border-zinc-800">
-              <span className="text-xs text-zinc-400 font-bold uppercase block">Original Query</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Original Query</span>
               <textarea
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 placeholder="SELECT * FROM users WHERE status = 'active' AND age > 21 JOIN orders ON orders.user_id = users.id..."
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white font-mono h-60 outline-none text-xs resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-60 outline-none text-xs resize-none"
               />
             </div>
           </div>
@@ -98,14 +98,14 @@ export default function SqlFormatter() {
         </div>
 
         {/* Output Column */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center">
-              <span className="text-xs text-zinc-400 font-bold uppercase">Formatted SQL Output</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Formatted SQL Output</span>
               {output && (
                 <div className="flex gap-2">
-                  <button onClick={handleCopy} className="p-1.5 text-zinc-500 hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
-                  <button onClick={handleDownload} className="p-1.5 text-zinc-500 hover:text-white border border-zinc-800 rounded-lg" aria-label="Download"><Download className="w-4 h-4" /></button>
+                  <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+                  <button onClick={handleDownload} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Download"><Download className="w-4 h-4" /></button>
                 </div>
               )}
             </div>
@@ -113,7 +113,7 @@ export default function SqlFormatter() {
               value={output}
               readOnly
               placeholder="Formatted SQL output will appear here..."
-              className="w-full flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white font-mono h-[380px] outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-[380px] outline-none text-xs resize-none"
             />
           </div>
         </div>

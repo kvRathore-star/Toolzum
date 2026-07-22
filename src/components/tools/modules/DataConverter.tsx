@@ -20,28 +20,28 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <h2 className="text-2xl font-bold">Data Converter</h2>
-        <p className="text-sm text-zinc-500">Convert structured data between formats</p>
+        <p className="text-sm text-[var(--text-secondary)]">Convert structured data between formats</p>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-zinc-500">Source</label>
-            <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Source</label>
+            <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-500">Target</label>
-            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Target</label>
+            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
           </div>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-500">Input</label>
-          <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-mono" placeholder={`Paste ${srcFormat} data here...`} />
+          <label className="text-xs font-medium text-[var(--text-secondary)]">Input</label>
+          <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={`Paste ${srcFormat} data here...`} />
         </div>
-        <button onClick={handleConvert} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition">Convert</button>
+        <button onClick={handleConvert} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">Convert</button>
         {output && (
           <div>
-            <label className="text-xs font-medium text-zinc-500">Output</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-sm font-mono whitespace-pre-wrap">{output}</pre>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>
+            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{output}</pre>
           </div>
         )}
       </div>

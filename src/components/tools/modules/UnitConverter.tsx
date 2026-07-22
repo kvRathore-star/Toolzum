@@ -83,33 +83,33 @@ export function UnitConverter() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <h2 className="text-2xl font-bold">Unit Converter</h2>
-        <p className="text-sm text-zinc-500">Convert between measurement units</p>
+        <p className="text-sm text-[var(--text-secondary)]">Convert between measurement units</p>
         <div>
-          <label className="text-xs font-medium text-zinc-500">Category</label>
+          <label className="text-xs font-medium text-[var(--text-secondary)]">Category</label>
           <div className="flex flex-wrap gap-2 mt-1">
             {Object.keys(CATEGORIES).map(c => (
-              <button key={c} onClick={() => handleCategory(c)} className={`px-3 py-1.5 text-sm rounded-lg transition ${category === c ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{c}</button>
+              <button key={c} onClick={() => handleCategory(c)} className={`px-3 py-1.5 text-sm rounded-lg transition ${category === c ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{c}</button>
             ))}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-zinc-500">From</label>
-            <select value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-500">To</label>
-            <select value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">To</label>
+            <select value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-500">Value</label>
-          <input type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm" />
+          <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
+          <input type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
         </div>
         <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
-          <p className="text-xs text-zinc-500">Result</p>
+          <p className="text-xs text-[var(--text-secondary)]">Result</p>
           <p className="text-2xl font-bold">{value} {fromUnit} = {result.toFixed(6)} {toUnit}</p>
         </div>
       </div>

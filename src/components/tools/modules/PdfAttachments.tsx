@@ -83,30 +83,30 @@ export default function PdfAttachments() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">
           Change File
         </button>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-        <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
           Add Attachment
         </h4>
 
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">File to Attach</label>
-            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl cursor-pointer bg-zinc-50 dark:bg-black/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors">
-              <svg className="w-8 h-8 mb-2 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">File to Attach</label>
+            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl cursor-pointer bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-zinc-900/50 transition-colors">
+              <svg className="w-8 h-8 mb-2 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
               </svg>
-              <span className="text-xs text-zinc-500">
+              <span className="text-xs text-[var(--text-secondary)]">
                 {attachFile ? `${attachFile.name} (${formatSize(attachFile.size)})` : 'Click to select file'}
               </span>
               <input type="file" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) setAttachFile(f); }} />
@@ -114,15 +114,15 @@ export default function PdfAttachments() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Description (optional)</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Description (optional)</label>
             <input type="text" value={attachDescription} onChange={(e) => setAttachDescription(e.target.value)}
               placeholder="Attached file description"
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
 
           <div className="flex gap-3">
             <button onClick={() => { setAttachFile(null); setAttachDescription(''); }}
-              className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium py-3 rounded-xl transition-all">
+              className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-medium py-3 rounded-xl transition-all">
               Clear
             </button>
             <button onClick={addAttachment} disabled={isProcessing || !attachFile}
@@ -134,8 +134,8 @@ export default function PdfAttachments() {
       </div>
 
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Attachment Added</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `attached_${file.name}`)}

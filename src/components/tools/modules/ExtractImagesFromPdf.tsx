@@ -158,18 +158,18 @@ export default function ExtractImagesFromPdf() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
-          <FileText className="w-8 h-8 text-indigo-500" />
+          <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
-            <p className="text-zinc-500 text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button 
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50"
+          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
         >
           Change File
         </button>
@@ -177,13 +177,13 @@ export default function ExtractImagesFromPdf() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Action Panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
           <div className="space-y-4">
-            <h4 className="text-zinc-900 dark:text-white font-bold text-base flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
-              <FileImage className="w-5 h-5 text-indigo-500" />
+            <h4 className="text-[var(--text-primary)] font-bold text-base flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2">
+              <FileImage className="w-5 h-5 text-[var(--accent)]" />
               Extract Embedded Images
             </h4>
-            <p className="text-sm text-zinc-500 leading-relaxed">
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
               We will scan the internal dictionaries and operators of your PDF to find the raw embedded image assets (photos, graphics) and export them as PNG files inside a ZIP archive.
             </p>
           </div>
@@ -191,7 +191,7 @@ export default function ExtractImagesFromPdf() {
           <button 
             onClick={extractImages}
             disabled={isProcessing || imageCount !== null}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
+            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -210,7 +210,7 @@ export default function ExtractImagesFromPdf() {
         {/* Output Panel */}
         <div className="flex flex-col justify-center">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
                <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                   <Download className="w-16 h-16 mb-4" />
                   <p className="font-bold text-center">extracted_images_{file.name.replace('.pdf', '')}.zip</p>
@@ -226,7 +226,7 @@ export default function ExtractImagesFromPdf() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-zinc-400 text-center">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
                <FileImage className="w-12 h-12 mb-4 opacity-30" />
                <p className="text-sm font-medium">Extracted images ZIP will appear here</p>
             </div>

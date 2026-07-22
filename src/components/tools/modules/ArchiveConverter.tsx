@@ -86,34 +86,34 @@ export default function ArchiveConverter() {
     <div className="max-w-3xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <FileArchive className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">ZIP File Creator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">ZIP File Creator</h3>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Drag & drop files or select them to create a ZIP archive. All processing is done locally in your browser.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">Drag & drop files or select them to create a ZIP archive. All processing is done locally in your browser.</p>
 
         <div onDrop={handleDrop} onDragOver={handleDragOver} onClick={() => inputRef.current?.click()}
-          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center"
+          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center"
         >
           <input ref={inputRef} type="file" multiple onChange={e => { if (e.target.files) addFiles(e.target.files); e.target.value = ''; }} className="hidden" />
           <Upload className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
-          <p className="text-xs text-zinc-500">Drop files here or click to browse</p>
+          <p className="text-xs text-[var(--text-secondary)]">Drop files here or click to browse</p>
         </div>
 
         {files.length > 0 && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <p className="text-[10px] font-bold text-zinc-400 uppercase">{files.length} file{files.length !== 1 ? 's' : ''} ({(totalSize / 1024 / 1024).toFixed(2)} MB)</p>
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">{files.length} file{files.length !== 1 ? 's' : ''} ({(totalSize / 1024 / 1024).toFixed(2)} MB)</p>
               <button onClick={() => setFiles([])} className="text-[10px] text-red-500 hover:underline">Clear all</button>
             </div>
             <div className="max-h-60 overflow-y-auto space-y-1.5">
               {files.map(({ id, file }) => (
-                <div key={id} className="flex items-center justify-between p-2.5 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800 group">
+                <div key={id} className="flex items-center justify-between p-2.5 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] group">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <File className="w-4 h-4 text-zinc-400 shrink-0" />
-                    <span className="text-xs text-zinc-700 dark:text-zinc-300 truncate">{file.name}</span>
-                    <span className="text-[10px] text-zinc-400 shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
+                    <File className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
+                    <span className="text-xs text-[var(--text-primary)] truncate">{file.name}</span>
+                    <span className="text-[10px] text-[var(--text-muted)] shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
                   </div>
-                  <button onClick={() => removeFile(id)} className="text-zinc-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2">
+                  <button onClick={() => removeFile(id)} className="text-[var(--text-muted)] hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2">
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -129,7 +129,7 @@ export default function ArchiveConverter() {
         )}
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Password-protected ZIPs, split large archives into multi-volume ZIPs, cloud storage integration (Google Drive / Dropbox), batch folder creation.</p>
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Password-protected ZIPs, split large archives into multi-volume ZIPs, cloud storage integration (Google Drive / Dropbox), batch folder creation.</p>
         </div>
       </div>
     </div>

@@ -68,25 +68,25 @@ export default function UuidGenerator() {
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       {/* Banner */}
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           🆔 Bulk UUID Generator
         </h4>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Generate RFC4122 compliant Universally Unique Identifiers (UUIDs) v4 (cryptographically random) or v1 (timestamp-based) entirely client-side.
         </p>
       </div>
 
       {/* Control Panel */}
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-200 dark:border-white/5 shadow-sm space-y-6">
+      <div className="bg-[var(--bg-overlay)] p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] shadow-sm space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* UUID Type Selector */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">UUID Version</label>
-            <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-zinc-200 dark:border-zinc-800">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">UUID Version</label>
+            <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)]">
               <button
                 onClick={() => setVersion('v4')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
-                  version === 'v4' ? 'bg-blue-600 text-white' : 'text-zinc-500'
+                  version === 'v4' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 v4 (Random)
@@ -94,7 +94,7 @@ export default function UuidGenerator() {
               <button
                 onClick={() => setVersion('v1')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
-                  version === 'v1' ? 'bg-blue-600 text-white' : 'text-zinc-500'
+                  version === 'v1' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 v1 (Time)
@@ -104,7 +104,7 @@ export default function UuidGenerator() {
 
           {/* Quantity Selector */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">
               Quantity ({quantity})
             </label>
             <input
@@ -113,13 +113,13 @@ export default function UuidGenerator() {
               max={100}
               value={quantity}
               onChange={e => setQuantity(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3"
+              className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3"
             />
           </div>
 
           {/* Toggles */}
           <div className="space-y-2 flex flex-col justify-center gap-1">
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input
                 type="checkbox"
                 checked={uppercase}
@@ -128,7 +128,7 @@ export default function UuidGenerator() {
               />
               Capitalize (UPPER)
             </label>
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input
                 type="checkbox"
                 checked={hyphens}
@@ -153,10 +153,10 @@ export default function UuidGenerator() {
 
       {/* Output Panel */}
       {uuids.length > 0 && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col overflow-hidden">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col overflow-hidden">
           {/* Output Header */}
-          <div className="px-6 py-4 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-            <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">
+          <div className="px-6 py-4 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+            <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
               Generated Identifiers
             </span>
             <div className="flex gap-2">
@@ -168,7 +168,7 @@ export default function UuidGenerator() {
               </button>
               <button
                 onClick={downloadList}
-                className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg font-semibold transition-colors"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg font-semibold transition-colors"
               >
                 💾 Save List
               </button>

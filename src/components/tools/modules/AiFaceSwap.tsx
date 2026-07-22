@@ -146,22 +146,22 @@ export default function AiFaceSwap() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Side: Uploads & Transforms */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
-            <Sparkles className="w-5 h-5 text-indigo-500" />
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI Face Swap</h3>
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
+            <Sparkles className="w-5 h-5 text-[var(--accent)]" />
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Face Swap</h3>
           </div>
 
-          <p className="text-xs text-zinc-400 dark:text-zinc-500">Upload your face photo (Source) and the background model photo (Target). Use transforms to fit.</p>
+          <p className="text-xs text-[var(--text-muted)]">Upload your face photo (Source) and the background model photo (Target). Use transforms to fit.</p>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Source Face</label>
-              <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Source Face</label>
+              <div className="relative border border-dashed border-[var(--border-subtle)] rounded-xl p-4 text-center hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {sourceImg ? (
                   <img loading="lazy" src={sourceImg} alt="Face Source"  width={48} height={48} className="w-12 h-12 object-cover rounded-full" />
                 ) : (
-                  <Upload className="w-6 h-6 text-zinc-400 mb-1" />
+                  <Upload className="w-6 h-6 text-[var(--text-muted)] mb-1" />
                 )}
                 <span className="text-[10px] text-[var(--text-muted)] mt-1">{sourceImg ? "Ready" : "Upload"}</span>
                 <input type="file" accept="image/*" onChange={handleSourceUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
@@ -169,12 +169,12 @@ export default function AiFaceSwap() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Target Background</label>
-              <div className="relative border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-center hover:bg-zinc-50 dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Background</label>
+              <div className="relative border border-dashed border-[var(--border-subtle)] rounded-xl p-4 text-center hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-surface)] transition-colors flex flex-col items-center">
                 {targetImg ? (
                   <img loading="lazy" src={targetImg} alt="Target Source"  width={48} height={48} className="w-12 h-12 object-cover rounded-lg" />
                 ) : (
-                  <Upload className="w-6 h-6 text-zinc-400 mb-1" />
+                  <Upload className="w-6 h-6 text-[var(--text-muted)] mb-1" />
                 )}
                 <span className="text-[10px] text-[var(--text-muted)] mt-1">{targetImg ? "Ready" : "Upload"}</span>
                 <input type="file" accept="image/*" onChange={handleTargetUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
@@ -184,10 +184,10 @@ export default function AiFaceSwap() {
 
           {sourceImg && targetImg && (
             <div className="space-y-4 border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)] pt-4 animate-in slide-in-from-top-2 duration-300">
-              <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Fine-Tune Alignment</h4>
+              <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Fine-Tune Alignment</h4>
               
               <div className="space-y-1">
-                <div className="flex justify-between text-xs text-zinc-500">
+                <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                   <span className="flex items-center gap-1"><Move className="w-3.5 h-3.5" /> Position X</span>
                   <span>{posX}px</span>
                 </div>
@@ -195,7 +195,7 @@ export default function AiFaceSwap() {
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-xs text-zinc-500">
+                <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                   <span className="flex items-center gap-1"><Move className="w-3.5 h-3.5" /> Position Y</span>
                   <span>{posY}px</span>
                 </div>
@@ -203,7 +203,7 @@ export default function AiFaceSwap() {
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-xs text-zinc-500">
+                <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                   <span className="flex items-center gap-1"><Scale className="w-3.5 h-3.5" /> Scale Size</span>
                   <span>{scale.toFixed(2)}x</span>
                 </div>
@@ -211,7 +211,7 @@ export default function AiFaceSwap() {
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between text-xs text-zinc-500">
+                <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                   <span className="flex items-center gap-1"><RotateCw className="w-3.5 h-3.5" /> Rotation</span>
                   <span>{rotation}°</span>
                 </div>
@@ -220,11 +220,11 @@ export default function AiFaceSwap() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase">Feather Edge</span>
+                  <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Feather Edge</span>
                   <input type="range" min="0" max="50" value={feather} onChange={e => setFeather(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase">Face Blend</span>
+                  <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Face Blend</span>
                   <input type="range" min="10" max="100" value={opacity} onChange={e => setOpacity(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
               </div>
@@ -233,9 +233,9 @@ export default function AiFaceSwap() {
         </div>
 
         {/* Right Side: Preview Canvas */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
-            <h4 className="font-semibold text-zinc-900 dark:text-white">Live Compositor</h4>
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
+          <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
+            <h4 className="font-semibold text-[var(--text-primary)]">Live Compositor</h4>
             {sourceImg && targetImg && (
               <button
                 onClick={handleDownload}
@@ -247,7 +247,7 @@ export default function AiFaceSwap() {
             )}
           </div>
 
-          <div className="flex-1 flex items-center justify-center bg-zinc-50 dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-zinc-800/50 p-4 overflow-hidden">
+          <div className="flex-1 flex items-center justify-center bg-[var(--bg-overlay)]/35 rounded-xl border border-[var(--border-subtle)]/50 p-4 overflow-hidden">
             <canvas
               ref={canvasRef}
               className="max-w-full max-h-[400px] object-contain rounded-lg shadow-md border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]"

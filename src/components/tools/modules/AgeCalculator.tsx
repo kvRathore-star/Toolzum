@@ -31,34 +31,34 @@ export default function AgeCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
-         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Age Calculator</h2>
-         <p className="text-zinc-500">Calculate your exact age in years, months, and days.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+         <h2 className="text-2xl font-bold text-[var(--text-primary)]">Age Calculator</h2>
+         <p className="text-[var(--text-secondary)]">Calculate your exact age in years, months, and days.</p>
          
          <div className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">Date of Birth</label>
+              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Date of Birth</label>
               <input 
                 type="date"
                 value={dob}
                 onChange={e => setDob(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-blue-500 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-2">Target Date (Defaults to Today)</label>
+              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Target Date (Defaults to Today)</label>
               <input 
                 type="date"
                 value={targetDate}
                 onChange={e => setTargetDate(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-blue-500 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none"
               />
             </div>
          </div>
 
          <button
             onClick={calculate}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
+            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
           >
             Calculate Exact Age
           </button>

@@ -113,9 +113,9 @@ export default function ImageCompressor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
-          <ImageIcon className="w-5 h-5 text-indigo-500" />
+          <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile.name}</h3>
             <p className="text-xs text-[var(--text-secondary)]">Original size: {(imageFile.size / 1024).toFixed(1)} KB</p>
@@ -123,7 +123,7 @@ export default function ImageCompressor() {
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Upload New Image
         </button>
@@ -131,17 +131,17 @@ export default function ImageCompressor() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings panel */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2 text-sm uppercase tracking-wider">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2 text-sm uppercase tracking-wider">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Compression Settings
           </h4>
 
           {/* Quality Slider */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Image Quality</span>
-              <span className="text-indigo-400 font-bold">{Math.round(quality * 100)}%</span>
+              <span className="text-[var(--accent)] font-bold">{Math.round(quality * 100)}%</span>
             </div>
             <input
               type="range"
@@ -159,9 +159,9 @@ export default function ImageCompressor() {
 
           {/* Scale Slider */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Resolution Scale</span>
-              <span className="text-indigo-400 font-bold">{Math.round(scale * 100)}%</span>
+              <span className="text-[var(--accent)] font-bold">{Math.round(scale * 100)}%</span>
             </div>
             <input
               type="range"
@@ -180,7 +180,7 @@ export default function ImageCompressor() {
           <button
             onClick={handleCompress}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:bg-indigo-600 disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -191,11 +191,11 @@ export default function ImageCompressor() {
         </div>
 
         {/* View panel */}
-        <div className="lg:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-6 rounded-2xl flex flex-col justify-between min-h-[350px]">
+        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between min-h-[350px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center flex-1">
             <div className="space-y-2 text-center">
-              <span className="text-xs font-bold text-zinc-500 uppercase block">Before</span>
-              <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
+              <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block">Before</span>
+              <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
                 {originalUrl && (
                   <NextImage
                     src={originalUrl}
@@ -207,8 +207,8 @@ alt="Uploaded image preview"
              </div>
  
              <div className="space-y-2 text-center">
-               <span className="text-xs font-bold text-zinc-500 uppercase block">After</span>
-               <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
+               <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block">After</span>
+               <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
                  {compressedUrl ? (
                    <NextImage
                      src={compressedUrl}
@@ -216,7 +216,7 @@ alt="Uploaded image preview"
                     className="max-w-full max-h-full object-contain"
                   />
                 ) : (
-                  <span className="text-xs text-zinc-500">Apply settings to preview</span>
+                  <span className="text-xs text-[var(--text-secondary)]">Apply settings to preview</span>
                 )}
               </div>
             </div>
@@ -226,8 +226,8 @@ alt="Uploaded image preview"
             <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300">
               <div className="space-y-0.5">
                 <span className="text-xs text-emerald-400 font-bold block">Compressed Successfully</span>
-                <div className="text-sm text-zinc-700 dark:text-zinc-300">
-                  New Size: <strong className="text-zinc-900 dark:text-white">{(compressedSize / 1024).toFixed(1)} KB</strong>
+                <div className="text-sm text-[var(--text-primary)]">
+                  New Size: <strong className="text-[var(--text-primary)]">{(compressedSize / 1024).toFixed(1)} KB</strong>
                   {compressionRatio && (
                     <span className="text-emerald-400 font-bold ml-1.5">(-{compressionRatio}%)</span>
                   )}
@@ -235,7 +235,7 @@ alt="Uploaded image preview"
               </div>
               <button
                 onClick={handleDownload}
-                className="bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow"
+                className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow"
               >
                 <Download className="w-4 h-4" />
                 Download Output

@@ -208,21 +208,21 @@ export default function BankStatementAnalyser() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Banknote className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Bank Statement Analyser</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Bank Statement Analyser</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         {transactions.length === 0 ? (
           <div>
-            <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-10 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
               onClick={() => document.getElementById('bs-statement-file')?.click()}>
-              <Upload className="w-12 h-12 mx-auto mb-3 text-zinc-400" />
-              <p className="text-base font-semibold text-zinc-500 dark:text-zinc-400">Upload bank statement</p>
-              <p className="text-xs text-zinc-400 mt-1">CSV, TXT — paste raw text below</p>
+              <Upload className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
+              <p className="text-base font-semibold text-[var(--text-secondary)]">Upload bank statement</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">CSV, TXT — paste raw text below</p>
               <input id="bs-statement-file" type="file" accept=".csv,.txt" onChange={handleFile} className="hidden" />
             </div>
             <div className="mt-4 space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Or paste statement text</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Or paste statement text</label>
               <textarea value={rawText} onChange={e => {
                 setRawText(e.target.value);
                 if (e.target.value.length > 50) {
@@ -234,7 +234,7 @@ export default function BankStatementAnalyser() {
                   }
                 }
               }} rows={6} placeholder="Copy-paste your bank statement text here..."
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none font-mono" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none font-mono" />
             </div>
             {error && (
               <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl mt-3">
@@ -267,13 +267,13 @@ export default function BankStatementAnalyser() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-                    <h5 className="text-[10px] font-bold text-zinc-400 uppercase mb-3 flex items-center gap-1.5"><PieChart className="w-3 h-3" /> Spending by Category</h5>
+                  <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+                    <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><PieChart className="w-3 h-3" /> Spending by Category</h5>
                     <div className="space-y-2">
                       {stats.topCategories.slice(0, 8).map(([cat, data]) => (
                         <div key={cat}>
                           <div className="flex justify-between text-[11px] mb-0.5">
-                            <span className="text-zinc-600 dark:text-zinc-400">{cat}</span>
+                            <span className="text-zinc-600 dark:text-[var(--text-muted)]">{cat}</span>
                             <span className="font-semibold text-zinc-800 dark:text-zinc-200">₹{data.total.toLocaleString('en-IN')}</span>
                           </div>
                           <div className="h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
@@ -284,17 +284,17 @@ export default function BankStatementAnalyser() {
                     </div>
                   </div>
 
-                  <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-                    <h5 className="text-[10px] font-bold text-zinc-400 uppercase mb-3 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Monthly Summary</h5>
+                  <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+                    <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Monthly Summary</h5>
                     <div className="space-y-1.5 max-h-[240px] overflow-y-auto">
                       {Object.entries(stats.monthly).slice(-12).map(([month, data]) => (
                         <div key={month} className="flex items-center gap-2 text-[11px]">
-                          <span className="text-zinc-500 w-14">{month}</span>
+                          <span className="text-[var(--text-secondary)] w-14">{month}</span>
                           <div className="flex-1 flex gap-0.5 h-4">
                             <div className="bg-emerald-400 rounded-l-sm" style={{ flex: data.credit || 0.1 }} title={`Credit: ₹${data.credit}`} />
                             <div className="bg-red-400 rounded-r-sm" style={{ flex: data.debit || 0.1 }} title={`Debit: ₹${data.debit}`} />
                           </div>
-                          <span className="text-zinc-500 font-mono w-20 text-right">₹{(data.credit - data.debit) > 0 ? '+' : ''}{(data.credit - data.debit).toLocaleString('en-IN')}</span>
+                          <span className="text-[var(--text-secondary)] font-mono w-20 text-right">₹{(data.credit - data.debit) > 0 ? '+' : ''}{(data.credit - data.debit).toLocaleString('en-IN')}</span>
                         </div>
                       ))}
                     </div>
@@ -305,31 +305,31 @@ export default function BankStatementAnalyser() {
 
             <div className="flex flex-wrap items-center gap-2">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--text-muted)]" />
                 <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search description..."
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}
-                className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-600 dark:text-zinc-400 outline-none focus:ring-2 focus:ring-emerald-500/30">
+                className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] outline-none focus:ring-2 focus:ring-emerald-500/30">
                 <option value="">All categories</option>
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
               <input type="text" value={dateFilter} onChange={e => setDateFilter(e.target.value)} placeholder="Filter date..."
-                className="w-24 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
               <button onClick={handleExport}
                 className="px-3 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
                 <Download className="w-3.5 h-3.5" /> Export CSV
               </button>
               <button onClick={() => setTransactions([])}
-                className="px-3 py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                className="px-3 py-2 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors">
                 New
               </button>
             </div>
 
-            <div className="max-h-[400px] overflow-y-auto overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded-xl">
+            <div className="max-h-[400px] overflow-y-auto overflow-x-auto border border-[var(--border-subtle)] rounded-xl">
               <table className="w-full text-xs">
-                <thead className="bg-zinc-50 dark:bg-black/30 sticky top-0">
-                  <tr className="text-[9px] font-bold text-zinc-400 uppercase">
+                <thead className="bg-[var(--bg-overlay)] sticky top-0">
+                  <tr className="text-[9px] font-bold text-[var(--text-muted)] uppercase">
                     <th className="text-left p-2">Date</th>
                     <th className="text-left p-2">Description</th>
                     <th className="text-right p-2">Amount</th>
@@ -340,9 +340,9 @@ export default function BankStatementAnalyser() {
                 </thead>
                 <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
                   {filteredTxns.map((t, i) => (
-                    <tr key={i} className="hover:bg-zinc-50 dark:hover:bg-black/20 transition-colors">
-                      <td className="p-2 text-zinc-500 whitespace-nowrap">{t.date}</td>
-                      <td className="p-2 text-zinc-700 dark:text-zinc-300 max-w-[200px] truncate" title={t.description}>{t.description}</td>
+                    <tr key={i} className="hover:bg-[var(--bg-overlay)] dark:hover:bg-black/20 transition-colors">
+                      <td className="p-2 text-[var(--text-secondary)] whitespace-nowrap">{t.date}</td>
+                      <td className="p-2 text-[var(--text-primary)] max-w-[200px] truncate" title={t.description}>{t.description}</td>
                       <td className={`p-2 text-right font-mono font-semibold ${t.type === 'credit' ? 'text-emerald-600' : 'text-red-600'}`}>
                         {t.type === 'credit' ? '+' : '-'}₹{t.amount.toLocaleString('en-IN')}
                       </td>
@@ -354,8 +354,8 @@ export default function BankStatementAnalyser() {
                           {t.type === 'credit' ? 'CR' : 'DR'}
                         </span>
                       </td>
-                      <td className="p-2 text-right text-zinc-500 font-mono">₹{t.balance.toLocaleString('en-IN')}</td>
-                      <td className="p-2"><span className="text-[9px] px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded-full whitespace-nowrap">{t.category}</span></td>
+                      <td className="p-2 text-right text-[var(--text-secondary)] font-mono">₹{t.balance.toLocaleString('en-IN')}</td>
+                      <td className="p-2"><span className="text-[9px] px-1.5 py-0.5 bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-full whitespace-nowrap">{t.category}</span></td>
                     </tr>
                   ))}
                 </tbody>

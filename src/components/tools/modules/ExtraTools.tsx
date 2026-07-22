@@ -13,7 +13,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
-  const cls = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -33,8 +33,8 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
-        <button onClick={() => { navigator.clipboard.writeText(value); setCopied(true); setTimeout(() => setCopied(false), 1500); }} className="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <button onClick={() => { navigator.clipboard.writeText(value); setCopied(true); setTimeout(() => setCopied(false), 1500); }} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
   );
@@ -49,10 +49,10 @@ export function AnnualContractValueCalculator() {
     <Section title="Annual Contract Value (ACV) Calculator">
       <Input label="Total Contract Value ($)" value={tv} onChange={setTv} placeholder="e.g. 120000" type="number" />
       <Input label="Contract Term (Years)" value={years} onChange={setYears} placeholder="e.g. 3" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate ACV</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate ACV</button>
       {result !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">ACV: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">${result.toFixed(2)}</span></p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">ACV: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">${result.toFixed(2)}</span></p>
         </div>
       )}
     </Section>
@@ -79,7 +79,7 @@ export function AsciiTableGenerator() {
   return (
     <Section title="ASCII Table Generator">
       <Input label="CSV Data (first row = headers)" value={data} onChange={setData} placeholder="Name, Age, City\nAlice, 30, NYC\nBob, 25, SF" rows={4} />
-      <button onClick={gen} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Table</button>
+      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Table</button>
       <Output value={table} label="ASCII Table" />
     </Section>
   );
@@ -99,7 +99,7 @@ export function GitCommitLinter() {
   return (
     <Section title="Git Commit Linter">
       <Input label="Commit Message" value={msg} onChange={setMsg} placeholder="feat: add user authentication" rows={2} />
-      <button onClick={lint} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Lint Message</button>
+      <button onClick={lint} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Lint Message</button>
       {issues.length > 0 && (
         <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
           {issues.map((e, i) => <p key={i} className="text-sm text-red-700 dark:text-red-300">{e}</p>)}
@@ -131,7 +131,7 @@ export function GitignoreGenerator() {
           </label>
         ))}
       </div>
-      <button onClick={generate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
+      <button onClick={generate} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
       <Output value={output} label=".gitignore" />
     </Section>
   );
@@ -146,10 +146,10 @@ export function HoursToMinutesConverter() {
     <Section title="Hours & Minutes to Total Minutes">
       <Input label="Hours" value={hours} onChange={setHours} placeholder="e.g. 2" type="number" />
       <Input label="Minutes" value={minutes} onChange={setMinutes} placeholder="e.g. 30" type="number" />
-      <button onClick={convert} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      <button onClick={convert} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {total !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Total Minutes: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{total}</span></p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Total Minutes: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{total}</span></p>
         </div>
       )}
     </Section>
@@ -161,10 +161,10 @@ export function ParquetToCsvConverter() {
   return (
     <Section title="Parquet to CSV Converter">
       <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format.</p>
-      <button onClick={() => setInfo('This tool requires server-side processing (Parquet is a binary columnar format). Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
+      <button onClick={() => setInfo('This tool requires server-side processing (Parquet is a binary columnar format). Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
       {info && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-700 dark:text-zinc-300">{info}</p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-[var(--text-primary)]">{info}</p>
         </div>
       )}
     </Section>
@@ -180,11 +180,11 @@ export function SaasPaybackPeriod() {
     <Section title="SaaS Payback Period">
       <Input label="Customer Acquisition Cost ($)" value={cac} onChange={setCac} placeholder="e.g. 500" type="number" />
       <Input label="Monthly Revenue per Customer ($)" value={mrr} onChange={setMrr} placeholder="e.g. 50" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate Payback</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Payback</button>
       {result !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Payback Period: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)} months</span></p>
-          <p className="text-xs text-zinc-500 mt-1">{result < 12 ? 'Healthy payback period.' : 'Long payback — consider reducing CAC or increasing MRR.'}</p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Payback Period: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)} months</span></p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">{result < 12 ? 'Healthy payback period.' : 'Long payback — consider reducing CAC or increasing MRR.'}</p>
         </div>
       )}
     </Section>
@@ -205,11 +205,11 @@ export function SaasQuickRatio() {
       <Input label="Reactivation MRR ($)" value={r} onChange={setR} placeholder="e.g. 1000" type="number" />
       <Input label="Churned MRR ($)" value={ch} onChange={setCh} placeholder="e.g. 2000" type="number" />
       <Input label="Contraction MRR ($)" value={co} onChange={setCo} placeholder="e.g. 1000" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate Quick Ratio</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Quick Ratio</button>
       {ratio !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Quick Ratio: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
-          <p className="text-xs text-zinc-500 mt-1">{ratio >= 4 ? 'Excellent!' : ratio >= 2 ? 'Good' : ratio >= 1 ? 'Needs improvement' : 'At risk'}</p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Quick Ratio: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">{ratio >= 4 ? 'Excellent!' : ratio >= 2 ? 'Good' : ratio >= 1 ? 'Needs improvement' : 'At risk'}</p>
         </div>
       )}
     </Section>
@@ -225,11 +225,11 @@ export function SaasRuleOf40() {
     <Section title="SaaS Rule of 40">
       <Input label="Revenue Growth Rate (%)" value={growth} onChange={setGrowth} placeholder="e.g. 25" type="number" />
       <Input label="Profit Margin (%)" value={margin} onChange={setMargin} placeholder="e.g. 20 (or -5 for loss)" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Calculate</button>
+      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate</button>
       {result !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Rule of 40 Score: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)}%</span></p>
-          <p className="text-xs text-zinc-500 mt-1">{result >= 40 ? 'Passes the Rule of 40 ✓' : 'Below 40% threshold — focus on growth or profitability.'}</p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Rule of 40 Score: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)}%</span></p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">{result >= 40 ? 'Passes the Rule of 40 ✓' : 'Below 40% threshold — focus on growth or profitability.'}</p>
         </div>
       )}
     </Section>
@@ -254,7 +254,7 @@ export function SwiftFormatter() {
   return (
     <Section title="Swift Formatter">
       <Input label="Swift Code" value={code} onChange={setCode} placeholder="struct Foo {\nlet bar: String\n}" rows={6} />
-      <button onClick={fmt} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Format</button>
+      <button onClick={fmt} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Format</button>
       <Output value={formatted} label="Formatted Swift Code" />
     </Section>
   );
@@ -282,7 +282,7 @@ export function TemperatureConverter() {
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">From</label>
-          <select value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+          <select value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>
@@ -290,17 +290,17 @@ export function TemperatureConverter() {
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">To</label>
-          <select value={to} onChange={e => setTo(e.target.value)} className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+          <select value={to} onChange={e => setTo(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>
           </select>
         </div>
       </div>
-      <button onClick={convert} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      <button onClick={convert} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {result !== null && (
-        <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
         </div>
       )}
     </Section>
@@ -312,7 +312,7 @@ export function PdfToDocx() {
   return (
     <Section title="PDF to DOCX Converter">
       <p className="text-sm text-[var(--text-secondary)] mb-4">Convert PDF documents to editable DOCX format.</p>
-      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
+      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
       <Output value={result} />
     </Section>
   );
@@ -323,7 +323,7 @@ export function PdfToTxt() {
   return (
     <Section title="PDF to TXT Extractor">
       <p className="text-sm text-[var(--text-secondary)] mb-4">Extract plain text from PDF documents.</p>
-      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
+      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
       <Output value={result} />
     </Section>
   );

@@ -73,22 +73,22 @@ export default function TextConverter() {
   const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
   const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
-    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
+    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
       <Icon className="w-3.5 h-3.5" /> {label}
     </button>
   );
 
   const ObfuscateOutput = ({ label, val }: { label: string; val: string }) => (
     <div className="relative">
-      <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">{label}</label>
-      <input type="text" readOnly value={val} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
-      {val && <button onClick={() => copy(val, label)} className="absolute top-5 right-2 text-[10px] text-indigo-400 hover:underline">Copy</button>}
+      <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">{label}</label>
+      <input type="text" readOnly value={val} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+      {val && <button onClick={() => copy(val, label)} className="absolute top-5 right-2 text-[10px] text-[var(--accent)] hover:underline">Copy</button>}
     </div>
   );
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1 w-fit">
+      <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 w-fit">
         <TabBtn v="nato" label="NATO" icon={Type} />
         <TabBtn v="binary" label="ASCII Binary" icon={Binary} />
         <TabBtn v="unicode" label="Unicode" icon={Hash} />
@@ -99,16 +99,16 @@ export default function TextConverter() {
       {tab === 'nato' && (
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
-              <button onClick={() => setNatoMode('to')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${natoMode === 'to' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>Text → NATO</button>
-              <button onClick={() => setNatoMode('from')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${natoMode === 'from' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>NATO → Text</button>
+            <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+              <button onClick={() => setNatoMode('to')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${natoMode === 'to' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Text → NATO</button>
+              <button onClick={() => setNatoMode('from')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${natoMode === 'from' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>NATO → Text</button>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <textarea value={natoInput} onChange={e => setNatoInput(e.target.value)} placeholder={natoMode === 'to' ? 'Enter text...' : 'Enter NATO words (e.g. Alpha Bravo Charlie)...'} className="w-full h-[150px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
+            <textarea value={natoInput} onChange={e => setNatoInput(e.target.value)} placeholder={natoMode === 'to' ? 'Enter text...' : 'Enter NATO words (e.g. Alpha Bravo Charlie)...'} className="w-full h-[150px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
             <div className="relative">
-              <textarea value={natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
-              {natoInput && <button onClick={() => copy(natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput), 'NATO')} className="absolute top-3 right-3 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700">Copy</button>}
+              <textarea value={natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+              {natoInput && <button onClick={() => copy(natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput), 'NATO')} className="absolute top-3 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
             </div>
           </div>
         </div>
@@ -117,17 +117,17 @@ export default function TextConverter() {
       {tab === 'binary' && (
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
-              <button onClick={() => setBinMode('to')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${binMode === 'to' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>Text → Binary</button>
-              <button onClick={() => setBinMode('from')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${binMode === 'from' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>Binary → Text</button>
+            <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+              <button onClick={() => setBinMode('to')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${binMode === 'to' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Text → Binary</button>
+              <button onClick={() => setBinMode('from')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${binMode === 'from' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Binary → Text</button>
             </div>
-            <button onClick={() => setBinMode(binMode === 'to' ? 'from' : 'to')} className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">⇄ Swap</button>
+            <button onClick={() => setBinMode(binMode === 'to' ? 'from' : 'to')} className="text-xs text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300">⇄ Swap</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <textarea value={binInput} onChange={e => setBinInput(e.target.value)} placeholder={binMode === 'to' ? 'Enter text...' : 'Enter binary (e.g. 01001000 01101001)...'} className="w-full h-[150px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
+            <textarea value={binInput} onChange={e => setBinInput(e.target.value)} placeholder={binMode === 'to' ? 'Enter text...' : 'Enter binary (e.g. 01001000 01101001)...'} className="w-full h-[150px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
             <div className="relative">
-              <textarea value={binMode === 'to' ? toBinary(binInput) : fromBinary(binInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
-              {binInput && <button onClick={() => copy(binMode === 'to' ? toBinary(binInput) : fromBinary(binInput), 'Binary')} className="absolute top-3 right-3 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700">Copy</button>}
+              <textarea value={binMode === 'to' ? toBinary(binInput) : fromBinary(binInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+              {binInput && <button onClick={() => copy(binMode === 'to' ? toBinary(binInput) : fromBinary(binInput), 'Binary')} className="absolute top-3 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
             </div>
           </div>
         </div>
@@ -135,9 +135,9 @@ export default function TextConverter() {
 
       {tab === 'unicode' && (
         <div className="space-y-4">
-          <textarea value={uniInput} onChange={e => setUniInput(e.target.value)} placeholder="Enter text..." className="w-full h-[100px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
+          <textarea value={uniInput} onChange={e => setUniInput(e.target.value)} placeholder="Enter text..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
           {uniInput && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
               <ObfuscateOutput label="Code Points (U+XXXX)" val={toUnicodeCP(uniInput)} />
               <ObfuscateOutput label="HTML Entities (&#XXXX;)" val={toHTMLEntities(uniInput)} />
               <ObfuscateOutput label="Percent Encoded" val={toPercentEncoded(uniInput)} />
@@ -149,9 +149,9 @@ export default function TextConverter() {
       {tab === 'roman' && (
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
-              <button onClick={() => { setRomanMode('to'); setRomanOutput(''); setRomanInput(''); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${romanMode === 'to' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>Number → Roman</button>
-              <button onClick={() => { setRomanMode('from'); setRomanOutput(''); setRomanInput(''); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${romanMode === 'from' ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>Roman → Number</button>
+            <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+              <button onClick={() => { setRomanMode('to'); setRomanOutput(''); setRomanInput(''); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${romanMode === 'to' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Number → Roman</button>
+              <button onClick={() => { setRomanMode('from'); setRomanOutput(''); setRomanInput(''); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${romanMode === 'from' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Roman → Number</button>
             </div>
           </div>
           <input value={romanInput} onChange={e => {
@@ -163,21 +163,21 @@ export default function TextConverter() {
               const r = e.target.value.toUpperCase().replace(/[^IVXLCDM]/g, '');
               setRomanOutput(r ? String(fromRoman(r)) : '');
             }
-          }} placeholder={romanMode === 'to' ? 'Enter a number (1-3999)...' : 'Enter Roman numerals (e.g. MCMXCIV)...'} className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
+          }} placeholder={romanMode === 'to' ? 'Enter a number (1-3999)...' : 'Enter Roman numerals (e.g. MCMXCIV)...'} className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
           {romanInput && romanOutput && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
-              <h3 className="text-[10px] font-bold text-zinc-400 uppercase mb-2">{romanMode === 'to' ? 'Roman Numeral' : 'Arabic Number'}</h3>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+              <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">{romanMode === 'to' ? 'Roman Numeral' : 'Arabic Number'}</h3>
               <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-mono">{romanOutput}</p>
-              <button onClick={() => copy(romanOutput, romanMode === 'to' ? 'Roman' : 'Number')} className="mt-2 text-[10px] text-indigo-400 hover:underline">Copy</button>
+              <button onClick={() => copy(romanOutput, romanMode === 'to' ? 'Roman' : 'Number')} className="mt-2 text-[10px] text-[var(--accent)] hover:underline">Copy</button>
             </div>
           )}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
-            <h3 className="text-[10px] font-bold text-zinc-400 uppercase mb-2">Reference</h3>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+            <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Reference</h3>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
               {[['I','1'],['IV','4'],['V','5'],['IX','9'],['X','10'],['XL','40'],['L','50'],['XC','90'],['C','100'],['CD','400'],['D','500'],['CM','900'],['M','1000']].map(([r, n]) => (
-                <div key={r} className="flex items-center gap-2 p-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
-                  <span className="font-bold text-zinc-900 dark:text-white">{r}</span>
-                  <span className="text-zinc-500">{n}</span>
+                <div key={r} className="flex items-center gap-2 p-1.5 rounded-lg bg-[var(--bg-overlay)]/50">
+                  <span className="font-bold text-[var(--text-primary)]">{r}</span>
+                  <span className="text-[var(--text-secondary)]">{n}</span>
                 </div>
               ))}
             </div>
@@ -187,9 +187,9 @@ export default function TextConverter() {
 
       {tab === 'obfuscate' && (
         <div className="space-y-4">
-          <textarea value={obfuscateInput} onChange={e => setObfuscateInput(e.target.value)} placeholder="Enter text to obfuscate..." className="w-full h-[100px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
+          <textarea value={obfuscateInput} onChange={e => setObfuscateInput(e.target.value)} placeholder="Enter text to obfuscate..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
           {obfuscateInput && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
               <ObfuscateOutput label="Leet Speak (1337)" val={leet(obfuscateInput)} />
               <ObfuscateOutput label="Reversed" val={Array.from(obfuscateInput).reverse().join('')} />
               <ObfuscateOutput label="Shuffled" val={shuffleStr(obfuscateInput)} />

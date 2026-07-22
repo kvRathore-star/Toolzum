@@ -66,26 +66,26 @@ export function EncoderDecoder() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <h2 className="text-2xl font-bold">Encoder / Decoder</h2>
-        <p className="text-sm text-zinc-500">Encode or decode text using various schemes</p>
+        <p className="text-sm text-[var(--text-secondary)]">Encode or decode text using various schemes</p>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>Encode</button>
-          <button onClick={() => setMode('decode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>Decode</button>
+          <button onClick={() => setMode('encode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Encode</button>
+          <button onClick={() => setMode('decode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Decode</button>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-500">Scheme</label>
-          <select value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
+          <label className="text-xs font-medium text-[var(--text-secondary)]">Scheme</label>
+          <select value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
         </div>
         <div>
-          <label className="text-xs font-medium text-zinc-500">Input</label>
-          <textarea value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
+          <label className="text-xs font-medium text-[var(--text-secondary)]">Input</label>
+          <textarea value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
         </div>
-        <button onClick={handleProcess} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
+        <button onClick={handleProcess} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
         {output && (
           <div>
-            <label className="text-xs font-medium text-zinc-500">Output</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>
+            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
           </div>
         )}
       </div>

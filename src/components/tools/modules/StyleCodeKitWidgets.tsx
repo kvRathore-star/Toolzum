@@ -28,14 +28,14 @@ export function ScssToCssConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">SCSS to CSS Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">SCSS to CSS Converter</h2>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {output && (
           <div className="space-y-1">
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
             <CopyBtn text={output} />
           </div>
         )}
@@ -70,14 +70,14 @@ export function StylusToCssConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Stylus to CSS Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Stylus to CSS Converter</h2>
         <textarea rows={5} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {output && (
           <div className="space-y-1">
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
             <CopyBtn text={output} />
           </div>
         )}
@@ -115,15 +115,15 @@ export function TailwindToCssConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Tailwind to CSS Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Tailwind to CSS Converter</h2>
         <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Space-separated Tailwind classes"
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
-        <p className="text-xs text-zinc-500">Supports 40+ common Tailwind classes.</p>
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <p className="text-xs text-[var(--text-secondary)]">Supports 40+ common Tailwind classes.</p>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {output && (
           <div className="space-y-1">
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
             <CopyBtn text={output} />
           </div>
         )}
@@ -156,14 +156,14 @@ export function ProtoSchemaConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Proto Schema to TS + JSON</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Proto Schema to TS + JSON</h2>
         <textarea rows={7} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate TS + JSON</button>
         {output && (
           <div className="space-y-1">
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
             <CopyBtn text={output} />
           </div>
         )}
@@ -187,12 +187,12 @@ export function ProtobufDecoder() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Protobuf Decoder</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Protobuf Decoder</h2>
         <textarea rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
-        {output && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
       </div>
     </div>
   );
@@ -220,12 +220,12 @@ export function TsconfigAnalyzer() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">tsconfig Analyzer</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">tsconfig Analyzer</h2>
         <textarea rows={5} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {output && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
       </div>
     </div>
   );
@@ -251,14 +251,14 @@ export function TypeScriptFormatter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">TypeScript Formatter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">TypeScript Formatter</h2>
         <textarea rows={5} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={format} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Format</button>
         {output && (
           <div className="space-y-1">
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
             <CopyBtn text={output} />
           </div>
         )}
@@ -283,20 +283,20 @@ export function StringTemplateTester() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">String Template Tester</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">String Template Tester</h2>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">Template</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Template</label>
           <input type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">Variables (JSON)</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Variables (JSON)</label>
           <textarea rows={3} value={vars} onChange={e => setVars(e.target.value)}
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={test} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Test</button>
-        {output && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
       </div>
     </div>
   );
@@ -325,12 +325,12 @@ export function TestDataGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Test Data Generator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Data Generator</h2>
         <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
-        {output && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
       </div>
     </div>
   );

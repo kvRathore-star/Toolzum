@@ -64,30 +64,30 @@ export default function ListConverter() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
-        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste your list here..." className="w-full h-[200px] bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste your list here..." className="w-full h-[200px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
         
         {detected && (
-          <div className="text-[11px] text-zinc-500 flex items-center gap-2">
+          <div className="text-[11px] text-[var(--text-secondary)] flex items-center gap-2">
             <span>Detected delimiter:</span>
             <span className="font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">{DELIMITER_MAP[detected].label}</span>
-            <span className="text-zinc-400 ml-auto">{items.length} item{items.length !== 1 ? 's' : ''}</span>
+            <span className="text-[var(--text-muted)] ml-auto">{items.length} item{items.length !== 1 ? 's' : ''}</span>
           </div>
         )}
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-[10px] font-bold text-zinc-400 uppercase self-center mr-1">Options:</span>
-          <label className="flex items-center gap-1.5 text-[11px] text-zinc-500"><input type="checkbox" checked={trimItems} onChange={e => setTrimItems(e.target.checked)} /> Trim</label>
-          <label className="flex items-center gap-1.5 text-[11px] text-zinc-500"><input type="checkbox" checked={removeEmpty} onChange={e => setRemoveEmpty(e.target.checked)} /> Remove empty</label>
-          <label className="flex items-center gap-1.5 text-[11px] text-zinc-500"><input type="checkbox" checked={sortAlpha} onChange={e => setSortAlpha(e.target.checked)} /> Sort A→Z</label>
-          <label className="flex items-center gap-1.5 text-[11px] text-zinc-500"><input type="checkbox" checked={deduplicate} onChange={e => setDeduplicate(e.target.checked)} /> Deduplicate</label>
+          <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase self-center mr-1">Options:</span>
+          <label className="flex items-center gap-1.5 text-[11px] text-[var(--text-secondary)]"><input type="checkbox" checked={trimItems} onChange={e => setTrimItems(e.target.checked)} /> Trim</label>
+          <label className="flex items-center gap-1.5 text-[11px] text-[var(--text-secondary)]"><input type="checkbox" checked={removeEmpty} onChange={e => setRemoveEmpty(e.target.checked)} /> Remove empty</label>
+          <label className="flex items-center gap-1.5 text-[11px] text-[var(--text-secondary)]"><input type="checkbox" checked={sortAlpha} onChange={e => setSortAlpha(e.target.checked)} /> Sort A→Z</label>
+          <label className="flex items-center gap-1.5 text-[11px] text-[var(--text-secondary)]"><input type="checkbox" checked={deduplicate} onChange={e => setDeduplicate(e.target.checked)} /> Deduplicate</label>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[10px] font-bold text-zinc-400 uppercase">Convert to:</span>
-          <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1 flex-wrap">
+          <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Convert to:</span>
+          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
             {(Object.keys(DELIMITER_MAP) as Delimiter[]).map(d => (
-              <button key={d} onClick={() => setTargetDelimiter(d)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${targetDelimiter === d ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>
+              <button key={d} onClick={() => setTargetDelimiter(d)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${targetDelimiter === d ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 {DELIMITER_MAP[d].label.replace(' (', '\n(')}
               </button>
             ))}
@@ -96,12 +96,12 @@ export default function ListConverter() {
       </div>
 
       {output && (
-        <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
+        <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase">Output ({items.length} items)</span>
-            <button onClick={() => copy(output, 'List')} className="text-[10px] text-indigo-400 hover:underline">Copy All</button>
+            <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Output ({items.length} items)</span>
+            <button onClick={() => copy(output, 'List')} className="text-[10px] text-[var(--accent)] hover:underline">Copy All</button>
           </div>
-          <textarea value={output} readOnly className="w-full h-[200px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white outline-none resize-none font-mono" />
+          <textarea value={output} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] outline-none resize-none font-mono" />
         </div>
       )}
     </div>

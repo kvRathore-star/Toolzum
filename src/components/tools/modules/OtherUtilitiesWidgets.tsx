@@ -63,27 +63,27 @@ export function WiFiQRGenerator() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-zinc-900 dark:text-white">WiFi QR Code Generator</h1>
-        <p className="text-sm text-zinc-500 mt-1">Generate WiFi configuration strings for QR codes.</p>
+        <h1 className="text-xl font-bold text-[var(--text-primary)]">WiFi QR Code Generator</h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Generate WiFi configuration strings for QR codes.</p>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">SSID</label>
-            <input value={wifiSSID} onChange={e => setWifiSSID(e.target.value)} placeholder="Network name..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">SSID</label>
+            <input value={wifiSSID} onChange={e => setWifiSSID(e.target.value)} placeholder="Network name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
           </div>
           <div>
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Password</label>
-            <input value={wifiPass} onChange={e => setWifiPass(e.target.value)} placeholder="Password..." className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none" />
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Password</label>
+            <input value={wifiPass} onChange={e => setWifiPass(e.target.value)} placeholder="Password..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
             {['WPA', 'WEP', 'nopass'].map(e => (
-              <button key={e} onClick={() => setWifiEnc(e)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${wifiEnc === e ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>{e === 'nopass' ? 'None' : e}</button>
+              <button key={e} onClick={() => setWifiEnc(e)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${wifiEnc === e ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{e === 'nopass' ? 'None' : e}</button>
             ))}
           </div>
-          <label className="flex items-center gap-2 text-xs text-zinc-500">
+          <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
             <input type="checkbox" checked={wifiHidden} onChange={e => setWifiHidden(e.target.checked)} /> Hidden
           </label>
         </div>
@@ -92,12 +92,12 @@ export function WiFiQRGenerator() {
           setWifiCode(code);
           if (wifiSSID) toast.success('WiFi config generated!');
           else toast.error('Enter an SSID');
-        }} className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate Config</button>
+        }} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate Config</button>
         {wifiCode && (
           <div className="relative">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">WiFi Config String</label>
-            <input type="text" readOnly value={wifiCode} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 outline-none font-mono" />
-            <button onClick={() => copy(wifiCode, 'WiFi config')} className="absolute top-5 right-2 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-0.5 rounded">Copy</button>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">WiFi Config String</label>
+            <input type="text" readOnly value={wifiCode} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 outline-none font-mono" />
+            <button onClick={() => copy(wifiCode, 'WiFi config')} className="absolute top-5 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
           </div>
         )}
       </div>
@@ -112,20 +112,20 @@ export function PhoneParser() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-zinc-900 dark:text-white">International Phone Parser</h1>
-        <p className="text-sm text-zinc-500 mt-1">Parse and format international phone numbers.</p>
+        <h1 className="text-xl font-bold text-[var(--text-primary)]">International Phone Parser</h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Parse and format international phone numbers.</p>
       </div>
-      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none font-mono" />
+      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
       {phoneResult && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-2">
-          <div className="text-xs flex justify-between"><span className="text-zinc-400">Country</span><span className="font-bold text-zinc-900 dark:text-white">{phoneResult.country}</span></div>
-          <div className="text-xs flex justify-between"><span className="text-zinc-400">Country Code</span><span className="font-bold text-zinc-900 dark:text-white">{phoneResult.code}</span></div>
-          <div className="text-xs flex justify-between"><span className="text-zinc-400">National Number</span><span className="font-bold text-zinc-900 dark:text-white">{phoneResult.national}</span></div>
-          <div className="text-xs flex justify-between"><span className="text-zinc-400">E.164 Format</span><span className="font-bold text-blue-600 dark:text-blue-400">{phoneResult.e164}</span></div>
-          <button onClick={() => copy(phoneResult.e164, 'E.164')} className="text-[10px] text-indigo-400 hover:underline">Copy</button>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.country}</span></div>
+          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country Code</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.code}</span></div>
+          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">National Number</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.national}</span></div>
+          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">E.164 Format</span><span className="font-bold text-blue-600 dark:text-blue-400">{phoneResult.e164}</span></div>
+          <button onClick={() => copy(phoneResult.e164, 'E.164')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
         </div>
       )}
-      {phoneInput && !phoneResult && <p className="text-xs text-zinc-400">No matching country found for this number.</p>}
+      {phoneInput && !phoneResult && <p className="text-xs text-[var(--text-muted)]">No matching country found for this number.</p>}
     </div>
   );
 }
@@ -151,37 +151,37 @@ export function OTPGenerator() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-zinc-900 dark:text-white">OTP Code Generator</h1>
-        <p className="text-sm text-zinc-500 mt-1">Generate one-time passcodes of various types and lengths.</p>
+        <h1 className="text-xl font-bold text-[var(--text-primary)]">OTP Code Generator</h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Generate one-time passcodes of various types and lengths.</p>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div>
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Length</label>
-            <select value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-white outline-none">
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Length</label>
+            <select value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none">
               {[4,5,6,7,8].map(n => <option key={n} value={n}>{n} digits</option>)}
             </select>
           </div>
           <div>
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Type</label>
-            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Type</label>
+            <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
               {(['numeric','alpha','hex'] as const).map(t => (
-                <button key={t} onClick={() => setOtpType(t)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${otpType === t ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>{t}</button>
+                <button key={t} onClick={() => setOtpType(t)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${otpType === t ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{t}</button>
               ))}
             </div>
           </div>
           <div>
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Count: {otpCount}</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Count: {otpCount}</label>
             <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} className="w-24" />
           </div>
         </div>
-        <button onClick={generateOTP} className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
+        <button onClick={generateOTP} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
         {otpCodes.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {otpCodes.map((code, i) => (
-              <div key={i} className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-3 text-center">
+              <div key={i} className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-3 py-3 text-center">
                 <div className="text-sm font-mono font-bold text-blue-600 dark:text-blue-400 tracking-wider">{code.replace(/(.{3})/g, '$1 ').trim()}</div>
-                <button onClick={() => copy(code, 'OTP')} className="text-[9px] text-indigo-400 hover:underline mt-1 block">Copy</button>
+                <button onClick={() => copy(code, 'OTP')} className="text-[9px] text-[var(--accent)] hover:underline mt-1 block">Copy</button>
               </div>
             ))}
           </div>
@@ -201,23 +201,23 @@ export function SlugifyTool() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-zinc-900 dark:text-white">URL Slug Generator</h1>
-        <p className="text-sm text-zinc-500 mt-1">Convert text into URL-friendly slugs.</p>
+        <h1 className="text-xl font-bold text-[var(--text-primary)]">URL Slug Generator</h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">Convert text into URL-friendly slugs.</p>
       </div>
-      <input value={slugInput} onChange={e => setSlugInput(e.target.value)} placeholder="Enter text to slugify..." className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm text-zinc-900 dark:text-white outline-none" />
-      <div className="flex items-center gap-4 flex-wrap text-xs text-zinc-500">
+      <input value={slugInput} onChange={e => setSlugInput(e.target.value)} placeholder="Enter text to slugify..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none" />
+      <div className="flex items-center gap-4 flex-wrap text-xs text-[var(--text-secondary)]">
         <label className="flex items-center gap-1.5"><input type="checkbox" checked={slugLowercase} onChange={e => setSlugLowercase(e.target.checked)} /> Lowercase</label>
         <label className="flex items-center gap-1.5"><input type="checkbox" checked={slugTrim} onChange={e => setSlugTrim(e.target.checked)} /> Trim</label>
         <label className="flex items-center gap-1.5">
           Separator:
-          <select value={slugSep} onChange={e => setSlugSep(e.target.value)} className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-xs text-zinc-900 dark:text-white outline-none font-mono">-</select>
+          <select value={slugSep} onChange={e => setSlugSep(e.target.value)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] outline-none font-mono">-</select>
         </label>
       </div>
       {slugInput && (
-        <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5">
-          <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Slug</label>
-          <input type="text" readOnly value={slugOutput} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 outline-none font-mono" />
-          <button onClick={() => copy(slugOutput, 'Slug')} className="absolute top-6 right-3 text-[10px] text-indigo-400 hover:underline bg-white dark:bg-zinc-800 px-2 py-0.5 rounded">Copy</button>
+        <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
+          <input type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 outline-none font-mono" />
+          <button onClick={() => copy(slugOutput, 'Slug')} className="absolute top-6 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
         </div>
       )}
     </div>

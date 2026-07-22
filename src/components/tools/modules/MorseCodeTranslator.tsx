@@ -87,25 +87,25 @@ export default function MorseCodeTranslator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Volume2 className="w-5 h-5 text-indigo-500" />
+          <Volume2 className="w-5 h-5 text-[var(--accent)]" />
           Morse Code Translator & Audio Synthesizer
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Translate English text to Morse Code signals and play clean audio dots and dashes offline.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Translate English text to Morse Code signals and play clean audio dots and dashes offline.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl space-y-4">
-          <span className="text-xs text-zinc-400 font-bold uppercase block">English Plaintext</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+          <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
           <textarea
             value={text}
             onChange={e => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && translateToMorse()}
             placeholder="Type standard text here..."
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white h-48 outline-none text-xs resize-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-48 outline-none text-xs resize-none"
           />
           <div className="grid grid-cols-2 gap-4">
-            <button onClick={translateToMorse} className="w-full bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={translateToMorse} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Translate to Morse →
             </button>
             <button onClick={() => { clipboardWrite(text); toast.success('Copied text!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
@@ -114,9 +114,9 @@ export default function MorseCodeTranslator() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
           <div className="flex justify-between items-center">
-            <span className="text-xs text-zinc-400 font-bold uppercase">Morse Code Output</span>
+            <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Morse Code Output</span>
             {morse && (
               <button onClick={playMorseSound} className="text-xs text-emerald-400 font-bold flex items-center gap-1 hover:underline cursor-pointer">
                 <Play className="w-4 h-4" /> Play Audio Beeps
@@ -127,10 +127,10 @@ export default function MorseCodeTranslator() {
             value={morse}
             onChange={e => setMorse(e.target.value)}
             placeholder="Morse code dots and dashes (e.g. .... . .-.. .-.. ---)..."
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-emerald-400 font-mono h-48 outline-none text-xs resize-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-400 font-mono h-48 outline-none text-xs resize-none"
           />
           <div className="grid grid-cols-2 gap-4">
-            <button onClick={translateToText} className="w-full bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={translateToText} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               ← Translate to Text
             </button>
             <button onClick={() => { clipboardWrite(morse); toast.success('Copied morse!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">

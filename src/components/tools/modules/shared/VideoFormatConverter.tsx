@@ -211,7 +211,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p className="text-zinc-500 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+        <p className="text-[var(--text-secondary)] font-medium animate-pulse">Initializing WebAssembly Core...</p>
       </div>
     );
   }
@@ -222,7 +222,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
         <select
           value={inputKey}
           onChange={(e) => handleFormatChange("input", e.target.value)}
-          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
         >
           {FORMAT_KEYS.map(k => (
             <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
@@ -231,10 +231,10 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
 
         <button
           onClick={swapFormats}
-          className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95"
+          className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all active:scale-95"
           aria-label="Swap formats"
         >
-          <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
           </svg>
         </button>
@@ -242,7 +242,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
         <select
           value={outputKey}
           onChange={(e) => handleFormatChange("output", e.target.value)}
-          className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
         >
           {FORMAT_KEYS.map(k => (
             <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
@@ -263,36 +263,36 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
         />
       ) : (
         <div className="space-y-8">
-          <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+          <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
             <div>
               <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
             </div>
             <button
               onClick={clearAll}
               disabled={isProcessing}
-              className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+              className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
             >
               Change File
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit flex flex-col justify-center">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit flex flex-col justify-center">
               <div className="text-center space-y-4">
-                <div className="flex justify-center items-center gap-4 text-zinc-400">
-                  <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl">
+                <div className="flex justify-center items-center gap-4 text-[var(--text-muted)]">
+                  <div className="bg-[var(--bg-surface)] p-4 rounded-2xl">
                     <span className="font-black text-xl text-zinc-800 dark:text-zinc-200">{inputFmt.label}</span>
                   </div>
                   <svg className="w-8 h-8 text-blue-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                  <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl border-2 border-blue-500/30">
+                  <div className="bg-[var(--bg-surface)] p-4 rounded-2xl border-2 border-blue-500/30">
                     <span className="font-black text-xl text-blue-500">{outputFmt.label}</span>
                   </div>
                 </div>
-                <p className="text-sm text-zinc-500">Video will be converted to {outputFmt.name} format.</p>
+                <p className="text-sm text-[var(--text-secondary)]">Video will be converted to {outputFmt.name} format.</p>
               </div>
 
-              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="pt-4 border-t border-[var(--border-subtle)]">
                 {isProcessing ? (
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-bold text-blue-500">
@@ -320,8 +320,8 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
 
             <div className="space-y-6">
               {outputUrl ? (
-                <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-                  <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+                  <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                     <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
                   </div>
 
@@ -331,7 +331,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
 
                   {outputSize && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-zinc-500">File Size:</span>
+                      <span className="text-[var(--text-secondary)]">File Size:</span>
                       <span className="font-bold text-emerald-500">{(outputSize / 1024 / 1024).toFixed(2)} MB</span>
                     </div>
                   )}
@@ -345,7 +345,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
                   </button>
                 </div>
               ) : (
-                <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+                <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
                   <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                   <p className="text-center text-sm px-4">Your {outputFmt.name} video will appear here.</p>
                 </div>
@@ -356,8 +356,8 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
       )}
 
       {related.length > 0 && (
-        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
-          <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+        <div className="pt-6 border-t border-[var(--border-subtle)]">
+          <p className="text-sm text-[var(--text-secondary)] mb-3 font-medium">Also popular:</p>
           <div className="flex flex-wrap gap-2">
             {related.map(s => {
               const p = FORMAT_PAIRS.find(fp => fp.slug === s);
@@ -366,7 +366,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
                 <Link
                   key={s}
                   href={`/converter/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
                 >
                   {p.label}
                 </Link>

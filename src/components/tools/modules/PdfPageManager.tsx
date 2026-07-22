@@ -168,52 +168,52 @@ export default function PdfPageManager() {
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <FileText className="w-5 h-5 text-blue-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">PDF Page Manager</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">PDF Page Manager</h3>
       </div>
 
       {!file ? (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
           <div className="bg-blue-500/10 border-b border-blue-500/20 p-3 px-5 text-blue-500 text-xs"><strong>All-in-One PDF Page Tool:</strong> Crop, organize, extract, rotate, and delete pages.</div>
-          <div className="p-5 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl m-5 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
+          <div className="p-5 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl m-5 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
             <input type="file" accept="application/pdf" onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" />
             <FileText className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
-            <p className="text-xs text-zinc-500">Click or drag PDF here</p>
+            <p className="text-xs text-[var(--text-secondary)]">Click or drag PDF here</p>
           </div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-          <div className="flex justify-between items-center p-4 border-b border-zinc-200 dark:border-zinc-800">
-            <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{file.name}</h4><p className="text-[10px] text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} pages</p></div>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+          <div className="flex justify-between items-center p-4 border-b border-[var(--border-subtle)]">
+            <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{file.name}</h4><p className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} pages</p></div>
             <button onClick={() => { setFile(null); setOutputUrl(null); setFileBuffer(null); }} className="text-[10px] text-red-500 hover:underline">Change</button>
           </div>
 
-          <div className="flex gap-1 bg-zinc-50 dark:bg-black/20 px-4 py-2.5 border-b border-zinc-200 dark:border-zinc-800 overflow-x-auto">
+          <div className="flex gap-1 bg-[var(--bg-overlay)] px-4 py-2.5 border-b border-[var(--border-subtle)] overflow-x-auto">
             {TABS.map(({ key, label, icon }) => (
-              <button key={key} onClick={() => setTab(key)} className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap ${tab === key ? 'bg-blue-600 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'}`}>{icon} {label}</button>
+              <button key={key} onClick={() => setTab(key)} className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap ${tab === key ? 'bg-blue-600 text-white shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200'}`}>{icon} {label}</button>
             ))}
           </div>
 
           <div className="p-5">
             {tab === 'crop' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-zinc-500">Remove white margins from all pages.</p>
-                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Crop Margin (points): {margin}pt</label><input type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
+                <p className="text-[10px] text-[var(--text-secondary)]">Remove white margins from all pages.</p>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Crop Margin (points): {margin}pt</label><input type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
                 <button onClick={processCrop} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Crop & Download'}</button>
               </div>
             )}
 
             {tab === 'organize' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-zinc-500">Drag pages to reorder. Click × to remove.</p>
-                <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-2 bg-zinc-50 dark:bg-black/10 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                <p className="text-[10px] text-[var(--text-secondary)]">Drag pages to reorder. Click × to remove.</p>
+                <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-2 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                   {pages.map((pn, i) => (
                     <div key={`${pn}-${i}`} draggable onDragStart={() => handleDragStart(i)} onDragOver={e => e.preventDefault()} onDrop={() => handleDrop(i)} onDragEnd={() => setDraggedIdx(null)}
-                      className={`flex flex-col items-center justify-center w-20 h-24 bg-white dark:bg-zinc-800 border-2 ${draggedIdx === i ? 'border-dashed border-blue-400 opacity-50' : 'border-zinc-200 dark:border-zinc-700'} rounded-lg shadow-sm cursor-move hover:border-blue-400 transition-colors group relative`}>
+                      className={`flex flex-col items-center justify-center w-20 h-24 bg-white dark:bg-[var(--bg-surface)] border-2 ${draggedIdx === i ? 'border-dashed border-blue-400 opacity-50' : 'border-[var(--border-subtle)]'} rounded-lg shadow-sm cursor-move hover:border-blue-400 transition-colors group relative`}>
                       <button onClick={() => handleRemove(i)} className="absolute -top-1.5 -right-1.5 bg-rose-500 text-white rounded-full w-5 h-5 text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">×</button>
-                      <FileText className="w-6 h-6 text-zinc-400 mb-1" /><span className="font-bold text-[10px]">Page {pn + 1}</span>
+                      <FileText className="w-6 h-6 text-[var(--text-muted)] mb-1" /><span className="font-bold text-[10px]">Page {pn + 1}</span>
                     </div>
                   ))}
-                  {pages.length === 0 && <p className="p-4 w-full text-center text-[10px] text-zinc-400">All pages removed</p>}
+                  {pages.length === 0 && <p className="p-4 w-full text-center text-[10px] text-[var(--text-muted)]">All pages removed</p>}
                 </div>
                 <button onClick={processOrganize} disabled={isProcessing || pages.length === 0} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Apply & Download'}</button>
               </div>
@@ -221,18 +221,18 @@ export default function PdfPageManager() {
 
             {tab === 'extract' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-zinc-500">Specify pages to extract (e.g. 1, 3, 5-10).</p>
-                <input type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+                <p className="text-[10px] text-[var(--text-secondary)]">Specify pages to extract (e.g. 1, 3, 5-10).</p>
+                <input type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
                 <button onClick={processExtract} disabled={isProcessing || !pageRange.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Extract & Download'}</button>
               </div>
             )}
 
             {tab === 'rotate' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-zinc-500">Rotate all pages in the document.</p>
+                <p className="text-[10px] text-[var(--text-secondary)]">Rotate all pages in the document.</p>
                 <div className="grid grid-cols-3 gap-2">
                   {[{ l: 'Right 90°', v: 90 }, { l: 'Upside Down', v: 180 }, { l: 'Left 90°', v: 270 }].map(o => (
-                    <button key={o.v} onClick={() => setRotation(o.v as any)} className={`py-3 rounded-xl text-[10px] font-bold border transition-all ${rotation === o.v ? 'bg-blue-600 text-white border-blue-500' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{o.l}</button>
+                    <button key={o.v} onClick={() => setRotation(o.v as any)} className={`py-3 rounded-xl text-[10px] font-bold border transition-all ${rotation === o.v ? 'bg-blue-600 text-white border-blue-500' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{o.l}</button>
                   ))}
                 </div>
                 <button onClick={processRotate} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Rotate & Download'}</button>
@@ -241,8 +241,8 @@ export default function PdfPageManager() {
 
             {tab === 'delete' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-zinc-500">Enter page numbers to delete (e.g. 1, 3, 5-10). Max: {totalPages}.</p>
-                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} onChange={e => setDeleteRange(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-xs text-zinc-900 dark:text-white outline-none focus:border-red-500" />
+                <p className="text-[10px] text-[var(--text-secondary)]">Enter page numbers to delete (e.g. 1, 3, 5-10). Max: {totalPages}.</p>
+                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} onChange={e => setDeleteRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] outline-none focus:border-red-500" />
                 <button onClick={processDelete} disabled={isProcessing || !deleteRange.trim()} className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Delete Pages & Download'}</button>
               </div>
             )}
@@ -251,7 +251,7 @@ export default function PdfPageManager() {
       )}
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-        <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Batch process multiple PDFs at once, unlimited page count, OCR-powered page splitting, merge PDFs before organizing, cloud storage integration.</p>
+        <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Batch process multiple PDFs at once, unlimited page count, OCR-powered page splitting, merge PDFs before organizing, cloud storage integration.</p>
       </div>
     </div>
   );

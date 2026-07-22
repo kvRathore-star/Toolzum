@@ -163,28 +163,28 @@ export default function SocialMediaPostMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Header */}
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Layout className="w-5 h-5 text-indigo-500" />
+          <Layout className="w-5 h-5 text-[var(--accent)]" />
           Social Media Graphic Designer
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Compose posts for Instagram, Twitter, and LinkedIn with templates, image backdrops, and overlays.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Compose posts for Instagram, Twitter, and LinkedIn with templates, image backdrops, and overlays.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Editor controls */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 max-h-[680px] overflow-y-auto pr-2">
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[680px] overflow-y-auto pr-2">
           
           {/* Ratio choices */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Dimensions / Platform</h4>
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Dimensions / Platform</h4>
             <div className="grid grid-cols-2 gap-2">
               {RATIOS.map((ratio) => (
                 <button
                   key={ratio.id}
                   onClick={() => setSelectedRatio(ratio)}
-                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedRatio.id === ratio.id ? 'border-indigo-500 bg-indigo-500/10 text-indigo-500' : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-[var(--bg-surface)] text-zinc-500'}`}
+                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedRatio.id === ratio.id ? 'border-indigo-500 bg-indigo-500/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
                 >
                   {ratio.name}
                 </button>
@@ -194,25 +194,25 @@ export default function SocialMediaPostMaker() {
 
           {/* Text controls */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)] dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Text Content</h4>
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Text Content</h4>
             
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-500 uppercase">Text Overlay</label>
+              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Overlay</label>
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-white outline-none text-xs h-20 resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs h-20 resize-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Font Size</label>
-                <input type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-zinc-900 dark:text-white font-bold outline-none text-xs" />
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
+                <input type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold outline-none text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Font Family</label>
-                <select value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-zinc-900 dark:text-white outline-none text-xs">
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
+                <select value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] outline-none text-xs">
                   <option value="sans-serif">Sans-Serif</option>
                   <option value="serif">Serif</option>
                   <option value="Impact">Impact (Meme Style)</option>
@@ -223,11 +223,11 @@ export default function SocialMediaPostMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Text Color</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Color</label>
                 <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Position Y (%)</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Position Y (%)</label>
                 <input type="range" min="10" max="90" value={textY} onChange={e => setTextY(parseInt(e.target.value))} className="w-full accent-indigo-650 mt-2" />
               </div>
             </div>
@@ -235,29 +235,29 @@ export default function SocialMediaPostMaker() {
 
           {/* Background colors/image */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)] dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Backdrop Settings</h4>
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Backdrop Settings</h4>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Grad Start</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad Start</label>
                 <input type="color" value={bgColor1} onChange={e => setBgColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 uppercase">Grad End</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad End</label>
                 <input type="color" value={bgColor2} onChange={e => setBgColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-              <label className="text-[10px] font-bold text-zinc-500 uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Background Image</label>
+            <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
+              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Background Image</label>
               <input 
                 type="file" 
                 accept="image/*" 
                 onChange={handleImageUpload} 
-                className="w-full text-xs text-[var(--text-muted)] bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-4 py-2 cursor-pointer focus:border-[var(--border-subtle)]" 
+                className="w-full text-xs text-[var(--text-muted)] bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-4 py-2 cursor-pointer focus:border-[var(--border-subtle)]" 
               />
               {bgImage && (
-                <button onClick={clearImage} className="text-[10px] font-bold text-rose-500 hover:underline">Clear Image Backdrop</button>
+                <button onClick={clearImage} className="text-[10px] font-bold text-[var(--accent)] hover:underline">Clear Image Backdrop</button>
               )}
             </div>
           </div>
@@ -265,14 +265,14 @@ export default function SocialMediaPostMaker() {
         </div>
 
         {/* Preview Area */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-zinc-50 dark:bg-black/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
-          <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3 mb-6">
-             <span className="text-xs font-bold text-zinc-400">DESIGN CANVAS</span>
+        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-6">
+             <span className="text-xs font-bold text-[var(--text-muted)]">DESIGN CANVAS</span>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
             {/* Draw according to aspect ratio */}
-            <div className="border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-[var(--bg-elevated)] p-1">
+            <div className="border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-[var(--bg-elevated)] p-1">
               <canvas 
                 ref={canvasRef} 
                 width={selectedRatio.w} 
@@ -286,7 +286,7 @@ export default function SocialMediaPostMaker() {
           {/* Export triggers */}
           <button 
             onClick={downloadPNG}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
+            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
           >
             <Download className="w-4 h-4" />
             Download Custom Design

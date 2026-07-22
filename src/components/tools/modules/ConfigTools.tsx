@@ -33,7 +33,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
-  const cls = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -56,8 +56,8 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
-        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
   );
@@ -70,7 +70,7 @@ function Select({ label, value, onChange, options }: {
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
       <select value={value} onChange={e => onChange(e.target.value)}
-        className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </div>
@@ -84,7 +84,7 @@ function ToggleGroup({ value, onChange, options }: {
     <div className="flex flex-wrap gap-2 mb-3">
       {options.map(o => (
         <button key={o.value} onClick={() => onChange(o.value)}
-          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${value === o.value ? 'bg-blue-600 text-white shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>{o.label}</button>
+          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${value === o.value ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{o.label}</button>
       ))}
     </div>
   );
@@ -179,7 +179,7 @@ export function HttpHeaderAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <Section title="HTTP Header Analyzer">
         <Input label="Headers (one per line)" value={input} onChange={setInput} rows={6} placeholder="header: value" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Analyze Headers</button>
+        <button onClick={analyze} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Analyze Headers</button>
         <Output value={output} label="Analysis" />
       </Section>
     </div>
@@ -200,7 +200,7 @@ export function HttpHeadersGenerator() {
         <ToggleGroup value={type} onChange={setType} options={[
           { value: 'json', label: 'JSON' }, { value: 'rest', label: 'REST' }, { value: 'graphql', label: 'GraphQL' },
         ]} />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate Headers</button>
+        <button onClick={generate} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate Headers</button>
         <Output value={output} label="Generated Headers" />
       </Section>
     </div>
@@ -231,14 +231,14 @@ export function HttpCacheHeaderGenerator() {
           ]} />
         </div>
         <div className="flex gap-4 mb-3">
-          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
             <input type="checkbox" checked={mustReval} onChange={e => setMustReval(e.target.checked)} className="rounded" /> must-revalidate
           </label>
-          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
             <input type="checkbox" checked={noTrans} onChange={e => setNoTrans(e.target.checked)} className="rounded" /> no-transform
           </label>
         </div>
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
         <Output value={output} label="Cache-Control Header" />
       </Section>
     </div>
@@ -265,17 +265,17 @@ export function HttpStatusCodeChecker() {
           <div className="flex-1">
             <Input label="Status Code" value={code} onChange={setCode} placeholder="404" />
           </div>
-          <button onClick={lookup} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all h-[42px]">Look Up</button>
+          <button onClick={lookup} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all h-[42px]">Look Up</button>
         </div>
         <Output value={output} label="Status Information" />
       </Section>
       <Section title="Reference Table">
         <div className="max-h-72 overflow-y-auto space-y-1">
           {HTTP_STATUSES.map(s => (
-            <div key={s.code} className="flex gap-3 text-sm py-1.5 px-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">
+            <div key={s.code} className="flex gap-3 text-sm py-1.5 px-2 rounded-lg hover:bg-[var(--bg-surface)]">
               <span className="font-mono font-bold text-blue-600 dark:text-blue-400 w-12 shrink-0">{s.code}</span>
               <span className="font-semibold text-zinc-800 dark:text-zinc-200 w-36 shrink-0">{s.label}</span>
-              <span className="text-zinc-500 dark:text-zinc-400">{s.desc}</span>
+              <span className="text-[var(--text-secondary)]">{s.desc}</span>
             </div>
           ))}
         </div>
@@ -299,7 +299,7 @@ export function EslintConfigGenerator() {
           { value: 'react', label: 'React' }, { value: 'node', label: 'Node' },
           { value: 'typescript', label: 'TypeScript' }, { value: 'next', label: 'Next.js' },
         ]} />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate ESLint Config</button>
+        <button onClick={generate} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate ESLint Config</button>
         <Output value={output} label="ESLint Configuration" />
       </Section>
     </div>
@@ -329,7 +329,7 @@ export function HttpRetryPolicyBuilder() {
           <Input label="Max Retries" value={maxRetries} onChange={setMaxRetries} placeholder="3" />
           <Input label="Delay (ms)" value={delay} onChange={setDelay} placeholder="1000" />
         </div>
-        <button onClick={build} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Build Retry Policy</button>
+        <button onClick={build} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Build Retry Policy</button>
         <Output value={output} label="Retry Policy" />
       </Section>
     </div>

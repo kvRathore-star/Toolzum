@@ -3,9 +3,9 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm whitespace-pre-wrap font-mono";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
 
 function randInt(min: number, max: number): number { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
@@ -22,9 +22,9 @@ function useCopy() {
 function CountSlider({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-zinc-500">Count</span>
+      <span className="text-sm text-[var(--text-secondary)]">Count</span>
       <input type="range" min={1} max={20} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 h-1" />
-      <span className="text-sm text-zinc-400 w-5 text-right">{value}</span>
+      <span className="text-sm text-[var(--text-muted)] w-5 text-right">{value}</span>
     </div>
   );
 }
@@ -192,9 +192,9 @@ export function PinGenerator() {
       <h1 className="text-2xl font-bold mb-6">PIN Generator</h1>
       <CountSlider value={count} onChange={setCount} />
       <div className="flex items-center gap-2">
-        <span className="text-sm text-zinc-500">Digits</span>
+        <span className="text-sm text-[var(--text-secondary)]">Digits</span>
         {[4, 5, 6, 8, 10].map(n => (
-          <button key={n} onClick={() => setDigits(n)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>{n}</button>
+          <button key={n} onClick={() => setDigits(n)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{n}</button>
         ))}
       </div>
       <button onClick={gen} className={btnClass}>Generate PINs</button>
@@ -250,7 +250,7 @@ export function ImagePlaceholderGenerator() {
     <div className="max-w-xl mx-auto p-6 space-y-3">
       <h1 className="text-2xl font-bold mb-6">Image Placeholder Generator</h1>
       <CountSlider value={count} onChange={setCount} />
-      <p className="text-xs text-zinc-400">Generates SVG placeholders as base64 data URIs</p>
+      <p className="text-xs text-[var(--text-muted)]">Generates SVG placeholders as base64 data URIs</p>
       <button onClick={gen} className={btnClass}>Generate Placeholders</button>
       <OutputBlock value={out} />
     </div>
@@ -276,7 +276,7 @@ export function LogoPlaceholderGenerator() {
     <div className="max-w-xl mx-auto p-6 space-y-3">
       <h1 className="text-2xl font-bold mb-6">Logo Placeholder Generator</h1>
       <CountSlider value={count} onChange={setCount} />
-      <p className="text-xs text-zinc-400">Branded SVG logos with random colors</p>
+      <p className="text-xs text-[var(--text-muted)]">Branded SVG logos with random colors</p>
       <button onClick={gen} className={btnClass}>Generate Logos</button>
       <OutputBlock value={out} />
     </div>
@@ -349,8 +349,8 @@ export function OauthPkceGenerator() {
   return (
     <div className="max-w-xl mx-auto p-6 space-y-3">
       <h1 className="text-2xl font-bold mb-6">OAuth PKCE Generator</h1>
-      <p className="text-sm text-zinc-500">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
-      <ul className="text-xs text-zinc-400 space-y-1 list-disc pl-4">
+      <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
+      <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">
         <li>48 random bytes → 64-char base64url verifier (spec: 43-128)</li>
         <li>SHA-256 hash → base64url-encoded challenge (S256 method)</li>
         <li>Output usable with any OAuth 2.0 PKCE-compliant provider</li>

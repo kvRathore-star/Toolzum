@@ -106,14 +106,14 @@ export default function WatermarkPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
         </div>
         <button 
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -122,23 +122,23 @@ export default function WatermarkPdf() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Left Col: Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Watermark Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Watermark Settings</h4>
           
           <div className="space-y-3">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Watermark Text</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Watermark Text</label>
             <input
               type="text"
               placeholder="e.g. CONFIDENTIAL"
               value={watermarkText}
               onChange={(e) => setWatermarkText(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500 font-bold"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] font-bold"
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Opacity</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Opacity</label>
               <span className="text-xs font-bold text-blue-500">{Math.round(opacity * 100)}%</span>
             </div>
             <input
@@ -154,7 +154,7 @@ export default function WatermarkPdf() {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Font Size</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
               <span className="text-xs font-bold text-blue-500">{fontSize}px</span>
             </div>
             <input
@@ -180,8 +180,8 @@ export default function WatermarkPdf() {
         {/* Right Col: Output */}
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Processing Complete</h4>
                </div>
                
@@ -199,7 +199,7 @@ export default function WatermarkPdf() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
                <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               <p>Generated PDF will appear here</p>
             </div>

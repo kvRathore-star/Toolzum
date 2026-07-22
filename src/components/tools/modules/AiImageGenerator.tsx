@@ -87,30 +87,30 @@ export default function AiImageGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Control Panel */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5 flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
+            <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
               <ImageIcon className="w-5 h-5 text-blue-500" />
-              <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI Image Generator</h3>
+              <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Image Generator</h3>
             </div>
             
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Image Prompt</label>
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Image Prompt</label>
               <textarea
                 value={prompt}
                 onChange={e => setPrompt(e.target.value)}
                 placeholder="e.g. A futuristic city with flying cars at sunset, watercolor style..."
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white h-32 outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Art Style</label>
+                <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Art Style</label>
                 <select
                   value={style}
                   onChange={e => setStyle(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
                 >
                   {styles.map(s => (
                     <option key={s.name} value={s.name}>{s.name}</option>
@@ -119,11 +119,11 @@ export default function AiImageGenerator() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Aspect Ratio</label>
+                <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Aspect Ratio</label>
                 <select
                   value={aspectRatio}
                   onChange={e => setAspectRatio(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
                 >
                   <option value="1:1">1:1 (Square)</option>
                   <option value="16:9">16:9 (Landscape)</option>
@@ -153,21 +153,21 @@ export default function AiImageGenerator() {
         </div>
 
         {/* Right Preview Panel */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col min-h-[450px]">
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
-            <h4 className="font-semibold text-zinc-900 dark:text-white">Artwork Preview</h4>
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col min-h-[450px]">
+          <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
+            <h4 className="font-semibold text-[var(--text-primary)]">Artwork Preview</h4>
             {imageUrl && (
               <div className="flex gap-2">
                 <button
                   onClick={handleCopyLink}
-                  className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
                   title="Copy Direct Link" aria-label="Copy link"
                 >
                   <Link2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
                   title="Download Image" aria-label="Download"
                 >
                   <Download className="w-4 h-4" />
@@ -176,15 +176,15 @@ export default function AiImageGenerator() {
             )}
           </div>
 
-          <div className="flex-1 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-zinc-50 dark:bg-black/20 border border-zinc-100 dark:border-zinc-800/50">
+          <div className="flex-1 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50">
             {isGenerating ? (
               <div className="flex flex-col items-center text-center p-8">
                 <div className="relative w-16 h-16 mb-4">
                   <div className="absolute inset-0 rounded-full border-4 border-blue-500/20 animate-pulse"></div>
                   <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
                 </div>
-                <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Processing latent diffusion nodes...</p>
-                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">This typically takes 3 to 6 seconds.</p>
+                <p className="text-sm font-semibold text-[var(--text-primary)]">Processing latent diffusion nodes...</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">This typically takes 3 to 6 seconds.</p>
               </div>
             ) : imageUrl ? (
 <NextImage
@@ -194,10 +194,10 @@ export default function AiImageGenerator() {
   className="max-w-full max-h-[480px] object-contain rounded-lg shadow-md animate-in zoom-in-95 duration-300"
 />
             ) : (
-              <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-400">
+              <div className="flex flex-col items-center justify-center p-8 text-center text-[var(--text-muted)]">
                 <ImageIcon className="w-10 h-10 mb-3 text-zinc-300 dark:text-zinc-700 animate-bounce" />
                 <p className="text-sm font-medium">Your generated artwork will appear here.</p>
-                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">Specify your prompt and options to render the model.</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">Specify your prompt and options to render the model.</p>
               </div>
             )}
           </div>

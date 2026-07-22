@@ -88,31 +88,31 @@ export default function TextToHandwriting() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <FileText className="w-5 h-5 text-indigo-500" />
+          <FileText className="w-5 h-5 text-[var(--accent)]" />
           Text to Handwriting Canvas Sheet Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Convert typed text transcripts into custom styled handwritten sheets of ruled paper offline.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Convert typed text transcripts into custom styled handwritten sheets of ruled paper offline.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
         {/* Input Controls */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">Configuration</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Configuration</h3>
           
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white h-48 outline-none resize-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-48 outline-none resize-none"
           />
 
           <div className="space-y-1">
-            <label className="text-[10px] text-zinc-400 font-bold uppercase">Ink Color</label>
-            <div className="flex bg-zinc-50 dark:bg-zinc-800 p-1 rounded-xl gap-1 max-w-xs">
-              <button onClick={() => setInkColor('#0018a8')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#0018a8' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Blue</button>
-              <button onClick={() => setInkColor('#09090b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#09090b' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Black</button>
-              <button onClick={() => setInkColor('#991b1b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#991b1b' ? 'bg-indigo-600 text-white shadow' : 'text-zinc-500'}`}>Red</button>
+            <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Ink Color</label>
+            <div className="flex bg-[var(--bg-overlay)] p-1 rounded-xl gap-1 max-w-xs">
+              <button onClick={() => setInkColor('#0018a8')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#0018a8' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Blue</button>
+              <button onClick={() => setInkColor('#09090b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#09090b' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Black</button>
+              <button onClick={() => setInkColor('#991b1b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#991b1b' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Red</button>
             </div>
           </div>
 
@@ -122,7 +122,7 @@ export default function TextToHandwriting() {
         </div>
 
         {/* Visual Sheet Preview */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex justify-center items-center overflow-hidden min-h-[300px]">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex justify-center items-center overflow-hidden min-h-[300px]">
           <canvas 
             ref={canvasRef} 
             width={500} 

@@ -294,13 +294,13 @@ export default function WaveformGenerator() {
   return (
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
-        <svg className="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
         </svg>
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Waveform Generator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Waveform Generator</h3>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate beautiful waveform visualizations from any audio file. All processing happens locally.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">Generate beautiful waveform visualizations from any audio file. All processing happens locally.</p>
 
         {!file ? (
           <FileUploader
@@ -316,7 +316,7 @@ export default function WaveformGenerator() {
           />
         ) : (
           <div className="space-y-5">
-            <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+            <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate max-w-[70%]">{file.name}</div>
               <button onClick={() => { setFile(null); cachedRef.current = null; setHasSamples(false); updateOutput(null); }} className="text-[10px] text-red-500 hover:underline shrink-0">Remove</button>
             </div>
@@ -327,7 +327,7 @@ export default function WaveformGenerator() {
                   className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all border ${
                     style === opt.value
                       ? 'bg-indigo-500 text-white border-indigo-500'
-                      : 'bg-zinc-50 dark:bg-black/30 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300'
+                      : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-zinc-300'
                   }`}>
                   {opt.label}
                 </button>
@@ -336,32 +336,32 @@ export default function WaveformGenerator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Waveform Color</label>
+                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Waveform Color</label>
                 <input type="color" value={waveformColor} onChange={e => setWaveformColor(e.target.value)}
-                  className="w-full h-9 rounded-xl cursor-pointer bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800" />
+                  className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               <div>
-                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Background Color</label>
+                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Background Color</label>
                 <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                  className="w-full h-9 rounded-xl cursor-pointer bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800" />
+                  className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               {useGradient && (
                 <div>
-                  <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Gradient Color</label>
+                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Gradient Color</label>
                   <input type="color" value={gradientColor} onChange={e => setGradientColor(e.target.value)}
-                    className="w-full h-9 rounded-xl cursor-pointer bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800" />
+                    className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
                 </div>
               )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Width: {width}px</label>
+                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Width: {width}px</label>
                 <input type="range" min={800} max={4000} step={50} value={width} onChange={e => setWidth(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
               <div>
-                <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Height: {height}px</label>
+                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Height: {height}px</label>
                 <input type="range" min={100} max={800} step={10} value={height} onChange={e => setHeight(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
@@ -371,11 +371,11 @@ export default function WaveformGenerator() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={useGradient} onChange={e => setUseGradient(e.target.checked)}
                   className="rounded accent-indigo-500" />
-                <span className="text-[10px] font-semibold text-zinc-500">Gradient</span>
+                <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Gradient</span>
               </label>
               {(style === 'bars' || style === 'circular') && (
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <span className="text-[10px] font-semibold text-zinc-500">Radius: {borderRadius}px</span>
+                  <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Radius: {borderRadius}px</span>
                   <input type="range" min={0} max={30} value={borderRadius} onChange={e => setBorderRadius(Number(e.target.value))}
                     className="w-20 accent-indigo-500" />
                 </label>
@@ -384,18 +384,18 @@ export default function WaveformGenerator() {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={mirror} onChange={e => setMirror(e.target.checked)}
                     className="rounded accent-indigo-500" />
-                  <span className="text-[10px] font-semibold text-zinc-500">Mirror</span>
+                  <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Mirror</span>
                 </label>
               )}
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={transparentBg} onChange={e => setTransparentBg(e.target.checked)}
                   className="rounded accent-indigo-500" />
-                <span className="text-[10px] font-semibold text-zinc-500">Transparent BG</span>
+                <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Transparent BG</span>
               </label>
             </div>
 
             <button onClick={generate} disabled={isProcessing}
-              className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
               {isProcessing ? (
                 <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" /><path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" className="opacity-75" /></svg> Processing...</>
               ) : needsFfmpeg ? (
@@ -406,7 +406,7 @@ export default function WaveformGenerator() {
             </button>
 
             {(outputUrl || hasSamples) && (
-              <div className="border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-zinc-50 dark:bg-black/30">
+              <div className="border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-[var(--bg-overlay)]">
                 <canvas ref={canvasRef} className="w-full h-auto" style={{ maxHeight: '400px', objectFit: 'contain' }} />
               </div>
             )}
@@ -422,7 +422,7 @@ export default function WaveformGenerator() {
         )}
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Tip:</strong> Adjust style, colors, and dimensions to match your brand. Bars work great for music visualizers, Line for podcasts, and Circular for social media covers.</p>
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Tip:</strong> Adjust style, colors, and dimensions to match your brand. Bars work great for music visualizers, Line for podcasts, and Circular for social media covers.</p>
         </div>
       </div>
     </div>

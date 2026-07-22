@@ -47,21 +47,21 @@ export default function CodeBeautifier() {
   return (
     <div className="max-w-5xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
           {(['html', 'css', 'js', 'xml', 'erb', 'less', 'scss'] as Lang[]).map(l => (
-            <button key={l} onClick={() => { setLang(l); if (input) process(input, l, action); }} className={`px-2.5 py-1.5 text-[11px] font-bold rounded-lg transition-all ${lang === l ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-700'}`}>{LANGUAGE_LABELS[l]}</button>
+            <button key={l} onClick={() => { setLang(l); if (input) process(input, l, action); }} className={`px-2.5 py-1.5 text-[11px] font-bold rounded-lg transition-all ${lang === l ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>{LANGUAGE_LABELS[l]}</button>
           ))}
         </div>
-        <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
-          <button onClick={() => { setAction('beautify'); handleProcess(); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${action === 'beautify' ? 'bg-white dark:bg-zinc-700 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-zinc-500'}`}>Beautify</button>
-          <button onClick={() => { setAction('minify'); handleProcess(); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${action === 'minify' ? 'bg-white dark:bg-zinc-700 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-zinc-500'}`}>Minify</button>
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+          <button onClick={() => { setAction('beautify'); handleProcess(); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${action === 'beautify' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Beautify</button>
+          <button onClick={() => { setAction('minify'); handleProcess(); }} className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${action === 'minify' ? 'bg-[var(--bg-elevated)] text-amber-600 dark:text-amber-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Minify</button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <textarea value={input} onChange={e => { setInput(e.target.value); process(e.target.value, lang, action); }} placeholder={`Paste ${LANGUAGE_LABELS[lang]} code...`} className="w-full h-[350px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono focus:border-blue-500 transition-colors" />
+        <textarea value={input} onChange={e => { setInput(e.target.value); process(e.target.value, lang, action); }} placeholder={`Paste ${LANGUAGE_LABELS[lang]} code...`} className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
-          <textarea value={output} readOnly placeholder="Result..." className="w-full h-[350px] bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none font-mono" />
-          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-zinc-800 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-700 transition-colors">Copy</button>}
+          <textarea value={output} readOnly placeholder="Result..." className="w-full h-[350px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
         </div>
       </div>
     </div>

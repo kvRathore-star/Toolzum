@@ -31,16 +31,16 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">
           {config.name}
         </h2>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">{config.description}</p>
+        <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
         <textarea
           rows={6}
           value={input}
           onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y min-h-[80px]"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y min-h-[80px]"
         />
         <button
           onClick={handleConvert}
@@ -51,7 +51,7 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
         {output && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-zinc-500">{config.outputLabel}</span>
+              <span className="text-xs text-[var(--text-secondary)]">{config.outputLabel}</span>
               <button
                 onClick={handleCopy}
                 className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
@@ -59,7 +59,7 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
-            <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">
               {output}
             </pre>
           </div>

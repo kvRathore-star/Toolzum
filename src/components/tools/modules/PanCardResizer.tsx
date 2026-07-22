@@ -144,8 +144,8 @@ export default function PanCardResizer() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto">
       {/* Informative Banner */}
-      <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 p-6 rounded-2xl text-zinc-700 dark:text-zinc-300 text-sm space-y-2">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+      <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 p-6 rounded-2xl text-[var(--text-primary)] text-sm space-y-2">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
           <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -157,16 +157,16 @@ export default function PanCardResizer() {
       </div>
 
       {/* Configuration Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-200 dark:border-white/5 shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[var(--bg-overlay)] p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] shadow-sm">
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">1. Select Document Type</label>
+          <label className="text-sm font-semibold text-[var(--text-primary)]">1. Select Document Type</label>
           <div className="flex gap-2">
             <button
               onClick={() => { setDocType('photo'); setOutputUrl(null); }}
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all ${
                 docType === 'photo'
                   ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/10'
-                  : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
+                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
               }`}
             >
               📷 Photograph
@@ -176,7 +176,7 @@ export default function PanCardResizer() {
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all ${
                 docType === 'signature'
                   ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/10'
-                  : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
+                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
               }`}
             >
               ✍️ Signature
@@ -185,14 +185,14 @@ export default function PanCardResizer() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">2. Select Portal</label>
+          <label className="text-sm font-semibold text-[var(--text-primary)]">2. Select Portal</label>
           <div className="flex gap-2">
             <button
               onClick={() => { setPortal('nsdl'); setOutputUrl(null); }}
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all ${
                 portal === 'nsdl'
                   ? 'bg-indigo-600 border-indigo-600 text-white shadow-md shadow-indigo-500/10'
-                  : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
+                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
               }`}
             >
               Protean (NSDL)
@@ -202,7 +202,7 @@ export default function PanCardResizer() {
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all ${
                 portal === 'utiitsl'
                   ? 'bg-indigo-600 border-indigo-600 text-white shadow-md shadow-indigo-500/10'
-                  : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
+                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
               }`}
             >
               UTIITSL
@@ -212,7 +212,7 @@ export default function PanCardResizer() {
       </div>
 
       {/* Target Spec Indicator */}
-      <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 text-center tracking-wider uppercase">
+      <div className="text-xs font-semibold text-[var(--text-secondary)] text-center tracking-wider uppercase">
         Target Spec: {currentSpec.label}
       </div>
 
@@ -238,7 +238,7 @@ export default function PanCardResizer() {
             </button>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-black p-4">
+          <div className="rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-zinc-100 dark:bg-black p-4">
             <Cropper
               src={image}
               style={{ height: 400, width: "100%" }}
@@ -264,7 +264,7 @@ export default function PanCardResizer() {
       {/* Cropped Output Preview and Download */}
       {outputUrl && (
         <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row items-center gap-6 animate-in slide-in-from-bottom-4 duration-500">
-          <div className="shrink-0 bg-white p-2 rounded-xl border border-zinc-200 dark:border-white/10 shadow-lg">
+          <div className="shrink-0 bg-white p-2 rounded-xl border border-[var(--border-subtle)] shadow-lg">
 <Image
   src={outputUrl}
   alt="Processed result"
@@ -280,17 +280,17 @@ export default function PanCardResizer() {
           <div className="flex-1 text-center md:text-left space-y-4">
             <div>
               <h4 className="text-lg font-bold text-emerald-500">Document Ready!</h4>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+              <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
                 The image has been scaled to exactly {currentSpec.width} x {currentSpec.height} pixels ({currentSpec.dpi} DPI equivalent) and compressed.
               </p>
             </div>
             
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-semibold text-[var(--text-primary)]">
               <span className="bg-black/20 dark:bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">
-                File Size: <strong className="text-zinc-900 dark:text-white">{(outputSize! / 1024).toFixed(2)} KB</strong> (Limit: {currentSpec.maxSizeKB} KB)
+                File Size: <strong className="text-[var(--text-primary)]">{(outputSize! / 1024).toFixed(2)} KB</strong> (Limit: {currentSpec.maxSizeKB} KB)
               </span>
               <span className="bg-black/20 dark:bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">
-                Dimensions: <strong className="text-zinc-900 dark:text-white">{currentSpec.width} x {currentSpec.height} px</strong>
+                Dimensions: <strong className="text-[var(--text-primary)]">{currentSpec.width} x {currentSpec.height} px</strong>
               </span>
             </div>
 

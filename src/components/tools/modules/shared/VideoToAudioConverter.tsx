@@ -108,7 +108,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p className="text-zinc-500 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+        <p className="text-[var(--text-secondary)] font-medium animate-pulse">Initializing WebAssembly Core...</p>
       </div>
     );
   }
@@ -143,7 +143,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 active
                   ? 'bg-teal-500 text-white shadow-md'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                  : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
               }`}
             >
               {p.label}
@@ -156,27 +156,27 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
         <div className="bg-teal-500/10 border border-teal-500/20 p-4 rounded-xl text-teal-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Audio Quality</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Audio Quality</h4>
 
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">VBR Quality (0-9)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">VBR Quality (0-9)</label>
               <span className="text-xs font-bold text-teal-500">
                 {quality === 0 ? 'Extreme (0)' : quality === 2 ? 'High (2)' : quality === 5 ? 'Standard (5)' : `Level ${quality}`}
               </span>
@@ -191,13 +191,13 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
               disabled={isProcessing}
               className="w-full accent-teal-600"
             />
-            <div className="flex justify-between text-xs text-zinc-500 px-1">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] px-1">
               <span>Best</span>
               <span>Smallest</span>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="pt-4 border-t border-[var(--border-subtle)]">
             {isProcessing ? (
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold text-teal-500">
@@ -225,18 +225,18 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Extraction Complete</h4>
               </div>
 
-              <div className="bg-zinc-50 dark:bg-black rounded-xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col items-center justify-center relative">
+              <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-6 flex flex-col items-center justify-center relative">
                 <audio src={outputUrl} controls className="w-full" />
               </div>
 
               {outputSize && (
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-500">Audio File Size:</span>
+                  <span className="text-[var(--text-secondary)]">Audio File Size:</span>
                   <span className="font-bold text-teal-500">{(outputSize / 1024 / 1024).toFixed(2)} MB</span>
                 </div>
               )}
@@ -250,7 +250,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
               <p className="text-center text-sm px-4">Your extracted MP3 will appear here.</p>
             </div>
@@ -259,8 +259,8 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
       </div>
 
       {related.length > 0 && (
-        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
-          <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+        <div className="pt-6 border-t border-[var(--border-subtle)]">
+          <p className="text-sm text-[var(--text-secondary)] mb-3 font-medium">Also popular:</p>
           <div className="flex flex-wrap gap-2">
             {related.map(s => {
               const p = FORMAT_PAIRS.find(fp => fp.slug === s);
@@ -269,7 +269,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
                 <Link
                   key={s}
                   href={`/video/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
                 >
                   {p.label}
                 </Link>

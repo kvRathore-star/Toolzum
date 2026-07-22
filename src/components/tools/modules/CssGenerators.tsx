@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
 const cardClass = "max-w-4xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
 const previewClass = "w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-xl flex items-center justify-center mb-4";
-const codeClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-3 font-mono text-xs h-32 overflow-auto whitespace-pre";
+const codeClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-xs h-32 overflow-auto whitespace-pre";
 
 function Slider({ label, value, onChange, min, max, step = 1 }: { label: string; value: number; onChange: (v: number) => void; min: number; max: number; step?: number }) {
   return (
     <div className="flex items-center gap-3">
       <label className="text-xs font-medium w-24 shrink-0">{label}</label>
       <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 accent-blue-600" />
-      <input type="number" value={value} onChange={e => onChange(Number(e.target.value))} className="w-16 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1 text-xs text-center" />
+      <input type="number" value={value} onChange={e => onChange(Number(e.target.value))} className="w-16 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs text-center" />
     </div>
   );
 }
@@ -55,7 +55,7 @@ function BoxShadowGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass} style={{ boxShadow: `${inset ? 'inset ' : ''}${x}px ${y}px ${blur}px ${spread}px ${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}` }}>
-        <div className="w-24 h-24 bg-white dark:bg-zinc-700 rounded-lg" />
+        <div className="w-24 h-24 bg-[var(--bg-elevated)] rounded-lg" />
       </div>
       <Slider label="Offset X" value={x} onChange={setX} min={-20} max={20} />
       <Slider label="Offset Y" value={y} onChange={setY} min={-20} max={20} />
@@ -64,7 +64,7 @@ function BoxShadowGeneratorInner() {
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
         <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1 text-xs" />
+        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
         <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
@@ -184,7 +184,7 @@ function TextShadowGeneratorInner() {
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
         <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1 text-xs" />
+        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
         <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
@@ -295,7 +295,7 @@ export const BoxShadowGenerator = () => {
     <div className={cardClass}>
       <h1 className={headingClass}>Box Shadow Generator</h1>
       <div className={previewClass} style={{ boxShadow: `${inset ? 'inset ' : ''}${x}px ${y}px ${blur}px ${spread}px ${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}` }}>
-        <div className="w-24 h-24 bg-white dark:bg-zinc-700 rounded-lg" />
+        <div className="w-24 h-24 bg-[var(--bg-elevated)] rounded-lg" />
       </div>
       <div className="space-y-4">
         <Slider label="Offset X" value={x} onChange={setX} min={-20} max={20} />
@@ -305,7 +305,7 @@ export const BoxShadowGenerator = () => {
         <div className="flex items-center gap-3">
           <label className="text-xs font-medium w-24 shrink-0">Color</label>
           <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-          <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1 text-xs" />
+          <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
           <label className="text-xs font-medium ml-2">Opacity</label>
           <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
           <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
@@ -420,7 +420,7 @@ export const TextShadowGenerator = () => {
         <div className="flex items-center gap-3">
           <label className="text-xs font-medium w-24 shrink-0">Color</label>
           <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-          <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-1 text-xs" />
+          <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
           <label className="text-xs font-medium ml-2">Opacity</label>
           <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
           <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>

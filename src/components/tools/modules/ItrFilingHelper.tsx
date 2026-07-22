@@ -28,25 +28,25 @@ Note: Connect backend LLM for exact deduction processing.`);
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Total Annual Income (₹)</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Total Annual Income (₹)</label>
             <input 
               type="number" 
               value={income}
               onChange={e => setIncome(e.target.value)}
-              className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-3 text-zinc-900 dark:text-white outline-none focus:border-emerald-500"
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500"
               placeholder="e.g. 1500000"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Tax Regime Preference</label>
+            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Tax Regime Preference</label>
             <select 
               value={regime}
               onChange={e => setRegime(e.target.value)}
-              className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-3 text-zinc-900 dark:text-white outline-none focus:border-emerald-500"
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500"
             >
               <option value="new">New Tax Regime (Default)</option>
               <option value="old">Old Tax Regime (With 80C Deductions)</option>
@@ -62,8 +62,8 @@ Note: Connect backend LLM for exact deduction processing.`);
 
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col">
-          <h4 className="text-zinc-900 dark:text-white font-medium mb-4">AI Tax Report</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
+          <h4 className="text-[var(--text-primary)] font-medium mb-4">AI Tax Report</h4>
           <textarea 
             className="flex-1 w-full bg-white dark:bg-black border border-emerald-500/30 rounded-lg px-4 py-3 text-emerald-400 font-mono text-sm outline-none resize-none min-h-[200px]"
             readOnly

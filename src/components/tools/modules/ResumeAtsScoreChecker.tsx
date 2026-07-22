@@ -107,29 +107,29 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
       <AiSettings />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col">
-          <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
-            <Target className="w-5 h-5 text-indigo-500" />
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Resume ATS Score Checker</h3>
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
+          <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3 mb-4">
+            <Target className="w-5 h-5 text-[var(--accent)]" />
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">Resume ATS Score Checker</h3>
           </div>
 
           <div className="space-y-4 flex-1 flex flex-col">
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Target Job Title *</label>
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Job Title *</label>
               <input
                 value={jobTitle}
                 onChange={e => setJobTitle(e.target.value)}
                 placeholder="e.g. Senior Software Engineer"
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-indigo-500/30"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Industry</label>
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Industry</label>
               <select
                 value={industry}
                 onChange={e => setIndustry(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none"
               >
                 {['Technology', 'Finance & Banking', 'Healthcare', 'Education', 'Manufacturing', 'Marketing & Media', 'Consulting', 'Government', 'Retail', 'Other'].map(i =>
                   <option key={i} value={i}>{i}</option>
@@ -138,12 +138,12 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
             </div>
 
             <div className="space-y-2 flex-1">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Paste Your Resume *</label>
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Paste Your Resume *</label>
               <textarea
                 value={resumeText}
                 onChange={e => setResumeText(e.target.value)}
                 placeholder="Paste your full resume text here including work experience, skills, education, certifications..."
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500/30 resize-none flex-1 min-h-[200px]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-indigo-500/30 resize-none flex-1 min-h-[200px]"
               />
             </div>
 
@@ -161,15 +161,15 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
           </div>
         </div>
 
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col min-h-[450px]">
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
-            <h4 className="font-semibold text-zinc-900 dark:text-white">ATS Analysis Report</h4>
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col min-h-[450px]">
+          <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
+            <h4 className="font-semibold text-[var(--text-primary)]">ATS Analysis Report</h4>
             {(result || rawOutput) && (
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Copy">
+                <button onClick={handleCopy} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Copy">
                   <Clipboard className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} className="p-2 text-zinc-500 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors" aria-label="Download">
+                <button onClick={handleDownload} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Download">
                   <Download className="w-4 h-4" />
                 </button>
               </div>
@@ -180,17 +180,17 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
             <div className="flex-1 space-y-4 overflow-y-auto max-h-[550px] pr-1">
               <div className={`flex items-center justify-between p-4 rounded-xl border ${scoreBg(result.score)}`}>
                 <div>
-                  <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase">ATS Compatibility Score</p>
-                  <p className="text-xs text-zinc-400 mt-0.5">{result.score >= 80 ? 'Strong candidate' : result.score >= 60 ? 'Room for improvement' : 'Needs significant work'}</p>
+                  <p className="text-xs font-semibold text-[var(--text-secondary)] uppercase">ATS Compatibility Score</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{result.score >= 80 ? 'Strong candidate' : result.score >= 60 ? 'Room for improvement' : 'Needs significant work'}</p>
                 </div>
                 <div className="text-right">
                   <span className={`text-4xl font-black ${scoreColor(result.score)}`}>{result.score}</span>
-                  <span className="text-sm text-zinc-400">/100</span>
+                  <span className="text-sm text-[var(--text-muted)]">/100</span>
                 </div>
               </div>
 
-              <div className="p-4 bg-zinc-50 dark:bg-black/20 rounded-xl border border-zinc-100 dark:border-zinc-800/50">
-                <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{result.summary}</p>
+              <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]/50">
+                <p className="text-sm text-[var(--text-primary)] leading-relaxed">{result.summary}</p>
               </div>
 
               {result.strengths.length > 0 && (
@@ -198,7 +198,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
                   <h5 className="text-xs font-bold text-emerald-500 uppercase tracking-wider mb-2 flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5" /> Strengths</h5>
                   <ul className="space-y-1">
                     {result.strengths.map((s, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
                         <span className="text-emerald-500 mt-0.5">•</span>{s}
                       </li>
                     ))}
@@ -211,7 +211,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
                   <h5 className="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2 flex items-center gap-1.5"><AlertTriangle className="w-3.5 h-3.5" /> Areas to Improve</h5>
                   <ul className="space-y-1">
                     {result.weaknesses.map((w, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
                         <span className="text-amber-500 mt-0.5">•</span>{w}
                       </li>
                     ))}
@@ -235,7 +235,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
                   <h5 className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-2">Format Issues</h5>
                   <ul className="space-y-1">
                     {result.formatIssues.map((f, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
                         <span className="text-orange-500 mt-0.5">•</span>{f}
                       </li>
                     ))}
@@ -245,11 +245,11 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
 
               {result.suggestions.length > 0 && (
                 <div>
-                  <h5 className="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2 flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Actionable Suggestions</h5>
+                  <h5 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider mb-2 flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Actionable Suggestions</h5>
                   <ul className="space-y-1">
                     {result.suggestions.map((s, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                        <span className="text-indigo-500 mt-0.5">→</span>{s}
+                      <li key={i} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
+                        <span className="text-[var(--accent)] mt-0.5">→</span>{s}
                       </li>
                     ))}
                   </ul>
@@ -257,14 +257,14 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
               )}
             </div>
           ) : rawOutput ? (
-            <pre className="flex-1 p-4 rounded-xl bg-zinc-50 dark:bg-black/40 border border-zinc-100 dark:border-zinc-800/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
+            <pre className="flex-1 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
               {rawOutput}
             </pre>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-zinc-100 dark:border-zinc-800 rounded-xl p-8 text-center text-zinc-400">
+            <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center text-[var(--text-muted)]">
               <Target className="w-8 h-8 mb-3 text-zinc-300 dark:text-zinc-700 animate-pulse" />
               <p className="text-sm font-medium">Your ATS analysis will appear here</p>
-              <p className="text-xs text-zinc-500 mt-1">Paste your resume, set the target role, and analyze</p>
+              <p className="text-xs text-[var(--text-secondary)] mt-1">Paste your resume, set the target role, and analyze</p>
             </div>
           )}
         </div>

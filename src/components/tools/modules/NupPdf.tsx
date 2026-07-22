@@ -231,35 +231,35 @@ export default function NupPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {totalPages} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {totalPages} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">N-up Layout Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">N-up Layout Settings</h4>
 
           <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-xs space-y-1">
             <p><strong>Note:</strong> N-up processing rasterizes PDF pages to images. Some text quality may be reduced. This process happens entirely in your browser.</p>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Layout</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Layout</label>
             <div className="grid grid-cols-5 gap-2">
               {(['2up', '4up', '6up', '9up', 'booklet'] as Layout[]).map((opt) => (
                 <button
                   key={opt}
                   onClick={() => setLayout(opt)}
-                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border capitalize ${layout === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border capitalize ${layout === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {opt}
                 </button>
@@ -268,13 +268,13 @@ export default function NupPdf() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Output Page Orientation</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Output Page Orientation</label>
             <div className="grid grid-cols-2 gap-2">
               {(['portrait', 'landscape'] as const).map((opt) => (
                 <button
                   key={opt}
                   onClick={() => setOrientation(opt)}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border capitalize ${orientation === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border capitalize ${orientation === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >
                   {opt}
                 </button>
@@ -285,10 +285,10 @@ export default function NupPdf() {
           {isProcessing && (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Progress</label>
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Progress</label>
                 <span className="text-xs font-bold text-blue-500">{progress}%</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden">
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                 <div
                   className="bg-blue-600 h-full rounded-full transition-all duration-300 ease-out"
                   style={{ width: `${progress}%` }}
@@ -308,8 +308,8 @@ export default function NupPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">N-up Complete</h4>
                </div>
 
@@ -327,7 +327,7 @@ export default function NupPdf() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
                <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               <p>Generated PDF will appear here</p>
             </div>

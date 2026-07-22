@@ -161,29 +161,29 @@ export default function WheelOfNames() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
-        <div className="border-b border-zinc-200 dark:border-white/10 p-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-sm">
+        <div className="border-b border-[var(--border-subtle)] p-6">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-pink-500/10 flex items-center justify-center">
               <Target className="w-5 h-5 text-pink-600 dark:text-pink-400" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Wheel of Names</h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">Random name picker wheel</p>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">Wheel of Names</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Random name picker wheel</p>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
           {/* Wheel Area */}
-          <div className="lg:col-span-8 p-8 flex flex-col items-center justify-center relative bg-zinc-50 dark:bg-zinc-950/50">
+          <div className="lg:col-span-8 p-8 flex flex-col items-center justify-center relative bg-[var(--bg-overlay)] dark:bg-zinc-950/50">
             {winner && (
               <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 animate-in slide-in-from-top-4 fade-in duration-500">
-                <div className="bg-white dark:bg-zinc-900 border-2 border-pink-500 rounded-2xl px-8 py-4 shadow-xl flex items-center gap-4">
+                <div className="bg-[var(--bg-elevated)] border-2 border-pink-500 rounded-2xl px-8 py-4 shadow-xl flex items-center gap-4">
                   <Trophy className="w-8 h-8 text-yellow-500" />
                   <div>
-                    <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Winner!</p>
-                    <p className="text-2xl font-bold text-zinc-900 dark:text-white">{winner}</p>
+                    <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Winner!</p>
+                    <p className="text-2xl font-bold text-[var(--text-primary)]">{winner}</p>
                   </div>
                 </div>
               </div>
@@ -212,10 +212,10 @@ export default function WheelOfNames() {
           </div>
 
           {/* Names Input */}
-          <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-zinc-200 dark:border-white/10 flex flex-col bg-white dark:bg-zinc-900">
-            <div className="p-4 border-b border-zinc-200 dark:border-white/10 flex items-center gap-2">
-              <ListPlus className="w-5 h-5 text-zinc-500" />
-              <h3 className="font-semibold text-zinc-900 dark:text-white">
+          <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-[var(--border-subtle)] flex flex-col bg-[var(--bg-elevated)]">
+            <div className="p-4 border-b border-[var(--border-subtle)] flex items-center gap-2">
+              <ListPlus className="w-5 h-5 text-[var(--text-secondary)]" />
+              <h3 className="font-semibold text-[var(--text-primary)]">
                 Entries ({nameList.length})
               </h3>
             </div>
@@ -223,7 +223,7 @@ export default function WheelOfNames() {
               value={names}
               onChange={(e) => setNames(e.target.value)}
               placeholder="Enter names here...\\nOne name per line"
-              className="flex-1 w-full p-4 bg-transparent resize-none focus:outline-none text-zinc-900 dark:text-white leading-relaxed font-medium"
+              className="flex-1 w-full p-4 bg-transparent resize-none focus:outline-none text-[var(--text-primary)] leading-relaxed font-medium"
               spellCheck={false}
             />
           </div>

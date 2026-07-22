@@ -168,19 +168,19 @@ export default function GifResizer() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && (
-            <p className="text-zinc-500 dark:text-zinc-500 text-xs mt-1">
+            <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)] text-xs mt-1">
               {gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}
             </p>
           )}
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); setWidth(0); setHeight(0); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -188,17 +188,17 @@ export default function GifResizer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Resize Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+            <h4 className="text-[var(--text-primary)] font-medium">Resize Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Width (px)</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (px)</label>
               <input
                 type="number"
                 min="1"
                 value={width}
                 onChange={(e) => handleWidthChange(Math.max(1, Number(e.target.value)))}
-                className="w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-xl text-zinc-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <div className="flex gap-2 mt-3 flex-wrap">
                 {PRESETS.map((p) => (
@@ -208,7 +208,7 @@ export default function GifResizer() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       width === p
                         ? 'bg-emerald-500 text-white'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {p}px
@@ -218,14 +218,14 @@ export default function GifResizer() {
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Height (px)</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (px)</label>
               <input
                 type="number"
                 min="1"
                 value={height}
                 onChange={(e) => handleHeightChange(Math.max(1, Number(e.target.value)))}
                 disabled={maintainAspect}
-                className="w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-xl text-zinc-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 
@@ -236,13 +236,13 @@ export default function GifResizer() {
                 onChange={(e) => setMaintainAspect(e.target.checked)}
                 className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500"
               />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">
+              <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
                 Maintain aspect ratio
               </span>
             </label>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Interpolation</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interpolation</label>
               <div className="flex gap-2">
                 {(['lanczos', 'bilinear', 'neighbor'] as Interpolation[]).map((m) => (
                   <button
@@ -251,7 +251,7 @@ export default function GifResizer() {
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       interpolation === m
                         ? 'bg-emerald-500 text-white shadow-lg'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {INTERPOLATION_LABELS[m]}
@@ -293,7 +293,7 @@ export default function GifResizer() {
 
         <div className="lg:col-span-2 space-y-6">
           {uploadedUrl && (
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img
                 src={uploadedUrl}
                 alt="Original GIF"
@@ -303,7 +303,7 @@ export default function GifResizer() {
           )}
 
           {outputUrl && (
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img
                 src={outputUrl}
                 alt="Resized GIF"
@@ -312,7 +312,7 @@ export default function GifResizer() {
             </div>
           )}
 
-          <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
             <p className="font-medium text-zinc-800 dark:text-zinc-200">Dimensions</p>
             <div className="space-y-1">
               <p>Original: <span className="text-zinc-900 dark:text-zinc-100">{gifInfo?.width}×{gifInfo?.height}</span></p>

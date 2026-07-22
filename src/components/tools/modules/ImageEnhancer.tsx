@@ -138,14 +138,14 @@ export default function ImageEnhancer() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-muted)]">Fine tune color, light, and styling parameters</p>
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Photo
         </button>
@@ -153,11 +153,11 @@ export default function ImageEnhancer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
           {/* Quick presets */}
           <div className="space-y-3">
-            <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-              <Star className="w-4 h-4 text-indigo-500" />
+            <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
+              <Star className="w-4 h-4 text-[var(--accent)]" />
               Quick Presets
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -165,7 +165,7 @@ export default function ImageEnhancer() {
                 <button
                   key={p.name}
                   onClick={() => setFilters(p.filters)}
-                  className="py-2.5 px-3 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-[var(--text-secondary)] dark:text-zinc-400 font-bold border border-[var(--border-subtle)] dark:border-zinc-700 rounded-lg text-center cursor-pointer"
+                  className="py-2.5 px-3 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] font-bold border border-[var(--border-subtle)] dark:border-zinc-700 rounded-lg text-center cursor-pointer"
                 >
                   {p.name}
                 </button>
@@ -173,16 +173,16 @@ export default function ImageEnhancer() {
             </div>
           </div>
 
-          <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1 border-t border-zinc-200 dark:border-zinc-800 pt-4">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Adjust Adjustments
           </h4>
 
           {/* Brightness */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Brightness</span>
-              <span className="text-indigo-400 font-bold">{filters.brightness}%</span>
+              <span className="text-[var(--accent)] font-bold">{filters.brightness}%</span>
             </div>
             <input
               type="range" min="0" max="200" value={filters.brightness}
@@ -193,9 +193,9 @@ export default function ImageEnhancer() {
 
           {/* Contrast */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Contrast</span>
-              <span className="text-indigo-400 font-bold">{filters.contrast}%</span>
+              <span className="text-[var(--accent)] font-bold">{filters.contrast}%</span>
             </div>
             <input
               type="range" min="0" max="200" value={filters.contrast}
@@ -206,9 +206,9 @@ export default function ImageEnhancer() {
 
           {/* Saturation */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Saturation</span>
-              <span className="text-indigo-400 font-bold">{filters.saturation}%</span>
+              <span className="text-[var(--accent)] font-bold">{filters.saturation}%</span>
             </div>
             <input
               type="range" min="0" max="200" value={filters.saturation}
@@ -219,9 +219,9 @@ export default function ImageEnhancer() {
 
           {/* Blur */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Soft Blur</span>
-              <span className="text-indigo-400 font-bold">{filters.blur} px</span>
+              <span className="text-[var(--accent)] font-bold">{filters.blur} px</span>
             </div>
             <input
               type="range" min="0" max="10" value={filters.blur}
@@ -232,9 +232,9 @@ export default function ImageEnhancer() {
 
           {/* Sepia */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Sepia (Warmth)</span>
-              <span className="text-indigo-400 font-bold">{filters.sepia}%</span>
+              <span className="text-[var(--accent)] font-bold">{filters.sepia}%</span>
             </div>
             <input
               type="range" min="0" max="100" value={filters.sepia}
@@ -245,9 +245,9 @@ export default function ImageEnhancer() {
 
           {/* Grayscale */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Grayscale</span>
-              <span className="text-indigo-400 font-bold">{filters.grayscale}%</span>
+              <span className="text-[var(--accent)] font-bold">{filters.grayscale}%</span>
             </div>
             <input
               type="range" min="0" max="100" value={filters.grayscale}
@@ -276,7 +276,7 @@ export default function ImageEnhancer() {
                 Download Enhanced Image
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] justify-center">
                 <span>Renders automatically as adjustments move.</span>
               </div>
             )}

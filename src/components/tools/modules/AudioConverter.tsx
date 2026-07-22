@@ -34,27 +34,27 @@ export function AudioConverter({ defaultFrom, defaultTo }: { defaultFrom?: strin
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <h2 className="text-2xl font-bold">Audio Converter</h2>
-        <p className="text-sm text-zinc-500">Convert audio files between formats</p>
+        <p className="text-sm text-[var(--text-secondary)]">Convert audio files between formats</p>
         <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600 rounded-xl p-8 cursor-pointer hover:border-blue-500 transition">
           <input type="file" accept="audio/*" onChange={handleFile} className="hidden" />
-          <span className="text-zinc-400 text-sm">{file ? file.name : 'Click or drag to upload'}</span>
+          <span className="text-[var(--text-muted)] text-sm">{file ? file.name : 'Click or drag to upload'}</span>
         </label>
         {file && (
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-zinc-500">Source</label>
-              <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
+              <label className="text-xs font-medium text-[var(--text-secondary)]">Source</label>
+              <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
             </div>
             <div>
-              <label className="text-xs font-medium text-zinc-500">Target</label>
-              <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
+              <label className="text-xs font-medium text-[var(--text-secondary)]">Target</label>
+              <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{FORMATS.map(f => <option key={f} value={f}>{f}</option>)}</select>
             </div>
           </div>
         )}
-        {file && <button onClick={handleConvert} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition">Convert & Download</button>}
-        {file && <div className="text-xs text-zinc-400"><p>Source: {file.name} ({srcFormat})</p><p>Output: {file.name.replace(/\.[^.]+$/, '')}.{dstFormat.toLowerCase()}</p></div>}
+        {file && <button onClick={handleConvert} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">Convert & Download</button>}
+        {file && <div className="text-xs text-[var(--text-muted)]"><p>Source: {file.name} ({srcFormat})</p><p>Output: {file.name.replace(/\.[^.]+$/, '')}.{dstFormat.toLowerCase()}</p></div>}
       </div>
     </div>
   );

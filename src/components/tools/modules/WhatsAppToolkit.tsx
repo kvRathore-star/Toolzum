@@ -42,22 +42,22 @@ function MessageLinkTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate a clickable <code className="text-emerald-500">wa.me</code> link with optional pre-filled message.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Generate a clickable <code className="text-emerald-500">wa.me</code> link with optional pre-filled message.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="space-y-2">
-          <label className="text-[10px] font-bold text-zinc-400 uppercase">Phone Number *</label>
+          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
           <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
         </div>
         <div className="space-y-2">
-          <label className="text-[10px] font-bold text-zinc-400 uppercase">Pre-filled Message</label>
+          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
           <input value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I saw your listing..."
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
         </div>
       </div>
       {whatsappUrl && (
-        <div className="flex items-center gap-2 p-3 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-          <code className="flex-1 text-xs text-zinc-600 dark:text-zinc-400 truncate">{whatsappUrl}</code>
+        <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
+          <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
           <button onClick={handleCopy}
             className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -91,17 +91,17 @@ function GroupLinkTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Format a WhatsApp group invite link from a group ID.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Format a WhatsApp group invite link from a group ID.</p>
       <div className="space-y-2">
-        <label className="text-[10px] font-bold text-zinc-400 uppercase">Group Invite Code / ID</label>
+        <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Group Invite Code / ID</label>
         <div className="flex gap-2">
           <input value={groupId} onChange={e => setGroupId(e.target.value)} placeholder="e.g. IvR5dLkQzP9..."
-            className="flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
         </div>
       </div>
       {groupUrl && (
-        <div className="flex items-center gap-2 p-3 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-          <code className="flex-1 text-xs text-zinc-600 dark:text-zinc-400 truncate">{groupUrl}</code>
+        <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
+          <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
           <button onClick={handleCopy}
             className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -140,25 +140,25 @@ function FormatTextTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Format your text for WhatsApp. Type below and copy the formatted version.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Format your text for WhatsApp. Type below and copy the formatted version.</p>
       <textarea value={input} onChange={e => setInput(e.target.value)} rows={3}
         placeholder="Type or paste your text here..."
-        className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
       {formats.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {formats.map(f => (
-            <div key={f.label} className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 space-y-2">
+            <div key={f.label} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1">
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1">
                   {f.label === 'Bold' && <Bold className="w-3 h-3" />}
                   {f.label === 'Italic' && <Italic className="w-3 h-3" />}
                   {f.label === 'Strikethrough' && <Strikethrough className="w-3 h-3" />}
                   {f.label === 'Monospace' && <Type className="w-3 h-3" />}
                   {f.label}
                 </span>
-                <span className="text-[9px] text-zinc-500">{f.desc}</span>
+                <span className="text-[9px] text-[var(--text-secondary)]">{f.desc}</span>
               </div>
-              <code className="block text-xs text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
+              <code className="block text-xs text-[var(--text-primary)] bg-zinc-100 dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
               <button onClick={() => handleCopy(f.syntax, f.label)}
                 className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition-colors">
                 {copied === f.label ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -168,10 +168,10 @@ function FormatTextTab() {
           ))}
         </div>
       )}
-      <div className="bg-zinc-50 dark:bg-black/20 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
-        <p className="text-[10px] text-zinc-500 leading-relaxed">
+      <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
+        <p className="text-[10px] text-[var(--text-secondary)] leading-relaxed">
           <strong>Tip:</strong> WhatsApp supports these formatting shortcuts natively. Paste the formatted text directly into any chat.
-          <span className="block mt-1 text-zinc-400">Pro: Bulk text formatter (format 100+ lines at once), custom formatting presets.</span>
+          <span className="block mt-1 text-[var(--text-muted)]">Pro: Bulk text formatter (format 100+ lines at once), custom formatting presets.</span>
         </p>
       </div>
     </div>
@@ -246,13 +246,13 @@ function BulkLinkTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Upload a CSV with phone numbers and optional messages to generate bulk WhatsApp links.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Upload a CSV with phone numbers and optional messages to generate bulk WhatsApp links.</p>
 
-      <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+      <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
         onClick={() => fileInputRef.current?.click()}>
-        <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 text-zinc-400" />
-        <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{fileName || 'Upload CSV file'}</p>
-        <p className="text-[10px] text-zinc-500 mt-1">CSV format: phone,message (one per line)</p>
+        <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
+        <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Upload CSV file'}</p>
+        <p className="text-[10px] text-[var(--text-secondary)] mt-1">CSV format: phone,message (one per line)</p>
         <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFile} className="hidden" />
       </div>
 
@@ -260,9 +260,9 @@ function BulkLinkTab() {
         <>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
               <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search contacts..."
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-10 pr-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
             <div className="flex gap-2">
               <button onClick={copyAll}
@@ -277,22 +277,22 @@ function BulkLinkTab() {
             </div>
           </div>
 
-          <div className="max-h-80 overflow-y-auto space-y-1.5 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2">
+          <div className="max-h-80 overflow-y-auto space-y-1.5 border border-[var(--border-subtle)] rounded-xl p-2">
             {filteredData.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 p-2 bg-zinc-50 dark:bg-black/30 rounded-lg">
-                <span className="text-[10px] text-zinc-500 w-6 text-right">{i + 1}</span>
+              <div key={i} className="flex items-center gap-2 p-2 bg-[var(--bg-overlay)] rounded-lg">
+                <span className="text-[10px] text-[var(--text-secondary)] w-6 text-right">{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{item.phone}</p>
-                  {item.message && <p className="text-[10px] text-zinc-500 truncate">{item.message}</p>}
+                  <p className="text-xs font-medium text-[var(--text-primary)]">{item.phone}</p>
+                  {item.message && <p className="text-[10px] text-[var(--text-secondary)] truncate">{item.message}</p>}
                 </div>
                 <div className="flex gap-1 shrink-0">
                   <button onClick={() => window.open(generateLink(item), '_blank')}
-                    className="p-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
-                    <MessageCircle className="w-3.5 h-3.5 text-zinc-500" />
+                    className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                    <MessageCircle className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
                   </button>
                   <button onClick={() => handleCopy(i)}
-                    className="p-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
-                    {copiedIndex === i ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" />}
+                    className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                    {copiedIndex === i ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-[var(--text-secondary)]" />}
                   </button>
                 </div>
               </div>
@@ -300,7 +300,7 @@ function BulkLinkTab() {
           </div>
 
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Bulk generate 1000+ links, custom short links with tracking, scheduled sending via API, team workspace.
             </p>
           </div>
@@ -360,53 +360,53 @@ function QrTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Generate a QR code that opens a WhatsApp chat with your number and optional pre-filled message.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Generate a QR code that opens a WhatsApp chat with your number and optional pre-filled message.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Phone Number *</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
             <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="919876543210"
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Pre-filled Message</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
             <input value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I need your services..."
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">QR Color</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">QR Color</label>
               <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
-                className="w-full h-10 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Background</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
               <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                className="w-full h-10 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Logo (optional)</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Logo (optional)</label>
             <input type="file" accept="image/*" onChange={e => {
               const file = e.target.files?.[0];
               if (file) setLogoImage(URL.createObjectURL(file));
             }}
-              className="w-full text-xs text-zinc-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
+              className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
           </div>
           <button onClick={handleDownload}
             className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download QR Code
           </button>
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Custom branding in QR center, dynamic QR (change link without reprinting), scan analytics, batch QR generation.
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-center bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
+        <div className="flex items-center justify-center bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="text-center">
             <canvas ref={canvasRef} width={size} height={size} className="rounded-xl mx-auto" />
-            <p className="text-[10px] text-zinc-500 mt-2">Scan to start WhatsApp chat</p>
+            <p className="text-[10px] text-[var(--text-secondary)] mt-2">Scan to start WhatsApp chat</p>
           </div>
         </div>
       </div>
@@ -462,15 +462,15 @@ function QuickRepliesTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Save and manage frequently sent WhatsApp messages. Copy with one tap.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Save and manage frequently sent WhatsApp messages. Copy with one tap.</p>
 
-      <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-3">
-        <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Plus className="w-3 h-3" /> New Quick Reply</h5>
+      <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
+        <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Plus className="w-3 h-3" /> New Quick Reply</h5>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           <input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Template title (e.g. Order Confirmation)"
-            className="bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)"
-            className="md:col-span-1 bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="md:col-span-1 bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           <button onClick={addTemplate}
             className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
             <Plus className="w-3.5 h-3.5" /> Save Template
@@ -479,20 +479,20 @@ function QuickRepliesTab() {
       </div>
 
       {templates.length === 0 ? (
-        <div className="text-center py-8 text-xs text-zinc-500">
-          <BookmarkPlus className="w-8 h-8 mx-auto mb-2 text-zinc-400" />
+        <div className="text-center py-8 text-xs text-[var(--text-secondary)]">
+          <BookmarkPlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
           No quick replies saved yet. Add your first template above.
         </div>
       ) : (
         <div className="space-y-2">
           {templates.map(t => (
-            <div key={t.id} className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3">
+            <div key={t.id} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3">
               {editingId === t.id ? (
                 <div className="space-y-2">
                   <input defaultValue={t.title} id={`edit-title-${t.id}`}
-                    className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
                   <textarea defaultValue={t.content} id={`edit-content-${t.id}`} rows={2}
-                    className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+                    className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
                   <div className="flex gap-2">
                     <button onClick={() => {
                       const title = (document.getElementById(`edit-title-${t.id}`) as HTMLInputElement).value;
@@ -501,14 +501,14 @@ function QuickRepliesTab() {
                     }}
                       className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg text-xs font-semibold">Save</button>
                     <button onClick={() => setEditingId(null)}
-                      className="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-xs">Cancel</button>
+                      className="px-3 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs">Cancel</button>
                   </div>
                 </div>
               ) : (
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{t.title}</p>
-                    <p className="text-[11px] text-zinc-500 mt-0.5 truncate">{t.content}</p>
+                    <p className="text-[11px] text-[var(--text-secondary)] mt-0.5 truncate">{t.content}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
                     <button onClick={() => handleCopy(t.id, t.content)}
@@ -516,7 +516,7 @@ function QuickRepliesTab() {
                       {copiedId === t.id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                     <button onClick={() => setEditingId(t.id)}
-                      className="p-1.5 bg-zinc-200 dark:bg-zinc-800 text-zinc-500 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+                      className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
                     <button onClick={() => deleteTemplate(t.id)}
@@ -532,7 +532,7 @@ function QuickRepliesTab() {
       )}
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-        <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+        <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>Pro:</strong> Unlimited templates, categories, template variables ({'{{name}}'}, {'{{order_id}}'}), team-shared templates, analytics on most-used replies.
         </p>
       </div>
@@ -640,51 +640,51 @@ function ChatAnalyzerTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Export your WhatsApp chat (without media) and drop the <code className="text-emerald-500">.txt</code> file here to analyze.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Export your WhatsApp chat (without media) and drop the <code className="text-emerald-500">.txt</code> file here to analyze.</p>
 
-      <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+      <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
         onClick={() => fileInputRef.current?.click()}>
-        <Upload className="w-8 h-8 mx-auto mb-2 text-zinc-400" />
-        <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{fileName || 'Tap to upload _chat.txt'}</p>
-        <p className="text-[10px] text-zinc-500 mt-1">WhatsApp → More → Export Chat → Without Media</p>
+        <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
+        <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Tap to upload _chat.txt'}</p>
+        <p className="text-[10px] text-[var(--text-secondary)] mt-1">WhatsApp → More → Export Chat → Without Media</p>
         <input ref={fileInputRef} type="file" accept=".txt" onChange={handleFile} className="hidden" />
       </div>
 
       {stats && (
         <div className="space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
               <p className="text-2xl font-black text-zinc-800 dark:text-white">{stats.totalMessages.toLocaleString()}</p>
-              <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Total Messages</p>
+              <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Total Messages</p>
             </div>
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
               <p className="text-2xl font-black text-emerald-500">{stats.mediaCount}</p>
-              <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Media Shared</p>
+              <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Media Shared</p>
             </div>
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800 text-center">
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
               <p className="text-2xl font-black text-blue-500">{stats.linkCount}</p>
-              <p className="text-[10px] text-zinc-500 uppercase mt-0.5">Links Shared</p>
+              <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Links Shared</p>
             </div>
           </div>
 
-          <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-3 border border-zinc-200 dark:border-zinc-800">
-            <h5 className="text-[10px] font-bold text-zinc-400 uppercase mb-2 flex items-center gap-1.5"><Users className="w-3 h-3" /> Top Senders</h5>
+          <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
+            <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2 flex items-center gap-1.5"><Users className="w-3 h-3" /> Top Senders</h5>
             <div className="space-y-1.5">
               {stats.topSenders.map(([name, count], i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <span className="text-[11px] text-zinc-500 w-4">{i + 1}.</span>
-                  <span className="text-xs text-zinc-700 dark:text-zinc-300 flex-1 truncate">{name}</span>
+                  <span className="text-[11px] text-[var(--text-secondary)] w-4">{i + 1}.</span>
+                  <span className="text-xs text-[var(--text-primary)] flex-1 truncate">{name}</span>
                   <div className="flex-1 max-w-[120px] h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(count / maxVal) * 100}%` }} />
                   </div>
-                  <span className="text-[10px] text-zinc-500 font-mono w-16 text-right">{count}</span>
+                  <span className="text-[10px] text-[var(--text-secondary)] font-mono w-16 text-right">{count}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-zinc-400">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
               <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Peak day: <strong>{stats.mostActiveDay}</strong></span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> Peak hour: <strong>{stats.mostActiveHour}</strong></span>
             </div>
@@ -794,27 +794,27 @@ function StatusDesignerTab() {
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-zinc-500 dark:text-zinc-400">Design a WhatsApp status image with custom text and colors.</p>
+      <p className="text-xs text-[var(--text-secondary)]">Design a WhatsApp status image with custom text and colors.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase">Status Text</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Status Text</label>
             <textarea value={text} onChange={e => setText(e.target.value)} rows={3}
               placeholder="Type your status message..."
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
           </div>
 
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Background</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
               <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                className="w-full h-10 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Text Color</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Text Color</label>
               <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
-                className="w-full h-10 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>
 
@@ -822,10 +822,10 @@ function StatusDesignerTab() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={gradient} onChange={e => setGradient(e.target.checked)}
                 className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
-              <span className="text-[11px] text-zinc-500">Gradient background</span>
+              <span className="text-[11px] text-[var(--text-secondary)]">Gradient background</span>
             </label>
             <div className="flex-1" />
-            <label className="text-[10px] font-bold text-zinc-400 uppercase mr-1">Font</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase mr-1">Font</label>
             <input type="range" min="20" max="72" value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
               className="w-20 accent-emerald-500" />
           </div>
@@ -833,7 +833,7 @@ function StatusDesignerTab() {
           <div className="flex flex-wrap gap-1.5">
             {statusPresets.map(p => (
               <button key={p.label} onClick={() => applyPreset(p)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 text-[10px] text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[10px] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">
                 <span className="w-3 h-3 rounded-full border border-zinc-300" style={{ backgroundColor: p.bg }} />
                 {p.label}
               </button>
@@ -846,7 +846,7 @@ function StatusDesignerTab() {
           </button>
         </div>
 
-        <div className="flex items-center justify-center bg-zinc-50 dark:bg-black/30 rounded-xl p-2 border border-zinc-200 dark:border-zinc-800 min-h-[400px]">
+        <div className="flex items-center justify-center bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)] min-h-[400px]">
           <canvas ref={canvasRef} className="w-full max-w-[200px] rounded-2xl shadow-lg border-4 border-zinc-800" style={{ aspectRatio: '540/960' }} />
         </div>
       </div>
@@ -862,19 +862,19 @@ export default function WhatsAppToolkit() {
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Smartphone className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">WhatsApp Business Toolkit</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">WhatsApp Business Toolkit</h3>
         </div>
         <span className="text-[9px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-full">8 Tools</span>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800 overflow-x-auto">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+        <div className="flex border-b border-[var(--border-subtle)] overflow-x-auto">
           {TABS.map(tab => (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-1.5 px-4 py-3 text-xs font-semibold whitespace-nowrap transition-colors border-b-2 ${
                 activeTab === tab.key
                   ? 'text-emerald-500 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10'
-                  : 'text-zinc-400 border-transparent hover:text-zinc-600 dark:hover:text-zinc-300'
+                  : 'text-[var(--text-muted)] border-transparent hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}>
               {tab.icon} {tab.label}
             </button>
@@ -893,7 +893,7 @@ export default function WhatsAppToolkit() {
         </div>
       </div>
 
-      <div className="text-center text-[10px] text-zinc-500">
+      <div className="text-center text-[10px] text-[var(--text-secondary)]">
         WhatsApp is a trademark of Meta. This tool is not affiliated with or endorsed by Meta/WhatsApp.
       </div>
     </div>

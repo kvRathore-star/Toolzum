@@ -320,16 +320,16 @@ export default function FontConverter() {
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
           <FileText className="w-4 h-4 text-blue-500" />
           Font Converter
         </h4>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Convert fonts between TTF, OTF, WOFF, and WOFF2 formats. Perfect for web developers and designers.
         </p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
@@ -337,37 +337,37 @@ export default function FontConverter() {
           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
         >
           <input ref={fileInputRef} type="file" accept={INPUT_ACCEPT} onChange={handleFileChange} className="hidden" />
-          <Upload className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
+          <Upload className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-3" />
           <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
             {file ? file.name : 'Click or drag a font file here'}
           </p>
-          <p className="text-xs text-zinc-400 mt-1">Supports TTF, OTF, WOFF, WOFF2</p>
+          <p className="text-xs text-[var(--text-muted)] mt-1">Supports TTF, OTF, WOFF, WOFF2</p>
         </div>
 
         {isProcessing && (
-          <div className="flex items-center justify-center gap-2 text-sm text-zinc-500">
+          <div className="flex items-center justify-center gap-2 text-sm text-[var(--text-secondary)]">
             <Loader2 className="w-4 h-4 animate-spin" />
             Parsing font...
           </div>
         )}
 
         {fontMeta && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-white/5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
             <div>
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Family</span>
-              <span className="text-sm font-medium text-zinc-900 dark:text-white truncate block">{fontMeta.familyName}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Family</span>
+              <span className="text-sm font-medium text-[var(--text-primary)] truncate block">{fontMeta.familyName}</span>
             </div>
             <div>
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Style</span>
-              <span className="text-sm font-medium text-zinc-900 dark:text-white">{fontMeta.style}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Style</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">{fontMeta.style}</span>
             </div>
             <div>
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Glyphs</span>
-              <span className="text-sm font-medium text-zinc-900 dark:text-white">{fontMeta.glyphCount.toLocaleString()}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Glyphs</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">{fontMeta.glyphCount.toLocaleString()}</span>
             </div>
             <div>
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Size</span>
-              <span className="text-sm font-medium text-zinc-900 dark:text-white">{fontMeta.fileSize}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Size</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">{fontMeta.fileSize}</span>
             </div>
           </div>
         )}
@@ -376,18 +376,18 @@ export default function FontConverter() {
           <>
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-1.5">Input Format</label>
-                <div className="bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-900 dark:text-white">
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Input Format</label>
+                <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-primary)]">
                   {inputFormat.toUpperCase()}
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-zinc-400 mt-6" />
+              <ArrowRight className="w-5 h-5 text-[var(--text-muted)] mt-6" />
               <div className="flex-1">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-1.5">Output Format</label>
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Output Format</label>
                 <select
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as FontFormat)}
-                  className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none cursor-pointer"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none cursor-pointer"
                 >
                   {OUTPUT_FORMATS.map((fmt) => (
                     <option key={fmt.value} value={fmt.value}>{fmt.label}</option>
@@ -399,7 +399,7 @@ export default function FontConverter() {
             <button
               onClick={handleConvert}
               disabled={isConverting}
-              className="w-full px-6 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-600/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-600/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
             >
               {isConverting ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Converting...</>
@@ -422,19 +422,19 @@ export default function FontConverter() {
       </div>
 
       {parsedFont && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-4">
           <div className="flex items-center gap-2">
-            <Type className="w-5 h-5 text-indigo-500" />
-            <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider">Font Preview</h3>
+            <Type className="w-5 h-5 text-[var(--accent)]" />
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Font Preview</h3>
           </div>
           <input
             type="text"
             value={previewText}
             onChange={(e) => setPreviewText(e.target.value)}
             placeholder="Type sample text here..."
-            className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-white outline-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none"
           />
-          <div className="bg-white border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden">
+          <div className="bg-white border border-[var(--border-subtle)] rounded-xl overflow-hidden">
             <canvas ref={canvasRef} width={760} height={160} className="w-full h-auto" />
           </div>
         </div>

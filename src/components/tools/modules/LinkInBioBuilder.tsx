@@ -144,63 +144,63 @@ ${linkCards}
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Link className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Link-in-Bio Builder</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Link-in-Bio Builder</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Build a Link-in-Bio page. Preview in real-time, then copy the HTML to deploy anywhere.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">Build a Link-in-Bio page. Preview in real-time, then copy the HTML to deploy anywhere.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div className="space-y-4">
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-3">
-              <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h5>
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
+              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h5>
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={() => document.getElementById('lib-profile-pic')?.click()}>
-                  {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-zinc-400" style={{ paddingTop: '18px' }} />}
+                  {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-[var(--text-muted)]" style={{ paddingTop: '18px' }} />}
                 </div>
                 <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="hidden" />
                 <div className="flex-1 space-y-2">
                   <input value={profileName} onChange={e => setProfileName(e.target.value)} placeholder="Your name"
-                    className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500/30" />
                   <input value={profileBio} onChange={e => setProfileBio(e.target.value)} placeholder="Short bio"
-                    className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-2">
-              <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Theme</h5>
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-2">
+              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Theme</h5>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
-                  <label className="text-[9px] text-zinc-500">Background</label>
-                  <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                  <label className="text-[9px] text-[var(--text-secondary)]">Background</label>
+                  <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-zinc-500">Card</label>
-                  <input type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                  <label className="text-[9px] text-[var(--text-secondary)]">Card</label>
+                  <input type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-zinc-500">Text</label>
-                  <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                  <label className="text-[9px] text-[var(--text-secondary)]">Text</label>
+                  <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-zinc-500">Accent</label>
-                  <input type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                  <label className="text-[9px] text-[var(--text-secondary)]">Accent</label>
+                  <input type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-3">
-              <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Link className="w-3 h-3" /> Links {links.length > 0 && <span className="font-mono text-zinc-500">({links.length})</span>}</h5>
+            <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
+              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Link className="w-3 h-3" /> Links {links.length > 0 && <span className="font-mono text-[var(--text-secondary)]">({links.length})</span>}</h5>
               
               <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
                 <input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Link title"
-                  className="bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 <input value={newUrl} onChange={e => setNewUrl(e.target.value)} placeholder="https://..."
-                  className="bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 <select value={newIcon} onChange={e => setNewIcon(e.target.value)}
-                  className="bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30">
+                  className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/30">
                   {ICON_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
                 <button onClick={addLink}
@@ -211,15 +211,15 @@ ${linkCards}
 
               <div className="space-y-1.5 max-h-[250px] overflow-y-auto">
                 {links.map((l, i) => (
-                  <div key={l.id} className="flex items-center gap-2 p-2 bg-white dark:bg-black/50 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                  <div key={l.id} className="flex items-center gap-2 p-2 bg-white dark:bg-black/50 rounded-lg border border-[var(--border-subtle)]">
                     <div className="flex flex-col gap-0.5">
-                      <button onClick={() => moveLink(l.id, 'up')} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
-                      <button onClick={() => moveLink(l.id, 'down')} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
+                      <button onClick={() => moveLink(l.id, 'up')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
+                      <button onClick={() => moveLink(l.id, 'down')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
                     </div>
-                    <span className="text-zinc-400">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
+                    <span className="text-[var(--text-muted)]">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-medium text-zinc-700 dark:text-zinc-300 truncate">{l.title}</p>
-                      <p className="text-[9px] text-zinc-500 truncate">{l.url}</p>
+                      <p className="text-[11px] font-medium text-[var(--text-primary)] truncate">{l.title}</p>
+                      <p className="text-[9px] text-[var(--text-secondary)] truncate">{l.url}</p>
                     </div>
                     <button onClick={() => removeLink(l.id)}
                       className="p-1.5 bg-red-100 dark:bg-red-900/20 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors">
@@ -235,11 +235,11 @@ ${linkCards}
             <div className="flex items-center justify-between">
               <div className="flex bg-zinc-200 dark:bg-zinc-700 rounded-lg p-0.5">
                 <button onClick={() => setShowPreview(true)}
-                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${showPreview ? 'bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}>
+                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${showPreview ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                   <Smartphone className="w-3 h-3" /> Preview
                 </button>
                 <button onClick={() => setShowPreview(false)}
-                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${!showPreview ? 'bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}>
+                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${!showPreview ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                   <Code className="w-3 h-3" /> HTML
                 </button>
               </div>
@@ -264,14 +264,14 @@ ${linkCards}
                       <img loading="lazy" src={profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileName)}&background=${accentColor.replace('#', '')}&color=fff&size=80`} alt="Profile avatar"  className="w-full h-full object-cover" />
                     </div>
                     <p className="text-white text-xl font-bold">{profileName}</p>
-                    <p className="text-zinc-400 text-sm mt-1">{profileBio}</p>
+                    <p className="text-[var(--text-muted)] text-sm mt-1">{profileBio}</p>
                   </div>
                   <div className="space-y-2.5">
                     {links.map(l => (
                       <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer"
                         className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium no-underline transition-transform hover:scale-[1.02] block"
                         style={{ background: cardColor, color: textColor, border: '1px solid rgba(255,255,255,0.06)' }}>
-                        <span className="text-zinc-400">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
+                        <span className="text-[var(--text-muted)]">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
                         <span className="flex-1">{l.title}</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16" className="opacity-40"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
                       </a>

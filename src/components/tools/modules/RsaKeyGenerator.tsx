@@ -49,14 +49,14 @@ export default function RsaKeyGenerator() {
   const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
   const KeySection = ({ title, pem, label }: { title: string; pem: string; label: string }) => (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-2">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
       <div className="flex justify-between items-center">
-        <h3 className="text-[11px] font-bold text-zinc-500 uppercase">{title}</h3>
-        {pem && <button onClick={() => copy(pem, title)} className="text-[10px] text-indigo-400 hover:underline flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>}
+        <h3 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase">{title}</h3>
+        {pem && <button onClick={() => copy(pem, title)} className="text-[10px] text-[var(--accent)] hover:underline flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>}
       </div>
-      <textarea value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-[11px] text-zinc-900 dark:text-emerald-400 placeholder:text-zinc-400 outline-none resize-none font-mono" />
+      <textarea value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
       {pem && (
-        <div className="text-[10px] text-zinc-400">
+        <div className="text-[10px] text-[var(--text-muted)]">
           {pem.split('\n').filter(l => !l.startsWith('---')).join('').length} characters
         </div>
       )}
@@ -65,21 +65,21 @@ export default function RsaKeyGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
-          <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-xl p-1">
+          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
             {[2048, 4096].map(n => (
-              <button key={n} onClick={() => setKeySize(n)} disabled={loading} className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${keySize === n ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-zinc-500'}`}>
+              <button key={n} onClick={() => setKeySize(n)} disabled={loading} className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${keySize === n ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 {n}-bit
               </button>
             ))}
           </div>
-          <button onClick={generate} disabled={loading} className={`bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          <button onClick={generate} disabled={loading} className={`bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
             {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : <><Key className="w-4 h-4" /> Generate Key Pair</>}
           </button>
         </div>
         {keyDetails && (
-          <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-4">
+          <div className="bg-[var(--bg-overlay)]/50 rounded-2xl p-4">
             <div className="space-y-0">
               <InfoRow label="Algorithm" val={keyDetails.algo} />
               <InfoRow label="Key Size" val={`${keyDetails.length} bits`} />
@@ -99,9 +99,9 @@ export default function RsaKeyGenerator() {
 
 function InfoRow({ label, val }: { label: string; val: React.ReactNode }) {
   return (
-    <div className="flex justify-between items-center py-1.5 border-b border-zinc-100 dark:border-zinc-800 last:border-0">
-      <span className="text-[11px] font-medium text-zinc-500">{label}</span>
-      <span className="text-[11px] font-mono text-zinc-900 dark:text-white text-right">{val}</span>
+    <div className="flex justify-between items-center py-1.5 border-b border-[var(--border-subtle)] last:border-0">
+      <span className="text-[11px] font-medium text-[var(--text-secondary)]">{label}</span>
+      <span className="text-[11px] font-mono text-[var(--text-primary)] text-right">{val}</span>
     </div>
   );
 }

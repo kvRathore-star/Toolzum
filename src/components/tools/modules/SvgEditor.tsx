@@ -81,38 +81,38 @@ export default function SvgEditor() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <FileCode className="w-5 h-5 text-indigo-500" />
+          <FileCode className="w-5 h-5 text-[var(--accent)]" />
           Offline SVG Editor
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Write, preview, and build vector graphic layouts in real time. 100% offline.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Write, preview, and build vector graphic layouts in real time. 100% offline.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Editor Code Panel */}
-        <div className="lg:col-span-6 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl flex flex-col justify-between h-[600px]">
+        <div className="lg:col-span-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between h-[600px]">
           <div className="space-y-4 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] dark:border-zinc-800 pb-2">
-               <h3 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+               <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                  <FileCode className="w-4 h-4" />
                  SVG Source Code
                </h3>
                
                {/* Quick add items */}
                <div className="flex gap-1">
-                 <button onClick={() => insertShape('rect')} className="p-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Rectangle">Rect</button>
-                 <button onClick={() => insertShape('circle')} className="p-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Circle">Circle</button>
-                 <button onClick={() => insertShape('text')} className="p-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Text">Text</button>
-                 <button onClick={() => insertShape('star')} className="p-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Star">Star</button>
+                 <button onClick={() => insertShape('rect')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Rectangle">Rect</button>
+                 <button onClick={() => insertShape('circle')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Circle">Circle</button>
+                 <button onClick={() => insertShape('text')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Text">Text</button>
+                 <button onClick={() => insertShape('star')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Star">Star</button>
                </div>
             </div>
 
             <textarea
               value={svgCode}
               onChange={e => setSvgCode(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed outline-none focus:border-indigo-500 resize-none flex-1 overflow-y-auto"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-900 dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed outline-none focus:border-indigo-500 resize-none flex-1 overflow-y-auto"
               placeholder="Write SVG code here..."
             />
           </div>
@@ -120,7 +120,7 @@ export default function SvgEditor() {
           <div className="grid grid-cols-3 gap-3 mt-4">
             <button 
               onClick={clearAll}
-              className="py-3 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-[var(--bg-elevated)] border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
+              className="py-3 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Reset
@@ -134,7 +134,7 @@ export default function SvgEditor() {
             </button>
             <button 
               onClick={downloadSvgFile}
-              className="py-3 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
+              className="py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
             >
               <Download className="w-3.5 h-3.5" />
               Export SVG
@@ -143,9 +143,9 @@ export default function SvgEditor() {
         </div>
 
         {/* Live Vector View Panel */}
-        <div className="lg:col-span-6 flex flex-col bg-zinc-50 dark:bg-black/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-5 rounded-2xl h-[600px]">
-          <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3 mb-4">
-             <span className="text-xs font-bold text-zinc-400">VECTOR RENDER CANVAS (AUTO ASPECT)</span>
+        <div className="lg:col-span-6 flex flex-col bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-5 rounded-2xl h-[600px]">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-4">
+             <span className="text-xs font-bold text-[var(--text-muted)]">VECTOR RENDER CANVAS (AUTO ASPECT)</span>
           </div>
 
           <div className="flex-1 flex items-center justify-center p-4 bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl relative overflow-hidden shadow-2xl">

@@ -194,12 +194,12 @@ export default function QrCodeReader() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-2xl text-indigo-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white">QR Code Reader</h4>
-        <p className="text-zinc-600 dark:text-zinc-400">Scan QR codes from images. 100% browser-based.</p>
+      <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-2xl text-[var(--accent)] text-sm space-y-1">
+        <h4 className="font-bold text-[var(--text-primary)]">QR Code Reader</h4>
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Scan QR codes from images. 100% browser-based.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
         <div
           ref={dropRef}
           onDrop={handleDrop}
@@ -209,7 +209,7 @@ export default function QrCodeReader() {
         >
           <label className="cursor-pointer">
             <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFileSelect} className="hidden" />
-            <div className="text-zinc-400 text-sm">
+            <div className="text-[var(--text-muted)] text-sm">
               <p className="font-medium text-zinc-600 dark:text-zinc-300 mb-1">Upload QR Code Image</p>
               <p className="text-xs">Drag & drop or click to select (PNG, JPG, WebP)</p>
             </div>
@@ -217,15 +217,15 @@ export default function QrCodeReader() {
         </div>
 
         <div className="flex items-center justify-center">
-          <button onClick={handlePaste} className="text-xs text-indigo-500 hover:text-indigo-400 font-bold px-4 py-2 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Paste from Clipboard</button>
+          <button onClick={handlePaste} className="text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-4 py-2 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Paste from Clipboard</button>
         </div>
 
         {file && (
-          <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/30 rounded-xl px-4 py-2.5">
-            <div className="text-xs text-zinc-500 flex items-center gap-2">
-              <span className="font-medium text-zinc-700 dark:text-zinc-300">{file.name}</span>
+          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/30 rounded-xl px-4 py-2.5">
+            <div className="text-xs text-[var(--text-secondary)] flex items-center gap-2">
+              <span className="font-medium text-[var(--text-primary)]">{file.name}</span>
               <span>({(file.size / 1024).toFixed(1)} KB)</span>
-              {imageDimensions.width > 0 && <span className="text-zinc-400">| {imageDimensions.width}x{imageDimensions.height}px</span>}
+              {imageDimensions.width > 0 && <span className="text-[var(--text-muted)]">| {imageDimensions.width}x{imageDimensions.height}px</span>}
             </div>
             <button onClick={handleReset} className="text-xs text-red-400 hover:text-red-300 font-bold">Clear</button>
           </div>
@@ -235,8 +235,8 @@ export default function QrCodeReader() {
           <div className="flex items-center justify-center py-8">
             <div className="w-7 h-7 border-[3px] border-indigo-500 border-t-transparent rounded-full animate-spin" />
             <div className="ml-4">
-              <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Scanning for QR codes...</p>
-              <p className="text-xs text-zinc-400 mt-0.5">Analyzing image data with jsQR engine</p>
+              <p className="text-sm font-medium text-[var(--text-primary)]">Scanning for QR codes...</p>
+              <p className="text-xs text-[var(--text-muted)] mt-0.5">Analyzing image data with jsQR engine</p>
             </div>
           </div>
         )}
@@ -254,11 +254,11 @@ export default function QrCodeReader() {
         {preview && !isProcessing && (
           <div className="flex flex-col items-center">
             <div className="relative inline-block max-w-full">
-              <img ref={imageRef} src={preview} alt="QR code preview" className="max-h-80 rounded-xl border border-zinc-200 dark:border-zinc-800" />
+              <img ref={imageRef} src={preview} alt="QR code preview" className="max-h-80 rounded-xl border border-[var(--border-subtle)]" />
               <canvas ref={overlayRef} className="absolute inset-0 pointer-events-none" />
             </div>
             {decodedData.length > 0 && metadata && (
-              <div className="flex items-center gap-4 mt-3 text-xs text-zinc-500">
+              <div className="flex items-center gap-4 mt-3 text-xs text-[var(--text-secondary)]">
                 <span>Version: {metadata.version}</span>
                 <span>ECC: {metadata.errorCorrection}</span>
                 <span>Modules: {decodedData.length}</span>
@@ -268,34 +268,34 @@ export default function QrCodeReader() {
         )}
 
         {decodedData.length > 0 && (
-          <div className="space-y-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="space-y-3 pt-2 border-t border-[var(--border-subtle)]">
             <div className="flex items-center justify-between">
-              <h5 className="text-sm font-bold text-zinc-900 dark:text-white">Decoded Data</h5>
-              {decodedData.length > 1 && <span className="text-xs text-zinc-400">{decodedData.length} QR codes found</span>}
+              <h5 className="text-sm font-bold text-[var(--text-primary)]">Decoded Data</h5>
+              {decodedData.length > 1 && <span className="text-xs text-[var(--text-muted)]">{decodedData.length} QR codes found</span>}
             </div>
             {decodedData.map((qr, i) => (
-              <div key={i} className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-2">
+              <div key={i} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1.5">
-                      {decodedData.length > 1 && <span className="text-[10px] font-bold text-zinc-400 uppercase">QR #{i + 1}</span>}
-                      <span className="text-[10px] text-zinc-400">at ({qr.x}, {qr.y})</span>
+                      {decodedData.length > 1 && <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">QR #{i + 1}</span>}
+                      <span className="text-[10px] text-[var(--text-muted)]">at ({qr.x}, {qr.y})</span>
                     </div>
-                    <pre className="text-xs font-mono text-zinc-900 dark:text-white whitespace-pre-wrap break-all max-h-32 overflow-y-auto">{qr.data}</pre>
+                    <pre className="text-xs font-mono text-[var(--text-primary)] whitespace-pre-wrap break-all max-h-32 overflow-y-auto">{qr.data}</pre>
                   </div>
-                  <button onClick={() => handleCopyData(qr.data)} className="shrink-0 text-xs text-indigo-500 hover:text-indigo-400 font-bold px-2 py-1 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Copy</button>
+                  <button onClick={() => handleCopyData(qr.data)} className="shrink-0 text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-2 py-1 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Copy</button>
                 </div>
               </div>
             ))}
             <div className="flex gap-3">
-              <button onClick={handleCopyAll} className="flex-1 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-xl transition-colors">Copy All</button>
-              <button onClick={handleDownloadResult} className="flex-1 px-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm font-bold rounded-xl transition-colors">Download</button>
+              <button onClick={handleCopyAll} className="flex-1 px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-bold rounded-xl transition-colors">Copy All</button>
+              <button onClick={handleDownloadResult} className="flex-1 px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] text-sm font-bold rounded-xl transition-colors">Download</button>
             </div>
           </div>
         )}
 
         {!file && !isProcessing && !error && (
-          <div className="text-center py-6 text-zinc-400 text-sm border-t border-zinc-200 dark:border-zinc-800">
+          <div className="text-center py-6 text-[var(--text-muted)] text-sm border-t border-[var(--border-subtle)]">
             <p>Upload an image containing a QR code to get started.</p>
             <p className="text-xs mt-1">Supports multiple QR codes in a single image.</p>
           </div>

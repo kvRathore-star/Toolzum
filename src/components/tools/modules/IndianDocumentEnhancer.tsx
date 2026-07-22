@@ -184,20 +184,20 @@ export default function IndianDocumentEnhancer() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <FileImage className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Indian Document Enhancer & Scanner</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Indian Document Enhancer & Scanner</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         {!image ? (
           <div className="p-8 text-center">
-            <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-12 hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
               onClick={() => fileInputRef.current?.click()}>
               <ImagePlus className="w-16 h-16 mx-auto mb-4 text-zinc-300 dark:text-zinc-600" />
-              <p className="text-lg font-semibold text-zinc-500 dark:text-zinc-400">Upload a document photo</p>
-              <p className="text-xs text-zinc-400 mt-2">Aadhaar, PAN, Marksheet, Passport, Bank Statement, Driving Licence, Voter ID</p>
+              <p className="text-lg font-semibold text-[var(--text-secondary)]">Upload a document photo</p>
+              <p className="text-xs text-[var(--text-muted)] mt-2">Aadhaar, PAN, Marksheet, Passport, Bank Statement, Driving Licence, Voter ID</p>
               <div className="flex flex-wrap justify-center gap-2 mt-4">
                 {DOCUMENT_PRESETS.slice(0, 5).map(p => (
-                  <span key={p.label} className="text-[9px] px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded-full">{p.label}</span>
+                  <span key={p.label} className="text-[9px] px-2 py-1 bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-full">{p.label}</span>
                 ))}
               </div>
               <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
@@ -208,15 +208,15 @@ export default function IndianDocumentEnhancer() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileImage className="w-4 h-4 text-emerald-500" />
-                <span className="text-xs text-zinc-600 dark:text-zinc-400">{fileName}</span>
+                <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)]">{fileName}</span>
               </div>
               <div className="flex gap-2">
                 <button onClick={() => { setImage(null); setFileName(''); }}
-                  className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors flex items-center gap-1">
+                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
                   <Upload className="w-3 h-3" /> New
                 </button>
                 <button onClick={resetAdjustments}
-                  className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors flex items-center gap-1">
+                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
                   <RotateCcw className="w-3 h-3" /> Reset
                 </button>
               </div>
@@ -224,50 +224,50 @@ export default function IndianDocumentEnhancer() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               <div className="space-y-4 lg:col-span-1">
-                <div className="space-y-3 bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-                  <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" /> Adjustments</h5>
+                <div className="space-y-3 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" /> Adjustments</h5>
                   
                   <div className="space-y-1">
-                    <label className="text-[10px] text-zinc-500 flex justify-between"><span>Brightness</span><span className="font-mono">{(brightness * 100).toFixed(0)}%</span></label>
+                    <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brightness</span><span className="font-mono">{(brightness * 100).toFixed(0)}%</span></label>
                     <input type="range" min="-50" max="50" value={brightness} onChange={e => setBrightness(Number(e.target.value))}
                       className="w-full accent-emerald-500" />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] text-zinc-500 flex justify-between"><span>Contrast</span><span className="font-mono">{(contrast * 100).toFixed(0)}%</span></label>
+                    <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Contrast</span><span className="font-mono">{(contrast * 100).toFixed(0)}%</span></label>
                     <input type="range" min="-50" max="50" value={contrast} onChange={e => setContrast(Number(e.target.value))}
                       className="w-full accent-emerald-500" />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] text-zinc-500 flex justify-between"><span>Rotation</span><span className="font-mono">{rotation}°</span></label>
+                    <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Rotation</span><span className="font-mono">{rotation}°</span></label>
                     <input type="range" min="-45" max="45" value={rotation} onChange={e => setRotation(Number(e.target.value))}
                       className="w-full accent-emerald-500" />
                   </div>
 
                   <div className="space-y-2 pt-1">
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] text-zinc-500 flex items-center gap-1.5"><Sun className="w-3 h-3" /> Shadow Removal</span>
+                      <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sun className="w-3 h-3" /> Shadow Removal</span>
                       <input type="checkbox" checked={shadowRemoval} onChange={e => setShadowRemoval(e.target.checked)}
                         className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
                     </label>
                     <label className="flex items-center justify-between cursor-pointer">
-                      <span className="text-[10px] text-zinc-500 flex items-center gap-1.5"><Sparkles className="w-3 h-3" /> Auto Sharpen</span>
+                      <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sparkles className="w-3 h-3" /> Auto Sharpen</span>
                       <input type="checkbox" checked={autoSharpen} onChange={e => setAutoSharpen(e.target.checked)}
                         className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
                     </label>
                   </div>
                 </div>
 
-                <div className="space-y-2 bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800">
-                  <h5 className="text-[10px] font-bold text-zinc-400 uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Export Preset</h5>
+                <div className="space-y-2 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Export Preset</h5>
                   <div className="grid grid-cols-2 gap-1.5">
                     {DOCUMENT_PRESETS.map(p => (
                       <button key={p.label} onClick={() => setSelectedPreset(selectedPreset?.label === p.label ? null : p)}
                         className={`text-left px-2.5 py-2 rounded-lg border text-[10px] transition-colors ${
                           selectedPreset?.label === p.label
                             ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'
-                            : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-500'
+                            : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500'
                         }`}>
                         <p className="font-semibold">{p.label}</p>
                         <p className="opacity-60">{p.desc}</p>
@@ -282,7 +282,7 @@ export default function IndianDocumentEnhancer() {
                 </button>
 
                 <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-                  <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+                  <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
                     <strong>Pro:</strong> AI auto-straighten (one tap), batch enhance 20 docs at once, auto-detect document type, OCR text extraction, export ZIP. 
                     <span className="block mt-1">₹199/mo — every CA firm, HR department, and admission office needs this.</span>
                   </p>
@@ -290,7 +290,7 @@ export default function IndianDocumentEnhancer() {
               </div>
 
               <div className="lg:col-span-2">
-                <div className="relative bg-zinc-50 dark:bg-black/30 rounded-xl p-2 border border-zinc-200 dark:border-zinc-800"
+                <div className="relative bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)]"
                   ref={containerRef}
                   onMouseEnter={() => setShowComparison(true)}
                   onMouseLeave={() => setShowComparison(false)}>

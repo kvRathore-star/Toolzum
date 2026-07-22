@@ -145,7 +145,7 @@ export default function RentalAgreementGenerator() {
   };
 
   const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div className="space-y-3 border border-zinc-200 dark:border-zinc-700/50 rounded-xl p-4 bg-zinc-50/50 dark:bg-black/20">
+    <div className="space-y-3 border border-[var(--border-subtle)]/50 rounded-xl p-4 bg-[var(--bg-overlay)]/50 dark:bg-black/20">
       <h4 className="text-xs font-bold text-blue-500 uppercase tracking-wider">{title}</h4>
       {children}
     </div>
@@ -156,18 +156,18 @@ export default function RentalAgreementGenerator() {
     options?: string[]; placeholder?: string; type?: string; cols?: number;
   }) => (
     <div className={cols > 1 ? 'md:col-span-2' : ''}>
-      <label className="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1">{lbl}</label>
+      <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">{lbl}</label>
       {options ? (
         <select value={value} onChange={e => onChange(e.target.value)}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500/30">
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-blue-500/30">
           {options.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
       ) : type === 'textarea' ? (
         <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500/30 resize-none h-20" />
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-blue-500/30 resize-none h-20" />
       ) : (
         <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500/30" />
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-blue-500/30" />
       )}
     </div>
   );
@@ -241,13 +241,13 @@ export default function RentalAgreementGenerator() {
     <div className="max-w-6xl mx-auto animate-in fade-in duration-500">
       <div className="flex items-center gap-2 mb-6">
         <FileText className="w-5 h-5 text-blue-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Rental Agreement Generator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Rental Agreement Generator</h3>
       </div>
 
       <div className={`grid gap-6 ${showPreview ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-100 dark:border-zinc-800">
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Agreement Details</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-subtle)]">
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Agreement Details</span>
             <button onClick={() => setShowPreview(!showPreview)}
               className="flex items-center gap-1.5 text-xs font-semibold text-blue-500 hover:text-blue-600 transition-colors">
               {showPreview ? <><EyeOff className="w-3.5 h-3.5" /> Hide</> : <><Eye className="w-3.5 h-3.5" /> Preview</>}
@@ -259,7 +259,7 @@ export default function RentalAgreementGenerator() {
         {showPreview && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Agreement Preview</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Agreement Preview</span>
               <button onClick={handlePrint}
                 className="flex items-center gap-1.5 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl text-xs transition-colors">
                 <Download className="w-3.5 h-3.5" /> Download / Print PDF

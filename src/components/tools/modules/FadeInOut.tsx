@@ -68,9 +68,9 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
   const accent = color === 'emerald' ? 'accent-emerald-500' : 'accent-red-500';
   const toggleColor = color === 'emerald' ? 'text-emerald-500' : 'text-red-500';
   return (
-    <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-3">
+    <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <label className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+        <label className="flex items-center gap-2 text-xs font-semibold text-[var(--text-primary)]">
           <input type="checkbox" checked={enabled} onChange={e => onToggle(e.target.checked)}
             className={`rounded border-zinc-400 dark:border-zinc-600 text-${color}-500 focus:ring-${color}-500`} />
           {side === 'in' ? 'Fade In' : 'Fade Out'}
@@ -83,7 +83,7 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
         <>
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] text-zinc-400">Duration</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Duration</span>
               <button onClick={() => onPercent(!percent)}
                 className={`text-[9px] ${toggleColor} hover:opacity-80 font-semibold uppercase tracking-wider`}>
                 {percent ? 'Switch to sec' : 'Switch to %'}
@@ -92,12 +92,12 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
             <input type="range" min={0.5} max={max} step={0.5} value={duration}
               onChange={e => onDuration(parseFloat(e.target.value))}
               className={`w-full ${accent}`} />
-            <div className="text-center text-[10px] text-zinc-500 font-mono">{duration.toFixed(1)}{label}</div>
+            <div className="text-center text-[10px] text-[var(--text-secondary)] font-mono">{duration.toFixed(1)}{label}</div>
           </div>
           <div>
-            <span className="text-[10px] text-zinc-400 block mb-1">Curve</span>
+            <span className="text-[10px] text-[var(--text-muted)] block mb-1">Curve</span>
             <select value={curve} onChange={e => onCurve(e.target.value as FadeCurve)}
-              className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2 py-1.5 text-xs text-zinc-900 dark:text-white outline-none">
+              className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-xs text-[var(--text-primary)] outline-none">
               {CURVES.map(c => <option key={c.v} value={c.v}>{c.l}</option>)}
             </select>
           </div>
@@ -273,10 +273,10 @@ export default function FadeInOut() {
     <div className="max-w-3xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Volume2 className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Audio Fade In/Out</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Fade In/Out</h3>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <p className="text-xs text-[var(--text-secondary)]">
           Apply smooth volume fade in and/or fade out effects to your audio. All processing happens locally.
         </p>
 
@@ -286,12 +286,12 @@ export default function FadeInOut() {
             subtitle="MP3, WAV, M4A, FLAC, OGG supported" />
         ) : (
           <div className="space-y-5">
-            <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+            <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div className="flex items-center gap-3 min-w-0">
-                <Music className="w-4 h-4 text-zinc-400 shrink-0" />
+                <Music className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
-                  <div className="text-[10px] text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB{duration > 0 && <span> &middot; {fmt(duration)}</span>}</div>
+                  <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB{duration > 0 && <span> &middot; {fmt(duration)}</span>}</div>
                 </div>
               </div>
               <button onClick={remove} className="text-[10px] text-red-500 hover:underline shrink-0 flex items-center gap-1">
@@ -311,8 +311,8 @@ export default function FadeInOut() {
             </div>
 
             <div>
-              <canvas ref={canvasRef} className="w-full h-28 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-800 rounded-xl" />
-              <div className="flex justify-between text-[9px] text-zinc-400 mt-0.5 px-1">
+              <canvas ref={canvasRef} className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl" />
+              <div className="flex justify-between text-[9px] text-[var(--text-muted)] mt-0.5 px-1">
                 <span>0s</span>
                 <span className="text-green-500">Fade In</span>
                 <span className="text-red-500">Fade Out</span>
@@ -321,14 +321,14 @@ export default function FadeInOut() {
             </div>
 
             <div className="flex items-center gap-3">
-              <label className="text-xs font-semibold text-zinc-500 shrink-0">Output:</label>
+              <label className="text-xs font-semibold text-[var(--text-secondary)] shrink-0">Output:</label>
               <div className="flex gap-1.5 flex-wrap">
                 {FORMATS.map(f => (
                   <button key={f} onClick={() => setOutputFmt(f)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                       outputFmt === f
                         ? 'bg-emerald-500 text-white border-emerald-500'
-                        : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-emerald-300 dark:hover:border-emerald-700'
+                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-emerald-300 dark:hover:border-emerald-700'
                     }`}>
                     {FORMAT_LABELS[f]}
                   </button>
@@ -356,20 +356,20 @@ export default function FadeInOut() {
 
             {!ffLoaded && !processing && (
               <button onClick={async () => { try { await loadFF(); setFfLoaded(true); } catch { toast.error('Failed to load FFmpeg'); } }}
-                className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-bold py-3 rounded-xl text-xs transition-all">
+                className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs transition-all">
                 Load FFmpeg Engine
               </button>
             )}
 
             {outputUrl && (
-              <div className="space-y-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2 mb-1">
                   <Volume2 className="w-4 h-4 text-emerald-500" />
-                  <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Preview</span>
+                  <span className="text-xs font-semibold text-zinc-600 dark:text-[var(--text-muted)]">Preview</span>
                   <div className="flex gap-2 ml-auto">
                     <audio ref={audioRef} src={outputUrl} onPlay={() => setPlaying(true)} onEnded={() => setPlaying(false)} onPause={() => setPlaying(false)} className="hidden" />
                     <button onClick={() => audioRef.current?.paused ? audioRef.current.play() : audioRef.current?.pause()}
-                      className="text-[10px] text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 flex items-center gap-1">
+                      className="text-[10px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1">
                       {playing ? <Square className="w-3 h-3" /> : <Play className="w-3 h-3" />}{playing ? 'Stop' : 'Play'}
                     </button>
                   </div>
@@ -385,7 +385,7 @@ export default function FadeInOut() {
         )}
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
             <strong>Pro:</strong> Curve types — Linear (constant rate), Logarithmic (gradual start), Exponential (rapid start), S-curve (smooth midpoint). Use percentage mode for duration-independent fades.
           </p>
         </div>

@@ -228,102 +228,102 @@ export default function GstInvoiceGenerator() {
         <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0 ml-4"><Crown className="w-3.5 h-3.5" /> Pro</span>
       </div>
 
-      <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
-        <p className="text-xs text-zinc-500">Monthly free invoices:</p>
+      <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
+        <p className="text-xs text-[var(--text-secondary)]">Monthly free invoices:</p>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {Array.from({ length: MONTHLY_LIMIT }, (_, i) => (
               <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-500'}`} />
             ))}
           </div>
-          <span className="text-[10px] font-bold text-zinc-500">{remaining} / {MONTHLY_LIMIT} remaining this month</span>
+          <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {MONTHLY_LIMIT} remaining this month</span>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 sm:p-8 rounded-2xl shadow-xl space-y-8">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-2xl shadow-xl space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Invoice Number</label>
-            <input type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
+            <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Number</label>
+            <input type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Invoice Date</label>
-            <input type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
+            <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Date</label>
+            <input type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-zinc-200 dark:border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Billed By (Seller / You)</h3>
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">Billed By (Seller / You)</h3>
             <div className="space-y-3">
-              <input type="text" placeholder="Company Name" value={billerName} onChange={e => setBillerName(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
-              <input type="text" placeholder="GSTIN (15 character)" value={billerGstin} onChange={e => setBillerGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500 uppercase font-mono" />
-              <select value={billerState} onChange={e => setBillerState(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500">
+              <input type="text" placeholder="Company Name" value={billerName} onChange={e => setBillerName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
+              <input type="text" placeholder="GSTIN (15 character)" value={billerGstin} onChange={e => setBillerGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 uppercase font-mono" />
+              <select value={billerState} onChange={e => setBillerState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500">
                 {INDIAN_STATES.map(s => <option key={s.code} value={s.code}>{s.name} ({s.code})</option>)}
               </select>
-              <textarea placeholder="Billing Address" value={billerAddress} onChange={e => setBillerAddress(e.target.value)} rows={2} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
+              <textarea placeholder="Billing Address" value={billerAddress} onChange={e => setBillerAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
             </div>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Billed To (Buyer / Client)</h3>
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">Billed To (Buyer / Client)</h3>
             <div className="space-y-3">
-              <input type="text" placeholder="Client Name" value={clientName} onChange={e => setClientName(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
-              <input type="text" placeholder="Client GSTIN (Optional)" value={clientGstin} onChange={e => setClientGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500 uppercase font-mono" />
-              <select value={clientState} onChange={e => setClientState(e.target.value)} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500">
+              <input type="text" placeholder="Client Name" value={clientName} onChange={e => setClientName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
+              <input type="text" placeholder="Client GSTIN (Optional)" value={clientGstin} onChange={e => setClientGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 uppercase font-mono" />
+              <select value={clientState} onChange={e => setClientState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500">
                 {INDIAN_STATES.map(s => <option key={s.code} value={s.code}>{s.name} ({s.code})</option>)}
               </select>
-              <textarea placeholder="Shipping/Billing Address" value={clientAddress} onChange={e => setClientAddress(e.target.value)} rows={2} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" />
+              <textarea placeholder="Shipping/Billing Address" value={clientAddress} onChange={e => setClientAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500" />
             </div>
           </div>
         </div>
 
-        <div className="space-y-4 pt-6 border-t border-zinc-200 dark:border-white/5">
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Invoice Items</h3>
+        <div className="space-y-4 pt-6 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Invoice Items</h3>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left text-sm text-zinc-500 dark:text-zinc-400">
-              <thead className="bg-zinc-50 dark:bg-black/50 text-xs font-semibold uppercase text-zinc-700 dark:text-zinc-300">
+            <table className="w-full border-collapse text-left text-sm text-[var(--text-secondary)]">
+              <thead className="bg-[var(--bg-overlay)] text-xs font-semibold uppercase text-[var(--text-primary)]">
                 <tr><th className="px-4 py-3">Description</th><th className="px-4 py-3 w-20 text-center">Qty</th><th className="px-4 py-3 w-32 text-right">Price (₹)</th><th className="px-4 py-3 w-24 text-center">GST Rate</th><th className="px-4 py-3 w-32 text-right">Total (₹)</th><th className="px-4 py-3 w-16"></th></tr>
               </thead>
               <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                 {items.map(item => (
-                  <tr key={item.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/40">
-                    <td className="px-4 py-3 font-medium text-zinc-900 dark:text-white">{item.description}</td>
+                  <tr key={item.id} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-zinc-900/40">
+                    <td className="px-4 py-3 font-medium text-[var(--text-primary)]">{item.description}</td>
                     <td className="px-4 py-3 text-center">{item.quantity}</td>
                     <td className="px-4 py-3 text-right">₹{item.price.toFixed(2)}</td>
                     <td className="px-4 py-3 text-center">{item.gstRate}%</td>
-                    <td className="px-4 py-3 text-right text-zinc-900 dark:text-white font-medium">₹{(item.quantity * item.price).toFixed(2)}</td>
+                    <td className="px-4 py-3 text-right text-[var(--text-primary)] font-medium">₹{(item.quantity * item.price).toFixed(2)}</td>
                     <td className="px-4 py-3 text-center"><button onClick={() => removeLineItem(item.id)} className="text-red-500 hover:text-red-400 font-bold">✕</button></td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="bg-zinc-50 dark:bg-zinc-900/30 p-5 rounded-2xl border border-zinc-200 dark:border-white/5 space-y-4">
-            <h4 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Add New Line Item</h4>
+          <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 p-5 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
+            <h4 className="text-sm font-semibold text-[var(--text-primary)]">Add New Line Item</h4>
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
-              <div className="sm:col-span-5"><input type="text" placeholder="Item Description" value={newItemDesc} onChange={e => setNewItemDesc(e.target.value)} className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500" /></div>
-              <div className="sm:col-span-2"><input type="number" placeholder="Qty" value={newItemQty || ''} onChange={e => setNewItemQty(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500 text-center" /></div>
-              <div className="sm:col-span-3"><input type="number" placeholder="₹ Unit Price" value={newItemPrice || ''} onChange={e => setNewItemPrice(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500 text-right" /></div>
+              <div className="sm:col-span-5"><input type="text" placeholder="Item Description" value={newItemDesc} onChange={e => setNewItemDesc(e.target.value)} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500" /></div>
+              <div className="sm:col-span-2"><input type="number" placeholder="Qty" value={newItemQty || ''} onChange={e => setNewItemQty(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-center" /></div>
+              <div className="sm:col-span-3"><input type="number" placeholder="₹ Unit Price" value={newItemPrice || ''} onChange={e => setNewItemPrice(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-right" /></div>
               <div className="sm:col-span-2">
-                <select value={newItemGst} onChange={e => setNewItemGst(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none focus:border-emerald-500 text-center">
+                <select value={newItemGst} onChange={e => setNewItemGst(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-center">
                   <option value="18">18% GST</option><option value="12">12% GST</option><option value="5">5% GST</option><option value="28">28% GST</option><option value="0">Exempt (0%)</option>
                 </select>
               </div>
             </div>
-            <button onClick={addLineItem} className="w-full py-3 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-bold rounded-xl transition-all active:scale-95">+ Add Item</button>
+            <button onClick={addLineItem} className="w-full py-3 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all active:scale-95">+ Add Item</button>
           </div>
         </div>
 
-        <div className="bg-zinc-50 dark:bg-black/60 p-6 rounded-2xl border border-zinc-200 dark:border-white/5 space-y-4">
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Invoice Calculations</h3>
+        <div className="bg-[var(--bg-overlay)]/60 p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Invoice Calculations</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm font-semibold">
-            <div className="p-3 bg-white dark:bg-zinc-900/50 rounded-xl border border-zinc-100 dark:border-zinc-800"><span className="text-zinc-500 text-xs block">Taxable Subtotal</span><span className="text-zinc-900 dark:text-white text-lg font-bold">₹{totals.taxableVal.toFixed(2)}</span></div>
-            <div className="p-3 bg-white dark:bg-zinc-900/50 rounded-xl border border-zinc-100 dark:border-zinc-800"><span className="text-zinc-500 text-xs block">Total GST Tax</span><span className="text-zinc-900 dark:text-white text-lg font-bold">₹{totals.totalTax.toFixed(2)}</span></div>
-            <div className="p-3 bg-white dark:bg-zinc-900/50 rounded-xl border border-zinc-100 dark:border-zinc-800 col-span-2"><span className="text-zinc-500 text-xs block">GST Mode</span><span className="text-emerald-500 text-lg font-bold">{billerState === clientState ? `Intra-state (CGST: ₹${totals.cgst.toFixed(2)}, SGST: ₹${totals.sgst.toFixed(2)})` : `Inter-state (IGST: ₹${totals.igst.toFixed(2)})`}</span></div>
+            <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)]"><span className="text-[var(--text-secondary)] text-xs block">Taxable Subtotal</span><span className="text-[var(--text-primary)] text-lg font-bold">₹{totals.taxableVal.toFixed(2)}</span></div>
+            <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)]"><span className="text-[var(--text-secondary)] text-xs block">Total GST Tax</span><span className="text-[var(--text-primary)] text-lg font-bold">₹{totals.totalTax.toFixed(2)}</span></div>
+            <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)] col-span-2"><span className="text-[var(--text-secondary)] text-xs block">GST Mode</span><span className="text-emerald-500 text-lg font-bold">{billerState === clientState ? `Intra-state (CGST: ₹${totals.cgst.toFixed(2)}, SGST: ₹${totals.sgst.toFixed(2)})` : `Inter-state (IGST: ₹${totals.igst.toFixed(2)})`}</span></div>
           </div>
-          <div className="pt-4 border-t border-zinc-200 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="text-center sm:text-left"><span className="text-zinc-500 text-xs block uppercase font-bold tracking-wider">Rupees in Words</span><span className="text-zinc-800 dark:text-zinc-300 font-medium text-sm block max-w-lg mt-0.5">{numberToWords(totals.grandTotal)}</span></div>
-            <div className="text-right shrink-0"><span className="text-zinc-500 text-xs block uppercase font-bold tracking-wider">Grand Total</span><span className="text-emerald-500 text-3xl font-extrabold block">₹{totals.grandTotal.toFixed(2)}</span></div>
+          <div className="pt-4 border-t border-zinc-200 dark:border-[var(--border-subtle)] flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="text-center sm:text-left"><span className="text-[var(--text-secondary)] text-xs block uppercase font-bold tracking-wider">Rupees in Words</span><span className="text-zinc-800 dark:text-zinc-300 font-medium text-sm block max-w-lg mt-0.5">{numberToWords(totals.grandTotal)}</span></div>
+            <div className="text-right shrink-0"><span className="text-[var(--text-secondary)] text-xs block uppercase font-bold tracking-wider">Grand Total</span><span className="text-emerald-500 text-3xl font-extrabold block">₹{totals.grandTotal.toFixed(2)}</span></div>
           </div>
         </div>
 
@@ -333,8 +333,8 @@ export default function GstInvoiceGenerator() {
         </button>
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
-          <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Unlimited monthly invoices, custom brand logo on every invoice, saved client database with GSTIN auto-fill, bulk invoice generation, export to Excel.</p>
-          <Link href="/pricing" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 underline shrink-0 ml-4">Upgrade →</Link>
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Unlimited monthly invoices, custom brand logo on every invoice, saved client database with GSTIN auto-fill, bulk invoice generation, export to Excel.</p>
+          <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>
       </div>
     </div>

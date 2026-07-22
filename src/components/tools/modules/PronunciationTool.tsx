@@ -190,14 +190,14 @@ export default function PronunciationTool() {
               <Volume2 className="w-5 h-5 text-sky-500" />
               Pronunciation Tool
             </h2>
-            <p className="text-xs text-zinc-500 mt-1">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Look up any word — hear it pronounced, see IPA transcription, definitions, and examples.
             </p>
           </div>
           <div className="flex gap-1">
             <button
               onClick={() => setShowFavorites(!showFavorites)}
-              className={`p-2 rounded-lg transition-colors cursor-pointer ${showFavorites ? 'bg-sky-100 dark:bg-sky-900/30 text-sky-600' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300'}`}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${showFavorites ? 'bg-sky-100 dark:bg-sky-900/30 text-sky-600' : 'text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300'}`}
               title="Favorites"
             >
               <Heart className="w-4 h-4" />
@@ -208,14 +208,14 @@ export default function PronunciationTool() {
 
       {/* Favorites/History Panel */}
       {showFavorites && (
-        <div className="bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-white/5 rounded-2xl p-5 space-y-4">
+        <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
           <div className="flex gap-6">
             <div className="flex-1">
-              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <h3 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <Heart className="w-3 h-3" /> Favorites
               </h3>
               {favorites.length === 0 ? (
-                <p className="text-xs text-zinc-400">No favorites yet. Click the heart icon to save words.</p>
+                <p className="text-xs text-[var(--text-muted)]">No favorites yet. Click the heart icon to save words.</p>
               ) : (
                 <div className="flex flex-wrap gap-1.5">
                   {favorites.map(w => (
@@ -231,18 +231,18 @@ export default function PronunciationTool() {
               )}
             </div>
             <div className="flex-1">
-              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <h3 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <Clock className="w-3 h-3" /> Recent
               </h3>
               {history.length === 0 ? (
-                <p className="text-xs text-zinc-400">No recent lookups.</p>
+                <p className="text-xs text-[var(--text-muted)]">No recent lookups.</p>
               ) : (
                 <div className="flex flex-wrap gap-1.5">
                   {history.slice(0, 10).map(w => (
                     <button
                       key={w}
                       onClick={() => pronounceWord(w)}
-                      className="px-2.5 py-1 text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+                      className="px-2.5 py-1 text-xs bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-full hover:bg-[var(--bg-surface)] transition-colors cursor-pointer"
                     >
                       {w}
                     </button>
@@ -255,19 +255,19 @@ export default function PronunciationTool() {
       )}
 
       {/* Main Card */}
-      <div className="bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-white/5 rounded-2xl p-6 space-y-5">
+      <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
         {/* Mode Tabs */}
-        <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-xl p-1 w-fit">
+        <div className="flex bg-[var(--bg-surface)]/50 rounded-xl p-1 w-fit">
           <button
             onClick={() => setTab('word')}
-            className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${tab === 'word' ? 'bg-white dark:bg-zinc-700 shadow-sm text-sky-600 dark:text-sky-400' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}
+            className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${tab === 'word' ? 'bg-[var(--bg-elevated)] shadow-sm text-sky-600 dark:text-sky-400' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
           >
             <Search className="w-3 h-3 inline mr-1" />
             Word Lookup
           </button>
           <button
             onClick={() => setTab('text')}
-            className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${tab === 'text' ? 'bg-white dark:bg-zinc-700 shadow-sm text-sky-600 dark:text-sky-400' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}
+            className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${tab === 'text' ? 'bg-[var(--bg-elevated)] shadow-sm text-sky-600 dark:text-sky-400' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
           >
             <Mic className="w-3 h-3 inline mr-1" />
             Free Text
@@ -283,13 +283,13 @@ export default function PronunciationTool() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder={tab === 'word' ? 'Enter a word to look up...' : 'Type any phrase to speak...'}
-                className="w-full px-4 py-3 pr-10 text-sm bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                className="w-full px-4 py-3 pr-10 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
               />
               {text && (
                 <button
                   type="button"
                   onClick={() => { setText(''); setDictionaryData(null); setError(''); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-zinc-600 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -316,7 +316,7 @@ export default function PronunciationTool() {
         {dictionaryData && tab === 'word' && (
           <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
             {/* Word Header */}
-            <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/30 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
+            <div className="flex items-center justify-between p-4 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/50">
               <div>
                 <div className="flex items-center gap-3">
                   <h3 className="text-2xl font-bold text-[var(--text-primary)]">
@@ -331,7 +331,7 @@ export default function PronunciationTool() {
                   </button>
                   <button
                     onClick={toggleFavorite}
-                    className={`p-2 rounded-full transition-colors cursor-pointer ${isFavorited ? 'text-red-500 bg-red-50 dark:bg-red-900/20' : 'text-zinc-400 hover:text-red-500 bg-zinc-100 dark:bg-zinc-800'}`}
+                    className={`p-2 rounded-full transition-colors cursor-pointer ${isFavorited ? 'text-red-500 bg-red-50 dark:bg-red-900/20' : 'text-[var(--text-muted)] hover:text-red-500 bg-[var(--bg-surface)]'}`}
                     title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
                   >
                     <Heart className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} />
@@ -343,11 +343,11 @@ export default function PronunciationTool() {
                       {dictionaryData.phonetic}
                     </span>
                   )}
-                  <span className="text-xs text-zinc-400">{ACCENTS[accentIndex].flag} {ACCENTS[accentIndex].label}</span>
+                  <span className="text-xs text-[var(--text-muted)]">{ACCENTS[accentIndex].flag} {ACCENTS[accentIndex].label}</span>
                 </div>
               </div>
               <div className="text-right">
-                <div className="flex items-center gap-1.5 text-xs text-zinc-400">
+                <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
                   <Bookmark className="w-3 h-3" />
                   {syllables.length} syllable{syllables.length !== 1 ? 's' : ''}
                 </div>
@@ -355,7 +355,7 @@ export default function PronunciationTool() {
                   {syllables.map((s, i) => (
                     <span
                       key={i}
-                      className="px-1.5 py-0.5 text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded"
+                      className="px-1.5 py-0.5 text-xs font-mono bg-[var(--bg-surface)] rounded"
                     >
                       {i === 0 ? `ˈ${s}` : s}
                     </span>
@@ -374,7 +374,7 @@ export default function PronunciationTool() {
                       const audio = new Audio(p.audio);
                       audio.play();
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg transition-colors cursor-pointer"
                   >
                     <Volume1 className="w-3 h-3" />
                     {p.text || `Audio ${i + 1}`}
@@ -386,10 +386,10 @@ export default function PronunciationTool() {
             {/* Definitions */}
             <div className="space-y-3">
               {dictionaryData.meanings.map((meaning, mi) => (
-                <div key={mi} className="border border-zinc-200 dark:border-zinc-700/50 rounded-xl overflow-hidden">
-                  <div className="px-4 py-2 bg-zinc-50 dark:bg-zinc-800/30 border-b border-zinc-200 dark:border-zinc-700/50 flex items-center gap-2">
+                <div key={mi} className="border border-[var(--border-subtle)]/50 rounded-xl overflow-hidden">
+                  <div className="px-4 py-2 bg-[var(--bg-overlay)]/30 border-b border-[var(--border-subtle)]/50 flex items-center gap-2">
                     <BookOpen className="w-3.5 h-3.5 text-sky-500" />
-                    <span className="text-xs font-semibold uppercase text-zinc-500">{meaning.partOfSpeech}</span>
+                    <span className="text-xs font-semibold uppercase text-[var(--text-secondary)]">{meaning.partOfSpeech}</span>
                   </div>
                   <div className="p-4 space-y-3">
                     {meaning.definitions.slice(0, 3).map((def, di) => (
@@ -398,7 +398,7 @@ export default function PronunciationTool() {
                           {di + 1}. {def.definition}
                         </p>
                         {def.example && (
-                          <p className="text-xs text-zinc-400 italic mt-1">
+                          <p className="text-xs text-[var(--text-muted)] italic mt-1">
                             &ldquo;{def.example}&rdquo;
                           </p>
                         )}
@@ -422,8 +422,8 @@ export default function PronunciationTool() {
 
         {/* Free Text Mode Hint */}
         {tab === 'text' && !dictionaryData && (
-          <div className="p-4 bg-zinc-50 dark:bg-zinc-800/30 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
-            <p className="text-xs text-zinc-500">
+          <div className="p-4 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/50">
+            <p className="text-xs text-[var(--text-secondary)]">
               Type any phrase, sentence, or paragraph and hear it spoken aloud in your chosen accent.
             </p>
           </div>
@@ -432,14 +432,14 @@ export default function PronunciationTool() {
         {/* Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1.5 flex items-center gap-1.5">
+            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5" />
               Accent
             </label>
             <select
               value={accentIndex}
               onChange={(e) => setAccentIndex(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
             >
               {ACCENTS.map((v, i) => (
                 <option key={i} value={i}>{v.flag} {v.label}</option>
@@ -448,14 +448,14 @@ export default function PronunciationTool() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1.5 flex items-center gap-1.5">
+            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
               <Mic className="w-3.5 h-3.5" />
               Voice
             </label>
             <select
               value={voiceGender}
               onChange={(e) => setVoiceGender(e.target.value as 'male' | 'female')}
-              className="w-full px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
             >
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -463,7 +463,7 @@ export default function PronunciationTool() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-zinc-500 mb-1.5">
+            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
               <Volume className="w-3.5 h-3.5 inline mr-1" />
               Speed: {rate.toFixed(1)}x
             </label>
@@ -502,8 +502,8 @@ export default function PronunciationTool() {
       </div>
 
       {/* Popular Words */}
-      <div className="bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-white/5 rounded-2xl p-5">
-        <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+      <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-5">
+        <h3 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3 flex items-center gap-1.5">
           <Star className="w-3 h-3" />
           Commonly Mispronounced Words
         </h3>
@@ -512,7 +512,7 @@ export default function PronunciationTool() {
             <button
               key={word}
               onClick={() => pronounceWord(word)}
-              className="px-3 py-1.5 text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-sky-50 dark:hover:bg-sky-900/20 hover:text-sky-600 dark:hover:text-sky-400 text-zinc-600 dark:text-zinc-400 rounded-lg transition-all cursor-pointer"
+              className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] hover:bg-sky-50 dark:hover:bg-sky-900/20 hover:text-sky-600 dark:hover:text-sky-400 text-zinc-600 dark:text-[var(--text-muted)] rounded-lg transition-all cursor-pointer"
             >
               {word}
             </button>
@@ -521,8 +521,8 @@ export default function PronunciationTool() {
       </div>
 
       {/* Info */}
-      <div className="p-4 bg-zinc-50 dark:bg-zinc-800/30 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
-        <p className="text-[11px] text-zinc-400 leading-relaxed">
+      <div className="p-4 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/50">
+        <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">
           Pronunciation uses the Free Dictionary API for word data plus your browser&apos;s Web Speech API for audio.
           Dictionary entries include IPA transcriptions, definitions, and example sentences. Works fully offline after
           initial page load in Chrome and Edge.

@@ -67,25 +67,25 @@ export function PdfBackgroundColor() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
         </div>
         <button onClick={() => { setFile(null); setFileBuffer(null); setOutputUrl(null); setPageCount(0); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Background Color (subtle tint)</label>
+        <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Background Color (subtle tint)</label>
         <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
-          className="w-full h-12 rounded-lg cursor-pointer border border-zinc-200 dark:border-zinc-700" />
+          className="w-full h-12 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
       </div>
       <button onClick={process} disabled={isProcessing}
         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Processing...' : 'Apply Background Color'}
       </button>
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `bg_${file.name}`)}
             className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
@@ -161,38 +161,38 @@ export function PdfAddBlankPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &middot; {pageCount} Pages</p>
         </div>
         <button onClick={() => { setFile(null); setFileBuffer(null); setOutputUrl(null); setPageCount(0); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Number of Blank Pages</label>
+          <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Number of Blank Pages</label>
           <input type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
-            className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Page Size</label>
+          <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Size</label>
           <select value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
             <option value="a4">A4</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="a3">A3</option>
           </select>
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Insert Position</label>
+          <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Insert Position</label>
           <select value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
-            className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
             <option value="after">After Page</option><option value="before">Before Page</option>
           </select>
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">At Page</label>
+          <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">At Page</label>
           <input type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
-            className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
         </div>
       </div>
       <button onClick={process} disabled={isProcessing}
@@ -200,7 +200,7 @@ export function PdfAddBlankPage() {
         {isProcessing ? 'Processing...' : 'Add Blank Pages'}
       </button>
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `blank_${file.name}`)}
             className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>

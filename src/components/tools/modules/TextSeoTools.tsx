@@ -2,12 +2,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
 const cardClass = "max-w-xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm";
 const secondaryBtnClass = "px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors";
 
 function useCopy() {
@@ -39,12 +39,12 @@ export function WordCounter() {
       <div className="space-y-3">
         <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={inputClass} placeholder="Paste or type your text here..." /></div>
         <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.words}</div><div className="text-xs text-zinc-500">Words</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.chars}</div><div className="text-xs text-zinc-500">Characters</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.charsNoSpace}</div><div className="text-xs text-zinc-500">Chars (no space)</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.sentences}</div><div className="text-xs text-zinc-500">Sentences</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.paragraphs}</div><div className="text-xs text-zinc-500">Paragraphs</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.readingTime}<span className="text-base font-normal text-zinc-400"> min</span></div><div className="text-xs text-zinc-500">Reading Time</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.words}</div><div className="text-xs text-[var(--text-secondary)]">Words</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.chars}</div><div className="text-xs text-[var(--text-secondary)]">Characters</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.charsNoSpace}</div><div className="text-xs text-[var(--text-secondary)]">Chars (no space)</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.sentences}</div><div className="text-xs text-[var(--text-secondary)]">Sentences</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.paragraphs}</div><div className="text-xs text-[var(--text-secondary)]">Paragraphs</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{stats.readingTime}<span className="text-base font-normal text-[var(--text-muted)]"> min</span></div><div className="text-xs text-[var(--text-secondary)]">Reading Time</div></div>
         </div>
       </div>
     </div>
@@ -69,12 +69,12 @@ export function CharacterCounter() {
       <div className="space-y-3">
         <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={inputClass} placeholder="Type or paste text..." /></div>
         <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.total}</div><div className="text-xs text-zinc-500">Total</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.noSpace}</div><div className="text-xs text-zinc-500">No Space</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.letters}</div><div className="text-xs text-zinc-500">Letters</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.digits}</div><div className="text-xs text-zinc-500">Digits</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.spaces}</div><div className="text-xs text-zinc-500">Spaces</div></div>
-          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{counts.punctuation}</div><div className="text-xs text-zinc-500">Punctuation</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.total}</div><div className="text-xs text-[var(--text-secondary)]">Total</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.noSpace}</div><div className="text-xs text-[var(--text-secondary)]">No Space</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.letters}</div><div className="text-xs text-[var(--text-secondary)]">Letters</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.digits}</div><div className="text-xs text-[var(--text-secondary)]">Digits</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.spaces}</div><div className="text-xs text-[var(--text-secondary)]">Spaces</div></div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-center"><div className="text-2xl font-bold">{counts.punctuation}</div><div className="text-xs text-[var(--text-secondary)]">Punctuation</div></div>
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@ export function WordFrequencyCounter() {
         {frequencies.length > 0 && (
           <div className="mt-4 space-y-1">
             {frequencies.map((f, i) => (
-              <div key={i} className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={i} className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span>{f.word}</span>
                 <span className="font-mono">{f.count} ({((f.count / frequencies.reduce((a, b) => a + b.count, 0)) * 100).toFixed(1)}%)</span>
               </div>
@@ -140,8 +140,8 @@ export function KeywordDensityChecker() {
         <button onClick={check} className={btnClass}>Check Density</button>
         {density && (
           <div className="space-y-2 mt-4">
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Keyword Count</span><span className="font-mono">{density.count}</span></div>
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Total Words</span><span className="font-mono">{density.total}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Keyword Count</span><span className="font-mono">{density.count}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Total Words</span><span className="font-mono">{density.total}</span></div>
             <div className="flex justify-between p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm font-bold"><span>Density</span><span className="font-mono">{density.percentage.toFixed(2)}%</span></div>
           </div>
         )}
@@ -176,7 +176,7 @@ export function KeywordPlannerTool() {
         {keywords.length > 0 && (
           <div className="mt-4 space-y-1">
             {keywords.map((k, i) => (
-              <div key={i} className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={i} className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span>{k.word}</span>
                 <span className="font-mono">{k.count} ({k.density.toFixed(1)}%)</span>
               </div>
@@ -235,10 +235,10 @@ export function SeoPreviewGenerator() {
         <div><label className={labelClass}>Title</label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className={inputClass} /></div>
         <div><label className={labelClass}>URL</label><input type="text" value={url} onChange={e => setUrl(e.target.value)} className={inputClass} /></div>
         <div><label className={labelClass}>Description</label><textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} className={inputClass} /></div>
-        <div className="mt-6 p-4 border border-zinc-200 dark:border-zinc-700 rounded-xl">
+        <div className="mt-6 p-4 border border-[var(--border-subtle)] rounded-xl">
           <div className="text-xs text-green-700 dark:text-green-400 mb-1">{url}</div>
           <div className="text-xl text-blue-600 dark:text-blue-400 font-medium leading-tight mb-1 hover:underline cursor-pointer">{title}</div>
-          <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-snug">{description}</div>
+          <div className="text-sm text-zinc-600 dark:text-[var(--text-muted)] leading-snug">{description}</div>
         </div>
       </div>
     </div>
@@ -279,10 +279,10 @@ export function SeoHeadlineAnalyzer() {
         <button onClick={analyze} className={btnClass}>Analyze</button>
         {analysis && (
           <div className="mt-4 space-y-2">
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Word Count</span><span className="font-mono">{analysis.wordCount}</span></div>
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Character Count</span><span className="font-mono">{analysis.charCount}</span></div>
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Sentiment</span><span className="font-mono">{analysis.sentiment}</span></div>
-            <div className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm"><span>Power Words</span><span className="font-mono">{analysis.powerWords.length > 0 ? analysis.powerWords.join(', ') : 'None found'}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Word Count</span><span className="font-mono">{analysis.wordCount}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Character Count</span><span className="font-mono">{analysis.charCount}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Sentiment</span><span className="font-mono">{analysis.sentiment}</span></div>
+            <div className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>Power Words</span><span className="font-mono">{analysis.powerWords.length > 0 ? analysis.powerWords.join(', ') : 'None found'}</span></div>
             <div className="flex justify-between p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm font-bold"><span>SEO Score</span><span className="font-mono">{analysis.score}/100</span></div>
           </div>
         )}
@@ -551,7 +551,7 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
         </div>
         <button onClick={convert} className={btnClass}>Convert to {isTextToHtml ? 'HTML' : 'Text'}</button>
         <button onClick={() => setMode(otherMode)}
-          className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
           Need to {isTextToHtml ? 'convert HTML back to text' : 'convert text to HTML'} instead? <span className="font-semibold">Switch →</span>
         </button>
         {result && (
@@ -600,7 +600,7 @@ export function MarkdownPreviewer() {
       <div className="space-y-3">
         <div><label className={labelClass}>Markdown</label><textarea value={md} onChange={e => setMd(e.target.value)} rows={8} className={`${inputClass} font-mono text-xs`} /></div>
         <button onClick={preview} className={btnClass}>Preview</button>
-        {html && <div className="mt-4 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />}
+        {html && <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-lg prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />}
       </div>
     </div>
   );
@@ -620,7 +620,7 @@ export function DuplicateWordRemover() {
   return (
     <div className={cardClass}>
       <h1 className={headingClass}>Duplicate Word Remover</h1>
-      <p className="text-sm text-zinc-500 mb-4">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <a href="/developer/text-deduplicator" className="text-blue-600 hover:underline">Text Deduplicator</a>.</p>
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <a href="/developer/text-deduplicator" className="text-blue-600 hover:underline">Text Deduplicator</a>.</p>
       <div className="space-y-3">
         <div><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
         <button onClick={remove} className={btnClass}>Remove Duplicate Words</button>

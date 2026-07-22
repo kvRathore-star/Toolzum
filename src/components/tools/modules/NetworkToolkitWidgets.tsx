@@ -24,9 +24,9 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
 
 function InfoRow({ label, val }: { label: string; val: string }) {
   return (
-    <div className="flex justify-between items-center py-2.5 border-b border-zinc-100 dark:border-zinc-800 last:border-0">
-      <span className="text-xs font-medium text-zinc-500">{label}</span>
-      <span className="text-sm font-mono text-zinc-900 dark:text-white break-all text-right ml-4">{val}</span>
+    <div className="flex justify-between items-center py-2.5 border-b border-[var(--border-subtle)] last:border-0">
+      <span className="text-xs font-medium text-[var(--text-secondary)]">{label}</span>
+      <span className="text-sm font-mono text-[var(--text-primary)] break-all text-right ml-4">{val}</span>
     </div>
   );
 }
@@ -40,12 +40,12 @@ export function IpAddressConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">IPv4 Address Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv4 Address Converter</h2>
         <div className="space-y-1">
-          <label className="text-xs font-medium text-zinc-500">IPv4 Address</label>
+          <label className="text-xs font-medium text-[var(--text-secondary)]">IPv4 Address</label>
           <input value={input} onChange={e => setInput(e.target.value)} placeholder="Enter IPv4..."
-            className="w-full bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
         </div>
         <div>
           <InfoRow label="Dotted Decimal" val={input} />
@@ -80,30 +80,30 @@ export function IpRangeExpander() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">IP Range Expander</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Range Expander</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <label className="text-xs font-medium text-zinc-500">Start IP</label>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Start IP</label>
             <input value={start} onChange={e => setStart(e.target.value)} placeholder="Start IP..."
-              className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-medium text-zinc-500">End IP</label>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">End IP</label>
             <input value={end} onChange={e => setEnd(e.target.value)} placeholder="End IP..."
-              className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
         </div>
-        <button onClick={expand} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Expand Range</button>
+        <button onClick={expand} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Expand Range</button>
         {rangeCount > 0 && (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-3">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-bold text-zinc-600 dark:text-zinc-400">Addresses ({rangeCount} total{rangeList.length < rangeCount ? `, showing first ${rangeList.length}` : ''})</span>
+              <span className="text-sm font-bold text-zinc-600 dark:text-[var(--text-muted)]">Addresses ({rangeCount} total{rangeList.length < rangeCount ? `, showing first ${rangeList.length}` : ''})</span>
               <CopyBtn text={rangeList.join('\n')} label="Range" />
             </div>
-            <div className="max-h-[250px] overflow-y-auto font-mono text-sm text-zinc-900 dark:text-white space-y-1">
+            <div className="max-h-[250px] overflow-y-auto font-mono text-sm text-[var(--text-primary)] space-y-1">
               {rangeList.map(ip => <div key={ip}>{ip}</div>)}
-              {rangeCount > rangeList.length && <div className="text-zinc-400 italic text-sm">... {rangeCount - rangeList.length} more</div>}
+              {rangeCount > rangeList.length && <div className="text-[var(--text-muted)] italic text-sm">... {rangeCount - rangeList.length} more</div>}
             </div>
           </div>
         )}
@@ -134,9 +134,9 @@ export function Ipv6UlaGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">IPv6 ULA Generator</h2>
-        <button onClick={generate} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Generate New ULA</button>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv6 ULA Generator</h2>
+        <button onClick={generate} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Generate New ULA</button>
         {ula.full && (
           <div>
             <InfoRow label="Full Address" val={ula.full} />

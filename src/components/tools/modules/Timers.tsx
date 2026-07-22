@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
 const cardClass = "max-w-xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
 const secondaryBtnClass = "px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono";
 
 function formatTime(seconds: number): string {
   const h = Math.floor(seconds / 3600);
@@ -118,7 +118,7 @@ export function Stopwatch() {
             <h3 className="text-sm font-medium mb-2">Laps</h3>
             <div className="space-y-1">
               {laps.map((l, i) => (
-                <div key={i} className="flex justify-between text-sm p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+                <div key={i} className="flex justify-between text-sm p-2 bg-[var(--bg-surface)] rounded-lg">
                   <span>Lap {i + 1}</span>
                   <span className="font-mono">{formatTime(l)}</span>
                 </div>
@@ -163,21 +163,21 @@ export function CountdownTimer() {
         <div><label className={labelClass}>Target Date & Time</label><input type="datetime-local" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputClass} /></div>
         <button onClick={() => setActive(true)} className={btnClass}>Start Countdown</button>
         <div className="grid grid-cols-4 gap-4 mt-6 text-center">
-          <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+          <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="text-3xl font-bold font-mono">{remaining.days}</div>
-            <div className="text-xs text-zinc-500">Days</div>
+            <div className="text-xs text-[var(--text-secondary)]">Days</div>
           </div>
-          <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+          <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="text-3xl font-bold font-mono">{remaining.hours}</div>
-            <div className="text-xs text-zinc-500">Hours</div>
+            <div className="text-xs text-[var(--text-secondary)]">Hours</div>
           </div>
-          <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+          <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="text-3xl font-bold font-mono">{remaining.minutes}</div>
-            <div className="text-xs text-zinc-500">Minutes</div>
+            <div className="text-xs text-[var(--text-secondary)]">Minutes</div>
           </div>
-          <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+          <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="text-3xl font-bold font-mono">{remaining.seconds}</div>
-            <div className="text-xs text-zinc-500">Seconds</div>
+            <div className="text-xs text-[var(--text-secondary)]">Seconds</div>
           </div>
         </div>
       </div>
@@ -406,10 +406,10 @@ export function WorldClock() {
           {selected.map(tz => {
             const t = TIMEZONES.find(t => t.tz === tz);
             return (
-              <div key={tz} className="flex items-center justify-between p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+              <div key={tz} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-lg">
                 <div>
                   <div className="font-medium text-sm">{t?.label || tz}</div>
-                  <div className="text-xs text-zinc-500">{tz}</div>
+                  <div className="text-xs text-[var(--text-secondary)]">{tz}</div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-lg font-mono font-bold">{new Date(time).toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit' })}</div>
@@ -468,7 +468,7 @@ export function TimeConverter() {
         {result.length > 0 && (
           <div className="mt-4 space-y-1">
             {result.map(r => (
-              <div key={r.unit} className="flex justify-between p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm">
+              <div key={r.unit} className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                 <span>{r.unit}</span>
                 <span className="font-mono">{r.value.toLocaleString(undefined, { maximumFractionDigits: 4 })}</span>
               </div>
@@ -609,7 +609,7 @@ export function MeetingTimePlanner() {
           <label className={labelClass}>Select Timezones</label>
           <div className="flex flex-wrap gap-2">
             {TIMEZONES.map(t => (
-              <button key={t.tz} onClick={() => toggleTz(t.tz)} className={`text-xs px-2 py-1 rounded border ${timezones.includes(t.tz) ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-600'}`}>{t.label}</button>
+              <button key={t.tz} onClick={() => toggleTz(t.tz)} className={`text-xs px-2 py-1 rounded border ${timezones.includes(t.tz) ? 'bg-blue-600 text-white border-blue-600' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-600'}`}>{t.label}</button>
             ))}
           </div>
         </div>
@@ -617,7 +617,7 @@ export function MeetingTimePlanner() {
         {results.length > 0 && (
           <div className="mt-4 space-y-2">
             {results.map(r => (
-              <div key={r.tz} className="flex justify-between p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+              <div key={r.tz} className="flex justify-between p-3 bg-[var(--bg-surface)] rounded-lg">
                 <span className="text-sm font-medium">{r.label}</span>
                 <span className="text-sm font-mono font-bold">{r.time}</span>
               </div>

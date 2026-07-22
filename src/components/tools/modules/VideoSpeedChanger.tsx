@@ -147,21 +147,21 @@ export default function VideoSpeedChanger() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={handleReset}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
           <video
             ref={videoRef}
             src={URL.createObjectURL(file)}
@@ -172,12 +172,12 @@ export default function VideoSpeedChanger() {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Speed Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium">Speed Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">
-                Speed: <span className="font-bold text-zinc-900 dark:text-white">{speed}x</span>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                Speed: <span className="font-bold text-[var(--text-primary)]">{speed}x</span>
               </label>
               <input
                 type="range"
@@ -188,14 +188,14 @@ export default function VideoSpeedChanger() {
                 onChange={(e) => setSpeed(parseFloat(e.target.value))}
                 className="w-full accent-blue-500"
               />
-              <div className="flex justify-between text-xs text-zinc-500 mt-1">
+              <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-1">
                 <span>0.1x</span>
                 <span>10x</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Presets</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Presets</label>
               <div className="flex flex-wrap gap-2">
                 {presets.map((p) => (
                   <button
@@ -204,7 +204,7 @@ export default function VideoSpeedChanger() {
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                       speed === p
                         ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {p}x
@@ -214,13 +214,13 @@ export default function VideoSpeedChanger() {
             </div>
 
             {originalDuration > 0 && (
-              <div className="bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200 dark:border-white/5 space-y-1">
+              <div className="bg-[var(--bg-overlay)]/50 p-3 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-zinc-400">Original Duration</span>
+                  <span className="text-zinc-600 dark:text-[var(--text-muted)]">Original Duration</span>
                   <span className="text-zinc-900 dark:text-zinc-100 font-mono">{formatDuration(originalDuration)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-zinc-400">Estimated Output</span>
+                  <span className="text-zinc-600 dark:text-[var(--text-muted)]">Estimated Output</span>
                   <span className="text-blue-500 font-mono">{formatDuration(outputDuration)}</span>
                 </div>
               </div>

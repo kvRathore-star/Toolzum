@@ -30,24 +30,24 @@ export default function JSONDiffChecker() {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">JSON Diff Checker</h1>
-        <p className="text-zinc-400 mt-2">Compare two JSON objects side-by-side with color-coded key-level differences.</p>
+        <p className="text-[var(--text-muted)] mt-2">Compare two JSON objects side-by-side with color-coded key-level differences.</p>
       </div>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-zinc-500">Left (original)</label>
-            <textarea value={left} onChange={e => setLeft(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-mono" />
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Left (original)</label>
+            <textarea value={left} onChange={e => setLeft(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
           </div>
           <div>
-            <label className="text-xs font-medium text-zinc-500">Right (modified)</label>
-            <textarea value={right} onChange={e => setRight(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm font-mono" />
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Right (modified)</label>
+            <textarea value={right} onChange={e => setRight(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
           </div>
         </div>
-        <button onClick={compare} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition">Compare</button>
+        <button onClick={compare} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Compare</button>
         {diff && (
           <div>
-            <label className="text-xs font-medium text-zinc-500">Differences</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-sm font-mono whitespace-pre-wrap">{diff}</pre>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Differences</label>
+            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{diff}</pre>
           </div>
         )}
       </div>

@@ -180,19 +180,19 @@ export default function GifToWebpWebm() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && (
-            <p className="text-zinc-500 dark:text-zinc-500 text-xs mt-1">
+            <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)] text-xs mt-1">
               {gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}
             </p>
           )}
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setOutputUrl2(null); setGifInfo(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -200,11 +200,11 @@ export default function GifToWebpWebm() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+            <h4 className="text-[var(--text-primary)] font-medium">Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Output Format</label>
+              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Output Format</label>
               <div className="flex gap-2">
                 {(['webp', 'webm', 'both'] as OutputFormat[]).map((fmt) => (
                   <button
@@ -213,7 +213,7 @@ export default function GifToWebpWebm() {
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       outputFormat === fmt
                         ? 'bg-emerald-500 text-white shadow-lg'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {fmt === 'webp' ? 'WebP' : fmt === 'webm' ? 'WebM' : 'Both'}
@@ -224,7 +224,7 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   WebP Quality: {quality}
                 </label>
                 <input
@@ -235,7 +235,7 @@ export default function GifToWebpWebm() {
                   onChange={(e) => setQuality(Number(e.target.value))}
                   className="w-full accent-emerald-500"
                 />
-                <div className="flex justify-between text-xs text-zinc-400 mt-1">
+                <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">
                   <span>Smaller</span>
                   <span>Better</span>
                 </div>
@@ -244,7 +244,7 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webm' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">Frame Rate</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Frame Rate</label>
                 <div className="flex gap-2 flex-wrap">
                   {(['auto', 10, 15, 24, 30] as FpsOption[]).map((f) => (
                     <button
@@ -253,7 +253,7 @@ export default function GifToWebpWebm() {
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                         fps === f
                           ? 'bg-blue-500 text-white shadow-lg'
-                          : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                          : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                       }`}
                     >
                       {f === 'auto' ? 'Auto' : `${f} fps`}
@@ -265,8 +265,8 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400 mb-2">
-                  Loop Count <span className="text-zinc-400">(0 = infinite)</span>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                  Loop Count <span className="text-[var(--text-muted)]">(0 = infinite)</span>
                 </label>
                 <input
                   type="number"
@@ -274,7 +274,7 @@ export default function GifToWebpWebm() {
                   max="1000"
                   value={loopCount}
                   onChange={(e) => setLoopCount(Math.max(0, Number(e.target.value)))}
-                  className="w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-xl text-zinc-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
             )}
@@ -287,8 +287,8 @@ export default function GifToWebpWebm() {
                   onChange={(e) => setPreserveAlpha(e.target.checked)}
                   className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500"
                 />
-                <span className="text-sm text-zinc-600 dark:text-zinc-400">
-                  Preserve transparency <span className="text-zinc-400">(WebP only — WebM ignores this)</span>
+                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+                  Preserve transparency <span className="text-[var(--text-muted)]">(WebP only — WebM ignores this)</span>
                 </span>
               </label>
             )}
@@ -349,7 +349,7 @@ export default function GifToWebpWebm() {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+          <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
             <img
               src={URL.createObjectURL(file)}
               alt="Original GIF"
@@ -367,7 +367,7 @@ export default function GifToWebpWebm() {
             </ul>
           </div>
 
-          <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
             <p className="font-medium text-zinc-800 dark:text-zinc-200">File Comparison</p>
             <div className="space-y-1">
               <p>Original GIF: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{(file.size / 1024).toFixed(1)} KB</span></p>

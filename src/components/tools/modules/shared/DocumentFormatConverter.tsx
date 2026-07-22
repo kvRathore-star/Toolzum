@@ -662,7 +662,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={inputKey}
         onChange={(e) => handleFormatChange("input", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {FORMAT_KEYS.map(k => (
           <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
@@ -671,10 +671,10 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
 
       <button
         onClick={swapFormats}
-        className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all active:scale-95"
+        className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all active:scale-95"
         aria-label="Swap formats"
       >
-        <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
         </svg>
       </button>
@@ -682,7 +682,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={outputKey}
         onChange={(e) => handleFormatChange("output", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {(VALID_OUTPUTS[inputKey] || []).map(k => (
           <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
@@ -712,37 +712,37 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       {formatPicker}
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
-          <FileText className="w-8 h-8 text-indigo-500" />
+          <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
-            <p className="text-zinc-500 text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors disabled:opacity-50"
+          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
           <div className="space-y-4">
-            <h4 className="text-zinc-900 dark:text-white font-bold text-base flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
-              <FileEdit className="w-5 h-5 text-indigo-500" />
+            <h4 className="text-[var(--text-primary)] font-bold text-base flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2">
+              <FileEdit className="w-5 h-5 text-[var(--accent)]" />
               {pair.title}
             </h4>
-            <p className="text-sm text-zinc-500 leading-relaxed">{pair.description}</p>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{pair.description}</p>
           </div>
 
           <button
             onClick={convertDoc}
             disabled={isProcessing || !!outputUrl}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
+            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -760,7 +760,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
 
         <div className="flex flex-col justify-center">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <Download className="w-16 h-16 mb-4" />
                 <p className="font-bold text-center">{pair.outputFileName(file.name)}</p>
@@ -776,7 +776,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-zinc-400 text-center">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
               <FileEdit className="w-12 h-12 mb-4 opacity-30" />
               <p className="text-sm font-medium">Converted file will appear here</p>
             </div>
@@ -785,8 +785,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       </div>
 
       {related.length > 0 && (
-        <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800">
-          <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+        <div className="pt-6 border-t border-[var(--border-subtle)]">
+          <p className="text-sm text-[var(--text-secondary)] mb-3 font-medium">Also popular:</p>
           <div className="flex flex-wrap gap-2">
             {related.map(s => {
               const p = FORMAT_PAIRS.find(fp => fp.slug === s);
@@ -795,7 +795,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
                 <a
                   key={s}
                   href={`/pdf/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
                 >
                   {p.iconLabel} {p.actionLabel}
                 </a>

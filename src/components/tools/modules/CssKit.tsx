@@ -5,10 +5,10 @@ import { clipboardWrite } from "@/lib/clipboard";
 
 const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: number | string; onChange: (v: any) => void; suffix?: string; small?: boolean }) => (
   <div className="flex items-center gap-1.5">
-    <label className="text-[10px] text-zinc-500 w-14 shrink-0">{label}</label>
+    <label className="text-[10px] text-[var(--text-secondary)] w-14 shrink-0">{label}</label>
     <input type={typeof value === 'number' ? 'number' : 'text'} value={value} onChange={e => onChange(typeof value === 'number' ? Number(e.target.value) : e.target.value)}
-      className={`w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 ${small ? 'py-1 text-[11px]' : 'py-1.5 text-xs'} text-zinc-900 dark:text-white outline-none focus:border-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`} />
-    {suffix && <span className="text-[10px] text-zinc-400 w-5">{suffix}</span>}
+      className={`w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 ${small ? 'py-1 text-[11px]' : 'py-1.5 text-xs'} text-[var(--text-primary)] outline-none focus:border-[var(--accent)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`} />
+    {suffix && <span className="text-[10px] text-[var(--text-muted)] w-5">{suffix}</span>}
   </div>
 );
 
@@ -17,7 +17,7 @@ const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => 
 );
 
 const Result = ({ value }: { value: string }) => (
-  <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-zinc-50 dark:bg-black rounded-lg px-2 py-1 break-all whitespace-pre-wrap">{value}</p>
+  <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-[var(--bg-overlay)] rounded-lg px-2 py-1 break-all whitespace-pre-wrap">{value}</p>
 );
 
 export function GlassmorphismGenerator() {
@@ -26,9 +26,9 @@ export function GlassmorphismGenerator() {
   const css = `background: rgba(255,255,255,${(opacity / 100).toFixed(2)}); backdrop-filter: blur(${blur}px); -webkit-backdrop-filter: blur(${blur}px); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px;`;
   return (
     <div className="space-y-3">
-      <div className="flex gap-1 items-center"><span className="text-[10px] text-zinc-500">Blur</span>
+      <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Blur</span>
         <input type="range" min={1} max={20} value={blur} onChange={e => setBlur(Number(e.target.value))} className="flex-1" /></div>
-      <div className="flex gap-1 items-center"><span className="text-[10px] text-zinc-500">Opacity</span>
+      <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Opacity</span>
         <input type="range" min={1} max={50} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1" /></div>
       <Result value={css} />
       <CalcBtn onClick={() => { clipboardWrite(css); toast.success('Copied!'); }} label="Copy CSS" />
@@ -63,7 +63,7 @@ export function CssSpecificityCalculator() {
   return (
     <div className="space-y-3">
       <input type="text" value={sel} onChange={e => setSel(e.target.value)} placeholder="Enter CSS selector..."
-        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 text-[11px] font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[11px] font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
       <CalcBtn onClick={() => {
         const ids = (sel.match(/#/g) || []).length;
         const classes = (sel.match(/\./g) || []).length;
@@ -82,7 +82,7 @@ export function CssToScss() {
   return (
     <div className="space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="CSS with nesting..."
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => { setOutput(input.replace(/\n/g, '\n')); toast.success('CSS → SCSS (basic)'); }} label="Convert" />
       {output && <Result value="Check nesting. Use & for parent refs." />}
     </div>
@@ -95,7 +95,7 @@ export function LessToCss() {
   return (
     <div className="space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="@var: value;"
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => { setOutput(input.replace(/@(\w+)/g, '/* $1 */')); toast.success('Less → CSS (variables commented)'); }} label="Convert" />
       {output && <Result value={output} />}
     </div>
@@ -108,7 +108,7 @@ export function CssValidator() {
   return (
     <div className="space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS..."
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
         const issues: string[] = [];
         const lines = input.split('\n');

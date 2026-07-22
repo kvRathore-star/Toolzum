@@ -51,25 +51,25 @@ export default function IpAddressLookup() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Globe className="w-5 h-5 text-indigo-500" />
+          <Globe className="w-5 h-5 text-[var(--accent)]" />
           IP Address Geo-Lookup & ISP Resolver
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Lookup IPv4 or IPv6 details including Country location, region coordinates, ZIP codes, and ISP providers.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Lookup IPv4 or IPv6 details including Country location, region coordinates, ZIP codes, and ISP providers.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Lookup Controls */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
-            <span className="text-xs text-zinc-400 font-bold uppercase block">IP Address query</span>
+            <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">IP Address query</span>
             <input 
               type="text" 
               value={ipAddress}
               onChange={e => setIpAddress(e.target.value)}
               placeholder="e.g. 8.8.8.8 (leave empty to query your current IP)"
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs outline-none"
             />
           </div>
 
@@ -80,31 +80,31 @@ export default function IpAddressLookup() {
         </div>
 
         {/* Geo Details */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-center">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-center">
           {details ? (
             <div className="space-y-4 animate-in zoom-in-95 duration-200 text-xs">
-              <span className="text-xs text-zinc-400 font-bold uppercase block border-b border-zinc-800 pb-2">Resolved Geolocation details</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-zinc-800 pb-2">Resolved Geolocation details</span>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-zinc-50 dark:bg-black/10 p-3 rounded-xl border border-[var(--border-subtle)]">
-                  <span className="text-[10px] text-zinc-500 block uppercase">Resolved IP</span>
-                  <p className="font-mono font-bold text-indigo-400 mt-1">{details.ip}</p>
+                <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
+                  <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Resolved IP</span>
+                  <p className="font-mono font-bold text-[var(--accent)] mt-1">{details.ip}</p>
                 </div>
-                <div className="bg-zinc-50 dark:bg-black/10 p-3 rounded-xl border border-[var(--border-subtle)]">
-                  <span className="text-[10px] text-zinc-500 block uppercase">ISP Network</span>
-                  <p className="font-bold text-zinc-900 dark:text-white mt-1">{details.org}</p>
+                <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
+                  <span className="text-[10px] text-[var(--text-secondary)] block uppercase">ISP Network</span>
+                  <p className="font-bold text-[var(--text-primary)] mt-1">{details.org}</p>
                 </div>
-                <div className="bg-zinc-50 dark:bg-black/10 p-3 rounded-xl border border-[var(--border-subtle)]">
-                  <span className="text-[10px] text-zinc-500 block uppercase">Country & Postal</span>
-                  <p className="font-bold text-zinc-900 dark:text-white mt-1">{details.country_name} ({details.postal})</p>
+                <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
+                  <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Country & Postal</span>
+                  <p className="font-bold text-[var(--text-primary)] mt-1">{details.country_name} ({details.postal})</p>
                 </div>
-                <div className="bg-zinc-50 dark:bg-black/10 p-3 rounded-xl border border-[var(--border-subtle)]">
-                  <span className="text-[10px] text-zinc-500 block uppercase">City & State</span>
-                  <p className="font-bold text-zinc-900 dark:text-white mt-1">{details.city}, {details.region}</p>
+                <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
+                  <span className="text-[10px] text-[var(--text-secondary)] block uppercase">City & State</span>
+                  <p className="font-bold text-[var(--text-primary)] mt-1">{details.city}, {details.region}</p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="text-center text-zinc-500">
+            <div className="text-center text-[var(--text-secondary)]">
               <ShieldAlert className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700" />
               <p className="text-xs">No IP Address details loaded. Trigger resolution query.</p>
             </div>

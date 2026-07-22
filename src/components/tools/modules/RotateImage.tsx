@@ -57,12 +57,12 @@ export default function RotateImage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <h2 className="text-2xl font-bold">Rotate Image Online</h2>
-         <p className="text-zinc-500">Rotate images left or right by 90 degrees instantly in your browser.</p>
+         <p className="text-[var(--text-secondary)]">Rotate images left or right by 90 degrees instantly in your browser.</p>
          
          <div 
-           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
+           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
            onClick={() => !image && fileInputRef.current?.click()}
          >
            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
@@ -71,7 +71,7 @@ export default function RotateImage() {
                <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg shadow-sm" />
              </div>
            ) : (
-             <div className="text-zinc-500">Click or Drag Image Here</div>
+             <div className="text-[var(--text-secondary)]">Click or Drag Image Here</div>
            )}
          </div>
 
@@ -83,10 +83,10 @@ export default function RotateImage() {
              <button onClick={() => handleRotate(90)} className="flex items-center gap-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 font-medium py-3 px-6 rounded-xl transition-all shadow-sm">
                <RotateCw className="w-5 h-5" /> Right
              </button>
-             <button onClick={download} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95 ml-auto sm:ml-4">
+             <button onClick={download} className="flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95 ml-auto sm:ml-4">
                <Download className="w-5 h-5" /> Download
              </button>
-             <button onClick={() => {setImage(null); setRotation(0);}} className="text-sm text-zinc-500 underline ml-2">Clear</button>
+             <button onClick={() => {setImage(null); setRotation(0);}} className="text-sm text-[var(--text-secondary)] underline ml-2">Clear</button>
            </div>
          )}
          

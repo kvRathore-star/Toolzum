@@ -572,14 +572,14 @@ export default function AiArticleWriter() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
           </svg>
           AI Article Writer
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Generate structured article outlines and content using intelligent templates.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Generate structured article outlines and content using intelligent templates.</p>
       </div>
 
       <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-xl px-4 py-3 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-2">
@@ -589,46 +589,46 @@ export default function AiArticleWriter() {
         <span>This tool uses a smart template system with pre-written patterns — not a true AI generator. Content is generated locally from curated sentence templates and transition phrases.</span>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
         <div className="space-y-2">
-          <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Topic</label>
+          <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Topic</label>
           <input
             type="text"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
             placeholder="e.g., Artificial Intelligence in Healthcare, Remote Work Best Practices..."
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 transition-colors text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Tone</label>
+            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tone</label>
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {TONES.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Length</label>
+            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
             <select
               value={length}
               onChange={(e) => setLength(e.target.value as LengthKey)}
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {LENGTHS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
             </select>
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Audience</label>
+            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Audience</label>
             <select
               value={audience}
               onChange={(e) => setAudience(e.target.value as Audience)}
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {AUDIENCES.map((a) => <option key={a} value={a}>{a}</option>)}
             </select>
@@ -636,7 +636,7 @@ export default function AiArticleWriter() {
         </div>
 
         <div className="space-y-2">
-          <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Include Sections</label>
+          <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Include Sections</label>
           <div className="flex flex-wrap gap-2">
             {ALL_SECTIONS.map((s) => (
               <button
@@ -645,7 +645,7 @@ export default function AiArticleWriter() {
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
                   selectedSections.includes(s.id)
                     ? 'bg-indigo-100 dark:bg-indigo-900/30 border-indigo-300 dark:border-indigo-700 text-indigo-700 dark:text-indigo-300'
-                    : 'bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600'
+                    : 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300 dark:hover:border-zinc-600'
                 }`}
               >
                 {s.label}
@@ -667,7 +667,7 @@ export default function AiArticleWriter() {
             {isLoading ? 'Generating...' : 'Generate Outline'}
           </button>
           <button onClick={handleClear} disabled={!finished}
-            className="px-5 py-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
@@ -678,11 +678,11 @@ export default function AiArticleWriter() {
 
       {finished && outline.length > 0 && (
         <div className="space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div className="flex items-center gap-3">
-                <h3 className="text-sm font-bold text-zinc-900 dark:text-white">Generated Outline</h3>
-                <span className="text-[10px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 px-2 py-0.5 rounded-full">
+                <h3 className="text-sm font-bold text-[var(--text-primary)]">Generated Outline</h3>
+                <span className="text-[10px] font-mono bg-[var(--bg-surface)] text-[var(--text-secondary)] px-2 py-0.5 rounded-full">
                   {totalWords} words
                 </span>
                 {(isShort || isMedium || isLong) && (
@@ -695,20 +695,20 @@ export default function AiArticleWriter() {
                 <select
                   value={format}
                   onChange={(e) => setFormat(e.target.value as Format)}
-                  className="bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-700 dark:text-zinc-300 outline-none focus:border-indigo-500 appearance-none cursor-pointer"
+                  className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:border-indigo-500 appearance-none cursor-pointer"
                 >
                   <option value="md">Markdown (.md)</option>
                   <option value="txt">Plain Text (.txt)</option>
                   <option value="html">HTML</option>
                 </select>
                 <button onClick={handleCopy}
-                  className="p-2 border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-500 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all cursor-pointer">
+                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-all cursor-pointer">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                 </button>
                 <button onClick={handleExport}
-                  className="p-2 border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-500 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all cursor-pointer">
+                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-all cursor-pointer">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -718,23 +718,23 @@ export default function AiArticleWriter() {
 
             <div className="space-y-3">
               {outline.map((item, i) => (
-                <div key={item.sectionId} className="border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden">
-                  <div className="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 flex items-center justify-between">
+                <div key={item.sectionId} className="border border-[var(--border-subtle)] rounded-xl overflow-hidden">
+                  <div className="bg-[var(--bg-overlay)]/50 px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500">{i + 1}.</span>
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white">{item.title}</h4>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)]">{i + 1}.</span>
+                      <h4 className="text-sm font-bold text-[var(--text-primary)]">{item.title}</h4>
                     </div>
-                    <span className="text-[10px] text-zinc-400 dark:text-zinc-500">{wordCount(item.content)} words</span>
+                    <span className="text-[10px] text-[var(--text-muted)]">{wordCount(item.content)} words</span>
                   </div>
                   <div className="px-4 pb-3 pt-2">
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {item.subtopics.map((st, j) => (
-                        <span key={j} className="text-[10px] bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2 py-0.5 rounded-full">
+                        <span key={j} className="text-[10px] bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] px-2 py-0.5 rounded-full">
                           {st}
                         </span>
                       ))}
                     </div>
-                    <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-wrap">
+                    <div className="text-xs text-[var(--text-primary)] leading-relaxed whitespace-pre-wrap">
                       {item.content}
                     </div>
                   </div>

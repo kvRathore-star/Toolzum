@@ -71,7 +71,7 @@ export default function VideoToGif() {
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p className="text-zinc-500 font-medium animate-pulse">Initializing WebAssembly Core...</p>
+        <p className="text-[var(--text-secondary)] font-medium animate-pulse">Initializing WebAssembly Core...</p>
       </div>
     );
   }
@@ -80,32 +80,32 @@ export default function VideoToGif() {
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <svg className="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Video & Image to GIF Converter</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Video & Image to GIF Converter</h3>
       </div>
 
-      <div className="flex gap-1.5 bg-zinc-100 dark:bg-zinc-800/50 p-1 rounded-2xl w-fit">
-        <button onClick={() => { setMode('video'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'video' ? 'bg-white dark:bg-zinc-700 text-pink-600 dark:text-pink-400 shadow-sm' : 'text-zinc-500'}`}><Film className="w-3.5 h-3.5" /> Video</button>
-        <button onClick={() => { setMode('image'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'image' ? 'bg-white dark:bg-zinc-700 text-pink-600 dark:text-pink-400 shadow-sm' : 'text-zinc-500'}`}><Image className="w-3.5 h-3.5" /> Images</button>
+      <div className="flex gap-1.5 bg-[var(--bg-surface)]/50 p-1 rounded-2xl w-fit">
+        <button onClick={() => { setMode('video'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'video' ? 'bg-[var(--bg-elevated)] text-pink-600 dark:text-pink-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}><Film className="w-3.5 h-3.5" /> Video</button>
+        <button onClick={() => { setMode('image'); setOutputUrl(null); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${mode === 'image' ? 'bg-[var(--bg-elevated)] text-pink-600 dark:text-pink-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}><Image className="w-3.5 h-3.5" /> Images</button>
       </div>
 
       {mode === 'video' ? (
         !videoFile ? (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
             <div className="bg-pink-500/10 border-b border-pink-500/20 p-3 px-5 text-pink-500 text-xs"><strong>Make Memes Offline:</strong> Convert any video clip into a high-quality looping GIF.</div>
             <div className="p-5">
               <FileUploader accept="video/mp4,video/quicktime,video/webm" onFileSelect={(f: File) => { setVideoFile(f); setOutputUrl(null); }} title="Upload Video" subtitle="MP4, MOV, or WEBM" />
             </div>
           </div>
         ) : (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex justify-between items-center p-4 border-b border-zinc-200 dark:border-zinc-800">
-              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{videoFile.name}</h4><p className="text-[10px] text-zinc-400">{(videoFile.size / 1024 / 1024).toFixed(2)} MB</p></div>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-[var(--border-subtle)]">
+              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{videoFile.name}</h4><p className="text-[10px] text-[var(--text-muted)]">{(videoFile.size / 1024 / 1024).toFixed(2)} MB</p></div>
               <button onClick={() => { setVideoFile(null); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Change</button>
             </div>
             <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v} FPS</button>)}</div></div>
-                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v}px</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v} FPS</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-pink-600 text-white border-pink-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v}px</button>)}</div></div>
               </div>
               <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} disabled={isProcessing} className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">{isProcessing ? 'Generating...' : 'Convert to GIF'}</button>}</div>
             </div>
@@ -113,26 +113,26 @@ export default function VideoToGif() {
         )
       ) : (
         imageFiles.length === 0 ? (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
             <div className="bg-fuchsia-500/10 border-b border-fuchsia-500/20 p-3 px-5 text-fuchsia-500 text-xs"><strong>Animate Images:</strong> Combine multiple images into a single animated GIF.</div>
             <div className="p-5">
-              <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
+              <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
                 <input type="file" multiple accept="image/png,image/jpeg,image/webp" onChange={e => { if (e.target.files) { setImageFiles(Array.from(e.target.files!)); setOutputUrl(null); } }} className="absolute inset-0 opacity-0 cursor-pointer" />
                 <svg className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                <p className="text-xs text-zinc-500">Select multiple images (PNG, JPG, WebP)</p>
+                <p className="text-xs text-[var(--text-secondary)]">Select multiple images (PNG, JPG, WebP)</p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex justify-between items-center p-4 border-b border-zinc-200 dark:border-zinc-800">
-              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{imageFiles.length} Images</h4><p className="text-[10px] text-zinc-400">Click to add more</p></div>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-[var(--border-subtle)]">
+              <div><h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{imageFiles.length} Images</h4><p className="text-[10px] text-[var(--text-muted)]">Click to add more</p></div>
               <button onClick={() => { setImageFiles([]); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Clear</button>
             </div>
             <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v} FPS</button>)}</div></div>
-                <div><label className="text-[10px] font-bold text-zinc-400 uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>{v}px</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v} FPS</button>)}</div></div>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v}px</button>)}</div></div>
               </div>
               <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} disabled={isProcessing} className="w-full bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">{isProcessing ? 'Generating...' : 'Create Animated GIF'}</button>}</div>
             </div>
@@ -141,15 +141,15 @@ export default function VideoToGif() {
       )}
 
       {isProcessing && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-2">
           <div className="flex justify-between text-[10px] font-semibold text-pink-600 dark:text-pink-400"><span>Generating GIF...</span><span>{progress}%</span></div>
-          <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+          <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
         </div>
       )}
 
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-4">
-          <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3"><h4 className="text-xs font-bold text-emerald-500">GIF Ready</h4>{outputSize && <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}</div>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-4">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3"><h4 className="text-xs font-bold text-emerald-500">GIF Ready</h4>{outputSize && <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}</div>
           <div className="bg-zinc-100 dark:bg-black rounded-xl overflow-hidden p-4 flex items-center justify-center" style={{backgroundImage: 'linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee)', backgroundSize: '20px 20px', backgroundPosition: '0 0,10px 10px'}}>
             <img  loading="lazy" src={outputUrl} alt="Generated GIF" className="max-w-full max-h-[250px] object-contain rounded drop-shadow-md" />
           </div>
@@ -158,7 +158,7 @@ export default function VideoToGif() {
             Download GIF
           </button>
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-            <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> No watermark, HD resolution (1080p+), batch convert multiple videos, custom loop count, add text overlays to GIFs.</p>
+            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> No watermark, HD resolution (1080p+), batch convert multiple videos, custom loop count, add text overlays to GIFs.</p>
           </div>
         </div>
       )}

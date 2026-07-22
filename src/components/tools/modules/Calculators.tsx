@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none";
-const labelClass = "block text-sm font-bold text-zinc-700 dark:text-zinc-300 mb-1.5";
+const inputClass = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none";
+const labelClass = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
 const btnClass = "w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg";
-const cardClass = "max-w-2xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl animate-in fade-in duration-500";
-const headingClass = "text-2xl font-bold text-zinc-900 dark:text-white mb-6";
-const resultClass = "p-5 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-sm font-mono whitespace-pre text-indigo-600 dark:text-indigo-400";
+const cardClass = "max-w-2xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl animate-in fade-in duration-500";
+const headingClass = "text-2xl font-bold text-[var(--text-primary)] mb-6";
+const resultClass = "p-5 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-sm font-mono whitespace-pre text-[var(--accent)] dark:text-[var(--accent)]";
 
 export function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');
@@ -303,7 +303,7 @@ export function LtvCalculator() {
         <div><label className={labelClass}>Churn Rate (%)</label><input type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
-        <p className="text-xs text-zinc-500 mt-2">Uses ARPU ÷ Churn Rate (SaaS method). For AOV × Frequency × Lifespan (product/e-commerce method), see <a href="/calculator/ltv-calculator" className="text-blue-600 hover:underline">LTV Calculator</a>.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">Uses ARPU ÷ Churn Rate (SaaS method). For AOV × Frequency × Lifespan (product/e-commerce method), see <a href="/calculator/ltv-calculator" className="text-blue-600 hover:underline">LTV Calculator</a>.</p>
       </div>
     </div>
   );
@@ -484,7 +484,7 @@ export function RunwayCalculator() {
         <div><label className={labelClass}>Monthly Burn Rate ($)</label><input type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
-        <p className="text-xs text-zinc-500 mt-2">For a full burn-rate analysis (gross/net burn with starting/ending cash), see <a href="/calculator/burn-rate-calculator" className="text-blue-600 hover:underline">Burn Rate & Runway Calculator</a>.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">For a full burn-rate analysis (gross/net burn with starting/ending cash), see <a href="/calculator/burn-rate-calculator" className="text-blue-600 hover:underline">Burn Rate & Runway Calculator</a>.</p>
       </div>
     </div>
   );
@@ -1562,7 +1562,7 @@ export function HeartRateZoneCalculator() {
         <div><label className={labelClass}>Resting Heart Rate (bpm)</label><input type="number" value={restingHR} onChange={e => setRestingHR(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
-        <p className="text-xs text-zinc-500 mt-2">Uses the Karvonen method (resting HR + HR reserve). For a simpler %-of-max calculation, see <a href="/health/heart-rate-calculator" className="text-blue-600 hover:underline">Target Heart Rate Zones</a>.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">Uses the Karvonen method (resting HR + HR reserve). For a simpler %-of-max calculation, see <a href="/health/heart-rate-calculator" className="text-blue-600 hover:underline">Target Heart Rate Zones</a>.</p>
       </div>
     </div>
   );
@@ -1843,7 +1843,7 @@ export function StepsToCaloriesCalculator() {
         <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
         <button onClick={calc} className={btnClass}>Calculate</button>
         {result && <pre className={resultClass}>{result}</pre>}
-        <p className="text-xs text-zinc-500 mt-2">Uses weight-based formula (avg stride 76.2 cm). For a height-based stride estimate, see <a href="/health/steps-calculator" className="text-blue-600 hover:underline">Steps to Distance</a>.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">Uses weight-based formula (avg stride 76.2 cm). For a height-based stride estimate, see <a href="/health/steps-calculator" className="text-blue-600 hover:underline">Steps to Distance</a>.</p>
       </div>
     </div>
   );

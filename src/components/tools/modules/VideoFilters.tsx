@@ -288,7 +288,7 @@ export default function VideoFilters() {
       className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
         isEnabled(k)
           ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-          : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+          : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
       }`}
     >
       {label}
@@ -304,7 +304,7 @@ export default function VideoFilters() {
           className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
             on
               ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
           }`}
         >
           {cfg.label}
@@ -330,7 +330,7 @@ export default function VideoFilters() {
                 onChange={(e) => setParam(cfg.key, pk, actualVal(Number(e.target.value)))}
                 className="flex-1 h-1 accent-violet-600"
               />
-              <span className="text-[10px] font-mono text-zinc-500 w-8 text-right">{displayVal}</span>
+              <span className="text-[10px] font-mono text-[var(--text-secondary)] w-8 text-right">{displayVal}</span>
             </div>
           );
         })()}
@@ -340,14 +340,14 @@ export default function VideoFilters() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setThumbnailUrl(null); setFilters({ ...D, pixelate: { ...D.pixelate }, oilPaint: { ...D.oilPaint }, gaussianBlur: { ...D.gaussianBlur }, vignette: { ...D.vignette }, brightness: { ...D.brightness }, contrast: { ...D.contrast }, saturation: { ...D.saturation } }); loadCalled.current = false; }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -355,11 +355,11 @@ export default function VideoFilters() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[250px]">
+          <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[250px]">
             {thumbnailUrl ? (
               <img src={thumbnailUrl} alt="Preview" className="w-full max-h-[350px] rounded-lg object-contain" />
             ) : (
-              <div className="text-zinc-400 text-sm">Generating preview...</div>
+              <div className="text-[var(--text-muted)] text-sm">Generating preview...</div>
             )}
           </div>
           <button
@@ -373,8 +373,8 @@ export default function VideoFilters() {
 
         <div className="space-y-5">
           {CATEGORIES.map((cat) => (
-            <div key={cat.key} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl space-y-3">
-              <h4 className="text-zinc-900 dark:text-white font-semibold text-sm">{cat.label}</h4>
+            <div key={cat.key} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-3">
+              <h4 className="text-[var(--text-primary)] font-semibold text-sm">{cat.label}</h4>
               <div className="flex flex-wrap gap-2">
                 {cat.filters.map((cfg) =>
                   cfg.hasParam ? paramBtn(cfg) : boolBtn(cfg.key, cfg.label)
@@ -383,8 +383,8 @@ export default function VideoFilters() {
             </div>
           ))}
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl space-y-3">
-            <h4 className="text-zinc-900 dark:text-white font-semibold text-sm">Output</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-3">
+            <h4 className="text-[var(--text-primary)] font-semibold text-sm">Output</h4>
             <div className="flex gap-2">
               {FORMATS.map((fmt) => (
                 <button
@@ -393,7 +393,7 @@ export default function VideoFilters() {
                   className={`px-4 py-2 rounded-lg text-xs font-bold border transition-all uppercase ${
                     outputFormat === fmt
                       ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {fmt}

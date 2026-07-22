@@ -132,7 +132,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             : <><strong>APNG to GIF:</strong> Convert animated PNGs to universally compatible GIF format.</>}
         </div>
         <button onClick={() => { setMode(otherMode); setFile(null); }}
-          className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
           Need to convert {toApng ? 'APNG back to GIF' : 'GIF to APNG'} instead? <span className="font-semibold">Switch →</span>
         </button>
         <FileUploader
@@ -147,30 +147,30 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && toApng && (
-            <p className="text-zinc-500 text-xs mt-1">{gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}</p>
+            <p className="text-[var(--text-secondary)] text-xs mt-1">{gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}</p>
           )}
         </div>
         <button onClick={() => { setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       <button onClick={() => { setMode(otherMode); setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
-        className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors -mt-6">
+        className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors -mt-6">
         Need to convert {toApng ? 'APNG to GIF' : 'GIF to APNG'} instead? <span className="font-semibold">Switch →</span>
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Convert to {toApng ? 'APNG' : 'GIF'}</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+            <h4 className="text-[var(--text-primary)] font-medium">Convert to {toApng ? 'APNG' : 'GIF'}</h4>
 
             {toApng ? (
-              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <div className="bg-[var(--bg-overlay)]/50 rounded-xl p-4 space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
                 <p>Your GIF will be converted to animated PNG format.</p>
                 <ul className="space-y-1">
                   <li>• 24-bit colors vs GIF&apos;s 8-bit palette</li>
@@ -181,20 +181,20 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             ) : (
               <div className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Frame Rate</label>
+                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Frame Rate</label>
                   <div className="grid grid-cols-4 gap-2 mt-2">
                     {FPS_OPTIONS.map(v => (
                       <button key={v} onClick={() => setFps(v)}
-                        className={`py-2 text-xs font-bold border rounded-lg transition-all ${fps === v ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}>{v} FPS</button>
+                        className={`py-2 text-xs font-bold border rounded-lg transition-all ${fps === v ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-300'}`}>{v} FPS</button>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Output Width</label>
+                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Output Width</label>
                   <div className="grid grid-cols-4 gap-2 mt-2">
                     {WIDTH_OPTIONS.map(v => (
                       <button key={v} onClick={() => setWidth(v)}
-                        className={`py-2 text-xs font-bold border rounded-lg transition-all ${width === v ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}>{v}px</button>
+                        className={`py-2 text-xs font-bold border rounded-lg transition-all ${width === v ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-300'}`}>{v}px</button>
                     ))}
                   </div>
                 </div>
@@ -213,12 +213,12 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
               <h4 className="text-xl font-bold text-emerald-400 mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
               {toApng && (
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div><p className="text-xs text-zinc-400 mb-2">Original (GIF)</p><p className="text-sm text-zinc-200">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</p></div>
-                  <div><p className="text-xs text-zinc-400 mb-2">{toApng ? 'APNG' : 'GIF'}</p><p className="text-sm text-zinc-200">{(outputSize / 1024).toFixed(1)} KB</p></div>
+                  <div><p className="text-xs text-[var(--text-muted)] mb-2">Original (GIF)</p><p className="text-sm text-zinc-200">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</p></div>
+                  <div><p className="text-xs text-[var(--text-muted)] mb-2">{toApng ? 'APNG' : 'GIF'}</p><p className="text-sm text-zinc-200">{(outputSize / 1024).toFixed(1)} KB</p></div>
                 </div>
               )}
               {toApng && outputSize > 0 && gifInfo!.fileSize > 0 && (
-                <p className="text-sm text-zinc-400 mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-emerald-400' : 'text-amber-400'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
+                <p className="text-sm text-[var(--text-muted)] mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-emerald-400' : 'text-amber-400'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
               )}
               <button onClick={() => downloadOrShare(outputUrl, `${file!.name.split('.')[0]}.${toApng ? 'png' : 'gif'}`)}
                 className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg">Download {toApng ? 'APNG' : 'GIF'}</button>
@@ -228,19 +228,19 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
 
         <div className="lg:col-span-2 space-y-6">
           {uploadedUrl && toApng && (
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img src={uploadedUrl} alt="Original" className="max-h-[240px] object-contain rounded-lg" />
             </div>
           )}
 
           {!toApng && file && (
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <NextImage unoptimized loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[300px] object-contain rounded-lg" />
             </div>
           )}
 
           {outputUrl && (
-            <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
+            <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img src={outputUrl} alt="Converted" className="max-h-[240px] object-contain rounded-lg" />
             </div>
           )}
@@ -248,7 +248,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
           {toApng && (
             <>
               {gifInfo && (
-                <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
                   <p className="font-medium text-zinc-800 dark:text-zinc-200">File Info</p>
                   <p>Size: <span className="text-zinc-900 dark:text-zinc-100">{(gifInfo.fileSize / 1024).toFixed(1)} KB</span></p>
                   <p>Dimensions: <span className="text-zinc-900 dark:text-zinc-100">{gifInfo.width}×{gifInfo.height}</span></p>
@@ -268,7 +268,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
           )}
 
           {!toApng && !isProcessing && (
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
               APNGs offer better compression and alpha channel support, but GIF remains the most compatible format across all platforms and browsers.
             </p>
           )}

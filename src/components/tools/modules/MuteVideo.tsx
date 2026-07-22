@@ -166,61 +166,61 @@ export default function MuteVideo() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={reset}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-black border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+        <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
           <video src={URL.createObjectURL(file)} controls className="w-full max-h-[350px] rounded-lg" />
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Audio Settings</h4>
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+            <h4 className="text-[var(--text-primary)] font-medium">Audio Settings</h4>
 
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={() => setMode('mute')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'mute' ? 'bg-amber-500 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'mute' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Mute
               </button>
               <button
                 onClick={() => setMode('replace')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'replace' ? 'bg-amber-500 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'replace' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Replace
               </button>
               <button
                 onClick={() => setMode('volume')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'volume' ? 'bg-amber-500 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'volume' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Volume
               </button>
             </div>
 
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{getModeDescription()}</p>
+            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{getModeDescription()}</p>
 
             {!ffmpegLoaded && (
-              <div className="flex items-center gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl">
+              <div className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] rounded-xl">
                 <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                <span className="text-sm text-zinc-600 dark:text-zinc-400">Loading FFmpeg engine...</span>
+                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Loading FFmpeg engine...</span>
               </div>
             )}
 
             {mode === 'replace' && (
               <div className="space-y-3">
-                <label className="block text-sm text-zinc-600 dark:text-zinc-400">Replacement Audio</label>
+                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Replacement Audio</label>
                 {!audioFile ? (
                   <FileUploader
                     accept="audio/mp3,audio/wav,audio/m4a,audio/aac,.mp3,.wav,.m4a,.aac"
@@ -229,10 +229,10 @@ export default function MuteVideo() {
                   />
                 ) : (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                    <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{audioFile.name}</p>
-                        <p className="text-xs text-zinc-500">{(audioFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                        <p className="text-xs text-[var(--text-secondary)]">{(audioFile.size / 1024 / 1024).toFixed(2)} MB</p>
                       </div>
                       <button
                         onClick={() => setAudioFile(null)}
@@ -247,7 +247,7 @@ export default function MuteVideo() {
                       <select
                         value={syncMode}
                         onChange={(e) => setSyncMode(e.target.value as 'shortest' | 'first')}
-                        className="text-xs bg-white dark:bg-black border border-zinc-200 dark:border-zinc-700 rounded-lg px-2 py-1 text-zinc-900 dark:text-white outline-none"
+                        className="text-xs bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[var(--text-primary)] outline-none"
                       >
                         <option value="shortest">Trim to shortest duration</option>
                         <option value="first">Use original video duration</option>
@@ -261,7 +261,7 @@ export default function MuteVideo() {
             {mode === 'volume' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm text-zinc-600 dark:text-zinc-400">Volume Level</label>
+                  <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Volume Level</label>
                   <span className="text-lg font-bold text-amber-500">{volume}%</span>
                 </div>
                 <input
@@ -272,7 +272,7 @@ export default function MuteVideo() {
                   onChange={(e) => setVolume(Number(e.target.value))}
                   className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
-                <div className="flex justify-between text-xs text-zinc-400">
+                <div className="flex justify-between text-xs text-[var(--text-muted)]">
                   <span>0% (Silent)</span>
                   <span>100% (Normal)</span>
                   <span>200% (Double)</span>

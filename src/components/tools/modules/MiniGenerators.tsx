@@ -13,7 +13,7 @@ export default function MiniGenerators() {
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Mini Generators</h1>
-        <p className="text-zinc-400 mt-2">ULID, numeronyms, and MAC vendor lookup — each tool opens in its own page.</p>
+        <p className="text-[var(--text-muted)] mt-2">ULID, numeronyms, and MAC vendor lookup — each tool opens in its own page.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {tools.map(tool => (

@@ -89,7 +89,7 @@ export default function UrlToPdf() {
           Some sites block embedding — enable the proxy option to bypass restrictions.
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <div className="flex items-center gap-3">
             <input
               type="url"
@@ -97,7 +97,7 @@ export default function UrlToPdf() {
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleLoad()}
               placeholder="https://example.com"
-              className="flex-1 px-4 py-3 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={handleLoad}
@@ -113,7 +113,7 @@ export default function UrlToPdf() {
             </button>
           </div>
 
-          <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-600 dark:text-zinc-400">
+          <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-600 dark:text-[var(--text-muted)]">
             <input
               type="checkbox"
               checked={useProxy}
@@ -131,7 +131,7 @@ export default function UrlToPdf() {
           )}
         </div>
 
-        <div className="bg-zinc-50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
+        <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
           <p>⚠️ <strong>Limitations:</strong> Some websites block embedding via X-Frame-Options. Enable &quot;Use CORS proxy&quot; to bypass this. Sites behind login or with heavy JavaScript may not render fully.</p>
         </div>
       </div>
@@ -140,22 +140,22 @@ export default function UrlToPdf() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
           <svg className="w-5 h-5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 0a9 9 0 019 9"/></svg>
           <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm truncate">{url}</span>
         </div>
         <button
           onClick={reset}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg shrink-0"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg shrink-0"
         >
           New URL
         </button>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800">
-          <h4 className="text-zinc-900 dark:text-white font-medium">Preview</h4>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+        <div className="flex items-center justify-between p-4 border-b border-[var(--border-subtle)]">
+          <h4 className="text-[var(--text-primary)] font-medium">Preview</h4>
         </div>
         <div className="relative w-full" style={{ height: '75vh' }}>
           <iframe
@@ -176,7 +176,7 @@ export default function UrlToPdf() {
         Save as PDF
       </button>
 
-      <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center">
+      <p className="text-xs text-[var(--text-secondary)] text-center">
         Click &quot;Save as PDF&quot; to open the browser print dialog. Choose &quot;Save as PDF&quot; as the destination.
       </p>
     </div>

@@ -93,10 +93,10 @@ export default function ZalgoTextGenerator() {
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
       {/* Banner */}
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           👻 Interactive Zalgo Text Generator
         </h4>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Transform standard string text into cursed, creepy Zalgo text by layering diacritical marks. Customise intensity and stacking bounds entirely client-side.
         </p>
       </div>
@@ -105,15 +105,15 @@ export default function ZalgoTextGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Controls Column */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-6 h-fit">
-          <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-200 dark:border-white/5 pb-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-6 h-fit">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-2">
             Zalgo Parameters
           </h4>
 
           {/* Corruption Intensity Slider */}
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Cursed Level (1-20)</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Cursed Level (1-20)</label>
               <span className="text-sm font-extrabold text-red-500">{intensity}</span>
             </div>
             <input
@@ -122,13 +122,13 @@ export default function ZalgoTextGenerator() {
               max={20}
               value={intensity}
               onChange={e => setIntensity(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-red-600 mt-2"
+              className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-red-600 mt-2"
             />
           </div>
 
           {/* Stacking Options */}
           <div className="space-y-3 pt-2">
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input
                 type="checkbox"
                 checked={goUp}
@@ -137,7 +137,7 @@ export default function ZalgoTextGenerator() {
               />
               Stack Above (Upwards)
             </label>
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input
                 type="checkbox"
                 checked={goMid}
@@ -146,7 +146,7 @@ export default function ZalgoTextGenerator() {
               />
               Stack Middle (Cross through)
             </label>
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input
                 type="checkbox"
                 checked={goDown}
@@ -159,7 +159,7 @@ export default function ZalgoTextGenerator() {
 
           <button
             onClick={loadSample}
-            className="w-full bg-[var(--bg-overlay)] dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm"
+            className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-800 dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm"
           >
             💡 Load Sample Text
           </button>
@@ -168,9 +168,9 @@ export default function ZalgoTextGenerator() {
         {/* Input & Output Area */}
         <div className="lg:col-span-2 space-y-6 flex flex-col h-auto">
           {/* Input Block */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[200px]">
-            <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-              <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[200px]">
+            <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+              <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
                 Normal Input Text
               </span>
               <button
@@ -184,14 +184,14 @@ export default function ZalgoTextGenerator() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type or paste standard text here..."
-              className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-900 dark:text-white"
+              className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-[var(--text-primary)]"
             />
           </div>
 
           {/* Output Block */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
-            <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-              <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
+            <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+              <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
                 Cursed Zalgo Output
               </span>
               <button

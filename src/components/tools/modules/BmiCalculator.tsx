@@ -73,15 +73,15 @@ export default function BmiCalculator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
         <div className="flex items-center gap-2">
-          <Activity className="w-5 h-5 text-rose-500" />
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">BMI Calculator</h3>
+          <Activity className="w-5 h-5 text-[var(--accent)]" />
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">BMI Calculator</h3>
         </div>
-        <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-lg p-0.5">
-          <button onClick={switchToMetric} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${unit === 'metric' ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>Metric</button>
-          <button onClick={switchToImperial} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${unit === 'imperial' ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>US/Imperial</button>
+        <div className="flex bg-[var(--bg-surface)] rounded-lg p-0.5">
+          <button onClick={switchToMetric} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${unit === 'metric' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Metric</button>
+          <button onClick={switchToImperial} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${unit === 'imperial' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>US/Imperial</button>
         </div>
       </div>
       
@@ -90,33 +90,33 @@ export default function BmiCalculator() {
           {unit === 'metric' ? (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Weight (kg)</label>
-                <input type="number" value={weightKg} onChange={e => onWeightKgChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
+                <input type="number" value={weightKg} onChange={e => onWeightKgChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
                 <input type="range" min="30" max="150" value={weightKg} onChange={e => onWeightKgChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Height (cm)</label>
-                <input type="number" value={heightCm} onChange={e => onHeightCmChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
+                <input type="number" value={heightCm} onChange={e => onHeightCmChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
                 <input type="range" min="100" max="220" value={heightCm} onChange={e => onHeightCmChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
             </>
           ) : (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Weight (lbs)</label>
-                <input type="number" value={weightLbs} onChange={e => onWeightLbsChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (lbs)</label>
+                <input type="number" value={weightLbs} onChange={e => onWeightLbsChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
                 <input type="range" min="70" max="330" value={weightLbs} onChange={e => onWeightLbsChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Height</label>
+                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height</label>
                 <div className="flex gap-2">
                   <div className="flex-1">
-                    <input type="number" value={heightFt} onChange={e => onHeightImperialChange(Math.max(0, parseInt(e.target.value) || 0), heightIn)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" placeholder="ft" />
-                    <div className="text-[10px] text-zinc-400 mt-1 text-center">ft</div>
+                    <input type="number" value={heightFt} onChange={e => onHeightImperialChange(Math.max(0, parseInt(e.target.value) || 0), heightIn)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" placeholder="ft" />
+                    <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">ft</div>
                   </div>
                   <div className="flex-1">
-                    <input type="number" value={heightIn} onChange={e => onHeightImperialChange(heightFt, Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" placeholder="in" />
-                    <div className="text-[10px] text-zinc-400 mt-1 text-center">in</div>
+                    <input type="number" value={heightIn} onChange={e => onHeightImperialChange(heightFt, Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" placeholder="in" />
+                    <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">in</div>
                   </div>
                 </div>
               </div>
@@ -124,20 +124,20 @@ export default function BmiCalculator() {
           )}
         </div>
 
-        <div className="bg-zinc-50 dark:bg-black/30 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800 flex flex-col justify-between">
+        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div>
-            <h4 className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase mb-4">Body Mass Index</h4>
+            <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase mb-4">Body Mass Index</h4>
             <p className="text-5xl font-extrabold text-[var(--text-secondary)] dark:text-white">{bmi.toFixed(1)}</p>
           </div>
 
-          <div className="border-t border-zinc-100 dark:border-zinc-800 pt-4 mt-6 space-y-3">
+          <div className="border-t border-[var(--border-subtle)] pt-4 mt-6 space-y-3">
             <div>
-              <span className="text-xs text-zinc-400">Classification</span>
+              <span className="text-xs text-[var(--text-muted)]">Classification</span>
               <p className={`text-2xl font-bold ${color}`}>{category}</p>
             </div>
-            <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800">
-              <span className="text-xs text-zinc-400">Healthy BMI Range (18.5–24.9)</span>
-              <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            <div className="pt-2 border-t border-[var(--border-subtle)]">
+              <span className="text-xs text-[var(--text-muted)]">Healthy BMI Range (18.5–24.9)</span>
+              <p className="text-sm font-semibold text-[var(--text-primary)]">
                 {unit === 'metric' ? `${minHealthy} – ${maxHealthy} kg` : `${minHealthyImp} – ${maxHealthyImp} lbs`}
               </p>
             </div>

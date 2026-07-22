@@ -29,34 +29,34 @@ export function OauthClientSetup() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">OAuth Client Setup</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Client Setup</h2>
         <div className="flex flex-wrap gap-2">
           {Object.keys(PROVIDERS).map(p => (
             <button key={p} onClick={() => setProvider(p)}
-              className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${provider === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'}`}>{p}</button>
+              className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${provider === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{p}</button>
           ))}
         </div>
         <div className="space-y-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Client ID</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Client ID</label>
             <input type="text" value={clientId} onChange={e => setClientId(e.target.value)} placeholder="your-client-id"
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Redirect URI</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Redirect URI</label>
             <input type="text" value={redirectUri} onChange={e => setRedirectUri(e.target.value)} placeholder="https://yourapp.com/callback"
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Scope</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Scope</label>
             <input type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="openid profile email"
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
         <button onClick={generateUrl} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Auth URL</button>
         {authUrl && (
-          <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{authUrl}</pre>
+          <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{authUrl}</pre>
         )}
       </div>
     </div>
@@ -95,25 +95,25 @@ export function PkceVerifier() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">PKCE Verifier</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">PKCE Verifier</h2>
         <div className="space-y-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">code_verifier</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_verifier</label>
             <textarea rows={2} value={verifier} onChange={e => setVerifier(e.target.value)} placeholder="Paste or generate..."
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">code_challenge (S256)</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_challenge (S256)</label>
             <input type="text" value={challenge} onChange={e => setChallenge(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
         <div className="flex gap-2">
-          <button onClick={generate} className="flex-1 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+          <button onClick={generate} className="flex-1 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-[var(--text-primary)] font-bold py-2 rounded-lg text-sm">Generate</button>
           <button onClick={verify} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Verify Pair</button>
         </div>
-        {result && <p className="text-sm text-zinc-600 dark:text-zinc-400">{result}</p>}
+        {result && <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">{result}</p>}
       </div>
     </div>
   );
@@ -133,15 +133,15 @@ export function OAuthScopeBuilder() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">OAuth Scope Builder</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Scope Builder</h2>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">Scopes (comma-separated)</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Scopes (comma-separated)</label>
           <input type="text" value={scopes} onChange={e => setScopes(e.target.value)} placeholder="openid,profile,email"
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <button onClick={build} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Build Scope String</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -163,15 +163,15 @@ export function OAuthStateValidator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">OAuth State Validator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">State parameter</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">State parameter</label>
           <input type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -194,15 +194,15 @@ export function Pbkdf2HashGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">PBKDF2 Hash Generator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">PBKDF2 Hash Generator</h2>
         <textarea rows={3} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Hash</button>
         {output && (
-          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3">
+          <div className="bg-[var(--bg-surface)] rounded-lg p-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-zinc-600 dark:text-zinc-400">Hash Output</span>
+              <span className="text-xs font-bold text-zinc-600 dark:text-[var(--text-muted)]">Hash Output</span>
               <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline">Copy</button>
             </div>
             <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 break-all">{output}</pre>
@@ -250,17 +250,17 @@ export function CookieParser() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Cookie Parser &amp; Analyzer</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Cookie Parser &amp; Analyzer</h2>
         <textarea rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Set-Cookie header value..."
-          className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={() => { setMode('parse'); parse(); }}
-            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'parse' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300'}`}>Parse Cookie</button>
+            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'parse' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]'}`}>Parse Cookie</button>
           <button onClick={() => { setMode('analyze'); analyze(); }}
-            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'analyze' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300'}`}>Analyze Security</button>
+            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'analyze' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]'}`}>Analyze Security</button>
         </div>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );

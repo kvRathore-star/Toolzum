@@ -208,7 +208,7 @@ export default function CollageMaker() {
         {images.length > 0 && (
           <div className="flex flex-wrap gap-3">
             {images.map((img, i) => (
-              <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 flex-shrink-0">
+              <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-[var(--border-subtle)] flex-shrink-0">
                 <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                 <button
                   onClick={() => removeImage(i)}
@@ -224,19 +224,19 @@ export default function CollageMaker() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{images.length} image{images.length > 1 ? 's' : ''}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">Collage Maker</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Collage Maker</p>
         </div>
         <button onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >Change Images</button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Layout</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Layout</h4>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {LAYOUTS.map(l => {
               const disabled = images.length > l.max || images.length < l.min;
@@ -247,8 +247,8 @@ export default function CollageMaker() {
                     layout === l.id
                       ? 'bg-blue-600 border-blue-500 text-white shadow-md'
                       : disabled
-                      ? 'bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-50'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'
+                      ? 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-muted)] dark:text-zinc-600 cursor-not-allowed opacity-50'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'
                   }`}
                   dangerouslySetInnerHTML={{ __html: `${LAYOUT_ICONS[l.id]}<span>${l.label}</span>` }}
                 />
@@ -256,11 +256,11 @@ export default function CollageMaker() {
             })}
           </div>
 
-          <div className="border-t border-zinc-100 dark:border-zinc-800 pt-6 space-y-4">
-            <h4 className="text-zinc-900 dark:text-white font-medium">Settings</h4>
+          <div className="border-t border-[var(--border-subtle)] pt-6 space-y-4">
+            <h4 className="text-[var(--text-primary)] font-medium">Settings</h4>
 
             <div>
-              <label className="flex justify-between text-xs text-zinc-500 mb-1"><span>Spacing</span><span>{spacing}px</span></label>
+              <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Spacing</span><span>{spacing}px</span></label>
               <input type="range" min={0} max={20} value={spacing}
                 onChange={e => setSpacing(Number(e.target.value))}
                 className="w-full accent-blue-500" />
@@ -268,28 +268,28 @@ export default function CollageMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-zinc-500 mb-1">Background</label>
+                <label className="block text-xs text-[var(--text-secondary)] mb-1">Background</label>
                 <input type="color" value={bgColor}
                   onChange={e => setBgColor(e.target.value)}
-                  className="w-full h-9 rounded-lg cursor-pointer border border-zinc-200 dark:border-zinc-700" />
+                  className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
               <div>
-                <label className="block text-xs text-zinc-500 mb-1">Border Color</label>
+                <label className="block text-xs text-[var(--text-secondary)] mb-1">Border Color</label>
                 <input type="color" value={borderColor}
                   onChange={e => setBorderColor(e.target.value)}
-                  className="w-full h-9 rounded-lg cursor-pointer border border-zinc-200 dark:border-zinc-700" />
+                  className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
             </div>
 
             <div>
-              <label className="flex justify-between text-xs text-zinc-500 mb-1"><span>Border Width</span><span>{borderWidth}px</span></label>
+              <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Border Width</span><span>{borderWidth}px</span></label>
               <input type="range" min={0} max={10} value={borderWidth}
                 onChange={e => setBorderWidth(Number(e.target.value))}
                 className="w-full accent-blue-500" />
             </div>
 
             <div>
-              <label className="flex justify-between text-xs text-zinc-500 mb-1"><span>Corner Radius</span><span>{radius}px</span></label>
+              <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Corner Radius</span><span>{radius}px</span></label>
               <input type="range" min={0} max={50} value={radius}
                 onChange={e => setRadius(Number(e.target.value))}
                 className="w-full accent-blue-500" />
@@ -297,10 +297,10 @@ export default function CollageMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-zinc-500 mb-1">Format</label>
+                <label className="block text-xs text-[var(--text-secondary)] mb-1">Format</label>
                 <select value={format}
                   onChange={e => setFormat(e.target.value as Format)}
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2 py-2 text-sm text-zinc-900 dark:text-zinc-100"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-2 text-sm text-zinc-900 dark:text-zinc-100"
                 >
                   <option value="image/png">PNG</option>
                   <option value="image/jpeg">JPG</option>
@@ -309,7 +309,7 @@ export default function CollageMaker() {
               </div>
               {(format === 'image/jpeg' || format === 'image/webp') && (
                 <div>
-                  <label className="flex justify-between text-xs text-zinc-500 mb-1"><span>Quality</span><span>{Math.round(quality * 100)}%</span></label>
+                  <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Quality</span><span>{Math.round(quality * 100)}%</span></label>
                   <input type="range" min={0.1} max={1} step={0.01} value={quality}
                     onChange={e => setQuality(Number(e.target.value))}
                     className="w-full accent-blue-500" />
@@ -329,11 +329,11 @@ export default function CollageMaker() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Collage Ready</h4>
               </div>
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700">
+              <div className="bg-[var(--bg-surface)] rounded-xl overflow-hidden border border-[var(--border-subtle)]">
                 <img src={outputUrl} alt="Collage" className="w-full h-auto" />
               </div>
               <div className="flex gap-3">
@@ -344,23 +344,23 @@ export default function CollageMaker() {
                   Download
                 </button>
                 <button onClick={() => setOutputUrl(null)}
-                  className="bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold px-4 py-4 rounded-xl transition-colors"
+                  className="bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold px-4 py-4 rounded-xl transition-colors"
                 >Regenerate</button>
               </div>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               <p>Adjust settings and generate your collage</p>
             </div>
           )}
 
           {!outputUrl && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl">
-              <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2 mb-4">Images ({images.length})</h4>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+              <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2 mb-4">Images ({images.length})</h4>
               <div className="flex flex-wrap gap-3">
                 {images.map((img, i) => (
-                  <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 flex-shrink-0">
+                  <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-[var(--border-subtle)] flex-shrink-0">
                     <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                     <button onClick={() => removeImage(i)}
                       className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">×</button>

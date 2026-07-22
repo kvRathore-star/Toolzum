@@ -15,20 +15,20 @@ export default function PdfBatesNumbering() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Prefix</label>
-                <input type="text" value={prefix} onChange={e => setState({ ...state, prefix: e.target.value })} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Prefix</label>
+                <input type="text" value={prefix} onChange={e => setState({ ...state, prefix: e.target.value })} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Start Number</label>
-                <input type="number" value={startNum} onChange={e => setState({ ...state, startNum: parseInt(e.target.value) || 1 })} min={1} className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Start Number</label>
+                <input type="number" value={startNum} onChange={e => setState({ ...state, startNum: parseInt(e.target.value) || 1 })} min={1} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
               </div>
             </div>
             <div className="space-y-3">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Position</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Position</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['bottom-left', 'bottom-center', 'bottom-right', 'top-left', 'top-center', 'top-right'] as const).map(p => (
                   <button key={p} onClick={() => setState({ ...state, position: p })}
-                    className={`py-2 text-xs font-bold border rounded-lg ${position === p ? 'bg-blue-600 text-white border-blue-600' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
+                    className={`py-2 text-xs font-bold border rounded-lg ${position === p ? 'bg-blue-600 text-white border-blue-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
                     {p.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                   </button>
                 ))}

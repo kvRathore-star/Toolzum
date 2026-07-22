@@ -124,40 +124,40 @@ export default function ReceiptGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-            <FileText className="w-5 h-5 text-indigo-500" />
+            <FileText className="w-5 h-5 text-[var(--accent)]" />
             Receipt Generator & PDF Builder
           </h2>
-          <p className="text-xs text-zinc-500 mt-1">Create professional custom receipts, format line items, calculate totals with tax rules, and export to PDF.</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Create professional custom receipts, format line items, calculate totals with tax rules, and export to PDF.</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-xs text-[var(--text-muted)]">
         {/* Workspace */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">Details</h3>
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Details</h3>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Business Name</label>
-              <input type="text" value={businessName} onChange={e => setBusinessName(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none text-zinc-200" />
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Business Name</label>
+              <input type="text" value={businessName} onChange={e => setBusinessName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none text-zinc-200" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Receipt ID</label>
-              <input type="text" value={receiptNumber} onChange={e => setReceiptNumber(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none" />
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Receipt ID</label>
+              <input type="text" value={receiptNumber} onChange={e => setReceiptNumber(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none" />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Date</label>
-              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none text-zinc-200" />
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Date</label>
+              <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none text-zinc-200" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Payment Method</label>
-              <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none">
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Payment Method</label>
+              <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none">
                 <option value="Credit Card">Credit Card</option>
                 <option value="PayPal">PayPal</option>
                 <option value="Bank Transfer">Bank Transfer</option>
@@ -167,37 +167,37 @@ export default function ReceiptGenerator() {
           </div>
 
           <div className="border-t border-[var(--border-subtle)] pt-3 space-y-3">
-            <span className="text-[10px] text-zinc-400 font-bold uppercase block">Add Line Item</span>
-            <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="Consultation Fees" className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none" />
+            <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Add Line Item</span>
+            <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="Consultation Fees" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none" />
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[9px] text-zinc-500">Qty</label>
-                <input type="number" min="1" value={newItemQty} onChange={e => setNewItemQty(Math.max(1, parseInt(e.target.value) || 1))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 outline-none" />
+                <label className="text-[9px] text-[var(--text-secondary)]">Qty</label>
+                <input type="number" min="1" value={newItemQty} onChange={e => setNewItemQty(Math.max(1, parseInt(e.target.value) || 1))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 outline-none" />
               </div>
               <div className="space-y-1">
-                <label className="text-[9px] text-zinc-500">Rate ($)</label>
-                <input type="number" min="0" value={newItemRate} onChange={e => setNewItemRate(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-1 outline-none" />
+                <label className="text-[9px] text-[var(--text-secondary)]">Rate ($)</label>
+                <input type="number" min="0" value={newItemRate} onChange={e => setNewItemRate(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 outline-none" />
               </div>
             </div>
-            <button onClick={addItem} className="w-full bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            <button onClick={addItem} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
               <Plus className="w-4 h-4" /> Add Item
             </button>
           </div>
         </div>
 
         {/* Live Bill preview */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
+        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
           <div className="space-y-4 flex-1">
             <div className="flex justify-between items-start border-b border-zinc-800 pb-3">
               <div>
                 <h4 className="text-base font-black text-[var(--text-primary)]">{businessName}</h4>
-                <p className="text-[10px] text-zinc-500 mt-1">Receipt: {receiptNumber} | {date}</p>
+                <p className="text-[10px] text-[var(--text-secondary)] mt-1">Receipt: {receiptNumber} | {date}</p>
               </div>
               <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-2 py-1 rounded text-[9px] font-bold tracking-wider">PAID</span>
             </div>
 
             <div className="space-y-3">
-              <div className="grid grid-cols-12 text-zinc-400 font-bold border-b border-zinc-800 pb-1.5">
+              <div className="grid grid-cols-12 text-[var(--text-muted)] font-bold border-b border-zinc-800 pb-1.5">
                 <span className="col-span-6">Description</span>
                 <span className="col-span-2 text-center">Qty</span>
                 <span className="col-span-2 text-right">Rate</span>

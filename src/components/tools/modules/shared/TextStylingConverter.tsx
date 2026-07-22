@@ -126,39 +126,39 @@ function FancyView() {
 
   return (
     <>
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 border border-zinc-200 dark:border-white/5 rounded-2xl">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <Type className="w-6 h-6 text-indigo-500" />
+      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Type className="w-6 h-6 text-[var(--accent)]" />
           Fancy Font & Text Stylizer
         </h2>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
           Type your text to generate stylized fonts, bubble letters, cursive scripts, and brackets. Copy instantly for Instagram, X, or Discord.
         </p>
       </div>
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
         <div className="space-y-2">
-          <label className="block text-sm font-bold text-zinc-700 dark:text-zinc-300">Input Text</label>
+          <label className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
           <input type="text" value={inputText} onChange={e => setInputText(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-black border-2 border-zinc-200 dark:border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-zinc-900 dark:text-white outline-none" />
+            className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] outline-none" />
         </div>
         {inputText && (
           <div className="space-y-8">
             <div className="space-y-3">
-              <h3 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-                <Type className="w-4 h-4 text-indigo-500" /> Unicode Alphabets
+              <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
+                <Type className="w-4 h-4 text-[var(--accent)]" /> Unicode Alphabets
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {FONT_STYLES.map((font, idx) => {
                   const output = applyFontStyle(inputText, font.map);
                   const key = `font-${idx}`;
                   return (
-                    <div key={key} className="p-4 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl flex items-center justify-between gap-4">
+                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="text-[10px] text-zinc-500 block">{font.name}</span>
-                        <span className="text-base font-medium text-zinc-900 dark:text-white">{output}</span>
+                        <span className="text-[10px] text-[var(--text-secondary)] block">{font.name}</span>
+                        <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -167,21 +167,21 @@ function FancyView() {
               </div>
             </div>
             <div className="space-y-3">
-              <h3 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
-                <Star className="w-4 h-4 text-indigo-500" /> Decorations & Symbols
+              <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
+                <Star className="w-4 h-4 text-[var(--accent)]" /> Decorations & Symbols
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SYMBOL_DECORATIONS.map((decor, idx) => {
                   const output = decor.format(inputText);
                   const key = `decor-${idx}`;
                   return (
-                    <div key={key} className="p-4 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-xl flex items-center justify-between gap-4">
+                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="text-[10px] text-zinc-500 block">{decor.name}</span>
-                        <span className="text-base font-medium text-zinc-900 dark:text-white">{output}</span>
+                        <span className="text-[10px] text-[var(--text-secondary)] block">{decor.name}</span>
+                        <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -210,22 +210,22 @@ function CursiveView() {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
-        <Type className="w-5 h-5 text-indigo-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Unicode Cursive Text Generator</h3>
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
+        <Type className="w-5 h-5 text-[var(--accent)]" />
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Unicode Cursive Text Generator</h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
         <div className="space-y-2">
-          <span className="text-[10px] text-zinc-400 font-bold uppercase block">English Plaintext</span>
+          <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
           <textarea value={input} onChange={e => setInput(e.target.value)}
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white h-40 outline-none resize-none" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-40 outline-none resize-none" />
         </div>
         <div className="flex flex-col justify-between space-y-4">
           <div className="space-y-2">
-            <span className="text-[10px] text-zinc-400 font-bold uppercase block">Cursive Unicode Output</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Cursive Unicode Output</span>
             <textarea value={cursive} readOnly
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-indigo-400 font-serif text-lg h-40 outline-none resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-serif text-lg h-40 outline-none resize-none" />
           </div>
           <button onClick={handleCopy}
             className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs cursor-pointer">
@@ -267,24 +267,24 @@ function ZalgoView() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-6 space-y-6 h-fit">
-        <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-200 dark:border-white/5 pb-2">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-6 h-fit">
+        <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-2">
           Zalgo Parameters
         </h4>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Cursed Level (1-20)</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Cursed Level (1-20)</label>
             <span className="text-sm font-extrabold text-red-500">{intensity}</span>
           </div>
           <input type="range" min={1} max={20} value={intensity} onChange={e => setIntensity(Number(e.target.value))}
-            className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-red-600 mt-2" />
+            className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-red-600 mt-2" />
         </div>
         <div className="space-y-3 pt-2">
           {[{ label: 'Stack Above (Upwards)', v: goUp, s: setGoUp },
             { label: 'Stack Middle (Cross through)', v: goMid, s: setGoMid },
             { label: 'Stack Below (Downwards)', v: goDown, s: setGoDown },
           ].map(({ label, v, s }) => (
-            <label key={label} className="flex items-center gap-2 cursor-pointer text-sm text-zinc-700 dark:text-zinc-300 font-semibold select-none">
+            <label key={label} className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input type="checkbox" checked={v} onChange={e => s(e.target.checked)}
                 className="rounded border-zinc-300 dark:border-zinc-800 text-red-600 focus:ring-red-500 h-4 w-4" />
               {label}
@@ -292,22 +292,22 @@ function ZalgoView() {
           ))}
         </div>
         <button onClick={loadSample}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm cursor-pointer">
+          className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-800 dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm cursor-pointer">
           Load Sample Text
         </button>
       </div>
       <div className="lg:col-span-2 space-y-6 flex flex-col h-auto">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[200px]">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-            <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">Normal Input Text</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[200px]">
+          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+            <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Normal Input Text</span>
             <button onClick={() => setInput('')} className="text-xs text-red-500 hover:text-red-400 font-semibold cursor-pointer">Clear</button>
           </div>
           <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Type or paste standard text here..."
-            className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-900 dark:text-white" />
+            className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-[var(--text-primary)]" />
         </div>
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-white/5 flex justify-between items-center shrink-0">
-            <span className="text-zinc-700 dark:text-zinc-300 text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
+          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+            <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
             <button onClick={() => { if (output) { clipboardWrite(output); toast.success('Copied!'); } }} disabled={!output}
               className="text-xs text-blue-500 hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>

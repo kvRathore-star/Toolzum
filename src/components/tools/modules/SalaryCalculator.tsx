@@ -31,42 +31,42 @@ export default function SalaryCalculator() {
   const netMonthly = netAnnual / 12;
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
         <Briefcase className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Salary Take-Home Calculator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Salary Take-Home Calculator</h3>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Annual CTC / Salary (₹)</label>
-            <input type="number" value={ctc} onChange={e => setCtc(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual CTC / Salary (₹)</label>
+            <input type="number" value={ctc} onChange={e => setCtc(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Annual Deductions / 80C (₹)</label>
-            <input type="number" value={deductions} onChange={e => setDeductions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none" />
+            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual Deductions / 80C (₹)</label>
+            <input type="number" value={deductions} onChange={e => setDeductions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
           </div>
         </div>
 
-        <div className="bg-zinc-50 dark:bg-black/30 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800 flex flex-col justify-between">
+        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase">Annual Breakdown</h4>
+            <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">Annual Breakdown</h4>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <span className="text-xs text-zinc-400">Income Tax</span>
-                <p className="text-lg font-bold text-rose-500">₹${Math.round(tax).toLocaleString('en-IN')}</p>
+                <span className="text-xs text-[var(--text-muted)]">Income Tax</span>
+                <p className="text-lg font-bold text-[var(--accent)]">₹${Math.round(tax).toLocaleString('en-IN')}</p>
               </div>
               <div>
-                <span className="text-xs text-zinc-400">Annual Take-Home</span>
+                <span className="text-xs text-[var(--text-muted)]">Annual Take-Home</span>
                 <p className="text-lg font-bold text-[var(--text-secondary)] dark:text-[var(--text-primary)]">₹${Math.round(netAnnual).toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-zinc-100 dark:border-zinc-800 pt-4 mt-6">
-            <span className="text-xs text-zinc-400">Monthly Net Salary</span>
+          <div className="border-t border-[var(--border-subtle)] pt-4 mt-6">
+            <span className="text-xs text-[var(--text-muted)]">Monthly Net Salary</span>
             <p className="text-3xl font-extrabold text-emerald-500">₹${Math.round(netMonthly).toLocaleString('en-IN')}/mo</p>
           </div>
         </div>

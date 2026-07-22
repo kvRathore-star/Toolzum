@@ -20,18 +20,18 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
       <div className="mb-6 relative">
         <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-        <div className="relative w-24 h-24 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-3xl flex items-center justify-center shadow-2xl">
+        <div className="relative w-24 h-24 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl flex items-center justify-center shadow-2xl">
           <svg className="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
       </div>
       
-      <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight">
+      <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
         In Development
       </h2>
       
-      <p className="text-zinc-600 dark:text-zinc-400 max-w-md mx-auto mb-10 text-lg leading-relaxed">
+      <p className="text-zinc-600 dark:text-[var(--text-muted)] max-w-md mx-auto mb-10 text-lg leading-relaxed">
         We are currently building the <span className="text-zinc-800 dark:text-zinc-200 font-semibold">{toolName}</span> module. It will be powered entirely by your browser for maximum privacy.
       </p>
 
@@ -55,7 +55,7 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="bg-zinc-50 dark:bg-zinc-900/50 border-zinc-200 dark:border-white/10 text-zinc-900 dark:text-white placeholder:text-zinc-600 flex-1 h-12 rounded-xl focus-visible:ring-blue-500"
+            className="bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-zinc-600 flex-1 h-12 rounded-xl focus-visible:ring-blue-500"
           />
           <Button type="submit" className="h-12 px-6 bg-blue-600 hover:bg-blue-500 text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
             Notify Me
@@ -63,24 +63,24 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
         </form>
       )}
 
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-3xl mx-auto w-full border-t border-zinc-200 dark:border-white/5 pt-12">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-3xl mx-auto w-full border-t border-zinc-200 dark:border-[var(--border-subtle)] pt-12">
         <div>
-          <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-2 flex items-center gap-2">
+          <h4 className="text-[var(--text-primary)] font-medium mb-2 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-500"></span> 100% Client-Side
           </h4>
-          <p className="text-sm text-zinc-500">Your files will never leave your device. All processing happens in your browser.</p>
+          <p className="text-sm text-[var(--text-secondary)]">Your files will never leave your device. All processing happens in your browser.</p>
         </div>
         <div>
-          <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-2 flex items-center gap-2">
+          <h4 className="text-[var(--text-primary)] font-medium mb-2 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Zero Data Retention
           </h4>
-          <p className="text-sm text-zinc-500">We don't store your files, logs, or processing history on our servers.</p>
+          <p className="text-sm text-[var(--text-secondary)]">We don't store your files, logs, or processing history on our servers.</p>
         </div>
         <div>
-          <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-2 flex items-center gap-2">
+          <h4 className="text-[var(--text-primary)] font-medium mb-2 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-purple-500"></span> Lightning Fast
           </h4>
-          <p className="text-sm text-zinc-500">Powered by WebAssembly for near-native performance directly on your machine.</p>
+          <p className="text-sm text-[var(--text-secondary)]">Powered by WebAssembly for near-native performance directly on your machine.</p>
         </div>
       </div>
     </div>

@@ -140,35 +140,35 @@ export default function WhiteoutPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Whiteout Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Whiteout Settings</h4>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Mode</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Mode</label>
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setMode('full')}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${mode === 'full' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${mode === 'full' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
               >
                 Full Page
               </button>
               <button
                 onClick={() => setMode('custom')}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${mode === 'custom' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${mode === 'custom' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
               >
                 Custom Area
               </button>
@@ -176,29 +176,29 @@ export default function WhiteoutPdf() {
           </div>
 
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-1">Page Range</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Page Range</label>
             <input
               type="text"
               placeholder="e.g. 1-3,5,7-9"
               value={pageRange}
               onChange={(e) => setPageRange(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500 font-mono text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] font-mono text-sm"
             />
-            <p className="text-xs text-zinc-500 mt-1">Total pages: {pageCount}</p>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">Total pages: {pageCount}</p>
           </div>
 
           {mode === 'custom' && (
             <div className="grid grid-cols-2 gap-3">
               {(['x', 'y', 'w', 'h'] as const).map((key) => (
                 <div key={key}>
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-1">{key === 'w' ? 'Width' : key === 'h' ? 'Height' : key.toUpperCase()} (pts)</label>
+                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">{key === 'w' ? 'Width' : key === 'h' ? 'Height' : key.toUpperCase()} (pts)</label>
                   <input
                     type="number"
                     min={0}
                     max={5000}
                     value={area[key]}
                     onChange={(e) => setArea({ ...area, [key]: Math.max(0, parseInt(e.target.value) || 0) })}
-                    className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
                   />
                 </div>
               ))}
@@ -217,8 +217,8 @@ export default function WhiteoutPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Whiteout Complete</h4>
               </div>
 
@@ -236,7 +236,7 @@ export default function WhiteoutPdf() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               <p>Whiteout PDF will appear here</p>
             </div>

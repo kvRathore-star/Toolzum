@@ -77,10 +77,10 @@ export default function BenchmarkBuilder() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex flex-wrap gap-2">
           {(Object.keys(BENCH_LABELS) as BenchType[]).map(t => (
-            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-white dark:bg-zinc-700 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-200 dark:border-blue-800' : 'text-zinc-500 border border-transparent'}`}>
+            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm border border-blue-200 dark:border-blue-800' : 'text-[var(--text-secondary)] border border-transparent'}`}>
               {BENCH_LABELS[t]}
             </button>
           ))}
@@ -88,28 +88,28 @@ export default function BenchmarkBuilder() {
 
         <div className="flex items-center gap-4">
           <div className="flex-1">
-            <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">Duration: {duration}s</label>
+            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Duration: {duration}s</label>
             <input type="range" min={1} max={5} step={0.5} value={duration} onChange={e => setDuration(parseFloat(e.target.value))} disabled={running} className="w-full" />
           </div>
-          <button onClick={run} disabled={running} className={`bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${running ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          <button onClick={run} disabled={running} className={`bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${running ? 'opacity-70 cursor-not-allowed' : ''}`}>
             {running ? <><Loader2 className="w-4 h-4 animate-spin" /> Running...</> : <><Zap className="w-4 h-4" /> Run Benchmark</>}
           </button>
         </div>
 
         {currentScore !== null && ranking && (
-          <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-5 space-y-3">
+          <div className="bg-[var(--bg-overlay)]/50 rounded-2xl p-5 space-y-3">
             <div className="flex justify-between items-center">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase block">Score</span>
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase block">Score</span>
                 <span className="text-3xl font-bold font-mono text-blue-600 dark:text-blue-400">{currentScore.toLocaleString()}</span>
-                <span className="text-xs text-zinc-400 ml-1">ops/s</span>
+                <span className="text-xs text-[var(--text-muted)] ml-1">ops/s</span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] font-bold text-zinc-400 uppercase block">Ranking</span>
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase block">Ranking</span>
                 <span className="text-lg font-bold" style={{ color: ranking.color === 'bg-red-500' ? '#ef4444' : ranking.color === 'bg-orange-500' ? '#f97316' : ranking.color === 'bg-yellow-500' ? '#eab308' : ranking.color === 'bg-lime-500' ? '#84cc16' : ranking.color === 'bg-green-500' ? '#22c55e' : '#10b981' }}>
                   {ranking.label}
                 </span>
-                <span className="text-xs text-zinc-400 ml-1">(faster than ~{ranking.pct}%)</span>
+                <span className="text-xs text-[var(--text-muted)] ml-1">(faster than ~{ranking.pct}%)</span>
               </div>
             </div>
             <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-3 overflow-hidden">
@@ -120,17 +120,17 @@ export default function BenchmarkBuilder() {
       </div>
 
       {results.length > 0 && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 space-y-2">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase">History</span>
-            <button onClick={() => { setResults([]); setCurrentScore(null); toast.success('Cleared!'); }} className="text-[10px] text-zinc-400 hover:underline">Clear</button>
+            <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">History</span>
+            <button onClick={() => { setResults([]); setCurrentScore(null); toast.success('Cleared!'); }} className="text-[10px] text-[var(--text-muted)] hover:underline">Clear</button>
           </div>
           <div className="space-y-1 max-h-[200px] overflow-y-auto">
             {results.map((r, i) => (
-              <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-[11px]">
-                <span className="text-zinc-400">{BENCH_LABELS[r.type]}</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">{r.score.toLocaleString()} ops/s</span>
-                <span className="text-zinc-400 text-[10px]">{r.date}</span>
+              <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-[var(--bg-overlay)]/50 rounded-lg text-[11px]">
+                <span className="text-[var(--text-muted)]">{BENCH_LABELS[r.type]}</span>
+                <span className="font-mono font-bold text-[var(--text-primary)]">{r.score.toLocaleString()} ops/s</span>
+                <span className="text-[var(--text-muted)] text-[10px]">{r.date}</span>
               </div>
             ))}
           </div>

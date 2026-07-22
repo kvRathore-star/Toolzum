@@ -222,7 +222,7 @@ export default function CreatePdf() {
   };
 
   const tabClass = (m: InputMode) =>
-    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${mode === m ? 'bg-blue-600 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`;
+    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${mode === m ? 'bg-blue-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -242,15 +242,15 @@ export default function CreatePdf() {
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Document Title</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Document Title</label>
             <input type="text" value={titleText} onChange={(e) => setTitleText(e.target.value)}
               placeholder="My Document"
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Font Size</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
             <select value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-blue-500">
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
               <option value={10}>10pt</option>
               <option value={12}>12pt</option>
               <option value={14}>14pt</option>
@@ -262,41 +262,41 @@ export default function CreatePdf() {
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" checked={includeTitle} onChange={(e) => setIncludeTitle(e.target.checked)}
             className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
-          <span className="text-sm text-zinc-700 dark:text-zinc-300">Include title on first page</span>
+          <span className="text-sm text-[var(--text-primary)]">Include title on first page</span>
         </label>
 
         {mode === 'csv' ? (
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <label className="cursor-pointer bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-sm font-medium px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
+              <label className="cursor-pointer bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-sm font-medium px-4 py-2 rounded-lg border border-[var(--border-subtle)] text-[var(--text-primary)]">
                 Upload CSV File
                 <input type="file" accept=".csv,.tsv,.txt" onChange={handleCsvFileSelect} className="hidden" />
               </label>
-              {csvFile && <span className="text-sm text-zinc-500">{csvFile.name}</span>}
+              {csvFile && <span className="text-sm text-[var(--text-secondary)]">{csvFile.name}</span>}
             </div>
             <textarea value={csvRaw} onChange={(e) => setCsvRaw(e.target.value)}
               placeholder="name,email,role&#10;John,john@example.com,Admin&#10;Jane,jane@example.com,Editor"
-              className="w-full h-48 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
             />
-            <p className="text-xs text-zinc-500">First row is treated as table headers. Supports quoted fields.</p>
+            <p className="text-xs text-[var(--text-secondary)]">First row is treated as table headers. Supports quoted fields.</p>
           </div>
         ) : mode === 'json' ? (
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <label className="cursor-pointer bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-sm font-medium px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
+              <label className="cursor-pointer bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-sm font-medium px-4 py-2 rounded-lg border border-[var(--border-subtle)] text-[var(--text-primary)]">
                 Upload JSON File
                 <input type="file" accept=".json" onChange={handleJsonFileSelect} className="hidden" />
               </label>
             </div>
             <textarea value={text} onChange={(e) => setText(e.target.value)}
               placeholder='{"name": "John", "age": 30}'
-              className="w-full h-48 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
             />
           </div>
         ) : (
           <textarea value={text} onChange={(e) => setText(e.target.value)}
             placeholder={mode === 'text' ? 'Enter your text here...' : '<root><item>XML content</item></root>'}
-            className="w-full h-48 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm font-mono text-zinc-900 dark:text-white outline-none focus:border-blue-500 resize-y"
+            className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
           />
         )}
       </div>
@@ -307,8 +307,8 @@ export default function CreatePdf() {
       </button>
 
       {outputUrl && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
-          <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">PDF Ready</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `${titleText.toLowerCase().replace(/\s+/g, '-') || 'document'}.pdf`)}

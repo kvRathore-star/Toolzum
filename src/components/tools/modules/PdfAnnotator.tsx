@@ -132,36 +132,36 @@ export default function PdfAnnotator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg">Change File</button>
+        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Annotation Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Annotation Settings</h4>
           <div>
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1.5 block">Page</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Page</label>
             <div className="flex items-center gap-2">
-              <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage <= 1} className="px-3 py-1.5 text-xs bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-30">−</button>
+              <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage <= 1} className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] rounded-lg disabled:opacity-30">−</button>
               <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100 min-w-[3rem] text-center">{currentPage} / {pageCount}</span>
-              <button onClick={() => setCurrentPage(Math.min(pageCount, currentPage + 1))} disabled={currentPage >= pageCount} className="px-3 py-1.5 text-xs bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-30">+</button>
+              <button onClick={() => setCurrentPage(Math.min(pageCount, currentPage + 1))} disabled={currentPage >= pageCount} className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] rounded-lg disabled:opacity-30">+</button>
             </div>
           </div>
           <div>
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1.5 block">Annotation Type</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Annotation Type</label>
             <div className="grid grid-cols-3 gap-2">
               {TYPES.map((t) => (
                 <button key={t.key} onClick={() => setSelectedType(t.key)}
-                  className={`py-2 px-1 rounded-lg text-xs font-medium transition-all border ${selectedType === t.key ? 'bg-blue-600 border-blue-500 text-white' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-blue-300'}`}
+                  className={`py-2 px-1 rounded-lg text-xs font-medium transition-all border ${selectedType === t.key ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
                 >{t.label}</button>
               ))}
             </div>
           </div>
           <div>
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1.5 block">Color</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Color</label>
             <div className="flex flex-wrap gap-2 mb-2">
               {SWATCHES.map((c) => (
                 <button key={c} onClick={() => setSelectedColor(c)}
@@ -171,14 +171,14 @@ export default function PdfAnnotator() {
               ))}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">Hex:</span>
+              <span className="text-xs text-[var(--text-secondary)]">Hex:</span>
               <input type="text" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}
-                className="flex-1 px-2 py-1 text-xs font-mono border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100" placeholder="#FF0000" />
+                className="flex-1 px-2 py-1 text-xs font-mono border border-[var(--border-subtle)] bg-white dark:bg-[var(--bg-surface)] rounded-lg text-zinc-900 dark:text-zinc-100" placeholder="#FF0000" />
               <div className="w-7 h-7 rounded border border-zinc-300 dark:border-zinc-600" style={{ backgroundColor: selectedColor }} />
             </div>
           </div>
           <div>
-            <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1.5 block">Opacity: {selectedOpacity.toFixed(1)}</label>
+            <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Opacity: {selectedOpacity.toFixed(1)}</label>
             <input type="range" min="0.1" max="1" step="0.1" value={selectedOpacity}
               onChange={(e) => setSelectedOpacity(parseFloat(e.target.value))} className="w-full accent-blue-600" />
           </div>
@@ -190,9 +190,9 @@ export default function PdfAnnotator() {
               { label: 'Height', val: pos.h, set: (v: number) => setPos(p => ({ ...p, h: v })) },
             ].map((f) => (
               <div key={f.label}>
-                <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1 block">{f.label}</label>
+                <label className="text-xs text-[var(--text-secondary)] font-medium mb-1 block">{f.label}</label>
                 <input type="number" value={f.val} onChange={(e) => f.set(parseInt(e.target.value) || 0)}
-                  className="w-full px-2 py-1.5 text-xs border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100" />
+                  className="w-full px-2 py-1.5 text-xs border border-[var(--border-subtle)] bg-white dark:bg-[var(--bg-surface)] rounded-lg text-zinc-900 dark:text-zinc-100" />
               </div>
             ))}
           </div>
@@ -201,12 +201,12 @@ export default function PdfAnnotator() {
           >Add Annotation</button>
           {annotations.length > 0 && (
             <div>
-              <label className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mb-1.5 block">Annotations ({annotations.length})</label>
+              <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Annotations ({annotations.length})</label>
               <div className="space-y-1.5 max-h-48 overflow-y-auto">
                 {annotations.map((ann, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800/50 p-2 rounded-lg border border-zinc-100 dark:border-zinc-800">
+                  <div key={i} className="flex items-center gap-2 bg-[var(--bg-overlay)]/50 p-2 rounded-lg border border-[var(--border-subtle)]">
                     <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: ann.color }} />
-                    <span className="text-xs text-zinc-600 dark:text-zinc-400 flex-1 truncate">{ann.type} (x:{ann.x} y:{ann.y})</span>
+                    <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)] flex-1 truncate">{ann.type} (x:{ann.x} y:{ann.y})</span>
                     <button onClick={() => removeAnnotation(i)} className="text-red-500 hover:text-red-400 text-xs font-bold px-1.5">✕</button>
                   </div>
                 ))}
@@ -219,8 +219,8 @@ export default function PdfAnnotator() {
         </div>
         <div className="space-y-6">
           {showResult && outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Annotations Applied</h4>
               </div>
               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
@@ -235,7 +235,7 @@ export default function PdfAnnotator() {
               </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
               <p>Annotated PDF will appear here</p>
             </div>

@@ -51,7 +51,7 @@ const initialForm: BiodataForm = {
 
 function BiodataPreview({ data, previewRef }: { data: BiodataForm; previewRef: React.RefObject<HTMLDivElement | null> }) {
   const hasAny = (field: string) => field.trim().length > 0;
-  const label = (l: string) => <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block mb-0.5">{l}</span>;
+  const label = (l: string) => <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-0.5">{l}</span>;
 
   return (
     <div ref={previewRef} className="bg-white text-zinc-900 rounded-2xl border border-zinc-200 shadow-sm overflow-hidden print:shadow-none print:border-0">
@@ -62,7 +62,7 @@ function BiodataPreview({ data, previewRef }: { data: BiodataForm; previewRef: R
       <div className="p-5 space-y-4 text-xs">
         <div className="text-center pb-3 border-b border-zinc-200">
           <h2 className="text-xl font-bold">{data.fullName || 'Your Name'}</h2>
-          <p className="text-zinc-500">{data.occupation || ''}{data.occupation && data.city ? ', ' : ''}{data.city || ''}</p>
+          <p className="text-[var(--text-secondary)]">{data.occupation || ''}{data.occupation && data.city ? ', ' : ''}{data.city || ''}</p>
         </div>
 
         <div>
@@ -131,7 +131,7 @@ function BiodataPreview({ data, previewRef }: { data: BiodataForm; previewRef: R
           </div>
         )}
 
-        <div className="text-center pt-3 border-t border-zinc-200 text-[9px] text-zinc-400">
+        <div className="text-center pt-3 border-t border-zinc-200 text-[9px] text-[var(--text-muted)]">
           Generated via Toolzum &bull; Not a legal document
         </div>
       </div>
@@ -164,8 +164,8 @@ export default function MarriageBiodataMaker() {
   };
 
   const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div className="space-y-3 border border-zinc-200 dark:border-zinc-700/50 rounded-xl p-4 bg-zinc-50/50 dark:bg-black/20">
-      <h4 className="text-xs font-bold text-rose-500 uppercase tracking-wider">{title}</h4>
+    <div className="space-y-3 border border-[var(--border-subtle)]/50 rounded-xl p-4 bg-[var(--bg-overlay)]/50 dark:bg-black/20">
+      <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">{title}</h4>
       {children}
     </div>
   );
@@ -175,18 +175,18 @@ export default function MarriageBiodataMaker() {
     options?: string[]; placeholder?: string; type?: string; cols?: number;
   }) => (
     <div className={cols > 1 ? 'col-span-2' : ''}>
-      <label className="block text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 mb-1">{lbl}</label>
+      <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">{lbl}</label>
       {options ? (
         <select value={value} onChange={e => onChange(e.target.value)}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-rose-500/30">
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-rose-500/30">
           {options.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
       ) : type === 'textarea' ? (
         <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-rose-500/30 resize-none h-20" />
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-rose-500/30 resize-none h-20" />
       ) : (
         <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-white dark:bg-black/50 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-900 dark:text-white outline-none focus:ring-2 focus:ring-rose-500/30" />
+          className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-rose-500/30" />
       )}
     </div>
   );
@@ -269,16 +269,16 @@ export default function MarriageBiodataMaker() {
   return (
     <div className="max-w-6xl mx-auto animate-in fade-in duration-500">
       <div className="flex items-center gap-2 mb-6">
-        <Heart className="w-5 h-5 text-rose-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Marriage Biodata Maker</h3>
+        <Heart className="w-5 h-5 text-[var(--accent)]" />
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Marriage Biodata Maker</h3>
       </div>
 
       <div className={`grid gap-6 ${showPreview ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-5 rounded-2xl shadow-xl">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-100 dark:border-zinc-800">
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Fill in your details</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-subtle)]">
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Fill in your details</span>
             <button onClick={() => setShowPreview(!showPreview)}
-              className="flex items-center gap-1.5 text-xs font-semibold text-rose-500 hover:text-rose-600 transition-colors">
+              className="flex items-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:text-rose-600 transition-colors">
               {showPreview ? <><EyeOff className="w-3.5 h-3.5" /> Hide Preview</> : <><Eye className="w-3.5 h-3.5" /> Show Preview</>}
             </button>
           </div>
@@ -288,9 +288,9 @@ export default function MarriageBiodataMaker() {
         {showPreview && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Biodata Preview</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Biodata Preview</span>
               <button onClick={handlePrint}
-                className="flex items-center gap-1.5 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-xl text-xs transition-colors">
+                className="flex items-center gap-1.5 px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl text-xs transition-colors">
                 <Download className="w-3.5 h-3.5" /> Download PDF
               </button>
             </div>

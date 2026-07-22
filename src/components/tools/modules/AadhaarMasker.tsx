@@ -127,7 +127,7 @@ export default function AadhaarMasker() {
   };
 
   if (isProcessing) {
-    return <div className="py-20 text-center text-zinc-600 dark:text-zinc-400">Parsing document entirely on your device...</div>;
+    return <div className="py-20 text-center text-zinc-600 dark:text-[var(--text-muted)]">Parsing document entirely on your device...</div>;
   }
 
   if (!image) {
@@ -147,22 +147,22 @@ export default function AadhaarMasker() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Draw to Mask</h3>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Click and drag over the first 8 digits to redact them.</p>
+          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Click and drag over the first 8 digits to redact them.</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={clearMasks} className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors">
+          <button onClick={clearMasks} className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors">
             Clear Masks
           </button>
-          <button onClick={() => setImage(null)} className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors">
+          <button onClick={() => setImage(null)} className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors">
             Start Over
           </button>
         </div>
       </div>
 
-      <div className="border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden bg-white dark:bg-black relative shadow-2xl">
+      <div className="border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-white dark:bg-black relative shadow-2xl">
         <canvas
           ref={canvasRef}
           onMouseDown={handleMouseDown}

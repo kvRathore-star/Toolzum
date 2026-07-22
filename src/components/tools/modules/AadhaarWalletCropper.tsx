@@ -94,29 +94,29 @@ export default function AadhaarWalletCropper() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Crop className="w-5 h-5 text-indigo-500" />
+          <Crop className="w-5 h-5 text-[var(--accent)]" />
           Aadhaar Card Wallet Cropper
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Crop scanned Aadhaar cards into standard printable wallet dimensions (86mm x 54mm) perfectly sized offline.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Crop scanned Aadhaar cards into standard printable wallet dimensions (86mm x 54mm) perfectly sized offline.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Workspace */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-            <span className="text-xs font-bold text-zinc-400 uppercase">Crop Workspace</span>
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Crop Workspace</span>
             <div className="flex gap-2">
               <button 
                 onClick={() => setSide('front')}
-                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'front' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-zinc-400'}`}
+                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'front' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-[var(--text-muted)]'}`}
               >
                 Front Side
               </button>
               <button 
                 onClick={() => setSide('back')}
-                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'back' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-zinc-400'}`}
+                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'back' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-[var(--text-muted)]'}`}
               >
                 Back Side
               </button>
@@ -124,10 +124,10 @@ export default function AadhaarWalletCropper() {
           </div>
 
           {!imageSrc ? (
-            <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-12 flex flex-col items-center justify-center bg-zinc-50 dark:bg-black/20 text-center">
-              <Upload className="w-10 h-10 text-zinc-400 mb-2" />
-              <p className="text-xs text-zinc-400">Upload scan of your ID card</p>
-              <label className="bg-[var(--accent)] hover:bg-indigo-600 px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
+              <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
+              <p className="text-xs text-[var(--text-muted)]">Upload scan of your ID card</p>
+              <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
                 Choose ID Image
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
               </label>
@@ -162,7 +162,7 @@ export default function AadhaarWalletCropper() {
               {/* Adjust Box Controls */}
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div className="space-y-1">
-                  <label className="text-[10px] text-zinc-500">Horizontal Box Position ({cropBox.x}px)</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">Horizontal Box Position ({cropBox.x}px)</label>
                   <input 
                     type="range" min="0" max="300" value={cropBox.x} 
                     onChange={e => setCropBox(prev => ({ ...prev, x: parseInt(e.target.value) }))} 
@@ -170,7 +170,7 @@ export default function AadhaarWalletCropper() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] text-zinc-500">Vertical Box Position ({cropBox.y}px)</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">Vertical Box Position ({cropBox.y}px)</label>
                   <input 
                     type="range" min="0" max="200" value={cropBox.y} 
                     onChange={e => setCropBox(prev => ({ ...prev, y: parseInt(e.target.value) }))} 
@@ -182,7 +182,7 @@ export default function AadhaarWalletCropper() {
               <div className="grid grid-cols-2 gap-4">
                 <button 
                   onClick={() => setImageSrc(null)}
-                  className="border border-zinc-800 text-zinc-400 font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="border border-zinc-800 text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   Clear File
                 </button>
@@ -200,10 +200,10 @@ export default function AadhaarWalletCropper() {
         </div>
 
         {/* Cropped Output preview */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
           {croppedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
-              <div className="flex-1 flex items-center justify-center w-full p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-800 rounded-xl">
+              <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-zinc-800 rounded-xl">
 <img  loading="lazy" 
   src={croppedUrl} 
   alt="Processed result" 
@@ -220,8 +220,8 @@ export default function AadhaarWalletCropper() {
               </button>
             </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-zinc-500">
-              <Shield className="w-12 h-12 mb-3 opacity-30 animate-pulse text-zinc-400" />
+            <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)]">
+              <Shield className="w-12 h-12 mb-3 opacity-30 animate-pulse text-[var(--text-muted)]" />
               <p className="text-xs">Adjust cropping area and hit crop card. Wallet printable preview will appear here.</p>
             </div>
           )}

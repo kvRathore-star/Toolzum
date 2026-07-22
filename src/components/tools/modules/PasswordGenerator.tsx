@@ -146,7 +146,7 @@ export default function PasswordGenerator() {
           <button onClick={download} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Download
           </button>
-          <button onClick={generate} className="flex-1 min-w-[100px] px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
+          <button onClick={generate} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Regenerate
           </button>
         </div>

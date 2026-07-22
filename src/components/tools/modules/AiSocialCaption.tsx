@@ -205,35 +205,35 @@ export default function AiSocialCaption() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
           </svg>
           AI Social Media Caption Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Generate engaging captions for any social media platform.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Generate engaging captions for any social media platform.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
         <div className="space-y-2">
-          <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider">What is your post about?</label>
+          <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What is your post about?</label>
           <textarea
             value={topic}
             onChange={e => setTopic(e.target.value)}
             placeholder="Describe your post topic, product, or idea..."
             rows={3}
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm text-zinc-900 dark:text-white outline-none resize-none focus:border-indigo-500"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] outline-none resize-none focus:border-indigo-500"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Platform</label>
+            <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Platform</label>
             <div className="flex flex-wrap gap-1.5">
               {PLATFORMS.map(p => (
                 <button key={p.id} onClick={() => setPlatform(p.id)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${platform === p.id ? 'bg-indigo-600 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${platform === p.id ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {p.icon} {p.label}
                 </button>
               ))}
@@ -241,11 +241,11 @@ export default function AiSocialCaption() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Mood</label>
+            <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Mood</label>
             <div className="flex flex-wrap gap-1.5">
               {MOODS.map(m => (
                 <button key={m} onClick={() => setMood(m)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${mood === m ? 'bg-indigo-600 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${mood === m ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {m}
                 </button>
               ))}
@@ -253,11 +253,11 @@ export default function AiSocialCaption() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Tone</label>
+            <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tone</label>
             <div className="flex flex-wrap gap-1.5">
               {TONES.map(t => (
                 <button key={t} onClick={() => setTone(t)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${tone === t ? 'bg-indigo-600 text-white shadow-md' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${tone === t ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {t}
                 </button>
               ))}
@@ -266,13 +266,13 @@ export default function AiSocialCaption() {
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <label className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300 cursor-pointer select-none">
+          <label className="flex items-center gap-2 text-xs text-[var(--text-primary)] cursor-pointer select-none">
             <input type="checkbox" checked={includeHashtags} onChange={e => setIncludeHashtags(e.target.checked)} className="accent-indigo-600 w-3.5 h-3.5" /> Hashtags
           </label>
-          <label className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300 cursor-pointer select-none">
+          <label className="flex items-center gap-2 text-xs text-[var(--text-primary)] cursor-pointer select-none">
             <input type="checkbox" checked={includeEmojis} onChange={e => setIncludeEmojis(e.target.checked)} className="accent-indigo-600 w-3.5 h-3.5" /> Emojis
           </label>
-          <label className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300 cursor-pointer select-none">
+          <label className="flex items-center gap-2 text-xs text-[var(--text-primary)] cursor-pointer select-none">
             <input type="checkbox" checked={includeCTA} onChange={e => setIncludeCTA(e.target.checked)} className="accent-indigo-600 w-3.5 h-3.5" /> Call-to-Action
           </label>
           <div className="ml-auto flex gap-2">
@@ -298,7 +298,7 @@ export default function AiSocialCaption() {
             <div className="flex gap-2">
               {captions.length > 0 && (
                 <button onClick={handleExportAll}
-                  className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5">
+                  className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -306,7 +306,7 @@ export default function AiSocialCaption() {
                 </button>
               )}
               <button onClick={() => setCaptions([])}
-                className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer">Clear</button>
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer">Clear</button>
             </div>
           </div>
 
@@ -317,9 +317,9 @@ export default function AiSocialCaption() {
               const ratio = Math.min(caption.length / limit, 1);
               const isFav = favorites.includes(caption);
               return (
-                <div key={i} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4 space-y-3 hover:shadow-lg transition-shadow">
+                <div key={i} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-3 hover:shadow-lg transition-shadow">
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-500">
+                    <div className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)]">
                       <span className="font-mono font-bold">{caption.length}</span>
                       <span>/</span>
                       <span className={isOverLimit ? 'text-red-500 font-bold' : ''}>{limit}</span>
@@ -328,7 +328,7 @@ export default function AiSocialCaption() {
                       </span>
                     </div>
                     <button onClick={() => toggleFavorite(caption)}
-                      className="cursor-pointer text-zinc-400 hover:text-amber-500 transition-colors shrink-0" title={isFav ? 'Remove from favorites' : 'Save as favorite'}>
+                      className="cursor-pointer text-[var(--text-muted)] hover:text-amber-500 transition-colors shrink-0" title={isFav ? 'Remove from favorites' : 'Save as favorite'}>
                       <svg className="w-4 h-4" fill={isFav ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                       </svg>
@@ -351,7 +351,7 @@ export default function AiSocialCaption() {
 
       {captions.length > 0 && (
         <button onClick={handleGenerate} disabled={isLoading}
-          className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
+          className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
           {isLoading ? (
             <div className="w-4 h-4 border-2 border-zinc-500 border-t-transparent rounded-full animate-spin" />
           ) : (
@@ -377,7 +377,7 @@ export default function AiSocialCaption() {
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {favorites.map((fav, i) => (
               <div key={i} className="flex items-start gap-2 bg-white dark:bg-black/20 border border-amber-200 dark:border-amber-800/20 rounded-lg p-3">
-                <p className="flex-1 text-xs text-zinc-700 dark:text-zinc-300 line-clamp-2 whitespace-pre-wrap">{fav}</p>
+                <p className="flex-1 text-xs text-[var(--text-primary)] line-clamp-2 whitespace-pre-wrap">{fav}</p>
                 <button onClick={() => handleCopy(fav)} className="text-amber-600 dark:text-amber-400 hover:text-amber-700 font-bold text-[10px] cursor-pointer shrink-0">Copy</button>
               </div>
             ))}

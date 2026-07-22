@@ -177,30 +177,30 @@ export default function LogoMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl gap-4">
         <div>
           <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-500 animate-pulse" />
             Vector Logo Maker
           </h2>
-          <p className="text-xs text-zinc-500 mt-1">Design premium vector logos with icons, custom typography, and high-fidelity PNG/SVG downloads.</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Design premium vector logos with icons, custom typography, and high-fidelity PNG/SVG downloads.</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Editor Controls */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 max-h-[680px] overflow-y-auto pr-2">
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[680px] overflow-y-auto pr-2">
           
           {/* Preset templates */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Quick Presets</h4>
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Quick Presets</h4>
             <div className="flex gap-2 flex-wrap">
               {PRESETS.map((preset, idx) => (
                 <button
                   key={idx}
                   onClick={() => loadPreset(preset)}
-                  className="px-3 py-1.5 text-xs font-bold bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/60 rounded-xl hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-xs font-bold bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/60 rounded-xl hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
                 >
                   {preset.name}
                 </button>
@@ -209,36 +209,36 @@ export default function LogoMaker() {
           </div>
 
           {/* Typography */}
-          <div className="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h4>
+          <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h4>
             
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Brand Name</label>
+              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Brand Name</label>
               <input
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none text-sm focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none text-sm focus:border-[var(--border-subtle)]"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Tagline</label>
+              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tagline</label>
               <input
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-900 dark:text-white outline-none text-sm focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none text-sm focus:border-[var(--border-subtle)]"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Font Family</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Font Family</label>
                 <select
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-white outline-none text-xs"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs"
                 >
                   <option value="sans-serif">Sans Serif (Modern)</option>
                   <option value="serif">Serif (Traditional)</option>
@@ -248,11 +248,11 @@ export default function LogoMaker() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Layout Style</label>
+                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Layout Style</label>
                 <select
                   value={layout}
                   onChange={(e) => setLayout(e.target.value as any)}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-white outline-none text-xs"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs"
                 >
                   <option value="vertical">Stacked (Vertical)</option>
                   <option value="horizontal">Line (Horizontal)</option>
@@ -262,11 +262,11 @@ export default function LogoMaker() {
           </div>
 
           {/* Sizing sliders */}
-          <div className="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Dimensions & Spacing</h4>
+          <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Dimensions & Spacing</h4>
             
             <div className="space-y-1">
-              <div className="flex justify-between text-[10px] text-zinc-500 uppercase font-bold">
+              <div className="flex justify-between text-[10px] text-[var(--text-secondary)] uppercase font-bold">
                 <span>Icon Size</span>
                 <span>{iconSize}px</span>
               </div>
@@ -274,7 +274,7 @@ export default function LogoMaker() {
             </div>
 
             <div className="space-y-1">
-              <div className="flex justify-between text-[10px] text-zinc-500 uppercase font-bold">
+              <div className="flex justify-between text-[10px] text-[var(--text-secondary)] uppercase font-bold">
                 <span>Text Size</span>
                 <span>{textSize}px</span>
               </div>
@@ -282,7 +282,7 @@ export default function LogoMaker() {
             </div>
 
             <div className="space-y-1">
-              <div className="flex justify-between text-[10px] text-zinc-500 uppercase font-bold">
+              <div className="flex justify-between text-[10px] text-[var(--text-secondary)] uppercase font-bold">
                 <span>Tagline Size</span>
                 <span>{taglineSize}px</span>
               </div>
@@ -291,24 +291,24 @@ export default function LogoMaker() {
           </div>
 
           {/* Colors & Canvas BG */}
-          <div className="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Palette & Canvas</h4>
+          <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
+            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Palette & Canvas</h4>
             
             <div className="grid grid-cols-3 gap-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Gradient Start</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient Start</label>
                 <input type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Gradient End</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient End</label>
                 <input type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Canvas BG</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Canvas BG</label>
                 <select
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
-                  className="w-full h-10 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-2 text-[10px] font-bold outline-none"
+                  className="w-full h-10 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 text-[10px] font-bold outline-none"
                 >
                   <option value="transparent">Transparent</option>
                   <option value="#ffffff">White</option>
@@ -322,14 +322,14 @@ export default function LogoMaker() {
         </div>
 
         {/* Live Canvas Preview Panel */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-zinc-50 dark:bg-black/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
-          <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-3 mb-4">
-             <span className="text-xs font-bold text-zinc-400">CANVAS PREVIEW (500 x 500)</span>
+        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-4">
+             <span className="text-xs font-bold text-[var(--text-muted)]">CANVAS PREVIEW (500 x 500)</span>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
             {/* Checked checkerboard pattern background for transparent canvas previews */}
-            <div className="relative border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-2xl p-1 bg-white dark:bg-zinc-950">
+            <div className="relative border-2 border-dashed border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl p-1 bg-white dark:bg-zinc-950">
               {bgColor === 'transparent' && (
                 <div 
                   className="absolute inset-0 opacity-15"
@@ -353,7 +353,7 @@ export default function LogoMaker() {
           <div className="grid grid-cols-2 gap-4 mt-6">
             <button 
               onClick={downloadPNG}
-              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-800 dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
+              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
             >
               <Download className="w-4 h-4" />
               Download PNG
@@ -361,7 +361,7 @@ export default function LogoMaker() {
             
             <button 
               onClick={downloadSVG}
-              className="bg-[var(--accent)] hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
+              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
             >
               <Download className="w-4 h-4" />
               Download Vector SVG

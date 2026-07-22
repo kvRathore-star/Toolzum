@@ -244,7 +244,7 @@ export default function ScreenRecorder() {
       </div>
 
       {isIdle && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-8">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
           <div className="text-center">
             <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
               <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,17 +252,17 @@ export default function ScreenRecorder() {
               </svg>
             </div>
             <h2 className="text-xl font-bold">Screen Recorder</h2>
-            <p className="text-sm text-zinc-500 mt-1">Record your screen, tab, or application window</p>
+            <p className="text-sm text-[var(--text-secondary)] mt-1">Record your screen, tab, or application window</p>
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Video Quality</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Video Quality</label>
             <div className="flex gap-2">
               {(Object.keys(qualityPresets) as Quality[]).map(q => (
                 <button
                   key={q}
                   onClick={() => setQuality(q)}
-                  className={`flex-1 px-4 py-3 text-sm font-medium rounded-xl border transition-all ${quality === q ? 'bg-red-500 text-white border-red-500 shadow-lg' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-red-300 dark:hover:border-red-700'}`}
+                  className={`flex-1 px-4 py-3 text-sm font-medium rounded-xl border transition-all ${quality === q ? 'bg-red-500 text-white border-red-500 shadow-lg' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-red-300 dark:hover:border-red-700'}`}
                 >
                   {qualityPresets[q].label}
                 </button>
@@ -270,9 +270,9 @@ export default function ScreenRecorder() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-700">
+          <div className="flex items-center justify-between p-4 bg-[var(--bg-overlay)]/50 rounded-xl border border-[var(--border-subtle)]">
             <div className="flex items-center gap-3">
-              <svg className="w-5 h-5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
               </svg>
               <span className="text-sm font-medium">Include microphone audio</span>
@@ -300,7 +300,7 @@ export default function ScreenRecorder() {
       )}
 
       {isRecording && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-8 text-center">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8 text-center">
           <div className="flex items-center justify-center gap-3">
             {!isPaused && <span className="w-4 h-4 bg-red-500 rounded-full animate-pulse" />}
             {isPaused && (
@@ -334,10 +334,10 @@ export default function ScreenRecorder() {
       )}
 
       {recordedUrl && !isRecording && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-emerald-500">Recording Complete</h3>
-            <span className="text-sm text-zinc-400 font-mono">{formatTime(duration)}</span>
+            <span className="text-sm text-[var(--text-muted)] font-mono">{formatTime(duration)}</span>
           </div>
 
           <div className="bg-black rounded-xl overflow-hidden shadow-inner">
@@ -350,7 +350,7 @@ export default function ScreenRecorder() {
                 <span>Converting to MP4...</span>
                 <span>{ffmpegProgress}%</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden">
+              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                 <div className="bg-blue-500 h-full transition-all duration-300 ease-out" style={{ width: `${ffmpegProgress}%` }} />
               </div>
             </div>
@@ -358,7 +358,7 @@ export default function ScreenRecorder() {
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => { if (recordedUrl) downloadOrShare(recordedUrl, `screen_recording_${Date.now()}.webm`); }}
-                className="px-4 py-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 border border-zinc-200 dark:border-zinc-700"
+                className="px-4 py-4 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-800 dark:text-zinc-200 font-bold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 border border-[var(--border-subtle)]"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download WebM
@@ -377,7 +377,7 @@ export default function ScreenRecorder() {
           <button
             onClick={resetAll}
             disabled={isProcessing}
-            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-400 font-medium rounded-xl transition-all active:scale-95 border border-zinc-200 dark:border-zinc-700 disabled:opacity-50"
+            className="w-full px-4 py-3 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] font-medium rounded-xl transition-all active:scale-95 border border-[var(--border-subtle)] disabled:opacity-50"
           >
             Record Again
           </button>

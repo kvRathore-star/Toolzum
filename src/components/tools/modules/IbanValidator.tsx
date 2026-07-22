@@ -16,16 +16,16 @@ export default function IbanValidator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
+    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
         <ShieldCheck className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">IBAN Validator</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">IBAN Validator</h3>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">International Bank Account Number (IBAN)</label>
+            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">International Bank Account Number (IBAN)</label>
             <input 
               type="text" 
               value={iban} 
@@ -34,7 +34,7 @@ export default function IbanValidator() {
                 setChecked(false);
               }} 
               placeholder="e.g. GB29 NWBK 6016 1331 9268 19" 
-              className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white text-sm outline-none focus:border-zinc-300 dark:focus:border-zinc-700" 
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-zinc-300 dark:focus:border-zinc-700" 
             />
           </div>
 
@@ -46,7 +46,7 @@ export default function IbanValidator() {
           </button>
         </div>
 
-        <div className="bg-zinc-50 dark:bg-black/30 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800 flex flex-col justify-center items-center min-h-[180px]">
+        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-center items-center min-h-[180px]">
           {checked ? (
             valid ? (
               <div className="text-center space-y-2 animate-in zoom-in-95">
@@ -61,15 +61,15 @@ export default function IbanValidator() {
                 <div className="p-3 bg-rose-500 text-white rounded-full inline-block">
                   <AlertTriangle className="w-8 h-8" />
                 </div>
-                <h4 className="text-lg font-bold text-rose-500">Invalid IBAN</h4>
+                <h4 className="text-lg font-bold text-[var(--accent)]">Invalid IBAN</h4>
                 <p className="text-xs text-[var(--text-muted)]">Format checksum check failed. Please verify and retype.</p>
               </div>
             )
           ) : (
-            <div className="text-center text-zinc-400">
+            <div className="text-center text-[var(--text-muted)]">
               <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700 animate-pulse" />
               <p className="text-sm">Status display is idle.</p>
-              <p className="text-xs text-zinc-500">Enter bank account details and validate.</p>
+              <p className="text-xs text-[var(--text-secondary)]">Enter bank account details and validate.</p>
             </div>
           )}
         </div>

@@ -113,14 +113,14 @@ export default function CompressImageTo50kb() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Original Photo</h3>
           <p className="text-xs text-[var(--text-secondary)]">File Weight: {(imageFile.size / 1024).toFixed(1)} KB</p>
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Photo
         </button>
@@ -128,9 +128,9 @@ export default function CompressImageTo50kb() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* original preview */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center text-center">
-          <span className="text-xs font-bold text-zinc-500 uppercase block mb-3">Original Preview</span>
-          <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center text-center">
+          <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block mb-3">Original Preview</span>
+          <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {originalUrl && (
               <img
                 src={originalUrl}
@@ -144,7 +144,7 @@ export default function CompressImageTo50kb() {
           <button
             onClick={handleCompress}
             disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-indigo-600 disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -155,9 +155,9 @@ export default function CompressImageTo50kb() {
         </div>
 
         {/* compressed preview */}
-        <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 p-6 rounded-2xl flex flex-col justify-between items-center text-center">
-          <span className="text-xs font-bold text-zinc-500 uppercase block mb-3">Compressed Output</span>
-          <div className="relative border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
+        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center text-center">
+          <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block mb-3">Compressed Output</span>
+          <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {compressedUrl ? (
               <img
                 src={compressedUrl}
@@ -167,7 +167,7 @@ export default function CompressImageTo50kb() {
                 className="max-w-full max-h-full object-contain"
               />
             ) : (
-              <span className="text-xs text-zinc-500">Run auto-compression to preview</span>
+              <span className="text-xs text-[var(--text-secondary)]">Run auto-compression to preview</span>
             )}
           </div>
 
@@ -181,15 +181,15 @@ export default function CompressImageTo50kb() {
                 Download ({(compressedSize / 1024).toFixed(1)} KB)
               </button>
             ) : (
-              <span className="text-xs text-zinc-400 font-mono">Target weight: &lt; 50.0 KB</span>
+              <span className="text-xs text-[var(--text-muted)] font-mono">Target weight: &lt; 50.0 KB</span>
             )}
           </div>
         </div>
       </div>
 
-      <div className="p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-white/5 space-y-2 text-xs text-zinc-500 leading-relaxed">
-        <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-indigo-500" />
+      <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-2 text-xs text-[var(--text-secondary)] leading-relaxed">
+        <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+          <ShieldCheck className="w-4 h-4 text-[var(--accent)]" />
           Government Compliance Guarantee
         </h4>
         <p>

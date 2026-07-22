@@ -271,26 +271,26 @@ export default function AiHumanizer() {
 
   return (
     <div className="max-w-6xl mx-auto animate-in fade-in duration-500 space-y-5">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.8L8.4 14l-6-4.8h7.6z" />
             </svg>
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI Humanizer</h3>
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Humanizer</h3>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">Rewrite AI-generated text to sound more natural and human-like.</p>
+          <p className="text-xs text-[var(--text-secondary)]">Rewrite AI-generated text to sound more natural and human-like.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Tone</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Tone</label>
               <div className="flex flex-wrap gap-1">
                 {TONES.map(t => (
                   <button key={t.value} onClick={() => setTone(t.value)}
                     className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
                       tone === t.value
                         ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300'
-                        : 'bg-zinc-50 dark:bg-black/30 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
                     }`}>
                     {t.label}
                   </button>
@@ -298,47 +298,47 @@ export default function AiHumanizer() {
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase">Creativity</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Creativity</label>
               <div className="flex gap-1">
                 {CREATIVITY_LEVELS.map(c => (
                   <button key={c.value} onClick={() => setCreativity(c.value)}
                     className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
                       creativity === c.value
                         ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-300'
-                        : 'bg-zinc-50 dark:bg-black/30 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
                     }`}>
                     {c.label}
                   </button>
                 ))}
               </div>
-              <p className="text-[10px] text-zinc-400">{CREATIVITY_LEVELS.find(c => c.value === creativity)?.desc}</p>
+              <p className="text-[10px] text-[var(--text-muted)]">{CREATIVITY_LEVELS.find(c => c.value === creativity)?.desc}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Original Text</label>
-                <span className="text-[10px] text-zinc-400">{input.length}/{MAX_CHARS}</span>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Original Text</label>
+                <span className="text-[10px] text-[var(--text-muted)]">{input.length}/{MAX_CHARS}</span>
               </div>
               <textarea value={input} onChange={e => setInput(e.target.value.slice(0, MAX_CHARS))}
                 placeholder="Paste AI-generated text here..."
-                className="w-full h-64 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-black/50 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full h-64 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase">Humanized Text</label>
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Humanized Text</label>
                 {output && (
                   <label className="flex items-center gap-1.5 cursor-pointer">
                     <input type="checkbox" checked={showChanges} onChange={e => setShowChanges(e.target.checked)}
                       className="w-3 h-3 rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
-                    <span className="text-[10px] text-zinc-400 font-medium">Highlight changes</span>
+                    <span className="text-[10px] text-[var(--text-muted)] font-medium">Highlight changes</span>
                   </label>
                 )}
               </div>
-              <div className="w-full h-64 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-black/50 text-sm text-zinc-900 dark:text-white overflow-y-auto whitespace-pre-wrap leading-relaxed">
+              <div className="w-full h-64 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm text-[var(--text-primary)] overflow-y-auto whitespace-pre-wrap leading-relaxed">
                 {!output ? (
-                  <span className="text-zinc-400">Humanized text will appear here...</span>
+                  <span className="text-[var(--text-muted)]">Humanized text will appear here...</span>
                 ) : showChanges && diff.length > 0 ? (
                   diff.map((t, i) => (
                     <span key={i} className={t.changed ? 'bg-emerald-200 dark:bg-emerald-800/40 rounded px-0.5 font-medium' : ''}>
@@ -364,11 +364,11 @@ export default function AiHumanizer() {
             {output && (
               <>
                 <button onClick={handleTryAgain} disabled={isLoading}
-                  className="px-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-semibold rounded-xl text-sm transition-colors">
+                  className="px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-semibold rounded-xl text-sm transition-colors">
                   Try Again
                 </button>
                 <button onClick={handleCopy}
-                  className="px-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-semibold rounded-xl text-sm transition-colors">
+                  className="px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-semibold rounded-xl text-sm transition-colors">
                   Copy to Clipboard
                 </button>
               </>
@@ -377,19 +377,19 @@ export default function AiHumanizer() {
 
           {output && (
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-              <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-center">
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
                 <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{inputWords}</div>
-                <div className="text-[10px] text-zinc-500 font-bold uppercase">Words (before)</div>
+                <div className="text-[10px] text-[var(--text-secondary)] font-bold uppercase">Words (before)</div>
               </div>
-              <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-center">
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
                 <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{outputWords}</div>
-                <div className="text-[10px] text-zinc-500 font-bold uppercase">Words (after)</div>
+                <div className="text-[10px] text-[var(--text-secondary)] font-bold uppercase">Words (after)</div>
               </div>
-              <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-center">
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
                 <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{inScore}</div>
-                <div className="text-[10px] text-zinc-500 font-bold uppercase">Readability (before)</div>
+                <div className="text-[10px] text-[var(--text-secondary)] font-bold uppercase">Readability (before)</div>
               </div>
-              <div className="bg-zinc-50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-center">
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{outScore}</span>
                   <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
@@ -398,7 +398,7 @@ export default function AiHumanizer() {
                     : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
                   }`}>{outLabel}</span>
                 </div>
-                <div className="text-[10px] text-zinc-500 font-bold uppercase">Readability (after)</div>
+                <div className="text-[10px] text-[var(--text-secondary)] font-bold uppercase">Readability (after)</div>
               </div>
             </div>
           )}

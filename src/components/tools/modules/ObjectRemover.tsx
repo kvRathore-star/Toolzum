@@ -240,7 +240,7 @@ export default function ObjectRemover() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-muted)]">Highlight unwanted elements with brush to erase them</p>
@@ -250,7 +250,7 @@ export default function ObjectRemover() {
             setImageFile(null);
             setImageSrc(null);
           }}
-          className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
         >
           Change Photo
         </button>
@@ -258,17 +258,17 @@ export default function ObjectRemover() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Toolbar */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h4 className="font-bold text-zinc-900 dark:text-white flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2 text-sm uppercase tracking-wider">
-            <Sliders className="w-4 h-4 text-indigo-500" />
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2 text-sm uppercase tracking-wider">
+            <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Brush Settings
           </h4>
 
           {/* Brush Size */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-zinc-400">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span>Brush Size</span>
-              <span className="text-indigo-400 font-bold">{brushSize} px</span>
+              <span className="text-[var(--accent)] font-bold">{brushSize} px</span>
             </div>
             <input
               type="range"
@@ -283,14 +283,14 @@ export default function ObjectRemover() {
           <div className="flex flex-col gap-2 pt-2">
             <button
               onClick={handleClearStrokes}
-              className="w-full py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-[var(--bg-surface)] dark:hover:bg-zinc-700 text-[var(--text-secondary)] dark:text-zinc-300 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+              className="w-full py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-zinc-300 font-bold rounded-xl text-xs transition-colors cursor-pointer"
             >
               Clear Canvas Strokes
             </button>
             <button
               onClick={handleInpaint}
               disabled={isProcessing}
-              className="w-full bg-[var(--accent)] hover:bg-indigo-600 disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-xs"
+              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-xs"
             >
               {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Eraser className="w-4 h-4" />}
               Erase Highlighted Object
@@ -320,7 +320,7 @@ export default function ObjectRemover() {
                 Download Restructured Image
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] justify-center">
                 <span>Hold mouse click and drag over objects to highlight them.</span>
               </div>
             )}

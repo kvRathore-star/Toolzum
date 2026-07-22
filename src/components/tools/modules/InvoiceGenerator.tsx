@@ -58,17 +58,17 @@ export default function InvoiceGenerator() {
       <div className="flex justify-between items-center print:hidden">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
-            <FileText className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            <FileText className="w-5 h-5 text-[var(--accent)] dark:text-[var(--accent)]" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Invoice Generator</h2>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">Create and print professional invoices</p>
+            <h2 className="text-xl font-bold text-[var(--text-primary)]">Invoice Generator</h2>
+            <p className="text-sm text-[var(--text-secondary)]">Create and print professional invoices</p>
           </div>
         </div>
         
         <button
           onClick={handlePrint}
-          className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+          className="px-6 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors flex items-center gap-2"
         >
           <Printer className="w-4 h-4" />
           Print / PDF
@@ -106,7 +106,7 @@ export default function InvoiceGenerator() {
 
       <div 
         id="invoice-container"
-        className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 rounded-2xl p-8 md:p-12 shadow-sm"
+        className="bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-2xl p-8 md:p-12 shadow-sm"
       >
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
@@ -115,13 +115,13 @@ export default function InvoiceGenerator() {
               type="text"
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
-              className="text-3xl font-bold text-zinc-900 dark:text-white bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full transition-colors"
+              className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full transition-colors"
               placeholder="Your Company Name"
             />
             <textarea
               value={senderDetails}
               onChange={(e) => setSenderDetails(e.target.value)}
-              className="text-zinc-500 dark:text-zinc-400 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none transition-colors"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none transition-colors"
               placeholder="Your Address & Contact Info"
             />
           </div>
@@ -132,7 +132,7 @@ export default function InvoiceGenerator() {
             </h1>
             <div className="space-y-2 text-sm">
               <div className="flex md:justify-end gap-2 items-center">
-                <span className="font-semibold text-zinc-700 dark:text-zinc-300">Invoice #:</span>
+                <span className="font-semibold text-[var(--text-primary)]">Invoice #:</span>
                 <input
                   type="text"
                   value={invoiceNum}
@@ -141,7 +141,7 @@ export default function InvoiceGenerator() {
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
-                <span className="font-semibold text-zinc-700 dark:text-zinc-300">Date:</span>
+                <span className="font-semibold text-[var(--text-primary)]">Date:</span>
                 <input
                   type="date"
                   value={date}
@@ -150,12 +150,12 @@ export default function InvoiceGenerator() {
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
-                <span className="font-semibold text-zinc-700 dark:text-zinc-300">Due Date:</span>
+                <span className="font-semibold text-[var(--text-primary)]">Due Date:</span>
                 <input
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none md:text-right text-zinc-500"
+                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none md:text-right text-[var(--text-secondary)]"
                 />
               </div>
             </div>
@@ -164,19 +164,19 @@ export default function InvoiceGenerator() {
 
         {/* Bill To */}
         <div className="mb-12">
-          <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Bill To</h3>
+          <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-3">Bill To</h3>
           <div className="space-y-2 max-w-sm">
             <input
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
-              className="text-lg font-bold text-zinc-900 dark:text-white bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full"
+              className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full"
               placeholder="Client Name"
             />
             <textarea
               value={clientDetails}
               onChange={(e) => setClientDetails(e.target.value)}
-              className="text-zinc-500 dark:text-zinc-400 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
               placeholder="Client Address & Info"
             />
           </div>
@@ -187,7 +187,7 @@ export default function InvoiceGenerator() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-y border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white">
+              <tr className="border-y border-[var(--border-subtle)] text-[var(--text-primary)]">
                 <th className="py-3 px-2 font-semibold">Description</th>
                 <th className="py-3 px-2 font-semibold w-24 text-right">Qty</th>
                 <th className="py-3 px-2 font-semibold w-32 text-right">Rate</th>
@@ -226,13 +226,13 @@ export default function InvoiceGenerator() {
                       className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none text-zinc-900 dark:text-zinc-300"
                     />
                   </td>
-                  <td className="py-3 px-2 text-right font-medium text-zinc-900 dark:text-white">
+                  <td className="py-3 px-2 text-right font-medium text-[var(--text-primary)]">
                     ${(item.quantity * item.rate).toFixed(2)}
                   </td>
                   <td className="py-3 px-2 text-right print-hide">
                     <button
                       onClick={() => handleRemoveItem(item.id)}
-                      className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                      className="p-1.5 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -245,7 +245,7 @@ export default function InvoiceGenerator() {
           
           <button
             onClick={handleAddItem}
-            className="mt-4 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 flex items-center gap-1 print-hide"
+            className="mt-4 text-sm font-medium text-[var(--accent)] dark:text-[var(--accent)] hover:text-indigo-700 flex items-center gap-1 print-hide"
           >
             <Plus className="w-4 h-4" />
             Add Item
@@ -255,25 +255,25 @@ export default function InvoiceGenerator() {
         {/* Totals & Notes */}
         <div className="flex flex-col-reverse md:flex-row justify-between gap-8">
           <div className="flex-1">
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Notes</h3>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Notes</h3>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="text-zinc-500 dark:text-zinc-400 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
               placeholder="Terms, payment instructions, etc."
             />
           </div>
           
-          <div className="w-full md:w-64 space-y-3 text-zinc-900 dark:text-white">
+          <div className="w-full md:w-64 space-y-3 text-[var(--text-primary)]">
             <div className="flex justify-between items-center py-1">
-              <span className="text-zinc-500">Subtotal</span>
+              <span className="text-[var(--text-secondary)]">Subtotal</span>
               <span className="font-medium">${subtotal.toFixed(2)}</span>
             </div>
             
             <div className="flex justify-between items-center py-1 group">
-              <span className="text-zinc-500 flex items-center gap-1">
+              <span className="text-[var(--text-secondary)] flex items-center gap-1">
                 Tax 
-                <span className="print-hide text-xs bg-zinc-100 dark:bg-zinc-800 px-1 rounded flex items-center">
+                <span className="print-hide text-xs bg-[var(--bg-surface)] px-1 rounded flex items-center">
                   <input
                     type="number"
                     value={taxRate}

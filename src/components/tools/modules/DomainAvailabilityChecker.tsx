@@ -59,15 +59,15 @@ export default function DomainAvailabilityChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Globe className="w-5 h-5 text-emerald-500" />
           Domain Name Availability Checker
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Check domain availability across 10 popular TLDs instantly. Find available domains for your next project.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Check domain availability across 10 popular TLDs instantly. Find available domains for your next project.</p>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-white/5 rounded-2xl p-6">
+      <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <input
             type="text"
@@ -75,7 +75,7 @@ export default function DomainAvailabilityChecker() {
             onChange={(e) => setDomain(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && checkDomain()}
             placeholder="Enter a name (e.g. myproject)"
-            className="flex-1 px-4 py-2.5 text-sm bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+            className="flex-1 px-4 py-2.5 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
           />
           <button
             onClick={checkDomain}
@@ -90,7 +90,7 @@ export default function DomainAvailabilityChecker() {
         {results.length > 0 && (
           <div className="space-y-2">
             {results.map((r) => (
-              <div key={r.domain} className="flex items-center justify-between px-4 py-3 bg-zinc-50 dark:bg-zinc-800/30 rounded-xl border border-zinc-200 dark:border-zinc-700/50">
+              <div key={r.domain} className="flex items-center justify-between px-4 py-3 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/50">
                 <div className="flex items-center gap-3">
                   {r.available ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
@@ -99,7 +99,7 @@ export default function DomainAvailabilityChecker() {
                   )}
                   <span className="text-sm font-mono text-[var(--text-primary)]">{r.domain}</span>
                 </div>
-                <span className={`text-xs font-medium ${r.available ? 'text-emerald-600' : 'text-zinc-400'}`}>
+                <span className={`text-xs font-medium ${r.available ? 'text-emerald-600' : 'text-[var(--text-muted)]'}`}>
                   {r.available ? 'Available' : r.error || 'Taken'}
                 </span>
               </div>
@@ -107,7 +107,7 @@ export default function DomainAvailabilityChecker() {
           </div>
         )}
 
-        <p className="mt-4 text-[11px] text-zinc-400 flex items-center gap-1">
+        <p className="mt-4 text-[11px] text-[var(--text-muted)] flex items-center gap-1">
           <ExternalLink className="w-3 h-3" />
           Powered by Google DNS — real-time lookup, no registration stored
         </p>

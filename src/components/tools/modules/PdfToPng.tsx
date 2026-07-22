@@ -244,54 +244,54 @@ export default function PdfToPng() {
         <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-500" />
         <span>Convert PDF pages to {format.toUpperCase()} images at your chosen DPI and color mode.</span>
       </div>
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
           <FileText className="w-8 h-8 text-blue-500 shrink-0" />
           <div className="min-w-0">
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
-            {pdfInfo && <p className="text-sm text-zinc-500">{pdfInfo.pageCount} page{pdfInfo.pageCount !== 1 ? 's' : ''} &middot; {pdfInfo.fileSize}</p>}
+            {pdfInfo && <p className="text-sm text-[var(--text-secondary)]">{pdfInfo.pageCount} page{pdfInfo.pageCount !== 1 ? 's' : ''} &middot; {pdfInfo.fileSize}</p>}
           </div>
         </div>
-        <button onClick={handleReset} className="text-sm text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition flex items-center gap-1.5 shrink-0">
+        <button onClick={handleReset} className="text-sm text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 transition flex items-center gap-1.5 shrink-0">
           <RefreshCw className="w-4 h-4" /> Change File
         </button>
       </div>
       {previewUrl && (
-        <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
-          <Eye className="w-5 h-5 text-zinc-400 shrink-0" />
-          <span className="text-sm text-zinc-600 dark:text-zinc-400">First page preview:</span>
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 flex items-center gap-3">
+          <Eye className="w-5 h-5 text-[var(--text-muted)] shrink-0" />
+          <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">First page preview:</span>
           <img src={previewUrl} alt="PDF preview" className="h-20 w-auto rounded border border-zinc-300 dark:border-zinc-700" />
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Output Format</label>
+          <label className="text-sm font-medium text-[var(--text-primary)]">Output Format</label>
           <select value={format} onChange={(e) => setFormat(e.target.value as OutputFormat)}
-            className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-blue-500/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
             <option value="png">PNG (lossless)</option>
             <option value="webp">WebP (smaller)</option>
             <option value="bmp">BMP (uncompressed)</option>
           </select>
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Page Range</label>
+          <label className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
           <input type="text" value={pageRange} onChange={(e) => setPageRange(e.target.value)}
             placeholder="all, 1-5, or 1,3,5"
-            className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-blue-500/50 outline-none" />
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none" />
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">DPI</label>
+          <label className="text-sm font-medium text-[var(--text-primary)]">DPI</label>
           <select value={dpi} onChange={(e) => setDpi(Number(e.target.value))}
-            className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-blue-500/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
             <option value={150}>150 DPI</option>
             <option value={200}>200 DPI</option>
             <option value={300}>300 DPI</option>
           </select>
         </div>
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Color Mode</label>
+          <label className="text-sm font-medium text-[var(--text-primary)]">Color Mode</label>
           <select value={colorMode} onChange={(e) => setColorMode(e.target.value as ColorMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-blue-500/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
             <option value="rgba">Full Color</option>
             <option value="gray">Grayscale</option>
             <option value="bw">Black & White</option>
@@ -300,18 +300,18 @@ export default function PdfToPng() {
       </div>
       {isProcessing && (
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="flex justify-between text-sm text-zinc-600 dark:text-[var(--text-muted)]">
             <span>Converting pages...</span>
             <span>{progress}%</span>
           </div>
-          <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
             <div className="h-full bg-blue-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
         </div>
       )}
       <div className="flex flex-col sm:flex-row gap-3">
         <button onClick={processConversion} disabled={isProcessing}
-          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all">
+          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all">
           {isProcessing ? <><RefreshCw className="w-5 h-5 animate-spin" /> Converting...</> : <><Settings className="w-5 h-5" /> Convert to {format.toUpperCase()}</>}
         </button>
         {outputUrl && (

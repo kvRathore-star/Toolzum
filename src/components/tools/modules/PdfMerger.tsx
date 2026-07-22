@@ -86,17 +86,17 @@ export default function PdfMerger() {
       />
 
       {files.length > 0 && (
-        <div className="p-6 border border-zinc-200 dark:border-white/10 bg-white dark:bg-black rounded-2xl shadow-xl">
-          <h4 className="text-zinc-700 dark:text-zinc-300 font-medium mb-4">Arrange Files</h4>
+        <div className="p-6 border border-[var(--border-subtle)] bg-white dark:bg-black rounded-2xl shadow-xl">
+          <h4 className="text-[var(--text-primary)] font-medium mb-4">Arrange Files</h4>
           <ul className="space-y-2 mb-6">
             {files.map((f, i) => (
-              <li key={f.id} className="flex items-center justify-between bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/5 p-3 rounded-xl">
+              <li key={f.id} className="flex items-center justify-between bg-[var(--bg-elevated)] border border-zinc-200 dark:border-[var(--border-subtle)] p-3 rounded-xl">
                 <span className="text-zinc-800 dark:text-zinc-200 text-sm truncate flex-1">{f.file.name}</span>
                 <div className="flex gap-2">
-                  <button onClick={() => moveUp(i)} disabled={i === 0} className="p-1 text-zinc-500 hover:text-zinc-900 dark:text-white disabled:opacity-30">
+                  <button onClick={() => moveUp(i)} disabled={i === 0} className="p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                   </button>
-                  <button onClick={() => moveDown(i)} disabled={i === files.length - 1} className="p-1 text-zinc-500 hover:text-zinc-900 dark:text-white disabled:opacity-30">
+                  <button onClick={() => moveDown(i)} disabled={i === files.length - 1} className="p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
                 </div>

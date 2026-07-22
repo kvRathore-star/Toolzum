@@ -15,22 +15,22 @@ export function StudyTimeCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Study Time Calculator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Study Time Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Hours per day</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Hours per day</label>
             <input type="number" value={hrs} onChange={e => setHrs(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Total days</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total days</label>
             <input type="number" value={days} onChange={e => setDays(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -49,22 +49,22 @@ export function TestScoreCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Test Score Calculator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Score Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Correct answers</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Correct answers</label>
             <input type="number" value={correct} onChange={e => setCorrect(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Total questions</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total questions</label>
             <input type="number" value={total} onChange={e => setTotal(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -85,24 +85,24 @@ export function WordsPerPageCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Words Per Page Calculator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Words Per Page Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Word count</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Word count</label>
             <input type="number" value={words} onChange={e => setWords(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Font size</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Font size</label>
             <select value={fontSize} onChange={e => setFontSize(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {[8, 9, 10, 11, 12, 14, 16, 18].map(s => <option key={s} value={s}>{s}pt</option>)}
             </select>
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -126,27 +126,27 @@ export function WorkingCapitalCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Working Capital Calculator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Working Capital Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Revenue ($)</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Revenue ($)</label>
             <input type="number" value={revenue} onChange={e => setRevenue(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">COGS ($)</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">COGS ($)</label>
             <input type="number" value={cogs} onChange={e => setCogs(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Operating Exp ($)</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Operating Exp ($)</label>
             <input type="number" value={opExp} onChange={e => setOpExp(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -176,15 +176,15 @@ export function RingSizeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Ring Size Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Ring Size Converter</h2>
         <div>
-          <label className="text-xs text-zinc-500 mb-1 block">Inner diameter (mm)</label>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Inner diameter (mm)</label>
           <input type="number" value={mm} onChange={e => setMm(e.target.value)} step={0.1}
-            className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -206,24 +206,24 @@ export function ScreenSizeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Screen Size Calculator</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Screen Size Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Diagonal (inches)</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Diagonal (inches)</label>
             <input type="number" value={diag} onChange={e => setDiag(e.target.value)} step={0.1}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Aspect ratio</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Aspect ratio</label>
             <select value={ratio} onChange={e => setRatio(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {['16:9', '16:10', '4:3', '3:2', '21:9'].map(r => <option key={r} value={r}>{r}</option>)}
             </select>
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -250,25 +250,25 @@ export function ShoeSizeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Shoe Size Converter</h2>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Shoe Size Converter</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">Size</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Size</label>
             <input type="number" value={size} onChange={e => setSize(e.target.value)} min={1} max={20}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-zinc-500 mb-1 block">From</label>
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
             <select value={from} onChange={e => setFrom(e.target.value)}
-              className="w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               <option value="US">US to UK</option>
               <option value="UK">UK to US</option>
             </select>
           </div>
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {result && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
   );
@@ -296,11 +296,11 @@ export function ZipFileExtractor() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">ZIP File Extractor</h2>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Select a ZIP file to view its contents.</p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">ZIP File Extractor</h2>
+        <p className="text-xs text-[var(--text-secondary)]">Select a ZIP file to view its contents.</p>
         <input type="file" accept=".zip" onChange={extract} className="w-full text-xs" />
-        {contents && <pre className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{contents}</pre>}
+        {contents && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{contents}</pre>}
       </div>
     </div>
   );

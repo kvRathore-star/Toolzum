@@ -28,13 +28,13 @@ export default function SaasPricingCalculator() {
 
   // LTV:CAC Health Indicator
   let healthText = "Unviable";
-  let healthColor = "text-rose-500 bg-rose-500/10 border-rose-500/20";
+  let healthColor = "text-[var(--accent)] bg-rose-500/10 border-rose-500/20";
   if (ltvToCac >= 5) {
     healthText = "Excellent (Highly Scalable)";
     healthColor = "text-emerald-500 bg-emerald-500/10 border-emerald-500/20";
   } else if (ltvToCac >= 3) {
     healthText = "Good (Standard SaaS Target)";
-    healthColor = "text-indigo-500 bg-indigo-500/10 border-indigo-500/20";
+    healthColor = "text-[var(--accent)] bg-indigo-500/10 border-indigo-500/20";
   } else if (ltvToCac >= 1.5) {
     healthText = "Cautionary (High CAC or Churn)";
     healthColor = "text-amber-500 bg-amber-500/10 border-amber-500/20";
@@ -76,28 +76,28 @@ export default function SaasPricingCalculator() {
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-indigo-500" />
+          <TrendingUp className="w-5 h-5 text-[var(--accent)]" />
           SaaS Pricing & Economics Calculator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Simulate unit economics, customer lifetime value, and MRR growth projections.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Simulate unit economics, customer lifetime value, and MRR growth projections.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Input Panel */}
-        <div className="lg:col-span-5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider border-b border-zinc-100 dark:border-zinc-800 pb-2">
+        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2">
             Economics & Drivers
           </h3>
 
           <div className="space-y-4">
             {/* ARPU */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>Avg. Revenue Per User (ARPU)</span>
-                <span className="text-zinc-900 dark:text-white">${arpu}/mo</span>
+                <span className="text-[var(--text-primary)]">${arpu}/mo</span>
               </div>
               <input 
                 type="range" min="5" max="500" step="5" value={arpu} 
@@ -108,9 +108,9 @@ export default function SaasPricingCalculator() {
 
             {/* CAC */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>Customer Acquisition Cost (CAC)</span>
-                <span className="text-zinc-900 dark:text-white">${cac}</span>
+                <span className="text-[var(--text-primary)]">${cac}</span>
               </div>
               <input 
                 type="range" min="10" max="2000" step="10" value={cac} 
@@ -121,9 +121,9 @@ export default function SaasPricingCalculator() {
 
             {/* Churn */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>Monthly Churn Rate (%)</span>
-                <span className="text-zinc-900 dark:text-white">{churn}%</span>
+                <span className="text-[var(--text-primary)]">{churn}%</span>
               </div>
               <input 
                 type="range" min="0.5" max="25" step="0.5" value={churn} 
@@ -134,9 +134,9 @@ export default function SaasPricingCalculator() {
 
             {/* OpEx */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>Monthly Operating Expense</span>
-                <span className="text-zinc-900 dark:text-white">${opex.toLocaleString()}/mo</span>
+                <span className="text-[var(--text-primary)]">${opex.toLocaleString()}/mo</span>
               </div>
               <input 
                 type="range" min="1000" max="100000" step="1000" value={opex} 
@@ -147,9 +147,9 @@ export default function SaasPricingCalculator() {
 
             {/* COGS % */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>COGS (Hosting/Support/API %)</span>
-                <span className="text-zinc-900 dark:text-white">{cogsPercent}%</span>
+                <span className="text-[var(--text-primary)]">{cogsPercent}%</span>
               </div>
               <input 
                 type="range" min="5" max="60" step="5" value={cogsPercent} 
@@ -160,9 +160,9 @@ export default function SaasPricingCalculator() {
 
             {/* Starting Customers */}
             <div className="space-y-1">
-              <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              <div className="flex justify-between text-xs font-bold text-[var(--text-secondary)]">
                 <span>Starting Customers</span>
-                <span className="text-zinc-900 dark:text-white">{startingCustomers}</span>
+                <span className="text-[var(--text-primary)]">{startingCustomers}</span>
               </div>
               <input 
                 type="range" min="0" max="1000" step="10" value={startingCustomers} 
@@ -172,15 +172,15 @@ export default function SaasPricingCalculator() {
             </div>
 
             {/* Target MRR */}
-            <div className="space-y-1 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Target Monthly Recurring Revenue</label>
+            <div className="space-y-1 pt-2 border-t border-[var(--border-subtle)]">
+              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Target Monthly Recurring Revenue</label>
               <div className="relative">
                 <input 
                   type="number" value={targetMrr} 
                   onChange={e => setTargetMrr(Math.max(100, parseInt(e.target.value) || 0))}
-                  className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white font-bold outline-none focus:border-[var(--border-subtle)] text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-bold outline-none focus:border-[var(--border-subtle)] text-sm"
                 />
-                <span className="absolute right-4 top-3.5 text-zinc-400 font-bold text-xs">USD</span>
+                <span className="absolute right-4 top-3.5 text-[var(--text-muted)] font-bold text-xs">USD</span>
               </div>
             </div>
           </div>
@@ -193,10 +193,10 @@ export default function SaasPricingCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             
             {/* LTV:CAC Ratio */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">LTV : CAC Ratio</span>
-                <h4 className="text-2xl font-black text-zinc-900 dark:text-white mt-1">
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">LTV : CAC Ratio</span>
+                <h4 className="text-2xl font-black text-[var(--text-primary)] mt-1">
                   {ltvToCac.toFixed(1)}x
                 </h4>
               </div>
@@ -206,25 +206,25 @@ export default function SaasPricingCalculator() {
             </div>
 
             {/* CAC Payback Period */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">CAC Payback</span>
-                <h4 className="text-2xl font-black text-indigo-500 mt-1">
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">CAC Payback</span>
+                <h4 className="text-2xl font-black text-[var(--accent)] mt-1">
                   {paybackPeriod.toFixed(1)} months
                 </h4>
               </div>
-              <span className="text-[10px] text-zinc-400 mt-3 block">Time to recover initial acquisition cost.</span>
+              <span className="text-[10px] text-[var(--text-muted)] mt-3 block">Time to recover initial acquisition cost.</span>
             </div>
 
             {/* Break-Even Points */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">OpEx Break-even</span>
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">OpEx Break-even</span>
                 <h4 className="text-2xl font-black text-emerald-500 mt-1">
                   {breakEvenCustomers.toLocaleString()} users
                 </h4>
               </div>
-              <span className="text-[10px] text-zinc-400 mt-3 block">
+              <span className="text-[10px] text-[var(--text-muted)] mt-3 block">
                 Required active users for gross profitability.
               </span>
             </div>
@@ -232,45 +232,45 @@ export default function SaasPricingCalculator() {
           </div>
 
           {/* Core Metrics Breakdown */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800">
               Economics Analysis
             </h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div className="flex justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/20 rounded-xl">
-                <span className="text-zinc-500">Gross Margin:</span>
-                <span className="font-bold text-zinc-900 dark:text-white">{(grossMarginMultiplier * 100).toFixed(0)}%</span>
+              <div className="flex justify-between p-2.5 bg-[var(--bg-overlay)]/20 rounded-xl">
+                <span className="text-[var(--text-secondary)]">Gross Margin:</span>
+                <span className="font-bold text-[var(--text-primary)]">{(grossMarginMultiplier * 100).toFixed(0)}%</span>
               </div>
-              <div className="flex justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/20 rounded-xl">
-                <span className="text-zinc-500">Customer Lifetime Value (LTV):</span>
-                <span className="font-bold text-zinc-900 dark:text-white">${Math.round(ltv).toLocaleString()}</span>
+              <div className="flex justify-between p-2.5 bg-[var(--bg-overlay)]/20 rounded-xl">
+                <span className="text-[var(--text-secondary)]">Customer Lifetime Value (LTV):</span>
+                <span className="font-bold text-[var(--text-primary)]">${Math.round(ltv).toLocaleString()}</span>
               </div>
-              <div className="flex justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/20 rounded-xl">
-                <span className="text-zinc-500">Target MRR Customers:</span>
-                <span className="font-bold text-zinc-900 dark:text-white">{targetCustomers.toLocaleString()} accounts</span>
+              <div className="flex justify-between p-2.5 bg-[var(--bg-overlay)]/20 rounded-xl">
+                <span className="text-[var(--text-secondary)]">Target MRR Customers:</span>
+                <span className="font-bold text-[var(--text-primary)]">{targetCustomers.toLocaleString()} accounts</span>
               </div>
-              <div className="flex justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/20 rounded-xl">
-                <span className="text-zinc-500">Gross Profit per User:</span>
-                <span className="font-bold text-zinc-900 dark:text-white">${(arpu * grossMarginMultiplier).toFixed(2)}/mo</span>
+              <div className="flex justify-between p-2.5 bg-[var(--bg-overlay)]/20 rounded-xl">
+                <span className="text-[var(--text-secondary)]">Gross Profit per User:</span>
+                <span className="font-bold text-[var(--text-primary)]">${(arpu * grossMarginMultiplier).toFixed(2)}/mo</span>
               </div>
             </div>
           </div>
 
           {/* Growth Simulator Output */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800 flex items-center justify-between">
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800 flex items-center justify-between">
               <span>12-Month Projections</span>
-              <span className="text-[10px] text-zinc-400 font-normal">Assumes 30% of OpEx allocated to CAC acquisition</span>
+              <span className="text-[10px] text-[var(--text-muted)] font-normal">Assumes 30% of OpEx allocated to CAC acquisition</span>
             </h3>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left text-zinc-500 dark:text-zinc-400">
+              <table className="w-full text-xs text-left text-[var(--text-secondary)]">
                 <thead>
-                  <tr className="border-b border-[var(--border-subtle)] dark:border-zinc-800 text-zinc-400 font-semibold">
+                  <tr className="border-b border-[var(--border-subtle)] dark:border-zinc-800 text-[var(--text-muted)] font-semibold">
                     <th className="py-2">Month</th>
                     <th className="py-2">End Users</th>
-                    <th className="py-2 text-rose-500">Churned</th>
+                    <th className="py-2 text-[var(--accent)]">Churned</th>
                     <th className="py-2">Monthly MRR</th>
                     <th className="py-2">Annual ARR</th>
                     <th className="py-2 text-right">Profit</th>
@@ -278,9 +278,9 @@ export default function SaasPricingCalculator() {
                 </thead>
                 <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
                   {projections.map(proj => (
-                    <tr key={proj.month} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/20">
-                      <td className="py-2.5 font-semibold text-zinc-700 dark:text-zinc-300">Month {proj.month}</td>
-                      <td className="py-2.5 font-bold text-zinc-900 dark:text-white">{proj.endCust.toLocaleString()}</td>
+                    <tr key={proj.month} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-zinc-800/20">
+                      <td className="py-2.5 font-semibold text-[var(--text-primary)]">Month {proj.month}</td>
+                      <td className="py-2.5 font-bold text-[var(--text-primary)]">{proj.endCust.toLocaleString()}</td>
                       <td className="py-2.5 text-rose-400">-{proj.churned}</td>
                       <td className="py-2.5 font-semibold text-zinc-900 dark:text-zinc-200">${Math.round(proj.mrr).toLocaleString()}</td>
                       <td className="py-2.5 text-[var(--text-muted)]">${Math.round(proj.arr).toLocaleString()}</td>

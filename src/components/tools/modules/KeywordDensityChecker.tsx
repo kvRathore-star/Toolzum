@@ -63,27 +63,27 @@ export default function KeywordDensityChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Search className="w-5 h-5 text-indigo-500" />
+          <Search className="w-5 h-5 text-[var(--accent)]" />
           Keyword Density Checker
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Analyze copy texts to map word frequency patterns and check stopword occurrences client-side.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Analyze copy texts to map word frequency patterns and check stopword occurrences client-side.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Editor */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4">
-          <span className="text-xs text-zinc-400 font-bold uppercase block">Content Copy</span>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Content Copy</span>
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Paste article, blog post, or keywords content to analyze..."
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white h-72 outline-none text-xs resize-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-72 outline-none text-xs resize-none"
           />
 
           <div className="flex justify-between items-center text-xs border-t border-zinc-800 pt-3">
-            <label className="text-zinc-400 flex items-center gap-1.5 cursor-pointer">
+            <label className="text-[var(--text-muted)] flex items-center gap-1.5 cursor-pointer">
               <input type="checkbox" checked={ignoreStopwords} onChange={e => setIgnoreStopwords(e.target.checked)} />
               Ignore Common Stopwords (the, as, or)
             </label>
@@ -94,22 +94,22 @@ export default function KeywordDensityChecker() {
         </div>
 
         {/* Results */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl min-h-[300px] flex flex-col justify-center">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[300px] flex flex-col justify-center">
           {results.length > 0 ? (
             <div className="space-y-4 flex-1 flex flex-col justify-between">
-              <span className="text-xs text-zinc-400 font-bold uppercase block border-b border-zinc-800 pb-2">Top density Keywords</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-zinc-800 pb-2">Top density Keywords</span>
               
               <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
                 {results.map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center text-xs bg-zinc-50 dark:bg-black/10 p-2.5 rounded-xl border border-[var(--border-subtle)]">
+                  <div key={idx} className="flex justify-between items-center text-xs bg-[var(--bg-overlay)] p-2.5 rounded-xl border border-[var(--border-subtle)]">
                     <span className="font-bold text-zinc-300 font-mono">#{idx+1} {item.word}</span>
-                    <span className="text-zinc-500">Count: {item.count} ({item.density}%)</span>
+                    <span className="text-[var(--text-secondary)]">Count: {item.count} ({item.density}%)</span>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="text-center text-zinc-500">
+            <div className="text-center text-[var(--text-secondary)]">
               <Search className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700 animate-pulse" />
               <p className="text-xs">No analysis computed yet. Enter text and trigger analysis check.</p>
             </div>

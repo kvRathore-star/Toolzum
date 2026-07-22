@@ -43,23 +43,23 @@ export default function MacAddressGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-zinc-50 dark:bg-zinc-900/50 p-5 border border-zinc-200 dark:border-white/5 rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Layers className="w-5 h-5 text-indigo-500" />
+          <Layers className="w-5 h-5 text-[var(--accent)]" />
           MAC Address List Generator
         </h2>
-        <p className="text-xs text-zinc-500 mt-1">Generate random hardware MAC addresses with custom prefixes, formats and cases client-side.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Generate random hardware MAC addresses with custom prefixes, formats and cases client-side.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Controls */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-4 text-xs">
-          <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase border-b border-zinc-800 pb-2">Formatting</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Formatting</h3>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Quantity</label>
-              <select value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-2.5 py-2 outline-none">
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Quantity</label>
+              <select value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 outline-none">
                 <option value="5">5 Addresses</option>
                 <option value="10">10 Addresses</option>
                 <option value="20">20 Addresses</option>
@@ -67,8 +67,8 @@ export default function MacAddressGenerator() {
             </div>
             
             <div className="space-y-1">
-              <label className="text-[10px] text-zinc-400 font-bold">Delimiter</label>
-              <select value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-2.5 py-2 outline-none">
+              <label className="text-[10px] text-[var(--text-muted)] font-bold">Delimiter</label>
+              <select value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 outline-none">
                 <option value=":">Colon (:)</option>
                 <option value="-">Hyphen (-)</option>
                 <option value="">None</option>
@@ -77,13 +77,13 @@ export default function MacAddressGenerator() {
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] text-zinc-400 font-bold">OUI Prefix (e.g. 00:50:56 for VMware)</label>
-            <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 outline-none" />
+            <label className="text-[10px] text-[var(--text-muted)] font-bold">OUI Prefix (e.g. 00:50:56 for VMware)</label>
+            <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 outline-none" />
           </div>
 
           <div className="flex items-center gap-1.5 pt-2">
             <input type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
-            <label className="text-zinc-400 cursor-pointer">Uppercase Hex Letters</label>
+            <label className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
           </div>
 
           <button onClick={generateMacs} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
@@ -92,13 +92,13 @@ export default function MacAddressGenerator() {
         </div>
 
         {/* Results */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-between">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-between">
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-              <span className="text-xs text-zinc-400 font-bold uppercase">MAC Addresses</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase">MAC Addresses</span>
               {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg"><Copy className="w-4 h-4" /></button>}
             </div>
-            <textarea readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs outline-none h-48 resize-none mt-2" />
+            <textarea readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs outline-none h-48 resize-none mt-2" />
           </div>
         </div>
       </div>

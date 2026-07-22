@@ -99,7 +99,7 @@ export default function TextToSpeechTts() {
       <div className="max-w-3xl mx-auto mt-12 bg-red-500/10 border border-red-500/20 p-8 rounded-2xl text-center space-y-4">
         <svg className="w-16 h-16 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
         <h3 className="text-xl font-bold text-red-600 dark:text-red-400">Browser Not Supported</h3>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
           Your browser does not support the Web Speech API. Please try using Google Chrome, Microsoft Edge, or Safari.
         </p>
       </div>
@@ -110,13 +110,13 @@ export default function TextToSpeechTts() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Top Toolbar */}
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-xl shadow-sm gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
         <div className="flex items-center gap-4 w-full sm:w-auto">
-          <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400 whitespace-nowrap">Voice:</label>
+          <label className="text-sm font-bold text-[var(--text-secondary)] whitespace-nowrap">Voice:</label>
           <select
             value={selectedVoiceURI}
             onChange={(e) => setSelectedVoiceURI(e.target.value)}
-            className="w-full sm:w-64 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium outline-none truncate"
+            className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium outline-none truncate"
           >
             {voices.map((v, i) => (
               <option key={`${v.voiceURI}-${i}`} value={v.voiceURI}>
@@ -161,14 +161,14 @@ export default function TextToSpeechTts() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[500px]">
         
         {/* Left: Input Textarea (Span 2) */}
-        <div className="lg:col-span-2 flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl">
-          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-white/10 px-4 py-3 flex justify-between items-center">
-            <h3 className="font-bold text-zinc-700 dark:text-zinc-300 text-sm flex items-center gap-2">
+        <div className="lg:col-span-2 flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
                <span className="text-xl">📝</span> Text Input
             </h3>
             <button 
               onClick={() => setText('')}
-              className="text-xs text-zinc-500 hover:text-red-500 transition-colors"
+              className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors"
             >
               Clear
             </button>
@@ -177,18 +177,18 @@ export default function TextToSpeechTts() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter the text you want to convert to speech..."
-            className="flex-1 w-full p-6 bg-transparent outline-none resize-none text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
+            className="flex-1 w-full p-6 bg-transparent outline-none resize-none text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
             spellCheck="false"
           />
         </div>
 
         {/* Right: Settings Sidebar */}
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl p-6 space-y-8">
-           <h3 className="font-bold text-zinc-900 dark:text-zinc-100 border-b border-zinc-100 dark:border-zinc-800 pb-2">Audio Settings</h3>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl p-6 space-y-8">
+           <h3 className="font-bold text-zinc-900 dark:text-zinc-100 border-b border-[var(--border-subtle)] pb-2">Audio Settings</h3>
            
            <div className="space-y-4">
              <div className="flex justify-between items-center">
-               <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400">Speech Rate</label>
+               <label className="text-sm font-bold text-[var(--text-secondary)]">Speech Rate</label>
                <span className="text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded">{rate.toFixed(1)}x</span>
              </div>
              <input
@@ -200,7 +200,7 @@ export default function TextToSpeechTts() {
                onChange={(e) => setRate(Number(e.target.value))}
                className="w-full accent-blue-600"
              />
-             <div className="flex justify-between text-xs text-zinc-400 px-1">
+             <div className="flex justify-between text-xs text-[var(--text-muted)] px-1">
                <span>Slow</span>
                <span>Fast</span>
              </div>
@@ -208,7 +208,7 @@ export default function TextToSpeechTts() {
 
            <div className="space-y-4">
              <div className="flex justify-between items-center">
-               <label className="text-sm font-bold text-zinc-500 dark:text-zinc-400">Voice Pitch</label>
+               <label className="text-sm font-bold text-[var(--text-secondary)]">Voice Pitch</label>
                <span className="text-xs font-bold bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-2 py-1 rounded">{pitch.toFixed(1)}</span>
              </div>
              <input
@@ -220,14 +220,14 @@ export default function TextToSpeechTts() {
                onChange={(e) => setPitch(Number(e.target.value))}
                className="w-full accent-purple-600"
              />
-             <div className="flex justify-between text-xs text-zinc-400 px-1">
+             <div className="flex justify-between text-xs text-[var(--text-muted)] px-1">
                <span>Deep</span>
                <span>High</span>
              </div>
            </div>
            
-           <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-center">
-              <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-blue-500 animate-pulse bg-blue-500/10 scale-110' : 'border-zinc-200 dark:border-zinc-800'}`}>
+           <div className="pt-6 border-t border-[var(--border-subtle)] flex items-center justify-center">
+              <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-blue-500 animate-pulse bg-blue-500/10 scale-110' : 'border-[var(--border-subtle)]'}`}>
                  <svg className={`w-10 h-10 ${isPlaying ? 'text-blue-500 animate-bounce' : 'text-zinc-300 dark:text-zinc-700'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
               </div>
            </div>

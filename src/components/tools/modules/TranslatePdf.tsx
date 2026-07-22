@@ -143,17 +143,17 @@ export default function TranslatePdf() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
-          <FileText className="w-8 h-8 text-indigo-500" />
+          <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
-            <p className="text-zinc-500 text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button 
           onClick={clearAll}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-zinc-800 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
         >
           Change File
         </button>
@@ -166,47 +166,47 @@ export default function TranslatePdf() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm mb-3 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-500" />
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm mb-3 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[var(--accent)]" />
               Extracted Text
-              {isProcessing && <RefreshCw className="w-4 h-4 animate-spin text-indigo-500 ml-auto" />}
+              {isProcessing && <RefreshCw className="w-4 h-4 animate-spin text-[var(--accent)] ml-auto" />}
             </h4>
             <textarea
               readOnly
               value={extractedText}
               placeholder="Text extracted from PDF will appear here..."
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 text-sm resize-none"
               rows={12}
             />
           </div>
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl">
-            <h4 className="text-zinc-900 dark:text-white font-medium text-sm mb-3 flex items-center gap-2">
-              <Languages className="w-4 h-4 text-indigo-500" />
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl">
+            <h4 className="text-[var(--text-primary)] font-medium text-sm mb-3 flex items-center gap-2">
+              <Languages className="w-4 h-4 text-[var(--accent)]" />
               Translation
             </h4>
             <textarea
               readOnly
               value={translatedText}
               placeholder="Translated text will appear here..."
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-zinc-900 dark:text-white outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 text-sm resize-none"
               rows={12}
             />
             {translatedText && (
               <div className="flex gap-2 mt-3">
                 <button
                   onClick={handleCopy}
-                  className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+                  className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-medium py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                   {copied ? 'Copied' : 'Copy'}
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="flex-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+                  className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-medium py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
                 >
                   <Download className="w-4 h-4" />
                   Download .txt
@@ -217,17 +217,17 @@ export default function TranslatePdf() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
               <Globe className="w-3 h-3" />
               Source Language
             </label>
             <select
               value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
             >
               <option value="auto">Auto Detect</option>
               {LANGUAGES.map((lang) => (
@@ -237,18 +237,18 @@ export default function TranslatePdf() {
           </div>
 
           <div className="flex items-end justify-center pb-3">
-            <ArrowRight className="w-6 h-6 text-zinc-400" />
+            <ArrowRight className="w-6 h-6 text-[var(--text-muted)]" />
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1">
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
               <Languages className="w-3 h-3" />
               Target Language
             </label>
             <select
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
-              className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-3 text-sm text-zinc-900 dark:text-white outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
             >
               {LANGUAGES.map((lang) => (
                 <option key={lang.code} value={lang.code}>{lang.name}</option>

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm whitespace-pre-wrap font-mono max-h-48 overflow-y-auto";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono max-h-48 overflow-y-auto";
 
 function parseCSV(text: string): { headers: string[]; rows: string[][] } {
   const lines = text.trim().split('\n').filter(l => l.trim());
@@ -755,13 +755,13 @@ export function CsvJsonRowGenerator() {
       <h1 className="text-2xl font-bold mb-6">CSV Row / JSON Generator</h1>
       <div className="flex gap-2">
         {[{ v: 'csv', l: 'CSV Row' }, { v: 'json', l: 'JSON' }].map(({ v, l }) => (
-          <button key={v} onClick={() => setType(v)} className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${type === v ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>{l}</button>
+          <button key={v} onClick={() => setType(v)} className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${type === v ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{l}</button>
         ))}
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm text-zinc-500">Count</span>
+        <span className="text-sm text-[var(--text-secondary)]">Count</span>
         <input type="range" min={1} max={50} value={count} onChange={e => setCount(Number(e.target.value))} className="flex-1 h-1" />
-        <span className="text-sm text-zinc-400 w-5 text-right">{count}</span>
+        <span className="text-sm text-[var(--text-muted)] w-5 text-right">{count}</span>
       </div>
       <button onClick={handle} className={btnClass}>Generate</button>
       <OutputBlock value={out} />

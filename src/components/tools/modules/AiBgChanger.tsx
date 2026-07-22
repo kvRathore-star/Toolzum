@@ -201,31 +201,31 @@ export default function AiBgChanger() {
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
         <Scissors className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-zinc-900 dark:text-white">AI BG Changer</h3>
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">AI BG Changer</h3>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         {!image ? (
-          <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl p-12 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-zinc-50/50 dark:bg-black/20"
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
             onClick={() => fileInputRef.current?.click()}>
-            <Image className="w-12 h-12 mx-auto mb-3 text-zinc-400" />
-            <p className="text-base font-semibold text-zinc-500 dark:text-zinc-400">Upload an image</p>
-            <p className="text-xs text-zinc-400 mt-1">AI-powered background removal + replacement</p>
+            <Image className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
+            <p className="text-base font-semibold text-[var(--text-secondary)]">Upload an image</p>
+            <p className="text-xs text-[var(--text-muted)] mt-1">AI-powered background removal + replacement</p>
             <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div className="space-y-3 lg:col-span-1">
-              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
                 <div className="flex items-center justify-between">
-                  <h5 className="text-[10px] font-bold text-zinc-400 uppercase">Mode</h5>
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Mode</h5>
                   <div className="flex bg-zinc-200 dark:bg-zinc-700 rounded-lg p-0.5">
                     <button onClick={() => setMode('auto')}
-                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors ${mode === 'auto' ? 'bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}>
+                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors ${mode === 'auto' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                       Auto
                     </button>
                     <button onClick={() => setMode('manual')}
-                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors ${mode === 'manual' ? 'bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500'}`}>
+                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors ${mode === 'manual' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                       Manual
                     </button>
                   </div>
@@ -234,7 +234,7 @@ export default function AiBgChanger() {
                 {mode === 'auto' ? (
                   <>
                     <div className="space-y-1">
-                      <label className="text-[10px] text-zinc-500 flex justify-between"><span>Detection Sensitivity</span><span className="font-mono">{tolerance}%</span></label>
+                      <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Detection Sensitivity</span><span className="font-mono">{tolerance}%</span></label>
                       <input type="range" min="1" max="50" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
                         className="w-full accent-emerald-500" />
                     </div>
@@ -245,9 +245,9 @@ export default function AiBgChanger() {
                   </>
                 ) : (
                   <>
-                    <p className="text-[9px] text-zinc-500">Paint over the foreground (subject) to keep it. Everything else will be removed.</p>
+                    <p className="text-[9px] text-[var(--text-secondary)]">Paint over the foreground (subject) to keep it. Everything else will be removed.</p>
                     <div className="space-y-1">
-                      <label className="text-[10px] text-zinc-500 flex justify-between"><span>Brush Size</span><span className="font-mono">{brushSize}px</span></label>
+                      <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brush Size</span><span className="font-mono">{brushSize}px</span></label>
                       <input type="range" min="5" max="80" value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}
                         className="w-full accent-emerald-500" />
                     </div>
@@ -259,19 +259,19 @@ export default function AiBgChanger() {
                 )}
 
                 <div className="space-y-1">
-                  <label className="text-[10px] text-zinc-500">New BG Color</label>
+                  <label className="text-[10px] text-[var(--text-secondary)]">New BG Color</label>
                   <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
-                    className="w-full h-9 rounded-xl border border-zinc-200 dark:border-zinc-800 cursor-pointer" />
+                    className="w-full h-9 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
 
                 <label className="flex items-center justify-between cursor-pointer">
-                  <span className="text-[10px] text-zinc-500">Transparent BG</span>
+                  <span className="text-[10px] text-[var(--text-secondary)]">Transparent BG</span>
                   <input type="checkbox" checked={useTransparent} onChange={e => setUseTransparent(e.target.checked)}
                     className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
                 </label>
 
                 <button onClick={resetAll}
-                  className="w-full py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                  className="w-full py-2 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors">
                   <RotateCcw className="w-3.5 h-3.5" /> Reset
                 </button>
               </div>
@@ -288,7 +288,7 @@ export default function AiBgChanger() {
             </div>
 
             <div className="lg:col-span-2 space-y-3">
-              <div className="bg-zinc-50 dark:bg-black/30 rounded-xl p-2 border border-zinc-200 dark:border-zinc-800 relative">
+              <div className="bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)] relative">
                 <NextImage loading="lazy" ref={imageRef} src={image} alt="Processed image" unoptimized={true} className="hidden" onLoad={() => {
                   const img = imageRef.current;
                   const canvas = canvasRef.current;

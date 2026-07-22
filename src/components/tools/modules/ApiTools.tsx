@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2";
 const labelClass = "block text-sm font-medium mb-1";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
 const cardClass = "max-w-xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm font-mono whitespace-pre";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono whitespace-pre";
 
 export function ApiRequestBuilder() {
   const [method, setMethod] = useState('GET');

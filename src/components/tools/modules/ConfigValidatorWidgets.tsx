@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono";
 const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-sm whitespace-pre-wrap font-mono";
+const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
 
 function validateYaml(text: string): string[] {
   const lines = text.split('\n');
@@ -287,7 +287,7 @@ export function CronExpressionValidator() {
     <div className="max-w-xl mx-auto p-6 space-y-3">
       <h1 className="text-2xl font-bold mb-6">Cron Expression Validator</h1>
       <input type="text" value={input} onChange={e => setInput(e.target.value)} className={inputClass} placeholder="*/5 * * * *" />
-      <p className="text-xs text-zinc-400">5 fields: minute hour day month weekday</p>
+      <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday</p>
       <button onClick={validate} className={btnClass}>Validate</button>
       {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
     </div>

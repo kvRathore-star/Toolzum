@@ -211,23 +211,23 @@ export default function ImageToIco() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setPreview(null); }}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Image
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div>
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2 block">Icon Size</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Icon Size</label>
             <div className="grid grid-cols-6 gap-1.5">
               {ICON_SIZES.map(s => (
                 <button
@@ -238,8 +238,8 @@ export default function ImageToIco() {
                     iconSize === s && !multiSize
                       ? 'bg-blue-600 text-white border-blue-600 shadow-md'
                       : multiSize
-                        ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 border-zinc-200 dark:border-zinc-700 cursor-not-allowed'
-                        : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'
+                        ? 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-subtle)] cursor-not-allowed'
+                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-300'
                   }`}
                 >
                   {s}
@@ -270,12 +270,12 @@ export default function ImageToIco() {
 
           {!squareCrop && (
             <div>
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2 block">Background Color</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Background Color</label>
               <input
                 type="color"
                 value={bgColor === '#ffffff00' ? '#ffffff' : bgColor}
                 onChange={(e) => setBgColor(e.target.value)}
-                className="w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 cursor-pointer"
+                className="w-full h-10 rounded-lg border border-[var(--border-subtle)] cursor-pointer"
               />
               <div className="flex items-center gap-2 mt-2">
                 <input
@@ -285,7 +285,7 @@ export default function ImageToIco() {
                   onChange={(e) => setBgColor(e.target.checked ? '#ffffff00' : '#ffffff')}
                   className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600"
                 />
-                <label htmlFor="transparentBg" className="text-xs text-zinc-500">Transparent background</label>
+                <label htmlFor="transparentBg" className="text-xs text-[var(--text-secondary)]">Transparent background</label>
               </div>
             </div>
           )}
@@ -322,7 +322,7 @@ export default function ImageToIco() {
                   <img  loading="lazy" src={preview} alt="Preview" width={iconSize} height={iconSize} className="drop-shadow-md rounded" />
                 )}
               </div>
-              <div className="text-xs text-zinc-500 mb-4">
+              <div className="text-xs text-[var(--text-secondary)] mb-4">
                 {sizesToGenerate.length} size{sizesToGenerate.length > 1 ? 's' : ''}: {sizesToGenerate.join('x, ')}x
               </div>
               <button
@@ -333,7 +333,7 @@ export default function ImageToIco() {
               </button>
             </div>
           ) : (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[300px]">
               <img
                 
                 loading="lazy"

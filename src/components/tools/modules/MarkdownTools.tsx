@@ -52,18 +52,18 @@ function MarkdownToHtmlTab() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
-        <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Markdown Input</span>
-            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-zinc-500 hover:text-red-500 transition-colors">Clear</button>
+        <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Input</span>
+            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
         </div>
-        <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">HTML Output</span>
+        <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">HTML Output</span>
             <div className="flex gap-2">
-              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
+              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
               <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .html</button>
             </div>
           </div>
@@ -71,7 +71,7 @@ function MarkdownToHtmlTab() {
             {output ? (
               <pre className="text-emerald-600 dark:text-emerald-400 font-mono text-sm whitespace-pre-wrap">{output}</pre>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-400 opacity-50">HTML output will appear here</div>
+              <div className="h-full flex items-center justify-center text-[var(--text-muted)] opacity-50">HTML output will appear here</div>
             )}
           </div>
         </div>
@@ -119,18 +119,18 @@ function TextToMarkdownTab() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
-        <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Text Input</span>
-            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-zinc-500 hover:text-red-500 transition-colors">Clear</button>
+        <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Text Input</span>
+            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste plain text here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste plain text here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
         </div>
-        <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Markdown Output</span>
+        <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
-              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
+              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
               <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
             </div>
           </div>
@@ -138,7 +138,7 @@ function TextToMarkdownTab() {
             {output ? (
               <pre className="text-emerald-600 dark:text-emerald-400 font-mono text-sm whitespace-pre-wrap">{output}</pre>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-400 opacity-50">Markdown output will appear here</div>
+              <div className="h-full flex items-center justify-center text-[var(--text-muted)] opacity-50">Markdown output will appear here</div>
             )}
           </div>
         </div>
@@ -189,18 +189,18 @@ function HtmlToMarkdownTab() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
-        <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">HTML Input</span>
-            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-zinc-500 hover:text-red-500 transition-colors">Clear</button>
+        <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">HTML Input</span>
+            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste HTML here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste HTML here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
         </div>
-        <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Markdown Output</span>
+        <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
-              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
+              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
               <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
             </div>
           </div>
@@ -208,7 +208,7 @@ function HtmlToMarkdownTab() {
             {output ? (
               <pre className="text-emerald-600 dark:text-emerald-400 font-mono text-sm whitespace-pre-wrap">{output}</pre>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-400 opacity-50">Markdown output will appear here</div>
+              <div className="h-full flex items-center justify-center text-[var(--text-muted)] opacity-50">Markdown output will appear here</div>
             )}
           </div>
         </div>
@@ -268,18 +268,18 @@ function MarkdownToTextTab() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
-        <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Markdown Input</span>
-            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-zinc-500 hover:text-red-500 transition-colors">Clear</button>
+        <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Input</span>
+            <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
         </div>
-        <div className="flex flex-col bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 flex justify-between items-center">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 text-sm">Text Output</span>
+        <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <span className="font-bold text-[var(--text-primary)] text-sm">Text Output</span>
             <div className="flex gap-2">
-              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
+              <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
               <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .txt</button>
             </div>
           </div>
@@ -287,7 +287,7 @@ function MarkdownToTextTab() {
             {output ? (
               <pre className="text-emerald-600 dark:text-emerald-400 font-mono text-sm whitespace-pre-wrap">{output}</pre>
             ) : (
-              <div className="h-full flex items-center justify-center text-zinc-400 opacity-50">Text output will appear here</div>
+              <div className="h-full flex items-center justify-center text-[var(--text-muted)] opacity-50">Text output will appear here</div>
             )}
           </div>
         </div>
@@ -322,8 +322,8 @@ export default function MarkdownTools() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ${
               activeTab === tab.id
-                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm'
-                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
+                ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
             {tab.label}

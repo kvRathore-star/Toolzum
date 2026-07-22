@@ -242,27 +242,27 @@ export default function AiDetector() {
         No AI detector is 100% accurate. Results are estimates based on statistical patterns and may produce false positives or false negatives. AI-generated text can mimic human writing, and human text can appear formulaic. Use this tool as a reference, not definitive proof.
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden">
-        <div className="border-b border-zinc-200 dark:border-white/10 p-6">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
+        <div className="border-b border-[var(--border-subtle)] p-6">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-red-500/10 flex items-center justify-center text-lg">
               {getScoreEmoji(result?.score ?? -1)}
             </div>
             <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">AI Content Detector</h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">Analyze text for AI-generated patterns</p>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">AI Content Detector</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Analyze text for AI-generated patterns</p>
             </div>
           </div>
         </div>
 
         <div className="p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-zinc-900 dark:text-white">Input Text</label>
+            <label className="text-sm font-medium text-[var(--text-primary)]">Input Text</label>
             <div className="flex gap-2">
-              <button onClick={handlePaste} className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button onClick={handlePaste} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
                 Paste
               </button>
-              <button onClick={handleClear} className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button onClick={handleClear} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
                 Clear
               </button>
             </div>
@@ -276,14 +276,14 @@ export default function AiDetector() {
               value={input}
               onChange={(e) => { if (e.target.value.length <= 10000) setInput(e.target.value); }}
               placeholder="Paste or type text to analyze (up to 10,000 characters)..."
-              className="w-full h-64 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none resize-none focus:ring-2 focus:ring-red-500/50 transition-all"
+              className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none focus:ring-2 focus:ring-red-500/50 transition-all"
               spellCheck={false}
             />
-            <div className="absolute bottom-3 right-3 text-[10px] text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full">
+            <div className="absolute bottom-3 right-3 text-[10px] text-[var(--text-muted)] bg-[var(--bg-surface)] px-2 py-0.5 rounded-full">
               {input.length}/10000
             </div>
           </div>
-          <p className="text-[10px] text-zinc-500 -mt-2">Drag and drop a .txt file to load text</p>
+          <p className="text-[10px] text-[var(--text-secondary)] -mt-2">Drag and drop a .txt file to load text</p>
 
           <button
             onClick={handleAnalyze}
@@ -309,7 +309,7 @@ export default function AiDetector() {
               <div className={`text-lg font-bold ${getScoreColor(result.score)}`}>
                 {getScoreEmoji(result.score)} {getScoreLabel(result.score)}
               </div>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+              <p className="text-sm text-[var(--text-secondary)] mt-1">
                 {result.score < 35
                   ? 'Text shows high variance in sentence structure typical of human writing'
                   : result.score < 65
@@ -334,7 +334,7 @@ export default function AiDetector() {
             <div className="flex justify-center">
               <button
                 onClick={() => setShowDetailed(!showDetailed)}
-                className="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white underline underline-offset-2 transition-colors"
+                className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white underline underline-offset-2 transition-colors"
               >
                 {showDetailed ? 'Hide Detailed Breakdown' : 'Show Detailed Breakdown'}
               </button>
@@ -343,44 +343,44 @@ export default function AiDetector() {
             {showDetailed && (
               <div className="space-y-4 animate-in fade-in duration-300">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4">
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white">Burstiness</h4>
+                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Burstiness</h4>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.burstiness.score)}`}>
                         {result.breakdown.burstiness.score}%
                       </span>
                     </div>
-                    <p className="text-[10px] text-zinc-500 mb-3">Measures sentence length variance. Human writing has greater variation.</p>
-                    <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+                    <p className="text-[10px] text-[var(--text-secondary)] mb-3">Measures sentence length variance. Human writing has greater variation.</p>
+                    <div className="space-y-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
                       <div className="flex justify-between"><span>Variance</span><span className="font-mono">{result.breakdown.burstiness.variance.toFixed(2)}</span></div>
                       <div className="flex justify-between"><span>Std Deviation</span><span className="font-mono">{result.breakdown.burstiness.stdDev.toFixed(2)}</span></div>
                       <div className="flex justify-between"><span>Avg Sentence Length</span><span className="font-mono">{result.breakdown.burstiness.avgLength.toFixed(1)} words</span></div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4">
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white">Repetition</h4>
+                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Repetition</h4>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.repetition.score)}`}>
                         {result.breakdown.repetition.score}%
                       </span>
                     </div>
-                    <p className="text-[10px] text-zinc-500 mb-3">Analyzes repeated n-gram patterns. AI tends to reuse phrase structures.</p>
-                    <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+                    <p className="text-[10px] text-[var(--text-secondary)] mb-3">Analyzes repeated n-gram patterns. AI tends to reuse phrase structures.</p>
+                    <div className="space-y-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
                       <div className="flex justify-between"><span>Repeated N-grams</span><span className="font-mono">{result.breakdown.repetition.ngramReps}</span></div>
                       <div className="flex justify-between"><span>Total N-grams</span><span className="font-mono">{result.breakdown.repetition.totalNgrams}</span></div>
                       <div className="flex justify-between"><span>Repetition Rate</span><span className="font-mono">{result.breakdown.repetition.totalNgrams > 0 ? ((result.breakdown.repetition.ngramReps / result.breakdown.repetition.totalNgrams) * 100).toFixed(1) : '0'}%</span></div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4">
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white">Trigger Phrases</h4>
+                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Trigger Phrases</h4>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.triggerPhrases.score)}`}>
                         {result.breakdown.triggerPhrases.score}%
                       </span>
                     </div>
-                    <p className="text-[10px] text-zinc-500 mb-3">Common AI overused phrases found in the text.</p>
+                    <p className="text-[10px] text-[var(--text-secondary)] mb-3">Common AI overused phrases found in the text.</p>
                     <div className="space-y-1.5 max-h-36 overflow-y-auto">
                       {result.breakdown.triggerPhrases.found.length > 0 ? (
                         result.breakdown.triggerPhrases.found.map((phrase, i) => (
@@ -397,22 +397,22 @@ export default function AiDetector() {
                 </div>
 
                 {result.breakdown.triggerPhrases.found.length > 0 && (
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4">
-                    <h4 className="text-sm font-bold text-zinc-900 dark:text-white mb-2">Highlighted AI Patterns</h4>
-                    <div className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-950 rounded-lg p-4 max-h-48 overflow-y-auto font-mono text-xs whitespace-pre-wrap">
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
+                    <h4 className="text-sm font-bold text-[var(--text-primary)] mb-2">Highlighted AI Patterns</h4>
+                    <div className="text-sm leading-relaxed text-[var(--text-primary)] bg-[var(--bg-overlay)] dark:bg-zinc-950 rounded-lg p-4 max-h-48 overflow-y-auto font-mono text-xs whitespace-pre-wrap">
                       {highlightAiPatterns(input, result.breakdown.triggerPhrases.found)}
                     </div>
                   </div>
                 )}
 
                 {paragraphScores.length > 1 && (
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl p-4">
-                    <h4 className="text-sm font-bold text-zinc-900 dark:text-white mb-3">Per-Paragraph Analysis</h4>
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
+                    <h4 className="text-sm font-bold text-[var(--text-primary)] mb-3">Per-Paragraph Analysis</h4>
                     <div className="space-y-2">
                       {paragraphScores.map((p) => (
                         <div key={p.index} className="flex items-center gap-3">
-                          <div className="w-12 shrink-0 text-xs font-mono text-zinc-500">#{p.index + 1}</div>
-                          <div className="flex-1 bg-zinc-100 dark:bg-zinc-800 rounded-full h-2.5 overflow-hidden">
+                          <div className="w-12 shrink-0 text-xs font-mono text-[var(--text-secondary)]">#{p.index + 1}</div>
+                          <div className="flex-1 bg-[var(--bg-surface)] rounded-full h-2.5 overflow-hidden">
                             <div
                               className={`h-full rounded-full transition-all ${getBarColor(p.score)}`}
                               style={{ width: `${p.score}%` }}
@@ -432,7 +432,7 @@ export default function AiDetector() {
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={handleShare}
-                className="text-xs bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Export Results

@@ -222,15 +222,15 @@ export default function PdfDeskew() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-200 dark:border-white/5">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {pageCount} Pages</p>
+          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {pageCount} Pages</p>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:text-white px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg disabled:opacity-50"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
         >
           Change File
         </button>
@@ -238,11 +238,11 @@ export default function PdfDeskew() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 h-fit">
-          <h4 className="text-zinc-900 dark:text-white font-medium border-b border-zinc-100 dark:border-zinc-800 pb-2">Deskew Settings</h4>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+          <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Deskew Settings</h4>
 
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Auto-Detect</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Auto-Detect</label>
             <button
               onClick={() => {
                 setUseAutoDetect(!useAutoDetect);
@@ -267,7 +267,7 @@ export default function PdfDeskew() {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Manual Rotation</label>
+              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Manual Rotation</label>
               <span className="text-xs font-bold text-blue-500">{manualAngle.toFixed(1)}&deg;</span>
             </div>
             <input
@@ -284,7 +284,7 @@ export default function PdfDeskew() {
               onMouseUp={() => { if (useAutoDetect) setManualAngle(skewAngle); }}
               className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
             />
-            <div className="flex justify-between text-xs text-zinc-500">
+            <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>-45&deg;</span>
               <span>0&deg;</span>
               <span>+45&deg;</span>
@@ -292,7 +292,7 @@ export default function PdfDeskew() {
           </div>
 
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Apply to All Pages</label>
+            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Apply to All Pages</label>
             <button
               onClick={() => setApplyToAll(!applyToAll)}
               className={`relative w-10 h-5 rounded-full transition-colors ${applyToAll ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'}`}
@@ -305,17 +305,17 @@ export default function PdfDeskew() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage <= 1}
-              className="text-xs px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 disabled:opacity-30 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
             >
               Prev
             </button>
-            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            <span className="text-xs font-medium text-zinc-600 dark:text-[var(--text-muted)]">
               Page {currentPage} of {pageCount}
             </span>
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage >= pageCount}
-              className="text-xs px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 disabled:opacity-30 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
             >
               Next
             </button>
@@ -346,17 +346,17 @@ export default function PdfDeskew() {
 
         <div className="space-y-6">
           {previewUrl && !outputUrl && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-4 rounded-2xl shadow-xl space-y-3">
-              <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Preview</h4>
-              <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-3">
+              <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Preview</h4>
+              <div className="rounded-xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] flex items-center justify-center">
                 <img src={previewUrl} alt="Deskew preview" className="max-w-full h-auto max-h-[400px] object-contain" />
               </div>
             </div>
           )}
 
           {outputUrl ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
-               <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-4">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Deskew Complete</h4>
                </div>
 
@@ -374,7 +374,7 @@ export default function PdfDeskew() {
                 </button>
             </div>
           ) : (
-            <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-zinc-200 dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-zinc-400">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center min-h-[300px] text-[var(--text-muted)]">
               <svg className="w-12 h-12 mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
               <p>Corrected PDF will appear here</p>
             </div>

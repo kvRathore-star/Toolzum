@@ -191,7 +191,7 @@ export default function VocalRemover() {
     return (
       <div className="flex flex-col items-center justify-center py-16 space-y-4">
         <div className="w-10 h-10 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-zinc-500 text-sm font-medium animate-pulse">Loading audio processing engine...</p>
+        <p className="text-[var(--text-secondary)] text-sm font-medium animate-pulse">Loading audio processing engine...</p>
       </div>
     );
   }
@@ -216,17 +216,17 @@ export default function VocalRemover() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-2xl shadow-xl p-5 space-y-5">
-        <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-black/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-5">
+        <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
           <div>
             <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</div>
-            <div className="text-[10px] text-zinc-400">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+            <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
           </div>
           <button onClick={handleRemove} disabled={isProcessing} className="text-[10px] text-red-500 hover:underline disabled:opacity-50">Remove</button>
         </div>
 
         <div>
-          <label className="text-[10px] font-semibold text-zinc-400 mb-1.5 block">Output Mode</label>
+          <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1.5 block">Output Mode</label>
           <div className="grid grid-cols-3 gap-2">
             {(Object.entries(MODE_LABELS) as [Mode, string][]).map(([key, label]) => (
               <button
@@ -235,7 +235,7 @@ export default function VocalRemover() {
                 className={`py-2.5 px-2 rounded-xl text-[10px] font-bold transition-all ${
                   mode === key
                     ? 'bg-violet-500 text-white shadow-lg'
-                    : 'bg-zinc-50 dark:bg-black/50 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
                 }`}
               >
                 {label}
@@ -245,11 +245,11 @@ export default function VocalRemover() {
         </div>
 
         <div>
-          <label className="text-[10px] font-semibold text-zinc-400 mb-1 block">Output Format</label>
+          <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
           <select
             value={outputFormat}
             onChange={e => setOutputFormat(e.target.value as OutFormat)}
-            className="w-full bg-zinc-50 dark:bg-black/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-white outline-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none"
           >
             {FORMATS.map(f => <option key={f} value={f}>{FORMAT_LABELS[f]}</option>)}
           </select>
@@ -268,17 +268,17 @@ export default function VocalRemover() {
               <span>Processing...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
               <div className="bg-violet-500 h-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           </div>
         )}
 
         {(outputUrl || outputUrl2) && !isProcessing && (
-          <div className="space-y-4 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="space-y-4 pt-3 border-t border-[var(--border-subtle)]">
             {outputUrl && mode !== 'acapella' && (
               <div className="space-y-2">
-                <p className="text-[10px] font-semibold text-zinc-500">Instrumental (Karaoke)</p>
+                <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Instrumental (Karaoke)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_instrumental.${ext}`)}
                   className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
@@ -288,7 +288,7 @@ export default function VocalRemover() {
             )}
             {mode === 'acapella' && outputUrl && (
               <div className="space-y-2">
-                <p className="text-[10px] font-semibold text-zinc-500">Acapella (Vocals Only)</p>
+                <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_vocals.${ext}`)}
                   className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
@@ -298,7 +298,7 @@ export default function VocalRemover() {
             )}
             {mode === 'both' && outputUrl2 && (
               <div className="space-y-2">
-                <p className="text-[10px] font-semibold text-zinc-500">Acapella (Vocals Only)</p>
+                <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl2} />
                 <button onClick={() => downloadOrShare(outputUrl2, `${baseName}_vocals.${ext}`)}
                   className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
@@ -314,7 +314,7 @@ export default function VocalRemover() {
       </div>
 
       <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-        <p className="text-[10px] text-indigo-600 dark:text-indigo-400">
+        <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>How it works:</strong> This tool uses center channel removal — it subtracts the left and right channels to remove audio panned to the center (typically vocals). Works best on stereo recordings where vocals are mixed in the center. Mono recordings or songs with heavily panned vocals may produce artifacts. For best results, use studio recordings with clean vocal centering.
         </p>
       </div>

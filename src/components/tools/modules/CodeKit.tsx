@@ -8,7 +8,7 @@ const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => 
 );
 
 const Result = ({ value }: { value: string }) => (
-  <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-zinc-50 dark:bg-black rounded-lg px-2 py-1 break-all whitespace-pre-wrap">{value}</p>
+  <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-[var(--bg-overlay)] rounded-lg px-2 py-1 break-all whitespace-pre-wrap">{value}</p>
 );
 
 export function CodeObfuscator() {
@@ -18,12 +18,12 @@ export function CodeObfuscator() {
   return (
     <div className="space-y-3">
       <select value={mode} onChange={e => setMode(e.target.value as any)}
-        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[10px] text-zinc-900 dark:text-white outline-none">
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] outline-none">
         <option value="obfuscate">Obfuscate</option>
         <option value="deobfuscate">Deobfuscate</option>
       </select>
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste code..."
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
         if (mode === 'obfuscate') setOutput(btoa(input).split('').reverse().join(''));
         else try { setOutput(atob(input.split('').reverse().join(''))); } catch { setOutput('Cannot deobfuscate (non-standard)'); }
@@ -40,7 +40,7 @@ export function CodeToCurlParser() {
   return (
     <div className="space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="curl command..."
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
         const m = input.match(/-X\s+(\w+)/);
         const u = input.match(/https?:\/\/[^\s"']+/);
@@ -59,7 +59,7 @@ export function JsSyntaxChecker() {
   return (
     <div className="space-y-3">
       <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
         try { new Function(code); setResult('✓ Valid JavaScript'); } catch (e) { setResult(`✗ ${e instanceof Error ? e.message : 'Syntax error'}`); }
       }} label="Check Syntax" />
@@ -74,7 +74,7 @@ export function PugToHtml() {
   return (
     <div className="space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello"
-        className="w-full h-24 bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded px-2 py-1 text-[9px] font-mono text-zinc-900 dark:text-white outline-none resize-none" />
+        className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
         const lines = input.split('\n');
         const out: string[] = [];

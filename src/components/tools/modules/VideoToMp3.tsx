@@ -79,48 +79,48 @@ export default function VideoToMp3() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <div className="flex items-center justify-center gap-3 mb-2">
            <Music className="w-8 h-8 text-fuchsia-500" />
            <h2 className="text-2xl font-bold">Audio Extractor</h2>
          </div>
          <div className="flex items-center justify-center gap-2">
-           <span className="text-zinc-500 text-xs">Extract high-quality audio from video files</span>
+           <span className="text-[var(--text-secondary)] text-xs">Extract high-quality audio from video files</span>
            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
          </div>
 
-         <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 max-w-md mx-auto">
-           <p className="text-xs text-zinc-500">Daily free extractions:</p>
+         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)] max-w-md mx-auto">
+           <p className="text-xs text-[var(--text-secondary)]">Daily free extractions:</p>
            <div className="flex items-center gap-2">
              <div className="flex gap-1">
                {Array.from({ length: DAILY_LIMIT }, (_, i) => (
                  <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-fuchsia-500'}`} />
                ))}
              </div>
-             <span className="text-[10px] font-bold text-zinc-500">{remaining} / {DAILY_LIMIT} remaining</span>
+             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
            </div>
          </div>
 
          {!file ? (
-           <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer relative mt-8">
+           <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative mt-8">
              <input type="file" accept="video/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
-             <div className="text-zinc-500 flex flex-col items-center">
+             <div className="text-[var(--text-secondary)] flex flex-col items-center">
                 <Upload className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" />
                 Select Video File (MP4, WEBM, MOV)
              </div>
            </div>
          ) : (
            <div className="mt-8 space-y-6 text-left">
-             <div className="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+             <div className="flex items-center justify-between p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                <div>
                  <div className="font-semibold">{file.name}</div>
-                 <div className="text-sm text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                 <div className="text-sm text-[var(--text-secondary)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
                </div>
                <button onClick={() => { setFile(null); setOutputUrl(null); }} className="text-sm text-red-500 hover:underline">Remove</button>
              </div>
 
              {(!isLoaded || isLoading) && (
-               <div className="text-center text-zinc-500 py-4 flex flex-col items-center gap-2">
+               <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
                  <Loader2 className="w-6 h-6 animate-spin text-fuchsia-500" />
                  Loading FFmpeg Engine... (This may take a moment)
                </div>
@@ -139,14 +139,14 @@ export default function VideoToMp3() {
                    <span>Processing...</span>
                    <span>{progress}%</span>
                  </div>
-                 <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden">
+                 <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                    <div className="bg-fuchsia-500 h-full transition-all duration-300 ease-out" style={{ width: `${progress}%` }}></div>
                  </div>
                </div>
              )}
 
              {outputUrl && (
-               <div className="space-y-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+               <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
                  <audio controls className="w-full" src={outputUrl}></audio>
                  <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}.mp3`}
                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
@@ -159,12 +159,12 @@ export default function VideoToMp3() {
          )}
 
          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
-           <p className="text-[10px] text-indigo-600 dark:text-indigo-400"><strong>Pro:</strong> Unlimited extractions, batch process multiple files, select specific audio track, export as MP3/FLAC/WAV/AAC.</p>
-           <Link href="/pricing" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 underline shrink-0 ml-4">Upgrade →</Link>
+           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Unlimited extractions, batch process multiple files, select specific audio track, export as MP3/FLAC/WAV/AAC.</p>
+           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
          </div>
 
-         <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
-           <p className="text-sm text-zinc-500 mb-3 font-medium">Also popular:</p>
+         <div className="pt-4 border-t border-[var(--border-subtle)]">
+           <p className="text-sm text-[var(--text-secondary)] mb-3 font-medium">Also popular:</p>
            <div className="flex flex-wrap gap-2 justify-center">
              {[
                { slug: 'mp4-to-mp3', label: 'MP4 → MP3' },
@@ -174,7 +174,7 @@ export default function VideoToMp3() {
                <Link
                  key={p.slug}
                  href={`/video/${p.slug}`}
-                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-all"
+                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-all"
                >
                  {p.label}
                </Link>
