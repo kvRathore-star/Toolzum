@@ -1687,6 +1687,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
+    id: "221",
+    name: "API Builder & Tester",
+    slug: "api-builder",
+    category: "Developer",
+    isPro: true,
+    description: 'Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.',
+    seoDescription: 'Free online API Builder & Tester — Full-featured API client that runs in your browser. Make HTTP requests, save collections, generate code snippets. Privacy-first — your API keys never touch a server.',
+    dependencies: "Browser Fetch API"
+  },
+  {
     id: "196",
     name: "Employee Turnover Calculator",
     slug: "employee-turnover-calculator",
