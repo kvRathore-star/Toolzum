@@ -16,6 +16,7 @@ export const proSlugs = [
   "bulk-heic-to-jpg",
   "saas-metrics-dashboard",
   "api-builder",
+  "pdf-workflow-builder",
 ];
 
 

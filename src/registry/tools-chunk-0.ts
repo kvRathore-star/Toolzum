@@ -1687,6 +1687,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
+    id: "222",
+    name: "PDF Workflow Builder",
+    slug: "pdf-workflow-builder",
+    category: "Developer",
+    isPro: true,
+    description: 'Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.',
+    seoDescription: 'Free online PDF Workflow Builder — merge, split, fill forms, rotate pages, add passwords, and edit metadata. All processing happens in your browser — no upload needed.',
+    dependencies: "pdf-lib"
+  },
+  {
     id: "221",
     name: "API Builder & Tester",
     slug: "api-builder",
