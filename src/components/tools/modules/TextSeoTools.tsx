@@ -29,7 +29,8 @@ export function WordCounter() {
     const charsNoSpace = text.replace(/\s/g, '').length;
     const sentences = text.split(/[.!?]+/).filter(s => s.trim()).length;
     const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim()).length;
-    return { words, chars, charsNoSpace, sentences, paragraphs };
+    const readingTime = words > 0 ? Math.ceil(words / 200) : 0;
+    return { words, chars, charsNoSpace, sentences, paragraphs, readingTime };
   })();
 
   return (
@@ -43,6 +44,7 @@ export function WordCounter() {
           <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.charsNoSpace}</div><div className="text-xs text-zinc-500">Chars (no space)</div></div>
           <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.sentences}</div><div className="text-xs text-zinc-500">Sentences</div></div>
           <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.paragraphs}</div><div className="text-xs text-zinc-500">Paragraphs</div></div>
+          <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-center"><div className="text-2xl font-bold">{stats.readingTime}<span className="text-base font-normal text-zinc-400"> min</span></div><div className="text-xs text-zinc-500">Reading Time</div></div>
         </div>
       </div>
     </div>
