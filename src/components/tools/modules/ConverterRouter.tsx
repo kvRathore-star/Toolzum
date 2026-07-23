@@ -8,6 +8,9 @@ import ImageCatchAllConverter from './shared/ImageCatchAllConverter';
 import DataFormatConverter from './shared/DataFormatConverter';
 import DocumentFormatConverter from './shared/DocumentFormatConverter';
 import TextTransformConverter from './shared/TextTransformConverter';
+import HtmlTextHub from './shared/HtmlTextHub';
+import CssPreprocessorHub from './shared/CssPreprocessorHub';
+import FormatSerializerHub from './shared/FormatSerializerHub';
 import JsonOutputConverter from './shared/JsonOutputConverter';
 import CsvOutputConverter from './shared/CsvOutputConverter';
 import TextStylingConverter from './shared/TextStylingConverter';
@@ -26,6 +29,9 @@ const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; des
   "data": DataFormatConverter,
   "document": DocumentFormatConverter,
   "text-transform": TextTransformConverter,
+  "html-text": HtmlTextHub,
+  "css-preprocessor": CssPreprocessorHub,
+  "serializer": FormatSerializerHub,
   "json-output": JsonOutputConverter,
   "csv-output": CsvOutputConverter,
   "text-style": TextStylingConverter,

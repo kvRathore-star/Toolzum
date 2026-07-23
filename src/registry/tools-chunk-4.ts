@@ -1305,6 +1305,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "csv-to-sqlite",
     category: "Developer",
     description: 'Import CSV data directly into a SQLite database. Run SQL queries, filter rows, and export results.',
+    seoDescription: 'Free online CSV to SQLite Converter \u2014 Import CSV data into a SQLite database, run SQL queries, and export results directly in your browser.',
     dependencies: "sql.js",
   },
   {
@@ -1313,6 +1314,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "vector-pen-canvas",
     category: "Design",
     description: 'A freeform vector drawing tool with freehand pen, shapes (rectangle, ellipse, line), multi-page canvas, color picker, and SVG/PNG export. Draw diagrams and illustrations entirely in your browser.',
+    seoDescription: 'Free online Vector Pen Canvas \u2014 Draw vector graphics with freehand pen, shapes, and multi-page canvas. Export as SVG or PNG.',
     dependencies: "fabric.js",
   },
   {

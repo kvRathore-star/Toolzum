@@ -139,6 +139,59 @@ const TOML_TO_JSON = (i: string) => {
   } catch { return 'Invalid TOML'; }
 };
 
+const JSON_TO_YAML = (i: string) => {
+  try {
+    const o = JSON.parse(i);
+    const fmt = (obj: Record<string, any>, prefix = ''): string =>
+      Object.entries(obj).map(([k, v]) => {
+        if (typeof v === 'object' && v !== null && !Array.isArray(v))
+          return `${prefix}${k}:\n${fmt(v, prefix + '  ')}`;
+        const val = typeof v === 'string' ? `"${v}"` : String(v);
+        return `${prefix}${k}: ${val}`;
+      }).join('\n');
+    return fmt(o);
+  } catch { return 'Invalid JSON'; }
+};
+
+const JSON_TO_INI = (i: string) => {
+  try {
+    const o = JSON.parse(i);
+    const out: string[] = [];
+    for (const [k, v] of Object.entries(o)) {
+      if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+        out.push(`[${k}]`);
+        for (const [sk, sv] of Object.entries(v as Record<string, any>))
+          out.push(`${sk}=${sv}`);
+      } else {
+        out.push(`${k}=${v}`);
+      }
+    }
+    return out.join('\n');
+  } catch { return 'Invalid JSON'; }
+};
+
+const JSON_TO_TOML = (i: string) => {
+  try {
+    const o = JSON.parse(i);
+    const out: string[] = [];
+    const fmt = (v: any): string => {
+      if (typeof v === 'string') return `"${v}"`;
+      if (typeof v === 'boolean') return v ? 'true' : 'false';
+      return String(v);
+    };
+    for (const [k, v] of Object.entries(o)) {
+      if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+        out.push(`[${k}]`);
+        for (const [sk, sv] of Object.entries(v as Record<string, any>))
+          out.push(`${sk} = ${fmt(sv)}`);
+      } else {
+        out.push(`${k} = ${fmt(v)}`);
+      }
+    }
+    return out.join('\n');
+  } catch { return 'Invalid JSON'; }
+};
+
 const TIMEZONE_CONVERTER = (i: string) => {
   const d = new Date();
   const tz = i.trim() || 'UTC';
@@ -166,6 +219,31 @@ const JSON_TO_CODE = (i: string) => {
   } catch { return 'Invalid JSON'; }
 };
 
+const CSS_TO_LESS = (i: string) =>
+  i.replace(/--([\w-]+)\s*:\s*([^;]+);/g, '@$1: $2;');
+
+const CSS_TO_STYLUS = (i: string) => {
+  const lines = i.split('\n');
+  const out: string[] = [];
+  let indent = 0;
+  for (const raw of lines) {
+    const l = raw.trim();
+    if (!l) continue;
+    if (l.startsWith('}')) indent = Math.max(0, indent - 1);
+    const prefix = '  '.repeat(indent);
+    if (l.endsWith('{')) {
+      const sel = l.replace(/\s*\{\s*$/, '');
+      out.push(prefix + sel);
+      indent++;
+    } else if (l.includes(':') && l.endsWith(';')) {
+      out.push(prefix + l.replace(/;\s*$/, ''));
+    } else {
+      out.push(prefix + l);
+    }
+  }
+  return out.join('\n');
+};
+
 const SVG_TO_CSS = (i: string) => {
   const w = i.match(/width="([^"]+)"/)?.[1] || 'auto';
   const h = i.match(/height="([^"]+)"/)?.[1] || 'auto';
@@ -179,7 +257,9 @@ export const TRANSFORM_CONFIG: Record<string, TransformDef> = {
   "css-to-scss-converter": { slug:"css-to-scss-converter",name:"CSS → SCSS",inputPlaceholder:`.container {\n  color: red;\n}`,outputLabel:"SCSS Output",description:"Convert CSS with nesting into SCSS syntax",convert:CSS_TO_SCSS},
   "scss-to-css-converter": { slug:"scss-to-css-converter",name:"SCSS → CSS",inputPlaceholder:"$primary: #3b82f6;\n.btn { color: $primary; }",outputLabel:"CSS Output",description:"Convert SCSS variables and nesting to standard CSS",convert:SCSS_TO_CSS},
   "less-to-css-converter": { slug:"less-to-css-converter",name:"Less → CSS",inputPlaceholder:"@primary: #333;\nbody { color: @primary; }",outputLabel:"CSS Output",description:"Convert Less variables to standard CSS",convert:LESS_TO_CSS},
+  "css-to-less-converter": { slug:"css-to-less-converter",name:"CSS → Less",inputPlaceholder:":root {\n  --primary: #333;\n}\nbody { color: var(--primary); }",outputLabel:"Less Output",description:"Convert CSS variables to Less syntax",convert:CSS_TO_LESS},
   "stylus-to-css-converter": { slug:"stylus-to-css-converter",name:"Stylus → CSS",inputPlaceholder:`.btn\n  color #3b82f6\n  font-weight bold`,outputLabel:"CSS Output",description:"Convert Stylus indentation syntax to CSS",convert:STYLUS_TO_CSS},
+  "css-to-stylus-converter": { slug:"css-to-stylus-converter",name:"CSS → Stylus",inputPlaceholder:".btn {\n  color: #3b82f6;\n  font-weight: bold;\n}",outputLabel:"Stylus Output",description:"Convert CSS braces/semicolons to Stylus indentation syntax",convert:CSS_TO_STYLUS},
   "tailwind-to-css-converter": { slug:"tailwind-to-css-converter",name:"Tailwind → CSS",inputPlaceholder:"flex items-center justify-between p-4",outputLabel:"CSS Output",description:"Convert Tailwind classes to CSS rules",convert:TAILWIND_TO_CSS},
   "html-to-jsx": { slug:"html-to-jsx",name:"HTML → JSX",inputPlaceholder:'<div class="container"><label for="email">Email</label></div>',outputLabel:"JSX Output",description:"Convert HTML attributes to React JSX equivalents",convert:HTML_TO_JSX},
   "html-to-text-converter": { slug:"html-to-text-converter",name:"HTML → Text",inputPlaceholder:"<p>Hello <strong>world</strong></p>",outputLabel:"Plain Text",description:"Strip HTML tags and decode entities",convert:HTML_TO_TEXT},
@@ -193,8 +273,11 @@ export const TRANSFORM_CONFIG: Record<string, TransformDef> = {
   "hex-ascii-converter": { slug:"hex-ascii-converter",name:"Hex → ASCII",inputPlaceholder:"48 65 6C 6C 6F",outputLabel:"ASCII Output",description:"Convert hex bytes to ASCII",convert:HEX_TO_TEXT},
   "number-base-converter": { slug:"number-base-converter",name:"Number Base",inputPlaceholder:"255",outputLabel:"Conversions",description:"Convert between binary, octal, decimal, hex",convert:NUMBER_BASE},
   "yaml-json-converter": { slug:"yaml-json-converter",name:"YAML → JSON",inputPlaceholder:"name: John\nage: 30",outputLabel:"JSON Output",description:"Convert YAML to JSON",convert:YAML_TO_JSON},
+  "json-to-yaml-converter": { slug:"json-to-yaml-converter",name:"JSON → YAML",inputPlaceholder:'{"name":"John","age":30}',outputLabel:"YAML Output",description:"Convert JSON to YAML",convert:JSON_TO_YAML},
   "ini-json-converter": { slug:"ini-json-converter",name:"INI → JSON",inputPlaceholder:"[database]\nhost = localhost\nport = 5432",outputLabel:"JSON Output",description:"Convert INI config to JSON",convert:INI_TO_JSON},
+  "json-to-ini-converter": { slug:"json-to-ini-converter",name:"JSON → INI",inputPlaceholder:'{"database":{"host":"localhost","port":5432}}',outputLabel:"INI Output",description:"Convert JSON to INI config format",convert:JSON_TO_INI},
   "toml-converter": { slug:"toml-converter",name:"TOML → JSON",inputPlaceholder:'title = "Example"\n[server]\nhost = "localhost"',outputLabel:"JSON Output",description:"Convert TOML config to JSON",convert:TOML_TO_JSON},
+  "json-to-toml-converter": { slug:"json-to-toml-converter",name:"JSON → TOML",inputPlaceholder:'{"title":"Example","server":{"host":"localhost"}}',outputLabel:"TOML Output",description:"Convert JSON to TOML config format",convert:JSON_TO_TOML},
   "case-converter": { slug:"case-converter",name:"Case Converter",inputPlaceholder:"hello world",outputLabel:"All Cases",description:"Convert text between UPPER, lower, Title, camelCase, snake_case, kebab-case",convert:CASE_CONVERTER},
   "time-zone-converter": { slug:"time-zone-converter",name:"Timezone Converter",inputPlaceholder:"America/New_York",outputLabel:"Current Time",description:"Show current time in any IANA timezone",convert:TIMEZONE_CONVERTER},
   "unix-time-converter": { slug:"unix-time-converter",name:"Unix Timestamp",inputPlaceholder:"1700000000",outputLabel:"Formatted Date",description:"Convert Unix timestamp to human-readable date",convert:UNIX_TIME},

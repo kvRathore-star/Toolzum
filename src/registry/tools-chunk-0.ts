@@ -555,7 +555,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "55",
     name: "URL Shortener",
     slug: "url-shortener",
-    category: "Branding",
+    category: "Utility",
     description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support. Uses cloud-based processing.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. ',
     dependencies: "Node.js / Redis"
@@ -1690,7 +1690,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "222",
     name: "PDF Workflow Builder",
     slug: "pdf-workflow-builder",
-    category: "Developer",
+    category: "PDF",
     isPro: false,
     description: 'Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.',
     seoDescription: 'Free online PDF Workflow Builder — merge, split, fill forms, rotate pages, add passwords, and edit metadata. All processing happens in your browser — no upload needed.',

@@ -121,20 +121,35 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
     }
   };
 
-  const otherMode: Mode = toApng ? 'apng-to-gif' : 'gif-to-apng';
-
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 text-emerald-400' : 'bg-blue-500/10 border border-blue-500/20 text-blue-400'}`}>
-          {toApng
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] w-fit">
+          <button
+            onClick={() => { setMode('gif-to-apng'); setFile(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'gif-to-apng'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            GIF to APNG
+          </button>
+          <button
+            onClick={() => { setMode('apng-to-gif'); setFile(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'apng-to-gif'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            APNG to GIF
+          </button>
+        </div>
+        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 text-emerald-400' : 'bg-blue-500/10 border border-blue-500/20 text-blue-400'}`}>          {toApng
             ? <><strong>APNG supports 24-bit colors and 8-bit alpha transparency</strong> — better quality than GIF.</>
             : <><strong>APNG to GIF:</strong> Convert animated PNGs to universally compatible GIF format.</>}
         </div>
-        <button onClick={() => { setMode(otherMode); setFile(null); }}
-          className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          Need to convert {toApng ? 'APNG back to GIF' : 'GIF to APNG'} instead? <span className="font-semibold">Switch →</span>
-        </button>
         <FileUploader
           accept={toApng ? "image/gif" : "image/png,image/apng"}
           onFileSelect={(f) => setFile(f)}
@@ -159,10 +174,28 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
           className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
-      <button onClick={() => { setMode(otherMode); setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
-        className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors -mt-6">
-        Need to convert {toApng ? 'APNG to GIF' : 'GIF to APNG'} instead? <span className="font-semibold">Switch →</span>
-      </button>
+      <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] w-fit">
+        <button
+          onClick={() => { setMode('gif-to-apng'); setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
+          className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mode === 'gif-to-apng'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+          }`}
+        >
+          GIF to APNG
+        </button>
+        <button
+          onClick={() => { setMode('apng-to-gif'); setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
+          className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mode === 'apng-to-gif'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+          }`}
+        >
+          APNG to GIF
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">

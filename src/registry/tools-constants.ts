@@ -52,10 +52,10 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "jwt-decoder": { category: "developer", slug: "jwt-debugger" },
   "body-fat-estimator": { category: "health", slug: "body-fat-calculator" },
   "due-date-calculator": { category: "calculator", slug: "pregnancy-due-date-calculator" },
-  "csv-data-generator": { category: "utility", slug: "data-utilities" },
+  "csv-data-generator": { category: "utility", slug: "csv-json-row-generator" },
   "json-minifier": { category: "developer", slug: "json-formatter" },
-  "csv-sorter": { category: "utility", slug: "data-utilities" },
-  "csv-preview-generator": { category: "utility", slug: "data-utilities" },
+  "csv-sorter": { category: "utility", slug: "csv-row-sorter" },
+  "csv-preview-generator": { category: "utility", slug: "csv-html-table-converter" },
   "morse-code-converter": { category: "utility", slug: "morse-code-translator" },
   "customer-acquisition-cost-calculator": { category: "calculator", slug: "cac-calculator" },
   "ratio-simplifier": { category: "calculator", slug: "ratio-calculator" },
@@ -108,6 +108,7 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "ruby-formatter": { category: "developer", slug: "code-beautifier" },
   "rust-formatter": { category: "developer", slug: "code-beautifier" },
   "yaml-to-toon": { category: "converter", slug: "yaml-json-converter" },
+  "wifi-qr-generator": { category: "utility", slug: "qr-code-generator" },
 };
 
 

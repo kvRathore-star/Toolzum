@@ -70,18 +70,34 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
     } catch { setError('Failed to process Base64.'); setImageUrl(null); }
   };
 
-  const otherMode: Mode = isEncode ? 'base64-to-image' : 'image-to-base64';
-
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white">
-          {isEncode ? 'Image to Base64' : 'Base64 to Image'}
+          Image ↔ Base64 Converter
         </h2>
-        <button onClick={() => { setMode(otherMode); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
-          className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          {isEncode ? 'Need to decode Base64 to image?' : 'Need to encode an image to Base64?'} <span className="font-semibold">Switch →</span>
-        </button>
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] mt-3 w-fit">
+          <button
+            onClick={() => { setMode('image-to-base64'); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'image-to-base64'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Image to Base64
+          </button>
+          <button
+            onClick={() => { setMode('base64-to-image'); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'base64-to-image'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Base64 to Image
+          </button>
+        </div>
       </div>
 
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">

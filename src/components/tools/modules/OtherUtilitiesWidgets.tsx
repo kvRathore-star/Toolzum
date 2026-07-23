@@ -53,58 +53,6 @@ function detectCountry(phone: string): { country: string; code: string; national
 
 const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
-export function WiFiQRGenerator() {
-  const [wifiSSID, setWifiSSID] = useState('');
-  const [wifiPass, setWifiPass] = useState('');
-  const [wifiEnc, setWifiEnc] = useState('WPA');
-  const [wifiHidden, setWifiHidden] = useState(false);
-  const [wifiCode, setWifiCode] = useState('');
-
-  return (
-    <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div>
-        <h1 className="text-xl font-bold text-[var(--text-primary)]">WiFi QR Code Generator</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">Generate WiFi configuration strings for QR codes.</p>
-      </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">SSID</label>
-            <input value={wifiSSID} onChange={e => setWifiSSID(e.target.value)} placeholder="Network name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-          </div>
-          <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Password</label>
-            <input value={wifiPass} onChange={e => setWifiPass(e.target.value)} placeholder="Password..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
-            {['WPA', 'WEP', 'nopass'].map(e => (
-              <button key={e} onClick={() => setWifiEnc(e)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${wifiEnc === e ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{e === 'nopass' ? 'None' : e}</button>
-            ))}
-          </div>
-          <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-            <input type="checkbox" checked={wifiHidden} onChange={e => setWifiHidden(e.target.checked)} /> Hidden
-          </label>
-        </div>
-        <button onClick={() => {
-          const code = `WIFI:T:${wifiEnc};S:${wifiSSID};P:${wifiPass};${wifiHidden ? 'H:true;' : ''}`;
-          setWifiCode(code);
-          if (wifiSSID) toast.success('WiFi config generated!');
-          else toast.error('Enter an SSID');
-        }} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate Config</button>
-        {wifiCode && (
-          <div className="relative">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">WiFi Config String</label>
-            <input type="text" readOnly value={wifiCode} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 outline-none font-mono" />
-            <button onClick={() => copy(wifiCode, 'WiFi config')} className="absolute top-5 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export function PhoneParser() {
   const [phoneInput, setPhoneInput] = useState('');
   const [phoneResult, setPhoneResult] = useState<ReturnType<typeof detectCountry>>(null);

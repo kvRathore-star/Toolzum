@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
@@ -8,12 +8,11 @@ export function EtaCalculator() {
   const [speed, setSpeed] = useState('60');
   const [unit, setUnit] = useState<'km' | 'mi'>('km');
   const [start, setStart] = useState('');
-  const [result, setResult] = useState('');
 
-  const compute = useCallback(() => {
+  const result = useMemo(() => {
     const d = parseFloat(dist);
     const s = parseFloat(speed);
-    if (isNaN(d) || isNaN(s) || s <= 0) { setResult(''); return; }
+    if (isNaN(d) || isNaN(s) || s <= 0) return '';
     const hours = d / s;
     const hh = Math.floor(hours);
     const mm = Math.round((hours - hh) * 60);
@@ -26,10 +25,8 @@ export function EtaCalculator() {
       const am = totalMin % 60;
       out += ` (arrival ~${String(ah).padStart(2, '0')}:${String(am).padStart(2, '0')})`;
     }
-    setResult(out);
+    return out;
   }, [dist, speed, start]);
-
-  useEffect(() => { compute(); }, [compute]);
 
   const copy = (txt: string) => { clipboardWrite(txt); toast.success('Copied!'); };
 
@@ -59,7 +56,7 @@ export function EtaCalculator() {
         </div>
         <div>
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Start Time (optional, HH:MM)</label>
-          <input value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
         </div>
         {result && (
           <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl p-5 text-center">

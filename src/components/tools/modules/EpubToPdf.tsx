@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
 import { PDFDocument, rgb } from 'pdf-lib';
+import DOMPurify from 'dompurify';
 
 const PAGE_SIZES = [
   { id: 'a4', label: 'A4', width: 595.28, height: 841.89 },
@@ -61,7 +62,7 @@ interface ParsedEpub {
 
 function decodeHtmlEntities(text: string): string {
   const textarea = document.createElement('textarea');
-  textarea.innerHTML = text;
+  textarea.innerHTML = DOMPurify.sanitize(text, { ALLOWED_TAGS: [] });
   return textarea.value;
 }
 

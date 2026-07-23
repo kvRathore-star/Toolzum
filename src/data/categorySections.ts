@@ -24,6 +24,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "tsconfig-analyzer", "string-template-tester",
         "test-data-generator",
         "css-to-scss-converter", "less-to-css-converter",
+        "bulk-csv-excel-to-json",
+        "bulk-regex-extractor-replacer",
       ],
     },
     {
@@ -46,6 +48,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "scss-to-css-converter", "stylus-to-css-converter",
         "tailwind-to-css-converter",
         "glassmorphism-generator", "neumorphism-generator",
+        "media-query-generator",
       ],
     },
     {
@@ -71,6 +74,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "webhook-signature-verifier", "webhook-tester", "webhook-validator",
         "code-to-curl-converter", "curl-to-code-converter",
         "jsonrpc-builder",
+        "api-builder",
       ],
     },
     {
@@ -97,6 +101,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "secret-scanner", "security-txt-generator", "robots-txt-validator",
         "oauth-pkce-generator",
         "jwt-encoder-signer",
+        "ip-allowlist-generator",
+        "cidr-calculator",
       ],
     },
     {
@@ -138,6 +144,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "jsonl-formatter", "json-to-url-params",
         "json-schema-generator", "merge-patch-generator",
         "css-specificity-calculator", "css-validator",
+        "json-to-xml", "bulk-csv-excel-to-json",
+        "bulk-regex-extractor-replacer",
+        "validator-kit",
       ],
     },
     {
@@ -149,6 +158,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "kubernetes-yaml-validator", "github-actions-validator",
         "code-obfuscator", "code-to-curl-parser",
         "js-syntax-checker", "pug-to-html-converter",
+        "nginx-config-generator",
       ],
     },
     {
@@ -213,6 +223,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "jwk-generator", "json-ld-generator", "json-size-analyzer",
         "image-placeholder-generator", "logo-placeholder-generator",
         "open-graph-generator",
+        "bulk-font-subsetter",
+        "ascii-font-generator", "svg-optimizer",
+        "markdown-table-generator",
       ],
     },
   ],
@@ -247,6 +260,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "geometry-calculator", "coordinate-calculator",
         "slope-calculator", "midpoint-calculator", "distance-calculator",
         "eta-calculator",
+        "screen-size-converter",
         "math-equation-solver",
       ],
     },
@@ -303,6 +317,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Interactive games and fun tools — number guessing, rock paper scissors, hangman, and more.",
       slugs: [
         "number-guessing-game", "rock-paper-scissors", "hangman-game",
+        "bulk-qr-code-generator",
       ],
     },
     {
@@ -331,6 +346,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "vcf-csv-converter", "ics-csv-converter",
         "tsv-csv-converter",
         "speed-converter-advanced", "power-converter", "pressure-converter",
+        "unit-converter",
       ],
     },
     {
@@ -368,9 +384,11 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "numeronym-generator", "mac-vendor-lookup",
         "wifi-qr-generator", "phone-parser", "otp-generator",
         "slugify-tool", "emoji-picker",
-        "cidr-calculator", "aws-iam-policy-analyzer",
-        "ring-size-converter", "screen-size-converter",
+        "url-shortener",
+        "aws-iam-policy-analyzer",
+        "ring-size-converter",
         "shoe-size-converter", "zip-file-extractor",
+        "privacy-cleaner", "whatsapp-toolkit", "bank-statement-analyser",
       ],
     },
   ],
@@ -382,6 +400,16 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert audio files between formats — MP3, WAV, FLAC, OGG, AAC, M4A, and more. 100% browser-based.",
       slugs: [
         "audio-converter", "bulk-audio-converter",
+        "aac-to-flac", "aac-to-m4a", "aac-to-mp3", "aac-to-ogg", "aac-to-opus", "aac-to-wav", "aac-to-wma",
+        "aiff-to-aac", "aiff-to-flac", "aiff-to-m4a", "aiff-to-mp3", "aiff-to-ogg", "aiff-to-opus", "aiff-to-wav", "aiff-to-wma",
+        "flac-to-aac", "flac-to-aiff", "flac-to-m4a", "flac-to-mp3", "flac-to-ogg", "flac-to-opus", "flac-to-wav", "flac-to-wma",
+        "m4a-to-aac", "m4a-to-aiff", "m4a-to-flac", "m4a-to-mp3", "m4a-to-ogg", "m4a-to-opus", "m4a-to-wav", "m4a-to-wma",
+        "mp3-to-aac", "mp3-to-aiff", "mp3-to-flac", "mp3-to-m4a", "mp3-to-ogg", "mp3-to-opus", "mp3-to-wav", "mp3-to-wma",
+        "ogg-to-aac", "ogg-to-aiff", "ogg-to-flac", "ogg-to-m4a", "ogg-to-mp3", "ogg-to-opus", "ogg-to-wav", "ogg-to-wma",
+        "opus-to-aac", "opus-to-aiff", "opus-to-flac", "opus-to-m4a", "opus-to-mp3", "opus-to-ogg", "opus-to-wav", "opus-to-wma",
+        "wav-to-aac", "wav-to-aiff", "wav-to-flac", "wav-to-m4a", "wav-to-mp3", "wav-to-ogg", "wav-to-opus", "wav-to-wma",
+        "wma-to-aac", "wma-to-aiff", "wma-to-flac", "wma-to-m4a", "wma-to-mp3", "wma-to-ogg", "wma-to-opus", "wma-to-wav",
+        "aac-to-aiff", "apple-music-preview-extractor",
       ],
     },
     {
@@ -454,6 +482,17 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "image-to-ico",
         "bulk-heic-to-jpg", "bulk-svg-to-png",
         "bulk-webp-avif-modernizer",
+        "avif-to-bmp", "avif-to-gif", "avif-to-heic", "avif-to-ico", "avif-to-jpg", "avif-to-jxl", "avif-to-png", "avif-to-svg", "avif-to-tiff", "avif-to-webp",
+        "bmp-to-avif", "bmp-to-gif", "bmp-to-heic", "bmp-to-ico", "bmp-to-jpg", "bmp-to-jxl", "bmp-to-png", "bmp-to-svg", "bmp-to-tiff", "bmp-to-webp",
+        "convert-to-jpg", "gif-to-avif", "gif-to-bmp", "gif-to-heic", "gif-to-ico", "gif-to-jpg", "gif-to-jxl", "gif-to-png", "gif-to-svg", "gif-to-tiff", "gif-to-webp",
+        "heic-to-avif", "heic-to-bmp", "heic-to-gif", "heic-to-ico", "heic-to-jpg", "heic-to-jxl", "heic-to-png", "heic-to-svg", "heic-to-tiff", "heic-to-webp",
+        "ico-to-avif", "ico-to-bmp", "ico-to-gif", "ico-to-heic", "ico-to-jpg", "ico-to-jxl", "ico-to-png", "ico-to-svg", "ico-to-tiff", "ico-to-webp",
+        "jfif-to-png", "jpg-to-avif", "jpg-to-bmp", "jpg-to-gif", "jpg-to-heic", "jpg-to-ico", "jpg-to-jxl", "jpg-to-png", "jpg-to-svg", "jpg-to-tiff", "jpg-to-webp",
+        "jxl-to-avif", "jxl-to-bmp", "jxl-to-gif", "jxl-to-heic", "jxl-to-ico", "jxl-to-jpg", "jxl-to-png", "jxl-to-svg", "jxl-to-tiff", "jxl-to-webp",
+        "png-to-avif", "png-to-bmp", "png-to-gif", "png-to-heic", "png-to-ico", "png-to-jpg", "png-to-jxl", "png-to-tiff", "png-to-webp",
+        "rotate-image", "svg-to-avif", "svg-to-bmp", "svg-to-gif", "svg-to-heic", "svg-to-ico", "svg-to-jpg", "svg-to-jxl", "svg-to-png", "svg-to-tiff", "svg-to-webp",
+        "tiff-to-avif", "tiff-to-bmp", "tiff-to-gif", "tiff-to-heic", "tiff-to-ico", "tiff-to-jpg", "tiff-to-jxl", "tiff-to-png", "tiff-to-svg", "tiff-to-webp",
+        "webp-to-avif", "webp-to-bmp", "webp-to-gif", "webp-to-heic", "webp-to-ico", "webp-to-jpg", "webp-to-jxl", "webp-to-png", "webp-to-svg", "webp-to-tiff",
       ],
     },
     {
@@ -473,6 +512,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "bulk-image-watermark", "bulk-face-anonymizer",
         "bulk-exif-stripper-injector", "bulk-app-icon-generator",
         "bulk-image-to-text-ocr",
+        "blur-face",
       ],
     },
     {
@@ -480,7 +520,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "AI Image Tools",
       description: "AI-powered image tools — upscale, face swap, background removal, and colorization.",
       slugs: [
-        "meme-generator",
+        "meme-generator", "ai-bg-changer", "bulk-bg-changer",
       ],
     },
   ],
@@ -523,7 +563,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "url-to-pdf", "eml-to-pdf",
         "document-converter",
         "bulk-image-to-pdf",
-
+        "excel-to-pdf", "html-to-pdf", "jpg-to-pdf",
+        "pdf-to-epub", "pdf-to-excel", "pdf-to-html",
+        "pdf-to-jpg", "pdf-to-ppt", "pdf-to-word",
+        "ppt-to-pdf",
       ],
     },
     {
@@ -551,7 +594,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-info", "pdf-cleanup",
         "pdf-advanced",
         "create-pdf",
+        "pdf-workflow-builder",
         "bulk-pdf-data-extractor", "bulk-pdf-form-extractor",
+        "pdf-page-manager", "generic-pdf-processor",
       ],
     },
   ],
@@ -574,6 +619,11 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "video-converter", "video-converter-tool",
         "video-to-gif",
         "video-to-mp3",
+        "avi-to-mkv", "avi-to-mov", "avi-to-webm",
+        "mkv-to-avi", "mkv-to-webm",
+        "mov-to-avi", "mov-to-webm",
+        "mp4-to-avi", "mp4-to-webm",
+        "webm-to-avi", "webm-to-mkv", "webm-to-mov",
       ],
     },
     {
@@ -581,7 +631,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Video Trimmers",
       description: "Cut, trim, and crop video files to extract the segments or dimensions you need.",
       slugs: [
-        "crop-video",
+        "crop-video", "video-trimmer",
       ],
     },
     {
@@ -593,8 +643,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "video-stabilizer", "video-filters", "video-screenshot",
 
         "screen-recorder",
-        "subtitle-translator", 
+        "subtitle-translator", "subtitle-generator",
         "bulk-video-subtitle-burner", "bulk-subtitle-time-shifter",
+        "video-watermark-adder",
       ],
     },
   ],
@@ -607,6 +658,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "website-screenshot",
         "gif-to-webp-webm",
+        "html-to-image",
       ],
     },
     {
@@ -615,6 +667,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert audio files between popular formats for playback on any device.",
       slugs: [
         "gif-to-mp4",
+        "mkv-to-mp4", "mov-to-mp4", "webm-to-mp4", "avi-to-mp4",
+        "mp4-to-mkv", "mkv-to-mov",
+        "mp4-to-mov", "mov-to-mkv",
       ],
     },
     {
@@ -625,6 +680,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "epub-to-pdf", "mobi-converter", "odt-rtf-to-pdf",
         "cbz-to-pdf",
         "bulk-ebook-converter",
+        "bulk-markdown-to-pdf-html",
+        "csv-to-json-converter", "csv-to-markdown", "csv-to-xml",
+        "html-to-markdown", "json-to-csv", "markdown-to-html",
+        "import-to-csv",
       ],
     },
     {
@@ -637,6 +696,12 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "temperature-converter", "archive-converter",
         "markdown-tools",
         "yaml-to-toon",
+        "base64-converter", "binary-converter", "hex-converter",
+        "json-to-xml-converter", "number-base-converter",
+        "roman-numeral-converter", "url-encoder", "bcrypt-checker",
+        "csv-to-json", "xml-to-csv", "xml-to-json",
+        "json-formatter-tool", "csv-formatter",
+        "text-style-generator", "color-tools", "number-words-tools",
       ],
     },
   ],
@@ -835,7 +900,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Brand Utilities",
       description: "Shorten URLs, schedule social media content, and manage brand assets.",
       slugs: [
-        "url-shortener", "social-media-calendar",
+        "social-media-calendar",
       ],
     },
   ],
@@ -849,7 +914,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "hex-to-rgb-converter",
         "color-shades-tints",
         "contrast-ratio-checker", 
-        "media-query-generator",
         "color-blindness-simulator",
       ],
     },
@@ -945,6 +1009,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Remove EXIF data from photos, anonymize IPs, and clean private information.",
       slugs: [
         "exif-data-remover", "ip-anonymizer",
+        "privacy-cleaner",
       ],
     },
     {
@@ -969,6 +1034,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pan-card-resizer", 
         "pan-verification",
         "indian-document-enhancer",
+        "aadhaar-card-masker",
       ],
     },
     {
@@ -977,6 +1043,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Calculate GST, look up GSTIN/IFSC, file ITR, and save on taxes.",
       slugs: [
         "gstin-lookup",
+        "gst-invoice-generator", "itr-filing-helper", "ifsc-code-lookup",
 
         "tax-saving-calculator", "seller-profit-calculator",
       ],
@@ -989,6 +1056,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "marriage-biodata-maker", "rental-agreement-generator",
         "complaint-letter-generator",
         "voter-id-form-helper",
+        "india-pincode-finder",
 
       ],
     },
@@ -997,9 +1065,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "India-Specific Converters",
       description: "Convert CGPA to percentage, calculate Indian age, generate regional fonts, and more.",
       slugs: [
- "indian-age-calculator",
+  "indian-age-calculator",
         "hindi-regional-font-generator",
         "indian-voice-transcriber",
+        "cgpa-to-percentage-converter",
       ],
     },
   ],

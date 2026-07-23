@@ -532,3 +532,142 @@ export function ASCIIArtGenerator() {
     </div>
   );
 }
+
+const FONT_PATTERNS: Record<string, Record<string, string[]>> = {
+  'standard': {
+    'A': ['  ██  ', '██  ██', '██████', '██  ██', '██  ██'],
+    'B': ['█████ ', '██  ██', '█████ ', '██  ██', '█████ '],
+    'C': [' ████', '██    ', '██    ', '██    ', ' ████'],
+    'D': ['████  ', '██  ██', '██  ██', '██  ██', '████  '],
+    'E': ['██████', '██    ', '████  ', '██    ', '██████'],
+    'F': ['██████', '██    ', '████  ', '██    ', '██    '],
+    'G': [' ████', '██    ', '██ ███', '██  ██', ' ████'],
+    'H': ['██  ██', '██  ██', '██████', '██  ██', '██  ██'],
+    'I': ['██████', '  ██  ', '  ██  ', '  ██  ', '██████'],
+    'J': ['██████', '    ██', '    ██', '██  ██', ' ████ '],
+    'K': ['██  ██', '██ ██ ', '████  ', '██ ██ ', '██  ██'],
+    'L': ['██    ', '██    ', '██    ', '██    ', '██████'],
+    'M': ['██   ██', '███ ███', '██ █ ██', '██   ██', '██   ██'],
+    'N': ['██  ██', '███ ██', '██████', '██ ███', '██  ██'],
+    'O': [' ████ ', '██  ██', '██  ██', '██  ██', ' ████ '],
+    'P': ['█████ ', '██  ██', '█████ ', '██    ', '██    '],
+    'Q': [' ████ ', '██  ██', '██  ██', '██ ██ ', ' ██ ██'],
+    'R': ['█████ ', '██  ██', '█████ ', '██ ██ ', '██  ██'],
+    'S': [' █████', '██    ', ' ████ ', '    ██', '█████ '],
+    'T': ['██████', '  ██  ', '  ██  ', '  ██  ', '  ██  '],
+    'U': ['██  ██', '██  ██', '██  ██', '██  ██', ' ████ '],
+    'V': ['██  ██', '██  ██', '██  ██', ' ████ ', '  ██  '],
+    'W': ['██   ██', '██   ██', '██ █ ██', '███ ███', '██   ██'],
+    'X': ['██  ██', ' ████ ', '  ██  ', ' ████ ', '██  ██'],
+    'Y': ['██  ██', ' ████ ', '  ██  ', '  ██  ', '  ██  '],
+    'Z': ['██████', '   ██ ', '  ██  ', ' ██   ', '██████'],
+    '0': [' ████ ', '██  ██', '██  ██', '██  ██', ' ████ '],
+    '1': ['  ██  ', ' ███  ', '  ██  ', '  ██  ', '██████'],
+    '2': [' ████ ', '██  ██', '   ██ ', '  ██  ', '██████'],
+    '3': [' ████ ', '    ██', '  ███ ', '    ██', ' ████ '],
+    '4': ['██  ██', '██  ██', '██████', '    ██', '    ██'],
+    '5': ['██████', '██    ', '█████ ', '    ██', '█████ '],
+    '6': [' ████ ', '██    ', '█████ ', '██  ██', ' ████ '],
+    '7': ['██████', '    ██', '   ██ ', '  ██  ', '  ██  '],
+    '8': [' ████ ', '██  ██', ' ████ ', '██  ██', ' ████ '],
+    '9': [' ████ ', '██  ██', ' █████', '    ██', ' ████ '],
+    ' ': ['      ', '      ', '      ', '      ', '      '],
+    '!': ['  ██  ', '  ██  ', '  ██  ', '      ', '  ██  '],
+    '?': [' ████ ', '    ██', '  ██  ', '      ', '  ██  '],
+    '.': ['      ', '      ', '      ', '      ', '  ██  '],
+    ',': ['      ', '      ', '      ', '  ██  ', ' ██   '],
+    '-': ['      ', '      ', '██████', '      ', '      '],
+    ':': ['      ', '  ██  ', '      ', '  ██  ', '      '],
+    "'": ['  ██  ', '  ██  ', '      ', '      ', '      '],
+    '"': ['██  ██', '██  ██', '      ', '      ', '      '],
+    '(': ['  ██  ', ' ██   ', ' ██   ', ' ██   ', '  ██  '],
+    ')': ['  ██  ', '   ██ ', '   ██ ', '   ██ ', '  ██  '],
+    '/': ['    ██', '   ██ ', '  ██  ', ' ██   ', '██    '],
+    '@': [' ████ ', '██  ███', '██ █ ██', '██ ███ ', ' ████ '],
+    '#': [' █ ██ ', '██████', ' █ ██ ', '██████', ' █ ██ '],
+    '$': ['  ██  ', ' ████ ', '██    ', ' ████ ', '  ██  '],
+    '%': ['██   ██', '   ██ ', '  ██  ', ' ██   ', '██   ██'],
+    '&': [' ████ ', '██  ██', ' ███  ', '██  ██', ' ███ ██'],
+    '*': ['      ', '██ ███', ' ███  ', '██ ███', '      '],
+    '+': ['      ', '  ██  ', '██████', '  ██  ', '      '],
+    '=': ['      ', '██████', '      ', '██████', '      '],
+    '<': ['   ██ ', '  ██  ', ' ██   ', '  ██  ', '   ██ '],
+    '>': [' ██   ', '  ██  ', '   ██ ', '  ██  ', ' ██   '],
+    '[': [' ████ ', ' ██   ', ' ██   ', ' ██   ', ' ████ '],
+    ']': [' ████ ', '   ██ ', '   ██ ', '   ██ ', ' ████ '],
+    '{': ['  ███ ', '  ██  ', '██    ', '  ██  ', '  ███ '],
+    '}': [' ███  ', '  ██  ', '    ██', '  ██  ', ' ███  '],
+    '|': ['  ██  ', '  ██  ', '  ██  ', '  ██  ', '  ██  '],
+    '_': ['      ', '      ', '      ', '      ', '██████'],
+    '~': ['      ', '██ ███', '█████ ', '      ', '      '],
+    '^': ['  ██  ', ' ████ ', '██  ██', '      ', '      '],
+  },
+};
+
+function renderAsciiFont(text: string, font: string): string {
+  const pattern = FONT_PATTERNS[font] || FONT_PATTERNS['standard'];
+  const upper = text.toUpperCase();
+  const lines: string[] = ['', '', '', '', ''];
+  
+  for (const char of upper) {
+    const glyph = pattern[char] || pattern[' '];
+    for (let i = 0; i < 5; i++) {
+      lines[i] += glyph[i] + ' ';
+    }
+  }
+  
+  return lines.join('\n');
+}
+
+export function ASCIIFontGenerator() {
+  const [fontInput, setFontInput] = useState('HELLO');
+  const [fontStyle, setFontStyle] = useState('standard');
+
+  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+
+  const fontResult = useMemo(() => renderAsciiFont(fontInput, fontStyle), [fontInput, fontStyle]);
+
+  return (
+    <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+        <Type className="w-6 h-6 text-purple-600 dark:text-purple-400" /> ASCII Font Generator
+      </h1>
+      <p className="text-sm text-[var(--text-secondary)]">
+        Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.
+      </p>
+      <div className="space-y-4">
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+          <input value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
+            {['standard'].map(s => (
+              <button key={s} onClick={() => setFontStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${fontStyle === s ? 'bg-[var(--bg-elevated)] text-purple-600 dark:text-purple-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                {s.charAt(0).toUpperCase() + s.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        {fontResult && (
+          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
+              <button onClick={() => copy(fontResult, 'ASCII font')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+            </div>
+            <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
+              {fontResult}
+            </pre>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Type(props: React.ComponentProps<"svg">) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="4 7 4 4 20 4 20 7" />
+      <line x1="9" y1="20" x2="15" y2="20" />
+      <line x1="12" y1="4" x2="12" y2="20" />
+    </svg>
+  );
+}

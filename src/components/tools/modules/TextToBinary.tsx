@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Type, Copy, RefreshCw } from 'lucide-react';
+import { Type, Copy, RefreshCw, ArrowLeftRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
@@ -33,25 +33,38 @@ export function TextBinaryTool({ defaultMode = 'text-to-binary' }: { defaultMode
     } catch { toast.error('Conversion failed'); }
   };
 
-  const otherMode: Mode = isTextToBin ? 'binary-to-text' : 'text-to-binary';
-  const otherLabel = isTextToBin ? 'Binary to Text' : 'Text to Binary';
-
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Type className="w-5 h-5 text-[var(--accent)]" />
-          {isTextToBin ? 'Text to Binary Converter' : 'Binary to Text Translator'}
+          Text ↔ Binary Converter
         </h2>
         <p className="text-xs text-[var(--text-secondary)] mt-1">
-          {isTextToBin
-            ? 'Convert standard ASCII or UTF-8 text characters into binary 8-bit block code representation.'
-            : 'Translate 8-bit binary stream blocks back into readable standard text code representations.'}
+          Convert between text characters and 8-bit binary representation.
         </p>
-        <button onClick={() => { setMode(otherMode); setInput(''); setOutput(''); }}
-          className="mt-2 text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          Need {otherLabel.toLowerCase().includes('binary') ? 'binary to text' : 'text to binary'} instead? <span className="font-semibold">Switch to {otherLabel} →</span>
-        </button>
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] mt-3 w-fit">
+          <button
+            onClick={() => { setMode('text-to-binary'); setInput(''); setOutput(''); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'text-to-binary'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Text to Binary
+          </button>
+          <button
+            onClick={() => { setMode('binary-to-text'); setInput(''); setOutput(''); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'binary-to-text'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Binary to Text
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -71,26 +71,31 @@ export default function PasswordGenerator() {
   const [opts, setOpts] = useState<Options>({ length: 16, upper: true, lower: true, numbers: true, symbols: true, excludeAmbiguous: false });
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
-  const generate = useCallback(() => {
+  const generate = () => {
     const pwd = generatePassword(opts);
     setPassword(pwd);
-  }, [opts]);
-
-  useEffect(() => { generate(); }, [generate]);
+  };
 
   const toggle = (key: keyof Options) => {
     if (typeof opts[key] === 'boolean') {
       const newOpts = { ...opts, [key]: !opts[key] };
       setOpts(newOpts);
       setActivePreset(null);
+      const pwd = generatePassword(newOpts);
+      setPassword(pwd);
     }
   };
 
   const handlePreset = useCallback((preset: PresetOption) => {
     const config = PRESET_CONFIG[preset.label];
-    if (config) setOpts(prev => ({ ...prev, ...config }));
+    if (config) {
+      const merged = { ...opts, ...config };
+      setOpts(merged);
+      const pwd = generatePassword(merged);
+      setPassword(pwd);
+    }
     setActivePreset(preset.label);
-  }, []);
+  }, [opts]);
 
   const copy = async () => {
     if (!password) return;

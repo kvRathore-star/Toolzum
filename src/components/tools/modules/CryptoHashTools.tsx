@@ -63,16 +63,31 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
     }
   };
 
-  const otherMode = mode === 'encrypt' ? 'decrypt' : 'encrypt';
-  const otherLabel = mode === 'encrypt' ? 'Decrypt' : 'Encrypt';
-
   return (
     <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-4">
       <Section title={`AES ${mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}`}>
-        <button onClick={() => { setMode(otherMode); setInput(''); setPass(''); setResult(''); }}
-          className="mb-4 text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          Need to {otherLabel.toLowerCase()} instead? <span className="font-semibold">Switch to {otherLabel} →</span>
-        </button>
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] mb-4 w-fit">
+          <button
+            onClick={() => { setMode('encrypt'); setInput(''); setPass(''); setResult(''); }}
+            className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
+              mode === 'encrypt'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Encrypt
+          </button>
+          <button
+            onClick={() => { setMode('decrypt'); setInput(''); setPass(''); setResult(''); }}
+            className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
+              mode === 'decrypt'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Decrypt
+          </button>
+        </div>
         <Input label="Passphrase" type="password" value={pass} onChange={setPass} placeholder="Enter passphrase..." />
         <Input label={mode === 'encrypt' ? 'Plain text' : 'Ciphertext'} value={input} onChange={setInput}
           placeholder={mode === 'encrypt' ? 'Enter text to encrypt...' : 'Paste ciphertext...'} rows={5} />

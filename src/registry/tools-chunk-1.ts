@@ -7,7 +7,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert between hundreds of units — length, mass, volume, temperature, currency, and more with a single click.',
     seoDescription: 'Free online Unit Converter — Universal unit conversion tool. ',
     category: 'Utility',
-    id:  "221",
+    id:  "224",
     dependencies: 'None'
   },
   {
@@ -235,7 +235,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'html-to-image',
     description: 'Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. No signup or account required.',
     seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. ',
-    category: 'Developer',
+    category: 'Converter',
     id:  "251",
     dependencies: 'html2canvas'
   },
@@ -1305,7 +1305,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "299",
     name: "Bulk Markdown to PDF/HTML",
     slug: "bulk-markdown-to-pdf-html",
-    category: "Developer",
+    category: "Converter",
     description: "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Markdown to PDF/HTML — Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. ',
     dependencies: "marked.js, jsPDF, jszip",

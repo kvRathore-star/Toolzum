@@ -56,12 +56,17 @@ export function CodeToCurlParser() {
 export function JsSyntaxChecker() {
   const [code, setCode] = useState('const x = 1;');
   const [result, setResult] = useState<string | null>(null);
+  let acorn: any = undefined;
+  if (typeof window !== 'undefined') {
+    try { acorn = require('acorn'); } catch {}
+  }
   return (
     <div className="space-y-3">
       <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
-        try { new Function(code); setResult('✓ Valid JavaScript'); } catch (e) { setResult(`✗ ${e instanceof Error ? e.message : 'Syntax error'}`); }
+        if (!acorn) { setResult('Syntax checker unavailable'); return; }
+        try { acorn.parse(code, { ecmaVersion: 'latest' }); setResult('✓ Valid JavaScript'); } catch (e) { setResult(`✗ ${e instanceof Error ? e.message : 'Syntax error'}`); }
       }} label="Check Syntax" />
       {result && <Result value={result} />}
     </div>

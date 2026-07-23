@@ -112,11 +112,31 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
     setPassword(''); setConfirmPassword(''); setProgress(0);
   };
 
-  const otherMode: Mode = isProtect ? 'unlock' : 'protect';
-
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
+        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] w-fit">
+          <button
+            onClick={() => { setMode('protect'); setFile(null); setFileBuffer(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'protect'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Protect PDF
+          </button>
+          <button
+            onClick={() => { setMode('unlock'); setFile(null); setFileBuffer(null); }}
+            className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              mode === 'unlock'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            Unlock PDF
+          </button>
+        </div>
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
           {isProtect ? <ShieldAlert className="w-5 h-5 flex-shrink-0" /> : <Unlock className="w-5 h-5 flex-shrink-0" />}
           <span>
@@ -124,13 +144,6 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
               ? <><strong>Secure Client-Side Encryption:</strong> Your files never leave your computer.</>
               : <><strong>100% Client-Side Decryption:</strong> All decryption happens in your browser.</>}
           </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <p className="text-xs text-[var(--text-secondary)]">Need to {isProtect ? 'unlock' : 'protect'} a PDF instead?</p>
-          <button onClick={() => { setMode(otherMode); setFile(null); setFileBuffer(null); }}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-semibold">
-            Switch to {isProtect ? 'Unlock PDF' : 'Protect PDF'} →
-          </button>
         </div>
         <FileUploader
           accept="application/pdf"
@@ -158,10 +171,28 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
         </button>
       </div>
 
-      <button onClick={() => { setMode(otherMode); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
-        className="text-xs text-[var(--text-secondary)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors -mt-3">
-        Need to {isProtect ? 'unlock' : 'protect'} this PDF instead? <span className="font-semibold">Switch to {isProtect ? 'Unlock' : 'Protect'} →</span>
-      </button>
+      <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] w-fit">
+        <button
+          onClick={() => { setMode('protect'); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
+          className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mode === 'protect'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+          }`}
+        >
+          Protect PDF
+        </button>
+        <button
+          onClick={() => { setMode('unlock'); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
+          className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mode === 'unlock'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+          }`}
+        >
+          Unlock PDF
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <form onSubmit={handleAction} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 flex flex-col justify-between">
