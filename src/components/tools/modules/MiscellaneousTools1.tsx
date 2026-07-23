@@ -1,36 +1,66 @@
 "use client";
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
-const labelClass = "block text-sm font-medium mb-1 text-[var(--text-secondary)]";
-const btnClass = "px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50";
-const cardClass = "w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6 space-y-4";
-const headingClass = "text-lg font-semibold text-[var(--text-primary)]";
-const selClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
-const textAreaClass = "w-full h-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
-
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className={cardClass}>
-      <h2 className={headingClass}>{title}</h2>
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
       {children}
     </div>
   );
 }
 
-function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={inputClass} {...props} />;
+function Input({ label, value, onChange, placeholder, type = "text", rows, min, max, step }: {
+  label: string; value: string | number; onChange: (v: any) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string;
+}) {
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+  return (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      {rows ? (
+        <textarea className={cls + " resize-y"} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+      ) : (
+        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} min={min} max={max} step={step} />
+      )}
+    </div>
+  );
 }
 
-function Select({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return <select className={selClass} {...props}>{children}</select>;
+const colors = ['rose', 'emerald', 'violet', 'amber', 'cyan', 'orange', 'teal', 'pink', 'indigo', 'lime', 'sky', 'fuchsia', 'purple', 'red', 'green', 'yellow', 'stone', 'slate', 'zinc', 'neutral'];
+let colorIdx = 0;
+function nextColor() { const c = colors[colorIdx % colors.length]; colorIdx++; return c; }
+const colorMap: Record<string, string> = {};
+
+function ac(tool: string) {
+  if (!colorMap[tool]) colorMap[tool] = nextColor();
+  return colorMap[tool];
 }
 
-function Btn({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button className={btnClass} {...props}>{children}</button>;
+function pillClass(c: string) { return `inline-block px-3 py-1 rounded-full text-xs font-medium cursor-pointer bg-${c}-500/10 text-${c}-600 dark:text-${c}-400 hover:bg-${c}-500/20 border border-${c}-500/20 transition-colors`; }
+function btnClass(c: string) { return `bg-${c}-500 hover:bg-${c}-600 text-white rounded-xl text-sm font-medium transition-colors px-4 py-2.5 disabled:opacity-50`; }
+function borderClass(c: string) { return `border-l-4 border-${c}-400 pl-3`; }
+
+function CopyBtn({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  const handle = useCallback(async () => {
+    await clipboardWrite(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }, [text]);
+  return (
+    <button onClick={handle} className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors ml-2 shrink-0">
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  );
 }
 
+const labelClass = "block text-sm font-medium text-[var(--text-secondary)] mb-1.5";
+const selClass = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+// --- QRCodeGenerator ---
 export function QRCodeGenerator() {
+  const clr = ac('QRCodeGenerator');
   const [text, setText] = useState('');
   const encode = (s: string) => {
     const qr: string[] = [];
@@ -47,18 +77,19 @@ export function QRCodeGenerator() {
   };
   const qr = text ? encode(text) : [];
   return (
-    <Card title="QR Code Generator">
-      <Input placeholder="Enter text or URL" value={text} onChange={e => setText(e.target.value)} />
+    <Section title="QR Code Generator">
+      <Input label="Enter text or URL" placeholder="Enter text or URL" value={text} onChange={setText} />
       {qr.length > 0 && (
         <pre className="font-mono text-[8px] leading-[8px] bg-white dark:bg-black p-4 rounded overflow-auto">
           {qr.map((r, i) => <div key={i}>{r}</div>)}
         </pre>
       )}
-    </Card>
+    </Section>
   );
 }
-
+// --- BarcodeGenerator ---
 export function BarcodeGenerator() {
+  const clr = ac('BarcodeGenerator');
   const [text, setText] = useState('123456789012');
   const [format, setFormat] = useState('upc-a');
   const encode = (s: string) => {
@@ -76,18 +107,19 @@ export function BarcodeGenerator() {
   };
   const barcode = encode(text);
   return (
-    <Card title="Barcode Generator">
-      <Input placeholder="Enter data" value={text} onChange={e => setText(e.target.value)} />
-      <Select value={format} onChange={e => setFormat(e.target.value)}>
+    <Section title="Barcode Generator">
+      <Input label="Enter data" placeholder="Enter data" value={text} onChange={setText} />
+      <select className={selClass} value={format} onChange={e => setFormat(e.target.value)}>
         <option value="upc-a">UPC-A</option><option value="ean-13">EAN-13</option>
         <option value="code128">Code 128</option><option value="code39">Code 39</option>
-      </Select>
+      </select>
       <pre className="font-mono text-[10px] leading-[10px] bg-white dark:bg-black p-4 rounded overflow-auto">{barcode.map((r, i) => <div key={i}>{r}</div>)}</pre>
-    </Card>
+    </Section>
   );
 }
-
+// --- GuidGenerator ---
 export function GuidGenerator() {
+  const clr = ac('GuidGenerator');
   const gen = (v: 4 | 7) => {
     if (v === 4) {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -102,25 +134,26 @@ export function GuidGenerator() {
   };
   const [guids, setGuids] = useState<string[]>([]);
   return (
-    <Card title="GUID / UUID Generator">
+    <Section title="GUID / UUID Generator">
       <div className="flex gap-2">
-        <Btn onClick={() => setGuids([gen(4), ...guids.slice(0, 9)])}>Generate UUID v4</Btn>
-        <Btn onClick={() => setGuids([gen(7), ...guids.slice(0, 9)])}>Generate UUID v7</Btn>
-        <Btn onClick={() => setGuids([])}>Clear</Btn>
+        <button className={btnClass(clr)} onClick={() => setGuids([gen(4), ...guids.slice(0, 9)])}>Generate UUID v4</button>
+        <button className={btnClass(clr)} onClick={() => setGuids([gen(7), ...guids.slice(0, 9)])}>Generate UUID v7</button>
+        <button className={btnClass(clr)} onClick={() => setGuids([])}>Clear</button>
       </div>
       <div className="space-y-1 max-h-64 overflow-auto">
         {guids.map((g, i) => (
           <div key={i} className="flex items-center gap-2">
             <code className="text-xs font-mono text-[var(--text-secondary)] flex-1">{g}</code>
-            <button className="text-xs text-blue-600 hover:underline" onClick={() => navigator.clipboard.writeText(g)}>Copy</button>
+            <button className="text-xs text-blue-600 hover:underline" onClick={() => clipboardWrite(g)}>Copy</button>
           </div>
         ))}
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ColorConverter ---
 export function ColorConverter() {
+  const clr = ac('ColorConverter');
   const [hex, setHex] = useState('#ff6b6b');
   const toRgb = (h: string) => {
     const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16);
@@ -155,8 +188,8 @@ export function ColorConverter() {
   const cmyk = hex.match(/^#[0-9a-f]{6}$/i) ? toCmyk(hex) : null;
   const hsv = hex.match(/^#[0-9a-f]{6}$/i) ? toHsv(hex) : null;
   return (
-    <Card title="Color Converter">
-      <Input placeholder="#ff6b6b" value={hex} onChange={e => setHex(e.target.value)} />
+    <Section title="Color Converter">
+      <Input label="#ff6b6b" placeholder="#ff6b6b" value={hex} onChange={setHex} />
       <div className="flex gap-4 items-center">
         <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: hex.match(/^#[0-9a-f]{6}$/i) ? hex : '#ccc' }} />
         <div className="text-xs space-y-1 font-mono">
@@ -166,24 +199,26 @@ export function ColorConverter() {
           {hsv && <div>HSV: {hsv.h}°, {hsv.s}%, {hsv.v}%</div>}
         </div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ColorPicker ---
 export function ColorPicker() {
+  const clr = ac('ColorPicker');
   const [color, setColor] = useState('#ff6b6b');
   return (
-    <Card title="Color Picker">
+    <Section title="Color Picker">
       <div className="flex gap-4 items-center">
         <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
-        <Input value={color} onChange={e => setColor(e.target.value.startsWith('#') ? e.target.value : '#' + e.target.value)} />
+        <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
       </div>
       <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
-    </Card>
+    </Section>
   );
 }
-
+// --- ColorPaletteGenerator ---
 export function ColorPaletteGenerator() {
+  const clr = ac('ColorPaletteGenerator');
   const [base, setBase] = useState('#3b82f6');
   const [type, setType] = useState('complementary');
   const hexToRgb = (h: string) => ({ r: parseInt(h.slice(1, 3), 16), g: parseInt(h.slice(3, 5), 16), b: parseInt(h.slice(5, 7), 16) });
@@ -211,30 +246,31 @@ export function ColorPaletteGenerator() {
   };
   const palette = getPalette();
   return (
-    <Card title="Color Palette Generator">
+    <Section title="Color Palette Generator">
       <div className="flex gap-3 items-center">
         <input type="color" value={base} onChange={e => setBase(e.target.value)} className="w-10 h-10 rounded cursor-pointer" />
-        <Select value={type} onChange={e => setType(e.target.value)}>
+        <select className={selClass} value={type} onChange={e => setType(e.target.value)}>
           <option value="complementary">Complementary</option>
           <option value="analogous">Analogous</option>
           <option value="triadic">Triadic</option>
-        </Select>
+        </select>
       </div>
       <div className="flex gap-2 h-16">
         {palette.map((c, i) => <div key={i} className="flex-1 rounded-lg flex items-end justify-center pb-2 text-xs font-mono text-white" style={{ backgroundColor: c }}>{c}</div>)}
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- GradientGenerator ---
 export function GradientGenerator() {
+  const clr = ac('GradientGenerator');
   const [colors, setColors] = useState(['#3b82f6', '#8b5cf6']);
   const [direction, setDirection] = useState('to right');
   const addColor = () => setColors([...colors, `#${Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')}`]);
   const removeColor = (i: number) => colors.length > 2 && setColors(colors.filter((_, idx) => idx !== i));
   const gradient = `linear-gradient(${direction}, ${colors.join(', ')})`;
   return (
-    <Card title="Gradient Generator">
+    <Section title="Gradient Generator">
       <div className="flex gap-2 items-center flex-wrap">
         {colors.map((c, i) => (
           <div key={i} className="flex items-center gap-1">
@@ -242,22 +278,23 @@ export function GradientGenerator() {
             {colors.length > 2 && <button className="text-xs text-red-500" onClick={() => removeColor(i)}>x</button>}
           </div>
         ))}
-        <Btn onClick={addColor}>+</Btn>
+        <button className={btnClass(clr)} onClick={addColor}>+</button>
       </div>
-      <Select value={direction} onChange={e => setDirection(e.target.value)}>
+      <select className={selClass} value={direction} onChange={e => setDirection(e.target.value)}>
         <option value="to right">Right</option><option value="to left">Left</option>
         <option value="to bottom">Down</option><option value="to top">Up</option>
         <option value="to bottom right">Bottom Right</option><option value="to bottom left">Bottom Left</option>
         <option value="to top right">Top Right</option><option value="to top left">Top Left</option>
-      </Select>
+      </select>
       <div className="w-full h-32 rounded-lg" style={{ background: gradient }} />
       <code className="text-xs block bg-[var(--bg-surface)] p-2 rounded break-all">{gradient}</code>
-      <button className="text-xs text-blue-600 hover:underline" onClick={() => navigator.clipboard.writeText(gradient)}>Copy CSS</button>
-    </Card>
+      <button className="text-xs text-blue-600 hover:underline" onClick={() => clipboardWrite(gradient)}>Copy CSS</button>
+    </Section>
   );
 }
-
+// --- ContrastChecker ---
 export function ContrastChecker() {
+  const clr = ac('ContrastChecker');
   const [fg, setFg] = useState('#ffffff');
   const [bg, setBg] = useState('#1a1a2e');
   const lum = (h: string) => {
@@ -268,7 +305,7 @@ export function ContrastChecker() {
   const l1 = lum(fg), l2 = lum(bg);
   const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
   return (
-    <Card title="Contrast Checker">
+    <Section title="Contrast Checker">
       <div className="flex gap-4 items-center">
         <div><label className={labelClass}>Foreground</label><input type="color" value={fg} onChange={e => setFg(e.target.value)} className="block w-10 h-10 rounded cursor-pointer" /></div>
         <div><label className={labelClass}>Background</label><input type="color" value={bg} onChange={e => setBg(e.target.value)} className="block w-10 h-10 rounded cursor-pointer" /></div>
@@ -280,27 +317,29 @@ export function ContrastChecker() {
         <div className={ratio >= 7 ? 'text-green-600' : 'text-red-500'}>AAA Normal: {ratio >= 7 ? 'Pass' : 'Fail'} (needs 7:1)</div>
       </div>
       <div className="w-full h-20 rounded-lg flex items-center justify-center text-lg font-bold" style={{ color: fg, backgroundColor: bg }}>Sample Text</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CounterTool ---
 export function CounterTool() {
+  const clr = ac('CounterTool');
   const [count, setCount] = useState(0);
   const [history, setHistory] = useState<number[]>([]);
   return (
-    <Card title="Counter">
+    <Section title="Counter">
       <div className="text-4xl font-bold text-center text-[var(--text-primary)]">{count}</div>
       <div className="flex gap-2 justify-center">
-        <Btn onClick={() => { setHistory(h => [count, ...h.slice(0, 19)]); setCount(c => c - 1); }}>-</Btn>
-        <Btn onClick={() => { setCount(0); setHistory([]); }}>Reset</Btn>
-        <Btn onClick={() => { setHistory(h => [count, ...h.slice(0, 19)]); setCount(c => c + 1); }}>+</Btn>
+        <button className={btnClass(clr)} onClick={() => { setHistory(h => [count, ...h.slice(0, 19)]); setCount(c => c - 1); }}>-</button>
+        <button className={btnClass(clr)} onClick={() => { setCount(0); setHistory([]); }}>Reset</button>
+        <button className={btnClass(clr)} onClick={() => { setHistory(h => [count, ...h.slice(0, 19)]); setCount(c => c + 1); }}>+</button>
       </div>
       {history.length > 0 && <div className="text-xs text-[var(--text-secondary)] max-h-24 overflow-auto"><div className="font-medium mb-1">History:</div>{history.map((h, i) => <span key={i} className="mr-2">{h}</span>)}</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- ListRandomizer ---
 export function ListRandomizer() {
+  const clr = ac('ListRandomizer');
   const [input, setInput] = useState('');
   const [result, setResult] = useState<string[]>([]);
   const randomize = () => {
@@ -313,15 +352,16 @@ export function ListRandomizer() {
     setResult(shuffled);
   };
   return (
-    <Card title="List Randomizer">
-      <textarea className={textAreaClass} placeholder="Enter items (one per line)" value={input} onChange={e => setInput(e.target.value)} />
-      <Btn onClick={randomize}>Randomize</Btn>
+    <Section title="List Randomizer">
+      <Input label="Enter items (one per line)" value={input} onChange={setInput} rows={5} />
+      <button className={btnClass(clr)} onClick={randomize}>Randomize</button>
       {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- ListSorter ---
 export function ListSorter() {
+  const clr = ac('ListSorter');
   const [input, setInput] = useState('');
   const [result, setResult] = useState<string[]>([]);
   const sort = (mode: 'az' | 'za' | 'len') => {
@@ -332,19 +372,20 @@ export function ListSorter() {
     setResult(items);
   };
   return (
-    <Card title="List Sorter">
-      <textarea className={textAreaClass} placeholder="Enter items (one per line)" value={input} onChange={e => setInput(e.target.value)} />
+    <Section title="List Sorter">
+      <Input label="Enter items (one per line)" value={input} onChange={setInput} rows={5} />
       <div className="flex gap-2">
-        <Btn onClick={() => sort('az')}>A-Z</Btn>
-        <Btn onClick={() => sort('za')}>Z-A</Btn>
-        <Btn onClick={() => sort('len')}>By Length</Btn>
+        <button className={btnClass(clr)} onClick={() => sort('az')}>A-Z</button>
+        <button className={btnClass(clr)} onClick={() => sort('za')}>Z-A</button>
+        <button className={btnClass(clr)} onClick={() => sort('len')}>By Length</button>
       </div>
       {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- DecisionMaker ---
 export function DecisionMaker() {
+  const clr = ac('DecisionMaker');
   const [options, setOptions] = useState('');
   const [choice, setChoice] = useState('');
   const [spinning, setSpinning] = useState(false);
@@ -378,15 +419,16 @@ export function DecisionMaker() {
     ctx.fillText(choice, cx, cy);
   }, [choice]);
   return (
-    <Card title="Decision Maker">
-      <textarea className={textAreaClass} placeholder="Enter options (one per line)" value={options} onChange={e => setOptions(e.target.value)} />
-      <Btn onClick={pick} disabled={spinning}>{spinning ? 'Spinning...' : 'Pick One'}</Btn>
+    <Section title="Decision Maker">
+      <Input label="Enter options (one per line)" value={options} onChange={setOptions} rows={5} />
+      <button className={btnClass(clr)} onClick={pick} disabled={spinning}>{spinning ? 'Spinning...' : 'Pick One'}</button>
       <div className="flex justify-center"><canvas ref={canvasRef} width={160} height={160} className="max-w-full" /></div>
-    </Card>
+    </Section>
   );
 }
-
+// --- YesNoPicker ---
 export function YesNoPicker() {
+  const clr = ac('YesNoPicker');
   const [result, setResult] = useState('');
   const outcomes = ['Yes', 'No', 'Maybe', 'Ask again later', 'Definitely', "Don't count on it", 'Absolutely', 'Very doubtful', 'Outlook good', 'Cannot predict now'];
   const pick = () => {
@@ -394,16 +436,17 @@ export function YesNoPicker() {
     const interval = setInterval(() => { setResult(outcomes[i % outcomes.length]); i++; if (i > outcomes.length * 3) clearInterval(interval); }, 80);
   };
   return (
-    <Card title="Yes / No / Maybe">
+    <Section title="Yes / No / Maybe">
       <div className="text-center">
         <div className="text-5xl font-bold mb-4 text-blue-600 h-16">{result}</div>
-        <Btn onClick={pick}>Ask</Btn>
+        <button className={btnClass(clr)} onClick={pick}>Ask</button>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CoinFlipper ---
 export function CoinFlipper() {
+  const clr = ac('CoinFlipper');
   const [side, setSide] = useState('');
   const [animating, setAnimating] = useState(false);
   const flip = () => {
@@ -412,33 +455,35 @@ export function CoinFlipper() {
     const interval = setInterval(() => { setSide(i % 2 === 0 ? 'Heads' : 'Tails'); i++; if (i > 8) { clearInterval(interval); setAnimating(false); setSide(Math.random() > 0.5 ? 'Heads' : 'Tails'); } }, 100);
   };
   return (
-    <Card title="Coin Flipper">
+    <Section title="Coin Flipper">
       <div className="text-center">
         <div className={'text-6xl mb-4' + (animating ? ' animate-spin' : '')}>&#x1FA99;</div>
         <div className="text-2xl font-bold mb-4 h-8">{side}</div>
-        <Btn onClick={flip} disabled={animating}>Flip Coin</Btn>
+        <button className={btnClass(clr)} onClick={flip} disabled={animating}>Flip Coin</button>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- DiceRollerTool ---
 export function DiceRollerTool() {
+  const clr = ac('DiceRollerTool');
   const [sides, setSides] = useState(6);
   const [result, setResult] = useState<number | null>(null);
   const roll = () => setResult(Math.floor(Math.random() * sides) + 1);
   return (
-    <Card title="Dice Roller (Custom)">
+    <Section title="Dice Roller (Custom)">
       <div className="flex gap-3 items-center">
         <label className="text-sm">Sides:</label>
-        <Input type="number" min={2} max={100} value={sides} onChange={e => setSides(Number(e.target.value))} className="w-20" />
-        <Btn onClick={roll}>Roll</Btn>
+        <Input label="Value" type="number" min={2} max={100} value={sides} onChange={v => setSides(Number(v))} />
+        <button className={btnClass(clr)} onClick={roll}>Roll</button>
       </div>
       {result !== null && <div className="text-5xl font-bold text-center text-blue-600">{result}</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- NumberGuessingGame ---
 export function NumberGuessingGame() {
+  const clr = ac('NumberGuessingGame');
   const target = useRef(Math.floor(Math.random() * 100) + 1);
   const [guess, setGuess] = useState('');
   const [hints, setHints] = useState<string[]>([]);
@@ -450,19 +495,20 @@ export function NumberGuessingGame() {
     else setHints(h => [...h, n + ' - ' + (n < target.current ? 'Too low' : 'Too high')]);
   };
   return (
-    <Card title="Number Guessing Game">
+    <Section title="Number Guessing Game">
       <p className="text-sm text-[var(--text-secondary)]">Guess a number between 1 and 100</p>
       <div className="flex gap-2">
-        <Input type="number" min={1} max={100} value={guess} onChange={e => setGuess(e.target.value)} disabled={won} onKeyDown={e => e.key === 'Enter' && check()} />
-        <Btn onClick={check} disabled={won}>Guess</Btn>
+        <Input label="Value" type="number" min={1} max={100} value={guess} onChange={setGuess} />
+        <button className={btnClass(clr)} onClick={check} disabled={won}>Guess</button>
       </div>
       {won && <div className="text-green-600 font-bold text-lg">You won in {hints.length} guesses!</div>}
       <div className="text-xs space-y-1 max-h-32 overflow-auto">{hints.map((h, i) => <div key={i} className={h.includes('Correct') ? 'text-green-600' : ''}>{h}</div>)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- RockPaperScissors ---
 export function RockPaperScissors() {
+  const clr = ac('RockPaperScissors');
   const [player, setPlayer] = useState('');
   const [computer, setComputer] = useState('');
   const [result, setResult] = useState('');
@@ -476,16 +522,17 @@ export function RockPaperScissors() {
     else setResult('Computer Wins');
   };
   return (
-    <Card title="Rock Paper Scissors">
+    <Section title="Rock Paper Scissors">
       <div className="flex gap-2 justify-center">
-        {choices.map(c => <Btn key={c} onClick={() => play(c)}>{c}</Btn>)}
+        {choices.map(c => <button className={btnClass(clr)} key={c} onClick={() => play(c)}>{c}</button>)}
       </div>
       {player && <div className="text-center text-sm"><div>You: {player}</div><div>Computer: {computer}</div><div className="text-lg font-bold mt-2">{result}</div></div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- HangmanGame ---
 export function HangmanGame() {
+  const clr = ac('HangmanGame');
   const words = ['react', 'typescript', 'javascript', 'hangman', 'developer', 'coding', 'puzzle', 'computer', 'python', 'rust'];
   const word = useRef(words[Math.floor(Math.random() * words.length)]);
   const [guessed, setGuessed] = useState<string[]>([]);
@@ -498,7 +545,7 @@ export function HangmanGame() {
   };
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   return (
-    <Card title="Hangman Game">
+    <Section title="Hangman Game">
       <div className="text-2xl font-mono tracking-widest text-center mb-4">{display}</div>
       <div className="text-sm text-red-500 mb-2">Wrong: {wrong}/6</div>
       <div className="flex flex-wrap gap-1 justify-center max-w-xs mx-auto">
@@ -510,11 +557,12 @@ export function HangmanGame() {
       </div>
       {wrong >= 6 && <div className="text-red-500 font-bold text-center mt-2">Game Over! Word: {word.current}</div>}
       {!display.includes('_') && <div className="text-green-600 font-bold text-center mt-2">You Win!</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- BinaryConverter ---
 export function BinaryConverter() {
+  const clr = ac('BinaryConverter');
   const [input, setInput] = useState('42');
   const [mode, setMode] = useState('dec');
   const convert = (v: string, m: string) => {
@@ -524,22 +572,23 @@ export function BinaryConverter() {
   };
   const res = convert(input, mode);
   return (
-    <Card title="Binary Converter">
-      <Select value={mode} onChange={e => setMode(e.target.value)}>
+    <Section title="Binary Converter">
+      <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
         <option value="dec">Decimal</option><option value="hex">Hex</option><option value="oct">Octal</option><option value="bin">Binary</option>
-      </Select>
-      <Input placeholder="Enter value" value={input} onChange={e => setInput(e.target.value)} />
+      </select>
+      <Input label="Enter value" placeholder="Enter value" value={input} onChange={setInput} />
       <div className="text-xs space-y-1 font-mono">
         <div><span className="text-[var(--text-secondary)]">Decimal:</span> {res.dec}</div>
         <div><span className="text-[var(--text-secondary)]">Hex:</span> {res.hex}</div>
         <div><span className="text-[var(--text-secondary)]">Octal:</span> {res.oct}</div>
         <div><span className="text-[var(--text-secondary)]">Binary:</span> {res.bin}</div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- RomanNumeralConverter ---
 export function RomanNumeralConverter() {
+  const clr = ac('RomanNumeralConverter');
   const [dec, setDec] = useState('2024');
   const [roman, setRoman] = useState('MMXXIV');
   const toRoman = (n: number) => {
@@ -561,15 +610,16 @@ export function RomanNumeralConverter() {
   const toR = () => { const n = parseInt(dec); if (n > 0 && n < 4000) setRoman(toRoman(n)); };
   const fromR = () => { const n = fromRoman(roman.toUpperCase()); if (n > 0) setDec(String(n)); };
   return (
-    <Card title="Roman Numeral Converter">
-      <Input placeholder="Decimal" value={dec} onChange={e => setDec(e.target.value)} />
-      <Input placeholder="Roman" value={roman} onChange={e => setRoman(e.target.value)} />
-      <div className="flex gap-2"><Btn onClick={toR}>To Roman</Btn><Btn onClick={fromR}>From Roman</Btn></div>
-    </Card>
+    <Section title="Roman Numeral Converter">
+      <Input label="Decimal" placeholder="Decimal" value={dec} onChange={setDec} />
+      <Input label="Roman" placeholder="Roman" value={roman} onChange={setRoman} />
+      <div className="flex gap-2"><button className={btnClass(clr)} onClick={toR}>To Roman</button><button className={btnClass(clr)} onClick={fromR}>From Roman</button></div>
+    </Section>
   );
 }
-
+// --- NumberToWordsConverter ---
 export function NumberToWordsConverter() {
+  const clr = ac('NumberToWordsConverter');
   const [num, setNum] = useState('1234');
   const ones = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
   const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
@@ -583,68 +633,72 @@ export function NumberToWordsConverter() {
   };
   const words = parseInt(num) ? convert(parseInt(num)) : '';
   return (
-    <Card title="Number to Words">
-      <Input type="number" value={num} onChange={e => setNum(e.target.value)} />
+    <Section title="Number to Words">
+      <Input label="Value" type="number" value={num} onChange={setNum} />
       <div className="text-sm font-medium p-3 bg-[var(--bg-surface)] rounded-lg">{words}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- NumberBaseConverter ---
 export function NumberBaseConverter() {
+  const clr = ac('NumberBaseConverter');
   const [input, setInput] = useState('255');
   const [fromBase, setFromBase] = useState(10);
   const [toBase, setToBase] = useState(16);
   const result = parseInt(input, fromBase);
   const output = isNaN(result) ? '' : result.toString(toBase).toUpperCase();
   return (
-    <Card title="Number Base Converter">
+    <Section title="Number Base Converter">
       <div className="flex gap-2">
-        <Select value={fromBase} onChange={e => setFromBase(Number(e.target.value))}>
+        <select className={selClass} value={fromBase} onChange={e => setFromBase(Number(e.target.value))}>
           {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
-        </Select>
+        </select>
         <span className="self-center">-</span>
-        <Select value={toBase} onChange={e => setToBase(Number(e.target.value))}>
+        <select className={selClass} value={toBase} onChange={e => setToBase(Number(e.target.value))}>
           {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
-        </Select>
+        </select>
       </div>
-      <Input placeholder="Enter number" value={input} onChange={e => setInput(e.target.value)} />
+      <Input label="Enter number" placeholder="Enter number" value={input} onChange={setInput} />
       <div className="text-lg font-mono font-bold text-blue-600">{output}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- PercentageChangeCalculator ---
 export function PercentageChangeCalculator() {
+  const clr = ac('PercentageChangeCalculator');
   const [a, setA] = useState('100');
   const [b, setB] = useState('120');
   const change = Number(a) ? ((Number(b) - Number(a)) / Number(a) * 100) : 0;
   return (
-    <Card title="Percentage Change">
+    <Section title="Percentage Change">
       <div className="flex gap-2 items-center">
-        <div><label className={labelClass}>Old Value</label><Input value={a} onChange={e => setA(e.target.value)} /></div>
-        <div><label className={labelClass}>New Value</label><Input value={b} onChange={e => setB(e.target.value)} /></div>
+        <div><label className={labelClass}>Old Value</label><Input label="Value" value={a} onChange={setA} /></div>
+        <div><label className={labelClass}>New Value</label><Input label="Value" value={b} onChange={setB} /></div>
       </div>
       <div className="text-lg font-bold">{change >= 0 ? '+' : ''}{change.toFixed(2)}% {change >= 0 ? 'increase' : 'decrease'}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- PercentageDifferenceCalculator ---
 export function PercentageDifferenceCalculator() {
+  const clr = ac('PercentageDifferenceCalculator');
   const [a, setA] = useState('100');
   const [b, setB] = useState('150');
   const avg = (Number(a) + Number(b)) / 2;
   const diff = avg ? Math.abs(Number(a) - Number(b)) / avg * 100 : 0;
   return (
-    <Card title="Percentage Difference">
+    <Section title="Percentage Difference">
       <div className="flex gap-2 items-center">
-        <Input value={a} onChange={e => setA(e.target.value)} />
-        <Input value={b} onChange={e => setB(e.target.value)} />
+        <Input label="Value" value={a} onChange={setA} />
+        <Input label="Value" value={b} onChange={setB} />
       </div>
       <div className="text-lg font-bold">{diff.toFixed(2)}% difference</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- VatCalculator ---
 export function VatCalculator() {
+  const clr = ac('VatCalculator');
   const [amount, setAmount] = useState('100');
   const [rate, setRate] = useState(20);
   const [mode, setMode] = useState('add');
@@ -653,20 +707,21 @@ export function VatCalculator() {
   const net = mode === 'add' ? a : a - vat;
   const gross = mode === 'add' ? a + vat : a;
   return (
-    <Card title="VAT Calculator">
-      <Select value={mode} onChange={e => setMode(e.target.value)}>
+    <Section title="VAT Calculator">
+      <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
         <option value="add">Add VAT</option><option value="remove">Remove VAT</option>
-      </Select>
+      </select>
       <div className="flex gap-2">
-        <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} />
-        <Input type="number" value={rate} onChange={e => setRate(Number(e.target.value))} className="w-20" />
+        <Input label="Value" type="number" value={amount} onChange={setAmount} />
+        <Input label="Value" type="number" value={rate} onChange={v => setRate(Number(v))} />
       </div>
       <div className="text-xs space-y-1"><div>Net: {net.toFixed(2)}</div><div>VAT ({rate}%): {vat.toFixed(2)}</div><div className="font-bold">Gross: {gross.toFixed(2)}</div></div>
-    </Card>
+    </Section>
   );
 }
-
+// --- TipCalculator ---
 export function TipCalculator() {
+  const clr = ac('TipCalculator');
   const [bill, setBill] = useState('50');
   const [pct, setPct] = useState(15);
   const [split, setSplit] = useState(2);
@@ -674,188 +729,198 @@ export function TipCalculator() {
   const tip = b * pct / 100;
   const total = b + tip;
   return (
-    <Card title="Tip Calculator">
+    <Section title="Tip Calculator">
       <div className="flex gap-2">
-        <div><label className={labelClass}>Bill</label><Input type="number" value={bill} onChange={e => setBill(e.target.value)} /></div>
-        <div><label className={labelClass}>Tip %</label><Input type="number" value={pct} onChange={e => setPct(Number(e.target.value))} /></div>
-        <div><label className={labelClass}>Split</label><Input type="number" min={1} value={split} onChange={e => setSplit(Number(e.target.value))} /></div>
+        <div><label className={labelClass}>Bill</label><Input label="Value" type="number" value={bill} onChange={setBill} /></div>
+        <div><label className={labelClass}>Tip %</label><Input label="Value" type="number" value={pct} onChange={v => setPct(Number(v))} /></div>
+        <div><label className={labelClass}>Split</label><Input label="Value" type="number" min={1} value={split} onChange={v => setSplit(Number(v))} /></div>
       </div>
       <div className="text-xs space-y-1">
         <div>Tip: ${tip.toFixed(2)}</div>
         <div>Total: ${total.toFixed(2)}</div>
         <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- SalesTaxCalculator ---
 export function SalesTaxCalculator() {
+  const clr = ac('SalesTaxCalculator');
   const [amount, setAmount] = useState('100');
   const [rate, setRate] = useState(8);
   const a = Number(amount), tax = a * rate / 100;
   return (
-    <Card title="Sales Tax Calculator">
+    <Section title="Sales Tax Calculator">
       <div className="flex gap-2">
-        <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} />
-        <Input type="number" value={rate} onChange={e => setRate(Number(e.target.value))} className="w-20" />
+        <Input label="Value" type="number" value={amount} onChange={setAmount} />
+        <Input label="Value" type="number" value={rate} onChange={v => setRate(Number(v))} />
       </div>
       <div className="text-xs space-y-1">
         <div>Tax: ${tax.toFixed(2)}</div>
         <div className="font-bold">Total: ${(a + tax).toFixed(2)}</div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- MarkupCalculator ---
 export function MarkupCalculator() {
+  const clr = ac('MarkupCalculator');
   const [cost, setCost] = useState('50');
   const [markup, setMarkup] = useState(25);
   const c = Number(cost), m = Number(markup);
   const price = c * (1 + m / 100);
   const profit = price - c;
   return (
-    <Card title="Markup Calculator">
+    <Section title="Markup Calculator">
       <div className="flex gap-2">
-        <div><label className={labelClass}>Cost</label><Input type="number" value={cost} onChange={e => setCost(e.target.value)} /></div>
-        <div><label className={labelClass}>Markup %</label><Input type="number" value={markup} onChange={e => setMarkup(Number(e.target.value))} /></div>
+        <div><label className={labelClass}>Cost</label><Input label="Value" type="number" value={cost} onChange={setCost} /></div>
+        <div><label className={labelClass}>Markup %</label><Input label="Value" type="number" value={markup} onChange={v => setMarkup(Number(v))} /></div>
       </div>
       <div className="text-xs space-y-1">
         <div>Selling Price: ${price.toFixed(2)}</div>
         <div>Profit: ${profit.toFixed(2)}</div>
         <div className="font-bold">Margin: {(profit / price * 100).toFixed(1)}%</div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ROICalculator ---
 export function ROICalculator() {
+  const clr = ac('ROICalculator');
   const [invested, setInvested] = useState('1000');
   const [returned, setReturned] = useState('1500');
   const i = Number(invested), r = Number(returned);
   const roi = i ? ((r - i) / i * 100) : 0;
   return (
-    <Card title="ROI Calculator">
-      <div className="flex gap-2"><div><label className={labelClass}>Amount Invested</label><Input type="number" value={invested} onChange={e => setInvested(e.target.value)} /></div><div><label className={labelClass}>Total Return</label><Input type="number" value={returned} onChange={e => setReturned(e.target.value)} /></div></div>
+    <Section title="ROI Calculator">
+      <div className="flex gap-2"><div><label className={labelClass}>Amount Invested</label><Input label="Value" type="number" value={invested} onChange={setInvested} /></div><div><label className={labelClass}>Total Return</label><Input label="Value" type="number" value={returned} onChange={setReturned} /></div></div>
       <div className="text-lg font-bold">ROI: {roi.toFixed(2)}% (${(r - i).toFixed(2)})</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CAGRCalculator ---
 export function CAGRCalculator() {
+  const clr = ac('CAGRCalculator');
   const [start, setStart] = useState('1000');
   const [end, setEnd] = useState('2000');
   const [years, setYears] = useState('5');
   const s = Number(start), e = Number(end), y = Number(years);
   const cagr = s > 0 && y > 0 ? (Math.pow(e / s, 1 / y) - 1) * 100 : 0;
   return (
-    <Card title="CAGR Calculator">
+    <Section title="CAGR Calculator">
       <div className="flex gap-2">
-        <div><label className={labelClass}>Start Value</label><Input type="number" value={start} onChange={e => setStart(e.target.value)} /></div>
-        <div><label className={labelClass}>End Value</label><Input type="number" value={end} onChange={e => setEnd(e.target.value)} /></div>
-        <div><label className={labelClass}>Years</label><Input type="number" value={years} onChange={e => setYears(e.target.value)} /></div>
+        <div><label className={labelClass}>Start Value</label><Input label="Value" type="number" value={start} onChange={setStart} /></div>
+        <div><label className={labelClass}>End Value</label><Input label="Value" type="number" value={end} onChange={setEnd} /></div>
+        <div><label className={labelClass}>Years</label><Input label="Value" type="number" value={years} onChange={setYears} /></div>
       </div>
       <div className="text-lg font-bold">CAGR: {cagr.toFixed(2)}%</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CurrencyConverter ---
 export function CurrencyConverter() {
+  const clr = ac('CurrencyConverter');
   const rates: Record<string, number> = { USD: 1, EUR: 0.92, GBP: 0.79, JPY: 149.5, INR: 83.1, CAD: 1.36, AUD: 1.53, CNY: 7.24, BRL: 4.97, KRW: 1325 };
   const [amount, setAmount] = useState('100');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('EUR');
   const result = (Number(amount) / rates[from]) * rates[to];
   return (
-    <Card title="Currency Converter">
+    <Section title="Currency Converter">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} className="w-24" />
-        <Select value={from} onChange={e => setFrom(e.target.value)} className="w-20">
+        <Input label="Value" type="number" value={amount} onChange={setAmount} />
+        <select className={selClass} value={from} onChange={e => setFrom(e.target.value)}>
           {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
-        </Select>
+        </select>
         <span>-</span>
-        <Select value={to} onChange={e => setTo(e.target.value)} className="w-20">
+        <select className={selClass} value={to} onChange={e => setTo(e.target.value)}>
           {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
-        </Select>
+        </select>
       </div>
       <div className="text-lg font-bold">{result.toFixed(2)} {to}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CurrencyRateCalculator ---
 export function CurrencyRateCalculator() {
+  const clr = ac('CurrencyRateCalculator');
   const currencies: Record<string, number> = { USD: 1, EUR: 0.92, GBP: 0.79, JPY: 149.5, INR: 83.1, CAD: 1.36, AUD: 1.53, CHF: 0.88, CNY: 7.24, NZD: 1.62, SEK: 10.45, NOK: 10.55, DKK: 6.87, PLN: 3.98, MXN: 17.15, SGD: 1.34, HKD: 7.82, TRY: 30.25, ZAR: 18.75, BRL: 4.97, KRW: 1325, AED: 3.67, SAR: 3.75, THB: 35.50, MYR: 4.72, PHP: 56.20, IDR: 15650, VND: 24600, CZK: 22.80, HUF: 358, CLP: 875, ARS: 820 };
   const [amount, setAmount] = useState('100');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('EUR');
   const result = (Number(amount) / currencies[from]) * currencies[to];
   return (
-    <Card title="Currency Rate Calculator">
+    <Section title="Currency Rate Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} className="w-24" />
-        <Select value={from} onChange={e => setFrom(e.target.value)} className="w-20">{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</Select>
+        <Input label="Value" type="number" value={amount} onChange={setAmount} />
+        <select className={selClass} value={from} onChange={e => setFrom(e.target.value)}>{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</select>
         <span>-</span>
-        <Select value={to} onChange={e => setTo(e.target.value)} className="w-20">{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</Select>
+        <select className={selClass} value={to} onChange={e => setTo(e.target.value)}>{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</select>
       </div>
       <div className="text-lg font-bold">{result.toFixed(2)} {to}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ExchangeRateCalculator ---
 export function ExchangeRateCalculator() {
+  const clr = ac('ExchangeRateCalculator');
   const rates: Record<string, number> = { 'USD/EUR': 0.92, 'USD/GBP': 0.79, 'USD/JPY': 149.5, 'EUR/USD': 1.09, 'EUR/GBP': 0.86, 'GBP/USD': 1.27, 'GBP/EUR': 1.16, 'USD/INR': 83.1, 'USD/CAD': 1.36, 'USD/AUD': 1.53 };
   const [amount, setAmount] = useState('100');
   const [pair, setPair] = useState('USD/EUR');
   const rate = rates[pair] || 1;
   return (
-    <Card title="Exchange Rate Calculator">
+    <Section title="Exchange Rate Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={amount} onChange={e => setAmount(e.target.value)} className="w-24" />
-        <Select value={pair} onChange={e => setPair(e.target.value)}>
+        <Input label="Value" type="number" value={amount} onChange={setAmount} />
+        <select className={selClass} value={pair} onChange={e => setPair(e.target.value)}>
           {Object.keys(rates).map(p => <option key={p}>{p}</option>)}
-        </Select>
+        </select>
       </div>
       <div className="text-lg font-bold">{(Number(amount) * rate).toFixed(2)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- FractionSimplifier ---
 export function FractionSimplifier() {
+  const clr = ac('FractionSimplifier');
   const [num, setNum] = useState('8');
   const [den, setDen] = useState('12');
   const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
   const n = Number(num), d = Number(den);
   const g = gcd(n, d);
   return (
-    <Card title="Fraction Simplifier">
+    <Section title="Fraction Simplifier">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={num} onChange={e => setNum(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={num} onChange={setNum} />
         <span className="text-xl">/</span>
-        <Input type="number" value={den} onChange={e => setDen(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={den} onChange={setDen} />
       </div>
       <div className="text-lg font-bold">
         {d ? n + '/' + d + ' = ' + (n/g) + '/' + (d/g) : 'Invalid'}
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- FractionToDecimalCalculator ---
 export function FractionToDecimalCalculator() {
+  const clr = ac('FractionToDecimalCalculator');
   const [num, setNum] = useState('3');
   const [den, setDen] = useState('4');
   const n = Number(num), d = Number(den);
   return (
-    <Card title="Fraction to Decimal">
+    <Section title="Fraction to Decimal">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={num} onChange={e => setNum(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={num} onChange={setNum} />
         <span className="text-xl">/</span>
-        <Input type="number" value={den} onChange={e => setDen(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={den} onChange={setDen} />
       </div>
       <div className="text-lg font-bold">{d ? (n / d).toString() : 'Invalid'}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- DecimalToFractionCalculator ---
 export function DecimalToFractionCalculator() {
+  const clr = ac('DecimalToFractionCalculator');
   const [dec, setDec] = useState('0.75');
   const d = parseFloat(dec);
   const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
@@ -868,219 +933,232 @@ export function DecimalToFractionCalculator() {
   };
   const f = getFraction(d);
   return (
-    <Card title="Decimal to Fraction">
-      <Input type="number" step="0.01" value={dec} onChange={e => setDec(e.target.value)} />
+    <Section title="Decimal to Fraction">
+      <Input label="Value" type="number" step="0.01" value={dec} onChange={setDec} />
       <div className="text-lg font-bold">{f.d ? f.n + '/' + f.d : 'Invalid'}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- RatioSimplifier ---
 export function RatioSimplifier() {
+  const clr = ac('RatioSimplifier');
   const [a, setA] = useState('12');
   const [b, setB] = useState('18');
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const n1 = Number(a), n2 = Number(b);
   const g = gcd(n1, n2);
   return (
-    <Card title="Ratio Simplifier">
+    <Section title="Ratio Simplifier">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={a} onChange={e => setA(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={a} onChange={setA} />
         <span>:</span>
-        <Input type="number" value={b} onChange={e => setB(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={b} onChange={setB} />
       </div>
       <div className="text-lg font-bold">{n1}:{n2} = {n1/g}:{n2/g}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ProportionalCalculator ---
 export function ProportionalCalculator() {
+  const clr = ac('ProportionalCalculator');
   const [a, setA] = useState('2');
   const [b, setB] = useState('4');
   const [c, setC] = useState('6');
   const na = Number(a), nb = Number(b), nc = Number(c);
   const d = na ? (nb * nc / na) : 0;
   return (
-    <Card title="Proportional Calculator">
+    <Section title="Proportional Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={a} onChange={e => setA(e.target.value)} className="w-16" /><span className="text-xs">:</span>
-        <Input type="number" value={b} onChange={e => setB(e.target.value)} className="w-16" /><span className="text-xs">=</span>
-        <Input type="number" value={c} onChange={e => setC(e.target.value)} className="w-16" /><span className="text-xs">:</span>
+        <Input label="Value" type="number" value={a} onChange={setA} /><span className="text-xs">:</span>
+        <Input label="Value" type="number" value={b} onChange={setB} /><span className="text-xs">=</span>
+        <Input label="Value" type="number" value={c} onChange={setC} /><span className="text-xs">:</span>
         <span className="text-lg font-bold">{d.toFixed(2)}</span>
       </div>
       <div className="text-xs text-[var(--text-secondary)]">{na}:{nb} = {nc}:{d.toFixed(2)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- RuleOfThreeCalculator ---
 export function RuleOfThreeCalculator() {
+  const clr = ac('RuleOfThreeCalculator');
   const [a, setA] = useState('2');
   const [b, setB] = useState('4');
   const [c, setC] = useState('6');
   const na = Number(a), nb = Number(b), nc = Number(c);
   const x = na ? (nb * nc / na) : 0;
   return (
-    <Card title="Rule of Three">
+    <Section title="Rule of Three">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={a} onChange={e => setA(e.target.value)} className="w-16" /><span className="text-xs">-</span>
-        <Input type="number" value={b} onChange={e => setB(e.target.value)} className="w-16" />
+        <Input label="Value" type="number" value={a} onChange={setA} /><span className="text-xs">-</span>
+        <Input label="Value" type="number" value={b} onChange={setB} />
       </div>
       <div className="flex gap-2 items-center">
-        <Input type="number" value={c} onChange={e => setC(e.target.value)} className="w-16" /><span className="text-xs">-</span>
+        <Input label="Value" type="number" value={c} onChange={setC} /><span className="text-xs">-</span>
         <span className="text-lg font-bold">{x.toFixed(2)}</span>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- CombinationCalculator ---
 export function CombinationCalculator() {
+  const clr = ac('CombinationCalculator');
   const [n, setN] = useState('5');
   const [r, setR] = useState('3');
   const fact = (x: number): number => x <= 1 ? 1 : x * fact(x - 1);
   const nn = Number(n), rr = Number(r);
   const c = fact(nn) / (fact(rr) * fact(nn - rr));
   return (
-    <Card title="Combinations (nCr)">
+    <Section title="Combinations (nCr)">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={n} onChange={e => setN(e.target.value)} className="w-20" placeholder="n" />
-        <Input type="number" value={r} onChange={e => setR(e.target.value)} className="w-20" placeholder="r" />
+        <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />
+        <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
       </div>
       <div className="text-lg font-bold">C({nn}, {rr}) = {isFinite(c) ? c.toFixed(0) : 'N/A'}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- PermutationCalculator ---
 export function PermutationCalculator() {
+  const clr = ac('PermutationCalculator');
   const [n, setN] = useState('5');
   const [r, setR] = useState('3');
   const fact = (x: number): number => x <= 1 ? 1 : x * fact(x - 1);
   const nn = Number(n), rr = Number(r);
   const p = fact(nn) / fact(nn - rr);
   return (
-    <Card title="Permutations (nPr)">
+    <Section title="Permutations (nPr)">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={n} onChange={e => setN(e.target.value)} className="w-20" placeholder="n" />
-        <Input type="number" value={r} onChange={e => setR(e.target.value)} className="w-20" placeholder="r" />
+        <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />
+        <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
       </div>
       <div className="text-lg font-bold">P({nn}, {rr}) = {isFinite(p) ? p.toFixed(0) : 'N/A'}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- FactorialCalculator ---
 export function FactorialCalculator() {
+  const clr = ac('FactorialCalculator');
   const [n, setN] = useState('5');
   const fact = (x: number): number => x <= 1 ? 1 : x * fact(x - 1);
   const nn = Number(n);
   return (
-    <Card title="Factorial Calculator">
-      <Input type="number" min={0} max={170} value={n} onChange={e => setN(e.target.value)} />
+    <Section title="Factorial Calculator">
+      <Input label="Value" type="number" min={0} max={170} value={n} onChange={setN} />
       <div className="text-lg font-bold">{nn}! = {nn > 170 ? 'Too large' : fact(nn).toLocaleString('fullwide', { useGrouping: false })}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- PrimeNumberChecker ---
 export function PrimeNumberChecker() {
+  const clr = ac('PrimeNumberChecker');
   const [n, setN] = useState('17');
   const nn = Number(n);
   const isPrime = (x: number) => { if (x < 2) return false; for (let i = 2; i * i <= x; i++) { if (x % i === 0) return false; } return true; };
   const factors = (x: number) => { const f: number[] = []; let d = 2; while (x > 1) { while (x % d === 0) { f.push(d); x /= d; } d++; } return f; };
   const prime = isPrime(nn);
   return (
-    <Card title="Prime Number Checker">
-      <Input type="number" min={1} value={n} onChange={e => setN(e.target.value)} />
+    <Section title="Prime Number Checker">
+      <Input label="Value" type="number" min={1} value={n} onChange={setN} />
       <div className={'text-lg font-bold ' + (prime ? 'text-green-600' : 'text-red-500')}>{nn} is {prime ? '' : 'not '}prime</div>
       {!prime && <div className="text-xs">Factors: {factors(nn).join(' x ')}</div>}
-    </Card>
+    </Section>
   );
 }
-
+// --- PrimeFactorizationCalculator ---
 export function PrimeFactorizationCalculator() {
+  const clr = ac('PrimeFactorizationCalculator');
   const [n, setN] = useState('84');
   const nn = Number(n);
   const factors = (x: number) => { const f: number[] = []; let d = 2; while (x > 1) { while (x % d === 0) { f.push(d); x /= d; } d++; } return f; };
   const f = factors(nn);
   return (
-    <Card title="Prime Factorization">
-      <Input type="number" min={2} value={n} onChange={e => setN(e.target.value)} />
+    <Section title="Prime Factorization">
+      <Input label="Value" type="number" min={2} value={n} onChange={setN} />
       <div className="text-lg font-bold">{nn} = {f.join(' x ')}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- GreatestCommonFactorCalculator ---
 export function GreatestCommonFactorCalculator() {
+  const clr = ac('GreatestCommonFactorCalculator');
   const [a, setA] = useState('12');
   const [b, setB] = useState('18');
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const na = Number(a), nb = Number(b);
   return (
-    <Card title="GCF / GCD Calculator">
-      <div className="flex gap-2"><Input type="number" value={a} onChange={e => setA(e.target.value)} /><Input type="number" value={b} onChange={e => setB(e.target.value)} /></div>
+    <Section title="GCF / GCD Calculator">
+      <div className="flex gap-2"><Input label="Value" type="number" value={a} onChange={setA} /><Input label="Value" type="number" value={b} onChange={setB} /></div>
       <div className="text-lg font-bold">GCF({na}, {nb}) = {gcd(na, nb)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- LeastCommonMultipleCalculator ---
 export function LeastCommonMultipleCalculator() {
+  const clr = ac('LeastCommonMultipleCalculator');
   const [a, setA] = useState('4');
   const [b, setB] = useState('6');
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const lcm = (x: number, y: number) => x && y ? (x * y) / gcd(x, y) : 0;
   const na = Number(a), nb = Number(b);
   return (
-    <Card title="LCM Calculator">
-      <div className="flex gap-2"><Input type="number" value={a} onChange={e => setA(e.target.value)} /><Input type="number" value={b} onChange={e => setB(e.target.value)} /></div>
+    <Section title="LCM Calculator">
+      <div className="flex gap-2"><Input label="Value" type="number" value={a} onChange={setA} /><Input label="Value" type="number" value={b} onChange={setB} /></div>
       <div className="text-lg font-bold">LCM({na}, {nb}) = {lcm(na, nb)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- ModuloCalculator ---
 export function ModuloCalculator() {
+  const clr = ac('ModuloCalculator');
   const [a, setA] = useState('17');
   const [b, setB] = useState('5');
   const na = Number(a), nb = Number(b);
   const mod = na % nb;
   return (
-    <Card title="Modulo Calculator">
+    <Section title="Modulo Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={a} onChange={e => setA(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={a} onChange={setA} />
         <span className="text-sm">mod</span>
-        <Input type="number" value={b} onChange={e => setB(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={b} onChange={setB} />
       </div>
       <div className="text-lg font-bold">{na} mod {nb} = {mod}</div>
       <div className="text-xs text-[var(--text-secondary)]">{na} = {nb} x {Math.floor(na / nb)} + {mod}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- LogarithmCalculator ---
 export function LogarithmCalculator() {
+  const clr = ac('LogarithmCalculator');
   const [num, setNum] = useState('100');
   const [base, setBase] = useState('10');
   const n = Number(num), b = Number(base);
   const log = Math.log(n) / Math.log(b);
   return (
-    <Card title="Logarithm Calculator">
+    <Section title="Logarithm Calculator">
       <div className="flex gap-2 items-center">
         <span className="text-sm">log</span>
-        <Input type="number" value={base} onChange={e => setBase(e.target.value)} className="w-16" />
-        <Input type="number" value={num} onChange={e => setNum(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={base} onChange={setBase} />
+        <Input label="Value" type="number" value={num} onChange={setNum} />
       </div>
       <div className="text-lg font-bold">log_{b}({n}) = {isFinite(log) ? log.toFixed(6) : 'Invalid'}</div>
       <div className="text-xs text-[var(--text-secondary)]">Natural log: {Math.log(n).toFixed(6)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- TrigonometryCalculator ---
 export function TrigonometryCalculator() {
+  const clr = ac('TrigonometryCalculator');
   const [angle, setAngle] = useState('45');
   const [unit, setUnit] = useState('deg');
   const a = Number(angle);
   const rad = unit === 'deg' ? a * Math.PI / 180 : a;
   return (
-    <Card title="Trigonometry Calculator">
+    <Section title="Trigonometry Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={angle} onChange={e => setAngle(e.target.value)} className="w-24" />
-        <Select value={unit} onChange={e => setUnit(e.target.value)} className="w-20">
+        <Input label="Value" type="number" value={angle} onChange={setAngle} />
+        <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
           <option value="deg">Degrees</option><option value="rad">Radians</option>
-        </Select>
+        </select>
       </div>
       <div className="text-xs space-y-1 font-mono">
         <div>sin({a}) = {Math.sin(rad).toFixed(6)}</div>
@@ -1090,25 +1168,27 @@ export function TrigonometryCalculator() {
         <div>sec({a}) = {1 / Math.cos(rad) < 1e10 ? (1 / Math.cos(rad)).toFixed(6) : 'inf'}</div>
         <div>cot({a}) = {1 / Math.tan(rad) < 1e10 ? (1 / Math.tan(rad)).toFixed(6) : 'inf'}</div>
       </div>
-    </Card>
+    </Section>
   );
 }
-
+// --- DegreeRadianConverter ---
 export function DegreeRadianConverter() {
+  const clr = ac('DegreeRadianConverter');
   const [deg, setDeg] = useState('180');
   const [rad, setRad] = useState('3.14159');
   const d2r = () => setRad(String(Number(deg) * Math.PI / 180));
   const r2d = () => setDeg(String(Number(rad) * 180 / Math.PI));
   return (
-    <Card title="Degree / Radian Converter">
-      <div className="flex gap-2 items-center"><label className={labelClass}>Degrees</label><Input type="number" value={deg} onChange={e => setDeg(e.target.value)} /></div>
-      <div className="flex gap-2 items-center"><label className={labelClass}>Radians</label><Input type="number" value={rad} onChange={e => setRad(e.target.value)} /></div>
-      <div className="flex gap-2"><Btn onClick={d2r}>Deg to Rad</Btn><Btn onClick={r2d}>Rad to Deg</Btn></div>
-    </Card>
+    <Section title="Degree / Radian Converter">
+      <div className="flex gap-2 items-center"><label className={labelClass}>Degrees</label><Input label="Value" type="number" value={deg} onChange={setDeg} /></div>
+      <div className="flex gap-2 items-center"><label className={labelClass}>Radians</label><Input label="Value" type="number" value={rad} onChange={setRad} /></div>
+      <div className="flex gap-2"><button className={btnClass(clr)} onClick={d2r}>Deg to Rad</button><button className={btnClass(clr)} onClick={r2d}>Rad to Deg</button></div>
+    </Section>
   );
 }
-
+// --- ScientificNotationConverter ---
 export function ScientificNotationConverter() {
+  const clr = ac('ScientificNotationConverter');
   const [input, setInput] = useState('1234000');
   const n = Number(input);
   const toScientific = (x: number) => {
@@ -1118,14 +1198,15 @@ export function ScientificNotationConverter() {
     return m.toFixed(3) + ' x 10^' + e;
   };
   return (
-    <Card title="Scientific Notation Converter">
-      <Input type="number" value={input} onChange={e => setInput(e.target.value)} />
+    <Section title="Scientific Notation Converter">
+      <Input label="Value" type="number" value={input} onChange={setInput} />
       <div className="text-sm">{isNaN(n) ? 'Invalid' : toScientific(n)}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- SignificantFiguresCalculator ---
 export function SignificantFiguresCalculator() {
+  const clr = ac('SignificantFiguresCalculator');
   const [input, setInput] = useState('0.00450');
   const countSigFigs = (s: string) => {
     const trimmed = s.replace(/^0+/, '');
@@ -1134,28 +1215,30 @@ export function SignificantFiguresCalculator() {
     return trimmed.replace(/\./g, '').length;
   };
   return (
-    <Card title="Significant Figures">
-      <Input value={input} onChange={e => setInput(e.target.value)} />
+    <Section title="Significant Figures">
+      <Input label="Value" value={input} onChange={setInput} />
       <div className="text-lg font-bold">{countSigFigs(input)} significant figures</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- RoundingCalculator ---
 export function RoundingCalculator() {
+  const clr = ac('RoundingCalculator');
   const [num, setNum] = useState('3.14159');
   const [places, setPlaces] = useState('2');
   return (
-    <Card title="Rounding Calculator">
+    <Section title="Rounding Calculator">
       <div className="flex gap-2 items-center">
-        <Input type="number" value={num} onChange={e => setNum(e.target.value)} />
-        <Input type="number" min={0} max={15} value={places} onChange={e => setPlaces(e.target.value)} className="w-20" />
+        <Input label="Value" type="number" value={num} onChange={setNum} />
+        <Input label="Value" type="number" min={0} max={15} value={places} onChange={setPlaces} />
       </div>
       <div className="text-lg font-bold">{Number(num).toFixed(Number(places))}</div>
-    </Card>
+    </Section>
   );
 }
-
+// --- MathEquationSolver ---
 export function MathEquationSolver() {
+  const clr = ac('MathEquationSolver');
   const [eq, setEq] = useState('2x + 3 = 7');
   const [result, setResult] = useState('');
 
@@ -1205,12 +1288,728 @@ export function MathEquationSolver() {
   };
 
   return (
-    <Card title="Equation Solver">
-      <Input value={eq} onChange={e => setEq(e.target.value)} placeholder="e.g. 2x + 3 = 7 or 3x^2 - 5x + 2 = 0" />
+    <Section title="Equation Solver">
+      <Input label="e.g. 2x + 3 = 7 or 3x^2 - 5x + 2 = 0" value={eq} onChange={setEq} placeholder="e.g. 2x + 3 = 7 or 3x^2 - 5x + 2 = 0" />
       <button onClick={solve} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Solve</button>
       {result && <div className="text-lg font-bold font-mono mt-2">{result}</div>}
       <p className="text-xs text-[var(--text-secondary)] mt-1">Supports linear (ax + b = cx + d) and quadratic (ax² + bx + c = 0) equations.</p>
-    </Card>
+    </Section>
+  );
+}
+// --- AlgebraCalculator ---
+export function AlgebraCalculator() {
+  const clr = ac('AlgebraCalculator');
+  const [expr, setExpr] = useState('2*(3+4)');
+  let result: string;
+  try { result = String(parseExpr(expr)); } catch { result = 'Invalid expression'; }
+  return (
+    <Section title="Algebraic Expression Evaluator">
+      <Input label="Value" value={expr} onChange={setExpr} />
+      <div className="text-lg font-bold font-mono">= {result}</div>
+    </Section>
+  );
+}
+// --- GeometryCalculator ---
+export function GeometryCalculator() {
+  const clr = ac('GeometryCalculator');
+  const [shape, setShape] = useState('circle');
+  const [r, setR] = useState('5');
+  const [w, setW] = useState('4');
+  const [h, setH] = useState('3');
+  const radius = Number(r), width = Number(w), height = Number(h);
+  const calc = () => {
+    switch (shape) {
+      case 'circle': return { area: Math.PI * radius * radius, perimeter: 2 * Math.PI * radius };
+      case 'square': return { area: width * width, perimeter: 4 * width, volume: width * width * width };
+      case 'triangle': return { area: 0.5 * width * height };
+      case 'rectangle': return { area: width * height, perimeter: 2 * (width + height) };
+      case 'sphere': return { area: 4 * Math.PI * radius * radius, volume: 4 / 3 * Math.PI * radius * radius * radius };
+      case 'cylinder': return { area: 2 * Math.PI * radius * (radius + height), volume: Math.PI * radius * radius * height };
+      case 'cone': return { area: Math.PI * radius * (radius + Math.sqrt(height * height + radius * radius)), volume: Math.PI * radius * radius * height / 3 };
+      case 'cube': return { area: 6 * width * width, volume: width * width * width };
+      default: return {};
+    }
+  };
+  const result = calc();
+  return (
+    <Section title="Geometry Calculator">
+      <select className={selClass} value={shape} onChange={e => setShape(e.target.value)}>
+        <option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option>
+        <option value="rectangle">Rectangle</option><option value="sphere">Sphere</option><option value="cylinder">Cylinder</option>
+        <option value="cone">Cone</option><option value="cube">Cube</option>
+      </select>
+      <div className="flex gap-2 flex-wrap">
+        {(shape === 'circle' || shape === 'sphere' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Radius</label><Input label="Value" type="number" value={r} onChange={setR} /></div>}
+        {(shape === 'square' || shape === 'rectangle' || shape === 'cube') && <div><label className={labelClass}>Width</label><Input label="Value" type="number" value={w} onChange={setW} /></div>}
+        {(shape === 'triangle' || shape === 'rectangle' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Height</label><Input label="Value" type="number" value={h} onChange={setH} /></div>}
+      </div>
+      <div className="text-xs space-y-1">
+        {result.area !== undefined && <div>Area: {result.area.toFixed(4)}</div>}
+        {result.perimeter !== undefined && <div>Perimeter: {result.perimeter.toFixed(4)}</div>}
+        {result.volume !== undefined && <div>Volume: {result.volume.toFixed(4)}</div>}
+      </div>
+    </Section>
+  );
+}
+// --- CoordinateCalculator ---
+export function CoordinateCalculator() {
+  const clr = ac('CoordinateCalculator');
+  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
+  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('4');
+  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
+  const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
+  const mx = (a + c) / 2, my = (b + d) / 2;
+  return (
+    <Section title="Coordinate Calculator">
+      <div className="flex gap-2">
+        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+      </div>
+      <div className="text-xs space-y-1">
+        <div>Distance: {dist.toFixed(4)}</div>
+        <div>Midpoint: ({mx.toFixed(2)}, {my.toFixed(2)})</div>
+      </div>
+    </Section>
+  );
+}
+// --- SlopeCalculator ---
+export function SlopeCalculator() {
+  const clr = ac('SlopeCalculator');
+  const [x1, setX1] = useState('1'); const [y1, setY1] = useState('2');
+  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('6');
+  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
+  const dx = c - a, dy = d - b;
+  const slope = dx !== 0 ? dy / dx : Infinity;
+  return (
+    <Section title="Slope Calculator">
+      <div className="flex gap-2">
+        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+      </div>
+      <div className="text-sm font-mono">
+        <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>
+        <div>Equation: y = {isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}</div>
+      </div>
+    </Section>
+  );
+}
+// --- MidpointCalculator ---
+export function MidpointCalculator() {
+  const clr = ac('MidpointCalculator');
+  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
+  const [x2, setX2] = useState('4'); const [y2, setY2] = useState('6');
+  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
+  return (
+    <Section title="Midpoint Calculator">
+      <div className="flex gap-2">
+        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+      </div>
+      <div className="text-lg font-bold">Midpoint: ({(a + c) / 2}, {(b + d) / 2})</div>
+    </Section>
+  );
+}
+// --- DistanceCalculator ---
+export function DistanceCalculator() {
+  const clr = ac('DistanceCalculator');
+  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
+  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('4');
+  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
+  const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
+  return (
+    <Section title="Distance Calculator (2D)">
+      <div className="flex gap-2">
+        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+      </div>
+      <div className="text-lg font-bold">Distance: {dist.toFixed(4)}</div>
+    </Section>
+  );
+}
+// --- BodyMassIndexCalculator ---
+export function BodyMassIndexCalculator() {
+  const clr = ac('BodyMassIndexCalculator');
+  const [height, setHeight] = useState('170');
+  const [weight, setWeight] = useState('70');
+  const [unit, setUnit] = useState('metric');
+  const h = unit === 'metric' ? Number(height) / 100 : Number(height) * 0.0254;
+  const w = unit === 'metric' ? Number(weight) : Number(weight) * 0.453592;
+  const bmi = h > 0 ? w / (h * h) : 0;
+  const category = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obese';
+  const color = bmi < 18.5 ? 'text-yellow-500' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-orange-500' : 'text-red-500';
+  return (
+    <Section title="BMI Calculator">
+      <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
+        <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
+      </select>
+      <div className="flex gap-2">
+        <Input label="Value" type="number" value={height} onChange={setHeight} placeholder={unit === 'metric' ? 'cm' : 'in'} />
+        <Input label="Value" type="number" value={weight} onChange={setWeight} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
+      </div>
+      <div className={'text-2xl font-bold ' + color}>{bmi.toFixed(1)}</div>
+      <div className={'text-sm font-medium ' + color}>{category}</div>
+    </Section>
+  );
+}
+// --- BodyFatCalculator ---
+export function BodyFatCalculator() {
+  const clr = ac('BodyFatCalculator');
+  const [bmi, setBmi] = useState('24');
+  const [age, setAge] = useState('30');
+  const [gender, setGender] = useState('male');
+  const b = Number(bmi), a = Number(age);
+  const bf = gender === 'male' ? 1.2 * b + 0.23 * a - 16.2 : 1.2 * b + 0.23 * a - 5.4;
+  return (
+    <Section title="Body Fat % Estimator">
+      <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}>
+        <option value="male">Male</option><option value="female">Female</option>
+      </select>
+      <div className="flex gap-2">
+        <div><label className={labelClass}>BMI</label><Input label="Value" type="number" value={bmi} onChange={setBmi} /></div>
+        <div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div>
+      </div>
+      <div className="text-lg font-bold">Body Fat: {bf.toFixed(1)}%</div>
+    </Section>
+  );
+}
+// --- CalorieIntakeCalculator ---
+export function CalorieIntakeCalculator() {
+  const clr = ac('CalorieIntakeCalculator');
+  const [weight, setWeight] = useState('70');
+  const [height, setHeight] = useState('170');
+  const [age, setAge] = useState('30');
+  const [gender, setGender] = useState('male');
+  const [activity, setActivity] = useState('1.55');
+  const w = Number(weight), h = Number(height), a = Number(age), act = Number(activity);
+  const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
+  return (
+    <Section title="Daily Calorie Needs">
+      <div className="flex gap-2">
+        <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select>
+        <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>
+          <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option>
+          <option value="1.725">Active</option><option value="1.9">Very Active</option>
+        </select>
+      </div>
+      <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div><div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div></div>
+      <div className="text-lg font-bold">BMR: {bmr.toFixed(0)} kcal/day</div>
+      <div className="text-sm">Maintenance: {(bmr * act).toFixed(0)} kcal/day</div>
+    </Section>
+  );
+}
+// --- MacronutrientCalculator ---
+export function MacronutrientCalculator() {
+  const clr = ac('MacronutrientCalculator');
+  const [calories, setCalories] = useState('2000');
+  const c = Number(calories);
+  return (
+    <Section title="Daily Macronutrients">
+      <Input label="Value" type="number" value={calories} onChange={setCalories} />
+      <div className="text-xs space-y-1">
+        <div className="flex justify-between"><span>Protein (30%)</span><span className="font-bold">{(c * 0.3 / 4).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
+        <div className="flex justify-between"><span>Carbs (40%)</span><span className="font-bold">{(c * 0.4 / 4).toFixed(0)}g = {(c * 0.4).toFixed(0)} kcal</span></div>
+        <div className="flex justify-between"><span>Fat (30%)</span><span className="font-bold">{(c * 0.3 / 9).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
+      </div>
+    </Section>
+  );
+}
+// --- WaterRequirementCalculator ---
+export function WaterRequirementCalculator() {
+  const clr = ac('WaterRequirementCalculator');
+  const [weight, setWeight] = useState('70');
+  const [activity, setActivity] = useState('30');
+  const w = Number(weight);
+  const base = w * 0.033;
+  const extra = Math.floor(Number(activity) / 30) * 0.35;
+  return (
+    <Section title="Daily Water Intake">
+      <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Exercise (min)</label><Input label="Value" type="number" value={activity} onChange={setActivity} /></div></div>
+      <div className="text-lg font-bold">{(base + extra).toFixed(1)} L / day</div>
+    </Section>
+  );
+}
+// --- SleepRequirementCalculator ---
+export function SleepRequirementCalculator() {
+  const clr = ac('SleepRequirementCalculator');
+  const [age, setAge] = useState('30');
+  const a = Number(age);
+  const rec = a < 1 ? '12-16 hours' : a < 2 ? '11-14 hours' : a < 5 ? '10-13 hours' : a < 13 ? '9-12 hours' : a < 18 ? '8-10 hours' : a < 65 ? '7-9 hours' : '7-8 hours';
+  return (
+    <Section title="Sleep Requirements by Age">
+      <Input label="Value" type="number" value={age} onChange={setAge} />
+      <div className="text-lg font-bold">Recommended: {rec}</div>
+    </Section>
+  );
+}
+// --- HeartRateCalculator ---
+export function HeartRateCalculator() {
+  const clr = ac('HeartRateCalculator');
+  const [age, setAge] = useState('35');
+  const a = Number(age);
+  const max = 220 - a;
+  return (
+    <Section title="Target Heart Rate Zones">
+      <Input label="Value" type="number" value={age} onChange={setAge} />
+      <div className="text-xs space-y-1">
+        <div>Max HR: {max} bpm</div>
+        <div>Zone 1 (50-60%): {Math.round(max * 0.5)}-{Math.round(max * 0.6)} bpm</div>
+        <div>Zone 2 (60-70%): {Math.round(max * 0.6)}-{Math.round(max * 0.7)} bpm</div>
+        <div>Zone 3 (70-80%): {Math.round(max * 0.7)}-{Math.round(max * 0.8)} bpm</div>
+        <div>Zone 4 (80-90%): {Math.round(max * 0.8)}-{Math.round(max * 0.9)} bpm</div>
+        <div>Zone 5 (90-100%): {Math.round(max * 0.9)}-{max} bpm</div>
+      </div>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
+    </Section>
+  );
+}
+// --- IdealWeightCalc ---
+export function IdealWeightCalc() {
+  const clr = ac('IdealWeightCalc');
+  const [height, setHeight] = useState('170');
+  const [gender, setGender] = useState('male');
+  const h = Number(height);
+  const devine = gender === 'male' ? 50 + 2.3 * ((h - 152.4) / 2.54) : 45.5 + 2.3 * ((h - 152.4) / 2.54);
+  const robinson = gender === 'male' ? 52 + 1.9 * ((h - 152.4) / 2.54) : 49 + 1.7 * ((h - 152.4) / 2.54);
+  return (
+    <Section title="Ideal Body Weight">
+      <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Value" type="number" value={height} onChange={setHeight} /></div>
+      <div className="text-xs space-y-1"><div>Devine: {devine.toFixed(1)} kg</div><div>Robinson: {robinson.toFixed(1)} kg</div></div>
+    </Section>
+  );
+}
+// --- PaceCalculator ---
+export function PaceCalculator() {
+  const clr = ac('PaceCalculator');
+  const [dist, setDist] = useState('10');
+  const [time, setTime] = useState('50');
+  const d = Number(dist), t = Number(time);
+  const paceMin = d ? t / d : 0;
+  const paceMinWhole = Math.floor(paceMin);
+  const paceSec = Math.round((paceMin - paceMinWhole) * 60);
+  return (
+    <Section title="Running Pace Calculator">
+      <div className="flex gap-2"><div><label className={labelClass}>Distance (km)</label><Input label="Value" type="number" value={dist} onChange={setDist} /></div><div><label className={labelClass}>Time (min)</label><Input label="Value" type="number" value={time} onChange={setTime} /></div></div>
+      <div className="text-lg font-bold">{paceMinWhole}:{paceSec.toString().padStart(2, '0')} /km</div>
+      <div className="text-sm">Speed: {d && t ? (d / t * 60).toFixed(2) : 0} km/h</div>
+    </Section>
+  );
+}
+// --- StepsCalculator ---
+export function StepsCalculator() {
+  const clr = ac('StepsCalculator');
+  const [steps, setSteps] = useState('10000');
+  const [height, setHeight] = useState('170');
+  const s = Number(steps), h = Number(height);
+  const stride = h * 0.415;
+  const distM = s * stride;
+  const distKm = distM / 1000;
+  const distMi = distKm / 1.609;
+  return (
+    <Section title="Steps to Distance">
+      <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input label="Value" type="number" value={steps} onChange={setSteps} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div></div>
+      <div className="text-xs space-y-1"><div>Distance: {distKm.toFixed(2)} km</div><div>Distance: {distMi.toFixed(2)} miles</div><div>Calories (est): {(s * 0.04).toFixed(0)} kcal</div></div>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
+    </Section>
+  );
+}
+// --- CaloriesBurnedCalculator ---
+export function CaloriesBurnedCalculator() {
+  const clr = ac('CaloriesBurnedCalculator');
+  const [weight, setWeight] = useState('70');
+  const [duration, setDuration] = useState('30');
+  const [activity, setActivity] = useState('running');
+  const mets: Record<string, number> = { running: 9.8, walking: 3.5, cycling: 7.5, swimming: 8, yoga: 2.5, lifting: 4.5, 'jump rope': 12 };
+  const met = mets[activity] || 5;
+  const burned = met * Number(weight) * (Number(duration) / 60);
+  return (
+    <Section title="Calories Burned">
+      <div className="flex gap-2"><select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>{Object.keys(mets).map(k => <option key={k}>{k}</option>)}</select>
+      <div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div>
+      <div><label className={labelClass}>Duration (min)</label><Input label="Value" type="number" value={duration} onChange={setDuration} /></div></div>
+      <div className="text-lg font-bold">{burned.toFixed(0)} kcal burned</div>
+    </Section>
+  );
+}
+// --- BloodAlcoholCalculator ---
+export function BloodAlcoholCalculator() {
+  const clr = ac('BloodAlcoholCalculator');
+  const [weight, setWeight] = useState('70');
+  const [gender, setGender] = useState('male');
+  const [drinks, setDrinks] = useState('3');
+  const [hours, setHours] = useState('2');
+  const w = Number(weight), d = Number(drinks), h = Number(hours);
+  const r = gender === 'male' ? 0.68 : 0.55;
+  const bac = (d * 14 / (w * 1000 * r)) * 100 - (h * 0.015);
+  const finalBac = Math.max(0, bac);
+  return (
+    <Section title="Blood Alcohol Estimator">
+      <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} placeholder="Weight (kg)" /></div>
+      <div className="flex gap-2"><Input label="Drinks" type="number" value={drinks} onChange={setDrinks} placeholder="Drinks" /><Input label="Value" type="number" value={hours} onChange={setHours} placeholder="Hours" /></div>
+      <div className={'text-lg font-bold ' + (finalBac >= 0.08 ? 'text-red-500' : 'text-green-600')}>BAC: {finalBac.toFixed(3)}%</div>
+      {finalBac >= 0.08 && <div className="text-xs text-red-500">Over legal limit (0.08%)</div>}
+    </Section>
+  );
+}
+// --- PregnancyCalculator ---
+export function PregnancyCalculator() {
+  const clr = ac('PregnancyCalculator');
+  const [lmp, setLmp] = useState('');
+  const due = lmp ? new Date(new Date(lmp).getTime() + 280 * 86400000) : null;
+  return (
+    <Section title="Pregnancy Calculator">
+      <label className={labelClass}>First day of last menstrual period</label>
+      <Input label="Value" type="date" value={lmp} onChange={setLmp} />
+      {due && <div><div className="text-lg font-bold">Due Date: {due.toLocaleDateString()}</div><div className="text-xs">Gestational age: {Math.floor((Date.now() - new Date(lmp).getTime()) / (7 * 86400000))} weeks</div></div>}
+    </Section>
+  );
+}
+// --- OvulationTracker ---
+export function OvulationTracker() {
+  const clr = ac('OvulationTracker');
+  const [lmp, setLmp] = useState('');
+  const [cycleLength, setCycleLength] = useState('28');
+  const results = lmp ? (() => {
+    const start = new Date(lmp);
+    const cycleLen = Number(cycleLength) || 28;
+    const fertileStart = new Date(start.getTime() + (cycleLen - 14 - 5) * 86400000);
+    const fertileEnd = new Date(start.getTime() + (cycleLen - 14 + 1) * 86400000);
+    const ovulation = new Date(start.getTime() + (cycleLen - 14) * 86400000);
+    const nextPeriod = new Date(start.getTime() + cycleLen * 86400000);
+    return { fertileStart, fertileEnd, ovulation, nextPeriod };
+  })() : null;
+  return (
+    <Section title="Ovulation Tracker">
+      <label className={labelClass}>First day of LMP</label>
+      <Input label="Value" type="date" value={lmp} onChange={setLmp} />
+      <label className={labelClass}>Cycle Length (days)</label>
+      <Input label="Value" type="number" value={cycleLength} onChange={setCycleLength} min={20} max={45} />
+      {results && <div className="text-xs space-y-1">
+        <div>Fertile window: {results.fertileStart.toLocaleDateString()} - {results.fertileEnd.toLocaleDateString()}</div>
+        <div className="font-bold">Ovulation: {results.ovulation.toLocaleDateString()}</div>
+        <div>Next period: {results.nextPeriod.toLocaleDateString()}</div>
+      </div>}
+    </Section>
+  );
+}
+// --- AgeCalculator ---
+export function AgeCalculator() {
+  const clr = ac('AgeCalculator');
+  const [birth, setBirth] = useState('');
+  const calc = birth ? (() => {
+    const b = new Date(birth), now = new Date();
+    let y = now.getFullYear() - b.getFullYear(), m = now.getMonth() - b.getMonth(), d = now.getDate() - b.getDate();
+    if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (m < 0) { y--; m += 12; }
+    return { y, m, d };
+  })() : null;
+  return (
+    <Section title="Age Calculator">
+      <Input label="Value" type="date" value={birth} onChange={setBirth} />
+      {calc && <div className="text-lg font-bold">{calc.y} years, {calc.m} months, {calc.d} days</div>}
+    </Section>
+  );
+}
+// --- DateDifferenceCalculator ---
+export function DateDifferenceCalculator() {
+  const clr = ac('DateDifferenceCalculator');
+  const [d1, setD1] = useState('');
+  const [d2, setD2] = useState('');
+  const diff = d1 && d2 ? (() => {
+    const a = new Date(d1), b = new Date(d2);
+    const ms = Math.abs(b.getTime() - a.getTime());
+    return { days: Math.floor(ms / 86400000), hours: Math.floor(ms / 3600000), minutes: Math.floor(ms / 60000), seconds: Math.floor(ms / 1000) };
+  })() : null;
+  return (
+    <Section title="Date Difference Calculator">
+      <div className="flex gap-2"><Input label="Value" type="date" value={d1} onChange={setD1} /><Input label="Value" type="date" value={d2} onChange={setD2} /></div>
+      {diff && <div className="text-xs space-y-1">
+        <div className="font-bold">{diff.days} days</div>
+        <div>{diff.hours} hours</div>
+        <div className="text-muted">{diff.minutes} minutes</div>
+        <div className="text-muted">{diff.seconds} seconds</div>
+      </div>}
+    </Section>
+  );
+}
+// --- DateAdditionCalculator ---
+export function DateAdditionCalculator() {
+  const clr = ac('DateAdditionCalculator');
+  const [start, setStart] = useState('');
+  const [days, setDays] = useState('30');
+  const result = start ? new Date(new Date(start).getTime() + Number(days) * 86400000) : null;
+  return (
+    <Section title="Date Addition / Subtraction">
+      <div className="flex gap-2"><Input label="Value" type="date" value={start} onChange={setStart} /><Input label="Value" type="number" value={days} onChange={setDays} /></div>
+      {result && <div className="text-lg font-bold">{result.toLocaleDateString()}</div>}
+    </Section>
+  );
+}
+// --- WeekNumberCalculator ---
+export function WeekNumberCalculator() {
+  const clr = ac('WeekNumberCalculator');
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const d = new Date(date);
+  const start = new Date(d.getFullYear(), 0, 1);
+  const diff = Math.floor((d.getTime() - start.getTime()) / 86400000);
+  const week = Math.ceil((diff + start.getDay() + 1) / 7);
+  return (
+    <Section title="Week Number Calculator">
+      <Input label="Value" type="date" value={date} onChange={setDate} />
+      <div className="text-lg font-bold">Week {week} of {d.getFullYear()}</div>
+      <div className="text-xs text-muted">{d.toLocaleDateString('en-US', { weekday: 'long' })}</div>
+    </Section>
+  );
+}
+// --- TimeSinceCalculator ---
+export function TimeSinceCalculator() {
+  const clr = ac('TimeSinceCalculator');
+  const [date, setDate] = useState(new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10));
+  const d = new Date(date);
+  const now = new Date();
+  const ms = now.getTime() - d.getTime();
+  const sec = Math.floor(ms / 1000);
+  const min = Math.floor(sec / 60);
+  const hr = Math.floor(min / 60);
+  const day = Math.floor(hr / 24);
+  const wk = Math.floor(day / 7);
+  const mo = Math.floor(day / 30.44);
+  const yr = Math.floor(day / 365.25);
+  return (
+    <Section title="Time Since / Until">
+      <Input label="Value" type="date" value={date} onChange={setDate} />
+      <div className="text-xs space-y-1">
+        <div>{yr} years</div><div>{mo} months</div><div>{wk} weeks</div>
+        <div>{day} days</div><div>{hr} hours</div><div>{min} minutes</div><div>{sec} seconds</div>
+      </div>
+    </Section>
+  );
+}
+// --- TimeZoneConverter ---
+export function TimeZoneConverter() {
+  const clr = ac('TimeZoneConverter');
+  const [time, setTime] = useState('12:00');
+  const [fromTz, setFromTz] = useState('UTC');
+  const [toTz, setToTz] = useState('America/New_York');
+  const now = new Date();
+  const [h, m] = time.split(':').map(Number);
+  const local = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+  const fromOffset = -new Date(local.toLocaleString('en-US', { timeZone: fromTz })).getTimezoneOffset();
+  const toOffset = -new Date(local.toLocaleString('en-US', { timeZone: toTz })).getTimezoneOffset();
+  const diffMin = toOffset - fromOffset;
+  const resultH = (h + Math.floor(diffMin / 60) + 24) % 24;
+  const resultM = (m + diffMin % 60 + 60) % 60;
+  return (
+    <Section title="Time Zone Converter">
+      <div className="flex gap-2"><Input label="Value" type="time" value={time} onChange={setTime} /><Input label="Value" value={fromTz} onChange={setFromTz} /></div>
+      <div className="flex gap-2"><Input label="Value" value={toTz} onChange={setToTz} /></div>
+      <div className="text-lg font-bold">{String(resultH).padStart(2, '0')}:{String(resultM).padStart(2, '0')}</div>
+      <div className="text-xs text-muted">From: {fromTz} → To: {toTz}</div>
+    </Section>
+  );
+}
+// --- DaylightSavingTimeChecker ---
+export function DaylightSavingTimeChecker() {
+  const clr = ac('DaylightSavingTimeChecker');
+  const [year, setYear] = useState(String(new Date().getFullYear()));
+  const y = Number(year);
+  const march = new Date(y, 2, 14);
+  const nov = new Date(y, 10, 7);
+  const dstStart = new Date(march.getTime() + (7 - march.getDay()) * 86400000);
+  const dstEnd = new Date(nov.getTime() + (7 - nov.getDay()) * 86400000);
+  return (
+    <Section title="DST Checker (US)">
+      <Input label="Value" type="number" value={year} onChange={setYear} />
+      <div className="text-xs">
+        <div>DST starts: {dstStart.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+        <div>DST ends: {dstEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+        <div>DST period: {Math.round((dstEnd.getTime() - dstStart.getTime()) / 86400000)} days</div>
+      </div>
+    </Section>
+  );
+}
+// --- WorkHoursCalculator ---
+export function WorkHoursCalculator() {
+  const clr = ac('WorkHoursCalculator');
+  const [start, setStart] = useState('09:00');
+  const [end, setEnd] = useState('17:00');
+  const [breakMin, setBreakMin] = useState('30');
+  const [sH, sM] = start.split(':').map(Number);
+  const [eH, eM] = end.split(':').map(Number);
+  const total = (eH * 60 + eM) - (sH * 60 + sM) - Number(breakMin);
+  const hrs = Math.floor(total / 60), mins = total % 60;
+  return (
+    <Section title="Work Hours Calculator">
+      <div className="flex gap-2"><Input label="Value" type="time" value={start} onChange={setStart} /><Input label="Value" type="time" value={end} onChange={setEnd} /><Input label="Value" type="number" value={breakMin} onChange={setBreakMin} /></div>
+      <div className="text-lg font-bold">{hrs}h {mins}m</div>
+    </Section>
+  );
+}
+// --- HoursMinutesCalculator ---
+export function HoursMinutesCalculator() {
+  const clr = ac('HoursMinutesCalculator');
+  const [h1, setH1] = useState('1'); const [m1, setM1] = useState('30');
+  const [h2, setH2] = useState('2'); const [m2, setM2] = useState('15');
+  const t1 = Number(h1) * 60 + Number(m1), t2 = Number(h2) * 60 + Number(m2);
+  const total = t1 + t2, diff = Math.abs(t1 - t2);
+  return (
+    <Section title="Hours & Minutes Calculator">
+      <div className="flex gap-2">
+        <Input label="Value" type="number" value={h1} onChange={setH1} /><Input label="Value" type="number" value={m1} onChange={setM1} />
+        <span className="self-center text-muted">+</span>
+        <Input label="Value" type="number" value={h2} onChange={setH2} /><Input label="Value" type="number" value={m2} onChange={setM2} />
+      </div>
+      <div className="text-xs">Total: {Math.floor(total / 60)}h {total % 60}m</div>
+      <div className="text-xs">Diff: {Math.floor(diff / 60)}h {diff % 60}m</div>
+    </Section>
+  );
+}
+// --- MinutesToHoursConverter ---
+export function MinutesToHoursConverter() {
+  const clr = ac('MinutesToHoursConverter');
+  const [mins, setMins] = useState('150');
+  const m = Number(mins);
+  return (
+    <Section title="Minutes → Hours Converter">
+      <Input label="Value" type="number" value={mins} onChange={setMins} />
+      <div className="text-lg font-bold">{Math.floor(m / 60)}h {m % 60}m</div>
+      <div className="text-xs text-muted">Decimal: {(m / 60).toFixed(2)} hours</div>
+    </Section>
+  );
+}
+// --- HoursToMinutesTool ---
+export function HoursToMinutesTool() {
+  const clr = ac('HoursToMinutesTool');
+  const [hrs, setHrs] = useState('2.5');
+  const h = Number(hrs);
+  return (
+    <Section title="Hours → Minutes Tool">
+      <Input label="Value" type="number" value={hrs} onChange={setHrs} step="0.1" />
+      <div className="text-lg font-bold">{Math.floor(h * 60)} minutes</div>
+      <div className="text-xs text-muted">{h * 3600} seconds</div>
+    </Section>
+  );
+}
+// --- SecondsToMinutesConverter ---
+export function SecondsToMinutesConverter() {
+  const clr = ac('SecondsToMinutesConverter');
+  const [sec, setSec] = useState('3661');
+  const s = Number(sec);
+  return (
+    <Section title="Seconds → Minutes Converter">
+      <Input label="Value" type="number" value={sec} onChange={setSec} />
+      <div className="text-lg font-bold">{Math.floor(s / 3600)}h {Math.floor((s % 3600) / 60)}m {s % 60}s</div>
+    </Section>
+  );
+}
+// --- SpeedConverter ---
+export function SpeedConverter() {
+  const clr = ac('SpeedConverter');
+  const [kmh, setKmh] = useState('100');
+  const k = Number(kmh);
+  return (
+    <Section title="Speed Converter">
+      <Input label="Value" type="number" value={kmh} onChange={setKmh} />
+      <div className="text-xs space-y-1">
+        <div>mph: {(k * 0.621371).toFixed(2)}</div>
+        <div>knots: {(k * 0.539957).toFixed(2)}</div>
+        <div>m/s: {(k / 3.6).toFixed(2)}</div>
+        <div>ft/s: {(k * 0.911344).toFixed(2)}</div>
+      </div>
+    </Section>
+  );
+}
+// --- LengthConverter ---
+export function LengthConverter() {
+  const clr = ac('LengthConverter');
+  const [meters, setMeters] = useState('100');
+  const m = Number(meters);
+  return (
+    <Section title="Length Converter">
+      <Input label="Value" type="number" value={meters} onChange={setMeters} />
+      <div className="text-xs space-y-1">
+        <div>km: {(m / 1000).toFixed(4)}</div>
+        <div>miles: {(m * 0.000621371).toFixed(4)}</div>
+        <div>yards: {(m * 1.09361).toFixed(2)}</div>
+        <div>feet: {(m * 3.28084).toFixed(2)}</div>
+        <div>inches: {(m * 39.3701).toFixed(2)}</div>
+      </div>
+    </Section>
+  );
+}
+// --- WeightConverter ---
+export function WeightConverter() {
+  const clr = ac('WeightConverter');
+  const [kg, setKg] = useState('70');
+  const k = Number(kg);
+  return (
+    <Section title="Weight Converter">
+      <Input label="Value" type="number" value={kg} onChange={setKg} />
+      <div className="text-xs space-y-1">
+        <div>g: {(k * 1000).toFixed(0)}</div>
+        <div>lb: {(k * 2.20462).toFixed(2)}</div>
+        <div>oz: {(k * 35.274).toFixed(2)}</div>
+        <div>stone: {(k * 0.157473).toFixed(2)}</div>
+      </div>
+    </Section>
+  );
+}
+// --- VolumeConverter ---
+export function VolumeConverter() {
+  const clr = ac('VolumeConverter');
+  const [liters, setLiters] = useState('1');
+  const l = Number(liters);
+  return (
+    <Section title="Volume Converter">
+      <Input label="Value" type="number" value={liters} onChange={setLiters} />
+      <div className="text-xs space-y-1">
+        <div>mL: {(l * 1000).toFixed(0)}</div>
+        <div>gal (US): {(l * 0.264172).toFixed(4)}</div>
+        <div>qt: {(l * 1.05669).toFixed(4)}</div>
+        <div>fl oz: {(l * 33.814).toFixed(2)}</div>
+        <div>cups: {(l * 4.22675).toFixed(2)}</div>
+      </div>
+    </Section>
+  );
+}
+// --- AreaConverter ---
+export function AreaConverter() {
+  const clr = ac('AreaConverter');
+  const [sqm, setSqm] = useState('100');
+  const a = Number(sqm);
+  return (
+    <Section title="Area Converter">
+      <Input label="Value" type="number" value={sqm} onChange={setSqm} />
+      <div className="text-xs space-y-1">
+        <div>sq ft: {(a * 10.7639).toFixed(2)}</div>
+        <div>acres: {(a * 0.000247105).toFixed(6)}</div>
+        <div>hectares: {(a * 0.0001).toFixed(6)}</div>
+        <div>sq km: {(a / 1e6).toFixed(6)}</div>
+      </div>
+    </Section>
+  );
+}
+// --- DataSizeConverter ---
+export function DataSizeConverter() {
+  const clr = ac('DataSizeConverter');
+  const [bytes, setBytes] = useState('1073741824');
+  const b = Number(bytes);
+  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+  const conv = units.map((u, i) => ({ unit: u, value: b / Math.pow(1024, i) }));
+  return (
+    <Section title="Data Size Converter">
+      <Input label="Value" type="number" value={bytes} onChange={setBytes} />
+      <div className="text-xs space-y-1">
+        {conv.map(c => <div key={c.unit}><span className="text-muted">{c.unit}:</span> {c.value.toFixed(2)}</div>)}
+      </div>
+    </Section>
   );
 }
 
@@ -1263,682 +2062,4 @@ function parseExpr(input: string): number {
   const result = parseExpression();
   if (pos < s.length) throw new Error('Unexpected character');
   return result;
-}
-
-export function AlgebraCalculator() {
-  const [expr, setExpr] = useState('2*(3+4)');
-  let result: string;
-  try { result = String(parseExpr(expr)); } catch { result = 'Invalid expression'; }
-  return (
-    <Card title="Algebraic Expression Evaluator">
-      <Input value={expr} onChange={e => setExpr(e.target.value)} />
-      <div className="text-lg font-bold font-mono">= {result}</div>
-    </Card>
-  );
-}
-
-export function GeometryCalculator() {
-  const [shape, setShape] = useState('circle');
-  const [r, setR] = useState('5');
-  const [w, setW] = useState('4');
-  const [h, setH] = useState('3');
-  const radius = Number(r), width = Number(w), height = Number(h);
-  const calc = () => {
-    switch (shape) {
-      case 'circle': return { area: Math.PI * radius * radius, perimeter: 2 * Math.PI * radius };
-      case 'square': return { area: width * width, perimeter: 4 * width, volume: width * width * width };
-      case 'triangle': return { area: 0.5 * width * height };
-      case 'rectangle': return { area: width * height, perimeter: 2 * (width + height) };
-      case 'sphere': return { area: 4 * Math.PI * radius * radius, volume: 4 / 3 * Math.PI * radius * radius * radius };
-      case 'cylinder': return { area: 2 * Math.PI * radius * (radius + height), volume: Math.PI * radius * radius * height };
-      case 'cone': return { area: Math.PI * radius * (radius + Math.sqrt(height * height + radius * radius)), volume: Math.PI * radius * radius * height / 3 };
-      case 'cube': return { area: 6 * width * width, volume: width * width * width };
-      default: return {};
-    }
-  };
-  const result = calc();
-  return (
-    <Card title="Geometry Calculator">
-      <Select value={shape} onChange={e => setShape(e.target.value)}>
-        <option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option>
-        <option value="rectangle">Rectangle</option><option value="sphere">Sphere</option><option value="cylinder">Cylinder</option>
-        <option value="cone">Cone</option><option value="cube">Cube</option>
-      </Select>
-      <div className="flex gap-2 flex-wrap">
-        {(shape === 'circle' || shape === 'sphere' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Radius</label><Input type="number" value={r} onChange={e => setR(e.target.value)} /></div>}
-        {(shape === 'square' || shape === 'rectangle' || shape === 'cube') && <div><label className={labelClass}>Width</label><Input type="number" value={w} onChange={e => setW(e.target.value)} /></div>}
-        {(shape === 'triangle' || shape === 'rectangle' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Height</label><Input type="number" value={h} onChange={e => setH(e.target.value)} /></div>}
-      </div>
-      <div className="text-xs space-y-1">
-        {result.area !== undefined && <div>Area: {result.area.toFixed(4)}</div>}
-        {result.perimeter !== undefined && <div>Perimeter: {result.perimeter.toFixed(4)}</div>}
-        {result.volume !== undefined && <div>Volume: {result.volume.toFixed(4)}</div>}
-      </div>
-    </Card>
-  );
-}
-
-export function CoordinateCalculator() {
-  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
-  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('4');
-  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
-  const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
-  const mx = (a + c) / 2, my = (b + d) / 2;
-  return (
-    <Card title="Coordinate Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input type="number" value={x1} onChange={e => setX1(e.target.value)} /></div>
-        <div><label className={labelClass}>y1</label><Input type="number" value={y1} onChange={e => setY1(e.target.value)} /></div>
-        <div><label className={labelClass}>x2</label><Input type="number" value={x2} onChange={e => setX2(e.target.value)} /></div>
-        <div><label className={labelClass}>y2</label><Input type="number" value={y2} onChange={e => setY2(e.target.value)} /></div>
-      </div>
-      <div className="text-xs space-y-1">
-        <div>Distance: {dist.toFixed(4)}</div>
-        <div>Midpoint: ({mx.toFixed(2)}, {my.toFixed(2)})</div>
-      </div>
-    </Card>
-  );
-}
-
-export function SlopeCalculator() {
-  const [x1, setX1] = useState('1'); const [y1, setY1] = useState('2');
-  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('6');
-  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
-  const dx = c - a, dy = d - b;
-  const slope = dx !== 0 ? dy / dx : Infinity;
-  return (
-    <Card title="Slope Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input type="number" value={x1} onChange={e => setX1(e.target.value)} /></div>
-        <div><label className={labelClass}>y1</label><Input type="number" value={y1} onChange={e => setY1(e.target.value)} /></div>
-        <div><label className={labelClass}>x2</label><Input type="number" value={x2} onChange={e => setX2(e.target.value)} /></div>
-        <div><label className={labelClass}>y2</label><Input type="number" value={y2} onChange={e => setY2(e.target.value)} /></div>
-      </div>
-      <div className="text-sm font-mono">
-        <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>
-        <div>Equation: y = {isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function MidpointCalculator() {
-  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
-  const [x2, setX2] = useState('4'); const [y2, setY2] = useState('6');
-  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
-  return (
-    <Card title="Midpoint Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input type="number" value={x1} onChange={e => setX1(e.target.value)} /></div>
-        <div><label className={labelClass}>y1</label><Input type="number" value={y1} onChange={e => setY1(e.target.value)} /></div>
-        <div><label className={labelClass}>x2</label><Input type="number" value={x2} onChange={e => setX2(e.target.value)} /></div>
-        <div><label className={labelClass}>y2</label><Input type="number" value={y2} onChange={e => setY2(e.target.value)} /></div>
-      </div>
-      <div className="text-lg font-bold">Midpoint: ({(a + c) / 2}, {(b + d) / 2})</div>
-    </Card>
-  );
-}
-
-export function DistanceCalculator() {
-  const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
-  const [x2, setX2] = useState('3'); const [y2, setY2] = useState('4');
-  const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
-  const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
-  return (
-    <Card title="Distance Calculator (2D)">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input type="number" value={x1} onChange={e => setX1(e.target.value)} /></div>
-        <div><label className={labelClass}>y1</label><Input type="number" value={y1} onChange={e => setY1(e.target.value)} /></div>
-        <div><label className={labelClass}>x2</label><Input type="number" value={x2} onChange={e => setX2(e.target.value)} /></div>
-        <div><label className={labelClass}>y2</label><Input type="number" value={y2} onChange={e => setY2(e.target.value)} /></div>
-      </div>
-      <div className="text-lg font-bold">Distance: {dist.toFixed(4)}</div>
-    </Card>
-  );
-}
-
-export function BodyMassIndexCalculator() {
-  const [height, setHeight] = useState('170');
-  const [weight, setWeight] = useState('70');
-  const [unit, setUnit] = useState('metric');
-  const h = unit === 'metric' ? Number(height) / 100 : Number(height) * 0.0254;
-  const w = unit === 'metric' ? Number(weight) : Number(weight) * 0.453592;
-  const bmi = h > 0 ? w / (h * h) : 0;
-  const category = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obese';
-  const color = bmi < 18.5 ? 'text-yellow-500' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-orange-500' : 'text-red-500';
-  return (
-    <Card title="BMI Calculator">
-      <Select value={unit} onChange={e => setUnit(e.target.value)}>
-        <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
-      </Select>
-      <div className="flex gap-2">
-        <Input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder={unit === 'metric' ? 'cm' : 'in'} />
-        <Input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
-      </div>
-      <div className={'text-2xl font-bold ' + color}>{bmi.toFixed(1)}</div>
-      <div className={'text-sm font-medium ' + color}>{category}</div>
-    </Card>
-  );
-}
-
-export function BodyFatCalculator() {
-  const [bmi, setBmi] = useState('24');
-  const [age, setAge] = useState('30');
-  const [gender, setGender] = useState('male');
-  const b = Number(bmi), a = Number(age);
-  const bf = gender === 'male' ? 1.2 * b + 0.23 * a - 16.2 : 1.2 * b + 0.23 * a - 5.4;
-  return (
-    <Card title="Body Fat % Estimator">
-      <Select value={gender} onChange={e => setGender(e.target.value)}>
-        <option value="male">Male</option><option value="female">Female</option>
-      </Select>
-      <div className="flex gap-2">
-        <div><label className={labelClass}>BMI</label><Input type="number" value={bmi} onChange={e => setBmi(e.target.value)} /></div>
-        <div><label className={labelClass}>Age</label><Input type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-      </div>
-      <div className="text-lg font-bold">Body Fat: {bf.toFixed(1)}%</div>
-    </Card>
-  );
-}
-
-export function CalorieIntakeCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [height, setHeight] = useState('170');
-  const [age, setAge] = useState('30');
-  const [gender, setGender] = useState('male');
-  const [activity, setActivity] = useState('1.55');
-  const w = Number(weight), h = Number(height), a = Number(age), act = Number(activity);
-  const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
-  return (
-    <Card title="Daily Calorie Needs">
-      <div className="flex gap-2">
-        <Select value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></Select>
-        <Select value={activity} onChange={e => setActivity(e.target.value)}>
-          <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option>
-          <option value="1.725">Active</option><option value="1.9">Very Active</option>
-        </Select>
-      </div>
-      <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div><div><label className={labelClass}>Height (cm)</label><Input type="number" value={height} onChange={e => setHeight(e.target.value)} /></div><div><label className={labelClass}>Age</label><Input type="number" value={age} onChange={e => setAge(e.target.value)} /></div></div>
-      <div className="text-lg font-bold">BMR: {bmr.toFixed(0)} kcal/day</div>
-      <div className="text-sm">Maintenance: {(bmr * act).toFixed(0)} kcal/day</div>
-    </Card>
-  );
-}
-
-export function MacronutrientCalculator() {
-  const [calories, setCalories] = useState('2000');
-  const c = Number(calories);
-  return (
-    <Card title="Daily Macronutrients">
-      <Input type="number" value={calories} onChange={e => setCalories(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div className="flex justify-between"><span>Protein (30%)</span><span className="font-bold">{(c * 0.3 / 4).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
-        <div className="flex justify-between"><span>Carbs (40%)</span><span className="font-bold">{(c * 0.4 / 4).toFixed(0)}g = {(c * 0.4).toFixed(0)} kcal</span></div>
-        <div className="flex justify-between"><span>Fat (30%)</span><span className="font-bold">{(c * 0.3 / 9).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
-      </div>
-    </Card>
-  );
-}
-
-export function WaterRequirementCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [activity, setActivity] = useState('30');
-  const w = Number(weight);
-  const base = w * 0.033;
-  const extra = Math.floor(Number(activity) / 30) * 0.35;
-  return (
-    <Card title="Daily Water Intake">
-      <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div><div><label className={labelClass}>Exercise (min)</label><Input type="number" value={activity} onChange={e => setActivity(e.target.value)} /></div></div>
-      <div className="text-lg font-bold">{(base + extra).toFixed(1)} L / day</div>
-    </Card>
-  );
-}
-
-export function SleepRequirementCalculator() {
-  const [age, setAge] = useState('30');
-  const a = Number(age);
-  const rec = a < 1 ? '12-16 hours' : a < 2 ? '11-14 hours' : a < 5 ? '10-13 hours' : a < 13 ? '9-12 hours' : a < 18 ? '8-10 hours' : a < 65 ? '7-9 hours' : '7-8 hours';
-  return (
-    <Card title="Sleep Requirements by Age">
-      <Input type="number" value={age} onChange={e => setAge(e.target.value)} />
-      <div className="text-lg font-bold">Recommended: {rec}</div>
-    </Card>
-  );
-}
-
-export function HeartRateCalculator() {
-  const [age, setAge] = useState('35');
-  const a = Number(age);
-  const max = 220 - a;
-  return (
-    <Card title="Target Heart Rate Zones">
-      <Input type="number" value={age} onChange={e => setAge(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>Max HR: {max} bpm</div>
-        <div>Zone 1 (50-60%): {Math.round(max * 0.5)}-{Math.round(max * 0.6)} bpm</div>
-        <div>Zone 2 (60-70%): {Math.round(max * 0.6)}-{Math.round(max * 0.7)} bpm</div>
-        <div>Zone 3 (70-80%): {Math.round(max * 0.7)}-{Math.round(max * 0.8)} bpm</div>
-        <div>Zone 4 (80-90%): {Math.round(max * 0.8)}-{Math.round(max * 0.9)} bpm</div>
-        <div>Zone 5 (90-100%): {Math.round(max * 0.9)}-{max} bpm</div>
-      </div>
-      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
-    </Card>
-  );
-}
-
-export function IdealWeightCalc() {
-  const [height, setHeight] = useState('170');
-  const [gender, setGender] = useState('male');
-  const h = Number(height);
-  const devine = gender === 'male' ? 50 + 2.3 * ((h - 152.4) / 2.54) : 45.5 + 2.3 * ((h - 152.4) / 2.54);
-  const robinson = gender === 'male' ? 52 + 1.9 * ((h - 152.4) / 2.54) : 49 + 1.7 * ((h - 152.4) / 2.54);
-  return (
-    <Card title="Ideal Body Weight">
-      <div className="flex gap-2"><Select value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></Select><Input type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-      <div className="text-xs space-y-1"><div>Devine: {devine.toFixed(1)} kg</div><div>Robinson: {robinson.toFixed(1)} kg</div></div>
-    </Card>
-  );
-}
-
-export function PaceCalculator() {
-  const [dist, setDist] = useState('10');
-  const [time, setTime] = useState('50');
-  const d = Number(dist), t = Number(time);
-  const paceMin = d ? t / d : 0;
-  const paceMinWhole = Math.floor(paceMin);
-  const paceSec = Math.round((paceMin - paceMinWhole) * 60);
-  return (
-    <Card title="Running Pace Calculator">
-      <div className="flex gap-2"><div><label className={labelClass}>Distance (km)</label><Input type="number" value={dist} onChange={e => setDist(e.target.value)} /></div><div><label className={labelClass}>Time (min)</label><Input type="number" value={time} onChange={e => setTime(e.target.value)} /></div></div>
-      <div className="text-lg font-bold">{paceMinWhole}:{paceSec.toString().padStart(2, '0')} /km</div>
-      <div className="text-sm">Speed: {d && t ? (d / t * 60).toFixed(2) : 0} km/h</div>
-    </Card>
-  );
-}
-
-export function StepsCalculator() {
-  const [steps, setSteps] = useState('10000');
-  const [height, setHeight] = useState('170');
-  const s = Number(steps), h = Number(height);
-  const stride = h * 0.415;
-  const distM = s * stride;
-  const distKm = distM / 1000;
-  const distMi = distKm / 1.609;
-  return (
-    <Card title="Steps to Distance">
-      <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div><div><label className={labelClass}>Height (cm)</label><Input type="number" value={height} onChange={e => setHeight(e.target.value)} /></div></div>
-      <div className="text-xs space-y-1"><div>Distance: {distKm.toFixed(2)} km</div><div>Distance: {distMi.toFixed(2)} miles</div><div>Calories (est): {(s * 0.04).toFixed(0)} kcal</div></div>
-      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
-    </Card>
-  );
-}
-
-export function CaloriesBurnedCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [duration, setDuration] = useState('30');
-  const [activity, setActivity] = useState('running');
-  const mets: Record<string, number> = { running: 9.8, walking: 3.5, cycling: 7.5, swimming: 8, yoga: 2.5, lifting: 4.5, 'jump rope': 12 };
-  const met = mets[activity] || 5;
-  const burned = met * Number(weight) * (Number(duration) / 60);
-  return (
-    <Card title="Calories Burned">
-      <div className="flex gap-2"><Select value={activity} onChange={e => setActivity(e.target.value)}>{Object.keys(mets).map(k => <option key={k}>{k}</option>)}</Select>
-      <div><label className={labelClass}>Weight (kg)</label><Input type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-      <div><label className={labelClass}>Duration (min)</label><Input type="number" value={duration} onChange={e => setDuration(e.target.value)} /></div></div>
-      <div className="text-lg font-bold">{burned.toFixed(0)} kcal burned</div>
-    </Card>
-  );
-}
-
-export function BloodAlcoholCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [gender, setGender] = useState('male');
-  const [drinks, setDrinks] = useState('3');
-  const [hours, setHours] = useState('2');
-  const w = Number(weight), d = Number(drinks), h = Number(hours);
-  const r = gender === 'male' ? 0.68 : 0.55;
-  const bac = (d * 14 / (w * 1000 * r)) * 100 - (h * 0.015);
-  const finalBac = Math.max(0, bac);
-  return (
-    <Card title="Blood Alcohol Estimator">
-      <div className="flex gap-2"><Select value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></Select><Input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="Weight (kg)" /></div>
-      <div className="flex gap-2"><Input type="number" value={drinks} onChange={e => setDrinks(e.target.value)} placeholder="Drinks" /><Input type="number" value={hours} onChange={e => setHours(e.target.value)} placeholder="Hours" /></div>
-      <div className={'text-lg font-bold ' + (finalBac >= 0.08 ? 'text-red-500' : 'text-green-600')}>BAC: {finalBac.toFixed(3)}%</div>
-      {finalBac >= 0.08 && <div className="text-xs text-red-500">Over legal limit (0.08%)</div>}
-    </Card>
-  );
-}
-
-export function PregnancyCalculator() {
-  const [lmp, setLmp] = useState('');
-  const due = lmp ? new Date(new Date(lmp).getTime() + 280 * 86400000) : null;
-  return (
-    <Card title="Pregnancy Calculator">
-      <label className={labelClass}>First day of last menstrual period</label>
-      <Input type="date" value={lmp} onChange={e => setLmp(e.target.value)} />
-      {due && <div><div className="text-lg font-bold">Due Date: {due.toLocaleDateString()}</div><div className="text-xs">Gestational age: {Math.floor((Date.now() - new Date(lmp).getTime()) / (7 * 86400000))} weeks</div></div>}
-    </Card>
-  );
-}
-
-export function OvulationTracker() {
-  const [lmp, setLmp] = useState('');
-  const [cycleLength, setCycleLength] = useState('28');
-  const results = lmp ? (() => {
-    const start = new Date(lmp);
-    const cycleLen = Number(cycleLength) || 28;
-    const fertileStart = new Date(start.getTime() + (cycleLen - 14 - 5) * 86400000);
-    const fertileEnd = new Date(start.getTime() + (cycleLen - 14 + 1) * 86400000);
-    const ovulation = new Date(start.getTime() + (cycleLen - 14) * 86400000);
-    const nextPeriod = new Date(start.getTime() + cycleLen * 86400000);
-    return { fertileStart, fertileEnd, ovulation, nextPeriod };
-  })() : null;
-  return (
-    <Card title="Ovulation Tracker">
-      <label className={labelClass}>First day of LMP</label>
-      <Input type="date" value={lmp} onChange={e => setLmp(e.target.value)} />
-      <label className={labelClass}>Cycle Length (days)</label>
-      <Input type="number" value={cycleLength} onChange={e => setCycleLength(e.target.value)} min={20} max={45} />
-      {results && <div className="text-xs space-y-1">
-        <div>Fertile window: {results.fertileStart.toLocaleDateString()} - {results.fertileEnd.toLocaleDateString()}</div>
-        <div className="font-bold">Ovulation: {results.ovulation.toLocaleDateString()}</div>
-        <div>Next period: {results.nextPeriod.toLocaleDateString()}</div>
-      </div>}
-    </Card>
-  );
-}
-
-export function AgeCalculator() {
-  const [birth, setBirth] = useState('');
-  const calc = birth ? (() => {
-    const b = new Date(birth), now = new Date();
-    let y = now.getFullYear() - b.getFullYear(), m = now.getMonth() - b.getMonth(), d = now.getDate() - b.getDate();
-    if (d < 0) { m--; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-    if (m < 0) { y--; m += 12; }
-    return { y, m, d };
-  })() : null;
-  return (
-    <Card title="Age Calculator">
-      <Input type="date" value={birth} onChange={e => setBirth(e.target.value)} />
-      {calc && <div className="text-lg font-bold">{calc.y} years, {calc.m} months, {calc.d} days</div>}
-    </Card>
-  );
-}
-
-export function DateDifferenceCalculator() {
-  const [d1, setD1] = useState('');
-  const [d2, setD2] = useState('');
-  const diff = d1 && d2 ? (() => {
-    const a = new Date(d1), b = new Date(d2);
-    const ms = Math.abs(b.getTime() - a.getTime());
-    return { days: Math.floor(ms / 86400000), hours: Math.floor(ms / 3600000), minutes: Math.floor(ms / 60000), seconds: Math.floor(ms / 1000) };
-  })() : null;
-  return (
-    <Card title="Date Difference Calculator">
-      <div className="flex gap-2"><Input type="date" value={d1} onChange={e => setD1(e.target.value)} /><Input type="date" value={d2} onChange={e => setD2(e.target.value)} /></div>
-      {diff && <div className="text-xs space-y-1">
-        <div className="font-bold">{diff.days} days</div>
-        <div>{diff.hours} hours</div>
-        <div className="text-muted">{diff.minutes} minutes</div>
-        <div className="text-muted">{diff.seconds} seconds</div>
-      </div>}
-    </Card>
-  );
-}
-
-export function DateAdditionCalculator() {
-  const [start, setStart] = useState('');
-  const [days, setDays] = useState('30');
-  const result = start ? new Date(new Date(start).getTime() + Number(days) * 86400000) : null;
-  return (
-    <Card title="Date Addition / Subtraction">
-      <div className="flex gap-2"><Input type="date" value={start} onChange={e => setStart(e.target.value)} /><Input type="number" value={days} onChange={e => setDays(e.target.value)} /></div>
-      {result && <div className="text-lg font-bold">{result.toLocaleDateString()}</div>}
-    </Card>
-  );
-}
-
-export function WeekNumberCalculator() {
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  const d = new Date(date);
-  const start = new Date(d.getFullYear(), 0, 1);
-  const diff = Math.floor((d.getTime() - start.getTime()) / 86400000);
-  const week = Math.ceil((diff + start.getDay() + 1) / 7);
-  return (
-    <Card title="Week Number Calculator">
-      <Input type="date" value={date} onChange={e => setDate(e.target.value)} />
-      <div className="text-lg font-bold">Week {week} of {d.getFullYear()}</div>
-      <div className="text-xs text-muted">{d.toLocaleDateString('en-US', { weekday: 'long' })}</div>
-    </Card>
-  );
-}
-
-export function TimeSinceCalculator() {
-  const [date, setDate] = useState(new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10));
-  const d = new Date(date);
-  const now = new Date();
-  const ms = now.getTime() - d.getTime();
-  const sec = Math.floor(ms / 1000);
-  const min = Math.floor(sec / 60);
-  const hr = Math.floor(min / 60);
-  const day = Math.floor(hr / 24);
-  const wk = Math.floor(day / 7);
-  const mo = Math.floor(day / 30.44);
-  const yr = Math.floor(day / 365.25);
-  return (
-    <Card title="Time Since / Until">
-      <Input type="date" value={date} onChange={e => setDate(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>{yr} years</div><div>{mo} months</div><div>{wk} weeks</div>
-        <div>{day} days</div><div>{hr} hours</div><div>{min} minutes</div><div>{sec} seconds</div>
-      </div>
-    </Card>
-  );
-}
-
-export function TimeZoneConverter() {
-  const [time, setTime] = useState('12:00');
-  const [fromTz, setFromTz] = useState('UTC');
-  const [toTz, setToTz] = useState('America/New_York');
-  const now = new Date();
-  const [h, m] = time.split(':').map(Number);
-  const local = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
-  const fromOffset = -new Date(local.toLocaleString('en-US', { timeZone: fromTz })).getTimezoneOffset();
-  const toOffset = -new Date(local.toLocaleString('en-US', { timeZone: toTz })).getTimezoneOffset();
-  const diffMin = toOffset - fromOffset;
-  const resultH = (h + Math.floor(diffMin / 60) + 24) % 24;
-  const resultM = (m + diffMin % 60 + 60) % 60;
-  return (
-    <Card title="Time Zone Converter">
-      <div className="flex gap-2"><Input type="time" value={time} onChange={e => setTime(e.target.value)} /><Input value={fromTz} onChange={e => setFromTz(e.target.value)} className={inputClass} /></div>
-      <div className="flex gap-2"><Input value={toTz} onChange={e => setToTz(e.target.value)} className={inputClass} /></div>
-      <div className="text-lg font-bold">{String(resultH).padStart(2, '0')}:{String(resultM).padStart(2, '0')}</div>
-      <div className="text-xs text-muted">From: {fromTz} → To: {toTz}</div>
-    </Card>
-  );
-}
-
-export function DaylightSavingTimeChecker() {
-  const [year, setYear] = useState(String(new Date().getFullYear()));
-  const y = Number(year);
-  const march = new Date(y, 2, 14);
-  const nov = new Date(y, 10, 7);
-  const dstStart = new Date(march.getTime() + (7 - march.getDay()) * 86400000);
-  const dstEnd = new Date(nov.getTime() + (7 - nov.getDay()) * 86400000);
-  return (
-    <Card title="DST Checker (US)">
-      <Input type="number" value={year} onChange={e => setYear(e.target.value)} />
-      <div className="text-xs">
-        <div>DST starts: {dstStart.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-        <div>DST ends: {dstEnd.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-        <div>DST period: {Math.round((dstEnd.getTime() - dstStart.getTime()) / 86400000)} days</div>
-      </div>
-    </Card>
-  );
-}
-
-export function WorkHoursCalculator() {
-  const [start, setStart] = useState('09:00');
-  const [end, setEnd] = useState('17:00');
-  const [breakMin, setBreakMin] = useState('30');
-  const [sH, sM] = start.split(':').map(Number);
-  const [eH, eM] = end.split(':').map(Number);
-  const total = (eH * 60 + eM) - (sH * 60 + sM) - Number(breakMin);
-  const hrs = Math.floor(total / 60), mins = total % 60;
-  return (
-    <Card title="Work Hours Calculator">
-      <div className="flex gap-2"><Input type="time" value={start} onChange={e => setStart(e.target.value)} /><Input type="time" value={end} onChange={e => setEnd(e.target.value)} /><Input type="number" value={breakMin} onChange={e => setBreakMin(e.target.value)} /></div>
-      <div className="text-lg font-bold">{hrs}h {mins}m</div>
-    </Card>
-  );
-}
-
-export function HoursMinutesCalculator() {
-  const [h1, setH1] = useState('1'); const [m1, setM1] = useState('30');
-  const [h2, setH2] = useState('2'); const [m2, setM2] = useState('15');
-  const t1 = Number(h1) * 60 + Number(m1), t2 = Number(h2) * 60 + Number(m2);
-  const total = t1 + t2, diff = Math.abs(t1 - t2);
-  return (
-    <Card title="Hours & Minutes Calculator">
-      <div className="flex gap-2">
-        <Input type="number" value={h1} onChange={e => setH1(e.target.value)} /><Input type="number" value={m1} onChange={e => setM1(e.target.value)} />
-        <span className="self-center text-muted">+</span>
-        <Input type="number" value={h2} onChange={e => setH2(e.target.value)} /><Input type="number" value={m2} onChange={e => setM2(e.target.value)} />
-      </div>
-      <div className="text-xs">Total: {Math.floor(total / 60)}h {total % 60}m</div>
-      <div className="text-xs">Diff: {Math.floor(diff / 60)}h {diff % 60}m</div>
-    </Card>
-  );
-}
-
-export function MinutesToHoursConverter() {
-  const [mins, setMins] = useState('150');
-  const m = Number(mins);
-  return (
-    <Card title="Minutes → Hours Converter">
-      <Input type="number" value={mins} onChange={e => setMins(e.target.value)} />
-      <div className="text-lg font-bold">{Math.floor(m / 60)}h {m % 60}m</div>
-      <div className="text-xs text-muted">Decimal: {(m / 60).toFixed(2)} hours</div>
-    </Card>
-  );
-}
-
-export function HoursToMinutesTool() {
-  const [hrs, setHrs] = useState('2.5');
-  const h = Number(hrs);
-  return (
-    <Card title="Hours → Minutes Tool">
-      <Input type="number" value={hrs} onChange={e => setHrs(e.target.value)} step="0.1" />
-      <div className="text-lg font-bold">{Math.floor(h * 60)} minutes</div>
-      <div className="text-xs text-muted">{h * 3600} seconds</div>
-    </Card>
-  );
-}
-
-export function SecondsToMinutesConverter() {
-  const [sec, setSec] = useState('3661');
-  const s = Number(sec);
-  return (
-    <Card title="Seconds → Minutes Converter">
-      <Input type="number" value={sec} onChange={e => setSec(e.target.value)} />
-      <div className="text-lg font-bold">{Math.floor(s / 3600)}h {Math.floor((s % 3600) / 60)}m {s % 60}s</div>
-    </Card>
-  );
-}
-
-export function SpeedConverter() {
-  const [kmh, setKmh] = useState('100');
-  const k = Number(kmh);
-  return (
-    <Card title="Speed Converter">
-      <Input type="number" value={kmh} onChange={e => setKmh(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>mph: {(k * 0.621371).toFixed(2)}</div>
-        <div>knots: {(k * 0.539957).toFixed(2)}</div>
-        <div>m/s: {(k / 3.6).toFixed(2)}</div>
-        <div>ft/s: {(k * 0.911344).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function LengthConverter() {
-  const [meters, setMeters] = useState('100');
-  const m = Number(meters);
-  return (
-    <Card title="Length Converter">
-      <Input type="number" value={meters} onChange={e => setMeters(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>km: {(m / 1000).toFixed(4)}</div>
-        <div>miles: {(m * 0.000621371).toFixed(4)}</div>
-        <div>yards: {(m * 1.09361).toFixed(2)}</div>
-        <div>feet: {(m * 3.28084).toFixed(2)}</div>
-        <div>inches: {(m * 39.3701).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function WeightConverter() {
-  const [kg, setKg] = useState('70');
-  const k = Number(kg);
-  return (
-    <Card title="Weight Converter">
-      <Input type="number" value={kg} onChange={e => setKg(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>g: {(k * 1000).toFixed(0)}</div>
-        <div>lb: {(k * 2.20462).toFixed(2)}</div>
-        <div>oz: {(k * 35.274).toFixed(2)}</div>
-        <div>stone: {(k * 0.157473).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function VolumeConverter() {
-  const [liters, setLiters] = useState('1');
-  const l = Number(liters);
-  return (
-    <Card title="Volume Converter">
-      <Input type="number" value={liters} onChange={e => setLiters(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>mL: {(l * 1000).toFixed(0)}</div>
-        <div>gal (US): {(l * 0.264172).toFixed(4)}</div>
-        <div>qt: {(l * 1.05669).toFixed(4)}</div>
-        <div>fl oz: {(l * 33.814).toFixed(2)}</div>
-        <div>cups: {(l * 4.22675).toFixed(2)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function AreaConverter() {
-  const [sqm, setSqm] = useState('100');
-  const a = Number(sqm);
-  return (
-    <Card title="Area Converter">
-      <Input type="number" value={sqm} onChange={e => setSqm(e.target.value)} />
-      <div className="text-xs space-y-1">
-        <div>sq ft: {(a * 10.7639).toFixed(2)}</div>
-        <div>acres: {(a * 0.000247105).toFixed(6)}</div>
-        <div>hectares: {(a * 0.0001).toFixed(6)}</div>
-        <div>sq km: {(a / 1e6).toFixed(6)}</div>
-      </div>
-    </Card>
-  );
-}
-
-export function DataSizeConverter() {
-  const [bytes, setBytes] = useState('1073741824');
-  const b = Number(bytes);
-  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-  const conv = units.map((u, i) => ({ unit: u, value: b / Math.pow(1024, i) }));
-  return (
-    <Card title="Data Size Converter">
-      <Input type="number" value={bytes} onChange={e => setBytes(e.target.value)} />
-      <div className="text-xs space-y-1">
-        {conv.map(c => <div key={c.unit}><span className="text-muted">{c.unit}:</span> {c.value.toFixed(2)}</div>)}
-      </div>
-    </Card>
-  );
 }

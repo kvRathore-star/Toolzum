@@ -56,3 +56,7 @@ Confirmed stubs found so far:
 5. Data Converters group (DataToolkit) — 5 buggy hand-rolled parsers: JSON→XML (no escaping → malformed XML), JSON→TOML (silently mistypes booleans), YAML→JSON (fails on arrays). Worse than visible stubs — produces plausible-looking incorrect output. Replaced with LinkCards to correct standalone versions. (retired)
 
 Relevant grep targets: `* 0.7`, `Math.round(*`, `'sample'`, fake/stub data patterns across all module files. Hand-rolled XML escaping, manual TOML/YAML parsers in composite widget files.
+
+71a78a2efbe244249625d4740fd91311 - index now key
+Key file: https://toolzum.com/71a78a2efbe244249625d4740fd91311.txt (served from public/)
+Submission script: npx tsx scripts/submit-indexnow.ts

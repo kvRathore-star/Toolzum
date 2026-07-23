@@ -3,9 +3,30 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono max-h-48 overflow-y-auto";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+function Input({ label, value, onChange, placeholder, type = "text", rows }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
+}) {
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+  return (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      {rows ? (
+        <textarea className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+      ) : (
+        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+      )}
+    </div>
+  );
+}
 
 function parseCSV(text: string): { headers: string[]; rows: string[][] } {
   const lines = text.trim().split('\n').filter(l => l.trim());
@@ -27,39 +48,48 @@ const firstNames = ['John', 'Jane', 'Bob', 'Alice', 'Eve', 'Charlie', 'Diana', '
 const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
 const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'example.com', 'test.org'];
 
-function OutputBlock({ value }: { value: string }) {
-  if (!value) return null;
-  return (
-    <div className="mt-3">
-      <pre className={resultClass}>{value}</pre>
-      <button onClick={() => { clipboardWrite(value); toast.success('Copied!'); }} className="mt-1 px-4 py-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs font-medium transition-colors">Copy</button>
-    </div>
-  );
-}
-
 export function ColumnExtractor() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor');
   const [cols, setCols] = useState('name,email');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor\nBob,bob@test.com,User' },
+    { label: 'Employees', v: 'id,name,department,salary\n1,Alice,Engineering,95000\n2,Bob,Marketing,72000\n3,Charlie,Engineering,88000\n4,Diana,Sales,65000' },
+  ];
+  const handle = (i?: string, c?: string) => {
+    const inp = i !== undefined ? i : input;
+    const colStr = c !== undefined ? c : cols;
+    if (i !== undefined) setInput(inp);
+    if (c !== undefined) setCols(colStr);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
-    const colList = cols.split(',').map(c => c.trim()).filter(c => c);
-    const idxs = colList.map(c => p.headers.indexOf(c)).filter(i => i >= 0);
+    const colList = colStr.split(',').map(x => x.trim()).filter(Boolean);
+    const idxs = colList.map(x => p.headers.indexOf(x)).filter(x => x >= 0);
     if (!idxs.length) { toast.error('No matching columns'); return; }
-    const nh = colList.filter(c => p.headers.includes(c));
+    const nh = colList.filter(x => p.headers.includes(x));
     const nr = p.rows.map(r => idxs.map(i => r[i] || ''));
     setOut(formatCSV(nh, nr));
-    toast.success(`Extracted ${nh.length} columns`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Column Extractor</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={cols} onChange={e => setCols(e.target.value)} className={inputClass} placeholder="column1,column2" />
-      <button onClick={handle} className={btnClass}>Extract</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Column Extractor">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Columns to extract" value={cols} onChange={v => { setCols(v); setOut(''); }} placeholder="col1,col2" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Extract</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result ({out.split('\n').length - 1} rows)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -67,22 +97,38 @@ export function ColumnRenamer() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor');
   const [mapping, setMapping] = useState('name:full_name');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const mappings = mapping.split(',').map(m => m.split(':').map(s => s.trim()));
     const nh = p.headers.map(h => { const m = mappings.find(([k]) => k === h); return m ? m[1] : h; });
     setOut(formatCSV(nh, p.rows));
-    toast.success('Columns renamed');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Column Renamer</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={mapping} onChange={e => setMapping(e.target.value)} className={inputClass} placeholder="old:new,old2:new2" />
-      <button onClick={handle} className={btnClass}>Rename</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Column Renamer">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 hover:bg-violet-500/20 border border-violet-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Mapping (old:new,old2:new2)" value={mapping} onChange={v => { setMapping(v); setOut(''); }} placeholder="name:full_name,email:email_address" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors">Rename</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-violet-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -91,8 +137,15 @@ export function DataTypeConverter() {
   const [col, setCol] = useState('age');
   const [type, setType] = useState('number');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const typePills = ['number', 'string', 'int', 'float'];
+  const csvPresets = [
+    { label: 'Default', v: 'name,age,salary\nJohn,35,75000\nJane,28,62000' },
+    { label: 'Products', v: 'product,price,quantity\nWidget,19.99,100\nGadget,49.99,50\nDoohickey,9.99,200' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const ci = p.headers.indexOf(col);
     if (ci < 0) { toast.error('Column not found'); return; }
@@ -105,22 +158,30 @@ export function DataTypeConverter() {
       return n;
     });
     setOut(formatCSV(p.headers, nr));
-    toast.success(`Converted ${col} to ${type}`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Data Type Converter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={col} onChange={e => setCol(e.target.value)} className={inputClass} placeholder="Column name" />
-      <select value={type} onChange={e => setType(e.target.value)} className={inputClass}>
-        <option value="number">Number</option>
-        <option value="string">String</option>
-        <option value="int">Integer</option>
-        <option value="float">Float</option>
-      </select>
-      <button onClick={handle} className={btnClass}>Convert</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Data Type Converter">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Column name" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {typePills.map(t => <button key={t} onClick={() => setType(t)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${type === t ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border-emerald-500/20'}`}>{t}</button>)}
+      </div>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result — {col} as {type}</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -128,49 +189,102 @@ export function Deduplicator() {
   const [input, setInput] = useState('name,email\nJohn,john@example.com\nJane,jane@test.com\nJohn,john@example.com');
   const [col, setCol] = useState('name');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const [stats, setStats] = useState<{ before: number; after: number } | null>(null);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email\nJohn,john@example.com\nJane,jane@test.com\nJohn,john@example.com\nBob,bob@test.com\nJane,jane@test.com' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const ci = p.headers.indexOf(col);
     if (ci < 0) { toast.error('Column not found'); return; }
     const seen = new Set<string>();
     const nr = p.rows.filter(r => { const v = r[ci] || ''; if (seen.has(v)) return false; seen.add(v); return true; });
+    setStats({ before: p.rows.length, after: nr.length });
     setOut(formatCSV(p.headers, nr));
-    toast.success(`Deduped: ${p.rows.length} → ${nr.length} rows`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Deduplicator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={col} onChange={e => setCol(e.target.value)} className={inputClass} placeholder="Column name" />
-      <button onClick={handle} className={btnClass}>Deduplicate</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Deduplicator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 border border-orange-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); setStats(null); }} placeholder="CSV input..." />
+      <Input label="Column to deduplicate on" value={col} onChange={v => { setCol(v); setOut(''); setStats(null); }} placeholder="Column name" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Deduplicate</button>
+      {stats && (
+        <div className="mt-4 space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-orange-400">
+              <span className="text-xs text-zinc-500">Before</span>
+              <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{stats.before}</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-green-400">
+              <span className="text-xs text-zinc-500">After</span>
+              <p className="text-lg font-bold text-green-600">{stats.after}</p>
+            </div>
+          </div>
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-blue-400">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs font-semibold text-zinc-500">Deduplicated Data</span>
+              <button onClick={copy} className="px-2 py-0.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            </div>
+            <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+          </div>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function FormatValidator() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com');
-  const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const [issues, setIssues] = useState<string[]>([]);
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+  const csvPresets = [
+    { label: 'Clean', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor' },
+    { label: 'Bad Cols', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com' },
+    { label: 'Empty', v: 'name,email\nJohn,\n,test@test.com' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
-    const issues: string[] = [];
+    const iss: string[] = [];
     const colCount = p.headers.length;
-    p.rows.forEach((r, i) => {
-      if (r.length !== colCount) issues.push(`Row ${i + 2}: ${r.length} cols (expected ${colCount})`);
-      if (r.some(c => !c.trim())) issues.push(`Row ${i + 2}: empty cell`);
+    p.rows.forEach((r, rowIdx) => {
+      if (r.length !== colCount) iss.push(`Row ${rowIdx + 2}: ${r.length} cols (expected ${colCount})`);
+      r.forEach((c, colIdx) => { if (!c.trim()) iss.push(`Row ${rowIdx + 2}, Col "${p.headers[colIdx]}": empty cell`); });
     });
-    setOut(issues.length ? issues.join('\n') : '✓ Valid CSV – ' + p.rows.length + ' rows, ' + colCount + ' cols');
-    toast.success(issues.length ? `Found ${issues.length} issues` : 'Valid!');
+    setIssues(iss);
+    setIsValid(iss.length === 0);
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Format Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <button onClick={handle} className={btnClass}>Validate</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Format Validator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border border-yellow-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setIssues([]); setIsValid(null); }} placeholder="CSV input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      {isValid !== null && (
+        <div className="mt-4 space-y-2">
+          {isValid ? (
+            <div className="p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-xl border-l-4 border-green-400 text-sm font-medium">✓ Valid CSV — all rows well-formed</div>
+          ) : (
+            <>
+              <div className="p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-xl border-l-4 border-red-400 text-sm font-medium">✗ Found {issues.length} issue(s)</div>
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-yellow-400 space-y-1">
+                {issues.map((iss, i) => <div key={i} className="text-xs text-red-600 dark:text-red-400">⚠ {iss}</div>)}
+              </div>
+            </>
+          )}
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -179,10 +293,17 @@ export function CsvMerger() {
   const [input2, setInput2] = useState('name,department\nJohn,Engineering\nJane,Marketing');
   const [key, setKey] = useState('name');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p1 = parseCSV(input1);
+  const csvPresets = [
+    { label: 'Default', v1: 'name,email\nJohn,john@example.com\nJane,jane@test.com', v2: 'name,department\nJohn,Engineering\nJane,Marketing' },
+  ];
+  const handle = (p1i?: string, p2i?: string) => {
+    const i1 = p1i !== undefined ? p1i : input1;
+    const i2 = p2i !== undefined ? p2i : input2;
+    if (p1i !== undefined) setInput1(i1);
+    if (p2i !== undefined) setInput2(i2);
+    const p1 = parseCSV(i1);
     if (!p1.headers.length) { toast.error('Enter first CSV'); return; }
-    const p2 = parseCSV(input2);
+    const p2 = parseCSV(i2);
     if (!p2.headers.length) { toast.error('Enter second CSV'); return; }
     const ci1 = p1.headers.indexOf(key);
     const ci2 = p2.headers.indexOf(key);
@@ -194,17 +315,28 @@ export function CsvMerger() {
       return match ? [...r, ...match.filter((_, i) => i !== ci2)] : [...r, ...Array(p2.headers.length - 1).fill('')];
     });
     setOut(formatCSV(nh, nr));
-    toast.success('Merged');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV Merger</h1>
-      <textarea value={input1} onChange={e => setInput1(e.target.value)} className={inputClass + ' h-20'} placeholder="First CSV" />
-      <textarea value={input2} onChange={e => setInput2(e.target.value)} className={inputClass + ' h-20'} placeholder="Second CSV" />
-      <input type="text" value={key} onChange={e => setKey(e.target.value)} className={inputClass} placeholder="Key column" />
-      <button onClick={handle} className={btnClass}>Merge</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV Merger">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v1, p.v2)} className="px-2.5 py-1 text-xs rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="First CSV (left table)" rows={3} value={input1} onChange={v => { setInput1(v); setOut(''); }} placeholder="First CSV..." />
+      <Input label="Second CSV (right table)" rows={3} value={input2} onChange={v => { setInput2(v); setOut(''); }} placeholder="Second CSV..." />
+      <Input label="Key column (must exist in both)" value={key} onChange={v => { setKey(v); setOut(''); }} placeholder="name" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl text-sm font-medium transition-colors">Merge</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Merged Result</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-cyan-500 hover:bg-cyan-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -212,21 +344,43 @@ export function NullValueHandler() {
   const [input, setInput] = useState('name,email,phone\nJohn,john@example.com,\nJane,,555-0100');
   const [replace, setReplace] = useState('N/A');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const [nullCount, setNullCount] = useState(0);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,phone\nJohn,john@example.com,\nJane,,555-0100\nBob,bob@test.com,' },
+  ];
+  const replacePresets = ['N/A', 'NULL', '0', '—', 'empty'];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
-    const nr = p.rows.map(r => r.map(c => c.trim() ? c : replace));
+    let count = 0;
+    const nr = p.rows.map(r => r.map(c => { const t = c.trim(); if (!t) count++; return t || replace; }));
+    setNullCount(count);
     setOut(formatCSV(p.headers, nr));
-    toast.success('Nulls replaced');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Null Value Handler</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input with empty cells" />
-      <input type="text" value={replace} onChange={e => setReplace(e.target.value)} className={inputClass} placeholder="Replacement value" />
-      <button onClick={handle} className={btnClass}>Replace Nulls</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Null Value Handler">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20 border border-teal-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input (with empty cells)" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {replacePresets.map(r => <button key={r} onClick={() => setReplace(r)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${replace === r ? 'bg-teal-500 text-white border-teal-500' : 'bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20 border-teal-500/20'}`}>{r}</button>)}
+      </div>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-sm font-medium transition-colors">Replace Nulls</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-teal-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result ({nullCount} nulls replaced)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-teal-500 hover:bg-teal-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -235,8 +389,14 @@ export function PivotGenerator() {
   const [groupCol, setGroupCol] = useState('role');
   const [valCol, setValCol] = useState('salary');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,role,salary\nJohn,Admin,75000\nJane,Editor,62000\nBob,Admin,82000' },
+    { label: 'Sales', v: 'rep,region,amount\nAlice,North,15000\nBob,South,22000\nAlice,North,18000\nBob,South,19000\nCharlie,North,12000' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const ci = p.headers.indexOf(groupCol);
     const vi = p.headers.indexOf(valCol);
@@ -249,17 +409,28 @@ export function PivotGenerator() {
     });
     const lines = Object.entries(groups).map(([k, vals]) => `${k},${vals.length},${vals.reduce((a, b) => a + b, 0).toFixed(2)},${(vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(2)}`);
     setOut(['group,count,sum,avg', ...lines].join('\n'));
-    toast.success('Pivot generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Pivot Generator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={groupCol} onChange={e => setGroupCol(e.target.value)} className={inputClass} placeholder="Group column" />
-      <input type="text" value={valCol} onChange={e => setValCol(e.target.value)} className={inputClass} placeholder="Value column" />
-      <button onClick={handle} className={btnClass}>Pivot</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Pivot Generator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Group column" value={groupCol} onChange={v => { setGroupCol(v); setOut(''); }} placeholder="Group column" />
+      <Input label="Value column" value={valCol} onChange={v => { setValCol(v); setOut(''); }} placeholder="Value column (numeric)" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Pivot</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Pivot Table (group, count, sum, avg)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -268,24 +439,43 @@ export function RowFilter() {
   const [col, setCol] = useState('role');
   const [val, setVal] = useState('Admin');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const [matchCount, setMatchCount] = useState(0);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor\nBob,bob@test.com,Admin' },
+    { label: 'Employees', v: 'name,dept,salary\nAlice,Engineering,95000\nBob,Marketing,72000\nCharlie,Engineering,88000\nDiana,Sales,65000\nEve,Engineering,91000' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const ci = p.headers.indexOf(col);
     if (ci < 0) { toast.error('Column not found'); return; }
     const nr = p.rows.filter(r => (r[ci] || '').toLowerCase().includes(val.toLowerCase()));
+    setMatchCount(nr.length);
     setOut(formatCSV(p.headers, nr));
-    toast.success(`Filtered: ${nr.length} rows match`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Row Filter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={col} onChange={e => setCol(e.target.value)} className={inputClass} placeholder="Column" />
-      <input type="text" value={val} onChange={e => setVal(e.target.value)} className={inputClass} placeholder="Filter value" />
-      <button onClick={handle} className={btnClass}>Filter</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Row Filter">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500/20 border border-pink-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Column" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
+      <Input label="Filter value" value={val} onChange={v => { setVal(v); setOut(''); }} placeholder="Filter value (case-insensitive)" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-pink-500 hover:bg-pink-600 text-white rounded-xl text-sm font-medium transition-colors">Filter</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-pink-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result — {matchCount} row(s) match</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-pink-500 hover:bg-pink-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -294,8 +484,13 @@ export function Sorter() {
   const [col, setCol] = useState('age');
   const [dir, setDir] = useState('asc');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,age,salary\nJohn,35,75000\nJane,28,62000\nBob,42,82000\nAlice,31,58000' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const ci = p.headers.indexOf(col);
     if (ci < 0) { toast.error('Column not found'); return; }
@@ -306,20 +501,30 @@ export function Sorter() {
       return dir === 'asc' ? cmp : -cmp;
     });
     setOut(formatCSV(p.headers, nr));
-    toast.success(`Sorted by ${col} (${dir})`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Sorter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={col} onChange={e => setCol(e.target.value)} className={inputClass} placeholder="Column" />
-      <select value={dir} onChange={e => setDir(e.target.value)} className={inputClass}>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-      <button onClick={handle} className={btnClass}>Sort</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Sorter">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 border border-sky-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Sort column" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {[{ v: 'asc', l: 'Ascending' }, { v: 'desc', l: 'Descending' }].map(d => <button key={d.v} onClick={() => setDir(d.v)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${dir === d.v ? 'bg-sky-500 text-white border-sky-500' : 'bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 border-sky-500/20'}`}>{d.l}</button>)}
+      </div>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-sm font-medium transition-colors">Sort</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-sky-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Sorted by {col} ({dir})</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -327,8 +532,14 @@ export function Splitter() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor\nBob,bob@test.com,Admin\nAlice,alice@test.com,Editor');
   const [parts, setParts] = useState('2');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor\nBob,bob@test.com,Admin\nAlice,alice@test.com,Editor' },
+  ];
+  const partPresets = ['2', '3', '4'];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const n = Math.max(1, parseInt(parts, 10) || 2);
     const chunk = Math.ceil(p.rows.length / n);
@@ -338,24 +549,43 @@ export function Splitter() {
       result.push(`=== Part ${i + 1} (${chunkRows.length} rows) ===\n${formatCSV(p.headers, chunkRows)}`);
     }
     setOut(result.join('\n\n'));
-    toast.success(`Split into ${n} parts`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV Splitter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={parts} onChange={e => setParts(e.target.value)} className={inputClass} placeholder="Number of parts" />
-      <button onClick={handle} className={btnClass}>Split</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV Splitter">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {partPresets.map(p => <button key={p} onClick={() => setParts(p)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${parts === p ? 'bg-rose-500 text-white border-rose-500' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border-rose-500/20'}`}>{p} parts</button>)}
+      </div>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Split</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Split Result</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function Transpose() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor' },
+    { label: 'Metrics', v: 'metric,Q1,Q2,Q3,Q4\nRevenue,100,120,110,130\nCost,60,65,63,68\nProfit,40,55,47,62' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const all = [p.headers, ...p.rows];
     const maxLen = Math.max(...all.map(r => r.length));
@@ -364,61 +594,106 @@ export function Transpose() {
     const nh = transposed[0];
     const nr = transposed.slice(1);
     setOut(formatCSV(nh, nr));
-    toast.success('Transposed');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV Transpose</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <button onClick={handle} className={btnClass}>Transpose</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV Transpose">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 border border-amber-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors">Transpose</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-amber-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Transposed ({out.split('\n').length - 1} rows)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function CsvToMarkdown() {
   const [input, setInput] = useState('name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,email,role\nJohn,john@example.com,Admin\nJane,jane@test.com,Editor' },
+    { label: 'Products', v: 'product,price,stock\nWidget,19.99,100\nGadget,49.99,50\nDoohickey,9.99,200' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const sep = `|${p.headers.map(() => '---').join('|')}|`;
     const head = `|${p.headers.join('|')}|`;
     const rows = p.rows.map(r => `|${r.join('|')}|`).join('\n');
     setOut([head, sep, rows].join('\n'));
-    toast.success('Markdown table generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV → Markdown Table</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <button onClick={handle} className={btnClass}>Generate MD</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV → Markdown Table">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20 border border-green-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-xl text-sm font-medium transition-colors">Generate MD</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-green-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Markdown Table</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-green-500 hover:bg-green-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function CsvToNdjson() {
   const [input, setInput] = useState('name,age\nJohn,35\nJane,28');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,age\nJohn,35\nJane,28' },
+    { label: 'Users', v: 'id,name,active\n1,Alice,true\n2,Bob,false\n3,Charlie,true' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const objs = p.rows.map(r => {
       const o: Record<string, string> = {};
-      p.headers.forEach((h, i) => o[h] = r[i] || '');
+      p.headers.forEach((h, j) => o[h] = r[j] || '');
       return JSON.stringify(o);
     }).join('\n');
     setOut(objs);
-    toast.success('NDJSON generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV → NDJSON</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <button onClick={handle} className={btnClass}>Convert</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV → NDJSON">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 border border-purple-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-purple-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">NDJSON ({out.split('\n').length} objects)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -426,47 +701,94 @@ export function CsvToSql() {
   const [input, setInput] = useState('name,age\nJohn,35\nJane,28');
   const [table, setTable] = useState('data');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const p = parseCSV(input);
+  const csvPresets = [
+    { label: 'Default', v: 'name,age\nJohn,35\nJane,28' },
+    { label: 'Products', v: 'product,price,stock\nWidget,19.99,100\nGadget,49.99,50\nDoohickey,9.99,200' },
+  ];
+  const handle = (i?: string) => {
+    const inp = i !== undefined ? i : input;
+    if (i !== undefined) setInput(inp);
+    const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const inserts = p.rows.map(r => `INSERT INTO ${table} (${p.headers.join(', ')}) VALUES (${r.map(c => `'${c.replace(/'/g, "''")}'`).join(', ')});`);
     setOut(inserts.join('\n'));
-    toast.success('SQL generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV → SQL INSERT</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="CSV input" />
-      <input type="text" value={table} onChange={e => setTable(e.target.value)} className={inputClass} placeholder="Table name" />
-      <button onClick={handle} className={btnClass}>Generate SQL</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="CSV → SQL INSERT">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-400 hover:bg-slate-500/20 border border-slate-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
+      <Input label="Table name" value={table} onChange={v => { setTable(v); setOut(''); }} placeholder="Table name" />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-slate-500 hover:bg-slate-600 text-white rounded-xl text-sm font-medium transition-colors">Generate SQL</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-slate-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">SQL INSERT ({out.split('\n').length} statements)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonEscapeUnescape() {
   const [input, setInput] = useState('{"name":"John","age":30}');
   const [out, setOut] = useState('');
-  const escape = () => { setOut(input.replace(/"/g, '\\"').replace(/\n/g, '\\n')); toast.success('Escaped'); };
-  const unescape = () => { setOut(input.replace(/\\"/g, '"').replace(/\\n/g, '\n')); toast.success('Unescaped'); };
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","age":30}' },
+    { label: 'Multi-line', v: '{"name":"John","bio":"Line 1\nLine 2\nLine 3"}' },
+  ];
+  const escape = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    setOut(txt.replace(/"/g, '\\"').replace(/\n/g, '\\n'));
+  };
+  const unescape = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    setOut(txt.replace(/\\"/g, '"').replace(/\\n/g, '\n'));
+  };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON Escape / Unescape</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="JSON input" />
-      <div className="flex gap-2">
-        <button onClick={escape} className={`${btnClass} flex-1`}>Escape</button>
-        <button onClick={unescape} className={`${btnClass} flex-1`}>Unescape</button>
+    <Section title="JSON Escape / Unescape">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => { setInput(p.v); setOut(''); }} className="px-2.5 py-1 text-xs rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors">{p.label}</button>)}
       </div>
-      <OutputBlock value={out} />
-    </div>
+      <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
+      <div className="flex gap-2 mb-3">
+        <button onClick={() => escape()} className="flex-1 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl text-sm font-medium transition-colors">Escape</button>
+        <button onClick={() => unescape()} className="flex-1 px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-sm font-medium transition-colors">Unescape</button>
+      </div>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Result ({out.length} chars)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-cyan-500 hover:bg-cyan-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonFlattener() {
   const [input, setInput] = useState('{"name":"John","address":{"street":"123 Main","zip":"10001"}}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const obj = parseJSON(input);
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","address":{"street":"123 Main","zip":"10001"}}' },
+    { label: 'Deep', v: '{"user":{"profile":{"name":"Alice","details":{"age":30,"city":"NYC"}}},"tags":["a","b","c"]}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const obj = parseJSON(txt);
     if (!obj) return;
     const flat: Record<string, any> = {};
     const go = (o: any, prefix: string) => {
@@ -476,37 +798,69 @@ export function JsonFlattener() {
     };
     go(obj, '');
     setOut(JSON.stringify(flat, null, 2));
-    toast.success('Flattened');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON Flattener</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="Nested JSON" />
-      <button onClick={handle} className={btnClass}>Flatten</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON Flattener">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 border border-orange-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="Nested JSON" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="Nested JSON..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Flatten</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-orange-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Flattened ({Object.keys(JSON.parse(out)).length} keys)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonLdGenerator() {
   const [input, setInput] = useState('{"name":"My Page","description":"A sample page"}');
   const [out, setOut] = useState('');
-  const handle = () => {
+  const typePresets = [
+    { label: 'WebPage', v: 'WebPage' },
+    { label: 'Article', v: 'Article' },
+    { label: 'Product', v: 'Product' },
+    { label: 'Organization', v: 'Organization' },
+    { label: 'Person', v: 'Person' },
+  ];
+  const [schemaType, setSchemaType] = useState('WebPage');
+  const handle = (t?: string) => {
+    const tp = t !== undefined ? t : schemaType;
+    if (t !== undefined) setSchemaType(tp);
     try {
       const parsed = JSON.parse(input);
-      const ld: Record<string, any> = { "@context": "https://schema.org", "@type": "WebPage" };
+      const ld: Record<string, any> = { "@context": "https://schema.org", "@type": tp };
       if (typeof parsed === 'object' && !Array.isArray(parsed)) Object.assign(ld, parsed);
       setOut(JSON.stringify(ld, null, 2));
-      toast.success('JSON-LD generated');
     } catch { toast.error('Invalid JSON'); }
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON-LD Generator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="JSON input to embed in schema.org context" />
-      <button onClick={handle} className={btnClass}>Generate JSON-LD</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON-LD Generator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {typePresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${schemaType === p.v ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border-blue-500/20'}`}>{p.label}</button>)}
+      </div>
+      <Input label="JSON Properties" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Generate JSON-LD</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">JSON-LD ({schemaType})</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -514,36 +868,63 @@ export function MergePatchGenerator() {
   const [orig, setOrig] = useState('{"name":"John","age":30,"city":"NYC"}');
   const [modified, setModified] = useState('{"name":"John","age":31,"city":"LA"}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const a = parseJSON(orig);
-    const b = parseJSON(modified);
-    if (!a || !b) return;
+  const jsonPresets = [
+    { label: 'Default', o: '{"name":"John","age":30,"city":"NYC"}', m: '{"name":"John","age":31,"city":"LA"}' },
+    { label: 'Add Field', o: '{"name":"John","age":30}', m: '{"name":"John","age":30,"email":"john@test.com"}' },
+    { label: 'Remove Field', o: '{"name":"John","age":30,"city":"NYC"}', m: '{"name":"John","age":30}' },
+  ];
+  const handle = (a?: string, b?: string) => {
+    const o = a !== undefined ? a : orig;
+    const m = b !== undefined ? b : modified;
+    if (a !== undefined) setOrig(o);
+    if (b !== undefined) setModified(m);
+    const objA = parseJSON(o);
+    const objB = parseJSON(m);
+    if (!objA || !objB) return;
     const patch: Record<string, any> = {};
-    const allKeys = new Set([...Object.keys(a), ...Object.keys(b)]);
+    const allKeys = new Set([...Object.keys(objA), ...Object.keys(objB)]);
     allKeys.forEach(k => {
-      if (!(k in a)) patch[k] = b[k];
-      else if (!(k in b)) patch[k] = null;
-      else if (JSON.stringify(a[k]) !== JSON.stringify(b[k])) patch[k] = b[k];
+      if (!(k in objA)) patch[k] = objB[k];
+      else if (!(k in objB)) patch[k] = null;
+      else if (JSON.stringify(objA[k]) !== JSON.stringify(objB[k])) patch[k] = objB[k];
     });
     setOut(JSON.stringify(patch, null, 2));
-    toast.success('Merge patch generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Merge Patch Generator</h1>
-      <textarea value={orig} onChange={e => setOrig(e.target.value)} className={inputClass + ' h-20'} placeholder="Original JSON" />
-      <textarea value={modified} onChange={e => setModified(e.target.value)} className={inputClass + ' h-20'} placeholder="Modified JSON" />
-      <button onClick={handle} className={btnClass}>Generate Patch</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="Merge Patch Generator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.o, p.m)} className="px-2.5 py-1 text-xs rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 hover:bg-violet-500/20 border border-violet-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="Original JSON" rows={3} value={orig} onChange={v => { setOrig(v); setOut(''); }} placeholder="Original JSON..." />
+      <Input label="Modified JSON" rows={3} value={modified} onChange={v => { setModified(v); setOut(''); }} placeholder="Modified JSON..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Patch</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-violet-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Merge Patch (RFC 7396)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonSchemaGenerator() {
   const [input, setInput] = useState('{"name":"John","age":30,"active":true}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const obj = parseJSON(input);
+  const jsonPresets = [
+    { label: 'User', v: '{"name":"John","age":30,"active":true}' },
+    { label: 'Product', v: '{"id":1,"title":"Widget","price":19.99,"inStock":true}' },
+    { label: 'Nested', v: '{"user":{"name":"Alice","address":{"street":"123 Main","zip":"10001"}},"tags":["a","b"]}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const obj = parseJSON(txt);
     if (!obj) return;
     const infer = (o: any): any => {
       if (o === null) return { type: 'null' };
@@ -559,23 +940,40 @@ export function JsonSchemaGenerator() {
       return {};
     };
     setOut(JSON.stringify({ $schema: 'http://json-schema.org/draft-07/schema#', ...infer(obj) }, null, 2));
-    toast.success('Schema generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON Schema Generator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="JSON input" />
-      <button onClick={handle} className={btnClass}>Generate Schema</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON Schema Generator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Schema</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">JSON Schema (draft-07)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonSizeAnalyzer() {
   const [input, setInput] = useState('{"name":"John","age":30,"address":{"street":"123 Main","zip":"10001"},"tags":["a","b","c"]}');
-  const [out, setOut] = useState('');
-  const handle = () => {
-    const obj = parseJSON(input);
+  const [metrics, setMetrics] = useState<{ size: string; chars: number; keys: number; depth: number; type: string; rootKeys: number } | null>(null);
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","age":30,"address":{"street":"123 Main","zip":"10001"},"tags":["a","b","c"]}' },
+    { label: 'Large', v: '{"users":[{"id":1,"name":"Alice"},{"id":2,"name":"Bob"},{"id":3,"name":"Charlie"},{"id":4,"name":"Diana"},{"id":5,"name":"Eve"}]}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const obj = parseJSON(txt);
     if (!obj) return;
     const str = JSON.stringify(obj);
     const countKeys = (o: any): number => {
@@ -586,32 +984,54 @@ export function JsonSizeAnalyzer() {
       if (typeof o !== 'object' || o === null) return 0;
       return 1 + Math.max(0, ...Object.values(o).map(maxDepth));
     };
-    const lines = [
-      `Size: ${(str.length / 1024).toFixed(2)} KB`,
-      `Characters: ${str.length}`,
-      `Keys (total): ${countKeys(obj)}`,
-      `Depth: ${maxDepth(obj)}`,
-      `Type: ${Array.isArray(obj) ? 'Array' : typeof obj}`,
-      `Root keys: ${Object.keys(obj).length}`,
-    ];
-    setOut(lines.join('\n'));
-    toast.success('Analysis done');
+    setMetrics({
+      size: (str.length / 1024).toFixed(2),
+      chars: str.length,
+      keys: countKeys(obj),
+      depth: maxDepth(obj),
+      type: Array.isArray(obj) ? 'Array' : typeof obj,
+      rootKeys: Object.keys(obj).length,
+    });
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON Size Analyzer</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="JSON input" />
-      <button onClick={handle} className={btnClass}>Analyze</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON Size Analyzer">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setMetrics(null); }} placeholder="JSON input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Analyze</button>
+      {metrics && (
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {[
+            { label: 'Size', value: `${metrics.size} KB`, color: 'border-l-rose-400' },
+            { label: 'Characters', value: metrics.chars.toLocaleString(), color: 'border-l-pink-400' },
+            { label: 'Keys (total)', value: metrics.keys.toLocaleString(), color: 'border-l-orange-400' },
+            { label: 'Max Depth', value: metrics.depth.toString(), color: 'border-l-amber-400' },
+            { label: 'Type', value: metrics.type, color: 'border-l-yellow-400' },
+            { label: 'Root Keys', value: metrics.rootKeys.toString(), color: 'border-l-lime-400' },
+          ].map(m => (
+            <div key={m.label} className={`bg-[var(--bg-surface)] rounded-xl p-3 ${m.color} border-l-4`}>
+              <span className="text-xs text-zinc-500">{m.label}</span>
+              <p className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{m.value}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonToZod() {
   const [input, setInput] = useState('{"name":"John","age":30,"active":true}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const obj = parseJSON(input);
+  const jsonPresets = [
+    { label: 'User', v: '{"name":"John","age":30,"active":true}' },
+    { label: 'Nested', v: '{"user":{"name":"Alice","age":25},"tags":["admin","user"]}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const obj = parseJSON(txt);
     if (!obj) return;
     const toZod = (o: any): string => {
       if (o === null) return 'z.null()';
@@ -626,105 +1046,179 @@ export function JsonToZod() {
       return 'z.any()';
     };
     setOut(`import { z } from 'zod';\n\nexport const schema = ${toZod(obj).trim()};`);
-    toast.success('Zod schema generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON → Zod Schema</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="JSON input" />
-      <button onClick={handle} className={btnClass}>Generate Zod</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON → Zod Schema">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Zod</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Zod Schema</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JwkGenerator() {
   const [bits, setBits] = useState('256');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const keyBytes = parseInt(bits, 10) / 8;
+  const bitPresets = ['128', '256'];
+  const handle = (b?: string) => {
+    const bs = b !== undefined ? b : bits;
+    if (b !== undefined) setBits(bs);
+    const keyBytes = parseInt(bs, 10) / 8;
     const randBytes = Array.from({ length: keyBytes }, () => Math.floor(Math.random() * 256));
     const b64url = btoa(String.fromCharCode(...randBytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     const jwk = {
       kty: 'oct',
       k: b64url,
-      alg: parseInt(bits, 10) >= 256 ? 'A256GCM' : 'A128GCM',
+      alg: parseInt(bs, 10) >= 256 ? 'A256GCM' : 'A128GCM',
       use: 'enc',
       kid: crypto.randomUUID().slice(0, 8),
     };
     setOut(JSON.stringify(jwk, null, 2));
-    toast.success('Symmetric JWK generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JWK Generator</h1>
-      <select value={bits} onChange={e => setBits(e.target.value)} className={inputClass}>
-        <option value="128">128 bits</option>
-        <option value="256">256 bits</option>
-      </select>
-      <button onClick={handle} className={btnClass}>Generate JWK</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JWK Generator">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {bitPresets.map(b => <button key={b} onClick={() => handle(b)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${bits === b ? 'bg-yellow-500 text-white border-yellow-500' : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border-yellow-500/20'}`}>{b} bits</button>)}
+      </div>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Generate JWK</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-yellow-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Symmetric JWK ({bits}-bit)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-yellow-500 hover:bg-yellow-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonlFormatter() {
   const [input, setInput] = useState('{"name":"John","age":30}\n{"name":"Jane","age":25}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const lines = input.split('\n').filter(l => l.trim());
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","age":30}\n{"name":"Jane","age":25}' },
+    { label: 'Mixed', v: '{"id":1,"active":true}\n{"id":2}\n{"id":3,"name":"Bob","tags":["a","b"]}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const lines = txt.split('\n').filter(l => l.trim());
     const formatted = lines.map(l => { try { return JSON.stringify(JSON.parse(l), null, 2); } catch { return l; } }).join('\n---\n');
     setOut(formatted);
-    toast.success('Formatted');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSONL Formatter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="One JSON object per line" />
-      <button onClick={handle} className={btnClass}>Format</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSONL Formatter">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 border border-sky-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="JSONL Input (one JSON per line)" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="One JSON object per line..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-sm font-medium transition-colors">Format</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-sky-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Formatted JSONL</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function NdjsonToJson() {
   const [input, setInput] = useState('{"name":"John","age":30}\n{"name":"Jane","age":25}');
   const [out, setOut] = useState('');
-  const handle = () => {
-    const lines = input.split('\n').filter(l => l.trim());
+  const [objCount, setObjCount] = useState(0);
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","age":30}\n{"name":"Jane","age":25}' },
+    { label: 'Events', v: '{"event":"click","ts":100}\n{"event":"scroll","ts":200}\n{"event":"submit","ts":300}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
+    const lines = txt.split('\n').filter(l => l.trim());
     const objs: any[] = [];
     for (const l of lines) { try { objs.push(JSON.parse(l)); } catch { /* skip */ } }
+    setObjCount(objs.length);
     setOut(JSON.stringify(objs, null, 2));
-    toast.success(`Converted ${objs.length} objects`);
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">NDJSON → JSON Array</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder="One JSON object per line" />
-      <button onClick={handle} className={btnClass}>Convert</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="NDJSON → JSON Array">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 border border-purple-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="NDJSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="One JSON per line..." />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-purple-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">JSON Array ({objCount} objects)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
 export function JsonToUrlParams() {
   const [input, setInput] = useState('{"name":"John","age":30,"city":"NYC"}');
   const [out, setOut] = useState('');
-  const handle = () => {
+  const jsonPresets = [
+    { label: 'Default', v: '{"name":"John","age":30,"city":"NYC"}' },
+    { label: 'Search', v: '{"q":"typescript","page":"1","sort":"asc","category":"programming"}' },
+  ];
+  const handle = (t?: string) => {
+    const txt = t !== undefined ? t : input;
+    if (t !== undefined) setInput(txt);
     try {
-      const obj = JSON.parse(input);
+      const obj = JSON.parse(txt);
       if (typeof obj !== 'object' || Array.isArray(obj)) { toast.error('Expected a flat object'); return; }
       setOut(new URLSearchParams(obj).toString());
-      toast.success('Converted');
     } catch { toast.error('Invalid JSON'); }
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">JSON → URL Params</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} className={inputClass + ' h-24'} placeholder='{"key":"value"}' />
-      <button onClick={handle} className={btnClass}>Convert</button>
-      <OutputBlock value={out} />
-    </div>
+    <Section title="JSON → URL Params">
+      <div className="flex flex-wrap gap-1.5 mb-3">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500/20 border border-pink-500/20 transition-colors">{p.label}</button>)}
+      </div>
+      <Input label="Flat JSON Object" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder='{"key":"value"}' />
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-pink-500 hover:bg-pink-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-pink-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">URL Query String</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-pink-500 hover:bg-pink-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -748,23 +1242,30 @@ export function CsvJsonRowGenerator() {
       }
     }
     setOut(results.join('\n'));
-    toast.success('Generated');
   };
+  const [copied, setCopied] = useState(false);
+  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">CSV Row / JSON Generator</h1>
-      <div className="flex gap-2">
+    <Section title="CSV Row / JSON Generator">
+      <div className="flex gap-2 mb-3">
         {[{ v: 'csv', l: 'CSV Row' }, { v: 'json', l: 'JSON' }].map(({ v, l }) => (
-          <button key={v} onClick={() => setType(v)} className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${type === v ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{l}</button>
+          <button key={v} onClick={() => setType(v)} className={`px-4 py-2 text-sm font-semibold rounded-xl border transition-colors ${type === v ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'}`}>{l}</button>
         ))}
       </div>
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-[var(--text-secondary)]">Count</span>
-        <input type="range" min={1} max={50} value={count} onChange={e => setCount(Number(e.target.value))} className="flex-1 h-1" />
-        <span className="text-sm text-[var(--text-muted)] w-5 text-right">{count}</span>
+      <div className="flex items-center gap-3 mb-3">
+        <span className="text-sm text-[var(--text-secondary)]">Rows: {count}</span>
+        <input type="range" min={1} max={50} value={count} onChange={e => setCount(Number(e.target.value))} className="flex-1 h-2 accent-blue-500" />
       </div>
-      <button onClick={handle} className={btnClass}>Generate</button>
-      <OutputBlock value={out} />
-    </div>
+      <button onClick={handle} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Generate</button>
+      {out && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-zinc-500">Generated {type.toUpperCase()} ({count} rows)</span>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+        </div>
+      )}
+    </Section>
   );
 }
