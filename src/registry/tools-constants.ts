@@ -15,8 +15,6 @@ export const proSlugs = [
   "bulk-regex-extractor-replacer", "bulk-image-to-text-ocr", "bulk-ebook-converter",
   "bulk-heic-to-jpg",
   "bulk-url-shortener",
-  "text-repeater", "text-styling", "small-text-generator", "big-text-generator",
-  "writing-tools", "citation-generator",
 ];
 
 

@@ -919,10 +919,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
-const BulkSeoLandingPage = dynamic(() => import('@/components/tools/modules/BulkSeoLandingPage'), { ssr: false, loading: () => <SkeletonLoader /> });
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { SEO_PERMUTATIONS } from '@/registry/tools';
 import { CONVERTER_CONFIG } from './shared/converterConfig';
 import ConverterRouter from './ConverterRouter';
 
@@ -940,15 +938,7 @@ export function DynamicModuleWrapper({ slug, category }: { slug: string, categor
   if (CONVERTER_CONFIG[slug]) {
     return <ConverterRouter slug={slug} />;
   }
-  
-  const seoPage = SEO_PERMUTATIONS.find(p => p.slug === slug);
-  if (seoPage) {
-    return (
-      <ErrorBoundary>
-        <BulkSeoLandingPage slug={slug} category={category} />
-      </ErrorBoundary>
-    );
-  }
+
   const toolName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   return (
     <ErrorBoundary>

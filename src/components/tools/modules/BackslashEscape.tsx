@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Copy, Download } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
@@ -21,6 +22,18 @@ export default function BackslashEscape() {
     if (output) process(output, newMode);
   };
 
+  const handleDownload = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${mode}d-string.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('File downloaded!');
+  };
+
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex items-center gap-3">
@@ -34,9 +47,17 @@ export default function BackslashEscape() {
         <textarea value={input} onChange={e => process(e.target.value, mode)} placeholder={mode === 'escape' ? 'Type or paste text with special characters...' : 'Type or paste escaped string...'} className="w-full h-[200px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
           <textarea value={output} readOnly placeholder="Result..." className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
-          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
+          {output && (
+            <div className="absolute top-3 right-3 flex gap-1">
+              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
+              <button onClick={handleDownload} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
+            </div>
+          )}
         </div>
       </div>
+      {output && (
+        <div className="text-xs text-[var(--text-muted)] text-right">{output.length} chars</div>
+      )}
     </div>
   );
 }

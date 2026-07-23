@@ -1436,7 +1436,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Developer",
     description: 'Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Minifier — Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. ',
-    dependencies: "clean-css"
+    dependencies: "clean-css",
+    showInCategory: false,
   },
   {
     id: "168",
@@ -1499,7 +1500,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Developer",
     description: 'Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML Minifier — Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. ',
-    dependencies: "html-minifier"
+    dependencies: "html-minifier",
+    showInCategory: false,
   },
   {
     id: "176",

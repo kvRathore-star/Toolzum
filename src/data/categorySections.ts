@@ -33,7 +33,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Minifiers & Compressors",
       description: "Reduce file sizes of JavaScript, CSS, HTML, and JSON for faster load times.",
       slugs: [
-        "js-minifier", "css-minifier", "html-minifier",
+        "js-minifier",
       ],
     },
     {
