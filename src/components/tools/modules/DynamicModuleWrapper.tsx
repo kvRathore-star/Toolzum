@@ -881,6 +881,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-subtitle-time-shifter': dynamic(() => import('@/components/tools/modules/BulkSubtitleTimeShifter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-subtitle-time-shifter" /> }),
   'bulk-svg-to-png': dynamic(() => import('@/components/tools/modules/BulkSvgToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-svg-to-png" /> }),
   'bulk-url-status-checker': dynamic(() => import('@/components/tools/modules/BulkUrlStatusChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-status-checker" /> }),
+  'bulk-url-shortener': dynamic(() => import('@/components/tools/modules/BulkUrlShortener'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-shortener" /> }),
   'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/BulkWebpAvifModernizer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-webp-avif-modernizer" /> }),
 
   // Standalone tools

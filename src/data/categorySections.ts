@@ -385,6 +385,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "wifi-qr-generator", "phone-parser", "otp-generator",
         "slugify-tool", "emoji-picker",
         "url-shortener",
+        "bulk-url-shortener",
         "aws-iam-policy-analyzer",
         "ring-size-converter",
         "shoe-size-converter", "zip-file-extractor",

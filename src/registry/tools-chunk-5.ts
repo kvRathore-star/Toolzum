@@ -1687,4 +1687,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSS to Stylus Converter — Convert CSS to Stylus indentation syntax. ',
     dependencies: "None",
   },
+  {
+    id: "1092",
+    name: "Bulk URL Shortener",
+    slug: "bulk-url-shortener",
+    category: "Utility",
+    description: 'Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.',
+    seoDescription: 'Free online Bulk URL Shortener — Shorten hundreds of URLs at once. Paste a list or upload a CSV, get shortened links with copy-all and CSV export. ',
+    dependencies: "Node.js / Redis",
+  },
 ];

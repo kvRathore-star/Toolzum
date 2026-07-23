@@ -14,6 +14,7 @@ export const proSlugs = [
   "bulk-markdown-to-pdf-html", "bulk-font-subsetter", "bulk-subtitle-time-shifter",
   "bulk-regex-extractor-replacer", "bulk-image-to-text-ocr", "bulk-ebook-converter",
   "bulk-heic-to-jpg",
+  "bulk-url-shortener",
 ];
 
 
@@ -109,6 +110,8 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "rust-formatter": { category: "developer", slug: "code-beautifier" },
   "yaml-to-toon": { category: "converter", slug: "yaml-json-converter" },
   "wifi-qr-generator": { category: "utility", slug: "qr-code-generator" },
+  "bulk-link-shortener": { category: "utility", slug: "bulk-url-shortener" },
+  "bulk-short-link-generator": { category: "utility", slug: "bulk-url-shortener" },
 };
 
 
