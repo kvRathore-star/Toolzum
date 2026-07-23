@@ -112,6 +112,17 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "wifi-qr-generator": { category: "utility", slug: "qr-code-generator" },
   "bulk-link-shortener": { category: "utility", slug: "bulk-url-shortener" },
   "bulk-short-link-generator": { category: "utility", slug: "bulk-url-shortener" },
+  // Coming-soon stubs — redirect to nearest working tool or category
+  "background-remover": { category: "image", slug: "ai-bg-changer" },
+  "bg-changer": { category: "image", slug: "ai-bg-changer" },
+  "image-converter": { category: "image", slug: "bulk-image-compressor" },
+  "video-converter": { category: "video", slug: "video-compressor" },
+  "ai-video-subtitler": { category: "video", slug: "subtitle-generator" },
+  "temporary-email-generator": { category: "privacy", slug: "privacy-cleaner" },
+  "browser-extension": { category: "developer", slug: "" },
+  // Thin wrappers — redirect to parent tool
+  "html-minifier": { category: "developer", slug: "js-minifier" },
+  "css-minifier": { category: "developer", slug: "js-minifier" },
 };
 
 

@@ -1404,6 +1404,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Filter Generator — Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "745",
@@ -1413,6 +1414,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.',
     seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. Coming soon.',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "747",

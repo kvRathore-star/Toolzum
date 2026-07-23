@@ -35,7 +35,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. ',
     category: 'indian-utilities',
     id:  "228",
-    dependencies: 'None'
+    dependencies: 'None',
+    showInCategory: false,
   },
   {
     name: 'Browser Extension',
@@ -44,7 +45,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. ',
     category: 'Extension',
     id:  "230",
-    dependencies: 'None'
+    dependencies: 'None',
+    showInCategory: false,
   },
   {
     name: 'MP3 Compressor',
@@ -1677,7 +1679,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format from the dropdown — your files never leave your device.',
     seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "audio-converter-1",
@@ -1977,7 +1979,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Create stunning charts and graphs online for free. Supports bar, line, pie, doughnut, area charts with custom colors, labels, and titles. Perfect for presentations and reports.',
     seoDescription: 'Free online Chart Maker — Create stunning bar, line, pie, doughnut, and area charts with custom colors and labels. ',
     dependencies: "none",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "337",
@@ -1987,7 +1989,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Replace image backgrounds with a solid color, gradient, or another image. Perfect for product photos, portraits, and creative projects. Quick and easy, right in your browser.',
     seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. Coming soon.',
     dependencies: "none",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
     id: "338",

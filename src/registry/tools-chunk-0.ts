@@ -323,6 +323,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Segments the foreground subject from an image using a neural network, producing a transparent PNG. Max 20MB.',
     dependencies: "rembg / OpenCV / TensorFlow.js",
     seoDescription: 'Remove image backgrounds automatically with AI. Coming soon.',
+    showInCategory: false,
   },
   {
     id: "34",
@@ -399,7 +400,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Uses cloud-based processing.',
     seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
-    dependencies: "Mailinator API / Custom Backend"
+    dependencies: "Mailinator API / Custom Backend",
+    showInCategory: false,
   },
   {
     id: "40",
@@ -1562,7 +1564,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Text",
     description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    showInCategory: false,
+  },
   {
     id: "186",
     name: "Invisible Text Generator",
@@ -1877,7 +1881,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "AI",
     description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Uses cloud-based processing.',
     seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. ',
-    dependencies: "Whisper API"
+    dependencies: "Whisper API",
+    showInCategory: false,
   },
   {
     name: 'Subtitle Generator',
