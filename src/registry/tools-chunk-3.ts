@@ -1422,9 +1422,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "video-converter-tool",
     category: "Video",
     description: 'Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats with format auto-detection.',
-    seoDescription: 'Free online Video Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB. Coming soon.',
+    seoDescription: 'Free online Video Format Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats. All processing happens locally.',
     dependencies: "None",
-    showInCategory: false,
+    showInCategory: true,
   },
   {
     id: "750",
