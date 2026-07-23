@@ -908,6 +908,14 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // Roadmap items
   'csv-to-sqlite': dynamic(() => import('@/components/tools/modules/CsvToSqlite'), { ssr: false, loading: () => <DynamicImportFallback slug="csv-to-sqlite" /> }),
   'vector-pen-canvas': dynamic(() => import('@/components/tools/modules/VectorPenCanvas'), { ssr: false, loading: () => <DynamicImportFallback slug="vector-pen-canvas" /> }),
+
+  // Premium text tools
+  'text-repeater': dynamic(() => import('@/components/tools/modules/TextRepeater'), { ssr: false, loading: () => <DynamicImportFallback slug="text-repeater" /> }),
+  'text-styling': dynamic(() => import('@/components/tools/modules/TextStyling'), { ssr: false, loading: () => <DynamicImportFallback slug="text-styling" /> }),
+  'small-text-generator': dynamic(() => import('@/components/tools/modules/SmallTextGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="small-text-generator" /> }),
+  'big-text-generator': dynamic(() => import('@/components/tools/modules/BigTextGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="big-text-generator" /> }),
+  'writing-tools': dynamic(() => import('@/components/tools/modules/WritingTools'), { ssr: false, loading: () => <DynamicImportFallback slug="writing-tools" /> }),
+  'citation-generator': dynamic(() => import('@/components/tools/modules/CitationGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="citation-generator" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });

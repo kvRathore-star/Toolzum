@@ -846,6 +846,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "word-counter", "character-counter",
         "ascii-table-generator",
+        "writing-tools",
       ],
     },
     {
@@ -856,6 +857,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "case-converter", "reverse-text-generator",
         "braille-translator",
         "text-to-handwriting",
+        "text-repeater",
       ],
     },
     {
@@ -868,6 +870,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "invisible-text-generator",
         "lorem-ipsum-generator",
         "pronunciation-tool",
+        "text-styling", "small-text-generator", "big-text-generator",
+        "citation-generator",
       ],
     },
   ],

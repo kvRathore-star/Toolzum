@@ -15,6 +15,8 @@ export const proSlugs = [
   "bulk-regex-extractor-replacer", "bulk-image-to-text-ocr", "bulk-ebook-converter",
   "bulk-heic-to-jpg",
   "bulk-url-shortener",
+  "text-repeater", "text-styling", "small-text-generator", "big-text-generator",
+  "writing-tools", "citation-generator",
 ];
 
 
@@ -123,6 +125,19 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   // Thin wrappers — redirect to parent tool
   "html-minifier": { category: "developer", slug: "js-minifier" },
   "css-minifier": { category: "developer", slug: "js-minifier" },
+  // Premium text tool redirects
+  "text-repeater-tool": { category: "text", slug: "text-repeater" },
+  "repeat-text": { category: "text", slug: "text-repeater" },
+  "unicode-text-styler": { category: "text", slug: "text-styling" },
+  "fancy-text-styler": { category: "text", slug: "text-styling" },
+  "superscript-generator": { category: "text", slug: "small-text-generator" },
+  "subscript-generator": { category: "text", slug: "small-text-generator" },
+  "ascii-big-text": { category: "text", slug: "big-text-generator" },
+  "bubble-text-generator": { category: "text", slug: "big-text-generator" },
+  "word-count-tool": { category: "text", slug: "writing-tools" },
+  "readability-analyzer": { category: "text", slug: "writing-tools" },
+  "apa-citation-generator": { category: "text", slug: "citation-generator" },
+  "mla-citation-generator": { category: "text", slug: "citation-generator" },
 };
 
 
