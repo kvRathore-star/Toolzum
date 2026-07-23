@@ -4,12 +4,19 @@ import { Copy, Delete } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { CalculatorShell } from './shared/CalculatorShell';
 
-const inputClass = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none";
-const labelClass = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
-const btnClass = "w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg";
-const cardClass = "max-w-2xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl animate-in fade-in duration-500";
-const headingClass = "text-2xl font-bold text-[var(--text-primary)] mb-6";
-const resultClass = "p-5 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-sm font-mono whitespace-pre text-[var(--accent)] dark:text-[var(--accent)]";
+const gradePointsMap: Record<string, number> = { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0 };
+const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
+function factorial(n: number): number {
+  if (n < 0) throw new Error('Factorial of negative number');
+  if (n === 0 || n === 1) return 1;
+  if (!Number.isInteger(n)) throw new Error('Factorial of non-integer');
+  let r = 1;
+  for (let i = 2; i <= n; i++) r *= i;
+  return r;
+}
+const inputCls = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors";
+const labelCls = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
+const btnCls = "mt-4 px-6 py-3 rounded-xl font-bold text-sm transition-all bg-[var(--accent)] text-white hover:opacity-90 active:scale-95";
 
 export function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');
@@ -50,11 +57,11 @@ export function MortgageCalculator() {
   ];
   const downloadData = result ? `Metric,Value\nMonthly Payment,$${result.split('\n')[0].split(': $')[1]}\nTotal Payment,$${result.split('\n')[1].split(': $')[1]}\nTotal Interest,$${result.split('\n')[2].split(': $')[1]}` : undefined;
   return (
-    <CalculatorShell title="Mortgage Calculator" result={result} onCalculate={calc} presets={presets} downloadData={downloadData} downloadFilename="mortgage.csv">
+    <CalculatorShell title="Mortgage Calculator" result={result} onCalculate={calc} presets={presets} downloadData={downloadData} downloadFilename="mortgage.csv" accent="indigo">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
       {amort.length > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
@@ -106,11 +113,11 @@ export function ArrCalculator() {
   const arr = (parseFloat(subRev) || 0) + (parseFloat(expRev) || 0) - (parseFloat(churnRev) || 0);
   const maxVal = Math.max(1, (parseFloat(subRev) || 0) + (parseFloat(expRev) || 0));
   return (
-    <CalculatorShell title="ARR Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="ARR Calculator" result={result} onCalculate={calc} presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Subscription Revenue ($)</label><input type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Expansion Revenue ($)</label><input type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Churn Revenue ($)</label><input type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Subscription Revenue ($)</label><input type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Expansion Revenue ($)</label><input type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Revenue ($)</label><input type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-2">
@@ -170,12 +177,12 @@ export function CompoundInterestCalculator() {
   ];
   const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
-    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
       </div>
       {yearData.length > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
@@ -236,11 +243,11 @@ export function CarLoanCalculator() {
   const p = parseFloat(loan);
   const pmt = p && r ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
   return (
-    <CalculatorShell title="Car Loan Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Car Loan Calculator" result={result} onCalculate={calc} presets={presets} accent="violet">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
       {result && pmt > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -292,12 +299,12 @@ export function CarLeaseCalculator() {
   const res = parseFloat(residual) || 0;
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
   return (
-    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
       <div className="grid grid-cols-2 gap-4">
-        <div className="md:col-span-2"><label className={labelClass}>Capitalized Cost ($)</label><input type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Residual Value ($)</label><input type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Lease Term (months)</label><input type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Money Factor</label><input type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputClass} /></div>
+        <div className="md:col-span-2"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Capitalized Cost ($)</label><input type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Residual Value ($)</label><input type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Lease Term (months)</label><input type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Money Factor</label><input type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputCls} /></div>
       </div>
       {result && monthly > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -348,10 +355,10 @@ export function ChurnRateCalculator() {
   const t = parseFloat(total) || 1;
   const churnPct = (l / t) * 100;
   return (
-    <CalculatorShell title="Churn Rate Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Churn Rate Calculator" result={result} onCalculate={calc} presets={presets} accent="rose">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Customers Lost</label><input type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Total Customers</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-3">
@@ -400,10 +407,10 @@ export function ConversionRateCalculator() {
   const v = parseFloat(visitors) || 1;
   const cr = (c / v) * 100;
   return (
-    <CalculatorShell title="Conversion Rate Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Conversion Rate Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Conversions</label><input type="number" value={conversions} onChange={e => setConversions(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Total Visitors</label><input type="number" value={visitors} onChange={e => setVisitors(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Conversions</label><input type="number" value={conversions} onChange={e => setConversions(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Visitors</label><input type="number" value={visitors} onChange={e => setVisitors(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-2">
@@ -435,7 +442,7 @@ export function DebtPayoffCalculator() {
     const r = annualRate / 100 / 12;
     const p = parseFloat(payment) || 0;
     if (!b || !p) return;
-    if (p <= b * r) { setResult('Payment too low — not covering monthly interest. Increase payment.'); return; }
+    if (p <= b * r) { setResult('Payment too low - not covering monthly interest. Increase payment.'); return; }
     let remaining = b;
     let months = 0;
     let totalPaid = 0;
@@ -470,11 +477,11 @@ export function DebtPayoffCalculator() {
     }
   }
   return (
-    <CalculatorShell title="Debt Payoff Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Debt Payoff Calculator" result={result} onCalculate={calc} presets={presets} accent="orange">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Current Balance ($)</label><input type="number" value={balance} onChange={e => setBalance(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Monthly Payment ($)</label><input type="number" value={payment} onChange={e => setPayment(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Balance ($)</label><input type="number" value={balance} onChange={e => setBalance(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Payment ($)</label><input type="number" value={payment} onChange={e => setPayment(e.target.value)} className={inputCls} /></div>
       </div>
       {result && payoffMonths > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
@@ -483,7 +490,7 @@ export function DebtPayoffCalculator() {
               <span className="text-xs text-[var(--text-tertiary)]">Payoff Timeline</span>
               <span className="text-xs font-bold text-[var(--text-primary)]">{payoffMonths} months ({Math.floor(payoffMonths / 12)} yr {payoffMonths % 12} mo)</span>
             </div>
-            <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
+            <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden relative">
               {[25, 50, 75, 100].map(pct => (
                 <div key={pct} className="absolute top-0 h-full w-px bg-[var(--border-subtle)]" style={{ left: `${pct}%` }} />
               ))}
@@ -521,16 +528,16 @@ export function DiscountCalculator() {
   const savings = p * d / 100;
   const final = p - savings;
   return (
-    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="flex justify-between items-end mb-3">
             <div className="text-center flex-1">
-              <div className="text-lg line-through text-[var(--text-tertiary)]">$${p.toFixed(0)}</div>
+              <div className="text-lg line-through text-[var(--text-tertiary)]">${p.toFixed(0)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">Original</div>
             </div>
             <div className="text-2xl font-bold text-emerald-400 px-4">&#8594;</div>
@@ -547,6 +554,7 @@ export function DiscountCalculator() {
     </CalculatorShell>
   );
 }
+
 
 export function HourlyToSalaryCalculator() {
   const [hourly, setHourly] = useState('25');
@@ -572,10 +580,10 @@ export function HourlyToSalaryCalculator() {
   const annual = h * hpw * 52;
   const monthly = annual / 12;
   return (
-    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets} accent="pink">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Hourly Rate ($)</label><input type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Hours per Week</label><input type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hourly Rate ($)</label><input type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hours per Week</label><input type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -620,11 +628,11 @@ export function InflationCalculator() {
   const y = parseFloat(years) || 0;
   const fv = p * Math.pow(1 + r, y);
   return (
-    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets} accent="lime">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -655,11 +663,25 @@ export function LtvCalculator() {
   const calc = useCallback(() => {
     const ltv = parseFloat(arpu) / (parseFloat(churn) / 100);
     setResult(`Customer Lifetime Value: $${ltv.toFixed(2)}`);
-  }, []);
+  }, [arpu, churn]);
+  const presets = [
+    { label: 'SaaS', apply: () => { setArpu('50'); setChurn('5'); } },
+    { label: 'Enterprise', apply: () => { setArpu('500'); setChurn('3'); } },
+    { label: 'Consumer', apply: () => { setArpu('10'); setChurn('8'); } },
+  ];
+  const ltv = parseFloat(arpu) / (parseFloat(churn) / 100 || 0.01);
   return (
-    <CalculatorShell title="LTV Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>ARPU ($)</label><input type="number" value={arpu} onChange={e => setArpu(e.target.value)} className={inputClass} /></div>
-      <div><label className={labelClass}>Churn Rate (%)</label><input type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputClass} /></div>
+    <CalculatorShell title="LTV Calculator" result={result} onCalculate={calc} presets={presets} accent="sky">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">ARPU ($)</label><input type="number" value={arpu} onChange={e => setArpu(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Rate (%)</label><input type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputCls} /></div>
+      </div>
+      {result && (
+        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
+          <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>
+          <div className="text-3xl font-bold text-indigo-400">$${ltv.toFixed(0)}</div>
+        </div>
+      )}
     </CalculatorShell>
   );
 }
@@ -684,10 +706,10 @@ export function MrrCalculator() {
   const r = parseFloat(avgRevenue) || 0;
   const mrr = c * r;
   return (
-    <CalculatorShell title="MRR Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="MRR Calculator" result={result} onCalculate={calc} presets={presets} accent="fuchsia">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Number of Customers</label><input type="number" value={customers} onChange={e => setCustomers(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Avg Revenue/Customer ($)</label><input type="number" value={avgRevenue} onChange={e => setAvgRevenue(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number of Customers</label><input type="number" value={customers} onChange={e => setCustomers(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Avg Revenue/Customer ($)</label><input type="number" value={avgRevenue} onChange={e => setAvgRevenue(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="grid grid-cols-3 gap-3">
@@ -735,10 +757,10 @@ export function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets} accent="purple">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Total Assets ($)</label><input type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Total Liabilities ($)</label><input type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Assets ($)</label><input type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Liabilities ($)</label><input type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-3">
@@ -797,11 +819,11 @@ export function NpsCalculator() {
   const pctDet = total > 0 ? (det / total) * 100 : 0;
   const nps = pctPromo - pctDet;
   return (
-    <CalculatorShell title="Net Promoter Score" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Net Promoter Score" result={result} onCalculate={calc} presets={presets} accent="red">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={`${labelClass} text-emerald-400`}>Promoters (9-10)</label><input type="number" value={promoters} onChange={e => setPromoters(e.target.value)} className={inputClass} /></div>
-        <div><label className={`${labelClass} text-amber-400`}>Passives (7-8)</label><input type="number" value={passives} onChange={e => setPassives(e.target.value)} className={inputClass} /></div>
-        <div><label className={`${labelClass} text-red-400`}>Detractors (0-6)</label><input type="number" value={detractors} onChange={e => setDetractors(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-emerald-400 mb-1.5">Promoters (9-10)</label><input type="number" value={promoters} onChange={e => setPromoters(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-amber-400 mb-1.5">Passives (7-8)</label><input type="number" value={passives} onChange={e => setPassives(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-red-400 mb-1.5">Detractors (0-6)</label><input type="number" value={detractors} onChange={e => setDetractors(e.target.value)} className={inputCls} /></div>
       </div>
       {result && total > 0 && (
         <div className="space-y-3">
@@ -863,13 +885,13 @@ export function RentVsBuyCalculator() {
   const rentTotal = monthlyRent * 12 * term;
   const buyPct = buyNet + rentTotal > 0 ? buyNet / (buyNet + rentTotal) * 100 : 50;
   return (
-    <CalculatorShell title="Rent vs Buy Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Rent vs Buy Calculator" result={result} onCalculate={calc} presets={presets} accent="green">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Home Price ($)</label><input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Down Payment ($)</label><input type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Mortgage Rate (%)</label><input type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Monthly Rent ($)</label><input type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Timeframe (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Home Price ($)</label><input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Down Payment ($)</label><input type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Mortgage Rate (%)</label><input type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Rent ($)</label><input type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Timeframe (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-3">
@@ -896,6 +918,7 @@ export function RentVsBuyCalculator() {
     </CalculatorShell>
   );
 }
+
 
 export function RetirementCalculator() {
   const [currentAge, setCurrentAge] = useState('30');
@@ -931,15 +954,15 @@ export function RetirementCalculator() {
   const growth = fv - totalContrib;
   const growthPct = totalContrib > 0 ? (growth / totalContrib) * 100 : 0;
   return (
-    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Retire Age</label><input type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputCls} /></div>
+          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Retire Age</label><input type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputCls} /></div>
         </div>
-        <div><label className={labelClass}>Current Savings ($)</label><input type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Savings ($)</label><input type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-3">
@@ -990,10 +1013,10 @@ export function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Current Period ($)</label><input type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Previous Period ($)</label><input type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Period ($)</label><input type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Period ($)</label><input type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -1044,10 +1067,10 @@ export function RunwayCalculator() {
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell title="Runway Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Runway Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Cash Balance ($)</label><input type="number" value={cash} onChange={e => setCash(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Monthly Burn Rate ($)</label><input type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Cash Balance ($)</label><input type="number" value={cash} onChange={e => setCash(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Burn Rate ($)</label><input type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-2">
@@ -1102,12 +1125,12 @@ export function AbTestCalculator() {
   const cr2 = vc / vv;
   const pct = cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0;
   return (
-    <CalculatorShell title="A/B Test Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="A/B Test Calculator" result={result} onCalculate={calc} presets={presets} accent="violet">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Control Visitors</label><input type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Control Conversions</label><input type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Variant Visitors</label><input type="number" value={variantVisitors} onChange={e => setVariantVisitors(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Variant Conversions</label><input type="number" value={variantConversions} onChange={e => setVariantConversions(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Visitors</label><input type="number" value={variantVisitors} onChange={e => setVariantVisitors(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Conversions</label><input type="number" value={variantConversions} onChange={e => setVariantConversions(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-2">
@@ -1167,10 +1190,10 @@ export function BusinessDaysCalculator() {
     current.setDate(current.getDate() + 1);
   }
   return (
-    <CalculatorShell title="Business Days Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Business Days Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Start Date</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>End Date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Start Date</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">End Date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -1210,15 +1233,20 @@ export function DaysBetweenDates() {
     const years = days / 365.25;
     setResult(`Days: ${days}\nWeeks: ${weeks}\nMonths: ~${months}\nYears: ~${years.toFixed(2)}`);
   }, [date1, date2]);
+  const presets = [
+    { label: '1 Year', apply: () => { setDate1('2026-01-01'); setDate2('2026-12-31'); } },
+    { label: 'Summer Break', apply: () => { setDate1('2026-06-01'); setDate2('2026-08-31'); } },
+    { label: 'Short Trip', apply: () => { setDate1('2026-07-15'); setDate2('2026-07-22'); } },
+  ];
   const d1 = new Date(date1);
   const d2 = new Date(date2);
   const diff = Math.abs(d2.getTime() - d1.getTime());
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Between Dates" result={result} onCalculate={calc}>
+    <CalculatorShell title="Days Between Dates" result={result} onCalculate={calc} presets={presets} accent="rose">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Date 1</label><input type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Date 2</label><input type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 1</label><input type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 2</label><input type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputCls} /></div>
       </div>
       {result && days > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -1256,13 +1284,18 @@ export function DaysUntilCalculator() {
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     setResult(`Days Until: ${days}\nHours Until: ${days * 24 + hours}\nTarget: ${target.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}`);
   }, [targetDate]);
+  const presets = [
+    { label: 'New Year', apply: () => { setTargetDate('2027-01-01'); } },
+    { label: 'Christmas', apply: () => { setTargetDate('2026-12-25'); } },
+    { label: 'Birthday', apply: () => { setTargetDate('2027-06-15'); } },
+  ];
   const now = new Date();
   const target = new Date(targetDate);
   const diff = target.getTime() - now.getTime();
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Until Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Target Date</label><input type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Days Until Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Target Date</label><input type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputCls} /></div>
       {result && days > 0 && (
         <div className="bg-indigo-500/10 rounded-xl p-4 text-center border border-indigo-500/20">
           <div className="text-xs text-[var(--text-tertiary)]">Countdown</div>
@@ -1282,13 +1315,18 @@ export function DayOfWeekCalculator() {
     const month = d.toLocaleString('en-US', { month: 'long' });
     setResult(`Day of Week: ${days[d.getDay()]}\nDate: ${month} ${d.getDate()}, ${d.getFullYear()}`);
   }, [date]);
+  const presets = [
+    { label: 'Christmas', apply: () => { setDate('2026-12-25'); } },
+    { label: 'New Year', apply: () => { setDate('2027-01-01'); } },
+    { label: 'Today', apply: () => { setDate(new Date().toISOString().split('T')[0]); } },
+  ];
   const d = new Date(date);
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const dayName = days[d.getDay()];
   const colors: Record<string, string> = { Sunday: 'text-red-400', Monday: 'text-indigo-400', Tuesday: 'text-emerald-400', Wednesday: 'text-amber-400', Thursday: 'text-blue-400', Friday: 'text-teal-400', Saturday: 'text-purple-400' };
   return (
-    <CalculatorShell title="Day of Week Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className={`text-3xl font-bold ${colors[dayName] || 'text-indigo-400'}`}>{dayName}</div>
@@ -1312,6 +1350,11 @@ export function DayOfYearCalculator() {
     const pct = (day / totalDays) * 100;
     setResult(`Day of Year: ${day} of ${totalDays}\nYear Progress: ${pct.toFixed(1)}%\nDays Remaining: ${totalDays - day}`);
   }, [date]);
+  const presets = [
+    { label: 'Mid Year', apply: () => { setDate('2026-07-01'); } },
+    { label: 'Year Start', apply: () => { setDate('2026-01-01'); } },
+    { label: 'Year End', apply: () => { setDate('2026-12-31'); } },
+  ];
   const d = new Date(date);
   const year = d.getFullYear();
   const start = new Date(year, 0, 0);
@@ -1320,8 +1363,8 @@ export function DayOfYearCalculator() {
   const totalDays = isLeap ? 366 : 365;
   const pct = (day / totalDays) * 100;
   return (
-    <CalculatorShell title="Day of Year Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Day of Year Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
@@ -1337,6 +1380,7 @@ export function DayOfYearCalculator() {
   );
 }
 
+
 export function ExponentCalculator() {
   const [base, setBase] = useState('2');
   const [exp, setExp] = useState('10');
@@ -1348,14 +1392,19 @@ export function ExponentCalculator() {
     const log10 = Math.log10(val);
     setResult(`${b}^${e} = ${val.toLocaleString()}\nScientific: ${val.toExponential(4)}\nLog10: ${log10.toFixed(4)}`);
   }, [base, exp]);
+  const presets = [
+    { label: '2^10 (1024)', apply: () => { setBase('2'); setExp('10'); } },
+    { label: '10^3 (1000)', apply: () => { setBase('10'); setExp('3'); } },
+    { label: '5^4 (625)', apply: () => { setBase('5'); setExp('4'); } },
+  ];
   const b = parseFloat(base) || 0;
   const e = parseFloat(exp) || 0;
   const val = Math.pow(b, e);
   return (
-    <CalculatorShell title="Exponent Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Exponent Calculator" result={result} onCalculate={calc} presets={presets} accent="pink">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Base</label><input type="number" value={base} onChange={e => setBase(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Exponent</label><input type="number" value={exp} onChange={e => setExp(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Base</label><input type="number" value={base} onChange={e => setBase(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Exponent</label><input type="number" value={exp} onChange={e => setExp(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1394,10 +1443,10 @@ export function FinalGradeCalculator() {
   for (let i = 0; i < g.length; i++) { total += g[i] * w[i] / 100; weightSum += w[i]; }
   const final = weightSum > 0 ? total / (weightSum / 100) : 0;
   return (
-    <CalculatorShell title="Final Grade Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="Final Grade Calculator" result={result} onCalculate={calc} presets={presets} accent="lime">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Grades (comma-separated)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Weights (comma-separated, %)</label><input type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (comma-separated)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Weights (comma-separated, %)</label><input type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -1410,8 +1459,6 @@ export function FinalGradeCalculator() {
     </CalculatorShell>
   );
 }
-
-const gradePointsMap: Record<string, number> = { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0 };
 
 export function GpaCalculator() {
   const [grades, setGrades] = useState('A,B+,A-');
@@ -1427,7 +1474,7 @@ export function GpaCalculator() {
       const gp = gradePointsMap[g[i]] || 0;
       totalPoints += gp * c[i];
       totalCredits += c[i];
-      details.push(`${g[i]} (${c[i]} cr) = ${gp.toFixed(1)} × ${c[i]}`);
+      details.push(`${g[i]} (${c[i]} cr) = ${gp.toFixed(1)} \u00d7 ${c[i]}`);
     }
     const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
     setResult(`GPA: ${gpa.toFixed(2)}\nTotal Points: ${totalPoints.toFixed(1)}\nTotal Credits: ${totalCredits}`);
@@ -1437,10 +1484,10 @@ export function GpaCalculator() {
     { label: 'Average Semester', apply: () => { setGrades('B,B+,C+'); setCredits('3,3,4'); } },
   ];
   return (
-    <CalculatorShell title="GPA Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="sky">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Grades (e.g., A,B+,A-)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Credits (comma-separated)</label><input type="text" value={credits} onChange={e => setCredits(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (e.g., A,B+,A-)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Credits (comma-separated)</label><input type="text" value={credits} onChange={e => setCredits(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (() => {
         const g = grades.split(',').map(g => g.trim().toUpperCase());
@@ -1469,12 +1516,17 @@ export function GradeCalculator() {
     const passed = letter !== 'F';
     setResult(`Letter Grade: ${letter}\nPercentage: ${p}%\n${passed ? 'Passed' : 'Failed'}`);
   }, [percentage]);
+  const presets = [
+    { label: 'Excellent (A)', apply: () => { setPercentage('95'); } },
+    { label: 'Passing (D)', apply: () => { setPercentage('65'); } },
+    { label: 'Failing (F)', apply: () => { setPercentage('55'); } },
+  ];
   const p = parseFloat(percentage) || 0;
   const letter = getLetter(p);
   const colorMap: Record<string, string> = { 'A': 'text-emerald-400', 'A-': 'text-emerald-400', 'B+': 'text-blue-400', 'B': 'text-blue-400', 'B-': 'text-blue-400', 'C+': 'text-amber-400', 'C': 'text-amber-400', 'C-': 'text-amber-400', 'D+': 'text-orange-400', 'D': 'text-orange-400', 'F': 'text-red-400' };
   return (
-    <CalculatorShell title="Grade Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Percentage (%)</label><input type="number" value={percentage} onChange={e => setPercentage(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Grade Calculator" result={result} onCalculate={calc} presets={presets} accent="fuchsia">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Percentage (%)</label><input type="number" value={percentage} onChange={e => setPercentage(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="space-y-2">
           <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1518,12 +1570,12 @@ export function CollegeGpaCalculator() {
     { label: 'Junior Year', apply: () => { setSemGrades('A-,A,B'); setSemCredits('4,3,3'); setPrevGpa('3.2'); setPrevCredits('60'); } },
   ];
   return (
-    <CalculatorShell title="College GPA Calculator" result={result} onCalculate={calc} presets={presets}>
+    <CalculatorShell title="College GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="purple">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Semester Grades (e.g., A,B+,A-)</label><input type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Semester Credits</label><input type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Previous GPA</label><input type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Previous Credits</label><input type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous GPA</label><input type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Credits</label><input type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (() => {
         const g = semGrades.split(',').map(g => g.trim().toUpperCase());
@@ -1560,11 +1612,16 @@ export function LeapYearCalculator() {
     const nextLeap = isLeap ? y : (() => { let n = y; while (!((n % 4 === 0 && n % 100 !== 0) || n % 400 === 0)) n++; return n; })();
     setResult(`${y} is ${isLeap ? '' : 'not '}a leap year\nNext leap year: ${nextLeap}\nDays in ${y}: ${isLeap ? 366 : 365}`);
   }, [year]);
+  const presets = [
+    { label: '2024 (Leap)', apply: () => { setYear('2024'); } },
+    { label: '2026 (No)', apply: () => { setYear('2026'); } },
+    { label: '2000 (Leap)', apply: () => { setYear('2000'); } },
+  ];
   const y = parseInt(year);
   const isLeap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
   return (
-    <CalculatorShell title="Leap Year Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Leap Year Calculator" result={result} onCalculate={calc} presets={presets} accent="red">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className={`bg-[var(--bg-overlay)] rounded-xl p-4 text-center border ${isLeap ? 'border-emerald-500/20' : 'border-amber-500/20'}`}>
           <div className={`text-3xl font-bold ${isLeap ? 'text-emerald-400' : 'text-amber-400'}`}>{isLeap ? 'Leap Year' : 'Not a Leap Year'}</div>
@@ -1588,14 +1645,19 @@ export function ProbabilityCalculator() {
     const odds = `${f}:${t - f}`;
     setResult(`Probability: ${pct.toFixed(2)}%\nOdds: ${odds}\nFraction: ${f}/${t}\nDecimal: ${prob.toFixed(4)}`);
   }, [favorable, total]);
+  const presets = [
+    { label: 'Coin Flip', apply: () => { setFavorable('1'); setTotal('2'); } },
+    { label: 'Dice Roll', apply: () => { setFavorable('1'); setTotal('6'); } },
+    { label: 'Deck of Cards', apply: () => { setFavorable('13'); setTotal('52'); } },
+  ];
   const f = parseFloat(favorable) || 0;
   const t = parseFloat(total) || 1;
   const pct = (f / t) * 100;
   return (
-    <CalculatorShell title="Probability Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Probability Calculator" result={result} onCalculate={calc} presets={presets} accent="green">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Favorable Outcomes</label><input type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Total Possible Outcomes</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Favorable Outcomes</label><input type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Possible Outcomes</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="space-y-2">
@@ -1625,16 +1687,21 @@ export function ProportionCalculator() {
     const d = (nb * nc) / na;
     setResult(`${na} : ${nb} = ${nc} : ${d.toFixed(4)}\nMissing value (D) = ${d.toFixed(4)}`);
   }, [a, b, c]);
+  const presets = [
+    { label: '2:5 = 8:?', apply: () => { setA('2'); setB('5'); setC('8'); } },
+    { label: '3:4 = 12:?', apply: () => { setA('3'); setB('4'); setC('12'); } },
+    { label: '1:10 = 5:?', apply: () => { setA('1'); setB('10'); setC('5'); } },
+  ];
   const na = parseFloat(a) || 0;
   const nb = parseFloat(b) || 0;
   const nc = parseFloat(c) || 0;
   const d = na ? (nb * nc) / na : 0;
   return (
-    <CalculatorShell title="Proportion Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Proportion Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>A</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>B (first ratio)</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>C (solve D)</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)] font-mono text-lg">
@@ -1644,8 +1711,6 @@ export function ProportionCalculator() {
     </CalculatorShell>
   );
 }
-
-const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
 
 export function RatioCalculator() {
   const [num1, setNum1] = useState('12');
@@ -1659,14 +1724,19 @@ export function RatioCalculator() {
     const pct = (n1 / n2) * 100;
     setResult(`Simplified Ratio: ${n1 / g} : ${n2 / g}\nProportion: ${pct.toFixed(1)}% (${n1} is ${pct.toFixed(1)}% of ${n2})`);
   }, [num1, num2]);
+  const presets = [
+    { label: '12:8', apply: () => { setNum1('12'); setNum2('8'); } },
+    { label: '16:9 (HD)', apply: () => { setNum1('16'); setNum2('9'); } },
+    { label: '100:75', apply: () => { setNum1('100'); setNum2('75'); } },
+  ];
   const n1 = parseInt(num1) || 0;
   const n2 = parseInt(num2) || 1;
   const g = gcd(n1, n2);
   return (
-    <CalculatorShell title="Ratio Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Ratio Calculator" result={result} onCalculate={calc} presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>First Number</label><input type="number" value={num1} onChange={e => setNum1(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Second Number</label><input type="number" value={num2} onChange={e => setNum2(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">First Number</label><input type="number" value={num1} onChange={e => setNum1(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Second Number</label><input type="number" value={num2} onChange={e => setNum2(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1687,18 +1757,23 @@ export function AspectRatioCalculator() {
     if (!w || !h) return;
     const g = gcd(w, h);
     const ratio = (w / g) / (h / g);
-    setResult(`Aspect Ratio: ${w / g}:${h / g}\nRatio: ${ratio.toFixed(3)}:1\n(${w} × ${h})`);
+    setResult(`Aspect Ratio: ${w / g}:${h / g}\nRatio: ${ratio.toFixed(3)}:1\n(${w} \u00d7 ${h})`);
   }, [width, height]);
+  const presets = [
+    { label: 'HD 16:9', apply: () => { setWidth('1920'); setHeight('1080'); } },
+    { label: '4:3', apply: () => { setWidth('1024'); setHeight('768'); } },
+    { label: 'Ultrawide 21:9', apply: () => { setWidth('2560'); setHeight('1080'); } },
+  ];
   const w = parseInt(width) || 0;
   const h = parseInt(height) || 1;
   const g = gcd(w, h);
   const commonRatios = ['16:9', '4:3', '21:9', '3:2', '1:1', '5:4'];
   const match = commonRatios.find(r => { const [rw, rh] = r.split(':').map(Number); return w / h === rw / rh; });
   return (
-    <CalculatorShell title="Aspect Ratio Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Aspect Ratio Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Width (px)</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Height (px)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width (px)</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Height (px)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
@@ -1707,7 +1782,7 @@ export function AspectRatioCalculator() {
             {match && <div className="text-xs text-emerald-400 mt-1">Common: {match}</div>}
           </div>
           <div className="mt-3 bg-[var(--bg-elevated)] rounded-lg h-24 flex items-center justify-center" style={{ aspectRatio: `${w / g}/${h / g}` }}>
-            <div className="text-xs text-[var(--text-tertiary)]">{w} × {h}</div>
+            <div className="text-xs text-[var(--text-tertiary)]">{w} \u00d7 {h}</div>
           </div>
         </div>
       )}
@@ -1725,11 +1800,16 @@ export function CircleCalculator() {
     const diameter = 2 * r;
     setResult(`Radius: ${r}\nDiameter: ${diameter}\nArea: ${area.toFixed(4)}\nCircumference: ${circumference.toFixed(4)}`);
   }, [radius]);
+  const presets = [
+    { label: 'r=1', apply: () => { setRadius('1'); } },
+    { label: 'r=5', apply: () => { setRadius('5'); } },
+    { label: 'r=10', apply: () => { setRadius('10'); } },
+  ];
   const r = parseFloat(radius) || 0;
   const area = Math.PI * r * r;
   return (
-    <CalculatorShell title="Circle Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Radius</label><input type="number" value={radius} onChange={e => setRadius(e.target.value)} step="0.1" className={inputClass} /></div>
+    <CalculatorShell title="Circle Calculator" result={result} onCalculate={calc} presets={presets} accent="violet">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Radius</label><input type="number" value={radius} onChange={e => setRadius(e.target.value)} step="0.1" className={inputCls} /></div>
       {result && (
         <div className="grid grid-cols-2 gap-2">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
@@ -1758,14 +1838,19 @@ export function DpiCalculator() {
     const dotPitch = 25.4 / dpi;
     setResult(`DPI: ${dpi.toFixed(2)}\nDot Pitch: ${dotPitch.toFixed(4)} mm\nTotal Dots: ${p}`);
   }, [pixels, inches]);
+  const presets = [
+    { label: 'MacBook 13\"', apply: () => { setPixels('2560'); setInches('13.3'); } },
+    { label: 'Full HD 24\"', apply: () => { setPixels('1920'); setInches('24'); } },
+    { label: 'Phone 6.1\"', apply: () => { setPixels('2532'); setInches('6.1'); } },
+  ];
   const p = parseFloat(pixels) || 0;
   const i = parseFloat(inches) || 1;
   const dpi = p / i;
   return (
-    <CalculatorShell title="DPI Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="DPI Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Pixels</label><input type="number" value={pixels} onChange={e => setPixels(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Inches</label><input type="number" value={inches} onChange={e => setInches(e.target.value)} step="0.1" className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Pixels</label><input type="number" value={pixels} onChange={e => setPixels(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inches</label><input type="number" value={inches} onChange={e => setInches(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1797,16 +1882,20 @@ export function FractionCalculator() {
     const g = gcd(Math.abs(n), Math.abs(d));
     n /= g; d /= g;
     const decimal = n / d;
-    setResult(`${frac1} ${op === '*' ? '×' : op === '/' ? '÷' : op} ${frac2} = ${n}/${d}${d === 1 ? ` = ${n}` : ` = ${decimal.toFixed(4)}`}`);
+    setResult(`${frac1} ${op === '*' ? '\u00d7' : op === '/' ? '\u00f7' : op} ${frac2} = ${n}/${d}${d === 1 ? ` = ${n}` : ` = ${decimal.toFixed(4)}`}`);
   }, [frac1, frac2, op]);
+  const presets = [
+    { label: '1/2 + 1/3', apply: () => { setFrac1('1/2'); setFrac2('1/3'); setOp('+'); } },
+    { label: '3/4 * 2/5', apply: () => { setFrac1('3/4'); setFrac2('2/5'); setOp('*'); } },
+  ];
   return (
-    <CalculatorShell title="Fraction Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Fraction Calculator" result={result} onCalculate={calc} presets={presets} accent="rose">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-        <div><label className={labelClass}>Fraction 1</label><input type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputClass} /></div>
-        <div><label className={labelClass}>Operation</label><select value={op} onChange={e => setOp(e.target.value)} className={inputClass}>
-          <option value="+">+</option><option value="-">-</option><option value="*">×</option><option value="/">÷</option>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 1</label><input type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Operation</label><select value={op} onChange={e => setOp(e.target.value)} className={inputCls}>
+          <option value="+">+</option><option value="-">-</option><option value="*">\u00d7</option><option value="/">\u00f7</option>
         </select></div>
-        <div><label className={labelClass}>Fraction 2</label><input type="text" value={frac2} onChange={e => setFrac2(e.target.value)} placeholder="1/3" className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 2</label><input type="text" value={frac2} onChange={e => setFrac2(e.target.value)} placeholder="1/3" className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)] font-mono">
@@ -1834,11 +1923,16 @@ export function MeanMedianModeCalculator() {
     const range = nums[nums.length - 1] - nums[0];
     setResult(`Mean: ${mean.toFixed(4)}\nMedian: ${median}\nMode: ${mode}\nRange: ${range}\nCount: ${nums.length}`);
   }, [numbers]);
+  const presets = [
+    { label: '2,4,4,6,8', apply: () => { setNumbers('2,4,4,6,8'); } },
+    { label: '1,2,3,4,5', apply: () => { setNumbers('1,2,3,4,5'); } },
+    { label: '10,20,30', apply: () => { setNumbers('10,20,30'); } },
+  ];
   const nums = numbers.split(',').map(Number).sort((a, b) => a - b);
   const mean = nums.length ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
   return (
-    <CalculatorShell title="Mean Median Mode Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Mean Median Mode Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="grid grid-cols-2 gap-2">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
@@ -1855,6 +1949,7 @@ export function MeanMedianModeCalculator() {
   );
 }
 
+
 export function PpiCalculator() {
   const [diagPixels, setDiagPixels] = useState('2200');
   const [diagInches, setDiagInches] = useState('6.1');
@@ -1867,14 +1962,19 @@ export function PpiCalculator() {
     const dotPitch = 25.4 / ppi;
     setResult(`PPI: ${ppi.toFixed(2)}\nDot Pitch: ${dotPitch.toFixed(4)} mm`);
   }, [diagPixels, diagInches]);
+  const presets = [
+    { label: 'iPhone 6.1\"', apply: () => { setDiagPixels('2532'); setDiagInches('6.1'); } },
+    { label: '27\" Monitor', apply: () => { setDiagPixels('3840'); setDiagInches('27'); } },
+    { label: '15\" Laptop', apply: () => { setDiagPixels('1920'); setDiagInches('15.6'); } },
+  ];
   const p = parseFloat(diagPixels) || 0;
   const i = parseFloat(diagInches) || 1;
   const ppi = p / i;
   return (
-    <CalculatorShell title="PPI Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="PPI Calculator" result={result} onCalculate={calc} presets={presets} accent="orange">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Diagonal Pixels</label><input type="number" value={diagPixels} onChange={e => setDiagPixels(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Diagonal Inches</label><input type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Pixels</label><input type="number" value={diagPixels} onChange={e => setDiagPixels(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Inches</label><input type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1899,18 +1999,23 @@ export function PythagoreanTheoremCalculator() {
     const perimeter = na + nb + c;
     setResult(`Hypotenuse (c) = ${c.toFixed(4)}\nArea: ${area.toFixed(4)}\nPerimeter: ${perimeter.toFixed(4)}`);
   }, [a, b]);
+  const presets = [
+    { label: '3-4-5', apply: () => { setA('3'); setB('4'); } },
+    { label: '5-12-13', apply: () => { setA('5'); setB('12'); } },
+    { label: '6-8-10', apply: () => { setA('6'); setB('8'); } },
+  ];
   const na = parseFloat(a) || 0;
   const nb = parseFloat(b) || 0;
   const c = Math.sqrt(na * na + nb * nb);
   return (
-    <CalculatorShell title="Pythagorean Theorem" result={result} onCalculate={calc}>
+    <CalculatorShell title="Pythagorean Theorem" result={result} onCalculate={calc} presets={presets} accent="teal">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Side a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Side b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">c = √(a² + b²)</div>
+          <div className="text-xs text-[var(--text-tertiary)]">c = \u221a(a\u00b2 + b\u00b2)</div>
           <div className="text-3xl font-bold text-indigo-400">{c.toFixed(2)}</div>
         </div>
       )}
@@ -1932,26 +2037,31 @@ export function QuadraticEquationSolver() {
     if (disc < 0) {
       const real = (-B / (2 * A)).toFixed(4);
       const imag = (Math.sqrt(-disc) / (2 * A)).toFixed(4);
-      setResult(`Discriminant: ${disc.toFixed(4)} (negative)\nx = ${real} ± ${imag}i`);
+      setResult(`Discriminant: ${disc.toFixed(4)} (negative)\nx = ${real} \u00b1 ${imag}i`);
     } else if (disc === 0) {
       const x = -B / (2 * A);
       setResult(`Discriminant: 0\nx = ${x.toFixed(4)} (one root)`);
     } else {
       const x1 = (-B + Math.sqrt(disc)) / (2 * A);
       const x2 = (-B - Math.sqrt(disc)) / (2 * A);
-      setResult(`Discriminant: ${disc.toFixed(4)}\nx₁ = ${x1.toFixed(4)}\nx₂ = ${x2.toFixed(4)}`);
+      setResult(`Discriminant: ${disc.toFixed(4)}\nx\u2081 = ${x1.toFixed(4)}\nx\u2082 = ${x2.toFixed(4)}`);
     }
   }, [a, b, c]);
+  const presets = [
+    { label: 'x\u00b2-3x+2=0', apply: () => { setA('1'); setB('-3'); setC('2'); } },
+    { label: 'x\u00b2-4=0', apply: () => { setA('1'); setB('0'); setC('-4'); } },
+    { label: 'x\u00b2+x+1=0', apply: () => { setA('1'); setB('1'); setC('1'); } },
+  ];
   const A = parseFloat(a) || 0;
   const B = parseFloat(b) || 0;
   const C = parseFloat(c) || 0;
   const disc = B * B - 4 * A * C;
   return (
-    <CalculatorShell title="Quadratic Solver" result={result} onCalculate={calc}>
+    <CalculatorShell title="Quadratic Solver" result={result} onCalculate={calc} presets={presets} accent="pink">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>c</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">c</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
@@ -1975,13 +2085,18 @@ export function RectangleAreaCalculator() {
     const diagonal = Math.sqrt(l * l + w * w);
     setResult(`Area: ${area}\nPerimeter: ${perimeter}\nDiagonal: ${diagonal.toFixed(4)}`);
   }, [length, width]);
+  const presets = [
+    { label: '10 x 5', apply: () => { setLength('10'); setWidth('5'); } },
+    { label: 'A4 (29.7x21)', apply: () => { setLength('29.7'); setWidth('21'); } },
+    { label: '3 x 4', apply: () => { setLength('3'); setWidth('4'); } },
+  ];
   const l = parseFloat(length) || 0;
   const w = parseFloat(width) || 0;
   return (
-    <CalculatorShell title="Rectangle Calculator" result={result} onCalculate={calc}>
+    <CalculatorShell title="Rectangle Calculator" result={result} onCalculate={calc} presets={presets} accent="lime">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Length</label><input type="number" value={length} onChange={e => setLength(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Width</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Length</label><input type="number" value={length} onChange={e => setLength(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
       </div>
       {result && (
         <div className="grid grid-cols-3 gap-2">
@@ -2011,16 +2126,21 @@ export function SquareRootCalculator() {
     if (n < 0) { setResult('Cannot calculate square root of a negative number.'); return; }
     const sqrt = Math.sqrt(n);
     const cubeRoot = Math.cbrt(n);
-    setResult(`√${n} = ${sqrt.toFixed(6)}\n∛${n} = ${cubeRoot.toFixed(6)}\n${n} = ${sqrt.toFixed(4)}²`);
+    setResult(`\u221a${n} = ${sqrt.toFixed(6)}\n\u221b${n} = ${cubeRoot.toFixed(6)}\n${n} = ${sqrt.toFixed(4)}²`);
   }, [number]);
+  const presets = [
+    { label: '\u221a144', apply: () => { setNumber('144'); } },
+    { label: '\u221a2', apply: () => { setNumber('2'); } },
+    { label: '\u221a10000', apply: () => { setNumber('10000'); } },
+  ];
   const n = parseFloat(number) || 0;
   const sqrt = Math.sqrt(Math.max(0, n));
   return (
-    <CalculatorShell title="Square Root Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Number</label><input type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Square Root Calculator" result={result} onCalculate={calc} presets={presets} accent="sky">
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number</label><input type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputCls} /></div>
       {result && n >= 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">√{n}</div>
+          <div className="text-xs text-[var(--text-tertiary)]">\u221a{n}</div>
           <div className="text-3xl font-bold text-indigo-400">{sqrt.toFixed(4)}</div>
         </div>
       )}
@@ -2028,19 +2148,10 @@ export function SquareRootCalculator() {
   );
 }
 
-function factorial(n: number): number {
-  if (n < 0) throw new Error('Factorial of negative number');
-  if (n === 0 || n === 1) return 1;
-  if (!Number.isInteger(n)) throw new Error('Factorial of non-integer');
-  let r = 1;
-  for (let i = 2; i <= n; i++) r *= i;
-  return r;
-}
-
 function evalScientific(input: string, degMode = true): number {
   let pos = 0;
   const s = input.replace(/\s+/g, '').toLowerCase()
-    .replace(/π/g, String(Math.PI))
+    .replace(/u03c0/g, String(Math.PI))
     .replace(/pi/g, String(Math.PI))
     .replace(/\be\b(?![xp])/g, String(Math.E));
 
@@ -2094,21 +2205,13 @@ function evalScientific(input: string, degMode = true): number {
   }
 
   function parseUnary(): number {
-    if (pos < s.length && s[pos] === '-') {
-      pos++;
-      return -parseAtom();
-    }
-    if (pos < s.length && s[pos] === '+') {
-      pos++;
-    }
+    if (pos < s.length && s[pos] === '-') { pos++; return -parseAtom(); }
+    if (pos < s.length && s[pos] === '+') { pos++; }
     return parseAtom();
   }
 
   function parseAtom(): number {
-    if (pos < s.length && s[pos] === '!') {
-      pos++;
-      return factorial(parseAtom());
-    }
+    if (pos < s.length && s[pos] === '!') { pos++; return factorial(parseAtom()); }
     if (pos < s.length && s[pos] === '(') {
       pos++;
       const val = parseExpr();
@@ -2128,9 +2231,7 @@ function evalScientific(input: string, degMode = true): number {
       }
     }
     let numStr = '';
-    while (pos < s.length && (/[0-9.]/).test(s[pos])) {
-      numStr += s[pos++];
-    }
+    while (pos < s.length && (/[0-9.]/).test(s[pos])) { numStr += s[pos++]; }
     if (numStr === '') throw new Error('Unexpected character');
     let val = parseFloat(numStr);
     if (pos < s.length && s[pos] === '!') { pos++; val = factorial(val); }
@@ -2142,6 +2243,7 @@ function evalScientific(input: string, degMode = true): number {
   if (pos !== s.length) throw new Error('Unexpected character');
   return result;
 }
+
 
 export function ScientificCalculator() {
   const [expr, setExpr] = useState('');
@@ -2159,7 +2261,7 @@ export function ScientificCalculator() {
     if (!expression.trim()) return;
     try {
       const val = evalScientific(expression, angleMode === 'deg');
-      const resultStr = formatNumber(val);
+      const resultStr = Number.isInteger(val) && Math.abs(val) < 1e15 ? String(val) : parseFloat(val.toPrecision(12)).toString();
       setResult(resultStr);
       setError('');
       setHistory(prev => [...prev, { expr: expression, result: resultStr }]);
@@ -2180,15 +2282,8 @@ export function ScientificCalculator() {
     inputRef.current?.focus();
   }, []);
 
-  const handleClear = useCallback(() => {
-    setExpr('');
-    setResult('');
-    setError('');
-  }, []);
-
-  const handleBackspace = useCallback(() => {
-    setExpr(prev => prev.slice(0, -1));
-  }, []);
+  const handleClear = useCallback(() => { setExpr(''); setResult(''); setError(''); }, []);
+  const handleBackspace = useCallback(() => { setExpr(prev => prev.slice(0, -1)); }, []);
 
   const handleEquals = useCallback(() => {
     if (!expr.trim()) return;
@@ -2198,10 +2293,7 @@ export function ScientificCalculator() {
 
   const handleMemory = useCallback((op: 'clear' | 'recall' | 'add' | 'subtract') => {
     if (op === 'clear') { setMemory(null); return; }
-    if (op === 'recall' && memory !== null) {
-      setExpr(prev => prev + String(memory));
-      return;
-    }
+    if (op === 'recall' && memory !== null) { setExpr(prev => prev + String(memory)); return; }
     const current = result ? parseFloat(result) : NaN;
     if (isNaN(current)) return;
     if (op === 'add') setMemory(m => (m ?? 0) + current);
@@ -2215,10 +2307,7 @@ export function ScientificCalculator() {
   }, []);
 
   const copyResult = useCallback(() => {
-    if (result) {
-      navigator.clipboard.writeText(result);
-      toast.success('Result copied');
-    }
+    if (result) { navigator.clipboard.writeText(result); toast.success('Result copied'); }
   }, [result]);
 
   useEffect(() => {
@@ -2242,13 +2331,7 @@ export function ScientificCalculator() {
     return () => window.removeEventListener('keydown', handler);
   }, [insertText, handleClear, handleBackspace, handleEquals]);
 
-  const formatNumber = (n: number): string => {
-    if (Number.isInteger(n) && Math.abs(n) < 1e15) return String(n);
-    const s = n.toPrecision(12);
-    return parseFloat(s).toString();
-  };
-
-  const evalDisplay = expr.replace(/\*/g, '×').replace(/\//g, '÷');
+  const evalDisplay = expr.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7');
   const btnBase = `h-10 sm:h-12 rounded-xl font-semibold text-sm sm:text-base transition-all active:scale-95 select-none flex items-center justify-center`;
   const btnNum = `${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`;
   const btnOp = `${btnBase} bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-400 border border-indigo-500/20`;
@@ -2260,101 +2343,75 @@ export function ScientificCalculator() {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-        {/* Header */}
         <div className="flex items-center justify-between px-4 pt-4 pb-2">
           <h1 className="text-lg font-bold text-[var(--text-primary)]">Scientific Calculator</h1>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowHistory(!showHistory)}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
-            >
+            <button onClick={() => setShowHistory(!showHistory)} className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               History {history.length > 0 && `(${history.length})`}
             </button>
-            <button
-              onClick={() => setShowFuncs(!showFuncs)}
-              className="px-3 py-1 rounded-lg text-xs font-medium bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-            >
+            <button onClick={() => setShowFuncs(!showFuncs)} className="px-3 py-1 rounded-lg text-xs font-medium bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {showFuncs ? 'Basic' : 'Sci'}
             </button>
-            <button
-              onClick={() => setAngleMode(m => m === 'deg' ? 'rad' : 'deg')}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${angleMode === 'deg' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-amber-500/20 text-amber-400'}`}
-            >
+            <button onClick={() => setAngleMode(m => m === 'deg' ? 'rad' : 'deg')} className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${angleMode === 'deg' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-amber-500/20 text-amber-400'}`}>
               {angleMode.toUpperCase()}
             </button>
           </div>
         </div>
-
-        {/* Display */}
         <div className="mx-4 mb-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-4 min-h-[88px] flex flex-col justify-end">
           <div className="text-right text-sm text-[var(--text-secondary)] font-mono break-all min-h-[20px]">
             {evalDisplay || <span className="opacity-30">0</span>}
           </div>
           <div className="flex items-center justify-between mt-1">
-            <div className="text-xs text-[var(--text-tertiary)]">
-              {memory !== null && <span className="text-purple-400 font-bold">M</span>}
-            </div>
+            <div className="text-xs text-[var(--text-tertiary)]">{memory !== null && <span className="text-purple-400 font-bold">M</span>}</div>
             <div className="flex items-center gap-2">
               {result && (
                 <>
                   <span className="text-2xl font-bold text-[var(--text-primary)] font-mono">{result}</span>
-                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result">
-                    <Copy size={16} />
-                  </button>
+                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result"><Copy size={16} /></button>
                 </>
               )}
               {error && <span className="text-sm text-red-400 font-medium">{error}</span>}
             </div>
           </div>
         </div>
-
-        {/* History Panel */}
         {showHistory && (
           <div ref={historyRef} className="mx-4 mb-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] max-h-40 overflow-y-auto">
             {history.length === 0 ? (
               <div className="p-4 text-center text-sm text-[var(--text-tertiary)]">No history yet</div>
             ) : (
               [...history].reverse().map((entry, i) => (
-                <button
-                  key={i}
-                  onClick={() => recallHistory(entry)}
-                  className="w-full text-left px-4 py-2 hover:bg-[var(--bg-elevated)] transition-colors border-b border-[var(--border-subtle)] last:border-0"
-                >
-                  <div className="text-xs text-[var(--text-tertiary)] font-mono">{entry.expr.replace(/\*/g, '×').replace(/\//g, '÷')}</div>
+                <button key={i} onClick={() => recallHistory(entry)} className="w-full text-left px-4 py-2 hover:bg-[var(--bg-elevated)] transition-colors border-b border-[var(--border-subtle)] last:border-0">
+                  <div className="text-xs text-[var(--text-tertiary)] font-mono">{entry.expr.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7')}</div>
                   <div className="text-sm font-bold text-[var(--text-primary)] font-mono">= {entry.result}</div>
                 </button>
               ))
             )}
           </div>
         )}
-
-        {/* Scientific Functions Panel */}
         {showFuncs && (
           <div className="px-4 pb-3">
             <div className="grid grid-cols-6 gap-1.5">
               <button className={btnFn} onClick={() => handleFunction('sin')}>sin</button>
               <button className={btnFn} onClick={() => handleFunction('cos')}>cos</button>
               <button className={btnFn} onClick={() => handleFunction('tan')}>tan</button>
-              <button className={btnFn} onClick={() => handleFunction('asin')}>sin⁻¹</button>
-              <button className={btnFn} onClick={() => handleFunction('acos')}>cos⁻¹</button>
-              <button className={btnFn} onClick={() => handleFunction('atan')}>tan⁻¹</button>
+              <button className={btnFn} onClick={() => handleFunction('asin')}>sin\u207b\u00b9</button>
+              <button className={btnFn} onClick={() => handleFunction('acos')}>cos\u207b\u00b9</button>
+              <button className={btnFn} onClick={() => handleFunction('atan')}>tan\u207b\u00b9</button>
               <button className={btnFn} onClick={() => handleFunction('log')}>log</button>
               <button className={btnFn} onClick={() => handleFunction('ln')}>ln</button>
-              <button className={btnFn} onClick={() => handleFunction('sqrt')}>√</button>
-              <button className={btnFn} onClick={() => insertText('^')}>xⁿ</button>
+              <button className={btnFn} onClick={() => handleFunction('sqrt')}>\u221a</button>
+              <button className={btnFn} onClick={() => insertText('^')}>x\u207f</button>
               <button className={btnFn} onClick={() => insertText('!')}>x!</button>
               <button className={btnFn} onClick={() => insertText('1/')}>1/x</button>
-              <button className={btnFn} onClick={() => insertText('π')}>π</button>
+              <button className={btnFn} onClick={() => insertText('\u03c0')}>\u03c0</button>
               <button className={btnFn} onClick={() => insertText('e')}>e</button>
               <button className={btnFn} onClick={() => insertText('(')}>(</button>
               <button className={btnFn} onClick={() => insertText(')')}>)</button>
-              <button className={btnFn} onClick={() => insertText('**2')}>x²</button>
-              <button className={btnFn} onClick={() => insertText('**3')}>x³</button>
+              <button className={btnFn} onClick={() => insertText('**2')}>x\u00b2</button>
+              <button className={btnFn} onClick={() => insertText('**3')}>x\u00b3</button>
             </div>
           </div>
         )}
-
-        {/* Main Keypad */}
         <div className="px-4 pb-4">
           <div className="grid grid-cols-5 gap-1.5">
             <button className={btnMem} onClick={() => handleMemory('clear')}>MC</button>
@@ -2362,27 +2419,21 @@ export function ScientificCalculator() {
             <button className={btnMem} onClick={() => handleMemory('add')}>M+</button>
             <button className={btnMem} onClick={() => handleMemory('subtract')}>M-</button>
             <button className={btnClr} onClick={handleClear}>C</button>
-
             <button className={btnNum} onClick={() => insertText('7')}>7</button>
             <button className={btnNum} onClick={() => insertText('8')}>8</button>
             <button className={btnNum} onClick={() => insertText('9')}>9</button>
-            <button className={btnOp} onClick={() => insertText('/')}>÷</button>
-            <button className={`${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`} onClick={handleBackspace}>
-              <Delete size={18} />
-            </button>
-
+            <button className={btnOp} onClick={() => insertText('/')}>\u00f7</button>
+            <button className={`${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`} onClick={handleBackspace}><Delete size={18} /></button>
             <button className={btnNum} onClick={() => insertText('4')}>4</button>
             <button className={btnNum} onClick={() => insertText('5')}>5</button>
             <button className={btnNum} onClick={() => insertText('6')}>6</button>
-            <button className={btnOp} onClick={() => insertText('*')}>×</button>
+            <button className={btnOp} onClick={() => insertText('*')}>\u00d7</button>
             <button className={btnFn} onClick={() => insertText('%')}>%</button>
-
             <button className={btnNum} onClick={() => insertText('1')}>1</button>
             <button className={btnNum} onClick={() => insertText('2')}>2</button>
             <button className={btnNum} onClick={() => insertText('3')}>3</button>
-            <button className={btnOp} onClick={() => insertText('-')}>−</button>
-            <button className={btnFn} onClick={() => insertText('(-')}>±</button>
-
+            <button className={btnOp} onClick={() => insertText('-')}>\u2212</button>
+            <button className={btnFn} onClick={() => insertText('(-')}>\u00b1</button>
             <button className={`${btnNum} col-span-2`} onClick={() => insertText('0')}>0</button>
             <button className={btnNum} onClick={() => insertText('.')}>.</button>
             <button className={btnOp} onClick={() => insertText('+')}>+</button>
@@ -2390,111 +2441,227 @@ export function ScientificCalculator() {
           </div>
         </div>
       </div>
-
-      {/* Keyboard hint */}
       <div className="mt-3 text-center">
-        <span className="text-xs text-[var(--text-tertiary)]">⌨️ Keyboard supported · Enter to evaluate · Esc to clear</span>
+        <span className="text-xs text-[var(--text-tertiary)]">Keyboard supported \u00b7 Enter to evaluate \u00b7 Esc to clear</span>
       </div>
     </div>
   );
 }
 
+
 export function FluidTypographyCalculator() {
+  const [base, setBase] = useState('16');
   const [minVw, setMinVw] = useState('320');
-  const [maxVw, setMaxVw] = useState('1200');
-  const [minSize, setMinSize] = useState('16');
-  const [maxSize, setMaxSize] = useState('24');
-  const [result, setResult] = useState('');
+  const [maxVw, setMaxVw] = useState('1440');
+  const [scale, setScale] = useState('1.25');
+  const [minSize, setMinSize] = useState('');
+  const [maxSize, setMaxSize] = useState('');
+  const [result, setResult] = useState<Array<{size: string; value: number}>>([]);
+  const [fontSizes, setFontSizes] = useState<Array<{level: number; cls: string}>>([]);
   const calc = useCallback(() => {
-    const slope = (parseFloat(maxSize) - parseFloat(minSize)) / (parseFloat(maxVw) - parseFloat(minVw));
-    const intercept = parseFloat(minSize) - slope * parseFloat(minVw);
-    const clamp = `clamp(${minSize}px, ${(slope * 100).toFixed(4)}vw + ${intercept.toFixed(4)}px, ${maxSize}px)`;
-    setResult(`CSS clamp() value:\n${clamp}`);
-  }, []);
+    const b = parseFloat(base) || 16;
+    const mn = parseFloat(minVw) || 320;
+    const mx = parseFloat(maxVw) || 1440;
+    const s = parseFloat(scale) || 1.25;
+    const minClamp = parseFloat(minSize) || b * 0.75;
+    const maxClamp = parseFloat(maxSize) || b * 1.5;
+    const levels = [-2, -1, 0, 1, 2, 3, 4, 5];
+    const sizes = levels.map(l => {
+      const val = b * Math.pow(s, l);
+      const clampMin = Math.max(minClamp, val * 0.7);
+      const clampMax = Math.max(maxClamp, val * 1.2);
+      const slope = (clampMax - clampMin) / (mx - mn);
+      const intercept = clampMin - slope * mn;
+      const desktop = Math.round(val * 10) / 10;
+      const cls = `${Math.round(l === 0 ? b * 100 : val * 100) / 100}`;
+      return { size: l <= 0 ? `h${Math.abs(l) + 6}` : `h${6 - l}`, value: desktop, level: l };
+    });
+    setResult(sizes);
+    setFontSizes([]);
+  }, [base, minVw, maxVw, scale, minSize, maxSize]);
+  const b2 = parseFloat(base) || 16;
+  const mn2 = parseFloat(minVw) || 320;
+  const mx2 = parseFloat(maxVw) || 1440;
+  const minSz = parseFloat(minSize) || b2 * 0.75;
+  const maxSz = parseFloat(maxSize) || b2 * 1.2;
+  const slope2 = ((maxSz - minSz) / (mx2 - mn2) * 100).toFixed(4);
+  const intercept2 = (minSz - mn2 * (maxSz - minSz) / (mx2 - mn2)).toFixed(2);
+  const cssClamp = `font-size: clamp(${minSz.toFixed(1)}px, ${slope2}vw + ${intercept2}px, ${maxSz.toFixed(1)}px);`;
   return (
-    <CalculatorShell title="Fluid Typography Calculator" result={result} onCalculate={calc}>
-        <div><label className={labelClass}>Min Viewport (px)</label><input type="number" value={minVw} onChange={e => setMinVw(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Max Viewport (px)</label><input type="number" value={maxVw} onChange={e => setMaxVw(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Min Font Size (px)</label><input type="number" value={minSize} onChange={e => setMinSize(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Max Font Size (px)</label><input type="number" value={maxSize} onChange={e => setMaxSize(e.target.value)} step="0.1" className={inputClass} /></div>
+    <CalculatorShell title="Fluid Typography" accent="purple" result={result.length > 0 ? `${result.length} sizes generated` : ''} onCalculate={calc}>
+      <div className="max-w-xl">
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Base Font Size (px)</label><input className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
+          <div><label className={labelCls}>Scale Ratio</label><input className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
+          <div><label className={labelCls}>Min Viewport (px)</label><input className={inputCls} value={minVw} onChange={e => setMinVw(e.target.value)} /></div>
+          <div><label className={labelCls}>Max Viewport (px)</label><input className={inputCls} value={maxVw} onChange={e => setMaxVw(e.target.value)} /></div>
+          <div><label className={labelCls}>Min Clamp (px, optional)</label><input className={inputCls} value={minSize} onChange={e => setMinSize(e.target.value)} placeholder="Auto" /></div>
+          <div><label className={labelCls}>Max Clamp (px, optional)</label><input className={inputCls} value={maxSize} onChange={e => setMaxSize(e.target.value)} placeholder="Auto" /></div>
+        </div>
+        {result.length > 0 && (
+          <div className="mt-6">
+            <div className="text-sm font-bold text-[var(--text-primary)] mb-3">Type Scale</div>
+            <div className="grid gap-3">
+              {result.reverse().map((r, i) => {
+                const baseRatio = r.value / (parseFloat(base) || 16);
+                const bg = baseRatio >= 2 ? 'bg-purple-500/10 border border-purple-500/20' : baseRatio >= 1.5 ? 'bg-blue-500/10' : baseRatio <= 0.7 ? 'bg-rose-500/10' : 'bg-[var(--bg-overlay)]';
+                return (
+                  <div key={i} className={`flex items-center justify-between p-4 rounded-xl ${bg}`}>
+                    <div>
+                      <span className="text-sm font-mono font-bold text-[var(--text-primary)]">{r.size}</span>
+                      <span className="text-xs text-[var(--text-tertiary)] ml-2">{baseRatio >= 2 ? 'Display' : baseRatio <= 0.7 ? 'Caption' : 'Body'}</span>
+                    </div>
+                    <span className="text-lg font-bold text-[var(--text-primary)] font-mono">{r.value}px</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-4 p-4 bg-purple-500/5 border border-purple-500/10 rounded-xl">
+              <div className="text-xs text-[var(--text-tertiary)] mb-2">CSS clamp() formula (base):</div>
+              <code className="text-xs font-mono text-purple-400 break-all">{cssClamp}</code>
+            </div>
+          </div>
+        )}
+      </div>
     </CalculatorShell>
   );
 }
 
 export function BmiCalculatorForKids() {
-  const [weight, setWeight] = useState('30');
-  const [height, setHeight] = useState('130');
   const [age, setAge] = useState('10');
-  const [gender, setGender] = useState('male');
+  const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [height, setHeight] = useState('140');
+  const [weight, setWeight] = useState('35');
   const [result, setResult] = useState('');
+  const [category, setCategory] = useState('');
+  const [percentile, setPercentile] = useState(0);
   const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
+    const a = parseFloat(age) || 0;
     const h = parseFloat(height) || 0;
-    if (!w || !h) return;
-    const bmi = w / Math.pow(h / 100, 2);
-    let category = 'Normal weight';
-    if (bmi < 5) category = 'Underweight';
-    else if (bmi > 25) category = 'Obese';
-    else if (bmi > 20) category = 'Overweight';
-    setResult(`BMI: ${bmi.toFixed(1)}\nAge: ${age}\nCategory: ${category}\nNote: BMI percentiles vary by age. Consult pediatrician.`);
-  }, [weight, height, gender, age]);
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 1;
-  const bmi = w / Math.pow(h / 100, 2);
-  const catColor = bmi < 5 ? 'text-red-400' : bmi > 25 ? 'text-red-400' : bmi > 20 ? 'text-amber-400' : 'text-emerald-400';
+    const w = parseFloat(weight) || 0;
+    if (!a || !h || !w) { setResult('Please fill all fields.'); return; }
+    const bmi = w / ((h / 100) ** 2);
+    const bmiRounded = Math.round(bmi * 10) / 10;
+    const medianBmi: Record<string, Record<number, number>> = { male: { 2:15.5,5:15.4,8:16.2,10:17.0,12:18.0,14:19.5,16:21.0,18:22.5 }, female: { 2:15.3,5:15.2,8:16.3,10:17.2,12:18.5,14:19.8,16:21.2,18:22.3 } };
+    const ages = Object.keys(medianBmi[gender]).map(Number);
+    const closest = ages.reduce((prev, curr) => Math.abs(curr - a) < Math.abs(prev - a) ? curr : prev);
+    const median = medianBmi[gender][closest];
+    const pct = median ? Math.round((1 - (Math.abs(bmi - median) / (median * 0.3))) * 100) : 50;
+    const clamped = Math.max(1, Math.min(99, pct));
+    setPercentile(clamped);
+    let cat = '';
+    if (bmiRounded < 14.5) cat = 'Underweight';
+    else if (bmiRounded < 18.5) cat = 'Normal weight';
+    else if (bmiRounded < 25) cat = 'Overweight';
+    else cat = 'Obese';
+    setCategory(cat);
+    setResult(bmiRounded.toString());
+  }, [age, gender, height, weight]);
   return (
-    <CalculatorShell title="BMI Calculator for Kids" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Age (years)</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-      </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className={`text-3xl font-bold ${catColor}`}>{bmi.toFixed(1)}</div>
-          <div className="text-xs text-[var(--text-tertiary)]">BMI</div>
+    <CalculatorShell title="BMI Calculator for Kids (2-18)" accent="cyan" result={result} onCalculate={calc}>
+      <div className="max-w-xl">
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Age (years)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+          <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+          <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+          <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         </div>
-      )}
+        <div className="flex gap-3 mt-3">
+          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('8'); setHeight('128'); setWeight('25'); }}>Age 8 (Boy)</button>
+          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('12'); setHeight('150'); setWeight('42'); }}>Age 12 (Girl)</button>
+        </div>
+        {result && (
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">BMI</div>
+              <div className="text-2xl font-bold text-cyan-400">{result}</div>
+            </div>
+            <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Category</div>
+              <div className="text-lg font-bold text-[var(--text-primary)]">{category}</div>
+            </div>
+            <div className="col-span-2 bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+              <div className="text-xs text-[var(--text-tertiary)] mb-2">Estimated Percentile: {percentile}th</div>
+              <div className="w-full bg-[var(--bg-overlay)] rounded-full h-3">
+                <div className="h-3 rounded-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 transition-all" style={{ width: `${percentile}%` }} />
+              </div>
+              <div className="flex justify-between text-xs text-[var(--text-tertiary)] mt-1"><span>Underweight</span><span>Normal</span><span>Overweight</span></div>
+            </div>
+          </div>
+        )}
+      </div>
     </CalculatorShell>
   );
 }
 
 export function BodyFatPercentageCalculator() {
-  const [gender, setGender] = useState('male');
-  const [waist, setWaist] = useState('32');
-  const [neck, setNeck] = useState('15');
-  const [height, setHeight] = useState('70');
-  const [hip, setHip] = useState('36');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [weight, setWeight] = useState('80');
+  const [waist, setWaist] = useState('90');
+  const [neck, setNeck] = useState('40');
+  const [hip, setHip] = useState('100');
   const [result, setResult] = useState('');
+  const [category, setCategory] = useState('');
   const calc = useCallback(() => {
-    const w = parseFloat(waist) || 0;
+    const w = parseFloat(weight) || 0;
+    const wa = parseFloat(waist) || 0;
     const n = parseFloat(neck) || 0;
-    const h = parseFloat(height) || 0;
-    if (!w || !n || !h) return;
+    const h = parseFloat(hip) || 0;
+    if (!w || !wa || !n) { setResult('Please fill required fields.'); return; }
     let bf: number;
     if (gender === 'male') {
-      bf = 495 / (1.0324 - 0.19077 * Math.log10(w - n) + 0.15456 * Math.log10(h)) - 450;
+      bf = 495 / (1.0324 - 0.19077 * Math.log10(wa - n) + 0.15456 * Math.log10(w)) - 450;
     } else {
-      const hp = parseFloat(hip) || 0;
-      bf = 495 / (1.29579 - 0.35004 * Math.log10(w + hp - n) + 0.22100 * Math.log10(h)) - 450;
+      if (!h) { setResult('Hip measurement required for female.'); return; }
+      bf = 495 / (1.29579 - 0.35004 * Math.log10(wa + h - n) + 0.22100 * Math.log10(w)) - 450;
     }
-    let cat = 'Essential';
-    if (bf > 35) cat = 'Obese'; else if (bf > 25) cat = 'Above Average'; else if (bf > 18) cat = 'Average'; else if (bf > 10) cat = 'Lean';
-    setResult(`Body Fat: ${bf.toFixed(1)}%\nCategory: ${cat}\nMethod: US Navy (NATO)`);
-  }, [gender, waist, neck, height, hip]);
+    const rounded = Math.round(bf * 10) / 10;
+    setResult(rounded.toString());
+    let cat = '';
+    if (gender === 'male') {
+      if (rounded < 6) cat = 'Essential fat';
+      else if (rounded < 14) cat = 'Athletes';
+      else if (rounded < 18) cat = 'Fitness';
+      else if (rounded < 25) cat = 'Acceptable';
+      else cat = 'Obese';
+    } else {
+      if (rounded < 14) cat = 'Essential fat';
+      else if (rounded < 21) cat = 'Athletes';
+      else if (rounded < 25) cat = 'Fitness';
+      else if (rounded < 32) cat = 'Acceptable';
+      else cat = 'Obese';
+    }
+    setCategory(cat);
+  }, [gender, weight, waist, neck, hip]);
   return (
-    <CalculatorShell title="Body Fat Calculator" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Waist (in)</label><input type="number" value={waist} onChange={e => setWaist(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Neck (in)</label><input type="number" value={neck} onChange={e => setNeck(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Height (in)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        {gender === 'female' && <div><label className={labelClass}>Hip (in)</label><input type="number" value={hip} onChange={e => setHip(e.target.value)} step="0.1" className={inputClass} /></div>}
+    <CalculatorShell title="Body Fat Percentage" accent="rose" result={result} onCalculate={calc}>
+      <div className="max-w-xl">
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+          <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+          <div><label className={labelCls}>Waist (cm)</label><input className={inputCls} type="number" value={waist} onChange={e => setWaist(e.target.value)} /></div>
+          <div><label className={labelCls}>Neck (cm)</label><input className={inputCls} type="number" value={neck} onChange={e => setNeck(e.target.value)} /></div>
+          <div className={gender === 'female' ? '' : 'opacity-50'}><label className={labelCls}>Hip (cm, female)</label><input className={inputCls} type="number" value={hip} onChange={e => setHip(e.target.value)} disabled={gender === 'male'} /></div>
+        </div>
+        {result && (
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Body Fat</div>
+              <div className="text-2xl font-bold text-rose-400">{result}%</div>
+            </div>
+            <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Category</div>
+              <div className="text-lg font-bold text-[var(--text-primary)]">{category}</div>
+            </div>
+            <div className="col-span-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4">
+              <div className="text-xs text-[var(--text-tertiary)] mb-2">Body Fat Indicator</div>
+              <div className="w-full bg-[var(--bg-overlay)] rounded-full h-3">
+                <div className={`h-3 rounded-full transition-all ${parseFloat(result) > 25 ? 'bg-red-500' : parseFloat(result) > 18 ? 'bg-yellow-500' : parseFloat(result) > 14 ? 'bg-green-500' : 'bg-blue-500'}`} style={{ width: `${Math.min(100, Math.max(5, parseFloat(result) * 2.5))}%` }} />
+              </div>
+              <div className="flex justify-between text-xs text-[var(--text-tertiary)] mt-1"><span>Essential</span><span>Fitness</span><span>Acceptable</span><span>Obese</span></div>
+            </div>
+          </div>
+        )}
       </div>
     </CalculatorShell>
   );
@@ -2502,692 +2669,545 @@ export function BodyFatPercentageCalculator() {
 
 export function BodySurfaceAreaCalculator() {
   const [weight, setWeight] = useState('70');
-  const [height, setHeight] = useState('175');
-  const [result, setResult] = useState('');
+  const [height, setHeight] = useState('170');
+  const [unit, setUnit] = useState<'metric'|'imperial'>('metric');
+  const [result, setResult] = useState<{m2: number; formula: string; value: number}[]>([]);
   const calc = useCallback(() => {
     const w = parseFloat(weight) || 0;
     const h = parseFloat(height) || 0;
-    if (!w || !h) return;
-    const bsa = Math.sqrt(w * h / 3600);
-    const bsaDubois = 0.007184 * Math.pow(w, 0.425) * Math.pow(h, 0.725);
-    setResult(`BSA (Mosteller): ${bsa.toFixed(2)} m²\nBSA (DuBois): ${bsaDubois.toFixed(2)} m²\nWeight: ${w} kg\nHeight: ${h} cm`);
-  }, [weight, height]);
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 0;
-  const bsa = Math.sqrt(w * h / 3600);
+    if (!w || !h) { setResult([]); return; }
+    const wKg = unit === 'imperial' ? w * 0.453592 : w;
+    const hCm = unit === 'imperial' ? h * 2.54 : h;
+    const formulas = [
+      { name: 'Mosteller', calc: Math.sqrt(wKg * hCm / 3600) },
+      { name: 'Du Bois', calc: 0.007184 * Math.pow(wKg, 0.425) * Math.pow(hCm, 0.725) },
+      { name: 'Haycock', calc: 0.024265 * Math.pow(wKg, 0.5378) * Math.pow(hCm, 0.3964) },
+      { name: 'Gehan & George', calc: 0.0235 * Math.pow(wKg, 0.51456) * Math.pow(hCm, 0.42246) },
+    ];
+    setResult(formulas.map(f => ({ m2: Math.round(f.calc * 100) / 100, formula: f.name, value: Math.round(f.calc * 100) / 100 })));
+  }, [weight, height, unit]);
   return (
-    <CalculatorShell title="Body Surface Area" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-      </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Body Surface Area</div>
-          <div className="text-3xl font-bold text-indigo-400">{bsa.toFixed(2)} m²</div>
+    <CalculatorShell title="Body Surface Area (BSA)" accent="emerald" result={result.length > 0 ? `Avg: ${(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²` : ''} onCalculate={calc}>
+      <div className="max-w-xl">
+        <div className="grid grid-cols-2 gap-4">
+          <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'metric'|'imperial')}><option value="metric">Metric (kg/cm)</option><option value="imperial">Imperial (lb/in)</option></select></div>
+          <div><label className={labelCls}>{unit === 'metric' ? 'Weight (kg)' : 'Weight (lb)'}</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+          <div><label className={labelCls}>{unit === 'metric' ? 'Height (cm)' : 'Height (in)'}</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
         </div>
-      )}
+        <div className="flex gap-3 mt-3">
+          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('70'); setHeight('170'); }}>Adult (70kg/170cm)</button>
+          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('85'); setHeight('180'); }}>Adult (85kg/180cm)</button>
+        </div>
+        {result.length > 0 && (
+          <div className="mt-6 grid gap-3">
+            {result.map((r, i) => {
+              const styles = [
+                { bg: 'bg-emerald-500/10 border border-emerald-500/20', text: 'text-emerald-400' },
+                { bg: 'bg-blue-500/10 border border-blue-500/20', text: 'text-blue-400' },
+                { bg: 'bg-violet-500/10 border border-violet-500/20', text: 'text-violet-400' },
+                { bg: 'bg-amber-500/10 border border-amber-500/20', text: 'text-amber-400' },
+              ];
+              const s = styles[i] || styles[0];
+              return (
+                <div key={i} className={`flex items-center justify-between ${s.bg} rounded-xl p-4`}>
+                  <span className="text-sm font-bold text-[var(--text-primary)]">{r.formula}</span>
+                  <span className={`text-xl font-bold ${s.text} font-mono`}>{r.m2} m²</span>
+                </div>
+              );
+            })}
+            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Average of all formulas</div>
+              <div className="text-2xl font-bold text-emerald-400">{(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²</div>
+            </div>
+          </div>
+        )}
+      </div>
     </CalculatorShell>
   );
 }
 
+
 export function BabyFormulaCalculator() {
-  const [weight, setWeight] = useState('5');
-  const [ageMonths, setAgeMonths] = useState('3');
+  const [age, setAge] = useState('3');
+  const [weight, setWeight] = useState('6');
+  const [feedsPerDay, setFeedsPerDay] = useState('8');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const kg = parseFloat(weight) || 0;
-    const age = parseFloat(ageMonths) || 0;
-    if (!kg) return;
-    const dailyOz = kg * 2.5;
-    const feedsPerDay = Math.max(6, 8 - Math.floor(age / 2));
-    const perFeed = dailyOz / feedsPerDay;
-    setResult(`Daily: ${dailyOz.toFixed(1)} oz (${(dailyOz * 29.5735).toFixed(0)} ml)\nPer Feeding: ${perFeed.toFixed(1)} oz (${(perFeed * 29.5735).toFixed(0)} ml)\nFeeds/Day: ${feedsPerDay}`);
-  }, [weight, ageMonths]);
-  const kg = parseFloat(weight) || 0;
-  const dailyOz = kg * 2.5;
+    const a = parseFloat(age) || 0;
+    const w = parseFloat(weight) || 0;
+    const feeds = parseFloat(feedsPerDay) || 8;
+    let dailyMl: number;
+    if (a <= 0.5) dailyMl = w * 150;
+    else if (a <= 3) dailyMl = w * 135;
+    else if (a <= 6) dailyMl = w * 120;
+    else if (a <= 12) dailyMl = w * 100;
+    else dailyMl = w * 90;
+    const perFeed = dailyMl / feeds;
+    setResult(`Daily: ${Math.round(dailyMl)} mL (${(dailyMl * 0.0338).toFixed(1)} oz)\nPer feed: ${Math.round(perFeed)} mL (${(perFeed * 0.0338).toFixed(1)} oz)\nFeeds: ${feeds} per day`);
+  }, [age, weight, feedsPerDay]);
   return (
-    <CalculatorShell title="Baby Formula Calculator" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Age (months)</label><input type="number" value={ageMonths} onChange={e => setAgeMonths(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Baby Formula Calculator" accent="pink" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Feeds / day</label><input className={inputCls} type="number" value={feedsPerDay} onChange={e => setFeedsPerDay(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">{dailyOz.toFixed(0)} oz</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Daily</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">{(dailyOz * 29.5735).toFixed(0)} ml</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Daily (ml)</div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function BabyGrowthPercentileCalculator() {
+  const [age, setAge] = useState('12');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [height, setHeight] = useState('75');
   const [weight, setWeight] = useState('10');
-  const [height, setHeight] = useState('85');
-  const [age, setAge] = useState('2');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
-    const h = parseFloat(height) || 0;
     const a = parseFloat(age) || 0;
-    if (!w || !h || !a) return;
-    const bmi = w / Math.pow(h / 100, 2);
-    const avgBmi = 16 + a * 0.5;
-    const percentile = Math.min(99, Math.max(1, 50 + (bmi - avgBmi) * 10));
-    setResult(`Weight: ${w} kg\nHeight: ${h} cm\nBMI: ${bmi.toFixed(1)}\nEst. Percentile: ${Math.round(percentile)}th\n(Consult pediatrician for WHO chart data)`);
-  }, [weight, height, age]);
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 1;
-  const a = parseFloat(age) || 1;
-  const bmi = w / Math.pow(h / 100, 2);
-  const avgBmi = 16 + a * 0.5;
-  const percentile = Math.min(99, Math.max(1, 50 + (bmi - avgBmi) * 10));
+    const h = parseFloat(height) || 0;
+    const w = parseFloat(weight) || 0;
+    if (!a || !h || !w) { setResult(''); return; }
+    const avgHeight: Record<string, Record<number, number>> = { male: { 0:50,6:68,12:76,24:87,36:96,48:103,60:110 }, female: { 0:49,6:66,12:74,24:86,36:95,48:102,60:109 } };
+    const avgWeight: Record<string, Record<number, number>> = { male: { 0:3.4,6:7.9,12:10.2,24:12.8,36:14.5,48:16.5,60:18.5 }, female: { 0:3.2,6:7.3,12:9.5,24:12.2,36:14.0,48:16.0,60:18.0 } };
+    const ages: number[] = Object.keys(avgHeight[gender]).map(k => parseInt(k));
+    const closest = ages.reduce((x, y) => Math.abs(x - a) < Math.abs(y - a) ? x : y);
+    const medH = avgHeight[gender][closest];
+    const medW = avgWeight[gender][closest];
+    const hPct = medH ? Math.round((1 - Math.abs(h - medH) / (medH * 0.15)) * 100) : 50;
+    const wPct = medW ? Math.round((1 - Math.abs(w - medW) / (medW * 0.2)) * 100) : 50;
+    setResult(`Height: ${Math.max(1, Math.min(99, hPct))}th percentile\nWeight: ${Math.max(1, Math.min(99, wPct))}th percentile`);
+  }, [age, gender, height, weight]);
   return (
-    <CalculatorShell title="Baby Growth Percentile" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Age (years)</label><input type="number" value={age} onChange={e => setAge(e.target.value)} step="0.5" className={inputClass} /></div>
+    <CalculatorShell title="Baby Growth Percentile" accent="rose" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Height / Length (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs text-[var(--text-tertiary)]">Percentile</span>
-            <span className="text-sm font-bold text-indigo-400">{Math.round(percentile)}th</span>
-          </div>
-          <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-red-500 via-amber-500 via-emerald-500 via-blue-500 to-indigo-500 rounded-full" style={{ width: `${percentile}%` }} />
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function BabySleepScheduleCalculator() {
-  const [ageMonths, setAgeMonths] = useState('6');
+  const [ageWeeks, setAgeWeeks] = useState('8');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const age = parseFloat(ageMonths) || 0;
-    let totalSleep = 14, naps = 2;
-    if (age <= 1) { totalSleep = 16; naps = 4; }
-    else if (age <= 4) { totalSleep = 15; naps = 3; }
-    else if (age <= 8) { totalSleep = 14; naps = 2; }
-    else if (age <= 12) { totalSleep = 13.5; naps = 2; }
-    else if (age <= 24) { totalSleep = 13; naps = 1; }
-    else { totalSleep = 12; naps = 1; }
-    const nightSleep = totalSleep - naps * 1.5;
-    setResult(`Total Sleep: ${totalSleep}h/day\nNaps: ${naps}/day\nNight: ~${nightSleep.toFixed(1)}h\nWake Window: ~${(24 - totalSleep).toFixed(1)}h`);
-  }, [ageMonths]);
-  const age = parseFloat(ageMonths) || 0;
-  const sleeps = [
-    { label: 'Newborn (0-1m)', total: 16, naps: 4 },
-    { label: 'Infant (1-4m)', total: 15, naps: 3 },
-    { label: 'Baby (4-8m)', total: 14, naps: 2 },
-    { label: 'Older (8-12m)', total: 13.5, naps: 2 },
-    { label: 'Toddler (12-24m)', total: 13, naps: 1 },
-    { label: 'Preschool (24m+)', total: 12, naps: 1 },
-  ];
-  const current = sleeps.reduce((prev, curr) => Math.abs(curr.total - (14 - age * 0.15)) < Math.abs(prev.total - (14 - age * 0.15)) ? curr : prev);
+    const w = parseFloat(ageWeeks) || 0;
+    const totalSleep = w <= 4 ? 16 : w <= 12 ? 15 : w <= 24 ? 14 : w <= 48 ? 13 : 12;
+    const nightSleep = w <= 4 ? 8 : w <= 12 ? 9 : w <= 24 ? 10 : w <= 48 ? 10.5 : 11;
+    const daySleep = totalSleep - nightSleep;
+    const naps = w <= 12 ? 4 : w <= 24 ? 3 : w <= 48 ? 2 : 1;
+    const wakeWindow = w <= 4 ? '45-60 min' : w <= 12 ? '60-90 min' : w <= 24 ? '2-3 hours' : '3-4 hours';
+    setResult(`Total sleep: ${totalSleep}h/day\nNight: ${nightSleep}h | Day: ${daySleep}h\nNaps: ${naps}\nWake window: ${wakeWindow}`);
+  }, [ageWeeks]);
   return (
-    <CalculatorShell title="Baby Sleep Schedule" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Age (months)</label><input type="number" value={ageMonths} onChange={e => setAgeMonths(e.target.value)} className={inputClass} /></div>
-      {result && (
-        <div className="bg-indigo-500/10 rounded-xl p-4 border border-indigo-500/20">
-          <div className="text-center mb-3">
-            <div className="text-xs text-[var(--text-tertiary)]">Recommended Sleep</div>
-            <div className="text-3xl font-bold text-indigo-400">{current.total}h <span className="text-lg">/ day</span></div>
-          </div>
-          <div className="flex justify-center gap-4 text-sm">
-            <div className="bg-[var(--bg-elevated)] px-3 py-1.5 rounded-lg">
-              <span className="text-[var(--text-tertiary)]">Naps: </span>
-              <span className="font-bold text-[var(--text-primary)]">{current.naps}</span>
-            </div>
-            <div className="bg-[var(--bg-elevated)] px-3 py-1.5 rounded-lg">
-              <span className="text-[var(--text-tertiary)]">Night: </span>
-              <span className="font-bold text-[var(--text-primary)]">~{(current.total - current.naps * 1.5).toFixed(1)}h</span>
-            </div>
-          </div>
-        </div>
-      )}
+    <CalculatorShell title="Baby Sleep Schedule" accent="purple" result={result} onCalculate={calc}>
+      <div className="max-w-sm">
+        <div><label className={labelCls}>Age (weeks)</label><input className={inputCls} type="number" value={ageWeeks} onChange={e => setAgeWeeks(e.target.value)} /></div>
+      </div>
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('4')}>Newborn (4w)</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('16')}>4 months</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('52')}>12 months</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function BreastfeedingCalorieCalculator() {
-  const [months, setMonths] = useState('3');
+  const [age, setAge] = useState('3');
   const [feedings, setFeedings] = useState('8');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const age = parseFloat(months) || 0;
-    const feeds = parseFloat(feedings) || 0;
-    const mlPerFeed = age <= 1 ? 60 : age <= 3 ? 90 : age <= 6 ? 120 : 150;
-    const dailyCal = mlPerFeed * feeds * 0.67;
-    setResult(`Daily Calories Burned: ~${dailyCal.toFixed(0)} kcal\nPer Feeding: ~${(mlPerFeed * 0.67).toFixed(0)} kcal\nTotal Milk: ~${(mlPerFeed * feeds).toFixed(0)} ml/day`);
-  }, [months, feedings]);
-  const age = parseFloat(months) || 0;
-  const mlPerFeed = age <= 1 ? 60 : age <= 3 ? 90 : age <= 6 ? 120 : 150;
-  const feeds = parseFloat(feedings) || 0;
-  const dailyCal = mlPerFeed * feeds * 0.67;
+    const a = parseFloat(age) || 0;
+    const f = parseFloat(feedings) || 8;
+    const milkPerFeedMl = a <= 1 ? 60 : a <= 2 ? 90 : a <= 4 ? 120 : a <= 6 ? 150 : a <= 12 ? 180 : 210;
+    const dailyMl = milkPerFeedMl * f;
+    const caloriesBurned = Math.round(dailyMl * 0.67);
+    setResult(`Est. milk per feed: ${milkPerFeedMl} mL\nDaily milk output: ${dailyMl} mL\nCalories burned: ~${caloriesBurned} kcal/day`);
+  }, [age, feedings]);
   return (
-    <CalculatorShell title="Breastfeeding Calories" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Baby's Age (months)</label><input type="number" value={months} onChange={e => setMonths(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Feedings per Day</label><input type="number" value={feedings} onChange={e => setFeedings(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Breastfeeding Calories" accent="fuchsia" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Baby age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Feedings / day</label><input className={inputCls} type="number" value={feedings} onChange={e => setFeedings(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Calories Burned Daily</div>
-          <div className="text-3xl font-bold text-amber-400">{dailyCal.toFixed(0)} <span className="text-lg">kcal</span></div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function CalorieCalculator() {
-  const [gender, setGender] = useState('male');
-  const [weight, setWeight] = useState('70');
-  const [height, setHeight] = useState('175');
+  const [gender, setGender] = useState<'male'|'female'>('male');
   const [age, setAge] = useState('30');
+  const [weight, setWeight] = useState('80');
+  const [height, setHeight] = useState('180');
   const [activity, setActivity] = useState('1.55');
+  const [goal, setGoal] = useState('maintain');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
+    const a = parseFloat(age) || 30;
     const w = parseFloat(weight) || 0;
     const h = parseFloat(height) || 0;
-    const a = parseFloat(age) || 0;
-    const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
-    const tdee = bmr * parseFloat(activity);
-    const calDeficit = tdee - 500;
-    const calSurplus = tdee + 300;
-    setResult(`BMR: ${bmr.toFixed(0)} kcal/day\nTDEE: ${tdee.toFixed(0)} kcal/day\nCut: ${calDeficit.toFixed(0)} kcal\nBulk: ${calSurplus.toFixed(0)} kcal`);
-  }, [gender, weight, height, age, activity]);
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 0;
-  const a = parseFloat(age) || 0;
-  const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
-  const tdee = bmr * parseFloat(activity);
-  const presets = [
-    { label: 'Sedentary', apply: () => { setActivity('1.2'); } },
-    { label: 'Moderate', apply: () => { setActivity('1.55'); } },
-    { label: 'Very Active', apply: () => { setActivity('1.9'); } },
-  ];
+    const act = parseFloat(activity) || 1.55;
+    if (!w || !h) { setResult(''); return; }
+    let bmr: number;
+    if (gender === 'male') bmr = 10 * w + 6.25 * h - 5 * a + 5;
+    else bmr = 10 * w + 6.25 * h - 5 * a - 161;
+    const tdee = bmr * act;
+    let goalCals = tdee;
+    if (goal === 'lose') goalCals = tdee - 500;
+    else if (goal === 'gain') goalCals = tdee + 500;
+    setResult(`BMR: ${Math.round(bmr)} kcal\nTDEE: ${Math.round(tdee)} kcal\n${goal === 'maintain' ? 'Maintenance' : goal === 'lose' ? 'Weight loss (-0.5kg/wk)' : 'Weight gain (+0.5kg/wk)'}: ${Math.round(goalCals)} kcal`);
+  }, [gender, age, weight, height, activity, goal]);
   return (
-    <CalculatorShell title="Calorie Calculator" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Activity Level</label><select value={activity} onChange={e => setActivity(e.target.value)} className={inputClass}>
-          <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Active</option><option value="1.9">Very Active</option>
-        </select></div>
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Age</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Calorie Calculator (TDEE)" accent="emerald" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Activity level</label><select className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="1.2">Sedentary</option><option value="1.375">Light (1-3 days)</option><option value="1.55">Moderate (3-5 days)</option><option value="1.725">Very active (6-7 days)</option><option value="1.9">Extra active</option></select></div>
+        <div><label className={labelCls}>Goal</label><select className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="lose">Lose weight</option><option value="maintain">Maintain</option><option value="gain">Gain weight</option></select></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">BMR</div>
-            <div className="text-lg font-bold text-indigo-400">{Math.round(bmr)}</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">TDEE</div>
-            <div className="text-lg font-bold text-emerald-400">{Math.round(tdee)}</div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('30'); setWeight('70'); setHeight('170'); setGender('male'); }}>Avg Male</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('30'); setWeight('60'); setHeight('165'); setGender('female'); }}>Avg Female</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function ChildHeightPredictor() {
-  const [motherH, setMotherH] = useState('165');
-  const [fatherH, setFatherH] = useState('180');
-  const [childGender, setChildGender] = useState('male');
+  const [parentHeight, setParentHeight] = useState('170');
+  const [motherHeight, setMotherHeight] = useState('160');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [childAge, setChildAge] = useState('8');
+  const [childHeight, setChildHeight] = useState('130');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const mh = parseFloat(motherH) || 0;
-    const fh = parseFloat(fatherH) || 0;
-    if (!mh || !fh) return;
-    const height = childGender === 'male' ? ((mh + fh + 13) / 2) : ((mh + fh - 13) / 2);
-    const range = 8.5;
-    setResult(`Predicted Height: ${height.toFixed(1)} cm (${(height / 2.54).toFixed(1)} in)\nRange (95%): ${(height - range).toFixed(1)} - ${(height + range).toFixed(1)} cm\nMethod: Mid-parental (Tanner)`);
-  }, [motherH, fatherH, childGender]);
-  const mh = parseFloat(motherH) || 0;
-  const fh = parseFloat(fatherH) || 0;
-  const height = childGender === 'male' ? ((mh + fh + 13) / 2) : ((mh + fh - 13) / 2);
+    const ph = parseFloat(parentHeight) || 0;
+    const mh = parseFloat(motherHeight) || 0;
+    const age = parseFloat(childAge) || 0;
+    const ch = parseFloat(childHeight) || 0;
+    if (!ph || !mh) { setResult(''); return; }
+    const midParent = (ph + mh) / 2;
+    let predicted: number;
+    if (gender === 'male') predicted = midParent + 6.5;
+    else predicted = midParent - 6.5;
+    if (age > 2 && age < 18 && ch) {
+      const adjusted = (ch / (age >= 2 ? (100 + (age - 2) * 6.2) : 100)) * predicted;
+      predicted = Math.round((predicted + adjusted) / 2);
+    }
+    setResult(`Mid-parental height: ${midParent.toFixed(1)} cm\nPredicted adult height: ${Math.round(predicted)} cm (${(predicted / 2.54).toFixed(1)} in)`);
+  }, [parentHeight, motherHeight, gender, childAge, childHeight]);
   return (
-    <CalculatorShell title="Child Height Predictor" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Mother's Height (cm)</label><input type="number" value={motherH} onChange={e => setMotherH(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Father's Height (cm)</label><input type="number" value={fatherH} onChange={e => setFatherH(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Child's Gender</label><select value={childGender} onChange={e => setChildGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
+    <CalculatorShell title="Child Height Predictor" accent="cyan" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Father height (cm)</label><input className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Mother height (cm)</label><input className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Child gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Child age (optional)</label><input className={inputCls} type="number" value={childAge} onChange={e => setChildAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Child height (optional)</label><input className={inputCls} type="number" value={childHeight} onChange={e => setChildHeight(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Predicted Adult Height</div>
-          <div className="text-3xl font-bold text-indigo-400">{height.toFixed(1)} cm</div>
-          <div className="text-xs text-[var(--text-tertiary)]">{(height / 2.54).toFixed(1)} inches</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
+
 export function CyclingCalorieCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [duration, setDuration] = useState('60');
-  const [speed, setSpeed] = useState('20');
+  const [weight, setWeight] = useState('80');
+  const [distance, setDistance] = useState('30');
+  const [speed, setSpeed] = useState('25');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const kg = parseFloat(weight) || 0;
-    const min = parseFloat(duration) || 0;
-    const kmh = parseFloat(speed) || 0;
-    if (!kg || !min) return;
-    const met = kmh <= 15 ? 6 : kmh <= 20 ? 8 : kmh <= 25 ? 10 : 12;
-    const cal = met * kg * (min / 60);
-    const distance = kmh * (min / 60);
-    setResult(`Calories Burned: ~${cal.toFixed(0)} kcal\nMET: ${met}\nDistance: ~${distance.toFixed(1)} km\nIntensity: ${met <= 8 ? 'Moderate' : 'Vigorous'}`);
-  }, [weight, duration, speed]);
-  const kg = parseFloat(weight) || 0;
-  const min = parseFloat(duration) || 0;
-  const kmh = parseFloat(speed) || 0;
-  const met = kmh <= 15 ? 6 : kmh <= 20 ? 8 : kmh <= 25 ? 10 : 12;
-  const cal = met * kg * (min / 60);
+    const w = parseFloat(weight) || 0;
+    const d = parseFloat(distance) || 0;
+    const s = parseFloat(speed) || 0;
+    if (!w || !d || !s) { setResult(''); return; }
+    const hours = d / s;
+    const met = s < 16 ? 4 : s < 20 ? 6 : s < 25 ? 8 : s < 30 ? 10 : 12;
+    const calories = Math.round(met * w * hours);
+    setResult(`Duration: ${hours.toFixed(1)} hours\nMET: ${met}\nCalories burned: ${calories} kcal`);
+  }, [weight, distance, speed]);
   return (
-    <CalculatorShell title="Cycling Calorie Calc" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Duration (min)</label><input type="number" value={duration} onChange={e => setDuration(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Speed (km/h)</label><input type="number" value={speed} onChange={e => setSpeed(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Cycling Calorie Calculator" accent="orange" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Distance (km)</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label className={labelCls}>Speed (km/h)</label><input className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-emerald-500/10 rounded-xl p-4 text-center border border-emerald-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Calories Burned</div>
-          <div className="text-3xl font-bold text-emerald-400">{Math.round(cal)} <span className="text-lg">kcal</span></div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('70'); setDistance('20'); setSpeed('20'); }}>Leisure ride</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('80'); setDistance('50'); setSpeed('28'); }}>Road training</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function HeartRateZoneCalculator() {
-  const [age, setAge] = useState('30');
-  const [restingHR, setRestingHR] = useState('70');
+  const [age, setAge] = useState('35');
+  const [restHr, setRestHr] = useState('65');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const a = parseFloat(age) || 0;
-    const rhr = parseFloat(restingHR) || 0;
-    if (!a) return;
-    const maxHR = 220 - a;
-    const hrr = maxHR - rhr;
+    const a = parseFloat(age) || 35;
+    const rhr = parseFloat(restHr) || 65;
+    const maxHr = 220 - a;
+    const reserve = maxHr - rhr;
     const zones = [
-      { name: 'Zone 1', desc: 'Very Light', min: 50, max: 60 },
-      { name: 'Zone 2', desc: 'Light', min: 60, max: 70 },
-      { name: 'Zone 3', desc: 'Moderate', min: 70, max: 80 },
-      { name: 'Zone 4', desc: 'Hard', min: 80, max: 90 },
-      { name: 'Zone 5', desc: 'Maximum', min: 90, max: 100 },
+      { name: 'Zone 1: Very Light', intensity: '50-60%', min: Math.round(rhr + reserve * 0.5), max: Math.round(rhr + reserve * 0.6) },
+      { name: 'Zone 2: Light', intensity: '60-70%', min: Math.round(rhr + reserve * 0.6), max: Math.round(rhr + reserve * 0.7) },
+      { name: 'Zone 3: Moderate', intensity: '70-80%', min: Math.round(rhr + reserve * 0.7), max: Math.round(rhr + reserve * 0.8) },
+      { name: 'Zone 4: Hard', intensity: '80-90%', min: Math.round(rhr + reserve * 0.8), max: Math.round(rhr + reserve * 0.9) },
+      { name: 'Zone 5: Maximum', intensity: '90-100%', min: Math.round(rhr + reserve * 0.9), max: maxHr },
     ];
-    const lines = zones.map(z => {
-      const low = Math.round(hrr * z.min / 100 + rhr);
-      const high = Math.round(hrr * z.max / 100 + rhr);
-      return `${z.name} (${z.desc}): ${low}-${high} bpm`;
-    });
-    setResult(`Max HR: ${maxHR} bpm\nResting: ${rhr} bpm\nHR Reserve: ${hrr} bpm\n\n${lines.join('\n')}`);
-  }, [age, restingHR]);
-  const a = parseFloat(age) || 0;
-  const rhr = parseFloat(restingHR) || 0;
-  const maxHR = 220 - a;
-  const hrr = maxHR - rhr;
-  const zones = [
-    { name: 'Z1', desc: 'Very Light', min: 50, max: 60, color: 'bg-blue-500' },
-    { name: 'Z2', desc: 'Light', min: 60, max: 70, color: 'bg-emerald-500' },
-    { name: 'Z3', desc: 'Moderate', min: 70, max: 80, color: 'bg-amber-500' },
-    { name: 'Z4', desc: 'Hard', min: 80, max: 90, color: 'bg-orange-500' },
-    { name: 'Z5', desc: 'Max', min: 90, max: 100, color: 'bg-red-500' },
-  ];
+    setResult(`Max HR: ${maxHr} bpm\nHR Reserve: ${reserve} bpm` + zones.map(z => `\n${z.name}: ${z.min}-${z.max} bpm`).join(''));
+  }, [age, restHr]);
   return (
-    <CalculatorShell title="Heart Rate Zones" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Age</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Resting HR (bpm)</label><input type="number" value={restingHR} onChange={e => setRestingHR(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Heart Rate Zone Calculator" accent="rose" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Resting HR (bpm)</label><input className={inputCls} type="number" value={restHr} onChange={e => setRestHr(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="space-y-1">
-          {zones.map((z, i) => {
-            const low = Math.round(hrr * z.min / 100 + rhr);
-            const high = Math.round(hrr * z.max / 100 + rhr);
-            return (
-              <div key={z.name} className="flex items-center gap-3 text-xs">
-                <div className="w-16 text-right font-medium text-[var(--text-secondary)]">{z.name}</div>
-                <div className="flex-1 h-5 bg-[var(--bg-elevated)] rounded-full overflow-hidden relative">
-                  <div className={`h-full ${z.color} rounded-full opacity-60`} style={{ width: `${z.max}%` }} />
-                  <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white mix-blend-difference">{low}-{high}</div>
-                </div>
-                <div className="w-20 text-[var(--text-tertiary)]">{z.desc}</div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('25'); setRestHr('60'); }}>Athlete 25</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('45'); setRestHr('72'); }}>Average 45</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function IdealWeightCalculator() {
-  const [gender, setGender] = useState('male');
-  const [height, setHeight] = useState('175');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [height, setHeight] = useState('180');
+  const [frame, setFrame] = useState<'small'|'medium'|'large'>('medium');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const h = parseFloat(height) || 0;
-    const hInches = h / 2.54;
-    const base = gender === 'male' ? 50 + 2.3 * (hInches - 60) : 45.5 + 2.3 * (hInches - 60);
-    const minWeight = base - base * 0.1;
-    const maxWeight = base + base * 0.1;
-    const bmiMin = minWeight / Math.pow(h / 100, 2);
-    const bmiMax = maxWeight / Math.pow(h / 100, 2);
-    setResult(`Ideal Weight: ${minWeight.toFixed(1)} - ${maxWeight.toFixed(1)} kg\n(${(minWeight * 2.205).toFixed(1)} - ${(maxWeight * 2.205).toFixed(1)} lbs)\nEst. BMI: ${bmiMin.toFixed(1)} - ${bmiMax.toFixed(1)}`);
-  }, [gender, height]);
-  const h = parseFloat(height) || 1;
+    if (!h) { setResult(''); return; }
+    const hIn = h / 2.54;
+    let devine: number, robinson: number, miller: number, hamwi: number;
+    if (gender === 'male') {
+      devine = 50 + 2.3 * (hIn - 60);
+      robinson = 52 + 1.9 * (hIn - 60);
+      miller = 56.2 + 1.41 * (hIn - 60);
+      hamwi = 48 + 2.7 * (hIn - 60);
+    } else {
+      devine = 45.5 + 2.3 * (hIn - 60);
+      robinson = 49 + 1.7 * (hIn - 60);
+      miller = 53.1 + 1.36 * (hIn - 60);
+      hamwi = 45.5 + 2.2 * (hIn - 60);
+    }
+    const frameAdj = frame === 'small' ? 0.9 : frame === 'large' ? 1.1 : 1;
+    const avg = (devine + robinson + miller + hamwi) / 4 * frameAdj;
+    setResult(`Devine: ${devine.toFixed(1)} kg\nRobinson: ${robinson.toFixed(1)} kg\nMiller: ${miller.toFixed(1)} kg\nHamwi: ${hamwi.toFixed(1)} kg\nAverage: ${avg.toFixed(1)} kg (${(avg * 2.205).toFixed(1)} lb)`);
+  }, [gender, height, frame]);
   return (
-    <CalculatorShell title="Ideal Weight" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Ideal Weight Calculator" accent="teal" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Frame</label><select className={inputCls} value={frame} onChange={e => setFrame(e.target.value as 'small'|'medium'|'large')}><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select></div>
       </div>
     </CalculatorShell>
   );
 }
 
 export function KetoCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [calories, setCalories] = useState('2000');
+  const [weight, setWeight] = useState('80');
+  const [height, setHeight] = useState('180');
+  const [age, setAge] = useState('35');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [activity, setActivity] = useState('1.55');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const cal = parseFloat(calories) || 0;
-    const kg = parseFloat(weight) || 0;
-    if (!cal || !kg) return;
-    const protein = kg * 1.6;
-    const fat = (cal - protein * 4) * 0.75 / 9;
-    const carbs = (cal - protein * 4) * 0.05 / 4;
-    const fatPct = (fat * 9 / cal) * 100;
-    const proteinPct = (protein * 4 / cal) * 100;
-    const carbPct = (carbs * 4 / cal) * 100;
-    setResult(`Protein: ${protein.toFixed(0)}g (${proteinPct.toFixed(0)}%)\nFat: ${fat.toFixed(0)}g (${fatPct.toFixed(0)}%)\nCarbs: ${carbs.toFixed(0)}g (${carbPct.toFixed(0)}%)\nCalories: ${Math.round(cal)} kcal`);
-  }, [weight, calories]);
-  const kg = parseFloat(weight) || 0;
-  const cal = parseFloat(calories) || 0;
-  const protein = kg * 1.6;
-  const fat = (cal - protein * 4) * 0.75 / 9;
-  const carbs = (cal - protein * 4) * 0.05 / 4;
+    const w = parseFloat(weight) || 0;
+    const h = parseFloat(height) || 0;
+    const a = parseFloat(age) || 35;
+    const act = parseFloat(activity) || 1.55;
+    if (!w || !h) { setResult(''); return; }
+    const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
+    const tdee = bmr * act;
+    const deficit = tdee - 500;
+    const protein = w * 1.8;
+    const fat = (deficit - protein * 4) / 9;
+    const carbs = 20;
+    setResult(`Daily calories: ${Math.round(deficit)} kcal\nProtein: ${Math.round(protein)} g (${Math.round(protein * 4)} kcal)\nFat: ${Math.round(fat)} g (${Math.round(fat * 9)} kcal)\nCarbs: ${carbs} g (${carbs * 4} kcal)\nNet carbs: ${carbs}g target`);
+  }, [weight, height, age, gender, activity]);
   return (
-    <CalculatorShell title="Keto Calculator" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Daily Calories</label><input type="number" value={calories} onChange={e => setCalories(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Keto Calculator" accent="amber" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Activity</label><select className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Very active</option></select></div>
       </div>
-      {result && cal > 0 && (
-        <div className="space-y-2">
-          {[
-            { label: 'Fat', value: fat, pct: (fat * 9 / cal) * 100, color: 'bg-amber-500' },
-            { label: 'Protein', value: protein, pct: (protein * 4 / cal) * 100, color: 'bg-indigo-500' },
-            { label: 'Carbs', value: carbs, pct: (carbs * 4 / cal) * 100, color: 'bg-emerald-500' },
-          ].map(m => (
-            <div key={m.label}>
-              <div className="flex justify-between text-xs">
-                <span className="text-[var(--text-secondary)]">{m.label}</span>
-                <span className="text-[var(--text-primary)] font-medium">{m.value.toFixed(0)}g ({m.pct.toFixed(0)}%)</span>
-              </div>
-              <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-                <div className={`h-full ${m.color} rounded-full transition-all duration-500`} style={{ width: `${m.pct}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('80'); setHeight('180'); setAge('35'); setGender('male'); }}>Avg Male</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('65'); setHeight('165'); setAge('35'); setGender('female'); }}>Avg Female</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function LeanBodyMassCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [bf, setBf] = useState('15');
+  const [gender, setGender] = useState<'male'|'female'>('male');
+  const [weight, setWeight] = useState('80');
+  const [height, setHeight] = useState('180');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const w = parseFloat(weight) || 0;
-    const bfp = parseFloat(bf) || 0;
-    if (!w) return;
-    const lbm = w * (1 - bfp / 100);
-    const fatMass = w - lbm;
-    const lbmPct = (lbm / w) * 100;
-    setResult(`Lean Body Mass: ${lbm.toFixed(1)} kg\nFat Mass: ${fatMass.toFixed(1)} kg\nLean %: ${lbmPct.toFixed(1)}%\nFat %: ${bfp.toFixed(1)}%`);
-  }, [weight, bf]);
-  const w = parseFloat(weight) || 0;
-  const bfp = parseFloat(bf) || 0;
-  const lbm = w * (1 - bfp / 100);
-  const fatMass = w - lbm;
+    const h = parseFloat(height) || 0;
+    if (!w || !h) { setResult(''); return; }
+    const boer = gender === 'male' ? 0.407 * w + 0.267 * h - 19.2 : 0.252 * w + 0.473 * h - 48.3;
+    const james = gender === 'male' ? 1.1 * w - 128 * Math.pow(w / h, 2) : 1.07 * w - 148 * Math.pow(w / h, 2);
+    const avg = (boer + james) / 2;
+    setResult(`Boer formula: ${Math.round(boer * 10) / 10} kg\nJames formula: ${Math.round(james * 10) / 10} kg\nAverage LBM: ${Math.round(avg * 10) / 10} kg\nBody fat est.: ${Math.round((w - avg) / w * 100)}%`);
+  }, [gender, weight, height]);
   return (
-    <CalculatorShell title="Lean Body Mass" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Body Fat (%)</label><input type="number" value={bf} onChange={e => setBf(e.target.value)} step="0.1" className={inputClass} /></div>
+    <CalculatorShell title="Lean Body Mass" accent="blue" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">{lbm.toFixed(1)} kg</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Lean Mass</div>
-          </div>
-          <div className="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/20">
-            <div className="text-lg font-bold text-amber-400">{fatMass.toFixed(1)} kg</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Fat Mass</div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function MacroCalculator() {
-  const [gender, setGender] = useState('male');
-  const [weight, setWeight] = useState('70');
-  const [height, setHeight] = useState('175');
-  const [age, setAge] = useState('30');
-  const [goal, setGoal] = useState('maintain');
+  const [calories, setCalories] = useState('2000');
+  const [proteinPct, setProteinPct] = useState('30');
+  const [carbsPct, setCarbsPct] = useState('40');
+  const [fatPct, setFatPct] = useState('30');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
-    const h = parseFloat(height) || 0;
-    const a = parseFloat(age) || 0;
-    const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
-    const tdee = bmr * 1.55;
-    let cal = tdee;
-    if (goal === 'lose') cal = tdee - 500;
-    else if (goal === 'gain') cal = tdee + 300;
-    const protein = w * 2;
-    const fat = cal * 0.25 / 9;
-    const carbs = (cal - protein * 4 - fat * 9) / 4;
-    setResult(`Calories: ${Math.round(cal)} kcal\nProtein: ${Math.round(protein)}g\nFat: ${Math.round(fat)}g\nCarbs: ${Math.round(carbs)}g`);
-  }, [gender, weight, height, age, goal]);
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 0;
-  const a = parseFloat(age) || 0;
-  const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
-  const tdee = bmr * 1.55;
-  let cal = tdee;
-  if (goal === 'lose') cal = tdee - 500;
-  else if (goal === 'gain') cal = tdee + 300;
-  const protein = w * 2;
-  const fat = cal * 0.25 / 9;
-  const carbs = (cal - protein * 4 - fat * 9) / 4;
-  const presets = [
-    { label: 'Lose Weight', apply: () => { setGoal('lose'); } },
-    { label: 'Maintain', apply: () => { setGoal('maintain'); } },
-    { label: 'Gain Muscle', apply: () => { setGoal('gain'); } },
-  ];
+    const cals = parseFloat(calories) || 0;
+    const p = parseFloat(proteinPct) || 0;
+    const c = parseFloat(carbsPct) || 0;
+    const f = parseFloat(fatPct) || 0;
+    if (!cals || Math.abs(p + c + f - 100) > 1) { setResult('Percentages must add to 100%.'); return; }
+    const proteinG = cals * (p / 100) / 4;
+    const carbsG = cals * (c / 100) / 4;
+    const fatG = cals * (f / 100) / 9;
+    setResult(`Protein: ${Math.round(proteinG)}g (${Math.round(proteinG * 4)} kcal)\nCarbs: ${Math.round(carbsG)}g (${Math.round(carbsG * 4)} kcal)\nFat: ${Math.round(fatG)}g (${Math.round(fatG * 9)} kcal)`);
+  }, [calories, proteinPct, carbsPct, fatPct]);
   return (
-    <CalculatorShell title="Macro Calculator" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Gender</label><select value={gender} onChange={e => setGender(e.target.value)} className={inputClass}>
-          <option value="male">Male</option><option value="female">Female</option>
-        </select></div>
-        <div><label className={labelClass}>Goal</label><select value={goal} onChange={e => setGoal(e.target.value)} className={inputClass}>
-          <option value="lose">Lose</option><option value="maintain">Maintain</option><option value="gain">Gain</option>
-        </select></div>
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Height (cm)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Age</label><input type="number" value={age} onChange={e => setAge(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Macro Calculator" accent="lime" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Daily calories</label><input className={inputCls} type="number" value={calories} onChange={e => setCalories(e.target.value)} /></div>
+        <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>
+        <div><label className={labelCls}>Protein %</label><input className={inputCls} type="number" value={proteinPct} onChange={e => setProteinPct(e.target.value)} /></div>
+        <div><label className={labelCls}>Carbs %</label><input className={inputCls} type="number" value={carbsPct} onChange={e => setCarbsPct(e.target.value)} /></div>
+        <div><label className={labelCls}>Fat %</label><input className={inputCls} type="number" value={fatPct} onChange={e => setFatPct(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-          <div className="text-center mb-3">
-            <div className="text-xs text-[var(--text-tertiary)]">Daily Calories</div>
-            <div className="text-2xl font-bold text-indigo-400">{Math.round(cal)} kcal</div>
-          </div>
-          <div className="flex justify-center gap-4 text-sm">
-            <div className="text-center"><div className="font-bold text-amber-400">{Math.round(protein)}g</div><div className="text-xs text-[var(--text-tertiary)]">Protein</div></div>
-            <div className="text-center"><div className="font-bold text-emerald-400">{Math.round(fat)}g</div><div className="text-xs text-[var(--text-tertiary)]">Fat</div></div>
-            <div className="text-center"><div className="font-bold text-blue-400">{Math.round(carbs)}g</div><div className="text-xs text-[var(--text-tertiary)]">Carbs</div></div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('30'); setCarbsPct('40'); setFatPct('30'); }}>Balanced</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('40'); setCarbsPct('20'); setFatPct('40'); }}>Keto</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2500'); setProteinPct('35'); setCarbsPct('45'); setFatPct('20'); }}>Muscle gain</button>
+      </div>
     </CalculatorShell>
   );
 }
 
+
 export function OvulationCalculator() {
-  const [lmp, setLmp] = useState('2026-07-01');
-  const [cycleLength, setCycleLength] = useState('28');
+  const [cycle, setCycle] = useState('28');
+  const [lastPeriod, setLastPeriod] = useState('2026-01-15');
+  const [periodLen, setPeriodLen] = useState('5');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const lmpDate = new Date(lmp);
-    const cycle = parseFloat(cycleLength) || 28;
-    const ovulation = new Date(lmpDate);
-    ovulation.setDate(ovulation.getDate() + cycle - 14);
-    const fertileStart = new Date(ovulation);
-    fertileStart.setDate(fertileStart.getDate() - 5);
-    const fertileEnd = new Date(ovulation);
-    fertileEnd.setDate(fertileEnd.getDate() + 1);
-    const nextPeriod = new Date(lmpDate);
-    nextPeriod.setDate(nextPeriod.getDate() + cycle);
-    const dpo = Math.floor((new Date().getTime() - ovulation.getTime()) / (1000 * 60 * 60 * 24));
-    setResult(`Ovulation: ${ovulation.toLocaleDateString()}\nFertile Window: ${fertileStart.toLocaleDateString()} - ${fertileEnd.toLocaleDateString()}\nNext Period: ${nextPeriod.toLocaleDateString()}\nDPO: ${Math.max(0, dpo)} days`);
-  }, [lmp, cycleLength]);
-  const lmpDate = new Date(lmp);
-  const cycle = parseFloat(cycleLength) || 28;
-  const ovulation = new Date(lmpDate);
-  ovulation.setDate(ovulation.getDate() + cycle - 14);
+    const cyc = parseFloat(cycle) || 28;
+    const pl = parseFloat(periodLen) || 5;
+    if (!lastPeriod) { setResult(''); return; }
+    const lmp = new Date(lastPeriod);
+    if (isNaN(lmp.getTime())) { setResult('Invalid date.'); return; }
+    const ovulationDay = new Date(lmp);
+    ovulationDay.setDate(lmp.getDate() + cyc - 14);
+    const fertileStart = new Date(ovulationDay);
+    fertileStart.setDate(ovulationDay.getDate() - 5);
+    const fertileEnd = new Date(ovulationDay);
+    fertileEnd.setDate(ovulationDay.getDate() + 1);
+    const nextPeriod = new Date(lmp);
+    nextPeriod.setDate(lmp.getDate() + cyc);
+    const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    setResult(`Ovulation day: ${fmt(ovulationDay)}\nFertile window: ${fmt(fertileStart)} - ${fmt(fertileEnd)}\nNext period: ${fmt(nextPeriod)}\nCycle day ${cyc - 14} (ovulation)`);
+  }, [cycle, lastPeriod, periodLen]);
   return (
-    <CalculatorShell title="Ovulation Calculator" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>First Day of Last Period</label><input type="date" value={lmp} onChange={e => setLmp(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Cycle Length (days)</label><input type="number" value={cycleLength} onChange={e => setCycleLength(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Ovulation Calculator" accent="rose" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Cycle length (days)</label><input className={inputCls} type="number" value={cycle} onChange={e => setCycle(e.target.value)} /></div>
+        <div><label className={labelCls}>Last period date</label><input className={inputCls} type="date" value={lastPeriod} onChange={e => setLastPeriod(e.target.value)} /></div>
+        <div><label className={labelCls}>Period length (days)</label><input className={inputCls} type="number" value={periodLen} onChange={e => setPeriodLen(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="bg-pink-500/10 rounded-xl p-4 text-center border border-pink-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Ovulation Date</div>
-          <div className="text-xl font-bold text-pink-400">{ovulation.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCycle('28'); setPeriodLen('5'); }}>28-day cycle</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCycle('28'); setLastPeriod('2026-02-01'); }}>Feb 1 start</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function PregnancyDueDateCalculator() {
-  const [lmp, setLmp] = useState('2026-01-15');
+  const [lmp, setLmp] = useState('2026-01-01');
+  const [cycleLen, setCycleLen] = useState('28');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const lmpDate = new Date(lmp);
-    const due = new Date(lmpDate);
-    due.setDate(due.getDate() + 280);
-    const trimester1 = new Date(lmpDate);
-    trimester1.setDate(trimester1.getDate() + 84);
-    const trimester2 = new Date(lmpDate);
-    trimester2.setDate(trimester2.getDate() + 196);
+    if (!lmp) { setResult(''); return; }
+    const date = new Date(lmp);
+    if (isNaN(date.getTime())) { setResult('Invalid date.'); return; }
+    const cl = parseFloat(cycleLen) || 28;
+    const adjustment = cl - 28;
+    const due = new Date(date);
+    due.setDate(date.getDate() + 280 + adjustment);
+    const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     const today = new Date();
-    const daysPregnant = Math.floor((today.getTime() - lmpDate.getTime()) / (1000 * 60 * 60 * 24));
-    const weeksPregnant = Math.max(0, Math.floor(daysPregnant / 7));
-    const daysRemaining = Math.max(0, Math.ceil((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
-    setResult(`Due Date: ${due.toLocaleDateString()}\nTrimester 1 ends: ${trimester1.toLocaleDateString()}\nTrimester 2 ends: ${trimester2.toLocaleDateString()}\nGestation: ${weeksPregnant}w ${daysPregnant % 7}d\nDays Remaining: ${daysRemaining}`);
-  }, [lmp]);
-  const lmpDate = new Date(lmp);
-  const due = new Date(lmpDate);
-  due.setDate(due.getDate() + 280);
-  const daysPregnant = Math.max(0, Math.floor((new Date().getTime() - lmpDate.getTime()) / (1000 * 60 * 60 * 24)));
-  const weeksPregnant = Math.floor(daysPregnant / 7);
+    const diff = due.getTime() - today.getTime();
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const trimester = daysLeft > 180 ? 'First' : daysLeft > 90 ? 'Second' : 'Third';
+    setResult(`Estimated due date: ${fmt(due)}\nDays remaining: ${daysLeft} days\nCurrent trimester: ${trimester}\nWeeks pregnant: ${Math.round((280 - daysLeft) / 7)} weeks`);
+  }, [lmp, cycleLen]);
   return (
-    <CalculatorShell title="Pregnancy Due Date" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>First Day of Last Period</label><input type="date" value={lmp} onChange={e => setLmp(e.target.value)} className={inputClass} /></div>
-      {result && (
-        <div className="bg-rose-500/10 rounded-xl p-4 border border-rose-500/20">
-          <div className="text-center mb-2">
-            <div className="text-xs text-[var(--text-tertiary)]">Due Date</div>
-            <div className="text-xl font-bold text-rose-400">{due.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</div>
-          </div>
-          <div className="text-center text-xs text-[var(--text-tertiary)]">Currently ~{weeksPregnant} weeks pregnant</div>
-        </div>
-      )}
+    <CalculatorShell title="Pregnancy Due Date" accent="fuchsia" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>First day of LMP</label><input className={inputCls} type="date" value={lmp} onChange={e => setLmp(e.target.value)} /></div>
+        <div><label className={labelCls}>Cycle length (optional)</label><input className={inputCls} type="number" value={cycleLen} onChange={e => setCycleLen(e.target.value)} /></div>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function ProteinCalculator() {
-  const [weight, setWeight] = useState('70');
-  const [activityLevel, setActivityLevel] = useState('moderate');
+  const [weight, setWeight] = useState('80');
+  const [goal, setGoal] = useState('general');
+  const [activity, setActivity] = useState('moderate');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const w = parseFloat(weight) || 0;
-    if (!w) return;
-    const factors: Record<string, number> = { sedentary: 0.8, moderate: 1.4, active: 1.8, athlete: 2.2 };
-    const factor = factors[activityLevel] || 1.4;
-    const protein = w * factor;
-    const calFromProtein = protein * 4;
-    const pctOf2000 = (calFromProtein / 2000) * 100;
-    setResult(`Daily Protein: ${protein.toFixed(0)}g (${calFromProtein.toFixed(0)} kcal)\nPer kg: ${factor.toFixed(1)}g/kg\n% of 2000 kcal diet: ${pctOf2000.toFixed(0)}%`);
-  }, [weight, activityLevel]);
-  const w = parseFloat(weight) || 0;
-  const factors: Record<string, number> = { sedentary: 0.8, moderate: 1.4, active: 1.8, athlete: 2.2 };
-  const factor = factors[activityLevel] || 1.4;
-  const protein = w * factor;
-  const presets = [
-    { label: 'Sedentary', apply: () => { setActivityLevel('sedentary'); } },
-    { label: 'Active', apply: () => { setActivityLevel('active'); } },
-    { label: 'Athlete', apply: () => { setActivityLevel('athlete'); } },
-  ];
+    if (!w) { setResult(''); return; }
+    const factors: Record<string, Record<string, number>> = { general: { sedentary: 0.8, moderate: 1.2, active: 1.6 }, muscle: { sedentary: 1.2, moderate: 1.6, active: 2.2 }, weightLoss: { sedentary: 1.2, moderate: 1.6, active: 2.0 } };
+    const factor = (factors[goal]?.[activity] || 1.2);
+    const proteinG = Math.round(w * factor);
+    const perMeal = Math.round(proteinG / 3);
+    setResult(`Daily protein: ${proteinG}g\nPer meal (3 meals): ${perMeal}g\nRange: ${Math.round(w * (factor - 0.3))}g - ${Math.round(w * (factor + 0.3))}g`);
+  }, [weight, goal, activity]);
   return (
-    <CalculatorShell title="Protein Calculator" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Activity Level</label><select value={activityLevel} onChange={e => setActivityLevel(e.target.value)} className={inputClass}>
-          <option value="sedentary">Sedentary</option><option value="moderate">Moderate</option><option value="active">Active</option><option value="athlete">Athlete</option>
-        </select></div>
+    <CalculatorShell title="Protein Calculator" accent="blue" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Goal</label><select className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="general">General health</option><option value="muscle">Muscle gain</option><option value="weightLoss">Weight loss</option></select></div>
+        <div><label className={labelCls}>Activity</label><select className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="sedentary">Sedentary</option><option value="moderate">Moderate</option><option value="active">Very active</option></select></div>
       </div>
-      {result && (
-        <div className="bg-indigo-500/10 rounded-xl p-4 text-center border border-indigo-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Daily Protein</div>
-          <div className="text-3xl font-bold text-indigo-400">{protein.toFixed(0)}g</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function RunningPaceCalculator() {
-  const [distance, setDistance] = useState('10');
+  const [distance, setDistance] = useState('5');
+  const [unit, setUnit] = useState<'km'|'mi'>('km');
   const [hours, setHours] = useState('0');
-  const [minutes, setMinutes] = useState('50');
+  const [minutes, setMinutes] = useState('25');
   const [seconds, setSeconds] = useState('0');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
@@ -3195,75 +3215,55 @@ export function RunningPaceCalculator() {
     const h = parseFloat(hours) || 0;
     const m = parseFloat(minutes) || 0;
     const s = parseFloat(seconds) || 0;
-    if (!d) return;
+    if (!d) { setResult(''); return; }
     const totalMin = h * 60 + m + s / 60;
-    const pace = totalMin / d;
-    const paceMin = Math.floor(pace);
-    const paceSec = Math.round((pace - paceMin) * 60);
+    const paceMin = totalMin / d;
+    const paceMinInt = Math.floor(paceMin);
+    const paceSec = Math.round((paceMin - paceMinInt) * 60);
     const speed = d / (totalMin / 60);
-    const calEstimate = Math.round(70 * 1.036 * d);
-    setResult(`Pace: ${paceMin}:${paceSec.toString().padStart(2, '0')} /km\nSpeed: ${speed.toFixed(2)} km/h\nTime: ${h > 0 ? `${Math.floor(totalMin / 60)}h ` : ''}${Math.round(totalMin % 60)}min\nEst. Calories: ~${calEstimate} kcal`);
-  }, [distance, hours, minutes, seconds]);
-  const d = parseFloat(distance) || 0;
-  const totalMin = (parseFloat(hours) || 0) * 60 + (parseFloat(minutes) || 0) + (parseFloat(seconds) || 0) / 60;
-  const pace = totalMin / (d || 1);
-  const presets = [
-    { label: '5K', apply: () => { setDistance('5'); setMinutes('25'); setSeconds('0'); } },
-    { label: '10K', apply: () => { setDistance('10'); setMinutes('50'); setSeconds('0'); } },
-    { label: 'Half Marathon', apply: () => { setDistance('21.1'); setHours('1'); setMinutes('45'); setSeconds('0'); } },
-  ];
+    const unitLabel = unit === 'km' ? 'km' : 'mi';
+    setResult(`Pace: ${paceMinInt}:${paceSec.toString().padStart(2, '0')} /${unitLabel}\nSpeed: ${speed.toFixed(2)} ${unitLabel}/h\nTime: ${h}h ${m}m ${s}s`);
+  }, [distance, unit, hours, minutes, seconds]);
   return (
-    <CalculatorShell title="Running Pace Calc" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div><label className={labelClass}>Distance (km)</label><input type="number" value={distance} onChange={e => setDistance(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Hours</label><input type="number" value={hours} onChange={e => setHours(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Minutes</label><input type="number" value={minutes} onChange={e => setMinutes(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Seconds</label><input type="number" value={seconds} onChange={e => setSeconds(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Running Pace Calculator" accent="orange" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Distance</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'km'|'mi')}><option value="km">km</option><option value="mi">mi</option></select></div>
+        <div><label className={labelCls}>Hours</label><input className={inputCls} type="number" value={hours} onChange={e => setHours(e.target.value)} /></div>
+        <div><label className={labelCls}>Minutes</label><input className={inputCls} type="number" value={minutes} onChange={e => setMinutes(e.target.value)} /></div>
+        <div><label className={labelCls}>Seconds</label><input className={inputCls} type="number" value={seconds} onChange={e => setSeconds(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Pace</div>
-            <div className="text-lg font-bold text-indigo-400">{Math.floor(pace)}:{Math.round((pace - Math.floor(pace)) * 60).toString().padStart(2, '0')} /km</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Speed</div>
-            <div className="text-lg font-bold text-emerald-400">{(d / (totalMin / 60 || 1)).toFixed(1)} km/h</div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setDistance('5'); setMinutes('25'); setHours('0'); }}>5K (25 min)</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setDistance('10'); setMinutes('50'); setHours('0'); }}>10K (50 min)</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setDistance('42.2'); setMinutes('0'); setHours('3.5'); }}>Marathon (3:30)</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function SleepCalculator() {
-  const [wakeTime, setWakeTime] = useState('07:00');
+  const [wakeTime, setWakeTime] = useState('06:30');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
+    if (!wakeTime) { setResult(''); return; }
     const [h, m] = wakeTime.split(':').map(Number);
-    const wakeMinutes = h * 60 + m;
-    const options = [5, 6, 7.5, 9].map(hours => {
-      const bedMin = wakeMinutes - hours * 60;
-      const bedH = Math.floor(((bedMin % 1440) + 1440) % 1440 / 60);
-      const bedM = Math.round(((bedMin % 1440) + 1440) % 1440 % 60);
-      return `${String(bedH).padStart(2, '0')}:${String(bedM).padStart(2, '0')} (${hours}h, ${hours / 1.5} cycles)`;
+    const wakeMin = h * 60 + m;
+    const cycles = [5, 4.5, 4, 3.5, 3, 2.5, 2].map(c => {
+      const sleepMin = c * 90;
+      let bedMin = wakeMin - sleepMin - 15;
+      if (bedMin < 0) bedMin += 1440;
+      const bedH = Math.floor(bedMin / 60) % 24;
+      const bedM = Math.round(bedMin % 60);
+      return { cycles: c, time: `${bedH.toString().padStart(2, '0')}:${bedM.toString().padStart(2, '0')}` };
     });
-    setResult(`If waking at ${wakeTime}:\n${options.join('\n')}`);
+    setResult(cycles.map(c => `${c.cycles} cycles (${c.cycles * 1.5}h): ${c.time}`).join('\n'));
   }, [wakeTime]);
   return (
-    <CalculatorShell title="Sleep Calculator" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Wake Time</label><input type="time" value={wakeTime} onChange={e => setWakeTime(e.target.value)} className={inputClass} /></div>
-      {result && (
-        <div className="bg-indigo-500/10 rounded-xl p-3 border border-indigo-500/20">
-          <div className="text-xs text-[var(--text-tertiary)] mb-2">Optimal Bedtimes (90-min cycles)</div>
-          {result.split('\n').slice(1).map((line, i) => (
-            <div key={i} className="flex justify-between text-sm py-1 border-b border-[var(--border-subtle)] last:border-0">
-              <span className="font-bold text-[var(--text-primary)]">{line.split(' (')[0]}</span>
-              <span className="text-[var(--text-secondary)]">({line.split('(')[1]}</span>
-            </div>
-          ))}
-        </div>
-      )}
+    <CalculatorShell title="Sleep Calculator" accent="purple" result={result} onCalculate={calc}>
+      <div className="max-w-sm">
+        <div><label className={labelCls}>Wake time</label><input className={inputCls} type="time" value={wakeTime} onChange={e => setWakeTime(e.target.value)} /></div>
+      </div>
     </CalculatorShell>
   );
 }
@@ -3271,76 +3271,60 @@ export function SleepCalculator() {
 export function StepsToCaloriesCalculator() {
   const [steps, setSteps] = useState('10000');
   const [weight, setWeight] = useState('70');
+  const [height, setHeight] = useState('170');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const s = parseFloat(steps) || 0;
     const w = parseFloat(weight) || 0;
-    if (!s || !w) return;
-    const km = s * 0.762 / 1000;
-    const cal = 0.65 * w * km;
-    const calPerStep = cal / s;
-    const miles = km / 1.609;
-    setResult(`Calories: ~${Math.round(cal)} kcal\nDistance: ${km.toFixed(2)} km (${miles.toFixed(2)} mi)\nCal/Step: ${calPerStep.toFixed(3)}\nSteps/km: ~${Math.round(1000 / 0.762)}`);
-  }, [steps, weight]);
-  const s = parseFloat(steps) || 0;
-  const w = parseFloat(weight) || 0;
-  const km = s * 0.762 / 1000;
-  const cal = 0.65 * w * km;
+    const h = parseFloat(height) || 0;
+    if (!s || !w || !h) { setResult(''); return; }
+    const strideLen = h * 0.415;
+    const distKm = s * strideLen / 100000;
+    const calories = Math.round(distKm * w * 1.036);
+    const distMiles = distKm * 0.621371;
+    setResult(`Distance: ${distKm.toFixed(2)} km (${distMiles.toFixed(2)} mi)\nCalories burned: ${calories} kcal\nStride length: ${strideLen.toFixed(1)} cm`);
+  }, [steps, weight, height]);
   return (
-    <CalculatorShell title="Steps to Calories" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Steps</label><input type="number" value={steps} onChange={e => setSteps(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Steps to Calories" accent="green" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Steps</label><input className={inputCls} type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">{Math.round(cal)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">kcal burned</div>
-          </div>
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">{km.toFixed(2)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">km walked</div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSteps('10000'); setWeight('70'); setHeight('170'); }}>10K steps</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSteps('5000'); }}>5K steps</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function WaterIntakeCalculator() {
   const [weight, setWeight] = useState('70');
-  const [exerciseMin, setExerciseMin] = useState('0');
+  const [activity, setActivity] = useState('30');
+  const [climate, setClimate] = useState('moderate');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const w = parseFloat(weight) || 0;
-    const ex = parseFloat(exerciseMin) || 0;
-    if (!w) return;
-    const base = w * 35;
-    const extra = ex * 12;
-    const total = (base + extra) / 1000;
-    const cups = total / 0.237;
-    setResult(`Daily Water: ${total.toFixed(1)} L\n(${cups.toFixed(0)} cups / ${(total * 33.814).toFixed(1)} oz)\nBase: ${(base / 1000).toFixed(1)}L + Exercise: ${(extra / 1000).toFixed(2)}L`);
-  }, [weight, exerciseMin]);
-  const w = parseFloat(weight) || 0;
-  const ex = parseFloat(exerciseMin) || 0;
-  const total = (w * 35 + ex * 12) / 1000;
+    const act = parseFloat(activity) || 0;
+    if (!w) { setResult(''); return; }
+    let baseMl = w * 35;
+    const actMl = Math.round(act * 12);
+    const climateFactor = climate === 'hot' ? 1.3 : climate === 'cold' ? 0.9 : 1;
+    const total = Math.round((baseMl + actMl) * climateFactor);
+    setResult(`Base: ${Math.round(baseMl)} mL\nActivity: +${actMl} mL\nClimate factor: ${climateFactor}x\nTotal: ${total} mL (${(total / 1000).toFixed(1)} L)\nCups (8oz): ${Math.round(total / 240)}`);
+  }, [weight, activity, climate]);
   return (
-    <CalculatorShell title="Water Intake" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Weight (kg)</label><input type="number" value={weight} onChange={e => setWeight(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Daily Exercise (min)</label><input type="number" value={exerciseMin} onChange={e => setExerciseMin(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Water Intake Calculator" accent="sky" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Exercise (min/day)</label><input className={inputCls} type="number" value={activity} onChange={e => setActivity(e.target.value)} /></div>
+        <div><label className={labelCls}>Climate</label><select className={inputCls} value={climate} onChange={e => setClimate(e.target.value)}><option value="moderate">Moderate</option><option value="hot">Hot / humid</option><option value="cold">Cold</option></select></div>
       </div>
-      {result && (
-        <div className="bg-blue-500/10 rounded-xl p-4 text-center border border-blue-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Daily Water Intake</div>
-          <div className="text-3xl font-bold text-blue-400">{total.toFixed(1)} L</div>
-          <div className="text-xs text-[var(--text-tertiary)]">{(total / 0.237).toFixed(0)} cups · {(total * 33.814).toFixed(0)} oz</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
+
 
 export function SimpleInterestCalculator() {
   const [principal, setPrincipal] = useState('10000');
@@ -3351,81 +3335,71 @@ export function SimpleInterestCalculator() {
     const p = parseFloat(principal) || 0;
     const r = parseFloat(rate) || 0;
     const t = parseFloat(time) || 0;
-    const si = p * r * t / 100;
-    const total = p + si;
-    setResult(`Simple Interest: $${si.toFixed(2)}\nTotal Amount: $${total.toFixed(2)}\nPrincipal: $${p.toFixed(2)}\nRate: ${r}%\nTime: ${t} year(s)`);
+    if (!p || !r || !t) { setResult(''); return; }
+    const interest = p * (r / 100) * t;
+    const total = p + interest;
+    setResult(`Simple Interest: $${interest.toFixed(2)}\nTotal amount: $${total.toFixed(2)}\nAnnual interest: $${(p * r / 100).toFixed(2)}`);
   }, [principal, rate, time]);
-  const p = parseFloat(principal) || 0;
-  const r = parseFloat(rate) || 0;
-  const t = parseFloat(time) || 0;
-  const si = p * r * t / 100;
-  const total = p + si;
   return (
-    <CalculatorShell title="Simple Interest" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputClass} /></div>
-        <div><label className={labelClass}>Time (years)</label><input type="number" value={time} onChange={e => setTime(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Simple Interest Calculator" accent="indigo" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Principal ($)</label><input className={inputCls} type="number" value={principal} onChange={e => setPrincipal(e.target.value)} /></div>
+        <div><label className={labelCls}>Rate (%)</label><input className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
+        <div><label className={labelCls}>Time (years)</label><input className={inputCls} type="number" value={time} onChange={e => setTime(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">${si.toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Interest</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">${total.toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Total</div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function SavingsCalculator() {
+  const [initial, setInitial] = useState('10000');
   const [monthly, setMonthly] = useState('500');
   const [rate, setRate] = useState('5');
   const [years, setYears] = useState('10');
+  const [compoundsPerYear, setCompoundsPerYear] = useState('12');
   const [result, setResult] = useState('');
+  const [schedule, setSchedule] = useState<Array<{year: number; balance: number; contributions: number; interest: number}>>([]);
   const calc = useCallback(() => {
-    const pmt = parseFloat(monthly) || 0;
-    const r = (parseFloat(rate) || 0) / 100 / 12;
-    const n = (parseFloat(years) || 0) * 12;
-    if (!pmt || !n) return;
-    const fv = pmt * (Math.pow(1 + r, n) - 1) / r;
-    const totalContributed = pmt * n;
-    const growth = fv - totalContributed;
-    const monthlyEquivalent = fv / n;
-    setResult(`Future Value: $${fv.toFixed(2)}\nTotal Contributed: $${totalContributed.toFixed(2)}\nTotal Growth: $${growth.toFixed(2)}\nMonthly Growth: $${monthlyEquivalent.toFixed(2)}/mo`);
-  }, [monthly, rate, years]);
-  const pmt = parseFloat(monthly) || 0;
-  const r = (parseFloat(rate) || 0) / 100 / 12;
-  const n = (parseFloat(years) || 0) * 12;
-  const fv = pmt * (Math.pow(1 + r, n) - 1) / (r || 0.0001);
-  const totalContributed = pmt * n;
-  const presets = [
-    { label: '10yr @ 5%', apply: () => { setMonthly('500'); setRate('5'); setYears('10'); } },
-    { label: '20yr @ 7%', apply: () => { setMonthly('1000'); setRate('7'); setYears('20'); } },
-    { label: '30yr @ 8%', apply: () => { setMonthly('500'); setRate('8'); setYears('30'); } },
-  ];
+    const p = parseFloat(initial) || 0;
+    const m = parseFloat(monthly) || 0;
+    const r = (parseFloat(rate) || 0) / 100;
+    const y = parseFloat(years) || 0;
+    const n = parseFloat(compoundsPerYear) || 12;
+    if (!r && !y) { setResult(''); return; }
+    const periodicRate = r / n;
+    const totalPeriods = y * n;
+    const future = p * Math.pow(1 + periodicRate, totalPeriods) + m * (Math.pow(1 + periodicRate, totalPeriods) - 1) / periodicRate;
+    const totalContributions = p + m * y * 12;
+    const totalInterest = future - totalContributions;
+    const sched: Array<{year: number; balance: number; contributions: number; interest: number}> = [];
+    for (let yr = 1; yr <= y; yr++) {
+      const per = yr * n;
+      const bal = p * Math.pow(1 + periodicRate, per) + m * (Math.pow(1 + periodicRate, per) - 1) / periodicRate;
+      const contribs = p + m * yr * 12;
+      sched.push({ year: yr, balance: Math.round(bal * 100) / 100, contributions: Math.round(contribs * 100) / 100, interest: Math.round((bal - contribs) * 100) / 100 });
+    }
+    setSchedule(sched);
+    setResult(`Future value: $${future.toFixed(2)}\nTotal contributions: $${totalContributions.toFixed(2)}\nTotal interest: $${totalInterest.toFixed(2)}`);
+  }, [initial, monthly, rate, years, compoundsPerYear]);
   return (
-    <CalculatorShell title="Savings Calculator" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Monthly ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Savings Calculator" accent="emerald" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Initial deposit ($)</label><input className={inputCls} type="number" value={initial} onChange={e => setInitial(e.target.value)} /></div>
+        <div><label className={labelCls}>Monthly contribution ($)</label><input className={inputCls} type="number" value={monthly} onChange={e => setMonthly(e.target.value)} /></div>
+        <div><label className={labelCls}>Annual rate (%)</label><input className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
+        <div><label className={labelCls}>Time (years)</label><input className={inputCls} type="number" value={years} onChange={e => setYears(e.target.value)} /></div>
+        <div><label className={labelCls}>Compounds / year</label><select className={inputCls} value={compoundsPerYear} onChange={e => setCompoundsPerYear(e.target.value)}><option value="1">Annual</option><option value="2">Semi-annual</option><option value="4">Quarterly</option><option value="12">Monthly</option><option value="365">Daily</option></select></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">${fv.toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Future Value</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">${(fv - totalContributed).toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Growth</div>
-          </div>
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setInitial('10000'); setMonthly('500'); setRate('7'); setYears('20'); }}>20yr retirement</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setInitial('0'); setMonthly('1000'); setRate('8'); setYears('30'); }}>30yr max</button>
+      </div>
+      {schedule.length > 0 && (
+        <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden max-h-48 overflow-y-auto">
+          <table className="w-full text-xs">
+            <thead className="sticky top-0 bg-[var(--bg-overlay)]"><tr className="text-[var(--text-tertiary)]"><th className="text-left px-3 py-2">Year</th><th className="text-right px-3 py-2">Balance</th><th className="text-right px-3 py-2">Contributions</th><th className="text-right px-3 py-2">Interest</th></tr></thead>
+            <tbody>{schedule.map(r => <tr key={r.year} className="border-b border-[var(--border-subtle)]"><td className="px-3 py-1.5 text-[var(--text-primary)]">{r.year}</td><td className="px-3 py-1.5 text-right text-emerald-400">${r.balance.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-[var(--text-secondary)]">${r.contributions.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-amber-400">${r.interest.toLocaleString()}</td></tr>)}</tbody>
+          </table>
         </div>
       )}
     </CalculatorShell>
@@ -3433,322 +3407,322 @@ export function SavingsCalculator() {
 }
 
 export function SeatLicenseCalculator() {
-  const [seats, setSeats] = useState('10');
-  const [pricePerSeat, setPricePerSeat] = useState('50');
-  const [months, setMonths] = useState('12');
+  const [users, setUsers] = useState('50');
+  const [pricePerUser, setPricePerUser] = useState('15');
+  const [billingCycle, setBillingCycle] = useState<'monthly'|'annual'>('monthly');
+  const [annualDiscount, setAnnualDiscount] = useState('15');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const s = parseFloat(seats) || 0;
-    const p = parseFloat(pricePerSeat) || 0;
-    const m = parseFloat(months) || 0;
-    const totalMonthly = s * p;
-    const totalAnnual = totalMonthly * m;
-    const costPerSeatAnnual = p * m;
-    setResult(`Monthly Total: $${totalMonthly.toFixed(2)}\nAnnual Total: $${totalAnnual.toFixed(2)}\nCost per Seat/Year: $${costPerSeatAnnual.toFixed(2)}\nTotal Seats: ${s}`);
-  }, [seats, pricePerSeat, months]);
-  const s = parseFloat(seats) || 0;
-  const p = parseFloat(pricePerSeat) || 0;
-  const m = parseFloat(months) || 0;
-  const totalMonthly = s * p;
-  const totalAnnual = totalMonthly * m;
+    const u = parseFloat(users) || 0;
+    const p = parseFloat(pricePerUser) || 0;
+    const disc = parseFloat(annualDiscount) || 0;
+    if (!u || !p) { setResult(''); return; }
+    const monthlyTotal = u * p;
+    const annualTotal = billingCycle === 'annual' ? monthlyTotal * 12 * (1 - disc / 100) : monthlyTotal * 12;
+    const perUserAnnual = billingCycle === 'annual' ? p * 12 * (1 - disc / 100) : p * 12;
+    setResult(`Monthly: $${monthlyTotal.toFixed(2)} ($${p.toFixed(2)}/user)\nAnnual: $${annualTotal.toFixed(2)} ($${perUserAnnual.toFixed(2)}/user/yr)\nSavings vs monthly: $${(monthlyTotal * 12 - annualTotal).toFixed(2)}`);
+  }, [users, pricePerUser, billingCycle, annualDiscount]);
   return (
-    <CalculatorShell title="Seat License Calc" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Number of Seats</label><input type="number" value={seats} onChange={e => setSeats(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Price/Seat ($/mo)</label><input type="number" value={pricePerSeat} onChange={e => setPricePerSeat(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Months</label><input type="number" value={months} onChange={e => setMonths(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Seat License Calculator" accent="violet" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Number of users</label><input className={inputCls} type="number" value={users} onChange={e => setUsers(e.target.value)} /></div>
+        <div><label className={labelCls}>Price / user / month ($)</label><input className={inputCls} type="number" value={pricePerUser} onChange={e => setPricePerUser(e.target.value)} /></div>
+        <div><label className={labelCls}>Billing cycle</label><select className={inputCls} value={billingCycle} onChange={e => setBillingCycle(e.target.value as 'monthly'|'annual')}><option value="monthly">Monthly</option><option value="annual">Annual</option></select></div>
+        <div><label className={labelCls}>Annual discount (%)</label><input className={inputCls} type="number" value={annualDiscount} onChange={e => setAnnualDiscount(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">${totalMonthly.toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Monthly</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">${totalAnnual.toFixed(0)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Annual</div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setUsers('10'); setPricePerUser('10'); }}>Small team (10)</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setUsers('100'); setPricePerUser('25'); }}>Enterprise (100)</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function SemverCalculator() {
-  const [ver1, setVer1] = useState('2.1.0');
-  const [ver2, setVer2] = useState('2.0.0');
+  const [v1, setV1] = useState('1.2.3');
+  const [v2, setV2] = useState('1.5.0');
   const [result, setResult] = useState('');
-  const parseVer = (v: string) => v.split('.').map(Number);
   const calc = useCallback(() => {
-    const v1 = parseVer(ver1);
-    const v2 = parseVer(ver2);
-    let cmp = '';
-    for (let i = 0; i < 3; i++) {
-      if ((v1[i] || 0) > (v2[i] || 0)) { cmp = '>'; break; }
-      if ((v1[i] || 0) < (v2[i] || 0)) { cmp = '<'; break; }
-    }
-    if (!cmp) cmp = '=';
-    setResult(`${ver1} ${cmp} ${ver2}\n${ver1} is ${cmp === '>' ? 'newer' : cmp === '<' ? 'older' : 'equal to'} ${ver2}`);
-  }, [ver1, ver2]);
-  const v1 = parseVer(ver1);
-  const v2 = parseVer(ver2);
-  let cmp = '';
-  for (let i = 0; i < 3; i++) { if ((v1[i] || 0) > (v2[i] || 0)) { cmp = '>'; break; } if ((v1[i] || 0) < (v2[i] || 0)) { cmp = '<'; break; } }
-  if (!cmp) cmp = '=';
-  const presets = [
-    { label: 'Major Bump', apply: () => { setVer1('3.0.0'); setVer2('2.1.0'); } },
-    { label: 'Minor Bump', apply: () => { setVer1('2.2.0'); setVer2('2.1.0'); } },
-    { label: 'Patch', apply: () => { setVer1('2.1.1'); setVer2('2.1.0'); } },
-  ];
+    const parse = (v: string): number[] => v.replace(/^v/, '').split('.').map(Number);
+    const a = parse(v1);
+    const b = parse(v2);
+    if (a.some(isNaN) || b.some(isNaN) || a.length !== 3 || b.length !== 3) { setResult('Invalid semver format. Use major.minor.patch'); return; }
+    const semverCompare = (x: number[], y: number[]): number => {
+      for (let i = 0; i < 3; i++) { if (x[i] !== y[i]) return x[i] > y[i] ? 1 : -1; }
+      return 0;
+    };
+    const cmp = semverCompare(a, b);
+    const diff = cmp === 0 ? 'Equal' : cmp > 0 ? `${v1} > ${v2}` : `${v1} < ${v2}`;
+    const bumpMajor = `${a[0] + 1}.0.0`;
+    const bumpMinor = `${a[0]}.${a[1] + 1}.0`;
+    const bumpPatch = `${a[0]}.${a[1]}.${a[2] + 1}`;
+    setResult(`Comparison: ${diff}\n${v1} -> major: ${bumpMajor}\n${v1} -> minor: ${bumpMinor}\n${v1} -> patch: ${bumpPatch}`);
+  }, [v1, v2]);
   return (
-    <CalculatorShell title="Semver Calculator" result={result} onCalculate={calc} presets={presets}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Version 1</label><input type="text" value={ver1} onChange={e => setVer1(e.target.value)} placeholder="2.1.0" className={inputClass} /></div>
-        <div><label className={labelClass}>Version 2</label><input type="text" value={ver2} onChange={e => setVer2(e.target.value)} placeholder="2.0.0" className={inputClass} /></div>
+    <CalculatorShell title="Semver Calculator" accent="sky" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Version 1</label><input className={inputCls} value={v1} onChange={e => setV1(e.target.value)} placeholder="1.0.0" /></div>
+        <div><label className={labelCls}>Version 2</label><input className={inputCls} value={v2} onChange={e => setV2(e.target.value)} placeholder="2.0.0" /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xl font-bold font-mono" style={{ color: cmp === '>' ? '#34d399' : cmp === '<' ? '#f87171' : '#fbbf24' }}>{ver1} {cmp} {ver2}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
 
 export function StandardDeviationCalculator() {
-  const [numbers, setNumbers] = useState('2,4,6,8,10');
+  const [numbers, setNumbers] = useState('10, 12, 23, 23, 16, 23, 21, 16');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const nums = numbers.split(',').map(Number);
-    if (!nums.length || nums.some(isNaN)) return;
-    const mean = nums.reduce((s, v) => s + v, 0) / nums.length;
-    const variance = nums.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / nums.length;
-    const std = Math.sqrt(variance);
-    const popStd = Math.sqrt(nums.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / (nums.length));
-    const sampleStd = nums.length > 1 ? Math.sqrt(nums.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / (nums.length - 1)) : 0;
-    setResult(`Mean: ${mean.toFixed(4)}\nPopulation σ: ${popStd.toFixed(4)}\nSample σ: ${sampleStd.toFixed(4)}\nVariance: ${variance.toFixed(4)}\nN: ${nums.length}`);
+    const nums = numbers.split(/[,\s]+/).filter(Boolean).map(Number);
+    if (nums.length < 2 || nums.some(isNaN)) { setResult('Enter at least 2 numbers.'); return; }
+    const mean = nums.reduce((a, b) => a + b, 0) / nums.length;
+    const sqDiffs = nums.map(n => Math.pow(n - mean, 2));
+    const variance = sqDiffs.reduce((a, b) => a + b, 0) / nums.length;
+    const sampleVariance = sqDiffs.reduce((a, b) => a + b, 0) / (nums.length - 1);
+    const stdDev = Math.sqrt(variance);
+    const sampleStdDev = Math.sqrt(sampleVariance);
+    const min = Math.min(...nums);
+    const max = Math.max(...nums);
+    const median = nums.sort((a, b) => a - b)[Math.floor(nums.length / 2)];
+    setResult(`Count: ${nums.length}\nMean: ${mean.toFixed(4)}\nMedian: ${median}\nRange: ${min} - ${max}\nPopulation Std Dev: ${stdDev.toFixed(4)}\nSample Std Dev: ${sampleStdDev.toFixed(4)}\nVariance: ${variance.toFixed(4)}`);
   }, [numbers]);
-  const nums = numbers.split(',').map(Number);
-  const mean = nums.length ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
   return (
-    <CalculatorShell title="Std Deviation" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputClass} /></div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Mean</div>
-            <div className="text-lg font-bold text-indigo-400">{mean.toFixed(2)}</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Std Dev (σ)</div>
-            <div className="text-lg font-bold text-emerald-400">{Math.sqrt(nums.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / nums.length).toFixed(2)}</div>
-          </div>
-        </div>
-      )}
+    <CalculatorShell title="Standard Deviation Calculator" accent="blue" result={result} onCalculate={calc}>
+      <div className="max-w-xl">
+        <div><label className={labelCls}>Numbers (comma separated)</label><textarea className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
+      </div>
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setNumbers('10, 12, 23, 23, 16, 23, 21, 16')}>Reset example</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setNumbers('1, 2, 3, 4, 5, 6, 7, 8, 9, 10')}>1-10</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function TaxCalculator() {
-  const [income, setIncome] = useState('75000');
-  const [deductions, setDeductions] = useState('13000');
+  const [income, setIncome] = useState('80000');
+  const [filingStatus, setFilingStatus] = useState<'single'|'married'|'head'>('single');
+  const [stateTax, setStateTax] = useState('5');
+  const [deductions, setDeductions] = useState('14600');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
     const inc = parseFloat(income) || 0;
-    const ded = parseFloat(deductions) || 0;
+    const ded = parseFloat(deductions) || 14600;
+    const st = parseFloat(stateTax) || 0;
     const taxable = Math.max(0, inc - ded);
-    let tax = 0;
-    if (taxable > 523600) tax = (taxable - 523600) * 0.37 + 157804.25;
-    else if (taxable > 209425) tax = (taxable - 209425) * 0.35 + 47843;
-    else if (taxable > 164925) tax = (taxable - 164925) * 0.32 + 33599;
-    else if (taxable > 86775) tax = (taxable - 86775) * 0.24 + 14279;
-    else if (taxable > 40675) tax = (taxable - 40675) * 0.22 + 4615;
-    else if (taxable > 9950) tax = (taxable - 9950) * 0.12 + 995;
-    else tax = taxable * 0.1;
-    const effective = inc > 0 ? (tax / inc) * 100 : 0;
-    const marginal = taxable > 523600 ? 37 : taxable > 209425 ? 35 : taxable > 164925 ? 32 : taxable > 86775 ? 24 : taxable > 40675 ? 22 : taxable > 9950 ? 12 : 10;
-    const afterTax = inc - tax;
-    setResult(`Taxable Income: $${taxable.toLocaleString()}\nTax: $${Math.round(tax).toLocaleString()}\nEffective: ${effective.toFixed(1)}%\nMarginal: ${marginal}%\nAfter Tax: $${afterTax.toLocaleString()}`);
-  }, [income, deductions]);
-  const inc = parseFloat(income) || 0;
-  const ded = parseFloat(deductions) || 0;
-  const taxable = Math.max(0, inc - ded);
-  let tax = 0;
-  if (taxable > 523600) tax = (taxable - 523600) * 0.37 + 157804.25;
-  else if (taxable > 209425) tax = (taxable - 209425) * 0.35 + 47843;
-  else if (taxable > 164925) tax = (taxable - 164925) * 0.32 + 33599;
-  else if (taxable > 86775) tax = (taxable - 86775) * 0.24 + 14279;
-  else if (taxable > 40675) tax = (taxable - 40675) * 0.22 + 4615;
-  else if (taxable > 9950) tax = (taxable - 9950) * 0.12 + 995;
-  else tax = taxable * 0.1;
+    const brackets: Record<string, Array<{min: number; max: number; rate: number}>> = { single: [{min:0,max:11600,rate:0.1},{min:11600,max:47150,rate:0.12},{min:47150,max:100525,rate:0.22},{min:100525,max:191950,rate:0.24},{min:191950,max:243725,rate:0.32},{min:243725,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}], married: [{min:0,max:23200,rate:0.1},{min:23200,max:94300,rate:0.12},{min:94300,max:201050,rate:0.22},{min:201050,max:383900,rate:0.24},{min:383900,max:487450,rate:0.32},{min:487450,max:731200,rate:0.35},{min:731200,max:Infinity,rate:0.37}], head: [{min:0,max:16550,rate:0.1},{min:16550,max:63100,rate:0.12},{min:63100,max:100500,rate:0.22},{min:100500,max:191950,rate:0.24},{min:191950,max:243700,rate:0.32},{min:243700,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}] };
+    let federalTax = 0;
+    let remaining = taxable;
+    for (const b of brackets[filingStatus]) {
+      if (remaining <= 0) break;
+      const taxableInBracket = Math.min(remaining, b.max - b.min);
+      federalTax += taxableInBracket * b.rate;
+      remaining -= taxableInBracket;
+    }
+    const stateTaxAmount = taxable * (st / 100);
+    const fica = inc * 0.0765;
+    const totalTax = federalTax + stateTaxAmount + fica;
+    const effectiveRate = (totalTax / inc) * 100;
+    const takeHome = inc - totalTax;
+    setResult(`Gross income: $${inc.toLocaleString()}\nTaxable income: $${taxable.toLocaleString()}\nFederal: $${Math.round(federalTax).toLocaleString()}\nFICA: $${Math.round(fica).toLocaleString()}\nState: $${Math.round(stateTaxAmount).toLocaleString()}\nTotal tax: $${Math.round(totalTax).toLocaleString()}\nEffective rate: ${effectiveRate.toFixed(1)}%\nTake-home: $${Math.round(takeHome).toLocaleString()} (${(takeHome / inc * 100).toFixed(0)}%)`);
+  }, [income, filingStatus, stateTax, deductions]);
   return (
-    <CalculatorShell title="Tax Calculator" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Annual Income ($)</label><input type="number" value={income} onChange={e => setIncome(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Standard Deduction ($)</label><input type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Tax Calculator (US 2025)" accent="indigo" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Annual income ($)</label><input className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
+        <div><label className={labelCls}>Filing status</label><select className={inputCls} value={filingStatus} onChange={e => setFilingStatus(e.target.value as 'single'|'married'|'head')}><option value="single">Single</option><option value="married">Married filing jointly</option><option value="head">Head of household</option></select></div>
+        <div><label className={labelCls}>State tax rate (%)</label><input className={inputCls} type="number" value={stateTax} onChange={e => setStateTax(e.target.value)} /></div>
+        <div><label className={labelCls}>Standard deduction ($)</label><input className={inputCls} type="number" value={deductions} onChange={e => setDeductions(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="space-y-2">
-          <div className="bg-red-500/10 rounded-xl p-3 text-center border border-red-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Estimated Tax</div>
-            <div className="text-2xl font-bold text-red-400">$${Math.round(tax).toLocaleString()}</div>
-          </div>
-          <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500 rounded-full" style={{ width: `${Math.min((tax / inc) * 100, 100)}%` }} />
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setIncome('60000'); setFilingStatus('single'); }}>60k Single</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setIncome('150000'); setFilingStatus('married'); }}>150k Married</button>
+      </div>
     </CalculatorShell>
   );
 }
 
+
 export function TdsCalculatorIndia() {
-  const [salary, setSalary] = useState('1200000');
+  const [income, setIncome] = useState('1200000');
+  const [age, setAge] = useState('35');
+  const [regime, setRegime] = useState<'old'|'new'>('new');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const s = parseFloat(salary) || 0;
+    const inc = parseFloat(income) || 0;
+    const a = parseFloat(age) || 35;
+    if (!inc) { setResult(''); return; }
+    let taxable = inc;
     let tax = 0;
-    if (s > 1500000) tax = (s - 1500000) * 0.3 + 150000;
-    else if (s > 1200000) tax = (s - 1200000) * 0.2 + 90000;
-    else if (s > 900000) tax = (s - 900000) * 0.15 + 45000;
-    else if (s > 600000) tax = (s - 600000) * 0.1 + 15000;
-    else if (s > 300000) tax = (s - 300000) * 0.05;
-    const monthly = tax / 12;
-    const netMonthly = (s - tax) / 12;
-    const effective = s > 0 ? (tax / s) * 100 : 0;
-    setResult(`Annual Tax: ₹${Math.round(tax).toLocaleString()}\nMonthly TDS: ₹${Math.round(monthly).toLocaleString()}\nNet Monthly: ₹${Math.round(netMonthly).toLocaleString()}\nEffective: ${effective.toFixed(1)}%\n(New Regime, no deductions)`);
-  }, [salary]);
-  const s = parseFloat(salary) || 0;
-  let tax = 0;
-  if (s > 1500000) tax = (s - 1500000) * 0.3 + 150000;
-  else if (s > 1200000) tax = (s - 1200000) * 0.2 + 90000;
-  else if (s > 900000) tax = (s - 900000) * 0.15 + 45000;
-  else if (s > 600000) tax = (s - 600000) * 0.1 + 15000;
-  else if (s > 300000) tax = (s - 300000) * 0.05;
+    if (regime === 'new') {
+      const slabs = [{min:0,max:300000,rate:0},{min:300000,max:600000,rate:0.05},{min:600000,max:900000,rate:0.1},{min:900000,max:1200000,rate:0.15},{min:1200000,max:1500000,rate:0.2},{min:1500000,max:Infinity,rate:0.3}];
+      let remaining = Math.max(0, taxable - 50000);
+      for (const s of slabs) {
+        if (remaining <= 0) break;
+        const taxableInSlab = Math.min(remaining, s.max - s.min);
+        tax += taxableInSlab * s.rate;
+        remaining -= taxableInSlab;
+      }
+      const rebate = inc <= 700000 ? Math.min(tax, 25000) : 0;
+      tax -= rebate;
+    } else {
+      const deduction80c = 150000;
+      const standardDeduction = a < 60 ? 50000 : a < 80 ? 50000 : 50000;
+      taxable = Math.max(0, inc - standardDeduction - deduction80c);
+      const slabs = [{min:0,max:250000,rate:0},{min:250000,max:500000,rate:0.05},{min:500000,max:1000000,rate:0.2},{min:1000000,max:Infinity,rate:0.3}];
+      let remaining = taxable;
+      for (const s of slabs) {
+        if (remaining <= 0) break;
+        const taxableInSlab = Math.min(remaining, s.max - s.min);
+        tax += taxableInSlab * s.rate;
+        remaining -= taxableInSlab;
+      }
+    }
+    const cess = tax * 0.04;
+    const totalTax = tax + cess;
+    setResult(`Gross income: \u20b9${inc.toLocaleString('en-IN')}\nTaxable: \u20b9${taxable.toLocaleString('en-IN')}\nTax: \u20b9${Math.round(tax).toLocaleString('en-IN')}\nHealth & edu cess (4%): \u20b9${Math.round(cess).toLocaleString('en-IN')}\nTotal tax: \u20b9${Math.round(totalTax).toLocaleString('en-IN')}\nEffective rate: ${(totalTax / inc * 100).toFixed(1)}%`);
+  }, [income, age, regime]);
   return (
-    <CalculatorShell title="TDS Calculator (India)" result={result} onCalculate={calc}>
-      <div><label className={labelClass}>Annual Salary (₹)</label><input type="number" value={salary} onChange={e => setSalary(e.target.value)} className={inputClass} /></div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-red-500/10 rounded-xl p-3 text-center border border-red-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Annual Tax</div>
-            <div className="text-lg font-bold text-red-400">₹{Math.round(tax).toLocaleString()}</div>
-          </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Net Monthly</div>
-            <div className="text-lg font-bold text-emerald-400">₹{Math.round((s - tax) / 12).toLocaleString()}</div>
-          </div>
-        </div>
-      )}
+    <CalculatorShell title="TDS Calculator (India)" accent="orange" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-3 gap-4">
+        <div><label className={labelCls}>Annual income (\u20b9)</label><input className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
+        <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Regime</label><select className={inputCls} value={regime} onChange={e => setRegime(e.target.value as 'old'|'new')}><option value="new">New (default)</option><option value="old">Old</option></select></div>
+      </div>
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setIncome('500000'); setRegime('new'); }}>5L New</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setIncome('1500000'); setRegime('old'); }}>15L Old</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function TrialConversionCalculator() {
-  const [trials, setTrials] = useState('1000');
-  const [paid, setPaid] = useState('200');
+  const [visitors, setVisitors] = useState('1000');
+  const [signups, setSignups] = useState('100');
+  const [paid, setPaid] = useState('20');
+  const [trialLength, setTrialLength] = useState('14');
+  const [price, setPrice] = useState('29');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const t = parseFloat(trials) || 0;
+    const v = parseFloat(visitors) || 0;
+    const s = parseFloat(signups) || 0;
     const p = parseFloat(paid) || 0;
-    if (!t) return;
-    const rate = (p / t) * 100;
-    const churned = t - p;
-    setResult(`Conversion Rate: ${rate.toFixed(2)}%\nPaid: ${p} of ${t}\nDid Not Convert: ${churned}`);
-  }, [trials, paid]);
-  const t = parseFloat(trials) || 1;
-  const p = parseFloat(paid) || 0;
-  const rate = (p / t) * 100;
+    const tl = parseFloat(trialLength) || 14;
+    const pr = parseFloat(price) || 0;
+    if (!v || !s || !p) { setResult(''); return; }
+    const signupRate = (s / v) * 100;
+    const conversionRate = (p / s) * 100;
+    const overallRate = (p / v) * 100;
+    const revenue = p * pr;
+    const monthlyRev = revenue * (30 / tl);
+    setResult(`Signup rate: ${signupRate.toFixed(1)}%\nTrial-to-paid: ${conversionRate.toFixed(1)}%\nOverall conversion: ${overallRate.toFixed(2)}%\nRevenue: $${Math.round(revenue)}\nEst. monthly revenue: $${Math.round(monthlyRev)}`);
+  }, [visitors, signups, paid, trialLength, price]);
   return (
-    <CalculatorShell title="Trial Conversion" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Total Trials</label><input type="number" value={trials} onChange={e => setTrials(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Paid Conversions</label><input type="number" value={paid} onChange={e => setPaid(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Trial Conversion Calculator" accent="violet" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Visitors / mo</label><input className={inputCls} type="number" value={visitors} onChange={e => setVisitors(e.target.value)} /></div>
+        <div><label className={labelCls}>Trial signups</label><input className={inputCls} type="number" value={signups} onChange={e => setSignups(e.target.value)} /></div>
+        <div><label className={labelCls}>Paid conversions</label><input className={inputCls} type="number" value={paid} onChange={e => setPaid(e.target.value)} /></div>
+        <div><label className={labelCls}>Trial length (days)</label><input className={inputCls} type="number" value={trialLength} onChange={e => setTrialLength(e.target.value)} /></div>
+        <div><label className={labelCls}>Price ($/mo)</label><input className={inputCls} type="number" value={price} onChange={e => setPrice(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="space-y-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Trial Conversion</div>
-            <div className="text-2xl font-bold text-indigo-400">{rate.toFixed(1)}%</div>
-          </div>
-          <div className="h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-full" style={{ width: `${rate}%` }} />
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setVisitors('10000'); setSignups('500'); setPaid('75'); }}>Typical SaaS</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setVisitors('5000'); setSignups('250'); setPaid('50'); setTrialLength('7'); }}>High conversion</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function TriangleAreaCalculator() {
-  const [base, setBase] = useState('6');
-  const [height, setHeight] = useState('4');
+  const [method, setMethod] = useState<'baseheight'|'sides'|'sas'>('baseheight');
+  const [base, setBase] = useState('10');
+  const [height, setHeight] = useState('8');
+  const [sideA, setSideA] = useState('5');
+  const [sideB, setSideB] = useState('6');
+  const [sideC, setSideC] = useState('7');
+  const [angle, setAngle] = useState('60');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const b = parseFloat(base) || 0;
-    const h = parseFloat(height) || 0;
-    if (!b || !h) return;
-    const area = 0.5 * b * h;
-    setResult(`Area: ${area.toFixed(2)} sq units\nBase: ${b}\nHeight: ${h}`);
-  }, [base, height]);
-  const b = parseFloat(base) || 0;
-  const h = parseFloat(height) || 0;
-  const area = 0.5 * b * h;
+    if (method === 'baseheight') {
+      const b = parseFloat(base) || 0;
+      const h = parseFloat(height) || 0;
+      if (!b || !h) { setResult(''); return; }
+      const area = 0.5 * b * h;
+      setResult(`Area = \u00bd \u00d7 ${b} \u00d7 ${h} = ${area.toFixed(2)} sq units\n\nFormula: A = \u00bdbh`);
+    } else if (method === 'sides') {
+      const a = parseFloat(sideA) || 0;
+      const b = parseFloat(sideB) || 0;
+      const c = parseFloat(sideC) || 0;
+      if (!a || !b || !c) { setResult(''); return; }
+      const s = (a + b + c) / 2;
+      const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+      if (isNaN(area)) { setResult('These side lengths do not form a valid triangle.'); return; }
+      setResult(`Area (Heron's formula) = ${area.toFixed(2)} sq units\nSemi-perimeter = ${s.toFixed(2)}\n\nFormula: A = \u221a(s(s-a)(s-b)(s-c))`);
+    } else {
+      const a = parseFloat(sideA) || 0;
+      const b = parseFloat(sideB) || 0;
+      const ang = parseFloat(angle) || 0;
+      if (!a || !b || !ang) { setResult(''); return; }
+      const rad = ang * Math.PI / 180;
+      const area = 0.5 * a * b * Math.sin(rad);
+      setResult(`Area = \u00bd \u00d7 ${a} \u00d7 ${b} \u00d7 sin(${ang}\u00b0) = ${area.toFixed(2)} sq units`);
+    }
+  }, [method, base, height, sideA, sideB, sideC, angle]);
   return (
-    <CalculatorShell title="Triangle Area" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className={labelClass}>Base</label><input type="number" value={base} onChange={e => setBase(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Height</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputClass} /></div>
+    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Method</label><select className={inputCls} value={method} onChange={e => setMethod(e.target.value as 'baseheight'|'sides'|'sas')}><option value="baseheight">Base & Height</option><option value="sides">Three sides (SSS)</option><option value="sas">Two sides & angle (SAS)</option></select></div>
+        <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>
+        {method === 'baseheight' && (<><div><label className={labelCls}>Base</label><input className={inputCls} type="number" value={base} onChange={e => setBase(e.target.value)} /></div><div><label className={labelCls}>Height</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div></>)}
+        {method === 'sides' && (<><div><label className={labelCls}>Side A</label><input className={inputCls} type="number" value={sideA} onChange={e => setSideA(e.target.value)} /></div><div><label className={labelCls}>Side B</label><input className={inputCls} type="number" value={sideB} onChange={e => setSideB(e.target.value)} /></div><div><label className={labelCls}>Side C</label><input className={inputCls} type="number" value={sideC} onChange={e => setSideC(e.target.value)} /></div></>)}
+        {method === 'sas' && (<><div><label className={labelCls}>Side A</label><input className={inputCls} type="number" value={sideA} onChange={e => setSideA(e.target.value)} /></div><div><label className={labelCls}>Side B</label><input className={inputCls} type="number" value={sideB} onChange={e => setSideB(e.target.value)} /></div><div><label className={labelCls}>Angle (\u00b0)</label><input className={inputCls} type="number" value={angle} onChange={e => setAngle(e.target.value)} /></div></>)}
       </div>
-      {result && (
-        <div className="bg-emerald-500/10 rounded-xl p-4 text-center border border-emerald-500/20">
-          <div className="text-xs text-[var(--text-tertiary)]">Area = ½ × b × h</div>
-          <div className="text-3xl font-bold text-emerald-400">{area.toFixed(2)}</div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setBase('10'); setHeight('8'); setMethod('baseheight'); }}>Base/Height</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSideA('5'); setSideB('6'); setSideC('7'); setMethod('sides'); }}>3-4-5</button>
+      </div>
     </CalculatorShell>
   );
 }
 
 export function GasMileageCalculator() {
-  const [miles, setMiles] = useState('300');
+  const [distance, setDistance] = useState('300');
   const [gallons, setGallons] = useState('10');
-  const [costPerGallon, setCostPerGallon] = useState('3.50');
+  const [pricePerGallon, setPricePerGallon] = useState('3.50');
+  const [unit, setUnit] = useState<'us'|'metric'>('us');
   const [result, setResult] = useState('');
   const calc = useCallback(() => {
-    const m = parseFloat(miles) || 0;
+    const d = parseFloat(distance) || 0;
     const g = parseFloat(gallons) || 0;
-    const cpg = parseFloat(costPerGallon) || 0;
-    if (!g) { setResult('Gallons cannot be zero'); return; }
-    const mpg = m / g;
-    const kml = mpg * 0.425144;
-    const costPerMile = cpg / mpg;
-    const tripCost = cpg * g;
-    setResult(`Fuel Economy: ${mpg.toFixed(1)} MPG\n${kml.toFixed(1)} km/L\nCost/Mile: $${costPerMile.toFixed(2)}\nTrip Cost: $${tripCost.toFixed(2)}`);
-  }, [miles, gallons, costPerGallon]);
-  const m = parseFloat(miles) || 0;
-  const g = parseFloat(gallons) || 1;
-  const cpg = parseFloat(costPerGallon) || 0;
-  const mpg = m / g;
+    const p = parseFloat(pricePerGallon) || 0;
+    if (!d || !g) { setResult(''); return; }
+    if (unit === 'us') {
+      const mpg = d / g;
+      const cost = g * p;
+      const perMile = cost / d;
+      setResult(`Fuel economy: ${mpg.toFixed(1)} mpg\nFuel used: ${g.toFixed(1)} gal\nFuel cost: $${cost.toFixed(2)}\nCost per mile: $${perMile.toFixed(3)}`);
+    } else {
+      const liters = g * 3.78541;
+      const km = d * 1.60934;
+      const lPer100km = (liters / km) * 100;
+      const cost = g * p;
+      setResult(`Fuel economy: ${lPer100km.toFixed(1)} L/100km\nFuel used: ${liters.toFixed(1)} L\nFuel cost: $${cost.toFixed(2)}\nCost per km: $${(cost / km).toFixed(3)}`);
+    }
+  }, [distance, gallons, pricePerGallon, unit]);
   return (
-    <CalculatorShell title="Gas Mileage" result={result} onCalculate={calc}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className={labelClass}>Miles Driven</label><input type="number" value={miles} onChange={e => setMiles(e.target.value)} className={inputClass} /></div>
-        <div><label className={labelClass}>Gallons Used</label><input type="number" value={gallons} onChange={e => setGallons(e.target.value)} step="0.1" className={inputClass} /></div>
-        <div><label className={labelClass}>$/Gallon</label><input type="number" value={costPerGallon} onChange={e => setCostPerGallon(e.target.value)} step="0.01" className={inputClass} /></div>
+    <CalculatorShell title="Gas Mileage Calculator" accent="amber" result={result} onCalculate={calc}>
+      <div className="grid grid-cols-2 gap-4">
+        <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'us'|'metric')}><option value="us">US (mi, gal)</option><option value="metric">Metric (km, L)</option></select></div>
+        <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>
+        <div><label className={labelCls}>{unit === 'us' ? 'Distance (miles)' : 'Distance (km)'}</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label className={labelCls}>{unit === 'us' ? 'Gallons used' : 'Gallons used'}</label><input className={inputCls} type="number" value={gallons} onChange={e => setGallons(e.target.value)} /></div>
+        <div><label className={labelCls}>Price per gallon ($)</label><input className={inputCls} type="number" value={pricePerGallon} onChange={e => setPricePerGallon(e.target.value)} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">{mpg.toFixed(1)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">MPG</div>
-          </div>
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">${(cpg * g).toFixed(2)}</div>
-            <div className="text-xs text-[var(--text-tertiary)]">Trip Cost</div>
-          </div>
-        </div>
-      )}
+      <div className="flex gap-3 mt-3">
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setDistance('300'); setGallons('10'); setUnit('us'); }}>Avg SUV</button>
+        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setDistance('400'); setGallons('8'); setUnit('us'); }}>Efficient sedan</button>
+      </div>
     </CalculatorShell>
   );
 }

@@ -3,9 +3,14 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
 
 function randInt(min: number, max: number): number { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
@@ -34,7 +39,7 @@ function OutputBlock({ value }: { value: string }) {
   if (!value) return null;
   return (
     <div className="mt-3">
-      <pre className={resultClass + ' max-h-48 overflow-y-auto'}>{value}</pre>
+      <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{value}</pre>
       <button onClick={() => copy(value)} className="mt-1 px-4 py-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
     </div>
   );
@@ -52,12 +57,11 @@ export function RandomDateGenerator() {
     toast.success('Dates generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random Date Generator</h1>
+    <Section title="Random Date Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate Dates</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Dates</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -75,12 +79,11 @@ export function RandomTimeGenerator() {
     toast.success('Times generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random Time Generator</h1>
+    <Section title="Random Time Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate Times</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Times</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -97,12 +100,11 @@ export function RandomIpGenerator() {
     toast.success('IPs generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random IP Generator</h1>
+    <Section title="Random IP Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate IPs</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate IPs</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -126,12 +128,11 @@ export function RandomUserAgentGenerator() {
     toast.success('User agents generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random User-Agent Generator</h1>
+    <Section title="Random User-Agent Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate User Agents</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate User Agents</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -150,12 +151,11 @@ export function RandomSentenceGenerator() {
     toast.success('Sentences generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random Sentence Generator</h1>
+    <Section title="Random Sentence Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate Sentences</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Sentences</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -167,12 +167,11 @@ export function RandomWordGenerator() {
     toast.success('Words generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Random Word Generator</h1>
+    <Section title="Random Word Generator">
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className={btnClass}>Generate Words</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Words</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -188,8 +187,7 @@ export function PinGenerator() {
     toast.success('PINs generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">PIN Generator</h1>
+    <Section title="PIN Generator">
       <CountSlider value={count} onChange={setCount} />
       <div className="flex items-center gap-2">
         <span className="text-sm text-[var(--text-secondary)]">Digits</span>
@@ -197,9 +195,9 @@ export function PinGenerator() {
           <button key={n} onClick={() => setDigits(n)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{n}</button>
         ))}
       </div>
-      <button onClick={gen} className={btnClass}>Generate PINs</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate PINs</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -216,16 +214,15 @@ export function LicenseKeyGenerator() {
     toast.success('License keys generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">License Key Generator</h1>
+    <Section title="License Key Generator">
       <CountSlider value={count} onChange={setCount} />
       <div className="space-y-1">
-        <label className="block text-sm font-medium">Format (X = any char)</label>
-        <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX" className={inputClass + ' font-mono'} />
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char)</label>
+        <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX" className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" />
       </div>
-      <button onClick={gen} className={btnClass}>Generate Keys</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Keys</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -247,13 +244,12 @@ export function ImagePlaceholderGenerator() {
     toast.success('Placeholders generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Image Placeholder Generator</h1>
+    <Section title="Image Placeholder Generator">
       <CountSlider value={count} onChange={setCount} />
       <p className="text-xs text-[var(--text-muted)]">Generates SVG placeholders as base64 data URIs</p>
-      <button onClick={gen} className={btnClass}>Generate Placeholders</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Placeholders</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -273,13 +269,12 @@ export function LogoPlaceholderGenerator() {
     toast.success('Logo placeholders generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Logo Placeholder Generator</h1>
+    <Section title="Logo Placeholder Generator">
       <CountSlider value={count} onChange={setCount} />
       <p className="text-xs text-[var(--text-muted)]">Branded SVG logos with random colors</p>
-      <button onClick={gen} className={btnClass}>Generate Logos</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Logos</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -305,17 +300,16 @@ export function OpenGraphGenerator() {
     toast.success('OG tags generated');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Open Graph Generator</h1>
+    <Section title="Open Graph Generator">
       <div className="space-y-2">
-        <div><label className="block text-sm font-medium mb-1">Title</label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">Description</label><input type="text" value={desc} onChange={e => setDesc(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">URL</label><input type="text" value={url} onChange={e => setUrl(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">Image URL</label><input type="text" value={img} onChange={e => setImg(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label><input type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label><input type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label><input type="text" value={img} onChange={e => setImg(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
       </div>
-      <button onClick={gen} className={btnClass}>Generate OG Tags</button>
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate OG Tags</button>
       <OutputBlock value={out} />
-    </div>
+    </Section>
   );
 }
 
@@ -347,18 +341,17 @@ export function OauthPkceGenerator() {
     }
   }, []);
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">OAuth PKCE Generator</h1>
+    <Section title="OAuth PKCE Generator">
       <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
       <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">
         <li>48 random bytes → 64-char base64url verifier (spec: 43-128)</li>
         <li>SHA-256 hash → base64url-encoded challenge (S256 method)</li>
         <li>Output usable with any OAuth 2.0 PKCE-compliant provider</li>
       </ul>
-      <button onClick={generate} disabled={loading} className={`${btnClass} ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
+      <button onClick={generate} disabled={loading} className={`w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
         {loading ? 'Generating...' : 'Generate PKCE Pair'}
       </button>
-      {out && <pre className={resultClass + ' max-h-64 overflow-y-auto'}>{out}</pre>}
-    </div>
+      {out && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-64 overflow-y-auto">{out}</pre>}
+    </Section>
   );
 }

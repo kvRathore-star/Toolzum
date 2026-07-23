@@ -3,9 +3,14 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
 
 const SECRET_PATTERNS: [RegExp, string][] = [
   [/sk-[a-zA-Z0-9]{20,}/g, 'Stripe Secret Key'],
@@ -51,12 +56,13 @@ export function SecretScanner() {
     }
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Secret Scanner</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} placeholder="Paste text or code to scan for API keys, tokens, and secrets..." />
-      <button onClick={scan} className={btnClass}>Scan for Secrets</button>
-      {output && <pre className={resultClass + ' max-h-48 overflow-y-auto'}>{output}</pre>}
-    </div>
+    <Section title="Secret Scanner">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="Paste text or code to scan for API keys, tokens, and secrets..." />
+        <button onClick={scan} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Scan for Secrets</button>
+        {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -79,17 +85,18 @@ export function SecurityTxtGenerator() {
     toast.success('security.txt generated!');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">security.txt Generator</h1>
-      <div className="space-y-2">
-        <div><label className="block text-sm font-medium mb-1">Contact</label><input type="text" value={contact} onChange={e => setContact(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">Policy URL</label><input type="text" value={policy} onChange={e => setPolicy(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">Encryption Key URL</label><input type="text" value={encryption} onChange={e => setEncryption(e.target.value)} className={inputClass} /></div>
-        <div><label className="block text-sm font-medium mb-1">Expires</label><input type="text" value={expires} onChange={e => setExpires(e.target.value)} className={inputClass} /></div>
+    <Section title="security.txt Generator">
+      <div className="space-y-3">
+        <div className="space-y-2">
+          <div><label className="block text-sm font-medium mb-1">Contact</label><input type="text" value={contact} onChange={e => setContact(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div><label className="block text-sm font-medium mb-1">Policy URL</label><input type="text" value={policy} onChange={e => setPolicy(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div><label className="block text-sm font-medium mb-1">Encryption Key URL</label><input type="text" value={encryption} onChange={e => setEncryption(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div><label className="block text-sm font-medium mb-1">Expires</label><input type="text" value={expires} onChange={e => setExpires(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        </div>
+        <button onClick={generate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate security.txt</button>
+        {output && <div><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><CopyBtn text={output} label="security.txt" /></div>}
       </div>
-      <button onClick={generate} className={btnClass}>Generate security.txt</button>
-      {output && <div><pre className={resultClass}>{output}</pre><CopyBtn text={output} label="security.txt" /></div>}
-    </div>
+    </Section>
   );
 }
 
@@ -115,12 +122,13 @@ export function RobotsTxtValidator() {
     toast.success(issues.length ? `Found ${issues.length} issue(s)` : 'Valid!');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">robots.txt Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} placeholder="User-agent: *\nAllow: /" />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={resultClass}>{output}</pre>}
-    </div>
+    <Section title="robots.txt Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="User-agent: *\nAllow: /" />
+        <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate</button>
+        {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -146,11 +154,12 @@ export function DnsRecordValidator() {
     setOutput(results.join('\n'));
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">DNS Record Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={5} className={`${inputClass} resize-y`} placeholder="example.com. 3600 A 192.168.1.1" />
-      <button onClick={validate} className={btnClass}>Validate Records</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="DNS Record Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="example.com. 3600 A 192.168.1.1" />
+        <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate Records</button>
+        {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+      </div>
+    </Section>
   );
 }

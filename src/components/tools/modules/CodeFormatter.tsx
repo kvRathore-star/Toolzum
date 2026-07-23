@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from 'react';
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 font-mono text-sm";
-const labelClass = "block text-sm font-medium mb-1";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
-const cardClass = "max-w-4xl mx-auto p-6";
-const headingClass = "text-2xl font-bold mb-6";
-const textareaClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono h-64 outline-none text-sm resize-y";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
 
 function formatJson(code: string) {
   try { return JSON.stringify(JSON.parse(code), null, 2); }
@@ -110,28 +112,27 @@ export default function CodeFormatter() {
   const [output, setOutput] = useState('');
   const handleFormat = () => { setOutput(formatCode(code, lang)); };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Code Formatter</h1>
+    <Section title="Code Formatter">
       <div className="space-y-4">
         <div>
-          <label className={labelClass}>Language</label>
-          <select value={lang} onChange={e => setLang(e.target.value)} className={inputClass}>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Language</label>
+          <select value={lang} onChange={e => setLang(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
             {LANGUAGES.map(l => <option key={l} value={l}>{l}</option>)}
           </select>
         </div>
         <div>
-          <label className={labelClass}>Source Code</label>
-          <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="Paste your code here..." className={textareaClass} />
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source Code</label>
+          <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="Paste your code here..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 outline-none text-sm resize-y" />
         </div>
-        <button onClick={handleFormat} className={btnClass}>Format Code</button>
+        <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format Code</button>
         {output && (
           <div>
-            <label className={labelClass}>Formatted Output</label>
-            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Formatted Output</label>
+            <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -141,22 +142,21 @@ function createFormatter(lang: string) {
     const [output, setOutput] = useState('');
     const handleFormat = () => { setOutput(formatCode(code, lang)); };
     return (
-      <div className={cardClass}>
-        <h1 className={headingClass}>{lang} Formatter</h1>
+      <Section title={`${lang} Formatter`}>
         <div className="space-y-4">
           <div>
-            <label className={labelClass}>Source {lang}</label>
-            <textarea value={code} onChange={e => setCode(e.target.value)} placeholder={`Paste ${lang} code here...`} className={textareaClass} />
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source {lang}</label>
+            <textarea value={code} onChange={e => setCode(e.target.value)} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 outline-none text-sm resize-y" />
           </div>
-          <button onClick={handleFormat} className={btnClass}>Format {lang}</button>
+          <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format {lang}</button>
           {output && (
             <div>
-              <label className={labelClass}>Formatted Output</label>
-              <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Formatted Output</label>
+              <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
             </div>
           )}
         </div>
-      </div>
+      </Section>
     );
   };
 }

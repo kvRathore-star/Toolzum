@@ -3,9 +3,14 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
 
 function validateYaml(text: string): string[] {
   const lines = text.split('\n');
@@ -22,6 +27,10 @@ function validateYaml(text: string): string[] {
   });
   return issues;
 }
+
+const taCls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y";
+const btnCls = "w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg";
+const preCls = "p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto";
 
 export function DockerComposeValidator() {
   const [input, setInput] = useState('version: "3.8"\nservices:\n  web:\n    image: nginx:latest\n    ports:\n      - "80:80"');
@@ -40,12 +49,13 @@ export function DockerComposeValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid YAML structure');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Docker Compose Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="Docker Compose Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -68,12 +78,13 @@ export function DockerfileLinter() {
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Dockerfile Linter</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Lint</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="Dockerfile Linter">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Lint</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -95,12 +106,13 @@ export function HtaccessValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">htaccess Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="htaccess Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -120,12 +132,13 @@ export function KubernetesYamlValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid K8s manifest');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Kubernetes YAML Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="Kubernetes YAML Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -145,12 +158,13 @@ export function GithubActionsValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid workflow');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">GitHub Actions Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="GitHub Actions Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -173,12 +187,13 @@ export function GeoJsonValidator() {
     } catch { toast.error('Invalid JSON'); setOutput('Invalid JSON'); }
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">GeoJSON Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="GeoJSON Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -199,12 +214,13 @@ export function RssFeedValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">RSS Feed Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="RSS Feed Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -223,12 +239,13 @@ export function SitemapValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid sitemap');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Sitemap Validator</h1>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} resize-y`} />
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="Sitemap Validator">
+      <div className="space-y-3">
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }
 
@@ -251,15 +268,20 @@ export function XpathValidator() {
     } catch (e: unknown) { setOutput('XPath error: ' + (e instanceof Error ? e.message : '')); toast.error('Invalid XPath'); }
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">XPath Validator</h1>
-      <div className="space-y-2">
-        <div><label className="block text-sm font-medium mb-1">XPath Expression</label><input type="text" value={expr} onChange={e => setExpr(e.target.value)} className={inputClass} placeholder="//div/p" /></div>
-        <div><label className="block text-sm font-medium mb-1">XML/HTML</label><textarea value={xml} onChange={e => setXml(e.target.value)} rows={4} className={`${inputClass} resize-y`} placeholder="<root><div><p>text</p></div></root>" /></div>
+    <Section title="XPath Validator">
+      <div className="space-y-3">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
+          <input type="text" value={expr} onChange={e => setExpr(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" placeholder="//div/p" />
+        </div>
+        <div className="space-y-1">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
+          <textarea value={xml} onChange={e => setXml(e.target.value)} rows={4} className={taCls} placeholder="<root><div><p>text</p></div></root>" />
+        </div>
+        <button onClick={validate} className={btnCls}>Test XPath</button>
+        {output && <pre className={preCls}>{output}</pre>}
       </div>
-      <button onClick={validate} className={btnClass}>Test XPath</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    </Section>
   );
 }
 
@@ -284,12 +306,13 @@ export function CronExpressionValidator() {
     toast.success(issues.length ? 'Issues found' : 'Valid cron');
   };
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-3">
-      <h1 className="text-2xl font-bold mb-6">Cron Expression Validator</h1>
-      <input type="text" value={input} onChange={e => setInput(e.target.value)} className={inputClass} placeholder="*/5 * * * *" />
-      <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday</p>
-      <button onClick={validate} className={btnClass}>Validate</button>
-      {output && <pre className={`${resultClass} max-h-48 overflow-y-auto`}>{output}</pre>}
-    </div>
+    <Section title="Cron Expression Validator">
+      <div className="space-y-3">
+        <input type="text" value={input} onChange={e => setInput(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" placeholder="*/5 * * * *" />
+        <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday</p>
+        <button onClick={validate} className={btnCls}>Validate</button>
+        {output && <pre className={preCls}>{output}</pre>}
+      </div>
+    </Section>
   );
 }

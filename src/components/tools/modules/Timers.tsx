@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
-const labelClass = "block text-sm font-medium mb-1";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const cardClass = "max-w-xl mx-auto p-6";
-const headingClass = "text-2xl font-bold mb-6";
-const secondaryBtnClass = "px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
 
 function formatTime(seconds: number): string {
   const h = Math.floor(seconds / 3600);
@@ -72,13 +73,12 @@ export function Timer() {
   const progress = total > 0 ? ((total - remaining) / total) * 100 : 0;
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Timer</h1>
+    <Section title="Timer">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Hours</label><input type="number" min={0} value={hours} onChange={e => setHours(e.target.value)} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Minutes</label><input type="number" min={0} max={59} value={minutes} onChange={e => setMinutes(e.target.value)} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Seconds</label><input type="number" min={0} max={59} value={seconds} onChange={e => setSeconds(e.target.value)} disabled={active} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hours</label><input type="number" min={0} value={hours} onChange={e => setHours(e.target.value)} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Minutes</label><input type="number" min={0} max={59} value={minutes} onChange={e => setMinutes(e.target.value)} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Seconds</label><input type="number" min={0} max={59} value={seconds} onChange={e => setSeconds(e.target.value)} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
         <div className="text-center">
           <div className="text-5xl font-bold font-mono my-6">{formatTime(remaining)}</div>
@@ -87,11 +87,11 @@ export function Timer() {
           </div>
         </div>
         <div className="flex gap-3">
-          {!active ? <button onClick={start} className={btnClass}>Start</button> : <button onClick={pause} className={btnClass}>Pause</button>}
-          <button onClick={reset} className={secondaryBtnClass}>Reset</button>
+          {!active ? <button onClick={start} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start</button> : <button onClick={pause} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Pause</button>}
+          <button onClick={reset} className="px-4 py-2.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-xl text-sm font-medium transition-colors">Reset</button>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -103,15 +103,14 @@ export function Stopwatch() {
   const lap = () => setLaps(l => [...l, elapsed]);
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Stopwatch</h1>
+    <Section title="Stopwatch">
       <div className="text-center">
         <div className="text-5xl font-bold font-mono my-6">{formatTime(elapsed)}</div>
         <div className="flex gap-3">
-          <button onClick={start} className={btnClass}>Start</button>
-          <button onClick={stop} className={secondaryBtnClass}>Stop</button>
-          <button onClick={lap} className={secondaryBtnClass}>Lap</button>
-          <button onClick={reset} className={secondaryBtnClass}>Reset</button>
+          <button onClick={start} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start</button>
+          <button onClick={stop} className="px-4 py-2.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-xl text-sm font-medium transition-colors">Stop</button>
+          <button onClick={lap} className="px-4 py-2.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-xl text-sm font-medium transition-colors">Lap</button>
+          <button onClick={reset} className="px-4 py-2.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-xl text-sm font-medium transition-colors">Reset</button>
         </div>
         {laps.length > 0 && (
           <div className="mt-6">
@@ -127,7 +126,7 @@ export function Stopwatch() {
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -157,11 +156,10 @@ export function CountdownTimer() {
   }, [active, targetDate]);
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Countdown Timer</h1>
+    <Section title="Countdown Timer">
       <div className="space-y-3">
-        <div><label className={labelClass}>Target Date & Time</label><input type="datetime-local" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputClass} /></div>
-        <button onClick={() => setActive(true)} className={btnClass}>Start Countdown</button>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Target Date & Time</label><input type="datetime-local" value={targetDate} onChange={e => setTargetDate(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <button onClick={() => setActive(true)} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start Countdown</button>
         <div className="grid grid-cols-4 gap-4 mt-6 text-center">
           <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="text-3xl font-bold font-mono">{remaining.days}</div>
@@ -181,7 +179,7 @@ export function CountdownTimer() {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -225,7 +223,7 @@ export function PomodoroTimer() {
   };
 
   const notify = () => {
-    try { new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAgICAPz8/Pz8/P4B/f39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/P4B/f39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/P4B/f39/f38/Pz8/Pz+Af39/f39/Pz8/Pz8/P4B/f39/f38/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/P4B/f39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/P4B/f39/f38/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pw==').play();
+    try { new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAgICAPz8/Pz8/P4B/f39/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz+Af39/f39/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f38/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8/gH9/f39/Pz8/Pz8/gH9/f39/fz8/Pz8/Pz8Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pw==').play();
     } catch {}
   };
 
@@ -234,23 +232,23 @@ export function PomodoroTimer() {
   }, [active, remaining]);
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Pomodoro Timer</h1>
+    <Section title="Pomodoro Timer">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Work (min)</label><input type="number" min={1} value={workTime} onChange={e => setWorkTime(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Break (min)</label><input type="number" min={1} value={breakTime} onChange={e => setBreakTime(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Cycles</label><input type="number" min={1} value={cycles} onChange={e => setCycles(Number(e.target.value))} disabled={active} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Work (min)</label><input type="number" min={1} value={workTime} onChange={e => setWorkTime(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Break (min)</label><input type="number" min={1} value={breakTime} onChange={e => setBreakTime(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Cycles</label><input type="number" min={1} value={cycles} onChange={e => setCycles(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
         <div className="text-center">
-          <div className="text-sm font-medium mb-1">{phase === 'work' ? 'Work' : 'Break'} — Cycle {cycleCount}/{cycles}</div>
-          <div className="text-5xl font-bold font-mono my-4">{formatTimeShort(remaining)}</div>
+          <div className="text-sm font-medium text-[var(--text-primary)] mb-1">{phase === 'work' ? 'Work' : 'Break'} &mdash; Cycle {cycleCount}/{cycles}</div>
+          <div className="text-5xl font-bold font-mono text-[var(--text-primary)] my-4">{formatTimeShort(remaining)}</div>
         </div>
-        {!active ? <button onClick={start} className={btnClass}>Start Pomodoro</button> : <button onClick={() => setActive(false)} className={btnClass}>Pause</button>}
+        {!active ? <button onClick={start} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start Pomodoro</button> : <button onClick={() => setActive(false)} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Pause</button>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 5. IntervalTimer ===
 export function IntervalTimer() {
@@ -287,23 +285,23 @@ export function IntervalTimer() {
   const start = () => { setCurrentSet(0); setIsWork(true); setRemaining(work); setActive(true); };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Interval Timer</h1>
+    <Section title="Interval Timer">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Sets</label><input type="number" min={1} value={sets} onChange={e => setSets(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Work (sec)</label><input type="number" min={1} value={work} onChange={e => setWork(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Rest (sec)</label><input type="number" min={1} value={rest} onChange={e => setRest(Number(e.target.value))} disabled={active} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sets</label><input type="number" min={1} value={sets} onChange={e => setSets(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Work (sec)</label><input type="number" min={1} value={work} onChange={e => setWork(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rest (sec)</label><input type="number" min={1} value={rest} onChange={e => setRest(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
         <div className="text-center">
-          <div className="text-sm font-medium mb-1">{isWork ? 'Work' : 'Rest'} — Set {currentSet}/{sets}</div>
-          <div className="text-5xl font-bold font-mono my-4">{remaining}s</div>
+          <div className="text-sm font-medium text-[var(--text-primary)] mb-1">{isWork ? 'Work' : 'Rest'} &mdash; Set {currentSet}/{sets}</div>
+          <div className="text-5xl font-bold font-mono text-[var(--text-primary)] my-4">{remaining}s</div>
         </div>
-        {!active ? <button onClick={start} className={btnClass}>Start</button> : <button onClick={() => setActive(false)} className={btnClass}>Pause</button>}
+        {!active ? <button onClick={start} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start</button> : <button onClick={() => setActive(false)} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Pause</button>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 6. TabataTimer ===
 export function TabataTimer() {
@@ -343,28 +341,28 @@ export function TabataTimer() {
   const start = () => { setPrep(3); setCurrentRound(0); setIsWork(true); setRemaining(work); setActive(true); };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Tabata Timer</h1>
+    <Section title="Tabata Timer">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Work (sec)</label><input type="number" min={1} value={work} onChange={e => setWork(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Rest (sec)</label><input type="number" min={1} value={rest} onChange={e => setRest(Number(e.target.value))} disabled={active} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Rounds</label><input type="number" min={1} value={rounds} onChange={e => setRounds(Number(e.target.value))} disabled={active} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Work (sec)</label><input type="number" min={1} value={work} onChange={e => setWork(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rest (sec)</label><input type="number" min={1} value={rest} onChange={e => setRest(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rounds</label><input type="number" min={1} value={rounds} onChange={e => setRounds(Number(e.target.value))} disabled={active} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
         <div className="text-center">
-          {prep > 0 && active ? <div className="text-2xl font-bold mb-2">Get ready... {prep}</div> : null}
+          {prep > 0 && active ? <div className="text-2xl font-bold text-[var(--text-primary)] mb-2">Get ready... {prep}</div> : null}
           {(!active || prep === 0) && (
             <>
-              <div className="text-sm font-medium mb-1">{isWork ? 'WORK!' : 'REST'} — Round {currentRound}/{rounds}</div>
-              <div className="text-5xl font-bold font-mono my-4">{remaining}s</div>
+              <div className="text-sm font-medium text-[var(--text-primary)] mb-1">{isWork ? 'WORK!' : 'REST'} &mdash; Round {currentRound}/{rounds}</div>
+              <div className="text-5xl font-bold font-mono text-[var(--text-primary)] my-4">{remaining}s</div>
             </>
           )}
         </div>
-        {!active ? <button onClick={start} className={btnClass}>Start Tabata</button> : <button onClick={() => setActive(false)} className={btnClass}>Pause</button>}
+        {!active ? <button onClick={start} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Start Tabata</button> : <button onClick={() => setActive(false)} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Pause</button>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 7. WorldClock ===
 const TIMEZONES = [
@@ -379,7 +377,7 @@ const TIMEZONES = [
   { label: 'Los Angeles', tz: 'America/Los_Angeles' },
   { label: 'Berlin', tz: 'Europe/Berlin' },
   { label: 'Shanghai', tz: 'Asia/Shanghai' },
-  { label: 'São Paulo', tz: 'America/Sao_Paulo' },
+  { label: 'Sao Paulo', tz: 'America/Sao_Paulo' },
 ];
 export function WorldClock() {
   const [selected, setSelected] = useState(['America/New_York', 'Europe/London', 'Asia/Tokyo', 'Asia/Kolkata']);
@@ -394,12 +392,11 @@ export function WorldClock() {
   const remove = (tz: string) => setSelected(s => s.filter(t => t !== tz));
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>World Clock</h1>
+    <Section title="World Clock">
       <div className="space-y-3">
         <div className="flex gap-2 flex-wrap mb-4">
           {TIMEZONES.filter(t => !selected.includes(t.tz)).map(t => (
-            <button key={t.tz} onClick={() => add(t.tz)} className="text-xs px-2 py-1 bg-zinc-200 dark:bg-zinc-700 rounded">{t.label} +</button>
+            <button key={t.tz} onClick={() => add(t.tz)} className="px-3 py-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100 rounded-lg text-xs font-medium transition-colors">{t.label} +</button>
           ))}
         </div>
         <div className="space-y-2">
@@ -408,21 +405,22 @@ export function WorldClock() {
             return (
               <div key={tz} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-lg">
                 <div>
-                  <div className="font-medium text-sm">{t?.label || tz}</div>
+                  <div className="font-medium text-sm text-[var(--text-primary)]">{t?.label || tz}</div>
                   <div className="text-xs text-[var(--text-secondary)]">{tz}</div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="text-lg font-mono font-bold">{new Date(time).toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit' })}</div>
-                  <button onClick={() => remove(tz)} className="text-xs text-red-500 hover:underline">×</button>
+                  <div className="text-lg font-mono font-bold text-[var(--text-primary)]">{new Date(time).toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit' })}</div>
+                  <button onClick={() => remove(tz)} className="text-xs text-red-500 hover:text-red-400 font-medium">&times;</button>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 8. TimeConverter ===
 export function TimeConverter() {
@@ -449,13 +447,12 @@ export function TimeConverter() {
   };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Time Converter</h1>
+    <Section title="Time Converter">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Value</label><input type="number" value={value} onChange={e => setValue(e.target.value)} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>From</label>
-            <select value={from} onChange={e => setFrom(e.target.value)} className={inputClass}>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Value</label><input type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">From</label>
+            <select value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value="seconds">Seconds</option>
               <option value="minutes">Minutes</option>
               <option value="hours">Hours</option>
@@ -464,21 +461,22 @@ export function TimeConverter() {
             </select>
           </div>
         </div>
-        <button onClick={convert} className={btnClass}>Convert</button>
+        <button onClick={convert} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Convert</button>
         {result.length > 0 && (
           <div className="mt-4 space-y-1">
             {result.map(r => (
               <div key={r.unit} className="flex justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
-                <span>{r.unit}</span>
-                <span className="font-mono">{r.value.toLocaleString(undefined, { maximumFractionDigits: 4 })}</span>
+                <span className="text-[var(--text-primary)]">{r.unit}</span>
+                <span className="font-mono text-[var(--text-primary)]">{r.value.toLocaleString(undefined, { maximumFractionDigits: 4 })}</span>
               </div>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 9. TimeDurationCalculator ===
 export function TimeDurationCalculator() {
@@ -500,19 +498,19 @@ export function TimeDurationCalculator() {
   };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Time Duration Calculator</h1>
+    <Section title="Time Duration Calculator">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>End Time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">End Time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
-        <button onClick={calc} className={btnClass}>Calculate Duration</button>
-        {result && <div className={resultClass}>{result}</div>}
+        <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Calculate Duration</button>
+        {result && <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono text-[var(--text-primary)]">{result}</div>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 10. TimeAdditionCalculator ===
 export function TimeAdditionCalculator() {
@@ -532,20 +530,20 @@ export function TimeAdditionCalculator() {
   };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Time Addition Calculator</h1>
+    <Section title="Time Addition Calculator">
       <div className="space-y-3">
-        <div><label className={labelClass}>Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className={inputClass} /></div>
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Hours to Add</label><input type="number" min={0} value={addH} onChange={e => setAddH(e.target.value)} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Minutes to Add</label><input type="number" min={0} value={addM} onChange={e => setAddM(e.target.value)} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hours to Add</label><input type="number" min={0} value={addH} onChange={e => setAddH(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Minutes to Add</label><input type="number" min={0} value={addM} onChange={e => setAddM(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {result && <div className={resultClass}>{result}</div>}
+        <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Calculate</button>
+        {result && <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono text-[var(--text-primary)]">{result}</div>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 11. TimeUntilCalculator ===
 export function TimeUntilCalculator() {
@@ -566,16 +564,16 @@ export function TimeUntilCalculator() {
   };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Time Until Calculator</h1>
+    <Section title="Time Until Calculator">
       <div className="space-y-3">
-        <div><label className={labelClass}>Future Date & Time</label><input type="datetime-local" value={futureDate} onChange={e => setFutureDate(e.target.value)} className={inputClass} /></div>
-        <button onClick={calc} className={btnClass}>Calculate</button>
-        {remaining && <div className={resultClass}>{remaining}</div>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Future Date & Time</label><input type="datetime-local" value={futureDate} onChange={e => setFutureDate(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Calculate</button>
+        {remaining && <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono text-[var(--text-primary)]">{remaining}</div>}
       </div>
-    </div>
+    </Section>
   );
 }
+
 
 // === 12. MeetingTimePlanner ===
 export function MeetingTimePlanner() {
@@ -598,33 +596,32 @@ export function MeetingTimePlanner() {
   };
 
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Meeting Time Planner</h1>
+    <Section title="Meeting Time Planner">
       <div className="space-y-3">
         <div className="flex gap-4">
-          <div className="flex-1"><label className={labelClass}>Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputClass} /></div>
-          <div className="flex-1"><label className={labelClass}>Time</label><input type="time" value={time} onChange={e => setTime(e.target.value)} className={inputClass} /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Time</label><input type="time" value={time} onChange={e => setTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
         </div>
         <div>
-          <label className={labelClass}>Select Timezones</label>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Select Timezones</label>
           <div className="flex flex-wrap gap-2">
             {TIMEZONES.map(t => (
-              <button key={t.tz} onClick={() => toggleTz(t.tz)} className={`text-xs px-2 py-1 rounded border ${timezones.includes(t.tz) ? 'bg-blue-600 text-white border-blue-600' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-600'}`}>{t.label}</button>
+              <button key={t.tz} onClick={() => toggleTz(t.tz)} className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors ${timezones.includes(t.tz) ? 'bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-md' : 'bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-zinc-100'}`}>{t.label}</button>
             ))}
           </div>
         </div>
-        <button onClick={calc} className={btnClass}>Show Times</button>
+        <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Show Times</button>
         {results.length > 0 && (
           <div className="mt-4 space-y-2">
             {results.map(r => (
               <div key={r.tz} className="flex justify-between p-3 bg-[var(--bg-surface)] rounded-lg">
-                <span className="text-sm font-medium">{r.label}</span>
-                <span className="text-sm font-mono font-bold">{r.time}</span>
+                <span className="text-sm font-medium text-[var(--text-primary)]">{r.label}</span>
+                <span className="text-sm font-mono font-bold text-[var(--text-primary)]">{r.time}</span>
               </div>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }

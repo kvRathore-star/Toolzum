@@ -5,14 +5,30 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import DOMPurify from 'dompurify';
 
-const cardClass = "max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500";
-const headerClass = "flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3";
-const inputClass = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--accent)] transition-colors";
-const labelClass = "text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider";
-const resultPanelClass = "bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)]";
-const actionBtnClass = "p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors";
-const btnPrimary = "px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors";
-const statBoxClass = "p-3 bg-[var(--bg-surface)] rounded-xl text-center";
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+function Input({ label, value, onChange, placeholder, type = "text", rows, min, max }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number;
+}) {
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+  return (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      {rows ? (
+        <textarea className={cls + " resize-y"} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+      ) : (
+        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} min={min} max={max} />
+      )}
+    </div>
+  );
+}
 
 // === 1. WordCounter ===
 export function WordCounter() {
@@ -26,24 +42,23 @@ export function WordCounter() {
   const speakingTime = words > 0 ? Math.ceil(words / 150) : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><FileText className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Word Counter</h3></div>
+    <Section title="Word Counter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={10} className={`${inputClass} resize-none`} placeholder="Paste or type your text here..." /></div>
+          <Input label="Text" value={text} onChange={setText} rows={10} placeholder="Paste or type your text here..." />
         </div>
-        <div className={`${resultPanelClass} flex flex-col justify-between min-h-[300px]`}>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-between min-h-[300px]">
           {text ? (<div className="space-y-4"><div className="grid grid-cols-2 gap-3">
-            <div className={statBoxClass}><p className="text-3xl font-extrabold text-emerald-500">{words}</p><p className="text-xs text-[var(--text-muted)]">Words</p></div>
-            <div className={statBoxClass}><p className="text-3xl font-extrabold text-blue-500">{chars}</p><p className="text-xs text-[var(--text-muted)]">Characters</p></div>
-            <div className={statBoxClass}><p className="text-3xl font-extrabold text-violet-500">{charsNoSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
-            <div className={statBoxClass}><p className="text-3xl font-extrabold text-amber-500">{sentences}</p><p className="text-xs text-[var(--text-muted)]">Sentences</p></div>
-            <div className={statBoxClass}><p className="text-3xl font-extrabold text-rose-500">{paragraphs}</p><p className="text-xs text-[var(--text-muted)]">Paragraphs</p></div>
-            <div className={statBoxClass}><p className="text-lg font-extrabold text-cyan-500">{readingTime}m<span className="text-sm font-normal text-[var(--text-muted)]"> read</span></p><p className="text-xs text-[var(--text-muted)]">Speaking: {speakingTime}m</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-emerald-500">{words}</p><p className="text-xs text-[var(--text-muted)]">Words</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-500">{chars}</p><p className="text-xs text-[var(--text-muted)]">Characters</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-violet-500">{charsNoSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{sentences}</p><p className="text-xs text-[var(--text-muted)]">Sentences</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-rose-500">{paragraphs}</p><p className="text-xs text-[var(--text-muted)]">Paragraphs</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-lg font-extrabold text-cyan-500">{readingTime}m<span className="text-sm font-normal text-[var(--text-muted)]"> read</span></p><p className="text-xs text-[var(--text-muted)]">Speaking: {speakingTime}m</p></div>
           </div></div>) : (<p className="text-[var(--text-muted)] text-sm">Start typing to see live statistics</p>)}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -58,28 +73,26 @@ export function CharacterCounter() {
   const punctuation = (text.match(/[^\w\s]/g) || []).length;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Hash className="w-5 h-5 text-violet-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Character Counter</h3></div>
+    <Section title="Character Counter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={10} className={`${inputClass} resize-none`} placeholder="Type or paste text..." /></div>
+          <Input label="Text" value={text} onChange={setText} rows={10} placeholder="Type or paste text..." />
         </div>
-        <div className={`${resultPanelClass} flex flex-col justify-between min-h-[300px]`}>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-between min-h-[300px]">
           {text ? (<div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-zinc-800 dark:text-white">{total}</p><p className="text-xs text-[var(--text-muted)]">Total</p></div>
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-emerald-500">{noSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-blue-500">{letters}</p><p className="text-xs text-[var(--text-muted)]">Letters</p></div>
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-amber-500">{digits}</p><p className="text-xs text-[var(--text-muted)]">Digits</p></div>
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-cyan-500">{spaces}</p><p className="text-xs text-[var(--text-muted)]">Spaces</p></div>
-              <div className={statBoxClass}><p className="text-3xl font-extrabold text-rose-500">{punctuation}</p><p className="text-xs text-[var(--text-muted)]">Punctuation</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-zinc-800 dark:text-white">{total}</p><p className="text-xs text-[var(--text-muted)]">Total</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-emerald-500">{noSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-500">{letters}</p><p className="text-xs text-[var(--text-muted)]">Letters</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{digits}</p><p className="text-xs text-[var(--text-muted)]">Digits</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-cyan-500">{spaces}</p><p className="text-xs text-[var(--text-muted)]">Spaces</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-rose-500">{punctuation}</p><p className="text-xs text-[var(--text-muted)]">Punctuation</p></div>
             </div>
-            {/* Visual bar */}
             {total > 0 && <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex"><div style={{ width: `${(letters / total) * 100}%` }} className="bg-blue-500 h-full" /><div style={{ width: `${(digits / total) * 100}%` }} className="bg-amber-500 h-full" /><div style={{ width: `${(spaces / total) * 100}%` }} className="bg-cyan-500 h-full" /><div style={{ width: `${(punctuation / total) * 100}%` }} className="bg-rose-500 h-full" /></div>}
           </div>) : (<p className="text-[var(--text-muted)] text-sm">Start typing to see character breakdown</p>)}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -96,19 +109,18 @@ export function WordFrequencyCounter() {
   const maxCount = frequencies.length > 0 ? frequencies[0].count : 1;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><BarChart3 className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Word Frequency Counter</h3></div>
+    <Section title="Word Frequency Counter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>Show Top</label><input type="number" min={5} max={100} value={limit} onChange={e => setLimit(Number(e.target.value))} className={inputClass} /></div>
-          <button onClick={analyze} className={btnPrimary}>Analyze</button>
+          <Input label="Text" value={text} onChange={setText} rows={8} />
+          <Input label="Show Top" type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v))} />
+          <button onClick={analyze} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[300px]`}>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[300px]">
           {frequencies.length > 0 ? (<div className="space-y-1.5 max-h-[350px] overflow-y-auto">{frequencies.map((f, i) => (<div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span><span className="flex-1">{f.word}</span><div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-500 h-full rounded-full" /></div><span className="w-16 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and analyze</p>)}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -122,17 +134,16 @@ export function KeywordDensityChecker() {
   };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Search className="w-5 h-5 text-amber-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Keyword Density Checker</h3></div>
+    <Section title="Keyword Density Checker">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>Keyword</label><input type="text" value={keyword} onChange={e => setKeyword(e.target.value)} className={inputClass} placeholder="Enter keyword to check..." /></div>
+          <Input label="Text" value={text} onChange={setText} rows={8} />
+          <Input label="Keyword" value={keyword} onChange={setKeyword} placeholder="Enter keyword to check..." />
           <button onClick={check} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Check Density</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col justify-center min-h-[200px]`}>{density ? (<div className="space-y-4"><div className="grid grid-cols-2 gap-3"><div className={statBoxClass}><p className="text-3xl font-extrabold text-amber-500">{density.count}</p><p className="text-xs text-[var(--text-muted)]">Occurrences</p></div><div className={statBoxClass}><p className="text-3xl font-extrabold">{density.total}</p><p className="text-xs text-[var(--text-muted)]">Total Words</p></div></div><div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"><div className="flex justify-between items-center"><span className="text-sm font-bold text-[var(--text-secondary)]">Density</span><span className="text-2xl font-extrabold text-amber-500">{density.percentage.toFixed(2)}%</span></div><div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden mt-2"><div style={{ width: `${Math.min(density.percentage * 5, 100)}%` }} className="bg-amber-500 h-full rounded-full" /></div></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Check keyword density in text</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">{density ? (<div className="space-y-4"><div className="grid grid-cols-2 gap-3"><div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{density.count}</p><p className="text-xs text-[var(--text-muted)]">Occurrences</p></div><div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold">{density.total}</p><p className="text-xs text-[var(--text-muted)]">Total Words</p></div></div><div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"><div className="flex justify-between items-center"><span className="text-sm font-bold text-[var(--text-secondary)]">Density</span><span className="text-2xl font-extrabold text-amber-500">{density.percentage.toFixed(2)}%</span></div><div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden mt-2"><div style={{ width: `${Math.min(density.percentage * 5, 100)}%` }} className="bg-amber-500 h-full rounded-full" /></div></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Check keyword density in text</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -148,16 +159,15 @@ export function KeywordPlannerTool() {
   };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><BarChart3 className="w-5 h-5 text-indigo-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Keyword Planner Tool</h3></div>
+    <Section title="Keyword Planner Tool">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text Content</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={inputClass} /></div>
+          <Input label="Text Content" value={text} onChange={setText} rows={8} />
           <button onClick={extract} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Extract Keywords</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[300px]`}>{keywords.length > 0 ? (<div className="space-y-1 max-h-[350px] overflow-y-auto">{keywords.map((k, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="flex items-center gap-2"><span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>{k.word}</span><span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Extract keywords from your content</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[300px]">{keywords.length > 0 ? (<div className="space-y-1 max-h-[350px] overflow-y-auto">{keywords.map((k, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="flex items-center gap-2"><span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>{k.word}</span><span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Extract keywords from your content</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -167,18 +177,17 @@ export function SeoMetaTagGenerator() {
   const generate = () => { setResult(`<title>${title}</title>\n<meta name="description" content="${description}" />\n<meta name="keywords" content="${keywords}" />\n<meta property="og:title" content="${title}" />\n<meta property="og:description" content="${description}" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${title}" />\n<meta name="twitter:description" content="${description}" />`); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Globe className="w-5 h-5 text-blue-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">SEO Meta Tag Generator</h3></div>
+    <Section title="SEO Meta Tag Generator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Title ({title.length}/60)</label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>Description ({description.length}/160)</label><textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>Keywords</label><input type="text" value={keywords} onChange={e => setKeywords(e.target.value)} className={inputClass} /></div>
+          <Input label={`Title (${title.length}/60)`} value={title} onChange={setTitle} />
+          <Input label={`Description (${description.length}/160)`} value={description} onChange={setDescription} rows={3} />
+          <Input label="Keywords" value={keywords} onChange={setKeywords} />
           <button onClick={generate} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Meta Tags</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={10} className={`${inputClass} font-mono text-xs`} /><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields and generate meta tags</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields and generate meta tags</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -189,15 +198,14 @@ export function SeoPreviewGenerator() {
   const descLength = description.length;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Globe className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">SEO Preview Generator</h3></div>
+    <Section title="SEO Preview Generator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Title ({ogLength}/60) <span className={`font-normal ${ogLength > 60 ? 'text-red-500' : 'text-[var(--text-muted)]'}`}>{ogLength > 60 ? 'Too long!' : ''}</span></label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>URL</label><input type="text" value={url} onChange={e => setUrl(e.target.value)} className={inputClass} /></div>
-          <div className="space-y-1"><label className={labelClass}>Description ({descLength}/160) <span className={`font-normal ${descLength > 160 ? 'text-red-500' : 'text-[var(--text-muted)]'}`}>{descLength > 160 ? 'Too long!' : ''}</span></label><textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} className={inputClass} /></div>
+          <Input label={`Title (${ogLength}/60) ${ogLength > 60 ? 'Too long!' : ''}`} value={title} onChange={setTitle} />
+          <Input label="URL" value={url} onChange={setUrl} />
+          <Input label={`Description (${descLength}/160) ${descLength > 160 ? 'Too long!' : ''}`} value={description} onChange={setDescription} rows={3} />
         </div>
-        <div className={`${resultPanelClass} flex flex-col justify-center min-h-[200px]`}>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">
           <p className="text-xs font-bold text-[var(--text-muted)] uppercase mb-3">Google SERP Preview</p>
           <div className="p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)]">
             <div className="text-xs text-green-700 dark:text-green-400 mb-1">{url}</div>
@@ -206,7 +214,7 @@ export function SeoPreviewGenerator() {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -227,20 +235,19 @@ export function SeoHeadlineAnalyzer() {
   };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><BarChart3 className="w-5 h-5 text-rose-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">SEO Headline Analyzer</h3></div>
+    <Section title="SEO Headline Analyzer">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Headline</label><input type="text" value={headline} onChange={e => setHeadline(e.target.value)} className={inputClass} /></div>
+          <Input label="Headline" value={headline} onChange={setHeadline} />
           <button onClick={analyze} className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{analysis ? (<div className="space-y-3">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{analysis ? (<div className="space-y-3">
           <div className={`p-4 rounded-xl text-center ${analysis.score >= 70 ? 'bg-emerald-50 dark:bg-emerald-900/20' : analysis.score >= 40 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}><span className="text-xs text-[var(--text-muted)]">SEO Score</span><p className={`text-4xl font-extrabold ${analysis.score >= 70 ? 'text-emerald-500' : analysis.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>{analysis.score}/100</p></div>
           <div className="grid grid-cols-2 gap-2 text-xs"><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Words</span><p className="font-bold">{analysis.wordCount}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Chars</span><p className="font-bold">{analysis.charCount}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Sentiment</span><p className="font-bold">{analysis.sentiment}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Power Words</span><p className="font-bold">{analysis.powerWords.length}</p></div></div>
           {analysis.powerWords.length > 0 && <div className="flex flex-wrap gap-1">{analysis.powerWords.map((w, i) => (<span key={i} className="px-2 py-0.5 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded text-xs font-medium">{w}</span>))}</div>}
         </div>) : (<p className="text-[var(--text-muted)] text-sm">Enter a headline to analyze</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -250,17 +257,19 @@ export function SeoSchemaGenerator() {
   const generate = () => { try { const parsed = JSON.parse(data); setResult(JSON.stringify({ '@context': 'https://schema.org', '@type': type, ...parsed }, null, 2)); } catch { setResult('Invalid JSON input'); } };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Sigma className="w-5 h-5 text-indigo-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">SEO Schema Generator</h3></div>
+    <Section title="SEO Schema Generator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Schema Type</label><select value={type} onChange={e => setType(e.target.value)} className={inputClass}><option value="Article">Article</option><option value="Product">Product</option><option value="FAQPage">FAQ</option><option value="LocalBusiness">LocalBusiness</option><option value="Recipe">Recipe</option><option value="Event">Event</option></select></div>
-          <div className="space-y-1"><label className={labelClass}>Properties (JSON)</label><textarea value={data} onChange={e => setData(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div>
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
+            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="Article">Article</option><option value="Product">Product</option><option value="FAQPage">FAQ</option><option value="LocalBusiness">LocalBusiness</option><option value="Recipe">Recipe</option><option value="Event">Event</option></select>
+          </div>
+          <Input label="Properties (JSON)" value={data} onChange={setData} rows={6} />
           <button onClick={generate} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Schema</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={10} className={`${inputClass} font-mono text-xs`} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate JSON-LD schema markup</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate JSON-LD schema markup</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -270,16 +279,15 @@ export function SeoSlugGenerator() {
   const generate = () => { setSlug(text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Link className="w-5 h-5 text-cyan-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">SEO Slug Generator</h3></div>
+    <Section title="SEO Slug Generator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><input type="text" value={text} onChange={e => setText(e.target.value)} className={inputClass} /></div>
-          <button onClick={generate} className={btnPrimary}>Generate Slug</button>
+          <Input label="Text" value={text} onChange={setText} />
+          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Slug</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col justify-center items-center min-h-[100px]`}>{slug ? (<div className="text-center"><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p><button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2'}><Copy size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate a URL-friendly slug</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">{slug ? (<div className="text-center"><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p><button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate a URL-friendly slug</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -289,16 +297,15 @@ export function CaseConverter() {
   const convert = (type: string) => { switch (type) { case 'upper': setResult(text.toUpperCase()); break; case 'lower': setResult(text.toLowerCase()); break; case 'title': setResult(text.replace(/\b\w/g, c => c.toUpperCase())); break; case 'sentence': setResult(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()); break; case 'camel': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'pascal': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'snake': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('_')); break; case 'kebab': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('-')); break; } };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Edit3 className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Case Converter</h3></div>
+    <Section title="Case Converter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={5} className={inputClass} /></div>
+          <Input label="Text" value={text} onChange={setText} rows={5} />
           <div className="flex flex-wrap gap-2">{[['UPPER','upper'],['lower','lower'],['Title Case','title'],['Sentence','sentence'],['camelCase','camel'],['PascalCase','pascal'],['snake_case','snake'],['kebab-case','kebab']].map(([label, id]) => (<button key={id} onClick={() => convert(id)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{label}</button>))}</div>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[150px]`}>{result ? (<><textarea readOnly value={result} rows={5} className={`${inputClass} resize-none`} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and choose a case</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[150px]">{result ? (<><textarea readOnly value={result} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and choose a case</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -309,17 +316,16 @@ export function TextReplacer() {
   const count = result ? (text.match(new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Edit3 className="w-5 h-5 text-blue-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Replacer</h3></div>
+    <Section title="Text Replacer">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div>
-          <div className="grid grid-cols-2 gap-3"><div className="space-y-1"><label className={labelClass}>Find</label><input type="text" value={find} onChange={e => setFind(e.target.value)} className={inputClass} /></div><div className="space-y-1"><label className={labelClass}>Replace With</label><input type="text" value={replace} onChange={e => setReplace(e.target.value)} className={inputClass} /></div></div>
-          <button onClick={replaceAll} className={btnPrimary}>Replace All</button>
+          <Input label="Text" value={text} onChange={setText} rows={6} />
+          <div className="grid grid-cols-2 gap-3"><Input label="Find" value={find} onChange={setFind} /><Input label="Replace With" value={replace} onChange={setReplace} /></div>
+          <button onClick={replaceAll} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Replace All</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[250px]`}>{result ? (<><textarea readOnly value={result} rows={8} className={`${inputClass} resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Find and replace text</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Find and replace text</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -331,16 +337,15 @@ export function TextSorter() {
   const outLines = sorted ? sorted.split('\n').filter(l => l.trim()).length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><ListOrdered className="w-5 h-5 text-violet-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Sorter</h3></div>
+    <Section title="Text Sorter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Lines ({inLines})</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={`${inputClass} font-mono text-xs`} /></div>
+          <Input label={`Lines (${inLines})`} value={text} onChange={setText} rows={8} />
           <div className="flex flex-wrap gap-2">{[['A→Z','az'],['Z→A','za'],['By Length','length'],['Randomize','random'],['Deduplicate','unique']].map(([label, id]) => (<button key={id} onClick={() => sort(id)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>{label}</button>))}</div>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[250px]`}>{sorted ? (<><textarea readOnly value={sorted} rows={8} className={`${inputClass} font-mono text-xs resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span><button onClick={() => { clipboardWrite(sorted); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Enter lines and choose sort method</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{sorted ? (<><textarea readOnly value={sorted} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span><button onClick={() => { clipboardWrite(sorted); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Enter lines and choose sort method</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -351,16 +356,15 @@ export function TextDeduplicator() {
   const deduplicate = () => { const lines = text.split('\n').map(l => l.trim()).filter(Boolean); setResult([...new Set(lines)].join('\n')); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Trash2 className="w-5 h-5 text-rose-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Deduplicator</h3></div>
+    <Section title="Text Deduplicator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Text Lines</label><textarea value={text} onChange={e => setText(e.target.value)} rows={8} className={`${inputClass} font-mono text-xs`} /></div>
+          <Input label="Text Lines" value={text} onChange={setText} rows={8} />
           <button onClick={deduplicate} className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicates</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[250px]`}>{result ? (<><textarea readOnly value={result} rows={8} className={`${inputClass} font-mono text-xs resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{result.split('\n').length} unique lines (from {inLines})</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste lines to deduplicate</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{result.split('\n').length} unique lines (from {inLines})</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste lines to deduplicate</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -377,14 +381,13 @@ export function TextDiffChecker() {
   const removed = diff ? diff.lines.filter(l => l.type === 'removed').length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><GitCompare className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Diff Checker</h3></div>
+    <Section title="Text Diff Checker">
       <div className="grid grid-cols-1 gap-6">
-        <div className="grid grid-cols-2 gap-4"><div className="space-y-1"><label className={labelClass}>Original Text</label><textarea value={text1} onChange={e => setText1(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div><div className="space-y-1"><label className={labelClass}>New Text</label><textarea value={text2} onChange={e => setText2(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div></div>
-        <button onClick={compare} className={btnPrimary + ' self-start'}>Compare</button>
-        {diff && (<div className={`${resultPanelClass}`}><div className="flex items-center gap-3 mb-3 text-xs"><span className="text-emerald-500 font-bold">+{added} added</span><span className="text-red-500 font-bold">-{removed} removed</span></div><div className="font-mono text-xs max-h-[300px] overflow-y-auto space-y-0.5">{diff.lines.map((l, i) => (<div key={i} className={`p-1 rounded ${l.type === 'same' ? '' : l.type === 'added' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300'}`}><span className="mr-2 font-bold">{l.type === 'added' ? '+' : l.type === 'removed' ? '-' : ' '}</span>{l.text || ' '}</div>))}</div></div>)}
+        <div className="grid grid-cols-2 gap-4"><Input label="Original Text" value={text1} onChange={setText1} rows={6} /><Input label="New Text" value={text2} onChange={setText2} rows={6} /></div>
+        <button onClick={compare} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors self-start">Compare</button>
+        {diff && (<div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4"><div className="flex items-center gap-3 mb-3 text-xs"><span className="text-emerald-500 font-bold">+{added} added</span><span className="text-red-500 font-bold">-{removed} removed</span></div><div className="font-mono text-xs max-h-[300px] overflow-y-auto space-y-0.5">{diff.lines.map((l, i) => (<div key={i} className={`p-1 rounded ${l.type === 'same' ? '' : l.type === 'added' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300'}`}><span className="mr-2 font-bold">{l.type === 'added' ? '+' : l.type === 'removed' ? '-' : ' '}</span>{l.text || ' '}</div>))}</div></div>)}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -396,16 +399,15 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
   const isTextToHtml = mode === 'text-to-html';
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><ArrowLeftRight className="w-5 h-5 text-blue-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">{isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'}</h3></div>
+    <Section title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>{isTextToHtml ? 'Plain Text' : 'HTML'}</label><textarea value={input} onChange={e => setInput(e.target.value)} rows={8} className={`${inputClass} ${!isTextToHtml ? 'font-mono text-xs' : ''}`} /></div>
-          <div className="flex flex-wrap gap-2"><button onClick={convert} className={btnPrimary}>Convert to {isTextToHtml ? 'HTML' : 'Text'}</button><button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button></div>
+          <Input label={isTextToHtml ? 'Plain Text' : 'HTML'} value={input} onChange={setInput} rows={8} />
+          <div className="flex flex-wrap gap-2"><button onClick={convert} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button><button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button></div>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[250px]`}>{result ? (<><textarea readOnly value={result} rows={8} className={`${inputClass} ${isTextToHtml ? 'font-mono text-xs' : ''} resize-none`} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter content to convert</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter content to convert</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 export function TextToHtmlConverter() { return <TextHtmlTool defaultMode="text-to-html" />; }
@@ -421,16 +423,15 @@ export function MarkdownPreviewer() {
   };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><FileText className="w-5 h-5 text-amber-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Markdown Previewer</h3></div>
+    <Section title="Markdown Previewer">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Markdown</label><textarea value={md} onChange={e => setMd(e.target.value)} rows={10} className={`${inputClass} font-mono text-xs resize-none`} /></div>
+          <Input label="Markdown" value={md} onChange={setMd} rows={10} />
           <button onClick={preview} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Preview</button>
         </div>
-        <div className={`${resultPanelClass} min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto`}>{html ? <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} /> : <p className="text-[var(--text-muted)] text-sm">Click Preview to render</p>}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">{html ? <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} /> : <p className="text-[var(--text-muted)] text-sm">Click Preview to render</p>}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -442,14 +443,13 @@ export function DuplicateWordRemover() {
   const outWords = result.trim() ? result.split(/\s+/).length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><SpellCheck className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Duplicate Word Remover</h3></div>
+    <Section title="Duplicate Word Remover">
       <p className="text-sm text-[var(--text-secondary)]">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <a href="/developer/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</a>.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>Text ({inWords} words)</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div><button onClick={remove} className={btnPrimary}>Remove Duplicate Words</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={6} className={`${inputClass} resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste text to remove duplicate words</p>)}</div>
+        <div className="space-y-4"><Input label={`Text (${inWords} words)`} value={text} onChange={setText} rows={6} /><button onClick={remove} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicate Words</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste text to remove duplicate words</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -459,13 +459,12 @@ export function TextCleaner() {
   const clean = () => { let t = text; t = t.replace(/\s+/g, ' '); t = t.replace(/\n{3,}/g, '\n\n'); t = t.replace(/[^\S\n]+$/gm, ''); t = t.replace(/^[^\S\n]+/gm, ''); setResult(t.trim()); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Scissors className="w-5 h-5 text-cyan-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Cleaner</h3></div>
+    <Section title="Text Cleaner">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div><button onClick={clean} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors">Clean Text</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={6} className={`${inputClass} resize-none`} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Normalize whitespace and clean text</p>)}</div>
+        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={clean} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors">Clean Text</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Normalize whitespace and clean text</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -476,13 +475,12 @@ export function TextSplitter() {
   const count = result ? result.split('\n').length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Scissors className="w-5 h-5 text-violet-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Text Splitter</h3></div>
+    <Section title="Text Splitter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={inputClass} /></div><div className="space-y-1"><label className={labelClass}>Delimiter</label><input type="text" value={delimiter} onChange={e => setDelimiter(e.target.value)} className={inputClass} /></div><button onClick={split} className="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors">Split</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={8} className={`${inputClass} font-mono text-xs resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} parts</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Split text by delimiter</p>)}</div>
+        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><Input label="Delimiter" value={delimiter} onChange={setDelimiter} /><button onClick={split} className="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors">Split</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} parts</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Split text by delimiter</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -493,13 +491,12 @@ export function TrailingSpaceRemover() {
   const trimmed = result ? text.split('\n').length - result.split('\n').length : 0;
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Trash2 className="w-5 h-5 text-zinc-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Trailing Space Remover</h3></div>
+    <Section title="Trailing Space Remover">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>Text</label><textarea value={text} onChange={e => setText(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div><button onClick={trim} className={btnPrimary}>Trim Trailing Spaces</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={6} className={`${inputClass} font-mono text-xs resize-none`} /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">Trimmed {trimmed} line{trimmed !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass}><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Remove trailing whitespace</p>)}</div>
+        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={trim} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Trim Trailing Spaces</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">Trimmed {trimmed} line{trimmed !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Remove trailing whitespace</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -509,13 +506,12 @@ export function CanonicalUrlChecker() {
   const check = () => { try { new URL(url); } catch { setResult('Invalid URL'); return; } const u = new URL(url); setResult([`✓ Valid URL format`,`Protocol: ${u.protocol}`,`Domain: ${u.hostname}`,`Path: ${u.pathname}`,u.hash ? '⚠️ Has fragment (#) — search engines may ignore' : '✓ No fragment',u.search ? '⚠️ Has query params — ensure these are the canonical version' : '✓ No query params',u.pathname.endsWith('/') ? '✓ Ends with /' : 'ℹ️ No trailing slash',u.hostname.startsWith('www.') ? 'ℹ️ With www' : 'ℹ️ Without www'].join('\n')); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Link className="w-5 h-5 text-blue-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Canonical URL Checker</h3></div>
+    <Section title="Canonical URL Checker">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>URL</label><input type="url" value={url} onChange={e => setUrl(e.target.value)} className={inputClass} /></div><button onClick={check} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Check URL</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<pre className="text-sm font-mono whitespace-pre-wrap">{result}</pre>) : (<p className="text-[var(--text-muted)] text-sm">Check canonical URL structure</p>)}</div>
+        <div className="space-y-4"><Input label="URL" type="url" value={url} onChange={setUrl} /><button onClick={check} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Check URL</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<pre className="text-sm font-mono whitespace-pre-wrap">{result}</pre>) : (<p className="text-[var(--text-muted)] text-sm">Check canonical URL structure</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -525,13 +521,12 @@ export function BreadcrumbSchemaGenerator() {
   const generate = () => { const items = pages.split('\n').filter(l => l.trim()).map(l => { const [name, url] = l.split(',').map(s => s.trim()); return { name, url }; }); if (items.length < 2) return; setResult(JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items.map((item, i) => ({ "@type": "ListItem", "position": i + 1, "name": item.name, "item": item.url })) }, null, 2)); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Rows3 className="w-5 h-5 text-amber-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">Breadcrumb Schema Generator</h3></div>
+    <Section title="Breadcrumb Schema Generator">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="space-y-1"><label className={labelClass}>Pages (Name,URL per line)</label><textarea value={pages} onChange={e => setPages(e.target.value)} rows={5} className={`${inputClass} font-mono text-xs`} /></div><button onClick={generate} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Breadcrumb Schema</button></div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><textarea readOnly value={result} rows={10} className={`${inputClass} font-mono text-xs resize-none`} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate breadcrumb JSON-LD schema</p>)}</div>
+        <div className="space-y-4"><Input label="Pages (Name,URL per line)" value={pages} onChange={setPages} rows={5} /><button onClick={generate} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Breadcrumb Schema</button></div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate breadcrumb JSON-LD schema</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -541,17 +536,16 @@ export function UtmBuilder() {
   const build = () => { try { new URL(baseUrl); } catch { return; } const u = new URL(baseUrl); u.searchParams.set('utm_source', source); u.searchParams.set('utm_medium', medium); u.searchParams.set('utm_campaign', campaign); if (term) u.searchParams.set('utm_term', term); if (content) u.searchParams.set('utm_content', content); setResult(u.toString()); };
 
   return (
-    <div className={cardClass}>
-      <div className={headerClass}><Link className="w-5 h-5 text-emerald-500" /><h3 className="text-lg font-bold text-[var(--text-primary)]">UTM Builder</h3></div>
+    <Section title="UTM Builder">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <div className="space-y-1"><label className={labelClass}>Base URL</label><input type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} className={inputClass} /></div>
-          <div className="grid grid-cols-2 gap-3"><div className="space-y-1"><label className={labelClass}>Source</label><input type="text" value={source} onChange={e => setSource(e.target.value)} className={inputClass} /></div><div className="space-y-1"><label className={labelClass}>Medium</label><input type="text" value={medium} onChange={e => setMedium(e.target.value)} className={inputClass} /></div><div className="space-y-1"><label className={labelClass}>Campaign</label><input type="text" value={campaign} onChange={e => setCampaign(e.target.value)} className={inputClass} /></div><div className="space-y-1"><label className={labelClass}>Term (opt)</label><input type="text" value={term} onChange={e => setTerm(e.target.value)} className={inputClass} /></div></div>
-          <div className="space-y-1"><label className={labelClass}>Content (opt)</label><input type="text" value={content} onChange={e => setContent(e.target.value)} className={inputClass} /></div>
-          <button onClick={build} className={btnPrimary}>Build UTM URL</button>
+          <Input label="Base URL" type="url" value={baseUrl} onChange={setBaseUrl} />
+          <div className="grid grid-cols-2 gap-3"><Input label="Source" value={source} onChange={setSource} /><Input label="Medium" value={medium} onChange={setMedium} /><Input label="Campaign" value={campaign} onChange={setCampaign} /><Input label="Term (opt)" value={term} onChange={setTerm} /></div>
+          <Input label="Content (opt)" value={content} onChange={setContent} />
+          <button onClick={build} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Build UTM URL</button>
         </div>
-        <div className={`${resultPanelClass} flex flex-col min-h-[200px]`}>{result ? (<><input readOnly value={result} className={inputClass} /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className={actionBtnClass + ' mt-2 self-start'}><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields to build a UTM-tagged URL</p>)}</div>
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><input readOnly value={result} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields to build a UTM-tagged URL</p>)}</div>
       </div>
-    </div>
+    </Section>
   );
 }

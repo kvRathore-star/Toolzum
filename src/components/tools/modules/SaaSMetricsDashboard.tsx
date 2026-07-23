@@ -62,7 +62,7 @@ function MiniBar({ values, color, height = 40 }: { values: number[]; color: stri
   const max = Math.max(...values, 1);
   const w = Math.max(8, Math.min(24, 160 / values.length - 4));
   return (
-    <svg width="160" height={height} viewBox={`0 0 160 ${height}`}>
+    <svg className="w-full" height={height} viewBox={`0 0 160 ${height}`} preserveAspectRatio="none">
       {values.map((v, i) => (
         <rect key={i} x={i * (w + 4) + 4} y={height - (v / max) * (height - 4)} width={w} height={(v / max) * (height - 4)} rx="3" fill={color} opacity="0.8"/>
       ))}
@@ -89,7 +89,7 @@ function KpiCard({ label, value, suffix, color, icon, subtitle }: { label: strin
   return (
     <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 flex flex-col gap-1">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-[var(--text-tertiary)]">{label}</span>
+        <span className="text-xs text-[var(--text-tertiary)] truncate">{label}</span>
         <span className={`${color}`}>{icon}</span>
       </div>
       <div className={`text-2xl font-bold ${color}`}>{value}{suffix && <span className="text-sm text-[var(--text-tertiary)] ml-1">{suffix}</span>}</div>
@@ -184,7 +184,7 @@ export function SaaSMetricsDashboard() {
         <KpiCard label="Monthly Recurring Revenue" value={formatCurrency(m.mrr)} icon={<TrendingUp size={16} />} color={kpiColor(revenueGrowth, [10, 30])} subtitle={`${revenueGrowth >= 0 ? '+' : ''}${revenueGrowth.toFixed(1)}% vs last period`} />
         <KpiCard label="Annual Recurring Revenue" value={formatCurrency(m.arr)} icon={<DollarSign size={16} />} color="text-blue-400" subtitle={`${(m.arr / m.mrr / 12 * 100).toFixed(0)}% of target`} />
         <KpiCard label="Net Promoter Score" value={npsScore > 0 ? `+${npsScore.toFixed(0)}` : npsScore.toFixed(0)} icon={<Activity size={16} />} color={kpiColor(npsScore, [0, 50])} subtitle={`${m.promoters} promoters · ${m.detractors} detractors`} />
-        <KpiCard label="Runway" value={runwayMonths < 12 ? `${runwayMonths.toFixed(1)}` : `${(runwayMonths / 12).toFixed(1)}yr`} suffix="months" icon={<Target size={16} />} color={kpiColor(runwayMonths, [6, 18])} subtitle={`$${(m.cashBalance / 1_000_000).toFixed(1)}M · $${(m.monthlyBurn / 1_000).toFixed(0)}K/mo`} />
+        <KpiCard label="Runway" value={runwayMonths < 12 ? `${runwayMonths.toFixed(1)}` : `${(runwayMonths / 12).toFixed(1)}yr`} suffix={runwayMonths < 12 ? "months" : undefined} icon={<Target size={16} />} color={kpiColor(runwayMonths, [6, 18])} subtitle={`$${(m.cashBalance / 1_000_000).toFixed(1)}M · $${(m.monthlyBurn / 1_000).toFixed(0)}K/mo`} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -300,8 +300,8 @@ export function SaaSMetricsDashboard() {
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
               <h2 className="text-sm font-bold text-[var(--text-primary)] mb-3">A/B Test Results</h2>
               <div className="space-y-2">
-                <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Control</span><span className="font-mono">{(abControlRate * 100).toFixed(2)}%</span></div>
-                <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Variant</span><span className="font-mono">{(abVariantRate * 100).toFixed(2)}%</span></div>
+                <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Control</span><span className="font-mono">{abControlRate.toFixed(2)}%</span></div>
+                <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Variant</span><span className="font-mono">{abVariantRate.toFixed(2)}%</span></div>
                 <div className="flex justify-between text-xs font-bold"><span>Improvement</span><span className={abImprovement >= 0 ? 'text-emerald-400' : 'text-red-400'}>{abImprovement >= 0 ? '+' : ''}{abImprovement.toFixed(2)}%</span></div>
               </div>
               <div className="mt-3 flex items-center gap-2">

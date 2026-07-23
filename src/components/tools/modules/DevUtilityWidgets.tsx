@@ -1,13 +1,6 @@
 "use client";
 import React, { useState, useCallback } from 'react';
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm";
-const labelClass = "block text-sm font-medium mb-1";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors";
-const cardClass = "max-w-xl mx-auto p-6";
-const headingClass = "text-2xl font-bold mb-6";
-const resultClass = "p-4 bg-[var(--bg-surface)] rounded-lg text-sm whitespace-pre-wrap font-mono";
-
 const PORTS: Record<number, string> = {
   20: 'FTP Data', 21: 'FTP Control', 22: 'SSH', 23: 'Telnet', 25: 'SMTP',
   53: 'DNS', 80: 'HTTP', 110: 'POP3', 143: 'IMAP', 443: 'HTTPS',
@@ -27,6 +20,15 @@ function useCopy() {
   return { copied, copy };
 }
 
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+}
+
 export function PortNumberLookup() {
   const [port, setPort] = useState('443');
   const [result, setResult] = useState('');
@@ -38,14 +40,13 @@ export function PortNumberLookup() {
     setResult(`Port ${num}: ${service} (${category})`);
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Port Number Lookup</h1>
+    <Section title="Port Number Lookup">
       <div className="space-y-3">
-        <div><label className={labelClass}>Port Number</label><input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535} className={inputClass} /></div>
-        <button onClick={lookup} className={btnClass}>Lookup</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label><input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <button onClick={lookup} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Lookup</button>
+        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -63,14 +64,13 @@ export function UserAgentParser() {
     setResult(`Browser: ${browser} ${version}\nOS: ${osMatch ? osMatch[1] : 'Unknown'}`);
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>User-Agent Parser</h1>
+    <Section title="User-Agent Parser">
       <div className="space-y-3">
-        <div><label className={labelClass}>User-Agent String</label><textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} className={`${inputClass} font-mono text-xs`} /></div>
-        <button onClick={parse} className={btnClass}>Parse</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label><textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+        <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
+        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -88,14 +88,13 @@ export function QueryStringParser() {
     setResult(JSON.stringify(params, null, 2));
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Query String Parser</h1>
+    <Section title="Query String Parser">
       <div className="space-y-3">
-        <div><label className={labelClass}>Query String</label><input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar" className={`${inputClass} font-mono`} /></div>
-        <button onClick={parse} className={btnClass}>Parse</button>
-        {result && <div className="mt-4"><pre className={resultClass}>{result}</pre><button onClick={() => copy(result)} className="mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button></div>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label><input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar" className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
+        {result && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre><button onClick={() => copy(result)} className="mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-xl text-sm font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button></div>}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -118,14 +117,13 @@ export function SseEventFormatter() {
     setResult(JSON.stringify(parsed, null, 2));
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>SSE Event Formatter</h1>
+    <Section title="SSE Event Formatter">
       <div className="space-y-3">
-        <div><label className={labelClass}>SSE Event Text</label><textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={`${inputClass} font-mono text-xs`} /></div>
-        <button onClick={format} className={btnClass}>Format</button>
-        {result && <div className="mt-4"><pre className={resultClass}>{result}</pre><button onClick={() => copy(result)} className="mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-sm font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button></div>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+        <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
+        {result && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre><button onClick={() => copy(result)} className="mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-xl text-sm font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button></div>}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -148,14 +146,13 @@ export function RateLimitHeaderParser() {
     setResult(summary);
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Rate Limit Header Parser</h1>
+    <Section title="Rate Limit Header Parser">
       <div className="space-y-3">
-        <div><label className={labelClass}>Rate Limit Headers</label><textarea value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className={`${inputClass} font-mono text-xs`} /></div>
-        <button onClick={parse} className={btnClass}>Parse</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+        <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
+        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
       </div>
-    </div>
+    </Section>
   );
 }
 
@@ -175,13 +172,12 @@ export function PricingTierBuilder() {
     } catch { setResult('Invalid JSON — check your tier format'); }
   };
   return (
-    <div className={cardClass}>
-      <h1 className={headingClass}>Pricing Tier Builder</h1>
+    <Section title="Pricing Tier Builder">
       <div className="space-y-3">
-        <div><label className={labelClass}>Tiers JSON</label><textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={5} className={`${inputClass} font-mono text-xs`} placeholder='[{"name": "Free", "price": 0, "users": 1}]' /></div>
-        <button onClick={build} className={btnClass}>Build</button>
-        {result && <pre className={resultClass}>{result}</pre>}
+        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label><textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder='[{"name": "Free", "price": 0, "users": 1}]' /></div>
+        <button onClick={build} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Build</button>
+        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
       </div>
-    </div>
+    </Section>
   );
 }
