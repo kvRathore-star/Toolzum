@@ -2651,4 +2651,49 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "Canvas API",
     showInCategory: false
   },
+  {
+    id: "404",
+    name: "UPI ID Validator & QR Generator",
+    slug: "upi-id-validator",
+    category: "indian-utilities",
+    description: 'Validate UPI IDs (@paytm, @okhdfcbank, @ybl, @sbi), check format rules, and generate UPI payment QR codes with amount. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online UPI ID Validator & QR Generator — Validate UPI IDs (@paytm, @okhdfcbank, @ybl, @sbi), check format rules, and generate UPI payment QR codes with amount. ',
+    dependencies: "QRCode.js"
+  },
+  {
+    id: "405",
+    name: "Indian Address Parser",
+    slug: "indian-address-parser",
+    category: "indian-utilities",
+    description: 'Parse free-text Indian addresses into structured fields — line 1, line 2, city, district, state, pincode. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Indian Address Parser — Parse free-text Indian addresses into structured fields — line 1, line 2, city, district, state, pincode. ',
+    dependencies: "None"
+  },
+  {
+    id: "406",
+    name: "Vehicle Registration Checker",
+    slug: "vehicle-registration-checker",
+    category: "indian-utilities",
+    description: 'Parse Indian vehicle registration numbers, identify state/UT codes, RTO codes, and series. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Vehicle Registration Checker — Parse Indian vehicle registration numbers, identify state/UT codes, RTO codes, and series. ',
+    dependencies: "None"
+  },
+  {
+    id: "407",
+    name: "Aadhaar Number Validator",
+    slug: "aadhaar-number-validator",
+    category: "indian-utilities",
+    description: 'Validate Aadhaar numbers with Verhoeff checksum verification. Check format rules, detect fake UIDs, and understand Aadhaar structure. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Aadhaar Number Validator — Validate Aadhaar numbers with Verhoeff checksum verification. ',
+    dependencies: "None"
+  },
+  {
+    id: "408",
+    name: "SIP / PPF / EPF Calculator",
+    slug: "indian-investment-calculator",
+    category: "indian-utilities",
+    description: 'Calculate Indian investment returns — SIP (lumpsum + monthly), PPF (15-year maturity), and EPF (employee provident fund). Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online SIP / PPF / EPF Calculator — Calculate Indian investment returns — SIP (lumpsum + monthly), PPF (15-year maturity), and EPF (employee provident fund). ',
+    dependencies: "None"
+  },
 ];

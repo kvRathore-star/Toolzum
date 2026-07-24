@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { Shield, Download, RefreshCw, Upload, Crop } from 'lucide-react';
+import { Shield, Download, RefreshCw, Upload, Crop, Ruler, ImageIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+
+const ACCENT = '#0d9488';
 
 export default function AadhaarWalletCropper() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -12,8 +14,7 @@ export default function AadhaarWalletCropper() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [side, setSide] = useState<'front' | 'back'>('front');
 
-  // Manual canvas crop coordinates
-  const [cropBox, setCropBox] = useState({ x: 50, y: 50, w: 300, h: 189 }); // 1.587 ratio (86mm x 54mm)
+  const [cropBox, setCropBox] = useState({ x: 50, y: 50, w: 300, h: 189 });
   const imageRef = useRef<HTMLImageElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -43,14 +44,12 @@ export default function AadhaarWalletCropper() {
       return;
     }
 
-    // Standard card dimensions (e.g. 1018 x 642 pixels for printing clarity)
     canvas.width = 1018;
     canvas.height = 642;
 
-    // Standard scaling factors
     const displayWidth = img.clientWidth;
     const displayHeight = img.clientHeight;
-    
+
     const scaleX = img.naturalWidth / displayWidth;
     const scaleY = img.naturalHeight / displayHeight;
 
@@ -72,7 +71,6 @@ export default function AadhaarWalletCropper() {
         canvas.height
       );
 
-      // Overlay security details border
       ctx.strokeStyle = '#e2e8f0';
       ctx.lineWidth = 4;
       ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -92,31 +90,42 @@ export default function AadhaarWalletCropper() {
     downloadOrShare(croppedUrl, `aadhaar_card_${side}.jpg`);
   };
 
+  const outputSizeDisplay = croppedUrl ? Math.round((croppedUrl.length * 3) / 4 / 1024) : null;
+
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Crop className="w-5 h-5 text-[var(--accent)]" />
-          Aadhaar Card Wallet Cropper
-        </h2>
-        <p className="text-xs text-[var(--text-secondary)] mt-1">Crop scanned Aadhaar cards into standard printable wallet dimensions (86mm x 54mm) perfectly sized offline.</p>
+      <div className="flex items-center gap-3 bg-[#0d9488]/10 border border-[#0d9488]/20 p-4 rounded-xl">
+        <Shield className="w-5 h-5 text-[#0d9488] shrink-0" />
+        <p className="text-sm text-[#0d9488] dark:text-[#0d9488] font-medium">
+          Crop scanned Aadhaar cards into standard printable wallet dimensions (86mm x 54mm). All processing is done entirely on your device.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Workspace */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
-          <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-            <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Crop Workspace</span>
-            <div className="flex gap-2">
-              <button 
+          <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3">
+            <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+              <Crop className="w-3.5 h-3.5 text-[#0d9488]" />
+              Crop Workspace
+            </span>
+            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-lg p-0.5">
+              <button
                 onClick={() => setSide('front')}
-                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'front' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-[var(--text-muted)]'}`}
+                className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                  side === 'front'
+                    ? 'bg-white dark:bg-zinc-700 text-[#0d9488] shadow-sm'
+                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+                }`}
               >
                 Front Side
               </button>
-              <button 
+              <button
                 onClick={() => setSide('back')}
-                className={`px-2.5 py-1 rounded text-[10px] font-bold cursor-pointer ${side === 'back' ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-[var(--text-muted)]'}`}
+                className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                  side === 'back'
+                    ? 'bg-white dark:bg-zinc-700 text-[#0d9488] shadow-sm'
+                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+                }`}
               >
                 Back Side
               </button>
@@ -124,28 +133,33 @@ export default function AadhaarWalletCropper() {
           </div>
 
           {!imageSrc ? (
-            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
-              <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
-              <p className="text-xs text-[var(--text-muted)]">Upload scan of your ID card</p>
-              <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+            <div className="border-2 border-dashed border-[#0d9488]/30 rounded-2xl p-12 flex flex-col items-center justify-center bg-[#0d9488]/5 text-center transition-all hover:border-[#0d9488]/50">
+              <Upload className="w-10 h-10 text-[#0d9488] mb-2" />
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Upload scan of your ID card</p>
+              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mb-4">JPG, PNG, WEBP supported</p>
+              <label className="cursor-pointer px-5 py-2.5 rounded-xl text-xs text-white font-bold transition-all shadow-lg inline-flex items-center gap-1.5"
+                style={{
+                  background: `linear-gradient(135deg, ${ACCENT}, #0f766e)`,
+                  boxShadow: `0 4px 16px ${ACCENT}44`
+                }}
+              >
+                <ImageIcon className="w-3.5 h-3.5" />
                 Choose ID Image
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
               </label>
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="relative border border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center">
-<img  loading="lazy" 
-  ref={imageRef}
-  src={imageSrc} 
-  alt="Uploaded image preview" 
-  width={800} height={600}
-  className="max-w-full max-h-[350px] object-contain"
-/>
-                
-                {/* Simplified Crop Overlay Guides */}
-                <div 
-                  className="absolute border-2 border-dashed border-indigo-500 bg-indigo-500/10 cursor-move pointer-events-none"
+              <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-zinc-950 flex justify-center items-center">
+                <img loading="lazy"
+                  ref={imageRef}
+                  src={imageSrc}
+                  alt="Uploaded image preview"
+                  width={800} height={600}
+                  className="max-w-full max-h-[350px] object-contain"
+                />
+                <div
+                  className="absolute border-2 border-[#0d9488] bg-[#0d9488]/10"
                   style={{
                     left: `${cropBox.x}px`,
                     top: `${cropBox.y}px`,
@@ -153,76 +167,104 @@ export default function AadhaarWalletCropper() {
                     height: `${cropBox.h}px`
                   }}
                 >
-                  <span className="absolute bottom-1 right-1 text-[9px] bg-indigo-600 px-1 py-0.5 rounded text-white font-mono">
-                    86mm x 54mm Standard Box
+                  {/* Crosshair guide lines */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#0d9488]/40 pointer-events-none" />
+                  <div className="absolute top-1/2 left-0 right-0 h-px bg-[#0d9488]/40 pointer-events-none" />
+                  <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] bg-[#0d9488] px-1.5 py-0.5 rounded text-white font-mono whitespace-nowrap">
+                    86mm x 54mm
                   </span>
                 </div>
               </div>
 
-              {/* Adjust Box Controls */}
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div className="space-y-1">
-                  <label className="text-[10px] text-[var(--text-secondary)]">Horizontal Box Position ({cropBox.x}px)</label>
-                  <input 
-                    type="range" min="0" max="300" value={cropBox.x} 
-                    onChange={e => setCropBox(prev => ({ ...prev, x: parseInt(e.target.value) }))} 
-                    className="w-full accent-indigo-500" 
+                  <label className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
+                    <Ruler className="w-3 h-3 text-[#0d9488]" />
+                    Horizontal Position ({cropBox.x}px)
+                  </label>
+                  <input
+                    type="range" min="0" max="300" value={cropBox.x}
+                    onChange={e => setCropBox(prev => ({ ...prev, x: parseInt(e.target.value) }))}
+                    className="w-full accent-[#0d9488]"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] text-[var(--text-secondary)]">Vertical Box Position ({cropBox.y}px)</label>
-                  <input 
-                    type="range" min="0" max="200" value={cropBox.y} 
-                    onChange={e => setCropBox(prev => ({ ...prev, y: parseInt(e.target.value) }))} 
-                    className="w-full accent-indigo-500" 
+                  <label className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
+                    <Ruler className="w-3 h-3 text-[#0d9488]" />
+                    Vertical Position ({cropBox.y}px)
+                  </label>
+                  <input
+                    type="range" min="0" max="200" value={cropBox.y}
+                    onChange={e => setCropBox(prev => ({ ...prev, y: parseInt(e.target.value) }))}
+                    className="w-full accent-[#0d9488]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <button 
+                <button
                   onClick={() => setImageSrc(null)}
-                  className="border border-zinc-800 text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 >
+                  <RefreshCw className="w-4 h-4" />
                   Clear File
                 </button>
-                <button 
+                <button
                   onClick={executeCrop}
                   disabled={isProcessing}
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 transition-all active:scale-95"
+                  style={{
+                    background: `linear-gradient(135deg, ${ACCENT}, #0f766e)`,
+                    boxShadow: `0 4px 16px ${ACCENT}44`
+                  }}
                 >
                   <Crop className="w-4 h-4" />
-                  Crop Card
+                  {isProcessing ? 'Cropping...' : 'Crop Card'}
                 </button>
               </div>
             </div>
           )}
         </div>
 
-        {/* Cropped Output preview */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
           {croppedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
-              <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-zinc-800 rounded-xl">
-<img  loading="lazy" 
-  src={croppedUrl} 
-  alt="Processed result" 
-  width={800} height={600}
-  className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
-/>
+              <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl">
+                <img loading="lazy"
+                  src={croppedUrl}
+                  alt="Processed result"
+                  width={800} height={600}
+                  className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
+                />
               </div>
-              <button 
-                onClick={downloadCard}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                Download printable card ({side})
-              </button>
+              <div className="w-full space-y-3">
+                <div className="flex items-center justify-center gap-3 text-xs text-zinc-600 dark:text-zinc-400">
+                  <span className="inline-flex items-center gap-1 bg-[#0d9488]/10 text-[#0d9488] px-2.5 py-1 rounded-full font-semibold">
+                    <ImageIcon className="w-3 h-3" />
+                    {outputSizeDisplay} KB
+                  </span>
+                  <span className="inline-flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2.5 py-1 rounded-full font-semibold">
+                    <Ruler className="w-3 h-3" />
+                    86mm x 54mm
+                  </span>
+                </div>
+                <button
+                  onClick={downloadCard}
+                  className="w-full text-white font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-95"
+                  style={{
+                    background: `linear-gradient(135deg, ${ACCENT}, #0f766e)`,
+                    boxShadow: `0 4px 16px ${ACCENT}44`
+                  }}
+                >
+                  <Download className="w-4 h-4" />
+                  Download Printable Card ({side})
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center text-[var(--text-secondary)]">
-              <Shield className="w-12 h-12 mb-3 opacity-30 animate-pulse text-[var(--text-muted)]" />
-              <p className="text-xs">Adjust cropping area and hit crop card. Wallet printable preview will appear here.</p>
+              <Shield className="w-12 h-12 mb-3 opacity-30 text-[#0d9488]" />
+              <p className="text-xs text-center max-w-[220px]">Adjust cropping area and hit crop card. Wallet printable preview will appear here.</p>
             </div>
           )}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { FileText, AlertCircle, Building, Smartphone, ShoppingCart, Shield, Home, Zap, Droplets, Loader2, Download, Copy, Check, Sparkles } from 'lucide-react';
+import { FileText, AlertCircle, Building, Smartphone, ShoppingCart, Shield, Home, Zap, Droplets, Loader2, Download, Copy, Check, Sparkles, Scale } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import AiSettings from '@/components/tools/AiSettings';
@@ -10,13 +10,13 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const COMPLAINT_TYPES = [
-  { id: 'bank', label: 'Bank Fraud', icon: <Building className="w-3.5 h-3.5" />, statute: 'Banking Ombudsman Scheme 2006, RBI Guidelines' },
-  { id: 'telecom', label: 'Telecom Issue', icon: <Smartphone className="w-3.5 h-3.5" />, statute: 'TRAI Regulations, Telecom Consumer Protection Rules' },
-  { id: 'ecommerce', label: 'E-commerce Fraud', icon: <ShoppingCart className="w-3.5 h-3.5" />, statute: 'Consumer Protection Act 2019, Legal Metrology Act' },
-  { id: 'insurance', label: 'Insurance Claim', icon: <Shield className="w-3.5 h-3.5" />, statute: 'IRDAI Guidelines, Consumer Protection Act 2019' },
-  { id: 'realestate', label: 'Real Estate/Builder', icon: <Home className="w-3.5 h-3.5" />, statute: 'RERA Act 2016, Consumer Protection Act 2019' },
-  { id: 'electricity', label: 'Electricity Bill', icon: <Zap className="w-3.5 h-3.5" />, statute: 'Electricity Act 2003, State Electricity Regulatory Commission' },
-  { id: 'water', label: 'Water Supply', icon: <Droplets className="w-3.5 h-3.5" />, statute: 'State Municipal Corporation Act, Consumer Protection Act 2019' },
+  { id: 'bank', label: 'Bank Fraud', icon: Building, statute: 'Banking Ombudsman Scheme 2006, RBI Guidelines', color: 'bg-blue-500' },
+  { id: 'telecom', label: 'Telecom Issue', icon: Smartphone, statute: 'TRAI Regulations, Telecom Consumer Protection Rules', color: 'bg-purple-500' },
+  { id: 'ecommerce', label: 'E-commerce Fraud', icon: ShoppingCart, statute: 'Consumer Protection Act 2019, Legal Metrology Act', color: 'bg-red-500' },
+  { id: 'insurance', label: 'Insurance Claim', icon: Shield, statute: 'IRDAI Guidelines, Consumer Protection Act 2019', color: 'bg-emerald-500' },
+  { id: 'realestate', label: 'Real Estate/Builder', icon: Home, statute: 'RERA Act 2016, Consumer Protection Act 2019', color: 'bg-amber-500' },
+  { id: 'electricity', label: 'Electricity Bill', icon: Zap, statute: 'Electricity Act 2003, State Electricity Regulatory Commission', color: 'bg-yellow-500' },
+  { id: 'water', label: 'Water Supply', icon: Droplets, statute: 'State Municipal Corporation Act, Consumer Protection Act 2019', color: 'bg-cyan-500' },
 ];
 
 interface FormData {
@@ -81,6 +81,7 @@ export default function ComplaintLetterGenerator() {
   const [generatedLetter, setGeneratedLetter] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [expandedStatute, setExpandedStatute] = useState(false);
 
   const ct = COMPLAINT_TYPES.find(t => t.id === form.type) || COMPLAINT_TYPES[0];
 
@@ -150,7 +151,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
       <AiPrivacyBanner />
       <div className="flex items-center gap-2 mb-1">
-        <FileText className="w-5 h-5 text-emerald-500" />
+        <FileText className="w-5 h-5 text-red-500" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Complaint Letter Generator</h3>
       </div>
 
@@ -162,16 +163,22 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Complaint Type *</label>
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Complaint Category *</label>
               <div className="grid grid-cols-2 gap-1.5">
                 {COMPLAINT_TYPES.map(t => (
                   <button key={t.id} onClick={() => update('type', t.id)}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-semibold transition-colors border ${
+                    className={`relative flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-[11px] font-semibold transition-all border ${
                       form.type === t.id 
-                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300' 
-                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
+                        ? 'bg-red-50 dark:bg-red-900/20 border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 shadow-sm shadow-red-500/10'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-red-300'
                     }`}>
-                    {t.icon} {t.label}
+                    <t.icon className="w-3.5 h-3.5 shrink-0" />
+                    <span className="truncate">{t.label}</span>
+                    {form.type === t.id && (
+                      <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full flex items-center justify-center">
+                        <Check className="w-2 h-2 text-white" />
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -180,41 +187,41 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Full Name *</label>
                 <input value={form.fullName} onChange={e => update('fullName', e.target.value)} placeholder="Rahul Sharma"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Email</label>
                   <input value={form.email} onChange={e => update('email', e.target.value)} placeholder="rahul@email.com"
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone</label>
                   <input value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="9876543210"
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
                 </div>
               </div>
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Against (Company/Person)</label>
               <input value={form.againstName} onChange={e => update('againstName', e.target.value)} placeholder="XYZ Bank / ABC Company"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Transaction/Reference ID</label>
               <input value={form.transactionId} onChange={e => update('transactionId', e.target.value)} placeholder="TXN123456789"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Amount (₹)</label>
                 <input type="number" value={form.amount} onChange={e => update('amount', e.target.value)} placeholder="5000"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Date of Incident</label>
                 <input type="date" value={form.date} onChange={e => update('date', e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
             </div>
           </div>
@@ -222,25 +229,36 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Address</label>
             <input value={form.address} onChange={e => update('address', e.target.value)} placeholder="123, Main Street, New Delhi - 110001"
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Describe Your Complaint in Detail *</label>
             <textarea value={form.description} onChange={e => update('description', e.target.value)} rows={4}
               placeholder="Describe what happened, when, and who you contacted..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Relief Sought (What do you want?)</label>
             <textarea value={form.relief} onChange={e => update('relief', e.target.value)} rows={2}
-              placeholder="e.g. Refund of ₹5000, compensation for mental harassment,道歉..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none" />
+              placeholder="e.g. Refund of ₹5000, compensation for mental harassment..."
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 rounded-lg">
+              <Scale className="w-3 h-3 text-red-500" />
+              <span className="text-[9px] font-semibold text-red-700 dark:text-red-300">{ct.statute}</span>
+            </div>
+            <button onClick={() => setExpandedStatute(!expandedStatute)}
+              className="text-[9px] text-red-500 hover:text-red-400 font-semibold underline">
+              {expandedStatute ? 'Less info' : 'More info'}
+            </button>
           </div>
 
           <button onClick={handleGenerate} disabled={isGenerating || !form.fullName.trim() || !form.description.trim()}
-            className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-red-500/20 transition-all active:scale-[0.98]">
             {isGenerating ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : <><Sparkles className="w-4 h-4" /> Generate Complaint Letter</>}
           </button>
 
@@ -250,11 +268,11 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
                 <h4 className="text-xs font-bold text-[var(--text-primary)]">Generated Letter</h4>
                 <div className="flex gap-1.5">
                   <button onClick={handleCopy}
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold transition-all active:scale-95">
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />} {copied ? 'Copied' : 'Copy'}
                   </button>
                   <button onClick={handleDownload}
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-emerald-500 text-white rounded-lg text-[10px] font-semibold hover:bg-emerald-600 transition-colors">
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-lg text-[10px] font-bold shadow-lg shadow-red-500/20 transition-all active:scale-95">
                     <Download className="w-3 h-3" /> Download
                   </button>
                 </div>

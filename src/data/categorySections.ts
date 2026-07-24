@@ -1066,6 +1066,15 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       ],
     },
     {
+      id: "payments",
+      heading: "Payments & Investments",
+      description: "Validate UPI IDs, generate payment QR codes, calculate SIP/PPF/EPF returns.",
+      slugs: [
+        "upi-id-validator",
+        "indian-investment-calculator",
+      ],
+    },
+    {
       id: "converters",
       heading: "India-Specific Converters",
       description: "Convert CGPA to percentage, calculate Indian age, generate regional fonts, and more.",
@@ -1074,6 +1083,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "hindi-regional-font-generator",
         "indian-voice-transcriber",
         "cgpa-to-percentage-converter",
+        "indian-address-parser",
+        "vehicle-registration-checker",
+        "aadhaar-number-validator",
       ],
     },
   ],
@@ -1128,7 +1140,7 @@ export const CATEGORY_INTROS: Record<string, string> = {
   Privacy:
     "Privacy tools for encrypting data, generating PGP keys, removing EXIF metadata from photos, checking password strength, and sharing notes securely. All processing happens locally with nothing uploaded.",
   "indian-utilities":
-    "India-specific utility tools — Aadhaar photo cropping and masking, PAN card verification, GST invoice generation, IFSC code lookup, and more. Every tool runs entirely in your browser with no server uploads.",
+    "India-specific utility tools — Aadhaar photo cropping and masking, PAN card verification, GST invoice generation, IFSC code lookup, UPI ID validation, vehicle registration check, and more. Every tool runs entirely in your browser with no server uploads.",
   Transcription:
     "Browser-based transcription tools — convert speech to text from audio and video files, generate YouTube transcripts, and create meeting minutes. All processing happens locally on your device.",
 };

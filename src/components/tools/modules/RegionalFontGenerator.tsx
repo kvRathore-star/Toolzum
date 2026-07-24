@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Type, Copy, Check, RefreshCw, Star, Heart } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Type, Copy, Check, RefreshCw, Star, Heart, Sparkles, Search, Grid3X3 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { motion, AnimatePresence } from 'framer-motion';
 
 const SYMBOL_WRAPPERS = [
   { name: 'Swastik Border', format: (t: string) => `卍 ${t} 卍` },
@@ -42,7 +43,7 @@ const UNICODE_FONTS = [
     map: (char: string) => {
       const code = char.charCodeAt(0);
       if (code >= 65 && code <= 90) return String.fromCodePoint(code - 65 + 0x1F130);
-      if (code >= 97 && code <= 122) return String.fromCodePoint(code - 97 + 0x1F130); // Squares are usually upper-only
+      if (code >= 97 && code <= 122) return String.fromCodePoint(code - 97 + 0x1F130);
       return char;
     }
   },
@@ -81,9 +82,13 @@ const UNICODE_FONTS = [
   }
 ];
 
+const HINT_PRESETS = ['जय हिन्द', 'नमस्ते', 'आपका स्वागत है', 'धन्यवाद', 'शुभ प्रभात'];
+
 export default function RegionalFontGenerator() {
   const [inputText, setInputText] = useState('जय हिन्द');
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
 
   const applyUnicodeFont = (text: string, mapFn: (c: string) => string) => {
     return text.split('').map(mapFn).join('');
@@ -96,19 +101,47 @@ export default function RegionalFontGenerator() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  const toggleFavorite = (key: string) => {
+    if (favorites.includes(key)) {
+      setFavorites(favorites.filter(f => f !== key));
+    } else {
+      setFavorites([...favorites, key]);
+      toast.success('Added to favorites!');
+    }
+  };
+
+  const allStyles = useMemo(() => {
+    const wrappers = SYMBOL_WRAPPERS.map((item, idx) => ({
+      id: `wrapper-${idx}`,
+      name: item.name,
+      output: item.format(inputText),
+      category: 'Royal Brackets & Indian Ornaments' as const,
+    }));
+    const fonts = UNICODE_FONTS.map((font, idx) => ({
+      id: `font-${idx}`,
+      name: font.name,
+      output: applyUnicodeFont(inputText, font.map),
+      category: 'Unicode Stylings (Latin Characters)' as const,
+    }));
+    return [...wrappers, ...fonts];
+  }, [inputText]);
+
+  const filteredStyles = showOnlyFavorites ? allStyles.filter(s => favorites.includes(s.id)) : allStyles;
+  const totalFontCount = allStyles.length;
+
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+    <div className="max-w-5xl mx-auto space-y-6">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <Type className="w-6 h-6 text-[var(--accent)]" />
+          <Type className="w-6 h-6" style={{ color: '#9333ea' }} />
           Hindi & Regional Font Stylizer
         </h2>
         <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Convert regional text (Hindi, Tamil, Telugu, etc.) or English names into decorative fonts and royal status styles suitable for bio, social media profiles, and messages.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
         <div className="space-y-2">
           <label className="block text-sm font-bold text-[var(--text-primary)]">
             Enter Input Text (English or Unicode Script)
@@ -119,89 +152,117 @@ export default function RegionalFontGenerator() {
               placeholder="e.g. जय हिन्द or Royal King"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] outline-none"
+              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-4 text-lg text-[var(--text-primary)] outline-none transition-all duration-200"
+              style={{ borderColor: inputText ? '#9333ea' : undefined }}
             />
+            {inputText && (
+              <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <span className="text-[10px] text-[var(--text-muted)] bg-[var(--bg-overlay)] px-2 py-0.5 rounded-full border border-[var(--border-subtle)]">
+                  {inputText.length} chars
+                </span>
+              </motion.div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {HINT_PRESETS.map(h => (
+              <button key={h} onClick={() => setInputText(h)}
+                className="px-2.5 py-1 text-[10px] font-medium rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-purple-400 hover:text-purple-500 transition-all cursor-pointer bg-[var(--bg-overlay)]/50">
+                {h}
+              </button>
+            ))}
           </div>
         </div>
 
         {inputText && (
-          <div className="space-y-6">
-            {/* Symbol wrappers */}
-            <div className="space-y-3">
-              <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
-                <Star className="w-4 h-4 text-[var(--accent)]" />
-                Royal Brackets & Indian Ornaments
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SYMBOL_WRAPPERS.map((item, idx) => {
-                  const output = item.format(inputText);
-                  const key = `wrapper-${idx}`;
-                  const isCopied = copiedIndex === key;
-                  return (
-                    <div
-                      key={key}
-                      className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] flex items-center justify-between gap-4"
-                    >
-                      <div className="space-y-1">
-                        <span className="text-[10px] text-[var(--text-secondary)] block">{item.name}</span>
-                        <span className="text-base font-medium text-zinc-900 dark:text-zinc-100">{output}</span>
-                      </div>
-                      <button
-                        onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${
-                          isCopied
-                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-                            : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-zinc-600'
-                        }`}
-                      >
-                        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  );
-                })}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-4 h-4" style={{ color: '#9333ea' }} />
+                <span className="text-xs font-bold text-[var(--text-secondary)]">
+                  <span style={{ color: '#9333ea' }}>{totalFontCount}</span> styles available
+                </span>
               </div>
+              <button onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
+                className={`text-[10px] font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  showOnlyFavorites ? 'bg-rose-500/10 border-rose-500/30 text-rose-500' : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400'
+                }`}>
+                <Heart className="w-3 h-3" fill={showOnlyFavorites ? 'currentColor' : 'none'} />
+                Favorites {favorites.length > 0 && `(${favorites.length})`}
+              </button>
             </div>
 
-            {/* Unicode Fonts */}
-            <div className="space-y-3">
-              <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">
-                <Type className="w-4 h-4 text-[var(--accent)]" />
-                Unicode Stylings (Latin Characters)
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {UNICODE_FONTS.map((font, idx) => {
-                  const output = applyUnicodeFont(inputText, font.map);
-                  const key = `font-${idx}`;
-                  const isCopied = copiedIndex === key;
+            <AnimatePresence mode="wait">
+              <motion.div key={showOnlyFavorites ? 'fav' : 'all'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {filteredStyles.map((item, idx) => {
+                  const isCopied = copiedIndex === item.id;
+                  const isFav = favorites.includes(item.id);
                   return (
-                    <div
-                      key={key}
-                      className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] flex items-center justify-between gap-4"
+                    <motion.div
+                      key={item.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.03 }}
+                      className="group relative p-4 rounded-xl border transition-all duration-200 cursor-pointer"
+                      style={{ borderColor: isCopied ? '#9333ea' : 'var(--border-subtle)', backgroundColor: isCopied ? '#9333ea08' : 'var(--bg-overlay)' }}
+                      onClick={() => handleCopy(item.output, item.id)}
+                      whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(147,51,234,0.12)' }}
                     >
-                      <div className="space-y-1">
-                        <span className="text-[10px] text-[var(--text-secondary)] block">{font.name}</span>
-                        <span className="text-base font-medium text-zinc-900 dark:text-zinc-100">{output}</span>
+                      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleFavorite(item.id); }}
+                          className={`p-1.5 rounded-lg transition-colors ${isFav ? 'text-rose-500 bg-rose-500/10' : 'text-[var(--text-muted)] hover:text-rose-400 bg-[var(--bg-surface)]/80'}`}
+                        >
+                          <Heart className="w-3 h-3" fill={isFav ? 'currentColor' : 'none'} />
+                        </button>
                       </div>
-                      <button
-                        onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${
-                          isCopied
-                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-                            : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-zinc-600'
-                        }`}
-                      >
-                        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      </button>
-                    </div>
+                      <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">{item.name}</span>
+                      <span className="text-base font-medium text-zinc-900 dark:text-zinc-100 block break-all">{item.output}</span>
+                      <div className="mt-2 flex items-center gap-1.5">
+                        {isCopied ? (
+                          <span className="text-[10px] flex items-center gap-1" style={{ color: '#9333ea' }}>
+                            <Check className="w-3 h-3" /> Copied!
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-[var(--text-muted)] flex items-center gap-1">
+                            <Copy className="w-3 h-3" /> Click to copy
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
                   );
                 })}
+              </motion.div>
+            </AnimatePresence>
+
+            {filteredStyles.length === 0 && showOnlyFavorites && (
+              <div className="text-center py-12 text-[var(--text-muted)]">
+                <Heart className="w-8 h-8 mx-auto mb-2" />
+                <p className="text-xs">No favorites yet. Click the heart icon on any style to add it.</p>
               </div>
+            )}
+
+            <div className="flex gap-3 pt-2">
+              <button
+                onClick={() => {
+                  const allText = allStyles.map(s => `${s.name}: ${s.output}`).join('\n');
+                  clipboardWrite(allText);
+                  toast.success('All styles copied!');
+                }}
+                className="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white font-bold py-3 px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer shadow-lg shadow-purple-500/25"
+              >
+                <Copy className="w-4 h-4" /> Copy All Styles
+              </button>
+              <button
+                onClick={() => { setInputText(''); setFavorites([]); }}
+                className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center gap-2 cursor-pointer"
+              >
+                <RefreshCw className="w-4 h-4" /> Reset
+              </button>
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

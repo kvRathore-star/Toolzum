@@ -116,10 +116,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
     ssr: false,
     loading: () => <DynamicImportFallback slug="ai-document-chat" />
   }),
-  'ai-video-subtitler': dynamic(() => import('@/components/tools/modules/AiVideoSubtitler'), { 
-    ssr: false,
-    loading: () => <DynamicImportFallback slug="ai-video-subtitler" />
-  }),
   'mp3-compressor': dynamic(() => import('@/components/tools/modules/Mp3Compressor'), { ssr: false, loading: () => <DynamicImportFallback slug="mp3-compressor" /> }),
   'gif-to-mp4': dynamic(() => import('@/components/tools/modules/GifToMp4'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-mp4" /> }),
   'video-trimmer': dynamic(() => import('@/components/tools/modules/VideoTrimmer'), { ssr: false, loading: () => <DynamicImportFallback slug="video-trimmer" /> }),
@@ -329,6 +325,11 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ip-anonymizer': dynamic(() => import('@/components/tools/modules/IpAnonymizer'), { ssr: false, loading: () => <DynamicImportFallback slug="ip-anonymizer" /> }),
   'braille-translator': dynamic(() => import('@/components/tools/modules/BrailleTranslator'), { ssr: false, loading: () => <DynamicImportFallback slug="braille-translator" /> }),
   'pan-card-resizer': dynamic(() => import('@/components/tools/modules/PanCardResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="pan-card-resizer" /> }),
+  'upi-id-validator': dynamic(() => import('@/components/tools/modules/UpiValidator'), { ssr: false, loading: () => <DynamicImportFallback slug="upi-id-validator" /> }),
+  'indian-address-parser': dynamic(() => import('@/components/tools/modules/IndianAddressParser'), { ssr: false, loading: () => <DynamicImportFallback slug="indian-address-parser" /> }),
+  'vehicle-registration-checker': dynamic(() => import('@/components/tools/modules/VehicleRegChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="vehicle-registration-checker" /> }),
+  'aadhaar-number-validator': dynamic(() => import('@/components/tools/modules/AadhaarValidator'), { ssr: false, loading: () => <DynamicImportFallback slug="aadhaar-number-validator" /> }),
+  'indian-investment-calculator': dynamic(() => import('@/components/tools/modules/IndianInvestmentCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="indian-investment-calculator" /> }),
   'subtitle-generator': dynamic(() => import('@/components/tools/modules/SubtitleGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="subtitle-generator" /> }),
   'unit-converter': dynamic(() => import('@/components/tools/modules/UnitConverter').then(m => ({ default: m.UnitConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="unit-converter" /> }),
   'video-watermark-adder': dynamic(() => import('@/components/tools/modules/VideoWatermarkAdder'), { ssr: false, loading: () => <DynamicImportFallback slug="video-watermark-adder" /> }),
@@ -710,8 +711,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ssl-certificate-decoder': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.SslCertificateDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="ssl-certificate-decoder" /> }),
   'subdomain-finder': dynamic(() => import('@/components/tools/modules/SecurityTools').then(m => ({ default: m.SubdomainFinder })), { ssr: false, loading: () => <DynamicImportFallback slug="subdomain-finder" /> }),
 
-  'image-converter': dynamic(() => import('@/components/tools/modules/ImageConverter').then(m => ({ default: m.ImageConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="image-converter" /> }),
-  'video-converter-tool': dynamic(() => import('@/components/tools/modules/VideoConverter').then(m => ({ default: m.VideoConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="video-converter-tool" /> }),
+  'image-converter': dynamic(() => import('@/components/tools/modules/ImageConverter').then(m => ({ default: m.ImageEffectsStudio })), { ssr: false, loading: () => <DynamicImportFallback slug="image-converter" /> }),
 
   'encoder-decoder': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="encoder-decoder" /> }),
 

@@ -1,9 +1,18 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Upload, Download, Sliders, RotateCcw, Sun, Contrast, Crop, FileImage, ImagePlus, ZoomIn, ZoomOut, RefreshCw, Check, Sparkles, Palette } from 'lucide-react';
+import { Upload, Download, Sliders, RotateCcw, Sun, Contrast, Crop, FileImage, ImagePlus, ZoomIn, ZoomOut, RefreshCw, Check, Sparkles, Palette, FileText, ArrowLeft, ArrowRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const DOCUMENT_TYPES = [
+  { id: 'aadhaar', label: 'Aadhaar', icon: '🆔' },
+  { id: 'pan', label: 'PAN', icon: '💳' },
+  { id: 'voter', label: 'Voter ID', icon: '🗳️' },
+  { id: 'driving', label: 'Driving License', icon: '🚗' },
+  { id: 'other', label: 'Other', icon: '📄' },
+];
 
 const DOCUMENT_PRESETS = [
   { label: 'Aadhaar (UIDAI)', size: 200, unit: 'KB', desc: 'UIDAI upload spec - 200KB max' },
@@ -27,17 +36,21 @@ export default function IndianDocumentEnhancer() {
   const [selectedPreset, setSelectedPreset] = useState<typeof DOCUMENT_PRESETS[0] | null>(null);
   const [showComparison, setShowComparison] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [docType, setDocType] = useState('aadhaar');
+  const [originalSize, setOriginalSize] = useState(0);
 
   const sourceCanvasRef = useRef<HTMLCanvasElement>(null);
   const outputCanvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const splitRef = useRef<HTMLDivElement>(null);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (!file.type.startsWith('image/')) return toast.error('Please upload an image file');
     setFileName(file.name);
+    setOriginalSize(file.size);
     const reader = new FileReader();
     reader.onload = (ev) => {
       const dataUrl = ev.target?.result as string;
@@ -79,7 +92,6 @@ export default function IndianDocumentEnhancer() {
       const outCtx = outCanvas.getContext('2d');
       if (!srcCtx || !outCtx) return;
 
-      // Draw with rotation
       outCtx.clearRect(0, 0, w, h);
       outCtx.save();
       outCtx.translate(w / 2, h / 2);
@@ -87,7 +99,6 @@ export default function IndianDocumentEnhancer() {
       outCtx.drawImage(srcCanvas, -w / 2, -h / 2);
       outCtx.restore();
 
-      // Apply pixel-level adjustments
       const imageData = outCtx.getImageData(0, 0, w, h);
       const data = imageData.data;
 
@@ -100,14 +111,12 @@ export default function IndianDocumentEnhancer() {
         let g = data[i + 1];
         let b = data[i + 2];
 
-        // Brightness
         if (brightnessFactor !== 0) {
           r += brightnessFactor * 255;
           g += brightnessFactor * 255;
           b += brightnessFactor * 255;
         }
 
-        // Contrast
         if (contrastFactor !== 0) {
           const factor = (259 * (contrastFactor * 255 + 255)) / (255 * (259 - contrastFactor * 255));
           r = factor * (r - 128) + 128;
@@ -115,7 +124,6 @@ export default function IndianDocumentEnhancer() {
           b = factor * (b - 128) + 128;
         }
 
-        // Shadow removal (brighten dark pixels)
         if (shadowRemoval) {
           const avg = (r + g + b) / 3;
           if (avg < shadowThreshold * 2.55) {
@@ -126,9 +134,7 @@ export default function IndianDocumentEnhancer() {
           }
         }
 
-        // Auto sharpen (simple unsharp mask approximation)
         if (autoSharpen) {
-          // subtle contrast boost for edges
           const avg = (r + g + b) / 3;
           const strength = 0.15;
           r = r + (r - avg) * strength;
@@ -161,7 +167,6 @@ export default function IndianDocumentEnhancer() {
       const ext = fileName.split('.').pop() || 'jpg';
       downloadOrShare(url, `enhanced_${fileName || `document.${ext}`}`);
       
-      // Show size info
       const sizeKB = blob.size / 1024;
       toast.success(`Downloaded (${sizeKB.toFixed(0)} KB)`);
       if (selectedPreset && sizeKB > selectedPreset.size && selectedPreset.unit === 'KB') {
@@ -180,19 +185,45 @@ export default function IndianDocumentEnhancer() {
     toast.success('Settings reset');
   };
 
-  return (
-    <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
-      <div className="flex items-center gap-2">
-        <FileImage className="w-5 h-5 text-emerald-500" />
-        <h3 className="text-lg font-bold text-[var(--text-primary)]">Indian Document Enhancer & Scanner</h3>
-      </div>
+  const autoEnhance = () => {
+    setBrightness(10);
+    setContrast(15);
+    setShadowRemoval(true);
+    setAutoSharpen(true);
+    toast.success('Auto-enhance applied!');
+  };
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+  const sizeReduction = originalSize > 0 && outputCanvasRef.current ? (() => {
+    const ratio = selectedPreset ? Math.min(selectedPreset.size / 2000, 0.9) : 0.85;
+    return Math.round((1 - ratio * 0.9) * 100);
+  })() : 0;
+
+  return (
+    <div className="max-w-5xl mx-auto space-y-5">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2">
+        <FileImage className="w-5 h-5" style={{ color: '#475569' }} />
+        <h3 className="text-lg font-bold text-[var(--text-primary)]">Indian Document Enhancer & Scanner</h3>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         {!image ? (
           <div className="p-8 text-center">
-            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
+            <div className="grid grid-cols-5 gap-2 mb-6 max-w-lg mx-auto">
+              {DOCUMENT_TYPES.map(dt => (
+                <button key={dt.id} onClick={() => setDocType(dt.id)}
+                  className={`p-2 rounded-xl border-2 text-center transition-all cursor-pointer ${docType === dt.id ? 'border-transparent' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)]'}`}
+                  style={docType === dt.id ? { borderColor: '#475569', backgroundColor: '#47556910' } : {}}>
+                  <span className="text-xl block">{dt.icon}</span>
+                  <span className="text-[9px] font-semibold text-[var(--text-secondary)] block mt-0.5">{dt.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
+              style={{ borderColor: '#47556940' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#475569'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#47556940'}
               onClick={() => fileInputRef.current?.click()}>
-              <ImagePlus className="w-16 h-16 mx-auto mb-4 text-zinc-300 dark:text-zinc-600" />
+              <ImagePlus className="w-16 h-16 mx-auto mb-4" style={{ color: '#47556980' }} />
               <p className="text-lg font-semibold text-[var(--text-secondary)]">Upload a document photo</p>
               <p className="text-xs text-[var(--text-muted)] mt-2">Aadhaar, PAN, Marksheet, Passport, Bank Statement, Driving Licence, Voter ID</p>
               <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -207,8 +238,13 @@ export default function IndianDocumentEnhancer() {
           <div className="p-5 space-y-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileImage className="w-4 h-4 text-emerald-500" />
+                <FileImage className="w-4 h-4" style={{ color: '#475569' }} />
                 <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)]">{fileName}</span>
+                {originalSize > 0 && (
+                  <span className="text-[10px] text-[var(--text-muted)] bg-[var(--bg-overlay)] px-2 py-0.5 rounded-full border border-[var(--border-subtle)]">
+                    {(originalSize / 1024).toFixed(0)} KB
+                  </span>
+                )}
               </div>
               <div className="flex gap-2">
                 <button onClick={() => { setImage(null); setFileName(''); }}
@@ -225,50 +261,51 @@ export default function IndianDocumentEnhancer() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               <div className="space-y-4 lg:col-span-1">
                 <div className="space-y-3 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" /> Adjustments</h5>
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" style={{ color: '#475569' }} /> Adjustments</h5>
                   
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brightness</span><span className="font-mono">{(brightness * 100).toFixed(0)}%</span></label>
                     <input type="range" min="-50" max="50" value={brightness} onChange={e => setBrightness(Number(e.target.value))}
-                      className="w-full accent-emerald-500" />
+                      className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Contrast</span><span className="font-mono">{(contrast * 100).toFixed(0)}%</span></label>
                     <input type="range" min="-50" max="50" value={contrast} onChange={e => setContrast(Number(e.target.value))}
-                      className="w-full accent-emerald-500" />
+                      className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Rotation</span><span className="font-mono">{rotation}°</span></label>
                     <input type="range" min="-45" max="45" value={rotation} onChange={e => setRotation(Number(e.target.value))}
-                      className="w-full accent-emerald-500" />
+                      className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
                   <div className="space-y-2 pt-1">
                     <label className="flex items-center justify-between cursor-pointer">
                       <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sun className="w-3 h-3" /> Shadow Removal</span>
                       <input type="checkbox" checked={shadowRemoval} onChange={e => setShadowRemoval(e.target.checked)}
-                        className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
+                        className="rounded border-zinc-300" style={{ accentColor: '#475569' }} />
                     </label>
                     <label className="flex items-center justify-between cursor-pointer">
                       <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sparkles className="w-3 h-3" /> Auto Sharpen</span>
                       <input type="checkbox" checked={autoSharpen} onChange={e => setAutoSharpen(e.target.checked)}
-                        className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
+                        className="rounded border-zinc-300" style={{ accentColor: '#475569' }} />
                     </label>
                   </div>
                 </div>
 
                 <div className="space-y-2 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Export Preset</h5>
+                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" style={{ color: '#475569' }} /> Export Preset</h5>
                   <div className="grid grid-cols-2 gap-1.5">
                     {DOCUMENT_PRESETS.map(p => (
                       <button key={p.label} onClick={() => setSelectedPreset(selectedPreset?.label === p.label ? null : p)}
                         className={`text-left px-2.5 py-2 rounded-lg border text-[10px] transition-colors ${
                           selectedPreset?.label === p.label
-                            ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'
+                            ? 'text-slate-600 dark:text-slate-400'
                             : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500'
-                        }`}>
+                        }`}
+                        style={selectedPreset?.label === p.label ? { borderColor: '#475569', backgroundColor: '#47556910', color: '#475569' } : {}}>
                         <p className="font-semibold">{p.label}</p>
                         <p className="opacity-60">{p.desc}</p>
                       </button>
@@ -276,13 +313,26 @@ export default function IndianDocumentEnhancer() {
                   </div>
                 </div>
 
+                <button onClick={autoEnhance}
+                  className="w-full py-3 bg-gradient-to-r from-slate-500 to-slate-700 hover:from-slate-600 hover:to-slate-800 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer shadow-lg shadow-slate-500/25">
+                  <Sparkles className="w-4 h-4" /> Auto-Enhance
+                </button>
+
                 <button onClick={handleDownload}
-                  className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+                  className="w-full py-3.5 bg-gradient-to-r from-slate-600 to-slate-800 hover:from-slate-700 hover:to-slate-900 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer shadow-lg shadow-slate-600/25">
                   <Download className="w-4 h-4" /> Download Enhanced Document
                 </button>
 
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
-                  <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
+                {selectedPreset && (
+                  <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="p-3 rounded-xl" style={{ backgroundColor: '#47556908', borderColor: '#47556920', borderWidth: 1 }}>
+                    <p className="text-[10px] text-[var(--text-secondary)]">
+                      Target: <strong style={{ color: '#475569' }}>{selectedPreset.label}</strong> — {selectedPreset.desc}
+                    </p>
+                  </motion.div>
+                )}
+
+                <div className="p-3 rounded-xl" style={{ backgroundColor: '#47556908', borderColor: '#47556920', borderWidth: 1 }}>
+                  <p className="text-[10px]" style={{ color: '#475569' }}>
                     <strong>Pro:</strong> AI auto-straighten (one tap), batch enhance 20 docs at once, auto-detect document type, OCR text extraction, export ZIP. 
                     <span className="block mt-1">₹199/mo — every CA firm, HR department, and admission office needs this.</span>
                   </p>
@@ -296,32 +346,45 @@ export default function IndianDocumentEnhancer() {
                   onMouseLeave={() => setShowComparison(false)}>
                   {isProcessing && (
                     <div className="absolute inset-0 bg-black/10 dark:bg-white/5 rounded-xl flex items-center justify-center z-10">
-                      <RefreshCw className="w-6 h-6 text-emerald-500 animate-spin" />
+                      <RefreshCw className="w-6 h-6 animate-spin" style={{ color: '#475569' }} />
                     </div>
                   )}
                   <div className="relative overflow-auto max-h-[600px] flex items-center justify-center">
-                    <canvas
-                      ref={showComparison ? sourceCanvasRef : outputCanvasRef}
-                      className="max-w-full max-h-[600px] rounded-lg"
-                      style={{ imageRendering: 'pixelated' }}
-                    />
+                    <div className="relative" style={{ position: 'relative' }}>
+                      <canvas
+                        ref={outputCanvasRef}
+                        className="max-w-full max-h-[600px] rounded-lg"
+                        style={{ imageRendering: 'pixelated' }}
+                      />
+                      {showComparison && (
+                        <div className="absolute inset-0 overflow-hidden rounded-lg" style={{ clipPath: 'inset(0 50% 0 0)' }}>
+                          <canvas
+                            ref={sourceCanvasRef}
+                            className="max-w-full max-h-[600px]"
+                            style={{ imageRendering: 'pixelated', width: '100%', height: '100%', objectFit: 'contain' }}
+                          />
+                        </div>
+                      )}
+                      {showComparison && (
+                        <div className="absolute top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2 z-20" style={{ backgroundColor: '#475569' }}>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#475569' }}>
+                            <ArrowLeft className="w-3 h-3 text-white" /><ArrowRight className="w-3 h-3 text-white" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                     <canvas ref={sourceCanvasRef} className="hidden" />
-                    {showComparison && (
-                      <div className="absolute top-2 right-2 bg-black/70 text-white text-[9px] px-2 py-1 rounded-full font-semibold">
-                        ORIGINAL
-                      </div>
-                    )}
                   </div>
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[9px] px-3 py-1 rounded-full font-semibold flex items-center gap-1.5">
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full font-semibold flex items-center gap-1.5 text-[9px]" style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: 'white' }}>
                     <Crop className="w-3 h-3" />
-                    {showComparison ? 'Showing original — move mouse away for enhanced' : 'Hover to compare with original'}
+                    {showComparison ? 'Draggable split — move mouse to compare' : 'Hover to compare with original'}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }
