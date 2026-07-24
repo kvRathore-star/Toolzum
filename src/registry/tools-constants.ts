@@ -92,13 +92,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "css-gradient-generator": { category: "utility", slug: "gradient-generator" },
   "days-between-dates-calculator": { category: "developer", slug: "date-difference-calculator" },
   "days-until-calculator": { category: "developer", slug: "time-until-calculator" },
-  "text-seo-toolkit": { category: "seo", slug: "" },
-  "network-utility-toolkit": { category: "developer", slug: "" },
-  "scanner-toolkit": { category: "developer", slug: "" },
-  "generator-toolkit": { category: "developer", slug: "" },
-  "converters-everyday-toolkit": { category: "converter", slug: "" },
-  "data-toolkit": { category: "utility", slug: "" },
-  "dev-utilities": { category: "developer", slug: "" },
 
   // Stub entries with no module — redirect to nearest equivalent
   "curl-to-code": { category: "developer", slug: "curl-to-code-converter" },
@@ -124,7 +117,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "video-converter": { category: "video", slug: "video-compressor" },
   "ai-video-subtitler": { category: "video", slug: "subtitle-generator" },
   "temporary-email-generator": { category: "privacy", slug: "privacy-cleaner" },
-  "browser-extension": { category: "developer", slug: "" },
   // Thin wrappers — redirect to parent tool
   "html-minifier": { category: "developer", slug: "js-minifier" },
   "css-minifier": { category: "developer", slug: "js-minifier" },

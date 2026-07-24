@@ -53,7 +53,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Time Converter",
     description: 'Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Converter — Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. ',
-    category: "Developer",
+    category: "Utility",
     slug: "time-converter",
     dependencies: "None",
   },

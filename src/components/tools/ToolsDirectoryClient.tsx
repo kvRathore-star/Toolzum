@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolMetadata } from "@/registry/tools";
 import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, ArrowUpDown, Crown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sparkles, Sun } from "lucide-react";
@@ -30,9 +31,22 @@ const GROUP_ICONS: Record<string, React.ReactNode> = {
 };
 
 export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMetadata[] }) {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState<string>("All");
+
+  const setCategory = (cat: string) => {
+    setActiveCategory(cat);
+    const params = new URLSearchParams(window.location.search);
+    if (cat === "All") {
+      params.delete("category");
+    } else {
+      params.set("category", cat.toLowerCase());
+    }
+    const qs = params.toString();
+    router.replace(qs ? `/tools?${qs}` : "/tools", { scroll: false });
+  };
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [navMode, setNavMode] = useState<'sidebar' | 'menubar'>('sidebar');
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -121,7 +135,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
     <div ref={menuRef} className="mb-8">
       <div className={`flex items-center gap-1 scrollbar-none ${openGroup ? 'overflow-visible flex-wrap pb-20' : 'overflow-x-auto pb-1'}`}>
         <button
-          onClick={() => setActiveCategory("All")}
+          onClick={() => setCategory("All")}
           className={`shrink-0 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border ${
             activeCategory === "All"
               ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
@@ -163,7 +177,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                     return (
                       <button
                         key={cat}
-                        onClick={() => { setActiveCategory(cat); setOpenGroup(null); }}
+                        onClick={() => { setCategory(cat); setOpenGroup(null); }}
                         className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs transition-colors ${
                           isCatActive
                             ? 'text-[var(--accent)] bg-[var(--accent-soft)] font-medium'
@@ -190,7 +204,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       <div className="md:sticky md:top-[100px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto flex flex-col gap-4">
         <div>
           <button
-            onClick={() => setActiveCategory("All")}
+            onClick={() => setCategory("All")}
             className={`w-full text-left px-3 py-2 text-sm rounded-[var(--radius-md)] transition-colors ${
               activeCategory === "All"
                 ? "bg-[var(--accent-soft)] text-[var(--accent)] font-medium border-l-2 border-[var(--accent)]"
@@ -217,7 +231,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                   return (
                     <button
                       key={category}
-                      onClick={() => setActiveCategory(category)}
+                      onClick={() => setCategory(category)}
                       className={`flex items-center gap-2 text-left px-3 py-1.5 text-sm rounded-[var(--radius-md)] transition-colors border-l-2 ${
                         activeCategory === category
                           ? "bg-[var(--bg-surface)] text-[var(--text-primary)] border-[var(--accent)] font-medium"
@@ -244,7 +258,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       <div className="border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            Ecosystem Directory
+            {(initialTools ?? toolsRegistry).length}+ Free Online Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
             {(initialTools ?? toolsRegistry).length}+ local browser utilities. Zero server uploads. Everything runs on your device.
@@ -339,7 +353,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
                 <Search className="w-6 h-6 text-[var(--text-muted)]" />
               </div>
               <p className="text-[var(--text-muted)] mb-4">No tools found matching your criteria.</p>
-              <Button variant="secondary" onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}>
+              <Button variant="secondary" onClick={() => { setSearchQuery(""); setCategory("All"); }}>
                 Clear filters
               </Button>
             </div>

@@ -4,17 +4,39 @@ import { toolsRegistry } from "@/registry/tools";
 const toolCount = toolsRegistry.length;
 
 export const metadata = {
-  title: `Browse ${toolCount}+ Free Tools`,
-  description: `Explore Toolzum's extensive ecosystem of ${toolCount}+ offline-first web utilities. Compress images, modify PDFs, format code, and convert files safely in your browser.`,
+  title: `1086+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
+  description: `Browse ${toolCount}+ free online tools for PDF, images, video, audio, AI, text, code, and more. All process locally in your browser — nothing is uploaded.`,
   alternates: { canonical: "https://toolzum.com/tools/" },
   openGraph: {
-    title: `Free Tools — ${toolCount}+ Browser-Based Utilities | Toolzum`,
+    title: `Free Online Tools — ${toolCount}+ Browser-Based Utilities | Toolzum`,
     description: `Stop uploading files to servers. ${toolCount}+ free tools for PDF, images, video, audio, AI, text, and code — all process locally in your browser. Nothing leaves your device.`,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Toolzum",
+  url: "https://toolzum.com",
+  description: `${toolCount}+ privacy-first online tools for PDF, images, video, audio, AI, text, and code.`,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://toolzum.com/tools?search={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
 export default function ToolsPage() {
   return (
-    <ToolsDirectoryClient initialTools={toolsRegistry} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolsDirectoryClient initialTools={toolsRegistry} />
+    </>
   );
 }
