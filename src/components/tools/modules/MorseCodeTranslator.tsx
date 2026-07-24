@@ -1,144 +1,191 @@
 "use client";
-
-import React, { useState } from 'react';
-import { FileText, Copy, Play, Volume2 } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
+import { ArrowLeftRight, Copy, Trash2 } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
+const MORSE: Record<string, string> = {
+  'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
+  'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
+  'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+  'Y': '-.--', 'Z': '--..',
+  '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+  '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+  '.': '.-.-.-', ',': '--..--', '?': '..--..', '!': '-.-.--', '/': '-..-.',
+  '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...', ';': '-.-.-.',
+  '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.',
+  '$': '...-..-', '@': '.--.-.', "'": '.----.',
+};
+
+const MORSE_REV: Record<string, string> = {};
+for (const [k, v] of Object.entries(MORSE)) MORSE_REV[v] = k;
+
+const LETTERS_ORDER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const NUMS_ORDER = '0123456789';
+
+function textToMorse(text: string): string {
+  return text
+    .toUpperCase()
+    .split('')
+    .map(c => MORSE[c] || c)
+    .join(' ')
+    .replace(/\s{3,}/g, ' / ')
+    .trim();
+}
+
+function morseToText(morse: string): string {
+  const words = morse.split('/');
+  return words
+    .map(word => {
+      const chars = word.trim().split(/\s+/);
+      return chars.map(c => MORSE_REV[c] || c).join('');
+    })
+    .join(' ');
+}
+
+const PUNCTUATION_DISPLAY: [string, string][] = [
+  ['.', '.-.-.-'], [',', '--..--'], ['?', '..--..'], ['!', '-.-.--'],
+  ['/', '-..-.'], ['(', '-.--.'], [')', '-.--.-'], ['&', '.-...'],
+  [':', '---...'], [';', '-.-.-.'], ['=', '-...-'], ['+', '.-.-.'],
+  ['-', '-....-'], ['_', '..--._'], ['"', '.-..-.'], ["'", '.----.'],
+  ['$', '...-..-'], ['@', '.--.-.'],
+];
+
 export default function MorseCodeTranslator() {
-  const [text, setText] = useState('');
-  const [morse, setMorse] = useState('');
+  const [mode, setMode] = useState<'encode' | 'decode'>('encode');
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
 
-  const morseMap: Record<string, string> = {
-    'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.',
-    'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..',
-    'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.',
-    's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-',
-    'y': '-.--', 'z': '--..', '1': '.----', '2': '..---', '3': '...--',
-    '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
-    '9': '----.', '0': '-----', ' ': '/'
-  };
-
-  const reverseMorseMap = Object.entries(morseMap).reduce((acc, [key, val]) => {
-    acc[val] = key;
-    return acc;
-  }, {} as Record<string, string>);
-
-  const translateToMorse = () => {
-    if (!text.trim()) {
-      setMorse('');
+  const handleInputChange = useCallback((value: string) => {
+    setInput(value);
+    if (!value.trim()) {
+      setOutput('');
       return;
     }
-    const clean = text.toLowerCase().trim();
-    const result = clean
-      .split('')
-      .map(char => morseMap[char] || char)
-      .join(' ');
-    setMorse(result);
-  };
-
-  const translateToText = () => {
-    if (!morse.trim()) {
-      setText('');
-      return;
+    try {
+      const result = mode === 'encode' ? textToMorse(value) : morseToText(value);
+      setOutput(result);
+    } catch {
+      setOutput('');
     }
-    const result = morse
-      .split(' ')
-      .map(code => reverseMorseMap[code] || code)
-      .join('');
-    setText(result.toUpperCase());
+  }, [mode]);
+
+  const toggleMode = () => {
+    const newMode = mode === 'encode' ? 'decode' : 'encode';
+    setMode(newMode);
+    setInput(output);
+    setOutput(input);
   };
 
-  // Web Audio API dot/dash feedback player
-  const playMorseSound = () => {
-    if (!morse) return;
-    
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const dotDuration = 0.08; // dot length in seconds
-    let time = audioCtx.currentTime;
+  const clearAll = () => {
+    setInput('');
+    setOutput('');
+  };
 
-    const chars = morse.split('');
-    chars.forEach(char => {
-      if (char === '.' || char === '-') {
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        osc.frequency.setValueAtTime(600, time); // 600Hz frequency beep
-        gainNode.gain.setValueAtTime(0, time);
-        gainNode.gain.linearRampToValueAtTime(0.3, time + 0.005);
-
-        const duration = char === '.' ? dotDuration : dotDuration * 3;
-        gainNode.gain.setValueAtTime(0.3, time + duration - 0.005);
-        gainNode.gain.linearRampToValueAtTime(0, time + duration);
-
-        osc.start(time);
-        osc.stop(time + duration);
-        time += duration + dotDuration;
-      } else if (char === ' ') {
-        time += dotDuration * 2;
-      } else if (char === '/') {
-        time += dotDuration * 4;
-      }
-    });
-    toast.success('Playing audio synthesis...');
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Copied to clipboard!');
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
-          <Volume2 className="w-5 h-5 text-[var(--accent)]" />
-          Morse Code Translator & Audio Synthesizer
-        </h2>
-        <p className="text-xs text-[var(--text-secondary)] mt-1">Translate English text to Morse Code signals and play clean audio dots and dashes offline.</p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
-          <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
-          <textarea
-            value={text}
-            onChange={e => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && translateToMorse()}
-            placeholder="Type standard text here..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-48 outline-none text-xs resize-none"
-          />
-          <div className="grid grid-cols-2 gap-4">
-            <button onClick={translateToMorse} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-              Translate to Morse →
+    <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <div className="flex items-center justify-between">
+        <button
+          onClick={toggleMode}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] transition-colors text-sm font-medium"
+        >
+          <ArrowLeftRight className="w-4 h-4" style={{ color: '#0891b2' }} />
+          <span>{mode === 'encode' ? 'Text → Morse' : 'Morse → Text'}</span>
+        </button>
+        <div className="flex items-center gap-2">
+          {output && (
+            <button
+              onClick={copyOutput}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+              style={{ backgroundColor: '#0891b2', color: 'white' }}
+            >
+              <Copy className="w-3.5 h-3.5" />
+              Copy
             </button>
-            <button onClick={() => { clipboardWrite(text); toast.success('Copied text!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-              Copy Text
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
-          <div className="flex justify-between items-center">
-            <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Morse Code Output</span>
-            {morse && (
-              <button onClick={playMorseSound} className="text-xs text-emerald-400 font-bold flex items-center gap-1 hover:underline cursor-pointer">
-                <Play className="w-4 h-4" /> Play Audio Beeps
-              </button>
-            )}
-          </div>
-          <textarea
-            value={morse}
-            onChange={e => setMorse(e.target.value)}
-            placeholder="Morse code dots and dashes (e.g. .... . .-.. .-.. ---)..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-400 font-mono h-48 outline-none text-xs resize-none"
-          />
-          <div className="grid grid-cols-2 gap-4">
-            <button onClick={translateToText} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-              ← Translate to Text
-            </button>
-            <button onClick={() => { clipboardWrite(morse); toast.success('Copied morse!'); }} className="border border-zinc-800 hover:bg-zinc-800 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-              Copy Morse
-            </button>
-          </div>
+          )}
+          <button
+            onClick={clearAll}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] transition-colors"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Clear
+          </button>
         </div>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <label className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
+            {mode === 'encode' ? 'Text Input' : 'Morse Code Input'}
+          </label>
+          <textarea
+            value={input}
+            onChange={(e) => handleInputChange(e.target.value)}
+            placeholder={mode === 'encode' ? 'Type your text here...' : 'Enter Morse code (use space between letters, / between words)...'}
+            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none outline-none focus:ring-2 focus:ring-[#0891b2]/40 transition-all placeholder:text-[var(--text-muted)]"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
+            {mode === 'encode' ? 'Morse Code Output' : 'Text Output'}
+          </label>
+          <textarea
+            value={output}
+            readOnly
+            placeholder="Translation will appear here..."
+            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none outline-none cursor-default"
+          />
+        </div>
+      </div>
+
+      <details className="group">
+        <summary className="cursor-pointer text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none">
+          Morse Code Reference Table
+        </summary>
+        <div className="mt-4 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1">
+            {LETTERS_ORDER.split('').map((letter) => (
+              <div
+                key={letter}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-md text-xs font-mono hover:bg-[var(--bg-overlay)] transition-colors"
+              >
+                <span className="font-bold w-4 text-center">{letter}</span>
+                <span style={{ color: '#0891b2' }}>{MORSE[letter]}</span>
+              </div>
+            ))}
+            {NUMS_ORDER.split('').map((num) => (
+              <div
+                key={num}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-md text-xs font-mono hover:bg-[var(--bg-overlay)] transition-colors"
+              >
+                <span className="font-bold w-4 text-center">{num}</span>
+                <span style={{ color: '#0891b2' }}>{MORSE[num]}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 pt-3 border-t border-[var(--border-subtle)]">
+            <p className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-2">Punctuation</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1">
+              {PUNCTUATION_DISPLAY.map(([char, code]) => (
+                <div
+                  key={char}
+                  className="flex items-center gap-2 px-2 py-1.5 rounded-md text-xs font-mono hover:bg-[var(--bg-overlay)] transition-colors"
+                >
+                  <span className="font-bold w-4 text-center">{char}</span>
+                  <span style={{ color: '#0891b2' }}>{code}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
   );
 }

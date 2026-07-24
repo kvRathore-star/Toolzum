@@ -78,36 +78,117 @@ export function TsvCsvConverter() {
 }
 
 export function JsonToonConverter() {
+  const [mode, setMode] = useState<'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'>('json-to-toon');
   const [input, setInput] = useState('{\n  "name": "Alice",\n  "age": 30,\n  "city": "New York"\n}');
   const [output, setOutput] = useState('');
 
+  const toonify = (o: Record<string, unknown>, indent = ''): string => {
+    let res = '';
+    for (const [k, v] of Object.entries(o)) {
+      if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+        res += `${indent}${k} →\n${toonify(v as Record<string, unknown>, indent + '  ')}`;
+      } else {
+        res += `${indent}${k} → ${v}\n`;
+      }
+    }
+    return res;
+  };
+
+  const detoonify = (text: string): Record<string, unknown> => {
+    const lines = text.split('\n').filter(l => l.trim());
+    const result: Record<string, unknown> = {};
+    const stack: { indent: number; obj: Record<string, unknown> }[] = [{ indent: -1, obj: result }];
+    for (const line of lines) {
+      const indent = line.search(/\S/);
+      const trimmed = line.trim();
+      if (trimmed.includes('→')) {
+        const [key, ...valParts] = trimmed.split('→');
+        const k = key.trim();
+        const v = valParts.join('→').trim();
+        while (stack.length > 1 && stack[stack.length - 1].indent >= indent) stack.pop();
+        if (v === '') {
+          const newObj: Record<string, unknown> = {};
+          (stack[stack.length - 1].obj)[k] = newObj;
+          stack.push({ indent, obj: newObj });
+        } else {
+          const num = Number(v);
+          (stack[stack.length - 1].obj)[k] = isNaN(num) ? v : num;
+        }
+      }
+    }
+    return result;
+  };
+
   const convert = () => {
     try {
-      const obj = JSON.parse(input);
-      const toonify = (o: Record<string, unknown>, indent = ''): string => {
-        let res = '';
-        for (const [k, v] of Object.entries(o)) {
-          if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
-            res += `${indent}${k} →\n${toonify(v as Record<string, unknown>, indent + '  ')}`;
-          } else {
-            res += `${indent}${k} → ${v}\n`;
-          }
+      if (mode === 'json-to-toon') {
+        const obj = JSON.parse(input);
+        setOutput(toonify(Array.isArray(obj) ? { items: obj } : obj));
+      } else if (mode === 'yaml-to-toon') {
+        let yaml: any;
+        try {
+          yaml = require('js-yaml').load(input);
+        } catch {
+          yaml = JSON.parse(input);
         }
-        return res;
-      };
-      setOutput(toonify(Array.isArray(obj) ? { items: obj } : obj));
-    } catch {
-      setOutput('Invalid JSON');
+        if (typeof yaml !== 'object' || yaml === null) throw new Error('Input must be an object');
+        setOutput(toonify(Array.isArray(yaml) ? { items: yaml } : yaml));
+      } else if (mode === 'toon-to-json') {
+        const obj = detoonify(input);
+        setOutput(JSON.stringify(obj, null, 2));
+      } else {
+        const obj = detoonify(input);
+        const yaml = require('js-yaml').dump(obj, { indent: 2, lineWidth: 120, noRefs: true });
+        setOutput(yaml);
+      }
+    } catch (e: any) {
+      setOutput(`Error: ${e.message}`);
     }
+  };
+
+  const MODES = [
+    { id: 'json-to-toon' as const, label: 'JSON → Toon' },
+    { id: 'yaml-to-toon' as const, label: 'YAML → Toon' },
+    { id: 'toon-to-json' as const, label: 'Toon → JSON' },
+    { id: 'toon-to-yaml' as const, label: 'Toon → YAML' },
+  ];
+
+  const placeholders: Record<string, string> = {
+    'json-to-toon': '{\n  "name": "Alice",\n  "age": 30\n}',
+    'yaml-to-toon': 'name: Alice\nage: 30',
+    'toon-to-json': 'name → Alice\nage → 30',
+    'toon-to-yaml': 'name → Alice\nage → 30',
+  };
+
+  const labels: Record<string, string> = {
+    'json-to-toon': 'JSON Input',
+    'yaml-to-toon': 'YAML Input',
+    'toon-to-json': 'Toon Input',
+    'toon-to-yaml': 'Toon Input',
+  };
+
+  const outputLabels: Record<string, string> = {
+    'json-to-toon': 'Toon Output',
+    'yaml-to-toon': 'Toon Output',
+    'toon-to-json': 'JSON Output',
+    'toon-to-yaml': 'YAML Output',
   };
 
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="JSON → Toon Converter">
-        <Input label="JSON Input" value={input} onChange={setInput} rows={6} placeholder='{"key": "value"}' />
-        <button onClick={convert} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert to Toon</button>
-        <Output value={output} label="Toon Output" />
-        <p className="text-xs text-[var(--text-secondary)] mt-2">Toon is a YAML-like human-readable format using → arrows instead of colons. Each key-value pair is shown as <span className="font-mono">key → value</span>.</p>
+      <Section title="Toon Converter">
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {MODES.map(m => (
+            <button key={m.id} onClick={() => { setMode(m.id); setInput(''); setOutput(''); }}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${mode === m.id ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'}`}>
+              {m.label}
+            </button>
+          ))}
+        </div>
+        <Input label={labels[mode]} value={input} onChange={setInput} rows={6} placeholder={placeholders[mode]} />
+        <button onClick={convert} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        <Output value={output} label={outputLabels[mode]} />
+        <p className="text-xs text-[var(--text-secondary)] mt-2">Toon is a YAML-like human-readable format using → arrows instead of colons. Supports nested objects and converts both ways.</p>
       </Section>
     </div>
   );

@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-import { Type, Binary, Hash, Sigma, EyeOff } from 'lucide-react';
+import { Type, Binary, Hash, Sigma, EyeOff, MessageCircle } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
-type Tab = 'nato' | 'binary' | 'unicode' | 'roman' | 'obfuscate';
+type Tab = 'nato' | 'binary' | 'unicode' | 'roman' | 'obfuscate' | 'morse';
 
 const NATO: Record<string, string> = {
   'A':'Alpha','B':'Bravo','C':'Charlie','D':'Delta','E':'Echo','F':'Foxtrot','G':'Golf','H':'Hotel','I':'India',
@@ -23,6 +23,26 @@ function fromBinary(s: string): string {
   const clean = s.replace(/[^01]/g, '');
   const bytes = clean.match(/.{1,8}/g) || [];
   return bytes.map(b => String.fromCharCode(parseInt(b, 2))).join('');
+}
+
+const MORSE: Record<string, string> = {
+  'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....',
+  'I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.',
+  'Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-',
+  'Y':'-.--','Z':'--..','0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
+  '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
+  '.':'.-.-.-',',':'--..--','?':'..--..',"'":'.----.','!':'-.-.--','/':'-..-.',
+  '(':'-.--.',')':'-.--.-','&':'.-...',':':'---...',';':'-.-.-.','=':'-...-',
+  '+':'.-.-.','-':'-....-','_':'..--.-','"':'.-..-.','$':'...-..-','@':'.--.-.',
+};
+const MORSE_REV: Record<string, string> = {};
+for (const [k, v] of Object.entries(MORSE)) MORSE_REV[v] = k;
+
+function toMorse(s: string): string {
+  return s.toUpperCase().split('').map(c => MORSE[c] || c).join(' ');
+}
+function fromMorse(s: string): string {
+  return s.split(/\s+/).map(w => MORSE_REV[w] || w).join('');
 }
 
 function toUnicodeCP(s: string): string { return Array.from(s).map(c => 'U+' + c.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')).join(' '); }
@@ -69,6 +89,8 @@ export default function TextConverter() {
   const [romanMode, setRomanMode] = useState<'to' | 'from'>('to');
   const [romanOutput, setRomanOutput] = useState('');
   const [obfuscateInput, setObfuscateInput] = useState('');
+  const [morseInput, setMorseInput] = useState('');
+  const [morseMode, setMorseMode] = useState<'to' | 'from'>('to');
 
   const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
@@ -90,6 +112,7 @@ export default function TextConverter() {
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 w-fit">
         <TabBtn v="nato" label="NATO" icon={Type} />
+        <TabBtn v="morse" label="Morse Code" icon={MessageCircle} />
         <TabBtn v="binary" label="ASCII Binary" icon={Binary} />
         <TabBtn v="unicode" label="Unicode" icon={Hash} />
         <TabBtn v="roman" label="Roman Numerals" icon={Sigma} />
@@ -109,6 +132,24 @@ export default function TextConverter() {
             <div className="relative">
               <textarea value={natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
               {natoInput && <button onClick={() => copy(natoMode === 'to' ? toNATO(natoInput) : fromNATO(natoInput), 'NATO')} className="absolute top-3 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {tab === 'morse' && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
+              <button onClick={() => setMorseMode('to')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${morseMode === 'to' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Text → Morse</button>
+              <button onClick={() => setMorseMode('from')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${morseMode === 'from' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>Morse → Text</button>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <textarea value={morseInput} onChange={e => setMorseInput(e.target.value)} placeholder={morseMode === 'to' ? 'Enter text...' : 'Enter Morse code (e.g. .... . .-.. .-.. ---)...'} className="w-full h-[150px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+            <div className="relative">
+              <textarea value={morseMode === 'to' ? toMorse(morseInput) : fromMorse(morseInput)} readOnly placeholder="Result..." className="w-full h-[150px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+              {morseInput && <button onClick={() => copy(morseMode === 'to' ? toMorse(morseInput) : fromMorse(morseInput), 'Morse')} className="absolute top-3 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
             </div>
           </div>
         </div>

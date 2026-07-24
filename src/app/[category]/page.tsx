@@ -49,7 +49,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Design: { title: 'Free Design Tools – Graphics & Visuals', description: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.' },
     Health: { title: 'Free Health Tools – BMI, Calorie & Wellness', description: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.' },
     Extension: { title: 'Free Browser Extension Tools', description: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.' },
-    Calculator: { title: 'Free Online Calculators – Mortgage, BMI, Math & More', description: 'Free online calculators — mortgage, BMI, percentage, age, math, health, finance, and everyday calculators. All computations happen locally in your browser.' },
+    Calculator: { title: 'Free Online Calculators – Math, Date & Academic Tools', description: 'Free online calculators — percentages, fractions, date differences, grade averages, and math tools. All computations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.` };
   const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.png`;

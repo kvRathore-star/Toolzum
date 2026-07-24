@@ -2415,7 +2415,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "380",
     name: "Website Screenshot",
     slug: "website-screenshot",
-    category: "Converter",
+    category: "Developer",
     description: 'Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.',
     seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. ',
     dependencies: "html2canvas",

@@ -46,7 +46,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "json-to-xml",
     dependencies: "xml2js",
-    showInCategory: false,
+    showInCategory: true,
   },
   {
     id: "time-conv-1",
@@ -61,7 +61,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "du-1",
     name: "Random Port Generator",
     slug: "random-port-generator",
-    category: "Developer",
+    category: "Utility",
     description: 'Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. Useful for network testing, Docker port mapping, and firewall configuration.',
     seoDescription: 'Free online Random Port Generator — Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. ',
     dependencies: "Vanilla JS",

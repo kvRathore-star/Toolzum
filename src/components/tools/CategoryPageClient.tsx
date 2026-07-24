@@ -106,7 +106,6 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   ],
   Branding: [
     { label: 'Design', icon: '🎨' },
-    { label: 'Analyze', icon: '📊' },
     { label: 'Calculate', icon: '🧮' },
     { label: 'Generate', icon: '✨' },
   ],
@@ -122,11 +121,8 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
     { label: 'Convert', icon: '🔄' },
   ],
   Calculator: [
-    { label: 'Finance', icon: '💰' },
-    { label: 'Health', icon: '❤️' },
     { label: 'Math', icon: '📐' },
     { label: 'Date/Time', icon: '📅' },
-    { label: 'Savings', icon: '🏦' },
   ],
 };
 
@@ -204,7 +200,6 @@ const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
   },
   Branding: {
     Design: ['logo', 'brand', 'business card', 'email signature', 'social media'],
-    Analyze: ['analyze', 'checker', 'test', 'validator'],
     Calculate: ['calculator', 'calculate', 'roi', 'cpm', 'roas'],
     Generate: ['generator', 'generate', 'maker', 'invoice', 'receipt', 'coupon'],
   },
@@ -220,11 +215,8 @@ const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
     Convert: ['converter', 'convert'],
   },
   Calculator: {
-    Finance: ['mortgage', 'loan', 'emi', 'interest', 'sip', 'gst', 'vat', 'roi', 'cagr', 'inflation', 'tip', 'debt', 'retirement', 'tax', 'investment', 'mrr', 'runway', 'churn', 'cac', 'ltv', 'break-even', 'burn rate', 'margin', 'profit', 'percentage', 'salary'],
-    Health: ['bmi', 'body fat', 'calorie', 'heart rate', 'macro', 'protein', 'water', 'sleep', 'keto', 'pregnancy', 'due date', 'ovulation', 'baby', 'running pace', 'ideal weight', 'bmr', 'lean body mass', 'body surface', 'breastfeeding'],
     Math: ['quadratic', 'pythagorean', 'fraction', 'percentage', 'circle', 'triangle', 'area', 'volume', 'exponent', 'square root', 'mean', 'median', 'mode', 'standard deviation', 'ratio', 'proportion', 'probability', 'scientific', 'trigonometry', 'logarithm', 'aspect ratio', 'rectangle', 'dpi', 'ppi'],
-    'Date/Time': ['age', 'date', 'time', 'week', 'business day', 'days between', 'pregnancy', 'due date', 'conception', 'day of week', 'leap year', 'ovulation'],
-    Savings: ['savings', 'compound', 'fd', 'rd', 'fixed deposit', 'recurring', 'goal', 'simple interest', 'net worth', 'retirement', 'investment'],
+    'Date/Time': ['age', 'date', 'time', 'week', 'business day', 'days between', 'day of week', 'leap year'],
   },
 };
 
@@ -406,7 +398,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   'indian-utilities': 'Free Indian utility tools — Aadhaar masking, PAN card validation, UPI payment helpers, and local utility tools. All processed locally.',
   Transcription: 'Free transcription tools — convert speech to text, generate captions, and transcribe audio files locally in your browser.',
   Branding: 'Free branding tools — create logos, generate mockups, design business cards, and brand assets. No design skills needed.',
-  Calculator: 'Free online calculators — mortgage, BMI, GPA, retirement, scientific, and 70+ more calculators for finance, health, math, and everyday life. 100% browser-based.',
+  Calculator: 'Free online calculators — math, date/time, and academic calculators for percentages, fractions, date differences, grade averages, and more. 100% browser-based.',
   Productivity: 'Free productivity tools — todo lists, pomodoro timers, note-taking, and workflow utilities to get more done.',
   Design: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.',
   Health: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.',

@@ -22,7 +22,10 @@ const TABS: { id: QrType; label: string; icon: React.ComponentType<{ className?:
 ];
 
 export default function QrCodeGenerator() {
-  const [qrType, setQrType] = useState<QrType>('url');
+  const [qrType, setQrType] = useState<QrType>(() => {
+    if (typeof window !== 'undefined' && window.location.pathname.includes('wifi-qr')) return 'wifi';
+    return 'url';
+  });
 
   const [urlContent, setUrlContent] = useState('https://toolzum.com');
   const [textContent, setTextContent] = useState('Hello from Toolzum!');
