@@ -1,7 +1,7 @@
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
 import { toolsRegistry } from "@/registry/tools";
 
-const toolCount = toolsRegistry.filter(t => t.showInCategory !== false).length;
+const toolCount = toolsRegistry.length;
 
 export const metadata = {
   title: `${toolCount}+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,

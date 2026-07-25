@@ -262,10 +262,10 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       <div className="border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            {visibleTools.length}+ Free Online Tools
+            {(initialTools ?? toolsRegistry).length}+ Free Online Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            {visibleTools.length}+ local browser utilities. Zero server uploads. Everything runs on your device.
+            {(initialTools ?? toolsRegistry).length}+ local browser utilities. Zero server uploads. Everything runs on your device.
           </p>
           
           <div className="mt-8 relative max-w-2xl">
