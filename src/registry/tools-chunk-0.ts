@@ -579,7 +579,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. No signup or account required.',
     seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. ',
-    dependencies: "qpdf"
+    dependencies: "qpdf",
+    showInCategory: false
   },
   {
     id: "60",
@@ -1188,7 +1189,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Developer",
     description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Base64 Encode/Decode — Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. ',
-    dependencies: "btoa/atob"
+    dependencies: "btoa/atob",
+    showInCategory: false
   },
   {
     id: "137",
@@ -1482,7 +1484,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Developer",
     description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. No signup or account required.',
     seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    showInCategory: false
   },
   {
     id: "174",

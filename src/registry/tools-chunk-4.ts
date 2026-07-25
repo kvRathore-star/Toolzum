@@ -1334,6 +1334,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online AES Decrypt — Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. ',
     dependencies: "CryptoJS",
+    showInCategory: false,
   },
   {
     id: "958",

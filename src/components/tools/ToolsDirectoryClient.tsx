@@ -294,7 +294,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
               <h2 className="text-xl font-medium text-[var(--text-primary)]">
                 {activeCategory === "All" ? "All Tools" : activeCategory}
               </h2>
-              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} results</span>
+              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} tools · {(initialTools ?? toolsRegistry).length}+ total</span>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}

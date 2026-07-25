@@ -572,6 +572,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate glassmorphism CSS with adjustable blur, opacity, and border radius. Copy ready-to-use CSS for frosted-glass UI effects. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Glassmorphism CSS Generator — Generate glassmorphism CSS with adjustable blur, opacity, and border radius. Copy ready-to-use CSS for frosted-glass UI effects. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "css-2",
@@ -581,6 +582,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate neumorphism CSS with configurable size, blur, and color. Create soft UI shadow effects with live preview.',
     seoDescription: 'Free online Neumorphism CSS Generator — Generate neumorphism CSS with configurable size, blur, and color. Create soft UI shadow effects. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "css-3",

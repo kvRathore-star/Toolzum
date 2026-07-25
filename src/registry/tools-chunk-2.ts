@@ -913,6 +913,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text.',
     seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "498",
@@ -922,6 +923,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "499",
@@ -1496,6 +1498,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Visual border CSS generator with width, style, color, and radius controls with live preview.',
     seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "949",

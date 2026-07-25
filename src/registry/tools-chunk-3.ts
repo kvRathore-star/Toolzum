@@ -1341,6 +1341,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Box Shadow Generator — Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "735",
@@ -1350,6 +1351,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS border-radius values visually. Control each corner independently with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Border Radius Generator — Generate CSS border-radius values visually. Control each corner independently with live preview. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "736",
@@ -1359,6 +1361,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "737",
@@ -1368,6 +1371,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Grid Generator — Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "738",
@@ -1377,6 +1381,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text Shadow Generator — Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "739",
@@ -1386,6 +1391,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Transform Generator — Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "740",
@@ -1395,6 +1401,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Animation Generator — Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "741",
@@ -1434,6 +1441,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Encode or decode text using Base64, Base64URL, URL encoding, HTML entities, Hex, Binary, ROT13, UTF-8, and Unicode escape schemes.',
     seoDescription: 'Free online Encoder / Decoder — Encode or decode text with Base64, Base64URL, URL, HTML, Hex, Binary, ROT13, UTF-8, and Unicode escape. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "du-6",

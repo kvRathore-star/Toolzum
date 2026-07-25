@@ -39,10 +39,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Generate CSS code visually — box shadows, gradients, grids, animations, filters, and more.",
       slugs: [
         "css-generator",
-        "border-radius-generator",
-        "text-shadow-generator",
         "css-filter-generator",
-        "glassmorphism-generator",
         "media-query-generator",
       ],
     },
@@ -106,9 +103,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Encoders & Decoders",
       description: "Encode and decode data across formats — Base64, URL, HTML entities, hex, ASCII, binary, and more.",
       slugs: [
-        "base64-encode-decode", "image-to-base64",
-        "url-encoder-decoder", "html-entity-encoder", "backslash-escape",
-        "encoder-decoder", "hex-ascii-converter",
+        "image-to-base64",
+        "url-encoder-decoder",
+        "hex-ascii-converter",
         "text-to-binary", "number-base-converter",
         "base32-encoder", "base64-json-decoder", "hex-text-converter",
         "svg-base64-converter",
@@ -570,7 +567,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "PDF Editors & Utilities",
       description: "Edit, annotate, sign, watermark, redact, and organize PDF documents.",
       slugs: [
-        "unlock-pdf", "protect-pdf", "watermark-pdf",
+        "protect-pdf", "watermark-pdf",
         "rotate-pdf", "crop-pdf", "redact-pdf",
         "flatten-pdf", "grayscale-pdf", "whiteout-pdf",
         "resize-pdf-pages",
@@ -912,7 +909,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "hex-to-rgb-converter",
         "color-shades-tints",
         "contrast-ratio-checker",
-              "border-css-generator",
 ],
     },
     {
