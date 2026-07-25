@@ -32,6 +32,7 @@ interface ToolLayoutProps {
 const proToolCount = toolsRegistry.filter(t => t.isPro).length;
 const toolCount = toolsRegistry.length;
 const SITE_URL = "https://toolzum.com";
+const SERVER_SIDE_SLUGS = new Set(['ai-translator', 'ai-paraphrasing-tool', 'ai-cover-letter-generator', 'ai-image-generator']);
 
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
@@ -180,10 +181,10 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           {/* Badges row */}
           <div className="flex items-center gap-3 sm:gap-4 mb-12 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full shadow-sm hover:border-[var(--border-default)] transition-colors flex-wrap justify-center">
-            <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-[var(--success)]" /> 100% Private</span>
+            {!SERVER_SIDE_SLUGS.has(slug) && <><span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-[var(--success)]" /> 100% Private</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>
-            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" /></>}
             <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <ShareTool title={title} slug={slug} category={category} />

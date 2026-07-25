@@ -5,6 +5,7 @@ import { Download, Sparkles, Image as ImageIcon, Link2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import NextImage from "next/image";
 import { clipboardWrite } from "@/lib/clipboard";
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -84,6 +85,7 @@ export default function AiImageGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <AiPrivacyBanner service="Pollinations AI" serverLabel="a third-party API" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Control Panel */}

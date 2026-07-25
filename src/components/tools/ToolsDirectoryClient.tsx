@@ -265,7 +265,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
             {(initialTools ?? toolsRegistry).length}+ Free Online Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            {(initialTools ?? toolsRegistry).length}+ local browser utilities. Zero server uploads. Everything runs on your device.
+            Most tools run in your browser with zero uploads. AI features use secure cloud processing — clearly marked on every tool.
           </p>
           
           <div className="mt-8 relative max-w-2xl">
