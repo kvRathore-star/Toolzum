@@ -254,7 +254,7 @@ export default function NupPdf() {
 
           <div className="space-y-2">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Layout</label>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
               {(['2up', '4up', '6up', '9up', 'booklet'] as Layout[]).map((opt) => (
                 <button
                   key={opt}

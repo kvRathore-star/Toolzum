@@ -228,7 +228,7 @@ export default function ImageToIco() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div>
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Icon Size</label>
-            <div className="grid grid-cols-6 gap-1.5">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
               {ICON_SIZES.map(s => (
                 <button
                   key={s}

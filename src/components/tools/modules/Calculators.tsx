@@ -2332,7 +2332,7 @@ export function ScientificCalculator() {
   }, [insertText, handleClear, handleBackspace, handleEquals]);
 
   const evalDisplay = expr.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7');
-  const btnBase = `h-10 sm:h-12 rounded-xl font-semibold text-sm sm:text-base transition-all active:scale-95 select-none flex items-center justify-center`;
+  const btnBase = `h-11 sm:h-12 rounded-xl font-semibold text-sm sm:text-base transition-all active:scale-95 select-none flex items-center justify-center`;
   const btnNum = `${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`;
   const btnOp = `${btnBase} bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-400 border border-indigo-500/20`;
   const btnEq = `${btnBase} bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg`;
@@ -2390,7 +2390,7 @@ export function ScientificCalculator() {
         )}
         {showFuncs && (
           <div className="px-4 pb-3">
-            <div className="grid grid-cols-6 gap-1.5">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
               <button className={btnFn} onClick={() => handleFunction('sin')}>sin</button>
               <button className={btnFn} onClick={() => handleFunction('cos')}>cos</button>
               <button className={btnFn} onClick={() => handleFunction('tan')}>tan</button>
@@ -2413,7 +2413,7 @@ export function ScientificCalculator() {
           </div>
         )}
         <div className="px-4 pb-4">
-          <div className="grid grid-cols-5 gap-1.5">
+          <div className="grid grid-cols-4 sm:grid-cols-5 gap-1.5">
             <button className={btnMem} onClick={() => handleMemory('clear')}>MC</button>
             <button className={btnMem} onClick={() => handleMemory('recall')}>MR</button>
             <button className={btnMem} onClick={() => handleMemory('add')}>M+</button>

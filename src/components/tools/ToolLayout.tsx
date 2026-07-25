@@ -147,7 +147,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
         
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[var(--accent)]/5 blur-[120px] rounded-full pointer-events-none hidden sm:block" />
 
-        <main className="max-w-[800px] mx-auto py-16 px-4 sm:px-6 relative z-10 flex flex-col items-center text-center">
+        <main className="max-w-[960px] mx-auto py-10 sm:py-14 lg:py-16 px-4 sm:px-8 md:px-10 relative z-10 flex flex-col items-center text-center">
           
           {/* Back link */}
           <div className="w-full flex justify-start mb-4">

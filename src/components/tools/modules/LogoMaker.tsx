@@ -344,7 +344,7 @@ export default function LogoMaker() {
                 ref={canvasRef} 
                 width={500} 
                 height={500} 
-                className="relative z-10 w-[350px] h-[350px] sm:w-[400px] sm:h-[400px]"
+                className="relative z-10 w-full max-w-[350px] aspect-square sm:max-w-[400px]"
               />
             </div>
           </div>

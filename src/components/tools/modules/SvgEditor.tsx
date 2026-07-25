@@ -161,7 +161,7 @@ export default function SvgEditor() {
             
             {/* Render block */}
             <div 
-              className="relative z-10 w-[350px] h-[350px] sm:w-[400px] sm:h-[400px] flex items-center justify-center"
+              className="relative z-10 w-full max-w-[350px] aspect-square sm:max-w-[400px] flex items-center justify-center"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(renderedSvg, { USE_PROFILES: { svg: true, svgFilters: true } }) }}
             />
           </div>

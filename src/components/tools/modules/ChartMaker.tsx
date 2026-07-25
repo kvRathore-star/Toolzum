@@ -539,7 +539,7 @@ export default function ChartMaker() {
 
           <div>
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Color Palette</label>
-            <div className="grid grid-cols-5 gap-1.5">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
               {PALETTES.map((p, i) => (
                 <button key={p.name} onClick={() => setPaletteIndex(i)} className={`h-8 rounded-lg border-2 transition-all ${paletteIndex === i ? 'border-blue-500 shadow-md scale-105' : 'border-[var(--border-subtle)]'}`} title={p.name} style={{ background: `linear-gradient(90deg, ${p.colors.slice(0, 5).join(', ')})` }} />
               ))}
