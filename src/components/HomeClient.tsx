@@ -86,7 +86,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-[family-name:var(--font-serif)] text-6xl sm:text-7xl lg:text-[84px] leading-[0.95] tracking-tight mb-8"
+              className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl lg:text-[84px] leading-[0.95] tracking-tight mb-6 sm:mb-8"
             >
               The browser<br />
               <span className="text-[var(--accent)]">supercomputer.</span>
@@ -207,7 +207,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.12 }}
-              className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 hover:border-[var(--accent)]/30 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.06)] transition-all duration-500 group"
+              className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 hover:border-[var(--accent)]/30 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.06)] transition-all duration-500 group"
             >
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-[40px] font-mono font-bold text-[var(--accent)] leading-none">{step.num}</span>
@@ -238,8 +238,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[var(--border-subtle)]">
             {FEATURES.map((feat, i) => (
-              <div key={i} className="py-12 px-8 flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-6 transition-all">
+              <div key={i} className="py-12 px-6 sm:px-8 flex flex-col items-center text-center">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-4 sm:mb-6 transition-all">
                   <feat.icon className="w-5 h-5 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-[18px] font-medium text-[var(--text-primary)] mb-3">{feat.title}</h3>
@@ -286,7 +286,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               >
                 <Link
                   href={`/${cat.id.toLowerCase()}`}
-                  className="group flex flex-col items-start p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.06)] transition-all duration-300 h-full"
+                  className="group flex flex-col items-start p-4 sm:p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.06)] transition-all duration-300 h-full"
                 >
                   {(() => {
                     const theme = getCategoryTheme(cat.id);
