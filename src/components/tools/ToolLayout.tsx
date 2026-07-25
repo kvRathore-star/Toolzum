@@ -32,7 +32,12 @@ interface ToolLayoutProps {
 const proToolCount = toolsRegistry.filter(t => t.isPro).length;
 const toolCount = toolsRegistry.length;
 const SITE_URL = "https://toolzum.com";
-const SERVER_SIDE_SLUGS = new Set(['ai-translator', 'ai-paraphrasing-tool', 'ai-cover-letter-generator', 'ai-image-generator']);
+const SERVER_SIDE_SLUGS = new Set([
+  'ai-translator', 'ai-paraphrasing-tool', 'ai-cover-letter-generator', 'ai-image-generator',
+  'regex-tester', 'resume-ats-score-checker', 'complaint-letter-generator', 'subtitle-translator',
+  'brand-color-palette-generator', 'youtube-transcript-generator', 'video-to-text-transcription',
+  'meeting-minutes-generator', 'audio-to-text-transcription', 'pdf-ai-summariser', 'indian-voice-transcriber',
+]);
 
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
