@@ -441,6 +441,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'yaml-validator': dynamic(() => import('@/components/tools/modules/DataFormatTools').then(m => ({ default: m.YamlValidator })), { ssr: false, loading: () => <DynamicImportFallback slug="yaml-validator" /> }),
   'html-entity-encoder': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="html-entity-encoder" /> }),
   'backslash-escape': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="backslash-escape" /> }),
+  'url-encoder-decoder': dynamic(() => import('@/components/tools/modules/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="url-encoder-decoder" /> }),
   'line-sorter': dynamic(() => import('@/components/tools/modules/LineSorter'), { ssr: false, loading: () => <DynamicImportFallback slug="line-sorter" /> }),
   'url-parser': dynamic(() => import('@/components/tools/modules/UrlParser'), { ssr: false, loading: () => <DynamicImportFallback slug="url-parser" /> }),
   'string-inspector': dynamic(() => import('@/components/tools/modules/StringInspector'), { ssr: false, loading: () => <DynamicImportFallback slug="string-inspector" /> }),

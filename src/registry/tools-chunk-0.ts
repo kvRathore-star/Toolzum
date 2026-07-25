@@ -580,7 +580,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. No signup or account required.',
     seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. ',
     dependencies: "qpdf",
-    showInCategory: false
   },
   {
     id: "60",
@@ -823,7 +822,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    showInCategory: false
   },
   {
     id: "97",
