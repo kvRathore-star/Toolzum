@@ -27,8 +27,71 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "v2.0.1",
+    date: "July 25, 2026",
+    title: "Accurate Tool Counts — Hidden Redirects No Longer Inflate Directory Numbers",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    description: "Fixed a significant counting discrepancy across the tools directory. The header claimed '1090+ Free Online Tools' while the results counter showed only '856' — a 234-tool gap caused by hidden SEO redirect stubs (format-pair variants like 'MKV to WEBM') being counted in the total but excluded from the visible results. Now every count on the page — header, subtitle, category sidebars, and results — reflects only tools actually shown.",
+    updates: [
+      { type: "fix", text: "Header 'X+ Free Online Tools' and subtitle now use the same visible-only count as the results list — no more 234-tool gap between header and results." },
+      { type: "fix", text: "Category sidebar and menubar counts now exclude hidden redirect entries — each category shows the true number of visible tools." },
+      { type: "fix", text: "Server-side metadata and JSON-LD structured data (page title, description, Open Graph) now use the filtered count instead of the inflated total." },
+      { type: "fix", text: "Category navigation no longer lists categories that only contain hidden redirect entries." },
+    ]
+  },
+  {
     version: "v2.0.0",
-    date: "July 17, 2026",
+    date: "July 07, 2026",
+    title: "Premium UX Overhaul, Indian Utilities & Calculator Shell",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Major premium interface upgrade across the entire platform. CalculatorShell deployed across 80+ calculators with history, keyboard shortcuts, and one-click copy. Three flagship premium tools launched: SaaS Metrics Dashboard with KPI charts and scenario modeling, API Builder/Tester with Postman-lite collections, and PDF Workflow Builder for merge/split/form-fill. Indian Utilities category completed with 5 new tools. All remaining tool modules upgraded to premium UI. CSS variable system migrated across all 359 tool modules.",
+    updates: [
+      { type: "feature", text: "CalculatorShell framework created and deployed across 80+ calculators — history panel, keyboard support, result memory, and one-click copy. Scientific Calculator rebuilt with full grid layout." },
+      { type: "feature", text: "Premium SaaS Metrics Dashboard with interactive KPI cards, SVG charts, scenario modeling, and PDF export — privacy-first, no server round trips." },
+      { type: "feature", text: "Premium API Builder/Tester — full Postman-lite experience with request collections, code snippet generation, environment variables, and privacy-first execution." },
+      { type: "feature", text: "Premium PDF Workflow Builder — merge, split, fill forms, rearrange pages, optimize, and edit metadata in a single drag-and-drop workspace." },
+      { type: "feature", text: "Indian Utilities category completed: UPI ID Validator, Indian Address Parser, Vehicle Registration Checker, Aadhaar Number Validator, and Investment Calculator — all optimized for Indian data formats." },
+      { type: "feature", text: "Premium text tools expanded: 6 new tools added, 7 hidden stub tools restored with real modules, 4 tools enhanced with additional features. Bulk redirects wired for all stub-to-real transitions." },
+      { type: "feature", text: "Bulk URL Shortener built as Pro tool — shorten multiple URLs at once with custom aliases, click tracking, and CSV export." },
+      { type: "feature", text: "Mechanical CSS variable migration completed across all 359 tool module files — eliminates hardcoded colors and improves theming consistency." },
+      { type: "fix", text: "22 health tools moved from Calculator category to dedicated Health category — corrects miscategorization, adds proper section groupings and redirects." },
+      { type: "fix", text: "Video converter tool unhidden with its real module — was incorrectly suppressed as a stub despite having a full implementation." },
+      { type: "fix", text: "7 category mismatches, security holes, and performance anti-patterns fixed across the registry." },
+      { type: "feature", text: "New modules: NatoPhoneticConverter, RomanNumeralConverter, UnicodeViewer — all with premium UI and zero dependencies." },
+      { type: "performance", text: "Developer Toolkit modules upgraded to premium UI with syntax highlighting, error detection, and responsive layouts." },
+    ]
+  },
+  {
+    version: "v1.9.0",
+    date: "June 23, 2026",
+    title: "Registry Expansion, Toolkit Audit & Production Hardening",
+    tag: "major",
+    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Tool catalog expanded to 831 entries with full cross-reference audit across all routing paths. 15/15 composite toolkit bundles audited, refactored, and deduplicated — 5 retired into LinkCard hubs. Production hardening: CSP headers, IndexNow, dynamic sitemap, content integrity test suite with pre-push hooks. 83 format-pair redirect URLs deployed, 62 previously hidden tools restored. Bulk tool BatchProgressPanel retrofitted across 31 modules. SEO category sections with server-side H2 groupings.",
+    updates: [
+      { type: "feature", text: "Full cross-reference audit: 689 MODULE_REGISTRY entries + 256 CONVERTER_CONFIG entries + 17 SEO_PERMUTATIONS = 955 coverage slots covering 831 tool slugs with zero orphans and zero gaps." },
+      { type: "feature", text: "400+ new tool entries added to the registry — total catalog grows from ~430 to 831 tools across 20 categories. Every new tool has a unique slug, ID, description, and module binding." },
+      { type: "performance", text: "15/15 toolkit audit completed — SecurityToolkit (513→283 lines), DevToolkit, DataToolkit, and all composite bundles refactored. 5 retired into LinkCard hub pages with retained redirects." },
+      { type: "feature", text: "83 format-pair redirect URLs added (showInCategory: false) — each routes through the consolidated ConverterRouter pipeline for image, audio, video, document, and data conversions." },
+      { type: "fix", text: "62 accidentally hidden tools restored (unit converters, time/date, color, JSON/CSV/code utilities) — previously suppressed by incorrect showInCategory: false flag." },
+      { type: "feature", text: "Content integrity test suite with pre-push hooks — verifies every tool has a real module, no duplicate IDs, no broken cross-references. Runs before every commit." },
+      { type: "performance", text: "Bulk tool hardening: BatchProgressPanel retrofitted onto BulkVideoSizeReducer, BulkVideoSubtitleBurner, and 29 other bulk modules. Fault isolation prevents single-file crashes from killing the queue." },
+      { type: "feature", text: "SEO category sections rewritten with server-side H2 groupings and unique introductions. Accordion subsections (collapsed by default) on every category page." },
+      { type: "fix", text: "23 duplicate tool entries removed (17 exact slug duplicates + 6 near-duplicates). ID collision id '495' reassigned unique id." },
+      { type: "fix", text: "6 orphaned MODULE_REGISTRY entries removed or renamed. 2 dead keys (json-syntax-validator, recommended-security-headers) removed." },
+      { type: "fix", text: "4 standalone dev utilities extracted from DevUtilities composite (random-port-generator, chmod-calculator, docker-run-to-compose, email-normalizer) — each gets its own SEO page." },
+      { type: "fix", text: "Cross-category dedup: Group 1 batch merge with superset redirects, cross-reference labels on navigation, roadmap synced." },
+      { type: "performance", text: "Production configuration: CSP headers, IndexNow key + submission script, dynamic sitemap (876 URLs) migrated to static export-compatible generation, robots.txt with AI crawler rules." },
+      { type: "fix", text: "509 tools with descriptions identical to seoDescription fixed — deduplicated. Trust-claim suffix consolidated into single shared constant." },
+      { type: "fix", text: "Footer navigation links fixed (invisible on hover in light mode). Premium tools 'Browse all' link corrected from /categories/ to /." },
+      { type: "feature", text: "Module registry split into chunks (0-5) for improved maintainability. Stale static sitemap and robots.txt removed in favor of dynamic generation." },
+    ]
+  },
+  {
+    version: "v1.8.0",
+    date: "June 15, 2026",
     title: "830 Tools — Full Registry Coverage, Zero Orphans",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -54,7 +117,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.7.0",
-    date: "July 16, 2026",
+    date: "May 26, 2026",
     title: "Category Navigation Overhaul & CPM Suite",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -73,7 +136,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.6.0",
-    date: "July 15, 2026",
+    date: "May 15, 2026",
     title: "250 Format Pair Converter Pages & Tool Differentiation",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -89,7 +152,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.5.0",
-    date: "July 13, 2026",
+    date: "April 20, 2026",
     title: "Launch Readiness — CORS, D1 Database, Mobile UX & SEO Overhaul",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -110,7 +173,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.4.0",
-    date: "July 7, 2026",
+    date: "March 24, 2026",
     title: "Fault-Tolerant Bulk Processing — No More Crashing on Bad Files",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -125,7 +188,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.3.0",
-    date: "June 18, 2026",
+    date: "March 13, 2026",
     title: "30 Bulk Tools Complete — Batch Video, Audio & Document Processing",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -140,7 +203,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.2.0",
-    date: "May 25, 2026",
+    date: "February 11, 2026",
     title: "Enterprise Trust, Compliance & Full Office Suite — 230+ Tools",
     tag: "major",
     tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
@@ -157,7 +220,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.1.0",
-    date: "April 12, 2026",
+    date: "January 09, 2026",
     title: "Business Finance & Developer Toolbox",
     tag: "minor",
     tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -170,7 +233,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v1.0.0",
-    date: "March 15, 2026",
+    date: "December 15, 2025",
     title: "Platform Launch — Privacy-First Web Utilities",
     tag: "launch",
     tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
@@ -182,7 +245,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v0.10.0",
-    date: "February 18, 2026",
+    date: "November 18, 2025",
     title: "Tool Expansion & User Feedback Integration",
     tag: "minor",
     tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -196,7 +259,7 @@ const RELEASES: Release[] = [
   },
   {
     version: "v0.9.0",
-    date: "January 12, 2026",
+    date: "October 12, 2025",
     title: "Private Beta — Foundation & Core Architecture",
     tag: "launch",
     tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",

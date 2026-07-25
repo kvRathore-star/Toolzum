@@ -1,10 +1,10 @@
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
 import { toolsRegistry } from "@/registry/tools";
 
-const toolCount = toolsRegistry.length;
+const toolCount = toolsRegistry.filter(t => t.showInCategory !== false).length;
 
 export const metadata = {
-  title: `1086+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
+  title: `${toolCount}+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
   description: `Browse ${toolCount}+ free online tools for PDF, images, video, audio, AI, text, code, and more. All process locally in your browser — nothing is uploaded.`,
   alternates: { canonical: "https://toolzum.com/tools/" },
   openGraph: {

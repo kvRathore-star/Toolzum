@@ -78,8 +78,12 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  const visibleTools = useMemo(() => {
+    return (initialTools ?? toolsRegistry).filter(tool => tool.showInCategory !== false);
+  }, [initialTools]);
+
   const groupedCategories = useMemo(() => {
-    const source = initialTools ?? toolsRegistry;
+    const source = visibleTools;
     const cats = Array.from(new Set(source.map(t => t.category).filter(Boolean)));
     const groups: Record<string, string[]> = {};
     cats.sort().forEach(c => {
@@ -91,7 +95,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
   }, [initialTools]);
 
   const allCategories = useMemo(() => {
-    const cats = Array.from(new Set((initialTools ?? toolsRegistry).map(t => t.category).filter(Boolean)));
+    const cats = Array.from(new Set(visibleTools.map(t => t.category).filter(Boolean)));
     return ["All", ...cats.sort()];
   }, [initialTools]);
 
@@ -258,10 +262,10 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       <div className="border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            {(initialTools ?? toolsRegistry).length}+ Free Online Tools
+            {visibleTools.length}+ Free Online Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
-            {(initialTools ?? toolsRegistry).length}+ local browser utilities. Zero server uploads. Everything runs on your device.
+            {visibleTools.length}+ local browser utilities. Zero server uploads. Everything runs on your device.
           </p>
           
           <div className="mt-8 relative max-w-2xl">
