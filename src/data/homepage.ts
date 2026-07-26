@@ -2,7 +2,8 @@ import {
   ArrowRight, ShieldCheck, Zap, Server,
   Upload, Download, Lock, Layers, Globe, Palette, BarChart3,
   FileType, Image as ImageIcon, Video, Mic, Cpu, FileText, Code,
-  Star
+  Type, Shield, Search, Wrench, DollarSign, Heart, CheckSquare,
+  Calculator as CalculatorIcon, Puzzle
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -46,6 +47,18 @@ export const CATEGORIES: CategoryDef[] = [
   { id: 'Audio', label: 'Audio', icon: Mic, desc: 'Convert, cut & enhance audio files' },
   { id: 'Converter', label: 'Convert', icon: FileType, desc: 'Convert between 50+ formats' },
   { id: 'Developer', label: 'Developer', icon: Code, desc: 'Format, minify & debug code' },
+  { id: 'Calculator', label: 'Calculator', icon: CalculatorIcon, desc: 'Math, stats, finance & unit converters' },
+  { id: 'Finance', label: 'Finance', icon: DollarSign, desc: 'Currency rates, GST, loans & budgeting' },
+  { id: 'Health', label: 'Health', icon: Heart, desc: 'BMI, calories, body fat & fitness trackers' },
+  { id: 'Text', label: 'Text', icon: Type, desc: 'Word counter, citation gen, text styling & more' },
+  { id: 'Utility', label: 'Utility', icon: Wrench, desc: 'Password gen, QR codes, UUIDs & everyday tools' },
+  { id: 'Privacy', label: 'Privacy', icon: Shield, desc: 'Metadata remover, ad blocker & privacy cleaners' },
+  { id: 'SEO', label: 'SEO', icon: Search, desc: 'Keyword tools, meta tags, robots.txt & audits' },
+  { id: 'Design', label: 'Design', icon: Palette, desc: 'Color palettes, gradients & typography tools' },
+  { id: 'Branding', label: 'Branding', icon: BarChart3, desc: 'NPS, CPM, profit margin & business calculators' },
+  { id: 'Transcription', label: 'Transcription', icon: Mic, desc: 'Speech-to-text, subtitles & caption tools' },
+  { id: 'Productivity', label: 'Productivity', icon: CheckSquare, desc: 'Todo lists, habit trackers & time tools' },
+  { id: 'Extension', label: 'Extension', icon: Puzzle, desc: 'Browser extensions & add-on tools' },
 ];
 
 export const STEPS: StepDef[] = [
@@ -99,10 +112,10 @@ export const USE_CASES: UseCaseDef[] = [
   },
 ];
 
-export function getStatsBar(toolCount: number, categoryCount?: number) {
+export function getStatsBar(toolCount: number, categoryCount: number) {
   return [
-    { value: `${toolCount}+`, label: 'Browser Tools', sub: 'And counting every week' },
-    { value: `${categoryCount || 21}`, label: 'Categories', sub: 'From PDF to AI generation' },
+    { value: `${toolCount}+`, label: 'Free Tools', sub: 'And counting every week' },
+    { value: `${categoryCount}`, label: 'Categories', sub: 'From PDF to AI generation' },
     { value: '100%', label: 'Client-Side', sub: 'Zero data leaves your device' },
     { value: 'Free', label: 'To Start', sub: 'No credit card required' },
   ];

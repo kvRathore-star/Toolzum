@@ -80,7 +80,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] mb-8"
             >
               <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
-              <span>1,000+ free tools · 100% local · no signup</span>
+              <span>{totalImplemented.toLocaleString()}+ free tools · 100% local · no signup</span>
             </motion.div>
 
             <motion.h1
@@ -314,7 +314,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               href="/tools"
               className="group flex flex-col items-center justify-center p-5 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 transition-all duration-300 h-full text-center"
             >
-              <span className="text-lg font-semibold mb-1">1,000+ tools</span>
+              <span className="text-lg font-semibold mb-1">{totalImplemented.toLocaleString()}+ tools</span>
               <span className="text-xs text-[var(--text-muted)]">& counting</span>
             </Link>
           </motion.div>
