@@ -914,6 +914,12 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'big-text-generator': dynamic(() => import('@/components/tools/modules/BigTextGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="big-text-generator" /> }),
   'writing-tools': dynamic(() => import('@/components/tools/modules/WritingTools'), { ssr: false, loading: () => <DynamicImportFallback slug="writing-tools" /> }),
   'citation-generator': dynamic(() => import('@/components/tools/modules/CitationGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="citation-generator" /> }),
+
+  // New text tools
+  'text-reverser': dynamic(() => import('@/components/tools/modules/TextReverser'), { ssr: false, loading: () => <DynamicImportFallback slug="text-reverser" /> }),
+  'upside-down-text': dynamic(() => import('@/components/tools/modules/UpsideDownText'), { ssr: false, loading: () => <DynamicImportFallback slug="upside-down-text" /> }),
+  'glitch-text': dynamic(() => import('@/components/tools/modules/GlitchText'), { ssr: false, loading: () => <DynamicImportFallback slug="glitch-text" /> }),
+  'invisible-character': dynamic(() => import('@/components/tools/modules/InvisibleCharacter'), { ssr: false, loading: () => <DynamicImportFallback slug="invisible-character" /> }),
 };
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
