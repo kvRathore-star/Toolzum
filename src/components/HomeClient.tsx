@@ -99,7 +99,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-md mb-10 leading-relaxed"
             >
-              1,000+ free tools — PDF, images, video, code, converters. 100% local. Zero uploads. Zero servers. Instant utility.
+              {totalImplemented.toLocaleString()}+ free tools — PDF, images, video, code, converters. 100% local. Zero uploads. Zero servers. Instant utility.
             </motion.p>
 
             <motion.div
@@ -127,7 +127,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="flex flex-wrap gap-6 sm:gap-10 mt-16 pt-8 border-t border-[var(--border-subtle)] w-full"
             >
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">1,000+</span>
+                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">{totalImplemented.toLocaleString()}+</span>
                 <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Free Tools</span>
               </div>
               <div className="flex flex-col">
