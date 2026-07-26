@@ -880,7 +880,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-svg-to-png': dynamic(() => import('@/components/tools/modules/BulkSvgToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-svg-to-png" /> }),
   'bulk-url-status-checker': dynamic(() => import('@/components/tools/modules/BulkUrlStatusChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-status-checker" /> }),
   'bulk-url-shortener': dynamic(() => import('@/components/tools/modules/BulkUrlShortener'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-shortener" /> }),
-  'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/BulkWebpAvifModernizer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-webp-avif-modernizer" /> }),
+  'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-webp-avif-modernizer" /> }),
+  'bulk-image-converter': dynamic(() => import('@/components/tools/modules/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-converter" /> }),
 
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),

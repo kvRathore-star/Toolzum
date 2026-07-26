@@ -1182,12 +1182,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     ],},
   {
     id: "296",
-    name: "Bulk WebP/AVIF Modernizer",
-    slug: "bulk-webp-avif-modernizer",
+    name: "Bulk Image Format Converter",
+    slug: "bulk-image-converter",
     category: "Image",
-    description: "Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. Everything runs locally in your browser — nothing is uploaded.",
-    seoDescription: 'Free online Bulk WebP/AVIF Modernizer — Convert entire image folders to WebP or AVIF while keeping directory structure intact. Generates fallback PNGs and ready-to-use HTML <picture> tag blocks per batch. ',
-    dependencies: "Canvas API, jszip",
+    description: "Convert images between JPG, PNG, WebP, AVIF, HEIC, HEIF, GIF, BMP, ICO, SVG. Batch convert with quality control. 100% local, zero uploads.",
+    seoDescription: 'Free online Bulk Image Converter — Convert JPG, PNG, WebP, AVIF, HEIC, GIF, BMP, ICO, SVG in bulk. Quality control, directory preservation, zero uploads. ',
+    dependencies: "Canvas API, jszip, heic2any",
   
     instructions: [
 

@@ -67,7 +67,14 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
   if (seoPage) {
     const parentTool = toolsRegistry.find(t => t.slug === seoPage.parentSlug);
     if (parentTool) {
-      permanentRedirect(`/${parentTool.category.toLowerCase()}/${parentTool.slug}/`);
+      let redirectUrl = `/${parentTool.category.toLowerCase()}/${parentTool.slug}/`;
+      if (seoPage.slug.includes('-to-')) {
+        const parts = seoPage.slug.split('-to-');
+        const from = parts[0].replace('bulk-', '');
+        const to = parts[1];
+        redirectUrl += `?from=${from}&to=${to}`;
+      }
+      permanentRedirect(redirectUrl);
     }
   }
 
