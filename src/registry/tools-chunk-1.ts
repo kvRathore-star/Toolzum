@@ -2696,4 +2696,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online SIP / PPF / EPF Calculator — Calculate Indian investment returns — SIP (lumpsum + monthly), PPF (15-year maturity), and EPF (employee provident fund). ',
     dependencies: "None"
   },
+  {
+    id: "409",
+    name: "Bulk PDF Suite",
+    slug: "bulk-pdf-suite",
+    category: "PDF",
+    description: 'Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. All processing happens locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Bulk PDF Suite — Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. ',
+    dependencies: "pdf-lib"
+  },
 ];

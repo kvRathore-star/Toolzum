@@ -73,6 +73,12 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         const from = parts[0].replace('bulk-', '');
         const to = parts[1];
         redirectUrl += `?from=${from}&to=${to}`;
+      } else {
+        const parentPrefix = seoPage.parentSlug.replace(/-[^-]+$/, '-');
+        if (seoPage.slug.startsWith(parentPrefix)) {
+          const op = seoPage.slug.slice(parentPrefix.length);
+          redirectUrl += `?op=${op}`;
+        }
       }
       permanentRedirect(redirectUrl);
     }

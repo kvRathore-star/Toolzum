@@ -874,6 +874,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-pdf-form-extractor': dynamic(() => import('@/components/tools/modules/BulkPdfFormExtractor'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-pdf-form-extractor" /> }),
   'bulk-pdf-merger': dynamic(() => import('@/components/tools/modules/BulkPdfMerger'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-pdf-merger" /> }),
   'bulk-pdf-size-reducer': dynamic(() => import('@/components/tools/modules/BulkPdfSizeReducer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-pdf-size-reducer" /> }),
+  'bulk-pdf-suite': dynamic(() => import('@/components/tools/modules/BulkPdfSuite'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-pdf-suite" /> }),
   'bulk-qr-code-generator': dynamic(() => import('@/components/tools/modules/BulkQrCodeGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-qr-code-generator" /> }),
   'bulk-regex-extractor-replacer': dynamic(() => import('@/components/tools/modules/BulkRegexExtractorReplacer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-regex-extractor-replacer" /> }),
   'bulk-subtitle-time-shifter': dynamic(() => import('@/components/tools/modules/BulkSubtitleTimeShifter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-subtitle-time-shifter" /> }),

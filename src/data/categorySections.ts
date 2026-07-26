@@ -588,7 +588,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-advanced",
         "create-pdf",
         "pdf-workflow-builder",
-        "bulk-pdf-data-extractor", "bulk-pdf-form-extractor",
+        "bulk-pdf-data-extractor", "bulk-pdf-form-extractor", "bulk-pdf-suite",
         "pdf-page-manager", "generic-pdf-processor",
       ],
     },
