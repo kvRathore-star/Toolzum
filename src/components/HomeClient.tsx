@@ -19,16 +19,6 @@ import {
 import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
 const { totalImplemented } = getCachedToolCounts();
-const localTools = toolsRegistry.filter(t => 
-  t.showInCategory !== false && 
-  !['ai-image-generator', 'ai-translator', 'word-to-pdf', 'excel-to-pdf', 'ppt-to-pdf', 
-    'temporary-email-generator', 'currency-converter', 'video-to-text-transcription',
-    'text-to-speech-tts', 'speech-to-text', 'meeting-minutes-generator',
-    'ai-cover-letter-generator', 'ai-thumbnail-maker', 'secure-note-sharer',
-    'subtitle-translator', 'podcast-transcription', 'ai-document-chat',
-    'ai-video-subtitler', 'bulk-url-shortener', 'youtube-transcript-generator',
-    'ip-geo-lookup', 'ifsc-code-lookup', 'postal-code-lookup', 'secure-note-sharer'].includes(t.slug)
-).length;
 const categoryCount = CATEGORIES.length;
 const WHY_CHOOSE = getWhyChoose(totalImplemented);
 const STATS_BAR = getStatsBar(totalImplemented, categoryCount);
@@ -273,7 +263,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             <Layers className="w-4 h-4" /> Everything You Need
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            1,000+ tools, 20 categories
+            {totalImplemented.toLocaleString()}+ tools, {categoryCount} categories
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
             From PDF wrangling to AI generation — one platform does it all.
@@ -678,7 +668,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             Start building. Nothing to install.
           </h2>
 <p className="text-lg text-[var(--text-secondary)] mb-10 max-w-lg mx-auto">
-            1,000+ free tools. Free to use. Pro plan for unlimited bulk + AI.
+            {totalImplemented.toLocaleString()}+ free tools. Free to use. Pro plan for unlimited bulk + AI.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="w-full sm:w-auto shadow-[var(--shadow-glow-accent)]" asChild>
