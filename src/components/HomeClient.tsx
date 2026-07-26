@@ -9,6 +9,7 @@ import {
   Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
 import { toolsRegistry } from '@/registry/tools';
+import { getCachedToolCounts } from '@/registry/tools-helpers';
 import { Button } from '@/components/ui/button';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import {
@@ -17,10 +18,12 @@ import {
 } from '@/data/homepage';
 import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
-const toolCount = toolsRegistry.length;
-const categoryCount = [...new Set(toolsRegistry.map(t => t.category))].length;
-const WHY_CHOOSE = getWhyChoose(toolCount);
-const STATS_BAR = getStatsBar(toolCount, categoryCount);
+const { totalImplemented, freeTierTotal, seoVariants, proTools } = getCachedToolCounts();
+const categoryCount = CATEGORIES.length;
+const localToolsCount = freeTierTotal;
+const cloudToolsCount = totalImplemented - freeTierTotal;
+const WHY_CHOOSE = getWhyChoose(totalImplemented);
+const STATS_BAR = getStatsBar(totalImplemented, categoryCount);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -79,7 +82,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] mb-8"
             >
               <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
-              <span>{toolCount} tools &middot; zero uploads &middot; free to use</span>
+              <span>{localToolsCount}+ local tools · Zero servers · Free to use</span>
             </motion.div>
 
             <motion.h1
@@ -98,7 +101,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-md mb-10 leading-relaxed"
             >
-              {toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.
+              {totalImplemented}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage for Local tools. Instant utility.
             </motion.p>
 
             <motion.div
@@ -126,19 +129,19 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="flex flex-wrap gap-6 sm:gap-10 mt-16 pt-8 border-t border-[var(--border-subtle)] w-full"
             >
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">{toolCount}+</span>
-                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Browser Tools</span>
+                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">{totalImplemented}+</span>
+                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Total Tools</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--success)] font-semibold">100%</span>
-                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Client-Side</span>
+                <span className="font-mono text-2xl text-[var(--success)] font-semibold">{localToolsCount}+</span>
+                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">100% Local</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">0</span>
-                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Server Uploads</span>
+                <span className="font-mono text-2xl text-[var(--warning)] font-semibold">{cloudToolsCount}</span>
+                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Cloud AI</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--warning)] font-semibold">24/7</span>
+                <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">24/7</span>
                 <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Available</span>
               </div>
             </motion.div>
@@ -262,7 +265,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             <Layers className="w-4 h-4" /> Everything You Need
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            {toolCount} tools, {categoryCount} categories
+            {totalImplemented} tools, {categoryCount} categories
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
             From PDF wrangling to AI generation — one platform does it all.
@@ -303,7 +306,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               </motion.div>
             );
           })}
-          <motion.div
+<motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -313,8 +316,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               href="/tools"
               className="group flex flex-col items-center justify-center p-5 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-[var(--accent)]/30 transition-all duration-300 h-full text-center"
             >
-              <span className="text-lg font-semibold mb-1">{toolCount}+ tools</span>
-              <span className="text-xs text-[var(--text-muted)]">&amp; counting</span>
+              <span className="text-lg font-semibold mb-1">{totalImplemented}+ tools</span>
+              <span className="text-xs text-[var(--text-muted)]">& counting</span>
             </Link>
           </motion.div>
         </div>
@@ -667,7 +670,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             Start building. Nothing to install.
           </h2>
           <p className="text-lg text-[var(--text-secondary)] mb-10 max-w-lg mx-auto">
-            {toolCount}+ tools. Free to use. Pro plan for unlimited access.
+            {totalImplemented}+ tools. Free to use. Pro plan for unlimited access.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="w-full sm:w-auto shadow-[var(--shadow-glow-accent)]" asChild>
