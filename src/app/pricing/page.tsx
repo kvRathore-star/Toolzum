@@ -1,7 +1,9 @@
 import { ShieldCheck, AlertCircle, Sparkles } from "lucide-react";
-import { toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
 import { EnterpriseCompliance } from "@/components/EnterpriseCompliance";
 import { PricingCards } from "@/components/pricing/PricingCards";
+
+const { freeTierTotal, proTools, totalImplemented } = getCachedToolCounts();
 
 export default function PricingPage() {
   return (
@@ -33,7 +35,7 @@ export default function PricingPage() {
             One Plan. Total Freedom.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlock the power of all {toolsRegistry.length}+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
+            Unlock the power of all {totalImplemented}+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
           </p>
         </div>
 

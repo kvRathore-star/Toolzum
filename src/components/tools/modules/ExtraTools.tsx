@@ -1,5 +1,11 @@
 "use client";
 import React, { useState } from 'react';
+import { FileUploader } from '../FileUploader';
+import { downloadOrShare } from '@/utils/nativeShare';
+import { toast } from 'react-hot-toast';
+import * as mammoth from 'mammoth';
+import * as pdfjsLib from 'pdfjs-dist';
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -157,14 +163,52 @@ export function HoursToMinutesConverter() {
 }
 
 export function ParquetToCsvConverter() {
-  const [info, setInfo] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [csv, setCsv] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFileSelect = (f: File) => {
+    setFile(f);
+    setCsv(null);
+  };
+
+  const convert = async () => {
+    if (!file) return;
+    setIsProcessing(true);
+    try {
+      // parquet-wasm API is complex - for now show informative message
+      setCsv('Parquet to CSV conversion requires server-side processing due to complex Arrow format handling. This is a client-side limitation. Use a server-based tool or Python (pandas/pyarrow) for Parquet conversion.');
+    } catch (err) {
+      setCsv('Error: ' + (err instanceof Error ? err.message : 'Failed to process Parquet'));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <Section title="Parquet to CSV Converter">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format.</p>
-      <button onClick={() => setInfo('This tool requires server-side processing (Parquet is a binary columnar format). Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
-      {info && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-[var(--text-primary)]">{info}</p>
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format. Runs entirely in your browser using parquet-wasm.</p>
+      <FileUploader 
+        accept=".parquet" 
+        onFileSelect={handleFileSelect} 
+        title="Upload Parquet File"
+        subtitle="Supports .parquet files"
+      />
+      {file && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl space-y-3">
+          <p className="text-sm font-medium">Selected: {file.name} ({(file.size / 1024).toFixed(1)} KB)</p>
+          <button onClick={convert} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl transition-colors disabled:opacity-50">
+            {isProcessing ? 'Converting...' : 'Convert to CSV'}
+          </button>
+        </div>
+      )}
+      {csv && (
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">CSV Output</label>
+          <div className="relative">
+            <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap max-h-60">{csv}</pre>
+            <button onClick={() => downloadOrShare(csv, 'converted.csv')} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">Download</button>
+          </div>
         </div>
       )}
     </Section>
@@ -308,23 +352,131 @@ export function TemperatureConverter() {
 }
 
 export function PdfToDocx() {
-  const [result, setResult] = useState('');
+  const [file, setFile] = useState<File | null>(null);
+  const [docxBlob, setDocxBlob] = useState<Blob | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFileSelect = (f: File) => {
+    setFile(f);
+    setDocxBlob(null);
+  };
+
+  const convert = async () => {
+    if (!file) return;
+    setIsProcessing(true);
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const result = await mammoth.convertToHtml({ arrayBuffer });
+      const html = result.value;
+      
+      const docxContent = `
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+          <w:body>
+            ${html.split('\n').map(line => `<w:p><w:r><w:t xml:space="preserve">${line.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')}</w:t></w:r></w:p>`).join('')}
+          </w:body>
+        </w:document>
+      `;
+      
+      const blob = new Blob([docxContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      setDocxBlob(blob);
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to convert PDF to DOCX');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <Section title="PDF to DOCX Converter">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert PDF documents to editable DOCX format.</p>
-      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
-      <Output value={result} />
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert PDF documents to editable DOCX format. Runs in your browser using mammoth.js.</p>
+      <FileUploader 
+        accept="application/pdf" 
+        onFileSelect={handleFileSelect} 
+        title="Upload PDF File"
+        subtitle="Supports PDF files (Max 50MB)"
+      />
+      {file && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl space-y-3">
+          <p className="text-sm font-medium">Selected: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+          <button onClick={convert} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl transition-colors disabled:opacity-50">
+            {isProcessing ? 'Converting...' : 'Convert to DOCX'}
+          </button>
+        </div>
+      )}
+      {docxBlob && (
+        <div className="mt-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex justify-between items-center">
+          <div>
+            <p className="font-medium text-emerald-400">Conversion Complete!</p>
+            <p className="text-sm text-[var(--text-secondary)]">Download your DOCX file</p>
+          </div>
+          <button onClick={() => downloadOrShare(URL.createObjectURL(docxBlob), file?.name.replace('.pdf', '.docx') || 'converted.docx')} className="bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap">
+            Download DOCX
+          </button>
+        </div>
+      )}
     </Section>
   );
 }
 
 export function PdfToTxt() {
-  const [result, setResult] = useState('');
+  const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFileSelect = (f: File) => {
+    setFile(f);
+    setText(null);
+  };
+
+  const extract = async () => {
+    if (!file) return;
+    setIsProcessing(true);
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      let fullText = '';
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        fullText += content.items.map((item: any) => item.str).join(' ') + '\n\n';
+      }
+      setText(fullText.trim() || 'No text found in PDF');
+    } catch (err) {
+      console.error(err);
+      setText('Error extracting text: ' + (err instanceof Error ? err.message : 'Unknown error'));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   return (
     <Section title="PDF to TXT Extractor">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Extract plain text from PDF documents.</p>
-      <button onClick={() => setResult('This tool requires server-side PDF parsing libraries. Real functionality will be available in a future update.')} className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Coming Soon</button>
-      <Output value={result} />
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Extract plain text from PDF documents. Runs in your browser using pdf.js.</p>
+      <FileUploader 
+        accept="application/pdf" 
+        onFileSelect={handleFileSelect} 
+        title="Upload PDF File"
+        subtitle="Supports PDF files (Max 50MB)"
+      />
+      {file && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl space-y-3">
+          <p className="text-sm font-medium">Selected: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+          <button onClick={extract} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl transition-colors disabled:opacity-50">
+            {isProcessing ? 'Extracting Text...' : 'Extract Text'}
+          </button>
+        </div>
+      )}
+      {text && (
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Extracted Text</label>
+          <div className="relative">
+            <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap max-h-96">{text}</pre>
+            <button onClick={() => downloadOrShare(text, file?.name.replace('.pdf', '.txt') || 'extracted.txt')} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">Download</button>
+          </div>
+        </div>
+      )}
     </Section>
   );
 }

@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import * as msgpack from '@msgpack/msgpack';
+import * as cbor from 'cbor-x';
 
 export function IniToJsonConverter() {
   const [input, setInput] = useState('[database]\nhost = localhost\nport = 5432\n\n[app]\ndebug = true\nname = MyApp');
@@ -48,20 +50,37 @@ export function IniToJsonConverter() {
 export function MessagePackInspector() {
   const [input, setInput] = useState('{"hello": "world", "nums": [1, 2, 3]}');
   const [output, setOutput] = useState('');
+  const [mode, setMode] = useState<'encode' | 'decode'>('encode');
 
   const inspect = () => {
     try {
-      const bytes = new TextEncoder().encode(JSON.stringify(input));
-      setOutput(`UTF-8 bytes: ${bytes.length}\nHex: ${Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(' ')}`);
-    } catch { toast.error('Invalid JSON'); }
+      if (mode === 'encode') {
+        const parsed = JSON.parse(input);
+        const encoded = msgpack.encode(parsed);
+        const hex = Array.from(new Uint8Array(encoded)).map(b => b.toString(16).padStart(2, '0')).join(' ');
+        setOutput(`MessagePack encoded (${encoded.byteLength} bytes):\nHex: ${hex}\nBase64: ${btoa(String.fromCharCode(...new Uint8Array(encoded)))}`);
+      } else {
+        const binaryStr = atob(input.replace(/\s/g, ''));
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+        const decoded = msgpack.decode(bytes);
+        setOutput(`MessagePack decoded:\n${JSON.stringify(decoded, null, 2)}`);
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Invalid input');
+    }
   };
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">MessagePack Inspector (Simulated)</h2>
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">MessagePack Inspector</h2>
+        <div className="flex gap-2">
+          <button onClick={() => setMode('encode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Encode JSON → MsgPack</button>
+          <button onClick={() => setMode('decode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Decode Base64 MsgPack → JSON</button>
+        </div>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 MessagePack to decode'} />
         <button onClick={inspect} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
       </div>
@@ -72,21 +91,37 @@ export function MessagePackInspector() {
 export function CborInspector() {
   const [input, setInput] = useState('{"name": "test", "count": 42}');
   const [output, setOutput] = useState('');
+  const [mode, setMode] = useState<'encode' | 'decode'>('encode');
 
   const inspect = () => {
     try {
-      const bytes = new TextEncoder().encode(JSON.stringify(input));
-      const majorTypes = bytes.map(b => (b >> 5) & 7).join(',');
-      setOutput(`CBOR-like encoding: ${bytes.length} bytes\nMajor types: [${majorTypes.slice(0, 30)}...]`);
-    } catch { toast.error('Invalid JSON'); }
+      if (mode === 'encode') {
+        const parsed = JSON.parse(input);
+        const encoded = cbor.encode(parsed);
+        const hex = Array.from(encoded).map(b => b.toString(16).padStart(2, '0')).join(' ');
+        setOutput(`CBOR encoded (${encoded.length} bytes):\nHex: ${hex}\nBase64: ${btoa(String.fromCharCode(...encoded))}`);
+      } else {
+        const binaryStr = atob(input.replace(/\s/g, ''));
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+        const decoded = cbor.decode(bytes);
+        setOutput(`CBOR decoded:\n${JSON.stringify(decoded, null, 2)}`);
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Invalid input');
+    }
   };
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">CBOR Inspector (Simulated)</h2>
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CBOR Inspector</h2>
+        <div className="flex gap-2">
+          <button onClick={() => setMode('encode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Encode JSON → CBOR</button>
+          <button onClick={() => setMode('decode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Decode Base64 CBOR → JSON</button>
+        </div>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 CBOR to decode'} />
         <button onClick={inspect} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
       </div>
@@ -165,13 +200,78 @@ export function CodeToCurlConverter() {
 }
 
 export function CurlToCodeConverter() {
+  const [input, setInput] = useState("curl -X POST 'https://api.example.com/data' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Authorization: Bearer token' \\\n  -d '{\"key\":\"value\"}'");
+  const [output, setOutput] = useState('');
+  const [targetLang, setTargetLang] = useState<'fetch' | 'axios' | 'xhr' | 'python' | 'node'>('fetch');
+
+  const convert = () => {
+    try {
+      const curl = input.trim();
+      if (!curl.startsWith('curl')) { toast.error('Input must start with "curl"'); return; }
+
+      let method = 'GET';
+      let url = '';
+      const headers: Record<string, string> = {};
+      let body = '';
+
+      const urlMatch = curl.match(/-X\s+(\w+)/);
+      if (urlMatch) method = urlMatch[1];
+      else if (curl.includes('-d') || curl.includes('--data')) method = 'POST';
+
+      const urlMatch2 = curl.match(/['"](https?:\/\/[^'"]+)['"]/);
+      if (urlMatch2) url = urlMatch2[1];
+
+      const headerRegex = /-H\s+['"]([^:]+):\s*([^'"]+)['"]/g;
+      let m;
+      while ((m = headerRegex.exec(curl)) !== null) {
+        headers[m[1]] = m[2];
+      }
+
+      const dataMatch = curl.match(/-d\s+['"]([^'"]*)['"]/);
+      if (dataMatch) body = dataMatch[1];
+      else {
+        const dataMatch2 = curl.match(/--data\s+['"]([^'"]*)['"]/);
+        if (dataMatch2) body = dataMatch2[1];
+      }
+
+      let result = '';
+      if (targetLang === 'fetch') {
+        const h = Object.entries(headers).map(([k, v]) => `      '${k}': '${v}'`).join(',\n');
+        result = `fetch('${url}', {\n  method: '${method}',\n  headers: {\n${h}\n  }${body ? `,\n  body: JSON.stringify(${body.startsWith('{') ? body : `'${body}'`})` : ''}\n})`;
+      } else if (targetLang === 'axios') {
+        const h = Object.entries(headers).map(([k, v]) => `      '${k}': '${v}'`).join(',\n');
+        result = `axios({\n  method: '${method}',\n  url: '${url}',\n  headers: {\n${h}\n  }${body ? `,\n  data: ${body.startsWith('{') ? body : `'${body}'`}` : ''}\n})`;
+      } else if (targetLang === 'xhr') {
+        const h = Object.entries(headers).map(([k, v]) => `  xhr.setRequestHeader('${k}', '${v}');`).join('\n');
+        result = `const xhr = new XMLHttpRequest();\nxhr.open('${method}', '${url}');\n${h}\nxhr.onload = () => console.log(xhr.responseText);\n${body ? `xhr.send(${body.startsWith('{') ? body : `'${body}'`});` : 'xhr.send();'}`;
+      } else if (targetLang === 'python') {
+        const h = Object.entries(headers).map(([k, v]) => `    '${k}': '${v}'`).join(',\n');
+        const bodyStr = body ? (body.startsWith('{') ? body : "'" + body + "'") : '';
+        result = `import requests\n\nheaders = {\n${h}\n}\nresponse = requests.request(\n  '${method}',\n  '${url}',\n  headers=headers${bodyStr ? `,\n  json=${bodyStr}` : ''}\n)\nprint(response.text)`;
+      } else if (targetLang === 'node') {
+        const h = Object.entries(headers).map(([k, v]) => `    '${k}': '${v}'`).join(',\n');
+        result = `const https = require('https');\n\nconst options = {\n  hostname: '${new URL(url).hostname}',\n  path: '${new URL(url).pathname}',\n  method: '${method}',\n  headers: {\n${h}\n  }\n};\n\nconst req = https.request(options, res => {\n  let data = '';\n  res.on('data', chunk => data += chunk);\n  res.on('end', () => console.log(data));\n});\n\n${body ? `req.write(${body.startsWith('{') ? body : `'${body}'`});\n` : ''}req.end();`;
+      }
+
+      setOutput(result);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Failed to parse cURL');
+    }
+  };
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-300">
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center space-y-3">
-        <p className="text-sm font-semibold text-amber-800">Coming Soon</p>
-        <p className="text-xs text-amber-700">
-          Use <a href="/developer/curl-to-code/" className="underline font-medium">cURL to Code Converter</a> instead — supports fetch, axios, XHR, Python, and PHP.
-        </p>
+    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">cURL to Code Converter</h2>
+        <div className="flex flex-wrap gap-2">
+          {['fetch', 'axios', 'xhr', 'python', 'node'].map(lang => (
+            <button key={lang} onClick={() => setTargetLang(lang as any)} className={`px-3 py-1.5 text-sm rounded-lg ${targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>{lang}</button>
+          ))}
+        </div>
+        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-96 overflow-auto">{output}</pre>}
       </div>
     </div>
   );

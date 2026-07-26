@@ -11,6 +11,9 @@ import { CommandMenu } from "./CommandMenu";
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
+
+const { freeTierTotal } = getCachedToolCounts();
 
 const MENU_COLUMN_DEFS = [
   { title: "Image", icon: "🖼", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg"] },
@@ -341,10 +344,10 @@ export function Header() {
                     </p>
                     <div className="space-y-0.5">
                       {[
-                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent('277+ free privacy-first browser tools. Zero servers, zero uploads.')}&url=${encodeURIComponent('https://toolzum.com')}` },
+                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. Zero servers, zero uploads.`)}&url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'LinkedIn', emoji: 'in', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'Facebook', emoji: 'f', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}` },
-                        { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent('277+ free privacy-first browser tools: https://toolzum.com')}` },
+                        { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}` },
                       ].map(p => (
                         <a
                           key={p.name}
@@ -468,11 +471,11 @@ export function Header() {
                 <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">Share Toolzum</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   {[
-                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent('277+ free privacy-first browser tools. Zero servers, zero uploads.')}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
+                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. Zero servers, zero uploads.`)}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
                     { emoji: 'in', title: 'Share on LinkedIn', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-blue-600 hover:border-blue-500/30' },
                     { emoji: 'f', title: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-indigo-600 hover:border-indigo-500/30' },
                     { emoji: 'IG', title: 'Share on Instagram', href: 'https://www.instagram.com/', hover: 'hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 hover:border-pink-500/30' },
-                    { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent('277+ free privacy-first browser tools: https://toolzum.com')}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
+                    { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
                     { emoji: 'RD', title: 'Share on Reddit', href: `https://reddit.com/submit?url=https://toolzum.com&title=Toolzum+—+privacy-first+browser+tools`, hover: 'hover:text-white hover:bg-orange-600 hover:border-orange-500/30' },
                     { emoji: 'TG', title: 'Share on Telegram', href: `https://t.me/share/url?url=https://toolzum.com&text=${encodeURIComponent('Check out Toolzum — privacy-first browser tools')}`, hover: 'hover:text-white hover:bg-sky-600 hover:border-sky-500/30' },
                   ].map(p => (

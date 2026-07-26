@@ -8,6 +8,7 @@ export default function AiDocumentChat() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDocumentReady, setIsDocumentReady] = useState(false);
+  const [documentText, setDocumentText] = useState<string>('');
 
   const [messages, setMessages] = useState<{ role: 'user' | 'ai', content: string }[]>([]);
   const [input, setInput] = useState('');
@@ -20,46 +21,100 @@ export default function AiDocumentChat() {
     }
   }, [messages, isTyping]);
 
-  const processDocument = () => {
-    if (!file) return;
-    setIsProcessing(true);
-    setTimeout(() => {
-      setIsProcessing(false);
-      setIsDocumentReady(true);
-      setMessages([
-        { role: 'ai', content: `AI Document Chat requires a server-side vector database (e.g., Cloudflare Vectorize) and an LLM API. This tool is under development and will be available in a future update.` }
-      ]);
-    }, 1000);
+  const extractTextFromFile = async (file: File): Promise<string> => {
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    if (file.type === 'application/pdf') {
+      const pdfjsLib = await import('pdfjs-dist');
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+      const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
+      let text = '';
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        text += content.items.map((item: any) => item.str).join(' ') + '\n';
+      }
+      return text.slice(0, 15000);
+    } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      const mammoth = await import('mammoth');
+      const result = await mammoth.extractRawText({ arrayBuffer });
+      return result.value.slice(0, 15000);
+    } else if (file.type === 'text/plain') {
+      return new TextDecoder().decode(uint8Array).slice(0, 15000);
+    }
+    throw new Error('Unsupported file type');
   };
 
-  const handleSend = () => {
+  const processDocument = async () => {
+    if (!file) return;
+    setIsProcessing(true);
+    try {
+      const text = await extractTextFromFile(file);
+      setDocumentText(text);
+      setIsDocumentReady(true);
+      setMessages([
+        { role: 'ai', content: `Document "${file.name}" processed. I've extracted ${text.length} characters of text. You can now ask questions about its content.\n\nNote: This is a simplified chat - the entire document text is sent with each question (no vector search). For production RAG, a vector database would be needed.` }
+      ]);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Failed to process document');
+      setMessages([
+        { role: 'ai', content: `Error processing document: ${err instanceof Error ? err.message : 'Unknown error'}` }
+      ]);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleSend = async () => {
     if (!input.trim()) return;
     const userMsg = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsTyping(true);
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: 'ai', 
-        content: `This feature is under development. Real document chat will be available once a vector database and LLM API are connected.`
-      }]);
+
+    try {
+      const systemPrompt = documentText 
+        ? `You are a helpful assistant answering questions about a document. Here is the document content:\n\n${documentText}\n\nAnswer the user's question based on this document. If the answer isn't in the document, say so.`
+        : 'You are a helpful assistant.';
+
+      const res = await fetch('/api/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [
+            { role: 'system', content: systemPrompt },
+            ...messages.map(m => ({ role: m.role === 'ai' ? 'assistant' : m.role, content: m.content })),
+            { role: 'user', content: userMsg }
+          ],
+          temperature: 0.3
+        })
+      });
+
+      if (!res.ok) throw new Error('AI request failed');
+      const data: { content?: string } = await res.json();
+      setMessages(prev => [...prev, { role: 'ai', content: data.content || 'No response' }]);
+    } catch (err) {
+      toast.error('Failed to get AI response');
+      setMessages(prev => [...prev, { role: 'ai', content: `Error: ${err instanceof Error ? err.message : 'Unknown error'}` }]);
+    } finally {
       setIsTyping(false);
-    }, 800);
+    }
   };
 
   if (!file || !isDocumentReady) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
         <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
-          <strong>AI Document Chat (Coming Soon):</strong> Upload a PDF or Word document and ask questions. Requires server-side vector database — under development.
+          <strong>AI Document Chat:</strong> Upload a PDF, DOCX, or TXT file and ask questions about its content. Uses Gemini AI with full document context (simplified RAG - no vector search).
         </div>
         
         {!file ? (
           <FileUploader 
-            accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+            accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" 
             onFileSelect={(f) => setFile(f)} 
             title="Upload Document"
-            subtitle="Supports PDF, DOCX (Max 50MB)"
+            subtitle="Supports PDF, DOCX, TXT (Max 50MB)"
           />
         ) : (
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl text-center space-y-6">
@@ -75,7 +130,7 @@ export default function AiDocumentChat() {
               disabled={isProcessing}
               className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
             >
-              {isProcessing ? "Vectorizing Document..." : "Analyze & Chat"}
+              {isProcessing ? "Extracting Text..." : "Process & Chat"}
             </button>
             <button 
               onClick={() => setFile(null)}
@@ -98,14 +153,14 @@ export default function AiDocumentChat() {
           </div>
           <div>
             <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-xs">{file.name}</h3>
-            <p className="text-emerald-400 text-xs">Vectorized & Ready</p>
+            <p className="text-emerald-400 text-xs">Ready — {documentText.length} chars loaded</p>
           </div>
         </div>
         <button 
-          onClick={() => { setFile(null); setIsDocumentReady(false); setMessages([]); }}
+          onClick={() => { setFile(null); setIsDocumentReady(false); setMessages([]); setDocumentText(''); }}
           className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
-          Upload New Document
+          New Document
         </button>
       </div>
 

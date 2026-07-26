@@ -8,7 +8,9 @@ import {
   Lock,
   Ban
 } from "lucide-react";
-import { toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
+
+const { totalImplemented, seoVariants } = getCachedToolCounts();
 
 export default function AboutPage() {
 
@@ -48,7 +50,7 @@ export default function AboutPage() {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">{toolsRegistry.length}</div>
+            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">{totalImplemented}</div>
             <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Active Tools</div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
@@ -73,7 +75,7 @@ export default function AboutPage() {
           <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Built by you, for you.</h2>
           <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             Built by a solo developer who was tired of uploading confidential PDFs and images to random cloud servers 
-            just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{toolsRegistry.length}+ tools</strong> 
+            just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{totalImplemented}+ tools</strong> 
             that never touch a server. The browser is all you need.
           </p>
           <p className="text-sm text-[var(--text-muted)] mt-4">

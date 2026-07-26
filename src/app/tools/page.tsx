@@ -1,15 +1,15 @@
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
-import { toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
 
-const toolCount = toolsRegistry.length;
+const { totalImplemented, seoVariants } = getCachedToolCounts();
 
 export const metadata = {
-  title: `${toolCount}+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
-  description: `Browse ${toolCount}+ free online tools for PDF, images, video, audio, AI, text, code, and more. All process locally in your browser — nothing is uploaded.`,
+  title: `${totalImplemented}+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
+  description: `Browse ${totalImplemented}+ free online tools for PDF, images, video, audio, AI, text, code, and more. All process locally in your browser — nothing is uploaded.`,
   alternates: { canonical: "https://toolzum.com/tools/" },
   openGraph: {
-    title: `Free Online Tools — ${toolCount}+ Browser-Based Utilities | Toolzum`,
-    description: `Stop uploading files to servers. ${toolCount}+ free tools for PDF, images, video, audio, AI, text, and code — all process locally in your browser. Nothing leaves your device.`,
+    title: `Free Online Tools — ${totalImplemented}+ Browser-Based Utilities | Toolzum`,
+    description: `Stop uploading files to servers. ${totalImplemented}+ free tools for PDF, images, video, audio, AI, text, and code — all process locally in your browser. Nothing leaves your device.`,
   },
 };
 
@@ -18,7 +18,7 @@ const jsonLd = {
   "@type": "WebSite",
   name: "Toolzum",
   url: "https://toolzum.com",
-  description: `${toolCount}+ privacy-first online tools for PDF, images, video, audio, AI, text, and code.`,
+  description: `${totalImplemented}+ privacy-first online tools for PDF, images, video, audio, AI, text, and code.`,
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -36,7 +36,7 @@ export default function ToolsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ToolsDirectoryClient initialTools={toolsRegistry} />
+      <ToolsDirectoryClient />
     </>
   );
 }

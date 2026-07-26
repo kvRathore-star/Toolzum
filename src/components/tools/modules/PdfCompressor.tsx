@@ -6,7 +6,7 @@ import { FileUploader } from '../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 
-export default function PdfCompressor() {
+export default function PdfOptimizer() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -23,17 +23,14 @@ export default function PdfCompressor() {
     };
   }, [outputUrl]);
 
-  const processCompress = async () => {
+  const processOptimize = async () => {
     if (!pdfFile) return;
     
     setIsProcessing(true);
     try {
       const arrayBuffer = await pdfFile.arrayBuffer();
-      // Load the PDF. pdf-lib will parse the objects.
       const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-      // Basic client-side optimization techniques:
-      // 1. Remove metadata
       pdf.setTitle('');
       pdf.setAuthor('');
       pdf.setSubject('');
@@ -41,16 +38,15 @@ export default function PdfCompressor() {
       pdf.setProducer('');
       pdf.setCreator('');
 
-      // 2. Save with object streams to compress the internal structure
-      const compressedPdfBytes = await pdf.save({ useObjectStreams: true });
+      const optimizedPdfBytes = await pdf.save({ useObjectStreams: true });
       
-      const blob = new Blob([compressedPdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = new Blob([optimizedPdfBytes as unknown as BlobPart], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
       setOutputSize(blob.size);
     } catch (e) {
-      console.error("PDF Compression failed", e);
-      toast.error("Failed to compress PDF. The file might be encrypted or corrupted.");
+      console.error("PDF Optimization failed", e);
+      toast.error("Failed to optimize PDF. The file might be encrypted or corrupted.");
     } finally {
       setIsProcessing(false);
     }
@@ -59,13 +55,13 @@ export default function PdfCompressor() {
   if (!pdfFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-[var(--text-secondary)] text-sm font-medium">
-          <strong>Basic PDF Optimization:</strong> Removes unnecessary metadata and optimizes object streams client-side. Heavy image compression requires server-side tools.
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm font-medium">
+          <strong>⚠ PDF Optimizer (Client-Side Only):</strong> This tool strips metadata and optimizes internal PDF structure using pdf-lib. It <strong>cannot compress images</strong> (the main driver of PDF size). For significant size reduction on scanned/image-heavy PDFs, server-side tools with image recompression are required.
         </div>
         <FileUploader 
           accept="application/pdf" 
           onFileSelect={handleFileSelect} 
-          title="Upload PDF to Compress"
+          title="Upload PDF to Optimize"
         />
       </div>
     );
@@ -89,15 +85,15 @@ export default function PdfCompressor() {
       </div>
 
       <div className="p-6 border border-[var(--border-subtle)] bg-[var(--bg-elevated)] rounded-2xl shadow-[var(--shadow-md)]">
-        <h4 className="text-[var(--text-primary)] font-medium mb-4">Compression Strategy</h4>
+        <h4 className="text-[var(--text-primary)] font-medium mb-4">Optimization Strategy</h4>
         <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-4 rounded-xl mb-6">
           <p className="text-sm text-[var(--text-secondary)]">
-            Client-side compression optimizes the internal PDF structure and strips hidden metadata. It is highly effective for text-heavy documents but may not significantly reduce files containing large scanned images.
+            Client-side optimization removes metadata (title, author, keywords, etc.) and enables object streams to compress the internal PDF structure. This is effective for text-heavy documents but provides minimal reduction for files with large embedded images.
           </p>
         </div>
 
         <button 
-          onClick={processCompress}
+          onClick={processOptimize}
           disabled={isProcessing}
           className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl shadow-[var(--shadow-md)] transition-all active:scale-95 disabled:opacity-50"
         >

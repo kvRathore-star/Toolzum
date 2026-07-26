@@ -1,17 +1,17 @@
 import { HomeClient } from "@/components/HomeClient";
-import { toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
 import type { Metadata } from "next";
 
-const toolCount = toolsRegistry.length;
+const { totalImplemented } = getCachedToolCounts();
 
 export const metadata: Metadata = {
-  title: `Toolzum — ${toolCount}+ Free Privacy-First Browser Tools`,
+  title: `Toolzum — ${totalImplemented}+ Privacy-First Browser Tools`,
   description:
-    `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
+    `${totalImplemented}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
   openGraph: {
-    title: `Toolzum — ${toolCount}+ Free Privacy-First Browser Tools`,
+    title: `Toolzum — ${totalImplemented}+ Privacy-First Browser Tools`,
     description:
-      `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
+      `${totalImplemented}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
 };
