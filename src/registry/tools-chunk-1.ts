@@ -1973,6 +1973,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. ',
     dependencies: "Sharp / Browser Canvas",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload Your Image",
+                "desc": "Upload any image in JPEG, PNG, GIF, BMP, TIFF, WebP, AVIF, or HEIC format. The tool reads the source format and displays its properties — dimensions, bit depth, color space, and alpha channel presence."
+          },
+          {
+                "title": "2. Choose Output Format",
+                "desc": "Select your target format from the dropdown. Each format shows estimated file size and feature compatibility — for example, JPEG doesn't support transparency, while PNG does. Quality sliders appear for lossy formats."
+          },
+          {
+                "title": "3. Adjust Settings and Convert",
+                "desc": "For lossy formats, set quality percentage. JPEG offers 1-100, WebP offers 0-100 with lossless option, AVIF adjusts quality versus encoding speed. Download the converted file or choose to save in multiple formats at once."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which format should I choose for the best compression?",
+                "answer": "AVIF offers the best compression-to-quality ratio today, followed by WebP, then JPEG. For photos, AVIF saves 50% more space than JPEG at the same quality level. For graphics with few colors, PNG is often smallest."
+          },
+          {
+                "question": "Will converting between formats reduce my image quality?",
+                "answer": "Converting from lossless to lossy (PNG to JPEG) degrades quality permanently. Converting lossy to lossless (JPEG to PNG) preserves existing quality but adds file size without restoring lost detail."
+          },
+          {
+                "question": "Can I convert to a format that supports animation?",
+                "answer": "Yes. Convert to GIF for simple animations (256 colors max), WebP for efficient animations with better color, or APNG for high-quality animations with full alpha support."
+          }
+    ]
   },
   {
     id: "data-converter-1",
@@ -2463,6 +2491,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online RAW Image Converter — Convert RAW camera images (CR2, NEF, ARW, DNG) to JPG, PNG, or WebP formats. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload a RAW Photo",
+                "desc": "Upload RAW files from major camera brands — CR2/CR3 (Canon), NEF (Nikon), ARW (Sony), RAF (Fujifilm), DNG (Adobe), and more. The tool reads the camera metadata and sensor data for processing."
+          },
+          {
+                "title": "2. Adjust RAW Processing",
+                "desc": "Set white balance from presets (Daylight, Cloudy, Tungsten, Flash) or use a custom color temperature. Adjust exposure compensation, contrast, highlights, shadows, and clarity. The demosaicing algorithm interpolates the Bayer pattern sensor data."
+          },
+          {
+                "title": "3. Export Processed Image",
+                "desc": "Choose output format — JPEG for sharing, PNG for web, TIFF for further editing, or DNG for archival. Set bit depth (8 or 16-bit) and color space (sRGB, Adobe RGB, ProPhoto RGB). Download the developed image."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is this Converter as powerful as Lightroom or Capture One?",
+                "answer": "It handles essential RAW development — white balance, exposure, and basic color grading — but lacks advanced tools like local adjustments, lens corrections, and noise profiling specific to your camera model."
+          },
+          {
+                "question": "What's the difference between 8-bit and 16-bit export?",
+                "answer": "16-bit exports retain far more color information from the RAW sensor data, preventing banding in smooth gradients like skies. 8-bit files are smaller and web-ready but clip subtle color variations."
+          },
+          {
+                "question": "Can I convert Sony ARW files that Lightroom doesn't support yet?",
+                "answer": "If your ARW file is from a very new Sony camera, it may not be in our decoder library yet. We update the supported camera list quarterly. DNG files from Adobe's converter are always supported."
+          }
+    ]
   },
   {
     id: "334",
@@ -2483,6 +2539,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Collage Maker — Combine multiple photos into beautiful collages. Grid, strip, and featured layouts. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Select Your Photos",
+                "desc": "Choose 2 to 12 photos from your device for the collage. Thumbnails appear in the upload tray. Drag them to reorder — the first photo becomes the primary slot in template layouts that have a featured image."
+          },
+          {
+                "title": "2. Pick a Layout and Spacing",
+                "desc": "Browse grid, freestyle, and themed layouts. Adjust spacing between photos with the gap slider, set rounded corner radius, and choose a background color or pattern. Each layout auto-arranges photos into balanced compositions."
+          },
+          {
+                "title": "3. Add Filters and Export",
+                "desc": "Apply a uniform filter across all photos for a cohesive look. Add text captions, dates, or borders. Download the collage as a single high-resolution JPEG or PNG file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens if my photos have different aspect ratios?",
+                "answer": "The layout engine crops photos to fit each slot while keeping the most important content centered. You can manually reposition each photo within its slot if the auto-crop cuts something important."
+          },
+          {
+                "question": "Can I save a collage template for reuse?",
+                "answer": "Not directly, but you can save the collage project as you work. Reopening the saved project restores your layout, photos, spacing, and filters so you can make adjustments or create variations."
+          },
+          {
+                "question": "What's the maximum resolution for exported collages?",
+                "answer": "Exports at up to 12000x12000 pixels total. The tool divides the resolution across slots, so a 4-photo grid at 6000x6000 gives each photo a 3000x3000 area — plenty for high-quality prints."
+          }
+    ]
   },
   {
     id: "336",
@@ -2493,6 +2577,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Chart Maker — Create stunning bar, line, pie, doughnut, and area charts with custom colors and labels. ',
     dependencies: "none",
     showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Enter Your Data",
+                "desc": "Type or paste data into the table grid. Add rows and columns manually or import a CSV file. Label your axes and data series. The tool supports bar, line, pie, area, scatter, and radar chart types."
+          },
+          {
+                "title": "2. Customize Chart Appearance",
+                "desc": "Choose colors, fonts, legends, grid lines, and data labels. Set axis ranges and tick mark intervals. Enable 3D perspective for bar and pie charts. Update the title and add annotations on specific data points."
+          },
+          {
+                "title": "3. Export Chart as Image",
+                "desc": "Preview the chart at full resolution. Download as PNG for presentations, JPEG for documents, or SVG for further editing in vector software. The chart renders at 2x resolution for Retina display clarity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What's the maximum number of data points I can visualize?",
+                "answer": "You can have up to 500 data points per series and 20 series per chart. Beyond that, chart readability degrades. For large datasets, consider aggregating or using a scatter plot with smaller markers."
+          },
+          {
+                "question": "Can I create a combo chart with multiple chart types?",
+                "answer": "Yes, the mixed chart option lets you assign different types to different series. For example, show revenue as bars and growth rate as a line on the same chart with dual Y-axes."
+          },
+          {
+                "question": "Is the SVG export fully editable in Illustrator?",
+                "answer": "Yes, SVG exports maintain all chart elements as separate objects — text labels, data points, legends, axes, and gridlines. Open the SVG in Illustrator or Inkscape to change colors, fonts, or individual elements."
+          }
+    ]
   },
   {
     id: "337",
@@ -2503,6 +2615,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Background Changer — Replace image backgrounds with solid color, gradient, or another image. Coming soon.',
     dependencies: "none",
     showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload a Photo with a Subject",
+                "desc": "Choose a photo where the subject is clearly separated from the background. Portraits, product shots, and pet photos work best. The subject should be in focus with the background at a different depth."
+          },
+          {
+                "title": "2. AI Background Removal",
+                "desc": "The AI automatically detects and masks the foreground subject. It preserves fine details like hair edges and fuzzy boundaries. Review the mask and use the refine brush to fix any missed spots."
+          },
+          {
+                "title": "3. Choose and Set New Background",
+                "desc": "Pick a solid color from the palette, upload your own background image, or select from stock backgrounds. The tool adjusts lighting and shadows to make the subject look naturally placed in the new scene."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I blur the original background instead of replacing it?",
+                "answer": "Yes, there's a background blur slider that creates a depth-of-field effect. This is useful for portraits where you want to keep the location context but reduce distraction."
+          },
+          {
+                "question": "Does the tool match lighting between subject and new background?",
+                "answer": "Basic color matching adjusts white balance and exposure to blend the subject with the new background. For complex lighting directions, you may need a photo editor, but standard scenarios look natural."
+          },
+          {
+                "question": "Can I use a video as the new background?",
+                "answer": "No, only static images are supported as backgrounds. However, the output image can be used as a frame in video editing software if you're building a composite for video production."
+          }
+    ]
   },
   {
     id: "338",
@@ -2513,6 +2653,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Unblur / Sharpen — Fix blurry photos or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload a Blurry Image",
+                "desc": "Upload any photo that needs sharpening — camera misfocus, motion blur, or soft lens issues. JPEG, PNG, WebP, and RAW-derived formats are supported. The tool analyzes the type and amount of blur present."
+          },
+          {
+                "title": "2. Adjust Sharpening Parameters",
+                "desc": "Three modes address different blur types: Deconvolution for out-of-focus, Motion Deblur for camera shake, and AI Sharpen for general softness. Adjust the strength slider and preview the result in real-time."
+          },
+          {
+                "title": "3. Fine-Tune and Export",
+                "desc": "Avoid oversharpening — it creates halos around edges and increases noise. Use the noise suppression slider to keep grain under control. Download the sharpened image in your original format or a new one."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can motion blur from a fast-moving subject be fixed?",
+                "answer": "The Motion Deblur mode is designed for camera shake, not subject motion. If a moving subject is blurred but the background is sharp, the tool struggles since the blur direction varies per pixel."
+          },
+          {
+                "question": "What causes the halo effect around edges when sharpening?",
+                "answer": "Halos occur when the sharpening radius is too large relative to image features. The sharpening algorithm increases contrast at edges, and excessive radius creates visible bright and dark bands. Start with a small radius."
+          },
+          {
+                "question": "Is there a way to sharpen only specific parts of an image?",
+                "answer": "No selective sharpening is built in, but you can crop the area you want sharpened, process it, then composite it back. The global sharpening affects the entire frame equally."
+          }
+    ]
   },
   {
     id: "339",
@@ -2523,6 +2691,34 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online GIF Editor — Resize, change speed, reverse, optimize colors, and extract frames from animated GIFs. ',
     dependencies: "@ffmpeg/ffmpeg, jszip",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload a GIF File",
+                "desc": "Select an animated GIF from your device. The tool displays each frame as a timeline strip. Larger files with more frames take longer to load — animations up to 200 frames and 50MB are supported."
+          },
+          {
+                "title": "2. Edit Individual Frames",
+                "desc": "Delete, duplicate, or reorder frames from the timeline. Adjust the delay time per frame or apply a uniform speed to all. Add text overlays, draw on frames, or apply filters to selected frame ranges."
+          },
+          {
+                "title": "3. Optimize and Export",
+                "desc": "Set output quality: reduce colors to 64 or 32 for smaller file sizes, enable dithering for smooth gradients, and trim unwanted frames. Download the edited GIF or export as a video MP4 for better compression."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I add text that appears on every frame?",
+                "answer": "Yes, the persistent text layer stamps your text onto every frame at the same position. For animated text that moves per frame, you'll need to position it individually on each frame."
+          },
+          {
+                "question": "Why is my GIF larger after editing than before?",
+                "answer": "GIF compression is lossless-frame-based. Adding frames, increasing dimensions, or using more colors increases file size. Use the optimization settings to reduce the color palette and enable lossy compression to compensate."
+          },
+          {
+                "question": "Does the tool support transparency in GIFs?",
+                "answer": "Yes, GIFs support single-color transparency. You can set one color as transparent per frame. For multi-color transparency or alpha channels, consider converting to APNG or WebP instead."
+          }
+    ]
   },
   {
     id: "340",
@@ -3005,7 +3201,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to PNG — Convert scalable vector graphics (SVG) into raster PNG images. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG File",
+                "desc": "Upload a Scalable Vector Graphic file. The tool parses the SVG XML and renders it at a specified resolution. SVGs with CSS styles, embedded fonts, and complex filters are supported."
+          },
+          {
+                "title": "2. Set Output Dimensions",
+                "desc": "Enter the desired PNG width and height in pixels. SVG is resolution-independent, so you can render at any size without quality loss. Choose from presets like social media sizes or print DPI."
+          },
+          {
+                "title": "3. Configure Background and Download",
+                "desc": "Choose a background color or leave it transparent. The SVG viewBox determines the visible area. Download the PNG at your specified resolution, preserving all vector detail in raster form."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will the PNG be sharp at any size from an SVG source?",
+                "answer": "Yes, SVGs scale to any resolution without pixelation. A 24x24 icon SVG can render to a 1024x1024 PNG with perfectly sharp edges since the vector data is recalculated at the target resolution."
+          },
+          {
+                "question": "What happens to SVG effects like blur and drop shadows in PNG?",
+                "answer": "SVG filter effects are rendered into the PNG pixels. Blurs, shadows, gradients, and masks are all rasterized. The PNG captures exactly what the SVG would display in a browser."
+          },
+          {
+                "question": "Does text in the SVG become editable in the PNG?",
+                "answer": "No, the SVG text is rendered as raster pixels. If you need editable text, keep the original SVG. The PNG captures the visual appearance only, including all fonts rendered at the specified size."
+          }
+    ]
   },
   {
     id: "364",
@@ -3015,7 +3239,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG vector file for conversion to JPEG. The tool rasterizes the vector at your chosen resolution. Since SVG is resolution-independent, you can generate JPEGs at any size."
+          },
+          {
+                "title": "2. Set Dimensions and Background",
+                "desc": "Enter width and height in pixels. SVG supports transparency, but JPEG doesn't. Choose a background color — white is standard. The SVG renders onto the background color, then JPEG compression is applied."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Quality 1-100. For vector graphics, use quality 90+ to avoid visible artifacts around sharp vector edges. JPEG compression adds blurring along crisp lines that were perfectly sharp in the SVG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does my SVG's sharp edges look blurry in the JPEG?",
+                "answer": "JPEG compression creates artifacts around high-contrast edges. SVG's mathematically perfect lines become softened by the DCT quantization process. Higher quality settings reduce this effect."
+          },
+          {
+                "question": "Can I preserve SVG gradients without banding in JPEG?",
+                "answer": "JPEG handles smooth gradients better than GIF but may still show subtle banding at low quality settings. Use quality 95+ for gradient-heavy SVGs to minimize visible transitions."
+          },
+          {
+                "question": "What JPEG size should I use for printing SVG artwork?",
+                "answer": "Calculate based on print DPI. For 300 DPI at 8x10 inches, set dimensions to 2400x3000 pixels. The SVG will render at full sharpness at that resolution."
+          }
+    ]
   },
   {
     id: "365",
@@ -3025,7 +3277,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert PNG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG image to convert to GIF format. The tool analyzes the image's color count. PNG supports 16.7 million colors while GIF is limited to 256, so some reduction is necessary."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set the target palette size from 2 to 256 colors. The tool quantizes the PNG's colors to fit within the limit. Enable dithering to simulate missing colors through pixel patterns — Floyd-Steinberg dithering gives the best visual result."
+          },
+          {
+                "title": "3. Handle Transparency and Download",
+                "desc": "GIF supports single-color transparency. Pick which color in the palette should be transparent, matching the PNG's transparent areas. Download the GIF — ideal for simple graphics, logos, and web badges where GIF format is required."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens to PNG's alpha channel in GIF conversion?",
+                "answer": "GIF supports only binary transparency — each pixel is either fully opaque or fully transparent. PNG's smooth alpha gradients (like soft shadows) are lost. Use dithering to approximate the transparent edge."
+          },
+          {
+                "question": "Can I convert a static PNG into an animated GIF?",
+                "answer": "No, PNG-to-GIF converts a single static image. For animations, start with an animated GIF or APNG file. This conversion preserves the GIF as a single-frame static image only."
+          },
+          {
+                "question": "Why does my gradient PNG look banded as a GIF?",
+                "answer": "Smooth gradients require thousands of colors to appear seamless. GIF's 256-color limit forces the gradient into visible color steps. Increased dithering helps disguise the bands but won't eliminate them entirely."
+          }
+    ]
   },
   {
     id: "366",
@@ -3035,7 +3315,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JPG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG image to convert to GIF format. The tool evaluates the image's color complexity. JPEG supports 16.7 million colors, but GIF is limited to 256 — significant color reduction is required."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set the target palette size (2-256 colors). JPEG photos with smooth gradients need careful quantization. Enable dithering — Floyd-Steinberg creates the most visually pleasing results by scattering pixels of available colors."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "GIF supports one transparent color. You can select a color from the reduced palette to become transparent. The converted GIF is well-suited for simple web graphics, reaction images, and low-color applications."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will my JPEG photo look good as an 256-color GIF?",
+                "answer": "Photographs lose significant quality when reduced to 256 colors. Gradients show banding, and fine color details disappear. GIF is better suited for graphics, logos, and illustrations with limited color palettes."
+          },
+          {
+                "question": "How does dithering affect the JPEG-to-GIF conversion?",
+                "answer": "Dithering scatters pixels of available colors to simulate missing shades. It reduces color banding but adds a grainy texture. For smooth-skinned portraits, dithering can look unnatural — try without it first."
+          },
+          {
+                "question": "Can I convert a multi-layer JPEG to an animated GIF?",
+                "answer": "No, JPEG is a single-image format. This conversion produces a single-frame GIF. For animations, you need a sequence of images or an existing animated source file."
+          }
+    ]
   },
   {
     id: "367",
@@ -3045,7 +3353,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert WEBP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP image (static or animated) for conversion to GIF. For animated WebP, all frames are extracted. The tool reads frame timing, disposal methods, and color data from the WebP source."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "GIF supports only 256 colors. Set the palette size (2-256). WebP animations in full color need significant quantization. Choose a dithering algorithm — Floyd-Steinberg or Stucki — to simulate missing colors."
+          },
+          {
+                "title": "3. Process Animation and Download",
+                "desc": "If converting an animated WebP, set frame delay and looping behavior. GIF frame delays have 10ms minimum granularity. Download the GIF — simpler animations with few colors convert best."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens to WebP's full alpha transparency in GIF?",
+                "answer": "GIF supports only binary transparency (on/off). WebP's smooth alpha edges become hard edges in GIF, potentially creating visible outlines around semi-transparent elements like shadows or reflections."
+          },
+          {
+                "question": "Can I preserve the animation length from the original WebP?",
+                "answer": "Frame count and timing are preserved as closely as possible. GIF timing is limited to multiples of 10ms, so very fast animations may play slightly slower. The loop count from WebP is carried over."
+          },
+          {
+                "question": "Why does my animated WebP look choppy as a GIF?",
+                "answer": "GIF's 256-color limit causes detail loss in each frame, making smooth motion appear less fluid. The dithering pattern also changes between frames, creating visible flickering in areas with smooth gradients."
+          }
+    ]
   },
   {
     id: "368",
@@ -3055,7 +3391,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP File",
+                "desc": "Upload an uncompressed BMP file for conversion to JPEG. The tool reads the raw pixel data. BMP files are large, so expect fast decoding. JPEG will dramatically reduce the file size."
+          },
+          {
+                "title": "2. Set JPEG Quality",
+                "desc": "Quality 1-100. Since BMP is uncompressed, quality 85-95 preserves most visual information. Each subsequent JPEG save adds generation loss — this is the first lossy step from the original."
+          },
+          {
+                "title": "3. Handle Transparency and Download",
+                "desc": "BMP may have alpha (32-bit BMP). JPEG doesn't support transparency — choose a background color. Download the JPEG — typically 10-20x smaller than the BMP source file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will the JPEG from BMP look better than JPEG from another JPEG?",
+                "answer": "Yes, since BMP is lossless, you're compressing from pristine source data. There's no generational loss from previous compression. The JPEG will look as good as the original BMP allows."
+          },
+          {
+                "question": "What BMP bit depth converts best to JPEG?",
+                "answer": "24-bit BMPs convert best since JPEG supports full 24-bit color. 32-bit BMPs with alpha require background handling. 8-bit BMPs from GIF-like sources will show posterization after JPEG compression."
+          },
+          {
+                "question": "How much space will I save converting BMP to JPEG?",
+                "answer": "Dramatically. A 24-bit 1920x1080 BMP is about 6MB. At JPEG quality 85, that becomes 200-500KB — a 90-95% reduction. The savings depend on image complexity."
+          }
+    ]
   },
   {
     id: "369",
@@ -3065,7 +3429,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to PNG. The tool reads the raw pixel data. BMP files are uncompressed, so PNG's lossless compression will significantly reduce file size while preserving every pixel."
+          },
+          {
+                "title": "2. Set PNG Compression",
+                "desc": "Compression level 0-9. Level 6 offers the best speed-to-size ratio. PNG's deflate compression works well on BMP data, especially images with large uniform color areas."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve bit depth — 24-bit BMP to 24-bit PNG, or 32-bit BMP with alpha to 32-bit PNG with full transparency. Download the PNG — 50-70% smaller than the BMP with identical quality."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is PNG always smaller than BMP?",
+                "answer": "Yes, PNG's deflate compression always produces smaller files than BMP's uncompressed storage. Simple images with large solid areas compress especially well. Complex noisy images still compress 20-40%."
+          },
+          {
+                "question": "Will converting BMP to PNG lose any quality?",
+                "answer": "No, PNG compression is completely lossless. Every pixel from the BMP is preserved identically. The file size decreases but the visual output is pixel-perfect."
+          },
+          {
+                "question": "Does PNG support all BMP color depths?",
+                "answer": "PNG supports 1, 2, 4, 8, 16, and 24/32-bit color depths, covering all standard BMP bit depths. Alpha channel from 32-bit BMP is preserved as PNG transparency."
+          }
+    ]
   },
   {
     id: "370",
@@ -3075,7 +3467,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF File",
+                "desc": "Upload a TIFF image for conversion to JPEG. The tool reads the TIFF's compression and pixel data. TIFF files from scanners and cameras are often large — JPEG will significantly reduce size."
+          },
+          {
+                "title": "2. Set JPEG Quality",
+                "desc": "Quality 1-100. For high-quality print TIFFs, use 90-95. For web use, 80-85 balances quality and file size. This is a lossy step — the JPEG will be smaller but will lose some TIFF detail."
+          },
+          {
+                "title": "3. Handle Transparency and Download",
+                "desc": "TIFF supports alpha and multiple pages. Choose a background color for transparency. Select which page to convert. Download the JPEG — universally compatible and much smaller than the TIFF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I convert a multi-page TIFF to multiple JPEGs?",
+                "answer": "Yes, each page can be extracted as a separate JPEG file. Specify the page number or convert all pages in sequence. Each page becomes its own JPEG image."
+          },
+          {
+                "question": "Does TIFF's 16-bit color depth matter for JPEG output?",
+                "answer": "JPEG supports only 8-bit per channel. TIFF's extra bit depth is discarded during conversion, potentially causing banding in smooth gradients that looked smooth in the 16-bit TIFF."
+          },
+          {
+                "question": "What JPEG quality preserves TIFF scan quality best?",
+                "answer": "Quality 95+ for archival scans. This minimizes visible loss from the TIFF source. For sharing documents, quality 85 is sufficient and produces much smaller files."
+          }
+    ]
   },
   {
     id: "371",
@@ -3085,7 +3505,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to PNG — Convert TIFF images into lossless PNG format for graphic design workflows. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for conversion to PNG. The tool decodes the TIFF and re-encodes losslessly to PNG. PNG provides a more universally supported lossless format than TIFF."
+          },
+          {
+                "title": "2. Set PNG Compression",
+                "desc": "Compression level 0-9. Level 6 is recommended. PNG's deflate compression typically matches or slightly beats TIFF's LZW compression for most images."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve bit depth — 8-bit TIFF to 8-bit PNG, 16-bit TIFF to 16-bit PNG. Alpha channels are preserved. Embed metadata. Download the PNG — compatible with all modern browsers and applications."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is PNG better than TIFF for web use?",
+                "answer": "Yes, PNG has native browser support and smaller file sizes. TIFF is overkill for web use — it lacks browser support and carries unnecessary overhead from its professional features."
+          },
+          {
+                "question": "Does PNG support TIFF's multi-page structure?",
+                "answer": "No, PNG is single-image only. Each TIFF page must be exported as a separate PNG file. APNG supports animation but not multi-page documents in the TIFF sense."
+          },
+          {
+                "question": "Will I lose TIFF metadata in the PNG conversion?",
+                "answer": "Basic metadata like ICC profiles and EXIF data are preserved. TIFF-specific fields like IPTC metadata and custom tags may not transfer. The pixel data is preserved losslessly."
+          }
+    ]
   },
   {
     id: "372",
@@ -3095,7 +3543,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert GIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to JPG — Convert GIF images into JPEG format with millions of colors. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF File",
+                "desc": "Upload a GIF file for conversion to JPEG. If the GIF is animated, only the first frame is converted. The tool reads the GIF's color palette and transparency information."
+          },
+          {
+                "title": "2. Handle Transparency and Palette",
+                "desc": "GIF supports only 256 colors and binary transparency. Choose a background color for transparent areas. The posterization from GIF's limited palette becomes fixed in the JPEG output."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Set quality 1-100. Quality 85 is recommended. JPEG compression will add artifacts on top of GIF's color banding and dithering. Download the JPEG — file size will be similar to or larger than the GIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will the JPEG quality be limited by the GIF's 256 colors?",
+                "answer": "Yes. The JPEG will encode the GIF's posterized colors, making banding and dithering patterns permanent. JPEG compression may soften the dithering pattern but won't restore smooth color transitions."
+          },
+          {
+                "question": "What happens to GIF animation when converting to JPEG?",
+                "answer": "Only the first frame of an animated GIF is converted. The remaining frames are discarded. For video-like content, extract frames individually or use a video conversion tool instead."
+          },
+          {
+                "question": "Why does my GIF look worse after JPEG conversion?",
+                "answer": "GIF's limited palette creates a specific look (posterization, dithering). JPEG adds compression artifacts and chroma subsampling on top, creating a combination of artifacts from both formats."
+          }
+    ]
   },
   {
     id: "373",
@@ -3105,7 +3581,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert GIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF File",
+                "desc": "Upload a GIF file for conversion to PNG. The tool extracts the GIF's first frame (or all frames for sprite sheets). PNG preserves the exact pixel data from the GIF."
+          },
+          {
+                "title": "2. Choose Frame Selection",
+                "desc": "For animated GIFs, select which frame to convert or extract all frames as individual PNGs. Each frame isexported as a separate PNG file."
+          },
+          {
+                "title": "3. Set Compression and Download",
+                "desc": "PNG compression level 0-9. GIF's 256 colors compress well with PNG since the limited palette creates large identical-color areas. Download the PNG — the file will be larger than the GIF but losslessly preserved."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will converting GIF to PNG improve the color quality?",
+                "answer": "No. PNG preserves the GIF's existing 256-color palette without improvement. The posterization and dithering from the GIF remain exactly the same. PNG stores the same pixels in a more widely-compatible container."
+          },
+          {
+                "question": "Is PNG better than GIF for animated content?",
+                "answer": "For static frames extracted from a GIF, PNG is excellent. For animations, use APNG instead of GIF. A static frame saved as PNG from an animated GIF is lossless and widely compatible."
+          },
+          {
+                "question": "Can GIF's single-color transparency be preserved in PNG?",
+                "answer": "Yes, and PNG improves on it. GIF's binary transparency becomes full alpha channel transparency in PNG. The hard transparent edge from GIF becomes the same in PNG but can be softened if you edit afterward."
+          }
+    ]
   },
   {
     id: "374",
@@ -3115,7 +3619,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert ICO images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to PNG — Extract Windows icon (.ico) files and convert them into universal PNG images. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload a Windows icon file for conversion to PNG. The tool reads all available sizes in the ICO and lets you choose which to extract. ICO files contain one or more embedded images."
+          },
+          {
+                "title": "2. Select Icon Size",
+                "desc": "Choose which icon size to extract — 16x16, 32x32, 48x48, 64x64, 128x128, or 256x256. Pick the size that matches your intended use. Larger sizes have more detail."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "ICO's alpha transparency is fully preserved in PNG. Choose compression level. Download the PNG — suitable for web use and general image editing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why extract ICO entries as separate PNGs?",
+                "answer": "PNG is universally supported while ICO is primarily for Windows icons. Extracting to PNG makes the icon graphic usable on any platform, in any application, and on the web."
+          },
+          {
+                "question": "Does ICO's 32-bit alpha transfer perfectly to PNG?",
+                "answer": "Yes, ICO stores 32-bit BGRA data which converts directly to PNG's RGBA. All transparency information is preserved identically."
+          },
+          {
+                "question": "Can I extract all sizes from an ICO at once?",
+                "answer": "Yes, the tool can extract every embedded size as a separate PNG file. This gives you a complete set of the icon's variants for different display contexts."
+          }
+    ]
   },
   {
     id: "375",
@@ -3125,7 +3657,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to PNG — Convert JPEG XL images into universally compatible PNG format. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to PNG. The tool decodes the JXL image data. JXL offers better compression than PNG, so the PNG output will be larger."
+          },
+          {
+                "title": "2. Set PNG Compression",
+                "desc": "Compression level 0-9. Level 6 is optimal. PNG preserves all pixel data decoded from the JXL source. If the JXL was lossless, the PNG is pixel-perfect."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve JXL's alpha channel in PNG transparency. Download the PNG — universally compatible with all browsers, applications, and platforms."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will the PNG be larger than the JXL source?",
+                "answer": "Yes, typically 20-35% larger than lossless JXL and 3-5x larger than lossy JXL at equivalent quality. PNG's deflate compression is less efficient than JXL's modular codec."
+          },
+          {
+                "question": "Does PNG preserve JXL's HDR tonemapping?",
+                "answer": "JXL HDR content is tonemapped to 8-bit SDR during PNG conversion. PNG cannot store HDR luminance data. The visual tonemap is preserved but the HDR metadata is lost."
+          },
+          {
+                "question": "Can I preserve JXL's higher bit depth in PNG?",
+                "answer": "PNG supports 16-bit per channel, which can preserve 10/12-bit JXL data without tonemapping. However, 16-bit PNG files are very large and not widely supported in web browsers."
+          }
+    ]
   },
   {
     id: "376",
@@ -3135,7 +3695,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to JPEG — Convert JPEG XL images into standard JPEG format for maximum compatibility. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to JPEG. The tool decodes the JXL and encodes to JPEG. JXL is more efficient than JPEG, so expect a size increase."
+          },
+          {
+                "title": "2. Handle Transparency",
+                "desc": "JXL supports alpha; JPEG doesn't. Choose a background color for transparent areas. White is standard for most applications."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Quality 1-100. To approximate JXL's visual quality, use 85-95. JPEG will introduce DCT blocking artifacts that weren't present in the JXL. Download the JPEG for maximum compatibility."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why downgrade from JXL to JPEG?",
+                "answer": "JPEG is universally supported. Every device, browser, and application can open JPEG. JXL adoption is limited. For sharing files broadly, JPEG is the safest choice."
+          },
+          {
+                "question": "Will JXL's better compression show as quality loss in JPEG?",
+                "answer": "JXL preserves detail more efficiently. The same visual information will appear slightly degraded in JPEG due to block-based DCT artifacts. This is expected — JPEG is a less capable codec."
+          },
+          {
+                "question": "Does JPEG preserve JXL's progressive decoding?",
+                "answer": "JPEG supports progressive encoding, though it differs from JXL's approach. Enable progressive JPEG for a similar perception-based loading experience."
+          }
+    ]
   },
   {
     id: "377",
@@ -3235,7 +3823,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert AVIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to JPG — Convert AVIF images back to universally compatible JPEG format. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to JPEG. The tool decodes the AV1-compressed data. AVIF typically offers 50% better compression than JPEG, so the JPEG output will be significantly larger."
+          },
+          {
+                "title": "2. Handle Transparency",
+                "desc": "AVIF supports alpha channels; JPEG does not. Choose a background color to fill transparent areas. White is standard, but any color can be used to match your design needs."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Set quality 1-100. To match AVIF's visual quality, use 90-95. JPEG's block-based DCT compression adds artifacts that weren't in the AVIF. Download the JPEG, optimized for maximum compatibility."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why did my AVIF photo quality decrease in the JPEG?",
+                "answer": "AVIF's AV1 codec handles complex textures much better than JPEG's DCT blocks. When converting to JPEG, you see blocking artifacts in gradients and noise in flat areas that AVIF handled cleanly."
+          },
+          {
+                "question": "Can I convert animated AVIF to animated JPEG?",
+                "answer": "No, JPEG doesn't support animation. Static frame conversion only. For animated AVIF, convert to GIF, WebP, or APNG which support animation sequences."
+          },
+          {
+                "question": "What JPEG quality setting best preserves AVIF's HDR tonemapping?",
+                "answer": "AVIF HDR is tonemapped to SDR during decode. Quality 95+ in JPEG preserves the tonemapped result with minimal additional loss, though the HDR luminance range is permanently gone."
+          }
+    ]
   },
   {
     id: "383",
@@ -3245,7 +3861,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert AVIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to PNG — Convert AVIF images to lossless PNG format for maximum compatibility. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to PNG. The tool fully decodes the AV1 data into pixels. PNG preserves all visible quality from the AVIF source without further loss."
+          },
+          {
+                "title": "2. Choose PNG Compression",
+                "desc": "Set compression level 0-9. Level 6 is recommended. AVIF images with large flat areas compress well with PNG. The alpha channel from AVIF is fully preserved in PNG's native transparency."
+          },
+          {
+                "title": "3. Set Bit Depth and Download",
+                "desc": "PNG supports 8-bit per channel. If the AVIF had 10 or 12-bit HDR, the data is tonemapped to 8-bit. Download the PNG — file will be larger than AVIF but losslessly stored."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does PNG preserve all the detail from the AVIF source?",
+                "answer": "Yes, the decoded pixels are stored losslessly in PNG. If the AVIF was lossy, those pixels — artifacts and all — are preserved. PNG provides a lossless container for whatever the AVIF decode produced."
+          },
+          {
+                "question": "How much larger will the PNG be compared to the AVIF?",
+                "answer": "AVIF photos typically become 3-5x larger as PNG. A 400KB AVIF photo might become 1.5-2MB as PNG. Graphics with few colors see a smaller increase since PNG handles flat areas efficiently."
+          },
+          {
+                "question": "Is PNG a good archive format for AVIF-converted images?",
+                "answer": "PNG is excellent for archival since it's lossless and universally supported. However, the file size penalty is significant. Consider keeping the original AVIF and converting only when PNG compatibility is needed."
+          }
+    ]
   },
   {
     id: "384",
@@ -3255,7 +3899,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to AVIF — Convert BMP bitmap images into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to AVIF. The BMP's uncompressed raw data is a perfect source for AV1 compression. Expect massive file size reduction."
+          },
+          {
+                "title": "2. Set AVIF Quality",
+                "desc": "Quality 0-63. Even moderate quality 20-30 produces excellent results from clean BMP data. AVIF handles the uncompressed source efficiently without amplifying any pre-existing artifacts."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "AVIF supports alpha for 32-bit BMP sources. Set chroma subsampling — 4:4:4 for maximum color fidelity. Download the AVIF — typically 80-95% smaller than the original BMP."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What's the best quality setting for archiving BMP scans as AVIF?",
+                "answer": "Use quality 30-40 for archival purposes. This retains virtually all visual information from the BMP while reducing file size by 80-90%. Compare with the original to confirm."
+          },
+          {
+                "question": "Can AVIF preserve BMP's exact pixel values?",
+                "answer": "No, AVIF is a lossy format. For lossless preservation, use PNG. AVIF offers extreme compression at the cost of pixel-perfect accuracy."
+          },
+          {
+                "question": "Does BMP's uncompressed nature improve AVIF encoding quality?",
+                "answer": "Yes, encoding from a lossless source (BMP) avoids amplifying pre-existing compression artifacts. The AVIF output contains only artifacts introduced by the AV1 encoder itself."
+          }
+    ]
   },
   {
     id: "385",
@@ -3265,7 +3937,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to GIF. The tool reads the BMP's raw pixel data. BMP can have millions of colors — GIF can only store 256, so significant color reduction is needed."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set palette size 2-256. BMP's full color data is quantized to the selected palette. Enable dithering to simulate missing colors. Floyd-Steinberg dithering produces the most visually palatable results."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "GIF supports one transparent color. Select a palette entry for transparency if the BMP had alpha. Download the GIF — much smaller than BMP but with significantly reduced color fidelity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much color information is lost from BMP to GIF?",
+                "answer": "BMP can store 16.7 million colors (24-bit). GIF stores at most 256. For photographic BMPs, this represents a 99.998% reduction in color information. Only graphics with intentional palettes survive well."
+          },
+          {
+                "question": "Does BMP's alpha channel survive in GIF?",
+                "answer": "Partially. GIF supports binary transparency (one color made transparent). BMP's smooth alpha edges become hard transparency edges in GIF, losing any feathering or soft shadows."
+          },
+          {
+                "question": "What BMP content is suitable for GIF conversion?",
+                "answer": "Graphics with intentionally limited colors — logos, diagrams, pixel art, and UI elements. BMP photographs should not be converted to GIF due to extreme quality loss from palette reduction."
+          }
+    ]
   },
   {
     id: "386",
@@ -3275,7 +3975,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to WebP. The BMP's uncompressed data provides a clean source. WebP's modern compression will dramatically reduce file size."
+          },
+          {
+                "title": "2. Choose Lossy or Lossless",
+                "desc": "Lossless WebP preserves every BMP pixel with 20-40% better compression than BMP. Lossy WebP offers 80-90% reduction by selectively discarding color detail."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve BMP's alpha channel with WebP transparency. Quality 80-90 for lossy is recommended for photos. Download the WebP — significantly smaller than the BMP source."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much smaller is WebP compared to BMP?",
+                "answer": "Lossless WebP reduces BMP size by 50-70%. Lossy WebP at quality 85 reduces by 85-95%. A 10MB BMP photo becomes 2-5MB as lossless WebP or 500KB-1MB as lossy WebP."
+          },
+          {
+                "question": "Is lossless WebP from BMP truly lossless?",
+                "answer": "Yes, lossless WebP preserves every pixel from the BMP identically. The compression is mathematically lossless — the decoded WebP matches the BMP pixel for pixel."
+          },
+          {
+                "question": "Does BMP's color depth affect the WebP conversion?",
+                "answer": "24-bit and 32-bit BMP convert directly to WebP's color space. 8-bit indexed BMPs are converted to full color during the WebP encode, potentially improving appearance if the original had banding."
+          }
+    ]
   },
   {
     id: "387",
@@ -3285,7 +4013,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert GIF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to AVIF — Convert GIF images into modern AVIF format with better compression and color depth. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for conversion to AVIF. The tool extracts the first frame from animated GIFs. AVIF offers superior compression but currently handles static images in this converter."
+          },
+          {
+                "title": "2. Set Quality Parameters",
+                "desc": "AVIF quality 0-63. GIF's 256-color palette will be encoded with AV1's efficient compression. Quality 25-35 provides excellent results. The limited GIF palette becomes a compact AVIF file."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "AVIF supports alpha transparency. GIF's single-color transparency maps to AVIF's full alpha channel. Download the AVIF — significantly smaller than the original GIF with the same visual appearance."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does AVIF handle GIF's limited palette efficiently?",
+                "answer": "Yes, AV1's compression handles flat color areas extremely well. A GIF with large uniform colored regions becomes a very compact AVIF file since the encoder efficiently represents repeated pixel values."
+          },
+          {
+                "question": "Can I convert an animated GIF to animated AVIF?",
+                "answer": "Animated AVIF is supported by the specification but not widely used. This converter handles static output. For animation preservation, convert animated GIFs to animated WebP instead."
+          },
+          {
+                "question": "Will AVIF's compression reveal GIF dithering patterns more?",
+                "answer": "AV1 may sharpen or emphasize GIF dithering patterns during compression. If the dithering looks worse, increase quality to 40+ or pre-process the GIF to smooth the dithering before conversion."
+          }
+    ]
   },
   {
     id: "388",
@@ -3295,7 +4051,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Converts GIF files to WebP format — simple animations, memes, and images on platforms that support animated GIFs natively to modern websites. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload an animated or static GIF file for conversion to WebP. The tool extracts all frames from animated GIFs. WebP supports both static and animated output with better compression."
+          },
+          {
+                "title": "2. Set Quality and Mode",
+                "desc": "Choose lossy or lossless WebP. For animated GIFs, lossy WebP dramatically reduces file size while maintaining good visual quality. Quality 80-90 for lossy, or use lossless to preserve GIF's exact appearance."
+          },
+          {
+                "title": "3. Configure Animation and Download",
+                "desc": "Frame timing from the GIF is preserved in animated WebP. WebP supports 24-bit color versus GIF's 256, but the conversion can't restore lost color information. Download the WebP — significantly smaller than the original GIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much smaller will my animated GIF be as WebP?",
+                "answer": "Animated WebP is typically 40-60% smaller than the equivalent GIF animation. For animations with large uniform areas, the savings are even more dramatic. A 5MB GIF animation might become 2MB as WebP."
+          },
+          {
+                "question": "Does WebP preserve GIF's frame timing exactly?",
+                "answer": "Frame delays are preserved as closely as possible. WebP supports millisecond-precision timing while GIF is limited to 10ms increments. Very fast GIF animations may play smoother as WebP."
+          },
+          {
+                "question": "Can I convert only a portion of a GIF animation to WebP?",
+                "answer": "This tool converts the entire animation. To select specific frame ranges, use the GIF editor first to trim frames, then convert the trimmed GIF to WebP."
+          }
+    ]
   },
   {
     id: "389",
@@ -3305,7 +4089,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image from an Apple device. Both HEIC and AVIF use modern compression — HEIC uses HEVC, AVIF uses AV1. AVIF can provide better compression ratios for photographic content."
+          },
+          {
+                "title": "2. Set Quality Parameters",
+                "desc": "AVIF quality 0-63 (lower is better). Quality 20-30 provides comparable visual quality to HEIC. AVIF's AV1 codec handles complex textures and gradients particularly well, often beating HEIC at low bitrates."
+          },
+          {
+                "title": "3. Configure Color and HDR",
+                "desc": "AVIF supports 10/12-bit HDR. If the HEIC has HDR metadata (iPhone 12+), AVIF can preserve it. Set chroma subsampling — 4:4:4 for full color or 4:2:0 for smaller files. Download the AVIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which format is better: HEIC or AVIF?",
+                "answer": "AVIF generally offers 10-20% better compression than HEIC at equivalent quality. HEIC has better hardware encoding support on Apple devices. For cross-platform use, AVIF is more open and royalty-free."
+          },
+          {
+                "question": "Can AVIF preserve HEIC's depth map and portrait data?",
+                "answer": "AVIF supports auxiliary images, so depth maps could theoretically be preserved. However, this conversion focuses on the main image. Depth data from HEIC portrait mode shots is not currently transferred."
+          },
+          {
+                "question": "Is AVIF encoding slower than decoding HEIC?",
+                "answer": "Yes, AVIF encoding (AV1) is computationally heavier than HEVC decoding. Expect 3-8 seconds per image for encoding software. Hardware encoding support for AV1 is growing but not as widespread as HEVC."
+          }
+    ]
   },
   {
     id: "390",
@@ -3315,7 +4127,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image to convert to GIF. The tool decodes the high-efficiency HEVC data. HEIC supports 16.7 million colors; GIF supports only 256 — significant palette reduction is necessary."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set target palette size 2-256. For HEIC photos, use 256 colors and enable dithering to approximate the original. Floyd-Steinberg dithering produces smooth transitions but adds grain to the image."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "GIF supports one transparent color. Select a palette color to be transparent if the HEIC had alpha. The converted GIF is suitable for web graphics and simple animations but not high-quality photo display."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would I convert a high-quality HEIC photo to GIF?",
+                "answer": "GIF is useful for simple web graphics, reaction images, and scenarios where GIF format is required (forums, legacy CMS, email signatures). It's a downgrade for photo quality but necessary for compatibility."
+          },
+          {
+                "question": "How severe is the quality loss from HEIC to GIF?",
+                "answer": "HEIC photos with smooth gradients look heavily posterized as GIFs. Skin tones become blotchy and skies show visible banding. The dithering helps but adds noise. Quality loss is very noticeable on most photographs."
+          },
+          {
+                "question": "Does HEIC's high bit depth affect the palette reduction?",
+                "answer": "HEIC's 10-bit color is quantized to 8-bit first, then further reduced to the GIF palette. Each reduction step discards color information. Starting with an 8-bit HEIC output yields marginally better GIF results."
+          }
+    ]
   },
   {
     id: "391",
@@ -3325,7 +4165,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image for conversion to WebP. The tool decodes the HEVC data. WebP offers efficient compression and broad web browser support, making it an excellent target for HEIC conversion."
+          },
+          {
+                "title": "2. Set Quality and Compression Mode",
+                "desc": "Choose lossy or lossless WebP. Lossy WebP quality 85-95 typically matches HEIC's visual quality. For photographic HEICs, lossy WebP with quality 90 provides excellent results at a manageable file size."
+          },
+          {
+                "title": "3. Configure Alpha and Metadata",
+                "desc": "If the HEIC has transparency, WebP preserves it. EXIF data from the HEIC including camera settings and GPS can be carried over. Download the WebP — optimized for web delivery with good compression."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does WebP compression compare to HEIC for iPhone photos?",
+                "answer": "HEIC generally achieves better compression than WebP for the same visual quality, typically 10-20% smaller. WebP is more broadly supported across browsers and platforms, so the slight size increase is often worth the compatibility."
+          },
+          {
+                "question": "Does WebP preserve HEIC's HDR tone mapping?",
+                "answer": "WebP supports HDR but with limited adoption. Standard WebP encoding tonemaps HDR to SDR, which may lose some luminance range. For HDR preservation, stay with HEIC or use AVIF which has better HDR support."
+          },
+          {
+                "question": "Will the converted WebP work on all websites and CMS platforms?",
+                "answer": "WebP is supported by 95%+ of modern browsers and most CMS platforms including WordPress, Shopify, and Squarespace. It's the most web-compatible target format for HEIC conversion."
+          }
+    ]
   },
   {
     id: "392",
@@ -3335,7 +4203,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert ICO images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to JPG — Convert Windows icon files into universally compatible JPEG format. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to JPEG. The tool extracts the largest available size for best quality. ICO icons are small — expect limited resolution in the JPEG output."
+          },
+          {
+                "title": "2. Select Size and Handle Transparency",
+                "desc": "Choose which icon size to convert. ICO supports transparency; JPEG doesn't. Select a background color to fill transparent areas. White is the standard choice."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Quality 1-100. Since ICO sources are typically small (256x256 max), use quality 90+ to avoid visible artifacts. Download the JPEG for use where ICO format isn't supported."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does my ICO-to-JPEG image look pixelated?",
+                "answer": "ICO source images are designed for small displays. 16x16 and 32x32 icons look very blocky when saved as JPEG. Use the largest size available in the ICO (256x256) for the best JPEG result."
+          },
+          {
+                "question": "Can I enlarge an ICO icon during JPEG conversion?",
+                "answer": "The tool converts at the original icon size. For larger JPEG output, use the image resizer after conversion to upscale the icon."
+          },
+          {
+                "question": "Does JPEG compression affect ICO's sharp icon edges?",
+                "answer": "Yes, JPEG blurring is most visible on small, high-contrast graphics. Icon edges become soft. Use quality 95+ to minimize this effect on the already-small icon."
+          }
+    ]
   },
   {
     id: "393",
@@ -3345,7 +4241,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert ICO images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to WebP — Convert Windows icon files into modern WebP format for web use. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to WebP. The tool extracts and converts the icon data. WebP supports transparency and provides modern compression for the icon graphic."
+          },
+          {
+                "title": "2. Select Size and Mode",
+                "desc": "Pick the icon size to convert. Lossless WebP preserves the icon's exact pixels with better compression than the ICO entry. Lossy WebP can further reduce size with minimal effect on simple icon graphics."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "ICO's alpha transparency is preserved in WebP. Quality settings: lossless for pixel-perfect icons, lossy at 85+ for smaller files. Download the WebP — ideal for website icons and favicon alternatives."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is WebP better than PNG for converted ICOs?",
+                "answer": "WebP lossless is typically 20-30% smaller than PNG for the same icon source. For web delivery of icon graphics, WebP offers clear advantages in file size."
+          },
+          {
+                "question": "Can I convert all ICO sizes to a single animated WebP?",
+                "answer": "No, each size converts independently. Use the Batch Image Editor to convert multiple sizes at once, or select the one size you need."
+          },
+          {
+                "question": "Does WebP support ICO's old 8-bit color depth?",
+                "answer": "WebP converts old 8-bit ICO entries to 24-bit color during encoding. The visual result is identical but the color space is modernized."
+          }
+    ]
   },
   {
     id: "394",
@@ -3355,7 +4279,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JPG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG file for conversion to JPEG XL. The tool reads the JPEG's DCT coefficients and quantization tables. JXL can losslessly recompress JPEG with 20% size reduction."
+          },
+          {
+                "title": "2. Choose Lossless or Lossy Mode",
+                "desc": "JXL offers JPEG-transcoding lossless recompression — it preserves every detail of the original JPEG while making the file smaller. Or use lossy mode with quality 0-100 for further size reduction."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "JPEG-to-JXL lossless mode is mathematically lossless to the JPEG decoder — the decoded image is identical. Enable progressive decoding for faster visual preview. Download the .jxl file, backward-compatible with JPEG decoders."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does 'lossless JPEG recompression' mean exactly?",
+                "answer": "JPEG XL can decode a JPEG, then re-encode it in a way that the resulting JXL file, when decoded, produces exactly the same pixels as decoding the original JPEG. The visual output is identical, but the file is 15-20% smaller."
+          },
+          {
+                "question": "Can JPEG XL restore detail lost in the original JPEG compression?",
+                "answer": "No, lossless recompression preserves existing artifacts. For restoration, JXL offers a lossy mode that can clean up blocking artifacts using its more advanced compression algorithm, but this alters the image from the original JPEG."
+          },
+          {
+                "question": "Is JPEG XL backward compatible with standard JPEG decoders?",
+                "answer": "The .jxl file is not readable by standard JPEG decoders. However, JPEG XL can encode data in a hybrid format where legacy JPEG decoders see a standard JPEG while JXL decoders see the enhanced version."
+          }
+    ]
   },
   {
     id: "395",
@@ -3365,7 +4317,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to GIF. The tool decodes the JXL data. JXL's millions of colors must be reduced to GIF's 256-color limit."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set palette size 2-256. JXL images with smooth gradients need careful quantization with dithering. Floyd-Steinberg or Atkinson dithering can simulate missing colors."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "JXL alpha maps to GIF's binary transparency. Select the transparent color entry. Download the GIF — a major quality reduction from the JXL source."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert advanced JXL to limited GIF?",
+                "answer": "GIF compatibility is required by legacy platforms, forums, and specific applications. Despite JXL's superiority, GIF remains universally supported in places where modern formats don't work."
+          },
+          {
+                "question": "Does JXL's progressive feature affect GIF conversion?",
+                "answer": "No, GIF is single-pass non-progressive. The GIF output is a flat, sequential image regardless of JXL's encoding features."
+          },
+          {
+                "question": "Can JXL's animation be preserved in GIF?",
+                "answer": "This converter handles static JXL. Animated JXL frames could be extracted and combined into an animated GIF using the GIF editor tool."
+          }
+    ]
   },
   {
     id: "396",
@@ -3375,7 +4355,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to WebP — Convert JPEG XL images into modern WebP format for broader compatibility. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to WebP. The tool decodes JXL and re-encodes to WebP. Both are modern formats, but WebP has broader real-world adoption."
+          },
+          {
+                "title": "2. Choose Quality and Mode",
+                "desc": "Lossless WebP preserves JXL pixels with good efficiency. Lossy WebP at quality 85-95 matches JXL's visual quality. Expect slightly larger files than the JXL source."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve JXL's alpha transparency. Embed metadata. Download the WebP — balanced compression with broad web platform support."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which is smaller: JXL or WebP?",
+                "answer": "JXL typically achieves 15-25% better compression than WebP for the same image quality. WebP's advantage is its broad deployment across browsers, CDNs, and CMS platforms."
+          },
+          {
+                "question": "Does WebP preserve JXL's HDR capability?",
+                "answer": "Standard WebP is limited to 8-bit SDR. JXL's HDR data is tonemapped to SDR. For HDR preservation, stay with JXL or use AVIF."
+          },
+          {
+                "question": "Why convert from JXL to WebP instead of keeping JXL?",
+                "answer": "Compatibility. WebP is supported by 95%+ of browsers. If your target audience uses platforms where JXL isn't supported, WebP is the practical choice."
+          }
+    ]
   },
   {
     id: "397",
@@ -3385,7 +4393,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert PNG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to JXL — Convert PNG images into JPEG XL format for better compression while preserving quality. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG file for conversion to JPEG XL. The tool identifies the PNG's color characteristics including bit depth, color space, and alpha channel. JXL is designed as a next-generation universal format."
+          },
+          {
+                "title": "2. Select Encoding Mode",
+                "desc": "JPEG XL offers modular (lossless) mode for exact preservation and VarDCT (lossy) mode for compression. Set quality 0-100. Lossless mode typically achieves 20-30% better compression than PNG."
+          },
+          {
+                "title": "3. Configure Advanced Options",
+                "desc": "Set bit depth to match the PNG (8, 10, or 12-bit). Enable progressive encoding for faster preview during transmission. Preserve the alpha channel with efficient lossy or lossless compression. Download the .jxl file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does JPEG XL compare to AVIF for PNG conversion?",
+                "answer": "Both offer excellent compression. JXL generally provides better lossless compression than AVIF and faster encoding/decoding. AVIF may achieve slightly smaller lossy files at very low bitrates but encodes much slower."
+          },
+          {
+                "question": "Is JPEG XL supported in web browsers currently?",
+                "answer": "JPEG XL adoption is limited. Chrome removed native support in 2023. Firefox supports it behind a flag. Safari doesn't support it yet. For web use, WebP or AVIF are more practical choices today."
+          },
+          {
+                "question": "Can JXL preserve PNG's exact lossless quality with smaller size?",
+                "answer": "Yes, JPEG XL's lossless mode preserves every original pixel of your PNG while typically achieving 20-35% smaller file sizes. This makes it ideal for archival storage where both quality and space matter."
+          }
+    ]
   },
   {
     id: "398",
@@ -3395,7 +4431,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG file for conversion to AVIF. The tool rasterizes the SVG to pixels then encodes with AV1. This gives you a highly compressed raster version of your vector graphic."
+          },
+          {
+                "title": "2. Set Raster Dimensions",
+                "desc": "Define output width and height. Since SVG is vector, you can render at any size. For web use, render at the display size to avoid unnecessary large files."
+          },
+          {
+                "title": "3. Choose AVIF Quality and Download",
+                "desc": "Set quality 0-63. Even at moderate quality, AV1 handles vector-rasterized content well, preserving sharp edges better than JPEG. Download the AVIF — significantly smaller than PNG from the same SVG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is AVIF better than PNG for rasterized SVGs on the web?",
+                "answer": "AVIF is typically 60-70% smaller than PNG for the same visual quality. For SVGs with gradients and colors, AVIF's compression is highly efficient. PNG is still better for screenshots with text."
+          },
+          {
+                "question": "Does the SVG's alpha transparency survive AVIF conversion?",
+                "answer": "Yes, AVIF supports alpha channels. The SVG's transparent areas are preserved in the AVIF output, making it suitable for overlay graphics and icons."
+          },
+          {
+                "question": "Why not just use the SVG directly instead of converting to AVIF?",
+                "answer": "Some platforms and applications don't support SVG rendering. Converting to AVIF provides a smaller file than PNG while maintaining visual fidelity, useful when SVG cannot be used directly."
+          }
+    ]
   },
   {
     id: "399",
@@ -3405,7 +4469,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to GIF — Convert SVG vector graphics into GIF format for use in legacy applications. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG vector file. The tool rasterizes the SVG at the dimensions you choose. Simple SVGs with flat colors convert better to GIF than those with gradients and complex effects."
+          },
+          {
+                "title": "2. Set Size and Color Reduction",
+                "desc": "Rasterize at your target dimensions first. Then reduce colors to GIF's 256-color limit. Set palette size (2-256). Enable dithering for smoother appearance. Simple icon SVGs at 64 colors look nearly identical."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "SVG transparency maps to a single transparent color in GIF. Download the GIF — suitable for simple web graphics where GIF format is required."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will SVG gradients look good as GIF?",
+                "answer": "No. SVG smooth gradients reduce to visible color bands in GIF. The 256-color limit strips away subtle gradient transitions. For gradient-heavy SVGs, PNG or JPEG are better rasterization targets."
+          },
+          {
+                "question": "What SVG content is ideal for GIF conversion?",
+                "answer": "Flat-color icons, monochrome logos, simple illustrations, and graphics with under 50 unique colors. SVGs designed for print with many color blends will lose significant quality."
+          },
+          {
+                "question": "Can I animate an SVG to GIF?",
+                "answer": "This tool converts static SVGs to static GIFs. For animated SVGs (SMIL animations), you'd need to capture each animation frame separately and combine them into an animated GIF."
+          }
+    ]
   },
   {
     id: "400",
@@ -3415,7 +4507,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to WebP — Convert SVG vector graphics into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG vector file. The tool rasterizes it at your chosen dimensions. SVG preserves quality at any scale, making it flexible for WebP generation at any resolution."
+          },
+          {
+                "title": "2. Set Output Dimensions",
+                "desc": "Enter target width and height. Render at the exact display size for optimal file size. WebP supports both lossy and lossless modes for the rasterized SVG."
+          },
+          {
+                "title": "3. Choose Mode and Download",
+                "desc": "Lossless WebP preserves the rasterized SVG exactly with better compression than PNG. Lossy WebP offers even smaller files. Both preserve SVG transparency. Download the WebP."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Should I use lossless or lossy WebP for SVG conversion?",
+                "answer": "Lossless WebP is recommended for SVGs with sharp edges, text, and logos. Lossy WebP may blur fine vector details. For photographic-quality SVGs with gradients, lossy WebP at high quality works well."
+          },
+          {
+                "question": "Is WebP more efficient than PNG for rasterized SVGs?",
+                "answer": "Yes, WebP lossless is typically 25-35% smaller than PNG for the same SVG rasterization. Lossy WebP can be 60-70% smaller with minimal visual difference."
+          },
+          {
+                "question": "What resolution should I rasterize SVG for WebP?",
+                "answer": "Rasterize at the exact display resolution. Since SVG is vector, rendering at 2x (Retina) gives you the flexibility to serve high-density displays. A 100px logo SVG at 200px gives crisp Retina output."
+          }
+    ]
   },
   {
     id: "401",
@@ -3425,7 +4545,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF image for conversion to AVIF. The tool decodes the TIFF and encodes with AV1. AVIF offers significantly better compression than TIFF."
+          },
+          {
+                "title": "2. Set AVIF Quality",
+                "desc": "Quality 0-63. For high-quality conversion from TIFF, use quality 25-35. This preserves most visual information while achieving 80-90% file size reduction."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Set chroma subsampling — 4:4:4 for maximum fidelity. Preserve alpha from TIFF. Download the AVIF — dramatically smaller than the TIFF with excellent visual quality."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert a lossless TIFF to lossy AVIF?",
+                "answer": "For storage efficiency. AVIF can match TIFF's visual quality at 5-10% of the file size. This is valuable for archiving large collections where absolute pixel preservation is less critical than storage space."
+          },
+          {
+                "question": "Does AVIF preserve TIFF's 16-bit color depth?",
+                "answer": "AVIF supports 10-bit and 12-bit depth, which exceeds TIFF's 16-bit in practical terms. However, the tonemapping from 16-bit to AVIF's bit depth may cause subtle banding in extreme gradients."
+          },
+          {
+                "question": "Can AVIF store multi-page TIFF documents?",
+                "answer": "No, AVIF is single-image. Each TIFF page must be converted to a separate AVIF file. Animated AVIF exists but is intended for animation, not document pages."
+          }
+    ]
   },
   {
     id: "402",
@@ -3435,7 +4583,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to GIF — Convert TIFF images into GIF format for use in applications with limited format support. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for conversion to GIF. The tool decodes the TIFF — which may contain millions of colors — and prepares for GIF's 256-color limit."
+          },
+          {
+                "title": "2. Reduce Color Palette",
+                "desc": "Set target palette size 2-256. TIFF from scanners or cameras with full color range needs aggressive quantization. Enable dithering to simulate the missing millions of colors."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "TIFF alpha is mapped to GIF's single-color transparency. Select the transparent color. Download the GIF — suitable for simple web graphics but a massive quality reduction from the TIFF source."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would I convert a high-quality TIFF to GIF?",
+                "answer": "GIF compatibility is sometimes required for specific applications, legacy systems, or web platforms that accept only GIF. It represents a drastic quality downgrade from TIFF's capabilities."
+          },
+          {
+                "question": "Does TIFF's higher bit depth matter for GIF output?",
+                "answer": "No, all bit depths are reduced to GIF's 8-bit indexed color. Extra tonal information from 16-bit TIFF is discarded. The GIF output looks the same regardless of the TIFF's bit depth."
+          },
+          {
+                "question": "Can GIF preserve TIFF's multi-page structure?",
+                "answer": "GIF supports animation, not document pages. You could convert each TIFF page to a GIF animation frame, but this is a misuse of GIF's intended purpose for simple animations."
+          }
+    ]
   },
   {
     id: "403",
@@ -3445,7 +4621,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF image for conversion to WebP. The tool reads the TIFF's pixel data and compression. WebP offers better compression than TIFF with broader web compatibility."
+          },
+          {
+                "title": "2. Choose Quality and Mode",
+                "desc": "Lossless WebP preserves TIFF quality with 30-50% smaller files. Lossy WebP at quality 85-95 offers 80-90% reduction with minimal visible difference."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve TIFF's alpha channel, ICC profiles, and EXIF metadata. Download the WebP — optimized for web delivery while maintaining the visual quality from the TIFF source."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is WebP a good replacement for TIFF in web workflows?",
+                "answer": "Yes, WebP provides 80%+ of TIFF's image quality at a fraction of the file size. For web delivery, WebP is superior. For print and professional editing, TIFF remains necessary."
+          },
+          {
+                "question": "Does WebP support TIFF's 16-bit depth?",
+                "answer": "Standard WebP supports 8-bit only. TIFF's 16-bit data is tonemapped to 8-bit during conversion. For extended bit depth preservation, use AVIF or keep the original TIFF."
+          },
+          {
+                "question": "Can I batch convert TIFF images to WebP?",
+                "answer": "This tool handles single conversions. For batch processing TIFF collections, use our Batch Image Editor which applies uniform settings to convert multiple TIFFs to WebP simultaneously."
+          }
+    ]
   },
   {
     id: "404",

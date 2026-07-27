@@ -2186,6 +2186,34 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. Coming soon.',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your Image File",
+                "desc": "Choose an image from your device. This universal converter accepts JPEG, PNG, GIF, BMP, TIFF, WebP, AVIF, HEIC, and RAW formats. Drag and drop or use the file browser."
+          },
+          {
+                "title": "2. Pick a Target Format",
+                "desc": "Select from all major formats — JPEG, PNG, WebP, AVIF, HEIC, GIF, BMP, TIFF, ICO, JXL. Each format shows a brief description of its best use case. For lossy formats, use the quality slider."
+          },
+          {
+                "title": "3. Set Output Options and Convert",
+                "desc": "Adjust format-specific parameters like color count for GIF, compression level for PNG, or chroma subsampling for JPEG. Resize, rotate, or flip during conversion if needed. Download the converted image."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How is this different from the specific format converters?",
+                "answer": "This tool lets you convert any format to any other format in one step, while the specific converters target one particular direction. Use this for general conversions and specific tools for specialized workflows."
+          },
+          {
+                "question": "Can I batch convert multiple images at once?",
+                "answer": "This tool handles single conversions. For batch converting many files to the same format with identical settings, use the Batch Image Editor which applies uniform conversion parameters."
+          },
+          {
+                "question": "What happens to EXIF metadata during conversion?",
+                "answer": "Most metadata is preserved when converting between common formats. Some formats like GIF and ICO have limited metadata capacity. You can choose to strip all metadata for privacy when downloading."
+          }
+    ]
   },
   {
     id: "747",

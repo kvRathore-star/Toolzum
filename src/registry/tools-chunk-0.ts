@@ -9,6 +9,34 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     slug: "add-text-to-photo",
     dependencies: "Canvas API",
+    instructions: [
+          {
+                "title": "1. Upload Your Photo",
+                "desc": "Select the image you want to annotate from your device. Drag-and-drop works best for quick edits. Supported formats include JPEG, PNG, and WebP up to 50MB."
+          },
+          {
+                "title": "2. Add and Style Text",
+                "desc": "Click anywhere on the photo to place a text box. Choose from 80+ fonts, adjust size with the slider, and pick any hex color. Apply shadows, outlines, or gradient fills to make text pop against busy backgrounds."
+          },
+          {
+                "title": "3. Position and Download",
+                "desc": "Drag text blocks to any position, rotate them freely, or set precise alignment guides. Layer multiple text boxes with different styles. Download your finished photo as PNG to preserve text sharpness or JPEG for smaller file size."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I add curved or rotated text?",
+                "answer": "Yes, you can rotate any text block to any angle using the rotation handle above the selected text box. Curved text along a path isn't supported currently, but you can angle each block independently for creative layouts."
+          },
+          {
+                "question": "Do you support emoji and special characters in text?",
+                "answer": "Absolutely. The text editor supports Unicode, so emoji, accented characters, and symbols from any language render correctly. Paste emoji directly or use the character picker on mobile."
+          },
+          {
+                "question": "Will my original image resolution change?",
+                "answer": "No, the tool preserves your original image dimensions and resolution. Text is rendered as a vector overlay before rasterization, so the output matches your input quality exactly at the pixel level."
+          }
+    ]
   },
   {
     id: "batch-edit-1",
@@ -19,6 +47,34 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "batch-image-editor",
     dependencies: "Canvas API, jszip",
     isPro: true,
+    instructions: [
+          {
+                "title": "1. Upload Multiple Images",
+                "desc": "Upload up to 50 images at once from your device or cloud storage. The tool accepts JPEG, PNG, WebP, and TIFF formats. A thumbnail grid shows all queued images with file names and sizes at a glance."
+          },
+          {
+                "title": "2. Apply Edits to All",
+                "desc": "Choose from resize, crop, rotate, flip, compress, or format conversion. Adjust quality, dimensions, and output format for the entire batch. Every image gets identical processing parameters."
+          },
+          {
+                "title": "3. Download as Archive",
+                "desc": "Processed images are bundled into a single ZIP archive for one-click download. Each file retains its original name with the new extension appended. You get a summary report of before-and-after sizes for every image in the batch."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is there a limit on how many images I can process at once?",
+                "answer": "You can upload up to 50 images per batch, each capped at 50MB individually. For larger volumes, split into multiple batches — the tool resets cleanly after each download."
+          },
+          {
+                "question": "Can I apply different settings to individual images in a batch?",
+                "answer": "No, batch mode applies uniform settings to all selected images. For per-image customization, use the individual image tools instead. Batch is optimized for consistency across many files."
+          },
+          {
+                "question": "What happens if one image fails to process?",
+                "answer": "Processing continues for the remaining images. A detailed error log shows which file failed and why, and the successful images still get bundled into the downloadable ZIP archive."
+          }
+    ]
   },
   {
     id: "vid-mp3-1",
@@ -398,7 +454,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert HEIC images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. ',
     dependencies: "heic2any",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image captured from an iPhone or iPad. The tool decodes Apple's HEVC-compressed image into pixel data. HEIC files are typically 40-50% smaller than equivalent JPEGs."
+          },
+          {
+                "title": "2. Handle Alpha and Metadata",
+                "desc": "HEIC supports alpha channels, but JPEG doesn't. Choose a background color for transparent areas if present. HEIC EXIF data including depth maps and burst IDs are read for potential embedding."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Set JPEG quality 1-100. Since HEIC efficiently compresses photos, quality 90-95 preserves most of the original detail. JPEG will be 2-3x larger than the HEIC at comparable quality. Download the universally-compatible JPEG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will I lose image quality converting HEIC to JPEG?",
+                "answer": "HEIC uses HEVC compression which preserves more detail at smaller sizes. Converting to JPEG introduces JPEG's block-based artifacts. Using quality 95+ minimizes visible loss, but the HEIC file inherently has better quality-per-byte."
+          },
+          {
+                "question": "What happens to Live Photos data from my iPhone?",
+                "answer": "Live Photos consist of a HEIC image plus a video component. This conversion handles only the still image. The video portion is discarded. Use Apple's export tools to preserve Live Photo functionality."
+          },
+          {
+                "question": "Does HEIC's 10-bit color depth get preserved in JPEG?",
+                "answer": "No, JPEG supports only 8-bit per channel. HEIC's 10-bit HDR data is tonemapped to 8-bit SDR during conversion. This can result in banding in smooth gradients where HEIC had smoother transitions."
+          }
+    ]
   },
   {
     id: "28",
@@ -469,6 +553,34 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "rembg / OpenCV / TensorFlow.js",
     seoDescription: 'Remove image backgrounds automatically with AI. Coming soon.',
     showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Image with Subject",
+                "desc": "Choose a photo with a clear subject against any background. The AI model works best with people, products, pets, and vehicles. For best results, ensure good contrast between the subject and background."
+          },
+          {
+                "title": "2. Automatic Detection and Removal",
+                "desc": "Our AI analyzes the image to detect the foreground subject. It creates a precise mask around edges, including fine details like hair, fur, or fuzzy boundaries. Processing takes 2-5 seconds depending on resolution."
+          },
+          {
+                "title": "3. Refine and Download",
+                "desc": "Use the edge brush to fix any imperfect mask areas. You can then place the subject on a solid color, upload a new background image, or download with a transparent PNG. Feather and smooth controls help blend edges naturally."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How accurate is the AI at detecting complex edges like hair?",
+                "answer": "The model uses semantic segmentation trained on millions of images to handle fine details. Flyaway hairs and fur are preserved well, but very blurry edges or subjects blending into similar-colored backgrounds may need manual touch-up."
+          },
+          {
+                "question": "Is my image stored on your servers after processing?",
+                "answer": "Processed images are deleted from our servers within one hour. We do not use uploaded images for training or data collection. Your privacy and content ownership remain fully intact."
+          },
+          {
+                "question": "Can I use background removal for batch processing?",
+                "answer": "Background removal works on single images only in this tool. Each image requires individual AI inference to generate the correct mask, so batch processing isn't available — but the processing itself takes only seconds per image."
+          }
+    ]
   },
   {
     id: "34",
@@ -478,7 +590,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert WEBP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP File",
+                "desc": "Upload a WebP image to convert to JPEG. The tool checks if the WebP has an alpha channel — since JPEG has no transparency, you'll need to handle this. The WebP's encoding mode affects conversion quality."
+          },
+          {
+                "title": "2. Handle Alpha Transparency",
+                "desc": "If your WebP has transparency, choose a background color to fill the transparent areas. White is standard for most uses, black for dark-themed applications. The fill color becomes part of the JPEG output."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Set JPEG quality 1-100. For web use, quality 85 typically matches the WebP's visual quality. JPEG's chroma subsampling reduces color resolution. Download the JPEG — file size depends on image complexity and quality setting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will JPEG compression add artifacts on top of WebP artifacts?",
+                "answer": "Yes, you're layering lossy compression on top of WebP's lossy encoding. The result will have artifacts from both encoders. To minimize this, use high JPEG quality (90+) or start with a lossless WebP source."
+          },
+          {
+                "question": "What happens to WebP's alpha channel in the JPEG output?",
+                "answer": "Alpha information is discarded since JPEG doesn't support it. Transparent areas are filled with the background color you select. Semi-transparent edges may show visible halos against the chosen background color."
+          },
+          {
+                "question": "Why convert from WebP to JPEG if WebP compresses better?",
+                "answer": "JPEG is universally supported — every device, browser, and application can open JPEG. If you're sending images to someone with legacy software or uploading to a platform that doesn't accept WebP, JPEG is the safest choice."
+          }
+    ]
   },
   {
     id: "34b",
@@ -488,7 +628,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PNG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG File",
+                "desc": "Upload the PNG image you want to convert to JPEG. PNG files with many colors or large dimensions will benefit most from JPEG compression. The tool displays the PNG's bit depth and alpha channel status."
+          },
+          {
+                "title": "2. Handle Alpha Transparency",
+                "desc": "Since JPEG doesn't support transparency, choose a background color for transparent areas — white is standard for product photos, black works well for graphics. The color you pick fills all formerly transparent pixels."
+          },
+          {
+                "title": "3. Set JPEG Quality and Download",
+                "desc": "Adjust quality from 1-100. For web photos, 80-85 offers excellent compression with minimal visible loss. Higher sources with smooth gradients need less compression. Download the JPEG — typically 5-10x smaller than the PNG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is my PNG with text blurry as a JPEG?",
+                "answer": "JPEG's lossy compression introduces artifacts around sharp edges and text. The blocking artifacts are most visible on high-contrast edges. Increase quality to 95+ if text sharpness is critical, or consider keeping the file as PNG."
+          },
+          {
+                "question": "Will the JPEG have the same color accuracy as my PNG?",
+                "answer": "JPEG uses YCbCr color space with chroma subsampling, which discards some color detail that PNG preserves exactly. For most photos, the difference is imperceptible, but for graphics with exact color requirements, PNG is superior."
+          },
+          {
+                "question": "What's the best JPEG quality for printing from a PNG source?",
+                "answer": "Use quality 100 for print. The file will be larger than a compressed JPEG, but it preserves maximum detail from the original PNG for high-quality output on paper or photo stock."
+          }
+    ]
   },
   {
     id: "35",
@@ -526,7 +694,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Object Remover — Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. ',
-    dependencies: "Lama Cleaner"
+    dependencies: "Lama Cleaner",
+    instructions: [
+          {
+                "title": "1. Upload Your Image",
+                "desc": "Load the photo containing unwanted objects, people, text, or blemishes. Works with JPEG, PNG, and WebP files. Higher resolution images yield better inpainting results."
+          },
+          {
+                "title": "2. Brush Over the Object",
+                "desc": "Use the brush tool to paint over everything you want removed. Adjust brush size for precision — small for wires and text, large for people and vehicles. The mask turns red so you see exactly what's selected."
+          },
+          {
+                "title": "3. Generate and Review",
+                "desc": "Hit Remove and the AI fills the masked area with contextually appropriate content. It analyzes surrounding textures, lighting, and patterns to reconstruct what should be underneath. Download the cleaned image when satisfied."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens behind the masked area during removal?",
+                "answer": "The AI uses generative inpainting — it studies the pixels surrounding your mask and synthesizes new content that matches the lighting, texture, and perspective. Results depend on how much context is available around the masked region."
+          },
+          {
+                "question": "Can I undo or redo a removal?",
+                "answer": "Yes. The tool keeps a full history of your edit session. You can undo back to the original image at any point. If you remove too much, simply undo and paint a more precise mask."
+          },
+          {
+                "question": "Does this work for removing watermarks from photos?",
+                "answer": "It can remove watermarks, but results vary. Simple semi-transparent watermarks over uniform backgrounds work well. Complex watermarks over detailed areas may leave visible artifacts since the AI has limited context to reconstruct from."
+          }
+    ]
   },
   {
     id: "38",
@@ -723,7 +919,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Crop Image — Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes.',
-    dependencies: "Cropper.js"
+    dependencies: "Cropper.js",
+    instructions: [
+          {
+                "title": "1. Upload Your Image",
+                "desc": "Select an image from your device. Any common format is accepted — JPEG, PNG, WebP, GIF, BMP, TIFF. The image appears in a canvas with a adjustable selection overlay."
+          },
+          {
+                "title": "2. Select Crop Area",
+                "desc": "Drag the corner handles to define your crop region. Choose from preset aspect ratios: 1:1 for square, 4:3 for standard, 16:9 for widescreen, 3:2 for print, or enter a custom ratio. Gridlines overlay helps with composition using the rule of thirds."
+          },
+          {
+                "title": "3. Apply Crop and Save",
+                "desc": "Click Apply to trim the image to your selected region. The output retains the original file format. Optionally set output dimensions in pixels if you need exact sizes for web or print use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does cropping reduce image quality?",
+                "answer": "No, cropping simply discards pixels outside your selection area. The remaining pixels retain their original quality. Unlike resizing, no interpolation or compression happens during a crop operation."
+          },
+          {
+                "question": "Can I crop to a specific pixel dimension?",
+                "answer": "Yes, switch to custom dimensions mode and enter exact width and height in pixels. The crop overlay adjusts to match. If your aspect ratio doesn't match, the tool shows you the closest fit."
+          },
+          {
+                "question": "What if I crop too much and want to go back?",
+                "answer": "You can undo the crop within the session. However, once you close the tool or start a new crop, the original cropped pixels are gone. Always save a copy if you think you might need the full image later."
+          }
+    ]
   },
   {
     id: "50",
@@ -857,7 +1081,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Enhancer — Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. ',
-    dependencies: "Real-ESRGAN"
+    dependencies: "Real-ESRGAN",
+    instructions: [
+          {
+                "title": "1. Upload Your Photo",
+                "desc": "Choose a photo that needs quality improvement — old scans, low-light shots, or compressed images. The enhancer supports JPEG, PNG, and WebP. Larger files give the AI more data to work with for better results."
+          },
+          {
+                "title": "2. Adjust Enhancement Settings",
+                "desc": "Use sliders to control brightness, contrast, saturation, sharpness, and noise reduction. Auto-enhance applies an AI-optimized combination. Preview changes in real-time with a split-view comparison."
+          },
+          {
+                "title": "3. Apply and Export",
+                "desc": "Once satisfied, apply the enhancements. You can further upscale resolution up to 4x using AI super-resolution. Download in your chosen format — PNG for maximum quality or JPEG for manageable file sizes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can this tool fix severely blurry photos?",
+                "answer": "The sharpening and AI upscaling can improve mild to moderate blur, but it cannot fix extreme motion blur or out-of-focus shots. The AI reconstructs detail based on patterns, but it cannot invent information that wasn't captured."
+          },
+          {
+                "question": "Does noise reduction remove grain from old film scans?",
+                "answer": "Yes, the noise reduction filter is effective on film grain and digital sensor noise. Use the strength slider carefully — too much reduction can create a waxy, plastic-looking surface. Medium settings preserve texture while removing grain."
+          },
+          {
+                "question": "What is the maximum upscale resolution supported?",
+                "answer": "You can upscale up to 4x the original dimensions in each axis. A 1000x1000 pixel image can become 4000x4000. Beyond that, the AI lacks sufficient source data to generate convincing detail."
+          }
+    ]
   },
   {
     id: "61",
@@ -925,7 +1177,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. No signup or account required.',
     seoDescription: 'Free online Meme Generator — Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. ',
-    dependencies: "Canvas API"
+    dependencies: "Canvas API",
+    instructions: [
+          {
+                "title": "1. Choose or Upload a Template",
+                "desc": "Pick from our library of trending meme templates — Drake, Distracted Boyfriend, Disaster Girl, and 200+ more. Or upload your own image to create a custom meme canvas."
+          },
+          {
+                "title": "2. Add Top and Bottom Text",
+                "desc": "Click the top and bottom text areas to type your punchline. Choose from classic Impact font, Arial, Comic Sans, or system fonts. Adjust text size, color, stroke width, and drop shadow. All caps styling is auto-applied for top text."
+          },
+          {
+                "title": "3. Customize and Export",
+                "desc": "Position text freely outside the traditional top-and-bottom layout if you want something different. Add stickers or emoji overlays. Download as PNG with transparent background or JPEG for smaller file size."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I use my own images as meme templates?",
+                "answer": "Yes, upload any image to create a custom template. It works exactly like built-in templates — you get the same text controls, positioning, and export options. Your uploaded template stays in your session only."
+          },
+          {
+                "question": "What font size works best for meme readability?",
+                "answer": "For classic meme format, use large bold white text with a thick black stroke. The tool defaults to a 48px Impact font with 2px stroke. On mobile screens, go bigger — 60px+ ensures your punchline is legible on all devices."
+          },
+          {
+                "question": "Are there copyright concerns with popular meme templates?",
+                "answer": "Using well-known meme images for personal or parody use generally falls under fair use. For commercial purposes, we recommend using original photos to avoid potential licensing issues with recognizable stock photos."
+          }
+    ]
   },
   {
     id: "67",
@@ -1005,6 +1285,34 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
     seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. ',
+    instructions: [
+          {
+                "title": "1. Upload Your Image",
+                "desc": "Select an image to resize. The tool supports JPEG, PNG, WebP, GIF, BMP, and TIFF. Current dimensions are displayed immediately. Images up to 100MB can be processed."
+          },
+          {
+                "title": "2. Set New Dimensions",
+                "desc": "Enter exact width and height in pixels, or choose from presets like Instagram square, Twitter header, LinkedIn banner, or 4K resolution. Maintain aspect ratio with the lock icon, or freely stretch for custom dimensions."
+          },
+          {
+                "title": "3. Choose Resampling and Download",
+                "desc": "Pick a resampling algorithm — Lanczos for maximum sharpness when downscaling, Bilinear for smooth upscaling, or Nearest Neighbor for pixel art. Download the resized image in any format independent of the original."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will resizing make my image look blurry?",
+                "answer": "Downscaling typically preserves sharpness well. Upscaling introduces interpolation blur since new pixels must be estimated. The Lanczos algorithm minimizes this, but enlarging beyond 2x the original will show softness."
+          },
+          {
+                "question": "What's the difference between resizing and resampling?",
+                "answer": "Resizing changes pixel dimensions. Resampling is the mathematical method used to calculate new pixel values. Lanczos preserves edges best for downscaling, Bilinear is smoother for upscaling, and Nearest Neighbor keeps hard edges for pixel art."
+          },
+          {
+                "question": "Can I resize multiple images at once?",
+                "answer": "This tool handles one image at a time. For bulk resizing, use our Batch Image Editor which applies the same dimensions and algorithm to up to 50 images simultaneously."
+          }
+    ]
   },
   {
     id: "72",
@@ -1060,7 +1368,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Photo Retoucher — Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. ',
-    dependencies: "OpenCV"
+    dependencies: "OpenCV",
+    instructions: [
+          {
+                "title": "1. Upload Your Portrait Photo",
+                "desc": "Upload a portrait or selfie that needs retouching. The tool is optimized for human faces and works best with well-lit front-facing photos. Supports JPEG, PNG, and WebP formats."
+          },
+          {
+                "title": "2. Apply Retouching Adjustments",
+                "desc": "Use skin smoothing to reduce blemishes and pores, the blemish remover for spot fixes, teeth whitening, eye brightening, and red-eye correction. Each adjustment has a strength slider so the result looks natural."
+          },
+          {
+                "title": "3. Compare and Save",
+                "desc": "Toggle between before and after views to see the retouch effect. Make final tweaks to ensure the result still looks like a natural photo. Download the retouched version in your preferred format."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can the retoucher handle group photos?",
+                "answer": "It works on individual faces within a group photo, but you may need to select faces individually. For consistent retouching across multiple people, process each face separately for the most natural results."
+          },
+          {
+                "question": "Is skin smoothing safe for preserving natural texture?",
+                "answer": "Yes, the slider lets you go from subtle pore reduction to full airbrushing. We recommend keeping it below 50% to maintain skin texture and avoid the plastic look. The AI targets blemishes specifically rather than blurring the entire face."
+          },
+          {
+                "question": "Does teeth whitening work on all tooth shades?",
+                "answer": "Teeth whitening brightens and removes yellow tint from natural teeth. It doesn't affect dental work like crowns, veneers, or braces, which already appear white. Over-whitening can make teeth look unnatural, so use a gentle setting."
+          }
+    ]
   },
   {
     id: "80",
@@ -1363,7 +1699,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Colorizer — Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. ',
-    dependencies: "DeOldify"
+    dependencies: "DeOldify",
+    instructions: [
+          {
+                "title": "1. Upload a Black and White Photo",
+                "desc": "Upload your monochrome or sepia historical photo. The colorizer works best with portrait and landscape photos from the 1800s to mid-1900s. Higher resolution scans produce more accurate coloring."
+          },
+          {
+                "title": "2. AI Colorization Process",
+                "desc": "The AI analyzes the image content — detecting sky, skin, foliage, clothing, and objects — then assigns realistic colors based on its training data. You can let it run fully automatic or guide it with color hints."
+          },
+          {
+                "title": "3. Fine-Tune Colors Manually",
+                "desc": "Use color brushes to correct or change specific areas. If the AI got the sky wrong, paint over it with the correct blue. Adjust saturation and warmth globally. Download the colorized result as JPEG or PNG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How historically accurate are the AI-assigned colors?",
+                "answer": "The AI assigns plausible colors based on what it learned from millions of color photos, not historical accuracy. Uniforms, cars, and specific objects may get generic colors. Historical reference images help you manually correct these."
+          },
+          {
+                "question": "Can I colorize damaged or scratched photos?",
+                "answer": "Yes, but scratches and damage are colorized along with the rest of the image. We recommend restoring the photo first using a restoration tool, then colorizing the cleaned version for the best results."
+          },
+          {
+                "question": "Does it work on sepia-toned photos too?",
+                "answer": "Yes, sepia photos work just as well as pure black-and-white. The AI strips the sepia tone as a pre-processing step before applying color. The output will be full color regardless of the original tint."
+          }
+    ]
   },
   {
     id: "109",
@@ -1646,7 +2010,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Convert PNG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. ',
-    dependencies: "Potrace"
+    dependencies: "Potrace",
+    instructions: [
+          {
+                "title": "1. Upload Your PNG Image",
+                "desc": "Upload a PNG file you want to convert to vector. Simple graphics with solid colors, logos, and icons work best. Photos and gradients don't vectorize well — the result will have too many paths and lose visual quality."
+          },
+          {
+                "title": "2. Choose Vectorization Settings",
+                "desc": "Set the color palette size (2-32 colors) and path simplification level. Fewer colors and simpler paths produce cleaner SVGs. Preview the vectorized result overlaying the original to compare."
+          },
+          {
+                "title": "3. Download as SVG",
+                "desc": "Review the vector output and adjust settings if needed. Download the SVG file which is infinitely scalable and editable in tools like Illustrator or Inkscape. The SVG code is also shown for direct copy-paste into web projects."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will text in my PNG be editable as text in the SVG?",
+                "answer": "No, text in the PNG is rasterized pixels. The vectorization traces shapes, not characters. If you need editable text, recreate it as actual text elements in the SVG using a vector editor afterward."
+          },
+          {
+                "question": "How many colors can the SVG output have?",
+                "answer": "You can set between 2 and 32 colors. Fewer colors create cleaner, smaller files but lose detail. Photos need 32+ colors but the SVG file becomes bloated. PNG-to-SVG is best suited for flat-color graphics under 16 colors."
+          },
+          {
+                "question": "What resolution PNG should I start with?",
+                "answer": "Upload at least 500x500 pixels. Low-resolution PNGs lack edge detail and produce jagged vector paths. If you only have a small PNG, scale it up first using AI upscaling, then vectorize the larger version."
+          }
+    ]
   },
   {
     id: "125",

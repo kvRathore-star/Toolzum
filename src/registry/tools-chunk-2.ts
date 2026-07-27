@@ -9,7 +9,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WEBP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WebP to AVIF — Convert WebP images into AVIF format for even better compression ratios. ',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP image for conversion to AVIF. The tool reads the WebP's mode (lossless/lossy), color data, and alpha channel. AVIF offers superior compression to WebP for most image types."
+          },
+          {
+                "title": "2. Set AVIF Quality",
+                "desc": "Quality 0-63 where lower is better. A value of 20-30 usually matches WebP quality 80-90. AVIF's AV1 codec achieves 30-40% better compression than WebP at equivalent quality for photographs."
+          },
+          {
+                "title": "3. Configure Encoding Speed and Download",
+                "desc": "Speed setting balances encoding time against file size. Medium speed is recommended. Preserve alpha channel — AVIF supports efficient transparency compression. Download the AVIF, which will be noticeably smaller than the WebP."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is AVIF always smaller than WebP at the same quality?",
+                "answer": "For photographic content with smooth gradients, AVIF is typically 30-50% smaller. For simple graphics with few colors and hard edges, the advantage is smaller since WebP's compression already handles these efficiently."
+          },
+          {
+                "question": "Does AVIF support WebP's lossless mode equivalently?",
+                "answer": "AVIF supports lossless encoding, but it's not as efficient as WebP's lossless mode for most images. For lossless preservation, staying with WebP or using PNG may produce smaller files than lossless AVIF."
+          },
+          {
+                "question": "Can I convert animated WebP to animated AVIF?",
+                "answer": "This tool handles static images. Animated AVIF is supported in the AVIF specification but is not widely adopted. For animated conversions, animated WebP to animated GIF or APNG is more practical."
+          }
+    ]
   },
   {
     id: "405",
@@ -641,6 +669,34 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload an Animated GIF",
+                "desc": "Upload the GIF you want to resize. The original dimensions, frame count, and file size are displayed. Large GIFs with many frames may take a moment to process before editing."
+          },
+          {
+                "title": "2. Set New Dimensions and Quality",
+                "desc": "Enter pixel dimensions or choose a percentage scale. Maintain aspect ratio by default. Adjust the color palette size — reducing from 256 to 64 colors dramatically shrinks file size. Enable frame skipping to reduce frame count."
+          },
+          {
+                "title": "3. Preview and Download",
+                "desc": "Preview the resized GIF in the player. Check that animation smoothness and quality meet expectations. Download the optimized GIF or export as a lightweight WebP animation for faster web loading."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does resizing a GIF sometimes create pixelation?",
+                "answer": "GIFs have a fixed 256-color palette. When you shrink dimensions, the dithering pattern compresses and can create moiré or blocky artifacts. Increasing dithering helps smooth the transition."
+          },
+          {
+                "question": "Can I resize only the dimensions without changing quality?",
+                "answer": "Yes, keep the color palette at 256 maximum and disable frame skipping. The resized GIF will look identical at the new size but the file will be proportionally smaller due to fewer pixels."
+          },
+          {
+                "question": "What's the recommended size for GIFs on social media?",
+                "answer": "Twitter and Facebook cap GIFs at 15MB but recommend under 5MB for fast loading. Resize to 480px wide max and reduce colors to 128 for the best balance of quality and social platform compatibility."
+          }
+    ]
   },
   {
     id: "437",
@@ -651,6 +707,34 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online GIF to APNG Converter — Convert animated GIFs to APNG format with 24-bit color and alpha transparency. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF Animation",
+                "desc": "Select an animated GIF file from your device. The tool reads all frames and their timing data. GIFs with up to 500 frames are supported. Complex animations with transparency may convert especially well to APNG."
+          },
+          {
+                "title": "2. Configure Conversion Options",
+                "desc": "Choose whether to preserve the original frame delays or set a uniform frame rate. APNG supports full alpha transparency per pixel, so semi-transparent pixels from GIF dithering can be cleaned up."
+          },
+          {
+                "title": "3. Convert and Download",
+                "desc": "The conversion extracts each GIF frame into APNG's frame sequence. Download the APNG file, which offers better color depth and smaller file sizes for animations with transparency compared to GIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will the APNG be smaller than the original GIF?",
+                "answer": "Often yes. APNG uses PNG-style compression which is more efficient than GIF's LZW compression, especially for animations with large uniform areas. Animations with lots of noise or grain may be similar in size."
+          },
+          {
+                "question": "Can I view APNG files in any browser?",
+                "answer": "APNG is supported in all modern browsers except Internet Explorer. Chrome, Firefox, Safari, and Edge all render APNG natively. For legacy compatibility, consider a fallback to a static PNG or GIF."
+          },
+          {
+                "question": "Does APNG support 24-bit color like PNG?",
+                "answer": "Yes, APNG supports full 24-bit RGB color plus 8-bit alpha channel, giving 16.7 million colors versus GIF's 256. This eliminates color banding and produces smoother gradients in animations."
+          }
+    ]
   },
   {
     id: "440",
@@ -661,6 +745,34 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload Your APNG File",
+                "desc": "Upload an animated PNG (APNG) file. The tool parses the frame structure and timing data. APNG files with many frames created from screen recordings or complex animations work well."
+          },
+          {
+                "title": "2. Configure Palette Reduction",
+                "desc": "Since GIF supports only 256 colors, set the color palette size (2-256). Choose a dithering algorithm — Floyd-Steinberg produces the best visual quality. Preview color banding and adjust palette colors manually if needed."
+          },
+          {
+                "title": "3. Set Frame Handling and Export",
+                "desc": "APNG supports per-frame alpha blending, but GIF doesn't. Choose how to composite semi-transparent areas. Set disposal method for each frame. Download the converted GIF with optional optimization."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens to APNG transparency in the GIF conversion?",
+                "answer": "GIF supports only binary transparency (on/off per pixel). Semi-transparent pixels in the APNG are either made fully opaque or fully transparent. This can create harsh edges where smooth transparency existed."
+          },
+          {
+                "question": "Why does my converted GIF have color banding?",
+                "answer": "Banding appears because GIF's 256-color palette cannot represent smooth gradients from the APNG's 16.7 million colors. Dithering helps by scattering pixels of different colors to simulate the missing shades."
+          },
+          {
+                "question": "Can I preserve the exact frame timing from the APNG?",
+                "answer": "GIF frame delays have a minimum of 10ms (some browsers enforce 20ms). APNG timings under 10ms are rounded up, which may slightly alter fast animation speed. Frame order and looping are preserved exactly."
+          }
+    ]
   },
   {
     id: "441",
@@ -671,6 +783,34 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. ',
     dependencies: "Canvas API",
     showInCategory: true,
+    instructions: [
+          {
+                "title": "1. Upload Your Source Image",
+                "desc": "Upload a PNG, JPEG, GIF, or BMP to convert into a Windows icon. Square images work best since ICO format is square-only. For non-square sources, the tool auto-crops to a centered square."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose which icon sizes to include: 16x16, 32x32, 48x48, 64x64, 128x128, and 256x256. Multiple sizes in one ICO file let Windows pick the right size for each context — taskbar, desktop, file explorer."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Set compression options per size. 32-bit icons include an alpha channel for smooth transparency. Download the .ico file ready for use as a website favicon, application icon, or Windows folder icon."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What resolution should my source image be for the best icon?",
+                "answer": "Upload a 256x256 or larger source image. Smaller images get upscaled for the larger icon sizes and may look blurry. Vector sources converted to PNG before ICO conversion yield the sharpest multi-size icons."
+          },
+          {
+                "question": "Can I include multiple color depths in one ICO file?",
+                "answer": "Yes, the tool can bundle 32-bit (true color with alpha), 24-bit, 8-bit, and 4-bit versions in a single ICO. This provides backward compatibility with older Windows versions that don't support alpha transparency."
+          },
+          {
+                "question": "Will my icon work on macOS and Linux too?",
+                "answer": "ICO is primarily a Windows format. macOS uses .icns and Linux uses .png for icons. However, web browsers use .ico for favicons across all platforms, so it remains the standard format for website icons."
+          }
+    ]
   },
   {
     id: "442",

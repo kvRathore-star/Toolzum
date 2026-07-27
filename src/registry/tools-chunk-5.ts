@@ -1197,7 +1197,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to PNG — Convert JPG images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG File",
+                "desc": "Upload a JPEG image that you want to convert to PNG. The tool reads the JPEG's compression artifacts and color data. Remember that JPEG has already lost quality through lossy compression — converting to PNG won't restore it."
+          },
+          {
+                "title": "2. Set PNG Bit Depth",
+                "desc": "Choose between 24-bit RGB for full color or 8-bit indexed for smaller file sizes. If the original JPEG had transparency that was flattened to white, this is your chance to add a transparent background."
+          },
+          {
+                "title": "3. Add Alpha Channel and Download",
+                "desc": "JPEG has no alpha channel. Use the magic wand or color-based selection to remove a solid background and make it transparent. Download the PNG — the file will be larger than the JPEG but preserves all visible detail without further loss."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will converting JPEG to PNG improve image quality?",
+                "answer": "No. JPEG compression already discarded information. Converting to PNG simply stores the current (already lossy) data without further degradation. It never recovers detail lost during the original JPEG encoding."
+          },
+          {
+                "question": "Why does my PNG from a JPEG look blocky in solid-color areas?",
+                "answer": "Those are JPEG compression artifacts — 8x8 pixel blocks with visible boundaries caused by the DCT quantization. Converting to PNG makes these artifacts permanent in a lossless container. They were present in the JPEG source."
+          },
+          {
+                "question": "Can I make a JPEG background transparent in the PNG?",
+                "answer": "Yes, but only if the background is a solid, uniform color. JPEG compression adds subtle color variations even to flat backgrounds, making perfect selection difficult. A tolerance-based selection tool helps isolate the subject."
+          }
+    ]
   },
   {
     id: "1016",
@@ -1207,7 +1235,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to WEBP — Convert PNG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG file for conversion to WebP. The tool reads the PNG's color data and alpha channel. WebP supports transparency, so no background color is needed — alpha is preserved."
+          },
+          {
+                "title": "2. Choose Lossy or Lossless Mode",
+                "desc": "WebP offers both modes. Lossless preserves PNG's exact pixel data with smaller file sizes than PNG. Lossy offers even smaller sizes by discarding subtle color data. Toggle between modes to compare file sizes."
+          },
+          {
+                "title": "3. Set Encoding Options and Download",
+                "desc": "Lossy quality ranges 0-100, with 80 being a great balance. Enable sharp YUV for improved RGB-to-YUV conversion quality. Download the WebP file — typically 25-35% smaller than the original PNG at equivalent quality."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can WebP preserve PNG's full alpha channel transparency?",
+                "answer": "Yes, both lossless and lossy WebP support an 8-bit alpha channel identical to PNG. Semi-transparent pixels, soft shadows, and smooth transparency edges are preserved perfectly during conversion."
+          },
+          {
+                "question": "Is WebP supported in all email clients and CMS platforms?",
+                "answer": "WebP works in most modern email clients but not all. Gmail and Outlook web support it, but Outlook desktop may not. Most CMS platforms like WordPress and Shopify support WebP uploads as of 2023."
+          },
+          {
+                "question": "Why is my lossless WebP sometimes larger than the original PNG?",
+                "answer": "For very small PNGs under 5KB with simple graphics, the WebP container overhead can exceed the PNG file size. For most photographs and illustrations, WebP is significantly smaller even in lossless mode."
+          }
+    ]
   },
   {
     id: "1017",
@@ -1217,7 +1273,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to WEBP — Convert JPG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG file to convert to WebP. The tool analyzes the JPEG's quality level and compression artifacts. WebP can achieve the same visual quality as the JPEG source at a fraction of the size."
+          },
+          {
+                "title": "2. Set Quality Level",
+                "desc": "WebP quality 0-100. Since the JPEG is already lossy, setting WebP quality to 80-90 usually matches the JPEG visually while reducing file size 25-35%. Lower values may exacerbate existing JPEG artifacts."
+          },
+          {
+                "title": "3. Enable Advanced Options",
+                "desc": "WebP supports alpha channel — useful if you want to add transparency to the JPEG. Enable sharpness filtering to reduce blocking artifacts from the JPEG source. Download the WebP, optimized for web delivery."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would I convert JPEG to WebP instead of just using JPEG?",
+                "answer": "WebP provides 25-35% better compression than JPEG at equivalent visual quality. For websites with many images, this translates directly to faster page loads and lower bandwidth costs."
+          },
+          {
+                "question": "Does WebP preserve JPEG metadata like camera EXIF data?",
+                "answer": "Yes, WebP supports EXIF, XMP, and ICC color profile metadata. The tool preserves this information during conversion. You can choose to strip metadata for privacy-conscious applications."
+          },
+          {
+                "question": "Can I convert a JPEG to lossless WebP for better quality?",
+                "answer": "Yes, WebP has a lossless mode. However, lossless WebP stores the JPEG's existing artifacts permanently without further loss. It won't improve quality but offers a path to a lossless container."
+          }
+    ]
   },
   {
     id: "1018",
@@ -1227,7 +1311,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Converts WebP files to PNG format — modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online WEBP to PNG — Convert WEBP images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP File",
+                "desc": "Upload a WebP image for conversion to PNG. The tool reads the WebP's encoding mode — lossless or lossy — and alpha channel data. PNG will preserve all visible quality of the WebP source."
+          },
+          {
+                "title": "2. Choose PNG Compression Level",
+                "desc": "PNG compression level ranges from 0 (no compression, fast) to 9 (maximum compression, slower). Level 6 is the default best trade-off. PNG's deflate compression works well on graphics with large uniform areas."
+          },
+          {
+                "title": "3. Configure Bit Depth and Download",
+                "desc": "Preserve 24-bit color for lossy WebP or full 24-bit for lossless WebP. Alpha channel converts to PNG's native transparency seamlessly. Download the PNG — typically 10-30% larger than lossless WebP, similar to lossy WebP."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is PNG from WebP better quality than the original WebP?",
+                "answer": "No. The conversion is pixel-exact — whatever quality the WebP has, the PNG preserves it exactly. If the WebP was lossy, the PNG locks in those artifacts losslessly. PNG never improves upon the source."
+          },
+          {
+                "question": "Does this conversion preserve WebP animation?",
+                "answer": "No, this converts static WebP to static PNG. For animated WebP, use the WebP-to-GIF or APNG tools or extract individual frames using the GIF editor."
+          },
+          {
+                "question": "Why is my PNG larger than the WebP source?",
+                "answer": "PNG uses general-purpose deflate compression, while WebP uses specialized prediction techniques tailored to image data. For photos and gradients, WebP typically compresses 25-35% better than PNG."
+          }
+    ]
   },
   {
     id: "1019",
@@ -1237,7 +1349,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Converts HEIC files to PNG format — Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HEIC to PNG — Convert HEIC images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image from an iOS device for conversion to PNG. The tool decodes the HEVC-compressed data. PNG preserves all visible quality from the HEIC source losslessly."
+          },
+          {
+                "title": "2. Choose PNG Options",
+                "desc": "Select PNG compression level 0-9. Level 6 provides a good balance. HEIC images with large uniform areas compress well with PNG. Set bit depth — 24-bit for standard color or 32-bit if the HEIC has alpha."
+          },
+          {
+                "title": "3. Configure Transparency and Download",
+                "desc": "If converting an HEIC with alpha (from sticker apps or compositing), PNG preserves transparency perfectly. Download the PNG — file will be larger than the HEIC but universally compatible and losslessly stored."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is the PNG so much larger than the HEIC file?",
+                "answer": "HEIC uses HEVC compression which is extremely efficient. PNG uses general deflate compression. A 2MB HEIC photo can become 8-12MB as PNG. This is expected — PNG trades file size for universal compatibility."
+          },
+          {
+                "question": "Can HEIC depth maps be preserved in the PNG output?",
+                "answer": "No, PNG doesn't support auxiliary image data like depth maps. The main image is converted, but portrait mode depth information, semantic masks, and camera metadata are not preserved in the PNG."
+          },
+          {
+                "question": "Is converting HEIC to PNG recommended for web use?",
+                "answer": "Not for photo-heavy websites — PNG files are too large. Use JPEG or WebP for web photos. Convert HEIC to PNG only when you need lossless preservation, transparency, or compatibility with software that doesn't support HEIC."
+          }
+    ]
   },
   {
     id: "1020",
@@ -1247,7 +1387,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to AVIF — Convert PNG images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG file for conversion to AVIF. The tool shows the PNG's color depth and whether it has an alpha channel. AVIF supports 10-bit HDR color and full alpha transparency."
+          },
+          {
+                "title": "2. Set Quality and Encoding Speed",
+                "desc": "AVIF uses the AV1 codec. Quality 0-63 controls quantization (lower is better). Speed settings trade encoding time for compression efficiency — Medium is recommended for the best balance."
+          },
+          {
+                "title": "3. Configure HDR and Alpha Options",
+                "desc": "Enable HDR metadata if your PNG is in a wide color gamut. Alpha channel is preserved with compression. Set chroma subsampling — 4:4:4 for maximum color accuracy, 4:2:0 for smaller files. Download the AVIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much smaller is AVIF compared to PNG?",
+                "answer": "AVIF typically reduces PNG file size by 60-80% at visually lossless quality. A 1MB PNG photo can become 200-300KB as AVIF with minimal perceptual difference, especially on photographs with smooth gradients."
+          },
+          {
+                "question": "Does AVIF support the same transparency features as PNG?",
+                "answer": "Yes, AVIF supports full 8-bit and 10-bit alpha channels per pixel, identical to PNG's alpha capabilities. Semi-transparency, soft edges, and layered compositions all survive conversion intact."
+          },
+          {
+                "question": "Why does AVIF encoding take longer than PNG minification?",
+                "answer": "AVIF uses the AV1 compression algorithm which is computationally intensive. Encoding can take 2-10 seconds per image depending on resolution and quality settings. The trade-off is significantly smaller file sizes."
+          }
+    ]
   },
   {
     id: "1021",
@@ -1257,7 +1425,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to AVIF — Convert JPG images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG image for conversion to AVIF. The tool reads the JPEG's quality level and existing compression artifacts. AVIF can deliver the same visual quality at roughly half the JPEG file size."
+          },
+          {
+                "title": "2. Set Quality and Encoding Parameters",
+                "desc": "AVIF quality is set from 0 to 63 (lower is better). A value of 20-30 usually matches JPEG quality 85-90 visually. Speed setting affects encoding time — prefer slower for better compression efficiency."
+          },
+          {
+                "title": "3. Configure Chroma and Download",
+                "desc": "Chroma subsampling 4:2:0 matches typical JPEG handling. 4:4:4 preserves full color detail for graphic elements. Enable alpha channel if you need to add transparency. Download the AVIF — significantly smaller than the JPEG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will AVIF encoding make JPEG artifacts worse?",
+                "answer": "AVIF's compression can amplify existing JPEG artifacts, especially blocking artifacts in smooth areas. Use higher AVIF quality settings to minimize this. Pre-filtering the JPEG to reduce artifacts before conversion helps."
+          },
+          {
+                "question": "How does AVIF handle JPEG's chroma subsampling?",
+                "answer": "JPEG typically uses 4:2:0 subsampling already. AVIF can preserve this or use 4:4:4 for better color fidelity. The AVIF decoder is more sophisticated and may produce cleaner color transitions than JPEG's block-based approach."
+          },
+          {
+                "question": "Is AVIF suitable for batch JPEG conversion on a website?",
+                "answer": "Yes, but consider the encoding speed trade-off. Each image takes 3-10 seconds to encode depending on settings. For large batches, server-side processing is recommended over client-side browser encoding."
+          }
+    ]
   },
   {
     id: "1022",
@@ -1267,7 +1463,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to HEIC — Convert PNG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG image to convert to HEIC format. HEIC is Apple's preferred image format, offering modern compression. The tool checks if your PNG has an alpha channel — HEIC supports transparency."
+          },
+          {
+                "title": "2. Set Quality Parameters",
+                "desc": "Quality ranges from 0.0 to 1.0 (HEIF specification). A value of 0.8 offers excellent quality with good compression. HEIC uses HEVC (H.265) encoding for efficient compression of photographic content."
+          },
+          {
+                "title": "3. Handle Alpha and Metadata",
+                "desc": "HEIC supports alpha channels but not all viewers render them. Choose whether to preserve transparency or flatten with a background color. EXIF metadata from the PNG is preserved. Download the HEIC file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will my HEIC file open on Windows and Android devices?",
+                "answer": "Windows 10+ and Android 10+ natively support HEIC, though some older versions require codec packs or extensions. On the web, HEIC support varies by browser — Safari supports it, Chrome may need flags enabled."
+          },
+          {
+                "question": "How does HEIC compression compare to JPEG for PNG photos?",
+                "answer": "HEIC typically achieves 40-50% smaller file sizes than equivalent quality JPEG from a PNG source. For photographs with large uniform areas like skies, HEIC's compression advantage is even more pronounced."
+          },
+          {
+                "question": "Can HEIC preserve PNG's lossless quality?",
+                "answer": "HEIC is natively lossy, though it offers a lossless mode. The lossless HEIC files are larger than the original PNG for most images. HEIC's strength is efficient lossy compression, not archival lossless storage."
+          }
+    ]
   },
   {
     id: "1023",
@@ -1277,7 +1501,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to BMP — Convert PNG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG file for conversion to BMP format. The tool identifies the PNG's pixel format. BMP is an uncompressed format, so prepare for significantly larger output files — often 3-5x the PNG size."
+          },
+          {
+                "title": "2. Choose BMP Bit Depth",
+                "desc": "Select bit depth: 24-bit (16.7 million colors), 32-bit (with alpha channel), 8-bit (256 colors), or 4-bit (16 colors). Higher bit depths mean larger files but preserve PNG color accuracy. 24-bit is standard."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "32-bit BMP preserves PNG's alpha channel. BMP files are uncompressed, making them ideal for applications that need raw pixel access without decoding overhead. Download the BMP — expect a file size equal to width × height × bytes per pixel."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is my BMP so much larger than the original PNG?",
+                "answer": "PNG uses deflate compression which can reduce file sizes dramatically for images with large uniform areas. BMP stores raw pixel data with no compression, so file size equals exact pixel data size regardless of image simplicity."
+          },
+          {
+                "question": "Does BMP support the same transparency as PNG?",
+                "answer": "Yes, 32-bit BMP supports an alpha channel for transparency. However, not all applications read the alpha channel from BMP files correctly. PNG or WebP are more reliable choices for transparent images."
+          },
+          {
+                "question": "What is BMP commonly used for today?",
+                "answer": "BMP is primarily used in legacy software, certain industrial applications, medical imaging, and scenarios where pixel data must be read without any decompression overhead. It's rarely used on the web due to large file sizes."
+          }
+    ]
   },
   {
     id: "1024",
@@ -1287,7 +1539,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to TIFF — Convert PNG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a PNG file for conversion to TIFF. The tool reads PNG metadata including color space, bit depth, and compression. TIFF is a flexible container format that supports multiple compression methods."
+          },
+          {
+                "title": "2. Select Compression and Bit Depth",
+                "desc": "Choose compression: LZW for lossless (best for graphics), Deflate for better lossless compression, or no compression for maximum compatibility. Select bit depth — 8-bit or 16-bit per channel. 16-bit preserves finer tonal detail from the PNG."
+          },
+          {
+                "title": "3. Set Color Space and Download",
+                "desc": "TIFF can embed ICC color profiles. Choose sRGB, Adobe RGB, or embed the PNG's original profile. Download the TIFF — ideal for print production, scanning archives, and professional image editing workflows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Should I use LZW or Deflate compression for my TIFF?",
+                "answer": "LZW is the most widely compatible TIFF compression — supported by virtually all image editors. Deflate offers slightly better compression ratios but with narrower software support. For maximum compatibility, choose LZW."
+          },
+          {
+                "question": "Can TIFF store layers from layered PNG files?",
+                "answer": "No, PNG doesn't support layers. It stores a single flat raster. TIFF can store multiple pages, but this conversion preserves only the single rasterized image. For layered files, use PSD or XCF formats."
+          },
+          {
+                "question": "What bit depth should I use for archival scanning?",
+                "answer": "Use 16-bit per channel for archival quality. This captures 65,536 tonal levels per channel versus 256 in 8-bit. The file is twice as large but provides far more editing headroom in applications like Photoshop."
+          }
+    ]
   },
   {
     id: "1025",
@@ -1297,7 +1577,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to ICO — Convert PNG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your PNG",
+                "desc": "Upload a square PNG image to convert into a Windows icon. The tool checks dimensions — non-square images are auto-cropped to a centered square. PNG's transparency is preserved in the ICO output."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose which standard icon sizes to include: 16x16, 32x32, 48x48, 64x64, 128x128, 256x256. Multi-size ICO files let Windows select the appropriate size for taskbar, desktop, and file explorer views."
+          },
+          {
+                "title": "3. Configure Color Depth and Download",
+                "desc": "32-bit true color with alpha is recommended for modern Windows. Include 8-bit versions for older systems. Download the .ico file ready to use as an application icon, favicon, or folder icon."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What's the minimum PNG resolution for a good icon set?",
+                "answer": "Upload at least 256x256 PNG. The tool downsizes to create smaller icon sizes. A 64x64 source will look pixelated when Windows tries to display it as a large icon. 512x512 or larger provides headroom for all sizes."
+          },
+          {
+                "question": "Will my PNG transparency carry over to all icon sizes?",
+                "answer": "Yes, alpha channel transparency is preserved in every size entry within the ICO file. Each size gets its own properly composited transparent version. 32-bit ICO entries include full alpha."
+          },
+          {
+                "question": "Can I use a non-square PNG as a website favicon?",
+                "answer": "Favicons should be square. If your PNG isn't square, the tool crops it to center before generating icon sizes. Use the crop feature beforehand to manually control which part of the image becomes the icon."
+          }
+    ]
   },
   {
     id: "1026",
@@ -1307,7 +1615,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to HEIC — Convert JPG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG file to convert to HEIC. The tool reads the JPEG's quality level and image structure. HEIC uses HEVC compression which typically reduces file size by 40-50% compared to the JPEG source."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Set quality level from 0.0 to 1.0. A quality of 0.8 matches most JPEG quality 85 sources visually. HEIC can also embed the original JPEG as a thumbnail for backward compatibility."
+          },
+          {
+                "title": "3. Configure Grid and Download",
+                "desc": "HEIC supports image grids for burst photos and multi-picture compositions. For single-image conversion, keep grid count at 1. Preserve or strip EXIF data. Download the HEIC, optimized for Apple ecosystem integration."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does HEIC preserve JPEG's original EXIF and camera data?",
+                "answer": "Yes, HEIC supports comprehensive metadata including EXIF, GPS, and XMP. All camera information, date stamps, and location data from the JPEG are preserved in the HEIC output."
+          },
+          {
+                "question": "Can I view HEIC files on non-Apple devices?",
+                "answer": "HEIC is natively supported on iOS, macOS, and Android 10+. Windows requires the HEIF Image Extension from the Microsoft Store. Web support is limited — primarily Safari on macOS and iOS."
+          },
+          {
+                "question": "Why is HEIC encoding slower than JPEG encoding?",
+                "answer": "HEIC uses HEVC (H.265) which is significantly more computationally complex than JPEG's DCT encoding. Hardware encoding on Apple Silicon devices is fast, but software encoding on other platforms takes several seconds."
+          }
+    ]
   },
   {
     id: "1027",
@@ -1317,7 +1653,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to SVG — Convert JPG images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG image to vectorize into SVG. The tool analyzes the image for edge detection and color regions. JPEG photos with gradual color changes produce SVGs with excessive paths, so simpler graphics work best."
+          },
+          {
+                "title": "2. Configure Vectorization",
+                "desc": "Set color count (2-32), edge detection threshold, and path simplification level. Lower color counts and higher simplification produce cleaner SVGs. Preview the vector output overlaid on the original JPEG."
+          },
+          {
+                "title": "3. Refine and Export SVG",
+                "desc": "Review the vector result — check that key shapes are recognizable. Fine-tune settings if edges are too jagged or details are lost. Download the SVG file, which is resolution-independent and editable in vector software."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I convert a photographic JPEG to a high-quality SVG?",
+                "answer": "Photographs contain continuous tones that vectorization cannot represent efficiently. The SVG would contain thousands of tiny shapes and be larger than the JPEG with poor visual quality. SVGs are best for graphics with few colors."
+          },
+          {
+                "question": "What JPEG content works best for SVG conversion?",
+                "answer": "Graphics with solid color blocks, logos with clean edges, cartoons, and illustrations work best. JPEG photos of products on clean backgrounds can also work if you reduce to 8-16 colors."
+          },
+          {
+                "question": "Will the SVG retain JPEG's EXIF metadata?",
+                "answer": "No, SVG is an XML-based vector format and does not support EXIF metadata. Camera information, timestamps, and GPS data from the JPEG are not carried into the SVG output."
+          }
+    ]
   },
   {
     id: "1028",
@@ -1327,7 +1691,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to BMP — Convert JPG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG file for conversion to BMP. The tool decompresses the JPEG into raw pixel data. Expect a massive file size increase — JPEG's compression ratio means a 500KB JPEG can become 10+ MB as BMP."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "Select 24-bit (16.7M colors) for photographic quality, 8-bit (256 colors) for smaller files with visible palette reduction, or 32-bit if you want to add an alpha channel. 24-bit is standard for photographs."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP files are uncompressed, so they're large but load instantly in any application without decoding delay. The conversion preserves all visible JPEG data in a pixel-exact format. Download the BMP for applications requiring direct pixel access."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert JPEG to BMP — is there any advantage?",
+                "answer": "BMP provides raw pixel access without decoding overhead, useful in embedded systems, legacy software, and situations where you need to read pixel data directly without image decoding libraries."
+          },
+          {
+                "question": "Does BMP preserve JPEG's compression artifacts?",
+                "answer": "Yes, every artifact present in the JPEG source becomes fixed pixel data in the BMP. The conversion is pixel-exact, so blocking artifacts, ringing, and color shifts from JPEG compression are all preserved."
+          },
+          {
+                "question": "Can I add transparency to a BMP converted from JPEG?",
+                "answer": "Yes, if you select 32-bit BMP, you can add an alpha channel. However, JPEG has no transparent areas, so you'd need to manually define a transparency mask using color selection after conversion."
+          }
+    ]
   },
   {
     id: "1029",
@@ -1337,7 +1729,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to TIFF — Convert JPG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a JPEG file for conversion to TIFF. The tool reads the JPEG's compression quality and metadata. TIFF can store the JPEG data intact or decompress it into uncompressed pixel data."
+          },
+          {
+                "title": "2. Choose Compression Method",
+                "desc": "JPEG-in-TIFF keeps the original JPEG compression without further loss. LZW compression re-encodes losslessly but may produce larger files. No compression creates the largest but fastest-to-read TIFF files."
+          },
+          {
+                "title": "3. Set Bit Depth and Color Space",
+                "desc": "TIFF supports up to 16-bit per channel. Since JPEG is 8-bit, converting to 16-bit adds no extra detail but allows future editing headroom. Embed the JPEG's ICC color profile for consistent color reproduction. Download the TIFF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is JPEG-in-TIFF and when should I use it?",
+                "answer": "JPEG-in-TIFF stores the original JPEG-compressed data inside a TIFF container. It preserves the file exactly without re-encoding, so no additional quality loss occurs. Use when you need TIFF's metadata or multi-page capabilities."
+          },
+          {
+                "question": "Can TIFF store multiple JPEG images in one file?",
+                "answer": "Yes, TIFF supports multi-page documents. You can combine several JPEG images into a single multi-page TIFF file, useful for scanned documents, fax archives, and multi-frame medical images."
+          },
+          {
+                "question": "Is TIFF better than JPEG for photo archiving?",
+                "answer": "For archiving, TIFF with LZW compression is preferred because it's lossless. However, converting an already-lossy JPEG to TIFF doesn't recover lost data. Only archive original JPEG sources or shoot in RAW for true archival quality."
+          }
+    ]
   },
   {
     id: "1030",
@@ -1347,7 +1767,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to ICO — Convert JPG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JPEG",
+                "desc": "Upload a square JPEG image to convert into a Windows icon. The tool auto-crops non-square images to a centered square. Since JPEG has no transparency, the icon background will initially be opaque."
+          },
+          {
+                "title": "2. Choose Icon Sizes",
+                "desc": "Select standard sizes: 16x16, 32x32, 48x48, 64x64, 128x128, 256x256. Each size is generated from the source. Small sizes like 16x16 may lose detail from a soft JPEG, so check the preview."
+          },
+          {
+                "title": "3. Handle Background and Download",
+                "desc": "Since JPEG has no alpha channel, the icon will have a solid background. You can use the background removal tool to make areas transparent before generating the ICO. Download the multi-size icon file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I make my JPEG-based icon transparent?",
+                "answer": "JPEG doesn't support transparency, but the ICO tool can process the image with the background remover before encoding icon sizes. Solid white or colored backgrounds in the JPEG will become transparent regions in the icon."
+          },
+          {
+                "question": "How does the JPEG compression affect small icon sizes?",
+                "answer": "JPEG artifacts become very visible at small sizes like 16x16 and 32x32. Blocking artifacts can make edges look jagged. For better small icons, use a high-quality JPEG source with minimal compression artifacts."
+          },
+          {
+                "question": "Will a JPEG-based ICO work as a favicon?",
+                "answer": "Yes, browsers will display it. However, favicons look best with clear transparency so the icon blends with browser tabs. Consider removing the JPEG background before conversion for a professional favicon."
+          }
+    ]
   },
   {
     id: "1031",
@@ -1357,7 +1805,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to HEIC — Convert WEBP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP file to convert to HEIC format. The tool reads WebP's color information and alpha channel. HEIC offers comparable or better compression than WebP, especially for photographic content."
+          },
+          {
+                "title": "2. Set Quality Parameters",
+                "desc": "HEIC quality ranges from 0.0 to 1.0. A setting of 0.8 provides excellent quality. HEIC uses HEVC encoding which is particularly efficient for high-resolution photos with smooth tonal transitions."
+          },
+          {
+                "title": "3. Configure Alpha and Metadata",
+                "desc": "If the WebP has transparency, HEIC can preserve it. However, HEIC transparency support varies across platforms. EXIF and XMP metadata from the WebP can be embedded. Download the HEIC file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does HEIC quality compare to the original WebP?",
+                "answer": "HEIC can match or exceed WebP's visual quality at the same file size for photographic content. For screen captures and graphics, WebP often maintains an edge. The best choice depends on your specific image type."
+          },
+          {
+                "question": "Can HEIC handle WebP's lossless encoding?",
+                "answer": "HEIC supports lossless mode, but it's rarely used. HEIC's strength is efficient lossy compression. Lossless HEIC files are typically 2-3x larger than lossless WebP, making HEIC a poor choice for lossless conversion."
+          },
+          {
+                "question": "Is HEIC conversion recommended for WebP images used on the web?",
+                "answer": "Not generally — WebP has broader web browser support than HEIC. Convert WebP to HEIC primarily when you need compatibility with Apple's ecosystem, such as for iOS apps or macOS workflows."
+          }
+    ]
   },
   {
     id: "1032",
@@ -1367,7 +1843,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to SVG — Convert WEBP images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP image for vectorization. The tool analyzes the image for color regions and edges. WebP photos with many colors produce complex SVGs with excessive paths — simple graphics work better."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge threshold, and path simplification. Fewer colors and higher simplification create cleaner SVG files. Preview the vectorized output to check shape accuracy."
+          },
+          {
+                "title": "3. Export as SVG",
+                "desc": "Review the vector result. Adjust settings if key features are lost or too many paths are generated. Download the SVG file — infinitely scalable and editable in vector applications like Illustrator, Figma, or Inkscape."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I vectorize a photographic WebP into a clean SVG?",
+                "answer": "Photographs contain thousands of color transitions that produce SVGs with excessive overlapping paths, often larger than the original WebP. SVGs are intended for graphics with well-defined shapes and limited colors."
+          },
+          {
+                "question": "Does vectorization preserve the WebP's transparency?",
+                "answer": "Yes, the vectorization process detects transparent regions and omits them from the SVG shapes. The resulting SVG has a transparent background by default, matching the WebP's alpha channel."
+          },
+          {
+                "question": "What's the ideal WebP for vectorization?",
+                "answer": "WebP images with 2-16 distinct colors, clear edges between color regions, and minimal noise or gradients produce the best SVGs. Logos, icons, and flat illustrations are ideal candidates."
+          }
+    ]
   },
   {
     id: "1033",
@@ -1377,7 +1881,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to BMP — Convert WEBP images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP file for conversion to BMP. The tool decodes the WebP into raw pixel data. BMP files are uncompressed, so the output will be significantly larger than the WebP source."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "Select 24-bit BMP for standard 16.7M color output, 32-bit to preserve alpha transparency from the WebP, or 8-bit indexed for smaller files with reduced color. 32-bit is best for WebP images with transparency."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP stores pixel data exactly as decoded. No further compression is applied. The file size equals width × height × bytes per pixel plus header. Download the BMP for use in applications requiring raw pixel access."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would anyone convert WebP to BMP?",
+                "answer": "BMP is the simplest image format for direct pixel reading — no decoding libraries required. This is useful in embedded systems, legacy applications, or custom software that reads pixel data directly from file offsets."
+          },
+          {
+                "question": "Does 32-bit BMP preserve WebP's alpha perfectly?",
+                "answer": "Yes, each pixel's RGBA values from the WebP decode are written directly into the BMP. Alpha is stored in the reserved byte of the 32-bit pixel. Not all BMP readers handle alpha, but the data is there."
+          },
+          {
+                "question": "How large will a BMP from a typical WebP photo be?",
+                "answer": "A 1920x1080 WebP that's 200KB will decode to approximately 6.2MB as a 24-bit BMP (1920 × 1080 × 3 bytes). A 32-bit BMP with alpha would be about 8.3MB."
+          }
+    ]
   },
   {
     id: "1034",
@@ -1387,7 +1919,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to TIFF — Convert WEBP images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP file for conversion to TIFF. The tool decodes the WebP into pixel data and extracts available metadata. TIFF offers flexible compression options and wide software compatibility."
+          },
+          {
+                "title": "2. Choose TIFF Compression",
+                "desc": "Select LZW for lossless compression with broad software support, Deflate for better lossless compression, or no compression for instant pixel access. WebP's alpha channel is preserved in the TIFF output."
+          },
+          {
+                "title": "3. Set Bit Depth and Color Profile",
+                "desc": "TIFF supports 8 or 16-bit per channel. Embed the ICC profile if the WebP has color space information. Multi-page TIFF can combine several WebP files. Download the TIFF, ideal for professional editing workflows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will converting WebP to TIFF improve image quality?",
+                "answer": "No. The decoded pixels from the WebP are stored exactly. If the WebP was lossy, those artifacts are preserved in the TIFF. TIFF provides a lossless container but cannot recover detail lost during WebP encoding."
+          },
+          {
+                "question": "Is TIFF better than WebP for print production?",
+                "answer": "Yes, TIFF is the industry standard for print. Print workflows expect TIFF with LZW compression for reliable color management and compatibility with prepress systems. WebP is not supported in most print pipelines."
+          },
+          {
+                "question": "Can I embed multiple WebP images into a single TIFF file?",
+                "answer": "Yes, TIFF supports multiple pages in one file. You can combine several WebP images into a single multi-page TIFF, useful for organizing related images or creating document archives."
+          }
+    ]
   },
   {
     id: "1035",
@@ -1397,7 +1957,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to ICO — Convert WEBP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a square WebP image for icon conversion. Non-square images are auto-cropped to center. The tool decodes the WebP and analyzes its transparency data for icon generation."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose sizes: 16x16 through 256x256. Multi-size ICO files include all selected sizes. WebP's alpha transparency is preserved in 32-bit icon entries for each size."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "32-bit icons with alpha are recommended for modern Windows. Include 8-bit fallback sizes for older systems. The WebP's background removal ensures clean transparency. Download the .ico file for application and favicon use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does WebP's lossy compression affect icon quality at small sizes?",
+                "answer": "Lossy WebP artifacts can become visible at small icon sizes, creating irregular edges. Using a lossless WebP source or a high-quality PNG source produces sharper small icons."
+          },
+          {
+                "question": "Can I create an icon from a non-square WebP?",
+                "answer": "ICO format is square-only. Non-square WebP images are auto-cropped from the center to create a square before generating sizes. Use the crop tool first for manual control over the crop region."
+          },
+          {
+                "question": "What's the best WebP resolution for generating a full icon set?",
+                "answer": "Upload a 256x256 or larger WebP. This resolution provides enough detail for all smaller sizes. A 512x512 lossless WebP yields the sharpest full icon set with clean edges at every size."
+          }
+    ]
   },
   {
     id: "1036",
@@ -1407,7 +1995,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online WEBP to JXL — Convert WEBP images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your WebP",
+                "desc": "Upload a WebP file for conversion to JPEG XL. The tool reads the WebP's mode (lossless/lossy), color data, and alpha channel. JXL offers better compression than WebP in most scenarios."
+          },
+          {
+                "title": "2. Choose Encoding Mode",
+                "desc": "JXL's modular mode provides lossless compression, often beating WebP lossless by 15-25%. VarDCT mode provides lossy compression with quality scaling 0-100. Select based on your quality requirement."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Set bit depth (8, 10, or 12-bit). Enable progressive decoding for faster previews. Preserve alpha with efficient compression. Download the .jxl file — offering state-of-the-art compression for the converted WebP content."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does JPEG XL really compress better than WebP for all images?",
+                "answer": "JXL typically wins for photographic content by 20-35%. For synthetic graphics, screenshots, and text-heavy images, WebP lossless often ties or slightly beats JXL. The advantage varies by image content type."
+          },
+          {
+                "question": "Can JPEG XL losslessly recompress a lossy WebP to be smaller?",
+                "answer": "No. Lossy WebP artifacts are part of the pixel data. JXL lossless mode preserves them exactly. To make the file smaller, you'd use JXL lossy mode which introduces its own compression."
+          },
+          {
+                "question": "Is JPEG XL better suited than WebP for long-term archiving?",
+                "answer": "JXL's lossless compression and robust feature set make it an excellent archival format. However, WebP has broader current ecosystem support. For archiving, consider keeping both or converting to JXL when adoption increases."
+          }
+    ]
   },
   {
     id: "1037",
@@ -1417,7 +2033,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to SVG — Convert HEIC images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image for vectorization. The tool decodes the HEVC data into pixel form. HEIC photos produce overly complex SVGs — simple graphics with limited colors work significantly better."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge detection sensitivity, and path simplification. SVG conversion applies color quantization and edge tracing to convert pixels into vector shapes and paths."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output for shape accuracy. Fine-tune settings to balance detail versus path count. Download the SVG — resolution-independent and editable in vector design software."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I convert an iPhone HEIC portrait to a usable SVG?",
+                "answer": "Portrait photos contain too many colors and soft edges for clean vectorization. The SVG would be bloated with thousands of paths. Consider converting a simplified, posterized version or using an illustration-style photo."
+          },
+          {
+                "question": "Does the vectorization preserve HEIC's HDR luminance?",
+                "answer": "No, SVG is a vector format using sRGB color references. HDR luminance values from HEIC are tonemapped to standard sRGB during the pixel decoding phase before vectorization."
+          },
+          {
+                "question": "What HEIC content produces the best SVGs?",
+                "answer": "HEIC images with flat colors, clear edges, and minimal gradients — such as screenshots, diagrams, or product photos on clean backgrounds — produce the best vectorization results with manageable SVG file sizes."
+          }
+    ]
   },
   {
     id: "1038",
@@ -1427,7 +2071,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to BMP — Convert HEIC images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image for conversion to BMP. The tool fully decodes the HEVC-compressed data into raw pixels. Expect a dramatic file size increase since BMP stores uncompressed pixel data."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "Select 24-bit BMP for photographs, 32-bit if the HEIC has an alpha channel, or 8-bit indexed for reduced file size. 24-bit BMP will be width × height × 3 bytes plus header overhead."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP discards all compression and stores raw RGB data. No further quality loss occurs during this step — the decoded pixels are written directly. Download the BMP for applications needing direct pixel buffer access."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How large will a BMP from an iPhone HEIC be?",
+                "answer": "An iPhone 48MP HEIC (about 5MB) would produce a BMP of roughly 48 million pixels × 3 bytes = 144MB for 24-bit. Even a 12MP HEIC yields about 36MB BMP. Storage requirements grow dramatically."
+          },
+          {
+                "question": "Is there any quality benefit to converting HEIC to BMP?",
+                "answer": "No quality benefit. The HEIC's superior compression and HDR capability are lost. The only advantage is immediate pixel access without any decoding step in software that reads raw BMP data."
+          },
+          {
+                "question": "Can BMP preserve HEIC's HDR color information?",
+                "answer": "No, standard BMP is limited to 8-bit per channel SDR. HEIC's 10-bit HDR luminance data is tonemapped to 8-bit during decoding, losing the extended dynamic range that makes HEIC advantageous."
+          }
+    ]
   },
   {
     id: "1039",
@@ -1437,7 +2109,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to TIFF — Convert HEIC images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image for conversion to TIFF. The tool decodes the HEVC data and extracts metadata. TIFF provides a professional-grade container with flexible compression options."
+          },
+          {
+                "title": "2. Choose TIFF Compression",
+                "desc": "Select LZW compression for lossless storage with broad compatibility, Deflate for tighter lossless compression, or JPEG-in-TIFF for photographic images at smaller sizes. LZW is recommended for archival quality."
+          },
+          {
+                "title": "3. Set Bit Depth and Color Profile",
+                "desc": "HEIC's 10-bit color can be preserved in 16-bit TIFF (stored as 16-bit per channel). Embed the ICC color profile. Download the TIFF, ready for professional photography, print, and editing workflows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF a better archive format than HEIC for iPhone photos?",
+                "answer": "TIFF with LZW compression is lossless and universally supported in professional software. HEIC is more storage-efficient. For long-term archives, TIFF is safer, but HEIC files preserve Apple-specific metadata better."
+          },
+          {
+                "question": "Does HEIC-to-TIFF preserve portrait mode depth data?",
+                "answer": "HEIC stores depth maps as auxiliary images. TIFF supports multi-page and auxiliary data, but this conversion focuses on the main RGB image. Depth data is not currently transferred to the TIFF output."
+          },
+          {
+                "question": "What bit depth TIFF should I use for photo editing?",
+                "answer": "Use 16-bit TIFF even though HEIC is 10-bit. The 16-bit container provides headroom for editing in Photoshop or Lightroom without banding. The extra bits remain empty but give you editing flexibility."
+          }
+    ]
   },
   {
     id: "1040",
@@ -1447,7 +2147,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to ICO — Convert HEIC images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload a square HEIC image from an iOS device for icon conversion. The tool decodes the HEIC and prepares it for multi-size icon generation. Non-square images are centered and cropped."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. HEIC images from iPhones (12MP+) provide excellent source resolution for all icon sizes. The HEIC's color reproduction is preserved in the icon."
+          },
+          {
+                "title": "3. Set Background and Download",
+                "desc": "Since HEIC-to-ICO does not inherently have icon transparency, use the background removal tool first if you need a transparent icon. Download the .ico file as an application or favicon resource."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I use an iPhone HEIC photo directly as a Windows icon?",
+                "answer": "Yes, after conversion. The HEIC's high resolution provides plenty of detail for all icon sizes. iPhone photos with clean backgrounds work best as recognizable icons at small sizes."
+          },
+          {
+                "question": "Will the icon preserve the HEIC's wide color gamut?",
+                "answer": "ICO format uses standard sRGB. HEIC images captured in Display P3 color space will be converted to sRGB, potentially losing some vibrancy in highly saturated colors."
+          },
+          {
+                "question": "What aspect ratio HEIC works best for ICO conversion?",
+                "answer": "Square HEIC images produce the best icons. iPhone photos are typically 4:3 or 16:9 — they'll be cropped to square. Use the crop tool beforehand to control the framing for the icon."
+          }
+    ]
   },
   {
     id: "1041",
@@ -1457,7 +2185,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to JXL — Convert HEIC images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your HEIC File",
+                "desc": "Upload an HEIC image for conversion to JPEG XL. The tool decodes the HEVC data into pixels. JPEG XL is designed as a universal format that can outperform both HEIC and JPEG."
+          },
+          {
+                "title": "2. Choose Compression Mode",
+                "desc": "JXL offers lossless mode that preserves every pixel (typically 10-15% smaller than HEIC lossless). VarDCT lossy mode with quality 80-95 matches HEIC quality at 5-15% smaller file sizes."
+          },
+          {
+                "title": "3. Configure Advanced Options",
+                "desc": "Set bit depth to match the HEIC source (8, 10, or 12-bit). Enable progressive decoding for perceptual streaming. Preserve the alpha channel. Download the .jxl file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is JPEG XL ready to replace HEIC for iPhone photos?",
+                "answer": "Not yet — iOS doesn't natively capture or export JPEG XL. Until Apple adopts JXL, HEIC remains the practical format for iPhone photos. JXL is useful for storage and processing after conversion."
+          },
+          {
+                "question": "Does JPEG XL match HEIC's compression efficiency for photos?",
+                "answer": "JXL typically matches or slightly beats HEIC in compression efficiency. A 2MB HEIC photo might be 1.7-1.9MB as JXL at the same visual quality. The advantage is modest but consistent."
+          },
+          {
+                "question": "Can JXL preserve HEIC's 10-bit HDR and wide gamut?",
+                "answer": "Yes, JPEG XL supports up to 12-bit color depth and HDR transfer functions just like HEIC. JXL also supports wider color gamuts including Rec.2020, making it a true equivalent for HDR image archival."
+          }
+    ]
   },
   {
     id: "1042",
@@ -1467,7 +2223,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to WEBP — Convert AVIF images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to WebP. The tool decodes the AV1-compressed data. Both are modern formats, but WebP has broader browser support while AVIF often compresses better."
+          },
+          {
+                "title": "2. Choose Quality and Mode",
+                "desc": "Select lossy or lossless WebP. For AVIF photos converted to lossy WebP, quality 85-95 matches well. WebP's compression is less efficient than AVIF, so expect slightly larger files at equivalent quality."
+          },
+          {
+                "title": "3. Configure Alpha and Metadata",
+                "desc": "AVIF's alpha channel transfers directly to WebP transparency. EXIF and XMP metadata from the AVIF can be embedded. Download the WebP for broader compatibility across browsers and CMS platforms."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which is better: AVIF or WebP for my converted image?",
+                "answer": "AVIF offers 25-35% better compression than WebP for photographs. WebP has 95%+ browser support versus AVIF's ~85%. The choice depends on whether file size or maximum compatibility is your priority."
+          },
+          {
+                "question": "Does WebP preserve AVIF's 10-bit color depth?",
+                "answer": "WebP supports 8-bit only in standard implementations. AVIF's 10 or 12-bit HDR data is tonemapped to 8-bit SDR during conversion. The extended luminance and color information from the AVIF is lost."
+          },
+          {
+                "question": "Why would I convert AVIF to WebP if AVIF compresses better?",
+                "answer": "Compatibility. Some CDNs, advertising platforms, and email clients don't support AVIF but do support WebP. Converting gives you reach at the cost of slightly larger files."
+          }
+    ]
   },
   {
     id: "1043",
@@ -1477,7 +2261,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to HEIC — Convert AVIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to HEIC. Both formats use modern compression — AVIF uses AV1, HEIC uses HEVC. The tool decodes AVIF and re-encodes to HEVC."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Quality 0.0-1.0. A setting of 0.8-0.9 matches most AVIF compression levels. HEIC and AVIF have similar compression efficiency for photographic content, so file sizes remain comparable."
+          },
+          {
+                "title": "3. Configure Alpha and Metadata",
+                "desc": "HEIC supports alpha channels. Transfer AVIF's transparency and metadata. Download the HEIC file for better compatibility with Apple ecosystem devices and applications."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is HEIC or AVIF better for photography?",
+                "answer": "AVIF offers slightly better compression and is royalty-free (no patent licensing). HEIC benefits from hardware encoding in Apple devices. For cross-platform use, AVIF is more open; for Apple-only workflows, HEIC is native."
+          },
+          {
+                "question": "Will the HEIC output be the same size as the AVIF source?",
+                "answer": "Generally yes — both use comparable modern compression. AVIF may be 5-10% smaller on average due to AV1's efficiency edge, but the difference is minor compared to the leap from JPEG."
+          },
+          {
+                "question": "Does this conversion preserve AVIF's HDR metadata?",
+                "answer": "Both formats support HDR. HEIC supports 10-bit HDR similar to AVIF, so HDR metadata and luminance ranges can be preserved in the conversion. Verify with a small test file first."
+          }
+    ]
   },
   {
     id: "1044",
@@ -1487,7 +2299,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to SVG — Convert AVIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for vectorization. The tool decodes the AV1 data to pixels. AVIF photos produce SVGs with excessive paths — simple graphics with few colors yield better results."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge detection threshold, and path simplification. The tool applies color quantization and edge tracing to convert the raster pixels to vector shapes."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output for accuracy. Fine-tune settings to balance detail and file size. Download the SVG — resolution-independent and ready for editing in Figma, Illustrator, or Inkscape."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What AVIF content makes the best SVGs?",
+                "answer": "AVIF images with 2-16 colors, sharp edges, and minimal noise. Screenshots saved as AVIF, flat-vector art, or diagrams with clear boundaries between color regions produce clean SVGs."
+          },
+          {
+                "question": "Does the vectorization preserve AVIF's alpha transparency?",
+                "answer": "Yes, the vectorization detects transparent regions and excludes them from the SVG output. The resulting SVG has a transparent background by default."
+          },
+          {
+                "question": "Can I get a vector-quality SVG from an AVIF photo?",
+                "answer": "Photographs contain continuous tones and soft edges that cannot be represented efficiently as vectors. The SVG will be large, complex, and visually inferior to the original raster image."
+          }
+    ]
   },
   {
     id: "1045",
@@ -1497,7 +2337,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to BMP — Convert AVIF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to BMP. The tool decodes the AV1 data into raw pixel data. BMP files are uncompressed — expect significant file size increase."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "24-bit BMP for standard color, 32-bit BMP to preserve alpha channel from AVIF. 8-bit indexed for smaller file size with color reduction. 32-bit is best if the AVIF has transparency."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP stores pixel data as raw RGB(A). File size equals dimensions × bytes per pixel. No compression means instant access. Download for embedded systems or software requiring direct pixel buffers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would a modern AVIF be converted to an archaic BMP?",
+                "answer": "BMP is used in embedded systems, boot loaders, medical imaging software, and legacy applications that read pixel data directly from file offsets without any decoding library."
+          },
+          {
+                "question": "How large will a BMP from an AVIF source be?",
+                "answer": "A 3840x2160 (4K) AVIF of about 1-2MB becomes roughly 24.9MB as 24-bit BMP (3840 × 2160 × 3). A 32-bit BMP with alpha would be about 33.2MB."
+          },
+          {
+                "question": "Does BMP preserve AVIF's full color accuracy?",
+                "answer": "Yes, the decoded pixel values are written exactly. However, if the AVIF was 10-bit HDR, the tonemapping to 8-bit (BMP's maximum) loses color resolution and luminance range."
+          }
+    ]
   },
   {
     id: "1046",
@@ -1507,7 +2375,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to TIFF — Convert AVIF images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to TIFF. The tool decodes the AV1 data and extracts available metadata. TIFF provides a flexible, professional-grade container."
+          },
+          {
+                "title": "2. Choose Compression and Bit Depth",
+                "desc": "Select LZW compression for lossless storage with broad software support. Set bit depth — 8 or 16-bit per channel. 16-bit preserves headroom from AVIF's 10-bit source when tonemapped."
+          },
+          {
+                "title": "3. Configure Color Profile and Download",
+                "desc": "Embed the ICC color profile from the AVIF source. TIFF supports multi-page files if you want to combine multiple AVIF images. Download the TIFF for professional editing workflows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF the best format for editing AVIF-converted photos?",
+                "answer": "Yes, TIFF with 16-bit depth gives you maximum editing headroom in professional software. AVIF's efficient compression is traded for the editing flexibility that TIFF provides."
+          },
+          {
+                "question": "Should I use JPEG-in-TIFF or uncompressed TIFF for AVIF photos?",
+                "answer": "JPEG-in-TIFF re-compresses the photo with JPEG, causing generation loss. Use LZW or uncompressed TIFF to avoid introducing new artifacts on top of the AVIF source."
+          },
+          {
+                "question": "What TIFF features are lost when converting from AVIF?",
+                "answer": "AVIF supports HDR gain maps and auxiliary images which TIFF doesn't natively handle in standard workflows. The main image converts, but advanced AVIF features are not transferred."
+          }
+    ]
   },
   {
     id: "1047",
@@ -1517,7 +2413,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to GIF — Convert AVIF images into GIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to GIF. The tool decodes the AV1 data, then performs heavy color reduction. AVIF's millions of colors must be reduced to GIF's 256-color palette."
+          },
+          {
+                "title": "2. Set Palette and Dithering",
+                "desc": "Choose palette size 2-256. For AVIF photos, use 256 colors with dithering. Floyd-Steinberg, Stucki, or Atkinson dithering algorithms offer different noise patterns. Enable dithering to soften banding."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "Select one palette color as transparent if needed. GIF supports only binary transparency. Download the GIF — suitable for simple graphics but a major quality reduction from the AVIF source."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why would I downgrade a high-quality AVIF to GIF?",
+                "answer": "GIF compatibility is needed for certain forums, legacy CMS platforms, email newsletters, and applications that accept only GIF format. It's a necessary step when compatibility requirements dictate the format."
+          },
+          {
+                "question": "How noticeable is the quality loss from AVIF to GIF?",
+                "answer": "Very noticeable. Smooth gradients posterize, fine color details vanish, and the dithering pattern adds visible noise. AVIF's clean HDR-tonemapped image becomes a flat 256-color approximation."
+          },
+          {
+                "question": "Can GIF preserve AVIF's alpha transparency correctly?",
+                "answer": "Partially. AVIF's smooth alpha edges become hard on/off transparency in GIF. Semi-transparent pixels become either fully opaque or fully transparent, creating jagged edges around formerly smooth alpha transitions."
+          }
+    ]
   },
   {
     id: "1048",
@@ -1527,7 +2451,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to ICO — Convert AVIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for icon conversion. The tool decodes the AV1 data and prepares it for multi-size icon generation. AVIF images with high resolution work best for comprehensive icon sets."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. The AVIF source should be at least 256x256 for best results. Each size is independently generated, preserving as much detail as the pixel count allows."
+          },
+          {
+                "title": "3. Handle Background and Download",
+                "desc": "AVIF's alpha channel is preserved in 32-bit icon entries. For solid icons, generate without transparency. Download the .ico file containing all selected size entries."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does AVIF's superior compression make it a good icon source?",
+                "answer": "Yes, AVIF can store high-quality source images at small file sizes, though the compression is irrelevant after conversion. The key advantage is that AVIF can preserve detailed source imagery for downscaling."
+          },
+          {
+                "question": "Can I create favicons from AVIF screenshots?",
+                "answer": "Yes. AVIF screenshots with clean UI elements and sharp edges make good favicons after conversion. The AVIF format captures screen content efficiently without JPEG-like blurring."
+          },
+          {
+                "question": "What AVIF resolution gives the best icon set quality?",
+                "answer": "512x512 or higher AVIF source. Since AVIF compresses so well, even very high resolution sources are small files. The extra source pixels help create sharper 256x256 and 128x128 icon sizes."
+          }
+    ]
   },
   {
     id: "1049",
@@ -1537,7 +2489,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to JXL — Convert AVIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your AVIF File",
+                "desc": "Upload an AVIF image for conversion to JPEG XL. Both are next-generation formats — AVIF uses AV1, JXL uses its own modular codec. The tool decodes AVIF and re-encodes to JXL."
+          },
+          {
+                "title": "2. Choose JXL Mode",
+                "desc": "Lossless mode preserves all AVIF-decoded pixels, typically with 5-10% better compression than AVIF lossless. VarDCT lossy mode with quality 80-95 matches AVIF visually at comparable or better file sizes."
+          },
+          {
+                "title": "3. Configure Advanced Options",
+                "desc": "Set bit depth (8, 10, or 12-bit). Enable progressive decoding for streaming. Preserve alpha channel with efficient compression. Download the .jxl file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which is the better format: AVIF or JPEG XL?",
+                "answer": "Both are excellent. AVIF has better industry adoption and browser support. JPEG XL offers slightly better lossless compression and faster encoding. For web use today, AVIF is more practical."
+          },
+          {
+                "question": "Does JPEG XL support all AVIF features?",
+                "answer": "JXL supports most features including HDR, alpha, and up to 12-bit color. AVIF's gain map HDR and auxiliary images (depth, alpha planes) don't have direct JXL equivalents."
+          },
+          {
+                "question": "Can I get lossless recompression from AVIF to JXL?",
+                "answer": "No — lossless JXL preserves the decoded pixel data, which includes AVIF's lossy artifacts. It doesn't recover data lost during AVIF encoding. The JXL output is pixel-identical to the AVIF decode."
+          }
+    ]
   },
   {
     id: "1050",
@@ -1547,7 +2527,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert SVG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to HEIC — Convert SVG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG vector file for conversion to HEIC. The tool rasterizes the vector data into pixels. HEIC's HEVC compression is efficient for rasterized vector graphics with photographic qualities."
+          },
+          {
+                "title": "2. Set Raster Dimensions",
+                "desc": "Enter the target output dimensions. SVG renders at any size without quality loss. For Apple ecosystem use, render at the device's native resolution."
+          },
+          {
+                "title": "3. Set Quality and Download",
+                "desc": "HEIC quality 0.0-1.0. Quality 0.8 provides excellent results. HEIC preserves transparency from the SVG. Download for use in iOS/macOS applications that prefer HEIC format."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert SVG to HEIC instead of keeping the vector?",
+                "answer": "Some iOS/macOS applications and APIs handle HEIC natively but not SVG. Converting to HEIC allows you to use vector-originated graphics in Apple-specific workflows."
+          },
+          {
+                "question": "Does HEIC preserve SVG's sharp vector edges?",
+                "answer": "HEIC's compression is designed for photographic content, not sharp vector edges. It may introduce slight softness around crisp lines. Lossless HEIC avoids this but produces larger files."
+          },
+          {
+                "question": "Can SVG's embedded raster images be preserved in HEIC?",
+                "answer": "SVG can embed base64-encoded raster images. These are rasterized as part of the SVG rendering. The HEIC captures the fully rendered composite, not the original embedded elements."
+          }
+    ]
   },
   {
     id: "1051",
@@ -1557,7 +2565,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert SVG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to BMP — Convert SVG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG file for BMP conversion. The tool renders the vector at your chosen resolution into raw pixel data. BMP provides uncompressed storage of the rasterized vector."
+          },
+          {
+                "title": "2. Set Output Resolution",
+                "desc": "Enter exact pixel dimensions. Since BMP is uncompressed, choose the smallest acceptable size. A 1000x1000 BMP from an SVG will be approximately 3MB (24-bit) regardless of SVG complexity."
+          },
+          {
+                "title": "3. Choose Bit Depth and Download",
+                "desc": "24-bit BMP for full color, 32-bit to preserve SVG transparency, or 8-bit indexed for smaller files. Download the BMP for applications requiring uncompressed raster data."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What's the point of SVG to BMP if SVG is vector?",
+                "answer": "BMP's uncompressed format is useful for systems that cannot render SVG — embedded displays, boot screens, custom hardware, and legacy applications."
+          },
+          {
+                "question": "Does the BMP capture all SVG effects like filters and masks?",
+                "answer": "Yes, the SVG is fully rendered into the BMP just as a browser would display it. Every filter, mask, gradient, and opacity effect is rasterized into the final pixel output."
+          },
+          {
+                "question": "How large can an SVG-to-BMP output get?",
+                "answer": "BMP size depends only on resolution, not SVG complexity. A 4K SVG (3840x2160) becomes 24.9MB as 24-bit BMP. Complex SVGs don't increase the BMP size — only pixel count matters."
+          }
+    ]
   },
   {
     id: "1052",
@@ -1567,7 +2603,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert SVG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to TIFF — Convert SVG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG file for conversion to TIFF. The tool renders the vector at your chosen resolution. TIFF provides a professional container for the rasterized output."
+          },
+          {
+                "title": "2. Set Dimensions and Compression",
+                "desc": "Enter target resolution. Select TIFF compression — LZW for lossless storage with wide compatibility, or no compression for instant access. Avoid JPEG-in-TIFF since it adds artifacts to vector content."
+          },
+          {
+                "title": "3. Set Bit Depth and Download",
+                "desc": "8-bit TIFF for simple graphics, 24-bit for full color, or 32-bit to preserve SVG's transparency. Embed ICC color profile. Download the TIFF for professional publishing workflows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF better than PNG for SVG rasterization in print?",
+                "answer": "Yes, TIFF is the print industry standard. Print shops expect TIFF with LZW compression and embedded ICC profiles. PNG works but may not be accepted by all prepress systems."
+          },
+          {
+                "question": "Can I embed multiple SVG versions in one TIFF page?",
+                "answer": "No, each SVG is rendered as a single image. But you can create a multi-page TIFF by rendering different sizes or versions of the SVG into separate pages of one TIFF file."
+          },
+          {
+                "question": "What DPI should I use when rendering SVG to TIFF for print?",
+                "answer": "Convert your print dimensions to pixels at 300 DPI minimum. An 8-inch wide SVG at 300 DPI needs 2400 pixels width. For high-quality art prints, use 600 DPI."
+          }
+    ]
   },
   {
     id: "1053",
@@ -1577,7 +2641,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert SVG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to ICO — Convert SVG images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG vector file for conversion to a Windows icon. SVG's vector nature makes it an excellent source for generating crisp icons at all sizes."
+          },
+          {
+                "title": "2. Set Icon Sizes",
+                "desc": "Select from 16x16 to 256x256. Since SVG is vector, every size renders sharply without pixelation. This is the key advantage of starting from an SVG — no lossy upscaling needed."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "SVG transparency is preserved in 32-bit icon entries. Include multiple sizes for Windows to choose the best fit. Download the .ico file with perfectly crisp icons at every resolution."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is SVG the best source format for ICO conversion?",
+                "answer": "SVG renders perfectly at every icon size without aliasing or pixelation. Unlike raster sources that blur when downscaled, SVG produces mathematically perfect 16x16 icons with crisp edges."
+          },
+          {
+                "question": "Do I need to worry about icon size limits with SVG sources?",
+                "answer": "No. A single SVG can generate a 256x256 icon, a 16x16 icon, and everything in between with identical quality. Set all sizes to get a comprehensive icon set in one ICO file."
+          },
+          {
+                "question": "Will complex SVG gradients look good at small icon sizes?",
+                "answer": "Gradients and details that are visible at 256x256 may become muddy at 16x16. Consider simplifying the SVG for icon use — thick stroke widths and high contrast colors work best at small sizes."
+          }
+    ]
   },
   {
     id: "1054",
@@ -1587,7 +2679,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert SVG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to JXL — Convert SVG images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your SVG",
+                "desc": "Upload an SVG file for conversion to JPEG XL. The SVG is rasterized at your chosen resolution, then encoded with JXL's efficient compression."
+          },
+          {
+                "title": "2. Set Rasterization Resolution",
+                "desc": "Enter the target dimensions. Since SVG is vector, render at the exact usage size. JXL's modular mode provides lossless encoding of the rasterized SVG."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Lossless JXL preserves every pixel of the rasterized SVG. VarDCT lossy mode offers smaller files if you need extreme compression. Alpha transparency is preserved. Download the .jxl file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is JXL a good format for storing rasterized SVGs?",
+                "answer": "Yes, JXL's lossless mode matches PNG for quality while providing 15-25% better compression. For SVGs with solid colors, JXL's compression is particularly effective."
+          },
+          {
+                "question": "Does JXL preserve SVG's transparency and sharp edges?",
+                "answer": "Yes, JXL supports full alpha transparency. Its modular mode handles sharp vector edges without the artifacts that lossy codecs introduce, making it excellent for rasterized vector storage."
+          },
+          {
+                "question": "What advantages does JXL have over PNG for SVG rasterization?",
+                "answer": "JXL achieves smaller file sizes than PNG at the same quality, supports higher bit depths for print work, and offers progressive decoding for faster image preview during loading."
+          }
+    ]
   },
   {
     id: "1055",
@@ -1597,7 +2717,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert BMP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to HEIC — Convert BMP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to HEIC. The tool reads the raw pixel data and encodes it with HEVC. HEIC provides modern HEVC compression for the lossless BMP source."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Set quality 0.0-1.0. Quality 0.8 provides excellent results from clean BMP data. HEVC encoding efficiently handles the uncompressed pixel data."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve 32-bit BMP alpha transparency in HEIC. Embed BMP metadata if available. Download the HEIC file for use in Apple ecosystem applications and devices."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert BMP to HEIC instead of JPEG?",
+                "answer": "HEIC offers 40-50% better compression than JPEG at the same quality. For Apple-heavy workflows, HEIC is natively supported. The file will be much smaller than BMP with excellent quality."
+          },
+          {
+                "question": "Does HEIC from BMP look better than HEIC from JPEG?",
+                "answer": "Yes, since BMP is uncompressed, there are no pre-existing artifacts to encode. HEIC compression starts from pristine pixels, producing cleaner output than encoding from a previously compressed source."
+          },
+          {
+                "question": "Can HEIC store BMP's indexed color palette?",
+                "answer": "HEIC doesn't support indexed color. The BMP's palette colors are converted to full RGB during HEVC encoding. For truly lossless indexed color preservation, use PNG."
+          }
+    ]
   },
   {
     id: "1056",
@@ -1607,7 +2755,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert BMP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to SVG — Convert BMP images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for vectorization to SVG. The tool analyzes the uncompressed pixel data for edge detection and color regions. Simple BMP graphics with clear shapes vectorize best."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge detection threshold, and path simplification. BMP's large file size doesn't affect vectorization quality — only the image content matters."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output. Fine-tune settings to balance shape accuracy and path count. Download the SVG — dramatically smaller than the BMP and resolution-independent."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I vectorize a BMP photo into SVG?",
+                "answer": "Photographic BMPs with continuous tones and gradients produce SVGs with thousands of paths and poor visual quality. Use vectorization only for graphics with distinct color regions and sharp edges."
+          },
+          {
+                "question": "Does the BMP's extra color depth help SVG conversion?",
+                "answer": "No, vectorization reduces colors to a small palette regardless of source bit depth. Extra color information from 24-bit BMP is quantized away during the vectorization process."
+          },
+          {
+                "question": "What BMP content produces the best SVG conversion?",
+                "answer": "Line art, logos, icons, and graphics stored as BMP with 16 or fewer distinct colors. Higher contrast between adjacent color regions produces cleaner vector edges."
+          }
+    ]
   },
   {
     id: "1057",
@@ -1617,7 +2793,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert BMP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to TIFF — Convert BMP images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to TIFF. The tool reads the raw pixel data and packages it into a TIFF container. Both are raster formats, but TIFF offers more features."
+          },
+          {
+                "title": "2. Choose TIFF Compression",
+                "desc": "LZW compression is lossless and widely compatible. Deflate offers better compression ratios. Since BMP is uncompressed, any TIFF compression will reduce file size."
+          },
+          {
+                "title": "3. Configure Bit Depth and Download",
+                "desc": "TIFF supports the same bit depths as BMP plus 16-bit per channel. Embed ICC color profiles. Download the TIFF — smaller than BMP with additional metadata and compression flexibility."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF an upgrade from BMP?",
+                "answer": "Yes, TIFF offers compression (reducing file size), metadata support (EXIF, IPTC), ICC color profiles, and multi-page capabilities. BMP only stores raw pixels with minimal header data."
+          },
+          {
+                "question": "Will I lose BMP data converting to TIFF?",
+                "answer": "No, all BMP pixel data is preserved. TIFF with LZW compression is lossless. The conversion adds value through better compression and metadata while maintaining pixel-perfect accuracy."
+          },
+          {
+                "question": "What compression should I use for BMP-to-TIFF?",
+                "answer": "LZW is the safe default — lossless with excellent software support. Deflate gives smaller files but some legacy software may not read it. Avoid JPEG-in-TIFF as it adds lossy artifacts."
+          }
+    ]
   },
   {
     id: "1058",
@@ -1627,7 +2831,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert BMP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to ICO — Convert BMP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for icon conversion. The tool reads the BMP's pixel data. BMP files are often large, so ensure your source includes transparency if needed for the icon."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. BMP's raw pixel structure means downscaling is straightforward. The BMP source should be at least 256x256 for quality results at larger sizes."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "32-bit BMP with alpha creates icons with transparency. 24-bit BMP creates opaque icons. Download the .ico file for application or favicon use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does 32-bit BMP alpha transfer to ICO transparency?",
+                "answer": "Yes, 32-bit BMP stores RGBA data which maps directly to ICO's 32-bit icon entries. The alpha channel is preserved across all selected icon sizes."
+          },
+          {
+                "question": "Is BMP a good source format for icon creation?",
+                "answer": "BMP is adequate but not ideal. Its uncompressed nature means large file sizes for high-resolution sources. PNG or SVG produce smaller source files with the same or better quality."
+          },
+          {
+                "question": "What BMP resolution makes the best icon set?",
+                "answer": "512x512 or higher. Since BMP is uncompressed, a 512x512 32-bit BMP is about 1MB. This provides excellent source data for generating crisp icons at all standard sizes."
+          }
+    ]
   },
   {
     id: "1059",
@@ -1637,7 +2869,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert BMP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to JXL — Convert BMP images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your BMP",
+                "desc": "Upload a BMP file for conversion to JPEG XL. The BMP's clean uncompressed data provides an ideal source for JXL's state-of-the-art compression."
+          },
+          {
+                "title": "2. Choose JXL Mode",
+                "desc": "Lossless JXL preserves every BMP pixel with 30-50% better compression than BMP's raw storage. VarDCT lossy mode achieves 90%+ reduction by exploiting JXL's advanced perceptual encoding."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve alpha from 32-bit BMP. Set bit depth (8, 10, or 12-bit). Enable progressive decoding. Download the .jxl file — dramatically smaller than BMP with excellent quality."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does JXL compression compare to PNG for BMP sources?",
+                "answer": "JXL lossless is 15-25% smaller than PNG for the same BMP data. JXL also offers lossy modes for even greater compression when absolute pixel accuracy isn't needed."
+          },
+          {
+                "question": "Can JXL handle BMP's full color range?",
+                "answer": "Yes, JXL supports up to 12-bit per channel, easily exceeding BMP's 8-bit. Wide color gamuts and HDR are supported, though BMP itself doesn't typically carry this data."
+          },
+          {
+                "question": "Is JXL suitable for archiving BMP scans?",
+                "answer": "Yes, JXL's lossless mode is excellent for archival — smaller files than BMP with perfect pixel preservation. JXL also supports rich metadata for cataloging scanned images."
+          }
+    ]
   },
   {
     id: "1060",
@@ -1647,7 +2907,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert TIFF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to HEIC — Convert TIFF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for conversion to HEIC. The tool decodes the TIFF and re-encodes with HEVC. HEIC provides modern compression while maintaining compatibility with Apple devices."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Quality 0.0-1.0. For high-quality TIFF scans, use 0.85-0.95. HEIC's HEVC encoding efficiently compresses the full-color TIFF data."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve TIFF's alpha channel and ICC color profiles. TIFF's multi-page structure is not supported — each page converts separately. Download the HEIC for Apple ecosystem use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is HEIC a viable format for TIFF scan archiving?",
+                "answer": "For space-efficient archiving, yes. HEIC at quality 0.9 reduces TIFF file size by 80-90% while preserving excellent quality. For true archival with no quality loss, use lossless TIFF or PNG."
+          },
+          {
+                "question": "Does HEIC preserve TIFF's CMYK color data?",
+                "answer": "HEIC supports RGB only. TIFF CMYK images are converted to sRGB during HEIC encoding, which may shift colors intended for print production."
+          },
+          {
+                "question": "Can HEIC store multi-page TIFF documents?",
+                "answer": "HEIC supports image sequences but this converter handles single-image output. Convert multi-page TIFFs page by page or use a dedicated document management format."
+          }
+    ]
   },
   {
     id: "1061",
@@ -1657,7 +2945,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert TIFF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to SVG — Convert TIFF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for vectorization to SVG. The tool decodes the TIFF and analyzes edges and color regions. Simple TIFF graphics with limited colors vectorize best."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge sensitivity, and path simplification. High-bit-depth TIFFs are quantized during vectorization, so set colors based on the image content rather than the TIFF's color depth."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output for accuracy. Adjust settings if shapes are lost. Download the SVG — resolution-independent and suitable for web, print, and further vector editing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What TIFF content produces the best SVG?",
+                "answer": "TIFFs with 2-16 solid colors, high contrast edges, and minimal noise. Scanned line art, logos stored as TIFF, and technical diagrams produce excellent SVG results."
+          },
+          {
+                "question": "Does TIFF's high bit depth help SVG conversion?",
+                "answer": "No, SVG uses sRGB color references. The extra color precision from 16-bit TIFF is irrelevant after quantization to the small SVG palette. Content clarity matters more than color depth."
+          },
+          {
+                "question": "Can I convert a scanned TIFF document to SVG?",
+                "answer": "Scanned photographs in TIFF form do not vectorize well. Scanned line drawings or black-and-white text documents can produce usable SVGs with appropriate settings."
+          }
+    ]
   },
   {
     id: "1062",
@@ -1667,7 +2983,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert TIFF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to BMP — Convert TIFF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for conversion to BMP. The tool decodes any TIFF compression (LZW, Deflate, JPEG, uncompressed) and stores raw pixel data. BMP is always uncompressed."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "Match the TIFF's bit depth or convert to 24-bit for maximum compatibility. 32-bit BMP preserves TIFF alpha. Converting 16-bit TIFF to 8-bit BMP loses tonal precision."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP strips all TIFF compression and metadata. The output is raw pixel data only. Download the BMP for applications that require direct pixel access without decoding libraries."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert compressed TIFF to uncompressed BMP?",
+                "answer": "BMP's simplicity — any software can read it by skipping a small header. This is valuable in embedded systems, custom hardware, and legacy applications that cannot decode TIFF compression."
+          },
+          {
+                "question": "How much larger will the BMP be than the TIFF?",
+                "answer": "A LZW-compressed TIFF at 2MB might become 10-20MB as BMP depending on image complexity. The simpler the image, the larger the size ratio since TIFF compresses flat areas well."
+          },
+          {
+                "question": "Does BMP preserve TIFF's embedded color profiles?",
+                "answer": "No, BMP has limited color profile support. ICC profiles from the TIFF are discarded. The pixel values are preserved but their intended color interpretation is lost."
+          }
+    ]
   },
   {
     id: "1063",
@@ -1677,7 +3021,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert TIFF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to ICO — Convert TIFF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for icon conversion. The tool decodes the TIFF and prepares it for multi-size icon generation. TIFF's high bit depth and resolution provide excellent source material."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. TIFF sources at 300+ DPI produce sharp icons at every size. The TIFF's quality is preserved through the downscaling process."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "TIFF alpha maps to icon transparency. Select the appropriate page from multi-page TIFFs. Download the .ico file with selected sizes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF overkill as a source for icon creation?",
+                "answer": "TIFF's high quality is beneficial for creating detailed icons, but the file size is excessive. Convert to PNG first for a more manageable source, then to ICO for the final icon."
+          },
+          {
+                "question": "Does TIFF's CMYK color mode affect icon output?",
+                "answer": "Yes, CMYK TIFFs are converted to RGB/sRGB during icon generation. Print-specific CMYK colors may shift. Use RGB TIFF sources for predictable icon colors."
+          },
+          {
+                "question": "Can I create icons from different pages of a multi-page TIFF?",
+                "answer": "Yes, select the desired page number from the multi-page TIFF. Each page can be converted to a separate icon or you can choose which page to iconize."
+          }
+    ]
   },
   {
     id: "1064",
@@ -1687,7 +3059,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert TIFF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to JXL — Convert TIFF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your TIFF",
+                "desc": "Upload a TIFF file for conversion to JPEG XL. The tool decodes the TIFF and re-encodes with JXL. JXL offers superior compression while supporting similar professional features."
+          },
+          {
+                "title": "2. Choose JXL Mode",
+                "desc": "Lossless JXL preserves all TIFF data with 30-50% better compression than LZW-compressed TIFF. VarDCT lossy mode with quality 80-95 offers extreme compression with minimal visible loss."
+          },
+          {
+                "title": "3. Configure Advanced Options",
+                "desc": "Preserve 16-bit depth from high-quality TIFFs. Embed ICC profiles and EXIF metadata. Enable progressive decoding. Download the .jxl file — a modern archival format."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is JXL a viable TIFF replacement for professional use?",
+                "answer": "JXL matches TIFF's professional features — high bit depth, lossless compression, ICC profiles — while offering better compression. The main barrier is software adoption in professional tools."
+          },
+          {
+                "question": "Can JXL preserve TIFF's multi-page document structure?",
+                "answer": "JXL supports frames similar to animation, not document pages. Multi-page TIFFs are better converted to PDF for document preservation or to individual JXL files per page."
+          },
+          {
+                "question": "Does JXL support TIFF's CMYK color space?",
+                "answer": "JPEG XL supports CMYK conversion to RGB during encoding. Native CMYK storage is not supported. For print workflow preservation, keep the original TIFF in CMYK."
+          }
+    ]
   },
   {
     id: "1065",
@@ -1697,7 +3097,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to HEIC — Convert GIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for conversion to HEIC. The tool decodes the GIF and re-encodes to HEVC. HEIC provides modern compression for GIF's limited-palette content."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Set quality 0.0-1.0. A value of 0.7-0.8 provides excellent quality. HEIC's HEVC compression handles the GIF's flat color regions and sharp edges efficiently."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "GIF transparency is preserved in HEIC's alpha channel. Since GIF is animated, only the first frame converts. Download the HEIC for use in Apple ecosystem applications."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert a low-color GIF to HEIC?",
+                "answer": "HEIC compatibility with iOS/macOS workflows. If you're using GIF-based graphics in an Apple-centric environment, HEIC provides native support with better compression for storage efficiency."
+          },
+          {
+                "question": "Does HEIC improve the visual quality of the converted GIF?",
+                "answer": "No, HEIC preserves the GIF's 256-color posterized appearance. The conversion is pixel-exact from the decoded GIF data. No color information is added or restored."
+          },
+          {
+                "question": "Can HEIC store multiple GIF frames as an animation?",
+                "answer": "HEIC supports image sequences, but this converter handles single-frame output. Use separate conversion for each frame or keep the animated GIF for multi-frame content."
+          }
+    ]
   },
   {
     id: "1066",
@@ -1707,7 +3135,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to SVG — Convert GIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for vectorization to SVG. The tool extracts the first frame and analyzes its colors and edges. Simple GIFs with few colors and clear shapes produce the best SVGs."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-256), edge detection sensitivity, and path simplification. Since GIF already has a limited palette, the quantization step is minimal. Set the color count to match or reduce the GIF's palette."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vectorized output. Check that key shapes were captured accurately. Download the SVG — resolution-independent and much smaller than the GIF for simple graphics."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does GIF's transparency vectorize well to SVG?",
+                "answer": "Yes, GIF's binary transparent areas are detected and excluded from the vector shapes. The resulting SVG has a natural transparent background matching the GIF's transparent regions."
+          },
+          {
+                "question": "What GIF content produces the best SVG results?",
+                "answer": "GIFs with solid color blocks, sharp edges, and minimal dithering produce clean SVGs. Dithering patterns confuse the edge detection and result in noisy vector paths with many small shapes."
+          },
+          {
+                "question": "Can I vectorize an animated GIF to SVG?",
+                "answer": "Only the first frame is vectorized. SVG supports SMIL animation but this converter produces a single-frame static SVG from the GIF's first frame."
+          }
+    ]
   },
   {
     id: "1067",
@@ -1717,7 +3173,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to BMP — Convert GIF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for conversion to BMP. The tool decodes the GIF's LZW-compressed data into raw pixels. BMP stores the data uncompressed, so the output is larger."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "GIF uses 8-bit indexed color. Convert to 24-bit BMP for full RGB conversion, or 8-bit BMP to preserve the GIF's original palette structure. 24-bit BMP removes the indexed limitation."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP stores the GIF's pixel data without further compression. Transparency from the GIF is preserved in 32-bit BMP. Download the BMP for applications needing direct pixel buffer access."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will BMP from GIF have better color than the original GIF?",
+                "answer": "No, the BMP stores the same 256 colors from the GIF. Even if you choose 24-bit BMP, the pixels are the same indexed colors converted to RGB — no new colors are added."
+          },
+          {
+                "question": "Why does my 24-bit BMP from a GIF still look posterized?",
+                "answer": "The posterization is inherent in the GIF's pixel data. Choosing 24-bit BMP doesn't interpolate or smooth the colors — it just stores the same palette-mapped colors in a 24-bit format."
+          },
+          {
+                "question": "How large will a BMP from a typical GIF be?",
+                "answer": "GIF's LZW compression is very efficient for its limited palette. A 500x500 GIF at 50KB becomes approximately 750KB as 24-bit BMP (500 × 500 × 3 bytes)."
+          }
+    ]
   },
   {
     id: "1068",
@@ -1727,7 +3211,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to TIFF — Convert GIF images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for conversion to TIFF. The tool decodes the GIF and packages the pixel data into a TIFF container. TIFF offers flexible archival storage."
+          },
+          {
+                "title": "2. Choose Compression and Bit Depth",
+                "desc": "LZW compression is compatible and effective for GIF-source content. Deflate offers slightly better compression. 8-bit TIFF preserves the GIF's indexed color structure, while 24-bit converts to full RGB."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "TIFF can store the GIF's transparency information. Multiple GIF frames can be placed as separate TIFF pages. Download the TIFF for archival or professional use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF a good archive format for GIF content?",
+                "answer": "Yes, TIFF with LZW compression preserves all GIF data in a widely-supported archival format. For long-term storage of GIF-based graphics that may be re-edited, TIFF is recommended."
+          },
+          {
+                "question": "Can a multi-frame GIF become a multi-page TIFF?",
+                "answer": "Yes, the tool can place each GIF frame as a separate page in the TIFF file. This preserves the frame sequence while converting to a format more suitable for document archiving."
+          },
+          {
+                "question": "Does TIFF improve on GIF's color limitations?",
+                "answer": "No, TIFF stores the same pixel data. The GIF's 256-color posterization remains. TIFF's advantage is in its robust metadata support and professional ecosystem compatibility."
+          }
+    ]
   },
   {
     id: "1069",
@@ -1737,7 +3249,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to ICO — Convert GIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for icon conversion. The tool extracts the first frame and analyzes it for transparency. GIF images with simple shapes and transparent backgrounds produce the best icons."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. GIF source resolution should be at least 128x128 for decent results. The limited palette of GIF becomes the color basis for all icon sizes."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "GIF transparency maps to 32-bit icon alpha. The posterized GIF colors may look blocky at small sizes. Download the .ico file for use as an application or favicon resource."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Are GIFs good sources for icon conversion?",
+                "answer": "Fair, but not ideal. GIF's 256 colors and potential dithering can make small icons look noisy. PNG or SVG sources produce cleaner icons. GIF works best for iconizing simple cartoon graphics."
+          },
+          {
+                "question": "Will the icon preserve GIF's animation?",
+                "answer": "No, only the first frame is used. ICO format is static only. If you need an animated icon, consider using a different approach like a video-based application icon."
+          },
+          {
+                "question": "How does GIF's transparency affect the icon?",
+                "answer": "GIF's binary transparency converts directly to icon alpha. Where the GIF was transparent, the icon will be transparent. The hard edges of GIF transparency become the icon's visible boundary."
+          }
+    ]
   },
   {
     id: "1070",
@@ -1747,7 +3287,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to JXL — Convert GIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your GIF",
+                "desc": "Upload a GIF file for conversion to JPEG XL. The tool decodes the GIF and re-encodes to JXL format. JXL offers modern compression that can reduce file size while preserving quality."
+          },
+          {
+                "title": "2. Choose JXL Mode",
+                "desc": "Lossless mode preserves the GIF's exact pixels with better compression than GIF. VarDCT lossy mode offers even smaller files by exploiting JXL's superior encoding for flat-color content."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "GIF transparency transfers to JXL's alpha channel. Set bit depth to match your needs. Download the .jxl file — smaller and more feature-rich than the original GIF."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does JXL support GIF animation?",
+                "answer": "JPEG XL supports animation through its frame structure. However, this converter handles static GIF output. For animated content, keep the GIF or convert to animated WebP."
+          },
+          {
+                "question": "Can JXL losslessly recompress a GIF to be smaller?",
+                "answer": "Yes, JXL's lossless mode typically achieves 20-30% better compression than GIF's LZW for the same image data. The decoded output is pixel-identical to the original GIF."
+          },
+          {
+                "question": "What advantage does JXL have over PNG for GIF conversion?",
+                "answer": "JXL lossless is 15-25% smaller than PNG for the same GIF-source pixels. JXL also supports higher bit depths and progressive decoding for better web delivery experience."
+          }
+    ]
   },
   {
     id: "1071",
@@ -1757,7 +3325,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to HEIC — Convert ICO images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to HEIC. The tool extracts the largest icon size. HEIC provides efficient HEVC compression for the extracted icon."
+          },
+          {
+                "title": "2. Select Size and Set Quality",
+                "desc": "Choose which icon size to convert. Set HEIC quality 0.0-1.0. Quality 0.8 preserves icon detail well. HEIC's compression is effective on small graphics with flat color areas."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "ICO transparency is preserved in HEIC alpha. Download the HEIC for use in Apple ecosystem applications that prefer HEIC format over ICO."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert a small ICO to HEIC?",
+                "answer": "For iOS/macOS application development where HEIC is the native image format. Converting app icons from ICO to HEIC allows consistent format use within Apple development workflows."
+          },
+          {
+                "question": "Does HEIC preserve ICO's multiple sizes?",
+                "answer": "No, each ICO entry is converted separately. The HEIC output is a single image at the selected size. Future HEIC image grid support may allow multi-size storage."
+          },
+          {
+                "question": "Is HEIC overkill for small icon graphics?",
+                "answer": "For single icons, HEIC's compression advantage is minimal at small sizes (<50KB). PNG or WebP are more practical for icon storage unless Apple compatibility is required."
+          }
+    ]
   },
   {
     id: "1072",
@@ -1767,7 +3363,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to AVIF — Convert ICO images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to AVIF. The tool extracts the chosen icon size. AVIF's modern compression efficiently handles small icon graphics."
+          },
+          {
+                "title": "2. Select Size and Set Quality",
+                "desc": "Pick the icon size. AVIF quality 20-30 provides excellent results for icon content. AVIF handles flat colors and sharp edges well at moderate quality settings."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "ICO transparency is preserved. Set chroma subsampling. Download the AVIF — a highly compressed version of the icon suitable for modern web delivery."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Will AVIF blur crisp icon edges like JPEG does?",
+                "answer": "AVIF's AV1 codec handles sharp edges better than JPEG's DCT blocks. At moderate quality settings, AVIF preserves icon edge sharpness better than JPEG at equivalent file sizes."
+          },
+          {
+                "question": "Can I convert all ICO sizes to a single AVIF grid?",
+                "answer": "AVIF supports image sequences but not multi-resolution grids like ICO. Convert each size separately."
+          },
+          {
+                "question": "Is AVIF's compression beneficial for tiny icon files?",
+                "answer": "For very small files under 10KB, the encoding overhead may exceed potential savings. AVIF shines for larger icons (128x128+) where compression ratios become meaningful."
+          }
+    ]
   },
   {
     id: "1073",
@@ -1777,7 +3401,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to SVG — Convert ICO images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for vectorization to SVG. The tool extracts the largest available size for the best vectorization source. Simple icons with solid colors produce the cleanest SVGs."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge detection threshold, and path simplification. Icons are naturally limited in colors, so 4-16 colors usually suffice. Higher simplification removes pixel-level noise."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output — it should match the icon's original shapes. Fine-tune settings if edges are jagged. Download the SVG — scalable to any size without quality loss."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can any ICO icon be converted to SVG?",
+                "answer": "Simple flat-color icons convert well. Icons with gradients, anti-aliased edges, or photographic content produce complex SVGs. Flat-design icons from modern interfaces work best."
+          },
+          {
+                "question": "Does the SVG preserve ICO's exact colors?",
+                "answer": "The vectorization quantizes colors to a palette, so exact ICO colors may shift slightly. For color-critical icons, manually adjust the SVG palette after export."
+          },
+          {
+                "question": "What ICO size gives the best SVG conversion?",
+                "answer": "256x256 provides sufficient pixel data for accurate edge detection. Smaller sizes (16x16, 32x32) produce jagged vector edges since the pixel grid is too coarse for smooth path tracing."
+          }
+    ]
   },
   {
     id: "1074",
@@ -1787,7 +3439,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to BMP — Convert ICO images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to BMP. The tool extracts the selected icon size and converts to BMP format. BMP stores the icon as an uncompressed raster."
+          },
+          {
+                "title": "2. Select Size and Bit Depth",
+                "desc": "Choose the icon size to extract. ICO entries may be 32-bit (with alpha) or lower bit depths. 32-bit BMP preserves ICO transparency, 24-bit BMP discards it."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP stores the icon pixel data without compression. File size equals width × height × bytes per pixel. Download the BMP for use in applications requiring direct pixel access."
+          }
+    ],
+    faqs: [
+          {
+                "question": "When would I need an ICO converted to BMP?",
+                "answer": "Legacy Windows applications that accept BMP but not ICO, or when you need to edit the icon pixels directly in a BMP-compatible image editor."
+          },
+          {
+                "question": "Does BMP preserve ICO's multiple sizes?",
+                "answer": "No, only one size is extracted per conversion. ICO can store many sizes, but BMP is single-image. Convert each size you need separately."
+          },
+          {
+                "question": "Is BMP larger than the original ICO entry?",
+                "answer": "Yes, ICO entries may use PNG compression internally (Vista+). BMP is always uncompressed. A 10KB ICO entry becomes ~40KB as 32-bit BMP for a 32x32 icon."
+          }
+    ]
   },
   {
     id: "1075",
@@ -1797,7 +3477,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to TIFF — Convert ICO images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to TIFF. The tool extracts icon sizes and packages them into a TIFF container. TIFF offers professional-grade storage with compression."
+          },
+          {
+                "title": "2. Select Icon Size and Compression",
+                "desc": "Choose which size to convert. Select TIFF compression — LZW for lossless storage or no compression for instant access. Multiple ICO sizes can be stored as TIFF pages."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve 32-bit ICO alpha in TIFF. Embed metadata. Download the TIFF — suitable for professional icon libraries and archives."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why store icons in TIFF format?",
+                "answer": "Icon libraries and design systems sometimes use TIFF for archival storage due to its compression, metadata support, and wide software compatibility."
+          },
+          {
+                "question": "Can I combine multiple ICO sizes into one TIFF file?",
+                "answer": "Yes, each icon size becomes a separate page in a multi-page TIFF. This preserves the multi-resolution nature of the original ICO in a more broadly compatible format."
+          },
+          {
+                "question": "Does TIFF improve ICO's color quality?",
+                "answer": "ICO at 32-bit already supports full color with alpha. TIFF provides identical pixel storage. The advantage is TIFF's superior metadata, compression, and industry acceptance."
+          }
+    ]
   },
   {
     id: "1076",
@@ -1807,7 +3515,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to GIF — Convert ICO images into GIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to GIF. The tool extracts the selected icon size. ICO supports 32-bit color; GIF is limited to 256 colors."
+          },
+          {
+                "title": "2. Select Size and Reduce Palette",
+                "desc": "Choose the icon size. Set palette size (2-256). Modern 32-bit ICO entries need color reduction. Enable dithering for smoother appearance — simple icons may not need it."
+          },
+          {
+                "title": "3. Set Transparency and Download",
+                "desc": "ICO transparency maps to GIF's binary transparency. Select the transparent color. Download the GIF — compatible with legacy web applications and forums."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert a modern ICO to GIF?",
+                "answer": "Legacy web compatibility. Some older platforms, forum software, and email clients accept GIF but not ICO. GIF is also lighter than handling ICO format in non-Windows environments."
+          },
+          {
+                "question": "Will the GIF preserve ICO's anti-aliased edges?",
+                "answer": "Anti-aliasing uses semi-transparent pixels around edges. GIF's binary transparency converts these to hard on/off, creating jagged edges. The icon will look rougher than the ICO source."
+          },
+          {
+                "question": "What ICO size converts best to GIF?",
+                "answer": "Larger sizes like 48x48 or 64x64 preserve more recognizable detail after palette reduction. Very small 16x16 icons lose too much information during quantization."
+          }
+    ]
   },
   {
     id: "1077",
@@ -1817,7 +3553,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert ICO images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online ICO to JXL — Convert ICO images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your ICO File",
+                "desc": "Upload an ICO file for conversion to JPEG XL. The tool extracts the selected icon size. JXL offers modern compression for the extracted icon data."
+          },
+          {
+                "title": "2. Select Size and Mode",
+                "desc": "Choose the icon size. Lossless JXL preserves ICO pixels exactly with better compression. VarDCT lossy mode further reduces size using JXL's perceptual encoding."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "ICO transparency preserved in JXL alpha. Set bit depth. Enable progressive decoding. Download the .jxl file — a future-proof storage format for icon graphics."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is JXL suitable for icon storage?",
+                "answer": "Yes, JXL's lossless mode preserves icon quality while reducing file size. As JXL gains adoption, it could become an efficient universal format for icon archives."
+          },
+          {
+                "question": "Does JXL support multi-size icon storage?",
+                "answer": "Not natively like ICO. Each icon size becomes a separate JXL file. JXL's animation support could theoretically store multiple sizes as frames."
+          },
+          {
+                "question": "How does JXL compression compare to PNG for icons?",
+                "answer": "JXL lossless is typically 15-25% smaller than PNG for icon graphics. For simple flat-color icons common in modern design, the savings are at the higher end of this range."
+          }
+    ]
   },
   {
     id: "1078",
@@ -1827,7 +3591,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to HEIC — Convert JXL images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to HEIC. The tool decodes JXL and re-encodes using HEVC. Both are efficient modern codecs with different strengths."
+          },
+          {
+                "title": "2. Set HEIC Quality",
+                "desc": "Quality 0.0-1.0. Quality 0.8 provides excellent results. HEIC's HEVC compression efficiency is comparable to JXL for most photographic content."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve JXL's alpha channel and metadata. Download the HEIC for best compatibility with Apple ecosystem devices and applications."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which format is better: JXL or HEIC?",
+                "answer": "JXL supports more features (lossless JPEG recompression, progressive decoding, wide HDR). HEIC has better hardware support (Apple Silicon, iPhone). Choose based on your platform requirements."
+          },
+          {
+                "question": "Does HEIC preserve JXL's lossless quality?",
+                "answer": "HEIC can use lossless mode, but it's less efficient than JXL lossless. For pixel-perfect preservation, keep the original JXL. HEIC lossy is better for size-optimized results."
+          },
+          {
+                "question": "Can HEIC match JXL's compression efficiency?",
+                "answer": "For high-quality settings, HEIC and JXL are comparable. JXL slightly edges ahead at very low and very high bitrates. The difference is usually within 10-15%."
+          }
+    ]
   },
   {
     id: "1079",
@@ -1837,7 +3629,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to AVIF — Convert JXL images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to AVIF. The tool decodes JXL and encodes with AV1. Both are next-generation formats vying for industry adoption."
+          },
+          {
+                "title": "2. Set AVIF Quality",
+                "desc": "Quality 0-63. Quality 20-30 matches most JXL compression levels. AVIF's AV1 codec achieves similar efficiency to JXL's VarDCT for most image types."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "Preserve JXL's alpha and color depth. Set chroma subsampling. Enable HDR if the source supported it. Download the AVIF — comparable to JXL in quality and size."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which codec is technically superior: JXL or AVIF?",
+                "answer": "JXL offers more features (lossless recompression of JPEG, progressive decode, wider bit depth range). AVIF has better browser adoption and industry backing. The technical winner depends on your use case."
+          },
+          {
+                "question": "Does AVIF preserve JXL's lossless encoding?",
+                "answer": "AVIF's lossless mode is less efficient than JXL's modular mode. Expect 20-30% larger lossless files. For lossy compression, both are competitive."
+          },
+          {
+                "question": "Should I convert JXL to AVIF for web use?",
+                "answer": "If your CDN or platform doesn't support JXL but supports AVIF, yes. AVIF has broader browser support (Chrome, Firefox) than JXL. For maximum reach, serve both and let the browser choose."
+          }
+    ]
   },
   {
     id: "1080",
@@ -1847,7 +3667,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to SVG — Convert JXL images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for vectorization to SVG. The tool decodes JXL and analyzes pixel data for edge and color detection. Simple graphics produce cleaner SVGs."
+          },
+          {
+                "title": "2. Set Vectorization Parameters",
+                "desc": "Choose color count (2-32), edge threshold, and path simplification. JXL's efficient compression doesn't affect vectorization quality — only the visual content matters."
+          },
+          {
+                "title": "3. Preview and Export SVG",
+                "desc": "Review the vector output. Fine-tune settings to balance detail and path count. Download the SVG — resolution-independent and editable in vector software."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JXL content produces the best SVGs?",
+                "answer": "Graphics with solid colors, clear edges, and minimal gradients. JXL screenshots of UI elements, flat-design graphics, and simple illustrations work well."
+          },
+          {
+                "question": "Does JXL's high bit depth benefit SVG conversion?",
+                "answer": "No, vectorization quantizes colors regardless of source bit depth. Extra color precision is lost during quantization to the small SVG palette."
+          },
+          {
+                "question": "Can I preserve JXL's HDR tonemapping in SVG?",
+                "answer": "No, SVG uses sRGB color references. HDR data from JXL is converted to standard gamut during the raster-to-vector conversion process."
+          }
+    ]
   },
   {
     id: "1081",
@@ -1857,7 +3705,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to BMP — Convert JXL images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to BMP. The tool decodes the JXL data into raw pixels. BMP stores data uncompressed, so expect a significant size increase."
+          },
+          {
+                "title": "2. Choose Bit Depth",
+                "desc": "Select 24-bit BMP for standard conversion, 32-bit to preserve JXL's alpha channel, or 16-bit for grayscale. JXL's high bit depth (10/12-bit) is tonemapped to 8-bit."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "BMP strips all JXL compression efficiency. File size equals pixel count × bytes per pixel. Download the BMP for direct pixel access without decoding libraries."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why convert efficient JXL to bloated BMP?",
+                "answer": "BMP's simplicity has value in embedded systems, boot loaders, and custom software that reads pixel data directly. JXL's efficiency is irrelevant when your target system can't decode it."
+          },
+          {
+                "question": "How much larger is BMP compared to JXL?",
+                "answer": "A high-quality JXL photo at 500KB might become 6-24MB as BMP depending on resolution. A 4K image at 1.5MB JXL becomes ~25MB as 24-bit BMP."
+          },
+          {
+                "question": "Does BMP preserve JXL's wide color gamut?",
+                "answer": "BMP uses simple RGB. JXL's wide gamut (Rec.2020, DCI-P3) is mapped to sRGB during BMP conversion. The extended color range is lost."
+          }
+    ]
   },
   {
     id: "1082",
@@ -1867,7 +3743,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to TIFF — Convert JXL images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for conversion to TIFF. The tool decodes JXL and packages data into a TIFF container. TIFF offers professional-grade storage with compression options."
+          },
+          {
+                "title": "2. Choose Compression and Bit Depth",
+                "desc": "LZW compression for lossless storage. Deflate for better ratios. 16-bit TIFF can preserve JXL's extended bit depth (10/12-bit mapped to 16-bit)."
+          },
+          {
+                "title": "3. Configure Color Profile and Download",
+                "desc": "Embed ICC color profiles. TIFF supports multi-image sequences. Download the TIFF for professional editing, print production, and archival storage."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is TIFF better than JXL for archival?",
+                "answer": "TIFF is more universally supported in archival and professional software. JXL offers better compression. For current archives, TIFF is safer. For space-efficient archives, JXL is better."
+          },
+          {
+                "question": "Can TIFF preserve JXL's progressive decode structure?",
+                "answer": "No, TIFF doesn't support progressive decoding. The stored image is full-resolution only. JXL's perceptual progressive loading is lost in the TIFF conversion."
+          },
+          {
+                "question": "Does TIFF support JXL's lossless mode?",
+                "answer": "TIFF with LZW compression is lossless, preserving all decoded JXL pixels. If the JXL was lossy, those artifacts become permanent in the TIFF."
+          }
+    ]
   },
   {
     id: "1083",
@@ -1877,7 +3781,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to ICO — Convert JXL images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Upload Your JXL File",
+                "desc": "Upload a JPEG XL file for icon conversion. The tool decodes the JXL and prepares it for multi-size icon generation. JXL's high quality provides excellent source material."
+          },
+          {
+                "title": "2. Select Icon Sizes",
+                "desc": "Choose from 16x16 to 256x256. JXL images should be at least 256x256 for a comprehensive icon set. JXL's efficient compression means high-resolution sources are still small files."
+          },
+          {
+                "title": "3. Configure and Download",
+                "desc": "JXL's alpha transparency maps to 32-bit icon entries. Download the .ico file with all selected sizes for application and favicon use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is JXL a good source for icon creation?",
+                "answer": "Yes, JXL combines high quality with efficient file sizes. A 512x512 JXL icon source is much smaller than an equivalent BMP or TIFF source, making it practical to store large source collections."
+          },
+          {
+                "question": "Does JXL's HDR affect icon conversion?",
+                "answer": "Icons use sRGB, so JXL HDR content is tonemapped to standard gamut. The icon preview shows the tonemapped version, which may look different from the HDR original."
+          },
+          {
+                "question": "Can I create favicons from JXL sources?",
+                "answer": "Yes, JXL sources produce excellent favicons. The high-efficiency compression lets you store large source icon collections without significant storage overhead."
+          }
+    ]
   },
   {
     id: "1085",
