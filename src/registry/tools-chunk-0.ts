@@ -248,7 +248,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "archive-converter",
     dependencies: "jszip",
     instructions: [
-      { title: "1. Upload Archive", desc: "Select a ZIP, RAR, 7z, TAR, or GZ file." },
+      { title: "1. Upload Archive", desc: "Select a compressed archive file — ZIP, RAR, 7z, TAR, or GZ. The tool decompresses the source and recompresses into your chosen target format with configurable compression level." },
       { title: "2. Choose Output Format", desc: "Pick the target archive format for conversion." },
       { title: "3. Download", desc: "Convert and download the re-packaged archive." },
     ],
@@ -1420,7 +1420,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "FFmpeg",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MOV File", desc: "Select a .mov video file to convert." },
+      { title: "1. Upload MOV File", desc: "Select a .mov video file recorded on Apple devices or professional cameras. The tool remuxes the MOV container's video and audio streams into the widely compatible MP4 format." },
       { title: "2. Set Quality", desc: "Choose output resolution and bitrate." },
       { title: "3. Download MP4", desc: "Convert and download the MP4 file compatible with most devices." },
     ],
@@ -1756,7 +1756,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
     dependencies: "Web Audio API / FFmpeg",
     instructions: [
-      { title: "1. Upload Audio", desc: "Select an audio file to cut or trim." },
+      { title: "1. Upload Audio", desc: "Select an audio file in MP3, WAV, FLAC, M4A, OGG, or AAC format. The tool displays the waveform and allows you to set precise start and end points for trimming." },
       { title: "2. Select Start and End Points", desc: "Use the waveform visualization to set the exact start and end times for your clip." },
       { title: "3. Export Cut Audio", desc: "Preview the trimmed section and download the result as your chosen format." },
     ],
@@ -2127,7 +2127,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MP4", desc: "Select an .mp4 file to convert to MKV." },
+      { title: "1. Upload MP4", desc: "Select an .mp4 file from your device. The tool reads the MP4's video and audio codecs and repackages them into the more flexible MKV container with subtitle support." },
       { title: "2. Choose Tracks", desc: "Select which audio and subtitle tracks to include." },
       { title: "3. Convert", desc: "Download the MKV file with your selected tracks." },
     ],
@@ -2147,7 +2147,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MP4", desc: "Select an .mp4 video file." },
+      { title: "1. Upload MP4", desc: "Select an .mp4 video file from your device. The tool reads the MP4 container and its video/audio streams for remuxing into the QuickTime-compatible MOV container." },
       { title: "2. Convert", desc: "The tool re-encodes the video into a QuickTime-compatible MOV format." },
       { title: "3. Download MOV", desc: "Download the converted MOV file." },
     ],
@@ -2167,7 +2167,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MKV", desc: "Select an .mkv video file to convert." },
+      { title: "1. Upload MKV", desc: "Select an .mkv video file containing any codec combination. The tool remuxes the video, audio, and subtitle streams into Apple-compatible MOV format." },
       { title: "2. Adjust Settings", desc: "Choose video codec (H.264, H.265) and quality." },
       { title: "3. Download MOV", desc: "Convert and download the MOV file." },
     ],
@@ -2187,7 +2187,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MOV", desc: "Select a .mov file from your device." },
+      { title: "1. Upload MOV", desc: "Select a .mov file from your device. The tool identifies the video codec (H.264, ProRes, etc.) and audio tracks for packaging into the flexible MKV container." },
       { title: "2. Configure", desc: "Choose video and audio codec settings for the MKV container." },
       { title: "3. Convert", desc: "Download the converted MKV file." },
     ],
@@ -3322,7 +3322,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "xml2js / PapaParse",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload or Paste XML", desc: "Paste XML data or upload an .xml file." },
+      { title: "1. Upload or Paste XML", desc: "Paste XML data into the editor or upload an .xml file containing structured records. The tool maps XML elements and attributes to flat CSV columns based on your configuration." },
       { title: "2. Select Elements", desc: "Choose which XML elements become rows and which nested elements become columns." },
       { title: "3. Download CSV", desc: "Review the flattened table and export as CSV." },
     ],

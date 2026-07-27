@@ -303,7 +303,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Time Addition Calculator — Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Starting Time", desc: "Input the base time you want to add to." },
+      { title: "1. Enter Starting Time", desc: "Input the base time you want to add to, then specify hours, minutes, and seconds to add. The calculator handles rollover across 24-hour boundaries correctly." },
       { title: "2. Enter Duration", desc: "Input hours and minutes to add." },
       { title: "3. View Result", desc: "See the new time after adding the duration." },
     ],
@@ -341,7 +341,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Meeting Time Planner — Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Your Timezone", desc: "Select your timezone from the list." },
+      { title: "1. Enter Your Timezone", desc: "Select your timezone from the drop-down list, then add participants with their timezones. The tool finds overlapping business hours across all selected regions." },
       { title: "2. Add Participants", desc: "Add timezones of all meeting participants." },
       { title: "3. Find Overlap", desc: "View overlapping business hours across all timezones." },
     ],
@@ -1111,7 +1111,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Tip Calculator \u2014 Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Bill Amount", desc: "Input the total bill amount." },
+    { title: "1. Enter Bill Amount", desc: "Input the total bill amount before tip, then select your desired tip percentage or enter a custom percentage. The calculator splits the bill and tip per person." },
     { title: "2. Choose Tip Percentage", desc: "Select a tip percentage (10%, 15%, 18%, 20%, or custom)." },
     { title: "3. Split the Bill", desc: "Optionally split the bill among any number of people." },
   ],
@@ -1131,7 +1131,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Sales Tax Calculator \u2014 Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Price", desc: "Input the product or service price." },
+    { title: "1. Enter Price", desc: "Input the product or service price before tax, then select the applicable sales tax rate by state or enter a custom percentage. The calculator shows the tax amount and total." },
     { title: "2. Enter Tax Rate", desc: "Input the applicable sales tax percentage." },
     { title: "3. View Total", desc: "See the tax amount and total price including tax." },
   ],
@@ -1151,7 +1151,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Markup Calculator \u2014 Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Cost", desc: "Input the cost price of the product." },
+    { title: "1. Enter Cost", desc: "Input the cost price of the product and your desired markup percentage. The calculator shows the selling price, profit margin, and markup amount in both percentage and dollar terms." },
     { title: "2. Enter Markup", desc: "Input the markup percentage you want to apply." },
     { title: "3. View Selling Price", desc: "See the selling price and profit amount." },
   ],
@@ -1171,7 +1171,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online CAGR Calculator \u2014 Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Beginning Value", desc: "Input the initial investment value." },
+    { title: "1. Enter Beginning Value", desc: "Input the beginning value of your investment, the ending value, and the number of years held. The CAGR formula calculates the smoothed annual growth rate." },
     { title: "2. Enter Ending Value", desc: "Input the final value of the investment." },
     { title: "3. Enter Years", desc: "Input the number of years. View the CAGR percentage." },
   ],
@@ -1191,7 +1191,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Numerator and Denominator", desc: "Input the fraction you want to convert." },
+      { title: "1. Enter Numerator and Denominator", desc: "Input the fraction numerator and denominator. The calculator performs the division with configurable decimal precision and shows the simplified decimal equivalent." },
       { title: "2. Convert", desc: "See the decimal equivalent and simplified fraction." },
       { title: "3. View Steps", desc: "Review the division step-by-step." },
     ],
@@ -1210,7 +1210,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Decimal to Fraction Calculator \u2014 Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Decimal", desc: "Input the decimal number to convert." },
+      { title: "1. Enter Decimal", desc: "Input the decimal number to convert (e.g., 0.75, 3.14, or a repeating decimal like 0.333...). The calculator finds the exact fractional equivalent in simplest form." },
       { title: "2. Convert", desc: "The tool finds the exact fraction representation." },
       { title: "3. View Result", desc: "See the simplified fraction and step-by-step conversion." },
     ],
@@ -1286,7 +1286,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Factorial Calculator \u2014 Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Number", desc: "Input a non-negative integer n." },
+      { title: "1. Enter Number", desc: "Input a non-negative integer n to compute n!. The calculator handles values up to 170! using arbitrary precision to avoid overflow errors." },
       { title: "2. Calculate", desc: "The tool computes n! (n factorial)." },
       { title: "3. View Result", desc: "See the factorial value with step-by-step multiplication." },
     ],
@@ -1305,7 +1305,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Number", desc: "Input any positive integer to check." },
+      { title: "1. Enter Number", desc: "Input any positive integer up to 10 million. The primality test uses trial division up to the square root with optimizations for divisibility by 2 and 3." },
       { title: "2. Check", desc: "The tool determines if the number is prime." },
       { title: "3. View Factors", desc: "See all factors and the prime factorization." },
     ],
@@ -1324,7 +1324,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Prime Factorization Calculator \u2014 Find the prime factors of any number. Shows the complete factorization tree and exponential form. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Number", desc: "Input a positive integer to factorize." },
+      { title: "1. Enter Number", desc: "Input a positive integer to factorize into its prime factors. The calculator divides by successive prime numbers starting from 2, producing a tree of prime factors." },
       { title: "2. Calculate", desc: "The tool breaks the number into prime factors." },
       { title: "3. View Result", desc: "See the prime factorization with exponents." },
     ],
@@ -1381,7 +1381,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Dividend and Divisor", desc: "Input the dividend and divisor." },
+      { title: "1. Enter Dividend and Divisor", desc: "Input the dividend (the number being divided) and the divisor (the number to divide by). The calculator returns the remainder after division using standard modular arithmetic." },
       { title: "2. Calculate", desc: "The tool computes dividend mod divisor." },
       { title: "3. View Result", desc: "See the remainder and step-by-step division." },
     ],
@@ -1400,7 +1400,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Logarithm Calculator \u2014 Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Value and Base", desc: "Input the number and log base." },
+      { title: "1. Enter Value and Base", desc: "Input the number you want to find the logarithm of, then set the base. Supports common log (base 10), natural log (base e), and any custom base value." },
       { title: "2. Calculate", desc: "The tool computes the logarithm." },
       { title: "3. View Result", desc: "See the log value with step-by-step calculation." },
     ],
@@ -1419,7 +1419,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Trigonometry Calculator \u2014 Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Angle", desc: "Input the angle in degrees or radians." },
+      { title: "1. Enter Angle", desc: "Input the angle value in degrees or radians. The calculator computes all six trigonometric functions — sine, cosine, tangent, cotangent, secant, and cosecant." },
       { title: "2. Select Function", desc: "Choose sin, cos, tan, csc, sec, or cot." },
       { title: "3. Calculate", desc: "View the trigonometric value with step-by-step work." },
     ],
@@ -1438,7 +1438,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Degree / Radian Converter \u2014 Convert between degrees and radians. Shows the formula and step-by-step conversion process. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Value", desc: "Input the angle in degrees or radians." },
+      { title: "1. Enter Value", desc: "Input the angle value in degrees or radians. The converter uses the standard formula — multiply degrees by π/180 or radians by 180/π for instant bidirectional conversion." },
       { title: "2. Convert", desc: "The tool converts to the other unit automatically." },
       { title: "3. View Result", desc: "See the converted value with the conversion formula." },
     ],
@@ -1495,7 +1495,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Rounding Calculator \u2014 Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Number", desc: "Input the number to round." },
+      { title: "1. Enter Number", desc: "Input the numeric value you need to round. The calculator handles integers, decimals, and negative numbers with multiple rounding methods to choose from." },
       { title: "2. Select Precision", desc: "Choose decimal places or significant figures." },
       { title: "3. View Result", desc: "See the rounded number with step-by-step rounding." },
     ],
@@ -1514,7 +1514,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Math Equation Solver \u2014 Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Equation", desc: "Type or paste a mathematical equation." },
+      { title: "1. Enter Equation", desc: "Type or paste a mathematical equation involving variables (e.g., 2x + 5 = 15). The solver handles linear, quadratic, and simple polynomial equations step by step." },
       { title: "2. Solve", desc: "The tool solves for the unknown variable." },
       { title: "3. View Solution", desc: "See the step-by-step solution." },
     ],
@@ -1552,7 +1552,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Geometry Calculator \u2014 Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Select Shape", desc: "Choose a geometric shape from the list." },
+      { title: "1. Select Shape", desc: "Choose a geometric shape from the list — circle, triangle, rectangle, square, trapezoid, or polygon. The calculator displays the relevant dimensions to measure." },
       { title: "2. Enter Dimensions", desc: "Input the required dimensions for the shape." },
       { title: "3. Calculate", desc: "View area, perimeter, volume, and other properties." },
     ],
@@ -1609,7 +1609,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Midpoint Calculator \u2014 Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Two Points", desc: "Input the coordinates of two points." },
+      { title: "1. Enter Two Points", desc: "Input the coordinates of two points in 2D space (x₁, y₁) and (x₂, y₂). The calculator finds the midpoint using the average of each coordinate pair." },
       { title: "2. Calculate", desc: "The tool computes the midpoint coordinates." },
       { title: "3. View Result", desc: "See the midpoint with step-by-step calculation." },
     ],
@@ -1932,7 +1932,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Sleep Requirements \u2014 Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Age", desc: "Sleep needs change across life stages." },
+      { title: "1. Enter Age", desc: "Enter your age in years. Sleep needs change across life stages — infants require more hours while older adults need slightly less. The calculator follows NIH guidelines." },
       { title: "2. View Recommendation", desc: "CDC and NSF guideline-based sleep hours for your age." },
       { title: "3. Assess Sleep", desc: "Compare current habits against recommendations." }
     ],
@@ -1970,7 +1970,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Steps to Distance \u2014 Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Steps", desc: "Step count from tracker or phone." },
+      { title: "1. Enter Steps", desc: "Enter your step count from a fitness tracker, phone pedometer, or manual log. The calculator converts steps to distance based on your stride length and estimates calories burned." },
       { title: "2. Enter Height", desc: "Step length estimated from height." },
       { title: "3. View Distance", desc: "Distance in km and miles plus calories." }
     ],
@@ -2046,7 +2046,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Date Difference Calculator \u2014 Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Start Date", desc: "Select the starting date." },
+      { title: "1. Enter Start Date", desc: "Select the starting date using the date picker or type it in YYYY-MM-DD format. The calculator computes the duration between this and the end date." },
       { title: "2. Enter End Date", desc: "Select the ending date." },
       { title: "3. View Difference", desc: "See the difference in days, months, years, and total days." },
     ],
@@ -2065,7 +2065,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Date Addition Calculator \u2014 Add or subtract days from any date. Get the resulting date instantly \u2014 useful for deadlines, scheduling, and planning. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Start Date", desc: "Select the starting date." },
+      { title: "1. Enter Start Date", desc: "Select the starting date you want to add or subtract days from. Use the date picker for quick selection or type a date directly into the input field." },
       { title: "2. Add Duration", desc: "Enter days, months, or years to add." },
       { title: "3. View Result", desc: "See the resulting date after adding the duration." },
     ],
@@ -2103,7 +2103,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Time Since Calculator \u2014 Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Past Date", desc: "Select a past date and time." },
+      { title: "1. Enter Past Date", desc: "Select a past date and optional time using the date picker. The calculator computes the elapsed duration from that moment to now in years, months, days, hours, and minutes." },
       { title: "2. Calculate", desc: "The tool computes the elapsed time since that moment." },
       { title: "3. View Duration", desc: "See the time elapsed in years, months, days, hours, minutes, and seconds." },
     ],
@@ -2160,7 +2160,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online DST Checker (US) \u2014 Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Select Year", desc: "Choose the year to check." },
+      { title: "1. Select Year", desc: "Choose the year to check for DST dates. The tool displays the exact start and end dates of daylight saving time for your selected timezone region." },
       { title: "2. Select Timezone", desc: "Choose the US timezone (Eastern, Central, Mountain, Pacific)." },
       { title: "3. View Dates", desc: "See DST start and end dates for the selected year and timezone." },
     ],
@@ -2655,7 +2655,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Annual Contract Value (ACV) Calculator \u2014 Calculate ACV by dividing total contract value by the contract term in years. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Contract Value", desc: "Input the total contract value." },
+    { title: "1. Enter Contract Value", desc: "Input the total contract value and the contract duration in months or years. The ACV calculator divides the total value by the term length to find the annual recurring portion." },
     { title: "2. Enter Contract Term", desc: "Input the contract duration in months or years." },
     { title: "3. Calculate ACV", desc: "View the annual contract value and monthly equivalent." },
   ],
@@ -2770,7 +2770,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online SaaS Payback Period Calculator \u2014 Calculate payback period by dividing CAC by monthly revenue per customer. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter CAC", desc: "Input your customer acquisition cost." },
+    { title: "1. Enter CAC", desc: "Input your customer acquisition cost and the monthly revenue per customer. The calculator divides CAC by monthly revenue to find months needed to recover the acquisition cost." },
     { title: "2. Enter Monthly Revenue", desc: "Input average monthly revenue per customer." },
     { title: "3. Calculate Payback", desc: "View how many months to recover your customer acquisition cost." },
   ],
@@ -2839,7 +2839,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Temperature", desc: "Input the temperature value to convert." },
+      { title: "1. Enter Temperature", desc: "Input the temperature value you want to convert. The tool supports Celsius, Fahrenheit, Kelvin, Rankine, Réaumur, and Delisle scales with instant results as you type." },
       { title: "2. Select Units", desc: "Choose from Celsius, Fahrenheit, or Kelvin as input and output units." },
       { title: "3. View Result", desc: "See the converted temperature instantly with the formula shown." },
     ],
@@ -3017,7 +3017,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Gas Mileage Calculator — Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Distance", desc: "Input total distance traveled." },
+      { title: "1. Enter Distance", desc: "Input the total distance traveled since your last fill-up, then enter the amount of fuel consumed. The calculator computes miles per gallon or liters per 100 kilometers." },
       { title: "2. Enter Fuel Used", desc: "Input fuel consumed in gallons or liters." },
       { title: "3. Calculate Mileage", desc: "View miles per gallon or liters per 100km and trip cost." },
     ],

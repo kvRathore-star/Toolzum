@@ -4570,7 +4570,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JSON to INI Converter — Convert JSON to INI config format with section headers and key-value pairs. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Paste JSON", desc: "Enter a flat or nested JSON object." },
+      { title: "1. Paste JSON", desc: "Paste a valid JSON object or array into the editor. The tool maps JSON key-value pairs and nested structures to INI's section-based format with proper escaping." },
       { title: "2. Convert to INI", desc: "The tool maps JSON keys to INI section headers and properties." },
       { title: "3. Copy INI Output", desc: "Copy the generated INI configuration file content." },
     ],
@@ -4627,7 +4627,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSS to Stylus Converter — Convert CSS to Stylus indentation syntax. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Paste CSS", desc: "Enter your CSS code." },
+      { title: "1. Paste CSS", desc: "Paste your CSS code into the editor panel. The tool parses selectors, properties, and values to transform them into Stylus's indentation-driven syntax with optional semicolons and braces." },
       { title: "2. Convert to Stylus", desc: "The tool transforms CSS into Stylus syntax with optional brackets and colons." },
       { title: "3. Copy Stylus", desc: "Copy the generated Stylus code." },
     ],

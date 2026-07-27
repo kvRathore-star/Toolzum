@@ -28,7 +28,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Paste INI Content", desc: "Enter INI configuration file content." },
+      { title: "1. Paste INI Content", desc: "Paste INI configuration file content with section headers and key-value pairs. The tool parses the structure and converts it to a well-formatted JSON object." },
       { title: "2. Convert to JSON", desc: "The tool parses INI sections and key-value pairs into a JSON object." },
       { title: "3. Copy JSON", desc: "Copy the resulting JSON for use in applications." },
     ],
@@ -286,7 +286,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online ARR Calculator — Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter MRR", desc: "Input your monthly recurring revenue." },
+    { title: "1. Enter MRR", desc: "Input your monthly recurring revenue from subscriptions or contracts. The calculator multiplies MRR by 12 to compute the annual recurring revenue." },
     { title: "2. Calculate ARR", desc: "The tool multiplies MRR by 12 to show annual recurring revenue." },
     { title: "3. Analyze Growth", desc: "Compare ARR across periods to track year-over-year growth." },
   ],
@@ -306,7 +306,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Principal", desc: "Input the initial investment amount." },
+    { title: "1. Enter Principal", desc: "Input the initial principal amount, annual interest rate, compounding frequency, and time period. The calculator shows how your investment grows with compound interest over time." },
     { title: "2. Set Rate and Time", desc: "Enter annual interest rate, compounding frequency, and time period." },
     { title: "3. View Future Value", desc: "See how your investment grows with compound interest over time." },
   ],
@@ -426,7 +426,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Hourly Rate", desc: "Input your hourly wage." },
+    { title: "1. Enter Hourly Rate", desc: "Input your hourly wage rate, then enter the average hours worked per week and weeks per year. The calculator projects your annual, monthly, and biweekly pre-tax salary." },
     { title: "2. Enter Work Hours", desc: "Input hours worked per week and weeks worked per year." },
     { title: "3. View Annual Salary", desc: "See your equivalent annual salary based on hourly rate." },
   ],
@@ -586,7 +586,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Runway Calculator — Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Cash Balance", desc: "Input your current cash balance." },
+    { title: "1. Enter Cash Balance", desc: "Input your current cash balance, monthly revenue, and monthly expenses. The calculator estimates how many months your startup can operate before running out of funds." },
     { title: "2. Enter Monthly Burn", desc: "Input your monthly net burn rate (expenses minus revenue)." },
     { title: "3. View Runway", desc: "See how many months of runway remain before funds run out." },
   ],
@@ -683,7 +683,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Exponent Calculator — Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Base", desc: "Input the base number." },
+      { title: "1. Enter Base", desc: "Input the base number you want to raise to a power. The calculator supports both positive and negative bases with integer or fractional exponents." },
       { title: "2. Enter Exponent", desc: "Input the power to raise the base to." },
       { title: "3. Calculate", desc: "View the result with step-by-step calculation." },
     ],
@@ -702,7 +702,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Final Grade Calculator — Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Current Grade", desc: "Input your current grade in the class." },
+      { title: "1. Enter Current Grade", desc: "Input your current grade percentage and the weight of the final exam. The calculator determines the score needed on the final to reach your target grade." },
       { title: "2. Enter Desired Grade", desc: "Input the grade you want for the final outcome." },
       { title: "3. Enter Exam Weight", desc: "Input the weight of the final exam. See required score." },
     ],
@@ -854,7 +854,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Aspect Ratio Calculator — Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Width and Height", desc: "Input the width and height dimensions." },
+      { title: "1. Enter Width and Height", desc: "Input the original width and height dimensions in pixels, inches, or centimeters. The calculator displays the ratio in simplified form and suggests standard display resolutions." },
       { title: "2. Choose Common Ratio", desc: "Or select from common aspect ratios (16:9, 4:3, etc.)." },
       { title: "3. View Result", desc: "See the simplified aspect ratio and missing dimension if applicable." },
     ],
@@ -1443,7 +1443,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Water Intake Calculator — Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Weight", desc: "Water recommendations are weight-based." },
+      { title: "1. Enter Weight", desc: "Enter your body weight in kilograms or pounds. Water recommendations are weight-based and adjusted for your activity level and climate conditions." },
       { title: "2. Add Exercise", desc: "Daily exercise minutes increase water needs through sweat." },
       { title: "3. View Goal", desc: "Daily water target in ounces, mL, and cups." }
     ],
@@ -1482,7 +1482,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Initial Deposit", desc: "Input your starting savings balance." },
+    { title: "1. Enter Initial Deposit", desc: "Input your starting savings balance, monthly contribution amount, annual interest rate, and savings goal. The calculator projects your savings growth toward your target." },
     { title: "2. Set Monthly Contribution", desc: "Enter how much you will save each month." },
     { title: "3. Project Growth", desc: "View your savings growth over time with compound interest." },
   ],
@@ -1522,7 +1522,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Semver Calculator — Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Version", desc: "Input a semantic version (e.g., 1.2.3)." },
+      { title: "1. Enter Version", desc: "Input a semantic version string following the MAJOR.MINOR.PATCH format (e.g., 1.2.3). The tool parses each component and displays the version breakdown." },
       { title: "2. Choose Operation", desc: "Select bump major, minor, or patch version." },
       { title: "3. View Result", desc: "See the new version after the bump with detailed diff." },
     ],
@@ -1560,7 +1560,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Tax Calculator — Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. ',
     dependencies: "None",
     instructions: [
-    { title: "1. Enter Income", desc: "Input your annual income amount." },
+    { title: "1. Enter Income", desc: "Input your annual gross income amount for the selected tax year. The calculator applies current tax brackets, deductions, and credits to estimate your total tax liability." },
     { title: "2. Select Tax Year", desc: "Choose the applicable tax year and filing status." },
     { title: "3. View Tax Liability", desc: "See estimated tax liability, effective tax rate, and bracket details." },
   ],

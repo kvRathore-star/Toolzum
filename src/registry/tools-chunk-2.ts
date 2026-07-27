@@ -965,7 +965,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
     instructions: [
-      { title: "1. Upload CBZ File", desc: "Select a .cbz comic book archive file." },
+      { title: "1. Upload CBZ File", desc: "Select a .cbz comic book archive file. The tool extracts the compressed images (usually PNG, JPEG, or WebP), preserves their page order, and compiles them into a single PDF document." },
       { title: "2. Arrange Pages", desc: "Review and reorder pages if needed before conversion." },
       { title: "3. Download PDF", desc: "Convert the CBZ to a single PDF document." },
     ],
@@ -2147,7 +2147,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Start Time", desc: "Input the departure or start time." },
+      { title: "1. Enter Start Time", desc: "Input the departure or start time, then enter the total travel distance and average speed. The calculator estimates arrival time accounting for the distance and speed." },
       { title: "2. Enter Distance and Speed", desc: "Input the distance to travel and average speed." },
       { title: "3. Calculate ETA", desc: "View the estimated arrival time based on your inputs." },
     ],
@@ -2874,7 +2874,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Study Time Calculator \u2014 Calculate total study hours and monthly projections. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter Exam Date", desc: "Set your exam or deadline date." },
+      { title: "1. Enter Exam Date", desc: "Set your exam or deadline date using the date picker. The calculator divides your available time into recommended study sessions based on subject difficulty." },
       { title: "2. Enter Study Hours Needed", desc: "Estimate total study hours required for the subject." },
       { title: "3. Plan Schedule", desc: "Get a recommended daily study schedule leading up to the exam." },
     ],

@@ -3183,7 +3183,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "pdf-lib, jszip",
     showInCategory: true,
     instructions: [
-      { title: "1. Upload File", desc: "Select an ODT or RTF document." },
+      { title: "1. Upload File", desc: "Select an ODT (OpenDocument) or RTF (Rich Text) document from your device. The tool preserves text formatting, images, tables, and embedded fonts during the PDF conversion." },
       { title: "2. Configure PDF Options", desc: "Set page size, margins, and orientation for the PDF output." },
       { title: "3. Download PDF", desc: "Convert and download the PDF file." },
     ],
@@ -3805,7 +3805,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     instructions: [
-      { title: "1. Upload GIF", desc: "Select a .gif file to convert." },
+      { title: "1. Upload GIF", desc: "Select an animated or static .gif file from your device. The tool decodes each frame's image data and timing information for re-encoding into WebP or WebM format." },
       { title: "2. Choose Output", desc: "Pick WebP for smaller file sizes or WebM for better quality animation." },
       { title: "3. Download", desc: "Convert and download the optimized animation." },
     ],

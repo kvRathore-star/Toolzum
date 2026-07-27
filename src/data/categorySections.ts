@@ -23,6 +23,12 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "bulk-csv-excel-to-json",
         "bulk-regex-extractor-replacer",
         "trailing-space-remover",
+        "sql-formatter", "code-beautifier", "code-formatter",
+        "css-formatter", "javascript-formatter", "jsx-formatter",
+        "tsx-formatter", "python-formatter", "yaml-formatter",
+        "markdown-formatter", "cpp-formatter", "go-formatter",
+        "kotlin-formatter", "php-beautifier", "ruby-formatter",
+        "rust-formatter",
 ],
     },
     {
@@ -30,7 +36,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Minifiers & Compressors",
       description: "Reduce file sizes of JavaScript, CSS, HTML, and JSON for faster load times.",
       slugs: [
-        "js-minifier",
+        "js-minifier", "css-minifier", "html-minifier",
       ],
     },
     {
@@ -41,6 +47,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "css-generator",
         "css-filter-generator",
         "media-query-generator",
+        "box-shadow-generator", "border-radius-generator",
+        "flexbox-css-generator", "css-grid-generator",
+        "text-shadow-generator", "css-transform-generator",
+        "css-animation-generator", "glassmorphism-generator",
       ],
     },
     {
@@ -67,7 +77,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "code-to-curl-converter", "curl-to-code-converter",
         "jsonrpc-builder",
         "api-builder",
-              "website-screenshot",
+        "curl-to-code", "http-headers-generator",
+        "http-status-code-checker", "pricing-tier-builder",
 ],
     },
     {
@@ -96,6 +107,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ip-allowlist-generator",
         "cidr-calculator",
               "aws-iam-policy-analyzer",
+        "ssl-checker", "aes-decrypt", "dns-record-validator",
+        "jwt-encoder-signer", "domain-availability-checker",
+        "rate-limit-header-parser",
 ],
     },
     {
@@ -109,6 +123,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "text-to-binary", "number-base-converter",
         "base32-encoder", "base64-json-decoder", "hex-text-converter",
         "svg-base64-converter",
+        "base64-encode-decode", "base64-to-image",
+        "html-entity-encoder", "backslash-escape",
+        "encoder-decoder", "binary-to-text", "text-converter",
 ],
     },
     {
@@ -137,6 +154,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "css-specificity-calculator", "css-validator",
         "validator-kit",
         "csv-data-cleaner",
+        "json-formatter-tool",
+        "url-parser", "protobuf-decoder", "query-string-parser",
+        "email-normalizer", "json-ld-generator", "json-size-analyzer",
 ],
     },
     {
@@ -149,6 +169,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "code-obfuscator", "code-to-curl-parser",
         "js-syntax-checker", "pug-to-html-converter",
         "nginx-config-generator",
+        "eslint-config-generator", "docker-run-to-compose",
       ],
     },
     {
@@ -161,6 +182,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "http-retry-policy-builder",
         "whois-lookup",
         "web-inspector",
+        "user-agent-parser", "chmod-calculator",
       ],
     },
     {
@@ -176,6 +198,11 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "uuid-generator",
         "test-data-generator",
               "open-graph-generator",
+        "fake-data-generator", "fake-credit-card-generator",
+        "coupon-code-generator", "avatar-generator",
+        "license-key-generator", "pin-generator",
+        "random-user-agent-generator", "logo-placeholder-generator",
+        "memorable-password-generator",
 ],
     },
     {
@@ -197,6 +224,11 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "image-placeholder-generator",
         "bulk-font-subsetter",
         "markdown-table-generator",
+        "website-screenshot",
+        "php-tools", "svg-optimizer", "mime-finder",
+        "string-template-tester", "csv-analyzer", "csv-statistics",
+        "log-analyzer", "csv-merger", "csv-splitter",
+        "csv-transpose", "csv-to-sql",
       ],
     },
   ],
@@ -232,6 +264,17 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "slope-calculator",
         "math-equation-solver",
               "screen-size-converter",
+        "proportion-calculator", "ppi-calculator",
+        "pythagorean-theorem-calculator", "rectangle-area-calculator",
+        "square-root-calculator", "fluid-typography-calculator",
+        "semver-calculator", "standard-deviation-calculator",
+        "decimal-to-fraction-calculator", "rule-of-three-calculator",
+        "permutation-calculator", "factorial-calculator",
+        "prime-factorization-calculator", "least-common-multiple-calculator",
+        "logarithm-calculator", "trigonometry-calculator",
+        "scientific-notation-converter", "rounding-calculator",
+        "coordinate-calculator", "midpoint-calculator",
+        "distance-calculator", "triangle-area-calculator",
 ],
     },
     {
@@ -247,6 +290,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "week-number-calculator",
         "work-hours-calculator",
         "eta-calculator",
+        "time-duration-calculator", "time-addition-calculator",
+        "meeting-time-planner", "date-addition-calculator",
+        "time-since-calculator", "daylight-saving-time-checker",
+        "hours-minutes-calculator",
 ],
     },
     {
@@ -285,6 +332,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ascii-art-generator",
         "ascii-font-generator",
         "random-port-generator",
+        "random-picker-generator", "random-username-generator",
+        "nickname-generator", "emoji-picker", "otp-generator",
+        "wifi-qr-generator", "random-time-generator",
+        "random-sentence-generator",
 ],
     },
     {
@@ -330,11 +381,15 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "fuel-consumption-converter",
         "clothing-size-converter",
         "hours-to-minutes-converter",
+        "hours-to-minutes-tool",
         "time-converter",
         "unix-time-converter",
         "vcf-csv-converter",
         "speed-converter-advanced",
         "unit-converter",
+        "power-converter", "pressure-converter",
+        "length-converter", "volume-converter", "area-converter",
+        "paper-size-converter",
       ],
     },
     {
@@ -350,6 +405,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "csv-json-row-generator",
         "tsv-csv-converter",
         "csv-formatter",
+        "line-sorter", "list-converter", "phone-parser",
+        "mac-vendor-lookup", "column-renamer", "data-type-converter",
+        "format-validator", "pivot-generator", "row-filter",
+        "csv-to-ndjson", "ics-csv-converter",
       ],
     },
     {
@@ -365,7 +424,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     {
       id: "everyday",
       heading: "Everyday Utilities",
-      description: "Speed test, privacy cleaner, resume builder, bank statement analyzer, and more.",
+      description: "Speed test, resume builder, bank statement analyzer, and more.",
       slugs: [
         "speed-test",
         "benchmark-builder",
@@ -380,9 +439,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "time-zone-converter",
         "minutes-to-hours-converter",
         "seconds-to-minutes-converter",
-        "privacy-cleaner",
-        "json-formatter-tool",
-        "text-style-generator",
+        "resume-builder", "zip-file-extractor",
+        "ical-event-generator", "whatsapp-toolkit",
+        "bank-statement-analyser",
 ],
     },
   ],
@@ -474,7 +533,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "gif-to-apng", "apng-to-gif",
         "image-to-ico",
         "bulk-heic-to-jpg", "bulk-svg-to-png",
-        "bulk-webp-avif-modernizer",
+        "bulk-image-converter",
         "avif-to-bmp", "avif-to-gif", "avif-to-heic", "avif-to-ico", "avif-to-jpg", "avif-to-jxl", "avif-to-png", "avif-to-svg", "avif-to-tiff", "avif-to-webp",
         "bmp-to-avif", "bmp-to-gif", "bmp-to-heic", "bmp-to-ico", "bmp-to-jpg", "bmp-to-jxl", "bmp-to-png", "bmp-to-svg", "bmp-to-tiff", "bmp-to-webp",
         "convert-to-jpg", "gif-to-avif", "gif-to-bmp", "gif-to-heic", "gif-to-ico", "gif-to-jpg", "gif-to-jxl", "gif-to-png", "gif-to-svg", "gif-to-tiff", "gif-to-webp",
@@ -501,7 +560,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
   
         "collage-maker", "chart-maker",
         "gif-editor", "gif-compressor", "gif-resizer",
-        "color-converter",
+        "meme-generator",
         "bulk-image-watermark", "bulk-face-anonymizer",
         "bulk-exif-stripper-injector", "bulk-app-icon-generator",
         "bulk-image-to-text-ocr",
@@ -513,7 +572,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "AI Image Tools",
       description: "AI-powered image tools — upscale, face swap, background removal, and colorization.",
       slugs: [
-        "meme-generator", "ai-bg-changer", "bulk-bg-changer",
+        "ai-bg-changer", "bulk-bg-changer",
       ],
     },
   ],
@@ -554,7 +613,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-to-docx", "pdf-to-txt",
         "pdf-to-pdfa",
         "url-to-pdf", "eml-to-pdf",
-        "document-converter",
         "bulk-image-to-pdf",
         "excel-to-pdf", "html-to-pdf", "jpg-to-pdf",
         "pdf-to-epub", "pdf-to-excel", "pdf-to-html",
@@ -590,6 +648,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-workflow-builder",
         "bulk-pdf-data-extractor", "bulk-pdf-form-extractor", "bulk-pdf-suite",
         "pdf-page-manager", "generic-pdf-processor",
+        "unlock-pdf",
       ],
     },
   ],
@@ -677,6 +736,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
  "json-to-csv",
         "text-to-html-converter",
         "import-to-csv",
+        "document-converter",
       ],
     },
     {
@@ -692,13 +752,17 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "temperature-converter", "archive-converter",
         "markdown-tools",
 
-        "json-to-xml", "number-base-converter",
+        "json-to-xml",
         "roman-numeral-converter",
         "csv-to-json", "xml-to-csv", "xml-to-json",
         "scss-to-css-converter",
         "tailwind-to-css-converter",
         "xlsx-csv-converter",
-        "csv-to-markdown",
+        "html-to-text-converter", "stylus-to-css-converter",
+        "css-to-scss-converter", "less-to-css-converter",
+        "css-to-less-converter", "css-to-stylus-converter",
+        "yaml-to-toon", "toon-to-json", "toon-to-yaml",
+        "text-tools",
 ],
     },
   ],
@@ -726,6 +790,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "xml-sitemap-generator",
         "seo-meta-tag-generator",
         "robots-txt-generator",
+        "meta-tag-generator", "seo-slug-generator",
       ],
     },
   ],
@@ -743,6 +808,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ideal-weight-calc",
         "lean-body-mass-calculator",
         "waist-to-hip-ratio-calculator",
+        "bmr-calculator", "bmi-calculator-for-kids",
+        "body-surface-area-calculator",
       ],
     },
     {
@@ -753,6 +820,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "calorie-calculator",
         "breastfeeding-calorie-calculator",
         "protein-calculator",
+        "keto-calculator", "macro-calculator",
+        "macronutrient-calculator", "calories-burned-calculator",
+        "calorie-tracker", "steps-to-calories-calculator",
       ],
     },
     {
@@ -762,6 +832,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "heart-rate-zone-calculator",
         "steps-calculator",
+        "running-pace-calculator", "cycling-calorie-calculator",
       ],
     },
     {
@@ -830,6 +901,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "word-counter", "character-counter",
         "ascii-table-generator",
         "writing-tools",
+        "reverse-text-generator", "text-reverser",
       ],
     },
     {
@@ -862,6 +934,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pronunciation-tool",
         "text-styling", "small-text-generator", "big-text-generator",
         "citation-generator",
+        "text-style-generator",
+        "upside-down-text", "glitch-text", "invisible-character",
       ],
     },
   ],
@@ -909,6 +983,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "hex-to-rgb-converter",
         "color-shades-tints",
         "contrast-ratio-checker",
+        "color-converter",
+        "color-blindness-simulator",
 ],
     },
     {
@@ -919,6 +995,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "typography-preview",
         "svg-editor",
         "favicon-generator",
+        "font-converter", "font-subsetter",
+        "vector-pen-canvas",
       ],
     },
   ],
@@ -938,6 +1016,11 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "customer-ltv-calculator",
         "acv-calculator",
         "saas-payback-period",
+        "cac-calculator", "burn-rate-calculator",
+        "employee-turnover-calculator", "arr-calculator",
+        "mrr-calculator", "revenue-growth-calculator",
+        "seat-license-calculator", "saas-quick-ratio",
+        "saas-rule-of-40",
       ],
     },
     {
@@ -948,6 +1031,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "mortgage-calculator",
         "car-lease-calculator",
         "working-capital-calculator",
+        "emi-calculator", "car-loan-calculator",
       ],
     },
     {
@@ -961,6 +1045,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "profit-margin-calculator",
         "break-even-calculator",
         "cagr-calculator",
+        "margin-calculator", "roi-calculator",
+        "simple-interest-calculator", "retirement-calculator",
+        "rent-vs-buy-calculator",
       ],
     },
     {
@@ -973,6 +1060,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "net-worth-calculator",
         "debt-payoff-calculator",
         "tip-calculator",
+        "salary-calculator", "hourly-to-salary-calculator",
+        "tax-calculator", "tds-calculator-india",
+        "sales-tax-calculator",
       ],
     },
     {
@@ -983,6 +1073,9 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "currency-converter",
         "invoice-generator",
         "bulk-invoice-receipt-parser",
+        "receipt-generator", "iban-validator", "discount-calculator",
+        "inflation-calculator", "trial-conversion-calculator",
+        "markup-calculator",
       ],
     },
   ],
@@ -1001,7 +1094,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Privacy Cleaners",
       description: "Remove EXIF data from photos, anonymize IPs, and clean private information.",
       slugs: [
-        "exif-data-remover", "ip-anonymizer",
+        "exif-data-remover", "ip-anonymizer", "privacy-cleaner",
       ],
     },
     {
@@ -1026,6 +1119,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pan-verification",
         "indian-document-enhancer",
         "aadhaar-card-masker",
+        "rental-agreement-generator",
       ],
     },
     {
@@ -1036,6 +1130,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "gst-invoice-generator",
         "tax-saving-calculator",
         "gstin-lookup",
+        "ifsc-code-lookup", "seller-profit-calculator",
       ],
     },
     {
@@ -1088,6 +1183,29 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       ],
     },
   ],
+
+  Extension: [
+    {
+      id: "record",
+      heading: "Browser Extensions",
+      description: "Generate browser extensions for screen recording and other browser-level tasks.",
+      slugs: [
+        "screen-recorder-extension",
+      ],
+    },
+  ],
+
+  Productivity: [
+    {
+      id: "focus",
+      heading: "Focus & Task Management",
+      description: "Timers, to-do lists, and productivity tools to help you stay focused and organized.",
+      slugs: [
+        "pomodoro-timer",
+        "to-do-list",
+      ],
+    },
+  ],
 };
 
 export const CATEGORY_INTROS: Record<string, string> = {
@@ -1127,4 +1245,8 @@ export const CATEGORY_INTROS: Record<string, string> = {
     "India-specific utility tools — Aadhaar photo cropping and masking, PAN card verification, GST invoice generation, IFSC code lookup, UPI ID validation, vehicle registration check, and more. Every tool runs entirely in your browser with no server uploads.",
   Transcription:
     "Browser-based transcription tools — convert speech to text from audio and video files, generate YouTube transcripts, and create meeting minutes. All processing happens locally on your device.",
+  Extension:
+    "Browser extension generator tools — create screen recorder extensions and other browser-level utilities. All processing happens locally in your browser with no server uploads.",
+  Productivity:
+    "Productivity tools — pomodoro timers, to-do lists, and focus management utilities to help you get things done. All processing happens locally in your browser.",
 };
