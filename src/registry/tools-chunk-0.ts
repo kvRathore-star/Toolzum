@@ -1030,14 +1030,14 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
-      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
-      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+      { title: "1. Select MP3 File", desc: "Pick the MP3 file to decode to uncompressed WAV. Essential for audio editing, sampling, and any workflow requiring raw PCM access." },
+      { title: "2. Choose Output WAV Format", desc: "Select 16-bit for CD-standard or 24-bit for production work. Stereo or mono output depending on your project needs." },
+      { title: "3. Decode to WAV", desc: "The MP3 is fully decoded to linear PCM and saved as WAV. The resulting file is 5-10x larger but provides sample-level access for precise editing." },
     ],
     faqs: [
-      { question: "Is MP3 to WAV conversion lossy?", answer: "Converting from MP3 to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
-      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
-      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+      { question: "Can I recover the original CD quality by converting MP3 to WAV?", answer: "No. MP3 is lossy — converting to WAV creates a much larger file but with the same degraded audio quality. The lost high frequencies cannot be restored." },
+      { question: "Why does my MP3 sound better after converting to WAV?", answer: "It does not sound better — your brain expects a larger file to sound better. Blind A/B tests show listeners cannot distinguish MP3 from WAV of the same source." },
+      { question: "Is WAV from MP3 suitable for professional use?", answer: "For production work, yes — WAV is easier for DAWs to handle. But the audio quality ceiling is the MP3's, not CD quality. Always prefer lossless sources." },
     ],
   },
   {

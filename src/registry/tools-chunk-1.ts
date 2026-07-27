@@ -2917,14 +2917,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
-      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
-      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+      { title: "1. Upload WMA File", desc: "Select a WMA audio file. WMA to MP3 conversion is useful when the target device supports MP3 but not WMA — common in older car audio systems." },
+      { title: "2. Choose MP3 Quality", desc: "Select 192 kbps for balanced quality, 256 kbps for good quality, or 320 kbps CBR for maximum MP3 quality. VBR encoding is recommended for better efficiency." },
+      { title: "3. Convert for Universal Playback", desc: "Your WMA is transcoded to MP3. The resulting file plays on any MP3-compatible device — from 2000s portable players to modern smart speakers." },
     ],
     faqs: [
-      { question: "Is WMA to MP3 conversion lossy?", answer: "Converting from WMA to MP3 uses lossy compression. " },
-      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
-      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+      { question: "Is MP3 or WMA better?", answer: "At equivalent bitrates, WMA generally matches or slightly exceeds MP3 quality below 128 kbps. Above 192 kbps, the difference is negligible." },
+      { question: "Does WMA to MP3 add noticeable artifacts?", answer: "Double lossy encoding always adds artifacts. If the WMA is 192 kbps or higher and the MP3 target is 256 kbps+, most listeners will not notice." },
+      { question: "Can I batch convert a WMA library to MP3?", answer: "Yes. Select multiple WMA files for batch processing. Each file is decoded and re-encoded individually." },
     ],
   },
   {
@@ -2937,14 +2937,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
-      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
-      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+      { title: "1. Upload Opus Source", desc: "Select your Opus audio file. Opus-to-MP3 conversion is needed when the playback hardware supports MP3 but not Opus." },
+      { title: "2. Set MP3 Encoding", desc: "Use VBR quality 0 (highest, ~245 kbps) to minimize quality loss. CBR 320 kbps is the safest choice if file size is not a concern." },
+      { title: "3. Encode for Maximum Compatibility", desc: "Your Opus is decoded and re-encoded to MP3. The resulting file plays on any MP3-compatible device from the last 25 years." },
     ],
     faqs: [
-      { question: "Is Opus to MP3 conversion lossy?", answer: "Converting from Opus to MP3 uses lossy compression. " },
-      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
-      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+      { question: "Is Opus to MP3 a bad idea quality-wise?", answer: "Both are lossy, so there is generational loss. However, Opus at 160 kbps converted to MP3 at 320 kbps is still very good quality for casual listening." },
+      { question: "What bitrate Opus source is worth converting?", answer: "Only convert Opus files encoded at 128 kbps or higher. Lower Opus bitrates already lack high-frequency detail, which MP3 encoding will further degrade." },
+      { question: "Does MP3 support Opus's 48 kHz full bandwidth?", answer: "Yes. MP3 supports up to 48 kHz sampling rate. Opus fullband (48 kHz) content is resampled as needed, but the frequency range is preserved." },
     ],
   },
   {
@@ -2957,14 +2957,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     instructions: [
-      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
-      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
-      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+      { title: "1. Select AIFF Uncompressed Source", desc: "Choose an AIFF file. Encoding MP3 from AIFF avoids generational loss — this is a single MP3 encode from pristine PCM." },
+      { title: "2. Set MP3 Encoding", desc: "Use VBR 0 (~245 kbps) for maximum quality or CBR 320 kbps for consistent bitrate. VBR is recommended for better quality-to-size ratio." },
+      { title: "3. Create Universal MP3", desc: "Your AIFF is encoded to MP3 — the most compatible audio format worldwide. The MP3 plays on all MP3 devices without exception." },
     ],
     faqs: [
-      { question: "Is AIFF to MP3 conversion lossy?", answer: "Converting from AIFF to MP3 uses lossy compression. " },
-      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
-      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+      { question: "Is MP3 from AIFF better than MP3 from AAC?", answer: "Yes. AIFF is uncompressed source material. AAC is already lossy. Encoding MP3 from AIFF produces first-generation MP3; from AAC compounds artifacts." },
+      { question: "What MP3 bitrate is considered 'transparent' from AIFF?", answer: "LAME MP3 at VBR 0 (~245 kbps avg) or CBR 320 kbps is transparent for nearly all listeners and content types on typical playback equipment." },
+      { question: "Can I convert AIFF to MP3 in batch?", answer: "Yes. Select multiple AIFF files for batch MP3 encoding. Each file is independently decoded and encoded for maximum quality." },
     ],
   },
   {
