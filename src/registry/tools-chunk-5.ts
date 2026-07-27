@@ -445,7 +445,18 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Converter",
     description: 'Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste CSV", desc: "Enter comma-separated values with a header row." },
+      { title: "2. Preview Table", desc: "See a live preview of the Markdown table." },
+      { title: "3. Copy Markdown", desc: "Copy the generated Markdown table syntax." },
+    ],
+    faqs: [
+      { question: "How are CSV headers displayed?", answer: "The first row becomes the Markdown table header, separated by a divider row of dashes." },
+      { question: "Can I set column alignment?", answer: "Yes. Choose left, right, or center alignment for each column in the alignment options." },
+      { question: "Is the output GitHub-flavored Markdown?", answer: "Yes. The output uses GFM table syntax compatible with GitHub, GitLab, and most Markdown renderers." },
+    ],
+  },
   {
     id: "dt-14",
     name: "CSV to NDJSON",
@@ -601,7 +612,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert plain CSS to SCSS syntax with nesting and parent selector references. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to SCSS Converter — Convert plain CSS to SCSS syntax with nesting and parent selector references. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Enter CSS", desc: "Paste standard CSS code into the editor." },
+      { title: "2. Convert to SCSS", desc: "The tool adds nesting, variables, and SCSS-compatible syntax." },
+      { title: "3. Copy SCSS", desc: "Copy the generated SCSS code." },
+    ],
+    faqs: [
+      { question: "Are CSS variables converted?", answer: "Yes. CSS custom properties become SCSS variables ($variable) during conversion." },
+      { question: "How are vendor prefixes handled?", answer: "Vendor prefixes are preserved as-is. SCSS mixins for prefixes are not auto-generated." },
+      { question: "Can I choose brace style?", answer: "Yes. Choose expanded or compact brace placement in the SCSS output." },
+    ],
+  },
   {
     id: "css-5",
     name: "Less to CSS Converter",
@@ -610,7 +631,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Less to CSS Converter — Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Enter Less", desc: "Paste Less code with variables, mixins, and nesting." },
+      { title: "2. Compile to CSS", desc: "The tool compiles Less into standard CSS." },
+      { title: "3. Copy CSS", desc: "Copy the resulting CSS for use in any project." },
+    ],
+    faqs: [
+      { question: "Are Less mixins compiled?", answer: "Yes. Less mixins with parameters are resolved and the resulting CSS is output." },
+      { question: "How are Less variables handled?", answer: "Less variables are evaluated and their computed values are output in the CSS." },
+      { question: "Are Less guards supported?", answer: "Yes. Less guarded mixins are evaluated and included based on the guard conditions." },
+    ],
+  },
   {
     id: "css-6",
     name: "CSS Validator",
@@ -665,6 +696,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Text Converter — Convert between case styles, CSS preprocessors, HTML/JSX, number bases, serialization formats, and time zones. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Enter Text", desc: "Paste or type the text you want to work with." },
+      { title: "2. Choose Operation", desc: "Select case conversion, trimming, line sorting, or encoding." },
+      { title: "3. Get Result", desc: "Copy the transformed text or download as a file." },
+    ],
+    faqs: [
+      { question: "What text operations are available?", answer: "Case conversion (upper, lower, title, sentence), trimming, line sorting, encoding detection, and whitespace normalization." },
+      { question: "Can I process multiple lines?", answer: "Yes. All operations work on multi-line text. Line-based operations sort or format each line." },
+      { question: "Is the data processed locally?", answer: "Yes. All text processing happens entirely in your browser. Nothing is sent to a server." },
+    ],
   },
   {
     id: "json-formatter-tool-hub",
@@ -716,6 +757,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Import to CSV Converter — Convert TSV, Excel XLSX, vCard VCF, iCalendar ICS, and Parquet files to CSV. ',
     dependencies: "None",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload File", desc: "Upload a data file (JSON, XML, or XLSX)." },
+      { title: "2. Map Fields", desc: "Confirm field mapping from source to CSV columns." },
+      { title: "3. Export CSV", desc: "Download the converted CSV file." },
+    ],
+    faqs: [
+      { question: "What file formats can I import?", answer: "JSON, XML, and XLSX files are supported for import and conversion to CSV." },
+      { question: "How are nested structures flattened?", answer: "Nested objects are flattened with dot-notation keys as CSV column headers." },
+      { question: "Can I reorder columns?", answer: "Yes. Drag and drop columns to reorder them before exporting the CSV." },
+    ],
   },
   {
     id: "color-tools-hub",
@@ -837,6 +888,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert YAML data into a human-readable Toon format using → arrows. Perfect for quick visualization of hierarchical YAML structures.',
     seoDescription: 'Free online YAML → Toon Converter — Convert YAML data into a human-readable Toon format using arrows for quick visualization of hierarchical structures. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste YAML", desc: "Enter YAML content to convert to Toon format." },
+      { title: "2. Convert", desc: "The tool parses YAML and generates equivalent Toon syntax." },
+      { title: "3. Copy Toon", desc: "Copy the Toon output." },
+    ],
+    faqs: [
+      { question: "Are YAML anchors preserved?", answer: "YAML anchors and aliases are resolved before conversion to Toon." },
+      { question: "How are YAML tags handled?", answer: "Custom YAML tags are stripped. Standard types (str, int, float, bool) are inferred automatically." },
+      { question: "Can I convert large YAML files?", answer: "Yes. The browser-based converter handles moderately sized files. Very large files may affect performance." },
+    ],
   },
   {
     id: "ttj-1",
@@ -846,6 +907,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Toon format (→ arrows) back into JSON. Reverse of the JSON → Toon converter for round-trip data transformation.',
     seoDescription: 'Free online Toon → JSON Converter — Convert Toon format back into JSON for round-trip data transformation. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Toon", desc: "Enter Toon-format data to convert to JSON." },
+      { title: "2. Convert", desc: "The tool parses Toon syntax into standard JSON." },
+      { title: "3. Copy JSON", desc: "Copy the resulting JSON output." },
+    ],
+    faqs: [
+      { question: "Is the conversion lossless?", answer: "Yes. All Toon data types have equivalent JSON representations." },
+      { question: "What about Toon comments?", answer: "Toon comments are stripped during conversion to JSON." },
+      { question: "Can I format the JSON output?", answer: "Yes. The JSON output is pretty-printed by default with configurable indentation." },
+    ],
   },
   {
     id: "tty-1",
@@ -855,6 +926,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Toon format (→ arrows) back into YAML. Complete the round-trip from any source format.',
     seoDescription: 'Free online Toon → YAML Converter — Convert Toon format back into YAML for complete round-trip data transformation. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Toon", desc: "Enter Toon-format data to convert to YAML." },
+      { title: "2. Convert", desc: "The tool transforms Toon syntax into YAML format." },
+      { title: "3. Copy YAML", desc: "Copy the resulting YAML output." },
+    ],
+    faqs: [
+      { question: "Are Toon multiline strings supported?", answer: "Yes. Multiline strings in Toon are converted to YAML block scalars." },
+      { question: "How are nested structures handled?", answer: "Nested Toon objects become properly indented YAML mappings." },
+      { question: "Is the output valid YAML 1.1?", answer: "Yes. The output follows YAML 1.2 specification for broad compatibility." },
+    ],
   },
   {
     id: "1003",
@@ -1836,6 +1917,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to YAML format with proper key-value formatting and nested structure support. Everything runs locally in your browser.',
     seoDescription: 'Free online JSON to YAML Converter — Convert JSON objects to YAML format with proper key-value formatting. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Enter valid JSON to convert to YAML format." },
+      { title: "2. Convert", desc: "The tool handles nested objects, arrays, and primitive values." },
+      { title: "3. Copy YAML", desc: "Copy the YAML output or download it as a .yml file." },
+    ],
+    faqs: [
+      { question: "How are null values handled?", answer: "Null values in JSON become 'null' or '~' in YAML, or can be omitted entirely." },
+      { question: "Does this preserve key order?", answer: "Yes. Key ordering from the JSON input is preserved in the YAML output." },
+      { question: "What about multiline strings?", answer: "Multiline strings use YAML's block scalar notation (| or >) for readability." },
+    ],
   },
   {
     id: "1088",
@@ -1845,6 +1936,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to INI config file format with section headers and key-value pairs. Perfect for configuration file generation.',
     seoDescription: 'Free online JSON to INI Converter — Convert JSON to INI config format with section headers and key-value pairs. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Enter a flat or nested JSON object." },
+      { title: "2. Convert to INI", desc: "The tool maps JSON keys to INI section headers and properties." },
+      { title: "3. Copy INI Output", desc: "Copy the generated INI configuration file content." },
+    ],
+    faqs: [
+      { question: "How are nested JSON keys handled?", answer: "Nested objects become INI sections like [parent.child]. Flat keys become properties within sections." },
+      { question: "What about arrays?", answer: "JSON arrays are serialized as comma-separated values in single INI properties." },
+      { question: "Is the output valid INI?", answer: "Yes. The output follows standard INI formatting with section headers and key=value pairs." },
+    ],
   },
   {
     id: "1089",
@@ -1854,6 +1955,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to TOML configuration format with proper typing and section support. Everything runs locally in your browser.',
     seoDescription: 'Free online JSON to TOML Converter — Convert JSON to TOML configuration format with proper typing. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter JSON", desc: "Paste JSON data that you want to convert to TOML format." },
+      { title: "2. Convert", desc: "The tool transforms JSON objects and arrays into TOML tables and inline arrays." },
+      { title: "3. Copy TOML", desc: "Copy the TOML output for use in configuration files." },
+    ],
+    faqs: [
+      { question: "How are nested objects converted?", answer: "Nested objects become TOML tables using [table.subtable] notation." },
+      { question: "What about arrays?", answer: "Arrays are converted to TOML inline arrays. Arrays of tables use [[array]] notation." },
+      { question: "Are TOML date types supported?", answer: "Yes. ISO 8601 date strings in JSON are detected and output as TOML datetime values." },
+    ],
   },
   {
     id: "1090",
@@ -1863,6 +1974,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSS to Less syntax by transforming CSS variables to Less variables (@). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to Less Converter — Convert CSS variables to Less syntax with proper transformation. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste CSS", desc: "Enter your CSS code in the input editor." },
+      { title: "2. Convert to Less", desc: "The tool transforms CSS into Less syntax with variables, nesting, and mixins." },
+      { title: "3. Copy Less", desc: "Copy the generated Less code or download as .less file." },
+    ],
+    faqs: [
+      { question: "Are CSS custom properties converted?", answer: "Yes. CSS custom properties (--variable) are converted to Less variables (@variable)." },
+      { question: "How are nested rules handled?", answer: "CSS descendant selectors are converted to Less nested rules for cleaner syntax." },
+      { question: "Are media queries preserved?", answer: "Yes. CSS media queries are converted to Less nested media query syntax." },
+    ],
   },
   {
     id: "1091",
@@ -1872,6 +1993,16 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSS braces and semicolons to Stylus indentation-based syntax. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to Stylus Converter — Convert CSS to Stylus indentation syntax. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste CSS", desc: "Enter your CSS code." },
+      { title: "2. Convert to Stylus", desc: "The tool transforms CSS into Stylus syntax with optional brackets and colons." },
+      { title: "3. Copy Stylus", desc: "Copy the generated Stylus code." },
+    ],
+    faqs: [
+      { question: "Does Stylus use braces and colons?", answer: "Stylus supports optional braces and colons. You can choose to include or omit them." },
+      { question: "How are CSS comments handled?", answer: "CSS multi-line comments are preserved. Single-line CSS comments are converted to Stylus // style." },
+      { question: "Are CSS imports converted?", answer: "Yes. CSS @import statements are preserved in the Stylus output." },
+    ],
   },
   {
     id: "1092",

@@ -514,6 +514,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload CBZ File", desc: "Select a .cbz comic book archive file." },
+      { title: "2. Arrange Pages", desc: "Review and reorder pages if needed before conversion." },
+      { title: "3. Download PDF", desc: "Convert the CBZ to a single PDF document." },
+    ],
+    faqs: [
+      { question: "What image formats inside CBZ are supported?", answer: "JPEG, PNG, GIF, and WebP images inside CBZ archives are all supported." },
+      { question: "Can I reorder pages?", answer: "Yes. Drag and drop to reorder pages before converting to PDF." },
+      { question: "Are page numbers added?", answer: "Optional. You can add page numbers to the bottom of each PDF page." },
+    ],
   },
   {
     id: "453",
@@ -523,7 +533,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
     seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
-      },
+    instructions: [
+      { title: "1. Paste YAML or JSON", desc: "Enter YAML to convert to JSON, or JSON to convert to YAML." },
+      { title: "2. Direction Auto-Detected", desc: "The tool detects the input format and shows the output in the opposite format." },
+      { title: "3. Copy Result", desc: "Copy the converted output or download it as a file." },
+    ],
+    faqs: [
+      { question: "Is the conversion lossless?", answer: "For simple data types (strings, numbers, booleans, null, arrays, objects), conversion is lossless." },
+      { question: "How are YAML anchors handled?", answer: "YAML anchors and aliases are resolved and expanded in the JSON output." },
+      { question: "What about comments?", answer: "YAML comments are discarded during conversion as JSON does not support comments." },
+    ],
+  },
   {
     id: "454",
     name: "XLSX ↔ CSV Converter",
@@ -532,7 +552,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.',
     seoDescription: 'Free online XLSX ↔ CSV Converter — Bidirectional conversion between Excel and CSV. Sheet selector, delimiter options, data preview. ',
     dependencies: "xlsx",
-      },
+    instructions: [
+      { title: "1. Upload Excel File", desc: "Select an .xlsx or .xls file from your device." },
+      { title: "2. Choose Sheet", desc: "Pick the sheet to convert if the workbook has multiple sheets." },
+      { title: "3. Download CSV", desc: "The converted CSV file is ready for download immediately." },
+    ],
+    faqs: [
+      { question: "Are formulas preserved?", answer: "Formulas are evaluated and the resulting values are exported to CSV, not the formulas themselves." },
+      { question: "What if my Excel file has formatting?", answer: "CSV does not support formatting (colors, fonts, borders). Only the cell values are exported." },
+      { question: "Can I convert specific cells instead of the whole sheet?", answer: "The converter exports all data in the selected sheet. Use a range selection in Excel first if needed." },
+    ],
+  },
   {
     id: "455",
     name: "VCF ↔ CSV Converter",
@@ -1076,7 +1106,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Paste JSON", desc: "Enter a JSON object to generate code from." },
+      { title: "2. Select Language", desc: "Choose your target language: TypeScript, Python, Go, Rust, Java, or C#." },
+      { title: "3. Copy Generated Code", desc: "Copy the type definitions or struct code generated from the JSON structure." },
+    ],
+    faqs: [
+      { question: "What languages are supported?", answer: "TypeScript interfaces, Python dataclasses, Go structs, Rust structs, Java classes, and C# records." },
+      { question: "How are nested objects handled?", answer: "Nested objects generate separate type definitions or nested classes depending on the target language." },
+      { question: "Can I customize naming conventions?", answer: "Yes. Choose camelCase, PascalCase, or snake_case for the generated type names." },
+    ],
+  },
   {
     id: "511",
     name: "JWT Debugger",
@@ -1122,7 +1162,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
     seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Paste TOML or JSON", desc: "Enter TOML to convert to JSON, or JSON to convert to TOML." },
+      { title: "2. Auto-Convert", desc: "The tool detects the input format and converts to the other." },
+      { title: "3. Copy Output", desc: "Copy the converted result for your project." },
+    ],
+    faqs: [
+      { question: "Are TOML inline tables supported?", answer: "Yes. Inline tables in TOML are converted to nested JSON objects and vice versa." },
+      { question: "How are TOML dates handled?", answer: "TOML datetimes are converted to ISO 8601 strings in JSON output." },
+      { question: "Is the conversion bidirectional?", answer: "Yes. The tool converts both TOML-to-JSON and JSON-to-TOML in a single interface." },
+    ],
+  },
   {
     id: "517",
     name: "Web Inspector & HTTP Tools",

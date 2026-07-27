@@ -27,7 +27,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert INI configs to JSON. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Paste INI Content", desc: "Enter INI configuration file content." },
+      { title: "2. Convert to JSON", desc: "The tool parses INI sections and key-value pairs into a JSON object." },
+      { title: "3. Copy JSON", desc: "Copy the resulting JSON for use in applications." },
+    ],
+    faqs: [
+      { question: "How are duplicate keys handled?", answer: "Duplicate keys in INI are converted to JSON arrays. The last value is used if duplicates are not desired." },
+      { question: "Are INI comments preserved?", answer: "INI comments (; or #) are discarded as JSON does not support comments." },
+      { question: "What if there are no sections?", answer: "Keys without a section header are placed in a 'global' object in the JSON output." },
+    ],
+  },
   {
     id: "549b",
     name: "MessagePack Inspector",
@@ -144,7 +154,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert SCSS variables and nesting to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Enter SCSS", desc: "Paste SCSS code with nested rules and variables." },
+      { title: "2. Compile", desc: "The tool compiles SCSS into plain CSS." },
+      { title: "3. Copy CSS", desc: "Copy the compiled CSS output." },
+    ],
+    faqs: [
+      { question: "Are SCSS @extend directives compiled?", answer: "Yes. @extend directives are resolved into the final CSS output." },
+      { question: "How are SCSS @if/@else blocks handled?", answer: "Conditional blocks are evaluated based on the variable values provided." },
+      { question: "Can I choose output style?", answer: "Yes. Choose expanded (readable) or compressed (minified) CSS output." },
+    ],
+  },
   {
     id: "553b",
     name: "Stylus to CSS Converter",
@@ -153,7 +173,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Stylus syntax to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Enter Stylus", desc: "Paste Stylus code with its optional syntax." },
+      { title: "2. Compile to CSS", desc: "The tool compiles Stylus into standard browser-compatible CSS." },
+      { title: "3. Copy CSS", desc: "Copy the resulting CSS." },
+    ],
+    faqs: [
+      { question: "Does this handle Stylus transparent mixins?", answer: "Yes. Stylus transparent mixins are compiled to their CSS equivalents." },
+      { question: "How are Stylus variable interpolation handled?", answer: "Variable interpolation in selectors and properties is resolved during compilation." },
+      { question: "Are Stylus block mixins supported?", answer: "Yes. Block mixins using +prefix syntax are compiled to CSS." },
+    ],
+  },
   {
     id: "553c",
     name: "Tailwind to CSS Converter",
@@ -162,7 +192,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Tailwind utility classes to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Paste Tailwind HTML", desc: "Enter HTML with Tailwind CSS utility classes." },
+      { title: "2. Convert to CSS", desc: "The tool extracts utility classes and generates equivalent custom CSS." },
+      { title: "3. Copy CSS", desc: "Copy the converted CSS rules." },
+    ],
+    faqs: [
+      { question: "What Tailwind classes are supported?", answer: "All standard Tailwind utility classes for layout, spacing, typography, colors, and effects." },
+      { question: "Are responsive prefixes handled?", answer: "Yes. sm:, md:, lg:, xl:, and 2xl: prefixes are converted to their respective media queries." },
+      { question: "Can I customize the CSS output?", answer: "Yes. Choose whether to generate class-based or direct property CSS output." },
+    ],
+  },
   {
     id: "553d",
     name: "Proto Schema Converter",

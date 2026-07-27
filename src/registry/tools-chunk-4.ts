@@ -279,7 +279,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Enter Plain Text", desc: "Paste or type the plain text you want to convert." },
+      { title: "2. Customize Output", desc: "Choose paragraph handling, link detection, and list formatting." },
+      { title: "3. Copy HTML", desc: "Copy the generated HTML code." },
+    ],
+    faqs: [
+      { question: "How are paragraphs detected?", answer: "Double line breaks separate paragraphs. Single line breaks can be preserved as <br> tags." },
+      { question: "Are URLs auto-linked?", answer: "Yes. Detected URLs and email addresses are automatically converted to clickable HTML links." },
+      { question: "Can I add custom CSS?", answer: "The converter generates clean HTML. Add your own CSS classes or inline styles as needed." },
+    ],
+  },
   {
     id: "810",
     name: "HTML to Text Converter",
@@ -288,7 +298,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML to Text Converter — Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. ',
     dependencies: "None",
-        },
+    instructions: [
+      { title: "1. Paste HTML", desc: "Enter HTML content with tags, attributes, and text." },
+      { title: "2. Configure Options", desc: "Choose whether to preserve links, line breaks, and heading formatting." },
+      { title: "3. Get Plain Text", desc: "Copy the extracted plain text without any HTML markup." },
+    ],
+    faqs: [
+      { question: "What HTML elements are supported?", answer: "All standard HTML elements are supported including headings, paragraphs, lists, tables, links, and images." },
+      { question: "How are links handled?", answer: "Links can be shown as inline text, collected as footnotes, or stripped entirely based on your preference." },
+      { question: "Does this handle inline styles?", answer: "Inline CSS styles are stripped. Only the visible text content and structural elements are preserved." },
+    ],
+  },
   {
     id: "811",
     name: "Markdown Previewer",
@@ -434,7 +454,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Roman Numeral Converter \u2014 Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. ',
     dependencies: "None",
-      },
+    instructions: [
+      { title: "1. Enter Roman or Number", desc: "Type a Roman numeral (e.g., XIV) or a number (e.g., 14)." },
+      { title: "2. Auto-Convert", desc: "The tool detects the input format and converts instantly." },
+      { title: "3. Copy Result", desc: "Copy the converted value to your clipboard." },
+    ],
+    faqs: [
+      { question: "What is the maximum number supported?", answer: "Standard Roman numerals support up to 3,999 (MMMCMXCIX). The tool may support higher values with vinculum notation." },
+      { question: "What is the subtractive notation?", answer: "Roman numerals use subtractive notation: IV (4) instead of IIII, IX (9) instead of VIIII." },
+      { question: "Can I convert invalid Roman numerals?", answer: "The tool validates Roman numeral syntax and flags invalid combinations like VX or IIV." },
+    ],
+  },
   {
     id: "829",
     name: "Number to Words Converter",
@@ -1786,7 +1816,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. ',
     dependencies: "None",
-      },
+    instructions: [
+      { title: "1. Upload Parquet File", desc: "Select a .parquet file from your device." },
+      { title: "2. Preview Columns", desc: "Review the schema and preview the first rows before converting." },
+      { title: "3. Download CSV", desc: "Download the full data as a CSV file." },
+    ],
+    faqs: [
+      { question: "What Parquet features are supported?", answer: "The converter handles all standard Parquet data types including nested schemas and repeated fields." },
+      { question: "Are there file size limits?", answer: "Processing is done locally in the browser. Very large Parquet files may take time to load." },
+      { question: "Is compression preserved?", answer: "Parquet compression (Snappy, GZIP, LZ4, ZSTD) is decompressed during conversion. The CSV output is uncompressed." },
+    ],
+  },
   {
     id: "939",
     name: "SaaS Payback Period",
@@ -1863,7 +1903,18 @@ export const entries_chunk_4: ToolMetadata[] = [
     category: "Converter",
     description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+      { title: "1. Enter Temperature", desc: "Input the temperature value to convert." },
+      { title: "2. Select Units", desc: "Choose from Celsius, Fahrenheit, or Kelvin as input and output units." },
+      { title: "3. View Result", desc: "See the converted temperature instantly with the formula shown." },
+    ],
+    faqs: [
+      { question: "What conversion formulas are used?", answer: "C to F: F = C x 9/5 + 32. F to C: C = (F - 32) x 5/9. C to K: K = C + 273.15." },
+      { question: "Can I convert between all three units?", answer: "Yes. Enter any value in Celsius, Fahrenheit, or Kelvin and see conversions to both other units." },
+      { question: "Is negative temperature supported?", answer: "Yes. Negative values are supported for Celsius and Fahrenheit. Kelvin values cannot go below absolute zero." },
+    ],
+  },
   {
     id: "944",
     name: "PDF to DOCX",
@@ -2077,6 +2128,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert JSON objects into a human-readable Toon format using → arrows instead of colons. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON → Toon Converter — Convert JSON objects into a human-readable Toon format using → arrows instead of colons. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter JSON", desc: "Paste JSON data to convert to Toon format." },
+      { title: "2. Convert", desc: "The tool transforms JSON into the human-friendly Toon syntax." },
+      { title: "3. Copy Toon", desc: "Copy the Toon output for use in your project." },
+    ],
+    faqs: [
+      { question: "What is Toon format?", answer: "Toon is a human-friendly data format similar to YAML but with a simpler syntax." },
+      { question: "Are all JSON types supported?", answer: "Yes. Objects, arrays, strings, numbers, booleans, and null values are all supported." },
+      { question: "Can I convert back from Toon to JSON?", answer: "Yes. Use the Toon to JSON converter tool for the reverse operation." },
+    ],
   },
   {
     id: "971",
@@ -2101,7 +2162,18 @@ export const entries_chunk_4: ToolMetadata[] = [
     category: "Converter",
     description: 'Bidirectional converter between CSV data and HTML table markup with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+      { title: "1. Paste CSV Data", desc: "Enter comma-separated values or upload a CSV file." },
+      { title: "2. Preview Table", desc: "See a live preview of the HTML table with proper column headers." },
+      { title: "3. Copy HTML", desc: "Copy the generated HTML <table> code for use in web pages." },
+    ],
+    faqs: [
+      { question: "How are CSV headers mapped?", answer: "The first row of the CSV becomes the <thead> row. Subsequent rows become <tr> elements." },
+      { question: "Can I add CSS classes?", answer: "Yes. You can add custom CSS classes to the table, thead, and tbody elements in the output." },
+      { question: "Is the output responsive?", answer: "The generated HTML is a plain table. Add your own CSS for responsive behavior." },
+    ],
+  },
   {
     id: "974",
     name: "YAML Validator",

@@ -1963,6 +1963,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Data Converter — Convert between JSON, CSV, XML, YAML, and Excel data formats. Pick any input and output format. ',
     dependencies: "PapaParse / SheetJS / js-yaml",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter Data", desc: "Paste your data in any supported format (JSON, XML, CSV, YAML, TOML)." },
+      { title: "2. Choose Target", desc: "Select the output format you need." },
+      { title: "3. Convert & Copy", desc: "Convert instantly and copy the result." },
+    ],
+    faqs: [
+      { question: "What formats are supported?", answer: "JSON, XML, CSV, YAML, TOML, INI, and Toon. Convert between any pair of supported formats." },
+      { question: "Can I convert large files?", answer: "The converter runs in-browser. Performance depends on file size and browser memory limits." },
+      { question: "Is the data processed locally?", answer: "Yes. All conversions happen entirely in your browser. No data is uploaded to any server." },
+    ],
   },
   {
     id: "document-converter-1",
@@ -1973,6 +1983,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. ',
     dependencies: "pdf-lib / pdf2docx / SheetJS / PptxGenJS",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Document", desc: "Select a document file (DOCX, ODT, RTF, TXT, HTML)." },
+      { title: "2. Choose Output Format", desc: "Pick the target format: PDF, DOCX, ODT, RTF, TXT, or HTML." },
+      { title: "3. Convert & Download", desc: "Download the converted document with formatting preserved." },
+    ],
+    faqs: [
+      { question: "What document formats are supported?", answer: "Input: DOCX, ODT, RTF, TXT, HTML. Output: PDF, DOCX, ODT, RTF, TXT, HTML." },
+      { question: "Is formatting preserved?", answer: "Basic formatting (bold, italic, fonts, colors) is preserved. Complex layouts may have minor differences." },
+      { question: "Are images preserved?", answer: "Embedded images are preserved in the output document where the format supports images." },
+    ],
   },
   {
     id: "311",
@@ -2626,6 +2646,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online MOBI Converter — Convert MOBI Kindle e-books to PDF or EPUB. Create MOBI files from PDF. ',
     dependencies: "pdf-lib, jszip, pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload E-Book", desc: "Select an EPUB, PDF, or DOCX file to convert to MOBI." },
+      { title: "2. Set Metadata", desc: "Edit title, author, and cover image if needed." },
+      { title: "3. Download MOBI", desc: "Convert and download the MOBI file for Kindle devices." },
+    ],
+    faqs: [
+      { question: "Can I convert EPUB to MOBI?", answer: "Yes. EPUB is the most common source format for MOBI conversion." },
+      { question: "Are Kindle-specific features supported?", answer: "Yes. The output supports Kindle features like X-Ray, page numbers, and book covers." },
+      { question: "Is the MOBI file compatible with all Kindles?", answer: "Yes. The output uses the MOBI 7 format compatible with all Kindle devices and apps." },
+    ],
   },
   {
     id: "362",
@@ -2636,6 +2666,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online ODT/RTF to PDF — Convert OpenDocument and Rich Text Format files to PDF. Preserves formatting. ',
     dependencies: "pdf-lib, jszip",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload File", desc: "Select an ODT or RTF document." },
+      { title: "2. Configure PDF Options", desc: "Set page size, margins, and orientation for the PDF output." },
+      { title: "3. Download PDF", desc: "Convert and download the PDF file." },
+    ],
+    faqs: [
+      { question: "Are embedded fonts preserved?", answer: "Yes. Embedded fonts in the ODT or RTF document are included in the PDF output." },
+      { question: "Can I set PDF security options?", answer: "Yes. Set a password to restrict opening, printing, or editing the PDF." },
+      { question: "Are bookmarks generated?", answer: "Yes. Headings in the source document are converted to PDF bookmarks for navigation." },
+    ],
   },
   {
     id: "363",
@@ -2826,6 +2866,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online GIF to WebP/WebM Converter — Convert animated GIFs to modern WebP or WebM formats. ~10x smaller files with transparency support. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload GIF", desc: "Select a .gif file to convert." },
+      { title: "2. Choose Output", desc: "Pick WebP for smaller file sizes or WebM for better quality animation." },
+      { title: "3. Download", desc: "Convert and download the optimized animation." },
+    ],
+    faqs: [
+      { question: "Which format is better: WebP or WebM?", answer: "WebP animations are smaller files. WebM animations support higher quality and more colors." },
+      { question: "Can I control the animation speed?", answer: "Yes. The GIF frame duration is preserved. Adjust speed multiplier for faster or slower playback." },
+      { question: "Is the conversion lossy?", answer: "Both WebP and WebM use lossy compression for animations. Higher quality settings produce larger files." },
+    ],
   },
   {
     id: "382",

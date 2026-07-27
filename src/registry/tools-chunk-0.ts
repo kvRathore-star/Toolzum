@@ -69,6 +69,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "json-to-xml",
     dependencies: "xml2js",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter JSON", desc: "Paste valid JSON or upload a .json file." },
+      { title: "2. Set XML Root", desc: "Define the root element name and how arrays are wrapped." },
+      { title: "3. Convert", desc: "Generate well-formed XML. Copy or download the output." },
+    ],
+    faqs: [
+      { question: "How are JSON arrays converted?", answer: "Each array element is wrapped in a parent element. You can customize the element naming convention." },
+      { question: "Are JSON attributes supported?", answer: "Yes. You can mark specific JSON keys as XML attributes instead of child elements." },
+      { question: "Can I format the XML output?", answer: "Yes. The output is indented by default. Toggle minification for compact output." },
+    ],
   },
   {
     id: "time-conv-1",
@@ -123,6 +133,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "archive-converter",
     dependencies: "jszip",
+    instructions: [
+      { title: "1. Upload Archive", desc: "Select a ZIP, RAR, 7z, TAR, or GZ file." },
+      { title: "2. Choose Output Format", desc: "Pick the target archive format for conversion." },
+      { title: "3. Download", desc: "Convert and download the re-packaged archive." },
+    ],
+    faqs: [
+      { question: "What archive formats are supported?", answer: "ZIP, RAR, 7z, TAR, GZ, BZ2, and XZ archives can be converted between formats." },
+      { question: "Is compression level adjustable?", answer: "Yes. Choose from fast (lower compression) to maximum (smallest file size) compression levels." },
+      { question: "Are passwords preserved?", answer: "Password-protected archives are decrypted during conversion. You need the original password." },
+    ],
   },
   {
     id: "pdf-heic-1",
@@ -632,7 +652,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert MKV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. ',
     dependencies: "FFmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Choose MKV File", desc: "Upload or drag an .mkv file into the converter." },
+      { title: "2. Select Codec", desc: "Choose H.264 for broad compatibility or H.265 for better compression." },
+      { title: "3. Start Conversion", desc: "Convert and download as MP4 with all audio tracks preserved." },
+    ],
+    faqs: [
+      { question: "Are all MKV codecs supported?", answer: "Common codecs like H.264, H.265, VP9, and AV1 are supported. Unsupported codecs are re-encoded." },
+      { question: "What about subtitles?", answer: "MKV subtitles can be burned into the video or converted to MP4-compatible formats." },
+      { question: "Is the conversion fast?", answer: "Conversion speed depends on file size and your device. Smaller files convert in seconds." },
+    ],
   },
   {
     id: "52",
@@ -785,7 +815,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert MOV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. ',
     dependencies: "FFmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MOV File", desc: "Select a .mov video file to convert." },
+      { title: "2. Set Quality", desc: "Choose output resolution and bitrate." },
+      { title: "3. Download MP4", desc: "Convert and download the MP4 file compatible with most devices." },
+    ],
+    faqs: [
+      { question: "Are ProRes files supported?", answer: "Yes. ProRes MOV files are converted to H.264/H.265 MP4 for better compatibility and smaller file sizes." },
+      { question: "Can I trim the video?", answer: "Yes. Set start and end times to convert only a portion of the MOV file." },
+      { question: "Does this preserve metadata?", answer: "Basic metadata like creation date and rotation flags are preserved where possible." },
+    ],
   },
   {
     id: "68",
@@ -872,7 +912,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert WEBM video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. ',
     dependencies: "FFmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WebM", desc: "Select a .webm video file from your device." },
+      { title: "2. Choose Quality", desc: "Pick output quality and resolution for the MP4." },
+      { title: "3. Download MP4", desc: "Convert and download the MP4 file." },
+    ],
+    faqs: [
+      { question: "What codecs does WebM use?", answer: "WebM uses VP8/VP9 video codec and Vorbis/Opus audio. These are re-encoded to H.264/AAC for MP4." },
+      { question: "Will I lose quality?", answer: "Re-encoding from VP9 to H.264 may result in slight quality loss. Use high quality settings to minimize this." },
+      { question: "Can I batch convert?", answer: "The converter handles one file at a time. For multiple files, convert them individually." },
+    ],
   },
   {
     id: "76",
@@ -1008,7 +1058,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts EPUB files to PDF format — e-readers, mobile devices, and accessible digital books to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
-    showInCategory: true
+    showInCategory: true,
+    instructions: [
+      { title: "1. Upload EPUB", desc: "Select an .epub e-book file from your device." },
+      { title: "2. Choose Layout", desc: "Pick page size, font size, and margin preferences." },
+      { title: "3. Download PDF", desc: "Convert the e-book to PDF and download." },
+    ],
+    faqs: [
+      { question: "Are EPUB images preserved?", answer: "Yes. All images from the EPUB are included in the PDF output." },
+      { question: "Can I set the PDF page size?", answer: "Yes. Choose from A4, Letter, or custom page dimensions." },
+      { question: "Are EPUB hyperlinks preserved?", answer: "Yes. Internal and external hyperlinks from the EPUB are converted to PDF hyperlinks." },
+    ],
   },
   {
     id: "96",
@@ -1152,7 +1212,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert AVI video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. ',
     dependencies: "FFmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AVI File", desc: "Select an .avi video file from your device." },
+      { title: "2. Choose Quality", desc: "Pick output quality: high, medium, or low. Higher quality produces larger files." },
+      { title: "3. Convert & Download", desc: "Click Convert and download your MP4 file." },
+    ],
+    faqs: [
+      { question: "What video codecs are supported?", answer: "The converter supports H.264 and H.265 codecs for MP4 output. H.264 offers broad compatibility." },
+      { question: "Can I adjust the resolution?", answer: "Yes. Choose from original, 1080p, 720p, 480p, or custom resolution settings." },
+      { question: "Is the conversion lossy?", answer: "MP4 encoding is lossy. Use high quality setting to minimize visual quality loss." },
+    ],
   },
   {
     id: "mp4-mkv-1",
@@ -1162,7 +1232,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "mp4-to-mkv",
     dependencies: "ffmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP4", desc: "Select an .mp4 file to convert to MKV." },
+      { title: "2. Choose Tracks", desc: "Select which audio and subtitle tracks to include." },
+      { title: "3. Convert", desc: "Download the MKV file with your selected tracks." },
+    ],
+    faqs: [
+      { question: "Why convert MP4 to MKV?", answer: "MKV supports more codecs, subtitles, and chapter markers than MP4. It is preferred for archiving." },
+      { question: "Are chapters preserved?", answer: "Yes. Chapter markers in the MP4 are converted to MKV chapter format." },
+      { question: "Can I add additional audio tracks?", answer: "Yes. You can add external audio tracks to the MKV output during conversion." },
+    ],
   },
   {
     id: "mp4-mov-1",
@@ -1172,7 +1252,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "mp4-to-mov",
     dependencies: "ffmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP4", desc: "Select an .mp4 video file." },
+      { title: "2. Convert", desc: "The tool re-encodes the video into a QuickTime-compatible MOV format." },
+      { title: "3. Download MOV", desc: "Download the converted MOV file." },
+    ],
+    faqs: [
+      { question: "What is the difference between MP4 and MOV?", answer: "Both use similar codecs. MOV is Apple's QuickTime format with broader ProRes support." },
+      { question: "Is the conversion lossless?", answer: "When using the same codec, the conversion remuxes the streams without re-encoding for lossless output." },
+      { question: "Are metadata tags preserved?", answer: "Yes. MP4 metadata tags are converted to MOV-compatible metadata." },
+    ],
   },
   {
     id: "mkv-mov-1",
@@ -1182,7 +1272,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "mkv-to-mov",
     dependencies: "ffmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MKV", desc: "Select an .mkv video file to convert." },
+      { title: "2. Adjust Settings", desc: "Choose video codec (H.264, H.265) and quality." },
+      { title: "3. Download MOV", desc: "Convert and download the MOV file." },
+    ],
+    faqs: [
+      { question: "Are subtitles preserved?", answer: "MKV subtitle tracks are converted to MOV-compatible formats or can be embedded as separate tracks." },
+      { question: "What audio codecs are supported?", answer: "AAC, MP3, and PCM audio codecs are supported for the MOV container." },
+      { question: "Can I select specific tracks?", answer: "Yes. Choose which video, audio, and subtitle tracks from the MKV to include in the MOV output." },
+    ],
   },
   {
     id: "mov-mkv-1",
@@ -1192,7 +1292,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "mov-to-mkv",
     dependencies: "ffmpeg",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MOV", desc: "Select a .mov file from your device." },
+      { title: "2. Configure", desc: "Choose video and audio codec settings for the MKV container." },
+      { title: "3. Convert", desc: "Download the converted MKV file." },
+    ],
+    faqs: [
+      { question: "What codecs are preserved?", answer: "Common codecs like H.264, ProRes, and DNxHD are preserved when remuxing to MKV." },
+      { question: "Can I add subtitles?", answer: "You can add external SRT or ASS subtitle files to the MKV output." },
+      { question: "Is the audio re-encoded?", answer: "By default audio is copied without re-encoding. Re-encode if you need a different audio format." },
+    ],
   },
   {
     id: "111",
@@ -1299,6 +1409,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts JSON files to CSV format — APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste a JSON array of objects or upload a .json file." },
+      { title: "2. Flatten Nested Fields", desc: "Optionally select which nested fields to flatten into columns." },
+      { title: "3. Export CSV", desc: "Download the CSV or copy it to clipboard. Headers are derived from JSON keys." },
+    ],
+    faqs: [
+      { question: "How are nested objects handled?", answer: "Nested objects are flattened using dot notation (e.g., 'address.city'). You can choose which nested paths to include." },
+      { question: "What happens to arrays in JSON?", answer: "Arrays are stringified as JSON strings in a single cell. For arrays of objects, each object becomes a separate row." },
+      { question: "Is the CSV RFC-compliant?", answer: "Yes. Fields containing commas, quotes, or newlines are properly escaped according to RFC 4180." },
+    ],
   },
   {
     id: "122",
@@ -1629,6 +1749,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts CSV files to JSON format — spreadsheets, database exports, and data imports to APIs, configuration files, and data exchange between web services. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
+    instructions: [
+      { title: "1. Paste or Upload CSV", desc: "Paste your CSV data or upload a CSV file. The tool automatically detects delimiters (comma, tab, semicolon)." },
+      { title: "2. Configure Options", desc: "Choose header row handling, quote character, and whether to trim whitespace." },
+      { title: "3. Convert & Copy", desc: "Click Convert to generate JSON. Copy the result or download as a .json file." },
+    ],
+    faqs: [
+      { question: "What delimiter is supported?", answer: "Comma is the default, but the tool auto-detects tabs, semicolons, and pipes. You can also set a custom delimiter." },
+      { question: "How are quoted fields handled?", answer: "Fields enclosed in double quotes are preserved as single values, even if they contain delimiters or newlines." },
+      { question: "Can I convert CSV with no headers?", answer: "Yes. Toggle the 'first row is header' option. Without headers, columns are named field_0, field_1, etc." },
+    ],
   },
   {
     id: "151b",
@@ -1638,7 +1768,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts CSV files to XML format — spreadsheets, database exports, and data imports to enterprise systems, SOAP APIs, document formats like DOCX and SVG. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. ',
     dependencies: "PapaParse / xml2js",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Enter CSV Data", desc: "Paste comma-separated values or upload a CSV file." },
+      { title: "2. Set Root Element", desc: "Enter a root element name for the XML output (e.g., 'items' or 'records')." },
+      { title: "3. Generate XML", desc: "The tool converts each row into an XML element. Copy or download the result." },
+    ],
+    faqs: [
+      { question: "What if my CSV has no header row?", answer: "You can specify custom element names for columns. Otherwise generic 'column1', 'column2' names are used." },
+      { question: "How are empty cells handled?", answer: "Empty cells are omitted from the XML output by default, or you can include them as empty elements." },
+      { question: "Can I set a custom namespace?", answer: "Yes. You can add an XML namespace prefix to the root element." },
+    ],
   },
   {
     id: "152",
@@ -1981,7 +2121,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     description: 'Renders GitHub-Flavored Markdown to HTML, converts text/HTML to Markdown, or strips Markdown to plain text — all in one tool.',
     seoDescription: 'Free online Markdown Tools — Render GitHub-Flavored Markdown to HTML, convert text or HTML to Markdown, or strip Markdown formatting to plain text. ',
-    dependencies: "marked.js, Turndown"
+    dependencies: "marked.js, Turndown",
+    instructions: [
+      { title: "1. Enter Markdown", desc: "Paste Markdown content or upload a .md file." },
+      { title: "2. Choose Output", desc: "Select HTML, PDF, or plain text as the target format." },
+      { title: "3. Export", desc: "Copy the output or download as a file." },
+    ],
+    faqs: [
+      { question: "What Markdown features are supported?", answer: "Headings, bold, italic, links, images, code blocks, tables, lists, blockquotes, and horizontal rules." },
+      { question: "Can I convert Markdown to PDF?", answer: "Yes. Select PDF as the output format. The PDF preserves Markdown formatting with a clean layout." },
+      { question: "Is the HTML output sanitized?", answer: "Yes. Generated HTML is sanitized to prevent XSS. Raw HTML in Markdown is stripped by default." },
+    ],
   },
   {
     id: "184",
@@ -2131,7 +2281,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts XML files to CSV format — enterprise systems, SOAP APIs, document formats like DOCX and SVG to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. ',
     dependencies: "xml2js / PapaParse",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload or Paste XML", desc: "Paste XML data or upload an .xml file." },
+      { title: "2. Select Elements", desc: "Choose which XML elements become rows and which nested elements become columns." },
+      { title: "3. Download CSV", desc: "Review the flattened table and export as CSV." },
+    ],
+    faqs: [
+      { question: "How are nested XML elements flattened?", answer: "Child elements become additional columns with dot-separated names (e.g., 'author.name')." },
+      { question: "What about XML attributes?", answer: "Attributes are prefixed with '@' by default (e.g., '@id'). You can change the prefix in settings." },
+      { question: "Can I handle repeating child elements?", answer: "Yes. Repeating child elements are expanded into separate rows with parent data duplicated." },
+    ],
   },
   {
     id: "192",
@@ -2301,7 +2461,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content.',
     seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. ',
     dependencies: "xml2js",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Enter XML", desc: "Paste XML content or upload an .xml file." },
+      { title: "2. Tune Conversion", desc: "Choose whether to preserve attributes, handle namespaces, and format arrays." },
+      { title: "3. Get JSON", desc: "View the JSON output with proper indentation. Copy or download." },
+    ],
+    faqs: [
+      { question: "How are XML attributes handled?", answer: "Attributes are prefixed with '@' by default. Toggle this behavior in the advanced options." },
+      { question: "What about namespaces?", answer: "XML namespaces can be preserved or stripped. Preserved namespaces become part of the JSON key." },
+      { question: "Are text nodes preserved?", answer: "Yes. Elements with both text and child elements have a '#text' key for the text content." },
+    ],
   },
   {
     id: "200",
