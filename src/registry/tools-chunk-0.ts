@@ -137,6 +137,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "time-conv-1",
     name: "Time Converter",
     description: 'Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.',
@@ -144,8 +145,37 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Utility",
     slug: "time-converter",
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter the Time Value",
+                "desc": "Type a numeric value into the input field. This is the amount of time you want to convert from one unit to another."
+          },
+          {
+                "title": "2. Select Source and Target Units",
+                "desc": "Choose the unit you are converting from (e.g., hours) and the unit you are converting to (e.g., minutes). Supported units include milliseconds, seconds, minutes, hours, days, weeks, months, and years."
+          },
+          {
+                "title": "3. View Converted Result",
+                "desc": "The converted value appears instantly as you type. Multiple target conversions are shown simultaneously so you can see the value expressed in all supported units at once."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle months and years since they have variable lengths?",
+                "answer": "Months are assumed to be 30.44 days and years 365.25 days on average. For exact calendar months, use a date calculator instead."
+          },
+          {
+                "question": "Can I convert from nanoseconds or microseconds?",
+                "answer": "No, the smallest supported unit is milliseconds. For sub-millisecond precision, convert to seconds (e.g., microseconds ÷ 1,000,000)."
+          },
+          {
+                "question": "Does the converter support scientific notation input?",
+                "answer": "Yes, you can enter values in scientific notation like 1.5e3 for 1,500. The output will display in both standard and scientific formats."
+          }
+    ]
+},
   {
+
     id: "du-1",
     name: "Random Port Generator",
     slug: "random-port-generator",
@@ -153,7 +183,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. Useful for network testing, Docker port mapping, and firewall configuration.',
     seoDescription: 'Free online Random Port Generator — Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Set Port Range",
+                "desc": "Choose the lower and upper bounds for port generation. The default is the dynamic/private port range 49152-65535, but you can set any range from 1 to 65535."
+          },
+          {
+                "title": "2. Filter Reserved Ports",
+                "desc": "Toggle the option to exclude IANA well-known ports (0-1023) and registered ports (1024-49151). When enabled, only dynamic ports are generated."
+          },
+          {
+                "title": "3. Generate Port Numbers",
+                "desc": "Click generate to produce one or more random port numbers. Each port is verified to be within range and free from the excluded categories."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What are the three ranges of TCP/UDP port numbers?",
+                "answer": "Well-known ports (0-1023), registered ports (1024-49151), and dynamic/private ports (49152-65535). Dynamic ports are recommended for custom applications."
+          },
+          {
+                "question": "Can the generator check if a port is actually available on my system?",
+                "answer": "No, port availability depends on your current system state. The tool generates valid port numbers but cannot check if a process is already using them."
+          },
+          {
+                "question": "Can I exclude specific ports that are commonly used by known services?",
+                "answer": "Yes, maintain an exclusion list (e.g., 80, 443, 3306, 5432). Ports on this list are skipped during generation."
+          }
+    ]
+},
   {
     id: "du-2",
     name: "Chmod Calculator",
@@ -290,14 +348,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "11",
     name: "Speed Test",
     slug: "speed-test",
     category: "Utility",
     description: 'Measures your internet connection’s download speed and latency by downloading a test file from a CDN. Upload speed is not currently measured.',
     seoDescription: 'Free online Speed Test — Measures your internet connection’s download speed and latency by downloading a test file from a CDN. ',
-    dependencies: "Fetch API"
-  },
+    dependencies: "Fetch API",
+    instructions: [
+          {
+                "title": "1. Start the Test",
+                "desc": "Click the start button to begin the speed test. The test runs in three phases: ping (latency), download speed, and upload speed."
+          },
+          {
+                "title": "2. Wait for Completion",
+                "desc": "The test downloads and uploads sample data to measure throughput. A progress indicator shows which phase is currently running."
+          },
+          {
+                "title": "3. View Results",
+                "desc": "Results display ping (ms), download speed (Mbps), upload speed (Mbps), and jitter. A letter grade from A+ to F rates your connection quality."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What size files are used for the download and upload tests?",
+                "answer": "The download test uses a 10MB file and the upload test uses a 5MB file. These sizes are sufficient for accurate measurement of typical broadband connections."
+          },
+          {
+                "question": "Does the speed test use my data plan?",
+                "answer": "Yes, the test consumes approximately 15MB of data per run (10MB download + 5MB upload). Results may affect metered connections."
+          },
+          {
+                "question": "Can the test run on a mobile browser or only desktop?",
+                "answer": "The test works on both desktop and mobile browsers. Mobile results may be less accurate due to variable cellular network conditions."
+          }
+    ]
+},
   {
     id: "14",
     name: "Compress Image to 50KB",
@@ -659,14 +746,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "35",
     name: "Wheel of Names",
     slug: "wheel-of-names",
     category: "Utility",
     description: 'Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Wheel of Names — Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. ',
-    dependencies: "Canvas API / GSAP"
-  },
+    dependencies: "Canvas API / GSAP",
+    instructions: [
+          {
+                "title": "1. Add Names to the Wheel",
+                "desc": "Type names one per line or paste a comma-separated list. Each name becomes a colored segment on the wheel. You can add up to 100 names."
+          },
+          {
+                "title": "2. Customize Wheel Appearance",
+                "desc": "Adjust segment colors, add or remove the center logo, and toggle sound effects. The wheel automatically sizes segments evenly."
+          },
+          {
+                "title": "3. Spin the Wheel",
+                "desc": "Click the spin button or press the spacebar. The wheel spins with realistic physics simulation and deceleration. The winning name is highlighted with a popup."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I remove a name from the wheel after it is selected?",
+                "answer": "Yes, toggle removal mode. When enabled, selected names are removed from the wheel after each spin, preventing repeat selections."
+          },
+          {
+                "question": "Does the wheel use true randomness for the outcome?",
+                "answer": "The spin animation is visual only — the outcome is determined by cryptographically secure random selection before the animation begins."
+          },
+          {
+                "question": "Can I save my name list for future use?",
+                "answer": "Yes, name lists are saved to local storage. You can also export the list as a text file and import it later."
+          }
+    ]
+},
   {
     id: "36",
     name: "Image Compressor",
@@ -804,6 +920,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "42",
     name: "QR Code Generator",
     slug: "qr-code-generator",
@@ -811,7 +928,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG.',
     dependencies: "qrcode.js",
     seoDescription: 'Free QR code generator online — create QR codes for URLs and text. Download high-resolution PNG. 100% free, no account needed.',
-  },
+    instructions: [
+          {
+                "title": "1. Enter Your Data",
+                "desc": "Type the URL, text, phone number, or email address you want to encode into the QR code. The input can be up to 2,953 bytes of alphanumeric data."
+          },
+          {
+                "title": "2. Customize Visuals",
+                "desc": "Choose the foreground color, background color, and error correction level (L, M, Q, H). Higher error correction allows up to 30% damage while remaining scannable."
+          },
+          {
+                "title": "3. Download the QR Code",
+                "desc": "Click download to save the QR code as a PNG or SVG image. PNG is best for print at 300 DPI, SVG for scaling without quality loss."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the maximum data capacity of a QR code?",
+                "answer": "The maximum capacity depends on the version and error correction level. Version 40 with L-level correction can hold 7,089 numeric or 4,296 alphanumeric characters."
+          },
+          {
+                "question": "Can I add a logo or image in the center of the QR code?",
+                "answer": "Yes, toggle the center logo option to upload a small image. With high error correction (H), the QR remains scannable even with a central graphic."
+          },
+          {
+                "question": "Do QR codes expire or need renewal?",
+                "answer": "No, the QR code is a static image that never expires. However, if the encoded URL points to a service that changes, update your marketing materials with a new code."
+          }
+    ]
+},
   {
     id: "44",
     name: "Excel to PDF",
@@ -1018,23 +1163,81 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "54",
     name: "Random Number Generator",
     slug: "random-number-generator",
     category: "Utility",
     description: 'Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Number Generator — Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. ',
-    dependencies: "Math.random()"
-  },
+    dependencies: "Math.random()",
+    instructions: [
+          {
+                "title": "1. Set Range Boundaries",
+                "desc": "Enter a minimum and maximum value in the range fields. The generator will produce a random integer between these two bounds using a cryptographically secure random function."
+          },
+          {
+                "title": "2. Choose Quantity",
+                "desc": "Specify how many random numbers you need in a single batch — from 1 up to 100. Each number is independently generated so results never repeat in a predictable pattern."
+          },
+          {
+                "title": "3. Copy or Download Results",
+                "desc": "Once generated, click the copy button to copy all numbers to your clipboard as a comma-separated list, or download them as a plain text file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate floating-point numbers instead of integers?",
+                "answer": "No, this generator produces whole integers only. For decimal values, round the result yourself or use a calculator tool after generation."
+          },
+          {
+                "question": "Is the random number generation truly random?",
+                "answer": "This generator uses window.crypto.getRandomValues, a cryptographically secure pseudo-random number generator. It is suitable for lotteries, giveaways, and security-sensitive draws."
+          },
+          {
+                "question": "What happens if I set the minimum higher than the maximum?",
+                "answer": "The tool automatically swaps the values so the lower number becomes the minimum and the higher becomes the maximum. No error is thrown."
+          }
+    ]
+},
   {
+
     id: "55",
     name: "URL Shortener",
     slug: "url-shortener",
     category: "Utility",
     description: 'Takes any long URL and generates a compact, shareable short link with optional custom alias support. Uses cloud-based processing.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link with optional custom alias support. ',
-    dependencies: "Node.js / Redis"
-  },
+    dependencies: "Node.js / Redis",
+    instructions: [
+          {
+                "title": "1. Enter the Long URL",
+                "desc": "Paste the URL you want to shorten. The tool validates that the URL is properly formatted and includes a protocol (http:// or https://)."
+          },
+          {
+                "title": "2. Customize Slug (Optional)",
+                "desc": "Optionally enter a custom alias for the shortened URL. If left blank, a random 6-character alphanumeric slug is generated."
+          },
+          {
+                "title": "3. Copy Short URL",
+                "desc": "Click shorten to generate the short URL. The result appears below with a copy button. The short URL redirects to your original URL when visited."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How long does the shortened URL remain active?",
+                "answer": "URLs created with this tool do not expire. They remain active indefinitely unless explicitly deleted through the management dashboard."
+          },
+          {
+                "question": "Can I set a password or expiration date on a short URL?",
+                "answer": "No, the basic shortener supports neither passwords nor expirations. For these features, consider a premium URL shortening service."
+          },
+          {
+                "question": "Does the tool track click statistics for short URLs?",
+                "answer": "Yes, basic analytics are available — total clicks, unique clicks, and top referrers. Access the stats by appending /stats to your short URL."
+          }
+    ]
+},
   {
     id: "58",
     name: "PDF to Excel",
@@ -1228,14 +1431,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "68",
     name: "Resume Builder",
     slug: "resume-builder",
     category: "Utility",
     description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Resume Builder — Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. ',
-    dependencies: "React / html2pdf.js"
-  },
+    dependencies: "React / html2pdf.js",
+    instructions: [
+          {
+                "title": "1. Fill in Personal Information",
+                "desc": "Enter your name, email, phone, location, and LinkedIn/GitHub URLs. This header section appears at the top of the resume."
+          },
+          {
+                "title": "2. Add Sections",
+                "desc": "Add work experience, education, skills, certifications, and projects sections. Each section can have multiple entries with dates and descriptions."
+          },
+          {
+                "title": "3. Choose Template and Export",
+                "desc": "Select a professional template style. Preview the rendered resume and download as PDF. The layout auto-adjusts to fit content on one page."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I rearrange sections by dragging them?",
+                "answer": "Yes, sections can be reordered by dragging the handle icon next to each section header. The order is preserved in the exported PDF."
+          },
+          {
+                "question": "Does the builder support multiple pages for long resumes?",
+                "answer": "Yes, the builder accommodates multi-page resumes. An academic CV mode removes the one-page limit and adds a publications section."
+          },
+          {
+                "question": "Can I save my resume and edit it later?",
+                "answer": "Yes, your resume data is saved to the browser's local storage. You can close and return later to continue editing."
+          }
+    ]
+},
   {
     id: "69",
     name: "AI Image Upscaler",
@@ -1315,14 +1547,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "72",
     name: "Password Generator",
     slug: "password-generator",
     category: "Utility",
     description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Password Generator — Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. ',
-    dependencies: "Crypto API"
-  },
+    dependencies: "Crypto API",
+    instructions: [
+          {
+                "title": "1. Set Password Length",
+                "desc": "Use the slider to choose a length between 8 and 128 characters. Longer passwords are exponentially more resistant to brute-force attacks."
+          },
+          {
+                "title": "2. Select Character Types",
+                "desc": "Toggle uppercase, lowercase, digits, and symbols on or off. For maximum security, enable all four types. The passphrase option generates memorable word-based phrases."
+          },
+          {
+                "title": "3. Generate and Copy",
+                "desc": "Click generate to produce a random password. Each character is chosen using a cryptographically secure PRNG. Copy the password (it is never stored or transmitted)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How strong is an 8-character password with all character types?",
+                "answer": "An 8-character password with 95 possible characters per position has 95^8 ≈ 6.6 quadrillion combinations. At 1 billion guesses per second, it would take about 76 days to brute-force."
+          },
+          {
+                "question": "Does the tool save or transmit generated passwords?",
+                "answer": "No, all generation happens locally in your browser. Passwords are never sent to any server, stored, or logged."
+          },
+          {
+                "question": "What is the passphrase mode and how does it work?",
+                "answer": "Passphrase mode generates a sequence of common words separated by hyphens or spaces, chosen from a dictionary of 7,776 words using diceware-like random selection."
+          }
+    ]
+},
   {
     id: "73",
     name: "Diff Checker",
@@ -1353,14 +1614,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "76",
     name: "IP Address Lookup",
     slug: "ip-address-lookup",
     category: "Utility",
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.',
     seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
-    dependencies: "MaxMind / IP-API"
-  },
+    dependencies: "MaxMind / IP-API",
+    instructions: [
+          {
+                "title": "1. Enter an IP Address",
+                "desc": "Type an IPv4 or IPv6 address into the input field. The tool validates the format and rejects invalid addresses with an error message."
+          },
+          {
+                "title": "2. Look Up Details",
+                "desc": "Click lookup to retrieve geographic and network information. Results include ISP, organization, ASN, city, region, country, and coordinates."
+          },
+          {
+                "title": "3. View on Map",
+                "desc": "The location is plotted on an interactive map if geolocation data is available. Zoom controls let you explore the surrounding area."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How accurate is the IP geolocation data?",
+                "answer": "Accuracy varies by IP. City-level data is about 60-80% accurate. ISP and country data is nearly 100% accurate. Mobile IPs are less accurate than fixed-line IPs."
+          },
+          {
+                "question": "Can I look up my own public IP address?",
+                "answer": "Yes, click the 'My IP' button to automatically detect and look up your public IP address. The request goes through the server, not client-side."
+          },
+          {
+                "question": "Is any IP data stored or logged by the tool?",
+                "answer": "No, IP lookups are processed on demand and not stored. The tool is privacy-respecting and does not retain any query history."
+          }
+    ]
+},
   {
     id: "79",
     name: "Photo Retoucher",
@@ -1616,14 +1906,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "regex.js"
   },
   {
+
     id: "101",
     name: "Dice Roller",
     slug: "dice-roller",
     category: "Utility",
     description: 'Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Dice Roller — Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. ',
-    dependencies: "Three.js"
-  },
+    dependencies: "Three.js",
+    instructions: [
+          {
+                "title": "1. Select Dice Configuration",
+                "desc": "Choose the number of dice (1 to 20) and the number of sides per die (4, 6, 8, 10, 12, 20, or 100). Standard polyhedral dice are supported."
+          },
+          {
+                "title": "2. Roll the Dice",
+                "desc": "Click the roll button to simulate the dice throw. Each die result is shown individually with a brief randomization animation."
+          },
+          {
+                "title": "3. View Results and Total",
+                "desc": "The outcome shows each die value and the total sum. A roll history is maintained below, allowing you to track all rolls in the current session."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Are the dice rolls truly random or simulated?",
+                "answer": "Rolls use a cryptographically secure PRNG (getRandomValues), which is more than sufficient for fair gameplay in tabletop RPGs and board games."
+          },
+          {
+                "question": "Can I roll with advantage or disadvantage like in D&D 5e?",
+                "answer": "Yes, enable advantage (roll 2d20, take higher) or disadvantage (roll 2d20, take lower) for any d20 roll with a single toggle."
+          },
+          {
+                "question": "Does the roller support exploding dice (rule of 6)?",
+                "answer": "Yes, toggle exploding dice mode. When a die rolls the maximum value, it is rerolled and added again, cascading indefinitely."
+          }
+    ]
+},
   {
     id: "102",
     name: "Profit Margin Calculator",
@@ -1684,14 +2003,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "107",
     name: "Coin Flipper",
     slug: "coin-flipper",
     category: "Utility",
     description: 'Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Coin Flipper — Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. ',
-    dependencies: "CSS3 Animations"
-  },
+    dependencies: "CSS3 Animations",
+    instructions: [
+          {
+                "title": "1. Flip the Coin",
+                "desc": "Click the coin to flip it. A 3D flip animation shows the coin tumbling before landing on heads or tails with equal probability."
+          },
+          {
+                "title": "2. Track Statistics",
+                "desc": "A counter tracks total flips, heads count, tails count, and the longest streak. Streaks are shown for both sides with timestamps."
+          },
+          {
+                "title": "3. Flip Multiple Times",
+                "desc": "Set a number (1 to 100) in the auto-flip field to flip the coin repeatedly. Results update in real-time with aggregate statistics."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is a coin flip truly 50/50 or is there a physical bias?",
+                "answer": "Digitally, the flip uses a cryptographically secure random source with exactly 50% probability for heads and 50% for tails."
+          },
+          {
+                "question": "Can I customize the coin with different images or labels?",
+                "answer": "No, the coin displays standard heads (H) and tails (T). Custom coin faces are not supported in this tool."
+          },
+          {
+                "question": "Does the tool record the history of all flips in a session?",
+                "answer": "Yes, a chronological list of every flip shows the result and timestamp. The list can be cleared manually or exported as text."
+          }
+    ]
+},
   {
     id: "108",
     name: "Image Colorizer",
@@ -2080,14 +2428,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "129",
     name: "Morse Code Translator",
     slug: "morse-code-translator",
     category: "Utility",
     description: 'Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Morse Code Translator — Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. ',
-    dependencies: "Vanilla JS"
-  },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Type or Paste Text",
+                "desc": "Enter alphanumeric text in the input box. The translator supports A-Z, 0-9, and basic punctuation. Lowercase letters are automatically uppercased before encoding."
+          },
+          {
+                "title": "2. Toggle Direction",
+                "desc": "Choose whether to translate text to Morse code (encode) or Morse code to text (decode). In decode mode, use dots (.) and dashes (-) separated by spaces."
+          },
+          {
+                "title": "3. Play Morse Audio",
+                "desc": "Click the play button to hear the Morse code as audible tones. The speed slider controls the transmission rate from 5 to 40 words per minute."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the timing rule for Morse code spacing?",
+                "answer": "The dot duration is the basic unit. Dash is 3 dots, space between parts of same letter is 1 dot, between letters is 3 dots, and between words is 7 dots."
+          },
+          {
+                "question": "Can I translate Morse code that has slashes between words?",
+                "answer": "Yes, the decoder treats a forward slash (/) as a word separator. Both slash-separated and space-separated Morse are accepted."
+          },
+          {
+                "question": "Does the tool support prosigns or special Morse abbreviations?",
+                "answer": "No, only standard ITU-R Morse code characters (A-Z, 0-9, basic punctuation) are supported. Prosigns like AR, SK, BT are not implemented."
+          }
+    ]
+},
   {
     id: "130",
     name: "Cursive Text Generator",
@@ -2700,14 +3077,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     showInCategory: false,
   },
   {
+
     id: "176",
     name: "Barcode Generator",
     slug: "barcode-generator",
     category: "Utility",
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Barcode Generator — Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. ',
-    dependencies: "JsBarcode"
-  },
+    dependencies: "JsBarcode",
+    instructions: [
+          {
+                "title": "1. Enter Barcode Data",
+                "desc": "Type the numeric or alphanumeric data you want to encode. Different barcode symbologies have different character set and length requirements."
+          },
+          {
+                "title": "2. Select Symbology",
+                "desc": "Choose from Code 128, Code 39, EAN-13, UPC-A, ISBN, ITF, and more. EAN-13 is standard for retail products, Code 128 for logistics."
+          },
+          {
+                "title": "3. Generate and Export",
+                "desc": "Click generate to render the barcode. Download as PNG at 300 DPI for print, or SVG for vector use. The human-readable text appears below the barcode."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between EAN-13 and UPC-A barcodes?",
+                "answer": "EAN-13 is a 13-digit international standard, while UPC-A is a 12-digit standard used primarily in the US and Canada. EAN-13 can encode UPC-A by adding a leading 0."
+          },
+          {
+                "question": "Does the generator calculate check digits automatically?",
+                "answer": "Yes, if you enter the data without the check digit, the tool calculates and appends it. If you include it, the tool verifies it and warns on mismatch."
+          },
+          {
+                "question": "Can I print barcodes on labels directly from the tool?",
+                "answer": "Yes, generate a sheet of multiple barcodes by entering multiple data rows. The tool arranges them in a printable grid with customizable label dimensions."
+          }
+    ]
+},
   {
     id: "181",
     name: "PGP Key Generator",

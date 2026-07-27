@@ -1014,6 +1014,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "455",
     name: "VCF ↔ CSV Converter",
     slug: "vcf-csv-converter",
@@ -1021,8 +1022,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.',
     seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. ',
     dependencies: "vcard-parser",
-      },
+    instructions: [
+          {
+                "title": "1. Upload or Paste VCF Data",
+                "desc": "Import contacts from a .vcf (vCard) file exported from your phone, email client, or CRM. The parser extracts name, phone, email, and address fields."
+          },
+          {
+                "title": "2. Map VCF Fields to Columns",
+                "desc": "Choose which VCF fields map to which CSV columns. Default mapping covers FN, TEL, EMAIL, ADR, ORG, and NOTE fields."
+          },
+          {
+                "title": "3. Download CSV or Reverse",
+                "desc": "Click convert to generate the CSV file. Reverse conversion (CSV to VCF) is also supported for importing contacts back into address books."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What VCF version does the converter support?",
+                "answer": "It supports vCard 2.1, 3.0, and 4.0 formats. Version detection is automatic based on the VERSION property in the file header."
+          },
+          {
+                "question": "Can I convert multiple VCF cards into a single CSV?",
+                "answer": "Yes, the tool processes all vCards in the input file and outputs one row per contact in the CSV. Multiple phone numbers per contact are concatenated."
+          },
+          {
+                "question": "Does the converter handle VCF photos or binary attachments?",
+                "answer": "No, binary photo data is stripped during conversion. Only text fields (name, phone, email, address, organization, notes) are extracted."
+          }
+    ]
+},
   {
+
     id: "456",
     name: "ICS ↔ CSV Converter",
     slug: "ics-csv-converter",
@@ -1030,7 +1060,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.',
     seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. ',
     dependencies: "ical",
-      },
+    instructions: [
+          {
+                "title": "1. Import ICS Calendar Data",
+                "desc": "Upload a .ics file from Google Calendar, Apple Calendar, or Outlook, or paste the ICS content directly into the input box."
+          },
+          {
+                "title": "2. Select Event Properties",
+                "desc": "Choose which event fields to include in the CSV output — SUMMARY, DTSTART, DTEND, LOCATION, DESCRIPTION, STATUS, and CATEGORIES."
+          },
+          {
+                "title": "3. Convert and Export",
+                "desc": "Click convert to generate rows for each calendar event. The CSV can be opened in Excel or Google Sheets for analysis and reporting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens to recurring events during conversion?",
+                "answer": "Recurring events are expanded into individual rows for each occurrence. The RRULE is parsed and occurrences within the next 365 days are generated."
+          },
+          {
+                "question": "Can I convert CSV back to ICS format?",
+                "answer": "Yes, reverse conversion is supported. Map CSV columns to ICS properties and download a valid .ics file for import into calendar applications."
+          },
+          {
+                "question": "Does the tool handle multi-value fields like multiple alerts?",
+                "answer": "Multi-value fields are concatenated with a separator in the CSV output. Alarms, attendees, and other multi-value properties are simplified."
+          }
+    ]
+},
   {
     id: "457",
     name: "WAV to MP3",
@@ -1830,6 +1888,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: false,
   },
   {
+
     id: "499",
     name: "Random String Generator",
     slug: "random-string-generator",
@@ -1837,7 +1896,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).',
     seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Character Pool",
+                "desc": "Toggle character types on or off — uppercase letters, lowercase letters, digits, and special symbols. At least one type must be selected before generation."
+          },
+          {
+                "title": "2. Set String Length",
+                "desc": "Drag the slider or type a value between 1 and 256 characters. Longer strings are exponentially more unique and suitable for API keys or tokens."
+          },
+          {
+                "title": "3. Generate and Copy",
+                "desc": "Press the generate button to produce a random string from your chosen pool. Click the copy icon next to the output to copy it to your clipboard instantly."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I exclude ambiguous characters like O, 0, I, and l?",
+                "answer": "Yes, toggle the ambiguous characters filter to exclude characters that look similar across different fonts. This is useful for human-readable codes."
+          },
+          {
+                "question": "Does this generator guarantee unique strings on every call?",
+                "answer": "No, uniqueness is probabilistic. Each character is chosen independently so collisions are possible, though astronomically unlikely at 256 characters with a full pool."
+          },
+          {
+                "question": "Can I generate multiple strings at once like a bulk operation?",
+                "answer": "No, this tool generates one string at a time. For bulk string generation, click generate repeatedly or use a dedicated bulk password generator."
+          }
+    ]
+},
   {
     id: "500",
     name: "Number Base Converter",
@@ -1848,6 +1935,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
         },
   {
+
     id: "501",
     name: "Line Sorter & Deduplicator",
     slug: "line-sorter",
@@ -1855,7 +1943,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
     seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Your Data",
+                "desc": "Copy and paste lines of text into the input area. Each line is treated as a separate entry. The tool accepts up to 50,000 rows."
+          },
+          {
+                "title": "2. Choose Sort Options",
+                "desc": "Select sort direction (A-Z or Z-A), case sensitivity (sensitive by default), and whether to trim whitespace before sorting."
+          },
+          {
+                "title": "3. Enable Deduplication",
+                "desc": "Toggle the deduplicate switch to remove exact duplicate lines. After deduplication, a count shows how many duplicates were removed."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I sort by numeric value instead of alphabetically?",
+                "answer": "Yes, toggle to numeric sort mode. Lines are parsed as numbers and sorted by value. Non-numeric lines are gathered at the top or bottom based on the sort direction."
+          },
+          {
+                "question": "How does the tool handle empty lines during sorting?",
+                "answer": "Empty lines are moved to the end of the sorted output regardless of sort direction. You can check an option to strip all empty lines from the result."
+          },
+          {
+                "question": "Can I sort lines by length instead of content?",
+                "answer": "Yes, choose the 'by length' sort mode. Lines are sorted from shortest to longest or vice versa, with ties broken alphabetically."
+          }
+    ]
+},
   {
     id: "502",
     name: "URL Parser",
@@ -2051,6 +2167,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "Vanilla JS",
   },
   {
+
     id: "ou-1",
     name: "WiFi QR Generator",
     slug: "wifi-qr-generator",
@@ -2058,8 +2175,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate QR codes for WiFi network credentials — scan to connect.',
     seoDescription: 'Free online WiFi QR Generator — Generate QR codes for WiFi network credentials to share with others. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Network Details",
+                "desc": "Type your WiFi network name (SSID), select the security protocol (WPA/WPA2/WPA3 or none), and enter the password. All fields are required for encrypted networks."
+          },
+          {
+                "title": "2. Choose Hidden Network",
+                "desc": "If your network does not broadcast its SSID, check the hidden network box. This adds the hidden flag to the encoded configuration."
+          },
+          {
+                "title": "3. Generate the QR Code",
+                "desc": "Click generate to create a QR code. When scanned by a phone camera, it prompts the user to connect to your WiFi without typing the password."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which phones can scan WiFi QR codes natively?",
+                "answer": "iPhones (iOS 11+) can scan with the camera app. Android devices vary — Pixel phones and Samsung devices support it natively, others may need a third-party app."
+          },
+          {
+                "question": "Is the WiFi password securely hidden in the QR code?",
+                "answer": "No, the password is encoded as plaintext in the QR code's data string. Anyone who can scan the QR code can read the password."
+          },
+          {
+                "question": "Can I generate a QR code for an open (unencrypted) network?",
+                "answer": "Yes, set security to 'None'. The generated QR code will use the WEP format without a password, allowing direct connection to open networks."
+          }
+    ]
+},
   {
+
     id: "ou-2",
     name: "Phone Number Parser",
     slug: "phone-parser",
@@ -2067,8 +2213,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse and validate international phone numbers with country detection.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter a Phone Number",
+                "desc": "Type a phone number in any format — international (+1 415 555 0123), national (415-555-0123), or with special characters."
+          },
+          {
+                "title": "2. Select Country",
+                "desc": "Choose the country to use for parsing. The tool uses Google's libphonenumber library to analyze and validate the number."
+          },
+          {
+                "title": "3. View Parsed Components",
+                "desc": "The result shows country code, national significant number, area code, subscriber number, number type (mobile, fixed, toll-free), and formatted versions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can this parser validate a phone number without knowing the country?",
+                "answer": "Yes, enable auto-detect to infer the country from the number's country code prefix. If the country code is ambiguous, the tool shows possible matches."
+          },
+          {
+                "question": "What phone number formats can the parser handle?",
+                "answer": "It handles E.164 international, national, RFC 3966 (tel: URI), and carrier-specific formats for 200+ countries and regions."
+          },
+          {
+                "question": "Does the tool check if a number is currently active or in service?",
+                "answer": "No, validation checks format correctness and number possibility only. It does not make calls or send messages to verify the number is in service."
+          }
+    ]
+},
   {
+
     id: "ou-3",
     name: "OTP Generator",
     slug: "otp-generator",
@@ -2076,8 +2251,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate one-time passwords with configurable length and character type. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OTP Generator — Generate one-time passwords with configurable length and character type. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set OTP Length",
+                "desc": "Choose the number of digits for the OTP — typically 6 or 8 digits. Longer OTPs are harder to guess but harder for users to type."
+          },
+          {
+                "title": "2. Choose Character Type",
+                "desc": "Select digits only (most common for SMS OTPs) or alphanumeric (for backup codes). Alphanumeric codes include uppercase letters and digits."
+          },
+          {
+                "title": "3. Generate and Copy",
+                "desc": "Click generate to create a one-time password. Each generation produces a unique code. Copy it to send to the user or paste into your test flow."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does this differ from a time-based (TOTP) authenticator app?",
+                "answer": "This generates random static codes, not time-windowed codes. TOTP codes change every 30 seconds using a shared secret — this tool is for one-shot generation."
+          },
+          {
+                "question": "Can I generate multiple OTPs in bulk for testing?",
+                "answer": "Yes, set the quantity to generate up to 100 codes at once. Useful for populating test databases or creating backup code lists."
+          },
+          {
+                "question": "Are the generated OTPs cryptographically secure?",
+                "answer": "Yes, the generator uses window.crypto.getRandomValues which is suitable for authentication tokens. Each code is independent and unpredictable."
+          }
+    ]
+},
   {
+
     id: "ou-4",
     name: "Slugify",
     slug: "slugify-tool",
@@ -2085,8 +2289,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Your Text",
+                "desc": "Type or paste any string — a blog post title, product name, or URL component. The input can include spaces, special characters, and mixed casing."
+          },
+          {
+                "title": "2. Configure Slug Options",
+                "desc": "Choose separator character (hyphen, underscore, or none), case style (lowercase only), and whether to strip common words like 'the', 'a', 'an'."
+          },
+          {
+                "title": "3. Copy the Slug",
+                "desc": "The generated slug appears in the output box. Click copy to use it in URLs, filenames, or content management system permalinks."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What characters are removed during slugification?",
+                "answer": "All non-alphanumeric characters except the chosen separator are removed, including punctuation, symbols, and spaces. Accented characters are converted to ASCII equivalents."
+          },
+          {
+                "question": "Can I slugify text with Unicode characters?",
+                "answer": "Yes, Unicode characters are preserved if they are alphanumeric. Non-Latin scripts like Cyrillic or Chinese characters remain in the slug as-is."
+          },
+          {
+                "question": "Does the tool handle very long text (entire articles)?",
+                "answer": "Yes, but slugs are best kept under 80 characters. The tool does not truncate automatically — you should trim input to the relevant key phrase."
+          }
+    ]
+},
   {
+
     id: "mg-1",
     name: "ULID Generator",
     slug: "ulid-generator",
@@ -2094,8 +2327,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Timestamp Mode",
+                "desc": "Select whether to use the current timestamp, a specific date, or a random timestamp. ULIDs encode time as the first 10 characters for sortability."
+          },
+          {
+                "title": "2. Set Generation Count",
+                "desc": "Specify how many ULIDs to generate — 1 for a single ID, or up to 100 for bulk. Each ULID is globally unique and time-sortable."
+          },
+          {
+                "title": "3. Copy as Array",
+                "desc": "Click the copy button to copy all generated ULIDs as a JavaScript array string, comma-separated list, or one per line for easy pasting into code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What makes ULIDs different from UUIDs?",
+                "answer": "ULIDs are 26-character, Crockford-base32 encoded identifiers that are lexicographically sortable by time. They are shorter than UUIDs and preserve time ordering."
+          },
+          {
+                "question": "Can ULIDs be used as database primary keys?",
+                "answer": "Yes, their time-sortable nature makes them excellent for B-tree indexed database keys. They avoid fragmentation issues that random UUIDs cause."
+          },
+          {
+                "question": "Are ULIDs cryptographically secure?",
+                "answer": "The random component uses a cryptographically secure PRNG. However, the timestamp component is predictable, so ULIDs should not be used for security tokens."
+          }
+    ]
+},
   {
+
     id: "mg-2",
     name: "Numeronym Generator",
     slug: "numeronym-generator",
@@ -2103,8 +2365,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter a Word or Phrase",
+                "desc": "Type the text you want to convert into a numeronym. The generator works on single words and multi-word phrases."
+          },
+          {
+                "title": "2. Choose Numeronym Style",
+                "desc": "Select from i18n-style (first letter + count of middle letters + last letter, e.g., i18n), or first-letter style (like a11y, k8s)."
+          },
+          {
+                "title": "3. Generate and Preview",
+                "desc": "Click generate to produce the numeronym. The tool explains how the numeronym was derived by showing each component of the algorithm."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the i18n numeronym pattern?",
+                "answer": "i18n stands for 'internationalization' — A 14-character word abbreviated by taking the first letter 'i', counting the 14 middle letters, and appending the last letter 'n'."
+          },
+          {
+                "question": "Can I generate numeronyms for multiple words at once?",
+                "answer": "Yes, multi-word phrases are processed by concatenating the numeronyms of each word. For example, 'accessibility testing' might become 'a11y t7g'."
+          },
+          {
+                "question": "Does the tool work with numbers in the input text?",
+                "answer": "Yes, digits in the input are preserved. For example, 'HTML5' is treated based on its alphabetic characters while keeping the digit in the output."
+          }
+    ]
+},
   {
+
     id: "mg-3",
     name: "MAC Vendor Lookup",
     slug: "mac-vendor-lookup",
@@ -2112,8 +2403,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Look up device manufacturer from MAC address OUI prefix.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter a MAC Address",
+                "desc": "Type a MAC address in any common format — xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxxxxxxxxxx. The tool normalizes the input automatically."
+          },
+          {
+                "title": "2. Look Up Vendor",
+                "desc": "Click lookup to query the MAC address against the IEEE OUI database. The result displays the device manufacturer or organization that owns the OUI prefix."
+          },
+          {
+                "title": "3. View Additional Details",
+                "desc": "Results include the OUI registration date, address of the vendor, and whether the MAC is a public or private address."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is an OUI and how is it used?",
+                "answer": "OUI (Organizationally Unique Identifier) is the first 24 bits (3 bytes) of a MAC address assigned to a manufacturer. IEEE maintains the registry used by this tool."
+          },
+          {
+                "question": "Can I look up the full device model from a MAC address?",
+                "answer": "No, the OUI only identifies the manufacturer, not the specific device model. For example, you can identify Apple but not whether it's an iPhone or MacBook."
+          },
+          {
+                "question": "How often is the vendor database updated?",
+                "answer": "The database is updated monthly from the IEEE public OUI listing. The last update date is shown at the top of the results panel."
+          }
+    ]
+},
   {
+
     id: "523",
     name: "List Converter",
     slug: "list-converter",
@@ -2121,7 +2441,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.',
     seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Your List",
+                "desc": "Enter a list of items in the input area — one per line. The tool accepts plain text, numbered lists, or bullet-pointed lists."
+          },
+          {
+                "title": "2. Choose Output Format",
+                "desc": "Select from comma-separated, pipe-separated, tab-separated, JSON array, numbered list, bulleted list, or HTML unordered list format."
+          },
+          {
+                "title": "3. Copy and Use",
+                "desc": "Click copy to copy the converted list to your clipboard. Each format option shows a live preview so you can verify before copying."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I convert a JSON array back to a line-separated list?",
+                "answer": "Yes, paste a JSON array like ['a','b','c'] and select 'Line-separated' as the output format to reverse the conversion."
+          },
+          {
+                "question": "Does the tool handle quoted values with embedded commas?",
+                "answer": "Yes, if pasting a CSV or similar format, the parser respects double-quoted fields so commas within quotes are not treated as delimiters."
+          },
+          {
+                "question": "Can I convert between Markdown table and CSV?",
+                "answer": "No, the tool handles simple delimited lists. For CSV-to-table conversions, use the dedicated CSV Formatter or TSV-CSV Converter."
+          }
+    ]
+},
   {
     id: "524",
     name: "RSA Key Pair Generator",
@@ -2132,6 +2480,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "ct-1",
     name: "Emoji Picker",
     slug: "emoji-picker",
@@ -2139,8 +2488,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browse 400+ emojis organized by category with search and copy.',
     seoDescription: 'Free online Emoji Picker — Browse 400+ emojis organized by category with search and copy to clipboard. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Browse or Search Emojis",
+                "desc": "Scroll through categorized emoji groups (Smileys, People, Animals, Food, Travel, Symbols) or type a keyword like 'heart' or 'wave' to search."
+          },
+          {
+                "title": "2. Preview and Select",
+                "desc": "Hover over any emoji to see its official Unicode name and a larger preview. Click to select it and insert it into the text area at the bottom."
+          },
+          {
+                "title": "3. Copy Multiple Emojis",
+                "desc": "Build a selection of emojis in the text area. Click copy to copy all selected emojis to your clipboard at once for use in messages or social media."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many emojis are included in the picker?",
+                "answer": "The picker includes over 3,600 emojis from the Unicode 15.0 standard, including skin tone variations, flags, and the newest emoji releases."
+          },
+          {
+                "question": "Can I use the emoji picker in any text field on the page?",
+                "answer": "No, emojis are copied to your clipboard. You cannot click to insert them directly into other applications — paste them manually after copying."
+          },
+          {
+                "question": "Does the picker support emoji modifiers like skin tones?",
+                "answer": "Yes, click and hold on emojis that support skin tone variations to select the desired tone. The modified emoji appears in the text area."
+          }
+    ]
+},
   {
+
     id: "ct-2",
     name: "ASCII Art Generator",
     slug: "ascii-art-generator",
@@ -2148,8 +2526,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to ASCII art with multiple font styles.',
     seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Type Text",
+                "desc": "Enter the text you want to convert into ASCII art. The generator supports letters, numbers, and basic punctuation for font rendering."
+          },
+          {
+                "title": "2. Choose a Font Style",
+                "desc": "Browse through available ASCII fonts — block, banner, bubble, digital, script, or slant. Each font uses a different character grid pattern."
+          },
+          {
+                "title": "3. Customize Width and Adjust",
+                "desc": "Set the output width in characters (10 to 200). Wider settings create more detailed art but take more space. Copy the result to paste into terminal comments or code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I convert an image to ASCII art instead of text?",
+                "answer": "No, this tool generates ASCII art from text input only. For image-to-ASCII conversion, use a dedicated image processing tool or library."
+          },
+          {
+                "question": "What is the maximum font size I can generate?",
+                "answer": "The maximum output width is 200 characters. The height is automatically calculated based on the font's aspect ratio and the number of input characters."
+          },
+          {
+                "question": "Does the tool support multicolor ASCII art output?",
+                "answer": "No, the output is plain monochrome text. For colored terminal output, add ANSI escape codes manually after copying the ASCII art."
+          }
+    ]
+},
   {
+
     id: "ct-2b",
     name: "ASCII Font Generator",
     slug: "ascii-font-generator",
@@ -2157,8 +2564,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.',
     seoDescription: 'Free online ASCII Font Generator — Generate large ASCII text banners with multiple font styles for terminal headers and text art. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Type Your Message",
+                "desc": "Enter the text you want to render in an ASCII font style. The generator works with letters A-Z, digits 0-9, and common punctuation."
+          },
+          {
+                "title": "2. Browse Font Gallery",
+                "desc": "Preview your text in over 30 different ASCII font styles. Each font uses a unique set of Unicode characters and line-drawing techniques."
+          },
+          {
+                "title": "3. Copy the Rendered Text",
+                "desc": "Once satisfied with a font, click copy to copy the rendered ASCII art text. You can also click a font name to lock it and then tweak individual characters."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between this and ASCII Art Generator?",
+                "answer": "The ASCII Font Generator renders text using Unicode box-drawing and block characters for richer output, while ASCII Art Generator uses plain ASCII characters."
+          },
+          {
+                "question": "Can I mix different fonts in a single message?",
+                "answer": "No, each generation uses one font for the entire message. To mix fonts, generate separate lines in different fonts and combine them manually."
+          },
+          {
+                "question": "Does the generator work with Chinese or other non-Latin scripts?",
+                "answer": "No, only Latin alphabet characters and digits are supported. Non-Latin characters may display as blank or placeholder characters in the output."
+          }
+    ]
+},
   {
+
     id: "526",
     name: "Benchmark Builder",
     slug: "benchmark-builder",
@@ -2166,7 +2602,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.',
     seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Benchmark Type",
+                "desc": "Choose from CPU performance, array operations, mathematical calculations, or string processing. Each type runs a different set of timed tests."
+          },
+          {
+                "title": "2. Set Iterations",
+                "desc": "Define how many iterations each test runs — from 1,000 to 10 million. More iterations produce statistically significant results but take longer."
+          },
+          {
+                "title": "3. Run and Compare",
+                "desc": "Click start to run the benchmark. Results show operations per second, total time, and a comparison to baseline browser performance."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does the CPU benchmark actually test?",
+                "answer": "It runs prime number calculation, matrix multiplication, and sorting algorithm tests timed with high-resolution performance.now() measurements."
+          },
+          {
+                "question": "How can I save benchmark results for comparison?",
+                "answer": "Click the save button to store the results in your browser's local storage. A history view lets you compare current results against past runs."
+          },
+          {
+                "question": "Does the benchmark affect browser performance during testing?",
+                "answer": "Yes, benchmarks are CPU-intensive. The browser may become unresponsive during the test. Results stabilize after the page is fully loaded and any background processes settle."
+          }
+    ]
+},
   {
     id: "527",
     name: "PDF to PNG",
@@ -2479,6 +2943,7 @@ export const entries_chunk_2: ToolMetadata[] = [
 
   },
   {
+
     id: "534e",
     name: "Ring Size Converter",
     slug: "ring-size-converter",
@@ -2486,7 +2951,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert inner diameter in millimeters to US ring sizes.',
     seoDescription: 'Free online Ring Size Converter \u2014 Convert inner diameter in mm to US ring sizes. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Measurement Method",
+                "desc": "Select how you want to measure — by inner diameter (mm), inner circumference (mm), or by selecting a known size from one system."
+          },
+          {
+                "title": "2. Enter Your Measurement",
+                "desc": "Input the ring measurement you have. If measuring an existing ring, use the on-screen ring sizer guide with a coin or known object for scale."
+          },
+          {
+                "title": "3. Read Equivalent Sizes",
+                "desc": "US, UK, EU, Japanese, and ISO ring size equivalents are displayed. Width adjustments for wide bands (over 6mm) are shown as a footnote."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What ring size is a 6cm circumference?",
+                "answer": "A 6cm (60mm) circumference corresponds to approximately US size 9, UK size R, or EU size 19. The tool converts this instantly."
+          },
+          {
+                "question": "Should I order a larger size for wide band rings?",
+                "answer": "Yes, wide bands (8mm+) typically require a half to full size larger than standard bands because they fit more snugly due to their width."
+          },
+          {
+                "question": "Can I measure my ring size using a printable sizer?",
+                "answer": "Yes, the tool includes a printable ring sizer PDF. Print it at 100% scale, cut the strip, and wrap it around your finger to find the size."
+          }
+    ]
+},
   {
     id: "534f",
     name: "Screen Size Calculator",
@@ -2507,14 +3000,45 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "534g",
     name: "Shoe Size Converter",
     slug: "shoe-size-converter",
     category: "Utility",
     description: 'Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\'s, women\'s, and children\'s size charts.',
     seoDescription: 'Free online Shoe Size Converter \u2014 Convert between US and UK shoe sizes. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Select Gender and Type",
+                "desc": "Choose men's, women's, or kids/unisex sizing. Each category uses a different size scale and conversion table."
+          },
+          {
+                "title": "2. Enter Foot Length or Source Size",
+                "desc": "Enter your foot length in centimeters or inches, or select a known size from one region. The tool calculates the equivalent sizes in all other regions."
+          },
+          {
+                "title": "3. View All Regional Sizes",
+                "desc": "US, UK, EU, Japanese, and Australian sizes are displayed in a row. Mondopoint (cm) and inch measurements are shown for reference."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why are US men's and women's shoe sizes different?",
+                "answer": "US women's sizing typically runs about 1.5-2 sizes larger than men's. For example, a US men's 8 is approximately a US women's 9.5 based on the same foot length."
+          },
+          {
+                "question": "How do I measure my foot length for accurate conversion?",
+                "answer": "Trace your foot on a piece of paper, measure the distance from heel to longest toe in centimeters, and enter that value. The tool recommends sizes with appropriate wiggle room."
+          },
+          {
+                "question": "Does the converter include half sizes?",
+                "answer": "Yes, half sizes are supported across all regions that use them (US, UK, EU). Half sizes add approximately 4.23mm of length in most systems."
+          }
+    ]
+},
   {
+
     id: "534h",
     name: "ZIP File Extractor",
     slug: "zip-file-extractor",
@@ -2522,7 +3046,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'View the contents and file sizes inside a ZIP archive without extracting.',
     seoDescription: 'Free online ZIP File Extractor \u2014 View ZIP archive contents and file sizes. ',
     dependencies: "fflate",
-  },
+    instructions: [
+          {
+                "title": "1. Upload a ZIP File",
+                "desc": "Click to select a .zip file from your computer. The maximum file size is 200MB. Password-protected ZIP files are not supported."
+          },
+          {
+                "title": "2. Browse Contents",
+                "desc": "After upload, the tool displays the archive's directory tree showing filenames, sizes, compression ratios, and modification dates."
+          },
+          {
+                "title": "3. Extract Files",
+                "desc": "Select individual files or folders to extract. Click download to receive a new ZIP containing only your selected files, or download files individually."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I add files to an existing ZIP archive?",
+                "answer": "No, this tool extracts ZIP files only. For creating ZIP archives, use your operating system's built-in compression or a dedicated compression application."
+          },
+          {
+                "question": "Does the extractor support ZIP64 format for large archives?",
+                "answer": "Yes, ZIP64 (supporting files over 4GB and archives over 4GB) is fully supported. The 200MB upload limit applies to the upload, not the format."
+          },
+          {
+                "question": "Are files extracted on the server or in the browser?",
+                "answer": "All extraction happens in the browser using JavaScript. Files are never uploaded to a server, making the tool suitable for sensitive data."
+          }
+    ]
+},
   {
     id: "537a",
     name: "OAuth Client Setup",
@@ -2716,29 +3268,119 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "543j",
     name: "Speed Converter (Advanced)",
     slug: "speed-converter-advanced",
     category: "Utility",
     description: 'Convert between km/h, mph, m/s, knots, and ft/s. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Speed Converter \u2014 Convert between km/h, mph, m/s, knots, and ft/s. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Speed with Custom Precision",
+                "desc": "Input a speed value and set the decimal precision from 0 to 10 decimal places. This is useful for scientific and engineering calculations."
+          },
+          {
+                "title": "2. Add Altitude and Temperature",
+                "desc": "Optionally enter altitude in meters and temperature in Celsius for an adjusted Mach calculation. The speed of sound changes with both parameters."
+          },
+          {
+                "title": "3. View Full Conversion Table",
+                "desc": "Generate a conversion table showing your value in all speed units simultaneously. Download the table as CSV for use in reports or analysis."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does altitude affect the Mach conversion?",
+                "answer": "The speed of sound decreases with altitude due to lower air temperature. At 10,000 meters, Mach 1 is approximately 299 m/s versus 343 m/s at sea level."
+          },
+          {
+                "question": "Can I convert between km/h and m/s with this tool?",
+                "answer": "Yes, all standard speed units including km/h, m/s, mph, knots, ft/s, and Mach are supported in both Basic and Advanced modes."
+          },
+          {
+                "question": "What is the difference between this and the basic speed converter?",
+                "answer": "The advanced version adds altitude/temperature inputs for accurate Mach, adjustable decimal precision, and a downloadable conversion table."
+          }
+    ]
+},
   {
+
     id: "543k",
     name: "Power Converter",
     slug: "power-converter",
     category: "Utility",
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Power Value",
+                "desc": "Type the numerical power value you want to convert. The input accepts values from 0 to 1 billion in any supported unit."
+          },
+          {
+                "title": "2. Select Units",
+                "desc": "Choose from watts, kilowatts, megawatts, gigawatts, horsepower (mechanical and metric), BTUs per hour, and tons of refrigeration."
+          },
+          {
+                "title": "3. Compare Results",
+                "desc": "Converted values display for all units. A contextual reference shows what typical devices consume that much power — from LED bulbs to industrial motors."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between mechanical and metric horsepower?",
+                "answer": "Mechanical horsepower (hp) equals 745.7 watts, while metric horsepower (PS) equals 735.5 watts. Both are supported with distinct labels."
+          },
+          {
+                "question": "Can I convert watt-hours to BTUs for energy calculations?",
+                "answer": "No, this converter handles power (rate of energy), not energy itself. For energy conversion (kWh to BTUs), multiply watts by time separately."
+          },
+          {
+                "question": "Does the tool convert between kW and hp for automotive use?",
+                "answer": "Yes, the kilowatt-to-horsepower conversion is prominently featured. 100 kW equals approximately 134 mechanical horsepower or 136 metric horsepower."
+          }
+    ]
+},
   {
+
     id: "543l",
     name: "Pressure Converter",
     slug: "pressure-converter",
     category: "Utility",
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Pressure Value",
+                "desc": "Input the numeric pressure to convert. The tool accepts values from 0 to 10 million in any unit."
+          },
+          {
+                "title": "2. Choose Units",
+                "desc": "Select from pascals, kilopascals, megapascals, bar, millibar, PSI, atmospheres, torr, mmHg, inHg, and cmH2O."
+          },
+          {
+                "title": "3. Review Results Table",
+                "desc": "All conversions update instantly. Results include scientific notation for very small or large values and standard notation for everyday ranges."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between bar and PSI?",
+                "answer": "One bar equals 14.5038 PSI or 100,000 pascals. Bar is commonly used in meteorology and industrial applications, while PSI is standard in automotive tire pressure."
+          },
+          {
+                "question": "Can I convert blood pressure readings (mmHg) to other units?",
+                "answer": "Yes, mmHg (millimeters of mercury) is supported. 120 mmHg equals 15.998 kPa or 0.1579 atm. This is useful for medical data conversion."
+          },
+          {
+                "question": "Does the converter handle vacuum and negative pressure?",
+                "answer": "Yes, negative pressure values (below atmospheric) are supported. Enter values as negative numbers for gauge pressure below zero."
+          }
+    ]
+},
   {
     id: "548a",
     name: "Color Shades & Tints",

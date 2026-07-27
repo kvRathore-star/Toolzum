@@ -2283,6 +2283,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "763",
     name: "Random Color Generator",
     slug: "random-color-generator",
@@ -2290,8 +2291,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Color Generator — Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Pick a Color Format",
+                "desc": "Choose between HEX, RGB, HSL, or CMYK output formats. Each format displays the same underlying color in a different notation suited for different design contexts."
+          },
+          {
+                "title": "2. Lock Desired Channels",
+                "desc": "Click the lock icon next to any color channel (red, green, blue) to freeze its value. Locked channels stay constant while unlocked channels randomize on each generation."
+          },
+          {
+                "title": "3. Generate and Preview",
+                "desc": "Click generate to see a new random color displayed as a swatch. The hex code, RGB values, and a complementary color suggestion appear below the preview."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate a palette of multiple random colors at once?",
+                "answer": "No, this tool generates one color at a time. For multiple coordinated colors, use the Color Palette Generator tool instead."
+          },
+          {
+                "question": "Does the generator avoid very dark or very light colors?",
+                "answer": "No, every color in the full 16.7-million-color spectrum is equally likely. Use the lock feature to constrain brightness by locking the luminance channel."
+          },
+          {
+                "question": "What is the color locking feature for?",
+                "answer": "Lock lets you fix one or more color channels while randomizing others. For example, lock red at 255 to generate random shades of red."
+          }
+    ]
+},
   {
+
     id: "764",
     name: "Random Team Generator",
     slug: "random-team-generator",
@@ -2299,8 +2329,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Team Generator — Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Participant Names",
+                "desc": "Type or paste a list of participant names — one per line or separated by commas. The tool parses each entry as an individual team member."
+          },
+          {
+                "title": "2. Choose Team Count or Size",
+                "desc": "Toggle between specifying the number of teams or the number of members per team. The tool automatically calculates the other value and alerts you if members must be left out."
+          },
+          {
+                "title": "3. Shuffle and Assign",
+                "desc": "Click generate to randomly shuffle all participants into balanced teams. Each team gets roughly equal members when the total is not evenly divisible."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I assign a team name or captain automatically?",
+                "answer": "No, the tool only assigns members to numbered teams (Team 1, Team 2, etc.). You can rename teams manually after generation."
+          },
+          {
+                "question": "What happens if I have an odd number of participants?",
+                "answer": "Teams are balanced so the difference in size between any two teams is never more than one. The extra members are distributed starting from Team 1."
+          },
+          {
+                "question": "Can I save or share the generated teams?",
+                "answer": "Yes, click the copy button to copy the team breakdown to your clipboard as formatted text, or download it as a text file."
+          }
+    ]
+},
   {
+
     id: "765",
     name: "Random Picker Generator",
     slug: "random-picker-generator",
@@ -2308,8 +2367,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Picker Generator — Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Build Your List",
+                "desc": "Add items one by one in the input field, pressing Enter or the add button after each. Each item becomes an entry in the pool for the random pick."
+          },
+          {
+                "title": "2. Set Pick Count",
+                "desc": "Choose how many items to pick — 1 for a single winner, or more for multiple selections. The tool can pick with or without replacement."
+          },
+          {
+                "title": "3. Run the Pick",
+                "desc": "Click the pick button to randomly select items. With replacement enabled, the same item can be picked multiple times. Without replacement, each item is removed from the pool after selection."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between picking with and without replacement?",
+                "answer": "With replacement means an item can be picked more than once in a single run. Without replacement means each item can only be picked once, like drawing names from a hat."
+          },
+          {
+                "question": "Can I import a list from a CSV or text file?",
+                "answer": "Yes, paste comma-separated or newline-separated values directly into the input area. The tool parses them into individual list items automatically."
+          },
+          {
+                "question": "Is there a limit on how many items I can add to the list?",
+                "answer": "You can add up to 10,000 items per list. Performance may slow slightly with very large lists but the pick algorithm remains fast."
+          }
+    ]
+},
   {
+
     id: "766",
     name: "Random Decision Maker",
     slug: "random-decision-maker",
@@ -2317,8 +2405,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Decision Maker — Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Your Options",
+                "desc": "Type each possible choice on a separate line. The tool needs at least two options to make a meaningful decision between them."
+          },
+          {
+                "title": "2. Add Weights (Optional)",
+                "desc": "Assign a weight percentage to each option to bias the decision. A 70% weight on one option means it is chosen 70% of the time."
+          },
+          {
+                "title": "3. Reveal the Decision",
+                "desc": "Click the decide button to see a dramatic animation that lands on one option. The result is displayed with a colored highlight."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I re-pick if I don't like the result?",
+                "answer": "Yes, click decide again. Each decision is independent and random. The tool does not track history or prevent repeat results."
+          },
+          {
+                "question": "How do weighted options work mathematically?",
+                "answer": "The weights are normalized into probabilities. If option A has weight 50 and option B has weight 25, A has a 66.67% chance and B has a 33.33% chance of being selected."
+          },
+          {
+                "question": "Can I save my list of options for later?",
+                "answer": "No, the tool does not persist data. Your options are cleared when you close or refresh the page. Copy them to a text file to reuse later."
+          }
+    ]
+},
   {
+
     id: "767",
     name: "Random Username Generator",
     slug: "random-username-generator",
@@ -2326,7 +2443,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Username Generator — Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Configure Name Structure",
+                "desc": "Choose a pattern — adjective-noun, random-name, or alphanumeric. Adjective-noun combines a dictionary word pair for memorable usernames."
+          },
+          {
+                "title": "2. Append a Suffix",
+                "desc": "Toggle whether to add a random number suffix (e.g., 42, 891) to the base name. This helps create unique usernames when the base word is common."
+          },
+          {
+                "title": "3. Generate and Preview",
+                "desc": "Click generate to produce a list of available usernames. Each entry shows a preview and a copy button for instant use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Are the generated usernames checked for availability on any platform?",
+                "answer": "No, the tool generates random name combinations locally. It does not check availability on any website or service."
+          },
+          {
+                "question": "Can I exclude offensive or inappropriate word combinations?",
+                "answer": "Yes, the profanity filter is enabled by default. It blocks known offensive word pairs from the adjective and noun dictionaries."
+          },
+          {
+                "question": "How many usernames can I generate at once?",
+                "answer": "Up to 50 usernames can be generated in a single batch. Each is unique within the batch but may collide with previously generated usernames."
+          }
+    ]
+},
   {
     id: "769",
     name: "Random Token Generator",
@@ -2373,6 +2518,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "775",
     name: "Sequence Generator",
     slug: "sequence-generator",
@@ -2380,7 +2526,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Sequence Generator — Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Start and End Values",
+                "desc": "Enter the starting number and ending number for your sequence. The generator counts from start to end inclusive using the specified step."
+          },
+          {
+                "title": "2. Configure Step Increment",
+                "desc": "Set the step value — 1 for consecutive integers, 2 for evens or odds, 10 for tens, or any custom step. Negative steps create descending sequences."
+          },
+          {
+                "title": "3. Choose Output Format",
+                "desc": "Select whether to output as a comma-separated list, newline-separated, or a fixed-width table. Copy the formatted sequence to your clipboard."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate a sequence of dates instead of numbers?",
+                "answer": "No, this tool generates numeric sequences only. For date sequences, use the Random Date Generator or work with date-specific tools."
+          },
+          {
+                "question": "What happens if the start and step produce an infinite sequence?",
+                "answer": "The generator caps output at 10,000 elements. If start, step, and end would produce more, it stops at 10,000 entries."
+          },
+          {
+                "question": "Can I generate a Fibonacci or custom formula sequence?",
+                "answer": "No, only arithmetic sequences with constant step values are supported. Fibonacci and geometric sequences are not implemented."
+          }
+    ]
+},
   {
     id: "778",
     name: "Coupon Code Generator",

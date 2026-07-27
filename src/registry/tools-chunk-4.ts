@@ -11,6 +11,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "780",
     name: "Nickname Generator",
     slug: "nickname-generator",
@@ -18,7 +19,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Nickname Generator — Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter a Base Name",
+                "desc": "Type the full name you want to derive nicknames from. The generator analyzes the name's syllables, consonants, and common nickname patterns."
+          },
+          {
+                "title": "2. Choose Nickname Style",
+                "desc": "Select from styles like diminutive (Bob from Robert), rhyming, edgy, or cutesy. Each style applies different truncation and suffix rules."
+          },
+          {
+                "title": "3. Browse Suggestions",
+                "desc": "View the generated nickname list ranked by similarity score. Each nickname includes a brief explanation of how it was derived from the base name."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate nicknames for group or team names?",
+                "answer": "No, this tool generates personal nicknames from individual names. For team names, use the Random Team Generator instead."
+          },
+          {
+                "question": "Does the generator work with non-English names?",
+                "answer": "It works best with English and Western names. Non-English names may produce fewer or less culturally appropriate suggestions."
+          },
+          {
+                "question": "Can I save my favorite nicknames from the list?",
+                "answer": "Yes, click the star icon next to any nickname to add it to a favorites list that persists during your session."
+          }
+    ]
+},
   {
     id: "781",
     name: "Avatar Generator",
@@ -29,6 +58,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "782",
     name: "Timer",
     slug: "timer",
@@ -36,8 +66,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Timer — Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Duration",
+                "desc": "Use the hour, minute, and second dropdowns to set the countdown duration. The maximum allowed is 99 hours, 59 minutes, and 59 seconds."
+          },
+          {
+                "title": "2. Start and Pause",
+                "desc": "Press the green start button to begin the countdown. Use the pause button to freeze the remaining time, then resume by pressing start again."
+          },
+          {
+                "title": "3. Reset and Restart",
+                "desc": "Press reset to return the timer to its original duration. A notification sound plays when the timer reaches zero and can be toggled on or off."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the timer continue running if I navigate away from the tab?",
+                "answer": "Yes, the timer uses service workers to keep running in the background. However, browser throttling may reduce accuracy after several minutes of inactivity."
+          },
+          {
+                "question": "Can I set multiple timers at the same time?",
+                "answer": "No, this is a single timer. For multiple concurrent timers, use the Interval Timer tool which supports interval-based timing."
+          },
+          {
+                "question": "Is there a lap or split time feature?",
+                "answer": "No, the basic timer only counts down. Use the Stopwatch tool if you need lap and split tracking."
+          }
+    ]
+},
   {
+
     id: "783",
     name: "Stopwatch",
     slug: "stopwatch",
@@ -45,8 +104,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Stopwatch — Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Start Timing",
+                "desc": "Press the start button to begin the stopwatch. The display shows elapsed time in hours, minutes, seconds, and hundredths of a second."
+          },
+          {
+                "title": "2. Record Laps",
+                "desc": "Press the lap button each time you want to record a split. Each lap entry shows the lap number, lap time, and cumulative elapsed time."
+          },
+          {
+                "title": "3. Stop and Review",
+                "desc": "Press stop to freeze the elapsed time. Review all recorded laps in the table below. You can export the lap data as a CSV file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the maximum time the stopwatch can measure?",
+                "answer": "The stopwatch can run for up to 99 hours, 59 minutes, and 59.99 seconds before rolling over. This is sufficient for most timing needs."
+          },
+          {
+                "question": "How accurate is the stopwatch timing?",
+                "answer": "Accuracy depends on the browser's requestAnimationFrame timing, typically within 10-20 milliseconds. For precision timing, use a dedicated hardware stopwatch."
+          },
+          {
+                "question": "Can I pause and resume without clearing laps?",
+                "answer": "Yes, pressing pause freezes the display but preserves all recorded laps. Press start to resume timing from where you paused."
+          }
+    ]
+},
   {
+
     id: "784",
     name: "Countdown Timer",
     slug: "countdown-tool",
@@ -54,8 +142,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Countdown Timer — Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Target Date and Time",
+                "desc": "Enter the exact date and time you want to count down to. The tool automatically calculates the difference from the current moment."
+          },
+          {
+                "title": "2. Add an Event Label",
+                "desc": "Type a name for your event (e.g., Project Deadline, New Year). The label appears above the countdown display for easy identification."
+          },
+          {
+                "title": "3. View Breakdown",
+                "desc": "The countdown shows days, hours, minutes, and seconds remaining. Each unit updates in real-time. The display turns red when less than 24 hours remain."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the countdown adjust for time zones?",
+                "answer": "It uses your device's local time zone. If you set a specific time zone, the tool converts it to your local time for the countdown calculation."
+          },
+          {
+                "question": "Can I save multiple countdown events?",
+                "answer": "Yes, created events are saved to local storage and displayed as a list. You can switch between active countdowns without losing any."
+          },
+          {
+                "question": "Does the tool work offline after the page loads?",
+                "answer": "Yes, once the page is loaded, the countdown runs entirely client-side and works without an internet connection."
+          }
+    ]
+},
   {
+
     id: "786",
     name: "Interval Timer",
     slug: "interval-timer",
@@ -63,8 +180,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Interval Timer — Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Configure Work and Rest Periods",
+                "desc": "Set the duration for work intervals and rest intervals separately using the minute and second selectors for each phase."
+          },
+          {
+                "title": "2. Set Number of Rounds",
+                "desc": "Choose how many work-rest cycles to complete. A warm-up and cool-down period can also be added before and after the main intervals."
+          },
+          {
+                "title": "3. Start the Sequence",
+                "desc": "Press start to begin. The timer cycles through warm-up, work, rest, and cool-down phases automatically with audible alerts between transitions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I customize the alert sound for each phase transition?",
+                "answer": "Yes, select different alert sounds for work-to-rest and rest-to-work transitions from a dropdown of 6 built-in tones."
+          },
+          {
+                "question": "What happens if I pause mid-workout?",
+                "answer": "The current interval pauses and the elapsed time within that interval is preserved. Pressing start resumes from where you left off."
+          },
+          {
+                "question": "Can I set different work and rest durations per round?",
+                "answer": "No, all rounds use the same work and rest durations. For variable intervals, run separate sessions with different settings."
+          }
+    ]
+},
   {
+
     id: "787",
     name: "Tabata Timer",
     slug: "tabata-timer",
@@ -72,8 +218,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tabata Timer — Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Standard Tabata Parameters",
+                "desc": "Configure the 20-second work period and 10-second rest period (standard Tabata protocol). Both durations can be customized as needed."
+          },
+          {
+                "title": "2. Choose Number of Cycles",
+                "desc": "Set how many Tabata cycles to complete. The standard protocol is 8 cycles totaling 4 minutes, but you can go up to 20 cycles."
+          },
+          {
+                "title": "3. Prepare and Start",
+                "desc": "A 10-second countdown prepares you before the first interval begins. The timer alternates between work and rest with distinct audio cues and color changes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the standard Tabata protocol duration?",
+                "answer": "The original Tabata protocol is 20 seconds of intense work followed by 10 seconds of rest, repeated for 8 cycles totaling 4 minutes."
+          },
+          {
+                "question": "Can I customize the work and rest durations?",
+                "answer": "Yes, while the default is 20/10 for the standard Tabata protocol, you can set any work and rest durations from 1 to 999 seconds."
+          },
+          {
+                "question": "Does the timer show accumulated work time?",
+                "answer": "Yes, the display shows both the current interval countdown and the total accumulated work time across all completed cycles."
+          }
+    ]
+},
   {
+
     id: "788",
     name: "World Clock",
     slug: "world-clock",
@@ -81,7 +256,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online World Clock — Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Search and Add Cities",
+                "desc": "Type a city name in the search box and select from autocomplete suggestions. Added cities appear as individual clock cards displaying local time."
+          },
+          {
+                "title": "2. Compare Time Zones",
+                "desc": "View all added cities side by side. Each card shows the current time, date, UTC offset, and whether daylight saving time is active."
+          },
+          {
+                "title": "3. Reorder and Remove",
+                "desc": "Drag city cards to reorder them by priority. Click the remove button to delete a city. Your selections are saved to local storage for next visit."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many cities can I add to the world clock view?",
+                "answer": "You can add up to 20 cities simultaneously. The time zone database covers over 50,000 locations worldwide via the IANA time zone database."
+          },
+          {
+                "question": "Does the clock auto-update for daylight saving changes?",
+                "answer": "Yes, all displayed times auto-update when DST starts or ends in each city's time zone. The UTC offset shown reflects current DST status."
+          },
+          {
+                "question": "Can I share my world clock layout with someone else?",
+                "answer": "Yes, click the share button to generate a URL containing your city list. Anyone opening that URL sees the same city configuration."
+          }
+    ]
+},
   {
     id: "790",
     name: "Time Duration Calculator",
@@ -330,6 +533,7 @@ export const entries_chunk_4: ToolMetadata[] = [
   ]
   },
   {
+
     id: "813",
     name: "Color Picker",
     slug: "color-picker",
@@ -337,8 +541,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Pick colors from a visual spectrum or enter hex values. Copy to clipboard — perfect for design palettes, CSS variables, and UI mockups. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Color Picker \u2014 Pick colors from a visual spectrum or enter hex values. Copy to clipboard \u2014 perfect for design palettes, CSS variables, and UI mockups. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Pick a Color",
+                "desc": "Click on the color spectrum or saturation/brightness panel to choose a color. Alternatively, type a HEX code like #FF5733 directly into the input field."
+          },
+          {
+                "title": "2. Fine-Tune with Sliders",
+                "desc": "Adjust the hue, saturation, and lightness sliders to fine-tune your selection. The HSV, HSL, and RGB values update in real-time."
+          },
+          {
+                "title": "3. Copy Color Values",
+                "desc": "Click any color value (HEX, RGB, HSL, HSV) to copy it to your clipboard. The color swatch preview shows your selected color with a checkerboard for transparency."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I pick colors from anywhere on my screen?",
+                "answer": "No, the color picker is limited to the tool's UI. Use your operating system's eye-dropper tool to capture colors from other applications."
+          },
+          {
+                "question": "Does the picker support alpha transparency?",
+                "answer": "Yes, drag the alpha slider to adjust opacity from fully transparent (0) to fully opaque (255). The HEX value shows as 8-digit RRGGBBAA when alpha is below 255."
+          },
+          {
+                "question": "Can I save colors to a palette for later use?",
+                "answer": "Yes, click the + icon to add the current color to your session palette. Saved colors appear as swatches below the picker and can be removed individually."
+          }
+    ]
+},
   {
+
     id: "814",
     name: "Color Palette Generator",
     slug: "color-palette-generator",
@@ -346,8 +579,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Color Palette Generator \u2014 Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose a Base Color",
+                "desc": "Select a starting color using the color picker. The generator creates a harmony palette based on this seed color."
+          },
+          {
+                "title": "2. Select Harmony Rule",
+                "desc": "Pick a color harmony type — analogous, complementary, split-complementary, triadic, tetradic, or monochromatic. Each rule uses different geometric relationships on the color wheel."
+          },
+          {
+                "title": "3. Generate and Export",
+                "desc": "Click generate to create a 5-color palette. Each swatch shows its HEX code. Export the entire palette as a CSS variable set, SCSS map, or downloadable image."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between analogous and monochromatic palettes?",
+                "answer": "Analogous uses colors adjacent on the wheel (30° apart) for harmonious contrast. Monochromatic uses variations of a single hue at different saturation and lightness levels."
+          },
+          {
+                "question": "Can I lock a color and regenerate only the others?",
+                "answer": "Yes, click the lock icon on any swatch to preserve it. Regenerating only affects unlocked colors while the locked colors remain fixed."
+          },
+          {
+                "question": "Does the tool ensure sufficient contrast between palette colors?",
+                "answer": "The generator does not enforce contrast ratios. Use the Contrast Checker tool separately to verify accessibility compliance for your palette."
+          }
+    ]
+},
   {
+
     id: "815",
     name: "Gradient Generator",
     slug: "gradient-generator",
@@ -355,8 +617,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Gradient Generator \u2014 Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Gradient Colors",
+                "desc": "Choose two or more color stops by clicking on the gradient bar. Each stop has its own color picker and position slider."
+          },
+          {
+                "title": "2. Configure Gradient Type",
+                "desc": "Select linear (with angle control from 0° to 360°) or radial (with shape and position controls). The preview updates in real-time."
+          },
+          {
+                "title": "3. Copy CSS Code",
+                "desc": "Click copy to copy the generated CSS background property. The tool outputs standard linear-gradient() or radial-gradient() syntax compatible with all modern browsers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I create gradients with more than 2 color stops?",
+                "answer": "Yes, click anywhere on the gradient bar to add a new color stop. You can add up to 10 stops and drag them to adjust their positions."
+          },
+          {
+                "question": "Does the generator support repeating gradients?",
+                "answer": "Yes, toggle repeating mode for repeating-linear-gradient or repeating-radial-gradient output. Set the size of the repeating pattern."
+          },
+          {
+                "question": "Can I export the gradient as an image file?",
+                "answer": "Yes, click download to save the gradient as a PNG image at your chosen resolution (1920x1080, 800x600, or 400x300)."
+          }
+    ]
+},
   {
+
     id: "816",
     name: "Contrast Checker",
     slug: "contrast-checker",
@@ -364,8 +655,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Contrast Checker \u2014 Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Foreground and Background Colors",
+                "desc": "Use the color pickers or enter HEX codes for the text (foreground) and background colors. The tool calculates the contrast ratio instantly."
+          },
+          {
+                "title": "2. Check WCAG Compliance",
+                "desc": "The results show the contrast ratio and whether it passes WCAG AA (4.5:1 for normal text, 3:1 for large) and AAA (7:1 for normal, 4.5:1 for large) standards."
+          },
+          {
+                "title": "3. Adjust and Retest",
+                "desc": "Use the lightness slider to adjust the foreground color until it passes the desired compliance level. The tool shows the minimum required adjustment."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is a good contrast ratio for readability?",
+                "answer": "A ratio of at least 4.5:1 for normal text and 3:1 for large text (18px+ bold or 24px+ regular) meets WCAG AA, the minimum legal standard in many countries."
+          },
+          {
+                "question": "Can I test a palette of multiple color pairs at once?",
+                "answer": "Yes, paste multiple HEX pairs in the batch mode to see which pass and which fail. Results are color-coded green (pass) and red (fail)."
+          },
+          {
+                "question": "Does the checker account for font weight and size in the recommendation?",
+                "answer": "Yes, select text size (small, large, or very large) and weight (normal or bold). The tool adjusts the AA and AAA thresholds accordingly."
+          }
+    ]
+},
   {
+
     id: "817",
     name: "Counter Tool",
     slug: "counter-tool",
@@ -373,8 +693,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Counter Tool \u2014 Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Initial Value",
+                "desc": "Enter the starting count for your counter. This can be any integer — positive, negative, or zero. The default is 0."
+          },
+          {
+                "title": "2. Configure Step Size",
+                "desc": "Set how much the counter increments or decrements with each click. Common step sizes are 1, 2, 5, 10, or any custom integer."
+          },
+          {
+                "title": "3. Count Up or Down",
+                "desc": "Click the + or - buttons to change the count. A long-press on either button auto-repeats. The count can also be reset to the initial value anytime."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I add labels or notes to specific count values?",
+                "answer": "No, the counter tracks only the numeric value. For annotated counting, use a spreadsheet or note-taking app alongside the counter."
+          },
+          {
+                "question": "What is the maximum or minimum value the counter supports?",
+                "answer": "The counter supports values from -9,999,999 to 9,999,999. Beyond these limits, the display shows an overflow indicator."
+          },
+          {
+                "question": "Can I have multiple counters running simultaneously?",
+                "answer": "Yes, click the + Add Counter button to create additional counters. Each counter has its own value, step size, label, and color theme."
+          }
+    ]
+},
   {
+
     id: "818",
     name: "List Randomizer",
     slug: "list-randomizer",
@@ -382,8 +731,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online List Randomizer \u2014 Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Add List Items",
+                "desc": "Type or paste items one per line. The tool accepts up to 10,000 items. Each line is treated as an individual entry for randomization."
+          },
+          {
+                "title": "2. Randomize the List",
+                "desc": "Click the shuffle button to randomly reorder all items using the Fisher-Yates shuffle algorithm, which gives every permutation equal probability."
+          },
+          {
+                "title": "3. Copy or Download",
+                "desc": "Copy the randomized list to your clipboard or download it as a text file. You can shuffle again to get a different order."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Fisher-Yates shuffle work?",
+                "answer": "It iterates through the list backward, swapping each element with a randomly chosen earlier element. This produces an unbiased permutation in O(n) time."
+          },
+          {
+                "question": "Can I randomize a comma-separated list without converting it first?",
+                "answer": "Yes, paste comma-separated values directly. The tool auto-detects the delimiter and splits them into individual items."
+          },
+          {
+                "question": "Does the tool preserve the original order anywhere?",
+                "answer": "No, once randomized, the original order is gone. Copy the original list before shuffling if you need to keep both versions."
+          }
+    ]
+},
   {
+
     id: "819",
     name: "List Sorter",
     slug: "list-sorter",
@@ -391,8 +769,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online List Sorter \u2014 Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Your Unsorted List",
+                "desc": "Enter items one per line in the input area. The tool accepts text, numbers, or alphanumeric entries."
+          },
+          {
+                "title": "2. Choose Sort Criteria",
+                "desc": "Select sort by text (A-Z or Z-A), by number (ascending or descending), by line length, or by reverse order."
+          },
+          {
+                "title": "3. View Sorted Results",
+                "desc": "The sorted list appears in the output area. Copy the sorted list or download it. A comparison view shows the original alongside the sorted version."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I sort a list of file paths by filename or extension?",
+                "answer": "Yes, use the 'by filename' or 'by extension' option. The tool parses the last segment of the path or the part after the last dot for sorting."
+          },
+          {
+                "question": "Does the sorter handle mixed content (numbers and text together)?",
+                "answer": "Yes, natural sorting is applied. 'Item 2' comes before 'Item 10' instead of alphabetical sorting which would put 'Item 10' before 'Item 2'."
+          },
+          {
+                "question": "Can I sort case-insensitively?",
+                "answer": "Yes, toggle the case-insensitive option. When enabled, 'apple' and 'Apple' are treated as equivalent for sorting purposes."
+          }
+    ]
+},
   {
+
     id: "820",
     name: "Decision Maker",
     slug: "decision-maker",
@@ -400,8 +807,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: "Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: "Free online Decision Maker \u2014 Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. ",
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Your Question",
+                "desc": "Type a yes/no question or a question with custom answer options. The tool stores your question but decisions are based purely on random selection."
+          },
+          {
+                "title": "2. Set Custom Answers (Optional)",
+                "desc": "Replace the default Yes/No with custom outcomes like 'Go for it', 'Wait', 'Ask again later'. You can provide up to 10 possible answers."
+          },
+          {
+                "title": "3. Make the Decision",
+                "desc": "Click the decide button. The tool displays a dramatic animation that lands on one answer. A history log records every decision made in the session."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Is the decision truly random or does it follow patterns?",
+                "answer": "Each decision uses a cryptographically secure random selection. There is no pattern, weighting, or bias — every outcome is equally likely."
+          },
+          {
+                "question": "Can I assign different probabilities to different answers?",
+                "answer": "No, all answers have equal probability. For weighted decisions, use the Random Decision Maker tool which supports custom weights."
+          },
+          {
+                "question": "Can I share a decision outcome with others?",
+                "answer": "Yes, after a decision is made, a share button generates a link that displays the question and result. The link is encoded and does not expire."
+          }
+    ]
+},
   {
+
     id: "821",
     name: "Yes / No Picker",
     slug: "yes-no-picker",
@@ -409,8 +845,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Yes / No Picker \u2014 Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Ask a Yes/No Question",
+                "desc": "Type any yes-or-no question into the input box. The more specific your question, the more satisfying the answer will feel."
+          },
+          {
+                "title": "2. Toggle Maybe Option",
+                "desc": "Enable or disable the 'Maybe' option. With Maybe off, the tool picks strictly between Yes and No. With Maybe on, there is a 10% chance of Maybe."
+          },
+          {
+                "title": "3. Get Your Answer",
+                "desc": "Click the ask button. A full-screen animation reveals the answer with an accompanying sound effect. The animation varies based on the answer."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the probability distribution of Yes, No, and Maybe?",
+                "answer": "With Maybe off: 50% Yes, 50% No. With Maybe on: 45% Yes, 45% No, 10% Maybe. All percentages use true random selection."
+          },
+          {
+                "question": "Can I override the result if I disagree with it?",
+                "answer": "Yes, click the 'Ask Again' button below the result to reroll. The old result is logged in the history but a new independent decision is made."
+          },
+          {
+                "question": "Does the tool save my question history?",
+                "answer": "Session history is saved in your browser's local storage. The last 50 questions and their answers are viewable in a collapsible sidebar."
+          }
+    ]
+},
   {
+
     id: "822",
     name: "Dice Roller Tool",
     slug: "dice-roller-tool",
@@ -418,8 +883,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Dice Roller Tool \u2014 Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Dice Notation",
+                "desc": "Type dice expressions in standard notation like '3d6+2', '2d20', or 'd100'. The parser handles multiple dice groups separated by plus or minus signs."
+          },
+          {
+                "title": "2. Save Common Rolls",
+                "desc": "Save your frequently used dice expressions as presets with custom names (e.g., 'Fireball: 8d6'). Presets persist in your browser's local storage."
+          },
+          {
+                "title": "3. Roll and Analyze",
+                "desc": "Click roll to execute all dice groups. Results show individual die values, group subtotals, modifiers, and the grand total with a probability distribution chart."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What dice notation syntax is supported?",
+                "answer": "Standard XdY+Z notation is supported, where X is number of dice, Y is sides per die, and Z is a modifier. Also supports keeping highest/lowest (XdYkhZ, XdYklZ)."
+          },
+          {
+                "question": "Can I roll dice for multiple players at once?",
+                "answer": "No, the tool handles one dice expression at a time. For group rolls, run separate rolls for each player or use a single roll with many dice."
+          },
+          {
+                "question": "Does the tool show the probability distribution of rolls?",
+                "answer": "Yes, a bar chart displays the distribution of all individual die results, showing how many times each face value appeared in the roll."
+          }
+    ]
+},
   {
+
     id: "823",
     name: "Number Guessing Game",
     slug: "number-guessing-game",
@@ -427,8 +921,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Guess the random number between 1 and 100. Get hints if your guess is too high or too low. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Number Guessing Game \u2014 Guess the random number between 1 and 100. Get hints if your guess is too high or too low. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set the Range",
+                "desc": "Choose the minimum and maximum numbers for the random target. A wider range makes the game harder. Default is 1 to 100."
+          },
+          {
+                "title": "2. Start Guessing",
+                "desc": "Type a number in the range and submit your guess. The game tells you whether the target is higher or lower after each guess."
+          },
+          {
+                "title": "3. Win or Lose",
+                "desc": "Guess correctly to win and see your score (number of guesses taken). The game records your best score in the session for comparison."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the minimum number of guesses needed using optimal strategy?",
+                "answer": "With binary search on a 1-100 range, you can always find the number in 7 or fewer guesses (log2 of 100 ≈ 6.64)."
+          },
+          {
+                "question": "Can I change the difficulty mid-game?",
+                "answer": "No, changing the range resets the game with a new random target. Your current game's progress is lost."
+          },
+          {
+                "question": "Does the game have a time limit or unlimited guesses?",
+                "answer": "There is no time limit and no guess limit. The only goal is to find the number in as few guesses as possible."
+          }
+    ]
+},
   {
+
     id: "824",
     name: "Rock Paper Scissors",
     slug: "rock-paper-scissors",
@@ -436,8 +959,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Play rock paper scissors against the computer. Keep track of wins, losses, and ties. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rock Paper Scissors \u2014 Play rock paper scissors against the computer. Keep track of wins, losses, and ties. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Your Move",
+                "desc": "Click the rock, paper, or scissors button to make your selection. Your choice is highlighted and locked in immediately."
+          },
+          {
+                "title": "2. See the Computer's Move",
+                "desc": "The computer's randomly chosen move is revealed after a brief animation. The win/loss/draw result is displayed with a color-coded banner."
+          },
+          {
+                "title": "3. Track Your Record",
+                "desc": "A scoreboard tracks wins, losses, draws, and your current win streak. Statistics show which moves you favor and your win rate with each."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the computer use any strategy or is it truly random?",
+                "answer": "The computer chooses randomly with equal probability (1/3 each) on every round. There is no pattern learning or adaptive strategy."
+          },
+          {
+                "question": "Can I play against another person instead of the computer?",
+                "answer": "No, this is a single-player game against the computer. For a two-player version, take turns picking moves on separate devices."
+          },
+          {
+                "question": "Does the game support best-of-N series (e.g., best of 3)?",
+                "answer": "Yes, toggle best-of mode and set N. The game automatically tracks rounds and declares a series winner when one player reaches the target wins."
+          }
+    ]
+},
   {
+
     id: "825",
     name: "Hangman Game",
     slug: "hangman-game",
@@ -445,7 +997,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hangman Game \u2014 Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Start a New Game",
+                "desc": "Click start to begin. A random word is selected from the chosen difficulty category. The word is shown as dashes representing each letter."
+          },
+          {
+                "title": "2. Guess Letters",
+                "desc": "Click letter buttons on the on-screen keyboard to make guesses. Correct guesses reveal the letter's positions. Incorrect guesses add a body part to the gallows."
+          },
+          {
+                "title": "3. Win or Lose",
+                "desc": "Guess all letters before the hangman is fully drawn (6 incorrect guesses). The game tracks won/lost count and average guesses per win."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many incorrect guesses are allowed before losing?",
+                "answer": "The standard limit is 6 incorrect guesses. Each wrong guess adds one body part (head, body, arms, legs). The game ends when the figure is complete."
+          },
+          {
+                "question": "Can I choose the word category or difficulty?",
+                "answer": "Yes, select from categories like Animals, Countries, Food, Technology, or Random. Difficulty affects word length — Easy (3-4 letters), Medium (5-7), Hard (8+)."
+          },
+          {
+                "question": "Does the game include a word hint or definition?",
+                "answer": "Yes, a hint button reveals the word's category and a short definition. Using a hint counts as a penalty and uses one of your allowed incorrect guesses."
+          }
+    ]
+},
   {
     id: "828",
     name: "Roman Numeral Converter",
@@ -466,6 +1046,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "829",
     name: "Number to Words Converter",
     slug: "number-to-words-converter",
@@ -473,7 +1054,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert any number to its English word representation. Supports large numbers up to billions. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Number to Words Converter \u2014 Convert any number to its English word representation. Supports large numbers up to billions. ',
     dependencies: "None",
-      },
+    instructions: [
+          {
+                "title": "1. Enter a Number",
+                "desc": "Type any integer from 0 to 999,999,999,999,999 (999 trillion). The input accepts digits only — commas and spaces are stripped automatically."
+          },
+          {
+                "title": "2. Choose Language",
+                "desc": "Select the output language — English, Spanish, French, German, or Hindi. Each language uses its own grammar rules for number names."
+          },
+          {
+                "title": "3. View Word Representation",
+                "desc": "The number is displayed in words with proper capitalization. Both the standard form and a check-writing form (with 'and' before the last part) are shown."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle decimal numbers like 123.45?",
+                "answer": "Enter the whole and decimal parts separately. For 123.45, the tool outputs 'one hundred twenty-three point four five' with each decimal digit spoken individually."
+          },
+          {
+                "question": "Can the converter output ordinal words (first, second, third)?",
+                "answer": "No, only cardinal numbers (one, two, three) are supported. Ordinal conversion is not available in this tool."
+          },
+          {
+                "question": "What is the maximum number that can be converted to words?",
+                "answer": "The maximum supported value is 999,999,999,999,999 (nine hundred ninety-nine trillion, nine hundred ninety-nine billion, nine hundred ninety-nine million, nine hundred ninety-nine thousand, nine hundred ninety-nine)."
+          }
+    ]
+},
   {
     id: "831",
     name: "Percentage Difference Calculator",
@@ -1030,53 +1639,233 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "866",
     name: "Speed Converter",
     slug: "speed-converter",
     category: "Utility",
     description: 'Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Speed Converter \u2014 Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Speed Value",
+                "desc": "Input the numerical speed you want to convert. This can be any positive real number representing speed in the selected source unit."
+          },
+          {
+                "title": "2. Select Conversion Units",
+                "desc": "Choose from km/h, mph, knots, m/s, ft/s, and Mach. The Mach calculation uses the speed of sound at sea level (343 m/s or 1,125 ft/s)."
+          },
+          {
+                "title": "3. Compare Results",
+                "desc": "All converted values update in real-time as you type. A speed scale bar shows where your value falls relative to common benchmarks like walking, cycling, and car speed."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between knots and nautical miles per hour?",
+                "answer": "They are identical — one knot equals one nautical mile per hour. Knots are used in aviation and maritime contexts while mph is used on land."
+          },
+          {
+                "question": "Does the Mach conversion account for altitude and temperature?",
+                "answer": "No, Mach is calculated using the standard sea-level speed of sound (343 m/s). At higher altitudes the actual Mach number would differ."
+          },
+          {
+                "question": "Can I convert speed values in reverse order?",
+                "answer": "Yes, click the swap button between the unit selectors to reverse the conversion direction without re-entering values."
+          }
+    ]
+},
   {
+
     id: "867",
     name: "Length Converter",
     slug: "length-converter",
     category: "Utility",
     description: 'Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Length Converter \u2014 Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Length Value",
+                "desc": "Type the numeric length you want to convert. The input accepts values from 0 to 1,000,000,000 in any supported unit."
+          },
+          {
+                "title": "2. Choose Units",
+                "desc": "Select from millimeters, centimeters, meters, kilometers, inches, feet, yards, miles, nautical miles, and astronomical units."
+          },
+          {
+                "title": "3. View Instant Results",
+                "desc": "All converted values update in milliseconds as you type or change units. The most common conversions are highlighted at the top of the results panel."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the converter handle fractional inches like 1/16?",
+                "answer": "No, all inputs must be decimal numbers. For fractional inches (e.g., 3/8 inch), calculate the decimal equivalent (0.375) before converting."
+          },
+          {
+                "question": "Can I convert between metric and imperial in both directions?",
+                "answer": "Yes, every supported unit can be both a source and target. Convert miles to kilometers or millimeters to inches with equal ease."
+          },
+          {
+                "question": "Are light-years or parsecs supported?",
+                "answer": "No, astronomical distances are limited to astronomical units (AU). For interstellar distances, convert to AU and multiply by 63,241 to get light-years manually."
+          }
+    ]
+},
   {
+
     id: "868",
     name: "Weight Converter",
     slug: "weight-converter",
     category: "Utility",
     description: 'Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Weight Converter \u2014 Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Weight Value",
+                "desc": "Type the numerical weight you wish to convert. The tool supports values from 0 up to 1 billion units."
+          },
+          {
+                "title": "2. Select Units",
+                "desc": "Choose from milligrams, grams, kilograms, metric tons, ounces, pounds, stones, and troy ounces. Each unit belongs to either metric or imperial categories."
+          },
+          {
+                "title": "3. Read Multiple Results",
+                "desc": "Converted values display for all units simultaneously. A visual comparison bar shows relative weight using familiar reference objects."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between a troy ounce and a standard ounce?",
+                "answer": "A troy ounce (31.1035 g) is heavier than a standard avoirdupois ounce (28.3495 g). Troy ounces are used for precious metals like gold and silver."
+          },
+          {
+                "question": "Can I convert between stones and kilograms?",
+                "answer": "Yes, stones are supported. One stone equals 14 pounds or approximately 6.35 kilograms, commonly used in the UK and Ireland for body weight."
+          },
+          {
+                "question": "Does the converter support micrograms for pharmaceutical use?",
+                "answer": "No, the smallest unit is milligrams. For micrograms, divide by 1,000 and use the milligram result."
+          }
+    ]
+},
   {
+
     id: "869",
     name: "Volume Converter",
     slug: "volume-converter",
     category: "Utility",
     description: 'Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Volume Converter \u2014 Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Volume Amount",
+                "desc": "Input the numeric volume to convert, supporting values from 0 to 10 million in any unit."
+          },
+          {
+                "title": "2. Choose Unit Pair",
+                "desc": "Select source and target units from milliliters, liters, cubic meters, gallons (US), gallons (UK), quarts, pints, cups, fluid ounces, tablespoons, and teaspoons."
+          },
+          {
+                "title": "3. See All Equivalents",
+                "desc": "The tool displays the converted value in every supported volume unit. US and UK variants are shown separately with clear labeling."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between US and UK gallons?",
+                "answer": "A US gallon is 3.785 liters while a UK (imperial) gallon is 4.546 liters — about 20% larger. The tool clearly labels which standard it uses."
+          },
+          {
+                "question": "Can I convert cooking measurements like cups to grams?",
+                "answer": "No, this is a volume-to-volume converter only. For weight-based cooking conversions, use the Cooking Measurement Converter tool."
+          },
+          {
+                "question": "Does the tool support microliters for lab measurements?",
+                "answer": "No, the smallest unit is milliliters. For microliter volumes, convert to milliliters (1 μL = 0.001 mL) first."
+          }
+    ]
+},
   {
+
     id: "870",
     name: "Area Converter",
     slug: "area-converter",
     category: "Utility",
     description: 'Convert area between square meters, square feet, acres, hectares, and square kilometers. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Area Converter \u2014 Convert area between square meters, square feet, acres, hectares, and square kilometers. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Area Value",
+                "desc": "Input the numeric area to convert. The tool handles values from 0 to 1 trillion square units."
+          },
+          {
+                "title": "2. Select Units",
+                "desc": "Choose from square millimeters, square centimeters, square meters, hectares, square kilometers, square inches, square feet, square yards, acres, and square miles."
+          },
+          {
+                "title": "3. View Real-Time Results",
+                "desc": "All conversions update instantly. A reference table shows equivalent areas using real-world landmarks — football fields, tennis courts, and city blocks."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many square feet are in an acre?",
+                "answer": "One acre equals 43,560 square feet. The tool can convert acres to any other unit including square meters (4,047 m²) and hectares (0.4047 ha)."
+          },
+          {
+                "question": "Can I convert between hectares and acres?",
+                "answer": "Yes, both hectares and acres are fully supported. One hectare equals 2.471 acres. The conversion works in both directions."
+          },
+          {
+                "question": "Does the converter support decimal input for partial units?",
+                "answer": "Yes, enter decimal values like 2.5 for two and a half units. The result displays the converted value with up to 10 decimal places of precision."
+          }
+    ]
+},
   {
+
     id: "871",
     name: "Data Size Converter",
     slug: "data-size-converter",
     category: "Utility",
     description: 'Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Data Size Converter \u2014 Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Enter Data Size",
+                "desc": "Type the digital storage size you want to convert, from 0 up to 1 exabyte."
+          },
+          {
+                "title": "2. Toggle Binary vs Decimal",
+                "desc": "Choose between decimal (SI: KB, MB, GB) which uses powers of 1000, and binary (KiB, MiB, GiB) which uses powers of 1024."
+          },
+          {
+                "title": "3. View Converted Sizes",
+                "desc": "See the equivalent size in every unit from bits up to yottabytes. A visual bar compares the size to common files like a 3-minute MP3 or a full HD movie."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between a gigabyte and a gibibyte?",
+                "answer": "A gigabyte (GB) is 1,000,000,000 bytes (decimal), while a gibibyte (GiB) is 1,073,741,824 bytes (binary). Storage manufacturers use GB while operating systems report GiB."
+          },
+          {
+                "question": "Can I convert data transfer rates like Mbps to MB/s?",
+                "answer": "Yes, the tool supports both storage sizes and transfer rates. 1 Mbps (megabit per second) equals 0.125 MB/s (megabyte per second)."
+          },
+          {
+                "question": "Does the tool convert between bits and bytes?",
+                "answer": "Yes, both bits and bytes are supported at every prefix level. 8 bits equal 1 byte, and this relationship is maintained across all conversions."
+          }
+    ]
+},
   {
     id: "873",
     name: "Body Fat Estimator",
@@ -1325,6 +2114,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "891",
     name: "Time Zone Converter",
     slug: "time-zone-converter",
@@ -1332,7 +2122,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Zone Converter \u2014 Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Select Date and Time",
+                "desc": "Use the date picker and time input to set the starting time. This is the time value you want to convert across time zones."
+          },
+          {
+                "title": "2. Choose Source and Target Zones",
+                "desc": "Select the source time zone (where the input time is) and the target time zone (what you want to know). Search by city name or UTC offset."
+          },
+          {
+                "title": "3. View Converted Time",
+                "desc": "The result shows the equivalent time in the target zone, including whether DST is active in both zones. A time bar visualizes the offset difference."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the converter handle half-hour and quarter-hour time zones?",
+                "answer": "Yes, all time zones including those with 30-minute (e.g., Newfoundland UTC-3:30) and 45-minute (e.g., Nepal UTC+5:45) offsets are supported."
+          },
+          {
+                "question": "Can I convert a time for a past or future date?",
+                "answer": "Yes, the date picker allows any date from 1970 to 2100. Historical and future DST rules are applied based on the IANA time zone database."
+          },
+          {
+                "question": "How many time zones can I view at once?",
+                "answer": "You can add up to 10 target zones simultaneously. Each shows the converted time plus the current time in that zone for comparison."
+          }
+    ]
+},
   {
     id: "892",
     name: "DST Checker (US)",
@@ -1391,6 +2209,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "895",
     name: "Minutes to Hours Converter",
     slug: "minutes-to-hours-converter",
@@ -1398,8 +2217,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Minutes",
+                "desc": "Type the total number of minutes you want to convert into hours. The input accepts values from 0 to 99,999 minutes."
+          },
+          {
+                "title": "2. View Result",
+                "desc": "The tool displays the equivalent in hours and minutes (e.g., 150 minutes = 2 hours 30 minutes) as well as a decimal hours value (2.5 hours)."
+          },
+          {
+                "title": "3. Copy or Use in Payroll",
+                "desc": "Click copy to copy the result in decimal format (2.5h) for use in payroll or timesheet systems. Both HH:MM and decimal formats are provided."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How do I convert 90 minutes to hours for a timesheet?",
+                "answer": "90 minutes equals 1.5 hours in decimal or 1 hour 30 minutes in HH:MM format. Use the decimal format for payroll systems that require fractional hours."
+          },
+          {
+                "question": "Can I convert negative values or time differences?",
+                "answer": "No, only positive values are accepted. For time differences that may be negative, calculate the absolute difference in minutes first."
+          },
+          {
+                "question": "Does the tool handle seconds within minutes?",
+                "answer": "No, this tool only handles whole minutes. For second-level precision, convert seconds to minutes first using the Seconds to Minutes Converter."
+          }
+    ]
+},
   {
+
     id: "896",
     name: "Hours to Minutes Tool",
     slug: "hours-to-minutes-tool",
@@ -1407,8 +2255,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hours to Minutes Tool \u2014 Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Hours",
+                "desc": "Input the number of hours to convert. This can include decimal hours (e.g., 2.5 for 2 hours and 30 minutes). Accepts values from 0 to 9,999."
+          },
+          {
+                "title": "2. View Minute Equivalent",
+                "desc": "The result shows the total minutes (e.g., 2.5 hours = 150 minutes). A breakdown displays the hours and remaining minutes separately."
+          },
+          {
+                "title": "3. Use in Schedules",
+                "desc": "Click the copy button to quickly copy the minute value for use in project planning, scheduling, or billing calculations."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How do I convert 1.75 hours to minutes?",
+                "answer": "Multiply 1.75 by 60 to get 105 minutes. The tool does this instantly and displays both the decimal and the 1 hour 45 minute breakdown."
+          },
+          {
+                "question": "Can I convert hours and minutes separately?",
+                "answer": "Yes, enter hours in the main field. If you also have minutes, add them by converting minutes separately using the companion Minutes to Hours converter."
+          },
+          {
+                "question": "Does this tool work with billable hours for freelancers?",
+                "answer": "Yes, decimal hours are supported. Enter 7.25 hours to get 435 minutes — useful for billing clients who track in minute increments rather than quarter-hours."
+          }
+    ]
+},
   {
+
     id: "897",
     name: "Seconds to Minutes Converter",
     slug: "seconds-to-minutes-converter",
@@ -1416,7 +2293,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Seconds to Minutes Converter \u2014 Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Seconds",
+                "desc": "Type the total seconds you want to convert. Accepts values from 0 to 9,999,999 seconds for durations up to 115 days."
+          },
+          {
+                "title": "2. View Minute Representation",
+                "desc": "The result displays total minutes (decimal), minutes and remaining seconds, and equivalent times in hours, minutes, and seconds."
+          },
+          {
+                "title": "3. Copy Any Format",
+                "desc": "Each format has its own copy button. Copy the decimal minutes for scientific use, or the HH:MM:SS format for display purposes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many minutes are in 3,600 seconds?",
+                "answer": "3,600 seconds equals 60 minutes exactly (or 1 hour). The tool shows this as 60 minutes, 1h 0m 0s, and 1 hour in the duration breakdown."
+          },
+          {
+                "question": "Can I convert backwards from minutes to seconds?",
+                "answer": "No, this is a seconds-to-minutes converter. Use the generic Time Converter for two-way conversions between any time units."
+          },
+          {
+                "question": "Does the tool account for leap seconds?",
+                "answer": "No, standard 60-second minutes are used. Civil leap seconds are not accounted for in this simple conversion tool."
+          }
+    ]
+},
   {
     id: "898",
     name: "Password Entropy Calculator",
@@ -1800,6 +2705,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "937",
     name: "Hours to Minutes Converter",
     slug: "hours-to-minutes-converter",
@@ -1807,7 +2713,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert hours and minutes to total minutes for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hours to Minutes Converter \u2014 Convert hours and minutes to total minutes for time tracking and scheduling. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Time in Hours",
+                "desc": "Type the hours value you need to convert. Accepts both whole numbers and decimals (e.g., 3 or 1.25). Range is 0 to 10,000 hours."
+          },
+          {
+                "title": "2. Read Minute Output",
+                "desc": "The equivalent in minutes appears instantly. For example, 3 hours becomes 180 minutes, and 1.25 hours becomes 75 minutes."
+          },
+          {
+                "title": "3. Toggle Precision",
+                "desc": "Use the precision toggle to show results with or without decimal places in the minute output. The HH:MM format is always shown alongside."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the formula for converting hours to minutes?",
+                "answer": "Multiply the number of hours by 60. For example, 2 hours × 60 = 120 minutes. The tool handles both whole and fractional hours automatically."
+          },
+          {
+                "question": "Is this different from the Hours to Minutes Tool?",
+                "answer": "The Hours to Minutes Tool focuses on decimal hour conversion while this converter provides a broader range and additional formatting options."
+          },
+          {
+                "question": "Can I convert large numbers like 1,000 hours into minutes?",
+                "answer": "Yes, 1,000 hours equals 60,000 minutes. The tool supports up to 10,000 hours (600,000 minutes) in a single conversion."
+          }
+    ]
+},
   {
     id: "938",
     name: "Parquet to CSV Converter",
@@ -2132,6 +3066,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ]
   },
   {
+
     id: "969",
     name: "TSV ↔ CSV Converter",
     slug: "tsv-csv-converter",
@@ -2139,7 +3074,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online TSV ↔ CSV Converter — Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. ',
     dependencies: "None",
-      },
+    instructions: [
+          {
+                "title": "1. Paste TSV Data",
+                "desc": "Copy tab-separated data from a spreadsheet, database export, or text file and paste it into the input area. The tool parses tabs as column separators."
+          },
+          {
+                "title": "2. Preview Conversion",
+                "desc": "The CSV output appears in a preview table showing headers and rows. Verify that columns aligned correctly — mismatched row lengths are highlighted in red."
+          },
+          {
+                "title": "3. Download or Copy CSV",
+                "desc": "Click download to save the converted CSV file, or copy the comma-separated text to your clipboard. The tool also supports the reverse direction (CSV to TSV)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle TSV fields containing tabs?",
+                "answer": "Fields with embedded tabs must be quoted. If unquoted tabs are found inside fields, the tool attempts to auto-quote them during conversion."
+          },
+          {
+                "question": "Can I change the delimiter from comma to semicolon in the output?",
+                "answer": "Yes, select the output delimiter — comma, semicolon, or pipe. This is useful for locales where the decimal separator is a comma."
+          },
+          {
+                "question": "Does the tool handle large files (over 100MB)?",
+                "answer": "The converter processes files entirely in browser memory. For files over 50MB, performance may degrade. Consider splitting large TSV files before conversion."
+          }
+    ]
+},
   {
     id: "970",
     name: "JSON → Toon Converter",

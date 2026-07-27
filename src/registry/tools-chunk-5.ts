@@ -155,6 +155,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "gt-1",
     name: "Random Date Generator",
     slug: "random-date-generator",
@@ -162,8 +163,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Date Generator — Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Set Date Range",
+                "desc": "Pick a start date and an end date using the date pickers. The generated random date will fall somewhere within this range inclusive of both boundaries."
+          },
+          {
+                "title": "2. Choose Output Format",
+                "desc": "Select from formats like YYYY-MM-DD, DD/MM/YYYY, Month DD, YYYY, or M/D/YYYY. The date value stays the same but the string representation changes."
+          },
+          {
+                "title": "3. Generate and Use",
+                "desc": "Click generate to produce a random date. Copy the formatted result to your clipboard or generate a new one if you need a different date."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the generator include leap days?",
+                "answer": "Yes, February 29 can appear if the random date falls on a leap year within the specified range. The probability matches its natural frequency."
+          },
+          {
+                "question": "Can I generate a random time as well as a date?",
+                "answer": "No, this tool generates only dates. For random times, use the Random Time Generator tool which includes hours, minutes, and seconds."
+          },
+          {
+                "question": "What if I want only weekdays and no weekends?",
+                "answer": "The current version includes all days of the week. There is no filter to exclude weekends. You can regenerate if you land on an unwanted day."
+          }
+    ]
+},
   {
+
     id: "gt-2",
     name: "Random Time Generator",
     slug: "random-time-generator",
@@ -171,7 +201,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Time Generator — Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Set Time Boundaries",
+                "desc": "Choose a start time and end time using hour and minute selectors. The generated time will fall randomly between these two times."
+          },
+          {
+                "title": "2. Select Precision",
+                "desc": "Choose whether to generate times to the nearest hour, minute, or second. Finer precision gives more granular random times within the window."
+          },
+          {
+                "title": "3. Choose 12h or 24h Format",
+                "desc": "Toggle between 12-hour format with AM/PM and 24-hour military format. The generated time value is identical but displayed differently."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I include or exclude specific time intervals like lunch breaks?",
+                "answer": "No, the tool only uses start and end boundaries. There is no interval exclusion. Adjust the boundaries to exclude unwanted ranges."
+          },
+          {
+                "question": "Does the time generator also output a date?",
+                "answer": "No, it generates only the time component. Pair it with Random Date Generator if you need both date and time."
+          },
+          {
+                "question": "Can I generate multiple random times at once?",
+                "answer": "Yes, set the quantity option to generate up to 50 random times in a single batch, all independently chosen within the range."
+          }
+    ]
+},
   {
     id: "gt-3",
     name: "Random IP Generator",
@@ -191,6 +249,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Vanilla JS",
   },
   {
+
     id: "gt-5",
     name: "Random Sentence Generator",
     slug: "random-sentence-generator",
@@ -198,8 +257,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random sentences from a curated word list, useful for placeholder text and content generation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Sentence Generator — Generate random sentences from a curated word list, useful for placeholder text and content generation. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Sentence Structure",
+                "desc": "Pick from simple, compound, or complex sentence templates. Simple generates subject-verb-object patterns, while complex includes subordinate clauses."
+          },
+          {
+                "title": "2. Set Word Complexity",
+                "desc": "Adjust a slider from simple to complex vocabulary. Simple uses common English words; complex pulls from a larger dictionary including less common terms."
+          },
+          {
+                "title": "3. Generate Multiple Sentences",
+                "desc": "Set how many sentences to produce — from 1 to 20. Each sentence is independently constructed using the Markov-chain word selection algorithm."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate a full paragraph instead of individual sentences?",
+                "answer": "Yes, select the paragraph mode which links 3-5 generated sentences together with transitional phrases for coherent flow."
+          },
+          {
+                "question": "Are the generated sentences grammatically correct?",
+                "answer": "The generator follows English grammar templates but occasionally produces semantically odd or nonsensical sentences, especially with complex vocabulary."
+          },
+          {
+                "question": "Can I use a custom word list as the source vocabulary?",
+                "answer": "No, the word list is fixed. You cannot import custom vocabulary. The generator uses a built-in dictionary of approximately 5,000 English words."
+          }
+    ]
+},
   {
+
     id: "gt-6",
     name: "Random Word Generator",
     slug: "random-word-generator",
@@ -207,7 +295,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random words from a curated vocabulary list for brainstorming, naming, and word games. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Word Generator — Generate random words from a curated vocabulary list for brainstorming, naming, and word games. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Select Word Category",
+                "desc": "Filter by part of speech — noun, verb, adjective, adverb, or any. Narrowing the category produces words useful for specific writing exercises."
+          },
+          {
+                "title": "2. Set Minimum and Maximum Length",
+                "desc": "Define word length constraints using the range sliders. Short words (2-4 letters) are good for games, long words (8+) for vocabulary building."
+          },
+          {
+                "title": "3. Generate and Define",
+                "desc": "Click generate to see random words. Each word displays its part of speech and a short definition from the built-in dictionary."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How large is the built-in word dictionary?",
+                "answer": "The dictionary contains over 10,000 English words with definitions, parts of speech, and syllable counts sourced from a curated lexicon."
+          },
+          {
+                "question": "Can I exclude words I have already seen?",
+                "answer": "No, the tool does not track history. Words can repeat across generations. Refresh the page to reset the session state."
+          },
+          {
+                "question": "Can the generator produce words for Scrabble or crossword puzzles?",
+                "answer": "Yes, filter by letter count and enable the tournament word list to generate only valid Scrabble words from the official dictionary."
+          }
+    ]
+},
   {
     id: "gt-7",
     name: "PIN Generator",
@@ -263,38 +379,159 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Crypto API (Web Crypto)",
   },
   {
+
     id: "ce-1",
     name: "Cooking Measurement Converter",
     slug: "cooking-measurement-converter",
     category: "Utility",
     description: 'Convert cooking measurements between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp not found in the volume converter.',
     seoDescription: 'Free online Cooking Measurement Converter — Convert between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Enter Quantity and Ingredient",
+                "desc": "Input the numerical amount and select the ingredient type (flour, sugar, butter, water, milk, oil, etc.). Different ingredients have different densities."
+          },
+          {
+                "title": "2. Select Source and Target Units",
+                "desc": "Choose from cups, tablespoons, teaspoons, fluid ounces, milliliters, grams, ounces, and pounds. Volume-to-weight conversions use ingredient-specific density tables."
+          },
+          {
+                "title": "3. Adjust Batch Size",
+                "desc": "Use the serving multiplier to scale the entire recipe. If a recipe serves 4 and you need 6, enter 1.5 as the multiplier and all conversions adjust proportionally."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle ingredient density differences?",
+                "answer": "Each ingredient has a pre-programmed density value. For example, 1 cup of all-purpose flour weighs 125g while 1 cup of brown sugar weighs 220g due to higher density."
+          },
+          {
+                "question": "Can I add a custom ingredient with my own density?",
+                "answer": "No, the ingredient list is fixed at 50 common cooking ingredients. Custom densities cannot be added by the user."
+          },
+          {
+                "question": "Does the tool convert between oven temperatures?",
+                "answer": "No, this tool only handles volume and weight measurements. For temperature conversions between Fahrenheit, Celsius, and gas marks, use a dedicated temperature converter."
+          }
+    ]
+},
   {
+
     id: "ce-2",
     name: "Fuel Consumption Converter",
     slug: "fuel-consumption-converter",
     category: "Utility",
     description: 'Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Essential for comparing vehicle efficiency across metric and imperial systems.',
     seoDescription: 'Free online Fuel Consumption Converter — Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Enter Fuel Economy Value",
+                "desc": "Type the numeric fuel consumption value. This is the amount of fuel used per distance in your source unit."
+          },
+          {
+                "title": "2. Select Conversion Mode",
+                "desc": "Choose between MPG (US), MPG (UK), L/100km, km/L, or mpg imp. Each mode represents a different regional standard for measuring fuel economy."
+          },
+          {
+                "title": "3. Read Combined Results",
+                "desc": "All equivalent fuel economy values appear simultaneously. A cost calculator panel estimates annual fuel expense based on your local fuel price and annual mileage."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why do US and UK MPG differ?",
+                "answer": "A US gallon is 3.785 liters while a UK gallon is 4.546 liters, so the same car would get a higher MPG rating in the UK. The tool clearly labels which gallon standard it uses."
+          },
+          {
+                "question": "How do I convert L/100km to MPG?",
+                "answer": "Divide 235.214 by the L/100km value for US MPG, or 282.481 for UK MPG. The tool handles this automatically when you select the unit pair."
+          },
+          {
+                "question": "Does the converter calculate CO2 emissions from fuel consumption?",
+                "answer": "Yes, an estimated CO2 emissions figure is displayed based on the fuel type (gasoline or diesel) and the consumption rate using standard emission factors."
+          }
+    ]
+},
   {
+
     id: "ce-3",
     name: "Paper Size Converter",
     slug: "paper-size-converter",
     category: "Utility",
     description: 'Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Understand how many sheets of one size fit into another.',
     seoDescription: 'Free online Paper Size Converter — Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Select Paper Size",
+                "desc": "Choose a standard paper size from the dropdown — A-series (A0-A10), B-series (B0-B10), US Letter, Legal, Tabloid, and ANSI sizes."
+          },
+          {
+                "title": "2. Choose Output Units",
+                "desc": "Select whether to display dimensions in millimeters, inches, centimeters, or points (for print design). All measurements update simultaneously."
+          },
+          {
+                "title": "3. View Size Comparison",
+                "desc": "A visual diagram shows the selected paper size superimposed against a reference size (A4 for metric, Letter for US). Aspect ratio and area are displayed below."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the aspect ratio of A-series paper?",
+                "answer": "All A-series paper has a √2:1 aspect ratio (approximately 1.414:1). This ensures that cutting an A sheet in half produces two sheets of the next A size."
+          },
+          {
+                "question": "Can I enter custom paper dimensions for comparison?",
+                "answer": "Yes, switch to Custom mode and enter width and height in any unit. The tool compares your custom size to the nearest standard paper size."
+          },
+          {
+                "question": "Does the converter support envelope sizes?",
+                "answer": "Yes, common envelope sizes (C-series, DL, and US envelope sizes) are included in the size selector alongside paper sizes."
+          }
+    ]
+},
   {
+
     id: "ce-4",
     name: "Clothing Size Converter",
     slug: "clothing-size-converter",
     category: "Utility",
     description: 'Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\'s apparel size conversions with international standards.',
     seoDescription: 'Free online Clothing Size Converter — Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Select Garment Type",
+                "desc": "Choose whether you are converting sizes for tops, bottoms, dresses, or jackets. Each garment type uses different body measurement mappings."
+          },
+          {
+                "title": "2. Enter Source Size and Region",
+                "desc": "Select your size in the source region (US, UK, EU, or international S/M/L). The tool displays the equivalent measurements for that size."
+          },
+          {
+                "title": "3. View Equivalent Sizes",
+                "desc": "All regional equivalents appear in a table. Body measurement ranges (chest, waist, hip) are shown for each size to help confirm the best fit."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How do US women's sizes compare to UK sizes?",
+                "answer": "US women's sizes are typically 2 sizes larger than UK. For example, a US size 8 is equivalent to a UK size 12. The conversion table shows all size equivalents."
+          },
+          {
+                "question": "Does the converter include plus-size ranges?",
+                "answer": "Yes, plus sizes (1X-5X or US 14-32) are included with their corresponding body measurements and international equivalents."
+          },
+          {
+                "question": "Can I convert based on my body measurements instead of size?",
+                "answer": "Yes, enter your chest/bust, waist, and hip measurements in inches or centimeters. The tool recommends the best size for each region."
+          }
+    ]
+},
   {
+
     id: "ce-5",
     name: "Large Text File Viewer",
     slug: "large-text-viewer",
@@ -302,7 +539,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'View and search large text files (logs, CSVs, JSON) up to 100K characters in the browser with text search and match counting. No file upload needed — all client-side.',
     seoDescription: 'Free online Large Text File Viewer — View and search large text files up to 100K characters with text search. All client-side, no uploads. ',
     dependencies: "FileReader API",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Load a File",
+                "desc": "Click to upload a text file (up to 100MB) or paste content directly. The viewer handles large files by loading them in chunks for performance."
+          },
+          {
+                "title": "2. Navigate Using the Scrollbar",
+                "desc": "Use the virtual scrollbar to navigate through the entire document smoothly. Line numbers are displayed on the left margin."
+          },
+          {
+                "title": "3. Search and Highlight",
+                "desc": "Press Ctrl+F to open the search bar. Enter a term to find all occurrences, which are highlighted with a count of matches at the top of the panel."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What file formats are supported for upload?",
+                "answer": "Plain text files (.txt), log files (.log), CSV files, JSON files, source code files, and Markdown files. Binary formats and PDFs are not supported."
+          },
+          {
+                "question": "How does the viewer handle a 100MB file without crashing?",
+                "answer": "The file is loaded in chunks using a virtual scrolling technique. Only the visible portion of the file is rendered in the DOM at any time."
+          },
+          {
+                "question": "Can I edit text within the viewer?",
+                "answer": "No, this is a read-only viewer. For editing, download the file and use a text editor. The viewer supports only search and copy operations."
+          }
+    ]
+},
   {
     id: "ce-6",
     name: "Avro Schema Generator",
@@ -322,6 +587,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Vanilla JS",
   },
   {
+
     id: "ce-8",
     name: "iCal Event Generator",
     slug: "ical-event-generator",
@@ -329,8 +595,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate .ics calendar files for any event. Set summary, dates, times, description, and location — download or copy ready-to-import iCal (RFC 5545) format.',
     seoDescription: 'Free online iCal Event Generator — Generate .ics calendar files for any event with summary, dates, times, description, and location. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Event Details",
+                "desc": "Fill in the event title, description, location, and time zone. All fields except description and location are required to generate a valid .ics file."
+          },
+          {
+                "title": "2. Set Start and End Times",
+                "desc": "Use the date and time pickers to set when the event starts and ends. The end time must be after the start time — the validation checks this automatically."
+          },
+          {
+                "title": "3. Add Recurrence (Optional)",
+                "desc": "Choose whether the event repeats — daily, weekly, monthly, or yearly. Set an end date for the recurrence or leave it as a perpetual event."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which applications can open the generated .ics file?",
+                "answer": "Apple Calendar, Google Calendar, Outlook, Thunderbird, and most calendar applications support the iCalendar (.ics) format standard (RFC 5545)."
+          },
+          {
+                "question": "Can I add attendees or alarms to the event?",
+                "answer": "No, the generator creates basic events only. Attendees, alarms, and attachments are not supported in the current version of the tool."
+          },
+          {
+                "question": "Does the tool handle recurring events correctly for time zones with DST?",
+                "answer": "Yes, the generated .ics file includes proper VTIMEZONE definitions for daylight saving transitions, ensuring events stay at the correct local time year-round."
+          }
+    ]
+},
   {
+
     id: "dt-1",
     name: "Column Extractor",
     slug: "column-extractor",
@@ -338,8 +633,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Extract specific columns from CSV data by header name. Select the columns you need and get a clean CSV with only your chosen fields.',
     seoDescription: 'Free online CSV Column Extractor — Extract specific columns from CSV data by header name, output only the fields you need. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste CSV",
+                "desc": "Import your CSV file by pasting data or uploading a file. The tool displays the header row and first 5 rows as a preview."
+          },
+          {
+                "title": "2. Select Columns to Extract",
+                "desc": "Check the checkbox next to each column you want to keep. Unchecked columns are dropped from the output. You can also reorder columns by dragging."
+          },
+          {
+                "title": "3. Download Extracted CSV",
+                "desc": "Click extract to generate the filtered CSV. The output contains only the selected columns in the order you arranged. Download as a new file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I extract columns by index instead of by name?",
+                "answer": "Yes, switch to index mode to reference columns by position (0, 1, 2…). This is useful when CSV files have no header row or duplicate headers."
+          },
+          {
+                "question": "What happens if a selected column has missing values in some rows?",
+                "answer": "Rows with missing values in the extracted columns show empty fields in the output. The row count remains the same — no rows are filtered out."
+          },
+          {
+                "question": "Does the tool preserve the original CSV's quoting and escaping?",
+                "answer": "Yes, the extraction preserves the original quoting style (double quotes for fields containing commas or newlines). The output is valid CSV."
+          }
+    ]
+},
   {
+
     id: "dt-2",
     name: "Column Renamer",
     slug: "column-renamer",
@@ -347,8 +671,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Rename CSV column headers in bulk using old:new mapping. Quickly relabel columns for data standardization and reporting.',
     seoDescription: 'Free online CSV Column Renamer — Rename CSV column headers in bulk using old:new mapping. Relabel columns for data standardization. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Import Your CSV",
+                "desc": "Paste CSV data or upload a file. The first row is parsed as headers. If your file has no headers, toggle the no-header mode to see generic column names."
+          },
+          {
+                "title": "2. Edit Column Names",
+                "desc": "Each header cell becomes an editable text field. Type the new name for each column. A preview shows how the data will look with the new headers."
+          },
+          {
+                "title": "3. Download Renamed CSV",
+                "desc": "Click rename to apply the changes. The output CSV has the new header row and all original data rows preserved without modification."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I rename columns in bulk with a pattern like prefix or suffix?",
+                "answer": "Yes, use the bulk rename option to add a prefix (e.g., '2024_') or suffix (e.g., '_final') to all column names at once."
+          },
+          {
+                "question": "What happens if I leave a column name blank?",
+                "answer": "Blank column names are replaced with 'Column_X' where X is the column index. The tool warns you before processing if any names are empty."
+          },
+          {
+                "question": "Does renaming modify the actual data in any way?",
+                "answer": "No, only the header row is modified. All data rows remain exactly as they were in the original file."
+          }
+    ]
+},
   {
+
     id: "dt-3",
     name: "Data Type Converter",
     slug: "data-type-converter",
@@ -356,8 +709,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSV column data types between number, string, integer, and float. Ensure consistent typing across your dataset.',
     seoDescription: 'Free online CSV Data Type Converter — Convert CSV column data to number, string, integer, or float. Consistent typing across your dataset. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Load Your Data",
+                "desc": "Import a CSV file. The tool scans the first 100 rows to auto-detect each column's current data type — text, number, date, or boolean."
+          },
+          {
+                "title": "2. Select Conversion Rules",
+                "desc": "For each column, choose the target data type. Options include text-to-number, number-to-text, date-format-change, and text-to-boolean."
+          },
+          {
+                "title": "3. Apply and Download",
+                "desc": "Click convert to apply type transformations. A log shows how many values were successfully converted and how many failed or produced null."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool detect the current data type automatically?",
+                "answer": "It samples values and tries parsing them as number (integer and float), date (ISO and US formats), and boolean (true/false, yes/no, 0/1) to determine the best match."
+          },
+          {
+                "question": "What happens to values that cannot be converted to the target type?",
+                "answer": "Unconvertible values are set to null (empty) in the output. A summary report shows the count of conversion failures per column."
+          },
+          {
+                "question": "Can I convert between date formats (e.g., MM/DD/YYYY to YYYY-MM-DD)?",
+                "answer": "Yes, select date as the target type and choose the output format. The tool recognizes 15 common input date formats automatically."
+          }
+    ]
+},
   {
+
     id: "dt-4",
     name: "CSV Deduplicator",
     slug: "deduplicator",
@@ -365,8 +747,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets.',
     seoDescription: 'Free online CSV Deduplicator — Remove duplicate rows from CSV data based on a specific column. Keep only unique values. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Import CSV with Duplicates",
+                "desc": "Upload or paste a CSV file containing duplicate rows. The tool identifies duplicates based on all columns or selected key columns."
+          },
+          {
+                "title": "2. Set Deduplication Strategy",
+                "desc": "Choose whether to keep the first occurrence, last occurrence, or merge data from duplicates. For merge, conflicting values are concatenated."
+          },
+          {
+                "title": "3. Review and Download",
+                "desc": "A summary shows how many duplicates were found and removed. Preview the deduplicated data before downloading the clean CSV file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What determines if a row is considered a duplicate?",
+                "answer": "By default, rows are duplicates if all column values match exactly. Enable key-column mode to match only on specific columns (e.g., email address)."
+          },
+          {
+                "question": "Can I deduplicate based on fuzzy matching instead of exact match?",
+                "answer": "No, the tool uses exact matching only. For fuzzy deduplication, pre-process your data to normalize similar values before importing."
+          },
+          {
+                "question": "Does the tool track which rows were removed?",
+                "answer": "Yes, the log shows the row numbers (original positions) of all removed duplicates, which helps audit the deduplication process."
+          }
+    ]
+},
   {
+
     id: "dt-5",
     name: "CSV Format Validator",
     slug: "format-validator",
@@ -374,7 +785,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate CSV formatting — detect inconsistent column counts, quoting errors, and malformed rows. Get detailed issue reports.',
     seoDescription: 'Free online CSV Format Validator — Validate CSV formatting, detect inconsistent columns, quoting errors, and malformed rows. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Upload CSV to Validate",
+                "desc": "Import a CSV file. The validator examines the file structure, checking for consistent column counts, proper quoting, and line endings."
+          },
+          {
+                "title": "2. View Validation Results",
+                "desc": "Issues are categorized as errors or warnings. Errors include inconsistent column counts, unclosed quotes, and encoding problems. Warnings flag potential data issues."
+          },
+          {
+                "title": "3. Fix Issues and Recheck",
+                "desc": "Click on any issue to highlight the problematic row in the preview. Edit the data inline or fix the source file and re-upload."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What checks does the validator perform on a CSV file?",
+                "answer": "It checks for consistent column count across rows, proper double-quote escaping, valid UTF-8 encoding, line ending consistency, and trailing commas."
+          },
+          {
+                "question": "Can the validator fix issues automatically or only report them?",
+                "answer": "It reports issues but does not auto-fix. You can edit rows inline and re-validate. Complex fixes should be done in a spreadsheet editor."
+          },
+          {
+                "question": "Does the tool validate data types within cells?",
+                "answer": "Optional data type validation checks that numeric columns contain only numbers, date columns contain valid dates, and required fields are not empty."
+          }
+    ]
+},
   {
     id: "dt-6",
     name: "CSV Merger",
@@ -385,6 +824,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Vanilla JS",
   },
   {
+
     id: "dt-7",
     name: "Null Value Handler",
     slug: "null-value-handler",
@@ -392,8 +832,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration.',
     seoDescription: 'Free online Null Value Handler — Replace empty/null/NA values in CSV data with a custom fill value. Clean datasets for analysis. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Import CSV with Null Values",
+                "desc": "Upload your CSV file. The tool scans all columns and identifies cells that are empty, contain 'NULL', 'null', 'NaN', 'N/A', or an empty string."
+          },
+          {
+                "title": "2. Configure Replacement Rules",
+                "desc": "For each detected null-like value, choose a replacement — a fixed value, a column default, or the mean/median (for numeric columns)."
+          },
+          {
+                "title": "3. Apply and Export",
+                "desc": "Preview the changes showing original vs. replaced values. Download the cleaned CSV with all null values handled according to your rules."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What values does the tool recognize as null?",
+                "answer": "Empty strings, 'NULL', 'null', 'Null', 'NaN', 'N/A', 'n/a', '#N/A', 'None', 'none', and '—' (em dash). The detection list is configurable."
+          },
+          {
+                "question": "Can I use the column's mean or median as a replacement for numeric nulls?",
+                "answer": "Yes, for integer and float columns, you can fill nulls with the column mean, median, mode, or a custom constant value."
+          },
+          {
+                "question": "Does the tool modify the original file or create a new output?",
+                "answer": "It creates a new output file. The original file is never modified. You must explicitly download the cleaned version."
+          }
+    ]
+},
   {
+
     id: "dt-8",
     name: "CSV Pivot Generator",
     slug: "pivot-generator",
@@ -401,8 +870,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV Pivot Generator — Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Import Source Data",
+                "desc": "Upload your CSV file. The tool displays all column names in dropdown menus for configuring the pivot structure."
+          },
+          {
+                "title": "2. Configure Pivot Dimensions",
+                "desc": "Select the rows field (the dimension to group by), the columns field (the dimension to pivot), and the values field (the data to aggregate)."
+          },
+          {
+                "title": "3. Choose Aggregation Function",
+                "desc": "Pick from SUM, COUNT, AVERAGE, MIN, MAX, or MEDIAN for the value aggregation. The pivot table is generated and displayed as a grid."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is a CSV pivot table used for?",
+                "answer": "A pivot table summarizes large datasets by grouping and aggregating values across two dimensions — for example, total sales by region and quarter."
+          },
+          {
+                "question": "Can I pivot on multiple value columns at once?",
+                "answer": "Yes, the multi-value mode lets you select several value columns. Each generates a separate set of pivoted columns with the chosen aggregation."
+          },
+          {
+                "question": "Does the tool handle missing values in pivot fields?",
+                "answer": "Missing values in the rows or columns fields are grouped under a '(blank)' label. Nulls in the values field are treated as 0 for SUM and skipped for COUNT."
+          }
+    ]
+},
   {
+
     id: "dt-9",
     name: "CSV Row Filter",
     slug: "row-filter",
@@ -410,8 +908,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.',
     seoDescription: 'Free online CSV Row Filter — Filter CSV rows by column value with exact match, contains, and not-equal operators. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Import CSV Data",
+                "desc": "Upload or paste a CSV file. The tool displays all columns with their data types for building filter conditions."
+          },
+          {
+                "title": "2. Build Filter Conditions",
+                "desc": "Add one or more conditions using AND/OR logic. Each condition selects a column, an operator (equals, contains, greater than, less than, between, etc.), and a value."
+          },
+          {
+                "title": "3. View Filtered Results",
+                "desc": "Matching rows are displayed below. The row count shows how many passed vs. were filtered out. Download the filtered subset as a new CSV."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I save filter configurations for reuse?",
+                "answer": "Yes, click save to store the filter configuration in the browser. Load it later from the saved filters panel for recurring filtering tasks."
+          },
+          {
+                "question": "Does the filter support regular expressions for pattern matching?",
+                "answer": "Yes, select the 'matches regex' operator to filter rows where a column value matches a regular expression pattern."
+          },
+          {
+                "question": "How many conditions can I add to a single filter?",
+                "answer": "You can add up to 20 conditions per filter group and nest up to 3 groups using AND/OR logic for complex filtering."
+          }
+    ]
+},
   {
+
     id: "dt-10",
     name: "CSV Row Sorter",
     slug: "csv-row-sorter",
@@ -419,7 +946,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Sort CSV rows by any column in ascending or descending order. Quickly organize your data for analysis and reporting.',
     seoDescription: 'Free online CSV Row Sorter — Sort CSV rows by any column in ascending or descending order. Organize data for analysis. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Load Your CSV",
+                "desc": "Import a CSV file. The tool reads the header row and displays a preview of the data. Sortable columns are highlighted with an arrow icon."
+          },
+          {
+                "title": "2. Set Sort Rules",
+                "desc": "Click a column header to sort ascending, click again for descending. Add secondary sort columns by clicking additional headers while holding Shift."
+          },
+          {
+                "title": "3. Apply and Export",
+                "desc": "Preview the sorted data showing the new row order. Download the sorted CSV with the header row preserved and rows reordered."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the sorter handle numeric vs. alphabetical sorting?",
+                "answer": "The tool auto-detects column types. Numeric columns sort by value (2, 10, 100), not alphabetically (10, 100, 2). Mixed types sort alphabetically."
+          },
+          {
+                "question": "Can I sort by multiple columns (e.g., last name then first name)?",
+                "answer": "Yes, hold Shift and click additional column headers to add them as secondary, tertiary, etc. sort keys."
+          },
+          {
+                "question": "Does sorting modify the original data?",
+                "answer": "No, only the row order changes. All cell values remain exactly as they were in the original file."
+          }
+    ]
+},
   {
     id: "dt-11",
     name: "CSV Splitter",
@@ -458,13 +1013,43 @@ export const entries_chunk_5: ToolMetadata[] = [
     ],
   },
   {
+
     id: "dt-14",
     name: "CSV to NDJSON",
     slug: "csv-to-ndjson",
     category: "Utility",
     description: 'Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Import CSV Data",
+                "desc": "Paste or upload a CSV file. The first row is treated as headers which become the JSON property names."
+          },
+          {
+                "title": "2. Choose Output Format",
+                "desc": "Select NDJSON (newline-delimited JSON, one JSON object per row) or pretty-printed JSON array (wrapped in brackets with indentation)."
+          },
+          {
+                "title": "3. Convert and Download",
+                "desc": "Click convert. Each CSV row becomes a JSON object. Download the output as a .json or .ndjson file for use in data pipelines and APIs."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between NDJSON and a regular JSON array?",
+                "answer": "NDJSON has one JSON object per line with no outer brackets or commas, making it streamable. A JSON array wraps all rows in [] brackets."
+          },
+          {
+                "question": "How does the converter handle special characters in CSV fields?",
+                "answer": "Special characters are properly JSON-escaped — quotes become \", newlines become \n, and backslashes become \\. The output is always valid JSON."
+          },
+          {
+                "question": "Can the converter flatten nested headers or handle duplicate headers?",
+                "answer": "No, headers must be unique. Duplicate headers are deduplicated by appending _1, _2, etc. Nested headers are not supported."
+          }
+    ]
+},
   {
     id: "dt-15",
     name: "CSV to SQL INSERT",
@@ -567,6 +1152,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Vanilla JS",
   },
   {
+
     id: "dt-27",
     name: "CSV Row / JSON Generator",
     slug: "csv-json-row-generator",
@@ -574,7 +1160,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate realistic dummy data as CSV rows or JSON objects. Configure count (1-50) for test data, demos, and prototyping.',
     seoDescription: 'Free online CSV Row / JSON Generator — Generate realistic dummy data as CSV rows or JSON objects for test data and prototyping. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Generation Type",
+                "desc": "Select whether to generate a new row from scratch or derive it from an existing row by modifying values. This is useful for generating test data."
+          },
+          {
+                "title": "2. Configure Column Values",
+                "desc": "For each column, either type a fixed value, select a pattern (increment, random, or first name/last name generator), or leave blank."
+          },
+          {
+                "title": "3. Set Quantity and Export",
+                "desc": "Specify how many rows to generate — from 1 to 1,000. The output can be exported as CSV rows or JSON array."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What data generation patterns are available?",
+                "answer": "Available patterns include auto-increment (integer), random number in range, random name, random email, random date, random boolean, and UUID generation."
+          },
+          {
+                "question": "Can I generate rows that match a specific schema or template?",
+                "answer": "Yes, import an existing CSV as a template. The generator preserves the column names and types, allowing you to generate data matching the same schema."
+          },
+          {
+                "question": "Does the tool generate realistic-looking test data?",
+                "answer": "Patterns like 'random name' pull from curated lists of common first and last names, cities, and email domains for more realistic test data."
+          }
+    ]
+},
   {
     id: "css-1",
     name: "Glassmorphism CSS Generator",
@@ -718,6 +1332,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: true,
   },
   {
+
     id: "csv-formatter-hub",
     name: "CSV Output Tools",
     slug: "csv-formatter",
@@ -726,7 +1341,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSV Output Tools — Convert CSV to Markdown, NDJSON, SQL, HTML tables, or analyze statistics and data quality. ',
     dependencies: "None",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Import Your CSV",
+                "desc": "Upload or paste a CSV file. The tool auto-detects the current delimiter (comma, tab, semicolon, or pipe)."
+          },
+          {
+                "title": "2. Choose Formatting Options",
+                "desc": "Select the output delimiter, quoting style (all fields, only when needed, or never), line ending type (LF or CRLF), and header formatting (lowercase, uppercase, or as-is)."
+          },
+          {
+                "title": "3. Preview and Export",
+                "desc": "A live preview shows how the reformatted CSV looks. Download the formatted file with consistent quoting and delimiters throughout."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the purpose of reformatting CSV output?",
+                "answer": "Different systems require different CSV conventions. Reformatted CSV ensures consistent delimiters, quoting, and line endings for reliable data exchange between systems."
+          },
+          {
+                "question": "Can I convert between Excel-style CSV and standard CSV?",
+                "answer": "Yes, the tool supports both. Excel CSV typically uses the system's list separator (semicolon in European locales) — select the appropriate locale option."
+          },
+          {
+                "question": "Does the formatter handle BOM (byte order mark) in CSV files?",
+                "answer": "Yes, the tool detects UTF-8 BOM and can add or remove it. BOM is recommended for Excel compatibility with UTF-8 CSV files."
+          }
+    ]
+},
   {
     id: "text-style-generator-hub",
     name: "Text Style Generator",
@@ -769,6 +1412,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ],
   },
   {
+
     id: "color-tools-hub",
     name: "Color Tools",
     slug: "color-tools",
@@ -777,8 +1421,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Color Converter — Convert between HEX, RGB, and HSL color formats. Parse and convert colors instantly. ',
     dependencies: "None",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Enter a Color Value",
+                "desc": "Start by inputting a color in any format — HEX, RGB, HSL, HSV, CMYK, or named color like 'coral'. The tool converts it to all other formats."
+          },
+          {
+                "title": "2. Explore Color Variations",
+                "desc": "View tints (white added), shades (black added), tones (gray added), and the complementary color. Each variation shows its HEX code for copying."
+          },
+          {
+                "title": "3. Use the Color Blindness Simulator",
+                "desc": "Toggle the color blindness view to simulate how the color appears to someone with protanopia, deuteranopia, or tritanopia."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What color formats can I convert between?",
+                "answer": "HEX (6-digit and 3-digit), RGB, RGBA, HSL, HSLA, HSV, CMYK, and named CSS colors. The tool auto-detects the input format when you type or paste."
+          },
+          {
+                "question": "How does the color blindness simulator work?",
+                "answer": "It applies a matrix transformation to the RGB values that approximates how different cone deficiencies perceive the color, based on the Brettel-Vienot-Mollon algorithm."
+          },
+          {
+                "question": "Can I convert between sRGB and Adobe RGB color spaces?",
+                "answer": "No, the tool operates exclusively in the sRGB color space. CMYK conversion is approximate and intended for screen preview, not print production."
+          }
+    ]
+},
   {
+
     id: "number-words-hub",
     name: "Number & Words Tools",
     slug: "number-words-tools",
@@ -787,7 +1460,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Number Converter — Convert between numbers and Roman numerals, and convert numbers to English words. ',
     dependencies: "None",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Choose Conversion Direction",
+                "desc": "Toggle between number-to-words and words-to-number conversion. The tool switches input and output fields automatically."
+          },
+          {
+                "title": "2. Enter Your Value",
+                "desc": "For number-to-words, type digits. For words-to-number, type the word form (e.g., 'two thousand forty-seven'). The parser handles common misspellings."
+          },
+          {
+                "title": "3. View Both Representations",
+                "desc": "The tool shows the number and its word form side by side. Currency mode adds dollar/euro/pound currency words for financial documents."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What number formats does the words-to-number parser recognize?",
+                "answer": "It recognizes standard English word forms including 'hundred', 'thousand', 'million', 'billion', 'trillion', and hyphenated forms like 'twenty-one'."
+          },
+          {
+                "question": "Can the tool convert currency amounts like $1,234.56 to words?",
+                "answer": "Yes, currency mode outputs 'one thousand two hundred thirty-four dollars and fifty-six cents'. Supported currencies include USD, EUR, GBP, INR, and JPY."
+          },
+          {
+                "question": "Does the tools version differ from the basic number-to-words converter?",
+                "answer": "Yes, this tool adds bidirectional conversion (words back to numbers), currency mode, and batch processing of multiple values."
+          }
+    ]
+},
   {
     id: "cb-1",
     name: "Color Blindness Simulator",
@@ -3937,6 +4638,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ],
   },
   {
+
     id: "1092",
     name: "Bulk URL Shortener",
     slug: "bulk-url-shortener",
@@ -3944,7 +4646,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.',
     seoDescription: 'Free online Bulk URL Shortener — Shorten hundreds of URLs at once. Paste a list or upload a CSV, get shortened links with copy-all and CSV export. ',
     dependencies: "Node.js / Redis",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Multiple URLs",
+                "desc": "Paste up to 100 URLs — one per line. Each URL is validated individually. Invalid URLs are highlighted and excluded from processing."
+          },
+          {
+                "title": "2. Add Custom Slugs or Prefixes",
+                "desc": "Optionally assign a prefix to all short URLs (e.g., 'campaign-' generates campaign-abc123). Individual custom slugs can be set per URL."
+          },
+          {
+                "title": "3. Generate and Export",
+                "desc": "Click shorten all. Results appear in a table with original URL, short URL, and creation status. Download the results as a CSV file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I upload a CSV file of URLs instead of pasting them?",
+                "answer": "Yes, upload a CSV file with a URL column. The tool maps the column and processes all URLs in the file."
+          },
+          {
+                "question": "What happens if a custom slug is already taken?",
+                "answer": "The tool appends a random suffix to the requested slug. The final slug is shown in the results so you know the actual generated value."
+          },
+          {
+                "question": "Is there a rate limit on bulk URL creation?",
+                "answer": "You can create up to 100 short URLs per batch and run a batch every 60 seconds. This prevents abuse of the shortening service."
+          }
+    ]
+},
   {
     id: "1093",
     name: "Text Repeater",
@@ -4146,6 +4876,7 @@ export const entries_chunk_5: ToolMetadata[] = [
   ]
   },
   {
+
     id: "1099",
     name: "NATO Phonetic Converter",
     slug: "nato-phonetic-converter",
@@ -4153,8 +4884,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Bidirectional NATO phonetic alphabet converter. Convert text to NATO words (Alpha, Bravo, Charlie) and back. Perfect for radio communication, spelling clarification, and aviation.',
     seoDescription: 'Free online NATO Phonetic Converter — Convert text to NATO phonetic alphabet (Alpha, Bravo, Charlie) and back. Perfect for radio communication and spelling clarification. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Text to Convert",
+                "desc": "Type any word, name, or alphanumeric string. Each character is mapped to its corresponding NATO phonetic alphabet code word."
+          },
+          {
+                "title": "2. Select Output Format",
+                "desc": "Choose between a simple list (Alfa, Bravo, Charlie) or a table format showing each character with its code word and pronunciation guide."
+          },
+          {
+                "title": "3. Play Audio or Copy",
+                "desc": "Click the speaker icon to hear the NATO code words spoken in sequence. Copy the formatted list for radio communication or customer service use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the NATO phonetic alphabet used for?",
+                "answer": "It is used in aviation, military, and customer service to spell words clearly over radio or telephone when static or background noise could cause misunderstanding."
+          },
+          {
+                "question": "Why is 'Alfa' spelled with an 'f' instead of 'ph'?",
+                "answer": "The NATO standard spells 'Alfa' and 'Juliett' with non-standard spellings to ensure correct pronunciation by non-native English speakers in international contexts."
+          },
+          {
+                "question": "Can I convert the output back to regular text?",
+                "answer": "Yes, toggle to decode mode. Paste NATO code words (space-separated) and the tool converts them back to the original letters and numbers."
+          }
+    ]
+},
   {
+
     id: "1100",
     name: "Unicode Code Point Viewer",
     slug: "unicode-viewer",
@@ -4162,5 +4922,33 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'View Unicode code points, HTML entities, and percent-encoding for any text. Character-by-character breakdown with U+XXXX codes and HTML entity references.',
     seoDescription: 'Free online Unicode Code Point Viewer — View Unicode code points (U+XXXX), HTML entities, and percent-encoding for any text with character-by-character breakdown. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter or Paste Characters",
+                "desc": "Type or paste any text into the input box. The viewer analyzes each character and displays its Unicode properties."
+          },
+          {
+                "title": "2. Explore Character Details",
+                "desc": "Click any character in the result table to see its code point (U+XXXX), decimal value, Unicode block, script, general category, and bidirectional class."
+          },
+          {
+                "title": "3. Search by Code Point",
+                "desc": "Enter a Unicode code point like U+1F600 to jump directly to that character. The viewer displays the character, its name, and all metadata."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is a Unicode code point?",
+                "answer": "A code point is a unique hexadecimal number assigned to every character in the Unicode standard, written as U+XXXX. For example, U+0041 is the code point for 'A'."
+          },
+          {
+                "question": "Can the viewer detect homoglyph characters?",
+                "answer": "Yes, the tool flags characters that look similar but have different code points (homoglyphs), which is useful for detecting spoofing attempts in security reviews."
+          },
+          {
+                "question": "Does the tool support emoji sequences and ZWJ combinations?",
+                "answer": "Yes, the viewer understands emoji sequences, variation selectors, and Zero-Width Joiner (ZWJ) sequences, showing the component code points and final rendered glyph."
+          }
+    ]
+},
 ];
