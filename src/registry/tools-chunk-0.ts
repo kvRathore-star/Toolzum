@@ -318,7 +318,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Calculator",
     description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Age Calculator — Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. ',
-    dependencies: "Date-fns / Moment.js"
+    dependencies: "Date-fns / Moment.js",
+    instructions: [
+      { title: "1. Enter Birth Date", desc: "Select your date of birth using the date picker." },
+      { title: "2. Choose Reference Date", desc: "Use today's date or pick a custom date to calculate age on." },
+      { title: "3. View Full Age", desc: "See your exact age in years, months, days, hours, minutes, and seconds." },
+    ],
+    faqs: [
+      { question: "What is the exact age calculation?", answer: "The calculator computes age by subtracting the birth date from the reference date, accounting for leap years and month lengths." },
+      { question: "Can I calculate age as of a past date?", answer: "Yes. Change the reference date from today to any past or future date." },
+      { question: "Is this accurate for leap year babies?", answer: "Yes. February 29 birthdays are handled correctly with February 28 or March 1 used in non-leap years." },
+    ],
   },
   {
     id: "27",

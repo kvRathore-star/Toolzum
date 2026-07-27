@@ -585,6 +585,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Business Days Calculator — Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Start Date", desc: "Select the starting date for the calculation." },
+      { title: "2. Enter End Date", desc: "Select the ending date." },
+      { title: "3. View Count", desc: "See total business days excluding weekends and optional holidays." },
+    ],
+    faqs: [
+      { question: "What counts as a business day?", answer: "Monday through Friday, excluding public holidays. Weekends (Saturday and Sunday) are not counted." },
+      { question: "Can I add custom holidays?", answer: "Yes. You can specify dates to exclude as holidays." },
+      { question: "Does this include the start and end dates?", answer: "The calculator counts business days between the dates. Toggle inclusive option to include the end date." },
+    ],
   },
   {
     id: "625",
@@ -594,6 +604,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Day of Week Calculator — Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Date", desc: "Select any date to find out which day of the week it falls on." },
+      { title: "2. View Result", desc: "See the day name and additional calendar information." },
+      { title: "3. Explore", desc: "Check what day other notable dates fall on." },
+    ],
+    faqs: [
+      { question: "How is the day of week determined?", answer: "Using Zeller's congruence algorithm which accounts for the Gregorian calendar system." },
+      { question: "Is this accurate for historical dates?", answer: "Yes, for dates after 1582 (Gregorian calendar adoption). For earlier dates, the Julian calendar may differ." },
+      { question: "What about dates before 1752?", answer: "Different countries adopted the Gregorian calendar at different times. Results for very old dates may vary by region." },
+    ],
   },
   {
     id: "626",
@@ -603,6 +623,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Day of Year Calculator — Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Date", desc: "Select a date to find its position in the year." },
+      { title: "2. View Day Number", desc: "See the day number (1-366) and days remaining in the year." },
+      { title: "3. Reverse Lookup", desc: "Input a day number to find the corresponding date." },
+    ],
+    faqs: [
+      { question: "How is day of year calculated?", answer: "The day number is the count of days from January 1 (day 1) to the selected date, including leap years." },
+      { question: "What is the maximum day number?", answer: "Day 366 in leap years, day 365 in non-leap years." },
+      { question: "Can I convert a day number to a date?", answer: "Yes. Input a day number (1-366) and year to find the corresponding date." },
+    ],
   },
   {
     id: "627",
@@ -612,6 +642,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Exponent Calculator — Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Base", desc: "Input the base number." },
+      { title: "2. Enter Exponent", desc: "Input the power to raise the base to." },
+      { title: "3. Calculate", desc: "View the result with step-by-step calculation." },
+    ],
+    faqs: [
+      { question: "What is an exponent?", answer: "An exponent indicates how many times the base is multiplied by itself. For example, 2 = 2 x 2 x 2 = 8." },
+      { question: "How are negative exponents handled?", answer: "A negative exponent means 1 divided by the base raised to the positive exponent: 2 = 1/2 = 1/8." },
+      { question: "What about fractional exponents?", answer: "Fractional exponents represent roots. For example, 4 = 2 (square root of 4)." },
+    ],
   },
   {
     id: "628",
@@ -621,6 +661,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Final Grade Calculator — Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Current Grade", desc: "Input your current grade in the class." },
+      { title: "2. Enter Desired Grade", desc: "Input the grade you want for the final outcome." },
+      { title: "3. Enter Exam Weight", desc: "Input the weight of the final exam. See required score." },
+    ],
+    faqs: [
+      { question: "How is the required final exam score calculated?", answer: "Required Score = (Desired Grade - Current Grade x (1 - Exam Weight)) / Exam Weight." },
+      { question: "What if I need more than 100%?", answer: "If the calculated score exceeds 100%, your desired grade is not achievable with the current weights." },
+      { question: "Can I calculate for multiple scenarios?", answer: "Yes. Adjust inputs to see how different exam scores affect your final grade." },
+    ],
   },
   {
     id: "629",
@@ -630,6 +680,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online GPA Calculator — Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Courses", desc: "Add your courses with credit hours and letter grades." },
+      { title: "2. Add All Courses", desc: "Continue adding all courses for the semester." },
+      { title: "3. Calculate GPA", desc: "View your semester GPA and cumulative GPA." },
+    ],
+    faqs: [
+      { question: "How is GPA calculated?", answer: "GPA = Total Grade Points / Total Credit Hours. Each letter grade corresponds to a point value (A=4.0, B=3.0, etc.)." },
+      { question: "What if my school uses a different scale?", answer: "The calculator uses the standard 4.0 scale. For weighted GPA or different scales, adjust grade points accordingly." },
+      { question: "Can I track cumulative GPA?", answer: "Yes. Add all semesters to see both semester and cumulative GPA." },
+    ],
   },
   {
     id: "630",
@@ -639,6 +699,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Grade Calculator — Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Assignments", desc: "Add assignment names, scores received, and max possible scores." },
+      { title: "2. Enter Weights", desc: "Set the weight of each assignment category." },
+      { title: "3. Calculate Grade", desc: "View your current grade and what you need on remaining work." },
+    ],
+    faqs: [
+      { question: "How is the weighted grade calculated?", answer: "Weighted Grade = Sum of (Score x Weight) / Sum of Weights. Each category contributes proportionally." },
+      { question: "What is the difference between weighted and unweighted?", answer: "Weighted grades assign different importance to different categories. Unweighted treats all assignments equally." },
+      { question: "Can I predict what I need on future assignments?", answer: "Yes. Add future assignments with unknown scores to see what you need for a target grade." },
+    ],
   },
   {
     id: "631",
@@ -648,6 +718,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online College GPA Calculator — Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Add Semesters", desc: "Enter each completed semester with course grades and credits." },
+      { title: "2. Add Courses Per Semester", desc: "Add all courses with letter grades and credit hours." },
+      { title: "3. Calculate", desc: "View your overall GPA across all semesters." },
+    ],
+    faqs: [
+      { question: "How is cumulative GPA calculated?", answer: "Total grade points across all semesters divided by total credit hours across all semesters." },
+      { question: "Can I include in-progress courses?", answer: "Yes. Add current semester courses to project your GPA with expected grades." },
+      { question: "Does this account for repeated courses?", answer: "The calculator treats each course instance separately. For grade replacement policies, adjust manually." },
+    ],
   },
   {
     id: "632",
@@ -657,6 +737,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Leap Year Calculator — Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Year", desc: "Input any year to check if it is a leap year." },
+      { title: "2. Check Result", desc: "See whether the year is a leap year with the divisibility rule explanation." },
+      { title: "3. Browse Nearby Years", desc: "View nearby leap years for reference." },
+    ],
+    faqs: [
+      { question: "What are the leap year rules?", answer: "A year is a leap year if: divisible by 4, but not by 100, unless also divisible by 400." },
+      { question: "Why do we have leap years?", answer: "Leap years adjust the calendar because the Earth's orbit takes approximately 365.2425 days." },
+      { question: "What happens if born on February 29?", answer: "Leaplings typically celebrate on February 28 or March 1 in non-leap years." },
+    ],
   },
   {
     id: "633",
@@ -666,6 +756,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Probability Calculator — Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Event Details", desc: "Input the number of favorable outcomes and total possible outcomes." },
+      { title: "2. Calculate", desc: "View probability as fraction, decimal, and percentage." },
+      { title: "3. Review Steps", desc: "See step-by-step probability calculation." },
+    ],
+    faqs: [
+      { question: "How is probability calculated?", answer: "Probability = Favorable Outcomes / Total Possible Outcomes. Results are shown as fraction, decimal, and percentage." },
+      { question: "What is the range of probability?", answer: "Probability ranges from 0 (impossible) to 1 (certain). It is always between 0% and 100%." },
+      { question: "Can I calculate compound probability?", answer: "This calculator handles single events. For multiple events, multiply individual probabilities." },
+    ],
   },
   {
     id: "634",
@@ -675,6 +775,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Proportion Calculator — Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Three Values", desc: "Input three known values of a proportion (a/b = c/d)." },
+      { title: "2. Calculate", desc: "The tool solves for the missing value." },
+      { title: "3. View Result", desc: "See the completed proportion with step-by-step solution." },
+    ],
+    faqs: [
+      { question: "How is the missing value found?", answer: "Using cross-multiplication: if a/b = c/d, then a x d = b x c. Solve for the missing value." },
+      { question: "What is a proportion?", answer: "A proportion states that two ratios are equal. Written as a:b = c:d or a/b = c/d." },
+      { question: "Can this handle percentage problems?", answer: "Yes. Proportions are commonly used for percentage, scale, and ratio problems." },
+    ],
   },
   {
     id: "635",
@@ -684,6 +794,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Ratio Calculator — Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Values", desc: "Input two numbers to find their simplified ratio." },
+      { title: "2. Simplify", desc: "The tool reduces the ratio to its simplest form." },
+      { title: "3. View Equivalent Ratios", desc: "See equivalent ratios and the ratio in different formats." },
+    ],
+    faqs: [
+      { question: "How is a ratio simplified?", answer: "Divide both numbers by their greatest common factor (GCF)." },
+      { question: "What are equivalent ratios?", answer: "Equivalent ratios are ratios that represent the same relationship. Multiply or divide both terms by the same number." },
+      { question: "Can I convert a ratio to a percentage?", answer: "Yes. A ratio a:b represents a/(a+b) x 100% for the first part and b/(a+b) x 100% for the second." },
+    ],
   },
   {
     id: "636",
@@ -693,6 +813,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Aspect Ratio Calculator — Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Width and Height", desc: "Input the width and height dimensions." },
+      { title: "2. Choose Common Ratio", desc: "Or select from common aspect ratios (16:9, 4:3, etc.)." },
+      { title: "3. View Result", desc: "See the simplified aspect ratio and missing dimension if applicable." },
+    ],
+    faqs: [
+      { question: "How is aspect ratio calculated?", answer: "Divide width by height and simplify to the smallest whole numbers. 1920x1080 simplifies to 16:9." },
+      { question: "What are common aspect ratios?", answer: "16:9 (HD video), 4:3 (traditional TV), 21:9 (ultrawide), 3:2 (photography), 1:1 (social media)." },
+      { question: "Can I find missing dimensions?", answer: "Yes. Input one dimension and the aspect ratio to find the matching dimension." },
+    ],
   },
   {
     id: "637",
@@ -702,6 +832,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Circle Calculator — Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter One Value", desc: "Input the radius, diameter, circumference, or area of a circle." },
+      { title: "2. Calculate", desc: "The tool computes all other circle properties automatically." },
+      { title: "3. View All", desc: "See radius, diameter, circumference, and area displayed together." },
+    ],
+    faqs: [
+      { question: "What formulas are used?", answer: "Diameter = 2r, Circumference = 2pr, Area = pr. Given any one value, all others can be derived." },
+      { question: "Can I input the area to find other values?", answer: "Yes. Enter any single known value to compute all other circle properties." },
+      { question: "Is p (pi) used in calculations?", answer: "Yes. The calculator uses p to high precision for accurate results." },
+    ],
   },
   {
     id: "638",
@@ -711,6 +851,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online DPI Calculator — Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Screen Dimensions", desc: "Input screen width and height in pixels." },
+      { title: "2. Enter Physical Size", desc: "Input screen diagonal or width/height in inches." },
+      { title: "3. Calculate DPI", desc: "View dots per inch and pixel pitch." },
+    ],
+    faqs: [
+      { question: "What is DPI?", answer: "DPI (Dots Per Inch) measures pixel density. Higher DPI means sharper display." },
+      { question: "How is DPI calculated?", answer: "DPI = Diagonal Pixels / Diagonal Inches. Diagonal pixels = sqrt(width + height)." },
+      { question: "What is a good DPI?", answer: "72 DPI for web, 300 DPI for print. Screen DPI varies: ~200 for standard monitors, ~300+ for Retina displays." },
+    ],
   },
   {
     id: "639",
@@ -720,6 +870,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fraction Calculator — Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Fractions", desc: "Input two fractions with numerators and denominators." },
+      { title: "2. Choose Operation", desc: "Select add, subtract, multiply, or divide." },
+      { title: "3. View Result", desc: "See the result as a simplified fraction and decimal." },
+    ],
+    faqs: [
+      { question: "How are fractions simplified?", answer: "Divide numerator and denominator by their greatest common factor (GCF)." },
+      { question: "Can I convert the result to decimal?", answer: "Yes. The calculator shows both simplified fraction and decimal equivalent." },
+      { question: "What if denominators are different?", answer: "Fractions with different denominators are converted to a common denominator before addition or subtraction." },
+    ],
   },
   {
     id: "640",
@@ -729,6 +889,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Mean Median Mode Calculator — Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Numbers", desc: "Input your dataset as comma or space-separated values." },
+      { title: "2. Calculate", desc: "The tool computes mean, median, mode, and range." },
+      { title: "3. Review Stats", desc: "View all measures of central tendency with sorted data." },
+    ],
+    faqs: [
+      { question: "What is the difference between mean and median?", answer: "Mean is the average (sum divided by count). Median is the middle value when data is sorted." },
+      { question: "Which measure is better for skewed data?", answer: "Median is better for skewed distributions as it is not affected by outliers like the mean." },
+      { question: "What if there are multiple modes?", answer: "The calculator shows all modes. If no number repeats, there is no mode." },
+    ],
   },
   {
     id: "641",
@@ -738,6 +908,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PPI Calculator — Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Resolution", desc: "Input screen width and height in pixels." },
+      { title: "2. Enter Diagonal", desc: "Input the screen diagonal size in inches." },
+      { title: "3. View PPI", desc: "See pixels per inch, dot pitch, and total pixel count." },
+    ],
+    faqs: [
+      { question: "What is PPI?", answer: "PPI (Pixels Per Inch) measures pixel density on a screen. Higher PPI means sharper image quality." },
+      { question: "How is PPI different from DPI?", answer: "PPI refers to screen pixels. DPI refers to printer dots. They are often used interchangeably but have different meanings." },
+      { question: "What PPI should I design for?", answer: "Design at 72 PPI for web graphics, 300 PPI for print. Screen resolution determines actual PPI display." },
+    ],
   },
   {
     id: "642",
@@ -747,6 +927,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pythagorean Theorem Calculator — Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Sides", desc: "Input any two sides of a right triangle (a, b, or c)." },
+      { title: "2. Calculate", desc: "The tool computes the missing side length." },
+      { title: "3. View Triangle Info", desc: "See all sides, area, perimeter, and angles." },
+    ],
+    faqs: [
+      { question: "What is the Pythagorean theorem?", answer: "a + b = c, where a and b are the legs of a right triangle and c is the hypotenuse." },
+      { question: "Can I calculate any two sides?", answer: "Yes. Enter any two of a, b, or c and the calculator finds the missing side." },
+      { question: "What if I enter sides that can't form a right triangle?", answer: "The calculator validates that the inputs can form a valid right triangle before computing." },
+    ],
   },
   {
     id: "643",
@@ -756,6 +946,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Quadratic Equation Solver — Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Coefficients", desc: "Input the a, b, and c coefficients of ax+bx+c=0." },
+      { title: "2. Solve", desc: "The tool computes the roots using the quadratic formula." },
+      { title: "3. View Solutions", desc: "See real or complex roots with step-by-step solution." },
+    ],
+    faqs: [
+      { question: "What is the quadratic formula?", answer: "x = (-b +/- sqrt(b - 4ac)) / 2a. The discriminant (b - 4ac) determines the nature of roots." },
+      { question: "What does the discriminant tell me?", answer: "Discriminant > 0: two real roots. Discriminant = 0: one real root. Discriminant < 0: two complex roots." },
+      { question: "Can it solve equations with complex roots?", answer: "Yes. When the discriminant is negative, the calculator shows complex roots with the imaginary unit i." },
+    ],
   },
   {
     id: "644",
@@ -765,6 +965,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rectangle Area Calculator — Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Length and Width", desc: "Input the length and width of the rectangle." },
+      { title: "2. Calculate", desc: "The tool computes area, perimeter, and diagonal." },
+      { title: "3. View All Properties", desc: "See area, perimeter, and diagonal length." },
+    ],
+    faqs: [
+      { question: "How is rectangle area calculated?", answer: "Area = Length x Width. Perimeter = 2 x (Length + Width). Diagonal = sqrt(Length + Width)." },
+      { question: "Can I calculate if I only know area and one side?", answer: "Yes. Enter area and either length or width to find the missing dimension." },
+      { question: "What units should I use?", answer: "Any consistent units. Area will be in square units, perimeter in linear units." },
+    ],
   },
   {
     id: "645",
@@ -774,6 +984,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Square Root Calculator — Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input a positive number to find its square root." },
+      { title: "2. Calculate", desc: "View the principal square root and negative square root." },
+      { title: "3. See Steps", desc: "Review the step-by-step calculation and nearest perfect squares." },
+    ],
+    faqs: [
+      { question: "What is a square root?", answer: "The square root of a number n is the value that when multiplied by itself equals n." },
+      { question: "Can I calculate the square root of negative numbers?", answer: "This calculator handles positive numbers. For negative numbers, the result is an imaginary number." },
+      { question: "How is the square root calculated?", answer: "The calculator uses Newton's method (Heron's method) for iterative approximation." },
+    ],
   },
   {
     id: "646",
@@ -783,6 +1003,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. No signup or account required.',
     seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Expression", desc: "Type or click buttons to build a mathematical expression." },
+      { title: "2. Use Functions", desc: "Access trigonometric, logarithmic, and exponential functions." },
+      { title: "3. Calculate", desc: "Press equals to evaluate the expression with detailed steps." },
+    ],
+    faqs: [
+      { question: "What functions are available?", answer: "Trigonometric (sin, cos, tan), logarithmic (log, ln), exponential (exp), power, factorial, and constants (p, e)." },
+      { question: "Are results given in degrees or radians?", answer: "Toggle between degrees and radians for trigonometric functions." },
+      { question: "Can I review the calculation steps?", answer: "Yes. The calculator shows step-by-step evaluation for complex expressions." },
+    ],
   },
   {
     id: "647",
@@ -792,6 +1022,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fluid Typography Calculator — Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Min and Max Sizes", desc: "Input the minimum and maximum font sizes." },
+      { title: "2. Enter Viewport Range", desc: "Input the minimum and maximum viewport widths." },
+      { title: "3. Generate CSS", desc: "Copy the generated clamp() CSS rule for fluid typography." },
+    ],
+    faqs: [
+      { question: "What is fluid typography?", answer: "Fluid typography uses the clamp() CSS function to make font sizes scale smoothly between viewport sizes." },
+      { question: "How does clamp() work?", answer: "clamp(MIN, PREFERRED, MAX) sets a font size that scales between min and max based on viewport width." },
+      { question: "Can I use this with any CSS property?", answer: "Yes. The clamp() function works with any CSS property that accepts length values." },
+    ],
   },
   {
     id: "648",
@@ -1241,6 +1481,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Semver Calculator — Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Version", desc: "Input a semantic version (e.g., 1.2.3)." },
+      { title: "2. Choose Operation", desc: "Select bump major, minor, or patch version." },
+      { title: "3. View Result", desc: "See the new version after the bump with detailed diff." },
+    ],
+    faqs: [
+      { question: "What is semantic versioning?", answer: "Semantic versioning uses MAJOR.MINOR.PATCH format where breaking changes increment MAJOR, features increment MINOR, and fixes increment PATCH." },
+      { question: "What does each version bump mean?", answer: "Patch: backwards-compatible bug fixes. Minor: backwards-compatible features. Major: breaking changes." },
+      { question: "Can I compare two versions?", answer: "Yes. The calculator shows the difference between current and new versions." },
+    ],
   },
   {
     id: "674",
@@ -1250,6 +1500,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Standard Deviation Calculator — Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Numbers", desc: "Input your dataset as comma-separated or space-separated numbers." },
+      { title: "2. Calculate", desc: "The tool computes mean, variance, and standard deviation." },
+      { title: "3. Review Stats", desc: "View population and sample standard deviation with step-by-step breakdown." },
+    ],
+    faqs: [
+      { question: "What is standard deviation?", answer: "Standard deviation measures the spread of data points from the mean. A low SD indicates data clustered close to the mean." },
+      { question: "What is the difference between population and sample?", answer: "Population SD uses N as denominator. Sample SD uses N-1 (Bessel's correction) to account for sampling bias." },
+      { question: "What is a good standard deviation?", answer: "It depends on the data scale. SD should be interpreted relative to the mean using the coefficient of variation." },
+    ],
   },
   {
     id: "675",

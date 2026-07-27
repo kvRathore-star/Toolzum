@@ -99,6 +99,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Addition Calculator — Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Starting Time", desc: "Input the base time you want to add to." },
+      { title: "2. Enter Duration", desc: "Input hours and minutes to add." },
+      { title: "3. View Result", desc: "See the new time after adding the duration." },
+    ],
+    faqs: [
+      { question: "Can I add to both AM and PM times?", answer: "Yes. The calculator handles 12-hour and 24-hour formats correctly, crossing AM/PM boundaries." },
+      { question: "What if the result goes past midnight?", answer: "The calculator crosses midnight correctly and shows the next day's time if applicable." },
+      { question: "Can I add hours and minutes separately?", answer: "Yes. Enter hours and minutes as separate inputs for flexibility." },
+    ],
   },
   {
     id: "792",
@@ -108,6 +118,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the exact days, hours, and minutes remaining until a specified future date and time. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Until Calculator — Calculate the exact days, hours, and minutes remaining until a specified future date and time. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Target Date", desc: "Select the future date and time to count down to." },
+      { title: "2. View Countdown", desc: "See the exact time remaining in days, hours, minutes, and seconds." },
+      { title: "3. Auto-Refresh", desc: "The countdown updates in real time." },
+    ],
+    faqs: [
+      { question: "Does it count down in real time?", answer: "Yes. The countdown updates every second for accurate time tracking." },
+      { question: "Can I set alerts?", answer: "The calculator displays the remaining time. Browser notifications are not supported." },
+      { question: "Does it handle timezone differences?", answer: "Yes. The calculator uses your local timezone for accurate countdown." },
+    ],
   },
   {
     id: "793",
@@ -117,6 +137,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Meeting Time Planner — Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Your Timezone", desc: "Select your timezone from the list." },
+      { title: "2. Add Participants", desc: "Add timezones of all meeting participants." },
+      { title: "3. Find Overlap", desc: "View overlapping business hours across all timezones." },
+    ],
+    faqs: [
+      { question: "How many timezones can I compare?", answer: "Add as many timezones as needed to find the best meeting time for all participants." },
+      { question: "Does it account for DST?", answer: "Yes. The planner uses current DST rules for each timezone." },
+      { question: "Can I save recurring meeting times?", answer: "The planner shows available slots. Save the best time manually for recurring meetings." },
+    ],
   },
   {
     id: "796",
@@ -422,6 +452,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Percentage Difference Calculator \u2014 Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Numbers", desc: "Input the two values you want to compare." },
+      { title: "2. Calculate", desc: "The tool computes the percentage difference." },
+      { title: "3. View Result", desc: "See the difference as both a number and percentage." },
+    ],
+    faqs: [
+      { question: "How is percentage difference calculated?", answer: "|V1 - V2| / ((V1 + V2) / 2) x 100. This gives a symmetric percentage difference." },
+      { question: "What is the difference between percentage difference and change?", answer: "Percentage difference compares two values symmetrically. Percentage change measures increase/decrease from a reference." },
+      { question: "When should I use this instead of percentage change?", answer: "Use percentage difference when neither value is the reference (both are equally important)." },
+    ],
   },
   {
     id: "832",
@@ -511,6 +551,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert fractions to decimal numbers. Shows the step-by-step division process. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Numerator and Denominator", desc: "Input the fraction you want to convert." },
+      { title: "2. Convert", desc: "See the decimal equivalent and simplified fraction." },
+      { title: "3. View Steps", desc: "Review the division step-by-step." },
+    ],
+    faqs: [
+      { question: "How do I convert a fraction to decimal?", answer: "Divide the numerator by the denominator. The result is the decimal equivalent." },
+      { question: "What if the decimal repeats?", answer: "The calculator shows enough decimal places to identify repeating patterns." },
+      { question: "Can I convert improper fractions?", answer: "Yes. The calculator handles proper fractions, improper fractions, and mixed numbers." },
+    ],
   },
   {
     id: "841",
@@ -520,6 +570,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Decimal to Fraction Calculator \u2014 Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Decimal", desc: "Input the decimal number to convert." },
+      { title: "2. Convert", desc: "The tool finds the exact fraction representation." },
+      { title: "3. View Result", desc: "See the simplified fraction and step-by-step conversion." },
+    ],
+    faqs: [
+      { question: "How do I convert a decimal to a fraction?", answer: "Write the decimal over 1, multiply numerator and denominator by 10 for each decimal place, then simplify." },
+      { question: "What if the decimal repeats?", answer: "The calculator handles terminating decimals. Repeating decimals require a different conversion method." },
+      { question: "How accurate is the conversion?", answer: "The conversion is exact for terminating decimals. Results are shown as simplified fractions." },
+    ],
   },
   {
     id: "844",
@@ -529,6 +589,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Solve direct and inverse rule of three problems. Essential for proportional reasoning and everyday math. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rule of Three Calculator \u2014 Solve direct and inverse rule of three problems. Essential for proportional reasoning and everyday math. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Three Values", desc: "Input three known values for a direct proportion." },
+      { title: "2. Calculate", desc: "The tool computes the missing fourth value." },
+      { title: "3. View Solution", desc: "See the completed proportion with explanation." },
+    ],
+    faqs: [
+      { question: "What is the rule of three?", answer: "The rule of three solves proportions: if a/b = c/d, then d = bc/a. Used for direct proportion problems." },
+      { question: "Can this solve inverse proportions?", answer: "This calculator handles direct proportions. For inverse proportions, the relationship is rearranged." },
+      { question: "What are common applications?", answer: "Percentage calculations, scaling recipes, currency conversion, and unit conversion." },
+    ],
   },
   {
     id: "845",
@@ -538,6 +608,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Combination Calculator \u2014 Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter n and r", desc: "Input the total items (n) and items to choose (r)." },
+      { title: "2. Calculate", desc: "The tool computes C(n,r) combinations." },
+      { title: "3. View Result", desc: "See the number of ways to choose r items from n items." },
+    ],
+    faqs: [
+      { question: "What is a combination?", answer: "A combination is a selection of items where order does not matter. C(n,r) = n! / (r! x (n-r)!)." },
+      { question: "How is this different from permutation?", answer: "In combinations, order does not matter (ABC = ACB). In permutations, order matters (ABC != ACB)." },
+      { question: "Can I calculate combinations with repetition?", answer: "This calculator handles combinations without repetition. Standard combinations formula." },
+    ],
   },
   {
     id: "846",
@@ -547,6 +627,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Permutation Calculator \u2014 Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter n and r", desc: "Input the total items (n) and items to arrange (r)." },
+      { title: "2. Calculate", desc: "The tool computes P(n,r) permutations." },
+      { title: "3. View Result", desc: "See the number of ways to arrange r items from n items." },
+    ],
+    faqs: [
+      { question: "What is a permutation?", answer: "A permutation is an arrangement of items where order matters. P(n,r) = n! / (n-r)!" },
+      { question: "How is this different from combination?", answer: "In permutations, ABC and ACB are different. In combinations, they are the same selection." },
+      { question: "Can I calculate permutations with repetition?", answer: "This calculator handles permutations without repetition. Standard permutation formula." },
+    ],
   },
   {
     id: "847",
@@ -556,6 +646,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Factorial Calculator \u2014 Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input a non-negative integer n." },
+      { title: "2. Calculate", desc: "The tool computes n! (n factorial)." },
+      { title: "3. View Result", desc: "See the factorial value with step-by-step multiplication." },
+    ],
+    faqs: [
+      { question: "What is a factorial?", answer: "n! = n x (n-1) x (n-2) x ... x 1. For example, 5! = 5 x 4 x 3 x 2 x 1 = 120." },
+      { question: "What is 0!?", answer: "0! = 1 by definition. This is a mathematical convention used in combinatorics." },
+      { question: "What is the largest factorial supported?", answer: "Factorials grow extremely fast. Very large numbers are displayed in scientific notation." },
+    ],
   },
   {
     id: "848",
@@ -565,6 +665,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check if any number is prime. Also shows all factors and whether the number is odd or even. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input any positive integer to check." },
+      { title: "2. Check", desc: "The tool determines if the number is prime." },
+      { title: "3. View Factors", desc: "See all factors and the prime factorization." },
+    ],
+    faqs: [
+      { question: "What is a prime number?", answer: "A prime number is a positive integer greater than 1 that is only divisible by 1 and itself." },
+      { question: "How do you check if a number is prime?", answer: "The tool uses trial division up to the square root of the number for efficient checking." },
+      { question: "What is the smallest prime?", answer: "2 is the smallest prime number and the only even prime." },
+    ],
   },
   {
     id: "849",
@@ -574,6 +684,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Find the prime factors of any number. Shows the complete factorization tree and exponential form. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Prime Factorization Calculator \u2014 Find the prime factors of any number. Shows the complete factorization tree and exponential form. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input a positive integer to factorize." },
+      { title: "2. Calculate", desc: "The tool breaks the number into prime factors." },
+      { title: "3. View Result", desc: "See the prime factorization with exponents." },
+    ],
+    faqs: [
+      { question: "What is prime factorization?", answer: "Breaking a number into its prime factors. For example, 12 = 2 x 2 x 3." },
+      { question: "How is the factorization done?", answer: "Divide the number by the smallest prime repeatedly, then move to the next prime." },
+      { question: "Is every number factorable?", answer: "Yes. Every integer greater than 1 has a unique prime factorization (Fundamental Theorem of Arithmetic)." },
+    ],
   },
   {
     id: "850",
@@ -583,6 +703,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Greatest Common Factor Calculator \u2014 Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Numbers", desc: "Input the two numbers to find the GCF of." },
+      { title: "2. Calculate", desc: "The tool computes the greatest common factor." },
+      { title: "3. View Steps", desc: "See the step-by-step solution using prime factorization." },
+    ],
+    faqs: [
+      { question: "What is the GCF?", answer: "The GCF is the largest number that divides evenly into two or more numbers." },
+      { question: "How is GCF calculated?", answer: "Using prime factorization or the Euclidean algorithm. The Euclidean algorithm is more efficient for large numbers." },
+      { question: "What is the GCF if numbers are co-prime?", answer: "If numbers have no common factors, the GCF is 1." },
+    ],
   },
   {
     id: "851",
@@ -592,6 +722,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Least Common Multiple Calculator \u2014 Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Numbers", desc: "Input the two numbers to find the LCM of." },
+      { title: "2. Calculate", desc: "The tool computes the least common multiple." },
+      { title: "3. View Steps", desc: "See the step-by-step solution." },
+    ],
+    faqs: [
+      { question: "What is the LCM?", answer: "The LCM is the smallest positive number that is divisible by both numbers." },
+      { question: "How is LCM calculated?", answer: "LCM(a,b) = |a x b| / GCF(a,b). The product of the numbers divided by their greatest common factor." },
+      { question: "Why is LCM useful?", answer: "LCM is used for finding common denominators in fractions and solving periodic event problems." },
+    ],
   },
   {
     id: "852",
@@ -601,6 +741,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Dividend and Divisor", desc: "Input the dividend and divisor." },
+      { title: "2. Calculate", desc: "The tool computes dividend mod divisor." },
+      { title: "3. View Result", desc: "See the remainder and step-by-step division." },
+    ],
+    faqs: [
+      { question: "What is the modulo operation?", answer: "a mod b = a - b x floor(a/b). It returns the remainder after division." },
+      { question: "How is modulo useful?", answer: "Modulo is used in programming for cyclic operations, even/odd checking, and hash functions." },
+      { question: "What if the divisor is zero?", answer: "Division by zero is undefined. The divisor must be a non-zero number." },
+    ],
   },
   {
     id: "853",
@@ -610,6 +760,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Logarithm Calculator \u2014 Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Value and Base", desc: "Input the number and log base." },
+      { title: "2. Calculate", desc: "The tool computes the logarithm." },
+      { title: "3. View Result", desc: "See the log value with step-by-step calculation." },
+    ],
+    faqs: [
+      { question: "What is a logarithm?", answer: "log(x) = y means b^y = x. The logarithm is the inverse of exponentiation." },
+      { question: "What are common bases?", answer: "Base 10 (common log), base e (natural log ln), and base 2 (binary log) are the most common." },
+      { question: "Can I use any base?", answer: "Yes. The calculator supports any positive base except 1." },
+    ],
   },
   {
     id: "854",
@@ -619,6 +779,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Trigonometry Calculator \u2014 Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Angle", desc: "Input the angle in degrees or radians." },
+      { title: "2. Select Function", desc: "Choose sin, cos, tan, csc, sec, or cot." },
+      { title: "3. Calculate", desc: "View the trigonometric value with step-by-step work." },
+    ],
+    faqs: [
+      { question: "What trigonometric functions are supported?", answer: "sin, cos, tan, csc, sec, and cot. Toggle between degrees and radians." },
+      { question: "How are values calculated?", answer: "Using standard mathematical series and CORDIC algorithms for high precision." },
+      { question: "Can I find inverse trig values?", answer: "This calculator computes direct trig functions. Use the scientific calculator for inverse functions." },
+    ],
   },
   {
     id: "855",
@@ -628,7 +798,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert between degrees and radians. Shows the formula and step-by-step conversion process. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Degree / Radian Converter \u2014 Convert between degrees and radians. Shows the formula and step-by-step conversion process. ',
     dependencies: "None",
-      },
+    instructions: [
+      { title: "1. Enter Value", desc: "Input the angle in degrees or radians." },
+      { title: "2. Convert", desc: "The tool converts to the other unit automatically." },
+      { title: "3. View Result", desc: "See the converted value with the conversion formula." },
+    ],
+    faqs: [
+      { question: "What is the conversion formula?", answer: "Radians = Degrees x p/180. Degrees = Radians x 180/p." },
+      { question: "What are common conversions?", answer: "0 degrees = 0 rad, 30 degrees = p/6, 45 degrees = p/4, 60 degrees = p/3, 90 degrees = p/2, 180 degrees = p." },
+      { question: "When should I use radians vs degrees?", answer: "Degrees are common in geometry and daily use. Radians are standard in calculus and physics." },
+    ],
+  },
   {
     id: "856",
     name: "Scientific Notation Converter",
@@ -637,6 +817,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Scientific Notation Converter \u2014 Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input a number in decimal or scientific notation." },
+      { title: "2. Convert", desc: "The tool converts between both formats." },
+      { title: "3. View Result", desc: "See the number in both formats with step-by-step conversion." },
+    ],
+    faqs: [
+      { question: "What is scientific notation?", answer: "A way to write numbers as a x 10^b, where 1 <= a < 10. For example, 1234 = 1.234 x 10^3." },
+      { question: "What is E notation?", answer: "E notation writes 1.234E3 instead of 1.234 x 10^3. Common in calculators and programming." },
+      { question: "How do I convert large numbers?", answer: "Move the decimal point left until one digit remains, count the moves as the positive exponent." },
+    ],
   },
   {
     id: "857",
@@ -646,6 +836,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Significant Figures Calculator \u2014 Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input a number to count its significant figures." },
+      { title: "2. Analyze", desc: "The tool identifies each digit's significance." },
+      { title: "3. View Count", desc: "See the significant figure count and rules applied." },
+    ],
+    faqs: [
+      { question: "Which digits are significant?", answer: "Non-zero digits are always significant. Zeros between digits are significant. Leading zeros are not. Trailing zeros after decimal are significant." },
+      { question: "How many significant figures should I use?", answer: "Use the precision of your least precise measurement. Scientific work typically uses 3-4 significant figures." },
+      { question: "What about exact numbers?", answer: "Exact numbers (defined constants, counted values) have infinite significant figures." },
+    ],
   },
   {
     id: "858",
@@ -655,6 +855,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rounding Calculator \u2014 Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Number", desc: "Input the number to round." },
+      { title: "2. Select Precision", desc: "Choose decimal places or significant figures." },
+      { title: "3. View Result", desc: "See the rounded number with step-by-step rounding." },
+    ],
+    faqs: [
+      { question: "What rounding methods are available?", answer: "Standard rounding (round half up), round up (ceil), round down (floor), and round half even (banker's rounding)." },
+      { question: "What is banker's rounding?", answer: "Round half even rounds to the nearest even number when the digit is exactly 5. Reduces statistical bias." },
+      { question: "How many decimal places should I use?", answer: "For most purposes, 2-4 decimal places. Financial calculations typically use 2. Scientific work varies." },
+    ],
   },
   {
     id: "859",
@@ -664,6 +874,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Math Equation Solver \u2014 Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Equation", desc: "Type or paste a mathematical equation." },
+      { title: "2. Solve", desc: "The tool solves for the unknown variable." },
+      { title: "3. View Solution", desc: "See the step-by-step solution." },
+    ],
+    faqs: [
+      { question: "What types of equations can it solve?", answer: "Linear equations, quadratic equations, and simple algebraic equations with one variable." },
+      { question: "How is the solution shown?", answer: "Step-by-step work is displayed showing each algebraic manipulation." },
+      { question: "Can it solve systems of equations?", answer: "This calculator handles single equations. For systems, solve one equation at a time." },
+    ],
   },
   {
     id: "860",
@@ -673,6 +893,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Algebra Calculator \u2014 Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Expression", desc: "Type an algebraic expression or equation." },
+      { title: "2. Choose Operation", desc: "Select simplify, factor, or solve." },
+      { title: "3. View Result", desc: "See the simplified expression or solution." },
+    ],
+    faqs: [
+      { question: "What operations are supported?", answer: "Simplify expressions, factor polynomials, solve equations, and expand expressions." },
+      { question: "Can it handle exponents?", answer: "Yes. The calculator supports exponents, variables, and basic algebraic operations." },
+      { question: "Is the solution step-by-step?", answer: "Yes. Each algebraic manipulation is shown step by step." },
+    ],
   },
   {
     id: "861",
@@ -682,6 +912,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Geometry Calculator \u2014 Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Select Shape", desc: "Choose a geometric shape from the list." },
+      { title: "2. Enter Dimensions", desc: "Input the required dimensions for the shape." },
+      { title: "3. Calculate", desc: "View area, perimeter, volume, and other properties." },
+    ],
+    faqs: [
+      { question: "What shapes are supported?", answer: "Square, rectangle, triangle, circle, parallelogram, trapezoid, cube, sphere, cylinder, cone, and rectangular prism." },
+      { question: "Can I calculate area and volume?", answer: "Yes. The calculator computes area, perimeter, volume, and surface area depending on the shape." },
+      { question: "What units should I use?", answer: "Use any consistent units. Results are in square units for area and cubic units for volume." },
+    ],
   },
   {
     id: "862",
@@ -691,6 +931,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the distance and midpoint between two points on a 2D coordinate plane. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Coordinate Calculator \u2014 Calculate the distance and midpoint between two points on a 2D coordinate plane. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Coordinates", desc: "Input the coordinates of two points (x,y)." },
+      { title: "2. Calculate", desc: "The tool computes distance and midpoint." },
+      { title: "3. View Result", desc: "See the distance between points and midpoint coordinates." },
+    ],
+    faqs: [
+      { question: "How is distance calculated?", answer: "Distance = sqrt((x2-x1) + (y2-y1)). The Euclidean distance formula." },
+      { question: "How is midpoint calculated?", answer: "Midpoint = ((x1+x2)/2, (y1+y2)/2). The average of the two points' coordinates." },
+      { question: "Can I use 3D coordinates?", answer: "This calculator handles 2D coordinates. For 3D, use the Distance Calculator with z-coordinates." },
+    ],
   },
   {
     id: "863",
@@ -700,6 +950,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Slope Calculator \u2014 Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Points", desc: "Input the coordinates of two points on a line." },
+      { title: "2. Calculate", desc: "The tool computes slope, equation, and intercepts." },
+      { title: "3. View Result", desc: "See slope, y-intercept, and line equation." },
+    ],
+    faqs: [
+      { question: "How is slope calculated?", answer: "Slope m = (y2-y1) / (x2-x1). It measures the steepness and direction of a line." },
+      { question: "What does the slope tell me?", answer: "Positive slope: line goes up. Negative slope: line goes down. Zero slope: horizontal line. Undefined: vertical line." },
+      { question: "How do I find the line equation?", answer: "y = mx + b. Using the slope and one point, calculate the y-intercept b." },
+    ],
   },
   {
     id: "864",
@@ -709,6 +969,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Midpoint Calculator \u2014 Find the midpoint between any two coordinates on a 2D grid. Shows the calculated midpoint coordinates with a visual reference. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Points", desc: "Input the coordinates of two points." },
+      { title: "2. Calculate", desc: "The tool computes the midpoint coordinates." },
+      { title: "3. View Result", desc: "See the midpoint with step-by-step calculation." },
+    ],
+    faqs: [
+      { question: "How is the midpoint calculated?", answer: "Midpoint = ((x1+x2)/2, (y1+y2)/2). The point exactly halfway between two coordinates." },
+      { question: "Can I use decimal coordinates?", answer: "Yes. The calculator handles both integer and decimal coordinates." },
+      { question: "What is the midpoint used for?", answer: "Finding center points, dividing line segments equally, and geometric constructions." },
+    ],
   },
   {
     id: "865",
@@ -718,6 +988,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the Euclidean distance between two points on a plane using the distance formula. Shows the step-by-step calculation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Distance Calculator \u2014 Calculate the Euclidean distance between two points on a plane using the distance formula. Shows the step-by-step calculation. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Two Points", desc: "Input the coordinates of two points (x,y) on a plane." },
+      { title: "2. Calculate", desc: "The tool computes the Euclidean distance." },
+      { title: "3. View Result", desc: "See the distance with step-by-step calculation." },
+    ],
+    faqs: [
+      { question: "How is distance calculated?", answer: "Using the Euclidean distance formula: sqrt((x2-x1) + (y2-y1))." },
+      { question: "Can I use 3D coordinates?", answer: "This calculator handles 2D. For 3D, the formula extends to sqrt((x2-x1) + (y2-y1) + (z2-z1))." },
+      { question: "What units is the result in?", answer: "The units match the input coordinates. If coordinates are in meters, the distance is in meters." },
+    ],
   },
   {
     id: "866",
@@ -946,6 +1226,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Date Difference Calculator \u2014 Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Start Date", desc: "Select the starting date." },
+      { title: "2. Enter End Date", desc: "Select the ending date." },
+      { title: "3. View Difference", desc: "See the difference in days, months, years, and total days." },
+    ],
+    faqs: [
+      { question: "How is the date difference calculated?", answer: "The difference is calculated as total days, months, and years between two dates." },
+      { question: "Does it include the end date?", answer: "The calculator shows both inclusive and exclusive options for the day count." },
+      { question: "Does it account for leap years?", answer: "Yes. Leap years are automatically accounted for in the calculation." },
+    ],
   },
   {
     id: "888",
@@ -955,6 +1245,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Add or subtract days from any date. Get the resulting date instantly — useful for deadlines, scheduling, and planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Date Addition Calculator \u2014 Add or subtract days from any date. Get the resulting date instantly \u2014 useful for deadlines, scheduling, and planning. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Start Date", desc: "Select the starting date." },
+      { title: "2. Add Duration", desc: "Enter days, months, or years to add." },
+      { title: "3. View Result", desc: "See the resulting date after adding the duration." },
+    ],
+    faqs: [
+      { question: "How does date addition work?", answer: "Add a duration of days, months, or years to a starting date to get the resulting date." },
+      { question: "What happens if the result date is invalid?", answer: "For example, adding 1 month to January 31 gives February 28 (or 29 in leap years)." },
+      { question: "Can I add multiple units at once?", answer: "Yes. Add days, months, and years simultaneously." },
+    ],
   },
   {
     id: "889",
@@ -964,6 +1264,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Find the ISO week number for any date. Also shows the day of the week and the current week of the year. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Week Number Calculator \u2014 Find the ISO week number for any date. Also shows the day of the week and the current week of the year. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Date", desc: "Select any date to find its ISO week number." },
+      { title: "2. Enter Week Number", desc: "Or input a week number and year to find the date range." },
+      { title: "3. View Result", desc: "See the week number, year, and start/end dates of the week." },
+    ],
+    faqs: [
+      { question: "What is ISO week number?", answer: "ISO 8601 defines week numbers where Week 1 is the week containing the first Thursday of the year." },
+      { question: "When does the first week start?", answer: "Week 1 of a year starts on the Monday of the week containing the first Thursday." },
+      { question: "Can I find the date range of a week?", answer: "Yes. Input a week number and year to see the Monday-Sunday date range." },
+    ],
   },
   {
     id: "890",
@@ -973,6 +1283,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Since Calculator \u2014 Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Past Date", desc: "Select a past date and time." },
+      { title: "2. Calculate", desc: "The tool computes the elapsed time since that moment." },
+      { title: "3. View Duration", desc: "See the time elapsed in years, months, days, hours, minutes, and seconds." },
+    ],
+    faqs: [
+      { question: "How is time since calculated?", answer: "Subtract the past date from the current date to find elapsed years, months, days, hours, minutes, and seconds." },
+      { question: "Does it update in real time?", answer: "Yes. The elapsed time updates every second." },
+      { question: "Can I use a custom reference date?", answer: "Yes. Select any past date and time as the starting point." },
+    ],
   },
   {
     id: "891",
@@ -991,6 +1311,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online DST Checker (US) \u2014 Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Select Year", desc: "Choose the year to check." },
+      { title: "2. Select Timezone", desc: "Choose the US timezone (Eastern, Central, Mountain, Pacific)." },
+      { title: "3. View Dates", desc: "See DST start and end dates for the selected year and timezone." },
+    ],
+    faqs: [
+      { question: "When does DST start in the US?", answer: "DST starts on the second Sunday of March (spring forward) and ends on the first Sunday of November (fall back)." },
+      { question: "Does this work for other countries?", answer: "This checker uses US DST rules. Different countries have different DST schedules." },
+      { question: "Why do we observe DST?", answer: "DST extends daylight in the evening during summer months, reducing energy consumption." },
+    ],
   },
   {
     id: "893",
@@ -1000,6 +1330,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Work Hours Calculator \u2014 Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Clock In/Out Times", desc: "Input your start and end times for each work day." },
+      { title: "2. Add Breaks", desc: "Enter unpaid break durations if applicable." },
+      { title: "3. Calculate Hours", desc: "View total hours worked, overtime, and regular hours." },
+    ],
+    faqs: [
+      { question: "How is overtime calculated?", answer: "Hours beyond 40 per week or 8 per day (configurable) are calculated as overtime at the specified rate." },
+      { question: "Can I track multiple days?", answer: "Yes. Add multiple days to calculate total weekly hours." },
+      { question: "Does this account for unpaid breaks?", answer: "Yes. Enter break durations and they are subtracted from total hours." },
+    ],
   },
   {
     id: "894",
@@ -1009,6 +1349,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hours & Minutes Calculator \u2014 Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Time Values", desc: "Input hours and minutes to add or subtract." },
+      { title: "2. Choose Operation", desc: "Select add or subtract between time values." },
+      { title: "3. View Result", desc: "See the total time in hours:minutes format." },
+    ],
+    faqs: [
+      { question: "How are hours and minutes added?", answer: "Add hours to hours and minutes to minutes separately, then carry over extra minutes to hours." },
+      { question: "Can I subtract time?", answer: "Yes. Select subtract to find the difference between two time values." },
+      { question: "What is the maximum result?", answer: "There is no limit. The calculator handles large time values." },
+    ],
   },
   {
     id: "895",
@@ -1642,6 +1992,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Triangle Area Calculator — Calculate the area of a triangle given base and height using the formula 0.5 × base × height. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Triangle Dimensions", desc: "Input base and height, or three side lengths." },
+      { title: "2. Choose Method", desc: "Select base-height or Heron's formula method." },
+      { title: "3. Calculate", desc: "View area with step-by-step calculation." },
+    ],
+    faqs: [
+      { question: "How is triangle area calculated?", answer: "Area = 0.5 x base x height. Using Heron's formula: Area = sqrt(s(s-a)(s-b)(s-c)) where s is semi-perimeter." },
+      { question: "What measurements do I need?", answer: "For base-height method: base and height. For Heron's formula: all three side lengths." },
+      { question: "Can I calculate for right triangles?", answer: "Yes. The Pythagorean Theorem Calculator is better suited for right triangles specifically." },
+    ],
   },
   {
     id: "965",
@@ -1651,6 +2011,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Gas Mileage Calculator — Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Distance", desc: "Input total distance traveled." },
+      { title: "2. Enter Fuel Used", desc: "Input fuel consumed in gallons or liters." },
+      { title: "3. Calculate Mileage", desc: "View miles per gallon or liters per 100km and trip cost." },
+    ],
+    faqs: [
+      { question: "How is fuel economy calculated?", answer: "MPG = Miles / Gallons. L/100km = (Liters / km) x 100." },
+      { question: "Can I calculate trip cost?", answer: "Yes. Enter fuel price per unit to see total trip fuel cost." },
+      { question: "Does this account for city vs highway driving?", answer: "This calculator uses a single combined value. For separate city/highway, calculate each separately." },
+    ],
   },
   {
     id: "966",

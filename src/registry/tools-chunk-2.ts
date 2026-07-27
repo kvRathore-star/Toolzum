@@ -1150,6 +1150,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate travel time from distance and speed — with optional arrival time.',
     seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Start Time", desc: "Input the departure or start time." },
+      { title: "2. Enter Distance and Speed", desc: "Input the distance to travel and average speed." },
+      { title: "3. Calculate ETA", desc: "View the estimated arrival time based on your inputs." },
+    ],
+    faqs: [
+      { question: "How is ETA calculated?", answer: "ETA = Start Time + (Distance / Speed). The calculation accounts for hours and minutes." },
+      { question: "Can I account for stops?", answer: "This calculator computes driving time only. Add rest stops and breaks separately." },
+      { question: "Does this account for traffic?", answer: "No. The calculator assumes constant speed. Actual arrival time may vary due to traffic and road conditions." },
+    ],
   },
   {
     id: "du-5",
@@ -1399,6 +1409,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate total study hours over a period and see monthly projections.',
     seoDescription: 'Free online Study Time Calculator \u2014 Calculate total study hours and monthly projections. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Exam Date", desc: "Set your exam or deadline date." },
+      { title: "2. Enter Study Hours Needed", desc: "Estimate total study hours required for the subject." },
+      { title: "3. Plan Schedule", desc: "Get a recommended daily study schedule leading up to the exam." },
+    ],
+    faqs: [
+      { question: "How many hours should I study per day?", answer: "The calculator distributes total study hours evenly across available days. Adjust based on your personal capacity." },
+      { question: "Does this account for breaks?", answer: "The schedule shows study time only. Include short breaks between sessions for better retention." },
+      { question: "Can I customize the schedule?", answer: "Yes. Adjust the total hours or days to create a personalized study plan." },
+    ],
   },
   {
     id: "534b",
@@ -1408,6 +1428,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert correct/total answers to percentage and letter grade.',
     seoDescription: 'Free online Test Score Calculator \u2014 Convert correct answers to percentage and letter grade. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Total Questions", desc: "Input the total number of questions on the test." },
+      { title: "2. Enter Correct Answers", desc: "Input the number of questions you answered correctly." },
+      { title: "3. View Score", desc: "See your percentage score and letter grade." },
+    ],
+    faqs: [
+      { question: "How is the grade determined?", answer: "Percentage = (Correct Answers / Total Questions) x 100. The letter grade follows the standard 90-80-70-60 scale." },
+      { question: "Can I use different grading scales?", answer: "The calculator uses the standard scale. For custom grading, use the Grade Calculator tool." },
+      { question: "Does this account for partial credit?", answer: "No. Each question is either correct or incorrect. For partial credit grading, calculate weighted scores separately." },
+    ],
   },
   {
     id: "534c",
@@ -1417,6 +1447,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate how many pages your word count will take at different font sizes.',
     seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Document Details", desc: "Input total word count, font size, and line spacing." },
+      { title: "2. Adjust Page Size", desc: "Select page size (A4, Letter, Legal) and margins." },
+      { title: "3. View Estimate", desc: "See estimated pages and adjust formatting to meet page targets." },
+    ],
+    faqs: [
+      { question: "What factors affect words per page?", answer: "Font size, font family, line spacing, margins, and page size all affect how many words fit on a page." },
+      { question: "Is this accurate for all fonts?", answer: "The calculator uses average character widths. Different fonts may produce slightly different results." },
+      { question: "Can I use this for book formatting?", answer: "Yes. This is commonly used for estimating manuscript page counts for publishing." },
+    ],
   },
   {
     id: "534d",
@@ -1455,6 +1495,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate width, height, and area from diagonal screen size and aspect ratio.',
     seoDescription: 'Free online Screen Size Calculator \u2014 Calculate width, height, and area from diagonal and aspect ratio. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Diagonal Size", desc: "Input the screen diagonal size in inches." },
+      { title: "2. Select Aspect Ratio", desc: "Choose the aspect ratio (16:9, 4:3, 21:9, etc.)." },
+      { title: "3. View Dimensions", desc: "Get screen width and height in inches, centimeters, and pixels." },
+    ],
+    faqs: [
+      { question: "How is screen width and height calculated?", answer: "Using the diagonal size and aspect ratio, the tool applies the Pythagorean theorem to find width and height." },
+      { question: "What is the difference between physical and logical resolution?", answer: "Physical resolution is the actual pixel count. PPI can be calculated from physical size and resolution." },
+      { question: "Can I calculate for any aspect ratio?", answer: "Yes. Choose from common ratios or enter a custom aspect ratio." },
+    ],
   },
   {
     id: "534g",
