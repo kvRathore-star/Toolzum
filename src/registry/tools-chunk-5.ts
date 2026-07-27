@@ -2,6 +2,7 @@ import type { ToolMetadata } from './tools-types';
 
 export const entries_chunk_5: ToolMetadata[] = [
   {
+
     id: "986",
     name: "Rate Limit Header Parser",
     slug: "rate-limit-header-parser",
@@ -9,8 +10,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. Supports standard X-RateLimit-Limit, X-RateLimit-Remaining, and X-RateLimit-Reset formats.',
     seoDescription: 'Free online Rate Limit Header Parser — Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Rate Limit Headers",
+                "desc": "Paste the HTTP response headers containing rate limit information."
+          },
+          {
+                "title": "2. Parse Automatically",
+                "desc": "The tool extracts rate limit values from common header formats."
+          },
+          {
+                "title": "3. View Parsed Limits",
+                "desc": "Shows: current usage, remaining requests, reset time, and whether you're approaching the limit."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What rate limit header formats does the parser recognize?",
+                "answer": "It recognizes: X-RateLimit-Limit/Remaining/Reset (GitHub, Shopify), X-Ratelimit-* (Twitter, Dropbox), Retry-After, RateLimit-* (RateLimit standard draft), and custom formats."
+          },
+          {
+                "question": "How does the tool calculate when the rate limit resets?",
+                "answer": "If the reset header is a Unix timestamp, it converts to local time. If it's a duration (seconds), it adds to the current time."
+          },
+          {
+                "question": "Can the parser suggest optimal request timing to avoid hitting limits?",
+                "answer": "Yes, based on the limit and remaining values, it suggests the ideal request interval and when to back off."
+          }
+    ]
+},
   {
+
     id: "987",
     name: "Pricing Tier Builder",
     slug: "pricing-tier-builder",
@@ -18,8 +48,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Build pricing tier descriptions from JSON input. Supports free/pro tiers with configurable pricing (monthly/annual), user limits, and feature lists.',
     seoDescription: 'Free online Pricing Tier Builder — Build pricing tier descriptions from JSON. Supports free/pro tiers, pricing, user limits, and feature lists. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Pricing Tiers",
+                "desc": "Add tier names (Free, Basic, Pro, Enterprise) with monthly prices."
+          },
+          {
+                "title": "2. Configure Feature Access",
+                "desc": "For each tier, enable/disable features. Set numeric limits (users, storage, API calls)."
+          },
+          {
+                "title": "3. Generate Pricing Table",
+                "desc": "Export as HTML table, Markdown, or JSON for your pricing page."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the pricing tier builder handle feature comparison?",
+                "answer": "Each feature is toggled per tier: checkmark (included), number (seated count), or cross (not included). The tool generates a comparison matrix."
+          },
+          {
+                "question": "Can the tool calculate annual pricing with discounts?",
+                "answer": "Yes, set an annual discount percentage (e.g., 20% off). The tool shows monthly vs annual pricing and total savings."
+          },
+          {
+                "question": "Does the builder support usage-based pricing components?",
+                "answer": "Yes, add overage pricing per unit (per API call, per GB storage, per user). The tool estimates total cost at different usage levels."
+          }
+    ]
+},
   {
+
     id: "988",
     name: "SSH Key Generator",
     slug: "ssh-key-generator",
@@ -27,8 +86,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate RSA, ECDSA, and Ed25519 SSH key pairs with proper OpenSSH format output. RSA uses RSASSA-PKCS1-v1_5 (2048-bit). ECDSA supports P-256 and P-384. Ed25519 uses a pure-JS implementation (no server). Public keys paste directly into ~/.ssh/authorized_keys.',
     seoDescription: 'Free online SSH Key Generator — Generate RSA (2048-bit), ECDSA (P-256/P-384), and Ed25519 SSH key pairs. OpenSSH format public keys for authorized_keys. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Key Algorithm",
+                "desc": "Choose RSA (2048/4096/8192), ECDSA (256/384/521), Ed25519 (recommended), or DSA (deprecated)."
+          },
+          {
+                "title": "2. Set Comment and Passphrase",
+                "desc": "Enter a comment (usually user@host). Set an optional passphrase for encrypting the private key."
+          },
+          {
+                "title": "3. Generate and Download Keys",
+                "desc": "Generate the key pair. The public key is ready for authorized_keys. Private key in OpenSSH format."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is Ed25519 recommended over RSA for SSH keys?",
+                "answer": "Ed25519 provides equivalent security to RSA-3072 with a fixed 256-bit key, faster generation and signing, and resistance to side-channel attacks."
+          },
+          {
+                "question": "How do I use the generated public key on a server?",
+                "answer": "Append the public key to ~/.ssh/authorized_keys with chmod 600. The private key goes on your client at ~/.ssh/id_ed25519 with chmod 600."
+          },
+          {
+                "question": "What is the difference between PEM and OpenSSH private key formats?",
+                "answer": "OpenSSH format (BEGIN OPENSSH PRIVATE KEY) is modern and flexible. PEM format (BEGIN RSA PRIVATE KEY) is older and limited to RSA/DSA keys."
+          }
+    ]
+},
   {
+
     id: "989",
     name: "Secret Scanner",
     slug: "secret-scanner",
@@ -36,8 +124,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Scan text and code for leaked secrets and credentials. Detects Stripe keys, GitHub tokens, Slack tokens, Google API keys, AWS keys, OpenAI keys, JWT tokens, private keys, and config passwords.',
     seoDescription: 'Free online Secret Scanner — Scan text and code for leaked API keys, tokens, and credentials. Detects Stripe, GitHub, Slack, AWS, Google, OpenAI, and more. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste source code, configuration files, log output, or any text content to scan for accidentally exposed secrets and credentials like API keys and passwords."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Run the secret detection scan to automatically identify potential secrets such as API keys, tokens, private keys, connection strings, and cloud provider credentials."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Review each detected secret with its location, type, and severity. Use the redact feature to replace found secrets with placeholders before sharing the content."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What types of secrets and credentials can the secret scanner detect automatically for you?",
+                "answer": "It detects AWS access keys, Google API keys, Slack tokens, GitHub tokens, Stripe API keys, Twilio credentials, generic passwords, JWT tokens, private keys, and database connection strings."
+          },
+          {
+                "question": "How does the scanner reduce false positives when detecting potential secrets in code files?",
+                "answer": "It uses entropy analysis and context-aware heuristics where high-entropy strings are flagged only in assignment contexts. Test values and examples are filtered out."
+          },
+          {
+                "question": "Can the tool scan git repositories for secrets committed in previous commit history?",
+                "answer": "Yes, the full git mode analyzes the entire commit history not just current files. It uses patterns to find secrets in historical commits for comprehensive auditing."
+          }
+    ]
+},
   {
+
     id: "990",
     name: "security.txt Generator",
     slug: "security-txt-generator",
@@ -45,8 +162,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate a security.txt file for your website following RFC 9116 standard. Specify contact email, security policy URL, encryption key, and expiry date for vulnerability disclosure.',
     seoDescription: 'Free online security.txt Generator — Generate RFC 9116 security.txt files with contact, policy, encryption, and expiry fields for vulnerability disclosure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Contact Information",
+                "desc": "Provide contact URIs (mailto:security@example.com, https://example.com/hall-of-fame)."
+          },
+          {
+                "title": "2. Set Policy and Dates",
+                "desc": "Add a link to your security policy page. Set expiration date and preferred languages."
+          },
+          {
+                "title": "3. Generate security.txt File",
+                "desc": "Generate the complete security.txt with Canonical, Encryption, Hiring, and Acknowledgments fields."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the purpose of a security.txt file on a website?",
+                "answer": "security.txt (RFC 9116) standardizes security contact information at /.well-known/security.txt, helping researchers find proper vulnerability reporting channels."
+          },
+          {
+                "question": "What fields are required in a valid security.txt file?",
+                "answer": "RFC 9116 only requires Contact. Strongly recommended: Expires, Preferred-Languages, Canonical, and Encryption."
+          },
+          {
+                "question": "Should the security.txt file be signed with OpenPGP?",
+                "answer": "Signing is recommended to prevent attackers from redirecting reports. The tool generates the unsigned file and provides the gpg command to sign it."
+          }
+    ]
+},
   {
+
     id: "991",
     name: "robots.txt Validator",
     slug: "robots-txt-validator",
@@ -54,8 +200,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate robots.txt syntax — checks User-agent, Allow, Disallow, Sitemap, Crawl-delay directives. Identifies unknown directives, missing colons, and missing User-agent declarations.',
     seoDescription: 'Free online robots.txt Validator — Validate robots.txt directives: User-agent, Allow, Disallow, Sitemap. Detects syntax errors and missing declarations. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste robots.txt Content",
+                "desc": "Paste the contents of your robots.txt file or enter a URL to fetch it."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the file against the Robots Exclusion Protocol standard."
+          },
+          {
+                "title": "3. Review Validation Report",
+                "desc": "See errors (invalid directives), warnings (missing sitemap), and a summary of which paths are blocked for each user-agent."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What robots.txt syntax does the validator check?",
+                "answer": "It validates User-agent, Disallow, Allow, Sitemap, Crawl-delay directives, and wildcard pattern syntax."
+          },
+          {
+                "question": "Does the tool simulate how specific search engine bots interpret the file?",
+                "answer": "Yes, select a user-agent (Googlebot, Bingbot, etc.) to see which paths are blocked/allowed for that specific crawler."
+          },
+          {
+                "question": "Can the validator detect accidentally disallowing important paths?",
+                "answer": "Yes, it flags common mistakes: Disallow: / (blocks everything), blocking CSS/JS files (renders poorly in search results), and conflicting directives."
+          }
+    ]
+},
   {
+
     id: "992",
     name: "DNS Record Validator",
     slug: "dns-record-validator",
@@ -63,8 +238,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate DNS record syntax for A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, and PTR records. Checks IP format for A/AAAA records and domain validity for MX records.',
     seoDescription: 'Free online DNS Record Validator — Validate DNS records: A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, PTR. Checks IP format and domain validity. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter DNS Record Data",
+                "desc": "Paste DNS record values to validate: A, AAAA, CNAME, MX, TXT, SRV, or SOA records."
+          },
+          {
+                "title": "2. Select Record Type",
+                "desc": "Choose the record type you want to validate."
+          },
+          {
+                "title": "3. Validate Format",
+                "desc": "The tool checks that the record value follows the correct format for the selected type."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What format validation does the tool perform for each DNS record type?",
+                "answer": "A records must be valid IPv4, AAAA must be valid IPv6, CNAME must be a valid domain, MX must have priority + domain, TXT must be properly quoted."
+          },
+          {
+                "question": "Does the validator check that CNAME records don't coexist with other records?",
+                "answer": "Yes, it warns when a CNAME would conflict with other record types at the same name per RFC 1912."
+          },
+          {
+                "question": "Can the tool validate SPF and DKIM DNS records specifically?",
+                "answer": "Yes, for TXT records it can parse SPF syntax (ip4, include, a, mx, all mechanisms) and DKIM tag=value format."
+          }
+    ]
+},
   {
+
     id: "993",
     name: "Docker Compose Validator",
     slug: "docker-compose-validator",
@@ -72,8 +276,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate docker-compose.yml files — checks YAML syntax, correct indentation, tab usage, and the presence of the services section. Identifies mixed indentation and formatting issues.',
     seoDescription: 'Free online Docker Compose Validator — Validate docker-compose.yml YAML syntax, indentation, services section, and formatting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste docker-compose.yml",
+                "desc": "Paste your docker-compose file content (YAML format). Supports version 2 and 3 formats."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the file against the Docker Compose specification."
+          },
+          {
+                "title": "3. Review Issues",
+                "desc": "Errors include missing required fields, invalid service names, and unsupported options for the specified version."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Docker Compose validation rules does this tool check?",
+                "answer": "It checks service definition completeness, valid image names, correct port mapping format (host:container), valid volume syntax, and network references."
+          },
+          {
+                "question": "Does the validator check for deprecated Compose file options?",
+                "answer": "Yes, it flags deprecated options like 'links' (use networks), 'volumes_from' (use named volumes), and version 1 format usage."
+          },
+          {
+                "question": "Can the tool validate environment variable interpolation?",
+                "answer": "Yes, it checks that ${VAR} references resolve to defined variables in the environment section or .env file."
+          }
+    ]
+},
   {
+
     id: "994",
     name: "Dockerfile Linter",
     slug: "dockerfile-linter",
@@ -81,8 +314,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Lint Dockerfiles against 20+ valid instructions (FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK, SHELL). Detects unknown instructions and missing FROM declaration.',
     seoDescription: 'Free online Dockerfile Linter — Lint Dockerfiles with 20+ valid instructions. Checks FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Dockerfile Content",
+                "desc": "Paste your Dockerfile content. The tool supports all Dockerfile instructions."
+          },
+          {
+                "title": "2. Run Lint Check",
+                "desc": "Click Lint to analyze the Dockerfile against best practices."
+          },
+          {
+                "title": "3. Review Recommendations",
+                "desc": "Suggestions cover layer optimization, instruction ordering, security practices, and base image selection."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Dockerfile best practices does the linter enforce?",
+                "answer": "It checks: pinning base image tags (not using latest), combining RUN commands to reduce layers, ordering instructions by cacheability, and using .dockerignore."
+          },
+          {
+                "question": "Does the tool detect security issues in Dockerfiles?",
+                "answer": "Yes, it flags: running as root (missing USER instruction), exposing ports without EXPOSE, hardcoded secrets via ENV, and installing unnecessary packages."
+          },
+          {
+                "question": "Can the linter suggest multi-stage build optimizations?",
+                "answer": "Yes, it recommends separating build-time dependencies from runtime dependencies using multi-stage builds and using distroless or alpine base images."
+          }
+    ]
+},
   {
+
     id: "995",
     name: "htaccess Validator",
     slug: "htaccess-validator",
@@ -90,8 +352,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.',
     seoDescription: 'Free online htaccess Validator — Validate .htaccess files with 30+ Apache directives. Checks RewriteRule, ErrorDocument, Header, Options. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste .htaccess Content",
+                "desc": "Paste your .htaccess file content. The tool supports Apache 2.2 and 2.4 directives."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the syntax against Apache configuration rules."
+          },
+          {
+                "title": "3. Review Errors",
+                "desc": "Errors show line numbers with descriptions. Warnings cover deprecated directives and common misconfigurations."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Apache directives does the htaccess validator check?",
+                "answer": "It validates RewriteRule/RewriteCond syntax, Redirect/RedirectMatch, Header directives, ExpiresDefault, and auth directives (Require, AuthType)."
+          },
+          {
+                "question": "Does the tool detect conflicts between multiple directives?",
+                "answer": "Yes, it flags when RewriteRule patterns conflict, when multiple Header directives set the same header, and when allow/deny rules overlap."
+          },
+          {
+                "question": "Can the validator distinguish between Apache 2.2 and 2.4 syntax?",
+                "answer": "Yes, it checks for 2.2-style allow/deny/order vs 2.4-style Require directives, and warns if the syntax doesn't match the selected version."
+          }
+    ]
+},
   {
+
     id: "996",
     name: "Kubernetes YAML Validator",
     slug: "kubernetes-yaml-validator",
@@ -99,8 +390,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate Kubernetes YAML manifests — checks for required fields (apiVersion, kind, metadata), correct YAML structure, indentation, and tab usage.',
     seoDescription: 'Free online Kubernetes YAML Validator — Validate K8s manifests for apiVersion, kind, metadata, and YAML structure correctness. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Kubernetes YAML",
+                "desc": "Paste your Kubernetes manifest YAML (Pod, Deployment, Service, Ingress, etc.)."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check against the Kubernetes API schema for the specified apiVersion."
+          },
+          {
+                "title": "3. Review Errors",
+                "desc": "Errors include unknown fields, missing required fields, invalid values, and deprecated apiVersions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Kubernetes API resources does the validator support?",
+                "answer": "It validates all built-in resource types: Pod, Deployment, Service, Ingress, ConfigMap, Secret, PersistentVolume, Namespace, RBAC resources, CRDs."
+          },
+          {
+                "question": "Does the tool check for Kubernetes security best practices?",
+                "answer": "Yes, it flags: containers running as root, privileged containers, missing resource limits, hostPath volumes, and containers with overly broad capabilities."
+          },
+          {
+                "question": "Can the validator detect deprecated apiVersions?",
+                "answer": "Yes, it checks the apiVersion against the current Kubernetes version and warns about deprecated versions like extensions/v1beta1 for Ingress."
+          }
+    ]
+},
   {
+
     id: "997",
     name: "GitHub Actions Validator",
     slug: "github-actions-validator",
@@ -108,8 +428,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate GitHub Actions workflow YAML — checks for workflow name, on trigger, jobs section, and correct YAML structure. Identifies formatting issues and missing fields.',
     seoDescription: 'Free online GitHub Actions Validator — Validate workflow YAML for name, on trigger, jobs section, and YAML structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Workflow YAML",
+                "desc": "Paste your GitHub Actions workflow YAML content from .github/workflows/."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the workflow syntax and structure."
+          },
+          {
+                "title": "3. Review Results",
+                "desc": "Errors include invalid trigger events, missing job dependencies, invalid step syntax, and expression parsing errors."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What GitHub Actions syntax does this validator check?",
+                "answer": "It validates: on triggers (push, pull_request, schedule, workflow_dispatch), job structure, step syntax (uses, run, with), and expression syntax (${{ }})."
+          },
+          {
+                "question": "Does the tool check for GitHub Actions security best practices?",
+                "answer": "Yes, it flags: pinning actions to mutable tags (use SHA instead), overly broad permissions, untrusted input in expressions, and missing checkout step."
+          },
+          {
+                "question": "Can the validator check if referenced actions exist?",
+                "answer": "Yes, it verifies that uses references (actions/checkout@v4) use valid formats and warns if the version or action name looks incorrect."
+          }
+    ]
+},
   {
+
     id: "998",
     name: "GeoJSON Validator",
     slug: "geojson-validator",
@@ -117,8 +466,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.',
     seoDescription: 'Free online GeoJSON Validator — Validate GeoJSON for feature, geometry, point coordinates, FeatureCollection, and bbox correctness. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste GeoJSON Data",
+                "desc": "Paste your GeoJSON content (Feature, FeatureCollection, or Geometry object)."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check against the GeoJSON specification (RFC 7946)."
+          },
+          {
+                "title": "3. Review Validation Report",
+                "desc": "Errors include invalid geometry types, malformed coordinates, and missing required properties."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What GeoJSON validation rules does this tool apply?",
+                "answer": "It validates: geometry type (Point, LineString, Polygon, etc.), coordinate array structure, coordinate ranges (lon -180 to 180, lat -90 to 90), and required type/coordinates fields."
+          },
+          {
+                "question": "Does the tool check for self-intersecting polygons?",
+                "answer": "Yes, it validates that polygon rings don't self-intersect and that the exterior ring is oriented counter-clockwise per RFC 7946."
+          },
+          {
+                "question": "Can the validator visualize the GeoJSON on a map?",
+                "answer": "Yes, after validation, click 'Preview on Map' to render the GeoJSON on an interactive map using Leaflet."
+          }
+    ]
+},
   {
+
     id: "999",
     name: "RSS Feed Validator",
     slug: "rss-feed-validator",
@@ -126,8 +504,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate RSS 2.0 and Atom feed XML — checks root element, channel/feed, title, link, description, items/entries, and XML declaration.',
     seoDescription: 'Free online RSS Feed Validator — Validate RSS 2.0 and Atom feeds for root element, channel, title, link, description, items, and XML declaration. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste RSS Feed XML",
+                "desc": "Paste your RSS 2.0 or Atom feed XML content."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check against the RSS 2.0 or Atom specification."
+          },
+          {
+                "title": "3. Review Feed Health",
+                "desc": "Errors include missing required elements, invalid date formats, and encoding issues."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What RSS validation checks does the tool perform?",
+                "answer": "RSS 2.0 checks: required channel elements (title, link, description), item requirements, valid pubDate format, enclosure correctness. Atom checks: feed/entry structure."
+          },
+          {
+                "question": "Does the validator check feed content against XML well-formedness rules?",
+                "answer": "Yes, it validates XML structure including proper nesting, character encoding (UTF-8 required), and CDATA section usage."
+          },
+          {
+                "question": "Can the tool suggest improvements for feed discoverability?",
+                "answer": "Yes, it suggests adding an author element (RSS) or contributor (Atom), language specification, and image/logo for better feed reader display."
+          }
+    ]
+},
   {
+
     id: "1000",
     name: "Sitemap Validator",
     slug: "sitemap-validator",
@@ -135,8 +542,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate XML sitemaps — checks urlset/sitemapindex root, loc entries, XML declaration, and URL count. Supports standard sitemap protocol formatting.',
     seoDescription: 'Free online Sitemap Validator — Validate XML sitemaps for urlset, loc entries, XML declaration, and sitemap protocol compliance. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Sitemap XML or URL",
+                "desc": "Paste sitemap XML content or enter a sitemap URL to fetch it."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check against the sitemaps.org protocol."
+          },
+          {
+                "title": "3. Review Sitemap Health",
+                "desc": "Errors include invalid URLs, missing required fields, exceeded URL limits, and incorrect date formats."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What sitemap validation rules does this tool enforce?",
+                "answer": "It validates: XML namespace declaration, location URL validity (absolute URL required), lastmod date format (W3C Datetime), changefreq values, and priority range (0.0–1.0)."
+          },
+          {
+                "question": "Does the validator check for sitemap index files?",
+                "answer": "Yes, it detects sitemap index files (sitemapindex) and validates the child sitemap URLs. It also checks that no sitemap exceeds 50,000 URLs."
+          },
+          {
+                "question": "Can the tool verify that sitemap URLs are accessible?",
+                "answer": "Yes, optionally perform HTTP HEAD/GET on each listed URL to check for 200 OK, 3xx redirects, or 4xx/5xx errors."
+          }
+    ]
+},
   {
+
     id: "1001",
     name: "XPath Validator",
     slug: "xpath-validator",
@@ -144,8 +580,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Test XPath expressions against XML or HTML documents. Evaluates queries and displays matching results in real time. Checks XML parsing errors before evaluation.',
     seoDescription: 'Free online XPath Validator — Test XPath expressions against XML/HTML. Evaluate queries and see matching results instantly. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter XML Content",
+                "desc": "Paste your XML document into the XML input field."
+          },
+          {
+                "title": "2. Enter XPath Expression",
+                "desc": "Type the XPath expression (version 1.0 or 2.0 syntax)."
+          },
+          {
+                "title": "3. Evaluate and View Results",
+                "desc": "Click Evaluate to apply the XPath. Results are highlighted in the XML and listed as extracted nodes or values."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What XPath versions does the validator support?",
+                "answer": "It supports XPath 1.0 (axes, predicates, node tests) and partial XPath 2.0 (sequence types, some functions)."
+          },
+          {
+                "question": "Does the tool support XPath function library?",
+                "answer": "Yes, common functions: string(), concat(), contains(), starts-with(), normalize-space(), count(), sum(), not(), and position()/last()."
+          },
+          {
+                "question": "Can the validator test multiple XPaths against the same XML?",
+                "answer": "Yes, enter multiple XPath expressions (one per line) and see results for each simultaneously."
+          }
+    ]
+},
   {
+
     id: "1002",
     name: "Cron Expression Validator",
     slug: "cron-expression-validator",
@@ -153,7 +618,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate cron expressions with field-level range checking. Supports 5-field format with step values, ranges, lists, and wildcards. Detects out-of-bounds values and provides readable descriptions.',
     seoDescription: 'Free online Cron Expression Validator — Validate cron expressions with field-level range checking, step values, lists, and wildcards. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Cron Expression",
+                "desc": "Type the cron expression with 5 (standard) or 6 (with seconds) fields separated by spaces."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the syntax and field values."
+          },
+          {
+                "title": "3. View Human-Readable Description",
+                "desc": "The tool translates the cron expression into plain English (e.g., 'At 14:30 every Monday through Friday')."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What cron expression formats does the validator accept?",
+                "answer": "It accepts standard Unix (minute hour day month weekday), with seconds (second minute hour day month weekday), and shortcut strings (@yearly, @monthly, @weekly, @daily, @hourly)."
+          },
+          {
+                "question": "Does the tool validate field ranges correctly?",
+                "answer": "Yes, it validates: minute (0–59), hour (0–23), day of month (1–31), month (1–12 or JAN–DEC), day of week (0–7 or SUN–SAT)."
+          },
+          {
+                "question": "Can the tool generate upcoming fire times for the expression?",
+                "answer": "Yes, after validation, click 'View Next 10 Runs' to see the calculated future execution times based on the expression."
+          }
+    ]
+},
   {
 
     id: "gt-1",
@@ -231,6 +724,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "gt-3",
     name: "Random IP Generator",
     slug: "random-ip-generator",
@@ -238,8 +732,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random IP Generator — Generate random IPv4 and IPv6 addresses for network testing, development, and security research. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Select IP Version and Scope",
+                "desc": "Choose IPv4 or IPv6, and whether to generate public IPs, private IPs, or all."
+          },
+          {
+                "title": "2. Exclude Specific Ranges",
+                "desc": "Optionally exclude multicast, loopback, link-local, or documentation ranges."
+          },
+          {
+                "title": "3. Generate Batch Results",
+                "desc": "Generate 1–1000 IP addresses. Results show version and classification."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the geographic restriction filter IP addresses by country?",
+                "answer": "The tool includes a simplified GeoIP database. When you select a country, it generates IPs from ranges registered to that country's regional internet registry."
+          },
+          {
+                "question": "What is the difference between public, private, and reserved IP addresses?",
+                "answer": "Public IPs are globally routable. Private IPs (RFC 1918) are for internal networks. Reserved includes multicast, loopback, and documentation ranges."
+          },
+          {
+                "question": "Can I generate IPs guaranteed to be unreachable for documentation?",
+                "answer": "Yes, the Documentation/Test Only mode restricts to RFC 5737 ranges (192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24) reserved for documentation."
+          }
+    ]
+},
   {
+
     id: "gt-4",
     name: "Random User-Agent Generator",
     slug: "random-user-agent-generator",
@@ -247,7 +770,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. No signup or account required.',
     seoDescription: 'Free online Random User-Agent Generator — Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Select Browser and Version",
+                "desc": "Choose Chrome, Firefox, Safari, Edge, or Opera. Optionally specify a version range."
+          },
+          {
+                "title": "2. Choose Device Type",
+                "desc": "Select Desktop (macOS, Windows, Linux), Mobile (iOS, Android), or Tablet."
+          },
+          {
+                "title": "3. Generate and Copy",
+                "desc": "Generate a random user agent. Shows parsed components for verification. Copy the raw string."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why do modern user agent strings have such complex structures?",
+                "answer": "User agents grew complex due to backwards compatibility — browsers add tokens from other browsers to avoid legacy sniffer blocks. Chrome includes 'Safari' and 'Gecko' tokens."
+          },
+          {
+                "question": "How does the tool generate realistic Apple device user agents?",
+                "answer": "For Safari on iOS, the generator creates strings matching real iPhone/iPad models (e.g., iPhone15,2) with correct WebKit build numbers and OS versioning."
+          },
+          {
+                "question": "Can I generate user agents for legacy compatibility testing?",
+                "answer": "Yes, the Historical mode includes strings from browsers dating back to 2010, including IE 6 on Windows XP and Safari 5 on Snow Leopard."
+          }
+    ]
+},
   {
 
     id: "gt-5",
@@ -325,6 +876,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "gt-7",
     name: "PIN Generator",
     slug: "pin-generator",
@@ -332,8 +884,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PIN Generator — Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. ',
     dependencies: "Crypto API",
-  },
+    instructions: [
+          {
+                "title": "1. Set PIN Length",
+                "desc": "Choose 4–12 digits. 6+ digit PINs offer significantly more security."
+          },
+          {
+                "title": "2. Configure Generation Rules",
+                "desc": "Optionally disallow sequential digits, repeated digits, patterns, and leading zeros."
+          },
+          {
+                "title": "3. Generate and Evaluate Strength",
+                "desc": "Generate 1–100 PINs. Each is evaluated for strength and flagged if weak."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What PIN patterns are considered weak and automatically rejected?",
+                "answer": "Sequential (1234), repeated (1111), common years (1984), palindromes (1221), keypad patterns (2580), and 5000+ breached PINs from data breaches."
+          },
+          {
+                "question": "How much does PIN entropy increase with each additional digit?",
+                "answer": "Each digit multiplies the search space by 10. 4-digit = 10^4, 6-digit = 10^6, 8-digit = 10^8, 12-digit = 10^12 combinations."
+          },
+          {
+                "question": "Can I generate pronounceable PINs that are easy to remember?",
+                "answer": "Yes, the Memorable mode converts digits to telephone keypad words (2668 = BOOT). Includes a 10,000-word dictionary for easy-to-remember secure PINs."
+          }
+    ]
+},
   {
+
     id: "gt-8",
     name: "License Key Generator",
     slug: "license-key-generator",
@@ -341,8 +922,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online License Key Generator — Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Choose License Key Format",
+                "desc": "Select alphanumeric groups, numeric groups, or base32-encoded. Set groups and characters per group."
+          },
+          {
+                "title": "2. Configure Embedded Data",
+                "desc": "Embed product ID, license tier, expiration date, or seat count in specific positions."
+          },
+          {
+                "title": "3. Add Validation Features",
+                "desc": "Enable checksum digit for typo detection. Generate validation algorithm snippet."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does checksum validation prevent fraudulent license key generation?",
+                "answer": "The checksum creates a self-validating key. Without knowing the algorithm and secret (for HMAC mode), attackers cannot generate valid keys."
+          },
+          {
+                "question": "Can license keys be revoked or verified online?",
+                "answer": "The tool generates offline-validable keys and optionally a JSON payload for online verification against your server database."
+          },
+          {
+                "question": "What is the recommended format for embedding product ID and tier in a key?",
+                "answer": "Embed in fixed positions: chars 0–3 for product ID (base36), 4–5 for tier, 6–9 for expiration (MMYY). The tool provides an interactive encoder."
+          }
+    ]
+},
   {
+
     id: "gt-9",
     name: "Image Placeholder Generator",
     slug: "image-placeholder-generator",
@@ -350,8 +960,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Placeholder Generator — Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. ',
     dependencies: "Canvas API",
-  },
+    instructions: [
+          {
+                "title": "1. Set Image Dimensions",
+                "desc": "Enter width and height in pixels (10–2000). Supports common aspect ratios."
+          },
+          {
+                "title": "2. Configure Background and Text",
+                "desc": "Choose background and text colors. Toggle the dimension label overlay."
+          },
+          {
+                "title": "3. Generate and Copy URL or Download",
+                "desc": "Get SVG data URI or hosted PNG URL. Copy HTML img tag or CSS background URL."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does the tool use SVG for placeholder images instead of raster PNG?",
+                "answer": "SVG is resolution-independent, has tiny file sizes (200–500 bytes), and can include inline CSS and styled text without external requests."
+          },
+          {
+                "question": "Can I generate a gradient placeholder instead of a solid color?",
+                "answer": "Yes, the Gradient mode offers linear and radial presets with up to 3 color stops. Duotone mode blends two colors with mix-blend-mode."
+          },
+          {
+                "question": "How do I use the placeholder in a responsive img tag?",
+                "answer": "Enable responsive mode to generate srcset and sizes attributes with multiple versions (400x300, 800x600, 1200x900)."
+          }
+    ]
+},
   {
+
     id: "gt-10",
     name: "Logo Placeholder Generator",
     slug: "logo-placeholder-generator",
@@ -359,8 +998,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Logo Placeholder Generator — Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. ',
     dependencies: "Canvas API",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Company/Product Name",
+                "desc": "Type the name (up to 30 chars). The tool extracts initials for icon variations."
+          },
+          {
+                "title": "2. Choose Logo Style",
+                "desc": "Select text-only, initial-circle, icon + text, or geometric shape."
+          },
+          {
+                "title": "3. Customize Colors and Export",
+                "desc": "Pick from preset palettes. Download as SVG, PNG, or ICO."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the initial-circle style choose colors and size for each letter?",
+                "answer": "Two-letter initials split the circle into half-circles with complementary colors. Single letters use the full circle. Letter spacing and centering are computed optimally."
+          },
+          {
+                "question": "Can I customize the icon by uploading my own SVG?",
+                "answer": "Yes, upload an SVG path or choose from 100+ built-in business icons. The icon is embedded inline for self-contained output."
+          },
+          {
+                "question": "What typography options are available for text-based logos?",
+                "answer": "20+ Google Fonts categorized by industry: sans-serif for tech, serif for luxury, display for creative, monospace for developer tools."
+          }
+    ]
+},
   {
+
     id: "gt-11",
     name: "Open Graph Generator",
     slug: "open-graph-generator",
@@ -368,8 +1036,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Open Graph Generator — Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Set OG Meta Fields",
+                "desc": "Enter og:title, og:description, og:url, og:type (website, article, product), og:site_name."
+          },
+          {
+                "title": "2. Configure Image and Video",
+                "desc": "Set og:image (1200x630 recommended) with alt text. For video, add og:video with secure_url."
+          },
+          {
+                "title": "3. Generate Meta Tags",
+                "desc": "Generate the complete OG tag block including Twitter Cards and optional JSON-LD."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between Open Graph and Twitter Cards?",
+                "answer": "OG is Facebook's protocol for URL previews. Twitter Cards are a separate format. Twitter falls back to OG tags if Twitter Card tags are absent."
+          },
+          {
+                "question": "How do I debug why my OG tags don't show correctly on Facebook?",
+                "answer": "Use Facebook's Sharing Debugger. Common issues: og:image must use absolute URL, image minimum 600x315px, page must not block facebookexternalhit crawler."
+          },
+          {
+                "question": "What OG type should I use for product pages vs article pages?",
+                "answer": "Use og:type=product for e-commerce (enables product:price:amount, product:availability). Use og:type=article for blog posts (enables article:published_time)."
+          }
+    ]
+},
   {
+
     id: "gt-12",
     name: "OAuth PKCE Generator",
     slug: "oauth-pkce-generator",
@@ -377,7 +1074,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OAuth PKCE Generator — Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. ',
     dependencies: "Crypto API (Web Crypto)",
-  },
+    instructions: [
+          {
+                "title": "1. Generate Code Verifier",
+                "desc": "Generate a cryptographically random code_verifier (43–128 chars using unreserved characters)."
+          },
+          {
+                "title": "2. Compute Code Challenge",
+                "desc": "Choose S256 (SHA-256 hash then base64url, recommended) or plain method."
+          },
+          {
+                "title": "3. Copy Configuration",
+                "desc": "Copy the verifier, challenge, authorization URL, and token exchange POST body."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What problem does PKCE solve in the OAuth 2.0 authorization code flow?",
+                "answer": "PKCE (RFC 7636) prevents authorization code interception attacks by binding the code to the client session. An attacker who intercepts the code cannot exchange it without the verifier."
+          },
+          {
+                "question": "Why is S256 recommended over the plain method for code challenge?",
+                "answer": "S256 ensures that even if the challenge is intercepted, the attacker cannot derive the verifier. With plain method, the challenge IS the verifier."
+          },
+          {
+                "question": "How do the verifier and challenge flow through the OAuth handshake?",
+                "answer": "Your app sends the challenge in the authorization request. After receiving the code, your app sends the original verifier to the token endpoint. The server hashes the verifier and compares to the stored challenge."
+          }
+    ]
+},
   {
 
     id: "ce-1",
@@ -569,6 +1294,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "ce-6",
     name: "Avro Schema Generator",
     slug: "avro-schema-generator",
@@ -576,8 +1302,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate Apache Avro schemas from a JSON field definition. Configure namespace, record name, and field types — outputs valid Avro schema JSON.',
     seoDescription: 'Free online Avro Schema Generator — Generate Apache Avro schemas from JSON field definitions. Configure namespace, record name, and field types. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Define Schema Name and Namespace",
+                "desc": "Enter the schema name and namespace (e.g., com.example.user). These define the fully qualified name."
+          },
+          {
+                "title": "2. Add Fields with Types",
+                "desc": "Add fields with Avro types: null, boolean, int, long, float, double, bytes, string, record, enum, array, map, union, fixed."
+          },
+          {
+                "title": "3. Set Field Properties",
+                "desc": "For each field, set default values, doc strings, order (ascending/descending/ignore), and aliases."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between Avro's record and enum types?",
+                "answer": "A record is a complex type with multiple named fields of various types. An enum is a type restricted to a set of symbolic names (strings). Enums support aliases for schema evolution."
+          },
+          {
+                "question": "How does Avro handle schema evolution with default values?",
+                "answer": "Fields can have default values, allowing readers with a newer schema to process older data. A field added with a default value is backward-compatible. Removing a field or making it required is a breaking change."
+          },
+          {
+                "question": "Can I generate Avro schema from an existing JSON object?",
+                "answer": "Yes, the tool has a JSON-to-Avro inference mode. Paste a sample JSON record, and the tool infers the Avro schema with appropriate types: string, int, long, double, boolean, array, and record."
+          }
+    ]
+},
   {
+
     id: "ce-7",
     name: "Avro to JSON Sample Generator",
     slug: "avro-to-json-sample",
@@ -585,7 +1340,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your Avro schema in JSON format including namespace, type, name, fields with types, default values, and optional properties like doc and order for sample generation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the number of sample records to generate and configure random data generation constraints for each field type including strings, numbers, and booleans."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate realistic JSON sample data from the Avro schema. Download the sample as a JSON file or copy individual records for testing your Avro deserialization logic."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool generate realistic sample data for different Avro field types automatically?",
+                "answer": "String fields get lorem ipsum text, int and long fields get random numbers, float and double get decimal values, boolean gets random true or false, and enum picks from defined symbols."
+          },
+          {
+                "question": "What happens when the Avro schema contains complex nested types like records within records?",
+                "answer": "Nested records are recursively generated with the same logic. The depth of nesting is preserved exactly as defined with parent-child relationships maintained in the output."
+          },
+          {
+                "question": "Can the tool generate sample data matching specific constraints like min and max values?",
+                "answer": "Yes, if your Avro schema includes logical types such as decimal or date or custom properties for constraints, the sample generator respects these to produce valid data."
+          }
+    ]
+},
   {
 
     id: "ce-8",
@@ -815,6 +1598,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "dt-6",
     name: "CSV Merger",
     slug: "csv-merger",
@@ -822,7 +1606,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Merge two CSV files on a common column. Join datasets horizontally by matching key values, like a SQL JOIN for your spreadsheets.',
     seoDescription: 'Free online CSV Merger — Merge two CSV files on a common column. Join datasets horizontally by matching key values. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Upload two or more CSV files that share a common structure. The tool detects the columns in each file and identifies matching columns for merging operations."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the merge method such as appending rows vertically, joining by key column like SQL JOIN, or merging columns side by side by row position."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Preview the merged dataset with column mappings and resolve any conflicts. Download the merged CSV file with your chosen delimiter for the final output."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CSV merging strategies does the tool offer for combining datasets together?",
+                "answer": "Append or vertical stack where files share columns, Horizontal merge side-by-side where files have same row count, Key-based join on a common column, and Column union."
+          },
+          {
+                "question": "How does the tool handle mismatched column names or structures between CSV files merging?",
+                "answer": "Column mapping interface lets you map columns with different names but similar meaning. Unmatched columns are filled with null values or excluded from the output."
+          },
+          {
+                "question": "Can the merger deduplicate rows after combining multiple CSV files into one dataset?",
+                "answer": "Yes, post-merge deduplication is available based on all columns matching, specific key columns, or fuzzy matching on text columns with duplicates listed in a report."
+          }
+    ]
+},
   {
 
     id: "dt-7",
@@ -976,6 +1788,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "dt-11",
     name: "CSV Splitter",
     slug: "csv-splitter",
@@ -983,8 +1796,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Split a large CSV file into multiple smaller files by page count. Divide datasets into manageable chunks for processing.',
     seoDescription: 'Free online CSV Splitter — Split large CSV files into multiple smaller files by page count. Divide datasets into manageable chunks. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Upload a large CSV file that needs to be split into smaller more manageable files for processing, email attachment limits, or parallel data processing workflows."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose to split by row count, number of output files, column value grouping, or percentage-based division of the total dataset into segments."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Execute the split and download the individual files or a zip archive. A preview shows the split summary including output count and rows per file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What methods are available for splitting a large CSV file into smaller parts or segments?",
+                "answer": "By row count such as every 1000 rows, by equal partition into a set number of files, by column value creating separate files per unique value, and by percentage division."
+          },
+          {
+                "question": "How does the splitter preserve the CSV header row in each output file created during splitting?",
+                "answer": "By default every split file includes the header row as the first line. You can choose to include headers only in the first file for splitting operations."
+          },
+          {
+                "question": "Can the tool split a CSV by column value creating separate files for each category group?",
+                "answer": "Yes, select a column to group by. Each unique value in that column gets its own output file named after the value for organized category-based file splitting."
+          }
+    ]
+},
   {
+
     id: "dt-12",
     name: "CSV Transpose",
     slug: "csv-transpose",
@@ -992,7 +1834,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Transpose CSV data — swap rows and columns. Convert horizontal data to vertical and vice versa for reformatting.',
     seoDescription: 'Free online CSV Transpose — Swap rows and columns in CSV data. Convert horizontal to vertical and vice versa. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste CSV data or upload a CSV file where rows and columns need to be swapped. This turns rows into columns and columns into rows for data restructuring."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure whether the first column becomes the new header row and whether to preserve the original header as the first column after the transposition operation."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Transpose the data and preview the resulting structure showing the swapped dimensions. Download the transposed CSV with the same or a different delimiter."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is a CSV transpose operation and when would you use it in data processing workflows?",
+                "answer": "Transposing swaps rows and columns making a 5-row by 3-column CSV become a 3-row by 5-column CSV. Useful for converting horizontal time-series data to vertical format."
+          },
+          {
+                "question": "How does the transpose tool handle mixed data types when rows become columns during conversion?",
+                "answer": "Each column in the original becomes a row potentially mixing data types. The tool preserves all original values as strings and notes the original type if requested."
+          },
+          {
+                "question": "Can the tool transpose only a selected range of rows and columns rather than the entire dataset?",
+                "answer": "Yes, select a range by specifying row and column indices or choose specific columns to include. This is useful when only a portion needs transformation."
+          }
+    ]
+},
   {
     id: "dt-13",
     name: "CSV to Markdown Table",
@@ -1051,14 +1921,45 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "dt-15",
     name: "CSV to SQL INSERT",
     slug: "csv-to-sql",
     category: "Developer",
     description: 'Converts CSV files to SQL format — spreadsheets, database exports, and data imports to relational database operations, data analysis, and reporting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste CSV data or upload a CSV file with a header row that defines the column names. The tool parses the data and prepares it for SQL INSERT statement generation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure the target SQL table name, column data types, and whether to generate CREATE TABLE statements alongside the INSERT statements for complete schema creation."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate SQL INSERT statements from the CSV data. Download the SQL file for direct execution against your database or copy the statements individually."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool parse CSV headers and generate the corresponding SQL table schema?",
+                "answer": "The first row is treated as column headers. Each column data type is inferred from the values allowing the tool to generate appropriate SQL types with size constraints."
+          },
+          {
+                "question": "Can the generated SQL include both CREATE TABLE and INSERT statements for complete setup?",
+                "answer": "Yes, the tool can generate a CREATE TABLE statement with inferred column types followed by INSERT statements for each row. You can choose to include or skip the table creation."
+          },
+          {
+                "question": "Does the tool handle special characters and quotes in CSV values during SQL generation safely?",
+                "answer": "Yes, special characters in string values are properly escaped for SQL. Single quotes are doubled and backslashes are handled according to the database type conventions."
+          }
+    ]
+},
   {
+
     id: "dt-16",
     name: "JSON Escape/Unescape",
     slug: "json-escape-unescape",
@@ -1066,24 +1967,113 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Escape or unescape JSON strings — convert special characters to their JSON-safe escaped equivalents and back.',
     seoDescription: 'Free online JSON Escape/Unescape — Escape or unescape JSON strings. Convert special characters to safe equivalents and back. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Enter JSON or Text",
+                "desc": "Paste a JSON string that needs escaping (special characters converted to escape sequences) or a string with escape sequences that needs unescaping."
+          },
+          {
+                "title": "2. Choose Escape Direction",
+                "desc": "Select Escape to convert newlines, tabs, quotes, and backslashes to \\n, \\t, \\\", \\\\ sequences, or Unescape to convert escape sequences back to their literal characters."
+          },
+          {
+                "title": "3. Process and Copy",
+                "desc": "Click Process to apply the escaping or unescaping. The result is displayed with syntax highlighting for easy verification before copying."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which special characters are escaped when converting to JSON-safe strings?",
+                "answer": "Double quotes (\"), backslashes (\\), forward slash (/) for HTML embedding, control characters (\\b, \\f, \\n, \\r, \\t), and Unicode characters above U+FFFF are escaped as \\uXXXX sequences."
+          },
+          {
+                "question": "What is the difference between JSON.stringify with escaping vs manual escaping?",
+                "answer": "JSON.stringify automatically handles all escaping rules including Unicode surrogate pairs and invalid UTF-8 sequences. Manual escaping may miss edge cases like embedded null characters or half-surrogates."
+          },
+          {
+                "question": "How does the tool handle invalid escape sequences during unescaping?",
+                "answer": "Invalid sequences like \\x or \\z are left as-is with a warning. The tool also handles common ambiguities: \\u0041 is correctly decoded to A, and \\\\u0041 remains the literal \\u0041."
+          }
+    ]
+},
   {
+
     id: "dt-17",
     name: "JSON Flattener",
     slug: "json-flattener",
     category: "Developer",
     description: 'Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.',
     seoDescription: 'Free online JSON Flattener — Flatten nested JSON into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Paste Nested JSON",
+                "desc": "Paste a JSON object with nested structures — objects within objects, arrays, and mixed data types that need to be flattened into a single-level structure."
+          },
+          {
+                "title": "2. Choose Flattening Strategy",
+                "desc": "Select the key separator (dot: user.name, underscore: user_name, bracket: user[name]), how to handle arrays (indexed or bracketed), and whether to include empty values."
+          },
+          {
+                "title": "3. View and Export Flattened Result",
+                "desc": "The flattened JSON is displayed as a single-level object with compound keys. Copy as JSON or CSV, or preview as a table."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the flattener handle arrays within nested JSON objects?",
+                "answer": "Arrays can be flattened using index notation (users.0.name, users.1.name), compressed to a single entry (users.0, users.1), or converted to a comma-separated string for simple types."
+          },
+          {
+                "question": "What separator options are available for constructing flattened keys?",
+                "answer": "Dot notation (address.city), underscore notation (address_city), bracket notation (address[city]), path notation (root/address/city), and custom separator. The tool shows a live preview as you change the separator."
+          },
+          {
+                "question": "Can the tool perform the reverse operation by unflattening a flat JSON back into nested structure?",
+                "answer": "Yes, the reverse mode accepts a flat JSON with compound keys and reconstructs the original nested structure by splitting keys at the separator and creating nested objects and arrays."
+          }
+    ]
+},
   {
+
     id: "dt-18",
     name: "JSON-LD Generator",
     slug: "json-ld-generator",
     category: "Developer",
     description: 'Wrap JSON data in valid JSON-LD (Linked Data) structure with @context and @type. Generate schema.org-compatible structured data.',
     seoDescription: 'Free online JSON-LD Generator — Wrap JSON data in valid JSON-LD with @context and @type. Schema.org-compatible structured data. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Set Context and Type",
+                "desc": "Enter the @context URL (e.g., https://schema.org) and @type (e.g., Product, Article, Person, Organization, Event)."
+          },
+          {
+                "title": "2. Add Structured Properties",
+                "desc": "Add properties relevant to the selected type. For Product: name, description, brand, offers, aggregateRating. For Article: headline, author, datePublished."
+          },
+          {
+                "title": "3. Generate and Validate",
+                "desc": "Generate the JSON-LD script block. The tool validates the structure against schema.org vocabulary and common errors."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between JSON-LD and microdata for structured data?",
+                "answer": "JSON-LD is a script tag in the head/body that doesn't alter visible HTML. Microdata adds itemprop attributes to existing HTML elements. JSON-LD is Google's recommended format as it's easier to maintain."
+          },
+          {
+                "question": "How does the tool validate JSON-LD against schema.org types?",
+                "answer": "The tool checks that all properties used are defined in schema.org for the specified type. It flags unknown properties, missing required properties (per Google's guidelines), and type mismatches."
+          },
+          {
+                "question": "Can JSON-LD be used for breadcrumb and FAQ rich results?",
+                "answer": "Yes, the tool supports BreadcrumbList (WebPage > itemListElement > ListItem) and FAQPage (mainEntity > Question > acceptedAnswer) types for Google rich snippets."
+          }
+    ]
+},
   {
+
     id: "dt-19",
     name: "Merge Patch Generator",
     slug: "merge-patch-generator",
@@ -1091,32 +2081,151 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON objects. Show exactly what changed.',
     seoDescription: 'Free online Merge Patch Generator — Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Original JSON",
+                "desc": "Paste the original JSON document that will be the base for the merge patch."
+          },
+          {
+                "title": "2. Enter Modified JSON",
+                "desc": "Paste the modified JSON document (the desired state after patching)."
+          },
+          {
+                "title": "3. Generate Merge Patch",
+                "desc": "The tool computes the RFC 7396 Merge Patch — a JSON document describing the differences. Fields with new values are included, removed fields are set to null."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does JSON Merge Patch (RFC 7396) differ from JSON Patch (RFC 6902)?",
+                "answer": "Merge Patch is a simple diff where null means remove the field. JSON Patch is an explicit list of operations (add, remove, replace, move, copy, test) in a specific order."
+          },
+          {
+                "question": "What happens when the original and modified documents have nested objects?",
+                "answer": "The merge patch recursively diffs nested objects. Only the changed nested fields appear in the patch output, not the entire nested structure."
+          },
+          {
+                "question": "Can I apply a merge patch to see the resulting document?",
+                "answer": "Yes, the tool has an Apply mode. Paste an original document and a merge patch to preview the resulting merged document before committing the patch."
+          }
+    ]
+},
   {
+
     id: "dt-20",
     name: "JSON Schema Generator",
     slug: "json-schema-generator",
     category: "Developer",
     description: 'Generate a JSON Schema (draft-07) from sample JSON data. Auto-detect types, required fields, and nested structures.',
     seoDescription: 'Free online JSON Schema Generator — Generate JSON Schema (draft-07) from sample JSON. Auto-detect types and nested structures. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Input JSON Sample",
+                "desc": "Paste a JSON object or array that represents your data. The tool analyzes the structure."
+          },
+          {
+                "title": "2. Select Schema Version",
+                "desc": "Choose JSON Schema draft-04, draft-07, 2020-12, or OpenAPI-compatible mode."
+          },
+          {
+                "title": "3. Customize Constraints",
+                "desc": "Add constraints: required fields, minimum/maximum values, regex patterns, enum values, and array length limits."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool infer types from a JSON sample?",
+                "answer": "The tool recursively walks the JSON structure: strings become {type: string}, numbers become {type: number}, objects become {type: object, properties}, arrays become {type: array, items}."
+          },
+          {
+                "question": "Can I generate schema for nullable fields?",
+                "answer": "Yes, toggle nullable mode. For draft-07, this adds 'nullable: true'. For 2020-12, it uses type: ['string', 'null'] (JSON Schema union types)."
+          },
+          {
+                "question": "What is the difference between allOf, anyOf, and oneOf in JSON Schema?",
+                "answer": "allOf requires all schemas to match (intersection). anyOf requires at least one to match (union). oneOf requires exactly one to match (exclusive union)."
+          }
+    ]
+},
   {
+
     id: "dt-21",
     name: "JSON Size Analyzer",
     slug: "json-size-analyzer",
     category: "Developer",
     description: 'Analyze JSON payload size, character count, key count, and nesting depth. Understand the size profile of your data.',
     seoDescription: 'Free online JSON Size Analyzer — Analyze JSON payload size, character count, key count, and nesting depth. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Paste JSON Data",
+                "desc": "Paste your JSON data or upload a .json file."
+          },
+          {
+                "title": "2. Run Size Analysis",
+                "desc": "The tool calculates the size in bytes, characters, and identifies the largest fields and arrays."
+          },
+          {
+                "title": "3. Review Breakdown",
+                "desc": "A treemap or table shows which parts of the JSON contribute most to the total size, helping identify optimization targets."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What metrics does the JSON size analyzer calculate?",
+                "answer": "It calculates total byte size (raw and minified), number of keys at each level, largest key names, largest values, and array element counts."
+          },
+          {
+                "question": "Can the tool estimate bandwidth costs at scale?",
+                "answer": "Yes, it estimates monthly bandwidth cost based on payload size and request volume (configurable RPM) using typical cloud pricing tiers."
+          },
+          {
+                "question": "Does the analyzer suggest size reduction strategies?",
+                "answer": "Yes, it suggests: shortening key names, removing null/empty fields, deduplicating repeated data, and enabling GZIP/Brotli compression."
+          }
+    ]
+},
   {
+
     id: "dt-22",
     name: "JSON to Zod Schema",
     slug: "json-to-zod",
     category: "Developer",
     description: 'Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Paste Sample JSON",
+                "desc": "Paste an example JSON object or array that represents the shape of data you want to validate with a Zod schema in TypeScript."
+          },
+          {
+                "title": "2. Configure Schema Options",
+                "desc": "Toggle options: mark fields as optional or required, set nullable fields, generate string enums from literal values, add min/max constraints for numbers and strings."
+          },
+          {
+                "title": "3. Generate and Export Zod Schema",
+                "desc": "Copy the generated Zod schema code. The tool outputs valid TypeScript with import statements, ready to use in your project with Zod."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool infer Zod types from JSON data?",
+                "answer": "Strings become z.string(), numbers become z.number(), booleans become z.boolean(), arrays become z.array(), nullables become z.nullable(), and objects become z.object() with inferred property types."
+          },
+          {
+                "question": "Can the tool detect enum-like fields (limited set of string values) and generate z.enum()?",
+                "answer": "Yes, when a string field has fewer than 8 unique values across the sample array, the tool generates z.enum(['value1', 'value2']) instead of z.string(), with each value properly quoted."
+          },
+          {
+                "question": "Does the generated Zod schema include .describe() annotations from JSON field names?",
+                "answer": "Yes, each field gets a .describe() call with the original JSON key name for documentation. Comments from JSON5 input are also preserved as .describe() annotations in the output."
+          }
+    ]
+},
   {
+
     id: "dt-23",
     name: "JWK Generator",
     slug: "jwk-generator",
@@ -1124,8 +2233,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate JSON Web Keys (JWK) with RSA key sizes of 2048 or 4096 bits. Export public and private keys in JWK format.',
     seoDescription: 'Free online JWK Generator — Generate JSON Web Keys (JWK) with 2048 or 4096 bit RSA. Export public/private key pairs. ',
     dependencies: "Web Crypto API",
-  },
+    instructions: [
+          {
+                "title": "1. Select Key Type",
+                "desc": "Choose the JWK key type: RSA, EC (P-256, P-384, P-521), oct (symmetric), or OKP (Ed25519, X25519)."
+          },
+          {
+                "title": "2. Set Key Parameters",
+                "desc": "For RSA: set modulus size. For EC: select curve. For oct: set key length. Add key ID (kid) and key usage (sig/enc)."
+          },
+          {
+                "title": "3. Generate JWK Set",
+                "desc": "Generate the JWK with public and private key parameters. Copy as compact JWK or JWK Set (keys array) format."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the JWK format and how does it differ from PEM?",
+                "answer": "JWK (JSON Web Key, RFC 7517) represents cryptographic keys as JSON objects with base64url-encoded parameters. PEM is base64-encoded DER with header/footer lines. JWK is directly usable in JavaScript/TypeScript."
+          },
+          {
+                "question": "How does the tool handle the JWK Thumbprint (RFC 7638)?",
+                "answer": "The tool computes the JWK Thumbprint by canonicalizing the required members (crv, kty, x, y for EC), constructing a JSON object, and computing its SHA-256 digest as base64url."
+          },
+          {
+                "question": "Can I convert an existing PEM key to JWK format?",
+                "answer": "Yes, the tool accepts PEM input for RSA and EC keys and extracts the base64url-encoded parameters (n, e, d, p, q, dp, dq, qi for RSA; crv, x, y, d for EC)."
+          }
+    ]
+},
   {
+
     id: "dt-24",
     name: "JSONL Formatter",
     slug: "jsonl-formatter",
@@ -1133,16 +2271,75 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format JSON Lines (JSONL) data — pretty-print each line as formatted JSON for readability and debugging.',
     seoDescription: 'Free online JSONL Formatter — Format JSON Lines data, pretty-print each line as formatted JSON for readability. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Paste JSONL Data",
+                "desc": "Paste JSONL (JSON Lines) data where each line is a valid JSON object or array. The tool parses and validates each line independently."
+          },
+          {
+                "title": "2. Format and Validate",
+                "desc": "Click Format to pretty-print each JSON line with consistent indentation. Invalid lines are highlighted with the specific JSON parse error."
+          },
+          {
+                "title": "3. View Summary and Export",
+                "desc": "View total lines, valid vs invalid count, byte size, and detected schema across all records. Export as formatted JSONL or pretty-printed JSON array."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is JSONL format and how does it differ from regular JSON?",
+                "answer": "JSONL (JSON Lines, RFC 7464) stores one JSON object per line, with a record separator (0x1E) optionally preceding each line. Unlike a JSON array, JSONL can be streamed line by line and appended to incrementally."
+          },
+          {
+                "question": "How does the tool validate each line of JSONL independently?",
+                "answer": "Each line is parsed separately with its own JSON.parse() call. Lines that fail parsing are shown with the error message and character position. The tool also checks for blank lines and leading/trailing whitespace."
+          },
+          {
+                "question": "Can the tool sort or filter JSONL records based on field values?",
+                "answer": "Yes, the query mode lets you filter records using simple field comparisons (field == value, field contains text) and sort by numeric or string fields in ascending or descending order."
+          }
+    ]
+},
   {
+
     id: "dt-25",
     name: "NDJSON to JSON Array",
     slug: "ndjson-to-json",
     category: "Developer",
     description: 'Convert Newline Delimited JSON into a standard JSON array format. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online NDJSON to JSON Array — Convert Newline Delimited JSON into a standard JSON array format. ',
-    dependencies: "Vanilla JS",        },
+    dependencies: "Vanilla JS",
+    instructions: [
+          {
+                "title": "1. Paste NDJSON Data",
+                "desc": "Paste newline-delimited JSON data where each line is a separate JSON object. The tool accepts data with trailing newlines and empty lines."
+          },
+          {
+                "title": "2. Choose Conversion Direction",
+                "desc": "Select NDJSON to JSON (wraps lines in a JSON array with commas) or JSON to NDJSON (extracts array elements into individual lines)."
+          },
+          {
+                "title": "3. Configure Output Options",
+                "desc": "For NDJSON to array: toggle pretty-printing of array elements. For JSON to NDJSON: choose to minify objects or preserve formatting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How is NDJSON different from JSONL?",
+                "answer": "NDJSON (Newline-Delimited JSON) and JSONL are effectively the same format — one JSON object per line. JSONL typically includes the record separator byte (0x1E) while NDJSON uses only newlines as delimiters."
+          },
+          {
+                "question": "How does the conversion handle JSON array elements that are themselves arrays or deeply nested?",
+                "answer": "Each element of the source array is treated as an independent JSON value for the line-by-line output. Deeply nested structures are preserved exactly, with no flattening of the internal structure."
+          },
+          {
+                "question": "Can the tool stream large NDJSON files that don't fit in browser memory?",
+                "answer": "For files up to 200 MB, the tool uses a streaming line reader that processes one line at a time, building the output incrementally. A progress bar shows conversion status."
+          }
+    ]
+},
   {
+
     id: "dt-26",
     name: "JSON to URL Parameters",
     slug: "json-to-url-params",
@@ -1150,7 +2347,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects into URL query string parameters for API calls and web requests. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to URL Parameters — Convert JSON objects into URL query string parameters for API calls and web requests. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Enter JSON Object",
+                "desc": "Paste a flat or nested JSON object that you want to convert into URL query string parameters with proper encoding."
+          },
+          {
+                "title": "2. Configure Serialization Style",
+                "desc": "Choose how nested objects are serialized: bracket-notation (user[name]=John), dot-notation (user.name=John), or repeated-key (name=John&name=Doe for arrays)."
+          },
+          {
+                "title": "3. Generate URL with Params",
+                "desc": "Click Convert to generate the query string. Copy just the query string (?key=value&...) or the full URL if you provide a base URL."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool encode special characters in URL parameter names and values?",
+                "answer": "All parameter names and values are percent-encoded using encodeURIComponent: spaces become %20, & becomes %26, = becomes %3D, and Unicode characters are encoded as UTF-8 byte sequences (e.g., é → %C3%A9)."
+          },
+          {
+                "question": "What is the difference between bracket-notation and dot-notation for nested JSON?",
+                "answer": "Bracket notation (user[profile][name]=John) is widely compatible with PHP, Rails, and Express apps. Dot notation (user.profile.name=John) is used by some GraphQL clients and C#/.NET systems."
+          },
+          {
+                "question": "Can the tool convert URL parameters back into a JSON object (reverse operation)?",
+                "answer": "Yes, the reverse mode parses a query string using the selected notation convention and reconstructs the original JSON object, handling arrays from repeated keys automatically."
+          }
+    ]
+},
   {
 
     id: "dt-27",
@@ -1190,6 +2415,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
 },
   {
+
     id: "css-1",
     name: "Glassmorphism CSS Generator",
     slug: "glassmorphism-generator",
@@ -1198,8 +2424,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Glassmorphism CSS Generator — Generate glassmorphism CSS with adjustable blur, opacity, and border radius. Copy ready-to-use CSS for frosted-glass UI effects. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Set Background Blur",
+                "desc": "Adjust the backdrop-filter: blur() value (1–50px). Higher values create more frosted glass effect."
+          },
+          {
+                "title": "2. Configure Glass Colors",
+                "desc": "Set the background color with opacity (rgba with alpha 0.1–0.5). Choose border color for the subtle glass edge."
+          },
+          {
+                "title": "3. Add Shadow and Radius",
+                "desc": "Set border-radius for the card and box-shadow for depth. Copy the generated CSS with all vendor prefixes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is glassmorphism and which CSS properties make it work?",
+                "answer": "Glassmorphism creates a frosted glass effect using backdrop-filter: blur(), semi-transparent background (rgba with alpha), light border, and layered box-shadow."
+          },
+          {
+                "question": "Why does backdrop-filter not work in Firefox without a background?",
+                "answer": "Firefox requires a background with some opacity (use rgba) for backdrop-filter to render. A fully transparent background prevents the blur effect."
+          },
+          {
+                "question": "Can glassmorphism be used on elements with dark backgrounds?",
+                "answer": "Yes, the tool has a dark mode toggle. Use lighter glass overlay colors (white with alpha 0.05–0.15) on dark backgrounds for the frosted effect."
+          }
+    ]
+},
   {
+
     id: "css-2",
     name: "Neumorphism CSS Generator",
     slug: "neumorphism-generator",
@@ -1208,8 +2463,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Neumorphism CSS Generator — Generate neumorphism CSS with configurable size, blur, and color. Create soft UI shadow effects. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Choose Shape Type",
+                "desc": "Select convex (raised button) or concave (inset field) neumorphic style."
+          },
+          {
+                "title": "2. Set Base Color",
+                "desc": "Choose the base color. Neumorphism works best with pastel/neutral backgrounds (#e0e0e0 family)."
+          },
+          {
+                "title": "3. Adjust Shadow Distance",
+                "desc": "Set the shadow offset and blur. Larger values create more pronounced neumorphic depth."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the core principle behind neumorphic design?",
+                "answer": "Neumorphism (soft UI) uses two shadows — a light shadow (top-left, from a light source) and a dark shadow (bottom-right) — on the same element to simulate extruded/inset plastic."
+          },
+          {
+                "question": "Why does neumorphism require a specific background color to work?",
+                "answer": "The illusion depends on the element color matching the background color. The two shadows create the 3D impression only when there's no contrast between the element and its background."
+          },
+          {
+                "question": "Does neumorphism have accessibility concerns?",
+                "answer": "Yes, the low contrast between elements and backgrounds can fail WCAG AA standards. The tool includes a contrast checker that warns when foreground text fails accessibility guidelines."
+          }
+    ]
+},
   {
+
     id: "css-3",
     name: "CSS Specificity Calculator",
     slug: "css-specificity-calculator",
@@ -1217,7 +2501,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Calculate CSS selector specificity as (IDs, classes, tags) and total weight. Understand which selector wins in a specificity conflict.',
     seoDescription: 'Free online CSS Specificity Calculator — Calculate CSS selector specificity as (IDs, classes, tags) and total weight. Understand which selector wins. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type a CSS selector string from simple element selectors to complex chains with IDs, classes, pseudo-classes, attributes, and combinators for analysis."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Calculate the specificity score as a three-part value representing inline styles, IDs, and class or element counts respectively for the given selector."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Add multiple selectors to compare their specificity values side by side. The tool shows which selector takes precedence in the CSS cascade resolution order."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How is CSS specificity calculated according to the W3C specification rules for cascade?",
+                "answer": "Specificity is a four-part value with inline styles at the highest weight, then IDs, then classes and attributes and pseudo-classes, then elements and pseudo-elements."
+          },
+          {
+                "question": "How does the tool handle the is and not and has pseudo-classes in specificity calculation?",
+                "answer": "For is and not and has the specificity uses the most specific argument in the selector list. The where pseudo-class always has zero specificity regardless of arguments."
+          },
+          {
+                "question": "Can the calculator help debug why certain CSS rules are not being applied as expected?",
+                "answer": "Yes, enter both the selector that should apply and the overriding selector. The tool shows specificity of each and explains which cascading rules determine the winner."
+          }
+    ]
+},
   {
     id: "css-4",
     name: "CSS to SCSS Converter",
@@ -1257,6 +2569,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ],
   },
   {
+
     id: "css-6",
     name: "CSS Validator",
     slug: "css-validator",
@@ -1264,8 +2577,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate CSS for missing semicolons, unclosed braces, and syntax issues. Get line-by-line error reports.',
     seoDescription: 'Free online CSS Validator — Validate CSS for missing semicolons, unclosed braces, and syntax issues. Line-by-line error reports. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste CSS Code",
+                "desc": "Paste your CSS code. The tool supports CSS3 and CSS4 (draft) properties."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check property names, values, and syntax against W3C CSS specifications."
+          },
+          {
+                "title": "3. Review Errors and Warnings",
+                "desc": "Errors cover invalid properties or values. Warnings cover vendor prefixes, deprecated properties, and browser compatibility."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CSS validation rules does this tool check?",
+                "answer": "It validates: property name existence, value type correctness (e.g., color values, lengths, percentages), shorthand expansion, and at-rule syntax."
+          },
+          {
+                "question": "Does the validator check browser compatibility for CSS properties?",
+                "answer": "Yes, it flags properties with limited browser support and suggests vendor-prefixed alternatives for compatibility."
+          },
+          {
+                "question": "Can the tool validate CSS custom properties (variables)?",
+                "answer": "Yes, it validates var() function syntax, fallback values, and detects undefined custom property references."
+          }
+    ]
+},
   {
+
     id: "code-1",
     name: "Code Obfuscator",
     slug: "code-obfuscator",
@@ -1273,8 +2615,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Obfuscate or deobfuscate code using Base64 encoding with reversed output. Quick one-way code protection for sharing.',
     seoDescription: 'Free online Code Obfuscator — Obfuscate or deobfuscate code using Base64 encoding with reversed output. Quick code protection for sharing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste JavaScript Code",
+                "desc": "Paste your JavaScript source code to obfuscate."
+          },
+          {
+                "title": "2. Select Obfuscation Options",
+                "desc": "Choose techniques: variable renaming, string encoding, control flow flattening, dead code injection, debug protection."
+          },
+          {
+                "title": "3. Obfuscate and Export",
+                "desc": "Click Obfuscate to transform the code. View the obfuscated output and size comparison."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What obfuscation techniques does the tool apply?",
+                "answer": "Variable renaming (to short/random names), string array encoding, control flow flattening (switch case), dead code injection, self-defending (anti-tamper), and debug protection (anti-debugging)."
+          },
+          {
+                "question": "Does obfuscation protect code from reverse engineering?",
+                "answer": "Obfuscation makes reverse engineering harder and more time-consuming but does not prevent it. Determined attackers can deobfuscate with enough effort."
+          },
+          {
+                "question": "Can the tool deobfuscate previously obfuscated code?",
+                "answer": "Limited deobfuscation is possible for simple transformations (string array decoding, variable renaming). Full deobfuscation for complex transforms (CFG flattening) is not supported."
+          }
+    ]
+},
   {
+
     id: "code-2",
     name: "Code to cURL Parser",
     slug: "code-to-curl-parser",
@@ -1282,8 +2653,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Parse cURL commands to extract method, URL, headers, and body. Debug HTTP requests from cURL strings. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Code to cURL Parser — Parse cURL commands to extract method, URL, headers, and body. Debug HTTP requests from cURL strings. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste source code snippets that include HTTP request creation using common libraries like fetch, axios, and the requests library for parsing into components."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "The tool automatically identifies the HTTP method, URL, headers, body, query parameters, and authentication from the code pattern regardless of programming language."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "View the parsed request components displayed in a structured table showing method, URL, headers, body, auth type, and query params for individual copying."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What HTTP client libraries across which languages can the parser recognize and extract from?",
+                "answer": "It recognizes JavaScript fetch and axios and superagent, Python requests and httpx and aiohttp, Java OkHttp and HttpURLConnection, Go net/http, Ruby Net::HTTP and Faraday."
+          },
+          {
+                "question": "How does the parser handle dynamically constructed URLs with template literals or concatenation?",
+                "answer": "Dynamic URL construction is partially resolved with static parts extracted and dynamic variables shown as placeholders that you can fill in manually to complete the URL."
+          },
+          {
+                "question": "Can the parser extract request components even when the code is minified or obfuscated?",
+                "answer": "The parser works best with readable code. For minified code it makes a best-effort extraction but may miss some patterns. Beautifying the code first improves accuracy."
+          }
+    ]
+},
   {
+
     id: "code-3",
     name: "JavaScript Syntax Checker",
     slug: "js-syntax-checker",
@@ -1291,8 +2691,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JavaScript Syntax Checker — Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste JavaScript Code",
+                "desc": "Paste your JavaScript code. The tool uses acorn for parsing."
+          },
+          {
+                "title": "2. Select ECMAScript Version",
+                "desc": "Choose the ECMAScript version (ES5, ES6/2015, ES2016+, ES2022, or ES2024)."
+          },
+          {
+                "title": "3. Run Syntax Check",
+                "desc": "Click Check Syntax to parse the code. Errors include line and column numbers for each syntax violation."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JavaScript syntax features are checked based on the selected ECMAScript version?",
+                "answer": "For ES5: no let/const, no arrow functions, no classes. For ES6+: checks destructuring, spread, generators, modules. For ES2022+: top-level await, class static blocks."
+          },
+          {
+                "question": "Does the checker detect ASI (automatic semicolon insertion) pitfalls?",
+                "answer": "Yes, it flags lines where ASI may cause unexpected behavior: starting with (, [, or ` after a line break without semicolon."
+          },
+          {
+                "question": "Can the tool detect module import/export syntax issues?",
+                "answer": "Yes, it validates import/export declarations, named vs default exports, and module specifier syntax."
+          }
+    ]
+},
   {
+
     id: "code-4",
     name: "Pug to HTML Converter",
     slug: "pug-to-html-converter",
@@ -1300,7 +2729,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pug to HTML Converter — Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Pug template code with its indentation-based syntax including mixins, includes, interpolation, and block inheritance from parent templates for HTML conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation for the output HTML and choose whether to pretty-print or minify. Configure self-closing tag format and doctype selection for the target environment."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Render the Pug template to HTML with a split-pane preview showing the output alongside the source. Copy the HTML or download it for use in your web application."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle Pug mixins and includes during conversion to HTML output?",
+                "answer": "Mixins are expanded inline with their arguments substituted. Includes are resolved by reading the referenced file or by displaying a placeholder where the include goes."
+          },
+          {
+                "question": "Can the converter handle Pug interpolation with variables and unescaped interpolation safely?",
+                "answer": "Yes, both escaped and unescaped interpolation are processed. Escaped interpolation is HTML-entity encoded while unescaped interpolation outputs raw HTML content."
+          },
+          {
+                "question": "Does the tool support Pug conditional statements and iteration during template rendering?",
+                "answer": "Yes, conditionals and loops are evaluated based on provided sample data or rendered with placeholder values. Each iteration generates corresponding HTML blocks."
+          }
+    ]
+},
   {
     id: "text-tools-hub",
     name: "Text Converter",
@@ -1322,6 +2779,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ],
   },
   {
+
     id: "json-formatter-tool-hub",
     name: "JSON Output Tools",
     slug: "json-formatter-tool",
@@ -1330,7 +2788,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JSON Output Tools — Format JSON, generate Zod schemas, convert to URL params, flatten, create JSON-LD, and analyze size. ',
     dependencies: "None",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any JSON data from API responses, configuration files, data exports, or serialized objects into the editor for formatting, validation, and transformation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation size, key sorting preference, array formatting style, quote style, and other JSON display preferences for the formatted output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the JSON with pretty-printing while validating structure simultaneously. Copy, download, or minify the output for production use in your application."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JSON features does the formatter handle beyond basic pretty-printing and indentation?",
+                "answer": "It handles key sorting alphabetically or custom, inline versus expanded arrays, trailing comma toggling, quote conversion, and JSON5 support with comments and unquoted keys."
+          },
+          {
+                "question": "Can the tool collapse specific parts of the JSON tree while expanding others for focus?",
+                "answer": "Yes, the interactive tree view allows collapsing and expanding individual nodes for large JSON responses where you need to focus on specific sections."
+          },
+          {
+                "question": "Does the formatter provide line numbers and path navigation for each JSON node in the data?",
+                "answer": "Yes, JSONPath expressions are shown for each node. Clicking a path highlights it in the source and line numbers help when debugging JSON parsing errors."
+          }
+    ]
+},
   {
 
     id: "csv-formatter-hub",
@@ -1510,6 +2996,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     ]
   },
   {
+
     id: "cf-cpp",
     name: "C++ Formatter",
     slug: "cpp-formatter",
@@ -1517,8 +3004,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format and beautify C++ source code with configurable indentation, brace style, and spacing. Supports modern C++11 through C++23 syntax.',
     seoDescription: 'Free online C++ Formatter — Format and beautify C++ source code with configurable indentation, brace style, and spacing. Supports modern C++ standards. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste C++ code including classes, templates, namespaces, inheritance, lambdas, smart pointers, and move semantics with C++11 through C++23 standard support."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose from LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, or GNU styles. Configure access modifier indentation and pointer alignment preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the code with the selected C++ style and review changes in a diff view. Verify all modifications before accepting the formatted output for your project."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the C++ formatter handle template declarations with long parameter lists?",
+                "answer": "Template declarations are formatted with each parameter on its own line when they exceed the line width. Template arguments in calls are also wrapped with proper alignment."
+          },
+          {
+                "question": "Can the formatter be configured to match an existing project's specific coding style?",
+                "answer": "Yes, you can export the configuration as a clang-format file compatible with the Clang-Format tool for consistency between this online formatter and your local environment."
+          },
+          {
+                "question": "Does the tool properly format C++ lambda expressions with captures and trailing return types?",
+                "answer": "Yes, lambdas are formatted with the capture list, parameters, and body all properly indented. Trailing return types are placed on the same line or wrapped based on line length."
+          }
+    ]
+},
   {
+
     id: "cf-go",
     name: "Go Formatter",
     slug: "go-formatter",
@@ -1526,8 +3042,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format and beautify Go source code with proper indentation, alignment, and standard gofmt-style conventions. Clean up any Go file instantly.',
     seoDescription: 'Free online Go Formatter — Format and beautify Go source code with proper indentation and gofmt-style conventions. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Go code including packages, imports, functions, methods, structs, interfaces, goroutines, channels, and error handling for standard Go formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Apply gofmt-equivalent formatting to standardize indentation with tabs, import grouping, spacing, and brace placement according to official Go conventions."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Review the formatted Go code which follows standard formatting conventions. Imports are sorted and grouped into standard library and external package sections."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Go formatting rules does the tool enforce that are specific to the Go language?",
+                "answer": "It enforces tabs for indentation, gofmt-compatible brace placement with opening brace on same line, proper spacing around operators, comment formatting, and file-ending newline."
+          },
+          {
+                "question": "Can the formatter automatically fix common Go style issues like receiver naming problems?",
+                "answer": "Yes, it suggests fixes for receiver names that should be short lowercase letters, variable shadowing detection, proper error variable names, and consistent naming conventions."
+          },
+          {
+                "question": "Does the tool sort and organize Go imports into standard library and third-party groups?",
+                "answer": "Yes, imports are sorted into three groups for standard library, third-party packages, and local module imports with each group separated by a blank line."
+          }
+    ]
+},
   {
+
     id: "cf-kt",
     name: "Kotlin Formatter",
     slug: "kotlin-formatter",
@@ -1535,8 +3080,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format and beautify Kotlin source code with correct indentation, spacing, and brace placement. Supports Kotlin DSL, coroutines, and modern syntax.',
     seoDescription: 'Free online Kotlin Formatter — Format and beautify Kotlin source code with correct indentation, spacing, and brace placement. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Kotlin code including classes, data classes, sealed classes, coroutines, extension functions, companion objects, and lambda expressions for consistent formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose formatting rules such as brace placement, property formatting, spacing around colons, expression body formatting, and trailing comma preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the Kotlin code following official JetBrains coding conventions. The output ensures consistency across all Kotlin projects in your organization."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Kotlin formatter handle formatting of chained method calls and extension functions?",
+                "answer": "Chained calls are formatted with each method call on its own line indented by one level. The dot operator is placed at the start of each line for visibility and readability."
+          },
+          {
+                "question": "Can the formatter convert Java-style code patterns to idiomatic Kotlin during formatting?",
+                "answer": "Yes, optional Java to Kotlin conversion transforms getters and setters to properties, static methods to companion object functions, and anonymous classes to lambdas."
+          },
+          {
+                "question": "Does the tool format Kotlin coroutine code with proper structuring of async and launch blocks?",
+                "answer": "Yes, coroutine builders are formatted with proper block indentation. Flow collections and channel operations are formatted with consistent operator placement."
+          }
+    ]
+},
   {
+
     id: "cf-php",
     name: "PHP Beautifier",
     slug: "php-beautifier",
@@ -1544,8 +3118,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Beautify and format PHP source code with proper indentation, brace style, and spacing. Handles PHP, HTML embedded PHP, and mixed syntax files.',
     seoDescription: 'Free online PHP Beautifier — Beautify and format PHP source code with proper indentation, brace style, and spacing. Handles embedded PHP in HTML. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste PHP code including classes, namespaces, traits, interfaces, closures, generators, type declarations, and PHP 8.x features like attributes and enums."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation style and brace position according to PSR-2 or PSR-12 standards. Configure namespace ordering and control statement formatting preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Beautify the PHP code with syntax validation to highlight any parse errors alongside the formatted output. Fix issues and download the clean code for production."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What PHP coding standards does the beautifier support for formatting configuration?",
+                "answer": "It supports PSR-1, PSR-2, PSR-12, Symfony, and Drupal coding standards. Each preset configures brace placement, line length, namespace formatting, and visibility ordering."
+          },
+          {
+                "question": "How does the beautifier handle PHP 8 attributes and named arguments during formatting?",
+                "answer": "Attributes are placed on the line above the element they decorate with consistent indentation. Named arguments are formatted with the parameter name and value on the same line."
+          },
+          {
+                "question": "Can the tool organize PHP use statements alphabetically and group them by type category?",
+                "answer": "Yes, use statements are sorted alphabetically and grouped into class imports, function imports, and constant imports with each group separated by a blank line per PSR-12."
+          }
+    ]
+},
   {
+
     id: "cf-rb",
     name: "Ruby Formatter",
     slug: "ruby-formatter",
@@ -1553,8 +3156,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format and beautify Ruby source code with proper indentation, spacing, and block alignment. Supports modern Ruby syntax and Rails conventions.',
     seoDescription: 'Free online Ruby Formatter — Format and beautify Ruby source code with proper indentation, spacing, and block alignment. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Ruby code including classes, modules, blocks, procs, lambdas, mixins, metaprogramming patterns, and Rails-specific syntax for consistent formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose from RuboCop default, Shopify, or Airbnb styles. Configure indentation, line length, hash formatting, block style, and quote preference for the output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the Ruby code and auto-fix common issues like incorrect spacing, indentation, and style violations. The output follows Ruby community conventions for readability."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Ruby formatter handle formatting of block arguments and multi-line blocks?",
+                "answer": "Blocks with single-line bodies are formatted with curly braces. Multi-line blocks use do and end with proper indentation. Block arguments have consistent spacing inside pipes."
+          },
+          {
+                "question": "Can the formatter automatically convert between hash rocket and JSON-style syntax in Ruby?",
+                "answer": "Yes, the formatter converts older hash rocket syntax to the modern JSON-style syntax where appropriate and vice versa depending on the configured style preference."
+          },
+          {
+                "question": "Does the tool format Ruby method chains with proper alignment and line breaking logic?",
+                "answer": "Yes, method chains are formatted with the dot at the beginning of each continuation line. Trailing dots are avoided and long chains are wrapped with one method per line."
+          }
+    ]
+},
   {
+
     id: "cf-rs",
     name: "Rust Formatter",
     slug: "rust-formatter",
@@ -1562,8 +3194,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Format and beautify Rust source code with proper indentation, spacing, and brace placement. Handles Rust macros, traits, generics, and module structure.',
     seoDescription: 'Free online Rust Formatter — Format and beautify Rust source code with proper indentation, spacing, and brace placement. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Rust code including structs, enums, traits, impl blocks, generics, lifetimes, macros, match expressions, closures, and async or unsafe blocks for formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Apply rustfmt-equivalent formatting with standard Rust conventions including 100 character line width and 4-space indentation for consistency."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the Rust code following official Rust style guidelines. Merge and organize use statements into consistent style with alphabetical sorting within groups."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Rust-specific formatting rules does the tool enforce for Rust code formatting?",
+                "answer": "It enforces proper placement of where clauses, formatted use statements with nesting, proper spacing around arrow symbols, consistent match arm formatting, and struct literal formatting."
+          },
+          {
+                "question": "How does the formatter handle Rust macro invocations with complex token trees?",
+                "answer": "Macro invocations are preserved with their original formatting by default. Common macros are formatted with consistent spacing and nested macro calls are properly indented."
+          },
+          {
+                "question": "Can the tool merge and organize Rust use statements into a consistent nested style?",
+                "answer": "Yes, use statements can be merged into nested use trees or kept as separate lines. Imports are sorted alphabetically within their groups for organized code."
+          }
+    ]
+},
   {
+
     id: "jwt-e-1",
     name: "JWT Encoder & Signer",
     slug: "jwt-encoder-signer",
@@ -1571,8 +3232,37 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Create and sign JSON Web Tokens with custom header and payload. Supports HS256, HS384, HS512 signing algorithms for API authentication testing.',
     seoDescription: 'Free online JWT Encoder & Signer — Create and sign JSON Web Tokens with custom header and payload. Supports HS256, HS384, and HS512 algorithms. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Set the JWT header fields including algorithm such as HS256 or RS256, type as JWT, key ID, and any custom header parameters needed for the JWT token."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Add JWT claims including issuer, subject, audience, expiration time, not before, issued at, JWT ID, and custom claims as key-value pairs in the payload."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Enter the secret key for HMAC or private key PEM for RSA or EC and sign the token. Generate the complete JWT with all three base64url-encoded segments."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JWT signing algorithms are supported for token generation and signing operations?",
+                "answer": "It supports HS256, HS384, HS512 with HMAC, RS256, RS384, RS512 with RSA, ES256, ES384, ES512 with ECDSA, EdDSA with Ed25519, and PS256, PS384, PS512 with RSA-PSS."
+          },
+          {
+                "question": "How does the tool generate JWT tokens with custom payload claims and proper structure?",
+                "answer": "The payload builder provides form fields for standard registered claims with date pickers for time-based claims. Custom claims can be added as key-value pairs."
+          },
+          {
+                "question": "Can the signer automatically set the expiration time based on a relative duration value?",
+                "answer": "Yes, set expiration as a relative duration such as one hour or thirty minutes or seven days. The tool converts relative durations to Unix timestamps automatically."
+          }
+    ]
+},
   {
+
     id: "mp-1",
     name: "Memorable Password Generator",
     slug: "memorable-password-generator",
@@ -1580,7 +3270,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate easy-to-remember passphrases using random word combinations with separators, numbers, and capitalization. More secure than dictionary words, easier to remember than random strings.',
     seoDescription: 'Free online Memorable Password Generator — Generate easy-to-remember passphrases using random word combinations with separators, numbers, and capitalization. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Password Strategy",
+                "desc": "Select word-based (XKCD-style: correct-horse-battery-staple), passphrase, or pattern-based."
+          },
+          {
+                "title": "2. Configure Words and Separators",
+                "desc": "Set number of words (3–8), word length range (4–10 chars), and separator (hyphen, dot, space, number)."
+          },
+          {
+                "title": "3. Add Complexity",
+                "desc": "Toggle capitalize words, add digits, add special chars, or leet-speak substitutions for additional entropy."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the XKCD-style password strategy achieve security with memorability?",
+                "answer": "Four random common words from a 7776-word dictionary (Diceware) create ~52 bits of entropy. Each word is a memorable unit, making the password easier to remember than a random 8-character string with similar entropy."
+          },
+          {
+                "question": "What word list does the tool use for generating memorable passwords?",
+                "answer": "The tool uses the EFF large wordlist (7776 words), the EFF short wordlist (1296 words), and Diceware. You can also import a custom word list."
+          },
+          {
+                "question": "How does adding a single random digit affect entropy?",
+                "answer": "Adding one random digit at a random position multiplies the search space by 10× (position) × 10× (digit value) = 100×, adding ~6.6 bits of entropy. The tool shows the entropy contribution of each complexity option."
+          }
+    ]
+},
   {
     id: "ytt-1",
     name: "YAML → Toon Converter",
@@ -4534,6 +6252,7 @@ export const entries_chunk_5: ToolMetadata[] = [
 
   },
   {
+
     id: "1086",
     name: "Validator Kit",
     slug: "validator-kit",
@@ -4541,7 +6260,35 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate email addresses, URLs, phone numbers, credit cards, IP addresses, JSON, and more. Batch validation supported.',
     seoDescription: 'Free online Validator Kit — Validate email, URL, phone, credit card, IP, JSON, and more. Batch validation with detailed error messages.',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Validator Tool",
+                "desc": "Choose from the validator kit: email, phone, URL, credit card, ISBN, UUID, JWT, hex color, or date."
+          },
+          {
+                "title": "2. Enter Value to Validate",
+                "desc": "Type or paste the value to validate against the selected format."
+          },
+          {
+                "title": "3. View Validation Result",
+                "desc": "The tool shows valid/invalid with detailed explanation of the validation rules applied."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What validation formats are included in the validator kit?",
+                "answer": "Email (RFC 5322), phone (E.164 and national formats), URL (WHATWG URL spec), credit card (Luhn + network detection), ISBN-10/13, UUID v1-v5, JWT (three base64url segments), hex colors, and ISO 8601 dates."
+          },
+          {
+                "question": "Can the kit validate values in batch mode (multiple values at once)?",
+                "answer": "Yes, switch to Batch mode and paste multiple values (one per line). Each value is validated independently with a pass/fail per row."
+          },
+          {
+                "question": "Does the validator kit suggest auto-corrections for common format mistakes?",
+                "answer": "Yes, for some validators (phone, URL, date), it suggests the correct format when the input has a common formatting error."
+          }
+    ]
+},
   {
     id: "1087",
     name: "JSON to YAML Converter",

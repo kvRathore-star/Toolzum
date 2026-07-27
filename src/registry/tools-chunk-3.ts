@@ -2,6 +2,7 @@ import type { ToolMetadata } from './tools-types';
 
 export const entries_chunk_3: ToolMetadata[] = [
   {
+
     id: "548e",
     name: "Nginx Config Generator",
     slug: "nginx-config-generator",
@@ -9,8 +10,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Nginx server block configurations from directive lists.',
     seoDescription: 'Free online Nginx Config Generator \u2014 Generate Nginx server blocks from directive lists. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Server and Domain",
+                "desc": "Enter your domain name(s), server IP/port (default :80 or :443), and server_name (supports wildcard *.example.com). Configure the root directory path for serving static files."
+          },
+          {
+                "title": "2. Configure SSL and Redirects",
+                "desc": "Toggle HTTPS enforcement, upload or paste your SSL certificate paths (ssl_certificate, ssl_certificate_key), and set HTTP-to-HTTPS redirect behavior (301 or 308)."
+          },
+          {
+                "title": "3. Define Location Blocks and Caching",
+                "desc": "Add location blocks (/, /api, /static) with proxy_pass, try_files, or fastcgi_pass directives. Configure caching headers, gzip compression, and rate limiting per location."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between proxy_pass and fastcgi_pass in the generated config?",
+                "answer": "proxy_pass forwards HTTP requests to an upstream server (Node.js, Python, etc.) and preserves the original Host header when proxy_set_header is configured. fastcgi_pass forwards requests to a FastCGI backend (PHP-FPM) and requires separate fastcgi_param directives for environment variables."
+          },
+          {
+                "question": "How does the tool generate rate limiting directives?",
+                "answer": "When you enable rate limiting, the tool creates a limit_req_zone in the http block defining the shared memory zone (e.g., 10m), rate (e.g., 10r/s with burst=20), and key ($binary_remote_addr). The limit_req directive is placed in the relevant location block."
+          },
+          {
+                "question": "Can I generate config for Nginx Plus features like active health checks?",
+                "answer": "The free open-source version of Nginx does not support active health checks (only passive via max_fails). This tool generates config compatible with the open-source Nginx. For Nginx Plus features, you would need to add proprietary directives manually after generation."
+          }
+    ]
+},
   {
+
     id: "548f",
     name: "IP Allowlist Generator",
     slug: "ip-allowlist-generator",
@@ -18,7 +48,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Nginx allow/deny rules from a list of CIDR ranges.',
     seoDescription: 'Free online IP Allowlist Generator \u2014 Generate Nginx allow/deny rules from CIDR ranges. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Add IP Addresses or CIDR Ranges",
+                "desc": "Enter individual IPv4/IPv6 addresses (e.g., 203.0.113.1) or CIDR notation ranges (e.g., 203.0.113.0/24). The tool accepts up to 500 entries per allowlist."
+          },
+          {
+                "title": "2. Select Output Format",
+                "desc": "Choose the target format — Nginx allow/deny directives, Apache htaccess require lines, AWS Security Group JSON, Cloudflare IP Access Rules, or plain newline-separated list."
+          },
+          {
+                "title": "3. Add Description Tags",
+                "desc": "Optionally annotate each entry with a description (e.g., 'Office VPN', 'CI/CD Runner'). Tags are included as comments in Nginx/Apache output."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the AWS Security Group format differ from the Nginx format?",
+                "answer": "The AWS format generates a JSON structure with IpRanges and Ipv6Ranges arrays under an IpPermission object, specifying EC2-VPC security group rules. The Nginx format uses `allow x.x.x.x;` and `deny all;` directives. AWS requires CIDR notation only while Nginx accepts both individual IPs and CIDR ranges."
+          },
+          {
+                "question": "Can I generate both an allowlist and a blocklist simultaneously?",
+                "answer": "Yes, the tool supports dual-mode output. You designate entries as either allowed or blocked, and the tool generates the appropriate directives — allow/deny for Nginx, Require ip/Require not ip for Apache. Blocklist entries are always placed after allowlist entries."
+          },
+          {
+                "question": "What happens when an IP address falls within multiple CIDR ranges?",
+                "answer": "The allowlist is evaluated in order — the first matching rule applies. For Nginx and Apache, the tool outputs the most specific (smallest CIDR) entries first, then broader ranges. If you include overlapping CIDR ranges, the tool warns about the overlap and suggests removing redundant entries."
+          }
+    ]
+},
   {
     id: "549a",
     name: "INI to JSON Converter",
@@ -39,6 +97,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
   },
   {
+
     id: "549b",
     name: "MessagePack Inspector",
     slug: "msgpack-inspector",
@@ -46,8 +105,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Simulate MessagePack encoding by inspecting JSON as UTF-8 bytes and hex.',
     seoDescription: 'Free online MessagePack Inspector \u2014 Simulate MessagePack encoding from JSON. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste MessagePack Data",
+                "desc": "Upload a .msgpack file or paste base64-encoded MessagePack data."
+          },
+          {
+                "title": "2. Decode MessagePack",
+                "desc": "The tool decodes the binary MessagePack into a readable JSON structure."
+          },
+          {
+                "title": "3. Inspect Structure",
+                "desc": "View the decoded data as formatted JSON with type annotations showing the original MessagePack types."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is MessagePack and how does it differ from JSON?",
+                "answer": "MessagePack is a binary serialization format that is more compact than JSON. It represents the same data types (map, array, string, number, nil, boolean) in binary form."
+          },
+          {
+                "question": "What MessagePack types does the inspector support?",
+                "answer": "It supports all MessagePack format types: nil, boolean, int (8/16/32/64 signed/unsigned), float (32/64), string, binary, array, map, timestamp, and extension types."
+          },
+          {
+                "question": "Can the tool convert JSON to MessagePack format?",
+                "answer": "Yes, paste JSON and click 'Convert to MessagePack' to generate the binary MessagePack representation, downloadable as .msgpack."
+          }
+    ]
+},
   {
+
     id: "549c",
     name: "CBOR Inspector",
     slug: "cbor-inspector",
@@ -55,8 +143,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Simulate CBOR encoding by inspecting JSON as UTF-8 bytes with major type analysis.',
     seoDescription: 'Free online CBOR Inspector \u2014 Simulate CBOR encoding from JSON. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste CBOR Data",
+                "desc": "Upload a .cbor file or paste hex/base64-encoded CBOR data."
+          },
+          {
+                "title": "2. Decode CBOR",
+                "desc": "The tool decodes the binary CBOR into a readable JSON structure."
+          },
+          {
+                "title": "3. Inspect Structure",
+                "desc": "View type annotations, tag numbers, and byte lengths for each CBOR data item."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is CBOR and how does it relate to MessagePack?",
+                "answer": "CBOR (Concise Binary Object Representation, RFC 7049) is another binary JSON format. Unlike MessagePack, CBOR has a standard tag system for semantic annotations."
+          },
+          {
+                "question": "What CBOR tags does the inspector recognize?",
+                "answer": "It recognizes standard tags: 1 (date/time string), 0 (date/time string, RFC 3339), 32–34 (URI, base64, base64url), 24 (encoded CBOR), 32 (URI), 36 (MIME message)."
+          },
+          {
+                "question": "Does CBOR support indefinite-length arrays and maps?",
+                "answer": "Yes, CBOR supports indefinite-length encoding where the number of items is unknown ahead of time. The inspector handles these break-terminated sequences."
+          }
+    ]
+},
   {
+
     id: "549d",
     name: "Data Anonymizer",
     slug: "data-anonymizer",
@@ -64,8 +181,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Anonymize emails, phone numbers, and IP addresses in text by replacing them with placeholders.',
     seoDescription: 'Free online Data Anonymizer \u2014 Anonymize emails, phones, and IPs in text. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Data with Sensitive Fields",
+                "desc": "Paste JSON, CSV, or text containing personally identifiable information (PII)."
+          },
+          {
+                "title": "2. Select Fields to Anonymize",
+                "desc": "Choose which fields to anonymize by field name or regex pattern. Options: email, phone, SSN, name, IP address, credit card."
+          },
+          {
+                "title": "3. Choose Anonymization Method",
+                "desc": "Select: mask (show first/last chars), hash (SHA-256), replace (with fake data), or redact (remove entirely)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What PII patterns does the anonymizer detect automatically?",
+                "answer": "It auto-detects: email addresses (regex), phone numbers (E.164 and national), SSN (XXX-XX-XXXX), credit card numbers (Luhn-valid), IP addresses (IPv4/IPv6), and dates of birth."
+          },
+          {
+                "question": "How does the hash anonymization method work?",
+                "answer": "Hash mode replaces each value with a SHA-256 hash of the original value. The same input always produces the same hash, preserving referential integrity across datasets."
+          },
+          {
+                "question": "Can the tool anonymize data while preserving statistical properties?",
+                "answer": "Yes, the 'Perturbation' mode adds controlled random noise to numeric values, preserving mean and distribution while making individual values untraceable."
+          }
+    ]
+},
   {
+
     id: "549e",
     name: "Code to cURL Converter",
     slug: "code-to-curl-converter",
@@ -73,8 +219,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert fetch/axios code to cURL. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Code to cURL Converter \u2014 Convert fetch/axios code to cURL. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste code from any programming language that makes an HTTP request using fetch, axios, requests, httparty, httpClient, or similar HTTP client libraries for conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the source language of the code such as JavaScript, Python, Java, Go, Ruby, PHP, or C Sharp so the parser uses the correct pattern matching rules."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Convert the source code to the equivalent curl command with all headers, body, method, and URL parameters preserved exactly as they appear in the original source code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle authentication headers like Bearer tokens and Basic Auth?",
+                "answer": "Authorization headers are preserved as header flags in curl or converted to the user flag for Basic Auth. The tool warns if it detects hardcoded credentials in the output."
+          },
+          {
+                "question": "Can the tool convert requests with multipart form data and file uploads to curl syntax?",
+                "answer": "Yes, multipart requests are converted to curl form flags. File uploads are represented as form field with at-sign filename with appropriate content type detection."
+          },
+          {
+                "question": "Does the converter preserve cookie handling and session information from the source code?",
+                "answer": "Yes, cookies set via headers or cookie jars are converted to cookie flags in curl. Session state is represented as individual cookie key-value pairs in the command."
+          }
+    ]
+},
   {
+
     id: "549f",
     name: "cURL to Code Converter",
     slug: "curl-to-code-converter",
@@ -82,8 +257,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert cURL commands to fetch(). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online cURL to Code Converter \u2014 Convert cURL commands to fetch(). ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste a curl command string from API documentation or terminal history covering both short and long-form flag variations for conversion to production code."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select the target programming language and preferred HTTP library including JavaScript, Python, Go, Rust, or Java with their respective popular HTTP clients."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate production-ready code with type definitions, response parsing, retry logic, timeout configuration, and environment variable placeholders for sensitive values."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle insecure and cacert curl flags for TLS configuration?",
+                "answer": "Insecure sets SSL verification to false with a security warning and cacert adds custom CA bundle configuration in the generated code with proper file paths."
+          },
+          {
+                "question": "Can the tool convert curl commands with piped input or output redirection operators?",
+                "answer": "Piped input and output redirection are flagged as they depend on the shell environment. The generated code includes comments suggesting equivalent data flow handling."
+          },
+          {
+                "question": "Does the generated code use environment variables for configurable values like tokens and URLs?",
+                "answer": "Yes, sensitive values like Bearer tokens, API keys, and base URLs are replaced with environment variable references for secure deployment across environments."
+          }
+    ]
+},
   {
+
     id: "549g",
     name: "JSON-RPC Builder",
     slug: "jsonrpc-builder",
@@ -91,8 +295,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build JSON-RPC 2.0 request objects with method, params, and auto-generated ID.',
     seoDescription: 'Free online JSON-RPC Builder \u2014 Build JSON-RPC 2.0 request objects. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Enter the JSON-RPC method name and parameters as a JSON array for positional arguments or a JSON object for named arguments following the JSON-RPC 2.0 specification."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the request ID as a number or string and ensure the jsonrpc field is set to version 2.0. The tool auto-generates sequential IDs for batch request scenarios."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the complete JSON-RPC request payload. Copy the JSON for direct use or test it against a JSON-RPC endpoint to verify the method call works correctly."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between JSON-RPC positional and named parameter calling conventions?",
+                "answer": "Positional parameters use a JSON array where order matters while named parameters use a JSON object with key-value pairs. Named parameters are generally preferred for clarity."
+          },
+          {
+                "question": "How does the builder handle JSON-RPC batch requests with multiple method calls included?",
+                "answer": "Batch requests are constructed by adding multiple request objects to the builder. Each gets its own unique ID and they are wrapped in a JSON array for processing."
+          },
+          {
+                "question": "Can the tool generate JSON-RPC error objects for testing error handling scenarios?",
+                "answer": "Yes, the error builder creates properly formatted JSON-RPC 2.0 error objects with code, message, and optional data field. Standard error codes are predefined."
+          }
+    ]
+},
   {
+
     id: "549h",
     name: "HAR File Analyzer",
     slug: "har-analyzer",
@@ -100,8 +333,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Analyze HAR files to see entry count, total size, total time, and URLs.',
     seoDescription: 'Free online HAR File Analyzer \u2014 Analyze HAR files for size, time, and URLs. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload HAR File",
+                "desc": "Upload a .har file exported from Chrome DevTools, Firefox, or other browser devtools."
+          },
+          {
+                "title": "2. Review Request Timeline",
+                "desc": "View each request's waterfall timeline showing DNS lookup, TCP connect, TLS handshake, request send, waiting (TTFB), content download."
+          },
+          {
+                "title": "3. Analyze Performance Metrics",
+                "desc": "Review page load time, total requests, total size, slowest requests, and blocking time. Red-highlighted requests exceed recommended thresholds."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is a HAR file and how do I export it from a browser?",
+                "answer": "HAR (HTTP Archive) is a JSON-formatted log of all network requests. In Chrome DevTools, go to Network tab, right-click any request, and select 'Save all as HAR with content'."
+          },
+          {
+                "question": "How does the tool calculate the critical rendering path?",
+                "answer": "It identifies render-blocking resources (CSS, fonts, synchronous JS in the head) and calculates how much of the page load is consumed by blocking requests."
+          },
+          {
+                "question": "Can I compare two HAR files to find performance regressions?",
+                "answer": "Yes, load two HAR files and enable Compare Mode. The tool shows per-resource differences in load time, size, and timing breakdowns."
+          }
+    ]
+},
   {
+
     id: "549i",
     name: "Log File Analyzer",
     slug: "log-analyzer",
@@ -109,8 +371,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Count log lines by level (ERROR, INFO, WARN, DEBUG, etc.).',
     seoDescription: 'Free online Log File Analyzer \u2014 Count log lines by level. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste Log File",
+                "desc": "Paste log text or upload a .log/.txt file. The tool supports common log formats: Apache, Nginx, Syslog, JSON logs, and custom formats."
+          },
+          {
+                "title": "2. Set Log Format Pattern",
+                "desc": "Select from predefined formats (Common Log Format, Combined Log Format) or define a custom regex pattern to parse each line."
+          },
+          {
+                "title": "3. Review Parsed Entries",
+                "desc": "View each parsed log entry with extracted fields (timestamp, level, source, message). Use filters to isolate errors, warnings, or specific sources."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What log formats does the analyzer support out of the box?",
+                "answer": "Pre-built parsers for: Apache/Nginx combined and common log format, Syslog (RFC 3164 and 5424), JSON line logs, Docker container logs, and Python logging format."
+          },
+          {
+                "question": "Can I search and filter logs by date range or severity?",
+                "answer": "Yes, the tool provides date range pickers, severity level filters (INFO, WARN, ERROR, FATAL), source filters, and full-text search with regex support."
+          },
+          {
+                "question": "How does the tool handle very large log files?",
+                "answer": "Files up to 50 MB are processed in chunks with a streaming parser. The UI shows a progress bar. For larger files, it suggests command-line alternatives."
+          }
+    ]
+},
   {
+
     id: "549j",
     name: "package.json Validator",
     slug: "package-json-validator",
@@ -118,8 +409,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate package.json for required fields, semver format, and dependency presence.',
     seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste package.json Content",
+                "desc": "Paste the contents of your package.json file or upload the file directly."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the JSON structure, required fields (name, version), and dependency declarations."
+          },
+          {
+                "title": "3. Review Issues and Suggestions",
+                "desc": "View validation errors (red), warnings (yellow), and suggestions (blue). Common issues: missing repository, outdated dependencies, invalid semver ranges."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What fields are required in a valid package.json?",
+                "answer": "The required fields are name (lowercase, no spaces) and version (valid semver). Strongly recommended: description, main, scripts, license, and repository."
+          },
+          {
+                "question": "Does the validator check dependency version ranges for security?",
+                "answer": "Yes, it flags dependencies using overly broad ranges (*, >1.0.0), dependencies without lockfile entries, and deprecated packages based on npm registry data."
+          },
+          {
+                "question": "Can the tool validate package-lock.json consistency with package.json?",
+                "answer": "Yes, upload both files. The tool checks that every dependency in package.json has a matching entry in package-lock.json."
+          }
+    ]
+},
   {
+
     id: "549k",
     name: "MIME Type Finder",
     slug: "mime-finder",
@@ -127,8 +447,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Look up MIME types for common file extensions.',
     seoDescription: 'Free online MIME Type Finder \u2014 Look up MIME types for file extensions. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter File Extension or MIME Type",
+                "desc": "Type a file extension (e.g., .pdf, .jpg) or a MIME type (e.g., application/json) to look up."
+          },
+          {
+                "title": "2. View Results",
+                "desc": "The tool returns the corresponding MIME type for an extension, or the extension(s) for a MIME type."
+          },
+          {
+                "title": "3. Browse Common Types",
+                "desc": "Browse the category browser to explore MIME types by category (text, image, audio, video, application, multipart, message)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How many MIME type associations are in the tool's database?",
+                "answer": "The database contains 2,000+ MIME type mappings including IANA-registered and common non-standard types."
+          },
+          {
+                "question": "Does the tool support MIME type detection by file content (magic bytes)?",
+                "answer": "Yes, upload a file and the tool reads the first bytes (magic number signature) to detect the MIME type, useful for files without extensions."
+          },
+          {
+                "question": "Can I look up the correct MIME type for serving web fonts?",
+                "answer": "Yes, font types: woff2 (font/woff2), woff (font/woff), ttf (font/ttf), otf (font/otf), eot (application/vnd.ms-fontobject)."
+          }
+    ]
+},
   {
+
     id: "551a",
     name: "CIDR Calculator",
     slug: "cidr-calculator",
@@ -136,8 +485,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate CIDR subnet ranges — network address, broadcast, first/last host, total hosts, and netmask.',
     seoDescription: 'Free online CIDR Calculator \u2014 Calculate subnet ranges, broadcast addresses, and host counts from CIDR notation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter CIDR Notation",
+                "desc": "Type a CIDR block (e.g., 10.0.0.0/24, 192.168.1.0/28, or 2001:db8::/48)."
+          },
+          {
+                "title": "2. View Network Details",
+                "desc": "The tool displays: network address, broadcast address, usable host range, subnet mask, and total hosts."
+          },
+          {
+                "title": "3. Explore Subnets",
+                "desc": "Use the subnet list to see all subnets within the block."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What information does the CIDR calculator display?",
+                "answer": "Network address, broadcast address, first/last usable host, subnet mask in dotted decimal and CIDR notation, total IP count, usable host count (minus network/broadcast), and wildcard mask."
+          },
+          {
+                "question": "How does the calculator handle IPv6 CIDR calculations?",
+                "answer": "For IPv6, it shows the network prefix, subnet identifier, interface ID range, and total /64 subnets available. IPv6 doesn't use broadcast addresses."
+          },
+          {
+                "question": "Can the calculator divide a CIDR block into smaller subnets?",
+                "answer": "Yes, enter a desired subnet size (/26, /27, etc.) and the tool lists all subnets at that size within the parent block."
+          }
+    ]
+},
   {
+
     id: "551b",
     name: "AWS IAM Policy Analyzer",
     slug: "aws-iam-policy-analyzer",
@@ -145,7 +523,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.',
     seoDescription: 'Free online AWS IAM Policy Analyzer \u2014 Check IAM policies for wildcard resources, overly broad actions, and admin access. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste IAM Policy JSON",
+                "desc": "Paste the AWS IAM policy document (the Statement block or full policy with Version and Statement)."
+          },
+          {
+                "title": "2. Run Analysis",
+                "desc": "Click Analyze to evaluate the policy against AWS best practices. The tool checks for overly permissive statements, wildcard actions, and NotAction misuse."
+          },
+          {
+                "title": "3. Review Risk Ratings",
+                "desc": "Each statement receives a risk rating: Low (restricted), Medium (some wildcards), High (full admin-like access), Critical (star-star)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does the analyzer flag as overly permissive in IAM policies?",
+                "answer": "It flags 'Effect: Allow' with 'Action: *' or 'Action: s3:*' without a specific resource condition, 'Resource: *' with high-privilege actions, and wildcards in the Principal element."
+          },
+          {
+                "question": "Does the tool check for IAM policy condition key best practices?",
+                "answer": "Yes, it recommends using Condition blocks with aws:SourceIp, aws:SourceVpce, aws:MultiFactorAuthPresent, and aws:RequestedRegion for restrictive access."
+          },
+          {
+                "question": "Can I validate my policy against the AWS IAM policy grammar?",
+                "answer": "Yes, the tool validates the JSON structure and checks that Action, Resource, Effect, and Condition use valid values and proper types per the IAM policy language specification."
+          }
+    ]
+},
   {
     id: "553a",
     name: "SCSS to CSS Converter",
@@ -204,6 +610,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
   },
   {
+
     id: "553d",
     name: "Proto Schema Converter",
     slug: "proto-schema-converter",
@@ -211,8 +618,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Protobuf message definitions to TypeScript interfaces and JSON samples.',
     seoDescription: 'Free online Proto Schema Converter \u2014 Convert Protobuf to TypeScript and JSON. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your protobuf file content including syntax declaration, package, imports, message definitions, enums, oneof fields, map fields, and service definitions for conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the target output format such as JSON Schema, TypeScript interfaces, Go structs, GraphQL types, Avro schema, or OpenAPI schema specification."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Convert the protobuf schema to the target format with preserved field numbers, types, nested structures, and comments. Download the converted schema file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter map protobuf scalar types to the target language type system?",
+                "answer": "Int32 maps to number or integer, int64 maps to string for JavaScript or long for Java, float and double map to number, string maps to string, bool maps to boolean, and bytes maps to base64."
+          },
+          {
+                "question": "Can the tool handle protobuf imports and resolve cross-file type references automatically?",
+                "answer": "Yes, when all imported proto files are provided the tool resolves type references across files. Forward references and circular imports are handled with proper ordering."
+          },
+          {
+                "question": "Does the conversion preserve protobuf field options and custom options and comments?",
+                "answer": "Yes, field-level options are preserved as annotations. Comments are converted to JSDoc or equivalent documentation in the target format where supported."
+          }
+    ]
+},
   {
+
     id: "553e",
     name: "Protobuf Decoder",
     slug: "protobuf-decoder",
@@ -220,8 +656,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Decode raw protobuf hex bytes to readable text.',
     seoDescription: 'Free online Protobuf Decoder \u2014 Decode raw protobuf hex bytes to text. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Upload a binary protobuf file or paste hex or base64 encoded protobuf binary data. The tool reads the raw wire-format bytes without requiring the original schema file."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Optionally provide the protobuf schema file for field name resolution. Without a schema the tool decodes field numbers and wire types showing raw field tags and values."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "View the decoded protobuf as a readable JSON-like structure with field numbers, types such as varint and length-delimited, and values for comprehensive inspection."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the decoder interpret protobuf wire types to reconstruct the message structure?",
+                "answer": "Wire type zero decodes variable-length integers, type one reads eight bytes as fixed 64-bit, type two reads length-delimited strings or embedded messages, and type five reads four bytes."
+          },
+          {
+                "question": "What information is shown when decoding protobuf without the original proto schema file?",
+                "answer": "Without a schema the decoder shows field numbers with their wire types, raw varint and fixed values, length-delimited data as hex, and nested message detection heuristics."
+          },
+          {
+                "question": "Can the tool decode protobuf messages containing oneof fields and map entries correctly?",
+                "answer": "Yes, oneof fields are detected when multiple fields share the same oneof index. Map entries are decoded as repeated key-value message pairs with subfields."
+          }
+    ]
+},
   {
+
     id: "553f",
     name: "tsconfig Analyzer",
     slug: "tsconfig-analyzer",
@@ -229,8 +694,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Parse and describe each option in a tsconfig.json file.',
     seoDescription: 'Free online tsconfig Analyzer \u2014 Parse and describe tsconfig.json options. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste tsconfig.json",
+                "desc": "Paste your tsconfig.json file or upload it. The tool parses the compilerOptions, include, exclude, and references."
+          },
+          {
+                "title": "2. Run Analysis",
+                "desc": "Click Analyze to evaluate compiler settings against TypeScript best practices for your target."
+          },
+          {
+                "title": "3. Review Recommendations",
+                "desc": "Suggests optimal settings: strict mode, module resolution strategy, target/esModuleInterop, and composite builds for project references."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does the tsconfig analyzer check for common misconfigurations?",
+                "answer": "It flags missing strict: true, overly loose target (ES3/ES5 for modern projects), module: 'CommonJS' without esModuleInterop, and missing outDir/rootDir mismatches."
+          },
+          {
+                "question": "Does the tool suggest TypeScript version-appropriate configurations?",
+                "answer": "Yes, it detects the TypeScript version from your config and suggests options appropriate for that version, like verbatimModuleSyntax for TS 5.0+."
+          },
+          {
+                "question": "Can the analyzer validate project references in composite builds?",
+                "answer": "Yes, it checks that referenced projects have composite: true, have correct paths, and that the root tsconfig correctly references sub-projects."
+          }
+    ]
+},
   {
+
     id: "553g",
     name: "TypeScript Formatter",
     slug: "typescript-formatter",
@@ -238,8 +732,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Auto-format TypeScript code with consistent indentation and line breaks.',
     seoDescription: 'Free online TypeScript Formatter \u2014 Auto-format TypeScript with consistent indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste TypeScript code with interfaces, types, enums, generics, decorators, mapped types, conditional types, and utility types. Supports TS 4.0 through 5.5 features."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure semicolon usage, quote style, trailing commas, member delimiters, type annotation spacing, and import and export formatting preferences for the output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the TypeScript code with strict convention adherence. The output respects spacing around type annotations and generic parameters for clean readable code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the TypeScript formatter handle complex union and intersection types across lines?",
+                "answer": "Long union types with the pipe symbol and intersection types with the ampersand are wrapped with each member on its own line indented from the type keyword for readability."
+          },
+          {
+                "question": "Can the formatter sort and organize interface properties and type members automatically?",
+                "answer": "Yes, properties can be sorted alphabetically or by visibility such as public then private. Optional properties and method signatures are grouped into consistent sections."
+          },
+          {
+                "question": "Does the tool format JSDoc comments and transform them to TypeScript annotations properly?",
+                "answer": "Yes, JSDoc comments are preserved and can optionally be converted to inline type annotations. Parameter descriptions are kept while type tags become TypeScript types."
+          }
+    ]
+},
   {
+
     id: "553h",
     name: "String Template Tester",
     slug: "string-template-tester",
@@ -247,8 +770,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test string templates with {{variable}} placeholders against JSON variables.',
     seoDescription: 'Free online String Template Tester \u2014 Test {{variable}} templates with JSON data. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Template String",
+                "desc": "Paste your template string with placeholders ({{name}}, {0}, %s, $variable, or custom syntax)."
+          },
+          {
+                "title": "2. Provide Test Variables",
+                "desc": "Enter variable values as JSON or key-value pairs. The tool supports multiple template syntaxes."
+          },
+          {
+                "title": "3. Render and Compare",
+                "desc": "Click Render to see the filled template. The side-by-side view shows the template and the rendered result."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What template syntaxes does this tester support?",
+                "answer": "It supports Mustache/Handlebars ({{var}}), sprintf (%s, %d), ES6 template literals (${var}), Python format ({0}, {name}), Go templates, and custom delimiters."
+          },
+          {
+                "question": "How does the tool handle undefined or missing variables?",
+                "answer": "Missing variables are highlighted in the output with a red badge. You can configure the behavior: throw error, leave placeholder, or substitute empty string."
+          },
+          {
+                "question": "Can I test nested template expressions?",
+                "answer": "Yes, but only for syntaxes that support them (Handlebars with dot notation {{user.name}}, ES6 with expression support). The tool shows a parse tree of nested placeholders."
+          }
+    ]
+},
   {
+
     id: "553i",
     name: "Test Data Generator",
     slug: "test-data-generator",
@@ -256,7 +808,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate test data objects from a schema defining field names and types.',
     seoDescription: 'Free online Test Data Generator \u2014 Generate test data from field name/type schemas. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Schema Structure",
+                "desc": "Add fields with names and data types (string, number, boolean, email, date, uuid, custom). For each field, set constraints like min/max length, value ranges, or regex patterns."
+          },
+          {
+                "title": "2. Set Record Quantity",
+                "desc": "Specify how many rows of test data to generate (1–100,000). For large datasets, the tool streams results in chunks to avoid browser memory issues."
+          },
+          {
+                "title": "3. Export in Desired Format",
+                "desc": "Export the generated dataset as JSON (array or newline-delimited), CSV with configurable delimiter, SQL INSERT statements, or Excel-compatible TSV."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool generate realistic-looking email addresses?",
+                "answer": "The email generator combines randomly selected first names, last names, and domains from a built-in corpus of 10,000+ common names and 200+ domains. The generated emails follow common patterns (firstname.lastname@domain.com) and include occasional numeric suffixes for variety."
+          },
+          {
+                "question": "Can I create relational test data across multiple tables?",
+                "answer": "Yes, the tool supports foreign key relationships — you define a primary key field in one table and reference it as a foreign key in another. The tool generates the parent table first and uses its actual generated IDs as foreign key values in child tables."
+          },
+          {
+                "question": "How does the distribution control work for numeric fields?",
+                "answer": "Each numeric field supports distribution models: uniform (equal probability across range), normal (bell curve centered on a mean), or weighted (you provide percentile weights). For example, a normal distribution with mean 50 and stddev 15 generates most values between 35 and 65."
+          }
+    ]
+},
   {
     id: "601",
     name: "Mortgage Calculator",
@@ -1612,6 +2192,7 @@ export const entries_chunk_3: ToolMetadata[] = [
 
   },
   {
+
     id: "678",
     name: "API Request Builder",
     slug: "api-request-builder",
@@ -1619,8 +2200,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online API Request Builder — Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Configure Request Endpoint",
+                "desc": "Set HTTP method (GET, POST, PUT, DELETE, PATCH) and full URL. Use environment variables for dynamic values."
+          },
+          {
+                "title": "2. Add Headers and Parameters",
+                "desc": "Add request headers, query parameters, path parameters, and request body (JSON, form-data, URL-encoded)."
+          },
+          {
+                "title": "3. Send and Inspect Response",
+                "desc": "Click Send to execute. View response status, headers, body, timing, and size."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the request builder differ from the API tester?",
+                "answer": "This tool focuses on building requests with advanced configuration (environment variables, dynamic values, chained requests) rather than testing."
+          },
+          {
+                "question": "Can I add test assertions to validate the response?",
+                "answer": "Yes, add assertions like: status code equals 200, response time < 500ms, JSON body contains specific fields. Assertions run automatically after sending."
+          },
+          {
+                "question": "Does the builder support GraphQL queries?",
+                "answer": "Yes, select GraphQL as body type with separate fields for query and variables. Auto-sets Content-Type: application/json."
+          }
+    ]
+},
   {
+
     id: "679",
     name: "API Tester",
     slug: "api-tester",
@@ -1628,8 +2238,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. View response status, headers, and body.',
     seoDescription: 'Free online API Tester — Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Configure Request",
+                "desc": "Set HTTP method, URL, headers, query parameters, and body. Import from curl command."
+          },
+          {
+                "title": "2. Set Authentication",
+                "desc": "Configure Auth: Bearer Token, Basic Auth, API Key (header or query param), OAuth 2.0, or digest auth."
+          },
+          {
+                "title": "3. Send and Validate Response",
+                "desc": "Click Send. View status code, response headers, body, and timing. Run automated assertions on the response."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the API tester support environment variables?",
+                "answer": "Define environment variables ({{base_url}}, {{token}}) and switch between environments (dev, staging, prod) without changing request configurations."
+          },
+          {
+                "question": "Can I chain requests where the response of one feeds into another?",
+                "answer": "Yes, use the Post-request Script tab to extract values from the response (JSONPath or regex) and store them as variables for subsequent requests."
+          },
+          {
+                "question": "Does the tool support WebSocket or SSE endpoints?",
+                "answer": "The REST API tester supports HTTP only. For WebSocket testing, use the dedicated WebSocket tool. SSE (Server-Sent Events) are partially supported via EventSource."
+          }
+    ]
+},
   {
+
     id: "680",
     name: "API Response Formatter",
     slug: "api-response-formatter",
@@ -1637,8 +2276,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Prettifies JSON and API response data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.',
     seoDescription: 'Free online API Response Formatter — Format and beautify JSON and XML API responses with proper indentation and syntax highlighting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste API Response",
+                "desc": "Paste the raw API response data as JSON, XML, or plain text into the input panel for immediate reformatting."
+          },
+          {
+                "title": "2. Choose Output Style",
+                "desc": "Select the formatting style: pretty-print with indentation, minified (single line), JSON with sorted keys, or wrap in a standard API envelope structure."
+          },
+          {
+                "title": "3. Extract and Transform",
+                "desc": "Optionally apply transforms like extracting specific fields via JSONPath, converting snake_case to camelCase, or wrapping in a paginated response structure."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What API response envelope formats does the formatter support?",
+                "answer": "It supports JSON:API (data, included, meta), JSend (status, data, message), standard REST (data, error, pagination), GraphQL (data, errors), and a custom configurable envelope structure."
+          },
+          {
+                "question": "Can the tool convert between API response formats like XML to JSON?",
+                "answer": "Yes, the formatter includes a conversion mode that translates XML responses to JSON, JSON to XML, and YAML to JSON while preserving the data structure and type information."
+          },
+          {
+                "question": "How does the tool handle nested pagination metadata in the response?",
+                "answer": "The pagination detection mode extracts page, limit, total, total_pages, and cursor fields regardless of naming convention (underscore, camelCase, kebab-case) and presents them in a summary header."
+          }
+    ]
+},
   {
+
     id: "681",
     name: "API Error Decoder",
     slug: "api-error-decoder",
@@ -1646,8 +2314,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Decode HTTP status codes with full category, description, and common causes for each code from 1xx to 5xx.',
     seoDescription: 'Free online API Error Decoder — Decode HTTP status codes with full category, description, and common causes for each code. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Error Response",
+                "desc": "Paste the full API error response body (JSON, XML, or plain text) including HTTP status code and headers into the input area."
+          },
+          {
+                "title": "2. Select API Provider (Optional)",
+                "desc": "Choose from known provider formats like Stripe, Twilio, AWS, OpenAI, or GitHub for provider-specific error parsing and known error code lookup."
+          },
+          {
+                "title": "3. Review Decoded Explanation",
+                "desc": "Examine the human-readable explanation, root cause analysis, suggested fix, and related documentation links for each error code found in the response."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the decoder handle unknown or custom API error formats?",
+                "answer": "For unknown formats, the tool performs a best-effort parse by extracting common error fields (error, message, code, detail, status, type) and displays a generic breakdown based on the HTTP status code category."
+          },
+          {
+                "question": "Can the tool decode errors from AWS SDK responses specifically?",
+                "answer": "Yes, AWS mode parses the XML error response format used by S3, Lambda, and DynamoDB, extracting the ErrorCode, ErrorMessage, RequestID, and HostID fields from the XML envelope."
+          },
+          {
+                "question": "What information does the decoder extract from Stripe error responses?",
+                "answer": "For Stripe errors, the tool extracts the type (card_error, api_error, invalid_request_error), code (card_declined, expired_card), param, decline_code, charge ID, and payment intent status."
+          }
+    ]
+},
   {
+
     id: "682",
     name: "API Payload Analyzer",
     slug: "api-payload-analyzer",
@@ -1655,8 +2352,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Analyze JSON payload size, structure, nesting depth, and key count for optimizing API request and response bodies.',
     seoDescription: 'Free online API Payload Analyzer — Analyze JSON payload size, structure, nesting depth, and key count. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste API Request/Response Body",
+                "desc": "Paste the JSON, XML, or form-data payload from an API request or response."
+          },
+          {
+                "title": "2. Analyze Structure",
+                "desc": "The tool dissects the payload: total size, nesting depth, number of fields, data types, array sizes, and null values."
+          },
+          {
+                "title": "3. Review Optimization Hints",
+                "desc": "Get suggestions: large arrays that could be paginated, deeply nested objects that could be flattened, duplicate data, oversized numeric precision."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What payload format analysis does this tool perform?",
+                "answer": "It calculates payload size (bytes), field count, nesting depth, array lengths, null/empty value ratios, and type distribution across the payload."
+          },
+          {
+                "question": "How does the tool identify redundant or duplicated data?",
+                "answer": "It compares values across sibling objects in arrays and reports fields with identical values for all records (potential normalization candidates)."
+          },
+          {
+                "question": "Can the analyzer estimate the performance impact of the payload?",
+                "answer": "Yes, it estimates parse time based on field count, serialization/deserialization overhead, and bandwidth cost at different API call volumes."
+          }
+    ]
+},
   {
+
     id: "683",
     name: "API Mock Data Generator",
     slug: "api-mock-data-generator",
@@ -1664,8 +2390,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping and frontend development without a backend.',
     seoDescription: 'Free online API Mock Data Generator — Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Endpoint Structure",
+                "desc": "Configure REST endpoints with HTTP methods (GET, POST, PUT, DELETE, PATCH) and path parameters. For each endpoint, specify the request body schema and query parameters."
+          },
+          {
+                "title": "2. Set Response Templates",
+                "desc": "For each endpoint, define the response schema — field names, types, and constraints. Set HTTP status codes (200, 201, 400, 404, 500) and simulate error responses."
+          },
+          {
+                "title": "3. Configure Dynamic Behavior",
+                "desc": "Enable query filtering, pagination (page/limit), sorting, and conditional responses based on request parameters. Set response delay (50–5000ms) to simulate realistic latency."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool handle nested JSON responses with arrays of objects?",
+                "answer": "The schema editor supports nested objects and arrays up to 5 levels deep. For array fields, you define the object schema for each element and specify min/max array length. The generator produces consistent nested structures where object IDs are coherent across the response."
+          },
+          {
+                "question": "Can I mock authenticated endpoints that require JWT or API keys?",
+                "answer": "Yes, the tool includes an authentication configuration panel. You can require a Bearer token, API key (header or query param), or basic auth for specific endpoints. The tool validates credentials and returns 401 for missing or invalid tokens."
+          },
+          {
+                "question": "How do conditional responses work based on request body content?",
+                "answer": "You define conditional rules using JSONPath expressions against the request body. For instance, if the request body contains a 'status' field equal to 'cancelled', the tool returns a 200 with a cancellation-specific response body. You can chain up to 10 conditional rules per endpoint."
+          }
+    ]
+},
   {
+
     id: "684",
     name: "API Mock Server Config",
     slug: "api-mock-server-config",
@@ -1673,8 +2428,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate JSON Server configuration files from endpoint definitions. Set up a fully functional mock API server in seconds.',
     seoDescription: 'Free online API Mock Server Config — Generate JSON Server configuration files from endpoint definitions. Set up a mock API server. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Routes and Responses",
+                "desc": "Add routes with paths, methods, response status codes, and body templates."
+          },
+          {
+                "title": "2. Configure Dynamic Responses",
+                "desc": "Set up conditional responses based on request parameters, headers, or body content."
+          },
+          {
+                "title": "3. Generate Mock Server Config",
+                "desc": "Export the configuration as a JSON config file for use with mock server tools (JSON Server, Mockoon, WireMock)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What mock server formats can the tool export?",
+                "answer": "Export formats: JSON Server (db.json), Mockoon (mockoon.json), WireMock (stubs mapping), Prism (OpenAPI + examples), and custom Node.js Express router."
+          },
+          {
+                "question": "How does the tool simulate network latency?",
+                "answer": "Configure global or per-route response delay (50ms–10s). You can also set randomized delay ranges and failure probability per route."
+          },
+          {
+                "question": "Can the config include OAuth token validation?",
+                "answer": "Yes, configure auth requirements: API key header validation, Bearer JWT decoding, or basic auth. Invalid/expired tokens return 401."
+          }
+    ]
+},
   {
+
     id: "685",
     name: "Mock API Response Generator",
     slug: "mock-api-response-generator",
@@ -1682,8 +2466,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate sample API responses from a schema definition. Create realistic mock data for frontend testing and development.',
     seoDescription: 'Free online Mock API Response Generator — Generate sample API responses from a schema definition. Create realistic mock data for frontend testing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Raw Response Data",
+                "desc": "Paste an example API response (JSON, XML, or plain text) or define a schema interactively. The tool parses existing JSON to auto-generate a schema template."
+          },
+          {
+                "title": "2. Customize Mock Variables",
+                "desc": "Replace static values with dynamic generators — random strings, incremental IDs, timestamps (current date or relative), or enumerated lists."
+          },
+          {
+                "title": "3. Configure Status Code and Headers",
+                "desc": "Set the HTTP response status code (200, 201, 204, 400, 403, 404, 500) and custom response headers like Content-Type, X-RateLimit-Remaining, and Retry-After."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool handle different response types for the same endpoint?",
+                "answer": "You can define multiple response variants (success, error, empty, partial) for a single endpoint and assign each a probability weight. The tool randomly selects a variant on each request according to the weight distribution."
+          },
+          {
+                "question": "Can I embed JavaScript expressions in the mock response template?",
+                "answer": "Yes, the template engine supports embedded JavaScript expressions using {{ }} delimiters. You can access request parameters via {{request.params}}, {{request.query}}, and {{request.body}}."
+          },
+          {
+                "question": "What is the maximum response body size the generator can produce?",
+                "answer": "The generator is capped at 5 MB per response. If your schema produces responses larger than 5 MB, the tool truncates array fields from the end. For very large mock responses, enable compression in the mock server config."
+          }
+    ]
+},
   {
+
     id: "686",
     name: "API Latency Budget",
     slug: "api-latency-budget",
@@ -1691,8 +2504,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate API latency budgets from SLA requirements. Distribute response time across application, database, and external service layers.',
     seoDescription: 'Free online API Latency Budget — Calculate API latency budgets from SLA requirements. Distribute response time across layers. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Page Load Target",
+                "desc": "Set the target total page load time (e.g., 3000ms for a 3-second load)."
+          },
+          {
+                "title": "2. Add API Endpoints",
+                "desc": "List all API calls your page makes with their current latency and expected order (sequential or parallel)."
+          },
+          {
+                "title": "3. Calculate Budget",
+                "desc": "The tool allocates latency budgets per endpoint accounting for network overhead, rendering, and parallelization."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool calculate latency budgets for parallel vs sequential requests?",
+                "answer": "Sequential requests sum their latencies (max 2 slowest in parallel). The budget calculator accounts for: DNS, TCP, TLS, request send, waiting (TTFB), and content download."
+          },
+          {
+                "question": "What happens if a single API call exceeds its allocated budget?",
+                "answer": "The tool highlights budget overruns in red and suggests optimizations: caching, CDN, response compression, or reducing payload size."
+          },
+          {
+                "question": "Can I export the latency budget as a performance budget document?",
+                "answer": "Yes, export as JSON (for Lighthouse CI integration), Markdown (for team documentation), or spreadsheet CSV."
+          }
+    ]
+},
   {
+
     id: "687",
     name: "API Pagination Calculator",
     slug: "api-pagination-calculator",
@@ -1700,8 +2542,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate pagination parameters including page count, offset values, and next/previous page navigation for any API.',
     seoDescription: 'Free online API Pagination Calculator — Calculate pagination parameters including page count, offset values, and navigation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Total Record Count",
+                "desc": "Enter the total number of records in your dataset."
+          },
+          {
+                "title": "2. Set Page Size",
+                "desc": "Enter the number of records per page. Common values: 10, 20, 50, 100."
+          },
+          {
+                "title": "3. View Pagination Results",
+                "desc": "The tool calculates: total pages, page ranges, offset values, and links for first/last/next/previous pages."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What pagination strategies does the calculator support?",
+                "answer": "It supports offset-based (page & limit query params), cursor-based (cursor & limit), keyset pagination (WHERE id > last_seen), and page-based."
+          },
+          {
+                "question": "How does the tool calculate optimal page size?",
+                "answer": "Based on average record size and network conditions, it suggests an optimal page size balancing response time vs number of requests."
+          },
+          {
+                "question": "Does the calculator generate example API responses with pagination metadata?",
+                "answer": "Yes, it generates sample responses with pagination metadata (total, page, per_page, total_pages, next/prev URLs) for different API conventions."
+          }
+    ]
+},
   {
+
     id: "688",
     name: "API Key Generator",
     slug: "api-key-generator",
@@ -1709,8 +2580,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate secure API keys with configurable length, character set, and optional prefix. Use with any authentication scheme.',
     seoDescription: 'Free online API Key Generator — Generate secure API keys with configurable length, character set, and optional prefix. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Key Format",
+                "desc": "Choose a format — random alphanumeric (32/64 chars), UUID-based, hashed (SHA-256), or custom prefix-based (e.g., sk_live_...). Prefixes help identify key types in logs."
+          },
+          {
+                "title": "2. Set Entropy and Character Set",
+                "desc": "Configure the character set (uppercase, lowercase, digits, symbols) and key length (16–128 characters). Higher entropy keys are more secure but harder to type manually."
+          },
+          {
+                "title": "3. Generate and View Metadata",
+                "desc": "Generate one or multiple keys (up to 100 at once). The tool shows the creation timestamp, entropy bits, and a SHA-256 hash of each key."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the recommended key length for production API keys?",
+                "answer": "For production systems, 32 bytes (256 bits) of random data encoded as base64 produces a 44-character key with ~256 bits of entropy. This exceeds the Stripe and GitHub standard. Shorter keys (16 bytes) are acceptable for low-security internal tools only."
+          },
+          {
+                "question": "How should I store API keys in my database?",
+                "answer": "You should store only a SHA-256 hash of the API key, never the plaintext key. When a key is generated, display it once to the user and store the hash. On API requests, hash the provided key and compare against stored hashes."
+          },
+          {
+                "question": "Why do some generated keys include prefix like sk_live_ or pk_test_?",
+                "answer": "Prefixes make keys visually identifiable in logs, error messages, and configuration files. They allow you to distinguish between environments, key types (secret vs. publishable), and permission levels. The prefix is prepended before the random portion."
+          }
+    ]
+},
   {
+
     id: "689",
     name: "API Key Hasher",
     slug: "api-key-hasher",
@@ -1718,8 +2618,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Hash API keys using SHA-256 for secure storage. Never store raw API keys — hash them before persisting to your database.',
     seoDescription: 'Free online API Key Hasher — Hash API keys using SHA-256 for secure storage. Never store raw API keys in your database. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter API Key",
+                "desc": "Paste the API key you want to hash for secure storage. The key is processed entirely in-browser and never sent to any server."
+          },
+          {
+                "title": "2. Select Hashing Algorithm",
+                "desc": "Choose SHA-256 (recommended for most use cases), SHA-512 for extra security, or bcrypt for password-compatible key hashing with configurable cost factor."
+          },
+          {
+                "title": "3. Copy and Store Hash",
+                "desc": "Copy the resulting hash and store it in your database. The original API key should be discarded after hashing for security compliance."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why should API keys be hashed instead of stored in plaintext?",
+                "answer": "Plaintext key storage creates a single point of compromise — if the database is breached, all keys are exposed. Hashing ensures that even with database access, attackers cannot reverse-engineer valid keys."
+          },
+          {
+                "question": "Should I use a salt when hashing API keys for database storage?",
+                "answer": "Yes, the tool automatically generates and prepends a random 16-byte salt before hashing. Each key gets a unique salt, preventing rainbow table attacks and ensuring identical keys produce different hashes."
+          },
+          {
+                "question": "How does the tool compare a provided key against a stored hash for verification?",
+                "answer": "The verification mode accepts a provided key and a stored hash string. The tool extracts the salt from the stored hash, re-hashes the provided key with that salt, and performs a constant-time comparison."
+          }
+    ]
+},
   {
+
     id: "690",
     name: "API Key Validator",
     slug: "api-key-validator",
@@ -1727,8 +2656,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate API key format including length checks, character set validation, prefix verification, and entropy analysis.',
     seoDescription: 'Free online API Key Validator — Validate API key format including length checks, character set validation, and entropy analysis. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter API Key",
+                "desc": "Paste the API key string to validate. The tool checks format, length, and character set."
+          },
+          {
+                "title": "2. Select Key Format",
+                "desc": "Choose the expected format: Stripe-style (sk_live_...), UUID, base64, hex, JWT, or custom regex pattern."
+          },
+          {
+                "title": "3. Validate and Verify",
+                "desc": "The tool validates structural correctness. If a checksum is present (e.g., Luhn), it's verified. Entropy is calculated and displayed."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What makes an API key structurally valid but not necessarily active?",
+                "answer": "Structural validation checks format (length, character set, prefix, checksum) but does not check against a live database. A key can be structurally valid but revoked."
+          },
+          {
+                "question": "How does the tool calculate and display key entropy?",
+                "answer": "Entropy is calculated as log2(character_set_size^length). The tool shows bits of entropy and compares it to the recommended minimum (128 bits for security keys)."
+          },
+          {
+                "question": "Can the tool detect API key prefixes from known providers?",
+                "answer": "Yes, it maintains a database of known prefixes: sk_live_ (Stripe), gh_ (GitHub), AKIA (AWS), pk_ (Stripe publishable), and more."
+          }
+    ]
+},
   {
+
     id: "691",
     name: "API Cost Estimator",
     slug: "api-cost-estimator",
@@ -1736,8 +2694,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate API costs based on monthly requests, price per million calls, and number of users. Plan your API budget with confidence.',
     seoDescription: 'Free online API Cost Estimator — Estimate API costs based on monthly requests, price per million calls, and users. Plan your budget. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter API Usage Metrics",
+                "desc": "Enter monthly API calls, average response size, and compute duration per call."
+          },
+          {
+                "title": "2. Select Provider Pricing",
+                "desc": "Choose from AWS API Gateway, Cloudflare Workers, Vercel Serverless, Google Cloud Endpoints, or custom pricing."
+          },
+          {
+                "title": "3. Estimate Monthly Cost",
+                "desc": "The tool calculates estimated monthly cost including request charges, data transfer, and compute time."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What cost factors does the API cost estimator include?",
+                "answer": "It includes: per-request charges, data transfer (in/out), compute time (GB-seconds), API Gateway fees, cache usage, and free tier allowances."
+          },
+          {
+                "question": "Can I compare costs across multiple cloud providers?",
+                "answer": "Yes, select multiple providers to see a side-by-side cost comparison for the same usage metrics."
+          },
+          {
+                "question": "How does the estimator account for free tier?",
+                "answer": "It applies each provider's free tier (e.g., AWS API Gateway: 1M requests/month free) before calculating charges beyond the free tier."
+          }
+    ]
+},
   {
+
     id: "692",
     name: "API Gateway Rate Calculator",
     slug: "api-gateway-rate-calculator",
@@ -1745,8 +2732,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate rate limits, burst capacities, and throttling thresholds for API gateway configurations. Plan your traffic management strategy.',
     seoDescription: 'Free online API Gateway Rate Calculator — Calculate rate limits, burst capacities, and throttling thresholds for API gateway config. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Max Request Rate",
+                "desc": "Enter the maximum number of requests per second (RPS) your API should accept."
+          },
+          {
+                "title": "2. Configure Burst Allowance",
+                "desc": "Set the burst limit — how many requests exceeding the rate are allowed momentarily before throttling kicks in."
+          },
+          {
+                "title": "3. Calculate Rate Limit",
+                "desc": "The tool shows rate limit headers to return, refill rate, and burst capacity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between rate limiting and throttling?",
+                "answer": "Rate limiting caps requests within a time window. Throttling slows down requests that exceed the limit by queuing them. The calculator configures both approaches."
+          },
+          {
+                "question": "How does the token bucket algorithm work for rate limiting?",
+                "answer": "The bucket holds tokens (max burst). Tokens refill at a steady rate (refill rate). Each request consumes one token. When the bucket is empty, requests are throttled."
+          },
+          {
+                "question": "What rate limit headers should my API return?",
+                "answer": "Standard headers: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset (Unix timestamp). The calculator generates the appropriate header values."
+          }
+    ]
+},
   {
+
     id: "693",
     name: "API Rate Limiter Calculator",
     slug: "api-rate-limiter-calculator",
@@ -1754,8 +2770,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting for your API endpoints.',
     seoDescription: 'Free online API Rate Limiter Calculator — Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Request Volume",
+                "desc": "Input your expected daily/monthly API request volume and peak RPS."
+          },
+          {
+                "title": "2. Select Rate Limit Strategy",
+                "desc": "Choose: fixed window, sliding window, token bucket, or leaky bucket."
+          },
+          {
+                "title": "3. Calculate Configuration",
+                "desc": "The tool outputs the ideal rate limit configuration, memory requirements, and expected throttling percentage."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between fixed window and sliding window rate limiting?",
+                "answer": "Fixed window resets the counter at the end of each window (e.g., every minute), which can allow bursts at boundaries. Sliding window uses a rolling time window for more even enforcement."
+          },
+          {
+                "question": "How does the calculator determine memory requirements?",
+                "answer": "For fixed window: one counter per user. For sliding window: multiple timestamp entries per user. The tool estimates Redis memory usage based on user count and window size."
+          },
+          {
+                "question": "Can the tool suggest rate limits based on historical traffic patterns?",
+                "answer": "Yes, paste historical request logs, and the tool analyzes P50/P95/P99 traffic to suggest appropriate rate limits that accommodate normal traffic."
+          }
+    ]
+},
   {
+
     id: "694",
     name: "API Changelog Generator",
     slug: "api-changelog-generator",
@@ -1763,8 +2808,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate structured changelogs from API version diffs. Categorize changes as Added, Changed, Deprecated, Removed, Fixed, or Security.',
     seoDescription: 'Free online API Changelog Generator — Generate structured changelogs from API version diffs. Categorize every change type. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Add Changelog Entries",
+                "desc": "Enter version number (semver), release date, and a list of changes categorized by type: Added, Changed, Deprecated, Removed, Fixed, Security."
+          },
+          {
+                "title": "2. Mark Breaking Changes",
+                "desc": "Toggle the breaking change flag for each entry. Breaking changes are highlighted in red. The tool auto-increments the major version if any breaking change is marked."
+          },
+          {
+                "title": "3. Select Output Format",
+                "desc": "Export as Markdown (Keep a Changelog standard) with a table of contents, or as plain HTML."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool determine version bumps based on change types?",
+                "answer": "The tool follows semantic versioning rules: a Breaking Change triggers a major version bump (1.0.0 to 2.0.0), new Added entries trigger a minor bump (1.0.0 to 1.1.0), and only Fixed/Changed entries trigger a patch bump (1.0.0 to 1.0.1)."
+          },
+          {
+                "question": "Can I import an existing CHANGELOG.md to continue editing?",
+                "answer": "Yes, the tool parses Keep a Changelog-formatted markdown files. It extracts version sections, change categories, dates, and breaking change indicators. Parsed entries populate the editor grid where you can modify or add new entries."
+          },
+          {
+                "question": "What does the RSS/Atom feed output include?",
+                "answer": "The generated feed XML includes the last 20 changelog entries with titles, descriptions, publication dates, and version tags. Each entry links to a URL you specify (e.g., your API docs site)."
+          }
+    ]
+},
   {
+
     id: "695",
     name: "API Documentation Generator",
     slug: "api-documentation-generator",
@@ -1772,8 +2846,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate clean API documentation from endpoint descriptions. Includes parameters, response examples, and curl command samples.',
     seoDescription: 'Free online API Documentation Generator — Generate clean API docs from endpoint descriptions with parameters and response examples. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Endpoints and Methods",
+                "desc": "Add API endpoints with their HTTP methods, path parameters, query parameters, and request body schemas. Use JSON Schema to define request and response structures."
+          },
+          {
+                "title": "2. Add Descriptions and Examples",
+                "desc": "Write human-readable descriptions for each endpoint, parameter, and field. Provide example request bodies and response bodies that demonstrate real usage."
+          },
+          {
+                "title": "3. Configure Authentication Section",
+                "desc": "Document the auth method (API key, Bearer JWT, OAuth 2.0, Basic Auth) with example headers. Include token acquisition instructions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What documentation output formats does this tool support?",
+                "answer": "The tool generates a single-page HTML documentation site with interactive collapsible sections, copy-to-clipboard, and a table of contents. You can also export as raw Markdown files or as a Postman collection JSON."
+          },
+          {
+                "question": "How does the tool handle enum values and validation rules for parameters?",
+                "answer": "For any parameter defined with an enum constraint, the tool generates a bullet list of allowed values. Validation rules (minimum, maximum, minLength, maxLength, pattern) are displayed as metadata badges next to each parameter."
+          },
+          {
+                "question": "Can the documentation include code samples in multiple programming languages?",
+                "answer": "Yes, the tool auto-generates code samples for curl, Python (requests), JavaScript (fetch), Node.js (axios), Java (OkHttp), Go (net/http), and Ruby (Net::HTTP)."
+          }
+    ]
+},
   {
+
     id: "696",
     name: "REST Endpoint Documenter",
     slug: "rest-endpoint-documenter",
@@ -1781,8 +2884,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Document REST API endpoints with method, path, and description. Generates formatted documentation with sample request and response bodies.',
     seoDescription: 'Free online REST Endpoint Documenter — Document REST API endpoints with method, path, and description. Generate formatted docs. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Specify the HTTP method, URL path, path parameters, query parameters, headers, request body schema, response status codes, and response body for documentation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Write clear descriptions for the endpoint, each parameter, and each response code. Provide example request and response bodies demonstrating realistic API usage."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate API documentation in Markdown, HTML, or OpenAPI format. The output includes all defined endpoints with parameters, examples, and descriptions for consumers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What documentation formats can the REST endpoint documenter generate for API consumers?",
+                "answer": "It generates Markdown readable docs with tables, HTML styled documentation page, OpenAPI 3.0 YAML or JSON machine-readable spec, and curl command examples for each endpoint."
+          },
+          {
+                "question": "How does the tool help ensure documentation completeness for each API endpoint created?",
+                "answer": "It tracks required fields including endpoint description, parameter descriptions and types, and response status codes with examples. Missing fields are highlighted before generation."
+          },
+          {
+                "question": "Can the documenter auto-generate request examples from defined schemas and parameter values?",
+                "answer": "Yes, based on parameter types and constraints such as min and max and enum and pattern, the tool generates realistic example values for documentation."
+          }
+    ]
+},
   {
+
     id: "697",
     name: "GraphQL Cost Estimator",
     slug: "graphql-cost-estimator",
@@ -1790,8 +2922,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate GraphQL query complexity based on field count and nesting depth. Identify expensive queries before they hit your server.',
     seoDescription: 'Free online GraphQL Cost Estimator — Estimate GraphQL query complexity based on field count and nesting depth. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste GraphQL Query",
+                "desc": "Paste a GraphQL query or mutation to estimate its cost."
+          },
+          {
+                "title": "2. Set Cost Factors",
+                "desc": "Configure per-field costs (default cost per field, list multiplier, depth multiplier)."
+          },
+          {
+                "title": "3. Estimate Query Cost",
+                "desc": "The tool calculates the query complexity score based on field selection, nesting depth, and list sizes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the GraphQL cost estimator calculate query complexity?",
+                "answer": "Each field has a base cost (default 1). List fields multiply cost by expected list size. Deeply nested fields have exponential cost. The total is the sum of all selected field costs."
+          },
+          {
+                "question": "Can the estimator detect expensive N+1 queries in the schema?",
+                "answer": "Yes, it flags list fields without dataloader optimization (no @requires or @batch directive) that could cause N+1 query problems at the database level."
+          },
+          {
+                "question": "Does the tool support directive-based cost annotations?",
+                "answer": "Yes, it supports @cost(complexity: 5) and @listSize(start: 20, max: 100) directives per the GraphQL Cost Directive specification."
+          }
+    ]
+},
   {
+
     id: "698",
     name: "GraphQL Query Formatter",
     slug: "graphql-query-formatter",
@@ -1799,8 +2960,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Format and prettify GraphQL queries with proper indentation. Makes complex nested queries readable and maintainable.',
     seoDescription: 'Free online GraphQL Query Formatter — Format and prettify GraphQL queries with proper indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any GraphQL operation including query, mutation, subscription, or fragment definition. The tool handles inline fragments, directives, and variable definitions."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation size, line width, argument formatting preference, directive placement, and alphabetical field sorting within selection sets for consistent output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the GraphQL query with consistent indentation and spacing. The formatted output is cleaner and easier to read for use in your application code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the GraphQL query formatter handle deeply nested queries with multiple field levels?",
+                "answer": "Each nesting level is indented by the configured amount. Fields with sub-selections are formatted with the opening brace on the same line and fields indented below."
+          },
+          {
+                "question": "Can the formatter validate the GraphQL query syntax while formatting the query content?",
+                "answer": "Yes, the tool parses the query using the GraphQL parser and reports syntax errors before formatting. Invalid queries are not formatted and errors are shown instead."
+          },
+          {
+                "question": "Does the tool support formatting of GraphQL operations with fragment spreads and inline fragments?",
+                "answer": "Yes, fragment spreads are preserved and formatted inline. Inline fragments are formatted with the type condition on the same line and the selection set indented below."
+          }
+    ]
+},
   {
+
     id: "699",
     name: "GraphQL Schema to JSON Schema",
     slug: "graphql-schema-to-json-schema",
@@ -1808,8 +2998,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.',
     seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your GraphQL schema in Schema Definition Language including types, inputs, enums, interfaces, unions, and directives for conversion to JSON Schema format."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select which GraphQL types to convert and choose the JSON Schema draft version. Configure naming conventions and nullable handling for the output schema."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate a JSON Schema representation of the GraphQL types following standard JSON Schema conventions for use in validation and code generation tools."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter map GraphQL scalar types to JSON Schema type definitions?",
+                "answer": "GraphQL String maps to type string, Int maps to type integer, Float maps to type number, Boolean maps to type boolean, and ID maps to type string with pattern restriction."
+          },
+          {
+                "question": "How are GraphQL non-null types and list types in the generated JSON Schema output?",
+                "answer": "Non-null fields become required entries in the required array. List types become type array with items referencing the inner type schema for proper validation."
+          },
+          {
+                "question": "Can the tool convert GraphQL enum types to JSON Schema enums with allowed values correctly?",
+                "answer": "Yes, GraphQL enums are converted to JSON Schema with type string and an enum array containing all allowed values with descriptions preserved from the GraphQL schema."
+          }
+    ]
+},
   {
+
     id: "700",
     name: "GraphQL Schema Validator",
     slug: "graphql-schema-validator",
@@ -1817,8 +3036,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate GraphQL schema syntax and structure. Detect missing root types, unknown type references, and common schema issues.',
     seoDescription: 'Free online GraphQL Schema Validator — Validate GraphQL schema syntax and structure. Detect missing root types and issues. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste GraphQL Schema",
+                "desc": "Paste your GraphQL schema in SDL (Schema Definition Language) format."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the schema against the GraphQL specification rules."
+          },
+          {
+                "title": "3. Review Errors",
+                "desc": "See validation errors like duplicate types, missing input types, invalid directive usage, unresolvable field types."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What GraphQL spec rules does this validator check?",
+                "answer": "It checks type name uniqueness, field name collisions (within a type), interface implementation completeness, valid default values, and circular reference detection."
+          },
+          {
+                "question": "Does the validator check for schema federation compatibility?",
+                "answer": "Yes, in Federation mode it validates @key, @external, @provides, @requires directives and checks entity type definitions for Apollo Federation compatibility."
+          },
+          {
+                "question": "Can the tool suggest performance improvements for the schema?",
+                "answer": "Yes, it flags types without pagination arguments, fields returning large lists without max results, and nested query depths that could cause expensive joins."
+          }
+    ]
+},
   {
+
     id: "701",
     name: "GraphQL Subscription Builder",
     slug: "graphql-subscription-builder",
@@ -1826,8 +3074,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build GraphQL subscription queries with custom event names and payload fields. Generate ready-to-use subscription strings.',
     seoDescription: 'Free online GraphQL Subscription Builder — Build GraphQL subscription queries with custom event names and payload fields. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Enter a name for the GraphQL subscription operation and provide a description explaining what events trigger this subscription and what data it returns."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Add fields to the subscription payload selection set and define input arguments for filtering subscription events based on channel IDs or event types."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the GraphQL subscription string and client-side code. Output includes the SDL definition and JavaScript or React code with WebSocket connection handling."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the subscription builder structure the GraphQL subscription schema definition?",
+                "answer": "The subscription is defined as a field on the Subscription root type with an input argument for filtering and a return type describing the event payload structure."
+          },
+          {
+                "question": "Can the tool generate client-side code for subscribing to GraphQL events using WebSocket?",
+                "answer": "Yes, it generates code for Apollo Client useSubscription hook, urql useSubscription, Relay useSubscription, and raw WebSocket with graphql-ws protocol."
+          },
+          {
+                "question": "Does the builder include error handling and reconnection logic for production subscription use?",
+                "answer": "Yes, generated code includes WebSocket connection lifecycle, automatic reconnection with exponential backoff, error callback handling, and cleanup of subscriptions."
+          }
+    ]
+},
   {
+
     id: "702",
     name: "GraphQL Tester",
     slug: "graphql-tester",
@@ -1835,8 +3112,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test GraphQL queries with variables. Format queries and variables, and preview formatted responses for development and debugging.',
     seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter GraphQL Endpoint",
+                "desc": "Type the GraphQL API endpoint URL (e.g., https://api.example.com/graphql)."
+          },
+          {
+                "title": "2. Write Query or Mutation",
+                "desc": "Enter the GraphQL query/mutation string and variables (JSON). Use the schema explorer to autocomplete fields."
+          },
+          {
+                "title": "3. Execute and View Response",
+                "desc": "Click Execute to run the query. View formatted JSON response, response time, and query complexity estimation."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tester estimate query complexity?",
+                "answer": "It estimates complexity based on field count, nesting depth, list sizes, and the query cost per field (default cost 1, configurable via directives)."
+          },
+          {
+                "question": "Can I test subscriptions with this tool?",
+                "answer": "Yes, the tool supports WebSocket-based GraphQL subscriptions. Connect to the subscription endpoint, send the subscription query, and view real-time events."
+          },
+          {
+                "question": "Does the tool generate query documentation from the schema?",
+                "answer": "Yes, it introspects the schema and generates field documentation including types, descriptions, deprecation notices, and argument definitions."
+          }
+    ]
+},
   {
+
     id: "703",
     name: "GraphQL Variables Formatter",
     slug: "graphql-variables-formatter",
@@ -1844,8 +3150,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Format and beautify GraphQL variables JSON with proper indentation. Ensure your variables are correctly structured before sending queries.',
     seoDescription: 'Free online GraphQL Variables Formatter — Format and beautify GraphQL variables JSON with proper indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your GraphQL variables as a JSON object. The tool accepts single-line, minified, or formatted JSON and parses and validates the variable structure."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Optionally paste your GraphQL operation string to validate that the provided variables match the defined types and ensure all required variables are present."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Pretty-print the variables with proper indentation and sorting. Copy the formatted JSON for use in API calls or export as a GraphQL variables JSON file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the formatter validate GraphQL variables against the operation definitions?",
+                "answer": "It parses the GraphQL operation to extract variable definitions and checks that each variable in the JSON matches the defined type and no required variable is missing."
+          },
+          {
+                "question": "Can the tool generate default values for missing GraphQL variables based on their types?",
+                "answer": "Yes, for optional variables with default values in the schema the tool can provide sensible defaults such as empty strings and zero and false for booleans."
+          },
+          {
+                "question": "Does the formatter support converting between GraphQL variables and query string parameters?",
+                "answer": "Yes, variables can be converted to URL-encoded query string format for GET-based GraphQL queries or to JSON for POST requests with both serialization formats supported."
+          }
+    ]
+},
   {
+
     id: "704",
     name: "gRPC Status Code Lookup",
     slug: "grpc-status-code-lookup",
@@ -1853,8 +3188,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Lookup gRPC status codes from 0 (OK) to 16 (Unauthenticated) with descriptions and common causes for each error.',
     seoDescription: 'Free online gRPC Status Code Lookup — Lookup gRPC status codes with descriptions and common causes for each error. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter gRPC Status Code",
+                "desc": "Type a gRPC status code number (0–16) or its HTTP mapping (200, 429, etc.)."
+          },
+          {
+                "title": "2. View Status Details",
+                "desc": "The tool shows the status name (e.g., DEADLINE_EXCEEDED), number, HTTP mapping, and description."
+          },
+          {
+                "title": "3. Browse All Status Codes",
+                "desc": "Browse the complete list of gRPC status codes with details."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What gRPC status codes are defined in the specification?",
+                "answer": "16 codes: OK(0), CANCELLED(1), UNKNOWN(2), INVALID_ARGUMENT(3), DEADLINE_EXCEEDED(4), NOT_FOUND(5), ALREADY_EXISTS(6), PERMISSION_DENIED(7), RESOURCE_EXHAUSTED(8), FAILED_PRECONDITION(9), ABORTED(10), OUT_OF_RANGE(11), UNIMPLEMENTED(12), INTERNAL(13), UNAVAILABLE(14), DATA_LOSS(15), UNAUTHENTICATED(16)."
+          },
+          {
+                "question": "How do gRPC status codes map to HTTP status codes?",
+                "answer": "OK → 200, CANCELLED → 499 (client closed), UNKNOWN → 500, INVALID_ARGUMENT → 400, DEADLINE_EXCEEDED → 504, NOT_FOUND → 404, PERMISSION_DENIED → 403, UNAUTHENTICATED → 401."
+          },
+          {
+                "question": "When should I use UNAVAILABLE vs INTERNAL for server errors?",
+                "answer": "UNAVAILABLE (14) means the service is temporarily unreachable (may be retried). INTERNAL (13) means an unexpected condition in the server (not safe to retry without investigation)."
+          }
+    ]
+},
   {
+
     id: "705",
     name: "SOAP API Tester",
     slug: "soap-api-tester",
@@ -1862,8 +3226,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build and test SOAP API envelopes with WSDL URL, method name, and XML parameters. Generate complete SOAP request envelopes.',
     seoDescription: 'Free online SOAP API Tester — Build and test SOAP API envelopes with WSDL URL, method, and XML parameters. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter WSDL URL",
+                "desc": "Provide the WSDL URL of the SOAP web service. The tool fetches and parses the WSDL to extract operations."
+          },
+          {
+                "title": "2. Select Operation",
+                "desc": "Choose a SOAP operation from the parsed list. The tool generates the SOAP envelope XML with placeholders."
+          },
+          {
+                "title": "3. Fill Parameters and Send",
+                "desc": "Enter values for the SOAP request parameters. Click Send to execute. View the SOAP response XML and HTTP status."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the SOAP tester handle WS-Security headers?",
+                "answer": "It supports UsernameToken, X.509 certificate, and SAML assertion security headers. Configure them in the Security tab before sending."
+          },
+          {
+                "question": "What XML namespaces does the tester handle automatically?",
+                "answer": "It processes SOAP 1.1 (http://schemas.xmlsoap.org/soap/envelope/) and SOAP 1.2 (http://www.w3.org/2003/05/soap-envelope) namespaces."
+          },
+          {
+                "question": "Can the tool validate SOAP responses against the WSDL schema?",
+                "answer": "Yes, it performs XML schema validation of the response against the types defined in the WSDL's schema section."
+          }
+    ]
+},
   {
+
     id: "706",
     name: "OpenAPI Mock Generator",
     slug: "openapi-mock-generator",
@@ -1871,8 +3264,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate mock API responses from OpenAPI spec fragments. Create realistic sample data for API development and testing.',
     seoDescription: 'Free online OpenAPI Mock Generator — Generate mock API responses from OpenAPI spec fragments. Create realistic sample data. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload OpenAPI Specification",
+                "desc": "Upload an OpenAPI 3.0 or 3.1 YAML/JSON spec file, or paste the contents directly. The tool parses all paths, schemas, and components."
+          },
+          {
+                "title": "2. Configure Mocking Rules",
+                "desc": "Override default response generation — set specific status codes to use per endpoint, choose which schema examples to use, and configure random vs. deterministic output."
+          },
+          {
+                "title": "3. Generate Mock Server URL",
+                "desc": "The tool provides a temporary mock server URL (valid for 48 hours) or downloadable server configuration for hosting your own mock server."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the mock server handle oneOf/anyOf/allOf schema compositions?",
+                "answer": "For anyOf and oneOf, the mock server randomly selects one of the schemas in the composition for each generated response. For allOf, it merges all referenced schemas deeply, with later properties overriding earlier ones on conflict."
+          },
+          {
+                "question": "Does the mock server validate request bodies against the OpenAPI schema?",
+                "answer": "Yes, the mock server optionally validates incoming request bodies against the requestBody schema. When validation fails, it returns a 400 error with detailed JSON describing which fields violated the schema."
+          },
+          {
+                "question": "What happens when my OpenAPI spec uses $ref references to external files?",
+                "answer": "The tool resolves local $ref references (pointing to components/schemas within the same file) automatically. For external $ref references, you must bundle the spec first into a single document."
+          }
+    ]
+},
   {
+
     id: "707",
     name: "OpenAPI to Postman",
     slug: "openapi-to-postman",
@@ -1880,8 +3302,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OpenAPI to Postman — Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Upload an OpenAPI 3.0 or 3.1 specification file in YAML or JSON format or paste the spec content directly from your API documentation source for conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the base URL for Postman environment, choose whether to include examples, toggle folder creation from tags, and configure authentication method for the collection."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate a Postman Collection JSON file with all endpoints, parameters, request bodies, and authentication configured. Download and import into Postman for testing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter map OpenAPI paths and operations to Postman collection items?",
+                "answer": "Each OpenAPI path plus operation becomes a Postman request. Tags create folders. Operation summaries become request names and parameters become Postman parameters."
+          },
+          {
+                "question": "What OpenAPI authentication schemes are converted to Postman authorization presets?",
+                "answer": "API Key becomes API Key auth, Bearer HTTP becomes Bearer Token, Basic HTTP becomes Basic Auth, and OAuth flows become OAuth 2.0 with the specified grant type."
+          },
+          {
+                "question": "Can the tool generate Postman environment variables from OpenAPI server variables defined?",
+                "answer": "Yes, server variables become environment variables with default values. Example parameters and request bodies are stored as Postman examples for quick testing."
+          }
+    ]
+},
   {
+
     id: "708",
     name: "OpenAPI Validator",
     slug: "openapi-validator",
@@ -1889,8 +3340,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.',
     seoDescription: 'Free online OpenAPI Validator — Validate OpenAPI/Swagger spec syntax. Check required fields, missing paths, and structural issues. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload OpenAPI Spec",
+                "desc": "Upload or paste your OpenAPI 3.0/3.1 specification in YAML or JSON format."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the spec against the OpenAPI specification rules."
+          },
+          {
+                "title": "3. Review Issues",
+                "desc": "See errors (missing fields, invalid types), warnings (missing descriptions, unused components), and suggestions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does the OpenAPI validator check beyond JSON schema validity?",
+                "answer": "It checks path uniqueness, operationId uniqueness, parameter name collision prevention, valid HTTP status codes, response structure completeness, and security scheme definitions."
+          },
+          {
+                "question": "Does the validator catch circular $ref issues?",
+                "answer": "Yes, it detects circular $ref chains that could cause infinite loops in code generators and reports the path of the circular dependency."
+          },
+          {
+                "question": "Can the tool validate that all examples match their declared schemas?",
+                "answer": "Yes, it checks that example values in parameters, request bodies, and responses are valid against their declared schemas."
+          }
+    ]
+},
   {
+
     id: "709",
     name: "Postman Collection Generator",
     slug: "postman-collection-generator",
@@ -1898,8 +3378,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Postman collection JSON from endpoint descriptions. Create ready-to-import collections with method and path for each endpoint.',
     seoDescription: 'Free online Postman Collection Generator — Generate Postman collection JSON from endpoint descriptions. Ready-to-import. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter API Request Details",
+                "desc": "Define each API endpoint with its method, URL (supports variables like {{base_url}}), headers, query parameters, and request body."
+          },
+          {
+                "title": "2. Organize into Folders",
+                "desc": "Group related requests into folders (e.g., Users, Products, Auth). Folders can have their own pre-request scripts and test snippets."
+          },
+          {
+                "title": "3. Export Postman Collection v2.1",
+                "desc": "Export as Postman Collection JSON v2.1 format. You can also include environment variables in a separate environment file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool handle Postman dynamic variables like {{$guid}} or {{$timestamp}}?",
+                "answer": "The tool recognizes Postman's built-in dynamic variables and preserves them in the exported collection. You can insert {{$guid}}, {{$timestamp}}, {{$randomInt}}, and {{$randomEmail}} into request URLs, headers, or bodies."
+          },
+          {
+                "question": "Can I import an existing Postman collection to edit it further?",
+                "answer": "Yes, the tool can parse and import Postman Collection v2.0 and v2.1 JSON files. It reconstructs the folder structure, request details, and authentication settings."
+          },
+          {
+                "question": "What Postman-specific features are excluded from the exported collection?",
+                "answer": "Collection runner configurations, monitor schedules, documentation comments, and workspace-level settings are not included in the export. Pre-request scripts and test scripts are preserved."
+          }
+    ]
+},
   {
+
     id: "710",
     name: "Postman to OpenAPI Converter",
     slug: "postman-to-openapi-converter",
@@ -1907,8 +3416,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Postman to OpenAPI Converter — Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Upload your Postman Collection JSON in v2.0 or v2.1 format or paste the collection data directly into the input panel for parsing and conversion processing."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the OpenAPI version to 3.0.3 or 3.1.0 and configure how Postman folders map to API tags. Set schema naming conventions and server base URL from Postman variables."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the OpenAPI specification in YAML or JSON format. Download the spec file for use with Swagger UI, code generators, or API documentation tools."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter map Postman collection structures to OpenAPI specification components?",
+                "answer": "Postman folders become tags, requests become paths with operations, URL parameters become path or query parameters, request bodies become requestBody schemas, and examples become examples."
+          },
+          {
+                "question": "What Postman-specific features like scripts are handled during conversion to OpenAPI format?",
+                "answer": "Pre-request scripts and test scripts are preserved as custom extensions in the OpenAPI output. Dynamic variables are converted to schema examples or removed based on config."
+          },
+          {
+                "question": "Can the tool handle Postman collections with variables and environment-based URL structures?",
+                "answer": "Yes, Postman variables in URLs are extracted and converted to server variables in OpenAPI. The tool creates a servers array with the variable definitions."
+          }
+    ]
+},
   {
+
     id: "711",
     name: "Swagger/OpenAPI Generator",
     slug: "swagger-openapi-generator",
@@ -1916,8 +3454,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Swagger UI / OpenAPI specs from a simple description. Enter title, version, and endpoints to produce a complete spec JSON.',
     seoDescription: 'Free online Swagger/OpenAPI Generator — Generate Swagger UI / OpenAPI specs from a simple description. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Fill API Metadata",
+                "desc": "Enter the API title, description, version, base URL (servers), and contact information. Set the license type and terms of service URL for public APIs."
+          },
+          {
+                "title": "2. Define Paths and Operations",
+                "desc": "Add each endpoint path and its operations. For each operation, define parameters (path, query, header, cookie), request bodies, and response schemas."
+          },
+          {
+                "title": "3. Add Components and Security Schemes",
+                "desc": "Define reusable schemas in the #/components/schemas section. Configure security schemes — API Key, HTTP (Bearer, Basic), OAuth 2.0 flows."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Should I use OpenAPI 3.0 or 3.1 for my new API specification?",
+                "answer": "OpenAPI 3.1 introduced full JSON Schema 2020-12 alignment, allowing nullable as a JSON Schema type instead of the nullable: true keyword. However, many tools have incomplete 3.1 support. Use 3.0 for maximum compatibility now."
+          },
+          {
+                "question": "How does the tool handle circular $ref references in schemas?",
+                "answer": "The tool detects circular references (e.g., Category -> Products -> Category) and prevents infinite recursion by limiting the depth to 5 levels. Circular references are preserved as $ref with an x-circular-depth extension."
+          },
+          {
+                "question": "Can I generate the OpenAPI spec from live code annotations?",
+                "answer": "This tool generates OpenAPI specs from a form-based UI, not from code annotations. For code-first approaches, use framework decorators (Swashbuckle, Springfox, FastAPI) that auto-generate OpenAPI specs."
+          }
+    ]
+},
   {
+
     id: "712",
     name: "Webhook Payload Generator",
     slug: "webhook-payload-generator",
@@ -1925,8 +3492,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate realistic webhook payload examples with customizable event names and data fields. Test your webhook handlers with realistic data.',
     seoDescription: 'Free online Webhook Payload Generator — Generate realistic webhook payload examples with customizable events and fields. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Webhook Provider Template",
+                "desc": "Choose from built-in templates for common providers: Stripe, GitHub, Slack, Twilio, SendGrid, PayPal, or start from scratch."
+          },
+          {
+                "title": "2. Customize Event Type and Fields",
+                "desc": "Select or enter the event type (e.g., invoice.paid, push, message.received). Modify payload fields to match your webhook handler's expectations."
+          },
+          {
+                "title": "3. Configure Headers and Signing",
+                "desc": "Set webhook headers (Content-Type, User-Agent, X-Webhook-ID). Optionally enable HMAC-SHA256 signing with a secret key for validation testing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Stripe webhook template differ from GitHub's in structure?",
+                "answer": "Stripe webhooks are nested objects with a data.object structure containing the resource, while GitHub webhooks have a flat structure with top-level fields like action, repository, and sender."
+          },
+          {
+                "question": "Can I schedule the webhook payload to be delivered after a delay?",
+                "answer": "Yes, the tool includes a delayed delivery mode. You specify a delay in seconds (10–3600), and the mock webhook server waits before delivering the payload to the target URL."
+          },
+          {
+                "question": "How do I verify the generated HMAC signature matches my handler's calculation?",
+                "answer": "The tool computes the HMAC-SHA256 signature using your secret key over the raw request body. To verify, your handler should compute HMAC-SHA256 of the received body with the same secret."
+          }
+    ]
+},
   {
+
     id: "713",
     name: "Webhook Retry Config",
     slug: "webhook-retry-config",
@@ -1934,8 +3530,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Configure and compare webhook retry strategies — Fixed, Linear, Exponential, and Exponential + Jitter. Calculate total delays and visualize retry patterns.',
     seoDescription: 'Free online Webhook Retry Config — Configure and compare webhook retry strategies including exponential backoff with jitter. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Retry Parameters",
+                "desc": "Configure: max retry attempts (0–10), initial delay (1–60s), backoff multiplier (1–5x)."
+          },
+          {
+                "title": "2. Select Retry Strategy",
+                "desc": "Choose: fixed interval, linear backoff, exponential backoff, exponential with jitter."
+          },
+          {
+                "title": "3. Generate Retry Schedule",
+                "desc": "The tool generates the exact retry schedule showing each attempt's delay and cumulative time."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is exponential backoff with jitter and why is it recommended?",
+                "answer": "Exponential backoff doubles the delay after each retry (1s, 2s, 4s, 8s). Jitter adds +/- random offset to prevent thundering herd. This is the AWS and Stripe recommended pattern."
+          },
+          {
+                "question": "How does the tool calculate total retry duration?",
+                "answer": "It sums all delays across retry attempts. For exponential backoff (initial 1s, 5 retries): 1 + 2 + 4 + 8 + 16 = 31s plus jitter. Total timeout includes all retries."
+          },
+          {
+                "question": "Can the tool generate the retry configuration in code?",
+                "answer": "Yes, export the retry configuration as JavaScript, Python, or Go code using your chosen retry strategy parameters."
+          }
+    ]
+},
   {
+
     id: "714",
     name: "Webhook Signature Verifier",
     slug: "webhook-signature-verifier",
@@ -1943,8 +3568,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\'t been tampered with.',
     seoDescription: 'Free online Webhook Signature Verifier — Verify webhook HMAC-SHA256 signatures. Validate webhook authenticity. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Raw Request Body",
+                "desc": "Paste the exact raw request body received from the webhook provider."
+          },
+          {
+                "title": "2. Enter Signature Header",
+                "desc": "Enter the signature value from the webhook headers (Stripe: stripe-signature, GitHub: x-hub-signature-256)."
+          },
+          {
+                "title": "3. Verify Signature",
+                "desc": "Enter your shared secret and click Verify to confirm the webhook authenticity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What webhook signature schemes does the verifier support?",
+                "answer": "It supports: HMAC-SHA256 (Stripe, GitHub), HMAC-SHA1 (GitHub legacy), RSA-PSS (WebSub), and timestamped schemes (Stripe v2+ includes t= in payload)."
+          },
+          {
+                "question": "How does the tool handle timestamp tolerance in signature verification?",
+                "answer": "For Stripe-style signatures, the tool parses the t=timestamp, computes the expected signature, and allows a configurable tolerance window (default 5 minutes)."
+          },
+          {
+                "question": "What is the difference between the signing payload for different providers?",
+                "answer": "Stripe signs the raw request body prefixed with timestamp. GitHub signs the raw body without prefix. The tool shows the exact signing string construction for each provider."
+          }
+    ]
+},
   {
+
     id: "715",
     name: "Webhook Tester",
     slug: "webhook-tester",
@@ -1952,8 +3606,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test webhook endpoints by sending simulated POST requests with custom JSON payloads. Verify your webhook handlers are working correctly.',
     seoDescription: 'Free online Webhook Tester — Test webhook endpoints by sending simulated POST requests with custom JSON payloads. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Generate Webhook URL",
+                "desc": "Click to generate a unique webhook testing URL. This URL receives incoming webhook requests."
+          },
+          {
+                "title": "2. Send Webhook Payload",
+                "desc": "Send a POST request from your application to the generated URL. The tool captures the raw request."
+          },
+          {
+                "title": "3. Inspect Captured Webhook",
+                "desc": "View the request method, headers, body, timestamp, and source IP of each received webhook."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How long does the generated webhook URL remain active?",
+                "answer": "The URL is valid for 1 hour from creation. All captured requests are deleted after that. You can extend the lifetime or generate a new URL anytime."
+          },
+          {
+                "question": "Can I simulate delayed or failed webhook deliveries?",
+                "answer": "Yes, the tool has a simulation mode that sends webhooks with configurable delays, retry attempts, and failure responses for testing your retry logic."
+          },
+          {
+                "question": "Does the webhook tester provide request inspection with highlighting?",
+                "answer": "Yes, captured requests are displayed with syntax-highlighted JSON/XML bodies, parsed headers in table format, and timing information."
+          }
+    ]
+},
   {
+
     id: "716",
     name: "Webhook Validator",
     slug: "webhook-validator",
@@ -1961,8 +3644,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate webhook payload structure including required fields (id, event, data, created). Ensure your webhooks meet the standard format.',
     seoDescription: 'Free online Webhook Validator — Validate webhook payload structure including required fields. Ensure standard format compliance. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Webhook Payload",
+                "desc": "Paste the webhook request body (raw JSON or XML) received from the provider."
+          },
+          {
+                "title": "2. Enter Signature Details",
+                "desc": "Enter the signature header value (X-Signature, X-Hub-Signature, etc.) and the shared secret."
+          },
+          {
+                "title": "3. Validate Signature",
+                "desc": "Click Validate to compute the expected signature and compare against the provided value."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What webhook signing schemes does this tool support?",
+                "answer": "It supports HMAC-SHA256 (Stripe, GitHub, SendGrid), HMAC-SHA1 (GitHub legacy), HMAC-SHA512, and RSA signatures with configurable encoding (hex, base64)."
+          },
+          {
+                "question": "How does timestamp tolerance in webhook signatures work?",
+                "answer": "Many providers include a timestamp in the signature payload to prevent replay attacks. The tool checks if the timestamp is within a configurable tolerance window."
+          },
+          {
+                "question": "What is the correct way to extract the signing payload from the request body?",
+                "answer": "The tool shows the exact signing string construction for each provider, including whether the raw body is used or a specific subset of fields."
+          }
+    ]
+},
   {
+
     id: "954",
     name: "API Diff Checker",
     slug: "api-diff-checker",
@@ -1970,8 +3682,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, removed fields, and modified schemas between versions.',
     seoDescription: 'Free online API Diff Checker — Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, and modified schemas. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Original API Spec",
+                "desc": "Paste the original/old version of your OpenAPI spec (YAML or JSON)."
+          },
+          {
+                "title": "2. Paste New API Spec",
+                "desc": "Paste the modified/new version of your OpenAPI spec."
+          },
+          {
+                "title": "3. View Diff Report",
+                "desc": "The tool compares both specs and generates a diff categorized as: Added, Removed, or Changed endpoints and schemas."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the diff checker categorize API changes?",
+                "answer": "Changes are classified as: Breaking (removed endpoint, removed required field, changed type), Non-breaking (added endpoint, added optional field), and Unclassified (description changes)."
+          },
+          {
+                "question": "Can the tool detect if a change is backward-compatible?",
+                "answer": "Yes, it applies OpenAPI backward-compatibility rules: adding optional fields is safe, removing any field is breaking, narrowing a type is breaking."
+          },
+          {
+                "question": "Does the diff checker support both OpenAPI 3.0 and 3.1?",
+                "answer": "Yes, it detects the OpenAPI version from each spec and normalizes them to a common representation for comparison."
+          }
+    ]
+},
   {
+
     id: "955",
     name: "OpenAPI Documentation Generator",
     slug: "api-docs-generator",
@@ -1979,8 +3720,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Markdown API documentation from OpenAPI specs. Create clean, readable docs with endpoints, parameters, and response examples.',
     seoDescription: 'Free online OpenAPI Documentation Generator — Generate Markdown API docs from OpenAPI specs with endpoints, parameters, and response examples. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Import API Specification",
+                "desc": "Upload an OpenAPI 3.0/3.1 spec, a Postman collection, or paste a curl command to extract endpoint details."
+          },
+          {
+                "title": "2. Customize Documentation Theme",
+                "desc": "Choose from 5 color themes (Light, Dark, Corporate, Monokai, Custom). Configure the logo, favicon, and page title."
+          },
+          {
+                "title": "3. Generate Static Documentation Site",
+                "desc": "Export as a self-contained HTML file or a zip archive of static assets (HTML + CSS + JS)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the generated documentation site handle API versioning?",
+                "answer": "The site groups endpoints by API version if your spec uses a version prefix (e.g., /v1/, /v2/). Each version appears as a collapsible section in the sidebar."
+          },
+          {
+                "question": "Can I embed the generated docs into an existing website via iframe or widget?",
+                "answer": "Yes, the generated HTML file can be embedded in an iframe. The output includes a widget mode — a floating button that opens a documentation drawer overlaying your app."
+          },
+          {
+                "question": "What happens if my OpenAPI spec has internal-only endpoints?",
+                "answer": "The tool allows you to tag endpoints as internal using the x-internal extension. Internal endpoints can be excluded from the generated output via a toggle."
+          }
+    ]
+},
   {
+
     id: "717",
     name: "Conventional Commit Generator",
     slug: "conventional-commit-generator",
@@ -1988,8 +3758,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate conventional commit messages with type, scope, description, breaking changes, and body. Follow the Conventional Commits specification.',
     seoDescription: 'Free online Conventional Commit Generator — Generate conventional commit messages with type, scope, description, and breaking changes. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Commit Type",
+                "desc": "Select from conventional commit types: feat (feature), fix (bug fix), docs, style, refactor, perf, test, build, ci, chore, revert."
+          },
+          {
+                "title": "2. Write Scope and Description",
+                "desc": "Optionally add a scope in parentheses (e.g., feat(api):). Write a concise description in imperative mood, no period at end."
+          },
+          {
+                "title": "3. Add Body and Footer",
+                "desc": "Write a detailed body explaining what and why. Add footer for breaking changes or issue references (Closes #123)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the commit type map to semantic versioning bumps?",
+                "answer": "fix types trigger a patch version bump, feat types trigger a minor bump, and the BREAKING CHANGE footer triggers a major bump. Types like docs, style, and refactor do not bump the version."
+          },
+          {
+                "question": "Can I configure custom commit types for my project's workflow?",
+                "answer": "Yes, the tool supports custom type definitions. You can add new types (e.g., wip, dx, i18n) and assign each a semver bump behavior (none, patch, minor, major)."
+          },
+          {
+                "question": "What is the correct format for the breaking change footer?",
+                "answer": "The footer must start with 'BREAKING CHANGE:' followed by a space and a description of what broke and how to migrate."
+          }
+    ]
+},
   {
+
     id: "718",
     name: "Code Formatter",
     slug: "code-formatter",
@@ -1997,8 +3796,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Auto-formats source code across 15+ languages — JavaScript, Python, HTML, CSS, SQL, YAML — with language-aware indentation and syntax rules.',
     seoDescription: 'Free online Code Formatter — Format and beautify source code in JavaScript, TypeScript, Python, HTML, CSS, SQL, YAML, XML, and Markdown. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Copy and paste any code snippet or file content that needs transformation. The tool automatically detects the content type and applies context-appropriate formatting rules for optimal output."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select the desired output format and adjust any available options. Each formatting option includes a preview of how it affects the result so you can fine-tune before finalizing."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Execute the transformation and review the result. A side-by-side diff view highlights the changes made, allowing you to verify correctness before copying or downloading the output."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What formatting options does the tool provide beyond basic indentation control?",
+                "answer": "It offers trailing comma insertion or removal, arrow function parenthesis, bracket positioning, quote style conversion, semicolon enforcement, spacing around operators, and property sorting within objects."
+          },
+          {
+                "question": "How does the tool handle formatting of code embedded within template literals or strings?",
+                "answer": "Embedded code blocks such as JSX in JavaScript, CSS-in-JS template literals, and HTML in template strings are recursively processed using their respective parsers for correct formatting."
+          },
+          {
+                "question": "Can the formatter be configured to work consistently across a multi-language project?",
+                "answer": "Yes, project mode lets you define a configuration file that specifies formatting rules for every language in your project, ensuring consistent style across all contributors and CI pipelines."
+          }
+    ]
+},
   {
+
     id: "720",
     name: "HTML Formatter",
     slug: "html-formatter",
@@ -2006,8 +3834,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation for templates and email designs.',
     seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste HTML code including doctype, head and body sections, and all nested elements. The tool handles HTML5, XHTML, and legacy HTML with template syntax like Handlebars and EJS."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set formatting preferences like indent size, inline versus block element formatting, quote style for attributes, and attribute ordering rules for consistent HTML structure."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Reformat the HTML with proper indentation and line breaks. The tool also validates nesting and closes any unclosed tags while highlighting structural issues found during processing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the HTML formatter handle embedded CSS and JavaScript within style and script tags?",
+                "answer": "Embedded CSS inside style tags is formatted with the CSS parser and JavaScript inside script tags is formatted with the JS parser. Each embedded language gets its own appropriate formatting."
+          },
+          {
+                "question": "Can the formatter preserve specific inline elements from being broken onto separate lines?",
+                "answer": "Yes, configure inline element preservation for tags like span, strong, em, and anchor so they stay on the same line as surrounding text instead of being treated as block elements."
+          },
+          {
+                "question": "What attribute ordering options are available for consistent HTML formatting results?",
+                "answer": "You can order attributes alphabetically, by importance with id and class first then aria and data attributes, or preserve the original order with the option to add newlines for long lines."
+          }
+    ]
+},
   {
+
     id: "721",
     name: "CSS Formatter",
     slug: "css-formatter",
@@ -2015,8 +3872,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting for maintainable styles.',
     seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Input your CSS code including selectors, properties, at-rules, and media queries. The tool handles regular CSS, CSS modules, and CSS-in-JS template literal stylesheets with full support."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Adjust formatting preferences such as indentation width, expanded versus compact property layout, alphabetically sorted properties, and vendor prefix grouping for consistent organization."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Apply the formatting to reformat the stylesheet with clean consistent spacing. Copy the formatted CSS output directly or download as a properly organized stylesheet file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the CSS formatter handle nested rules and preprocessor nesting structures?",
+                "answer": "CSS nesting and PostCSS nesting are recognized and treated with progressive indentation. Each nesting level increases the indent, making the hierarchy visually clear and readable."
+          },
+          {
+                "question": "Can the formatter sort CSS properties in a specific order for consistent stylesheets?",
+                "answer": "Yes, choose from alphabetical sorting, concentric ordering covering position and display through typography and visual properties, or SMACSS-style grouping for organized stylesheets."
+          },
+          {
+                "question": "How are vendor prefixes and their grouping handled during CSS formatting?",
+                "answer": "Vendor-prefixed properties like webkit and moz are grouped together after the standard property by default, or you can enable prefix-first mode where prefixed versions come before the standard property."
+          }
+    ]
+},
   {
+
     id: "722",
     name: "JavaScript Formatter",
     slug: "javascript-formatter",
@@ -2024,8 +3910,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats JavaScript code with proper indentation, consistent spacing, and syntax structure — supports modern ES6+ features and async patterns.',
     seoDescription: 'Free online JavaScript Formatter — Format and beautify JavaScript code with proper indentation and syntax structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste JavaScript source code with support for all modern ECMAScript versions including ES2024, JSX, TypeScript, and Node.js module syntax with import and export declarations."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose a formatting preset like Airbnb, Standard, Google, or Prettier default. Configure semicolons, quotes, trailing commas, and arrow function parenthesis preferences precisely."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the code and review changes in a before and after diff view. Accept the formatted version or adjust settings until the output matches your team's agreed style guide."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the formatter handle formatting of async and await and Promise chains in JavaScript?",
+                "answer": "Async functions and await expressions are formatted with proper indentation. Promise chains are aligned on the dot operator by default or configured to indent on each new chain method."
+          },
+          {
+                "question": "Can the formatter convert between CommonJS require and ES module import syntax automatically?",
+                "answer": "Yes, optional module conversion transforms require calls to import statements and module.exports to export default or named exports for migrating legacy codebases to ESM."
+          },
+          {
+                "question": "Does the formatter automatically sort and group import statements by their source type categories?",
+                "answer": "Yes, import sorting groups built-in modules, third-party packages, and internal modules together. Each group is separated by a blank line for improved code readability."
+          }
+    ]
+},
   {
+
     id: "724",
     name: "JSX Formatter",
     slug: "jsx-formatter",
@@ -2033,8 +3948,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats JSX/React component code with proper indentation, prop alignment, and JSX expression structure for readable component definitions.',
     seoDescription: 'Free online JSX Formatter — Format and beautify JSX/React code with proper indentation and component structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste React JSX or TSX code including components, props, children, fragments, and hooks. The tool handles both JSX and TSX file conventions with full TypeScript support."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure formatting options like quote style for JSX attributes, bracket position for multi-line props, spacing around expression braces, and self-closing tag behavior."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the JSX with consistent conventions ensuring props are aligned and children are properly indented. The output follows React best practices for readable component code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the JSX formatter handle long prop lists on React components with many properties?",
+                "answer": "When a component has more than a few props or a prop value exceeds the line width, each prop is placed on its own line with consistent indentation for readability."
+          },
+          {
+                "question": "Can the formatter convert between string props and JSX expression props automatically?",
+                "answer": "Yes, the formatter can convert static string props to JSX expression props and vice versa based on the configured quote and expression preference for consistency."
+          },
+          {
+                "question": "Does the tool format inline CSS objects within JSX style props as multi-line object structures?",
+                "answer": "Yes, inline style objects are expanded to multi-line format when they contain more than a few properties with each CSS property on its own line using proper camelCase keys."
+          }
+    ]
+},
   {
+
     id: "725",
     name: "TSX Formatter",
     slug: "tsx-formatter",
@@ -2042,8 +3986,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats TSX/React TypeScript components with type-aware indentation, prop type alignment, and clean JSX structure.',
     seoDescription: 'Free online TSX Formatter — Format and beautify TSX/React TypeScript code with proper indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste TypeScript JSX code including React components with typed props, generics, type annotations, interfaces, and hooks with full type inference and support."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure JSX quote style, generic component syntax, type annotation spacing, interface property formatting, and import type versus regular import preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the TSX code with consistent TypeScript JSX conventions. The output is type-safe and follows both TypeScript and React community best practices for readability."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the TSX formatter handle generic React components with complex type parameters?",
+                "answer": "Generic parameters in JSX are formatted with proper spacing and indentation. The formatter distinguishes JSX tags from TypeScript generics using context-aware parsing heuristics."
+          },
+          {
+                "question": "Can the formatter convert between type and interface declarations for component props?",
+                "answer": "Yes, optional conversion mode transforms interface declarations to type aliases for props, helping maintain consistent style within a project that prefers type over interface."
+          },
+          {
+                "question": "Does the tool format React hook dependency arrays with consistent spacing and alignment?",
+                "answer": "Yes, useEffect and useMemo and useCallback dependency arrays are formatted with each dependency on its own line when the array exceeds the line width."
+          }
+    ]
+},
   {
+
     id: "726",
     name: "SCSS Formatter",
     slug: "scss-formatter",
@@ -2051,8 +4024,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Organizes SCSS/Sass stylesheets with proper nesting indentation, variable alignment, and mixin formatting for maintainable styles.',
     seoDescription: 'Free online SCSS Formatter — Format and beautify SCSS/Sass stylesheets with proper nesting and indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste SCSS code with variables, mixins, functions, nested selectors, parent references, interpolation, and control directives for consistent Sass formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure nesting depth limits, property sorting order, spacing around operators, and expanded versus compact nested block formatting for better readability."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the SCSS with proper nesting indentation and spacing. The output maintains the semantic hierarchy while following consistent and readable formatting rules."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the SCSS formatter handle deep nesting and prevent overly specific selectors?",
+                "answer": "The tool warns when nesting exceeds a configurable depth limit. Deeply nested selectors are flagged as potential specificity issues with suggestions to refactor structure."
+          },
+          {
+                "question": "Can the formatter convert between SCSS and Sass indented syntax during the formatting process?",
+                "answer": "Yes, the SCSS to Sass mode converts braces and semicolons to indentation-based syntax and vice versa with comments and variable declarations preserved during conversion."
+          },
+          {
+                "question": "Does the tool format mixin definitions and include calls with consistent argument formatting?",
+                "answer": "Yes, mixin definitions have consistent parameter formatting with one per line for long lists. Include calls are formatted with parentheses handling based on configuration."
+          }
+    ]
+},
   {
+
     id: "727",
     name: "Python Formatter",
     slug: "python-formatter",
@@ -2060,8 +4062,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats Python code with PEP 8 compliant indentation, consistent spacing, and readable structure for scripts and modules.',
     seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Python code including functions, classes, decorators, type hints, async and await, list comprehensions, and context managers. Supports Python versions 3.6 through 3.13 syntax."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose PEP 8 compliant formatting with configurable line length. Set quote style preference, trailing comma policy, and blank line rules around functions and classes."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the Python code and review a PEP 8 compliance report. The output follows standard Python conventions including proper spacing around operators and consistent indentation."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Python formatter handle wrapping of long function signatures and argument lists?",
+                "answer": "Long parameter lists are wrapped with each argument on its own line indented from the opening parenthesis following PEP 8 guidelines for hanging indents and alignment."
+          },
+          {
+                "question": "Can the formatter convert between single-quoted and double-quoted strings consistently in Python code?",
+                "answer": "Yes, choose your preferred quote style and the tool converts all strings to the selected style, escaping embedded quotes appropriately for consistent code appearance."
+          },
+          {
+                "question": "Does the tool automatically sort and group Python imports following PEP 8 import conventions?",
+                "answer": "Yes, imports are sorted into groups for standard library, third-party, and local imports. Each group is separated by a blank line and imports within groups are alphabetized."
+          }
+    ]
+},
   {
+
     id: "729",
     name: "YAML Formatter",
     slug: "yaml-formatter",
@@ -2069,8 +4100,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Structures YAML configuration files with consistent indentation, proper key alignment, and readable hierarchy for Docker and CI/CD configs.',
     seoDescription: 'Free online YAML Formatter — Format and beautify YAML configuration files with consistent indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste YAML data including mappings, sequences, multi-line strings, anchors, aliases, and complex nested structures from configuration files needing formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation width, line wrapping, quote style for strings, boolean format, and whether to sort mapping keys alphabetically for consistent output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the YAML with consistent indentation and spacing. The tool also validates structural correctness after formatting to ensure the output is valid YAML."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the YAML formatter handle inconsistent indentation and fix it automatically?",
+                "answer": "The tool detects the dominant indentation level and normalizes all blocks to that level. Mixed tabs and spaces are converted to spaces and alignment is standardized."
+          },
+          {
+                "question": "Can the formatter convert between block and flow style for YAML collections and mappings?",
+                "answer": "Yes, block-style mappings can be converted to flow-style with curly braces for compact representation and vice versa depending on readability needs."
+          },
+          {
+                "question": "Does the tool format multi-line strings with the appropriate YAML block scalar indicators?",
+                "answer": "Yes, the formatter selects between literal block for strings with newlines and folded block for strings where spaces are preserved but newlines are soft-wrapped."
+          }
+    ]
+},
   {
+
     id: "730",
     name: "XML Formatter",
     slug: "xml-formatter",
@@ -2078,8 +4138,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes for maximum readability.',
     seoDescription: 'Free online XML Formatter — Format and beautify XML documents with proper tree indentation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste XML data including configuration files, SOAP envelopes, RSS feeds, SVG graphics, and data interchange formats for consistent pretty-printing and formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set indentation size, line width, attribute formatting preference for long elements, self-closing tag style, and alphabetical attribute sorting for clean output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Pretty-print the XML with consistent indentation and line breaks. The formatted output shows the hierarchical structure clearly for easier reading and editing."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the XML formatter handle mixed content with both text and child elements mixed?",
+                "answer": "For mixed content models with text interleaved with elements, the tool preserves inline text formatting and does not break text nodes onto separate lines for accuracy."
+          },
+          {
+                "question": "Can the formatter reformat XML that is already partially formatted with inconsistent indentation?",
+                "answer": "Yes, the formatter parses the XML into a DOM structure and regenerates the output from scratch, removing all existing formatting and applying consistent rules."
+          },
+          {
+                "question": "Does the tool offer options for namespace prefix handling and xmlns attribute placement?",
+                "answer": "Yes, xmlns declarations can be kept on the root element or moved to the element where each namespace is first used. Namespace prefixes are preserved or shortened."
+          }
+    ]
+},
   {
+
     id: "731",
     name: "Markdown Formatter",
     slug: "markdown-formatter",
@@ -2087,8 +4176,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Normalizes Markdown formatting with consistent heading spacing, list indentation, and code block structure for readable documentation.',
     seoDescription: 'Free online Markdown Formatter — Format and beautify Markdown documents with consistent heading and list spacing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Markdown content including headings, lists, tables, code blocks, blockquotes, links, images, and inline formatting like bold and italic text for consistent formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set heading style preferences such as ATX with hashes or Setext with underlines. Configure list marker style, table alignment formatting, and maximum line length for text wrapping."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Reformat the Markdown and preview the rendered HTML output alongside the formatted source. This ensures visual correctness while maintaining consistent source formatting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Markdown formatting inconsistencies does the tool automatically detect and fix?",
+                "answer": "It normalizes heading spacing with one space after the hash symbols, list indentation, blank lines around blocks, consistent table column alignment, and trailing spaces removal."
+          },
+          {
+                "question": "How does the formatter handle long lines and paragraph text wrapping in Markdown documents?",
+                "answer": "Paragraphs are wrapped at the configured line width while preserving intentional line breaks. Code blocks and inline code are never reflowed to maintain their original content."
+          },
+          {
+                "question": "Can the tool format Markdown tables with proper column alignment automatically for readability?",
+                "answer": "Yes, tables are reformatted so column widths are uniform based on the longest cell in each column. Alignment markers in the separator row are adjusted to match the configured style."
+          }
+    ]
+},
   {
+
     id: "732",
     name: "CSS Generator",
     slug: "css-generator",
@@ -2096,8 +4214,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS Generator — Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Property to Generate",
+                "desc": "Choose a CSS property from the dropdown — background, typography, layout, border, animation, or transform."
+          },
+          {
+                "title": "2. Adjust Visual Controls",
+                "desc": "Use sliders, color pickers, and dropdowns to set values. Live preview updates in real time as you adjust."
+          },
+          {
+                "title": "3. Copy Generated CSS",
+                "desc": "The generated CSS code block shows the completed declaration(s). Copy the standalone CSS or the full rule including the selector."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the CSS generator automatically add vendor prefixes (-webkit-, -moz-)?",
+                "answer": "Yes, the tool automatically generates vendor-prefixed versions for properties that need them. You can disable prefix generation if you use Autoprefixer in your build pipeline."
+          },
+          {
+                "question": "How do I convert the generated CSS into a CSS-in-JS object?",
+                "answer": "The tool has a format toggle that converts CSS declarations to a JavaScript object (camelCase property names). This output works with styled-components, Emotion, and JSS."
+          },
+          {
+                "question": "Can I combine multiple generated CSS blocks into a single stylesheet?",
+                "answer": "Yes, use the Collection mode to accumulate multiple CSS rules. The final export combines all collected rules into one stylesheet with your preferred formatting."
+          }
+    ]
+},
   {
+
     id: "733",
     name: "Box Shadow Generator",
     slug: "box-shadow-generator",
@@ -2106,8 +4253,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Box Shadow Generator — Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Set Horizontal and Vertical Offset",
+                "desc": "Use the H-offset and V-offset sliders to control shadow position. Positive V-offset moves the shadow down; negative moves it up."
+          },
+          {
+                "title": "2. Adjust Blur, Spread, and Color",
+                "desc": "Blur controls softness (0 = sharp edge), spread expands/shrinks the shadow size. Choose the shadow color with the color picker."
+          },
+          {
+                "title": "3. Layer Multiple Shadows",
+                "desc": "Click 'Add Shadow' to create layered box-shadow effects. Each layer has independent controls. Reorder layers by drag-and-drop."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between box-shadow and filter: drop-shadow()?",
+                "answer": "box-shadow creates a rectangular shadow following the element's bounding box. filter: drop-shadow() follows the actual alpha channel, creating shadows that conform to irregular shapes."
+          },
+          {
+                "question": "How does the inset keyword change the shadow behavior?",
+                "answer": "Inset box-shadow renders the shadow inside the element's border box, creating a recessed appearance. The shadow is clipped by border-radius and appears behind the background."
+          },
+          {
+                "question": "Can I export the box-shadow as a Sass/SCSS mixin variable?",
+                "answer": "Yes, the tool has an export format option for SCSS. It generates a variable like $shadow-1 and optionally wraps it in a @mixin for reuse."
+          }
+    ]
+},
   {
+
     id: "735",
     name: "Border Radius Generator",
     slug: "border-radius-generator",
@@ -2116,8 +4292,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Border Radius Generator — Generate CSS border-radius values visually. Control each corner independently with live preview. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Set Uniform or Per-Corner Radius",
+                "desc": "Toggle between uniform radius (single slider for all corners) and per-corner mode where each corner has an independent slider."
+          },
+          {
+                "title": "2. Use Percentage vs. Pixel Values",
+                "desc": "Choose px for fixed rounded corners or % for elliptical corners. Percentage values are relative to the element's dimensions."
+          },
+          {
+                "title": "3. Preview and Copy the Code",
+                "desc": "A live preview element shows the exact border-radius effect. Copy the generated CSS declaration."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How do I create a pill-shaped button using border-radius?",
+                "answer": "Set border-radius to a large fixed pixel value (e.g., 9999px) that exceeds the button's height. This produces a fully rounded rectangle where the ends are perfect semicircles."
+          },
+          {
+                "question": "What do the four slash-separated values in border-radius do?",
+                "answer": "The slash syntax sets different horizontal and vertical radii for elliptical corners. Values before the slash are horizontal radii, values after are vertical radii."
+          },
+          {
+                "question": "Why does border-radius not clip the background of my element on some browsers?",
+                "answer": "border-radius clips the background by default in modern browsers, but older WebKit browsers (Safari < 5) and IE (< 9) do not. Adding overflow: hidden resolves most cases."
+          }
+    ]
+},
   {
+
     id: "736",
     name: "Flexbox CSS Generator",
     slug: "flexbox-css-generator",
@@ -2126,8 +4331,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Configure Container Properties",
+                "desc": "Set display: flex, flex-direction (row/column), flex-wrap (nowrap/wrap), justify-content, and align-items."
+          },
+          {
+                "title": "2. Add and Configure Flex Items",
+                "desc": "Add up to 10 flex items. For each item, set flex-grow, flex-shrink, flex-basis, align-self, and order."
+          },
+          {
+                "title": "3. Preview Layout and Export",
+                "desc": "The live preview shows the exact flex layout. Copy the generated HTML and CSS."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between align-items and align-content?",
+                "answer": "align-items aligns individual flex items along the cross axis within each line. align-content distributes space between entire lines when there are multiple lines (flex-wrap: wrap)."
+          },
+          {
+                "question": "How does flex: 1 differ from flex-grow: 1?",
+                "answer": "flex: 1 is shorthand for flex: 1 1 0 — flex-grow: 1, flex-shrink: 1, flex-basis: 0. flex-grow: 1 alone keeps flex-basis: auto, meaning the item starts at its content width."
+          },
+          {
+                "question": "Why does gap not work in flexbox on older Safari versions?",
+                "answer": "Safari 13 and earlier do not support flex gap. The workaround is to use margin on flex items with negative margin on the container (margin hack)."
+          }
+    ]
+},
   {
+
     id: "737",
     name: "CSS Grid Generator",
     slug: "css-grid-generator",
@@ -2136,8 +4370,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Grid Generator — Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Define Grid Container",
+                "desc": "Set display: grid with column and row track sizes using px, fr, %, auto, min-content, max-content, or minmax()."
+          },
+          {
+                "title": "2. Place Grid Items",
+                "desc": "Add items and use grid-column / grid-row with span syntax or named grid lines. Use grid-area with template areas."
+          },
+          {
+                "title": "3. Adjust Gap and Alignment",
+                "desc": "Set row-gap and column-gap. Use align-items, justify-items, align-content, and justify-content."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between auto-fill and auto-fit in repeat()?",
+                "answer": "auto-fill keeps empty track spaces, preserving track sizing even without items. auto-fit collapses empty tracks to 0 width, causing remaining items to stretch."
+          },
+          {
+                "question": "How does the grid-template-areas property work with named grid areas?",
+                "answer": "grid-template-areas uses ASCII-art strings where each line represents a row. A period (.) creates an empty cell. Areas must form a rectangular shape."
+          },
+          {
+                "question": "Why does my grid item overflow the container with fractional units?",
+                "answer": "Adding minmax(0, 1fr) instead of 1fr prevents overflow by allowing tracks to shrink below their content's minimum size, resolving the common grid overflow issue."
+          }
+    ]
+},
   {
+
     id: "738",
     name: "Text Shadow Generator",
     slug: "text-shadow-generator",
@@ -2146,8 +4409,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Text Shadow Generator — Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Set Shadow Offsets and Blur",
+                "desc": "Use the H-shadow and V-shadow sliders to position the shadow relative to the text. Blur radius controls softness."
+          },
+          {
+                "title": "2. Choose Shadow Color",
+                "desc": "Pick a color using the color picker. Use rgba/hsla values for semi-transparent shadows."
+          },
+          {
+                "title": "3. Add Multiple Shadow Layers",
+                "desc": "Stack multiple text-shadow layers separated by commas. Layer order is left-to-right, first shadow renders on top."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does text-shadow differ from box-shadow in CSS?",
+                "answer": "text-shadow applies to text glyphs, not the element box. It has no spread option, no inset keyword, and layers render front-to-back instead of back-to-front."
+          },
+          {
+                "question": "Can I create a neon glow effect using text-shadow?",
+                "answer": "Yes, a neon glow uses 2–4 shadow layers with increasing blur radius and the same color. The tool's Neon preset creates this automatically."
+          },
+          {
+                "question": "Why does text-shadow performance lag with large blur values?",
+                "answer": "Each shadow layer renders as a separate blur operation. Large blur radii (50px+) with 3+ layers cause significant painting overhead, especially on mobile."
+          }
+    ]
+},
   {
+
     id: "739",
     name: "CSS Transform Generator",
     slug: "css-transform-generator",
@@ -2156,8 +4448,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Transform Generator — Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Select Transform Functions",
+                "desc": "Choose from translate(), rotate(), scale(), skew(), and matrix(). Add multiple functions in sequence."
+          },
+          {
+                "title": "2. Set Transform Values",
+                "desc": "For translate: enter X and Y distances. For rotate: enter angle. For scale: enter multiplier."
+          },
+          {
+                "title": "3. Set Transform Origin",
+                "desc": "Choose the transform-origin point (center, top-left, etc.). The origin affects rotation and scale axes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between rotate() and rotateZ()?",
+                "answer": "rotate() is a 2D function that rotates around the Z axis — it is equivalent to rotateZ(). rotateX() and rotateY() tilt the element and are 3D transforms."
+          },
+          {
+                "question": "How does the matrix() transform function work mathematically?",
+                "answer": "matrix(a, b, c, d, tx, ty) is shorthand for combining scale, rotate, and translate in one 2x3 affine transformation matrix."
+          },
+          {
+                "question": "Why does transform: translate(-50%, -50%) commonly center elements?",
+                "answer": "left: 50% positions the left edge at 50%. translate(-50%, -50%) moves the element left by 50% of its own width, centering it regardless of size."
+          }
+    ]
+},
   {
+
     id: "740",
     name: "CSS Animation Generator",
     slug: "css-animation-generator",
@@ -2166,8 +4487,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Animation Generator — Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Define @keyframes",
+                "desc": "Create keyframe steps (from/to or percentage points 0%–100%). For each step, define CSS properties like opacity and transform."
+          },
+          {
+                "title": "2. Configure Animation Properties",
+                "desc": "Set animation-name, duration, timing-function, delay, iteration-count, direction, and fill-mode."
+          },
+          {
+                "title": "3. Preview and Export",
+                "desc": "Play the animation in the preview panel. Export the CSS keyframes plus animation declaration."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between animation and transition in CSS?",
+                "answer": "Transitions require a trigger (hover) and interpolate between two states. Animations run independently using @keyframes with multiple stops and can loop infinitely."
+          },
+          {
+                "question": "How does the steps() timing function differ from cubic-bezier()?",
+                "answer": "cubic-bezier() creates smooth interpolated acceleration curves. steps(n) divides the animation into n discrete frames with no interpolation."
+          },
+          {
+                "question": "Why is my animation not running on page load?",
+                "answer": "Common issues: animation-name doesn't match the @keyframes name, display: none prevents animation, or the element isn't in the DOM when the page loads."
+          }
+    ]
+},
   {
+
     id: "741",
     name: "CSS Filter Generator",
     slug: "css-filter-generator",
@@ -2176,7 +4526,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Filter Generator — Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Apply Base Filters",
+                "desc": "Adjust the 10 available CSS filter functions: blur, brightness, contrast, drop-shadow, grayscale, hue-rotate, invert, opacity, saturate, and sepia."
+          },
+          {
+                "title": "2. Layer and Reorder Filters",
+                "desc": "Add multiple filters — order matters. Drag to reorder filter functions in the stack."
+          },
+          {
+                "title": "3. Preview and Compare",
+                "desc": "The live preview shows the filtered result side by side with the original. Toggle individual filters on/off."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the performance impact of CSS filters on scrolling?",
+                "answer": "filter: blur() and filter: drop-shadow() are the most GPU-intensive. blur() with large radii on full-page elements is particularly expensive."
+          },
+          {
+                "question": "How does hue-rotate() affect the color space of an image?",
+                "answer": "hue-rotate(deg) shifts all colors by the specified angle on the HSL color wheel. For example, hue-rotate(180deg) inverts the color wheel."
+          },
+          {
+                "question": "Can CSS filters be animated for a smooth transition effect?",
+                "answer": "Yes, all filter functions are animatable. Use CSS transitions or @keyframes to smoothly transition between filter states."
+          }
+    ]
+},
   {
     id: "745",
     name: "Image Converter",
@@ -2237,6 +4615,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     showInCategory: true,
   },
   {
+
     id: "750",
     name: "Encoder / Decoder",
     slug: "encoder-decoder",
@@ -2245,8 +4624,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Encoder / Decoder — Encode or decode text with Base64, Base64URL, URL, HTML, Hex, Binary, ROT13, UTF-8, and Unicode escape. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any text string, binary data in hex format, or upload a file that needs to be encoded or decoded using one of the supported encoding schemes."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose from Base64, Base64URL, Base32, Base16, URL encoding, HTML entities, Unicode escapes, or quoted-printable encoding for the conversion operation."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Select encode or decode direction and process the input. View the result in both text and hex dump formats for comprehensive verification of correctness."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What encoding and decoding formats does the universal encoder-decoder tool support?",
+                "answer": "It supports Base64 standard and URL-safe, Base32 as per RFC 4648, Base16 hex, URL percent encoding, HTML entity encoding, Unicode escape sequences, and quoted-printable."
+          },
+          {
+                "question": "How does the tool auto-detect whether the input is already encoded and which scheme was used?",
+                "answer": "The auto-detect mode analyzes the character set, length, and pattern of the input. Base64 ends with padding characters, hex contains only hex digits, and URL encoding has percent signs."
+          },
+          {
+                "question": "Can the tool chain multiple encoding and decoding operations in sequence for nested data?",
+                "answer": "Yes, the pipeline mode lets you apply multiple encode or decode steps in sequence. Each step is applied to the result of the previous step for nested encodings."
+          }
+    ]
+},
   {
+
     id: "du-6",
     name: "CSV Analyzer",
     slug: "csv-analyzer",
@@ -2254,8 +4662,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Analyze CSV structure — column types, counts, unique values, and empty cells.',
     seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste CSV Data",
+                "desc": "Paste CSV text or upload a .csv file. The tool auto-detects the delimiter (comma, tab, semicolon, pipe)."
+          },
+          {
+                "title": "2. View Column Analysis",
+                "desc": "For each column, the tool shows: data type, unique values, null count, min/max (for numbers), and distribution."
+          },
+          {
+                "title": "3. Generate Summary Statistics",
+                "desc": "View row count, column count, memory estimate, and per-column statistics."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the CSV analyzer detect column data types?",
+                "answer": "It samples the first 100 rows and attempts to parse each column as number, date, boolean, or string. The type with the highest successful parse rate is assigned."
+          },
+          {
+                "question": "Does the tool detect encoding issues in CSV files?",
+                "answer": "Yes, it detects UTF-8, UTF-16, Latin-1, and common encoding mismatches. Invalid characters are highlighted and the tool suggests the correct encoding."
+          },
+          {
+                "question": "Can the analyzer handle CSV files with quoted fields containing delimiters?",
+                "answer": "Yes, it properly parses RFC 4180 CSV format including quoted fields, escaped quotes (\"\"), and multiline quoted fields."
+          }
+    ]
+},
   {
+
     id: "du-7",
     name: "JSON Path Query Builder",
     slug: "json-path-query-builder",
@@ -2263,8 +4700,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Query JSON data using dot-notation path expressions with wildcard support. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON Path Query Builder — Query JSON data using dot-notation path expressions with wildcard support. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your JSON document into the input panel. The tool parses the JSON and builds a navigable tree structure showing all available nodes and their paths."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Build a JSONPath expression using the interactive builder by selecting nodes from the tree or typing the expression manually with autocomplete suggestions."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Execute the JSONPath query and view matching results highlighted in the source. Results are listed in the panel with their full paths and values for inspection."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JSONPath syntax features does the query builder support for complex path queries?",
+                "answer": "It supports dot notation, bracket notation, wildcards, array slices, filters with expressions, recursive descent, and union operators for comprehensive query construction."
+          },
+          {
+                "question": "Can the tool extract and export query results as a separate JSON or CSV file format?",
+                "answer": "Yes, query results can be exported as a JSON array of matched values, a CSV file for flat results, or a new JSON document containing only the matched subtree."
+          },
+          {
+                "question": "How does the interactive tree view help users unfamiliar with JSONPath build correct queries?",
+                "answer": "Clicking any node in the tree generates the corresponding JSONPath. Filters and conditions are added via dropdown menus without manual syntax knowledge."
+          }
+    ]
+},
   {
+
     id: "du-8",
     name: "JSON Tree Viewer",
     slug: "json-tree-viewer",
@@ -2272,8 +4738,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.',
     seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any JSON data into the input area. The tool parses the JSON and renders it as an interactive collapsible tree structure for visual data exploration."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Navigate the tree by clicking expand and collapse arrows to show or hide nested objects and arrays. The view displays types and values with color coding."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Use the search box to find specific keys or values. Click any node to see its full path, value, and type in the detail panel for deep inspection."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the JSON tree viewer handle files that are too large to display all at once?",
+                "answer": "Large JSON files are loaded with virtualized rendering where only visible nodes are rendered in the DOM. Nodes outside the viewport are lazily loaded as you scroll."
+          },
+          {
+                "question": "What features does the tree viewer offer for analyzing complex JSON structures effectively?",
+                "answer": "Features include collapse all and expand all, expand to specific depth, search by key name or value, filter by value type, copy node path, and copy value functionality."
+          },
+          {
+                "question": "Can the viewer highlight differences between two JSON documents in a side-by-side comparison?",
+                "answer": "Yes, the compare mode loads two JSON documents side by side. Added nodes are green, removed nodes are red, and changed values are orange with both values shown."
+          }
+    ]
+},
   {
+
     id: "du-9",
     name: "JSON Diff Checker",
     slug: "json-diff-checker",
@@ -2281,7 +4776,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Compare two JSON objects side-by-side with color-coded key-level differences. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON Diff Checker — Compare two JSON objects side-by-side with color-coded key-level differences. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Original JSON",
+                "desc": "Paste the original JSON document in the left panel."
+          },
+          {
+                "title": "2. Paste Modified JSON",
+                "desc": "Paste the modified JSON document in the right panel."
+          },
+          {
+                "title": "3. View Structural Diff",
+                "desc": "See added fields (green), removed fields (red), and changed values (yellow) with path locations."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the JSON diff checker handle array ordering?",
+                "answer": "By default it uses index-based comparison. Toggle 'Smart Array Diff' to match objects by ID key fields and show moved/reordered items."
+          },
+          {
+                "question": "Can the tool ignore specified paths during comparison?",
+                "answer": "Yes, use the ignore path feature (e.g., $.metadata.timestamp, $.version) to exclude volatile fields like timestamps from the diff."
+          },
+          {
+                "question": "What JSON depth does the diff checker support?",
+                "answer": "It handles arbitrarily nested JSON up to 100 levels deep. Circular references are detected and flagged with a warning."
+          }
+    ]
+},
   {
 
     id: "763",
@@ -2473,6 +4996,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     ]
 },
   {
+
     id: "769",
     name: "Random Token Generator",
     slug: "random-token-generator",
@@ -2480,8 +5004,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Random Token Generator — Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Token Length",
+                "desc": "Choose the token length from 8 to 256 characters. 32 characters (192 bits) is the recommended minimum for security tokens."
+          },
+          {
+                "title": "2. Choose Character Set",
+                "desc": "Select character groups: uppercase, lowercase, digits, and special characters. For URL-safe tokens, exclude special characters."
+          },
+          {
+                "title": "3. Generate and Copy Tokens",
+                "desc": "Generate 1–50 tokens at once using crypto.getRandomValues(). Click any token to copy it individually."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does this token generator ensure cryptographic randomness?",
+                "answer": "The tool uses the Web Crypto API's crypto.getRandomValues(), drawing entropy from the OS CSPRNG. This is the same source used for TLS key generation."
+          },
+          {
+                "question": "What is the difference between a random token and a hash?",
+                "answer": "A random token is pure entropy — each bit is randomly chosen. A hash is deterministic — the same input always produces the same output."
+          },
+          {
+                "question": "Are the generated tokens URL-safe and can they contain ambiguous characters?",
+                "answer": "The tool has a URL-safe mode excluding special characters. Ambiguity-free mode excludes visually similar characters (0/O, 1/l/I)."
+          }
+    ]
+},
   {
+
     id: "771",
     name: "Dummy Text Generator",
     slug: "dummy-text-generator",
@@ -2489,8 +5042,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Dummy Text Generator — Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Generation Mode",
+                "desc": "Choose between Lorem Ipsum (Latin filler), Cicero, or Custom text with your own word list."
+          },
+          {
+                "title": "2. Set Output Parameters",
+                "desc": "Specify paragraphs (1–100), sentences per paragraph (3–20), and words per sentence (5–30)."
+          },
+          {
+                "title": "3. Include HTML Markup",
+                "desc": "Toggle HTML tags — wraps paragraphs in <p>, adds <h2> headings, and optionally includes lists."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Where does the traditional Lorem Ipsum text originate from?",
+                "answer": "The standard Lorem Ipsum passage derives from Cicero's de Finibus Bonorum et Malus (45 BC), specifically sections 1.10.32–33. The text is intentionally scrambled Latin."
+          },
+          {
+                "question": "Can I generate text with specific word count instead of paragraph count?",
+                "answer": "Yes, the tool has a Target word count mode. Enter a specific number (50–5000 words), and it generates exactly that many words."
+          },
+          {
+                "question": "How does the Custom mode allow me to create branded placeholder text?",
+                "answer": "In Custom mode, you provide a comma-separated list of words or phrases (product names, features, industry terms). The tool constructs sentences using your vocabulary."
+          }
+    ]
+},
   {
+
     id: "772",
     name: "Fake Data Generator",
     slug: "fake-data-generator",
@@ -2498,8 +5080,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fake Data Generator — Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Data Categories",
+                "desc": "Choose types — personal info (names, emails, phones), addresses, company data, dates, financial data, or internet data."
+          },
+          {
+                "title": "2. Choose Locale",
+                "desc": "Select a locale for region-specific formats. en-US yields American formats; de-DE returns German; fr-FR returns French."
+          },
+          {
+                "title": "3. Set Row Count and Export",
+                "desc": "Generate 1–10,000 rows. Export as JSON, CSV, or SQL INSERT statements."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does locale selection affect phone number generation?",
+                "answer": "Each locale has a phone number format template (e.g., en-US uses (555) XXX-XXXX, en-GB uses +44 7XXX XXXXXX). Generated numbers follow area code rules."
+          },
+          {
+                "question": "Can I generate data that matches a specific database schema?",
+                "answer": "Yes, the Schema Match mode parses a CREATE TABLE statement or JSON schema and generates matching data based on column names and types."
+          },
+          {
+                "question": "What is the data source for the name and street databases?",
+                "answer": "The tool includes 50,000+ first and last names from 40 countries, 200,000+ street names from public census datasets, and 100,000+ city names."
+          }
+    ]
+},
   {
+
     id: "773",
     name: "Fake Identity Generator",
     slug: "fake-identity-generator",
@@ -2507,8 +5118,37 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fake Identity Generator — Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Identity Components",
+                "desc": "Choose which identity fields to include: full name, DOB, gender, SSN/National ID, passport number, driver's license, address, phone, email, username."
+          },
+          {
+                "title": "2. Set Nationality and Age Range",
+                "desc": "Select a nationality that determines document formats (SSN for US, NIN for UK). Set a min/max age range (18–99)."
+          },
+          {
+                "title": "3. Generate Complete Identities",
+                "desc": "Click Generate to create a single coherent fake identity. All fields are internally consistent — SSN issue date precedes expiration."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Are the generated SSN/passport numbers from valid number series?",
+                "answer": "The generated SSN numbers follow US SSA format but use unassigned area numbers (000 or 900+ series) to avoid matching real SSNs. Passport numbers use correct country-specific formats with random generation."
+          },
+          {
+                "question": "How does the tool ensure internal consistency of identity data?",
+                "answer": "The generator creates a persona with a single seed value. The email derives from the generated name, the phone area code matches the city, and the SSN area number matches the state of issuance."
+          },
+          {
+                "question": "Can I export identities in a format suitable for user testing databases?",
+                "answer": "Yes, export formats include SQL INSERT statements matching common user table schemas, JSON for MongoDB/Firestore, and CSV for spreadsheet import."
+          }
+    ]
+},
   {
+
     id: "774",
     name: "Fake Credit Card Generator",
     slug: "fake-credit-card-generator",
@@ -2516,7 +5156,35 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fake Credit Card Generator — Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Card Networks",
+                "desc": "Choose networks: Visa (starts with 4), Mastercard (51–55), Amex (34/37, 15 digits), Discover (6011/65), or Diners Club."
+          },
+          {
+                "title": "2. Set Card Details",
+                "desc": "Optionally set a specific BIN prefix. Choose the expiration year range and CVV length (3 for most, 4 for Amex)."
+          },
+          {
+                "title": "3. Generate and Validate",
+                "desc": "Generated cards pass Luhn algorithm validation. The tool displays the complete card number, expiry, CVV, and cardholder name."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Luhn algorithm ensure generated card numbers are structurally valid?",
+                "answer": "The Luhn algorithm (mod 10) is the checksum formula used by all major payment networks. The generator produces a partial number, computes the Luhn check digit, and appends it."
+          },
+          {
+                "question": "Can I generate cards from specific BIN (Bank Identification Number) ranges?",
+                "answer": "Yes, the Custom BIN mode lets you enter a 6- or 8-digit BIN prefix. The tool completes the card number using the selected network's length rules."
+          },
+          {
+                "question": "Are the generated Amex cards different from Visa/Mastercard in format?",
+                "answer": "American Express uses 15-digit numbers versus 16 for Visa/Mastercard. Amex uses 4-digit CVV on the front. The tool adjusts all formatting per card network."
+          }
+    ]
+},
   {
 
     id: "775",
@@ -2556,6 +5224,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     ]
 },
   {
+
     id: "778",
     name: "Coupon Code Generator",
     slug: "coupon-code-generator",
@@ -2563,5 +5232,33 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Coupon Code Generator — Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Code Pattern",
+                "desc": "Choose a pattern: random alphanumeric, word-based (e.g., SUMMER2024), or prefix-based (e.g., WELCOME10)."
+          },
+          {
+                "title": "2. Configure Generation Rules",
+                "desc": "Set character groups to include. Optionally exclude ambiguous characters like O/0 and I/1."
+          },
+          {
+                "title": "3. Set Quantity and Batch Export",
+                "desc": "Generate 1–1000 codes at once. Export as CSV, plain text, or JSON array."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the prefix-based mode help organize coupon campaigns?",
+                "answer": "Prefixes let you categorize codes by campaign or discount tier. For example, EMAIL10 for email campaigns, SOCIAL20 for social media. The tool appends a random suffix after the prefix."
+          },
+          {
+                "question": "What is the optimal code length for readability vs. security?",
+                "answer": "8 characters provides 47.6 trillion combinations with uppercase + digits, sufficient for most campaigns. 10-character codes are preferred for high-value discounts."
+          },
+          {
+                "question": "Can I generate codes that spell out words or follow a pronounceable pattern?",
+                "answer": "Yes, the Pronounceable mode alternates consonants and vowels (CVCVCV pattern), creating human-readable pseudo-words like BATEMU or KOLISA."
+          }
+    ]
+},
 ];

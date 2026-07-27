@@ -1895,6 +1895,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     ]
   },
   {
+
     id: "auto-10050",
     name: "Domain Availability Checker",
     slug: "domain-availability-checker",
@@ -1902,7 +1903,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
     seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
     dependencies: "DNS API",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Domain Name",
+                "desc": "Type the domain name (e.g., example.com). The tool checks the TLD and queries DNS for existing records."
+          },
+          {
+                "title": "2. Select TLDs to Check",
+                "desc": "Choose from popular TLDs (.com, .org, .net, .io, .dev, .app) or enter custom TLDs. Bulk check up to 20 TLDs."
+          },
+          {
+                "title": "3. View Availability Results",
+                "desc": "Each domain shows Available (green) or Registered (red). Registered domains include the registrar and expiration date if available via WHOIS."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool determine if a domain is available?",
+                "answer": "The tool performs a DNS lookup for NS records. If no nameservers are found and the domain is not in WHOIS, it's likely available. DNS-based checking is faster than WHOIS but may have false negatives for recently registered domains."
+          },
+          {
+                "question": "Why might a domain show as available but actually be registered?",
+                "answer": "DNS caching, propagation delays (new registrations can take 24–48 hours to appear in all DNS servers), and WHOIS throttling can cause false availability. The tool recommends verifying with a registrar."
+          },
+          {
+                "question": "Can I check domain availability for premium TLDs like .ai or .io?",
+                "answer": "Yes, the tool supports 1500+ TLDs. Premium TLDs use the same DNS-based check but may have different registration requirements or pricing."
+          }
+    ]
+},
   {
     id: "auto-10051",
     name: "Pronunciation Tool",
@@ -3786,6 +3815,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     ],
   },
   {
+
     id: "380",
     name: "Website Screenshot",
     slug: "website-screenshot",
@@ -3794,7 +3824,35 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. ',
     dependencies: "html2canvas",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Enter Website URL",
+                "desc": "Type the full URL (including https://) of the website to capture."
+          },
+          {
+                "title": "2. Set Viewport Dimensions",
+                "desc": "Choose the viewport size: desktop (1920x1080), tablet (768x1024), mobile (375x667), or custom."
+          },
+          {
+                "title": "3. Capture and Download",
+                "desc": "Click Capture to render the page and generate a screenshot. Download as PNG or JPEG."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the screenshot tool render JavaScript-heavy websites?",
+                "answer": "It uses a headless browser that fully executes JavaScript before capturing. The tool waits for network idle (2 seconds) or until a configurable delay."
+          },
+          {
+                "question": "Can I capture a full-page screenshot (scrolling)?",
+                "answer": "Yes, enable Full Page mode to capture the entire page height, not just the viewport. This scrolls through the page and stitches the sections together."
+          },
+          {
+                "question": "Does the tool support setting custom cookies for authenticated pages?",
+                "answer": "Yes, add cookies as key-value pairs in the Advanced section before capturing. Cookies are injected into the browser session before rendering."
+          }
+    ]
+},
   {
     id: "381",
     name: "GIF to WebP/WebM",

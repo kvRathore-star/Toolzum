@@ -2,6 +2,7 @@ import type { ToolMetadata } from './tools-types';
 
 export const entries_chunk_4: ToolMetadata[] = [
   {
+
     id: "779",
     name: "Serial Number Generator",
     slug: "serial-number-generator",
@@ -9,7 +10,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Serial Number Generator — Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Serial Format Template",
+                "desc": "Create a template using placeholders: # = random digit, @ = random letter, ? = random alphanumeric."
+          },
+          {
+                "title": "2. Set Generation Options",
+                "desc": "Configure the separator character, segment length, and whether to use uppercase only. Toggle checksum digit mode."
+          },
+          {
+                "title": "3. Generate and Validate",
+                "desc": "Generate 1–5000 unique serial numbers. Export as CSV, TXT, or JSON array."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the checksum digit mode prevent manual entry errors?",
+                "answer": "The tool appends a check digit computed using the Luhn mod-10 algorithm or custom weighted-sum algorithm. This catches single-digit errors and transpositions."
+          },
+          {
+                "question": "What is the maximum number of unique serial numbers from a given template?",
+                "answer": "The template's total combinations = (character set size per placeholder) ^ (number of variable placeholders). The tool estimates capacity and warns about birthday problem risks."
+          },
+          {
+                "question": "Can I generate serial numbers that encode specific data like date or batch ID?",
+                "answer": "Yes, the template supports fixed groups (e.g., BATCH42-####) and date-based placeholders: YYYY = current year, MM = month, DD = day."
+          }
+    ]
+},
   {
 
     id: "780",
@@ -49,6 +78,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ]
 },
   {
+
     id: "781",
     name: "Avatar Generator",
     slug: "avatar-generator",
@@ -56,7 +86,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Avatar Generator — Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Avatar Style",
+                "desc": "Select from initials-based, generated pixel art (8x8 or 16x16 grid), abstract geometric shapes, or identicon-style."
+          },
+          {
+                "title": "2. Customize Appearance",
+                "desc": "For initials: pick background color, text color, and shape. For pixel art: choose color palette and symmetry mode."
+          },
+          {
+                "title": "3. Generate and Download",
+                "desc": "Generate the avatar as SVG or PNG (64x64 to 512x512). Download individually or generate a batch from a list of names."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the identicon algorithm generate unique avatars from a string?",
+                "answer": "The identicon takes an input string, computes its MD5 hash, and uses bytes to determine the mirrored pattern, hue, and saturation. The same input always produces the same identicon."
+          },
+          {
+                "question": "Can I generate avatars that are real-time rendered as SVG instead of PNG?",
+                "answer": "Yes, SVG output is resolution-independent and typically under 2KB per avatar. Ideal for web applications where you want lightweight avatar placeholders."
+          },
+          {
+                "question": "What color palettes are available for the pixel art style?",
+                "answer": "12 curated palettes: Classic (8-bit NES), Game Boy (4-shade green), Pastel, Vibrant, Monochrome, Ocean, Sunset, Forest, Neon, Grayscale, and Custom."
+          }
+    ]
+},
   {
 
     id: "782",
@@ -2323,6 +2381,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ]
 },
   {
+
     id: "898",
     name: "Password Entropy Calculator",
     slug: "password-entropy-calculator",
@@ -2330,8 +2389,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate password entropy in bits to measure password strength against brute-force attacks. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Password Entropy Calculator \u2014 Calculate password entropy in bits to measure password strength against brute-force attacks. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type a password to analyze its entropy directly or configure password criteria like length and character sets to calculate theoretical maximum entropy."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Review the entropy analysis including bits of entropy, estimated cracking time at various attacker speeds, character set composition, and pattern detection results."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Check the password against a local database of common and breached passwords without sending it externally. Weak passwords are flagged with improvement suggestions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the password entropy calculator determine the estimated cracking time needed?",
+                "answer": "It uses the formula where time equals two to the power of entropy minus one divided by guesses per second. Three tiers are shown from online to massive botnet speeds."
+          },
+          {
+                "question": "What factors reduce the effective entropy of a password beyond character set and length?",
+                "answer": "Patterns like dictionary words, keyboard patterns, repeated characters, common substitutions, dates, names, and previously breached passwords reduce effective entropy."
+          },
+          {
+                "question": "What is the recommended minimum entropy for different security contexts and applications?",
+                "answer": "For online services moderate is 30 to 40 bits and strong is 50 to 60 bits. For encryption keys and password managers more than 80 bits is very strong for security."
+          }
+    ]
+},
   {
+
     id: "899",
     name: "Two-Factor Auth Generator",
     slug: "two-factor-auth-generator",
@@ -2339,8 +2427,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate TOTP URIs for two-factor authentication setup with authenticator apps. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Two-Factor Auth Generator \u2014 Generate TOTP URIs for two-factor authentication setup with authenticator apps. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select TOTP Parameters",
+                "desc": "Choose the time step (30 seconds recommended), HMAC algorithm (SHA-1, SHA-256, SHA-512), and OTP digit length (6 or 8 digits)."
+          },
+          {
+                "title": "2. Enter or Generate a Secret",
+                "desc": "Generate a random base32-encoded secret (16–32 characters) or enter your own."
+          },
+          {
+                "title": "3. Generate QR Code and Codes",
+                "desc": "The tool generates the otpauth:// URL and renders a QR code for scanning into authenticator apps."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does time-based one-time password (TOTP) synchronization work?",
+                "answer": "TOTP uses the Unix epoch time divided by the time step as input to HMAC-SHA1 with the shared secret. Both server and authenticator must have synchronized clocks within +/-30 seconds."
+          },
+          {
+                "question": "What is the difference between TOTP and HOTP for two-factor authentication?",
+                "answer": "HOTP uses a counter that increments with each authentication. TOTP uses time as the counter. TOTP is more common (Google Authenticator, Authy)."
+          },
+          {
+                "question": "Can I generate backup codes alongside the TOTP configuration?",
+                "answer": "Yes, the tool generates 5–10 single-use backup codes (10-character alphanumeric) displayed alongside the QR code for when the user loses access to their device."
+          }
+    ]
+},
   {
+
     id: "900",
     name: "Brute Force Time Estimator",
     slug: "brute-force-time-estimator",
@@ -2348,8 +2465,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate the time required to brute-force a password given its length, character set, and hash rate. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Brute Force Time Estimator \u2014 Estimate the time required to brute-force a password given its length, character set, and hash rate. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Password or Key Details",
+                "desc": "Input the password, passphrase, or key to analyze its resistance against brute-force attacks based on character set composition and length."
+          },
+          {
+                "title": "2. Set Attacker Capabilities",
+                "desc": "Configure the assumed attacker speed — from consumer GPU (10 GH/s) to massive botnet (100 TH/s) — and whether the attack is offline (hash cracking) or online (rate-limited API)."
+          },
+          {
+                "title": "3. Review Time Estimates",
+                "desc": "View estimated cracking times across attacker tiers, from instant to centuries, with entropy bits and comparative strength against common benchmarks."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool calculate entropy for passwords with mixed character sets?",
+                "answer": "Entropy is calculated as log2(R^L) where R is the size of the character set (26 for lowercase, 52 for mixed case, 62 for alphanumeric, 95 for all printable ASCII) and L is the length of the password."
+          },
+          {
+                "question": "What is the difference between online and offline brute-force attack estimates?",
+                "answer": "Offline attacks assume the attacker has the password hash and can attempt billions of guesses per second on GPUs. Online attacks are limited by server rate limiting, typically 1–1000 guesses per second before lockout."
+          },
+          {
+                "question": "How do dictionary attacks and common password patterns factor into the estimate?",
+                "answer": "The tool includes a common password dictionary check — if your input matches any of the top 10,000 breached passwords, the estimate shows 'Instant' regardless of length, as it would be guessed in a standard dictionary attack."
+          }
+    ]
+},
   {
+
     id: "902",
     name: "Hash Verifier",
     slug: "hash-verifier",
@@ -2357,8 +2503,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Verify that a hash matches a given input to check data integrity. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hash Verifier \u2014 Verify that a hash matches a given input to check data integrity. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload or Paste File Content",
+                "desc": "Paste the file content or upload a file to verify its integrity against a known hash. All processing happens locally in your browser."
+          },
+          {
+                "title": "2. Enter Expected Hash",
+                "desc": "Enter the expected hash value in hex format. Select the algorithm used: MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA-3, or BLAKE2b."
+          },
+          {
+                "title": "3. Compare and Verify",
+                "desc": "The tool computes the hash of your file and performs a case-insensitive comparison, showing a green checkmark for a match or a red X with the actual computed hash for a mismatch."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What hash algorithms does the verifier support for file integrity checking?",
+                "answer": "It supports MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA-3 (256/384/512), BLAKE2b (256/512), and BLAKE2s. SHA-256 is recommended for general-purpose file integrity verification."
+          },
+          {
+                "question": "How does the tool handle large files during hash computation?",
+                "answer": "Files are read in 64 MB chunks using the File API's slice method. Each chunk is fed to the Web Crypto API incrementally, preventing browser memory exhaustion regardless of file size."
+          },
+          {
+                "question": "Can the tool verify checksums from common formats like SHA256SUMS files?",
+                "answer": "Yes, the batch verification mode accepts a SHA256SUMS-style file with hash + filename pairs and automatically computes and compares all listed files against their expected hashes."
+          }
+    ]
+},
   {
+
     id: "903",
     name: "Hash Password Generator",
     slug: "hash-password-generator",
@@ -2366,8 +2541,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hash Password Generator \u2014 Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Password",
+                "desc": "Type or paste the password to hash. The input is masked for security. All processing happens in your browser."
+          },
+          {
+                "title": "2. Select Hash Algorithm",
+                "desc": "Choose from bcrypt (cost factor 4–31), argon2 (argon2id), scrypt, or PBKDF2."
+          },
+          {
+                "title": "3. Review Salt and Hash Output",
+                "desc": "The tool auto-generates a salt. The output includes the algorithm identifier, cost parameters, salt, and resulting hash."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the modular crypt format and why is it important?",
+                "answer": "Modular crypt format ($identifier$parameter$salt$hash) encodes algorithm, cost factors, salt, and hash in one string. Libraries like PHP's password_hash() and Python's passlib use this format."
+          },
+          {
+                "question": "Why should I use argon2id over bcrypt for new password hashing?",
+                "answer": "Argon2id is memory-hard, resisting GPU and ASIC attacks by requiring configurable memory (typically 19 MiB+) per hash computation. Bcrypt is acceptable but considered legacy."
+          },
+          {
+                "question": "How does the bcrypt cost factor affect hash time and security?",
+                "answer": "Cost factor 2^10 = 1,024 rounds (~100ms), cost 2^12 = 4,096 rounds (~400ms). Each increment of 1 doubles compute time. Recommended minimum as of 2024 is cost 10–12."
+          }
+    ]
+},
   {
+
     id: "904",
     name: "Content Hash Generator",
     slug: "hash-file-generator",
@@ -2375,8 +2579,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Content Hash Generator \u2014 Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload a File",
+                "desc": "Drag and drop a file or click to browse. Supports files up to 1 GB. File is processed in-browser — never uploaded."
+          },
+          {
+                "title": "2. Select Hash Algorithms",
+                "desc": "Choose from MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA-3, or Blake2b. Multi-select for simultaneous computation."
+          },
+          {
+                "title": "3. View and Compare Hash Results",
+                "desc": "The computed hash(es) display in hex format. Use the Compare panel to paste a provided hash and check for match."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool handle files larger than browser memory?",
+                "answer": "The tool uses the File API's .slice() method to read the file in 64 MB chunks, feeding each to the Web Crypto API incrementally. A progress bar updates as each chunk processes."
+          },
+          {
+                "question": "Can I verify a downloaded file's checksum against a provided hash?",
+                "answer": "Yes, the Compare mode lets you paste a known hash. The tool computes the file's hash and performs a case-insensitive comparison with green (match) or red (mismatch) indicator."
+          },
+          {
+                "question": "What is the difference between SHA-2 and SHA-3 families?",
+                "answer": "SHA-2 uses Merkle-Damgard structure and is the most widely adopted. SHA-3 (Keccak) uses a sponge construction, designed as a backup in case SHA-2 is broken."
+          }
+    ]
+},
   {
+
     id: "905",
     name: "HMAC Generator",
     slug: "hmac-generator",
@@ -2384,8 +2617,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate HMAC signatures using a secret key and hash algorithm for API authentication. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HMAC Generator \u2014 Generate HMAC signatures using a secret key and hash algorithm for API authentication. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Message and Secret Key",
+                "desc": "Input the message string and a secret key. The key should be at least as long as the hash output for maximum security."
+          },
+          {
+                "title": "2. Select Hash Algorithm",
+                "desc": "Choose the underlying hash function: MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA3-256, or SHA3-512."
+          },
+          {
+                "title": "3. Choose Output Format",
+                "desc": "Select between hex (lowercase), hex (uppercase), base64, or base64-url. Copy the resulting HMAC tag."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How is HMAC different from regular hashing (e.g., just SHA-256 of message + key)?",
+                "answer": "HMAC uses a specific two-pass construction with ipad and opad to prevent length-extension attacks that affect plain SHA-256(message + key) constructions."
+          },
+          {
+                "question": "What is the purpose of HMAC in API authentication?",
+                "answer": "HMAC creates a message authentication code proving both integrity and authenticity. In API auth (AWS Signature V4), the client computes HMAC of the request and sends it in a header."
+          },
+          {
+                "question": "How does key length affect HMAC security?",
+                "answer": "If the key is shorter than the hash output length, security degrades to the key's brute-force space. The recommended key length equals the hash output length (32 bytes for SHA-256)."
+          }
+    ]
+},
   {
+
     id: "906",
     name: "SSL/TLS Checker",
     slug: "ssl-tls-checker",
@@ -2393,8 +2655,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SSL/TLS Checker \u2014 Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Hostname and Port",
+                "desc": "Type the server hostname (example.com) and port (default 443 for HTTPS)."
+          },
+          {
+                "title": "2. Run TLS Scan",
+                "desc": "Click Scan to test the server's TLS configuration. The tool connects using various protocol versions and cipher suites."
+          },
+          {
+                "title": "3. Review Security Grade",
+                "desc": "View a grade (A+ to F) based on protocol support, cipher strength, key exchange, and known vulnerability status."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What TLS protocols does the checker test for?",
+                "answer": "It tests for SSL 2.0, SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2, and TLS 1.3 support. Modern servers should only support TLS 1.2 and 1.3."
+          },
+          {
+                "question": "How does the tool check for known TLS vulnerabilities?",
+                "answer": "It tests for Heartbleed (CVE-2014-0160), POODLE (CVE-2014-3566), BEAST, CRIME, Logjam, FREAK, and ROBOT vulnerabilities."
+          },
+          {
+                "question": "Can the tool test SMTP, IMAP, or POP3 TLS configurations?",
+                "answer": "Yes, select from STARTTLS for SMTP (port 587), IMAP (port 143), POP3 (port 110), or direct TLS modes."
+          }
+    ]
+},
   {
+
     id: "907",
     name: "HTTP Security Checker",
     slug: "http-security-checker",
@@ -2402,8 +2693,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Scan HTTP response headers for security best practices like HSTS, X-Frame-Options, and CSP.',
     seoDescription: 'Free online HTTP Security Checker \u2014 Scan HTTP response headers for security best practices. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Website URL",
+                "desc": "Type the full URL (https://example.com) to check its HTTP security headers."
+          },
+          {
+                "title": "2. Scan Headers",
+                "desc": "The tool sends a request to the URL and analyzes the response headers for security configurations."
+          },
+          {
+                "title": "3. Review Security Report",
+                "desc": "Each header gets a pass/fail/warning status with explanation and remediation steps for missing or misconfigured headers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What HTTP security headers does the checker validate?",
+                "answer": "It checks: Strict-Transport-Security (HSTS), X-Frame-Options, X-Content-Type-Options, Content-Security-Policy, X-XSS-Protection, Referrer-Policy, Permissions-Policy, and Cache-Control."
+          },
+          {
+                "question": "How does the tool grade the HSTS configuration?",
+                "answer": "It checks max-age (recommended >= 1 year = 31536000), includeSubDomains, preload directive, and whether the header is sent on HTTP first."
+          },
+          {
+                "question": "Does the checker provide remediation code snippets?",
+                "answer": "Yes, each failed check includes a code snippet showing the correct header configuration for Nginx, Apache, and application-level frameworks."
+          }
+    ]
+},
   {
+
     id: "909",
     name: "JWT Inspector",
     slug: "jwt-inspector",
@@ -2411,8 +2731,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JWT Inspector \u2014 Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste JWT Token",
+                "desc": "Paste the full JSON Web Token (JWT) string — a three-part base64url-encoded token with dots separating header, payload, and signature."
+          },
+          {
+                "title": "2. Inspect Header and Payload",
+                "desc": "View the automatically decoded header (algorithm, type, kid) and payload (claims like sub, iat, exp, iss) as formatted JSON with type-highlighted values."
+          },
+          {
+                "title": "3. Validate Signature and Expiry",
+                "desc": "The tool checks the token expiration (exp), not-before (nbf), and issued-at (iat) claims against the current time, and optionally verifies the HMAC/RSA/ECDSA signature."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the JWT inspector decode the token without knowing the secret key?",
+                "answer": "JWT consists of three base64url-encoded segments: header and payload are JSON objects encoded in plaintext and can be decoded by anyone. Only the signature requires the secret or public key for verification."
+          },
+          {
+                "question": "What JWT claims does the inspector check for common security issues?",
+                "answer": "It flags tokens with no expiration (missing exp), overly long validity (exp - iat > 24h), alg=none (critical vulnerability), weak algorithms (HS256 vs RS256), and mismatched issuer/audience claims."
+          },
+          {
+                "question": "Can the tool decode and inspect JWTs signed with asymmetric algorithms like RS256?",
+                "answer": "Yes, for RS256/ES256, you can paste the public key (PEM or JWK format) to verify the signature. The tool supports RSA, ECDSA, EdDSA, and HMAC algorithm families."
+          }
+    ]
+},
   {
+
     id: "910",
     name: "Content Security Policy Generator",
     slug: "content-security-policy-generator",
@@ -2420,8 +2769,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Build a Content Security Policy header by selecting directives and allowed sources. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Content Security Policy Generator \u2014 Build a Content Security Policy header by selecting directives and allowed sources. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Resource Directives",
+                "desc": "Configure directives: default-src, script-src, style-src, img-src, font-src, connect-src, media-src, object-src, frame-src."
+          },
+          {
+                "title": "2. Set Allowed Sources",
+                "desc": "Specify sources: 'self', 'none', specific domains, scheme, inline (with nonce or hash), and 'unsafe-inline'/'unsafe-eval'."
+          },
+          {
+                "title": "3. Add Reporting",
+                "desc": "Configure report-uri or report-to. Toggle between enforcing and Report-Only headers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between 'unsafe-inline' and using a nonce in CSP?",
+                "answer": "unsafe-inline allows ALL inline scripts, defeating XSS protection. A nonce allows only tags with the matching nonce attribute. Strict CSP using nonces is vastly more secure."
+          },
+          {
+                "question": "How does 'strict-dynamic' change script-src behavior?",
+                "answer": "strict-dynamic tells the browser to trust scripts dynamically loaded by already-trusted scripts, eliminating the need to list every third-party domain in script-src."
+          },
+          {
+                "question": "Can I test a CSP policy before deploying to production?",
+                "answer": "Yes, generate a report-only header with Content-Security-Policy-Report-Only and a report-uri endpoint. Monitor reports before switching to enforcement."
+          }
+    ]
+},
   {
+
     id: "911",
     name: "Subnet Calculator",
     slug: "subnet-calculator",
@@ -2429,8 +2807,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Subnet Calculator \u2014 Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Network Address with CIDR",
+                "desc": "Type a network address in CIDR notation (e.g., 10.0.0.0/24, 192.168.1.0/28)."
+          },
+          {
+                "title": "2. View Network Details",
+                "desc": "Displays: network address, broadcast, usable range, subnet mask, wildcard mask, total hosts."
+          },
+          {
+                "title": "3. Subdivide Network",
+                "desc": "Enter a target subnet size to see all subnets at that size within the parent network."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between a /24 and a /28 network?",
+                "answer": "A /24 has 256 total IPs with 254 usable hosts. A /28 has 16 total IPs with 14 usable hosts. The /24 provides more addresses, the /28 reserves fewer."
+          },
+          {
+                "question": "How does subnetting relate to VPC design in cloud providers?",
+                "answer": "AWS VPCs use CIDR blocks (e.g., 10.0.0.0/16) subdivided into /24 subnets per availability zone. The calculator helps plan VPC subnet allocation."
+          },
+          {
+                "question": "Can the tool calculate both IPv4 and IPv6 subnets?",
+                "answer": "Yes, it handles IPv4 and IPv6 CIDR notation. For IPv6, /64 is the minimum subnet for SLAAC, and the tool shows the number of /64 subnets available."
+          }
+    ]
+},
   {
+
     id: "912",
     name: "Subnet Visualizer",
     slug: "subnet-visualizer",
@@ -2438,8 +2845,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Visualize IP subnet divisions with a hierarchical tree view for network planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Subnet Visualizer \u2014 Visualize IP subnet divisions with a hierarchical tree view for network planning. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Parent CIDR Block",
+                "desc": "Type the parent CIDR block (e.g., 10.0.0.0/16)."
+          },
+          {
+                "title": "2. Add Subnets",
+                "desc": "Add subnet CIDR blocks that exist within the parent block. The tool visualizes their overlap and allocation."
+          },
+          {
+                "title": "3. View Visual Map",
+                "desc": "A visual diagram shows how subnets are allocated within the parent block, highlighting used vs available space."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the subnet visualizer display overlapping subnets?",
+                "answer": "Each subnet is shown as a colored bar proportional to its size within the parent block. Overlapping subnets are flagged in red."
+          },
+          {
+                "question": "Can the tool recommend where to place new subnets?",
+                "answer": "Yes, it identifies available address space gaps and suggests optimal CIDR placement for new subnets."
+          },
+          {
+                "question": "Does the visualizer support VPC peering connection visualization?",
+                "answer": "Yes, add peered VPC CIDR blocks to check for overlapping CIDR ranges that would prevent VPC peering."
+          }
+    ]
+},
   {
+
     id: "912b",
     name: "IPv4 Address Converter",
     slug: "ip-address-converter",
@@ -2447,8 +2883,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online IPv4 Address Converter \u2014 Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter IP Address",
+                "desc": "Type an IPv4 address (e.g., 192.168.1.1) or IPv6 address (e.g., 2001:db8::1) to convert between formats and representations."
+          },
+          {
+                "title": "2. Select Conversion Type",
+                "desc": "Choose: IPv4 to IPv6 (IPv4-mapped IPv6), IPv6 to IPv4 (extract embedded IPv4), IP to integer, integer to IP, binary representation, or hex representation."
+          },
+          {
+                "title": "3. View All Representations",
+                "desc": "The tool displays the IP in decimal, hex, binary, octal, integer, and compressed/expanded IPv6 formats side by side."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool convert an IPv4 address to its integer representation?",
+                "answer": "The formula is (octet1 * 2^24) + (octet2 * 2^16) + (octet3 * 2^8) + octet4. For example, 192.168.1.1 equals 3232235777. The tool shows the calculation steps for educational purposes."
+          },
+          {
+                "question": "What is an IPv4-mapped IPv6 address and how is it formatted?",
+                "answer": "IPv4-mapped IPv6 addresses embed an IPv4 address in the last 32 bits of an IPv6 address, formatted as ::ffff:192.168.1.1 or ::ffff:c0a8:101. These are used in dual-stack applications to represent IPv4 connections over IPv6 sockets."
+          },
+          {
+                "question": "Can the converter handle IPv6 shorthand notation and expand it fully?",
+                "answer": "Yes, it expands shortened IPv6 addresses (::1 → 0:0:0:0:0:0:0:1), removes leading zeros per group, converts mixed IPv4/IPv6 notation (::ffff:192.168.1.1), and validates the address structure."
+          }
+    ]
+},
   {
+
     id: "912c",
     name: "IP Range Expander",
     slug: "ip-range-expander",
@@ -2456,8 +2921,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online IP Range Expander \u2014 Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter IP Range or CIDR",
+                "desc": "Paste an IP range (e.g., 192.168.1.1–192.168.1.255), CIDR block (e.g., 10.0.0.0/24), or comma-separated list of IPs to expand into individual addresses."
+          },
+          {
+                "title": "2. Configure Output Options",
+                "desc": "Choose IPv4 or IPv6 mode, set the maximum number of addresses to display (100–10000), and select output format: one per line, comma-separated, or as CIDR blocks."
+          },
+          {
+                "title": "3. Generate Expanded List",
+                "desc": "Click Expand to generate all IPs in the range. The tool shows a summary with total count, first/last IP, and subnet mask."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What IP range formats does the expander accept as input?",
+                "answer": "It accepts CIDR notation (10.0.0.0/24), explicit start-end range (10.0.0.1–10.0.0.254), wildcard notation (10.0.0.*), octet range (10.0.0.{1..254}), and mixed formats in a single input."
+          },
+          {
+                "question": "How does the tool handle very large IP ranges like /16 networks (65,536 addresses)?",
+                "answer": "For ranges larger than 10,000 addresses, the tool shows a preview of the first and last 100 IPs with pagination. A summary table shows subnet breakdowns instead of expanding every single address."
+          },
+          {
+                "question": "Can the expander detect overlapping IP ranges and merge them?",
+                "answer": "Yes, when multiple ranges are entered, the tool detects overlaps and optionally merges contiguous ranges into larger CIDR blocks. Merged ranges are shown alongside the original entries."
+          }
+    ]
+},
   {
+
     id: "912d",
     name: "IPv6 ULA Generator",
     slug: "ipv6-ula-generator",
@@ -2465,8 +2959,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate random IPv6 Unique Local Addresses (ULA) for internal network use. No signup or account required.',
     seoDescription: 'Free online IPv6 ULA Generator \u2014 Generate random IPv6 Unique Local Addresses (ULA) for internal network use. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Generate ULA Prefix",
+                "desc": "The tool generates a random fdXX:XXXX:XXXX::/48 prefix per RFC 4193. The 8-bit fd prefix identifies ULA."
+          },
+          {
+                "title": "2. Set Subnet ID",
+                "desc": "Optionally extend to a /64 or /56 by specifying a subnet ID. The tool shows the expanded subnet range."
+          },
+          {
+                "title": "3. Copy and Document",
+                "desc": "Copy the generated ULA prefix. Document in your IPAM system — ULAs are not globally routable."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the purpose of Unique Local Addresses (ULA) in IPv6?",
+                "answer": "ULA (fc00::/7) is the IPv6 equivalent of private IPv4 addresses. They are for internal network communication and are not routable on the public internet."
+          },
+          {
+                "question": "How does the random global ID in ULA ensure uniqueness?",
+                "answer": "RFC 4193 requires the 40-bit global ID to be generated from a sufficiently random source. The probability of two networks generating the same /48 is approximately 1 in 1.1 trillion."
+          },
+          {
+                "question": "Can I use ULA addresses alongside global unicast addresses on the same interface?",
+                "answer": "Yes, IPv6 interfaces commonly have multiple addresses — GUA for internet, ULA for internal, and link-local for neighbor discovery."
+          }
+    ]
+},
   {
+
     id: "913",
     name: "DNS Lookup Generator",
     slug: "dns-lookup-generator",
@@ -2474,8 +2997,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online DNS Lookup Generator \u2014 Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Domain Name",
+                "desc": "Type the domain name to query. Supports internationalized domain names (IDN) with Punycode conversion."
+          },
+          {
+                "title": "2. Select Record Types",
+                "desc": "Choose record types: A, AAAA, CNAME, MX, NS, TXT, SOA, SRV, CAA, DS, DNSKEY, or ALL."
+          },
+          {
+                "title": "3. View Results with TTL",
+                "desc": "The tool performs queries via DNS-over-HTTPS (DoH) and displays each record with type, value, and TTL."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does DNS-over-HTTPS (DoH) lookup differ from a traditional nslookup?",
+                "answer": "Traditional nslookup sends UDP packets to port 53. DoH encrypts the query within HTTPS POST to a resolver endpoint (e.g., Cloudflare 1.1.1.1)."
+          },
+          {
+                "question": "Why do some DNS lookups return different results from different locations?",
+                "answer": "GeoDNS returns different IPs based on the requester's region. CDNs like Cloudflare and Akamai use this to route users to the nearest edge server."
+          },
+          {
+                "question": "What does the SOA record's serial number indicate?",
+                "answer": "The SOA serial number is a version counter for the zone's DNS records. Secondary servers use this to determine if a zone transfer is needed."
+          }
+    ]
+},
   {
+
     id: "914",
     name: "CORS Inspector",
     slug: "cors-inspector",
@@ -2483,8 +3035,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze CORS headers to identify cross-origin request configuration issues. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CORS Inspector \u2014 Analyze CORS headers to identify cross-origin request configuration issues. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Request URL and Origin",
+                "desc": "Type the target URL and the origin URL (the page making the cross-origin request)."
+          },
+          {
+                "title": "2. Configure Request Details",
+                "desc": "Set the HTTP method, custom headers, and whether credentials (cookies) are included."
+          },
+          {
+                "title": "3. Inspect CORS Result",
+                "desc": "The tool shows whether the request would be allowed or blocked, with detailed reasons."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CORS checks does the inspector simulate?",
+                "answer": "It simulates: preflight (OPTIONS) check, Access-Control-Allow-Origin validation, method allowlist check, header allowlist check, and credentials flag validation."
+          },
+          {
+                "question": "How does the tool determine if a preflight is required?",
+                "answer": "A preflight is required if: method is not GET/HEAD/POST, Content-Type is not form-safe, or custom headers are included. The tool shows the exact reason."
+          },
+          {
+                "question": "Can I test CORS errors from a specific browser's perspective?",
+                "answer": "Yes, select browser (Chrome, Firefox, Safari) to see browser-specific CORS behavior, as Safari has stricter CORS restrictions for certain features."
+          }
+    ]
+},
   {
+
     id: "915",
     name: "CORS Header Generator",
     slug: "cors-header-generator",
@@ -2492,8 +3073,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate CORS headers for your API by configuring allowed origins, methods, and headers.',
     seoDescription: 'Free online CORS Header Generator \u2014 Generate CORS headers by configuring allowed origins, methods, and headers. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Allowed Origins",
+                "desc": "Enter one or more allowed origins. Use * for public APIs but note this disables credentials."
+          },
+          {
+                "title": "2. Configure Methods and Headers",
+                "desc": "Select allowed HTTP methods and allowed request headers (Content-Type, Authorization, X-Requested-With)."
+          },
+          {
+                "title": "3. Set Preflight Options",
+                "desc": "Configure Access-Control-Max-Age, allow credentials, and exposed response headers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does the browser send a preflight OPTIONS request before some cross-origin requests?",
+                "answer": "The browser sends a preflight when the request uses non-simple methods, includes custom headers, or has a non-safelisted Content-Type."
+          },
+          {
+                "question": "What is the Vary: Origin header and why is it critical for CORS?",
+                "answer": "When Access-Control-Allow-Origin is dynamic, Vary: Origin tells caches the response varies by Origin. Without it, cached responses may be served to wrong origins."
+          },
+          {
+                "question": "How do I handle CORS with credentials (cookies) across origins?",
+                "answer": "Set Access-Control-Allow-Credentials: true, Access-Control-Allow-Origin must be a specific origin (not *), and client must set withCredentials: true."
+          }
+    ]
+},
   {
+
     id: "916",
     name: "Env File Generator",
     slug: "env-file-generator",
@@ -2501,8 +3111,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate .env file templates with configurable variable names and default values. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Env File Generator \u2014 Generate .env file templates with configurable variable names and default values. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Add Environment Variables",
+                "desc": "Enter key-value pairs. Keys must be uppercase with underscores (e.g., DATABASE_URL)."
+          },
+          {
+                "title": "2. Organize by Environment",
+                "desc": "Organize variables by environment — development, staging, production. The tool generates separate .env files per environment."
+          },
+          {
+                "title": "3. Export in Multiple Formats",
+                "desc": "Download as .env, JSON, or YAML. The tool also generates .env.example with dummy values."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What are the rules for valid .env file syntax?",
+                "answer": "Each line follows KEY=VALUE format. Lines starting with # are comments. Values can be quoted. Multi-line values use backslash escaping."
+          },
+          {
+                "question": "How should I differentiate between development and production environment variables?",
+                "answer": "The tool creates .env (shared defaults), .env.development, and .env.production. Libraries like dotenv load .env first, then environment-specific overrides."
+          },
+          {
+                "question": "Can I generate .env files with type validation?",
+                "answer": "Yes, the .env.schema output includes type constraints (string, number, boolean, url) and required/optional flags compatible with envalid."
+          }
+    ]
+},
   {
+
     id: "917",
     name: "Env File Parser",
     slug: "env-file-parser",
@@ -2510,8 +3149,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Parse and validate .env files to detect missing variables, syntax errors, and duplicates. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Env File Parser \u2014 Parse and validate .env files to detect missing variables, syntax errors, and duplicates. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste .env File Content",
+                "desc": "Paste the content of your .env file into the editor."
+          },
+          {
+                "title": "2. Parse Variables",
+                "desc": "The tool parses each line: extracts key-value pairs, handles quoted strings, comments, and multi-line values."
+          },
+          {
+                "title": "3. View Parsed Results",
+                "desc": "Variables are displayed in a table with key, value, and a security classification (public, secret, credential)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What .env file features does the parser handle?",
+                "answer": "It handles: quoted strings (single and double), multiline values (backslash or quoted), inline comments (#), variable expansion (${VAR_NAME}), and export prefix."
+          },
+          {
+                "question": "Does the parser detect potential security issues in .env files?",
+                "answer": "Yes, it flags: hardcoded credentials in non-.env files, missing required variables, duplicate keys, and values that look like secrets (API keys, passwords)."
+          },
+          {
+                "question": "Can the tool convert .env to other configuration formats?",
+                "answer": "Yes, export parsed variables as JSON (.env.json), YAML (.env.yaml), or Docker --env-file format."
+          }
+    ]
+},
   {
+
     id: "918",
     name: "CVE Lookup",
     slug: "cve-lookup",
@@ -2519,8 +3187,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CVE Lookup \u2014 Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter CVE ID or Keyword",
+                "desc": "Type a CVE identifier (e.g., CVE-2024-3094) or a keyword (e.g., 'OpenSSH', 'Log4j')."
+          },
+          {
+                "title": "2. Search or Lookup",
+                "desc": "Click Lookup to fetch CVE details from the NVD database."
+          },
+          {
+                "title": "3. Review Details",
+                "desc": "View: description, CVSS score (v3/v4), affected versions, published date, severity, and references."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CVE data sources does this tool query?",
+                "answer": "It queries the National Vulnerability Database (NVD) API for CVE details, CVSS scores, CPE matches, and reference URLs."
+          },
+          {
+                "question": "How is the CVSS score interpreted?",
+                "answer": "CVSS v3 scores: 0.0 (None), 0.1–3.9 (Low), 4.0–6.9 (Medium), 7.0–8.9 (High), 9.0–10.0 (Critical). The tool shows the vector string and breakdown."
+          },
+          {
+                "question": "Can the tool check if a specific software version is affected by a CVE?",
+                "answer": "Yes, enter a CPE (Common Platform Enumeration) string or software name and version to check known vulnerabilities."
+          }
+    ]
+},
   {
+
     id: "919",
     name: "SQL Injection Detector",
     slug: "sql-injection-detector",
@@ -2528,8 +3225,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze SQL queries for common injection patterns and parameterization issues. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SQL Injection Detector \u2014 Analyze SQL queries for common injection patterns and parameterization issues. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter SQL Query or Input",
+                "desc": "Paste an SQL query, a user input string, or a web request parameter to test for potential SQL injection vulnerabilities and patterns."
+          },
+          {
+                "title": "2. Select Database Type",
+                "desc": "Choose the target database: MySQL, PostgreSQL, SQL Server, Oracle, or SQLite — each has different injection syntax, comment styles, and function signatures."
+          },
+          {
+                "title": "3. Review Detection Results",
+                "desc": "The tool highlights suspicious patterns like UNION SELECT, OR 1=1, stacked queries, time-based payloads, and out-of-band exfiltration attempts with severity ratings."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What SQL injection patterns does the detector identify and classify?",
+                "answer": "It detects classic tautologies (OR 1=1), UNION-based extraction, blind boolean (AND 1=1 vs AND 1=2), time-based (SLEEP, WAITFOR DELAY), error-based (CONVERT, CAST), stacked queries, and second-order injection indicators."
+          },
+          {
+                "question": "How does the tool distinguish between intentional SQL and likely injection attempts?",
+                "answer": "The tool uses a weighted scoring system — common SQL keywords in legitimate queries score low, while patterns like 'OR 1=1--', stacked semicolons, and DBMS-specific comments (#, --) in user-input contexts score high as threats."
+          },
+          {
+                "question": "Can the detector identify parameterized query placeholders vs concatenated injection?",
+                "answer": "Yes, it flags queries with string concatenation (+ or ||) of user input variables, especially near WHERE clauses. Properly parameterized queries using ? or $1 placeholders are marked as safe."
+          }
+    ]
+},
   {
+
     id: "920",
     name: "XSS Protection Checker",
     slug: "xss-protection-checker",
@@ -2537,8 +3263,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Scan HTML/JavaScript code for reflected, stored, and DOM-based XSS vulnerabilities.',
     seoDescription: 'Free online XSS Protection Checker \u2014 Scan HTML/JavaScript for reflected, stored, and DOM-based XSS vulnerabilities. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Input String",
+                "desc": "Paste the user input string or HTML fragment you want to test for XSS vulnerabilities."
+          },
+          {
+                "title": "2. Select Context",
+                "desc": "Choose where the input appears: HTML body, HTML attribute, JavaScript string, CSS value, or URL parameter."
+          },
+          {
+                "title": "3. Test Escape Methods",
+                "desc": "Apply different encoding/escaping methods (HTML entity, JS string, URL encoding) and see if the input can break out."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What types of XSS does this checker simulate?",
+                "answer": "It tests for Reflected XSS (input echoed immediately), Stored XSS (persistent injection), DOM-based XSS (client-side execution), and Mutation XSS."
+          },
+          {
+                "question": "How does the context selector affect the escaping requirements?",
+                "answer": "Each context has different escaping rules: HTML body needs &<>\" escaping, JavaScript string needs \\n\\'\\\" escaping, URL needs percent encoding."
+          },
+          {
+                "question": "Can the tool generate safe output examples with proper escaping?",
+                "answer": "Yes, after detecting the context, it shows the correctly escaped output using the appropriate encoding scheme for that context."
+          }
+    ]
+},
   {
+
     id: "921",
     name: "CSRF Token Generator",
     slug: "csrf-token-generator",
@@ -2546,8 +3301,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate cryptographically secure CSRF tokens with configurable length and encoding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSRF Token Generator \u2014 Generate cryptographically secure CSRF tokens with configurable length and encoding. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Choose Token Generation Method",
+                "desc": "Select random bytes (crypto.getRandomValues), HMAC-based, or double-submit cookie pattern."
+          },
+          {
+                "title": "2. Configure Token Parameters",
+                "desc": "Set token length (16–64 bytes), encoding (base64, hex, base64url), and optional timestamp prefix."
+          },
+          {
+                "title": "3. Generate and Test",
+                "desc": "Generate a new CSRF token. Shows the token value, expected header name, and form embedding method."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the double-submit cookie pattern and how does it differ from session-based CSRF tokens?",
+                "answer": "Double-submit sends a CSRF token in both a cookie (non-httponly) and a request header. The server validates both match, requiring no server-side storage."
+          },
+          {
+                "question": "Why can't I just use the Origin header instead of CSRF tokens?",
+                "answer": "The Origin header can be absent in some browsers or navigation scenarios. CSRF tokens are the most robust defense as they don't rely on potentially absent headers."
+          },
+          {
+                "question": "How often should CSRF tokens be rotated for security?",
+                "answer": "Per-session rotation (at login/logout) is recommended. Per-request rotation is most secure but causes issues with back-button navigation and multiple tabs."
+          }
+    ]
+},
   {
+
     id: "922",
     name: "OAuth2 Debugger",
     slug: "oauth2-debugger",
@@ -2555,8 +3339,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OAuth2 Debugger \u2014 Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter OAuth 2.0 Configuration",
+                "desc": "Provide the authorization endpoint, token endpoint, client ID, redirect URI, and requested scopes to start debugging the OAuth 2.0 flow."
+          },
+          {
+                "title": "2. Select Grant Type and Parameters",
+                "desc": "Choose the grant type: Authorization Code (with optional PKCE), Client Credentials, Resource Owner Password, or Implicit. Fill in grant-specific parameters like code_verifier or client_secret."
+          },
+          {
+                "title": "3. Step Through Flow",
+                "desc": "Click each step to simulate the OAuth handshake: authorization request, redirect handling, token exchange, and token refresh. View request and response details at each step."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What OAuth 2.0 grant types does the debugger support for interactive testing?",
+                "answer": "It supports Authorization Code (with PKCE S256/plain), Client Credentials (machine-to-machine), Resource Owner Password (legacy, not recommended), and Implicit (deprecated by OAuth 2.1)."
+          },
+          {
+                "question": "How does the debugger help troubleshoot redirect URI mismatches?",
+                "answer": "The tool compares the redirect_uri sent in the authorization request against the one configured in the authorization server's response. A mismatch is highlighted with the exact difference shown in red."
+          },
+          {
+                "question": "Can the debugger inspect and decode the returned ID token from an OpenID Connect flow?",
+                "answer": "Yes, when OIDC scope is included, the tool decodes the returned id_token JWT, extracts standard claims (sub, email, preferred_username), and validates the nonce and at_hash if present."
+          }
+    ]
+},
   {
+
     id: "923",
     name: "SAML Decoder",
     slug: "saml-decoder",
@@ -2564,8 +3377,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Decode and inspect SAML assertions and responses for SSO troubleshooting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SAML Decoder \u2014 Decode and inspect SAML assertions and responses for SSO troubleshooting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste SAML Response",
+                "desc": "Paste the base64-encoded SAML response XML string (often from a SAMLResponse form field) or the raw XML envelope from an HTTP POST binding."
+          },
+          {
+                "title": "2. Decode and Pretty-Print XML",
+                "desc": "The tool decodes the base64 content, inflates (if deflate-compressed), and pretty-prints the SAML XML with syntax highlighting and collapsible assertion sections."
+          },
+          {
+                "title": "3. Inspect Assertion Details",
+                "desc": "Review parsed attributes like issuer, subject (NameID), conditions (NotBefore, NotOnOrAfter), authentication context, and attribute statements with friendly names and values."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What SAML bindings and encoding formats does the decoder support?",
+                "answer": "It supports HTTP POST binding (base64-encoded XML), HTTP Redirect binding (base64 + deflate + RelayState), and artifact binding. Both SAML 2.0 and SAML 1.1 response formats are recognized."
+          },
+          {
+                "question": "How does the tool validate the SAML assertion conditions and timestamps?",
+                "answer": "The tool checks NotBefore and NotOnOrAfter conditions against the current time, validates AudienceRestriction against a configured expected audience, and verifies SubjectConfirmation method (bearer, holder-of-key)."
+          },
+          {
+                "question": "Can the SAML decoder verify the XML digital signature on the assertion?",
+                "answer": "Yes, if you provide the IdP's X.509 certificate (from the XML KeyDescriptor or uploaded separately), the tool validates the XML Signature (ds:Signature) using RSA-SHA256 or RSA-SHA1 over the signed info."
+          }
+    ]
+},
   {
+
     id: "924",
     name: "CSP Policy Validator",
     slug: "csp-policy-validator",
@@ -2573,8 +3415,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate Content Security Policy headers against W3C spec and common pitfalls. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSP Policy Validator \u2014 Validate Content Security Policy headers against W3C spec and common pitfalls. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste CSP Header Value",
+                "desc": "Paste the Content-Security-Policy header value (the policy directive string)."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the policy syntax against the CSP specification."
+          },
+          {
+                "title": "3. Review Issues",
+                "desc": "See syntax errors, deprecated directives, missing required directives, and overly permissive source expressions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CSP syntax errors does the validator detect?",
+                "answer": "It detects invalid directive names, missing semicolons, invalid source expressions (e.g., 'self' instead of 'self'), unquoted nonce values, and malformed hash sources."
+          },
+          {
+                "question": "Does the tool check for CSP bypass techniques?",
+                "answer": "Yes, it warns about known bypass issues: script-src with 'unsafe-inline', JSONP endpoints in script-src, and overly broad CDN origins."
+          },
+          {
+                "question": "Can the validator suggest a stricter CSP based on current usage?",
+                "answer": "Yes, the 'Suggest Strict CSP' feature generates a nonce-based strict CSP from your current policy, removing all unsafe expressions."
+          }
+    ]
+},
   {
+
     id: "925",
     name: "TLS Cipher Checker",
     slug: "tls-cipher-checker",
@@ -2582,8 +3453,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check which TLS ciphers and protocol versions are supported by a server.',
     seoDescription: 'Free online TLS Cipher Checker \u2014 Check which TLS ciphers and protocol versions are supported. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Hostname",
+                "desc": "Type the server hostname to check supported cipher suites."
+          },
+          {
+                "title": "2. Run Cipher Scan",
+                "desc": "The tool attempts connections using cipher suites from multiple categories (modern, intermediate, legacy)."
+          },
+          {
+                "title": "3. View Supported Ciphers",
+                "desc": "Each cipher is listed with its status (supported/not supported), key exchange, authentication, encryption, and MAC algorithm."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What cipher categories does the tool test against?",
+                "answer": "It tests against Mozilla's recommended sets: Modern (TLS 1.3 only, AEAD ciphers), Intermediate (compatible with most clients), and Old (legacy support)."
+          },
+          {
+                "question": "How does the checker identify weak or deprecated ciphers?",
+                "answer": "It flags ciphers using RC4, DES, 3DES, CBC mode in TLS 1.0/1.1, export-grade ciphers, and those vulnerable to Lucky13, BEAST, or POODLE attacks."
+          },
+          {
+                "question": "Can the tool test both TLS 1.2 and TLS 1.3 cipher suites?",
+                "answer": "Yes, TLS 1.2 ciphers are tested individually. TLS 1.3 uses a fixed set (TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256)."
+          }
+    ]
+},
   {
+
     id: "926",
     name: "IP Reputation Checker",
     slug: "ip-reputation-checker",
@@ -2591,8 +3491,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check an IP address against known threat intelligence and blacklist databases. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online IP Reputation Checker \u2014 Check an IP address against known threat intelligence and blacklist databases. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter IP Address",
+                "desc": "Type an IPv4 or IPv6 address to check its reputation."
+          },
+          {
+                "title": "2. Run Reputation Check",
+                "desc": "The tool queries multiple threat intelligence sources and DNS blocklists."
+          },
+          {
+                "title": "3. Review Report",
+                "desc": "View the IP's reputation score, blocklist status, geolocation, ASN, and any associated threat categories."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What reputation data sources does this tool query?",
+                "answer": "It checks against DNSBLs (Spamhaus, Barracuda, SURBL), known botnet lists, open proxy lists, and IP reputation databases."
+          },
+          {
+                "question": "How is the reputation score calculated?",
+                "answer": "The score (0–100) is calculated from: number of blocklists the IP appears on (weighted by list credibility), historical abuse data, and ASN-level reputation."
+          },
+          {
+                "question": "Does the tool show the IP's ASN and hosting provider?",
+                "answer": "Yes, it performs a WHOIS and ASN lookup to identify the ISP or hosting provider, data center, and IP allocation date."
+          }
+    ]
+},
   {
+
     id: "927",
     name: "URL Sanitizer",
     slug: "url-sanitizer",
@@ -2600,8 +3529,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Sanitize URLs by removing tracking parameters and normalizing the URL structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online URL Sanitizer \u2014 Sanitize URLs by removing tracking parameters and normalizing the URL structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter URL to Sanitize",
+                "desc": "Paste the full URL or a list of URLs that need sanitization — removing sensitive data like tracking parameters, session tokens, and personally identifiable information."
+          },
+          {
+                "title": "2. Select Sanitization Rules",
+                "desc": "Choose which parameters to strip: tracking (utm_source, utm_medium, fbclid, gclid), session (sessionid, token, sid), or custom regex patterns for proprietary query parameters."
+          },
+          {
+                "title": "3. Review and Export Clean URLs",
+                "desc": "View the sanitized URL(s) with removed parameters clearly marked. Copy individual URLs or export the entire batch for use in data cleaning pipelines."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What tracking and analytics parameters does the URL sanitizer automatically remove?",
+                "answer": "It removes UTM tags (utm_source, utm_medium, utm_campaign, utm_term, utm_content), social click IDs (fbclid, gclid, igshid, ttclid), and analytics tokens (_ga, _gl, _hsenc, _openstat) from URLs."
+          },
+          {
+                "question": "How does the tool handle URL fragments and hash-based routing parameters?",
+                "answer": "By default, the hash fragment (#section) is preserved as it's used for client-side routing. Hash-based tracking parameters (#_ga=...) are stripped. The tool also handles URLs with multiple # or ? characters."
+          },
+          {
+                "question": "Can the sanitizer normalize URLs by lowercasing the domain and removing default ports?",
+                "answer": "Yes, enabling URL normalization: lowercases the scheme and hostname, removes default ports (80 for HTTP, 443 for HTTPS), decodes percent-encoded unreserved characters, and removes trailing dots from hostnames."
+          }
+    ]
+},
   {
+
     id: "928",
     name: "SSL Certificate Decoder",
     slug: "ssl-certificate-decoder",
@@ -2609,8 +3567,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Decode and view SSL certificate details including subject, issuer, and validity period. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SSL Certificate Decoder \u2014 Decode and view SSL certificate details including subject, issuer, and validity period. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Certificate Data",
+                "desc": "Paste a PEM-encoded certificate (-----BEGIN CERTIFICATE----- ...), DER (base64 or hex), or PKCS#12 container, or upload a .crt/.pem/.cer/.p12 file."
+          },
+          {
+                "title": "2. Decode Certificate Fields",
+                "desc": "The tool parses and displays all X.509 fields: version, serial number, signature algorithm, issuer, validity period, subject, public key info, and extensions."
+          },
+          {
+                "title": "3. Review Extensions and Policies",
+                "desc": "Examine detailed extension data: Subject Alternative Names (SANs), Key Usage, Extended Key Usage, Basic Constraints, Certificate Policies, and Authority/Subject Key Identifiers."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What X.509 certificate fields and extensions does the decoder parse?",
+                "answer": "It parses all standard fields plus extensions: SANs (DNS, IP, email), Key Usage (digitalSignature, keyEncipherment), EKU (serverAuth, clientAuth), CRL Distribution Points, Authority Info Access (OCSP, CA Issuers), and custom extensions."
+          },
+          {
+                "question": "How does the tool decode certificates in different formats like PEM, DER, and PKCS#12?",
+                "answer": "PEM is decoded by stripping headers and base64-decoding. DER is decoded as raw binary ASN.1. PKCS#12 containers are decrypted using the provided password, and each certificate (entity + intermediates) is extracted and decoded."
+          },
+          {
+                "question": "Can the decoder verify the certificate chain against a trusted root store?",
+                "answer": "Yes, when you provide intermediate and root certificates, the tool validates the certificate path: each cert's issuer matches the next cert's subject, signature verification, validity period check, and revocation status via CRL/OCSP."
+          }
+    ]
+},
   {
+
     id: "929",
     name: "Subdomain Finder",
     slug: "subdomain-finder",
@@ -2618,8 +3605,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Discover subdomains for a given domain using common wordlists and patterns. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Subdomain Finder \u2014 Discover subdomains for a given domain using common wordlists and patterns. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Domain",
+                "desc": "Type the target domain (e.g., example.com)."
+          },
+          {
+                "title": "2. Run Subdomain Discovery",
+                "desc": "Click Find to enumerate subdomains using certificate transparency logs and DNS records."
+          },
+          {
+                "title": "3. Review Results",
+                "desc": "Discovered subdomains are listed with their IP addresses and status (resolved, no record, error)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What sources does the subdomain finder use for discovery?",
+                "answer": "It queries: Certificate Transparency logs (crt.sh), DNS records (MX, NS, CNAME), and brute-force of common subdomain names."
+          },
+          {
+                "question": "Is subdomain discovery legal for my own domain?",
+                "answer": "Yes, scanning your own domains is legal and recommended for security posture. Scanning third-party domains may violate terms of service or local laws."
+          },
+          {
+                "question": "How many subdomain queries does the tool perform?",
+                "answer": "It checks up to 10,000 common subdomain names from a curated wordlist plus CT log entries which can return hundreds of results."
+          }
+    ]
+},
   {
+
     id: "930",
     name: "Email Validator",
     slug: "email-format-validator",
@@ -2627,8 +3643,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate email addresses for correct format, disposable domains, and MX record existence. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Email Validator \u2014 Validate email addresses for correct format, disposable domains, and MX record existence. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Email Address",
+                "desc": "Type or paste one or more email addresses to validate (one per line)."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check each address against RFC 5321/5322 syntax rules."
+          },
+          {
+                "title": "3. Review Results",
+                "desc": "Each email shows valid/invalid status with specific error messages for invalid addresses."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What RFC rules does the email validator check?",
+                "answer": "It checks local part rules (allowed characters, dot handling, quoted strings), domain rules (valid labels, TLD existence, DNS MX records), and total length."
+          },
+          {
+                "question": "Does the validator check if the email domain has an MX record?",
+                "answer": "Yes, optionally perform DNS MX record lookup to verify the domain can receive mail. This is an extra check beyond syntax validation."
+          },
+          {
+                "question": "How does the tool handle internationalized email addresses (EAI)?",
+                "answer": "It validates UTF-8 characters in the local part (RFC 6531) and converts IDN domains to Punycode for DNS checking."
+          }
+    ]
+},
   {
+
     id: "931",
     name: "Validator",
     slug: "syntax-validator",
@@ -2636,8 +3681,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate code syntax across multiple languages including JSON, XML, and JavaScript. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Syntax Validator \u2014 Validate code syntax across multiple languages including JSON, XML, and JavaScript. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Programming Language",
+                "desc": "Choose the language: JavaScript, TypeScript, Python, Ruby, PHP, Go, Rust, Java, C++, or C."
+          },
+          {
+                "title": "2. Paste Source Code",
+                "desc": "Paste your code into the editor. The tool parses it using the appropriate parser."
+          },
+          {
+                "title": "3. Run Validation",
+                "desc": "Click Validate to check for syntax errors. Errors include line number, column, and error message."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What parsers does the syntax validator use for each language?",
+                "answer": "JavaScript/TypeScript uses acorn, Python uses a CPython-compatible parser, Ruby uses MRI parser, Go uses Go's own parser, Rust uses syn."
+          },
+          {
+                "question": "Does the validator check for more than just syntax errors?",
+                "answer": "Yes, it also flags unused variables, unreachable code, missing imports, and potential type errors for TypeScript."
+          },
+          {
+                "question": "Can the tool validate code against a specific language version (ES2020, Python 3.12)?",
+                "answer": "Yes, select the language version. The parser uses the appropriate grammar rules for that version."
+          }
+    ]
+},
   {
+
     id: "932",
     name: "YAML Syntax Validator",
     slug: "yaml-syntax-validator",
@@ -2645,7 +3719,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate YAML syntax, check for indentation errors, and preview the parsed structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online YAML Validator \u2014 Validate YAML syntax, check for indentation errors, and preview the parsed structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste YAML Content",
+                "desc": "Paste your YAML content into the editor. The tool supports YAML 1.1 and 1.2."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check the YAML for syntax errors."
+          },
+          {
+                "title": "3. Review Issues",
+                "desc": "Errors show line number, column, and description. Common issues: incorrect indentation, tab usage, unresolved aliases."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What YAML syntax errors does this validator detect?",
+                "answer": "It detects: inconsistent indentation, tabs (not allowed in YAML), duplicate keys, unresolved anchors/aliases, invalid scalars, and improper quoting."
+          },
+          {
+                "question": "Does the validator distinguish between YAML 1.1 and 1.2 behavior?",
+                "answer": "Yes, YAML 1.1 treats yes/no/true/false as booleans, while 1.2 only treats true/false as booleans. The validator flags these differences."
+          },
+          {
+                "question": "Can the tool convert the validated YAML to JSON?",
+                "answer": "Yes, after validation, click 'Convert to JSON' to see the equivalent JSON representation of your YAML document."
+          }
+    ]
+},
   {
     id: "933",
     name: "Annual Contract Value Calculator",
@@ -2687,6 +3789,7 @@ export const entries_chunk_4: ToolMetadata[] = [
   ]
   },
   {
+
     id: "935",
     name: "Git Commit Linter",
     slug: "git-commit-linter",
@@ -2694,8 +3797,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate git commit messages against the Conventional Commits specification. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Git Commit Linter \u2014 Validate git commit messages against the Conventional Commits specification. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Commit Message",
+                "desc": "Paste your git commit message (subject line and optional body)."
+          },
+          {
+                "title": "2. Select Lint Rules",
+                "desc": "Choose rules to apply: conventional commits format, subject line length (50 chars), body wrap (72 chars), imperative mood."
+          },
+          {
+                "title": "3. Review Lint Results",
+                "desc": "Each rule shows pass/fail with suggestion for fixing violations."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What commit message conventions does this linter check?",
+                "answer": "It checks: Conventional Commits (type(scope): description), Git standard (subject ≤50 chars, body wrap at 72), and Angular commit convention."
+          },
+          {
+                "question": "How does the linter validate the imperative mood?",
+                "answer": "It checks that the subject line starts with a verb in imperative tense (Add, Fix, Update, Remove) rather than past tense (Added, Fixed) or gerunds (Adding, Fixing)."
+          },
+          {
+                "question": "Can the tool auto-fix commit message formatting issues?",
+                "answer": "Yes, individual violations have auto-fix buttons that reformat the message to comply with the selected convention."
+          }
+    ]
+},
   {
+
     id: "936",
     name: ".gitignore Generator",
     slug: "gitignore-generator",
@@ -2703,7 +3835,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.',
     seoDescription: 'Free online .gitignore Generator \u2014 Generate .gitignore files by selecting languages, frameworks, and tools. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Project Type",
+                "desc": "Choose from 100+ templates: Node, Python, Java, Go, Rust, React, Vue, Angular, Django, Rails."
+          },
+          {
+                "title": "2. Add Custom Entries",
+                "desc": "Extend with custom patterns for your specific project. Use the interactive glob builder."
+          },
+          {
+                "title": "3. Merge and Export",
+                "desc": "The tool merges selected templates, removes duplicates, and orders entries logically. Download or copy."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool handle template merging when multiple technologies are selected?",
+                "answer": "The tool unifies all entries, deduplicates identical patterns, and flags conflicting entries in orange. The final output is alphabetically sorted by category."
+          },
+          {
+                "question": "Why are some entries like .env and .DS_Store always included by default?",
+                "answer": ".env files contain secrets and must never be committed. .DS_Store and Thumbs.db are OS files that clutter repositories. These are locked against removal."
+          },
+          {
+                "question": "Can I create a custom .gitignore template and save it for my team?",
+                "answer": "Yes, the Team Templates feature lets you create and save custom configurations to browser localStorage, exportable as JSON for team sharing."
+          }
+    ]
+},
   {
 
     id: "937",
@@ -2822,6 +3982,7 @@ export const entries_chunk_4: ToolMetadata[] = [
 
   },
   {
+
     id: "942",
     name: "Swift Formatter",
     slug: "swift-formatter",
@@ -2829,7 +3990,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Formats Swift source code with proper indentation, spacing, and bracing style for readable iOS and macOS development.',
     seoDescription: 'Free online Swift Formatter \u2014 Format Swift source code with proper indentation and spacing for readability. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Swift code including structs, classes, protocols, extensions, enums with associated values, optionals, closures, and async await for proper formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure indentation, line length, colon spacing, semicolon usage, access control ordering, and protocol conformance formatting according to preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the Swift code following Apple's API design guidelines and recommended coding standards. The output is clean and follows the Swift community conventions."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the Swift formatter handle formatting of SwiftUI view builder closures and modifiers?",
+                "answer": "SwiftUI view bodies are formatted with each view on its own line. Modifier chains are indented one level from the view with one modifier per line for readability."
+          },
+          {
+                "question": "Can the formatter convert between Swift old and new coding conventions automatically?",
+                "answer": "Yes, optional conversions include key path syntax, objc dynamic to objc only when needed, and old-style closure syntax to trailing closure syntax for modern Swift."
+          },
+          {
+                "question": "Does the tool properly format Swift error handling with throws and try and catch blocks?",
+                "answer": "Yes, throwing functions are formatted with throws before the return arrow. Try expressions have proper spacing and catch blocks are placed correctly with error patterns."
+          }
+    ]
+},
   {
     id: "943",
     name: "Temperature Converter",
@@ -2888,6 +4077,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "946",
     name: "CSV to SQLite Web Terminal",
     slug: "csv-to-sqlite",
@@ -2895,7 +4085,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Import CSV data directly into a SQLite database. Run SQL queries, filter rows, and export results.',
     seoDescription: 'Free online CSV to SQLite Converter \u2014 Import CSV data into a SQLite database, run SQL queries, and export results directly in your browser.',
     dependencies: "sql.js",
-  },
+    instructions: [
+          {
+                "title": "1. Upload CSV Files",
+                "desc": "Upload one or multiple CSV files. Each CSV file will become a separate table in the SQLite database with column types auto-detected from the data."
+          },
+          {
+                "title": "2. Configure Schema Options",
+                "desc": "Set the database name, choose whether the first row is a header (column names), set column types (TEXT, INTEGER, REAL, BLOB) or let the tool infer them from data samples."
+          },
+          {
+                "title": "3. Generate and Download",
+                "desc": "Click Convert to generate a .sqlite file. Download the SQLite database or get the equivalent SQL CREATE TABLE + INSERT statements."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool infer SQLite column types from CSV data?",
+                "answer": "The tool samples the first 1000 rows, attempts to parse each column as INTEGER first, then REAL, then TEXT. If >80% of values parse as a numeric type, that type is assigned. Otherwise TEXT is used as the fallback type."
+          },
+          {
+                "question": "What happens when a CSV row has fewer columns than the header row?",
+                "answer": "Missing values are inserted as NULL. The tool logs warnings with the row numbers of incomplete rows so you can verify data integrity after conversion."
+          },
+          {
+                "question": "Can the tool handle CSV files that are too large for browser memory?",
+                "answer": "Files up to 500 MB are processed in chunks using the File API's streaming capabilities. A progress indicator shows conversion status. For larger files, the tool suggests splitting into smaller CSVs first."
+          }
+    ]
+},
   {
     id: "947",
     name: "Vector Pen Canvas",
@@ -2917,6 +4135,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ]
   },
   {
+
     id: "956",
     name: "AES Encrypt",
     slug: "aes-encrypt",
@@ -2924,8 +4143,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online AES Encrypt — Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. ',
     dependencies: "CryptoJS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type or paste the plaintext message or upload a file that needs AES encryption. The tool supports text input of any length and binary files up to file size limit."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select key size of 128, 192, or 256 bits and cipher mode such as CBC, GCM, CTR, or ECB. Configure padding scheme and key or IV input format preferences."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Enter the encryption key and IV or generate random ones. Click encrypt to produce the ciphertext in base64 or hex format for secure storage or transmission."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What AES encryption modes are available and which is recommended for different use cases?",
+                "answer": "GCM authenticated encryption with integrity verification is recommended for most use cases. CBC is widely compatible but lacks authentication. ECB is not recommended."
+          },
+          {
+                "question": "How does the tool handle key and IV generation for secure AES encryption operations?",
+                "answer": "The random key and IV generator uses crypto.getRandomValues for cryptographically secure bytes. Keys are generated at the selected bit length with appropriate IV sizes."
+          },
+          {
+                "question": "Can the tool decrypt previously AES-encrypted data if the same parameters are provided?",
+                "answer": "Yes, the decrypt mode accepts ciphertext, key, IV, and all parameters. For GCM mode the authentication tag must be provided for integrity verification before decrypting."
+          }
+    ]
+},
   {
+
     id: "957",
     name: "AES Decrypt",
     slug: "aes-decrypt",
@@ -2934,8 +4182,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online AES Decrypt — Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. ',
     dependencies: "CryptoJS",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Enter Encrypted Data",
+                "desc": "Paste the encrypted ciphertext in base64 or hex format."
+          },
+          {
+                "title": "2. Select AES Parameters",
+                "desc": "Choose: key size (128, 192, 256), mode (CBC, GCM, CTR, ECB), and padding (PKCS7, NoPadding)."
+          },
+          {
+                "title": "3. Enter Key and IV",
+                "desc": "Provide the decryption key and initialization vector (IV) in hex or base64."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What AES encryption modes does the tool support?",
+                "answer": "CBC (Cipher Block Chaining, requires IV), GCM (Galois/Counter Mode, authenticated encryption, requires IV + auth tag), CTR (Counter mode), and ECB (not recommended, no IV)."
+          },
+          {
+                "question": "How does GCM mode handle authentication tags?",
+                "answer": "GCM produces an authentication tag (typically 16 bytes) appended to the ciphertext. The tool requires the tag to verify integrity before decrypting."
+          },
+          {
+                "question": "What is the difference between PKCS7 and NoPadding?",
+                "answer": "PKCS7 adds padding bytes to make the plaintext a multiple of the block size (16 bytes). NoPadding requires the plaintext to already be a multiple of 16 bytes for block modes."
+          }
+    ]
+},
   {
+
     id: "958",
     name: "HTTP Header Analyzer",
     slug: "http-header-analyzer",
@@ -2943,8 +4220,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTTP Header Analyzer — Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste HTTP Headers",
+                "desc": "Paste the raw HTTP request or response headers as a string."
+          },
+          {
+                "title": "2. Parse and Analyze",
+                "desc": "The tool parses each header, identifies security implications, and checks for proper formatting."
+          },
+          {
+                "title": "3. Review Header Map",
+                "desc": "Each header is displayed with its parsed value, RFC reference, and security recommendation."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What analysis does the HTTP header analyzer perform on each header?",
+                "answer": "It validates header syntax, checks for deprecated headers (P3P, X-XSS-Protection), recommends replacements, and identifies security misconfigurations."
+          },
+          {
+                "question": "Does the tool detect malformed or duplicate headers?",
+                "answer": "Yes, it flags duplicate header names, malformed header line format (missing colon), and invalid characters in header names."
+          },
+          {
+                "question": "Can the analyzer suggest cache optimization headers?",
+                "answer": "Yes, it recommends Cache-Control directives based on the content type and suggests ETag/Last-Modified configuration."
+          }
+    ]
+},
   {
+
     id: "959",
     name: "HTTP Headers Generator",
     slug: "http-headers-generator",
@@ -2952,8 +4258,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTTP Headers Generator — Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Header Category",
+                "desc": "Choose from General, Entity, Request, Response, or Security headers."
+          },
+          {
+                "title": "2. Configure Header Values",
+                "desc": "For each selected header, set its value. Cache-Control supports max-age, no-cache, no-store, public/private."
+          },
+          {
+                "title": "3. Generate Header Block",
+                "desc": "Generate the complete HTTP header block as plain text, raw HTTP response, or server configuration snippet."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the correct order of HTTP headers in a response?",
+                "answer": "HTTP does not require specific order, but convention is: general headers, response headers, entity headers, security headers. The tool follows this convention."
+          },
+          {
+                "question": "How does the Link header work in HTTP for preloading resources?",
+                "answer": "The Link header tells the browser about related resources before parsing HTML. Supported rel types: preload, prefetch, preconnect, dns-prefetch, modulepreload."
+          },
+          {
+                "question": "How should Set-Cookie headers be configured for secure cross-site usage?",
+                "answer": "Include SameSite=Lax (default) or SameSite=Strict, Secure flag, HttpOnly flag, and Path attribute. For third-party cookies, use SameSite=None; Secure."
+          }
+    ]
+},
   {
+
     id: "960",
     name: "HTTP Cache Header Generator",
     slug: "http-cache-header-generator",
@@ -2961,8 +4296,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTTP Cache Header Generator — Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Cache-Control Directive",
+                "desc": "Choose no-cache, no-store, public, private, or max-age with a duration in seconds."
+          },
+          {
+                "title": "2. Configure ETag and Last-Modified",
+                "desc": "Toggle ETag generation (strong or weak) and set Last-Modified date for conditional requests."
+          },
+          {
+                "title": "3. Add Cache Busting Strategy",
+                "desc": "Configure Vary header, stale-while-revalidate, and stale-if-error directives."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between no-cache and no-store in Cache-Control?",
+                "answer": "no-cache allows caching but requires revalidation with the server before use. no-store prevents any storage of the response at all, including in memory."
+          },
+          {
+                "question": "How does the Vary header interact with CDN caching?",
+                "answer": "Vary tells caches the response varies based on request headers. A broad Vary: * effectively disables caching."
+          },
+          {
+                "question": "What is the stale-while-revalidate directive and when should I use it?",
+                "answer": "It allows serving stale content while revalidating asynchronously, eliminating the cache stampede problem. Configurable with age windows."
+          }
+    ]
+},
   {
+
     id: "961",
     name: "HTTP Status Code Checker",
     slug: "http-status-code-checker",
@@ -2970,8 +4334,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Look up HTTP status codes by number — view description, label, and response class (informational, success, redirect, client error, server error).',
     seoDescription: 'Free online HTTP Status Code Checker — Look up HTTP status codes by number — view description, label, and response class. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter URL or Status Code",
+                "desc": "Enter a URL to check its response status code, or type a specific status code number to see its details."
+          },
+          {
+                "title": "2. Scan URL (Optional)",
+                "desc": "If a URL is provided, the tool sends a HEAD/GET request and displays the status code."
+          },
+          {
+                "title": "3. View Status Code Details",
+                "desc": "For any code, view its class (1xx–5xx), RFC reference, standard description, and common causes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool categorize HTTP status codes?",
+                "answer": "It categorizes by class: 1xx (Informational), 2xx (Success), 3xx (Redirection), 4xx (Client Error), 5xx (Server Error), with specific notes for each."
+          },
+          {
+                "question": "Does the checker follow redirects to determine the final status code?",
+                "answer": "Optionally, enable 'Follow Redirects' to trace the redirect chain and show the final status code with each intermediate redirect."
+          },
+          {
+                "question": "Can the tool suggest fixes for non-200 status codes?",
+                "answer": "Yes, for common error codes (404, 403, 500, 502, 503), it provides troubleshooting steps and configuration advice."
+          }
+    ]
+},
   {
+
     id: "962",
     name: "ESLint Config Generator",
     slug: "eslint-config-generator",
@@ -2979,8 +4372,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ESLint Config Generator — Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Project Environment",
+                "desc": "Choose browser, Node.js, ES modules, or combination. Sets env.browser, env.node, etc."
+          },
+          {
+                "title": "2. Configure Rules and Plugins",
+                "desc": "Select rules from categories. Add plugins like @typescript-eslint, react, react-hooks, import, prettier."
+          },
+          {
+                "title": "3. Set Parser and Export",
+                "desc": "Choose parser (Espree, @typescript-eslint/parser). Export as .eslintrc.json, .js, .yaml, or flat config."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between the old .eslintrc format and the new flat config?",
+                "answer": "Flat config exports an array of objects from eslint.config.js with no extends, env, or parserOptions. These are replaced by languageOptions."
+          },
+          {
+                "question": "How should I configure @typescript-eslint/no-unused-vars for TypeScript?",
+                "answer": "Disable the base no-unused-vars and enable @typescript-eslint/no-unused-vars with argsIgnorePattern: '^_' and varsIgnorePattern: '^_'."
+          },
+          {
+                "question": "Can I generate an ESLint config that integrates with Prettier?",
+                "answer": "Yes, enable Prettier integration to include eslint-config-prettier as an override that disables conflicting rules. Prettier must be last in extends."
+          }
+    ]
+},
   {
+
     id: "963",
     name: "HTTP Retry Policy Builder",
     slug: "http-retry-policy-builder",
@@ -2988,7 +4410,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTTP Retry Policy Builder — Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Set Base Retry Parameters",
+                "desc": "Configure the maximum number of retry attempts (0–10), base delay in milliseconds (50–5000ms), and which HTTP status codes should trigger a retry (429, 5xx)."
+          },
+          {
+                "title": "2. Choose Backoff Strategy",
+                "desc": "Select from fixed delay, linear backoff, exponential backoff (2^n), exponential with jitter, or decorrelated jitter for distributed system resilience."
+          },
+          {
+                "title": "3. Generate Configuration Code",
+                "desc": "Export the retry policy as a ready-to-use code snippet in JavaScript (axios-retry), Python (tenacity), Go, Java (Resilience4j), or curl retry flags."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between exponential backoff and exponential backoff with jitter?",
+                "answer": "Pure exponential backoff (delay = base * 2^attempt) causes synchronized retries across clients at the same moments. Jitter adds random offset to each delay, preventing thundering herd problems in distributed systems."
+          },
+          {
+                "question": "Which HTTP status codes should typically trigger a retry in production systems?",
+                "answer": "Retry on 429 (Too Many Requests), 502 (Bad Gateway), 503 (Service Unavailable), 504 (Gateway Timeout), and occasional 5xx errors. Do NOT retry on 4xx client errors except 429 with Retry-After header."
+          },
+          {
+                "question": "How does the builder handle Retry-After headers from the server?",
+                "answer": "When enabled, the tool parses the Retry-After header (both HTTP-date and seconds formats) and overrides the calculated backoff delay with the server-specified wait time, respecting the server's explicit instruction."
+          }
+    ]
+},
   {
     id: "964",
     name: "Triangle Area Calculator",
@@ -3123,21 +4573,81 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "971",
     name: "CSV Data Cleaner",
     slug: "csv-data-cleaner",
     category: "Developer",
     description: 'Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV Data Cleaner — Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Upload or Paste CSV Data",
+                "desc": "Paste your CSV text or upload a CSV file. The tool auto-detects the delimiter (comma, tab, semicolon, pipe) and displays a preview of the parsed data."
+          },
+          {
+                "title": "2. Select Cleaning Operations",
+                "desc": "Choose from: trim whitespace, remove empty rows, deduplicate rows, normalize date formats, fix encoding issues, standardize number formats, and fill missing values."
+          },
+          {
+                "title": "3. Apply and Export Clean Data",
+                "desc": "Review the cleaning diff showing before/after for each changed cell. Export the cleaned CSV with the same or a custom delimiter."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What CSV data quality issues can the cleaner detect and fix automatically?",
+                "answer": "It detects leading/trailing whitespace, inconsistent quote escaping, mixed line endings (CRLF vs LF), BOM markers, encoding mismatches (UTF-8 vs Latin-1), extra delimiters within quoted fields, and blank rows."
+          },
+          {
+                "question": "How does the deduplication feature determine which rows are duplicates?",
+                "answer": "You can deduplicate based on all columns matching exactly or select specific key columns. The tool keeps the first occurrence by default and marks removed duplicates in a separate report."
+          },
+          {
+                "question": "Can the cleaner standardize date formats across the entire CSV to a single format?",
+                "answer": "Yes, the date normalization feature detects 20+ common date formats (MM/DD/YYYY, DD-MM-YYYY, YYYYMMDD, ISO 8601) and converts all date columns to your chosen output format with timezone handling."
+          }
+    ]
+},
   {
+
     id: "972",
     name: "CSV Statistics",
     slug: "csv-statistics",
     category: "Developer",
     description: 'Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV Statistics — Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. ',
-    dependencies: "None",        },
+    dependencies: "None",
+    instructions: [
+          {
+                "title": "1. Upload or Paste CSV Data",
+                "desc": "Paste your CSV data or upload a CSV file. The tool automatically parses the header row and identifies each column's data type (numeric, text, date, boolean)."
+          },
+          {
+                "title": "2. Select Columns for Analysis",
+                "desc": "Choose which columns to include in the statistical analysis. Numeric columns generate descriptive statistics; text columns generate frequency and distribution reports."
+          },
+          {
+                "title": "3. Review Statistical Report",
+                "desc": "View per-column statistics: count, unique values, missing values, mean, median, mode, standard deviation, min, max, percentiles (P25, P50, P75, P95, P99), and a histogram distribution."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What descriptive statistics does the CSV statistics tool compute for numeric columns?",
+                "answer": "It computes count, sum, mean, median, mode, variance, standard deviation, coefficient of variation, skewness, kurtosis, min, max, range, interquartile range (IQR), and 10 percentiles from P5 to P99."
+          },
+          {
+                "question": "How does the tool handle missing or null values in the statistical calculations?",
+                "answer": "Missing values are excluded from calculations and reported as a separate count. The tool shows both the count of non-null values used in calculations and the count of null/excluded values."
+          },
+          {
+                "question": "Can the tool generate frequency distributions and histograms for categorical data?",
+                "answer": "Yes, for text/categorical columns, it generates a frequency table with absolute count, relative frequency (percentage), cumulative frequency, and a horizontal bar chart of the top 20 values."
+          }
+    ]
+},
   {
     id: "973",
     name: "CSV ↔ HTML Table Converter",
@@ -3158,6 +4668,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
   },
   {
+
     id: "974",
     name: "YAML Validator",
     slug: "yaml-validator",
@@ -3165,7 +4676,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online YAML Validator — Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste YAML Data",
+                "desc": "Paste your YAML content. The tool supports anchors, aliases, multi-line strings, and complex mappings."
+          },
+          {
+                "title": "2. Run Validation",
+                "desc": "Click Validate to check syntax and structure according to YAML spec."
+          },
+          {
+                "title": "3. View Errors and Warnings",
+                "desc": "Errors include line and column numbers. Warnings cover best practices like implicit typing concerns."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between this YAML validator and the syntax validator?",
+                "answer": "This validator focuses on YAML-specific constructs: anchor resolution, tag handling, schema validation, and type coercion warnings."
+          },
+          {
+                "question": "Does the tool validate YAML against a JSON Schema?",
+                "answer": "Yes, paste a JSON Schema alongside your YAML to validate the structure, required fields, and data types."
+          },
+          {
+                "question": "Can the validator handle multi-document YAML (--- separator)?",
+                "answer": "Yes, it parses and validates each document in a multi-document YAML stream independently."
+          }
+    ]
+},
   {
     id: "975",
     name: "Duplicate Word Remover",
@@ -3227,6 +4766,7 @@ export const entries_chunk_4: ToolMetadata[] = [
   ]
   },
   {
+
     id: "978",
     name: "Trailing Space Remover",
     slug: "trailing-space-remover",
@@ -3234,7 +4774,35 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Remove trailing whitespace from every line in your text. Essential for code cleanup and formatting.',
     seoDescription: 'Free online Trailing Space Remover — Remove trailing whitespace from every line. Essential for code cleanup and formatting. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste or Upload Text",
+                "desc": "Paste text or upload a file to remove trailing whitespace."
+          },
+          {
+                "title": "2. Configure Options",
+                "desc": "Choose to remove trailing spaces, trailing tabs, or both. Toggle to preserve empty lines or remove them."
+          },
+          {
+                "title": "3. Process and Export",
+                "desc": "Click Remove to strip trailing whitespace. Download the cleaned file or copy to clipboard."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is trailing whitespace considered a bad practice in code?",
+                "answer": "Trailing whitespace creates noisy diffs, triggers linter warnings, and can cause CI failures. Many style guides forbid it."
+          },
+          {
+                "question": "Does the tool support batch processing of multiple files?",
+                "answer": "Yes, upload multiple files (zip or individually) and the tool processes them all, showing per-file change counts."
+          },
+          {
+                "question": "Can the tool preserve trailing whitespace in markdown files where it has semantic meaning?",
+                "answer": "Yes, markdown mode preserves two trailing spaces before a line break (which creates a <br> in many markdown renderers)."
+          }
+    ]
+},
   {
     id: "979",
     name: "Canonical URL Checker",
@@ -3263,6 +4831,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
   },
   {
+
     id: "982",
     name: "Port Number Lookup",
     slug: "port-number-lookup",
@@ -3270,8 +4839,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Look up service names for TCP/UDP port numbers — well-known (0-1023), registered (1024-49151), and dynamic/private (49152-65535) ranges. Includes 25+ common services.',
     seoDescription: 'Free online Port Number Lookup — Look up service names for TCP/UDP port numbers with 25+ common services. Well-known, registered, and dynamic ranges. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Port Number or Service Name",
+                "desc": "Type a port number (e.g., 443) or service name (e.g., 'HTTPS', 'SSH')."
+          },
+          {
+                "title": "2. View Service Info",
+                "desc": "The tool shows the registered service name, protocol (TCP/UDP), and common usage description."
+          },
+          {
+                "title": "3. Browse by Category",
+                "desc": "Browse ports by category: web, email, file transfer, database, security, remote access, or well-known (0–1023)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What port number ranges are defined by IANA?",
+                "answer": "Well-known ports (0–1023): system services. Registered ports (1024–49151): user applications. Dynamic/private ports (49152–65535): temporary connections."
+          },
+          {
+                "question": "Can I look up port conflicts between services?",
+                "answer": "Yes, the tool shows if a port is used by multiple services and which is the IANA-registered assignment."
+          },
+          {
+                "question": "Does the tool include UDP ports in addition to TCP?",
+                "answer": "Yes, each port entry shows both TCP and UDP assignments, as some services use different protocols on the same port."
+          }
+    ]
+},
   {
+
     id: "983",
     name: "User-Agent Parser",
     slug: "user-agent-parser",
@@ -3279,8 +4877,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, Edge, and the client OS from request headers.',
     seoDescription: 'Free online User-Agent Parser — Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, and Edge. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter User Agent String",
+                "desc": "Paste a user agent string from a browser or HTTP client."
+          },
+          {
+                "title": "2. Parse Automatically",
+                "desc": "The tool parses the UA string and extracts: browser name, version, engine, OS, device type, and crawler detection."
+          },
+          {
+                "title": "3. Review Parsed Data",
+                "desc": "Structured breakdown of the parsed components in a readable table."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What information does the user agent parser extract?",
+                "answer": "It extracts: browser (Chrome, Firefox, Safari, Edge, etc.), browser version, rendering engine (Blink, Gecko, WebKit), operating system, device type (desktop, mobile, tablet), and crawler/bot detection."
+          },
+          {
+                "question": "Can the parser distinguish between mobile app webviews and browsers?",
+                "answer": "Yes, it detects: Facebook in-app browser, Instagram, Twitter, LinkedIn, and WebView/UIWebView/WKWebView on iOS and Android."
+          },
+          {
+                "question": "Does the parser identify specific crawlers (Googlebot, Bingbot)?",
+                "answer": "Yes, it recognizes Googlebot, Bingbot, DuckDuckBot, Baiduspider, YandexBot, Slackbot, Twitterbot, and 100+ other crawlers."
+          }
+    ]
+},
   {
+
     id: "984",
     name: "Query String Parser",
     slug: "query-string-parser",
@@ -3288,8 +4915,37 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values and displays them in a readable JSON format.',
     seoDescription: 'Free online Query String Parser — Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Query String",
+                "desc": "Paste a URL query string (starting with ? or without) into the input field. Supports complex values with arrays, nested objects, and URL-encoded characters."
+          },
+          {
+                "title": "2. Choose Parsing Convention",
+                "desc": "Select the parsing style — simple key-value, PHP-style (key[] for arrays), bracket-notation (key[subkey]), or dot-notation (key.subkey) for nested object support."
+          },
+          {
+                "title": "3. View Parsed Results",
+                "desc": "The tool displays parsed parameters as a formatted JSON object with decoded values, type detection, and a table view with each parameter's raw and decoded form."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the parser handle duplicate keys in the query string?",
+                "answer": "By default, duplicate keys are converted to an array of values. The PHP-style mode treats key[] as explicit array notation, while simple mode keeps only the last occurrence. The tool shows a warning when duplicates are detected."
+          },
+          {
+                "question": "Can the tool parse and decode complex nested query strings with encoded characters?",
+                "answer": "Yes, the parser fully decodes percent-encoded values (%20 → space, %23 → #, %26 → &), handles UTF-8 multibyte sequences, and converts plus signs to spaces per application/x-www-form-urlencoded specification."
+          },
+          {
+                "question": "Does the tool support the reverse operation of building a query string from parameters?",
+                "answer": "Yes, the reverse mode accepts a JSON object and generates the corresponding query string. Nested objects are serialized using the selected convention (bracket-notation by default) with proper URL encoding."
+          }
+    ]
+},
   {
+
     id: "985",
     name: "SSE Event Formatter",
     slug: "sse-event-formatter",
@@ -3297,5 +4953,33 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event fields including data, event, id, and retry directives.',
     seoDescription: 'Free online SSE Event Formatter — Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event, data, id, and retry fields. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Event Data",
+                "desc": "Input the event data payload as plain text or JSON. The tool will format it into the Server-Sent Events (SSE) wire format as defined in the HTML specification."
+          },
+          {
+                "title": "2. Configure Event Fields",
+                "desc": "Set optional fields: event (event type name, default 'message'), id (last event ID for reconnection), retry (reconnection time in milliseconds), and data lines."
+          },
+          {
+                "title": "3. Format and Export",
+                "desc": "Copy the formatted SSE stream text, export as a chunked event source file, or view the stream simulation with timing controls for testing clients."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the SSE wire format and how does it differ from WebSocket messages?",
+                "answer": "SSE uses a simple text protocol with lines prefixed by field names (event:, data:, id:, retry:), separated by double newlines. Unlike WebSocket's bidirectional binary frames, SSE is unidirectional server-to-client text only."
+          },
+          {
+                "question": "How does the formatter handle multiline data payloads in SSE events?",
+                "answer": "Multiline data is split across multiple 'data:' lines per the SSE specification. Each line of the data payload gets its own 'data:' prefix, and a double newline terminates the event. The tool handles this automatically."
+          },
+          {
+                "question": "What is the purpose of the last event ID in SSE reconnection semantics?",
+                "answer": "When an SSE connection drops, the browser sends a Last-Event-ID header with the last received 'id' field value. The server can resume the stream from that point, preventing duplicate or missed events during reconnection."
+          }
+    ]
+},
 ];

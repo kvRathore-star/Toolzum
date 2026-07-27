@@ -213,6 +213,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
 },
   {
+
     id: "du-2",
     name: "Chmod Calculator",
     slug: "chmod-calculator",
@@ -220,8 +221,37 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert between numeric (755) and symbolic (u=rwx,g=rx,o=rx) chmod permission formats. See detailed breakdown for owner, group, and others.',
     seoDescription: 'Free online Chmod Calculator — Convert between numeric and symbolic chmod permission formats with detailed breakdown. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Set Permissions via Toggle",
+                "desc": "Toggle read/r(4), write/w(2), execute/x(1) for Owner, Group, and Others using checkboxes."
+          },
+          {
+                "title": "2. View Numeric and Symbolic Modes",
+                "desc": "The tool displays the numeric (e.g., 755) and symbolic (e.g., u=rwx,g=rx,o=rx) representations."
+          },
+          {
+                "title": "3. Set Special Permissions",
+                "desc": "Toggle SUID (4), SGID (2), and Sticky bit (1) which modify the leading digit (e.g., 4755 for SUID)."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between chmod 755 and chmod +x?",
+                "answer": "chmod 755 sets exact permissions (owner: rwx, group: rx, others: rx). chmod +x adds execute to the current permissions without changing other bits. 755 is absolute, +x is relative."
+          },
+          {
+                "question": "What does the SUID bit (chmod 4xxx) do?",
+                "answer": "SUID (Set User ID) makes an executable run with the file owner's privileges, not the executing user's. Common on /usr/bin/passwd. The calculator shows the leading digit."
+          },
+          {
+                "question": "How do sticky bits work on directories?",
+                "answer": "The sticky bit (chmod 1xxx) on directories restricts deletion — only the file owner, directory owner, or root can delete files. Commonly used on /tmp."
+          }
+    ]
+},
   {
+
     id: "du-3",
     name: "Docker Run to Compose Converter",
     slug: "docker-run-to-compose",
@@ -229,8 +259,37 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert docker run commands to docker-compose.yml format. Supports ports, volumes, environment variables, networks, restart policies, and container names.',
     seoDescription: 'Free online Docker Run to Compose Converter — Convert docker run commands to docker-compose.yml format. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste a docker run command including all flags such as port mappings, volume mounts, environment variables, network settings, and restart policies for conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the Docker Compose version and service name. Choose whether to include compose-only features like healthcheck, depends_on, and deploy sections in the output."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the equivalent docker-compose YAML file. The output is a complete ready-to-use Docker Compose service definition for your containerized application."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What docker run flags does the converter map to Docker Compose YAML configuration keys?",
+                "answer": "Port mappings become ports, volumes become volumes, environment variables become environment, network becomes networks, restart becomes restart, and name becomes container name."
+          },
+          {
+                "question": "How does the tool handle docker run commands with multiple containers linked via link flag?",
+                "answer": "Multiple containers are each converted to separate services. Link directives are converted to depends_on with optional conditions and shared networks in the networks section."
+          },
+          {
+                "question": "Can the converter handle complex docker run features like mount with volume options specified?",
+                "answer": "Yes, mount type bind or volume or tmpfs is converted to the compose mount syntax. Capabilities become cap_add and security options become security_opt in the output."
+          }
+    ]
+},
   {
+
     id: "du-4",
     name: "Email Normalizer",
     slug: "email-normalizer",
@@ -238,7 +297,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.',
     seoDescription: 'Free online Email Normalizer — Normalize email addresses by removing dots, stripping +tags, and lowercasing. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Email Address",
+                "desc": "Type or paste an email address. The tool will apply normalization rules."
+          },
+          {
+                "title": "2. Select Normalization Rules",
+                "desc": "Choose: lowercase domain, remove dots from Gmail local part, remove +tag suffixes, trim whitespace."
+          },
+          {
+                "title": "3. View Normalized Result",
+                "desc": "The tool shows the original and normalized addresses side by side."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does Gmail ignore dots in the local part of email addresses?",
+                "answer": "Gmail treats 'first.last@gmail.com' and 'firstlast@gmail.com' as identical because dots are ignored in Gmail addresses. This tool strips dots from @gmail.com and @googlemail.com addresses."
+          },
+          {
+                "question": "How does the tool handle +tag suffixes in email addresses?",
+                "answer": "Text after a plus sign in the local part (e.g., user+tag@domain.com) is treated as a tag. The normalizer strips tags to get the base address for deduplication."
+          },
+          {
+                "question": "Does the normalizer convert internationalized domains to Punycode?",
+                "answer": "Yes, domains with non-ASCII characters are converted to Punycode (xn--) representation, allowing comparison between Unicode and ASCII versions of the same domain."
+          }
+    ]
+},
   {
     id: "arch-conv-1",
     name: "Archive Converter",
@@ -1585,14 +1672,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
 },
   {
+
     id: "73",
     name: "Diff Checker",
     slug: "diff-checker",
     category: "Developer",
     description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
-    dependencies: "diff-match-patch"
-  },
+    dependencies: "diff-match-patch",
+    instructions: [
+          {
+                "title": "1. Paste Original Text",
+                "desc": "Enter the original/left version of your text in the first panel. Supports plain text, code, JSON, or configuration files."
+          },
+          {
+                "title": "2. Paste Modified Text",
+                "desc": "Enter the modified/right version in the second panel. The tool compares character by character on paste."
+          },
+          {
+                "title": "3. Review Differences",
+                "desc": "View highlighted additions (green) and deletions (red). Toggle unified diff, side-by-side, or inline view."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What diff algorithm does this tool use?",
+                "answer": "The tool uses Myers' diff algorithm for optimal line-level diffs and a refined word-level diff for inline highlighting. It handles large files up to 500 KB efficiently."
+          },
+          {
+                "question": "Can I ignore whitespace differences in the comparison?",
+                "answer": "Yes, enable the 'Ignore whitespace' toggle to strip trailing/leading whitespace, normalize line endings, and collapse multiple spaces before computing the diff."
+          },
+          {
+                "question": "How do I export the diff as a unified patch file?",
+                "answer": "Click Export and select 'Unified Patch' format. The output follows the standard diff -u format with context lines, usable with git apply or patch."
+          }
+    ]
+},
   {
     id: "74",
     name: "WEBM to MP4",
@@ -1897,14 +2013,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "React / Canvas API"
   },
   {
+
     id: "99",
     name: "Regex Tester",
     slug: "regex-tester",
     category: "Developer",
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
-    dependencies: "regex.js"
-  },
+    dependencies: "regex.js",
+    instructions: [
+          {
+                "title": "1. Enter Regular Expression",
+                "desc": "Type your regex pattern (without delimiters). Select flags: g (global), i (case-insensitive), m (multiline), s (dotall), u (unicode), y (sticky)."
+          },
+          {
+                "title": "2. Enter Test String",
+                "desc": "Paste your test string in the input area. Matches are highlighted in real time as you type the regex."
+          },
+          {
+                "title": "3. Analyze Match Groups",
+                "desc": "View each match with its capturing groups, named groups, and positions. The tool also shows the match explanation in plain English."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What regex engine does this tester use?",
+                "answer": "The tool uses the JavaScript (ECMAScript) regex engine via RegExp. This supports lookahead (?=), lookbehind (?<=), named groups (?<name>), and Unicode property escapes (\\p{L})."
+          },
+          {
+                "question": "How do backreferences work differently in JS vs PCRE?",
+                "answer": "JavaScript supports backreferences to capturing groups (\\1, \\2) but does not support subroutine calls or recursive patterns (?R) that PCRE supports."
+          },
+          {
+                "question": "Can I test regex against multiple strings at once?",
+                "answer": "Yes, use the multi-line mode where each line of the test area is treated as a separate test string. The tool shows per-line match/no-match results."
+          }
+    ]
+},
   {
 
     id: "101",
@@ -2238,13 +2383,43 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "113",
     name: "JSON Formatter",
     slug: "json-formatter",
     category: "Developer",
     description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.',
     dependencies: "JSONLint",
-    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',        },
+    seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',
+    instructions: [
+          {
+                "title": "1. Paste Raw JSON",
+                "desc": "Paste any JSON data (minified, compact, or malformed) into the input panel. The tool validates the JSON and shows line numbers."
+          },
+          {
+                "title": "2. Configure Formatting Options",
+                "desc": "Set indentation size (2, 4, or tab), sort keys alphabetically, toggle trailing commas, and choose between single and double quotes for output."
+          },
+          {
+                "title": "3. Format and Export",
+                "desc": "Click Format to pretty-print the JSON. Copy the formatted output, minify it, or download as a .json file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JSON validation checks does the formatter perform before formatting?",
+                "answer": "It validates: proper opening/closing brackets and braces, valid key-value separators, proper comma placement, valid string escaping, and numeric value formats. Invalid JSON is highlighted with the exact error position."
+          },
+          {
+                "question": "How does the tool handle very large JSON documents (over 100 MB)?",
+                "answer": "Large JSON is processed in streaming mode to avoid browser memory limits. The tool displays a progress bar and incremental preview. For files over 50 MB, minification is faster than pretty-printing."
+          },
+          {
+                "question": "Can the formatter convert between JSON and JSON5 formats (with comments and trailing commas)?",
+                "answer": "Yes, JSON5 mode allows comments (// and /* */), trailing commas, single-quoted keys, and unquoted keys. The tool can convert JSON5 to strict JSON and vice versa."
+          }
+    ]
+},
   {
     id: "114",
     name: "XML Sitemap Generator",
@@ -2546,15 +2721,45 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "135",
     name: "JS Minifier",
     slug: "js-minifier",
     category: "Developer",
     description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. No signup or account required.',
     seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. ',
-    dependencies: "Terser"
-  },
+    dependencies: "Terser",
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your JavaScript code for compression. The tool supports ES5, ES6+, modules, and TypeScript. It parses the abstract syntax tree to safely rename and compress without breaking anything."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select compression level from basic whitespace removal to advanced dead code elimination, constant folding, and tree shaking for maximum size reduction."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the minified JavaScript and compare sizes. Download the minified file with proper naming convention or copy the compressed code for production deployment."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JavaScript minification techniques does the tool apply beyond simple whitespace removal?",
+                "answer": "It performs identifier shortening known as mangling, dead code elimination, constant folding where constants are precomputed, expression simplification, and block statement merging."
+          },
+          {
+                "question": "How does the minifier ensure compatibility with older browsers during the minification process?",
+                "answer": "The ES5 compatibility mode avoids using modern syntax like arrow functions and const in the output. Ensure your target browser matrix is set before starting minification."
+          },
+          {
+                "question": "Can the minifier preserve specific function or variable names from being shortened during mangling?",
+                "answer": "Yes, a reserved names list lets you specify identifiers to exclude from mangling such as jQuery dollar sign and underscore for global API names exposed to consumers."
+          }
+    ]
+},
   {
+
     id: "136",
     name: "Base64 Encode/Decode",
     slug: "base64-encode-decode",
@@ -2562,8 +2767,36 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Base64 Encode/Decode — Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. ',
     dependencies: "btoa/atob",
-    showInCategory: false
-  },
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Enter Input Data",
+                "desc": "Type or paste text, upload a file, or choose from sample data to encode or decode using Base64 (RFC 4648) or Base64-URL (RFC 4648 section 5)."
+          },
+          {
+                "title": "2. Choose Encoding Options",
+                "desc": "Select Standard Base64 (with + and / characters) for general use, or Base64-URL (with - and _ characters, no padding) for URL-safe contexts like JWTs and signed URLs."
+          },
+          {
+                "title": "3. Encode or Decode",
+                "desc": "Click Encode to convert to Base64 or Decode to convert back. View both the result and a character-by-character breakdown of the encoding process."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between Base64 and Base64-URL encoding?",
+                "answer": "Standard Base64 uses + and / characters which need URL encoding in query strings. Base64-URL replaces + with - and / with _, omits padding = characters, and is safe for use in URLs, filenames, and JWT without additional percent-encoding."
+          },
+          {
+                "question": "How does the tool handle decoding of malformed Base64 strings?",
+                "answer": "It gracefully handles common issues: missing padding (= characters are added if needed), whitespace is stripped, and invalid characters are flagged with their position. Non-ASCII input is assumed to be UTF-8."
+          },
+          {
+                "question": "Can the tool detect whether a given string is already Base64-encoded?",
+                "answer": "Yes, the auto-detect mode analyzes the character set (A-Z, a-z, 0-9, +, /, =), checks string length divisibility by 4, and attempts decoding to verify — showing a confidence score for the detection."
+          }
+    ]
+},
   {
     id: "137",
     name: "Text to Handwriting",
@@ -2664,14 +2897,43 @@ export const entries_chunk_0: ToolMetadata[] = [
   ],
 },
   {
+
     id: "142",
     name: "Image to Base64",
     slug: "image-to-base64",
     category: "Developer",
     description: 'Convert images to Base64 encoded data URIs directly in your browser. Supports PNG, JPG, WebP, SVG, and GIF. 100% client-side.',
     seoDescription: 'Free online Image to Base64 — Converts uploaded images (PNG, JPG, GIF, SVG, WebP) into Base64-encoded data URI strings ready for embedding in HTML, CSS, or JSON. ',
-    dependencies: "FileReader API"
-  },
+    dependencies: "FileReader API",
+    instructions: [
+          {
+                "title": "1. Upload an Image File",
+                "desc": "Drag and drop or browse to select an image file. Supports PNG, JPEG, GIF, WebP, SVG, BMP, AVIF, and TIFF formats up to 25 MB."
+          },
+          {
+                "title": "2. Preview and Configure Output",
+                "desc": "View a preview of the uploaded image. Optionally resize or compress before encoding. Choose whether to include the data URI prefix (data:image/png;base64,)."
+          },
+          {
+                "title": "3. Copy Base64 String",
+                "desc": "Copy the generated Base64 string to your clipboard. The tool displays the encoded length and original file size for comparison."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much larger is a Base64-encoded image compared to the original binary file?",
+                "answer": "Base64 encoding increases file size by approximately 33% over the original binary. A 100 KB image becomes about 137 KB of Base64 text (including data URI prefix) due to the 6-bit to 8-bit encoding overhead."
+          },
+          {
+                "question": "When should I use Base64 images in HTML/CSS instead of separate image files?",
+                "answer": "Base64 images are useful for small images (under 10 KB) that are embedded in CSS or HTML to reduce HTTP requests. For larger images, separate files load faster because browsers cache them independently."
+          },
+          {
+                "question": "Can the tool process multiple images at once for batch conversion?",
+                "answer": "Yes, upload multiple images and each is processed independently. The output shows all Base64 strings with labels, and you can copy individual results or download all as a JSON map of filename to Base64 string."
+          }
+    ]
+},
   {
     id: "143",
     name: "Subtitle Translator",
@@ -2789,23 +3051,81 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "154",
     name: "SQL Formatter",
     slug: "sql-formatter",
     category: "Developer",
     description: 'Formats SQL queries with proper keyword capitalization, indentation, and clause alignment for readable database operations.',
     seoDescription: 'Free online SQL Formatter — Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. ',
-    dependencies: "sql-formatter"
-  },
+    dependencies: "sql-formatter",
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any SQL statement including SELECT, INSERT, UPDATE, DELETE, CREATE TABLE, ALTER, WITH clauses, JOINs, subqueries, window functions, and CTEs for formatting."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the SQL dialect such as MySQL, PostgreSQL, SQL Server, Oracle, SQLite, BigQuery, or Snowflake. Configure keyword case, indentation, and line width."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Format the SQL with consistent indentation and line breaks at major clauses with aligned keywords. The tool also validates basic SQL syntax during formatting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the SQL formatter handle formatting of complex JOIN operations and subqueries?",
+                "answer": "JOIN clauses are indented and aligned with their ON conditions. Subqueries are wrapped in parentheses and indented one level. Correlated subqueries are aligned with context."
+          },
+          {
+                "question": "Can the formatter convert between different SQL dialects during the formatting process?",
+                "answer": "Yes, optional dialect conversion handles LIMIT and OFFSET becoming TOP or ROW_NUMBER and ILIKE becoming LOWER equals LOWER for cross-dialect compatibility."
+          },
+          {
+                "question": "Does the tool support formatting of DDL statements like CREATE TABLE with column definitions?",
+                "answer": "Yes, CREATE TABLE columns are formatted one per line with type, constraints such as NOT NULL and DEFAULT and PRIMARY KEY, and comments aligned for readability."
+          }
+    ]
+},
   {
+
     id: "155",
     name: "UUID Generator",
     slug: "uuid-generator",
     category: "Developer",
     description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). ',
-    dependencies: "uuid"
-  },
+    dependencies: "uuid",
+    instructions: [
+          {
+                "title": "1. Specify UUID Version",
+                "desc": "Select UUID version (v1, v4, v5) — v4 generates random UUIDs, v1 uses timestamp + MAC, v5 uses SHA-1 namespace hash. Default to v4 for most use cases."
+          },
+          {
+                "title": "2. Set Output Count",
+                "desc": "Choose how many UUIDs to generate in a single batch (1–10,000). For bulk generation, consider the 5,000 batch limit to avoid browser lag."
+          },
+          {
+                "title": "3. Copy and Verify",
+                "desc": "Click the Copy button to copy all generated UUIDs to clipboard. Paste into your database or config and verify uniqueness — collisions are astronomically rare for v4."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I generate time-ordered UUIDs (v7) with this tool?",
+                "answer": "This tool supports UUID v1, v4, and v5. UUID v7 (time-ordered with random suffix) is not yet supported. For time-sorted UUIDs, consider PostgreSQL's gen_random_uuid() or a dedicated v7 library. v4 remains the most widely supported version across databases and programming languages."
+          },
+          {
+                "question": "How do UUID v5 namespace UUIDs work?",
+                "answer": "UUID v5 generates a deterministic UUID from a namespace UUID and a name string using SHA-1 hashing. This tool provides predefined namespaces (DNS, URL, OID, X500) plus a custom option. The same namespace + name always produces identical UUIDs, making v5 useful for generating consistent identifiers without a central authority."
+          },
+          {
+                "question": "What is the difference between UUID v1 and v4 regarding privacy?",
+                "answer": "UUID v1 encodes the generating machine's MAC address and timestamp, which can be a privacy concern in client-facing applications. UUID v4 uses purely random bits (122 bits of entropy) and reveals nothing about the source machine. For security-sensitive or user-facing identifiers, always prefer v4 over v1."
+          }
+    ]
+},
   {
     id: "156",
     name: "HEX to RGB Converter",
@@ -2855,6 +3175,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
+
     id: "159",
     name: "Text to Binary",
     slug: "text-to-binary",
@@ -2862,8 +3183,37 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS",
-      },
+    instructions: [
+          {
+                "title": "1. Enter Text Input",
+                "desc": "Type or paste any text string — letters, numbers, symbols, or Unicode characters including emoji — that you want to convert to binary representation."
+          },
+          {
+                "title": "2. Select Encoding and Format",
+                "desc": "Choose character encoding: ASCII (7-bit), UTF-8 (variable), UTF-16, or UTF-32. Select output format: simple binary string or grouped bytes with separators."
+          },
+          {
+                "title": "3. Convert and Inspect",
+                "desc": "View each character's binary representation, decimal code point, and hex value. The tool shows the full binary sequence as a continuous string or grouped by byte."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does UTF-8 encoding affect the binary representation of characters differently than ASCII?",
+                "answer": "ASCII characters (U+0000–U+007F) use 7 bits in UTF-8. Characters above U+007F use 2–4 bytes in UTF-8, while ASCII always uses exactly 7 bits (padded to 8). Emoji like 😀 (U+1F600) require 4 bytes (32 bits) in UTF-8."
+          },
+          {
+                "question": "What is the difference between binary representation with spaces vs without?",
+                "answer": "Without spaces, the binary output is a continuous string of bits. With spaces (grouped by byte), each 8-bit group represents one character in ASCII or one byte in UTF-8, making it easier to read individual character encodings."
+          },
+          {
+                "question": "Can the tool reverse binary back to the original text for verification?",
+                "answer": "Yes, the reverse mode accepts a binary string and converts it back to text using the same encoding setting. This allows you to round-trip test: text → binary → text to verify the conversion is lossless."
+          }
+    ]
+},
   {
+
     id: "160",
     name: "Binary to Text",
     slug: "binary-to-text",
@@ -2871,7 +3221,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
     dependencies: "Vanilla JS",
-      },
+    instructions: [
+          {
+                "title": "1. Enter Binary Data",
+                "desc": "Type or paste binary data as a string of 0s and 1s, with or without spaces separating bytes (8-bit groups) for readability."
+          },
+          {
+                "title": "2. Configure Binary Interpretation",
+                "desc": "Choose the bit grouping: 7-bit (ASCII), 8-bit (standard byte), 16-bit (Unicode), or 32-bit (UTF-32). Select endianness for multi-byte interpretations."
+          },
+          {
+                "title": "3. Convert and View",
+                "desc": "Click Convert to decode the binary to text. The tool shows the decimal and hex value for each byte alongside the decoded character."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What character encodings does the binary-to-text converter support?",
+                "answer": "It supports ASCII (7-bit), extended ASCII/Latin-1 (8-bit), UTF-8 (variable-width), UTF-16LE/BE, UTF-32 LE/BE, and EBCDIC. UTF-8 is the default and recommended encoding."
+          },
+          {
+                "question": "How does the tool handle binary strings with spaces, hyphens, or other separators?",
+                "answer": "It automatically detects and strips common separators: spaces, hyphens, dots, and underscores between byte groups. The tool also accepts raw binary strings without any separator."
+          },
+          {
+                "question": "Can the tool convert text to binary as a reverse operation?",
+                "answer": "Yes, the reverse mode converts any input text to its binary representation, showing each character's code point in binary form with proper byte grouping."
+          }
+    ]
+},
   {
     id: "161",
     name: "Break-Even Calculator",
@@ -2971,6 +3349,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     ]
   },
   {
+
     id: "166",
     name: "CSS Minifier",
     slug: "css-minifier",
@@ -2979,7 +3358,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online CSS Minifier — Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. ',
     dependencies: "clean-css",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste your CSS source code or upload a stylesheet file that needs to be compressed. The tool accepts any valid CSS including custom properties, preprocessor output, and browser-specific extensions."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select a compression level from safe whitespace removal to aggressive optimization including color shortening and selector merging. Each level offers different size reduction trade-offs."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Run the minification process and compare the original file size against the compressed result. Download the minified CSS or copy it directly for use in your production deployment pipeline."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much size reduction can I expect from CSS minification for my stylesheets?",
+                "answer": "Typical reduction ranges from 30 to 60 percent depending on original formatting. Safe mode saves about 20 to 30 percent by removing whitespace while aggressive mode can save up to 70 percent."
+          },
+          {
+                "question": "What CSS optimizations does the aggressive compression mode perform beyond whitespace removal?",
+                "answer": "Aggressive mode performs hex color shortening, margin and padding shorthand merging, duplicate selector removal, redundant property removal, zero unit stripping, and font-weight number conversion."
+          },
+          {
+                "question": "Does the minifier preserve CSS source maps for debugging the minified output files?",
+                "answer": "Yes, source map generation can be enabled. The minifier outputs a map file alongside the minified CSS, allowing browser devtools to map minified styles back to the original source."
+          }
+    ]
+},
   {
     id: "168",
     name: "Compare PDF Files",
@@ -3048,6 +3455,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   },
   {
+
     id: "172",
     name: "Base64 to Image",
     slug: "base64-to-image",
@@ -3055,18 +3463,76 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. No signup or account required.',
     seoDescription: 'Free online Base64 to Image — Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. ',
     dependencies: "Vanilla JS",
-    showInCategory: false
-  },
+    showInCategory: false,
+    instructions: [
+          {
+                "title": "1. Paste Base64 Image String",
+                "desc": "Paste the Base64-encoded image string, with or without the data URI prefix (data:image/png;base64,). Supports PNG, JPEG, GIF, WebP, and SVG formats."
+          },
+          {
+                "title": "2. Preview the Image",
+                "desc": "The tool renders the decoded image in a live preview panel showing the actual dimensions, file size, and MIME type detected from the data URI."
+          },
+          {
+                "title": "3. Download as Image File",
+                "desc": "Click the Download button to save the decoded image as its native format (.png, .jpg, .gif, .webp). Copy the data URI for direct use in HTML or CSS."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What image formats are supported for Base64-to-image conversion?",
+                "answer": "The tool supports PNG, JPEG, GIF (including animated), WebP, SVG (vector), BMP, ICO, and AVIF. The format is auto-detected from the data URI mime type or by analyzing the decoded image header bytes."
+          },
+          {
+                "question": "How does the tool handle invalid or corrupted Base64 image data?",
+                "answer": "It validates the Base64 string format first, checks the magic bytes of the decoded binary for a valid image signature (PNG header, JPEG SOI, GIF89a), and shows a specific error message if the data is corrupted."
+          },
+          {
+                "question": "Can the tool convert between image formats after decoding the Base64 string?",
+                "answer": "Yes, after decoding, the tool can re-encode the image in a different format. For example, a Base64 PNG can be downloaded as JPEG (with configurable quality) or WebP (with lossless/lossy toggle)."
+          }
+    ]
+},
   {
+
     id: "174",
     name: "MD5 & SHA Hash Generator",
     slug: "md5-hash-generator",
     category: "Developer",
     description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.',
     seoDescription: 'Free online MD5 & SHA Hash Generator — Compute MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from text or file input. All processing happens in your browser, nothing is uploaded.',
-    dependencies: "CryptoJS"
-  },
+    dependencies: "CryptoJS",
+    instructions: [
+          {
+                "title": "1. Input Your Data",
+                "desc": "Type or paste the string you want to hash into the input field. The tool supports plain text, with sizes up to 10 MB for file uploads."
+          },
+          {
+                "title": "2. Enable HMAC (Optional)",
+                "desc": "Toggle HMAC mode and provide a secret key to produce an HMAC-MD5 hash instead of a plain MD5. This prevents rainbow table attacks on the output."
+          },
+          {
+                "title": "3. Compare Hash Output",
+                "desc": "The 32-character hex digest appears instantly. Use the Compare feature to check if two strings produce the same MD5 hash, useful for verifying file integrity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is MD5 considered cryptographically broken?",
+                "answer": "MD5 is vulnerable to collision attacks — researchers have demonstrated that two different inputs can produce the same 128-bit hash. In 2008, researchers used MD5 collisions to forge SSL certificates. For security-sensitive hashing (passwords, signatures), use SHA-256 or bcrypt instead. MD5 remains acceptable for non-security checksums like file integrity verification."
+          },
+          {
+                "question": "Can I hash files larger than 10 MB with this tool?",
+                "answer": "The browser-based limit is 10 MB per file upload. For larger files, use a command-line tool like md5sum (Linux/macOS) or certutil (Windows). The tool processes files entirely in memory, so excessively large files may crash your browser tab."
+          },
+          {
+                "question": "What does the uppercase/lowercase toggle do?",
+                "answer": "MD5 hashes are case-insensitive in hex representation, but some systems expect uppercase digest format (e.g., Windows certutil outputs uppercase by default). The toggle lets you switch between 32-character lowercase (a-f) and uppercase (A-F) without recomputing the hash."
+          }
+    ]
+},
   {
+
     id: "175",
     name: "HTML Minifier",
     slug: "html-minifier",
@@ -3075,7 +3541,35 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online HTML Minifier — Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. ',
     dependencies: "html-minifier",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste full HTML documents or fragments that need to be compressed. The tool handles all HTML versions and can process embedded CSS and JavaScript within the same operation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Toggle minification options like comment removal, whitespace collapse, optional tag removal, and inline style or script minification for maximum size reduction."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the compressed HTML and review the size savings. Download the minified file or copy the compact output for use in production environments where bandwidth matters."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What HTML elements and attributes can be safely removed during the minification process?",
+                "answer": "Optional closing tags for list items and paragraphs are removed per HTML5 spec. Boolean attributes like disabled and checked are collapsed. Default type attributes are stripped from script and style tags."
+          },
+          {
+                "question": "How does the minifier handle Internet Explorer conditional comments in HTML documents?",
+                "answer": "IE conditional comments are preserved by default to maintain compatibility. You can optionally strip them if you no longer need IE support, which reduces the file size further."
+          },
+          {
+                "question": "Can the minifier process multiple HTML files in batch mode for a complete website build?",
+                "answer": "Yes, upload a zip of HTML files for batch processing. Each file is minified individually and packaged as a downloadable zip archive with the same directory structure preserved."
+          }
+    ]
+},
   {
 
     id: "176",
@@ -3442,6 +3936,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     ],
   },
   {
+
     id: "221",
     name: "API Builder & Tester",
     slug: "api-builder",
@@ -3449,8 +3944,36 @@ export const entries_chunk_0: ToolMetadata[] = [
     isPro: false,
     description: 'Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.',
     seoDescription: 'Free online API Builder & Tester — Full-featured API client that runs in your browser. Make HTTP requests, save collections, generate code snippets. Privacy-first — your API keys never touch a server.',
-    dependencies: "Browser Fetch API"
-  },
+    dependencies: "Browser Fetch API",
+    instructions: [
+          {
+                "title": "1. Set Request Method and URL",
+                "desc": "Choose the HTTP method (GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS). Enter the full URL including query parameters."
+          },
+          {
+                "title": "2. Configure Headers and Body",
+                "desc": "Add headers as key-value pairs. For POST/PUT, select body format (JSON, form-data, x-www-form-urlencoded, raw text, binary)."
+          },
+          {
+                "title": "3. Send and Inspect Response",
+                "desc": "Click Send to execute the request. View the response status code, headers, body, and timing information."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the API builder handle authentication (Bearer, Basic, API Key)?",
+                "answer": "The tool has an Auth tab where you select Bearer Token, Basic Auth, or API Key. The credentials are automatically added to the request headers."
+          },
+          {
+                "question": "Can I save requests for later reuse?",
+                "answer": "Yes, save requests as named presets in browser localStorage. Organize into collections with folders. Export/import collections as JSON."
+          },
+          {
+                "question": "Does the tool support GraphQL queries in the request body?",
+                "answer": "Yes, select GraphQL as the body type. The tool provides separate fields for the query string and variables, and auto-sets Content-Type: application/json."
+          }
+    ]
+},
   {
     id: "196",
     name: "Employee Turnover Calculator",

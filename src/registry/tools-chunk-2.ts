@@ -833,6 +833,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
       },
   {
+
     id: "443",
     name: "QR Code Reader",
     slug: "qr-code-reader",
@@ -841,7 +842,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Upload QR Code Image",
+                "desc": "Upload a PNG, JPEG, or WEBP image containing a QR code, or paste from clipboard."
+          },
+          {
+                "title": "2. Auto-Decode",
+                "desc": "The tool automatically detects the QR code in the image and decodes its content."
+          },
+          {
+                "title": "3. View Decoded Content",
+                "desc": "The decoded text, URL, or other data is displayed. If it's a URL, a clickable link is shown."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What QR code versions does this reader support?",
+                "answer": "It supports QR code versions 1–40 (21×21 to 177×177 modules) including micro QR codes and all error correction levels (L, M, Q, H)."
+          },
+          {
+                "question": "Can the reader decode damaged or partially obscured QR codes?",
+                "answer": "Yes, the error correction built into QR codes (up to 30% with level H) allows decoding partially damaged codes. The tool reports the error correction level used."
+          },
+          {
+                "question": "Does the tool support batch scanning multiple QR codes in one image?",
+                "answer": "Yes, if the image contains multiple QR codes, the tool decodes all of them and lists each with its content and position in the image."
+          }
+    ]
+},
   {
     id: "444",
     name: "Lorem Ipsum Generator",
@@ -864,6 +893,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
   },
   {
+
     id: "445",
     name: "WHOIS Lookup",
     slug: "whois-lookup",
@@ -872,8 +902,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
     dependencies: "none",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Enter Domain or IP",
+                "desc": "Type a domain name (example.com) or IP address to look up."
+          },
+          {
+                "title": "2. Perform Lookup",
+                "desc": "Click Lookup to query the WHOIS database for registration information."
+          },
+          {
+                "title": "3. Review Details",
+                "desc": "View registrar, registration/expiration dates, name servers, and registrant contact information."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What WHOIS data fields are typically returned?",
+                "answer": "Fields include: domain name, registrar, registrant contact (often redacted with GDPR), administrative/technical contacts, name servers, creation/expiration dates, and DNSSEC status."
+          },
+          {
+                "question": "Why is registrant information often hidden in WHOIS results?",
+                "answer": "GDPR and similar privacy regulations require registrars to redact personal contact information. The tool shows 'Redacted for Privacy' or the registrar's proxy/privately-registered service name."
+          },
+          {
+                "question": "Can the tool differentiate between domain WHOIS and IP WHOIS?",
+                "answer": "Yes, domain WHOIS returns domain registration data, while IP WHOIS returns the RIR (ARIN, RIPE, APNIC, LACNIC, AFRINIC) allocation information."
+          }
+    ]
+},
   {
+
     id: "446",
     name: "SSL Checker",
     slug: "ssl-checker",
@@ -882,7 +941,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "none",
     showInCategory: true,
-  },
+    instructions: [
+          {
+                "title": "1. Enter Server URL",
+                "desc": "Type the HTTPS URL (https://example.com) or hostname:port. The tool connects to the server and retrieves the SSL certificate."
+          },
+          {
+                "title": "2. View Certificate Details",
+                "desc": "Review the certificate issuer, subject, validity period (not before/not after), SANs, and signature algorithm."
+          },
+          {
+                "title": "3. Check Chain and Security",
+                "desc": "Verify the certificate chain is complete, check for weak signature algorithms, and ensure the server supports modern TLS protocols."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What does the SSL checker validate in a certificate?",
+                "answer": "It validates the certificate chain (each cert signed by the next), expiration dates, hostname match (SAN coverage), key strength, and revocation status via CRL/OCSP."
+          },
+          {
+                "question": "How does the tool detect weak cipher suites?",
+                "answer": "The tool attempts connections using known weak ciphers (RC4, 3DES, export-grade) and reports which insecure protocols (SSLv2, SSLv3, TLS 1.0) are enabled."
+          },
+          {
+                "question": "Can I check if a certificate supports ECC or is ECDSA-signed?",
+                "answer": "Yes, the tool displays the public key algorithm (RSA, ECDSA, Ed25519) and curve type (P-256, P-384, P-521) for ECC certificates."
+          }
+    ]
+},
   {
     id: "447",
     name: "PDF to TIFF",
@@ -1850,6 +1937,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "495-uniq",
     name: "Hex ↔ ASCII Converter",
     slug: "hex-ascii-converter",
@@ -1857,8 +1945,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Enter Hex or ASCII Text",
+                "desc": "Type hex bytes (with or without spaces, e.g., 48 65 6C or 48656C) or ASCII text. The tool auto-detects which format you entered."
+          },
+          {
+                "title": "2. Choose Conversion Direction",
+                "desc": "Click Hex to ASCII to decode hex bytes to their character representation, or ASCII to Hex to encode text as hexadecimal byte values."
+          },
+          {
+                "title": "3. View Detailed Breakdown",
+                "desc": "The tool shows each hex byte paired with its ASCII character, decimal value, and binary representation in a comprehensive table."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between hex to ASCII and hex to text conversion?",
+                "answer": "Hex to ASCII interprets each hex byte as an ASCII character code (00–7F for standard ASCII). The same operation is commonly referred to as hex to text since ASCII covers the standard English character set."
+          },
+          {
+                "question": "How does the tool handle hex strings with spaces, colons, or no separators?",
+                "answer": "It accepts hex strings with no delimiters (48656C6C6F), spaces (48 65 6C 6C 6F), colons (48:65:6C:6C:6F), or dashes (48-65-6C-6C-6F). The tool normalizes all formats before conversion."
+          },
+          {
+                "question": "Can the converter handle non-printable ASCII characters and control codes?",
+                "answer": "Yes, the tool displays non-printable bytes (00–1F, 7F) as their control code names (NUL, SOH, STX, etc.) and shows the Unicode replacement character U+FFFD for invalid byte sequences."
+          }
+    ]
+},
   {
+
     id: "496",
     name: "URL Encoder / Decoder",
     slug: "url-encoder-decoder",
@@ -1866,8 +1983,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste a full URL, URL component, or plain text that needs URL encoding or decoding according to RFC 3986 URI specification standards for web development."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select encode mode to convert special characters to percent-encoded sequences or decode mode to convert percent-encoded strings back to original characters."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Apply the encoding or decoding operation and review the original versus converted values side by side with specific changes highlighted for clarity."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between URL encoding and URL component encoding in the tool?",
+                "answer": "Full URL encoding encodes the entire URL including colons and slashes making it unusable. Component encoding only encodes characters invalid in a specific URL component."
+          },
+          {
+                "question": "Which characters are always encoded in URL percent-encoding according to RFC 3986 rules?",
+                "answer": "Reserved characters like colon and slash and question mark and hash are encoded. Spaces become percent-encoded sequences or plus signs in form context."
+          },
+          {
+                "question": "How does the tool handle Unicode and non-ASCII characters during URL encoding operations?",
+                "answer": "Non-ASCII characters including Unicode are first encoded as UTF-8 bytes then each byte is percent-encoded. The tool shows the intermediate UTF-8 byte sequence."
+          }
+    ]
+},
   {
+
     id: "497",
     name: "HTML Entity Encoder / Decoder",
     slug: "html-entity-encoder",
@@ -1876,8 +2022,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Enter HTML Content",
+                "desc": "Paste HTML content, plain text with special characters, or a specific string that needs HTML entity encoding or decoding."
+          },
+          {
+                "title": "2. Choose Encoding Direction",
+                "desc": "Select Encode to convert special characters to HTML entities (&amp;, &lt;, &gt;, &quot;, &#39;), or Decode to convert entities back to their character equivalents."
+          },
+          {
+                "title": "3. Select Entity Format",
+                "desc": "Choose between named entities (&amp;) for common characters, decimal numeric entities (&#38;) for broader compatibility, or hex numeric entities (&#x26;) for Unicode characters."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Which special characters are automatically encoded when converting to HTML entities?",
+                "answer": "The five essential XML/HTML entities: & (&amp;), < (&lt;), > (&gt;), \" (&quot;), and ' (&#39; or &apos;). Additionally, non-ASCII and Unicode characters can be encoded as numeric entities for broader compatibility."
+          },
+          {
+                "question": "How does the tool handle encoding of Unicode characters outside the Latin-1 range?",
+                "answer": "Characters above U+00A0 can be encoded as named entities (if available, e.g., &euro; for €) or as numeric entities (&#8364; or &#x20AC;). The tool also offers a mode where only the 5 required characters are encoded."
+          },
+          {
+                "question": "What is the difference between &amp; and &#38; in HTML and when should each be used?",
+                "answer": "Both represent the same character (&). Named entities (&amp;) are human-readable and preferred for common characters. Numeric entities (&#38;) work in contexts where named entity support is limited, like XML without DTD."
+          }
+    ]
+},
   {
+
     id: "498",
     name: "Backslash Escape / Unescape",
     slug: "backslash-escape",
@@ -1886,7 +2061,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Enter Text to Escape or Unescape",
+                "desc": "Paste the string you want to escape or unescape. The tool processes special characters like newlines, tabs, quotes, and Unicode characters."
+          },
+          {
+                "title": "2. Select Escape Context",
+                "desc": "Choose the target context: JavaScript string, JSON string, Python string, C string, SQL string, or generic backslash escaping for shell commands."
+          },
+          {
+                "title": "3. Choose Direction and Process",
+                "desc": "Toggle between Escape (add backslashes) and Unescape (remove backslashes). Copy the result for use in your code."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What special characters does the backslash escape tool handle for JavaScript strings?",
+                "answer": "It escapes: single quote (\\'), double quote (\\\"), backslash (\\\\), newline (\\n), carriage return (\\r), tab (\\t), form feed (\\f), backspace (\\b), and Unicode characters above U+FFFF using \\u{XXXXX} syntax."
+          },
+          {
+                "question": "How does escaping differ between JavaScript strings and JSON strings?",
+                "answer": "JSON strings require escaping of double quotes and backslashes, but not single quotes. JavaScript strings additionally escape single quotes and recognize \\v (vertical tab) and \\0 (null character). The tool adjusts per context."
+          },
+          {
+                "question": "Can the tool escape text for use in SQL query literals?",
+                "answer": "Yes, SQL mode escapes single quotes by doubling them ('' instead of ') per ANSI SQL standard, and handles backslash escaping for MySQL where \\' is used. Note: always prefer parameterized queries over manual escaping."
+          }
+    ]
+},
   {
 
     id: "499",
@@ -1926,6 +2129,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
 },
   {
+
     id: "500",
     name: "Number Base Converter",
     slug: "number-base-converter",
@@ -1933,7 +2137,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
     seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type a numeric value in any supported base format including decimal, binary, octal, hexadecimal, or base-32 and base-64 for compact number representations."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Specify the input base from 2 to 64 and the target output base. The tool supports conversion between any two bases with arbitrary precision handling."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "View the number displayed in all common bases simultaneously. Additional representations include ASCII interpretation and IEEE 754 float or double decoding."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What number bases does the converter support for conversion between numbering systems?",
+                "answer": "It supports base-2 binary through base-64 with all standard bases including 8 octal, 10 decimal, 16 hexadecimal, 32 Crockford, and 64 with custom character sets."
+          },
+          {
+                "question": "How does the tool handle very large numbers that exceed JavaScript safe integer range?",
+                "answer": "Numbers beyond the maximum safe integer are handled using BigInt for arbitrary precision integer conversion. Floating-point conversion uses string-based algorithms for exact representation."
+          },
+          {
+                "question": "Can the converter display the number in IEEE 754 single and double precision binary formats?",
+                "answer": "Yes, for decimal inputs the tool shows the IEEE 754 binary representation including 32-bit float and 64-bit double with sign exponent and mantissa breakdown."
+          }
+    ]
+},
   {
 
     id: "501",
@@ -1973,6 +2205,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
 },
   {
+
     id: "502",
     name: "URL Parser",
     slug: "url-parser",
@@ -1980,8 +2213,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
     seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any valid URL including protocol, hostname, port, path, query string, fragment hash, and authentication credentials for complete component parsing."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Parse the URL to extract and display all components such as protocol, hostname, port, pathname, search, hash, username, and password in a structured table."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "View each URL component with its decoded value in a structured table. Individual components can be copied separately for use in your code or debugging tasks."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What URL components does the parser extract from a given URL string or address?",
+                "answer": "It extracts protocol, hostname, port, pathname, search or query string, hash or fragment, origin, username, password, and the full href for complete component analysis."
+          },
+          {
+                "question": "How does the parser handle URLs with internationalized domain names containing Unicode characters?",
+                "answer": "IDN domains are shown in both Unicode form and Punycode-encoded form. The parser validates the IDN and shows conversion details for each method."
+          },
+          {
+                "question": "Can the tool parse and decode query string parameters into a structured key-value table?",
+                "answer": "Yes, the query string is parsed into a table showing each parameter name, its decoded value, and whether it appears multiple times with duplicate keys grouped."
+          }
+    ]
+},
   {
+
     id: "503",
     name: "String Inspector",
     slug: "string-inspector",
@@ -1989,7 +2251,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
     seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter String",
+                "desc": "Type or paste any string into the input field."
+          },
+          {
+                "title": "2. View Inspection Results",
+                "desc": "The tool displays: length, character count, word count, line count, byte size (UTF-8, UTF-16), and character composition."
+          },
+          {
+                "title": "3. Review Unicode Details",
+                "desc": "See each character's code point, hex representation, Unicode category, and any combining characters."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Unicode properties does the string inspector reveal?",
+                "answer": "It shows: code points (U+XXXX), UTF-8/UTF-16/UTF-32 byte representations, Unicode block, general category (L, N, P, S, etc.), and bidirectional class."
+          },
+          {
+                "question": "Does the tool detect zero-width characters or hidden Unicode?",
+                "answer": "Yes, it flags zero-width characters (U+200B, U+200C), bidirectional override characters (U+202E), and other invisible Unicode characters that can be used for homograph attacks."
+          },
+          {
+                "question": "Can the inspector find duplicate characters or analyze character frequency?",
+                "answer": "Yes, it generates a character frequency histogram showing how often each character appears, sorted by frequency."
+          }
+    ]
+},
   {
     id: "504",
     name: "Unix Time Converter",
@@ -2000,6 +2290,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
         },
   {
+
     id: "505",
     name: "Code Beautifier & Minifier",
     slug: "code-beautifier",
@@ -2007,8 +2298,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
     seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste or Upload Your Code",
+                "desc": "Copy your messy, minified, or poorly indented source code and paste it into the editor area, or upload a file directly from your computer to begin the beautification process."
+          },
+          {
+                "title": "2. Select Language and Indentation",
+                "desc": "Choose the appropriate programming language from the dropdown menu and configure your preferred indentation style using spaces or tabs with custom width settings."
+          },
+          {
+                "title": "3. Click Beautify and Export Result",
+                "desc": "Press the beautify button to instantly reformat your code with proper spacing and line breaks, then copy the cleaned output or download it as a new file."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Does the code beautifier change the logic of my code?",
+                "answer": "No, the beautifier only modifies whitespace, indentation, and line breaks to improve readability. It never alters variable names, function logic, control flow, or any functional part of your source code."
+          },
+          {
+                "question": "Can I customize the indentation style for different languages?",
+                "answer": "Yes, you can configure indentation size from 1 to 8 spaces, choose between tabs and spaces, and select language-specific formatting rules before running the beautifier."
+          },
+          {
+                "question": "Is my source code stored on your servers after beautification?",
+                "answer": "All code processing happens entirely in your browser using client-side JavaScript. Your source code is never transmitted to or stored on any server, ensuring complete privacy and security."
+          }
+    ]
+},
   {
+
     id: "506",
     name: "HTML to JSX Converter",
     slug: "html-to-jsx",
@@ -2016,8 +2336,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Converts HTML files to JSX format — web pages, email templates, and content rendering to React component definitions and UI rendering. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any HTML markup including standard elements, attributes, inline styles, and nested structures that need conversion to JSX syntax for use in React application components."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure conversion options such as className versus class, htmlFor versus for, camelCase style attributes, and whether to wrap the output in a functional component template."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Run the conversion to transform HTML into JSX syntax with proper React attribute names and event handlers. Copy the resulting JSX for direct use in your React components."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What HTML attribute transformations are performed when converting to React JSX syntax?",
+                "answer": "Class becomes className, for becomes htmlFor, tabindex becomes tabIndex, style strings become JavaScript objects, and various SVG attributes are converted to their camelCase equivalents."
+          },
+          {
+                "question": "How does the converter handle inline CSS styles during the HTML to JSX conversion process?",
+                "answer": "Inline style strings are parsed and converted to camelCase JavaScript objects. Background-color becomes backgroundColor and font-size becomes fontSize with appropriate value handling."
+          },
+          {
+                "question": "Can the tool convert SVG elements embedded in HTML to proper JSX SVG syntax format?",
+                "answer": "Yes, SVG attributes such as stroke-width becoming strokeWidth and fill-rule becoming fillRule are handled appropriately for inline SVGs within JSX components."
+          }
+    ]
+},
   {
+
     id: "507",
     name: "PHP Tools",
     slug: "php-tools",
@@ -2025,8 +2374,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
     seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select PHP Tool Mode",
+                "desc": "Choose from: PHP syntax checker, serialize/unserialize, base64 encode/decode, or var_dump formatter."
+          },
+          {
+                "title": "2. Enter PHP Code or Data",
+                "desc": "Paste your PHP code, serialized string, or data depending on the selected mode."
+          },
+          {
+                "title": "3. Process and View Output",
+                "desc": "The tool processes the input and shows the result with syntax highlighting."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What PHP tools are included in this utility pack?",
+                "answer": "PHP syntax linting (parse error detection), serialization format converter, base64 PHP-style encoding (base64_encode/base64_decode), and pretty-print for var_dump output."
+          },
+          {
+                "question": "How does the PHP serialization tool work?",
+                "answer": "It parses PHP serialized strings (a:3:{i:0;s:4:\"test\";...}) and converts them to readable JSON. It also generates PHP serialization from JSON input."
+          },
+          {
+                "question": "Does the syntax checker validate against specific PHP versions?",
+                "answer": "Yes, select PHP 7.4, 8.0, 8.1, 8.2, or 8.3. Each version checks for version-specific syntax (named arguments, readonly properties, enums)."
+          }
+    ]
+},
   {
+
     id: "508",
     name: "SVG to CSS Converter",
     slug: "svg-to-css",
@@ -2034,8 +2412,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste SVG markup including paths, shapes, groups, gradients, patterns, filters, text elements, and transformations that need conversion to CSS properties."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the output format such as CSS background-image as data URI or individual CSS properties from SVG attributes. Toggle base64 encoding versus UTF-8 inline SVG."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the CSS code as a complete declaration block ready for your stylesheet. The output can be used as a background, mask, or clip-path in your web project."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the advantage of converting SVG to CSS data URI versus linking a separate SVG file?",
+                "answer": "Inline data URIs eliminate HTTP requests and work in CSS backgrounds without file path management. However they increase CSS file size by about 33 percent due to base64 encoding."
+          },
+          {
+                "question": "How does the tool handle SVG gradients and filters during the CSS conversion process?",
+                "answer": "SVG gradients are preserved within the inline SVG data URI. CSS-only linear gradient conversion is available for simple two-stop color gradients lacking complex features."
+          },
+          {
+                "question": "Can the converter extract individual SVG path data for use as CSS clip-path shapes?",
+                "answer": "Yes, individual SVG paths can be extracted and converted to CSS clip-path path format. The tool validates that the path is a single continuous shape suitable for clipping."
+          }
+    ]
+},
   {
+
     id: "509",
     name: "cURL to Code",
     slug: "curl-to-code",
@@ -2043,7 +2450,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste a curl command including flags like X, H, d, F, b, u, and data or header options from any operating system or API documentation for code generation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the target programming language and HTTP library for the output such as JavaScript fetch, Python requests, Go net/http, or Java OkHttp."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Convert the curl command to equivalent code in the target language. The output includes proper imports, error handling, and async patterns where appropriate for production use."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the converter handle complex curl features like data-binary and form and cookie-jar?",
+                "answer": "Data-binary becomes raw body with binary encoding, form becomes multipart form data construction, and cookie-jar becomes cookie store setup with appropriate functionality."
+          },
+          {
+                "question": "Can the tool generate both synchronous and asynchronous versions of the HTTP call?",
+                "answer": "Yes, toggle between sync and async output. JavaScript supports async fetch versus synchronous XMLHttpRequest and Python supports httpx sync versus async modes."
+          },
+          {
+                "question": "Does the generated code include proper error handling and status code checking logic?",
+                "answer": "Yes, the output includes try-catch blocks, HTTP status validation checking for 2xx responses and throwing on 4xx and 5xx, and connection timeout handling."
+          }
+    ]
+},
   {
     id: "510",
     name: "JSON to Code Generator",
@@ -2064,6 +2499,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "511",
     name: "JWT Debugger",
     slug: "jwt-debugger",
@@ -2071,8 +2507,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
     seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any JWT token string with the three-part base64url-encoded header, payload, and signature sections separated by dots for inspection and debugging."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "The tool automatically decodes the header and payload displaying them as formatted JSON with syntax highlighting and field-by-field inspection capabilities."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Check token validity including expiration time, not-before time, issuer match, and audience match. Optionally verify the HMAC or RSA signature with your key."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What JWT validation checks does the debugger perform on decoded tokens for security?",
+                "answer": "It checks token structure with three segments, valid base64url encoding, expiration against current time, not-before time, issued-at chronology, and algorithm awareness."
+          },
+          {
+                "question": "How does the tool help debug common JWT issues like expired or malformed tokens?",
+                "answer": "Each validation check has a clear pass or fail or error status. Expired tokens show the exact expiration time and malformed segments show the parsing error position."
+          },
+          {
+                "question": "Can the debugger extract and display nested JSON objects within JWT claims for inspection?",
+                "answer": "Yes, nested claims within the payload are rendered as expandable and collapsible JSON trees. Complex claim structures are fully navigable for deep inspection."
+          }
+    ]
+},
   {
+
     id: "512",
     name: "HTML Preview",
     slug: "html-preview",
@@ -2080,8 +2545,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any HTML document or fragment including inline CSS and JavaScript. The tool supports HTML5 with canvas, SVG, WebGL, and modern JavaScript APIs for preview."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set viewport size for desktop, tablet, or mobile preview. Enable responsive mode and toggle dark or light theme simulation for accurate rendering previews."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Preview the rendered HTML in a sandboxed iframe. Interactive elements like forms, buttons, links, and JavaScript all behave as in a real browser environment."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the HTML preview render JavaScript-heavy pages and single-page applications?",
+                "answer": "JavaScript is fully executed in the sandboxed iframe including DOM manipulation, fetch requests, and ES modules. The preview updates in real-time as you edit the source code."
+          },
+          {
+                "question": "Is the preview sandboxed to prevent security risks from untrusted HTML content loading?",
+                "answer": "Yes, the preview loads in a sandboxed iframe with restricted permissions including no form submission to external sites and no access to the parent page origin."
+          },
+          {
+                "question": "Can the tool highlight corresponding source code when an element is hovered in preview?",
+                "answer": "Yes, the inspector mode links the preview and source editor. Clicking an element in the preview scrolls the source to the corresponding HTML for debugging layout issues."
+          }
+    ]
+},
   {
+
     id: "513",
     name: "Cron Expression Parser",
     slug: "cron-parser",
@@ -2089,8 +2583,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
     seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type a standard five-field or six-field cron expression with standard operators including ranges, steps, list values, and special time strings for parsing."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Parse the cron expression to get a human-readable description explaining when the schedule runs and what each field contributes to the overall timing."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the next scheduled execution times based on the cron expression. Verify the schedule accuracy by reviewing the exact dates and times of upcoming runs."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What cron expression syntax features does the parser support for complex schedule definitions?",
+                "answer": "It supports all standard operators including ranges, steps, and lists. Month and weekday names such as JAN or SUN are supported along with special shortcuts like yearly."
+          },
+          {
+                "question": "How does the parser handle non-standard cron features like L for last and W for weekday?",
+                "answer": "L for last day or month or weekday is supported in extended mode. W for nearest weekday is also supported as Quartz-specific extensions for Java scheduling."
+          },
+          {
+                "question": "Can the tool detect invalid or impossible cron expressions and suggest corrections for them?",
+                "answer": "Yes, it validates that field values are within allowed ranges, detects impossible dates like February 30, and flags expressions that would rarely or never execute."
+          }
+    ]
+},
   {
+
     id: "514",
     name: "Crypto & Hash Toolkit",
     slug: "crypto-kit",
@@ -2099,7 +2622,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Choose from available cryptographic operations such as hash generation, HMAC computation, random byte generation, key derivation, or entropy estimation."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Select the specific algorithm, key size, iteration count, output encoding format, and additional parameters like salt or initialization vector for the operation."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Execute the cryptographic operation in-browser using the Web Crypto API. Copy the result in your preferred encoding format for use in your application or system."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What cryptographic algorithms are available in the crypto kit toolkit for developers?",
+                "answer": "It includes SHA-256 and SHA-384 and SHA-512, HMAC with all SHA variants, PBKDF2 with adjustable iterations, Argon2id via WASM, AES encryption, HKDF key derivation, and random generation."
+          },
+          {
+                "question": "How does the tool ensure cryptographic operations are performed securely in the browser?",
+                "answer": "All operations use the Web Crypto API which is backed by the operating system's cryptographic primitives. Key material and plaintext never leave the browser environment."
+          },
+          {
+                "question": "Can the tool be used to generate cryptographically secure random passwords and tokens?",
+                "answer": "Yes, the random generation module uses crypto.getRandomValues to produce secure random bytes suitable for generating API keys, session tokens, and initialization vectors."
+          }
+    ]
+},
   {
     id: "515",
     name: "TOML Converter",
@@ -2120,6 +2671,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "517",
     name: "Web Inspector & HTTP Tools",
     slug: "web-inspector",
@@ -2127,8 +2679,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
     seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type the full URL of the website you want to inspect. The tool fetches the page and analyzes its HTML structure, CSS, JavaScript, and network resources used."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Review a comprehensive page analysis including title, meta tags, Open Graph tags, headings structure, links count, and images with or without alt text."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Examine technical details such as HTTP headers, HTML document outline, CSS class usage, JavaScript context, form elements, and accessibility landmarks on the page."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What technical information does the web inspector extract from a given website URL?",
+                "answer": "It extracts page metadata, heading structure for SEO analysis, broken links, images missing alt text, Open Graph and Twitter Card tags, HTTP status, and content type headers."
+          },
+          {
+                "question": "Can the inspector analyze the page SEO and accessibility compliance automatically for you?",
+                "answer": "Yes, it checks meta description presence and length, title tag length, heading hierarchy with single h1 and sequential order, alt text on images, and ARIA landmarks."
+          },
+          {
+                "question": "Does the tool detect third-party scripts and trackers and analytics services loaded by pages?",
+                "answer": "Yes, it identifies known third-party scripts such as Google Analytics and Facebook Pixel and CDN libraries showing their source URLs and categories."
+          }
+    ]
+},
   {
+
     id: "518",
     name: "Text Converter & Obfuscator",
     slug: "text-converter",
@@ -2137,7 +2718,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. ',
     dependencies: "None",
     showInCategory: false,
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste any text string into the input area. The tool supports Unicode characters including emoji, CJK characters, accented letters, and special symbols for conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose from uppercase, lowercase, title case, sentence case, camelCase, snake_case, kebab-case, PascalCase, alternating case, or leetspeak transformation."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Convert the text to the selected case format. The result appears instantly with a visual comparison showing the original and transformed versions side by side."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What text case transformations does the text converter support for formatting strings?",
+                "answer": "It supports uppercase, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, PascalCase, Train-Case, dot.case, alternating case, and inverse case."
+          },
+          {
+                "question": "How does the tool handle special characters and acronyms during case conversion operations?",
+                "answer": "Acronyms in title case such as NASA and USA are preserved. Unicode characters maintain their case properties. Words with numbers are handled intelligently in conversions."
+          },
+          {
+                "question": "Can the tool perform bulk text transformations on multiple lines or a list of strings?",
+                "answer": "Yes, multi-line mode applies the conversion to each line independently for converting lists of variable names or database column names to a different convention."
+          }
+    ]
+},
   {
     id: "mt-1",
     name: "ETA Calculator",
@@ -2158,6 +2767,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
+
     id: "du-5",
     name: "YAML Re-indenter",
     slug: "yaml-reindenter",
@@ -2165,7 +2775,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.',
     seoDescription: 'Free online YAML Re-indenter — Clean up messy YAML with proper indentation, aligned colons, and normalized list formatting. ',
     dependencies: "Vanilla JS",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste YAML data with inconsistent, mixed, or incorrect indentation. The tool accepts any YAML including mappings, sequences, multi-line strings, and complex nested structures."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Set the desired indentation width and use spaces only since tabs are not valid YAML indentation. Configure line wrapping options for long lines."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Reindent the YAML by parsing and regenerating it with consistent indentation. The tool also validates the YAML structure and reports any parsing errors found."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why does YAML require consistent indentation and what happens when it is incorrect?",
+                "answer": "YAML uses indentation for structure so incorrect indentation changes meaning or causes parse failures. Common issues include mixing tabs and spaces and inconsistent nesting depth."
+          },
+          {
+                "question": "How does the reindenter handle YAML with anchors and aliases that reference different levels?",
+                "answer": "Anchors and aliases are preserved exactly. The reindenter parses the resolved YAML structure and regenerates the document maintaining correct references."
+          },
+          {
+                "question": "Can the tool convert YAML files between different indentation levels in bulk processing mode?",
+                "answer": "Yes, batch mode processes multiple YAML files converting all to the target indentation for consolidating YAML files from different sources into a consistent style."
+          }
+    ]
+},
   {
 
     id: "ou-1",
@@ -2471,6 +3109,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
 },
   {
+
     id: "524",
     name: "RSA Key Pair Generator",
     slug: "rsa-key-generator",
@@ -2478,7 +3117,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
     seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Select Key Bit Length",
+                "desc": "Choose the RSA key size from 1024, 2048, 4096, or 8192 bits. 2048-bit is the current industry minimum for security; 4096-bit provides stronger security at slower generation and encryption speed."
+          },
+          {
+                "title": "2. Choose Output Format",
+                "desc": "Select PEM (base64-encoded with headers) or DER (binary ASN.1) format. PEM is human-readable and widely compatible with OpenSSL, SSH, and most programming languages."
+          },
+          {
+                "title": "3. Generate and Download Keys",
+                "desc": "Click Generate to create a public/private key pair. Download each key separately or copy them individually. Store the private key securely — it cannot be recovered if lost."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Can I protect the private key with a passphrase?",
+                "answer": "Yes, the tool supports optional AES-256 encryption of the private key using a passphrase. When enabled, the private key is wrapped in OpenSSL's ENCRYPTED PRIVATE KEY PEM format. You must provide the passphrase every time the private key is used. Without the passphrase, the encrypted key file is useless."
+          },
+          {
+                "question": "What is the difference between PKCS#1 and PKCS#8 key formats?",
+                "answer": "PKCS#1 is the older RSA-specific format (BEGIN RSA PRIVATE KEY), while PKCS#8 is a more flexible, standard container (BEGIN PRIVATE KEY) that stores key type, algorithm parameters, and the key material together. PKCS#8 is the modern recommended format and supports encryption at the container level. Most libraries accept both, but PKCS#8 is preferred for new applications."
+          },
+          {
+                "question": "How does the Java/.NET compatibility mode affect the output?",
+                "answer": "When enabled, the tool outputs the private key in PKCS#8 format (required by Java's KeyFactory and .NET's RSACryptoServiceProvider by default) and the public key as a SubjectPublicKeyInfo structure. Without this mode, keys use OpenSSL's traditional format which may require conversion before use in these frameworks."
+          }
+    ]
+},
   {
 
     id: "ct-1",
@@ -3076,6 +3743,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
 },
   {
+
     id: "537a",
     name: "OAuth Client Setup",
     slug: "oauth-client-setup",
@@ -3083,8 +3751,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.',
     seoDescription: 'Free online OAuth Client Setup \u2014 Generate authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Choose from built-in OAuth provider templates including Google, GitHub, Facebook, Microsoft, Twitter, and Apple. Alternatively configure a custom provider with your own endpoints."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Provide your client ID and client secret if confidential. Set the redirect URI, authorized JavaScript origins, and required scopes for your application needs."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Generate the OAuth client configuration with code snippets for multiple languages and environment variables. Download the provider-specific configuration JSON."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What OAuth grant types does the client setup wizard support for different application types?",
+                "answer": "It supports Authorization Code with PKCE for SPAs and mobile apps, Authorization Code with client secret for server-side apps, Client Credentials for machine to machine, and Device Code."
+          },
+          {
+                "question": "How does the tool generate provider-specific configuration for different OAuth platforms?",
+                "answer": "Each provider has a customized template using the correct format for its console. Google uses Google Cloud Console format and GitHub uses OAuth App settings format."
+          },
+          {
+                "question": "Can the generated configuration include environment variable placeholders for sensitive credentials?",
+                "answer": "Yes, client secrets and client IDs are output as environment variable references for secure deployment across different environments without hardcoding credentials."
+          }
+    ]
+},
   {
+
     id: "537b",
     name: "PKCE Verifier",
     slug: "pkce-verifier",
@@ -3092,8 +3789,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
     seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Code Verifier",
+                "desc": "Paste the code_verifier used in the OAuth PKCE flow."
+          },
+          {
+                "title": "2. Enter Code Challenge",
+                "desc": "Paste the code_challenge received from the authorization request."
+          },
+          {
+                "title": "3. Verify Match",
+                "desc": "Select the challenge method (S256 or plain) and click Verify to confirm the verifier matches the challenge."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the PKCE verifier confirm a code_challenge matches a code_verifier?",
+                "answer": "For S256, the tool computes SHA-256 of the verifier and base64url-encodes it, then compares to the challenge. For plain, it compares strings directly."
+          },
+          {
+                "question": "What should I do if the verifier doesn't match the challenge?",
+                "answer": "Check that both values were copied completely (no truncation), verify the challenge method (S256 vs plain), and ensure the verifier uses unreserved characters only."
+          },
+          {
+                "question": "Does the verifier check the code_verifier's RFC 7636 compliance?",
+                "answer": "Yes, it validates: minimum 43 characters, maximum 128 characters, and only unreserved characters (A-Z, a-z, 0-9, -, ., _, ~)."
+          }
+    ]
+},
   {
+
     id: "537c",
     name: "OAuth Scope Builder",
     slug: "oauth-scope-builder",
@@ -3101,8 +3827,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
     seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Choose from supported OAuth providers like Google, Microsoft, GitHub, Facebook, Slack, or Spotify. Each provider has its own list of available scopes and permissions."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Browse the categorized scope list for the selected provider. Each scope shows its full name, data access level, and sensitivity rating for informed selection."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Copy the formatted scope string and the full authorization URL with selected scopes. The output is ready for use in your OAuth authorization request to the provider."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the scope builder help determine the minimum scopes needed for an application?",
+                "answer": "Scopes are annotated with the specific API endpoints they enable. The builder shows a dependency tree where broader scopes include narrower ones for least-privilege selection."
+          },
+          {
+                "question": "Can the tool validate that a scope combination is valid for the selected provider and grant type?",
+                "answer": "Yes, it validates scope combinations against provider-specific rules including restricted scopes requiring verification, incompatible pairs, and scopes needing configuration."
+          },
+          {
+                "question": "Does the scope builder support OpenID Connect scopes and custom claims parameters for OIDC?",
+                "answer": "Yes, OIDC scopes are included with explanations of which claims each returns. The builder can also generate a claims parameter for specific claims beyond default mappings."
+          }
+    ]
+},
   {
+
     id: "537d",
     name: "OAuth State Validator",
     slug: "oauth-state-validator",
@@ -3110,8 +3865,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Validate OAuth state parameters for format, length, and age.',
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter State Parameter",
+                "desc": "Paste the state parameter value sent in the OAuth authorization request."
+          },
+          {
+                "title": "2. Enter Returned State",
+                "desc": "Paste the state parameter value received in the callback URL after the authorization redirect."
+          },
+          {
+                "title": "3. Validate Match",
+                "desc": "The tool performs a constant-time string comparison to prevent timing attacks. Shows Match or Mismatch result."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why is the OAuth state parameter important for security?",
+                "answer": "The state parameter prevents CSRF attacks on OAuth flows. It binds the authorization request to the callback, ensuring that the response corresponds to a request the client initiated."
+          },
+          {
+                "question": "What is constant-time comparison and why is it used?",
+                "answer": "Constant-time comparison ensures the comparison takes the same duration regardless of how many characters match, preventing timing side-channel attacks that could leak the state value character by character."
+          },
+          {
+                "question": "Can the tool generate a cryptographically random state parameter?",
+                "answer": "Yes, the tool has a Generate button that creates a random state using crypto.getRandomValues(), base64url-encoded, suitable for OAuth 2.0 authorization requests."
+          }
+    ]
+},
   {
+
     id: "537e",
     name: "PBKDF2 Hash Generator",
     slug: "pbkdf2-hash-generator",
@@ -3119,8 +3903,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
     seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Password and Salt",
+                "desc": "Input the password you want to hash and provide either a custom salt or let the tool generate a cryptographically random 16-byte salt. The salt prevents rainbow table precomputation."
+          },
+          {
+                "title": "2. Configure Iterations and Algorithm",
+                "desc": "Set the iteration count (recommended minimum 600,000 for SHA-256 as of 2024) and select the underlying hash algorithm: SHA-1, SHA-256, or SHA-512. Higher iterations increase brute-force cost."
+          },
+          {
+                "title": "3. Select Output Length and Encoding",
+                "desc": "Choose the derived key length in bytes (default 32) and output encoding — hex (64 chars for 32 bytes) or base64. Copy the salt and hash together for storage, as both are needed for verification."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Why do I need to store the salt alongside the PBKDF2 hash?",
+                "answer": "PBKDF2 is deterministic — the same password + salt + iterations always produces the same derived key. The salt must be unique per user and stored in plaintext alongside the hash. During login, you retrieve the stored salt, re-run PBKDF2 with the provided password, and compare the computed hash against the stored hash. Without the salt, verification is impossible."
+          },
+          {
+                "question": "How many PBKDF2 iterations should I use for password hashing in 2024?",
+                "answer": "OWASP recommends at least 720,000 iterations for PBKDF2-HMAC-SHA256 and 600,000 for PBKDF2-HMAC-SHA512 as of 2024. These numbers derive from the time it takes to compute the hash on modern hardware — aim for approximately 0.5 seconds of computation time on your production server. Higher is always better within acceptable latency."
+          },
+          {
+                "question": "What is the difference between PBKDF2 and bcrypt/argon2?",
+                "answer": "PBKDF2 is a key derivation function designed by RSA Laboratories and is FIPS-140 compliant. Unlike bcrypt (which includes adaptive cost and is GPU-resistant) and argon2 (which adds memory-hardness to resist ASIC attacks), PBKDF2 has relatively low memory requirements and is more vulnerable to GPU-based brute force at equivalent iteration counts. Argon2id is the OWASP-recommended choice for new password hashing implementations."
+          }
+    ]
+},
   {
+
     id: "537f",
     name: "Cookie Parser & Analyzer",
     slug: "cookie-parser",
@@ -3128,8 +3941,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
     seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste Cookie Header",
+                "desc": "Paste the Cookie or Set-Cookie header string from an HTTP request or response."
+          },
+          {
+                "title": "2. Auto-Parse Cookies",
+                "desc": "The tool automatically parses each cookie name-value pair and extracts attributes (Expires, Max-Age, Domain, Path, Secure, HttpOnly, SameSite)."
+          },
+          {
+                "title": "3. Inspect Cookie Properties",
+                "desc": "Review each cookie's parsed details in a table. Expired cookies are flagged. Security issues (missing Secure, missing HttpOnly on session cookies) are warned."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the cookie parser handle multiple Set-Cookie headers?",
+                "answer": "The tool supports multiple Set-Cookie headers by splitting on newlines or concatenated headers. Each cookie is parsed independently and displayed in its own row."
+          },
+          {
+                "question": "What is the difference between a session cookie and a persistent cookie?",
+                "answer": "A session cookie has no Expires or Max-Age attribute and is deleted when the browser closes. A persistent cookie has an Expires or Max-Age attribute defining its lifetime."
+          },
+          {
+                "question": "Does the tool detect security misconfigurations in cookies?",
+                "answer": "Yes, it flags cookies missing the Secure flag (sent over HTTP), missing HttpOnly (accessible to JavaScript), SameSite=None without Secure, and cookies with overly broad Domain attributes."
+          }
+    ]
+},
   {
+
     id: "539b",
     name: "HTML Linter",
     slug: "html-linter",
@@ -3137,8 +3979,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
     seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Paste HTML Source",
+                "desc": "Paste your HTML code into the editor. The tool supports HTML5, XHTML, and legacy HTML doctypes."
+          },
+          {
+                "title": "2. Run Lint Check",
+                "desc": "Click Lint to analyze the HTML. The tool checks for unclosed tags, duplicate IDs, invalid nesting, deprecated attributes, and accessibility violations."
+          },
+          {
+                "title": "3. Fix Errors",
+                "desc": "Each error links to the problematic line. Use the Auto-fix button for common issues like unclosed tags or incorrect boolean attributes."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What HTML linting rules does this tool enforce?",
+                "answer": "Rules include: void elements must not have content, ID uniqueness, valid ARIA attributes, heading hierarchy (h1-h6), img alt text, label-for associations, and deprecated tag detection."
+          },
+          {
+                "question": "Does the linter check for accessibility (a11y) issues?",
+                "answer": "Yes, it checks WCAG 2.1 AA requirements: missing alt text on images, missing form labels, insufficient color contrast (when CSS is included), missing lang attribute, and non-semantic structure."
+          },
+          {
+                "question": "Can I customize which linting rules to enable or disable?",
+                "answer": "Yes, the tool has a Rules panel where you can toggle individual rules on/off. Rule configurations can be saved as presets for different projects."
+          }
+    ]
+},
   {
+
     id: "539c",
     name: "XML Minifier / Validator",
     slug: "xml-minifier-validator",
@@ -3146,7 +4017,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste XML content for validation and minification. The tool checks well-formedness including proper nesting, matching tags, correct attribute quoting, and character references."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Run validation first to check for XML structure errors. After validation passes, configure minification options to remove whitespace and unnecessary line breaks."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Minify the validated XML to remove whitespace and comments. The compact output is suitable for API payloads and storage where file size matters."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What XML validation checks does the tool perform beyond basic well-formedness checks?",
+                "answer": "It validates namespace prefix declarations match their URIs, element and attribute names follow XML naming rules, CDATA sections are properly terminated, and document structure."
+          },
+          {
+                "question": "How does the minifier handle XML namespaces and preserve essential whitespace content?",
+                "answer": "Namespace declarations are preserved. Whitespace in elements with space equals preserve attribute is kept intact. CDATA sections are preserved but tag whitespace is collapsed."
+          },
+          {
+                "question": "Can the tool validate XML against an XSD schema or DTD for structural correctness checking?",
+                "answer": "Yes, provide an XSD schema or DTD to validate the XML document structure, required elements, attribute types, and data value constraints beyond well-formedness."
+          }
+    ]
+},
   {
     id: "948",
     name: "Border CSS Generator",
@@ -3187,6 +4086,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
   },
   {
+
     id: "543a",
     name: "Base32 Encoder / Decoder",
     slug: "base32-encoder",
@@ -3194,8 +4094,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode text to Base32 or decode Base32 strings back to text.',
     seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Input Data",
+                "desc": "Type or paste text, or upload a file to encode or decode using the Base32 encoding scheme as defined by RFC 4648."
+          },
+          {
+                "title": "2. Choose Base32 Variant",
+                "desc": "Select Standard Base32 (uppercase A–Z and 2–7) for general use, or Base32hex (0–9 and A–V) for lexicographically sortable output, as used in DNSSEC and NSEC3 records."
+          },
+          {
+                "title": "3. Encode or Decode",
+                "desc": "Click Encode to convert to Base32 or Decode to convert back. View the result with optional padding (= characters) or without."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the difference between Base32 and Base64 encoding in terms of efficiency?",
+                "answer": "Base32 encodes 5 bits per character (40% overhead) while Base64 encodes 6 bits per character (33% overhead). Base32 is less space-efficient but uses only alphanumeric characters, making it suitable for case-insensitive systems."
+          },
+          {
+                "question": "Where is Base32 encoding commonly used in practice?",
+                "answer": "Base32 is used in TOTP/HOTP shared secrets (Google Authenticator encodes secrets in Base32), DNSSEC NSEC3 record hashes, Magnet links (BitTorrent), and Crockford's Base32 for human-friendly identifiers."
+          },
+          {
+                "question": "How does the tool handle padding in Base32 encoded output?",
+                "answer": "Base32 output is padded with = characters to make the output length a multiple of 8 characters. The tool provides options to include padding (standard), omit padding (RFC 4648 section 6), or add padding validation when decoding."
+          }
+    ]
+},
   {
+
     id: "543b",
     name: "Base64 to JSON Decoder",
     slug: "base64-json-decoder",
@@ -3203,8 +4132,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode Base64 and pretty-print JSON. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Base64-Encoded JSON",
+                "desc": "Paste a Base64 string that contains a JSON payload. This is commonly found in JWT payloads, API tokens, and encoded configuration blobs."
+          },
+          {
+                "title": "2. Decode Automatically",
+                "desc": "The tool decodes the Base64 string to raw text and attempts to parse the result as JSON. If parsing succeeds, the JSON is pretty-printed and syntax-highlighted."
+          },
+          {
+                "title": "3. Inspect Decoded JSON",
+                "desc": "Browse the decoded JSON structure with collapsible tree view. Copy individual field values or the entire decoded object."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What happens if the Base64 decoded content is not valid JSON?",
+                "answer": "The tool still displays the decoded raw text content with character encoding detection. A warning is shown indicating JSON parse failure, along with the position of the syntax error to help you identify the issue."
+          },
+          {
+                "question": "Can the tool decode nested Base64 encoding (Base64 inside a JSON value that is itself Base64-encoded)?",
+                "answer": "Yes, the tool recursively detects and offers to decode nested Base64 strings found within the decoded JSON fields. Each nested level is indented and labeled with its encoding depth."
+          },
+          {
+                "question": "How does the decoder handle different JSON-like formats inside Base64 wrappers?",
+                "answer": "It attempts to parse as standard JSON first. If that fails, it tries JSON5 (comments, trailing commas), HJSON, or YAML. Supported encodings for the Base64 layer include UTF-8, UTF-16LE, and ASCII."
+          }
+    ]
+},
   {
+
     id: "543c",
     name: "Hex to Text Converter",
     slug: "hex-text-converter",
@@ -3212,8 +4170,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hex strings and text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
-        },
+    instructions: [
+          {
+                "title": "1. Enter Hex String or Plain Text",
+                "desc": "Paste a hex string (e.g., 54686520717569636B) or type plain text. The tool detects the input format automatically for bidirectional conversion."
+          },
+          {
+                "title": "2. Configure Encoding Options",
+                "desc": "Select the text encoding: UTF-8 (standard, variable-width), UTF-16 (fixed 2 bytes per code unit), or Latin-1 (1 byte per character) for hex-text conversion."
+          },
+          {
+                "title": "3. Convert and Inspect",
+                "desc": "View the converted output alongside a detailed byte map showing each character, its hex code point, and its binary representation."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the hex-to-text converter handle UTF-8 encoded characters that are multiple hex bytes long?",
+                "answer": "UTF-8 characters can span 1–4 bytes. The tool properly decodes multi-byte sequences, showing the Unicode code point and the actual rendered character (e.g., U+1F600 rendered as 😀)."
+          },
+          {
+                "question": "What is the difference between this converter and the hex-to-ASCII converter?",
+                "answer": "This tool focuses on full Unicode text conversion using variable-width encodings (UTF-8), while the hex-ASCII converter is limited to 8-bit bytes interpreted as ASCII characters without multi-byte character support."
+          },
+          {
+                "question": "Can the tool convert hex to text for UTF-16 encoded data with BOM?",
+                "answer": "Yes, it detects byte order marks (FEFF for BE, FFFE for LE) and automatically selects the correct byte order. It also handles UCS-2 surrogate pairs for characters outside the Basic Multilingual Plane."
+          }
+    ]
+},
   {
+
     id: "543d",
     name: "SVG to Base64 Converter",
     slug: "svg-base64-converter",
@@ -3221,8 +4208,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to BASE64 format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to Base64 Converter \u2014 Convert SVG to data URIs. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Upload SVG File or Paste Code",
+                "desc": "Paste your SVG markup code or upload a .svg file. The tool validates the SVG XML structure before conversion."
+          },
+          {
+                "title": "2. Convert to Base64 or Vice Versa",
+                "desc": "Click SVG to Base64 to convert the SVG code into a data URI. Click Base64 to SVG to decode a base64-encoded SVG back to raw markup."
+          },
+          {
+                "title": "3. Choose Output Format",
+                "desc": "Select the data URI format: svg+xml for browser embedding or image/svg+xml;base64 for CSS background-image and img src usage."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What is the advantage of using SVG as a data URI vs a separate file?",
+                "answer": "SVG data URIs eliminate an HTTP request and can be inlined in CSS. However, the base64 encoding adds ~33% overhead. For SVGs under 2 KB, inlining as raw SVG (without base64) is more efficient than base64 encoding."
+          },
+          {
+                "question": "How does the tool handle SVG files with external references (fonts, images) during conversion?",
+                "answer": "External references are flagged with warnings. The tool can optionally inline external resources by converting relative URLs to absolute or by embedding small images as data URIs within the SVG."
+          },
+          {
+                "question": "Can the converter optimize the SVG by removing unnecessary attributes before encoding?",
+                "answer": "Yes, the optional cleanup mode strips editor metadata (Inkscape, Illustrator namespaces), removes empty groups, simplifies paths, and removes unused defs before encoding to reduce data URI size."
+          }
+    ]
+},
   {
+
     id: "543e",
     name: "Character Encoding Converter",
     slug: "character-encoding-converter",
@@ -3230,8 +4246,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
     seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Text or Upload File",
+                "desc": "Type or paste text, or upload a file to detect and convert between character encodings. The tool auto-detects the current encoding from byte patterns."
+          },
+          {
+                "title": "2. Detect Current Encoding",
+                "desc": "Click Detect to analyze the byte sequences and identify the source encoding — UTF-8, Latin-1 (ISO 8859-1), Windows-1252, Shift JIS, EUC-KR, GB2312, etc."
+          },
+          {
+                "title": "3. Convert to Target Encoding",
+                "desc": "Select the target encoding and click Convert. The tool displays the converted text and provides a hex dump comparison showing bytes before and after conversion."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What character encodings does the converter support for detection and conversion?",
+                "answer": "It supports 50+ encodings: UTF-8, UTF-16 (LE/BE), UTF-32 (LE/BE), ISO 8859 series (1–16), Windows codepages (1250–1258), Shift JIS, EUC-JP, EUC-KR, GB2312, GBK, Big5, KOI8-R, KOI8-U, and ISO 2022 variants."
+          },
+          {
+                "question": "How does the tool detect the character encoding of an input with mixed content?",
+                "answer": "It uses byte sequence analysis: UTF-8 BOM detection, valid UTF-8 sequence checking, high-byte pattern matching for single-byte encodings, and character range analysis for CJK multi-byte encodings."
+          },
+          {
+                "question": "What happens when characters in the source encoding have no equivalent in the target encoding?",
+                "answer": "Unmappable characters are replaced with the target encoding's replacement character (usually ? or □). The tool provides a fallback strategy selector: skip, replace with ?, or escape as \\uXXXX."
+          }
+    ]
+},
   {
+
     id: "543f",
     name: "Unicode Converter",
     slug: "unicode-converter",
@@ -3239,8 +4284,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste text containing Unicode characters that need conversion between different Unicode normalisation forms such as NFC, NFD, NFKC, or NFKD forms."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the conversion direction and target Unicode form. Select additional options like escape sequence format for JavaScript, HTML, or CSS context compatibility."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Convert the Unicode text to the target form and review the result. The tool highlights differences between the original and converted text for easy verification."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Unicode normalization forms does the converter support for text transformation?",
+                "answer": "It supports NFC for canonical composition, NFD for canonical decomposition, NFKC for compatibility composition, and NFKD for compatibility decomposition of characters."
+          },
+          {
+                "question": "Can the tool convert Unicode characters to escape sequences for different programming contexts?",
+                "answer": "Yes, it generates escape sequences for JavaScript with backslash-u format, HTML with ampersand-hash format, CSS with backslash format, and Python with backslash-N format."
+          },
+          {
+                "question": "Does the converter detect malformed UTF-8 sequences and suggest proper encoding fixes?",
+                "answer": "Yes, it validates UTF-8 byte sequences and flags malformed sequences. Invalid bytes are highlighted and the tool suggests the correct encoding for problematic characters."
+          }
+    ]
+},
   {
+
     id: "543g",
     name: "Markdown to Slack Converter",
     slug: "markdown-slack-converter",
@@ -3248,8 +4322,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert Markdown to Slack mrkdwn. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Markdown to Slack Converter \u2014 Convert Markdown to Slack mrkdwn. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste Markdown-formatted text to convert to Slack mrkdwn or paste Slack message text to convert to standard Markdown. Both conversion directions are fully supported."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Choose the conversion direction and review how each element maps between formats. Slack-specific formatting like emoji and mentions have no Markdown equivalent and are preserved."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Execute the conversion and copy the result directly to your Slack message or Markdown editor. The tool highlights which elements were transformed and which were preserved as-is."
+          }
+    ],
+    faqs: [
+          {
+                "question": "What Markdown elements are converted differently when targeting Slack mrkdwn message format?",
+                "answer": "Headings become bold text since Slack has no heading levels, horizontal rules are removed, tables are converted to formatted text, and images become hyperlinks."
+          },
+          {
+                "question": "How does the tool handle Slack-specific formatting that has no equivalent in standard Markdown?",
+                "answer": "Slack emoji shortcuts like smile, channel references like general, and user mentions like username are preserved as-is since they are native to Slack and have no Markdown equivalent."
+          },
+          {
+                "question": "Can the converter handle Slack message attachments and block kit formatting during conversion?",
+                "answer": "Yes, the converter supports Slack message attachment formatting including field titles and values that are converted to Markdown blockquotes or tables with appropriate structure."
+          }
+    ]
+},
   {
+
     id: "543h",
     name: "PX to REM Converter",
     slug: "px-rem-converter",
@@ -3257,8 +4360,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between PX and REM with custom base size. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Type a CSS value with pixels or rem unit such as 16px or 2.5rem to convert between the two units. The tool also accepts comma-separated lists for batch conversion."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Configure the root font size which defaults to 16px for most browsers. Adjust for projects with custom root font sizes like 14px or 10px for mental math."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Get the equivalent value in the target unit with two decimal precision. Copy the converted CSS declaration directly for use in your stylesheet or component."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How does the tool calculate the conversion between pixels and rems for CSS values?",
+                "answer": "To convert px to rem you divide by the root font size. To convert rem to px you multiply by the root font size. The default base is 16px making one rem equal to 16px."
+          },
+          {
+                "question": "What is the advantage of using rem units over px in responsive web design strategies?",
+                "answer": "Rem units scale with the user browser font size settings improving accessibility. They also allow global resizing by changing a single root font-size value."
+          },
+          {
+                "question": "Can the converter handle CSS shorthand values with multiple values for batch conversion?",
+                "answer": "Yes, multi-value CSS properties are parsed and each value is converted independently. The tool preserves the order and structure of shorthand declarations."
+          }
+    ]
+},
   {
+
     id: "543i",
     name: "SVG Optimizer",
     slug: "svg-optimizer",
@@ -3266,7 +4398,35 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify SVG by removing whitespace, comments, and redundant attributes.',
     seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Step 1",
+                "desc": "Paste SVG source code or upload an SVG file with paths, shapes, gradients, fonts, and metadata that needs to be optimized for web and production use."
+          },
+          {
+                "title": "2. Step 2",
+                "desc": "Toggle optimization passes including editor metadata removal, empty group collapsing, path precision reduction, unused ID removal, and path merging operations."
+          },
+          {
+                "title": "3. Step 3",
+                "desc": "Optimize the SVG and compare the original versus optimized size with a visual preview. Download the optimized SVG file for use in your production application."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How much file size reduction can I expect from SVG optimization for web graphics?",
+                "answer": "Typical reduction ranges from 20 to 80 percent depending on the source. SVGs from vector editors have significant metadata overhead of 30 to 60 percent that can be stripped."
+          },
+          {
+                "question": "What SVG elements and attributes are removed during the cleanup optimization pass?",
+                "answer": "Removed elements include editor namespaces, empty groups, unused defs, duplicate IDs, hidden elements, default attribute values, and XML declarations when not needed."
+          },
+          {
+                "question": "Does the optimizer simplify SVG paths by reducing coordinate precision without visible change?",
+                "answer": "Yes, path coordinate precision is reduced to a configurable number of decimal places. A typical path with six decimal places can be reduced without visible quality loss."
+          }
+    ]
+},
   {
 
     id: "543j",
@@ -3420,6 +4580,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ]
   },
   {
+
     id: "548c",
     name: "Media Query Generator",
     slug: "media-query-generator",
@@ -3427,8 +4588,37 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate CSS media queries with min/max width and optional device type conditions.',
     seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Define Breakpoint Ranges",
+                "desc": "Configure min-width and max-width values for each breakpoint (e.g., mobile: 0–576px, tablet: 577–768px). The tool supports up to 10 named breakpoints."
+          },
+          {
+                "title": "2. Select Media Type and Features",
+                "desc": "Choose the target media type (screen, print, all) and optional features like resolution, orientation (portrait/landscape), or aspect-ratio for more precise targeting."
+          },
+          {
+                "title": "3. Generate and Export CSS",
+                "desc": "Review the generated @media rule blocks. You can copy individual queries or export the entire stylesheet. Each query includes the appropriate min/max width syntax."
+          }
+    ],
+    faqs: [
+          {
+                "question": "Should I use min-width or max-width queries for mobile-first design?",
+                "answer": "Mobile-first design uses min-width queries exclusively — the base styles target the smallest screen, and each @media (min-width: ...px) block adds enhancements as viewport grows. This is simpler, performs better, and avoids the specificity cascading issues of max-width overrides. The tool defaults to min-width but lets you toggle to max-width as needed."
+          },
+          {
+                "question": "How do I handle high-DPI (Retina) screens with media queries?",
+                "answer": "Use the resolution media feature with -webkit-min-device-pixel-ratio: 2 or min-resolution: 192dpi for Retina targeting. The tool includes a dedicated Retina toggle that generates the vendor-prefixed and standard syntax. This is essential for delivering @2x images or different CSS for high-density displays."
+          },
+          {
+                "question": "Can I generate container queries instead of media queries?",
+                "answer": "This tool generates traditional @media queries, not @container queries. Container queries respond to the size of a parent container rather than the viewport. For container query support, you would need a separate tool — they follow a different syntax (@container (min-width: ...)) and require a contain property on the parent element."
+          }
+    ]
+},
   {
+
     id: "548d",
     name: "Markdown Table Generator",
     slug: "markdown-table-generator",
@@ -3436,5 +4626,33 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate Markdown table templates with configurable rows and columns.',
     seoDescription: 'Free online Markdown Table Generator \u2014 Generate Markdown table templates with custom dimensions. ',
     dependencies: "None",
-  },
+    instructions: [
+          {
+                "title": "1. Enter Table Dimensions",
+                "desc": "Specify the number of rows (including header) and columns. The tool supports tables up to 50×50 cells for practical markdown rendering limits."
+          },
+          {
+                "title": "2. Fill Cell Content",
+                "desc": "Click into each cell and type your content directly in the interactive grid. You can paste tabular data from spreadsheets using the Paste from Clipboard button."
+          },
+          {
+                "title": "3. Choose Alignment and Generate",
+                "desc": "Set column alignment (left/center/right) using the column header controls. The tool generates the separator row with colons (:---, :---:, ---:) accordingly."
+          }
+    ],
+    faqs: [
+          {
+                "question": "How do I handle multiline content in a markdown table cell?",
+                "answer": "Markdown tables do not natively support multiline cells. The workaround is to use <br> HTML tags within cells for line breaks. The tool automatically wraps cell content containing <br> to render correctly. Alternatively, you can split the row into multiple rows with repeating first-column content."
+          },
+          {
+                "question": "What is the maximum table size that renders well in markdown?",
+                "answer": "Most markdown renderers (GitHub, GitLab, Stack Overflow) handle tables up to 20–30 columns and several hundred rows. Beyond that, the raw markdown becomes unreadable and rendering may be slow. This tool limits to 50×50 to maintain performance and output quality."
+          },
+          {
+                "question": "Can I import a CSV file directly into the table grid?",
+                "answer": "Yes, the tool includes a CSV import feature. Paste comma-separated or tab-separated data, and the tool automatically detects the delimiter and populates the grid. The first row is treated as the table header."
+          }
+    ]
+},
 ];
