@@ -230,7 +230,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.',
     seoDescription: 'Free online Currency Converter — Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. ',
     dependencies: "ExchangeRate-API"
-  },
+  ,
+    instructions: [
+    { title: "1. Select Currencies", desc: "Choose the source currency and target currency from the dropdown lists. Over 160 world currencies are supported with real-time exchange rates." },
+    { title: "2. Enter Amount", desc: "Type the amount you want to convert. The converted value updates instantly as you type." },
+    { title: "3. Review and Convert", desc: "View the converted amount with the current exchange rate displayed. Swap currencies to convert in the opposite direction." },
+  ],
+    faqs: [
+    { question: "How many currencies are supported?", answer: "Over 160 world currencies are supported with exchange rates sourced from central banks and financial data providers." },
+    { question: "How often are exchange rates updated?", answer: "Exchange rates are updated in real-time from financial data providers to ensure accurate conversions." },
+    { question: "Can I use this offline?", answer: "No, live exchange rates require an internet connection. The tool uses cloud-based APIs for current rates." },
+  ],
+},
   {
     id: "16",
     name: "Logo Maker",
@@ -513,7 +524,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Loan Details", desc: "Input the loan amount, annual interest rate, and loan tenure in months or years." },
+    { title: "2. Calculate EMI", desc: "The tool instantly computes your monthly EMI, total interest payable, and total payment." },
+    { title: "3. View Amortization", desc: "Review the full amortization schedule showing the breakdown of principal vs interest for each payment." },
+  ],
+    faqs: [
+    { question: "What is an EMI?", answer: "EMI (Equated Monthly Installment) is the fixed monthly payment you make to repay a loan, consisting of both principal and interest components." },
+    { question: "How is EMI calculated?", answer: "EMI is calculated using the formula: EMI = P x R x (1+R)^N / ((1+R)^N - 1), where P is loan amount, R is monthly interest rate, and N is number of months." },
+    { question: "Can I change the loan tenure?", answer: "Yes. Adjust the tenure to see how it affects your monthly EMI and total interest payable." },
+  ],
+},
   {
     id: "46",
     name: "Character Counter",
@@ -685,7 +707,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SIP Calculator — Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter SIP Details", desc: "Input your monthly investment amount, expected annual return rate, and investment tenure." },
+    { title: "2. Calculate Returns", desc: "The tool computes the total invested amount, estimated returns, and maturity value." },
+    { title: "3. Review Growth", desc: "View the year-wise growth chart showing how your investment compounds over time." },
+  ],
+    faqs: [
+    { question: "What is SIP?", answer: "SIP (Systematic Investment Plan) is a method of investing a fixed amount regularly in mutual funds, allowing you to benefit from rupee cost averaging and compounding." },
+    { question: "How are returns calculated?", answer: "Returns are calculated using compound interest on monthly investments at the expected annual return rate. Actual returns may vary." },
+    { question: "Can I change the investment frequency?", answer: "This calculator assumes monthly SIP. For quarterly or annual investments, adjust the monthly amount accordingly." },
+  ],
+},
   {
     id: "62",
     name: "BMI Calculator",
@@ -886,7 +919,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Calculate net salary after taxes Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter CTC", desc: "Input your annual Cost to Company (CTC) or monthly salary." },
+    { title: "2. Select Components", desc: "Enter deductions like PF, professional tax, and income tax as applicable." },
+    { title: "3. View In-Hand Salary", desc: "Review your monthly in-hand salary after all deductions." },
+  ],
+    faqs: [
+    { question: "What is CTC?", answer: "CTC (Cost to Company) is the total amount your employer spends on you annually, including salary, benefits, bonuses, and employer PF contributions." },
+    { question: "What deductions are considered?", answer: "Common deductions include Employee PF (12% of basic), Professional Tax, Income Tax (TDS), and voluntary deductions." },
+    { question: "Is this accurate for all countries?", answer: "The calculator uses Indian salary structure by default. Tax rules vary by country — adjust deductions based on your location." },
+  ],
+},
   {
     id: "86",
     name: "Audio Cutter",
@@ -974,7 +1018,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Invoice Generator — Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. ',
     dependencies: "PDF-lib / Vue.js"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Business Details", desc: "Add your company name, address, logo, and contact information." },
+    { title: "2. Add Line Items", desc: "Add items or services with quantities, rates, and taxes. The total auto-calculates." },
+    { title: "3. Download Invoice", desc: "Preview the invoice and download as PDF or print directly." },
+  ],
+    faqs: [
+    { question: "Can I add my logo?", answer: "Yes. Upload your business logo and it will appear on the invoice header." },
+    { question: "What formats can I download?", answer: "Invoices can be downloaded as PDF or printed directly from the browser." },
+    { question: "Are my invoices stored?", answer: "No. All data is processed locally in your browser. Invoices are not stored on any server." },
+  ],
+},
   {
     id: "98",
     name: "Business Card Maker",
@@ -1358,7 +1413,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online VAT Calculator — Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Price", desc: "Input the net price (excluding VAT) or gross price (including VAT)." },
+    { title: "2. Select VAT Rate", desc: "Choose the applicable VAT rate for your country and product type." },
+    { title: "3. View VAT Amount", desc: "See the VAT amount, net price, and gross price clearly displayed." },
+  ],
+    faqs: [
+    { question: "What is the difference between VAT and sales tax?", answer: "VAT is collected at each stage of production, while sales tax is collected only at the final sale to consumers. Both are consumption taxes." },
+    { question: "What VAT rates are available?", answer: "Common VAT rates include 5%, 10%, 13%, 17%, 20%, and 27% depending on the country and product category." },
+    { question: "Can I calculate VAT for multiple items?", answer: "Enter the total price of all items to calculate VAT for the entire purchase." },
+  ],
+},
   {
     id: "134",
     name: "Password Strength Checker",
@@ -1426,7 +1492,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Receipt Generator — Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. ',
     dependencies: "Canvas API / jsPDF"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Details", desc: "Add your business info, customer details, and receipt date." },
+    { title: "2. Add Items", desc: "List the items or services provided with quantities and prices." },
+    { title: "3. Generate Receipt", desc: "Preview and download the receipt as PDF for record keeping." },
+  ],
+    faqs: [
+    { question: "What information appears on the receipt?", answer: "Business name, address, date, receipt number, itemized list, quantities, prices, subtotal, tax, and total." },
+    { question: "Can I customize the receipt?", answer: "Yes. Add your business details, logo, and customize the receipt appearance." },
+    { question: "Are receipts saved?", answer: "No. Receipts are generated locally in your browser and are not stored on any server." },
+  ],
+},
   {
     id: "139",
     name: "AI Thumbnail Maker",
@@ -1522,7 +1599,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online IBAN Validator — Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. ',
     dependencies: "ibantools"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter IBAN", desc: "Type or paste the IBAN you want to validate." },
+    { title: "2. Validate", desc: "The tool checks the IBAN structure, country code, and check digits." },
+    { title: "3. View Bank Info", desc: "See the validated IBAN with bank identifier and branch details." },
+  ],
+    faqs: [
+    { question: "What is an IBAN?", answer: "IBAN (International Bank Account Number) is a standard international numbering system for bank accounts, used for cross-border transactions." },
+    { question: "Which countries use IBAN?", answer: "IBAN is used primarily in Europe, the Middle East, and parts of Africa. The US and Canada use routing numbers instead." },
+    { question: "Does validation guarantee the account exists?", answer: "No. Validation checks the IBAN structure and check digits but does not verify that the actual bank account exists." },
+  ],
+},
   {
     id: "151",
     name: "CSV to JSON",
@@ -1994,7 +2082,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Burn Rate Calculator — Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Monthly Expenses", desc: "Input your company's total monthly operating expenses." },
+    { title: "2. Enter Cash Balance", desc: "Enter your current cash balance or available funding." },
+    { title: "3. View Runway", desc: "See your monthly burn rate and how many months of runway remain." },
+  ],
+    faqs: [
+    { question: "What is burn rate?", answer: "Burn rate is the rate at which a company spends its cash reserves, typically measured monthly." },
+    { question: "What is gross vs net burn rate?", answer: "Gross burn is total monthly expenses. Net burn is expenses minus revenue. Net burn is more meaningful for runway calculation." },
+    { question: "How much runway should a startup have?", answer: "Most investors recommend 12-18 months of runway. Less than 6 months is considered risky." },
+  ],
+},
   {
     id: "190",
     name: "Net Promoter Score Calculator",
@@ -2070,7 +2169,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SaaS Pricing Calculator — Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Pricing Tiers", desc: "Define your SaaS pricing tiers with monthly and annual prices." },
+    { title: "2. Enter Assumptions", desc: "Input expected conversion rates, churn, and customer counts per tier." },
+    { title: "3. Project Revenue", desc: "View projected monthly and annual recurring revenue based on your model." },
+  ],
+    faqs: [
+    { question: "What inputs do I need?", answer: "Define your pricing tiers, expected customer counts per tier, conversion rates, and churn assumptions." },
+    { question: "How does annual vs monthly pricing affect revenue?", answer: "Annual billing typically offers a discount but provides upfront cash and reduces churn. The calculator compares both models." },
+    { question: "Can I model different scenarios?", answer: "Yes. Adjust assumptions to model best-case, expected, and worst-case revenue scenarios." },
+  ],
+},
   {
     id: "220",
     name: "SaaS Metrics Dashboard",
@@ -2080,7 +2190,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis — plus scenario modeling and PDF export. Your data stays in your browser — nothing is uploaded.',
     seoDescription: 'Free online SaaS Metrics Dashboard — All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis. ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Key Metrics", desc: "Input MRR, churn rate, CAC, LTV, and customer counts." },
+    { title: "2. Auto-Calculate", desc: "The dashboard computes key SaaS metrics: ARR, NRR, quick ratio, and more." },
+    { title: "3. Review Dashboard", desc: "View all SaaS metrics in one place for a comprehensive health check." },
+  ],
+    faqs: [
+    { question: "What metrics does this dashboard show?", answer: "MRR, ARR, NRR, churn rate, LTV, CAC, quick ratio, gross margin, and customer count trends." },
+    { question: "How often should I update these metrics?", answer: "Review key SaaS metrics monthly. MRR and churn should be tracked weekly for early warning signals." },
+    { question: "Can I export the dashboard?", answer: "The dashboard is designed for on-screen review. Copy the data for use in spreadsheets or presentations." },
+  ],
+},
   {
     id: "222",
     name: "PDF Workflow Builder",
@@ -2109,7 +2230,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Calculate employee turnover rate Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Employee Turnover Calculator — Calculate employee turnover rate ',
     dependencies: "Vanilla JS"
-  },
+  ,
+    instructions: [
+    { title: "1. Enter Employee Data", desc: "Input total employees at start and end of period, plus departures." },
+    { title: "2. Calculate Turnover", desc: "The tool computes turnover rate and retention rate." },
+    { title: "3. Analyze Trends", desc: "Review turnover trends to identify retention improvement areas." },
+  ],
+    faqs: [
+    { question: "What is employee turnover rate?", answer: "Turnover rate is the percentage of employees who leave during a period, calculated as departures divided by average headcount." },
+    { question: "What is a healthy turnover rate?", answer: "Average turnover is 10-15% annually. Under 5% is excellent. Over 20% may indicate retention issues." },
+    { question: "How is retention rate different?", answer: "Retention rate = 100% - turnover rate. It measures the percentage of employees who stay." },
+  ],
+},
   {
     id: "197",
     name: "MAC Address Generator",

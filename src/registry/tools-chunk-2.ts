@@ -1426,6 +1426,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate gross profit, net income, and margin from revenue, COGS, and operating expenses.',
     seoDescription: 'Free online Working Capital Calculator \u2014 Calculate gross profit, net income, and margin. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Assets", desc: "Input current assets including cash, receivables, and inventory." },
+    { title: "2. Enter Liabilities", desc: "Input current liabilities including payables and short-term debt." },
+    { title: "3. Calculate Ratio", desc: "View your working capital and current ratio for liquidity assessment." },
+  ],
+    faqs: [
+    { question: "What is working capital?", answer: "Working capital = Current Assets - Current Liabilities. It measures a company's operational liquidity." },
+    { question: "What is a healthy current ratio?", answer: "A current ratio (current assets / current liabilities) between 1.5 and 3 is generally considered healthy." },
+    { question: "How can I improve working capital?", answer: "Speed up receivables, delay payables (without harming relationships), and reduce inventory levels." },
+  ],
+
   },
   {
     id: "534e",

@@ -431,6 +431,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tip Calculator \u2014 Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Bill Amount", desc: "Input the total bill amount." },
+    { title: "2. Choose Tip Percentage", desc: "Select a tip percentage (10%, 15%, 18%, 20%, or custom)." },
+    { title: "3. Split the Bill", desc: "Optionally split the bill among any number of people." },
+  ],
+    faqs: [
+    { question: "What is the standard tip percentage?", answer: "15-20% is standard for good service in restaurants. 18% is becoming the new standard in many areas." },
+    { question: "Should I tip on pre-tax or post-tax amount?", answer: "Tipping on the pre-tax amount is more common, but tipping on post-tax is generous and appreciated." },
+    { question: "How do I split the tip among multiple people?", answer: "Enter the number of people splitting the bill to see the tip and total per person." },
+  ],
+
   },
   {
     id: "833",
@@ -440,6 +451,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Sales Tax Calculator \u2014 Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Price", desc: "Input the product or service price." },
+    { title: "2. Enter Tax Rate", desc: "Input the applicable sales tax percentage." },
+    { title: "3. View Total", desc: "See the tax amount and total price including tax." },
+  ],
+    faqs: [
+    { question: "How is sales tax calculated?", answer: "Sales Tax = Price x Tax Rate / 100. Total Price = Price + Sales Tax." },
+    { question: "What sales tax rates are available?", answer: "Rates vary by location. Common US state sales tax rates range from 0% (Oregon, Delaware) to 9.5%+ (Tennessee, Louisiana)." },
+    { question: "Is this different from VAT?", answer: "Yes. Sales tax is charged only at the final sale to consumers. VAT is charged at each stage of production and distribution." },
+  ],
+
   },
   {
     id: "834",
@@ -449,6 +471,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Markup Calculator \u2014 Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Cost", desc: "Input the cost price of the product." },
+    { title: "2. Enter Markup", desc: "Input the markup percentage you want to apply." },
+    { title: "3. View Selling Price", desc: "See the selling price and profit amount." },
+  ],
+    faqs: [
+    { question: "What is the difference between markup and margin?", answer: "Markup is the percentage added to cost to get selling price. Margin is profit as a percentage of selling price." },
+    { question: "How is markup calculated?", answer: "Markup Percentage = (Selling Price - Cost) / Cost x 100. A 50% markup on $100 cost = $150 selling price." },
+    { question: "What is a standard markup?", answer: "Markup varies by industry. Retail: 50-100%. Restaurant food: 300%. Electronics: 30-50%. Clothing: 100-200%." },
+  ],
+
   },
   {
     id: "836",
@@ -458,6 +491,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CAGR Calculator \u2014 Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Beginning Value", desc: "Input the initial investment value." },
+    { title: "2. Enter Ending Value", desc: "Input the final value of the investment." },
+    { title: "3. Enter Years", desc: "Input the number of years. View the CAGR percentage." },
+  ],
+    faqs: [
+    { question: "What is CAGR?", answer: "CAGR (Compound Annual Growth Rate) is the mean annual growth rate of an investment over a specified period, assuming compounding." },
+    { question: "How is CAGR different from average return?", answer: "CAGR shows the geometric mean return, which is more accurate than simple average because it accounts for compounding." },
+    { question: "Can CAGR be negative?", answer: "Yes. If the ending value is less than the beginning value, CAGR will be negative, indicating a loss." },
+  ],
+
   },
   {
     id: "840",
@@ -1325,6 +1369,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate Annual Contract Value (ACV) by dividing total contract value by the contract term in years.',
     seoDescription: 'Free online Annual Contract Value (ACV) Calculator \u2014 Calculate ACV by dividing total contract value by the contract term in years. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Contract Value", desc: "Input the total contract value." },
+    { title: "2. Enter Contract Term", desc: "Input the contract duration in months or years." },
+    { title: "3. Calculate ACV", desc: "View the annual contract value and monthly equivalent." },
+  ],
+    faqs: [
+    { question: "What is ACV?", answer: "ACV (Annual Contract Value) is the normalized annual value of a customer contract, excluding one-time fees." },
+    { question: "How is ACV different from ARR?", answer: "ACV is per-contract, while ARR is company-wide total. Sum of all ACVs = ARR for annual contracts." },
+    { question: "How do multi-year contracts affect ACV?", answer: "ACV spreads multi-year contract values across each year. A 3-year $30K contract has $10K ACV per year." },
+  ],
+
   },
   {
     id: "934",
@@ -1390,6 +1445,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate SaaS customer payback period by dividing CAC by monthly revenue per customer.',
     seoDescription: 'Free online SaaS Payback Period Calculator \u2014 Calculate payback period by dividing CAC by monthly revenue per customer. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter CAC", desc: "Input your customer acquisition cost." },
+    { title: "2. Enter Monthly Revenue", desc: "Input average monthly revenue per customer." },
+    { title: "3. Calculate Payback", desc: "View how many months to recover your customer acquisition cost." },
+  ],
+    faqs: [
+    { question: "What is a good payback period?", answer: "Under 12 months is excellent. 12-18 months is healthy. Over 18 months may strain cash flow for growing companies." },
+    { question: "How does payback period relate to churn?", answer: "If payback period exceeds average customer lifespan, you lose money on each customer. Payback must be shorter than customer lifetime." },
+    { question: "How can I reduce payback period?", answer: "Lower CAC through more efficient marketing, or increase monthly revenue through upsells and price optimization." },
+  ],
+
   },
   {
     id: "940",
@@ -1399,6 +1465,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate SaaS Quick Ratio from new, expansion, reactivation, churned, and contraction MRR.',
     seoDescription: 'Free online SaaS Quick Ratio Calculator \u2014 Calculate Quick Ratio from new, expansion, reactivation, churned, and contraction MRR. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Revenue Metrics", desc: "Input new MRR, expansion MRR, churned MRR, and contraction MRR." },
+    { title: "2. Calculate Ratio", desc: "The tool computes your SaaS quick ratio." },
+    { title: "3. Analyze Health", desc: "A ratio above 4 indicates healthy growth. Below 1 signals a shrinking business." },
+  ],
+    faqs: [
+    { question: "What is the SaaS quick ratio?", answer: "Quick Ratio = (New MRR + Expansion MRR) / (Churned MRR + Contraction MRR). It measures revenue growth efficiency." },
+    { question: "What is a good quick ratio?", answer: "Above 4 is excellent (growing efficiently). 2-4 is healthy. 1-2 is concerning. Below 1 means shrinking." },
+    { question: "How can I improve my quick ratio?", answer: "Reduce churn, increase expansion revenue through upsells, and focus on high-quality customer acquisition." },
+  ],
+
   },
   {
     id: "941",
@@ -1408,6 +1485,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the Rule of 40 score by combining revenue growth rate and profit margin. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SaaS Rule of 40 Calculator \u2014 Calculate the Rule of 40 score by combining revenue growth rate and profit margin. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Growth Rate", desc: "Input your revenue growth rate percentage." },
+    { title: "2. Enter Profit Margin", desc: "Input your profit margin percentage (negative if unprofitable)." },
+    { title: "3. Calculate Score", desc: "See if your combined growth + profit meets the 40% threshold." },
+  ],
+    faqs: [
+    { question: "What is the Rule of 40?", answer: "The Rule of 40 states that a healthy SaaS company's revenue growth rate + profit margin should be 40% or higher." },
+    { question: "How is this used by investors?", answer: "Investors use the Rule of 40 to evaluate SaaS companies. A score above 40% indicates a well-balanced company." },
+    { question: "Can high-growth companies be exempt?", answer: "Yes. Fast-growing companies (50%+ growth) are often evaluated primarily on growth, even if profitability is negative." },
+  ],
+
   },
   {
     id: "942",

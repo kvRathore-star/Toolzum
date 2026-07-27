@@ -225,6 +225,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Mortgage Calculator — Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Loan Amount", desc: "Input the total mortgage loan amount you want to borrow." },
+    { title: "2. Set Rate and Term", desc: "Enter the annual interest rate and loan term in years." },
+    { title: "3. View Payments", desc: "See monthly payment, total interest, and full amortization schedule." },
+  ],
+    faqs: [
+    { question: "What is included in the monthly payment?", answer: "The monthly payment includes principal and interest. Taxes and insurance are not included unless specified." },
+    { question: "How does the amortization schedule work?", answer: "Early payments are mostly interest. Later payments shift toward principal. The schedule shows this breakdown for each payment." },
+    { question: "Can I see the effect of extra payments?", answer: "This calculator shows standard amortization. Use the debt payoff calculator to see how extra payments save interest." },
+  ],
+
   },
   {
     id: "602",
@@ -234,6 +245,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ARR Calculator — Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter MRR", desc: "Input your monthly recurring revenue." },
+    { title: "2. Calculate ARR", desc: "The tool multiplies MRR by 12 to show annual recurring revenue." },
+    { title: "3. Analyze Growth", desc: "Compare ARR across periods to track year-over-year growth." },
+  ],
+    faqs: [
+    { question: "What is ARR?", answer: "ARR (Annual Recurring Revenue) is the annualized version of MRR, calculated as MRR x 12. It represents predictable annual revenue from subscriptions." },
+    { question: "How is ARR different from revenue?", answer: "ARR includes only recurring subscription revenue, not one-time fees, setup charges, or professional services revenue." },
+    { question: "What is good ARR growth?", answer: "20-30% year-over-year ARR growth is considered strong for SaaS companies. 40%+ is exceptional." },
+  ],
+
   },
   {
     id: "603",
@@ -243,6 +265,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Principal", desc: "Input the initial investment amount." },
+    { title: "2. Set Rate and Time", desc: "Enter annual interest rate, compounding frequency, and time period." },
+    { title: "3. View Future Value", desc: "See how your investment grows with compound interest over time." },
+  ],
+    faqs: [
+    { question: "What is compound interest?", answer: "Compound interest is interest earned on both the initial principal and the accumulated interest from previous periods." },
+    { question: "How does compounding frequency affect returns?", answer: "More frequent compounding (daily vs annual) results in higher returns because interest is calculated on interest more often." },
+    { question: "What is the difference between simple and compound interest?", answer: "Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest." },
+  ],
+
   },
   {
     id: "605",
@@ -252,6 +285,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Car Loan Calculator — Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Loan Details", desc: "Input the car price, down payment, loan term, and interest rate." },
+    { title: "2. Calculate Payment", desc: "The tool computes monthly EMI and total interest payable." },
+    { title: "3. Review Amortization", desc: "View the full payment schedule for your car loan." },
+  ],
+    faqs: [
+    { question: "What factors affect my car loan EMI?", answer: "Loan amount, interest rate, and loan tenure are the three main factors. A higher down payment reduces the loan amount and EMI." },
+    { question: "Should I choose a shorter or longer tenure?", answer: "Shorter tenure means higher EMI but lower total interest. Longer tenure means lower EMI but more total interest paid." },
+    { question: "Can I prepay the loan?", answer: "Most car loans allow prepayment with or without penalty. Check your loan agreement for prepayment terms." },
+  ],
+
   },
   {
     id: "606",
@@ -261,6 +305,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Car Lease Calculator — Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Vehicle Details", desc: "Input the car price, residual value, lease term, and money factor." },
+    { title: "2. Calculate Lease", desc: "The tool computes monthly lease payment and total lease cost." },
+    { title: "3. Compare Options", desc: "Compare lease vs buy to make an informed decision." },
+  ],
+    faqs: [
+    { question: "What is residual value?", answer: "Residual value is the estimated value of the car at the end of the lease term. Higher residual value means lower monthly payments." },
+    { question: "What is a money factor?", answer: "Money factor is the interest rate on a lease, expressed as a decimal. Multiply by 2400 to convert to an APR percentage." },
+    { question: "Is leasing cheaper than buying?", answer: "Leasing typically has lower monthly payments but you don't own the car. Buying costs more monthly but builds equity." },
+  ],
+
   },
   {
     id: "607",
@@ -270,6 +325,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Churn Rate Calculator — Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Customer Data", desc: "Input customers at start of period and customers lost during period." },
+    { title: "2. Calculate Churn", desc: "The tool computes monthly churn rate and annual churn rate." },
+    { title: "3. Analyze Retention", desc: "View retention rate and understand customer loyalty metrics." },
+  ],
+    faqs: [
+    { question: "What is churn rate?", answer: "Churn rate is the percentage of customers who stop using your product or service during a given period." },
+    { question: "What is a good churn rate?", answer: "For SaaS, 3-5% monthly churn is average. Under 2% is excellent. Over 7% indicates serious retention issues." },
+    { question: "How does churn affect growth?", answer: "High churn means you need more new customers just to maintain revenue. Reducing churn by 5% can increase profits by 25-95%." },
+  ],
+
   },
   {
     id: "609",
@@ -279,6 +345,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Debt Payoff Calculator — Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Debt Details", desc: "Input total debt amount, interest rate, and monthly payment." },
+    { title: "2. Calculate Payoff", desc: "The tool shows how long it takes to pay off debt and total interest." },
+    { title: "3. Optimize Strategy", desc: "Compare different payment amounts to see how extra payments save interest." },
+  ],
+    faqs: [
+    { question: "What is the debt snowball method?", answer: "Pay off smallest debts first for psychological wins. The snowball method focuses on behavior, not math." },
+    { question: "What is the debt avalanche method?", answer: "Pay off highest interest debts first to minimize total interest paid. The avalanche method is mathematically optimal." },
+    { question: "How do extra payments help?", answer: "Even small extra payments significantly reduce total interest and payoff time. Use the calculator to compare scenarios." },
+  ],
+
   },
   {
     id: "610",
@@ -288,6 +365,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Discount Calculator — Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Original Price", desc: "Input the original price of the product." },
+    { title: "2. Enter Discount", desc: "Input the discount percentage or amount." },
+    { title: "3. View Savings", desc: "See the final price after discount and total amount saved." },
+  ],
+    faqs: [
+    { question: "How do I calculate a percentage discount?", answer: "Discount Amount = Original Price x Discount Percentage / 100. Final Price = Original Price - Discount Amount." },
+    { question: "Is this for single or multiple items?", answer: "The calculator handles one item at a time. For multiple items with the same discount, calculate the total first." },
+    { question: "What is the difference between discount and sale price?", answer: "Discount is the amount saved. Sale price is what you actually pay after the discount." },
+  ],
+
   },
   {
     id: "611",
@@ -297,6 +385,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Hourly Rate", desc: "Input your hourly wage." },
+    { title: "2. Enter Work Hours", desc: "Input hours worked per week and weeks worked per year." },
+    { title: "3. View Annual Salary", desc: "See your equivalent annual salary based on hourly rate." },
+  ],
+    faqs: [
+    { question: "How many work hours are standard?", answer: "Standard full-time is 40 hours per week for 52 weeks (2,080 hours per year), but many people work fewer weeks accounting for vacation." },
+    { question: "Does this include overtime?", answer: "No. The calculator uses your regular hourly rate. Overtime at 1.5x should be calculated separately." },
+    { question: "Should I include benefits in the calculation?", answer: "This calculator compares hourly wage to salary. Benefits like health insurance and 401k match add 20-30% to total compensation." },
+  ],
+
   },
   {
     id: "612",
@@ -306,6 +405,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Inflation Calculator — Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Amount", desc: "Input the amount of money you want to adjust for inflation." },
+    { title: "2. Select Years", desc: "Choose the start year and end year for the inflation calculation." },
+    { title: "3. View Adjusted Value", desc: "See what your money is worth after accounting for inflation." },
+  ],
+    faqs: [
+    { question: "What inflation rate is used?", answer: "The calculator uses historical CPI (Consumer Price Index) data to show how purchasing power has changed over time." },
+    { question: "Can I predict future inflation?", answer: "This calculator uses historical rates. For future projections, use expected inflation rates (typically 2-3% for developed economies)." },
+    { question: "How does inflation affect savings?", answer: "Inflation erodes purchasing power. If your savings earn less than inflation, your money loses value over time." },
+  ],
+
   },
   {
     id: "613",
@@ -315,6 +425,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Customer LTV Calculator — Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Revenue Data", desc: "Input average revenue per customer and gross margin." },
+    { title: "2. Enter Retention", desc: "Input customer retention rate or churn rate." },
+    { title: "3. Calculate LTV", desc: "View customer lifetime value based on revenue and retention." },
+  ],
+    faqs: [
+    { question: "What is the difference between LTV and customer LTV?", answer: "They are the same metric. Customer LTV (or CLV) is the total revenue expected from a customer over their lifetime." },
+    { question: "How does retention affect LTV?", answer: "Higher retention dramatically increases LTV. A 5% increase in retention can increase LTV by 25-95%." },
+    { question: "What inputs are needed?", answer: "Average revenue per customer, gross margin, and retention rate or average customer lifespan in months." },
+  ],
+
   },
   {
     id: "614",
@@ -324,6 +445,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online MRR Calculator — Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Customer Tiers", desc: "Input the number of customers at each pricing tier." },
+    { title: "2. Enter Pricing", desc: "Input the monthly price for each tier." },
+    { title: "3. Calculate MRR", desc: "View total monthly recurring revenue and breakdown by tier." },
+  ],
+    faqs: [
+    { question: "What is MRR?", answer: "MRR (Monthly Recurring Revenue) is the normalized monthly revenue from subscription customers, excluding one-time fees." },
+    { question: "How is MRR different from revenue?", answer: "MRR only includes recurring subscription revenue. One-time setup fees, professional services, and variable charges are excluded." },
+    { question: "Should I track MRR growth?", answer: "Yes. MRR growth rate is the most important SaaS metric. Monthly growth of 5-7% is considered strong." },
+  ],
+
   },
   {
     id: "615",
@@ -333,6 +465,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Net Worth Calculator — Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Assets", desc: "List all your assets: cash, investments, property, vehicles, and other valuables." },
+    { title: "2. Enter Liabilities", desc: "List all your debts: mortgage, loans, credit cards, and other obligations." },
+    { title: "3. Calculate Net Worth", desc: "See your total net worth by subtracting liabilities from assets." },
+  ],
+    faqs: [
+    { question: "What should I include in assets?", answer: "Cash, savings, investments (stocks, bonds, mutual funds), retirement accounts, real estate, vehicles, and other valuable property." },
+    { question: "What should I include in liabilities?", answer: "Mortgage, car loans, student loans, credit card debt, personal loans, and any other outstanding debts." },
+    { question: "How often should I calculate net worth?", answer: "Quarterly is ideal for tracking progress. Annual is minimum. More frequent calculation helps with short-term financial goals." },
+  ],
+
   },
   {
     id: "617",
@@ -342,6 +485,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rent vs Buy Calculator — Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Rent Details", desc: "Input monthly rent, renters insurance, and annual rent increase." },
+    { title: "2. Enter Buy Details", desc: "Input home price, down payment, mortgage rate, and closing costs." },
+    { title: "3. Compare Costs", desc: "View a side-by-side comparison of renting vs buying over time." },
+  ],
+    faqs: [
+    { question: "What factors favor renting?", answer: "Renting is better when you need flexibility, can't afford a down payment, or when home prices are overvalued relative to rents." },
+    { question: "What factors favor buying?", answer: "Buying is better when you plan to stay 5+ years, can afford the down payment, and when mortgage rates are favorable." },
+    { question: "What hidden costs should I consider for buying?", answer: "Property taxes, insurance, maintenance (1-2% of home value annually), HOA fees, and closing costs when selling." },
+  ],
+
   },
   {
     id: "618",
@@ -351,6 +505,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Current Savings", desc: "Input your current retirement savings and monthly contributions." },
+    { title: "2. Set Goals", desc: "Enter your desired retirement age, life expectancy, and annual retirement income." },
+    { title: "3. Plan Your Future", desc: "See if you're on track and how much more you need to save." },
+  ],
+    faqs: [
+    { question: "How much should I save for retirement?", answer: "A common rule is to save 15% of income from age 25. By 30, aim to have 1x your salary saved. By 40, 3x. By 50, 6x. By 60, 8x." },
+    { question: "What return rate should I assume?", answer: "A conservative 6-7% annual return is reasonable for a balanced portfolio. Use lower rates for more conservative planning." },
+    { question: "Does this account for Social Security?", answer: "Social Security benefits depend on your earnings history and claiming age. This calculator focuses on personal savings." },
+  ],
+
   },
   {
     id: "619",
@@ -360,6 +525,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Revenue Growth Calculator — Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Revenue Data", desc: "Input revenue figures for two periods (monthly or yearly)." },
+    { title: "2. Calculate Growth", desc: "The tool computes revenue growth amount and percentage." },
+    { title: "3. Analyze Trends", desc: "Review growth rate to track business performance over time." },
+  ],
+    faqs: [
+    { question: "How is revenue growth calculated?", answer: "Revenue Growth = (Current Period Revenue - Previous Period Revenue) / Previous Period Revenue x 100." },
+    { question: "Should I compare month-over-month or year-over-year?", answer: "Year-over-year (YoY) is more meaningful for seasonal businesses. Month-over-month (MoM) is useful for fast-growing startups." },
+    { question: "What is healthy revenue growth?", answer: "For mature companies, 5-15% YoY is solid. For startups, 20-50% YoY is expected by investors." },
+  ],
+
   },
   {
     id: "620",
@@ -369,6 +545,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Runway Calculator — Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Cash Balance", desc: "Input your current cash balance." },
+    { title: "2. Enter Monthly Burn", desc: "Input your monthly net burn rate (expenses minus revenue)." },
+    { title: "3. View Runway", desc: "See how many months of runway remain before funds run out." },
+  ],
+    faqs: [
+    { question: "What is startup runway?", answer: "Runway is the amount of time a company can continue operating before running out of cash, based on current burn rate." },
+    { question: "What is the 12-month rule?", answer: "Investors typically want to see at least 12 months of runway. Less than 6 months is considered a cash crisis." },
+    { question: "How can I extend my runway?", answer: "Reduce expenses, increase revenue, raise funding, or negotiate longer payment terms with vendors." },
+  ],
+
   },
   {
     id: "621",
@@ -378,6 +565,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online A/B Test Calculator — Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Test Data", desc: "Input visitor counts and conversion numbers for control and variation." },
+    { title: "2. Calculate Significance", desc: "The tool computes statistical significance using standard methods." },
+    { title: "3. Interpret Results", desc: "Review confidence level and decide whether results are statistically valid." },
+  ],
+    faqs: [
+    { question: "What is statistical significance?", answer: "Statistical significance indicates that the observed difference between control and variation is unlikely to be due to chance." },
+    { question: "What is a good confidence level?", answer: "95% confidence is the standard for A/B testing. A p-value below 0.05 means results are statistically significant." },
+    { question: "How many visitors do I need?", answer: "The required sample size depends on the expected effect size and baseline conversion rate. Larger effects need fewer visitors to detect." },
+  ],
+
   },
   {
     id: "622",
@@ -983,6 +1181,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Principal", desc: "Input the principal amount you want to invest or borrow." },
+    { title: "2. Set Rate and Time", desc: "Enter the annual interest rate and time period." },
+    { title: "3. View Interest", desc: "See the simple interest earned or owed." },
+  ],
+    faqs: [
+    { question: "What is simple interest?", answer: "Simple interest is calculated only on the principal amount, not on accumulated interest. Formula: Interest = Principal x Rate x Time." },
+    { question: "How is simple interest different from compound interest?", answer: "Simple interest doesn't compound. It's calculated once on the principal for the entire period." },
+    { question: "When is simple interest used?", answer: "Simple interest is commonly used for short-term loans, car loans, and some bonds." },
+  ],
+
   },
   {
     id: "671",
@@ -992,6 +1201,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Initial Deposit", desc: "Input your starting savings balance." },
+    { title: "2. Set Monthly Contribution", desc: "Enter how much you will save each month." },
+    { title: "3. Project Growth", desc: "View your savings growth over time with compound interest." },
+  ],
+    faqs: [
+    { question: "How does compound interest grow savings?", answer: "Your savings grow exponentially as interest earns interest on itself. The longer you save, the more powerful compounding becomes." },
+    { question: "How much should I save monthly?", answer: "Aim to save 20% of your income. Even 10% makes a significant difference over 20-30 years due to compounding." },
+    { question: "What return rate should I use?", answer: "Use 6-8% for stock market investments, 2-3% for high-yield savings accounts, and 4-5% for balanced portfolios." },
+  ],
+
   },
   {
     id: "672",
@@ -1001,6 +1221,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Seat License Calculator — Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Seat Count", desc: "Input the number of licenses or seats needed." },
+    { title: "2. Enter Per-Seat Price", desc: "Input the price per seat monthly or annually." },
+    { title: "3. Calculate Total", desc: "View total license cost and compare annual vs monthly pricing." },
+  ],
+    faqs: [
+    { question: "What is per-seat pricing?", answer: "Per-seat pricing charges a fixed amount for each user or license. Common in SaaS for B2B products." },
+    { question: "Should I offer annual or monthly pricing?", answer: "Annual pricing typically offers a 15-20% discount and provides upfront cash. Monthly pricing is more accessible but has higher churn risk." },
+    { question: "How do volume discounts work?", answer: "Many vendors offer lower per-seat prices at higher volumes. Account for tiered pricing in your cost calculations." },
+  ],
+
   },
   {
     id: "673",
@@ -1028,6 +1259,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tax Calculator — Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Income", desc: "Input your annual income amount." },
+    { title: "2. Select Tax Year", desc: "Choose the applicable tax year and filing status." },
+    { title: "3. View Tax Liability", desc: "See estimated tax liability, effective tax rate, and bracket details." },
+  ],
+    faqs: [
+    { question: "What tax brackets are used?", answer: "The calculator uses progressive tax brackets. Different portions of your income are taxed at different rates." },
+    { question: "Does this account for deductions?", answer: "Standard deduction is included. For itemized deductions, adjust your taxable income before using the calculator." },
+    { question: "Is this accurate for my country?", answer: "Tax laws vary by country. Use the specific calculator for your jurisdiction, such as TDS Calculator for India." },
+  ],
+
   },
   {
     id: "676",
@@ -1037,6 +1279,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online TDS Calculator India — Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Payment Amount", desc: "Input the payment amount subject to TDS." },
+    { title: "2. Select TDS Section", desc: "Choose the applicable TDS section (192, 194A, 194C, 194H, etc.)." },
+    { title: "3. Calculate TDS", desc: "View the TDS amount and net payment after deduction." },
+  ],
+    faqs: [
+    { question: "What is TDS?", answer: "TDS (Tax Deducted at Source) is a system where the payer deducts tax before making a payment and deposits it with the government." },
+    { question: "What are common TDS sections?", answer: "Section 192 (salary), 194A (interest), 194C (contractor payments), 194H (commission), 194I (rent), 194J (professional fees)." },
+    { question: "What is the TDS rate for each section?", answer: "TDS rates vary by section and nature of payment. Rates range from 1% to 30% depending on the section and payee type." },
+  ],
+
   },
   {
     id: "677",
@@ -1046,6 +1299,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Trial Conversion Calculator — Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. ',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Trial Data", desc: "Input number of trial starts and trial conversions." },
+    { title: "2. Calculate Rate", desc: "The tool computes trial-to-paid conversion rate." },
+    { title: "3. Optimize Funnel", desc: "Use conversion data to improve trial experience and onboarding." },
+  ],
+    faqs: [
+    { question: "What is trial conversion rate?", answer: "Trial conversion rate is the percentage of trial users who become paying customers." },
+    { question: "What is a good trial conversion rate?", answer: "Industry average is 15-25%. Top-performing SaaS companies achieve 30%+ trial conversion rates." },
+    { question: "How can I improve trial conversion?", answer: "Improve onboarding, offer personalized demos, send targeted email sequences, and remove friction from the payment process." },
+  ],
+
   },
   {
     id: "678",
