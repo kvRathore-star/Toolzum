@@ -672,6 +672,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "AI voice generator with Indian accents",
     dependencies: "Google Cloud TTS / ElevenLabs",
     seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio. AI voices in Hindi, Tamil, Telugu, and more. No sign-up needed.',
+    instructions: [
+      { title: "1. Enter Text", desc: "Type or paste the text you want converted to speech." },
+      { title: "2. Choose Voice & Settings", desc: "Select from multiple voices, adjust speed, pitch, and volume. Supports 30+ languages." },
+      { title: "3. Generate & Download", desc: "Preview the audio and download as MP3 or WAV file." },
+    ],
+    faqs: [
+      { question: "What languages are supported?", answer: "30+ languages including English, Spanish, French, German, Chinese, Japanese, Arabic, Hindi, Portuguese, and more." },
+      { question: "How many voices are available?", answer: "Multiple voices per language, including different genders and accents. Premium voices offer more natural intonation." },
+      { question: "Can I adjust the speaking speed?", answer: "Yes. Adjust speed from 0.5x (slow) to 2x (fast). Pitch and volume are also adjustable." },
+    ],
   },
   {
     id: "53",
@@ -998,7 +1008,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Audio",
     description: "Trim and cut audio files online Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
-    dependencies: "Web Audio API / FFmpeg"
+    dependencies: "Web Audio API / FFmpeg",
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select an audio file to cut or trim." },
+      { title: "2. Select Start and End Points", desc: "Use the waveform visualization to set the exact start and end times for your clip." },
+      { title: "3. Export Cut Audio", desc: "Preview the trimmed section and download the result as your chosen format." },
+    ],
+    faqs: [
+      { question: "Can I cut with millisecond precision?", answer: "Yes. The waveform display allows precise selection down to the millisecond for accurate cuts." },
+      { question: "What formats are supported?", answer: "Input: MP3, WAV, FLAC, M4A, OGG, AAC. Output is available in MP3, WAV, and M4A formats." },
+      { question: "Can I make multiple cuts from one file?", answer: "Yes. Make multiple cuts and export them as separate clips or merge them into one file." },
+    ],
   },
   {
     id: "86b",
@@ -1008,7 +1028,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts MP3 files to WAV format — universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to WAV conversion lossy?", answer: "Converting from MP3 to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "87",
@@ -1154,7 +1184,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Audio",
     description: "Transcribe audio to text in multiple languages Uses cloud-based processing.",
     seoDescription: 'Free online Speech to Text — Transcribe audio to text in multiple languages ',
-    dependencies: "Whisper API / Web Speech API"
+    dependencies: "Whisper API / Web Speech API",
+    instructions: [
+      { title: "1. Upload or Record Audio", desc: "Upload an audio file or record speech directly using your microphone." },
+      { title: "2. Select Language", desc: "Choose the spoken language for accurate transcription. Supports 50+ languages." },
+      { title: "3. Generate & Export Transcript", desc: "Process the audio and review the generated text. Copy or download as TXT, SRT, or VTT." },
+    ],
+    faqs: [
+      { question: "What audio formats are supported?", answer: "MP3, WAV, M4A, FLAC, OGG, and AAC. Maximum file size depends on your browser's memory limits." },
+      { question: "How accurate is the transcription?", answer: "Accuracy depends on audio quality, speaker clarity, and background noise. Clean recordings with clear speech achieve 90-95%+ accuracy." },
+      { question: "Can I export with timestamps?", answer: "Yes. Export as SRT or VTT subtitle formats with accurate timestamps for each segment." },
+    ],
   },
   {
     id: "106",

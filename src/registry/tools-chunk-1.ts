@@ -1943,6 +1943,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select one or more audio files from your device." },
+      { title: "2. Choose Output Format", desc: "Pick the target format: MP3, WAV, FLAC, M4A, OGG, AAC, WMA, or AIFF." },
+      { title: "3. Adjust Settings & Convert", desc: "Set bitrate, sample rate, and channels. Click Convert and download your files." },
+    ],
+    faqs: [
+      { question: "What formats are supported?", answer: "Input and output: MP3, WAV, FLAC, M4A, OGG, AAC, WMA, and AIFF. Convert between any pair of supported formats." },
+      { question: "Can I batch convert multiple files?", answer: "Yes. Select multiple files and convert them all at once to the same output format." },
+      { question: "What bitrate should I choose?", answer: "128 kbps for podcasts/voice, 192 kbps for mixed content, 256-320 kbps for music. Higher bitrate = better quality + larger file." },
+    ],
   },
   {
     id: "image-format-converter-1",
@@ -2356,6 +2366,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Vocal Remover — Remove vocals from songs to create karaoke tracks. Extract instrumentals or acapella. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Song", desc: "Select a music track to remove vocals from." },
+      { title: "2. Choose Mode", desc: "Select vocal removal for karaoke or instrumental extraction for isolating the music track." },
+      { title: "3. Download Result", desc: "Process and download the karaoke version or isolated instrumental." },
+    ],
+    faqs: [
+      { question: "How does vocal removal work?", answer: "The tool uses phase cancellation and spectral analysis to isolate and remove the center-panned vocal track from stereo recordings." },
+      { question: "Does it work on all songs?", answer: "Best results on stereo mixes where vocals are centered. Mono recordings or songs with heavy vocal effects may have limited effectiveness." },
+      { question: "Can I extract instruments too?", answer: "Yes. Use instrumental extraction mode to isolate the music track without vocals for sampling or remixing." },
+    ],
   },
   {
     id: "344",
@@ -2366,6 +2386,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Merger — Combine multiple audio files into one track with crossfade and volume normalization. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio Files", desc: "Select multiple audio files in the order you want them merged." },
+      { title: "2. Arrange & Configure", desc: "Drag to reorder files. Optionally set crossfade duration between tracks." },
+      { title: "3. Merge & Download", desc: "Combine all files into a single audio file and download the result." },
+    ],
+    faqs: [
+      { question: "How many files can I merge?", answer: "There is no hard limit. Merge as many files as needed, but total processing time depends on combined file length." },
+      { question: "What is crossfade?", answer: "Crossfade blends the end of one track into the beginning of the next for smooth transitions. Adjustable from 0 to 10 seconds." },
+      { question: "Can I merge files with different formats?", answer: "Yes. Files in different formats are decoded and re-encoded to a single output format you choose." },
+    ],
   },
   {
     id: "345",
@@ -2376,6 +2406,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Voice Recorder — Record audio directly in your browser with waveform visualization. No installation needed. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Grant Microphone Access", desc: "Allow the browser to access your microphone when prompted." },
+      { title: "2. Start Recording", desc: "Click Record and speak into your microphone. Monitor audio levels in real time." },
+      { title: "3. Stop & Download", desc: "Stop recording, preview the audio, and download as MP3, WAV, or other formats." },
+    ],
+    faqs: [
+      { question: "What audio quality options are available?", answer: "Choose from voice quality (8kHz, mono, good for speech), standard (44.1kHz, stereo), or high quality (48kHz, stereo)." },
+      { question: "How long can I record?", answer: "Recording duration is limited by browser memory. Most browsers support recordings up to several hours." },
+      { question: "Can I pause and resume recording?", answer: "Yes. Use the pause button to temporarily stop recording and resume without creating separate files." },
+    ],
   },
   {
     id: "346",
@@ -2386,6 +2426,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Noise Reducer — Reduce background noise from recordings. Mild to extreme noise reduction. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select an audio recording with background noise." },
+      { title: "2. Sample Noise Profile", desc: "Select a section of audio containing only background noise for the tool to analyze." },
+      { title: "3. Reduce Noise & Export", desc: "Adjust noise reduction strength and download the cleaned audio." },
+    ],
+    faqs: [
+      { question: "What types of noise can be removed?", answer: "Background hum, fan noise, air conditioning, traffic, crowd murmur, and consistent ambient sounds. Works best on steady, predictable noise." },
+      { question: "How do I get the best noise profile?", answer: "Select a 1-3 second section that contains ONLY background noise (no speech or music). The quality of the noise profile directly affects results." },
+      { question: "Will noise reduction affect audio quality?", answer: "Strong noise reduction can introduce artifacts or make audio sound 'tinny'. Start with low settings and increase gradually." },
+    ],
   },
   {
     id: "347",
@@ -2396,6 +2446,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Equalizer — Fine-tune audio with 10-band graphic EQ. Boost bass, enhance vocals, apply presets. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select an audio file to apply EQ adjustments." },
+      { title: "2. Adjust Frequency Bands", desc: "Use sliders to boost or cut 10 frequency bands from 31Hz to 16kHz." },
+      { title: "3. Preview & Download", desc: "Listen to the adjusted audio in real time and download the processed file." },
+    ],
+    faqs: [
+      { question: "What frequency bands are available?", answer: "10 bands: 31Hz, 62Hz, 125Hz, 250Hz, 500Hz, 1kHz, 2kHz, 4kHz, 8kHz, 16kHz covering the full audible spectrum." },
+      { question: "Can I save EQ presets?", answer: "Yes. Save your EQ settings as presets for reuse on other audio files." },
+      { question: "Does this support real-time preview?", answer: "Yes. Changes to the EQ sliders update the audio in real time for immediate feedback." },
+    ],
   },
   {
     id: "348",
@@ -2406,6 +2466,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Compressor — Balance audio dynamics with threshold, ratio, attack, release, and makeup gain controls. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio File", desc: "Select an audio file to compress. Supports MP3, WAV, FLAC, M4A, OGG, and other common formats." },
+      { title: "2. Set Compression Level", desc: "Choose from light, medium, or strong compression. Higher compression reduces file size more but may affect quality." },
+      { title: "3. Download Compressed File", desc: "Process and download the compressed audio file. Compare the file size reduction before and after." },
+    ],
+    faqs: [
+      { question: "What compression levels are available?", answer: "Light (minimal quality loss, ~30% size reduction), Medium (balanced, ~50% reduction), and Strong (maximum compression, ~70%+ reduction with noticeable quality difference)." },
+      { question: "What audio formats are supported?", answer: "Input: MP3, WAV, FLAC, M4A, OGG, AAC, WMA, AIFF. Output is the same format as input but compressed." },
+      { question: "Is the compression lossless?", answer: "No. Audio compression reduces file size by removing imperceptible audio data. Light compression preserves near-original quality." },
+    ],
   },
   {
     id: "349",
@@ -2416,6 +2486,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Waveform Generator — Create beautiful waveform visualizations from audio. Bar, line, filled, or circular styles. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select an audio file to generate a waveform visualization from." },
+      { title: "2. Customize Appearance", desc: "Choose waveform color, background color, style (bars, lines, filled), and resolution." },
+      { title: "3. Export Image", desc: "Download the waveform as a PNG, SVG, or JPG image for use in videos, thumbnails, or visualizations." },
+    ],
+    faqs: [
+      { question: "What styles are available?", answer: "Solid bars, outlined bars, line graph, and filled waveform. Each style can be customized with colors and background." },
+      { question: "What resolutions are supported?", answer: "Export from 640x480 up to 3840x2160 (4K). Higher resolutions produce larger image files." },
+      { question: "Can I customize colors?", answer: "Yes. Set waveform color, background color, and optionally a gradient for the waveform fill." },
+    ],
   },
   {
     id: "350",
@@ -2426,6 +2506,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Fade In/Out — Apply smooth volume fades with linear, log, exp, or S-curve transitions. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Audio", desc: "Select an audio file to apply fade effects." },
+      { title: "2. Set Fade Parameters", desc: "Choose fade-in duration, fade-out duration, and the fade curve shape (linear, logarithmic, exponential)." },
+      { title: "3. Preview & Export", desc: "Preview the faded audio and download the processed file." },
+    ],
+    faqs: [
+      { question: "What fade curves are available?", answer: "Linear (constant rate), Logarithmic (smooth natural taper), and Exponential (rapid initial change). Each creates a different fade feel." },
+      { question: "Can I apply only fade-in or only fade-out?", answer: "Yes. Set the other fade duration to 0 to apply only the effect you want." },
+      { question: "What formats are supported?", answer: "Process MP3, WAV, FLAC, M4A, OGG, and AAC files. Export in MP3 or WAV format." },
+    ],
   },
   {
     id: "351",
@@ -2825,7 +2915,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert WMA audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to MP3 conversion lossy?", answer: "Converting from WMA to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "378",
@@ -2835,7 +2935,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert OPUS audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to MP3 conversion lossy?", answer: "Converting from Opus to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "379",
@@ -2845,7 +2955,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert AIFF audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to MP3 conversion lossy?", answer: "Converting from AIFF to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "380",

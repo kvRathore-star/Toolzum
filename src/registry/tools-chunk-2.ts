@@ -19,7 +19,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to FLAC conversion lossy?", answer: "Converting from AAC to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "406",
@@ -29,7 +39,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to M4A conversion lossy?", answer: "Converting from AAC to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "407",
@@ -39,7 +59,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to OGG conversion lossy?", answer: "Converting from AAC to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "408",
@@ -49,7 +79,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to WAV conversion lossy?", answer: "Converting from AAC to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "409",
@@ -59,7 +99,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to AAC conversion lossy?", answer: "Converting from FLAC to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "410",
@@ -69,7 +119,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to M4A conversion lossy?", answer: "Converting from FLAC to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "411",
@@ -79,7 +139,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to OGG conversion lossy?", answer: "Converting from FLAC to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "412",
@@ -89,7 +159,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to WAV conversion lossy?", answer: "Converting from FLAC to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "413",
@@ -99,7 +179,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to AAC conversion lossy?", answer: "Converting from M4A to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "414",
@@ -109,7 +199,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to FLAC conversion lossy?", answer: "Converting from M4A to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "415",
@@ -119,7 +219,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to OGG conversion lossy?", answer: "Converting from M4A to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "416",
@@ -129,7 +239,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to WAV — Convert M4A audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to WAV conversion lossy?", answer: "Converting from M4A to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "417",
@@ -139,7 +259,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to AAC — Convert MP3 audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to AAC conversion lossy?", answer: "Converting from MP3 to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "418",
@@ -149,7 +279,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to AIFF conversion lossy?", answer: "Converting from MP3 to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "419",
@@ -159,7 +299,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to FLAC conversion lossy?", answer: "Converting from MP3 to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "420",
@@ -169,7 +319,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to M4A conversion lossy?", answer: "Converting from MP3 to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "421",
@@ -179,7 +339,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to OGG conversion lossy?", answer: "Converting from MP3 to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "422",
@@ -189,7 +359,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to Opus conversion lossy?", answer: "Converting from MP3 to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "423",
@@ -199,7 +379,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload MP3 File", desc: "Select a .mp3 audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is MP3 to WMA conversion lossy?", answer: "Converting from MP3 to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (MP3) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "424",
@@ -209,7 +399,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to AAC — Convert OGG Vorbis audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to AAC conversion lossy?", answer: "Converting from OGG to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "425",
@@ -219,7 +419,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to FLAC — Convert OGG Vorbis audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to FLAC conversion lossy?", answer: "Converting from OGG to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "426",
@@ -229,7 +439,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to M4A conversion lossy?", answer: "Converting from OGG to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "427",
@@ -239,7 +459,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to WAV conversion lossy?", answer: "Converting from OGG to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "428",
@@ -249,7 +479,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to AAC conversion lossy?", answer: "Converting from WAV to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "429",
@@ -259,7 +499,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to AIFF conversion lossy?", answer: "Converting from WAV to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "430",
@@ -269,7 +519,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to FLAC — Convert uncompressed WAV files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to FLAC conversion lossy?", answer: "Converting from WAV to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "431",
@@ -279,7 +539,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to M4A conversion lossy?", answer: "Converting from WAV to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "432",
@@ -289,7 +559,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to OGG conversion lossy?", answer: "Converting from WAV to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "433",
@@ -299,7 +579,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to Opus conversion lossy?", answer: "Converting from WAV to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "434",
@@ -309,7 +599,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to WMA conversion lossy?", answer: "Converting from WAV to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "435",
@@ -589,7 +889,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WAV audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WAV File", desc: "Select a .wav audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is WAV to MP3 conversion lossy?", answer: "Converting from WAV to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WAV) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "458",
@@ -599,7 +909,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to MP3 conversion lossy?", answer: "Converting from FLAC to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "459",
@@ -609,7 +929,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to WMA conversion lossy?", answer: "Converting from FLAC to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "460",
@@ -619,7 +949,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to Opus conversion lossy?", answer: "Converting from FLAC to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "461",
@@ -629,7 +969,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload FLAC File", desc: "Select a .flac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is FLAC to AIFF conversion lossy?", answer: "Converting from FLAC to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (FLAC) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "462",
@@ -639,7 +989,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to MP3 conversion lossy?", answer: "Converting from OGG to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "463",
@@ -649,7 +1009,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to WMA conversion lossy?", answer: "Converting from OGG to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "464",
@@ -659,7 +1029,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to Opus conversion lossy?", answer: "Converting from OGG to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "465",
@@ -669,7 +1049,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload OGG File", desc: "Select a .ogg audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is OGG to AIFF conversion lossy?", answer: "Converting from OGG to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (OGG) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "466",
@@ -679,7 +1069,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to MP3 conversion lossy?", answer: "Converting from M4A to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "467",
@@ -689,7 +1089,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to WMA conversion lossy?", answer: "Converting from M4A to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "468",
@@ -699,7 +1109,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to Opus conversion lossy?", answer: "Converting from M4A to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "469",
@@ -709,7 +1129,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert M4A audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload M4A File", desc: "Select a .m4a audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is M4A to AIFF conversion lossy?", answer: "Converting from M4A to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (M4A) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "470",
@@ -719,7 +1149,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the MP3 output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download MP3", desc: "Click Convert to process your file. Download the resulting .mp3 file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to MP3 conversion lossy?", answer: "Converting from AAC to MP3 uses lossy compression. " },
+      { question: "What bitrate should I use for MP3?", answer: "For MP3, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (MP3) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "471",
@@ -729,7 +1169,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to WMA conversion lossy?", answer: "Converting from AAC to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "472",
@@ -739,7 +1189,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to Opus conversion lossy?", answer: "Converting from AAC to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "473",
@@ -749,7 +1209,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AAC File", desc: "Select a .aac audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is AAC to AIFF conversion lossy?", answer: "Converting from AAC to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AAC) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "474",
@@ -759,7 +1229,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to WAV conversion lossy?", answer: "Converting from WMA to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "475",
@@ -769,7 +1249,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to FLAC conversion lossy?", answer: "Converting from WMA to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "476",
@@ -779,7 +1269,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to OGG conversion lossy?", answer: "Converting from WMA to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "477",
@@ -789,7 +1289,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to M4A conversion lossy?", answer: "Converting from WMA to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "478",
@@ -799,7 +1309,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to AAC conversion lossy?", answer: "Converting from WMA to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "479",
@@ -809,7 +1329,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to Opus conversion lossy?", answer: "Converting from WMA to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "480",
@@ -819,7 +1349,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert WMA audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload WMA File", desc: "Select a .wma audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is WMA to AIFF conversion lossy?", answer: "Converting from WMA to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (WMA) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "481",
@@ -829,7 +1369,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to WAV conversion lossy?", answer: "Converting from Opus to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "482",
@@ -839,7 +1389,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to FLAC conversion lossy?", answer: "Converting from Opus to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "483",
@@ -849,7 +1409,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to OGG conversion lossy?", answer: "Converting from Opus to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "484",
@@ -859,7 +1429,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to M4A conversion lossy?", answer: "Converting from Opus to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "485",
@@ -869,7 +1449,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to AAC conversion lossy?", answer: "Converting from Opus to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "486",
@@ -879,7 +1469,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to WMA conversion lossy?", answer: "Converting from Opus to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "487",
@@ -889,7 +1489,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Opus File", desc: "Select a .opus audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AIFF output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AIFF", desc: "Click Convert to process your file. Download the resulting .aiff file to your device." },
+    ],
+    faqs: [
+      { question: "Is Opus to AIFF conversion lossy?", answer: "Converting from Opus to AIFF is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for AIFF?", answer: "For AIFF, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (Opus) to another lossy format (AIFF) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "488",
@@ -899,7 +1509,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WAV output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WAV", desc: "Click Convert to process your file. Download the resulting .wav file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to WAV conversion lossy?", answer: "Converting from AIFF to WAV is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for WAV?", answer: "For WAV, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (WAV) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "489",
@@ -909,7 +1529,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the FLAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download FLAC", desc: "Click Convert to process your file. Download the resulting .flac file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to FLAC conversion lossy?", answer: "Converting from AIFF to FLAC is lossless. WAV, FLAC, and AIFF are lossless formats that preserve full audio quality." },
+      { question: "What bitrate should I use for FLAC?", answer: "For FLAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (FLAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "490",
@@ -919,7 +1549,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the OGG output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download OGG", desc: "Click Convert to process your file. Download the resulting .ogg file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to OGG conversion lossy?", answer: "Converting from AIFF to OGG uses lossy compression. " },
+      { question: "What bitrate should I use for OGG?", answer: "For OGG, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (OGG) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "491",
@@ -929,7 +1569,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the M4A output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download M4A", desc: "Click Convert to process your file. Download the resulting .m4a file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to M4A conversion lossy?", answer: "Converting from AIFF to M4A is lossless. " },
+      { question: "What bitrate should I use for M4A?", answer: "For M4A, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (M4A) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "492",
@@ -939,7 +1589,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the AAC output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download AAC", desc: "Click Convert to process your file. Download the resulting .aac file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to AAC conversion lossy?", answer: "Converting from AIFF to AAC uses lossy compression. " },
+      { question: "What bitrate should I use for AAC?", answer: "For AAC, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (AAC) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "493",
@@ -949,7 +1609,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the WMA output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download WMA", desc: "Click Convert to process your file. Download the resulting .wma file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to WMA conversion lossy?", answer: "Converting from AIFF to WMA uses lossy compression. " },
+      { question: "What bitrate should I use for WMA?", answer: "For WMA, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (WMA) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "494",
@@ -959,7 +1629,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload AIFF File", desc: "Select a .aiff audio file from your device or drag and drop it onto the converter." },
+      { title: "2. Choose Audio Settings", desc: "Optionally adjust bitrate, sample rate, and channels for the Opus output. Higher bitrates produce better quality but larger files." },
+      { title: "3. Convert & Download Opus", desc: "Click Convert to process your file. Download the resulting .opus file to your device." },
+    ],
+    faqs: [
+      { question: "Is AIFF to Opus conversion lossy?", answer: "Converting from AIFF to Opus uses lossy compression. " },
+      { question: "What bitrate should I use for Opus?", answer: "For Opus, 128 kbps is adequate for voice/podcasts, 192 kbps for balanced quality, and 320 kbps for music archiving. Higher bitrates mean larger file sizes." },
+      { question: "Will the audio quality decrease?", answer: "Converting from a lossy format (AIFF) to another lossy format (Opus) may reduce quality due to re-encoding. For best results, use lossless sources (WAV, FLAC, AIFF)." },
+    ],
   },
   {
     id: "495-uniq",
