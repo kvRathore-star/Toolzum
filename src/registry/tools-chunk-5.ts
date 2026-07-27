@@ -864,6 +864,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MKV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to WEBM — Convert MKV video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MKV", desc: "Choose an MKV video file to convert to WebM format." },
+    { title: "2. Convert", desc: "Click convert to begin the transformation. Processing is done locally." },
+    { title: "3. Download", desc: "Download the converted WebM file optimized for web playback." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -874,6 +885,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MKV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to AVI — Convert MKV video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MKV", desc: "Choose an MKV video file to convert to AVI format." },
+    { title: "2. Convert", desc: "Click to start the MKV to AVI conversion." },
+    { title: "3. Download AVI", desc: "Download the converted AVI file for broad media player compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -884,6 +906,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MP4 video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to WEBM — Convert MP4 video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MP4", desc: "Choose an MP4 video file to convert to WebM format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download", desc: "Download the converted WebM file for web and streaming use." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -894,6 +927,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MP4 video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to AVI — Convert MP4 video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MP4", desc: "Choose an MP4 video file to convert to AVI format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download AVI", desc: "Download the converted AVI file for legacy system compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -904,6 +948,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MOV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to WEBM — Convert MOV video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MOV", desc: "Choose a QuickTime MOV file to convert to WebM format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download", desc: "Download the converted WebM for web and streaming." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -914,6 +969,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MOV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to AVI — Convert MOV video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload MOV", desc: "Choose a QuickTime MOV file to convert to AVI format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download AVI", desc: "Download the converted AVI for broad compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -924,6 +990,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBM video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MKV — Convert WEBM video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload WebM", desc: "Choose a WebM video file to convert to MKV format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download MKV", desc: "Download the converted MKV with advanced metadata support." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -934,6 +1011,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBM video files to MOV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to MOV — Convert WEBM video files into MOV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload WebM", desc: "Choose a WebM video file to convert to MOV format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download MOV", desc: "Download the converted MOV for Apple ecosystem compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -944,6 +1032,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert WEBM video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online WEBM to AVI — Convert WEBM video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload WebM", desc: "Choose a WebM video file to convert to AVI format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download AVI", desc: "Download the converted AVI for media player compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -954,6 +1053,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVI video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MKV — Convert AVI video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload AVI", desc: "Choose an AVI video file to convert to MKV format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download MKV", desc: "Download the converted MKV with enhanced feature support." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -964,6 +1074,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVI video files to MOV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MOV — Convert AVI video files into MOV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload AVI", desc: "Choose an AVI video file to convert to MOV format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download MOV", desc: "Download the converted MOV for Apple device compatibility." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -974,6 +1095,17 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVI video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to WEBM — Convert AVI video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload AVI", desc: "Choose an AVI video file to convert to WebM format." },
+    { title: "2. Convert", desc: "Click to start the conversion." },
+    { title: "3. Download WebM", desc: "Download the converted WebM optimized for modern browsers." },
+  ],
+    faqs: [
+    { question: "Will I lose quality?", answer: "The conversion uses optimized settings to minimize quality loss. Some re-encoding may occur depending on the source and target formats." },
+    { question: "Is this processed locally?", answer: "Yes. All conversion happens in your browser using FFmpeg WASM. Your files never leave your device." },
+    { question: "What is the file size difference?", answer: "File size varies depending on the source format, codec, and content. Modern formats like WebM typically produce smaller files than older formats like AVI." },
+  ],
+
     showInCategory: false
   },
   {
@@ -1674,6 +1806,18 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate SRT/VTT subtitles for videos from transcript text. Auto-sync timestamps with configurable duration and gap.',
     seoDescription: 'Free online Subtitle Generator — Generate SRT and VTT subtitle files from transcript text. Auto-sync with configurable timestamps.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Upload Media", desc: "Choose a video or audio file to auto-generate subtitles." },
+    { title: "2. Select Language", desc: "Choose the language of the spoken content for accurate recognition." },
+    { title: "3. Download SRT", desc: "Download the generated subtitles as SRT or VTT. Edit the text before downloading if needed." },
+  ],
+    faqs: [
+    { question: "What languages are supported?", answer: "30+ languages including English, Spanish, French, German, Japanese, Chinese, Arabic, and Hindi." },
+    { question: "What output formats?", answer: "SRT (SubRip) or VTT (WebVTT). Both are widely supported." },
+    { question: "How accurate is recognition?", answer: "Clear speech with minimal background noise produces the best results. Accents may reduce accuracy." },
+    { question: "Can I edit subtitles?", answer: "Yes. Review and edit text and timing before downloading." },
+  ],
+
   },
   {
     id: "1086",

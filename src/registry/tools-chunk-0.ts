@@ -28,6 +28,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     slug: "video-to-mp3",
     dependencies: "ffmpeg",
+    instructions: [
+    { title: "1. Upload Your Video", desc: "Choose any MP4, MOV, AVI, or WebM video file. The tool automatically extracts the audio track and prepares it for MP3 encoding." },
+    { title: "2. Select Audio Quality", desc: "Choose your preferred MP3 quality setting. Higher bitrates (320 kbps) produce better sound quality but larger file sizes." },
+    { title: "3. Download the MP3", desc: "Click download to save the extracted audio as an MP3 file. The audio is ready instantly with all metadata preserved." },
+  ],
+    faqs: [
+    { question: "What video formats can I extract audio from?", answer: "The converter supports MP4, MOV, AVI, and WebM. The audio track is extracted and encoded as MP3." },
+    { question: "Is there a file size limit?", answer: "The tool runs locally in your browser using ffmpeg.wasm. Most videos under 2GB work well on modern devices." },
+    { question: "Does video quality affect MP3 quality?", answer: "MP3 quality depends on your selected bitrate setting, not the original video quality." },
+  ],
+
   },
   {
     id: "vid-crop-1",
@@ -37,6 +48,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     slug: "crop-video",
     dependencies: "ffmpeg",
+    instructions: [
+    { title: "1. Upload Your Video", desc: "Select the MP4 video you want to crop. The tool loads it entirely in your browser for privacy." },
+    { title: "2. Choose Crop Area", desc: "Use the visual crop selector to define the visible area. Drag corners and edges to set your desired frame dimensions." },
+    { title: "3. Download Cropped Video", desc: "Download the cropped video. The output preserves the original duration and audio track." },
+  ],
+    faqs: [
+    { question: "What video formats are supported?", answer: "The crop tool works with MP4 videos. Output maintains the original format and codec." },
+    { question: "Does cropping reduce video quality?", answer: "Cropping only removes outer frame areas. The remaining area retains full quality." },
+    { question: "Can I crop to a specific aspect ratio?", answer: "Yes. Crop freely or constrain to common ratios like 16:9, 4:3, 1:1, or 9:16." },
+  ],
+
   },
   {
     id: "dev-json-xml-1",
@@ -1452,8 +1474,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     description: "Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Max 500MB input. ',
-    dependencies: "FFmpeg / gif.js"
-  },
+    dependencies: "FFmpeg / gif.js",
+    instructions: [
+    { title: "1. Upload a Video", desc: "Choose an MP4 or other video file to convert to animated GIF format." },
+    { title: "2. Adjust GIF Settings", desc: "Set output dimensions and frame rate. Lower frame rates reduce file size but also reduce animation smoothness." },
+    { title: "3. Download Your GIF", desc: "Download the generated animated GIF, ready to share on social media, forums, or messaging apps." },
+  ],
+    faqs: [
+    { question: "How long should the video be?", answer: "Shorter videos (under 30 seconds) work best. Longer videos create very large GIF files." },
+    { question: "How do I control GIF file size?", answer: "Reduce output dimensions and frame rate. Lower frame rates (10-15 fps) still produce smooth animations." },
+    { question: "What frame rate should I use?", answer: "15-24 fps for smooth motion. 10 fps works well for smaller file sizes." },
+  ],
+},
   {
     id: "142",
     name: "Image to Base64",
@@ -1470,8 +1502,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     description: 'Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. Uses cloud-based processing.',
     seoDescription: 'Free online Subtitle Translator — Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. ',
-    dependencies: "Google Translate API"
-  },
+    dependencies: "Google Translate API",
+    instructions: [
+    { title: "1. Upload Subtitle File", desc: "Upload an SRT, VTT, or ASS subtitle file. The tool reads existing subtitles and their timestamps." },
+    { title: "2. Choose Target Language", desc: "Select the language to translate the subtitles into. Translation preserves original timing." },
+    { title: "3. Download Translated Subtitles", desc: "Download the translated subtitle file in the same format. All timestamp alignments are preserved." },
+  ],
+    faqs: [
+    { question: "What subtitle formats are supported?", answer: "SRT, VTT, and ASS formats. Output matches input format." },
+    { question: "How accurate is translation?", answer: "Machine translation handles common phrases well but may struggle with idioms and technical terms." },
+    { question: "Are timestamps preserved?", answer: "Yes. Original timing is preserved exactly. Only text content is translated." },
+  ],
+},
   {
     id: "144",
     name: "IBAN Validator",

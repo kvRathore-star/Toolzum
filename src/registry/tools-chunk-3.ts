@@ -1631,6 +1631,17 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats with format auto-detection.',
     seoDescription: 'Free online Video Format Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats. All processing happens locally.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Upload Video", desc: "Select the video file to convert. Common input formats are supported." },
+    { title: "2. Choose Format", desc: "Pick the target format from the list. Each format includes a description of its best use case." },
+    { title: "3. Download Result", desc: "Download your converted video, ready to use on any device or platform." },
+  ],
+    faqs: [
+    { question: "What formats are supported?", answer: "Common video formats for input and output. See the format selector for the full list." },
+    { question: "Is processing local?", answer: "Yes. All processing happens in your browser. No files are uploaded." },
+    { question: "Are quality settings available?", answer: "Optimal settings for each format are used. Advanced options are available for power users." },
+  ],
+
     showInCategory: true,
   },
   {

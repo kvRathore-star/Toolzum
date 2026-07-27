@@ -17,8 +17,18 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Video Watermark Adder — Add logo or text watermark to video. ',
     category: 'Video',
     id:  "223",
-    dependencies: 'None'
-  },
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Upload Your Video", desc: "Choose the video file you want to watermark. Processing happens entirely in your browser." },
+    { title: "2. Add Watermark", desc: "Upload a watermark image or enter text. Position it anywhere on the video frame using visual controls." },
+    { title: "3. Download Watermarked Video", desc: "Download the video with the watermark applied throughout the entire duration." },
+  ],
+    faqs: [
+    { question: "What watermark types can I add?", answer: "Image watermarks (PNG with transparency recommended) or text watermarks with customizable font and opacity." },
+    { question: "Can I position the watermark?", answer: "Yes. Drag to any position or use preset positions. The watermark appears throughout the video." },
+    { question: "Is the watermark permanent?", answer: "Yes. The watermark is baked into the video frames and cannot be removed from the output." },
+  ],
+},
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
@@ -96,8 +106,18 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Video Trimmer — Trim and cut video clips locally ',
     category: 'Video',
     id:  "233",
-    dependencies: 'FFmpeg WASM'
-  },
+    dependencies: 'FFmpeg WASM',
+    instructions: [
+    { title: "1. Upload Video", desc: "Select the video file you want to trim. The tool loads it and shows the total duration." },
+    { title: "2. Set Start and End Points", desc: "Use the timeline controls to select the segment to keep. Preview the selected portion before trimming." },
+    { title: "3. Download Trimmed Video", desc: "Download the trimmed video containing only your selected segment." },
+  ],
+    faqs: [
+    { question: "What formats are supported?", answer: "MP4, MOV, and WebM. Output keeps the same format and codec as input." },
+    { question: "Can I trim with frame accuracy?", answer: "Yes. Use frame-by-frame navigation for precise start and end points." },
+    { question: "Is audio also trimmed?", answer: "Yes. Audio is trimmed to match the selected video segment. Sync is preserved." },
+  ],
+},
   {
     name: 'Aadhaar Card Masker',
     slug: 'aadhaar-card-masker',
@@ -1901,6 +1921,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format from the dropdown — your files never leave your device.',
     seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
+    instructions: [
+    { title: "1. Upload Your Video", desc: "Choose the video file to convert. Supports MP4, MOV, AVI, WebM, MKV, and more input formats." },
+    { title: "2. Select Output Format", desc: "Pick your desired output format from the available options." },
+    { title: "3. Download Converted Video", desc: "Download your video in the new format. Quality and metadata are preserved during conversion." },
+  ],
+    faqs: [
+    { question: "What formats can I convert?", answer: "Input: MP4, MOV, AVI, WebM, MKV, FLV. Output: MP4, MOV, AVI, WebM, MKV." },
+    { question: "Does conversion affect quality?", answer: "Converting between similar formats preserves quality well. Converting to older codecs may reduce quality." },
+    { question: "Is my video uploaded?", answer: "No. All conversion happens in your browser using FFmpeg WASM. Files never leave your device." },
+  ],
+
     showInCategory: false,
   },
   {
@@ -2241,6 +2272,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Speed up or slow down any video. Adjust playback speed from 0.1x to 10x with audio pitch preservation. Perfect for creating time-lapses, slow-motion replays, and quick reviews.',
     seoDescription: 'Free online Video Speed Changer — Speed up or slow down videos from 0.1x to 10x with audio pitch preservation. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Video", desc: "Choose a video file to change its playback speed. Supports MP4 and other common formats." },
+    { title: "2. Adjust Speed", desc: "Use the speed slider from 0.25x (slow motion) to 4x (fast forward). Audio pitch is preserved for natural sound." },
+    { title: "3. Download Modified Video", desc: "Download the video with adjusted speed. Duration changes proportionally to the speed multiplier." },
+  ],
+    faqs: [
+    { question: "What speed range is available?", answer: "0.25x to 4x in 0.05 increments." },
+    { question: "Is audio pitch preserved?", answer: "Yes. Pitch is automatically adjusted for natural sound at different speeds." },
+    { question: "Does speed affect quality?", answer: "No. Video quality and resolution are unaffected. Only playback rate changes." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2251,6 +2293,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Play any video backwards. Reverse video, audio, or both independently. Create fun effects, hidden messages, and creative video edits with a single click.',
     seoDescription: 'Free online Reverse Video — Play any video backwards. Reverse video, audio, or both. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Video", desc: "Choose a video file to reverse. Both video frames and audio will play backward." },
+    { title: "2. Preview", desc: "Preview the reversed video to ensure it looks correct before downloading." },
+    { title: "3. Download", desc: "Download the complete reversed video with both video and audio reversed." },
+  ],
+    faqs: [
+    { question: "Is audio also reversed?", answer: "Yes. Both video frames and audio track play backward." },
+    { question: "What formats are supported?", answer: "MP4, MOV, and other common formats." },
+    { question: "How long does it take?", answer: "A 1-minute video typically takes 30-60 seconds to reverse." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2261,6 +2314,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Remove audio from a video completely, replace it with a new audio track, or adjust the volume. Perfect for creating silent videos, adding background music, or fixing audio levels.',
     seoDescription: 'Free online Mute Video — Remove, replace, or adjust audio volume in your videos. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Video", desc: "Select the video file you want to mute. All audio tracks will be removed." },
+    { title: "2. Confirm", desc: "The tool strips all audio channels while keeping the video track intact." },
+    { title: "3. Download Muted Video", desc: "Download the video without audio. Video quality and frame rate remain unchanged." },
+  ],
+    faqs: [
+    { question: "What happens to the audio?", answer: "All audio channels are completely stripped from the video." },
+    { question: "Can I mute only part?", answer: "This tool mutes the entire video. For selective muting, use a video editor." },
+    { question: "Does muting affect quality?", answer: "No. Video quality, resolution, and frame rate remain unchanged." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2351,6 +2415,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Fix shaky handheld footage with advanced video stabilization. Two-pass analysis delivers smooth, professional results. Perfect for vloggers, action cameras, and mobile videos.',
     seoDescription: 'Free online Video Stabilizer — Fix shaky footage with advanced stabilization. Two-pass analysis for smooth results. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Shaky Video", desc: "Upload a video with camera shake. The stabilizer analyzes motion between frames." },
+    { title: "2. Choose Level", desc: "Select low, medium, or high stabilization. Higher levels reduce more shake but crop more of the frame." },
+    { title: "3. Download Stabilized Video", desc: "Download the smoothed video with reduced camera movement." },
+  ],
+    faqs: [
+    { question: "What stabilization level should I choose?", answer: "Start with medium. Low corrects minor shake. High strongly reduces shake but crops more." },
+    { question: "Will the video be cropped?", answer: "Yes. Higher stabilization results in more cropping as the frame edges are trimmed." },
+    { question: "What formats are supported?", answer: "MP4, MOV, and WebM. Output matches input format." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2361,6 +2436,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Capture still frames from any video at precise timestamps. Extract single screenshots or batch capture at regular intervals. Export as JPG, PNG, or WebP. Perfect for thumbnails and previews.',
     seoDescription: 'Free online Video Screenshot — Capture frames from videos at precise timestamps. Single or batch extraction. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Video", desc: "Choose a video from which to capture screenshots." },
+    { title: "2. Select Timestamp", desc: "Use the player controls to find the exact frame. Navigate frame by frame for precision." },
+    { title: "3. Capture and Download", desc: "Click to capture the screenshot and download as PNG or JPEG." },
+  ],
+    faqs: [
+    { question: "What image formats?", answer: "PNG (lossless) or JPEG (smaller files). PNG recommended for text-heavy frames." },
+    { question: "Can I capture multiple?", answer: "Yes. Navigate to different timestamps and capture each frame individually." },
+    { question: "What resolution?", answer: "Matches the video's original resolution. No resizing is applied." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2371,6 +2457,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Apply stunning visual effects to your videos. Choose from color filters, artistic effects, blurs, and lighting adjustments. Combine multiple filters for unique looks.',
     seoDescription: 'Free online Video Filters — Apply color, artistic, blur, and lighting effects to videos. Combine multiple filters. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Upload Video", desc: "Select a video to apply visual filters and effects. Processing is done locally." },
+    { title: "2. Choose Filters", desc: "Apply filters like grayscale, sepia, vintage, sharpen, or blur. Preview effects in real time." },
+    { title: "3. Export", desc: "Download the video with filters permanently baked into the output." },
+  ],
+    faqs: [
+    { question: "What filters are available?", answer: "Grayscale, sepia, vintage, invert, sharpen, blur, brightness, contrast, saturation, and custom color grading." },
+    { question: "Can I combine filters?", answer: "Yes. Filters stack and combine for custom looks." },
+    { question: "Are filters permanent?", answer: "Yes. Filters are baked into the output video and cannot be removed." },
+  ],
+
     showInCategory: true,
   },
   {
@@ -2381,6 +2478,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Record your screen, application window, or browser tab with optional microphone audio. Choose HD, Full HD, or 2K quality. Download as WebM or MP4. No software installation needed.',
     seoDescription: 'Free online Screen Recorder — Record screen, window, or tab with mic audio. HD to 2K quality. Download as WebM or MP4. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+    { title: "1. Choose Source", desc: "Select what to record: entire screen, a specific window, or a browser tab." },
+    { title: "2. Start Recording", desc: "Click record and grant permissions. Record your screen activity in real time." },
+    { title: "3. Stop and Download", desc: "Click stop when finished. Preview and download the recording as MP4." },
+  ],
+    faqs: [
+    { question: "What recording sources?", answer: "Entire screen, specific window, or browser tab." },
+    { question: "Is audio recorded?", answer: "Yes. System audio and/or microphone can be captured." },
+    { question: "What format?", answer: "MP4 with H.264 video and AAC audio." },
+  ],
+
     showInCategory: true,
   },
   {
