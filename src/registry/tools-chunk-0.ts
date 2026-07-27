@@ -153,6 +153,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
     showInCategory: false,
+    instructions: [
+      { title: "1. Upload HEIC Images", desc: "Select HEIC/HEIF photos from your iPhone or modern Android device. HEIC is Apple's efficient image format with 50% smaller files than JPEG." },
+      { title: "2. Choose Output Settings", desc: "Select page size and orientation. Each HEIC photo becomes one PDF page in the order uploaded." },
+      { title: "3. Convert & Download", desc: "Your HEIC images are decoded and assembled into a single PDF. Download the PDF for sharing or archiving." },
+    ],
+    faqs: [
+      { question: "Why convert HEIC to PDF?", answer: "HEIC is not universally supported on Windows or in enterprise document systems. PDF ensures anyone can view your photos without special software." },
+      { question: "Does this preserve Live Photos?", answer: "No. Only the still image from a HEIC Live Photo is converted. The motion component is not included in the PDF." },
+      { question: "What about HEIF vs HEIC?", answer: "Both formats use the same HEVC-based compression. The tool handles both .heic and .heif file extensions identically." },
+    ],
   },
   {
     id: "2",
@@ -191,7 +201,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract PDF content into editable DOCX files. Preserves formatting and layout.',
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — extract PDF content into editable DOCX files. Preserves formatting. 100% client-side, no uploads needed.',
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF File", desc: "Select a PDF document to convert to Word format. The tool extracts text, images, and basic formatting." },
+      { title: "2. Choose Output Format", desc: "Select .docx (editable Word document) or .doc (legacy format). DOCX is recommended for the best formatting preservation." },
+      { title: "3. Download Editable File", desc: "Your PDF is converted to a Word document. Text is editable, images are extractable, and basic structure is preserved." },
+    ],
+    faqs: [
+      { question: "How accurate is the conversion?", answer: "Text-heavy PDFs with simple layouts convert accurately (90%+). Complex layouts with multiple columns, tables, or text boxes may need manual adjustments." },
+      { question: "Are scanned PDFs supported?", answer: "For scanned PDFs (images of text), use the PDF OCR tool first to recognize text, then convert to Word." },
+      { question: "Is the conversion free with no limits?", answer: "Yes. All processing happens locally in your browser. No file uploads, no server costs, no page limits." },
+    ],
   },
   {
     id: "10",
@@ -299,7 +319,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
     seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. ',
     dependencies: "LibreOffice API / CloudConvert API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Word Document", desc: "Select a .docx or .doc file. The converter preserves text formatting, fonts, tables, images, and basic layout." },
+      { title: "2. Set PDF Options", desc: "Choose PDF compliance level (PDF/A-1b for archiving) and whether to embed fonts for consistent rendering across devices." },
+      { title: "3. Download PDF", desc: "Your Word document is converted to PDF with formatting preserved. Download the result or open in a new tab." },
+    ],
+    faqs: [
+      { question: "Are tracked changes visible in the PDF?", answer: "Tracked changes are accepted before conversion. The PDF shows the final document as if all changes were accepted." },
+      { question: "Are Word macros preserved?", answer: "No. VBA macros and ActiveX controls are stripped during conversion. Only visible document content is included in the PDF." },
+      { question: "Do embedded fonts render correctly?", answer: "When font embedding is enabled, the PDF includes the fonts used. The document looks identical on any device without font installation." },
+    ],
   },
   {
     id: "21",
@@ -329,7 +359,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert JPG images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to PDF — Merges one or more JPG images into a single multi-page PDF file in the order you arrange them. ',
     dependencies: "jsPDF / Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload JPG Images", desc: "Select one or more JPG images from your device. Supported: JPEG, JPG, and JFIF formats. You can also drag and drop files directly." },
+      { title: "2. Arrange Image Order", desc: "Drag thumbnails to reorder pages. Each JPG becomes one PDF page. The order in the PDF matches the thumbnail arrangement." },
+      { title: "3. Generate & Download PDF", desc: "Choose page size (A4, Letter, or match image size) and orientation. Click Create PDF and download your multi-page document." },
+    ],
+    faqs: [
+      { question: "Can I combine JPG and PNG in one PDF?", answer: "Yes. The tool accepts multiple image formats simultaneously. Mix JPG, PNG, WebP, and other formats in a single PDF output." },
+      { question: "What happens to EXIF data?", answer: "EXIF orientation tags are respected — images are auto-rotated to display correctly. Other EXIF metadata is stripped from the PDF output." },
+      { question: "Is there a file size limit?", answer: "Processing is done locally in your browser. Very large images (>50MB each) may take time. Total pages are limited by browser memory." },
+    ],
   },
   {
     id: "26",
@@ -368,7 +408,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PDF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF Document", desc: "Select a PDF file. Each page is rendered as a separate JPG image at your chosen quality level." },
+      { title: "2. Set Image Quality", desc: "Choose JPG quality: 70% (small file, acceptable for previews), 90% (good quality for most uses), or 100% (maximum quality, large file)." },
+      { title: "3. Download Images", desc: "Download individual JPG files or a ZIP archive containing all pages as separate images." },
+    ],
+    faqs: [
+      { question: "What resolution are the JPG images?", answer: "Output resolution matches the PDF's native resolution, typically 72-150 DPI for screen PDFs, 300 DPI for print PDFs. Adjustable in settings." },
+      { question: "Can I convert specific page ranges?", answer: "Yes. Enter a page range (e.g., 1-5, 8) to convert only selected pages instead of the entire document." },
+      { question: "Do text layers remain?", answer: "No. JPG is a raster image format — all text, images, and vector graphics are flattened into a single image layer." },
+    ],
   },
   {
     id: "29",
@@ -378,7 +428,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. ',
     dependencies: "pdf2json / PptxGenJS",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF File", desc: "Select a PDF document to convert to PowerPoint. Each PDF page becomes a separate slide." },
+      { title: "2. Choose Layout", desc: "Select standard slide size (4:3 or 16:9) and whether to preserve the original aspect ratio of PDF pages." },
+      { title: "3. Download PPTX", desc: "Your PDF is converted to an editable PowerPoint file. Text and images are placed on individual slides." },
+    ],
+    faqs: [
+      { question: "Are PDF text boxes editable in PowerPoint?", answer: "Yes. Text extracted from the PDF is placed in editable text boxes on each slide. Formatting may need minor adjustments." },
+      { question: "Do vector graphics remain vectors?", answer: "PDF vector graphics (logos, diagrams) are typically rasterized to PNG during conversion for compatibility." },
+      { question: "Can I convert a multi-page PDF to multiple slides?", answer: "Yes. Each PDF page becomes one PowerPoint slide in order. Slide count matches the PDF page count." },
+    ],
   },
   {
     id: "30",
@@ -476,7 +536,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PowerPoint presentations to PDF with accurate slide rendering. Server-side conversion preserves fonts and layouts.',
     seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. ',
     dependencies: "LibreOffice API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PowerPoint File", desc: "Select a .pptx or .ppt presentation. The converter preserves slide layout, text formatting, images, and shapes." },
+      { title: "2. Set PDF Options", desc: "Choose to include one slide per page or multiple slides per page (handout layout). Select slide range if you only need specific slides." },
+      { title: "3. Download PDF", desc: "Your PowerPoint is converted to PDF. Animations and transitions are removed — each slide appears in its final state." },
+    ],
+    faqs: [
+      { question: "Are speaker notes included?", answer: "Optionally. Toggle 'include speaker notes' to append notes pages after each slide, or 'notes only' for a text-only notes document." },
+      { question: "Do embedded videos and audio play in the PDF?", answer: "No. Multimedia elements are not playable in the PDF. Placeholder icons indicate where media was in the original presentation." },
+      { question: "Are SmartArt graphics preserved?", answer: "Yes. SmartArt diagrams are converted to static vector graphics in the PDF, preserving their visual appearance." },
+    ],
   },
   {
     id: "39",
@@ -526,6 +596,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Combines two or more PDF files into one contiguous document with a drag-and-drop reorder interface for the input list. Legal assistants compiling.',
     dependencies: "pdf-lib",
     seoDescription: 'Merge PDF files online free — combine multiple PDFs into one document with drag-and-drop reordering. No uploads, 100% secure and private.',
+    instructions: [
+      { title: "1. Upload PDF Files", desc: "Select two or more PDF files to merge. Drag and drop to reorder them in the list." },
+      { title: "2. Set Merge Options", desc: "Choose to merge all files into one PDF (append mode) or interleave pages from multiple files." },
+      { title: "3. Download Merged PDF", desc: "Your combined PDF is ready. All original content including bookmarks, links, and form fields are preserved." },
+    ],
+    faqs: [
+      { question: "Can I merge files with different page sizes?", answer: "Yes. Each page retains its original size in the merged PDF. The output is a mixed-format document." },
+      { question: "Are PDF bookmarks merged?", answer: "Yes. Bookmarks from each file are combined into a single bookmark tree with nested sections per source file." },
+      { question: "Is there a file limit?", answer: "Processing is local. The limit depends on your browser's available memory — typically files up to 500MB total." },
+    ],
   },
   {
     id: "42",
@@ -544,7 +624,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. ',
     dependencies: "SheetJS / jsPDF",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload Excel File", desc: "Select a .xlsx or .xls spreadsheet. The tool processes all worksheets in the workbook." },
+      { title: "2. Choose Sheet & Layout", desc: "Select specific sheets or convert all. Choose landscape or portrait orientation and whether to fit all columns on one page." },
+      { title: "3. Export as PDF", desc: "Your spreadsheet is converted to PDF with cell formatting, borders, and conditional formatting preserved." },
+    ],
+    faqs: [
+      { question: "Are Excel formulas evaluated?", answer: "Yes. Cell values as displayed (including formula results) are captured in the PDF. Formula syntax is not shown — only the computed values." },
+      { question: "Do charts and pivot tables render?", answer: "Yes. Charts, pivot tables, sparklines, and conditional formatting icons are rendered as static graphics in the PDF." },
+      { question: "What if my sheet is wider than one page?", answer: "Select 'fit to page width' to scale columns to fit. Alternatively, choose landscape orientation or allow multiple horizontal pages." },
+    ],
   },
   {
     id: "45",
@@ -729,7 +819,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract tables from PDF into editable XLSX spreadsheets with accurate column alignment.',
     dependencies: "pdf2json / SheetJS",
     seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. ',
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF with Tables", desc: "Select a PDF containing tabular data. The tool identifies tables using horizontal and vertical line detection." },
+      { title: "2. Review Detected Tables", desc: "Preview extracted tables. Adjust detection sensitivity if the tool misses or merges table boundaries incorrectly." },
+      { title: "3. Export as Excel", desc: "Download the .xlsx file with each table on a separate worksheet, or all tables combined into one sheet." },
+    ],
+    faqs: [
+      { question: "What types of tables work best?", answer: "Tables with clear borders, consistent column alignment, and simple headers convert best. Borderless tables or merged cells may need manual correction." },
+      { question: "Can I extract specific tables only?", answer: "Yes. Select individual tables from the preview to export only what you need, rather than all detected tables." },
+      { question: "Are number formats preserved?", answer: "The tool attempts to detect number, date, and currency formatting. Complex custom formats may not transfer exactly." },
+    ],
   },
   {
     id: "59",
@@ -739,6 +839,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. No signup or account required.',
     seoDescription: 'Free online Unlock PDF — Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. ',
     dependencies: "qpdf",
+    instructions: [
+      { title: "1. Upload Protected PDF", desc: "Select a password-protected or restricted PDF file." },
+      { title: "2. Enter Password", desc: "Enter the permissions password to unlock the PDF. If you only have the user password, you can open but may not remove restrictions." },
+      { title: "3. Download Unlocked PDF", desc: "Your PDF is decrypted with all restrictions removed. The output PDF is free to print, edit, and copy." },
+    ],
+    faqs: [
+      { question: "What if I forgot the password?", answer: "PDF passwords cannot be recovered or cracked by this tool. You need the original password set during protection." },
+      { question: "Does unlocking remove the password permanently?", answer: "Yes. The downloaded PDF has no encryption or restrictions. It behaves like any unprotected PDF." },
+      { question: "Can I unlock PDFs restricted by DRM?", answer: "No. Adobe DRM, Enterprise Rights Management, and similar systems require their respective authorization tools." },
+    ],
   },
   {
     id: "60",
@@ -960,6 +1070,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Divides a single PDF into multiple files by page range, bookmark level, or a specified page count per split.',
     dependencies: "pdf-lib",
     seoDescription: 'Split PDF files online free — divide PDF by page range, bookmarks, or page count. Extract specific pages into separate files. No uploads, private.',
+    instructions: [
+      { title: "1. Upload PDF File", desc: "Select a multi-page PDF to split into separate files." },
+      { title: "2. Choose Split Method", desc: "Split by: every N pages, all pages individually, specific page ranges (1-3, 5, 8-10), or split at each bookmark." },
+      { title: "3. Download Split Files", desc: "Download individual PDF files or a ZIP archive containing all split documents." },
+    ],
+    faqs: [
+      { question: "Does splitting affect document content?", answer: "No. Each split PDF contains the original pages exactly as they appeared — no content is modified during splitting." },
+      { question: "Can I split by bookmark levels?", answer: "Yes. Choose 'split by bookmark' and the PDF is divided at each first-level bookmark boundary." },
+      { question: "What happens to PDF forms?", answer: "Form field data is preserved in each split document. AcroForm fields remain functional in the resulting PDF files." },
+    ],
   },
   {
     id: "84",
@@ -1108,7 +1228,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. ',
     dependencies: "pdf-lib",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to password-protect or restrict." },
+      { title: "2. Set Passwords", desc: "Set a user password (required to open the file) and/or a permissions password (required to modify permissions)." },
+      { title: "3. Choose Restrictions", desc: "Restrict printing (low-res or full), copying text, modifying content, adding comments, and filling forms." },
+      { title: "4. Download Protected PDF", desc: "Your PDF is encrypted and protected. Share the password separately from the document." },
+    ],
+    faqs: [
+      { question: "What encryption standard is used?", answer: "AES-128 bit encryption (PDF 2.0 compliant). This is the current industry standard for PDF document security." },
+      { question: "Can I remove password protection later?", answer: "Yes. Use the Unlock PDF tool with the correct permissions password to remove restrictions." },
+      { question: "Is PDF password protection truly secure?", answer: "AES-128 encryption is cryptographically strong. However, the user password cannot be recovered if lost, so keep backup copies." },
+    ],
   },
   {
     id: "97",
@@ -1204,7 +1335,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PDF documents to EPUB format for e-book readers. Server-side conversion preserves layout, images, and chapter structure.',
     seoDescription: 'Free online PDF to EPUB — Converts static PDF documents into reflowable EPUB ebook format with adjustable font size, orientation, and screen adaptation. ',
     dependencies: "Calibre API",
-    showInCategory: false
+    showInCategory: false,
+    instructions: [
+      { title: "1. Upload PDF for E-Book Conversion", desc: "Select a PDF document. Best results come from text-rich PDFs with reflowable content (not scanned pages)." },
+      { title: "2. Set E-Book Metadata", desc: "Enter title, author, and cover image. Choose the output format: EPUB (standard e-book) or EPUB3 (with enhanced layout support)." },
+      { title: "3. Download EPUB", desc: "Your PDF is converted to an e-book readable on Kindle, Kobo, Apple Books, Google Play Books, and most e-readers." },
+    ],
+    faqs: [
+      { question: "Why convert PDF to EPUB?", answer: "PDFs have fixed layouts that do not reflow on small screens. EPUB text adjusts to any screen size for comfortable mobile reading." },
+      { question: "Are images preserved?", answer: "Yes. Images embedded in the PDF are extracted and included in the EPUB. Image quality is preserved at original resolution." },
+      { question: "Does this support PDF tables of contents?", answer: "Yes. PDF bookmarks and internal links are converted to EPUB navigation for chapter-based reading." },
+    ],
   },
   {
     id: "107",
@@ -1467,7 +1608,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Watermark PDF — Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the PDF document to add watermarks to." },
+      { title: "2. Configure Watermark", desc: "Choose text watermark (enter text, font, size, color, opacity) or image watermark (upload PNG/JPG). Set position, rotation, and page range." },
+      { title: "3. Apply & Download", desc: "The watermark is applied to selected pages. Download the watermarked PDF." },
+    ],
+    faqs: [
+      { question: "Can I add watermarks to specific pages only?", answer: "Yes. Enter a page range (e.g., 1-3, 5) or select 'first page only' for cover-page watermarks." },
+      { question: "What opacity should I use?", answer: "10-30% for visible-yet-subtle watermarks (DRAFT, CONFIDENTIAL). 50%+ for bold markings (COPY). Below 10% for background watermarks." },
+      { question: "Can I use an image as watermark?", answer: "Yes. Upload a PNG or JPG with transparency. The image is repeated or centered across each page as configured." },
+    ],
   },
   {
     id: "123",
@@ -1476,7 +1627,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Page Delete — Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the PDF document to delete pages from." },
+      { title: "2. Select Pages to Remove", desc: "View thumbnail previews of all pages. Click to mark pages for deletion. Use the page range input (1-3, 5, 8-10) for bulk selection." },
+      { title: "3. Export Cleaned PDF", desc: "Download the PDF with selected pages removed. Remaining pages are renumbered sequentially." },
+    ],
+    faqs: [
+      { question: "Can I undo page deletion?", answer: "The operation is applied immediately to the preview. You can reset and start over before downloading." },
+      { question: "Are deleted pages recoverable after download?", answer: "No. Once you download the modified PDF without the deleted pages, those pages are permanently removed from that copy." },
+      { question: "Does page deletion affect internal links?", answer: "Yes. Internal cross-references to deleted pages are removed. Links to remaining pages are updated to reflect new page numbers." },
+    ],
   },
   {
     id: "124",
@@ -1827,7 +1988,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Rotate PDF — Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document. The tool shows thumbnail previews of all pages for rotation." },
+      { title: "2. Rotate Pages", desc: "Click individual pages to rotate them 90 clockwise. Use 'rotate all' for uniform rotation. Each click adds 90 of rotation." },
+      { title: "3. Save Rotated PDF", desc: "Download the PDF with pages rotated to your desired orientation." },
+    ],
+    faqs: [
+      { question: "What rotation angles are available?", answer: "90, 180, and 270 degrees. Each click rotates by 90 . Rotate a page twice for 180  (upside down)." },
+      { question: "Does rotating affect text selectability?", answer: "No. Text in rotated pages remains selectable and searchable. Only the visual orientation changes." },
+      { question: "Can I rotate only odd or even pages?", answer: "Yes. Use 'rotate odd pages' or 'rotate even pages' for duplex scanning corrections." },
+    ],
   },
   {
     id: "153",
@@ -1836,7 +2007,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Extract Images from PDF — Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. ',
-    dependencies: "pdf.js"
+    dependencies: "pdf.js",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF containing embedded images. The tool scans each page for raster images." },
+      { title: "2. Choose Images", desc: "Preview all detected images with thumbnails. Select individual images or 'select all' to extract everything." },
+      { title: "3. Download Images", desc: "Download selected images as a ZIP archive. Each image retains its original format (JPEG, PNG, TIFF) where possible." },
+    ],
+    faqs: [
+      { question: "What image formats are embedded in PDFs?", answer: "PDFs typically contain JPEG (photos), PNG/JPX (high-quality images), and CCITT (fax/black & white scans). The tool preserves original formats." },
+      { question: "Are vector graphics extractable?", answer: "The tool extracts raster images only. Vector graphics (logos, diagrams) are rendered as PNG if enabled in settings." },
+      { question: "What is the maximum image resolution?", answer: "Images are extracted at their original resolution as embedded in the PDF. No upscaling or downscaling is applied." },
+    ],
   },
   {
     id: "154",
@@ -2037,7 +2218,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Compare PDF Files — Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. ',
-    dependencies: "pdf.js"
+    dependencies: "pdf.js",
+    instructions: [
+      { title: "1. Upload Two PDFs", desc: "Select the original and modified PDF versions to compare. The tool analyzes both documents page by page." },
+      { title: "2. Choose Comparison Mode", desc: "Select 'visual' (image-based pixel diff) or 'textual' (text content difference). Visual mode detects layout changes; textual focuses on word changes." },
+      { title: "3. Review Differences", desc: "View highlighted differences: added content in green, removed in red, modified in yellow. Download a difference report as PDF." },
+    ],
+    faqs: [
+      { question: "What types of changes are detected?", answer: "Text additions, deletions, modifications, image changes, formatting differences, and page reordering are all detected and highlighted." },
+      { question: "Can I compare specific pages only?", answer: "Yes. Enter a page range to limit comparison. Useful when comparing large documents where changes are in known sections." },
+      { question: "Is this suitable for legal document review?", answer: "Yes. The visual diff report provides clear, color-coded change tracking suitable for legal document comparison and contract review." },
+    ],
   },
   {
     id: "169",
@@ -2152,7 +2343,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Add Page Numbers to PDF — Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to add page numbers to." },
+      { title: "2. Configure Numbering", desc: "Choose position (top/bottom, left/center/right), starting number, format (1, 2, 3 or i, ii, iii), and font size." },
+      { title: "3. Apply Page Numbers", desc: "Page numbers are added to every page in the document. Download the numbered PDF." },
+    ],
+    faqs: [
+      { question: "Can I skip the first page?", answer: "Yes. Select 'skip first page' to omit page numbers on cover pages or title pages." },
+      { question: "Can I use Roman numerals for front matter?", answer: "Yes. Choose Roman numeral (i, ii, iii) format for the first section and switch to Arabic (1, 2, 3) from a specified page." },
+      { question: "Does this affect existing headers or footers?", answer: "Page numbers are placed in the page margin area. Existing header/footer content may overlap if positioned similarly." },
+    ],
   },
   {
     id: "167c",
@@ -2340,7 +2541,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Metadata Editor — Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF file to view and edit its metadata." },
+      { title: "2. Edit Metadata Fields", desc: "Modify title, author, subject, keywords, and producer fields. Custom XMP metadata can also be added." },
+      { title: "3. Save Updated PDF", desc: "Download the PDF with the corrected metadata. The document content remains unchanged." },
+    ],
+    faqs: [
+      { question: "What metadata fields does a PDF contain?", answer: "Core fields: Title, Author, Subject, Keywords (PDF info dictionary). Extended fields in XMP: creation date, modification date, producer, creator tool." },
+      { question: "Can I remove all metadata?", answer: "Yes. Use the 'clear metadata' option to strip all identifying information from the PDF before distribution." },
+      { question: "Does editing metadata change the document hash?", answer: "Yes. Modifying metadata alters the PDF binary, so any cryptographic hash of the file changes." },
+    ],
   },
   {
     id: "193",
@@ -2420,7 +2631,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     isPro: false,
     description: 'Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.',
     seoDescription: 'Free online PDF Workflow Builder — merge, split, fill forms, rotate pages, add passwords, and edit metadata. All processing happens in your browser — no upload needed.',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Add PDF Files", desc: "Upload one or more PDF source files to the workflow." },
+      { title: "2. Build Processing Steps", desc: "Create a sequence: merge, split, rotate, watermark, compress, protect. Drag steps to reorder the workflow." },
+      { title: "3. Execute Workflow", desc: "Run the entire processing pipeline in sequence. Download the final output or review each step's result." },
+    ],
+    faqs: [
+      { question: "What steps can I chain?", answer: "Merge, split, rotate, crop, compress, watermark, protect (password), flatten, grayscale, add headers/footers, and add page numbers." },
+      { question: "Can I save workflows for reuse?", answer: "Yes. Save your workflow as a JSON template and reload it later for processing similar document batches." },
+      { question: "Does the workflow process files sequentially?", answer: "Yes. Each step processes the output of the previous step. Order matters — compress before protect, for example." },
+    ],
   },
   {
     id: "221",
@@ -2657,7 +2878,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF OCR (Scanned Docs) — Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. ',
-    dependencies: "tesseract.js"
+    dependencies: "tesseract.js",
+    instructions: [
+      { title: "1. Upload Scanned PDF", desc: "Select a scanned PDF or image-based PDF. OCR (Optical Character Recognition) converts images of text into searchable content." },
+      { title: "2. Select Language", desc: "Choose the document language for accurate character recognition. Supports 30+ languages including English, Spanish, French, German, Chinese, and Arabic." },
+      { title: "3. Process & Download", desc: "The OCR engine analyzes each page and creates a searchable PDF with a hidden text layer over the original image." },
+    ],
+    faqs: [
+      { question: "How accurate is the OCR?", answer: "Clean scans at 300 DPI with clear fonts achieve 98%+ accuracy. Handwriting, decorative fonts, or low-resolution scans (below 200 DPI) significantly reduce accuracy." },
+      { question: "Does the original image quality change?", answer: "No. The original scanned image is preserved. The recognized text is added as an invisible layer underneath for search and selection." },
+      { question: "Can I export the recognized text separately?", answer: "Yes. Download the extracted text as a .txt file or the original PDF with the searchable text layer added." },
+    ],
   },
   {
     id: "214",
@@ -2666,7 +2897,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF Form Filler — Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF Form", desc: "Select a fillable PDF form (AcroForm or XFA format). The tool detects all form fields automatically." },
+      { title: "2. Fill Out Fields", desc: "Click on each form field to enter text, select checkboxes, choose radio buttons, or pick dropdown options." },
+      { title: "3. Download Filled Form", desc: "Save the completed PDF form with all entered data flattened or editable. Choose whether to allow further editing." },
+    ],
+    faqs: [
+      { question: "What types of form fields are supported?", answer: "Text fields, checkboxes, radio buttons, dropdown lists, list boxes, buttons, and signature fields are all supported." },
+      { question: "Can I save progress and continue later?", answer: "Yes. Your filled data persists in the browser session. Do not clear browser cache until you download the completed form." },
+      { question: "What is field flattening?", answer: "Flattening converts fillable form fields into static text. This prevents further editing and is commonly required for submitted forms." },
+    ],
   },
   {
     id: "216",

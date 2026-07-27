@@ -294,7 +294,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online HTML to PDF — Convert HTML source code into a downloadable PDF document. ',
     category: 'PDF',
     id:  "243",
-    dependencies: 'jsPDF'
+    dependencies: 'jsPDF',
+    instructions: [
+      { title: "1. Enter HTML Code", desc: "Paste HTML content or upload an .html file. The tool renders the HTML as it would appear in a web browser." },
+      { title: "2. Style & Format", desc: "Choose paper size, orientation, margins, and whether to include page numbers and headers/footers." },
+      { title: "3. Export PDF", desc: "Your HTML is rendered as a clean PDF. CSS styles are applied, and the output matches the browser preview." },
+    ],
+    faqs: [
+      { question: "Are external CSS and JS loaded?", answer: "External resources linked in the HTML are loaded. For offline HTML files without network access, inline all resources first." },
+      { question: "Do print-specific CSS rules apply?", answer: "Yes. CSS @media print rules are respected. The tool applies print stylesheets for optimal PDF output." },
+      { question: "Can I add custom headers and footers?", answer: "Yes. Set custom header and footer HTML with dynamic fields like page number, title, and date." },
+    ],
   },
   {
     name: 'Generic PDF Processor',
@@ -2013,6 +2023,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PDF to Markdown — Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Your PDF", desc: "Select a PDF that contains text content. The tool attempts to extract and structure content as Markdown." },
+      { title: "2. Configure Output", desc: "Choose heading level mapping (PDF heading styles to Markdown H1-H6), list detection, and code block preservation." },
+      { title: "3. Download Markdown", desc: "Get a .md file with your PDF content converted to Markdown syntax. Ideal for documentation, note-taking, or CMS import." },
+    ],
+    faqs: [
+      { question: "How are tables handled?", answer: "Tables are extracted as Markdown pipe tables. Complex merged cells or nested tables may not convert perfectly." },
+      { question: "Are footnotes preserved?", answer: "Yes. PDF footnotes are converted to Markdown footnote syntax [^1] at the bottom of the document." },
+      { question: "Can I convert only specific pages?", answer: "Yes. Enter a page range to limit the conversion scope, useful for large documents with irrelevant sections." },
+    ],
   },
   {
     id: "312",
@@ -2023,6 +2043,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Extract Pages from PDF — Extract specific pages from a PDF document to create a new PDF. Select individual pages or page ranges. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the source PDF document to extract pages from." },
+      { title: "2. Select Page Range", desc: "Enter the page range to extract (e.g., 1-3, 5, 8-10). Preview thumbnails show which pages are selected." },
+      { title: "3. Extract & Download", desc: "The selected pages are extracted as a new PDF document. All content, formatting, and links are preserved." },
+    ],
+    faqs: [
+      { question: "Does extraction preserve the original file?", answer: "Yes. The original PDF is not modified. A new PDF is created containing only the extracted pages." },
+      { question: "Can I extract non-consecutive pages?", answer: "Yes. Use comma-separated ranges: 1-3, 5, 8-10 extracts pages 1,2,3,5,8,9,10 in that order." },
+      { question: "Are form fields preserved in extracted pages?", answer: "Yes. Form fields and their values are copied to the new PDF. Fields reference the new page numbering." },
+    ],
   },
   {
     id: "313",
@@ -2033,6 +2063,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Connect Your Scanner", desc: "Select your scanner from the list of detected devices. TWAIN and WIA drivers are supported on desktop browsers." },
+      { title: "2. Set Scan Parameters", desc: "Choose resolution (150-600 DPI), color mode (color, grayscale, black & white), and document size." },
+      { title: "3. Scan & Save as PDF", desc: "Start scanning. The scanned pages are assembled into a PDF document and ready for download." },
+    ],
+    faqs: [
+      { question: "Can I scan multiple pages into one PDF?", answer: "Yes. Use the 'batch scan' mode to scan multiple pages sequentially. Each page is appended to the same PDF." },
+      { question: "What resolution should I use for documents?", answer: "300 DPI is standard for text documents. 150 DPI for drafts (smaller files). 600 DPI for detailed graphics or small text." },
+      { question: "Does this work with network scanners?", answer: "The tool uses WebUSB and WebHID APIs. USB-connected scanners work best. Network scanners may require vendor-specific software." },
+    ],
   },
   {
     id: "314",
@@ -2043,6 +2083,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Repair PDF — Attempts to repair corrupted or damaged PDF files by rebuilding the internal structure. Recovers readable content from broken PDFs. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Damaged PDF", desc: "Select a PDF that displays errors, fails to open, or has corrupted content." },
+      { title: "2. Analyze Damage", desc: "The tool scans the PDF structure and identifies corruption: missing cross-references, damaged streams, or truncated data." },
+      { title: "3. Repair & Download", desc: "The tool attempts to rebuild the damaged PDF structure. Download the repaired version or recoverable content." },
+    ],
+    faqs: [
+      { question: "What types of PDF corruption can be repaired?", answer: "Cross-reference table errors, invalid object streams, truncated files (recovers readable portion), and incorrect file headers." },
+      { question: "Can all damaged PDFs be repaired?", answer: "No. Severely truncated or overwritten files may not be recoverable. Backup copies are always the best recovery option." },
+      { question: "Does repair preserve all content?", answer: "The tool recovers as much as possible. Some formatting, images, or pages may be lost if the corresponding data is corrupted irreparably." },
+    ],
   },
   {
     id: "315",
@@ -2053,6 +2103,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PDF to PDF/A — Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF File", desc: "Select a standard PDF to convert to PDF/A format. PDF/A is an ISO-standardized version for long-term archiving." },
+      { title: "2. Choose Compliance Level", desc: "Select PDF/A-1b (basic, 2005), PDF/A-2b (supports layers and transparency, 2008), or PDF/A-3b (can embed non-PDF files, 2012)." },
+      { title: "3. Generate Archival PDF", desc: "Your PDF is converted to PDF/A with all fonts embedded, metadata normalized, and features restricted for archival compliance." },
+    ],
+    faqs: [
+      { question: "What does PDF/A restrict?", answer: "PDF/A prohibits dynamic content (JavaScript, audio, video), requires embedded fonts, bans encryption, and mandates device-independent colors." },
+      { question: "Why not just keep the original PDF?", answer: "Standard PDFs may reference external fonts, contain JavaScript, or use features that degrade over time. PDF/A ensures the document renders identically forever." },
+      { question: "Does PDF/A increase file size?", answer: "Yes. Embedding all fonts and converting images to device-independent color spaces typically increases file size by 10-30%." },
+    ],
   },
   {
     id: "316",
@@ -2063,6 +2123,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Crop PDF — Crop PDF pages to custom dimensions or preset sizes. Remove unwanted margins, white space, or sections. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF with pages to crop. The tool shows page previews with a draggable crop rectangle." },
+      { title: "2. Set Crop Margins", desc: "Drag crop handles or enter precise margin values (top, bottom, left, right) in inches, mm, or points." },
+      { title: "3. Apply & Download", desc: "All pages (or selected page range) are cropped to the specified boundaries. Content outside the crop area is hidden." },
+    ],
+    faqs: [
+      { question: "Does cropping permanently remove content?", answer: "Yes. Content outside the crop box is hidden. Some PDF viewers may allow revealing cropped content unless the PDF is optimized." },
+      { question: "Can I crop different pages differently?", answer: "No. The crop applies uniformly to the selected page range. For individual page crops, process each page separately." },
+      { question: "What are standard crop presets?", answer: "Trim whitespace (auto-detect), presentation crop (16:9), document crop (remove margins), and custom size." },
+    ],
   },
   {
     id: "317",
@@ -2073,6 +2143,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Redact PDF — Permanently remove sensitive information from PDF files. Black out text, images, or areas with permanent redaction. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF containing sensitive information to permanently remove." },
+      { title: "2. Select Content to Redact", desc: "Use the tool to draw redaction rectangles over text, images, or entire page sections. Search for specific text to auto-redact all occurrences." },
+      { title: "3. Apply Redactions", desc: "Permanently remove the selected content. Redacted areas appear as black boxes. The underlying text is irrecoverably deleted." },
+    ],
+    faqs: [
+      { question: "Is redaction reversible?", answer: "No. Proper redaction removes the underlying content permanently. The text cannot be recovered from the redacted PDF." },
+      { question: "Does redaction remove hidden metadata?", answer: "Yes. The tool also strips hidden metadata, comments, and tracked changes that might expose redacted information." },
+      { question: "Can I search and redact specific words?", answer: "Yes. Enter a search term to find all occurrences. Bulk-select results for batch redaction across the entire document." },
+    ],
   },
   {
     id: "318",
@@ -2083,6 +2163,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Translate PDF — Extract and translate PDF content between 50+ languages. Preserves document structure while converting text. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to translate. The tool extracts text, translates it, and rebuilds the document with translated content." },
+      { title: "2. Choose Languages", desc: "Select source language (auto-detect or manual) and target language. Supports 50+ language pairs." },
+      { title: "3. Download Translated PDF", desc: "Your PDF is translated with the layout preserved as closely as possible. Text is replaced in-place within the original design." },
+    ],
+    faqs: [
+      { question: "How is the translation quality?", answer: "Machine translation quality depends on language pair and content complexity. Simple content translates well; technical or literary content may need human review." },
+      { question: "Is the original layout preserved?", answer: "The tool attempts to match text position, font size, and formatting. Longer translated text may overflow text boxes and need adjustment." },
+      { question: "Are images and graphics preserved?", answer: "Yes. Images, charts, and graphics remain unchanged. Only text content is extracted and translated." },
+    ],
   },
   {
     id: "319",
@@ -2093,6 +2183,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Flatten PDF — Flattens PDF files by merging all layers, removing form fields, and converting interactive elements into static content. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF with form fields, annotations, or layers to flatten." },
+      { title: "2. Choose Flatten Options", desc: "Select what to flatten: form fields (convert to text), annotations (merge into page), or layers (merge all visible layers)." },
+      { title: "3. Download Flattened PDF", desc: "Your PDF has all interactive elements merged into the page content. The file remains visually identical but is no longer editable." },
+    ],
+    faqs: [
+      { question: "Why flatten a PDF?", answer: "Flattening prevents further editing, ensures consistent rendering across PDF viewers, and is often required for document submission or archival." },
+      { question: "Is flattening reversible?", answer: "No. Once flattened, form fields cannot be edited, annotations cannot be moved, and layers cannot be toggled." },
+      { question: "Does flattening reduce file size?", answer: "Sometimes. Flattening removes editable form field structures while retaining their visual appearance. Annotations become part of the page content." },
+    ],
   },
   {
     id: "320",
@@ -2103,6 +2203,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Grayscale PDF — Convert any PDF to grayscale/black and white. Perfect for printing and reducing ink usage. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a color PDF document to convert to grayscale." },
+      { title: "2. Choose Conversion Method", desc: "Choose 'luminosity' (perceptual brightness) for natural-looking grayscale, 'average' for flat conversion, or 'print' for CMYK simulation." },
+      { title: "3. Download Grayscale PDF", desc: "All colors are converted to shades of gray while preserving text readability and image detail." },
+    ],
+    faqs: [
+      { question: "Why convert to grayscale?", answer: "Grayscale PDFs are 30-50% smaller than color versions. Printing in grayscale saves color ink or toner charges." },
+      { question: "Does this affect text searchability?", answer: "No. Text content and OCR layers are preserved. Only the visual color information is removed." },
+      { question: "Can I convert specific pages to grayscale?", answer: "Yes. Enter a page range to apply grayscale conversion only to selected pages, leaving others in color." },
+    ],
   },
   {
     id: "321",
@@ -2113,6 +2223,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Whiteout PDF — Cover sensitive content in PDF files with white rectangles. Select entire pages or custom areas to hide text or images. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to white out (cover up) specific content." },
+      { title: "2. Select Areas to Cover", desc: "Click and drag white rectangles over text, signatures, numbers, or any content you want to conceal." },
+      { title: "3. Download Whitened PDF", desc: "The selected areas are covered with white. Unlike redaction, the underlying content is hidden but not permanently removed." },
+    ],
+    faqs: [
+      { question: "Is whitening the same as redaction?", answer: "No. Whitening covers content with a white box — the underlying text is still present in the PDF and could be recovered. Redaction permanently deletes content." },
+      { question: "Can I resize whitening blocks?", answer: "Yes. Each white rectangle can be dragged, resized, or deleted before final download." },
+      { question: "What color options are available?", answer: "Multiple colors: white (most common), black, gray, or custom colors to match the document background." },
+    ],
   },
   {
     id: "322",
@@ -2123,6 +2243,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Resize PDF Pages — Change page size of your PDF documents. Choose A4, Letter, Legal, A3 or custom dimensions. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to resize its pages. All pages are scaled to the same output dimensions." },
+      { title: "2. Set New Page Size", desc: "Choose a standard size (A4, Letter, A3, Legal, Tabloid) or enter custom width and height. Choose scaling mode: fit, fill, or stretch." },
+      { title: "3. Download Resized PDF", desc: "All pages are uniformly scaled to the new size. Content is scaled proportionally by default." },
+    ],
+    faqs: [
+      { question: "Does resizing affect content layout?", answer: "Yes. Content is scaled proportionally. A letter-sized page resized to A4 will have slight aspect ratio adjustment." },
+      { question: "Can I upscale a PDF to a larger size?", answer: "Yes, but text and images may appear pixelated if upscaled significantly (e.g., A5 to A3). Vector content scales cleanly." },
+      { question: "What is the difference between fit, fill, and stretch?", answer: "Fit: content fits entirely within new page. Fill: content fills the entire page (may crop). Stretch: content deforms to match new dimensions exactly." },
+    ],
   },
   {
     id: "323",
@@ -2133,6 +2263,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Add Text to PDF — Add custom text labels, annotations, and captions directly onto PDF pages. Choose font size, color, and position. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the PDF document to add text annotations to." },
+      { title: "2. Enter Text", desc: "Type your text content. Choose font, size, color, and bold/italic formatting." },
+      { title: "3. Position & Download", desc: "Click on the page to place the text. Drag to reposition if needed. Download the PDF with added text." },
+    ],
+    faqs: [
+      { question: "Can I add text with Unicode characters?", answer: "Yes. Unicode text including accented characters, CJK characters, and emoji are supported. Font availability affects special character rendering." },
+      { question: "Is the added text editable after saving?", answer: "No. Added text is flattened into the page as a printable annotation. For editable text, use a PDF editor." },
+      { question: "Can I add text to multiple pages at once?", answer: "Yes. Select 'apply to all pages' to add the same text (e.g., page numbers, headers) to every page." },
+    ],
   },
   {
     id: "324",
@@ -2143,6 +2283,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Add Image to PDF — Insert images onto any page of your PDF. Position and resize PNG/JPG images anywhere. Perfect for signatures, logos, or photos. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the PDF document to add images to." },
+      { title: "2. Upload Image", desc: "Choose an image file (PNG, JPG, WebP) to insert. The image is placed as an overlay on the page." },
+      { title: "3. Position & Download", desc: "Click to set the image position on the page. Adjust size and rotation. Download the PDF with the embedded image." },
+    ],
+    faqs: [
+      { question: "Can I add images to specific pages only?", answer: "Yes. Select the target page number. The image is added only to that page while others remain unchanged." },
+      { question: "What image formats are supported?", answer: "PNG (with transparency), JPG/JPEG, WebP, GIF, and BMP. PNG is recommended for logos and graphics with transparent backgrounds." },
+      { question: "Can I add multiple images to different pages?", answer: "Yes. Upload an image, place it on a page, then repeat for additional images on different pages." },
+    ],
   },
   {
     id: "325",
@@ -2153,6 +2303,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PDF Header and Footer — Add professional headers and footers to every page. Supports page numbers, dates, and custom alignment. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select the PDF document to add headers and/or footers to." },
+      { title: "2. Design Header/Footer", desc: "Enter left, center, and right content. Include dynamic fields: [page], [totalpages], [date], [time], and custom text." },
+      { title: "3. Apply & Download", desc: "Headers and footers are added to the selected page range. Download the PDF with consistent headers and footers." },
+    ],
+    faqs: [
+      { question: "Can different headers be set for odd/even pages?", answer: "Yes. Enable 'different odd and even pages' to set mirrored headers for book-style layouts." },
+      { question: "What font options are available?", answer: "Choose from system fonts. Set size, color, bold, and italic. Fonts are embedded for consistent rendering." },
+      { question: "Can I add a line separator below headers?", answer: "Yes. Toggle 'header line' to add a horizontal rule separating the header from page content." },
+    ],
   },
   {
     id: "326",
@@ -2163,6 +2323,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online N-up PDF — Combine multiple PDF pages onto a single sheet. Choose 2-up, 4-up, 6-up, 9-up, or booklet layout. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to arrange multiple pages per sheet (N-up layout)." },
+      { title: "2. Choose Layout", desc: "Select 2-up, 4-up, 6-up, 8-up, or 16-up layout. Choose reading order: left-to-right or top-to-bottom." },
+      { title: "3. Download N-up PDF", desc: "Your PDF is rearranged with multiple reduced-size pages on each sheet. Ideal for printing drafts or handouts." },
+    ],
+    faqs: [
+      { question: "What is N-up layout used for?", answer: "N-up printing saves paper by placing multiple document pages on one physical sheet. Common for lecture handouts (4-up, 6-up) and document review (2-up)." },
+      { question: "Can I add borders between pages?", answer: "Yes. Toggle page borders and set border thickness. Borders help visually separate reduced pages on the sheet." },
+      { question: "Does N-up preserve page order?", answer: "Yes. Pages flow in reading order within each sheet. For 4-up, pages 1-4 on first sheet, 5-8 on second, etc." },
+    ],
   },
   {
     id: "327",
@@ -2173,6 +2343,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PDF Annotator — Add highlights, underlines, strikeouts, rectangles, circles to PDF pages. Review and markup documents visually. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to add annotations to." },
+      { title: "2. Choose Annotation Tool", desc: "Select highlight (yellow, green, blue, pink), underline, strikethrough, freehand drawing, rectangle, circle, arrow, or sticky note." },
+      { title: "3. Annotate & Download", desc: "Click and drag on the page to create annotations. Download the PDF with all annotations embedded." },
+    ],
+    faqs: [
+      { question: "Are annotations saved in the PDF?", answer: "Yes. Annotations are embedded as PDF comments and appear in any PDF viewer that supports annotations (Adobe Acrobat, Preview, Edge)." },
+      { question: "Can I delete or modify annotations?", answer: "Yes. Click on any annotation to select it for deletion, repositioning, or resizing before downloading." },
+      { question: "Are annotations printable?", answer: "Yes. Annotations are printed by default. Toggle 'print annotations' off to download a PDF with on-screen-only annotations." },
+    ],
   },
   {
     id: "328",
@@ -2183,6 +2363,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Deskew PDF — Automatically straighten crooked scanned PDF pages. Fix skewed documents with auto-detection or manual rotation. ',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a skewed or crooked scanned PDF document." },
+      { title: "2. Auto-Detect Skew", desc: "The tool analyzes page content and detects rotation angles. Preview the auto-corrected result." },
+      { title: "3. Apply Correction", desc: "The deskew is applied to all pages or selected pages. Download the straightened PDF." },
+    ],
+    faqs: [
+      { question: "What causes PDF skew?", answer: "Scanned documents often have slight rotation (1-5 degrees) from imperfect alignment on the scanner bed or ADF." },
+      { question: "Is deskewing always accurate?", answer: "The tool detects skew by analyzing text baselines and page edges. Results are best for text-heavy pages with straight margins." },
+      { question: "Can I manually adjust the angle?", answer: "Yes. If auto-deskew is off by a fraction of a degree, use the manual fine-tune slider to adjust ±5 degrees." },
+    ],
   },
   {
     id: "329",
@@ -2193,6 +2383,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online URL to PDF — Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter Website URL", desc: "Paste the full URL of the web page to convert. The tool renders the page as it appears in a browser." },
+      { title: "2. Adjust Page Settings", desc: "Select page size (A4, Letter), orientation, margins, and whether to include background graphics and images." },
+      { title: "3. Capture & Download", desc: "The web page is rendered and converted to PDF. Dynamic content (scroll, click) is captured as initially loaded." },
+    ],
+    faqs: [
+      { question: "Does this capture JavaScript-rendered content?", answer: "Yes. The tool uses a headless browser to render JavaScript before capturing. Some highly dynamic apps may not fully render." },
+      { question: "How are multi-page websites handled?", answer: "The tool captures only the entered URL. It does not follow links or crawl subpages. For the full site, save each page individually." },
+      { question: "Can I set a custom viewport size?", answer: "Yes. Set viewport width and height to control how the page renders. Useful for capturing mobile-specific layouts." },
+    ],
   },
   {
     id: "330",
@@ -2203,6 +2403,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Markdown to PDF — Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. ',
     dependencies: "pdf-lib, marked",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter or Upload Markdown", desc: "Paste Markdown text or upload a .md file. Supports standard Markdown syntax including tables, code blocks, and task lists." },
+      { title: "2. Style Your PDF", desc: "Choose from built-in themes (clean, modern, classic, dark). Set font family, size, page margins, and line spacing." },
+      { title: "3. Generate PDF", desc: "Your Markdown is rendered and exported as a styled PDF. Download or print directly from the browser." },
+    ],
+    faqs: [
+      { question: "Can I add a custom CSS stylesheet?", answer: "Yes. Upload a custom CSS file or paste CSS rules to control every aspect of the PDF appearance beyond the built-in themes." },
+      { question: "Are emoji and Unicode supported?", answer: "Yes. Standard emoji and Unicode characters render in the PDF. Font selection may affect how special characters appear." },
+      { question: "Does this support math formulas?", answer: "LaTeX math expressions in $$ delimiters are rendered using KaTeX for professional mathematical typesetting." },
+    ],
   },
   {
     id: "331",
@@ -2213,6 +2423,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Bookmark PDF — Add Table of Contents to your PDF documents. Organize pages with titled sections and nested hierarchies. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to add or edit bookmarks (table of contents)." },
+      { title: "2. Add Bookmarks", desc: "Create new bookmarks: enter bookmark name, set target page number, and assign a hierarchy level for nested sections." },
+      { title: "3. Save Bookmarked PDF", desc: "Download the PDF with the updated bookmark tree. Bookmarks appear in the PDF viewer's navigation panel." },
+    ],
+    faqs: [
+      { question: "Can I import bookmarks from a text file?", answer: "Yes. Upload a tab-indented text file with bookmark names and page numbers for batch bookmark creation." },
+      { question: "Are existing bookmarks preserved?", answer: "Yes. Existing bookmarks remain and new bookmarks are added. You can also choose to replace existing bookmarks entirely." },
+      { question: "How many bookmark levels are supported?", answer: "Up to 12 levels of nested bookmarks (L1: Chapter, L2: Section, L3: Subsection, etc.). Most PDF viewers display 3-5 levels by default." },
+    ],
   },
   {
     id: "332",
@@ -2223,6 +2443,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online EML to PDF — Convert email files (.eml) to PDF documents. Preserves headers and body content in a clean, printable format. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload EML File", desc: "Select an .eml email file exported from Outlook, Thunderbird, Apple Mail, or any email client." },
+      { title: "2. Choose PDF Layout", desc: "Select whether to include email headers (From, To, Date, Subject), attachments as separate pages, and inline images." },
+      { title: "3. Download as PDF", desc: "Your email is converted to a PDF document with all content preserved. Attachments are appended as additional pages." },
+    ],
+    faqs: [
+      { question: "Are EML attachments included?", answer: "Yes. Attachments are extracted and appended to the PDF. Common document and image formats are rendered inline." },
+      { question: "Does this preserve email formatting?", answer: "Email HTML formatting is preserved including fonts, colors, tables, and embedded images. Plain text emails use a clean monospace layout." },
+      { question: "Can I batch convert multiple EML files?", answer: "Yes. Select multiple .eml files. Each is converted independently and combined into a single PDF or separate files." },
+    ],
   },
   {
     id: "333",
@@ -3324,6 +3554,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. All processing happens locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Bulk PDF Suite — Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. ',
-    dependencies: "pdf-lib"
+    dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload Multiple PDFs", desc: "Select several PDF files for batch processing. The suite applies the same operation to all files." },
+      { title: "2. Choose Batch Operation", desc: "Select from: compress, rotate, protect, unlock, split, watermark, crop, resize, or flatten all uploaded files." },
+      { title: "3. Configure & Export", desc: "Set parameters for the chosen operation. Download individual results or a ZIP archive of all processed files." },
+    ],
+    faqs: [
+      { question: "What batch operations are supported?", answer: "Compress, rotate, password-protect, unlock, split into pages, add watermark, crop margins, resize pages, and flatten." },
+      { question: "Can I apply different settings per file?", answer: "Batch operations apply uniform settings to all files. For file-specific settings, process each file individually." },
+      { question: "What is the batch file limit?", answer: "Up to 20 files per batch, or files totaling up to 500 MB, depending on browser memory." },
+    ],
   },
 ];

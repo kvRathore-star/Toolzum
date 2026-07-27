@@ -762,6 +762,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. ',
     dependencies: "pdf-lib, utif",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload TIFF Files", desc: "Select one or more multi-page TIFF files. TIFF is common in scanning and fax workflows." },
+      { title: "2. Set Page Options", desc: "Choose page size, orientation, and compression (JPEG for photos, LZW for line art) for the PDF output." },
+      { title: "3. Convert to PDF", desc: "Each TIFF page becomes a PDF page. Multi-page TIFFs are preserved with all pages in order." },
+    ],
+    faqs: [
+      { question: "Does this handle multi-page TIFF?", answer: "Yes. Multi-page TIFF files are converted in full — each TIFF page becomes a PDF page without losing any content." },
+      { question: "What TIFF compression types are supported?", answer: "Uncompressed, LZW, PackBits, CCITT Group 3/4 (fax), JPEG, and Deflate compressed TIFFs are all supported." },
+      { question: "Can I combine multiple TIFFs into one PDF?", answer: "Yes. Select multiple TIFF files — they merge into a single PDF in the order they are added." },
+    ],
   },
   {
     id: "449",
@@ -2026,6 +2036,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF to PNG — Convert PDF pages to PNG, WebP, or BMP images. Extract slides and graphics with customizable DPI and color modes. ',
     dependencies: "pdfjs-dist, jszip",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF file. PNG preserves transparency and sharp edges better than JPG for text-heavy pages." },
+      { title: "2. Set Resolution", desc: "Choose output DPI (72-600). 150 DPI is recommended for screen viewing. 300 DPI for print-ready images." },
+      { title: "3. Download PNGs", desc: "Download individual PNG files. Each PDF page becomes a separate high-quality PNG image." },
+    ],
+    faqs: [
+      { question: "Why use PNG over JPG for PDF conversion?", answer: "PNG supports lossless compression and transparency. Text and line art appear sharper in PNG than JPG at the same resolution." },
+      { question: "What is the file size compared to JPG?", answer: "PNG files are typically 2-5x larger than equivalent JPGs for photo-heavy pages. For text-only pages, the difference is smaller." },
+      { question: "Can I convert to monochrome PNG?", answer: "Yes. Select 'grayscale' or 'black and white' mode to reduce file size. Black and white PNGs are significantly smaller than color." },
+    ],
   },
   {
     id: "528",
@@ -2036,6 +2056,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Create PDF — Generate PDF documents from plain text, CSV tables, JSON data, or XML. Fully customizable with titles and table formatting. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Choose Content Type", desc: "Select how to create your PDF: from a blank page, from uploaded images, or from pasted text content." },
+      { title: "2. Add Content", desc: "For images: upload and arrange files. For text: type or paste. For blank: set page size and orientation." },
+      { title: "3. Save as PDF", desc: "Your content is assembled into a clean PDF document. Download the result." },
+    ],
+    faqs: [
+      { question: "Can I mix images and text in one PDF?", answer: "Yes. Upload images and add text blocks on the same page for simple document creation without external software." },
+      { question: "What page sizes are available?", answer: "A4, A3, Letter, Legal, and custom dimensions. Orientation can be portrait or landscape." },
+      { question: "Can I rearrange pages after adding content?", answer: "Yes. Thumbnail view allows drag-and-drop reordering of pages before final export." },
+    ],
   },
   {
     id: "529",
@@ -2046,6 +2076,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Info & Analysis — View metadata, page dimensions, extract text, or export JSON from PDF. Document auditing and compliance tool. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF file to inspect its properties and technical details." },
+      { title: "2. View Document Info", desc: "See page count, file size, PDF version, encryption status, fonts used, images count, metadata, and more." },
+      { title: "3. Export Report", desc: "Download the PDF information as a text report or copy individual details to clipboard." },
+    ],
+    faqs: [
+      { question: "What technical details are shown?", answer: "PDF version, page dimensions, font list (embedded or not), image resolutions, color spaces, layer information, and interactive elements." },
+      { question: "Can I check if a PDF is PDF/A compliant?", answer: "Yes. The tool validates the PDF against PDF/A-1, PDF/A-2, and PDF/A-3 requirements and reports compliance status." },
+      { question: "Does this detect malicious PDFs?", answer: "The tool reports JavaScript usage, external references, and embedded files — indicators used in PDF-based attacks — but does not scan for malware." },
+    ],
   },
   {
     id: "530",
@@ -2056,6 +2096,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Cleanup — Remove annotations, strip metadata, delete blank pages, reverse page order, or sanitize PDFs. Combine operations in one pass. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to clean up and optimize. The tool finds and removes unnecessary elements." },
+      { title: "2. Choose Cleanup Options", desc: "Select to remove: metadata, annotations, form fields, embedded files, JavaScript actions, alternate images, and orphaned objects." },
+      { title: "3. Download Cleaned PDF", desc: "Your PDF is optimized with unnecessary data removed. File size is reduced while visible content remains unchanged." },
+    ],
+    faqs: [
+      { question: "What is removed during cleanup?", answer: "Metadata (author, title, creator), hidden annotations, embedded search indexes, duplicate fonts, alternate image versions, and JavaScript actions." },
+      { question: "Is cleanup safe for document integrity?", answer: "Yes. All visible content, text, images, and page layout are preserved. Only hidden or unnecessary data structures are removed." },
+      { question: "How much size reduction can I expect?", answer: "5-30% reduction for typical PDFs. PDFs with heavy metadata, embedded files, or alternate images may see 40%+ reduction." },
+    ],
   },
   {
     id: "531b",
@@ -2065,6 +2115,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to change or add a background color to." },
+      { title: "2. Choose Color", desc: "Pick a solid background color from the palette or enter a hex code (e.g., #FFF8E7 for warm white)." },
+      { title: "3. Apply & Download", desc: "The background color is applied to selected pages. Text and content remain fully visible over the new background." },
+    ],
+    faqs: [
+      { question: "Why change PDF background color?", answer: "Reduce eye strain with warm or sepia tones for extended reading. Brand documents may require specific background colors." },
+      { question: "Does this affect text readability?", answer: "No. Text and images render above the background. Choose a light background for dark text or dark background for light text." },
+      { question: "Can I apply different colors to different pages?", answer: "Batch apply is uniform. For multi-color backgrounds, process each page range separately." },
+    ],
   },
   {
     id: "531c",
@@ -2074,6 +2134,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position.',
     seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to insert blank pages into." },
+      { title: "2. Choose Insert Points", desc: "Specify positions to add blank pages: after each page, before specific pages, or at the end of the document." },
+      { title: "3. Download Modified PDF", desc: "The PDF is updated with blank pages inserted at the chosen positions." },
+    ],
+    faqs: [
+      { question: "Why add blank pages?", answer: "Common reasons: duplex printing preparation (add blank page after odd-numbered end page), insert separator pages between chapters, or leave room for notes." },
+      { question: "Can I set the blank page size?", answer: "Yes. Choose the same size as the document or a custom size. Matching size is recommended for uniform document appearance." },
+      { question: "Can I add different blank pages to different positions?", answer: "Yes. Use 'insert after pages 1, 5, 10' to add blank pages at multiple specific positions." },
+    ],
   },
   {
     id: "950",
@@ -2083,6 +2153,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
     seoDescription: 'Free online PDF Bates Numbering — Add sequential Bates numbers to every page. Customize prefix, start number, and position. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to add Bates numbering for legal document identification." },
+      { title: "2. Configure Bates Format", desc: "Set prefix (e.g., DEF-), starting number, suffix, number of digits (0001-9999), and position on the page." },
+      { title: "3. Apply Numbering", desc: "Sequential Bates numbers are stamped on every page. Download the numbered PDF for legal discovery or case management." },
+    ],
+    faqs: [
+      { question: "What is Bates numbering used for?", answer: "Bates numbering is the standard in legal discovery for uniquely identifying document pages. Each page gets a unique sequential number." },
+      { question: "Can I add custom text alongside the number?", answer: "Yes. Set prefix and suffix fields. Example: 'DEF-000001-2024' where 'DEF-' is prefix, '000001' is sequential, '-2024' is suffix." },
+      { question: "Does Bates numbering affect existing content?", answer: "Numbers are added in the page margin. Ensure sufficient margin space exists to avoid overlap with content." },
+    ],
   },
   {
     id: "951",
@@ -2092,6 +2172,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF.',
     seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to apply stamps to." },
+      { title: "2. Choose Stamp", desc: "Select from built-in stamps (APPROVED, DRAFT, CONFIDENTIAL, RECEIVED, VOID, COPY, SIGNED) or upload a custom stamp image." },
+      { title: "3. Place & Download", desc: "Click on the page to place the stamp. Adjust size, rotation, and opacity. Download the stamped PDF." },
+    ],
+    faqs: [
+      { question: "What stamp formats are available?", answer: "Built-in text stamps in multiple styles, date/time stamps, and custom image stamps (PNG with transparency)." },
+      { question: "Can I stamp multiple pages automatically?", answer: "Yes. Select 'apply to all pages' or specify a page range for batch stamping." },
+      { question: "Are stamps different from watermarks?", answer: "Stamps are placed annotations that can include text, dates, and images. Watermarks typically cover the entire page background." },
+    ],
   },
   {
     id: "952",
@@ -2101,6 +2191,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a generation timestamp to the bottom-right corner of every page in your PDF.',
     seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF document to add a trusted timestamp to." },
+      { title: "2. Apply Timestamp", desc: "The tool connects to a RFC 3161 Time Stamp Authority to generate a cryptographic proof-of-existence for the document." },
+      { title: "3. Download Stamped PDF", desc: "Your PDF now contains a timestamp token that proves the document existed at a specific point in time." },
+    ],
+    faqs: [
+      { question: "What is an RFC 3161 timestamp?", answer: "A cryptographic token issued by a Time Stamp Authority that proves a document existed before or at a specific time. It is verifiable by anyone." },
+      { question: "Is a timestamp legally valid?", answer: "eIDAS Regulation defines qualified timestamps as legally equivalent to handwritten dates in the EU. Validity varies by jurisdiction." },
+      { question: "Does the timestamp expire?", answer: "No. The timestamp remains cryptographically verifiable indefinitely. However, the TSA certificate chain must remain valid." },
+    ],
   },
   {
     id: "953",
@@ -2110,6 +2210,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Insert a table of contents page at the beginning of your PDF document.',
     seoDescription: 'Free online PDF Table of Contents — Insert a table of contents page at the beginning of your PDF. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to automatically generate a table of contents from its content structure." },
+      { title: "2. Review Suggestions", desc: "The tool analyzes heading styles and font sizes to detect chapter/section structure. Review and adjust auto-detected TOC entries." },
+      { title: "3. Generate TOC", desc: "A new table of contents page is inserted at the beginning of the PDF with clickable links to each section." },
+    ],
+    faqs: [
+      { question: "How are headings detected?", answer: "The tool analyzes font size, weight, and spacing patterns. Large bold fonts at the start of paragraphs are flagged as potential headings." },
+      { question: "Can I manually add missing entries?", answer: "Yes. Click 'add entry' to manually insert TOC items for sections the auto-detection missed." },
+      { question: "Are TOC entries hyperlinked?", answer: "Yes. Each entry contains an internal PDF link that jumps to the corresponding section when clicked." },
+    ],
   },
   {
     id: "532",
@@ -2120,6 +2230,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Advanced PDF Tools — Overlay, alternate-merge, booklet layout, combine pages, invert colors, or extract PDF pages as ZIP images. ',
     dependencies: "pdf-lib, pdfjs-dist, jszip",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF for advanced operations. This tool provides a set of power-user features." },
+      { title: "2. Choose Advanced Feature", desc: "Options include: PDF version conversion, color space conversion, Overprint Preview, transparency flattening, and page box editing." },
+      { title: "3. Apply & Export", desc: "Configure the advanced operation parameters and download the processed PDF." },
+    ],
+    faqs: [
+      { question: "What is page box editing?", answer: "PDFs have multiple boxes: MediaBox (page size), CropBox (visible area), BleedBox (printing), TrimBox (final size), and ArtBox (content area). You can edit all." },
+      { question: "What color space conversions are available?", answer: "Convert between RGB, CMYK, and Grayscale. CMYK is used for print production; RGB for screen display." },
+      { question: "When should I flatten transparency?", answer: "Transparency flattening is needed for PDFs with overlapping transparent objects that cause printing issues on older RIP systems." },
+    ],
   },
   {
     id: "533",
@@ -2130,6 +2250,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Attachments — View, add, and extract embedded files from PDF documents. Supports any file type. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload PDF", desc: "Select a PDF to manage embedded file attachments." },
+      { title: "2. View Current Attachments", desc: "See all files currently embedded in the PDF. Add new attachments or remove existing ones." },
+      { title: "3. Save PDF with Attachments", desc: "Download the PDF with the updated embedded files. Attachments appear in the PDF viewer's attachment panel." },
+    ],
+    faqs: [
+      { question: "What file types can be embedded?", answer: "Any file type: documents (DOCX, XLSX), images, ZIP archives, or other PDFs. The attachment is embedded within the PDF file." },
+      { question: "Can I extract attachments from a PDF?", answer: "Yes. Select an attachment and click 'download' to extract it from the PDF as a separate file." },
+      { question: "Do attachments increase PDF file size?", answer: "Yes, significantly. A 10 MB file attached to a 1 MB PDF results in an 11 MB PDF. Compress files before attaching for smaller output." },
+    ],
   },
   {
     id: "534a",

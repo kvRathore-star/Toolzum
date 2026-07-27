@@ -1923,6 +1923,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Converts PDF files to DOCX format — document sharing, printing, and archival with consistent formatting to word processing, collaboration, and document editing. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online PDF to DOCX Converter \u2014 Simulate PDF to Word conversion with estimated output size and format details. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Select PDF for Conversion", desc: "Upload the PDF file you want to convert to DOCX format. Works best with text-based PDFs created from digital sources." },
+      { title: "2. Configure Output", desc: "Choose whether to preserve headers/footers, footnotes, and table of contents during conversion." },
+      { title: "3. Download DOCX", desc: "Your DOCX file is ready. Open it in Microsoft Word, Google Docs, or LibreOffice for editing." },
+    ],
+    faqs: [
+      { question: "What is the difference between DOCX and DOC?", answer: "DOCX is the modern XML-based Word format (Office 2007+). DOC is the legacy binary format. DOCX produces smaller files with better formatting preservation." },
+      { question: "Are PDF bookmarks preserved?", answer: "Yes. PDF bookmarks (table of contents entries) are converted to Word heading styles and a table of contents." },
+      { question: "Does this handle PDF forms?", answer: "Form field values are preserved as static text. Fillable form fields are converted to plain text in the Word output." },
+    ],
   },
   {
     id: "945",
@@ -1932,6 +1942,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Extract plain text from PDF files with estimated output size. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to TXT Extractor \u2014 Extract plain text from PDF files with estimated output size. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Upload PDF File", desc: "Select any PDF document. The tool extracts all text content in reading order." },
+      { title: "2. Choose Extraction Mode", desc: "Select 'preserve layout' to maintain column and line positions, or 'raw text' for continuous paragraph text without positioning." },
+      { title: "3. Download Text File", desc: "Download the extracted text as .txt or copy it directly to your clipboard. No formatting remains — plain text only." },
+    ],
+    faqs: [
+      { question: "What about scanned PDFs?", answer: "This tool extracts text from digital PDFs only. For scanned documents, use the PDF OCR tool first to recognize text." },
+      { question: "Are page numbers included?", answer: "Optional. Toggle 'include page markers' to add [Page 1], [Page 2] labels at each page boundary in the output text." },
+      { question: "Is this lossy?", answer: "Yes — all formatting (bold, italic, fonts, colors, images) is lost. Only the raw text content is extracted." },
+    ],
   },
   {
     id: "946",
