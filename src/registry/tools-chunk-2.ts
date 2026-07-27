@@ -10,34 +10,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WebP to AVIF — Convert WebP images into AVIF format for even better compression ratios. ',
     dependencies: "Canvas API",
     showInCategory: false,
-    instructions: [
-          {
-                "title": "1. Upload Your WebP",
-                "desc": "Upload a WebP image for conversion to AVIF. The tool reads the WebP's mode (lossless/lossy), color data, and alpha channel. AVIF offers superior compression to WebP for most image types."
-          },
-          {
-                "title": "2. Set AVIF Quality",
-                "desc": "Quality 0-63 where lower is better. A value of 20-30 usually matches WebP quality 80-90. AVIF's AV1 codec achieves 30-40% better compression than WebP at equivalent quality for photographs."
-          },
-          {
-                "title": "3. Configure Encoding Speed and Download",
-                "desc": "Speed setting balances encoding time against file size. Medium speed is recommended. Preserve alpha channel — AVIF supports efficient transparency compression. Download the AVIF, which will be noticeably smaller than the WebP."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Is AVIF always smaller than WebP at the same quality?",
-                "answer": "For photographic content with smooth gradients, AVIF is typically 30-50% smaller. For simple graphics with few colors and hard edges, the advantage is smaller since WebP's compression already handles these efficiently."
-          },
-          {
-                "question": "Does AVIF support WebP's lossless mode equivalently?",
-                "answer": "AVIF supports lossless encoding, but it's not as efficient as WebP's lossless mode for most images. For lossless preservation, staying with WebP or using PNG may produce smaller files than lossless AVIF."
-          },
-          {
-                "question": "Can I convert animated WebP to animated AVIF?",
-                "answer": "This tool handles static images. Animated AVIF is supported in the AVIF specification but is not widely adopted. For animated conversions, animated WebP to animated GIF or APNG is more practical."
-          }
-    ]
   },
   {
     id: "405",
@@ -48,16 +20,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Your AAC File", desc: "Choose an .aac audio file. AAC is a lossy format commonly used in Apple Music, YouTube, and MP4 containers. Loading is instant since everything stays in your browser." },
-      { title: "2. Pick FLAC Encoding Depth", desc: "FLAC supports 16-bit, 24-bit, and 32-bit depth. For music archiving, 24-bit preserves maximum dynamic range from high-resolution AAC sources." },
-      { title: "3. Start Archival Conversion", desc: "Convert your AAC to FLAC for lossless storage. The FLAC file will be 3-5x larger than the AAC but preserves every bit of decoded audio data." },
-    ],
-    faqs: [
-      { question: "Can converting AAC to FLAC improve sound quality?", answer: "No. AAC is already lossy — converting to FLAC cannot recover the audio data lost during AAC encoding. FLAC simply stores the decoded AAC output without further loss." },
-      { question: "Why convert AAC to FLAC at all?", answer: "FLAC is ideal for archiving. You can transcode FLAC to any other format later without generational quality loss. AAC should be your delivery format, FLAC your master copy." },
-      { question: "Does FLAC support AAC's native sample rates?", answer: "Yes. FLAC supports up to 192 kHz sample rate and up to 655,350 Hz bandwidth, covering all AAC sample rates including 44.1 kHz, 48 kHz, and 96 kHz." },
-    ],
   },
   {
     id: "406",
@@ -68,16 +30,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload Your AAC File", desc: "Select an .aac audio track. AAC is the audio layer inside M4A containers — the conversion repackages the stream without re-encoding." },
-      { title: "2. Add Metadata (Optional)", desc: "Edit track title, artist, album, and cover art before converting. M4A supports rich metadata including embedded album artwork." },
-      { title: "3. Remux to M4A", desc: "The tool copies the AAC bitstream into an M4A container. Since there is no re-encoding, the process is near-instant and quality is perfectly preserved." },
-    ],
-    faqs: [
-      { question: "Is AAC to M4A lossless?", answer: "Yes, when the AAC stream is copied (not re-encoded). This is a container swap — the audio data is untouched. The result is identical to the original AAC." },
-      { question: "Why use M4A instead of AAC?", answer: "M4A is a container format that supports metadata, chapter marks, and cover art. AAC is a pure audio codec without container features." },
-      { question: "Will the file size change?", answer: "Minimally. M4A adds a small container overhead (a few KB) for the header and metadata. The audio data size remains exactly the same." },
-    ],
   },
   {
     id: "407",
@@ -88,16 +40,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick Your AAC File", desc: "Select an .aac file. The AAC codec uses MDCT-based compression similar to OGG's Vorbis, but the implementations differ significantly." },
-      { title: "2. Set Vorbis Quality Level", desc: "Choose a quality level from -1 (lowest) to 10 (highest). Level 5 (~160 kbps) is transparent for most content. Levels above 7 have diminishing returns." },
-      { title: "3. Convert to Vorbis", desc: "The AAC stream is decoded to PCM then encoded to Vorbis in an OGG container. OGG Vorbis often achieves better quality than AAC at matching bitrates." },
-    ],
-    faqs: [
-      { question: "Is OGG Vorbis better than AAC?", answer: "At equivalent bitrates, Vorbis generally matches or slightly exceeds AAC quality, especially below 128 kbps. AAC has wider hardware support." },
-      { question: "What devices support OGG?", answer: "OGG is standard on Android, Linux, and many open-source media players. It is not natively supported on iOS or most car audio systems." },
-      { question: "Can I embed album art in OGG?", answer: "Yes. OGG Vorbis supports metadata comments including METADATA_BLOCK_PICTURE for embedded cover art, similar to M4A and MP3." },
-    ],
   },
   {
     id: "408",
@@ -108,16 +50,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Import AAC Track", desc: "Select the .aac file for conversion to WAV. WAV is an uncompressed format used in professional audio workflows." },
-      { title: "2. Choose Output Depth", desc: "WAV supports 8, 16, 24, or 32-bit integer and 32-bit float. For audio editing, 24-bit provides ample headroom for processing without clipping." },
-      { title: "3. Export Uncompressed WAV", desc: "The AAC is decoded to linear PCM and saved as a WAV file. The resulting file is 5-10x larger than the AAC but ready for DAW import, sampling, or further processing." },
-    ],
-    faqs: [
-      { question: "Why convert AAC to WAV instead of FLAC?", answer: "WAV is universally supported by audio editing software (Pro Tools, Ableton, Logic, Audacity) without any codec plugins. FLAC requires decoder support." },
-      { question: "How large will the WAV file be?", answer: "A 4-minute AAC song at 256 kbps (~7.5 MB) becomes approximately 40 MB as 16-bit/44.1 kHz WAV. At 24-bit/96 kHz, expect 120+ MB." },
-      { question: "Can I convert WAV back to AAC later?", answer: "Yes, but the re-encoded AAC will have generational quality loss. Archive the original AAC separately for future use." },
-    ],
   },
   {
     id: "409",
@@ -128,16 +60,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload Your FLAC Master", desc: "Select a FLAC file — your lossless source. FLAC files preserve full CD or hi-res quality, making them ideal masters for encoding to any lossy format." },
-      { title: "2. Set AAC Target Bitrate", desc: "For music, 256 kbps AAC is considered transparent (indistinguishable from the FLAC original). For podcasts, 128 kbps is sufficient." },
-      { title: "3. Encode to AAC", desc: "Convert your FLAC to AAC for Apple device compatibility. Since the source is lossless, this single encoding pass produces the best possible AAC output." },
-    ],
-    faqs: [
-      { question: "Will AAC from FLAC sound better than AAC from MP3?", answer: "Yes. Encoding AAC from lossless FLAC avoids generational loss. AAC encoded from MP3 would compound artifacts from both codecs." },
-      { question: "What AAC profile should I use?", answer: "AAC-LC (Low Complexity) is supported everywhere. AAC-HE (High Efficiency) is for low bitrates below 128 kbps. For most users, AAC-LC at 256 kbps is ideal." },
-      { question: "Can I batch convert a FLAC library to AAC?", answer: "Yes. Select multiple FLAC files. Each is encoded independently. This is common when building an iTunes/Apple Music portable library from FLAC archives." },
-    ],
   },
   {
     id: "410",
@@ -148,16 +70,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose FLAC Source Files", desc: "Pick your FLAC files — ideal for converting to Apple-friendly M4A. FLAC is not natively supported on iOS, making this conversion essential for Apple users." },
-      { title: "2. Set AAC Quality in M4A", desc: "Select the target quality: 128 kbps (standard), 192 kbps (good), 256 kbps (high), or 320 kbps (maximum). M4A uses AAC encoding by default." },
-      { title: "3. Transfer to Apple Devices", desc: "Convert your FLAC to M4A and sync with iTunes/Apple Music. M4A supports gapless playback, chapter markers, and embedded album artwork." },
-    ],
-    faqs: [
-      { question: "Why M4A instead of AAC for Apple devices?", answer: "M4A is the container format Apple recommends. It supports metadata, artwork, and chapter tracks. Bare AAC files lack these features." },
-      { question: "Does M4A support ALAC (Apple Lossless)?", answer: "Yes, M4A can contain ALAC (Apple Lossless) audio, but this converter produces AAC-LC in M4A. For lossless on Apple devices, use ALAC in M4A." },
-      { question: "Can I sync M4A to an iPod Classic?", answer: "Yes. M4A files with AAC-LC encoding are compatible with all iPod models, iPhone, iPad, and Apple TV." },
-    ],
   },
   {
     id: "411",
@@ -168,16 +80,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select FLAC Master File", desc: "Choose your lossless FLAC source. Encoding to OGG Vorbis from FLAC produces better quality than re-encoding from any lossy format." },
-      { title: "2. Tune Vorbis Encoding", desc: "Use quality level 5 (~160 kbps) for transparent music encoding. Level 3 (~112 kbps) is good for mixed content. Level 7+ for archival." },
-      { title: "3. Generate OGG Vorbis", desc: "Convert your FLAC to OGG Vorbis. OGG files are smaller than FLAC while offering excellent quality. Perfect for Android devices and open-source media libraries." },
-    ],
-    faqs: [
-      { question: "Is OGG Vorbis truly free?", answer: "Yes. OGG Vorbis is patent-free and open-source. Unlike MP3 and AAC, no licensing fees are required for encoding, distributing, or playing OGG files." },
-      { question: "Can I use OGG in web projects?", answer: "OGG Vorbis is supported by HTML5 <audio> in Chrome, Firefox, and Opera. Safari and Edge require MP3 or AAC for full web audio coverage." },
-      { question: "How does Vorbis compare to MP3 at low bitrates?", answer: "Vorbis significantly outperforms MP3 at bitrates below 128 kbps. At 80 kbps, Vorbis sounds much cleaner than MP3 with fewer high-frequency artifacts." },
-    ],
   },
   {
     id: "412",
@@ -188,16 +90,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select FLAC Files to Decode", desc: "Choose FLAC files from your lossless archive. FLAC typically reduces file size by 40-60% compared to the original WAV." },
-      { title: "2. Pick Output Format Details", desc: "WAV format: select 16-bit (CD standard), 24-bit (hi-res), or 32-bit float (for audio processing with headroom). Match the original FLAC bit depth for best results." },
-      { title: "3. Decode to Uncompressed WAV", desc: "Your FLAC is decoded losslessly to WAV. Both files contain identical audio data. This is useful for loading into DAWs that do not support FLAC natively." },
-    ],
-    faqs: [
-      { question: "Is FLAC to WAV truly lossless?", answer: "Yes. FLAC is a lossless codec — decoding to WAV produces bit-exact PCM data identical to the original source that was encoded to FLAC." },
-      { question: "Why decompress FLAC back to WAV?", answer: "Many professional audio tools (Pro Tools, Ableton Live, older Audacity versions) lack native FLAC support. WAV is the universal interchange format." },
-      { question: "Will the WAV file be exactly the original size?", answer: "Yes, if the FLAC was compressed from a WAV source. FLAC compression is reversible. The decoded WAV matches the original WAV bit-for-bit." },
-    ],
   },
   {
     id: "413",
@@ -208,16 +100,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Open Your M4A File", desc: "Select an M4A file. M4A typically contains AAC-LC audio — extracting the raw AAC stream requires no re-encoding." },
-      { title: "2. Choose Extraction Mode", desc: "Select 'stream copy' to extract the AAC bitstream from the M4A container without quality loss, or 're-encode' to change codec parameters." },
-      { title: "3. Extract or Convert", desc: "Stream copy mode produces a .aac file instantly. Re-encoding mode decodes then re-encodes, useful for reducing bitrate for portable devices." },
-    ],
-    faqs: [
-      { question: "Is M4A the same as AAC?", answer: "Not exactly. M4A is a container format that usually holds AAC audio. M4A can also contain ALAC (Apple Lossless). AAC is the audio codec inside." },
-      { question: "Why extract AAC from M4A?", answer: "Raw AAC files are smaller (no container overhead) and preferred in some broadcasting and streaming workflows that decode AAC directly." },
-      { question: "Does stream copy preserve quality?", answer: "Yes. Stream copy extracts the AAC bitstream without decoding or re-encoding. The output is bit-identical to the AAC within the M4A." },
-    ],
   },
   {
     id: "414",
@@ -228,16 +110,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Import M4A Source", desc: "Select an M4A audio file. If your M4A contains ALAC (Apple Lossless), the conversion to FLAC preserves full lossless quality." },
-      { title: "2. Configure FLAC Compression", desc: "FLAC compression levels range from 0 (fastest, least compression) to 8 (slowest, best compression). Level 5 offers a good balance of speed and size." },
-      { title: "3. Convert to FLAC", desc: "Decode the M4A audio and encode to FLAC. The process runs entirely in your browser. FLAC offers better metadata support than M4A." },
-    ],
-    faqs: [
-      { question: "Can I convert ALAC in M4A to FLAC?", answer: "Yes. ALAC to FLAC conversion is lossless since both are lossless codecs. Audio quality is perfectly preserved during the transcoding." },
-      { question: "Which has better compression: FLAC or ALAC?", answer: "FLAC typically achieves 5-10% better compression than ALAC. A CD that compresses to 300 MB in ALAC may be 270-285 MB in FLAC." },
-      { question: "Does FLAC support embedded artwork?", answer: "Yes. FLAC supports embedded images as METADATA_BLOCK_PICTURE, similar to M4A's covr atom. Up to 16MB per image is standard." },
-    ],
   },
   {
     id: "415",
@@ -248,16 +120,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select M4A Input", desc: "Choose an M4A audio file. This conversion is useful when building open-source media libraries that prefer OGG format." },
-      { title: "2. Set Vorbis Quality", desc: "Choose quality level 3 (~112 kbps) for voice, 5 (~160 kbps) for music listening, or 8 (~256 kbps) for near-transparent quality." },
-      { title: "3. Encode to OGG Vorbis", desc: "The M4A audio is decoded and re-encoded to Vorbis. OGG files are fully metadata-compatible with most open-source media servers like Plex and Jellyfin." },
-    ],
-    faqs: [
-      { question: "Can I embed lyrics in OGG files?", answer: "Yes. OGG Vorbis supports LYRICS metadata tags. Unlike MP3's SYLT frames, OGG lyrics are plain text stored in Vorbis comments." },
-      { question: "Is OGG compatible with media servers?", answer: "Yes. Plex, Jellyfin, Emby, and Kodi all support OGG Vorbis natively. Some transcoding may be required for browser playback in Safari." },
-      { question: "Does OGG support ReplayGain?", answer: "Yes. OGG Vorbis supports REPLAYGAIN_TRACK_GAIN and REPLAYGAIN_ALBUM_GAIN comments for volume normalization across playback." },
-    ],
   },
   {
     id: "416",
@@ -268,16 +130,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to WAV — Convert M4A audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Bring Your M4A File", desc: "Select the M4A audio for conversion. WAV from M4A is the standard pipeline when extracting audio from iTunes purchases for editing." },
-      { title: "2. Set WAV Parameters", desc: "Choose the output sample rate (44.1 kHz for CD, 48 kHz for video) and bit depth (16 or 24 bit). 16-bit/44.1 kHz is CD standard." },
-      { title: "3. Export for Editing", desc: "Decode M4A to WAV for use in any audio editor. WAV is the standard format for sampling, loop creation, and audio restoration work." },
-    ],
-    faqs: [
-      { question: "Why does my WAV file sound the same but is much larger?", answer: "WAV is uncompressed — every audio sample is stored as raw PCM values. M4A removes imperceptible audio data to achieve 80-90% size reduction." },
-      { question: "Can I edit WAV files without quality loss?", answer: "Yes. WAV is lossless, so saving edits in WAV preserves full quality. Each generation of MP3/AAC re-encoding degrades quality." },
-      { question: "Does WAV support cue points and loops?", answer: "Not natively. Some DAWs embed cue information in WAV chunks, but there is no standard. FLAC or CAF (Core Audio Format) is better for cue metadata." },
-    ],
   },
   {
     id: "417",
@@ -288,16 +140,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to AAC — Convert MP3 audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload Your MP3 File", desc: "Select an MP3 file. MP3 is universally compatible but AAC offers better quality at equivalent bitrates, making this conversion useful for Apple devices." },
-      { title: "2. Set AAC Bitrate", desc: "For MP3 source at 320 kbps, use 256 kbps AAC for transparent quality. For MP3 at 128 kbps, use 128 kbps AAC to avoid amplifying source artifacts." },
-      { title: "3. Encode to AAC", desc: "The MP3 is decoded and re-encoded to AAC. The AAC file will be smaller than the MP3 at equivalent quality, saving storage on portable devices." },
-    ],
-    faqs: [
-      { question: "Does AAC at 128 kbps sound better than MP3 at 128 kbps?", answer: "Yes. AAC's improved coding tools (MDCT, TNS, PS) deliver better sound at low bitrates. At 128 kbps, AAC sounds closer to the source than MP3." },
-      { question: "Can I use AAC for video projects?", answer: "Yes. AAC is the standard audio codec for MP4 video containers. Converting MP3 to AAC before video editing avoids container format conflicts." },
-      { question: "Why does the AAC file sometimes sound worse?", answer: "If the MP3 source is low bitrate (below 128 kbps), re-encoding to AAC amplifies existing compression artifacts. Start from a higher quality source." },
-    ],
   },
   {
     id: "418",
@@ -308,16 +150,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select MP3 Source", desc: "Choose an MP3 file to expand to AIFF for audio production. MP3 is not ideal for editing — AIFF gives you full uncompressed PCM for processing." },
-      { title: "2. Set AIFF Depth", desc: "Select 16-bit for standard CD-quality output or 24-bit for professional applications. The AIFF file will be 5-10x the size of the MP3." },
-      { title: "3. Export AIFF for DAW", desc: "Convert MP3 to AIFF for use in audio editors. The decoded PCM is wrapped in AIFF format, ready for loading into Logic Pro, Ableton, or Pro Tools." },
-    ],
-    faqs: [
-      { question: "Does AIFF playback require less CPU than MP3?", answer: "Yes. AIFF is PCM — no decoding required. MP3 needs real-time decoding which uses CPU cycles. In large DAW projects, this matters for track count." },
-      { question: "Is there any reason to keep MP3 over AIFF for archiving?", answer: "No. MP3 is lossy — each playback decodes the same lossy data. AIFF stores full PCM data. For active projects, AIFF is better." },
-      { question: "Does AIFF support BWF (Broadcast Wave) features?", answer: "No, BWF is a WAV extension. AIFF has no equivalent to BWF's timecode stamp or originating station fields." },
-    ],
   },
   {
     id: "419",
@@ -328,16 +160,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose MP3 Files", desc: "Select MP3 files to wrap in FLAC. Important: this does NOT restore quality lost during MP3 encoding — the MP3 artifacts remain." },
-      { title: "2. Set FLAC Compression", desc: "Choose compression level 0-8. Unlike MP3's quality trade-off, FLAC compression is lossless — level 8 produces identical audio to level 0, just smaller." },
-      { title: "3. Archive in FLAC", desc: "The MP3 is decoded to PCM then encoded losslessly to FLAC. The FLAC file is useful for unified library management but does not contain original CD quality." },
-    ],
-    faqs: [
-      { question: "Does MP3 to FLAC improve sound quality?", answer: "Absolutely not. FLAC is lossless, but the damage from MP3 encoding is permanent. This is like saving a JPEG as PNG — the artifacts remain visible." },
-      { question: "Why would anyone convert MP3 to FLAC?", answer: "For library consistency. If your collection is mostly FLAC, converting old MP3s to FLAC avoids format switching in playback. Metadata management is also unified." },
-      { question: "Will the FLAC file be larger than the MP3?", answer: "Yes. FLAC is lossless and typically 3-5x larger than the original MP3. A 10 MB MP3 becomes 30-50 MB FLAC with identical audio quality." },
-    ],
   },
   {
     id: "420",
@@ -348,16 +170,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Load MP3 File", desc: "Pick an MP3 recording. Converting to M4A is useful for integrating MP3-sourced audio into an Apple-centric media library." },
-      { title: "2. Configure AAC Output", desc: "Select M4A quality: 128 kbps for voice, 192 kbps for mixed listening, or 256 kbps for music. The MP3 is decoded then re-encoded to AAC in M4A container." },
-      { title: "3. Export for Apple Ecosystem", desc: "Convert to M4A for seamless use in iTunes, Apple Music, AirDrop, and iOS devices. M4A supports gapless playback and embedded artwork." },
-    ],
-    faqs: [
-      { question: "Will M4A from MP3 have Apple compatibility?", answer: "Yes. M4A with AAC-LC encoding is fully compatible with all Apple devices and software including iPod, iPhone, iPad, Apple TV, and HomePod." },
-      { question: "Can I convert MP3 audio books to M4A?", answer: "Yes. M4A supports chapter markers which are useful for audiobooks. The converter preserves any existing chapter data and adds file-level metadata." },
-      { question: "Does M4A support album art from MP3 ID3 tags?", answer: "Yes. Album art embedded in MP3 ID3 tags is transferred to the M4A container during conversion, so your artwork is retained." },
-    ],
   },
   {
     id: "421",
@@ -368,16 +180,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select MP3 File", desc: "Choose the MP3 audio you want to convert to OGG Vorbis. Useful when migrating away from proprietary formats to open codecs." },
-      { title: "2. Set Vorbis Encoding Quality", desc: "Vorbis quality -1 (lowest) to 10 (highest). For MP3 at 192 kbps, quality level 5 (~160 kbps) provides similar quality. Levels above 6 offer diminishing returns." },
-      { title: "3. Encode to Open Format", desc: "Convert your MP3 to OGG Vorbis — a fully open, patent-free audio format supported natively on Android, Linux, and web platforms." },
-    ],
-    faqs: [
-      { question: "Is OGG Vorbis better than MP3?", answer: "At matching bitrates, Vorbis generally outperforms MP3 in blind listening tests. The difference is most noticeable at low bitrates (below 128 kbps)." },
-      { question: "Can I use OGG in video editing?", answer: "Most video editors support OGG for import but may not export OGG. For video work, consider converting to PCM WAV for editing, then encode to your delivery format." },
-      { question: "Does OGG support sample rates above 48 kHz?", answer: "Yes. OGG Vorbis supports up to 192 kHz sample rate. High-resolution audio is preserved during conversion from high-sample-rate MP3 sources." },
-    ],
   },
   {
     id: "422",
@@ -388,16 +190,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload MP3 Audio", desc: "Select the MP3 file. Opus delivers better quality than MP3 at every bitrate, making this a sensible upgrade for personal listening libraries." },
-      { title: "2. Set Opus Complexity", desc: "Choose encoding complexity from 0 (fastest) to 10 (slowest, best quality). Complexity 10 provides the best compression efficiency for archival encoding." },
-      { title: "3. Encode to Modern Standard", desc: "Convert MP3 to Opus. At 96 kbps, Opus rivals MP3 at 192 kbps quality. Your portable music collection can be halved in size without audible quality loss." },
-    ],
-    faqs: [
-      { question: "Should I replace all my MP3s with Opus?", answer: "If your MP3s are from lossless sources, yes — re-encode from the original source, not from MP3. MP3-to-Opus conversion compounds artifacts." },
-      { question: "Is Opus patent-free like OGG?", answer: "Opus is developed under IETF standardization with a free, open license. No patent licensing fees are required for Opus encoding or distribution." },
-      { question: "What hardware supports Opus playback?", answer: "Most modern smartphones, Raspberry Pi, Sonos speakers, and Chromecast support Opus. Older MP3 players and car stereos typically do not." },
-    ],
   },
   {
     id: "423",
@@ -408,16 +200,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload MP3 for Conversion", desc: "Select the MP3 file. Converting to WMA is primarily for compatibility with Windows-based audio systems and older portable media players." },
-      { title: "2. Select WMA Quality", desc: "Choose 128 kbps (standard), 160 kbps (good), or 192 kbps (high). WMA at 192 kbps is comparable to MP3 at 256 kbps in blind listening." },
-      { title: "3. Encode to WMA", desc: "Your MP3 is decoded and re-encoded to Windows Media Audio. The file is optimized for Windows Media Player and Windows Phone playback." },
-    ],
-    faqs: [
-      { question: "Is WMA better than MP3 at the same bitrate?", answer: "WMA generally outperforms MP3 at bitrates below 128 kbps. At higher bitrates, the difference narrows. Neither matches AAC or Opus efficiency." },
-      { question: "Can WMA files be played on Mac?", answer: "macOS does not natively support WMA. Third-party players like VLC, Floola, and Elmedia Player can play WMA on Mac." },
-      { question: "Does WMA support audio books with bookmarks?", answer: "WMA supports bookmarks through the ASF container structure. Windows Media Player and some audiobook apps can resume WMA audiobooks." },
-    ],
   },
   {
     id: "424",
@@ -428,16 +210,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to AAC — Convert OGG Vorbis audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Open OGG Vorbis File", desc: "Select an OGG audio file. OGG is common in open-source software (Linux, PulseAudio, many game engines). Converting to AAC broadens device compatibility." },
-      { title: "2. Set AAC Output Parameters", desc: "Choose the target bitrate for AAC: 128 kbps (balanced), 192 kbps (high quality), or 256 kbps (maximum). The OGG is decoded to PCM first." },
-      { title: "3. Convert for Apple/Windows", desc: "Your OGG is encoded to AAC for use in Apple devices, Windows Media Player, and any ecosystem that prefers AAC over OGG." },
-    ],
-    faqs: [
-      { question: "Why does my game have OGG but not AAC?", answer: "OGG Vorbis is popular in game development because it is royalty-free. Many game audio assets are distributed as OGG to avoid licensing costs." },
-      { question: "Can I convert OGG 5.1 surround to AAC?", answer: "Yes, but AAC surround output depends on the profile. AAC-LC supports up to 48 channels. The conversion preserves multi-channel layout if the target profile supports it." },
-      { question: "Does AAC preserve OGG metadata?", answer: "Most Vorbis comments (title, artist, album) are transferred to AAC metadata fields during conversion. OGG-specific tags without AAC equivalents are dropped." },
-    ],
   },
   {
     id: "425",
@@ -448,16 +220,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to FLAC — Convert OGG Vorbis audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select OGG Source", desc: "Choose your OGG Vorbis file. Converting OGG to FLAC creates a lossless container for an already-lossy source — useful for unified library management." },
-      { title: "2. Set FLAC Compression", desc: "Compression level 0 (fast encode) to 8 (best compression). Level 5 is recommended for everyday use. FLAC decoding is fast regardless of compression level." },
-      { title: "3. Wrap in FLAC", desc: "Your OGG is decoded to PCM and losslessly compressed to FLAC. The FLAC file is larger than the OGG but integrates into a lossless library seamlessly." },
-    ],
-    faqs: [
-      { question: "Can I edit OGG audio without re-compressing?", answer: "OGG editing typically requires decode-reencode cycles. FLAC also requires decode-reencode for non-destructive editing, but without additional quality loss." },
-      { question: "Is FLAC metadata as rich as OGG's?", answer: "FLAC supports METADATA_BLOCK_VORBIS_COMMENT which is functionally equivalent to OGG Vorbis comments. Most metadata transfers cleanly." },
-      { question: "Will FLAC from OGG sound better than FLAC from CD?", answer: "No. FLAC from OGG contains the OGG's lossy data. FLAC from CD contains full CD-quality PCM. They are not equivalent regardless of the FLAC container." },
-    ],
   },
   {
     id: "426",
@@ -468,16 +230,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload OGG File", desc: "Select an OGG audio file. This conversion is common when moving audio from open-source software into Apple's ecosystem." },
-      { title: "2. Select M4A Codec", desc: "Choose AAC (lossy, compatible with all Apple devices) or ALAC (lossless, compatible with iTunes but larger). AAC is recommended for portable use." },
-      { title: "3. Convert for Apple Devices", desc: "Your OGG is encoded to M4A with the selected codec. Sync the resulting file with iTunes, Apple Music, or any iOS device." },
-    ],
-    faqs: [
-      { question: "Can I embed album art in M4A from OGG?", answer: "Yes. If the OGG file contains embedded cover art (METADATA_BLOCK_PICTURE), it is transferred to the M4A container as a covr atom during conversion." },
-      { question: "Does M4A from OGG support chapter markers?", answer: "OGG has no chapter marker standard, so chapters cannot be transferred. M4A chapters can be added after conversion using chapter editor tools." },
-      { question: "Why would I convert OGG to M4A instead of MP3?", answer: "M4A (AAC) offers better quality than MP3 at the same bitrate. For Apple device users, M4A is the preferred format with native ecosystem support." },
-    ],
   },
   {
     id: "427",
@@ -488,16 +240,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select OGG File to Decode", desc: "Choose an OGG Vorbis file for conversion to uncompressed WAV. Standard practice when extracting audio from open-source software for editing." },
-      { title: "2. Set WAV Properties", desc: "Choose output bit depth (16 or 24 bit) and channel mapping (stereo, mono, or original). 24-bit recommended if further processing is planned." },
-      { title: "3. Export for Universal Editing", desc: "Your OGG is fully decoded to PCM WAV. The WAV file is ready for import into any audio editor, sample library, or DAW without format restrictions." },
-    ],
-    faqs: [
-      { question: "Can I convert OGG to WAV without installing anything?", answer: "This tool runs entirely in your browser using WebAssembly — no installation or plugins needed. All processing is done locally on your machine." },
-      { question: "Why is the WAV file a different length than the OGG?", answer: "OGG and WAV may report slightly different durations due to how Vorbis handles sample-accurate timing. The actual audio content length is identical." },
-      { question: "Does WAV preserve OGG's encoder delay?", answer: "OGG Vorbis has ~7 ms of encoder delay that is typically trimmed during playback. The decoded WAV may retain or trim this depending on the decoder implementation." },
-    ],
   },
   {
     id: "428",
@@ -508,16 +250,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Load Your WAV File", desc: "Select a WAV file — this is your uncompressed source. WAV files are large but lossless, making them ideal sources for lossy encoding." },
-      { title: "2. Set AAC Parameters", desc: "Choose target bitrate: 128 kbps (voice), 192 kbps (balanced), 256 kbps (high quality), or 320 kbps (maximum). Since WAV is uncompressed, the AAC encode is first-generation." },
-      { title: "3. Encode from Uncompressed", desc: "Your WAV is encoded to AAC. Because the source is lossless PCM, this single encode produces the best possible AAC quality — no generational loss." },
-    ],
-    faqs: [
-      { question: "Will AAC from WAV sound better than AAC from MP3?", answer: "Yes. Encoding AAC from WAV is first-generation encoding. AAC from MP3 is second-generation (MP3 artifacts plus AAC artifacts combined)." },
-      { question: "How much space will I save?", answer: "WAV at 1411 kbps (CD) to AAC at 256 kbps saves ~80% storage. A 50 MB WAV song becomes ~10 MB AAC with near-indistinguishable quality." },
-      { question: "Should I keep the original WAV after encoding AAC?", answer: "Yes. Archive the WAV file. If you need to re-encode to a future codec, the WAV source produces better results than re-encoding from AAC." },
-    ],
   },
   {
     id: "429",
@@ -528,16 +260,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select WAV Source", desc: "Choose a WAV audio file. WAV and AIFF both contain PCM audio — they differ only in container format and byte ordering." },
-      { title: "2. Choose AIFF Variant", desc: "Select standard AIFF (.aif) for macOS/Pro Tools compatibility or AIFF-C (.aifc) which supports compression options." },
-      { title: "3. Container Swap", desc: "The PCM data is copied from the WAV container to an AIFF container with byte-swapping if needed. No audio data is modified — the process is lossless." },
-    ],
-    faqs: [
-      { question: "Is WAV to AIFF really lossless?", answer: "Yes. Both formats store identical PCM audio data. Only the header format and byte ordering differ. No audio quality is affected." },
-      { question: "Why would I use AIFF over WAV?", answer: "AIFF is preferred in Mac-based studios, Pro Tools (historical), and some broadcast environments. WAV is more universal on Windows." },
-      { question: "Does file size differ between WAV and AIFF?", answer: "AIFF is typically 1-5% larger than WAV due to differences in header structure and data chunk alignment. The audio data portion is identical." },
-    ],
   },
   {
     id: "430",
@@ -548,16 +270,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to FLAC — Convert uncompressed WAV files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose Your WAV File", desc: "Select uncompressed WAV audio. FLAC reduces file size by 40-60% without any quality loss — every bit of the WAV is perfectly preserved." },
-      { title: "2. Set FLAC Compression Level", desc: "Level 0 is fastest with least compression. Level 8 is slowest with best compression. Level 5 is recommended: ~50% size reduction with fast encoding." },
-      { title: "3. Compress Losslessly", desc: "Your WAV is encoded to FLAC. The FLAC file retains CD-quality or hi-res audio identically to the WAV, but takes up half the disk space." },
-    ],
-    faqs: [
-      { question: "Is FLAC decoding as fast as WAV playback?", answer: "FLAC decoding is fast enough that CPU usage is negligible on modern hardware. FLAC decoding achieves ~50x realtime on a typical laptop — no buffering issues." },
-      { question: "Can I convert FLAC back to WAV?", answer: "Yes, losslessly. FLAC is fully reversible. The decoded WAV is bit-identical to the original WAV that was compressed to FLAC." },
-      { question: "Does FLAC support all WAV bit depths?", answer: "FLAC supports 4-32 bits per sample, 1-8 channels, and sample rates from 1 Hz to 1,048,570 Hz. All standard WAV formats are supported." },
-    ],
   },
   {
     id: "431",
@@ -568,16 +280,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Import WAV Audio", desc: "Select your uncompressed WAV file. Converting WAV to M4A with AAC compression is the standard workflow for preparing audio for Apple devices." },
-      { title: "2. Configure M4A Output", desc: "Choose AAC bitrate (128-320 kbps) and whether to include optimized gapless playback metadata for iTunes." },
-      { title: "3. Compress for Apple", desc: "Your WAV is encoded to AAC in an M4A container. The file integrates perfectly with Apple Music, iTunes, and iOS devices." },
-    ],
-    faqs: [
-      { question: "Can M4A contain ALAC from WAV?", answer: "Yes, but this converter produces AAC (lossy) in M4A. For lossless M4A, use ALAC encoding which is also supported by iTunes and iOS." },
-      { question: "Does M4A support sample rates above 48 kHz?", answer: "M4A with AAC-LC supports up to 96 kHz. For hi-res audio (>48 kHz), ALAC in M4A supports up to 192 kHz without loss." },
-      { question: "Will I notice the difference between WAV and 256 kbps M4A?", answer: "In blind listening tests, most listeners cannot reliably distinguish 256 kbps AAC from the original WAV on typical playback systems." },
-    ],
   },
   {
     id: "432",
@@ -588,16 +290,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick Your WAV File", desc: "Select uncompressed WAV audio. OGG Vorbis is an excellent choice for open-source projects and Android applications requiring smaller files." },
-      { title: "2. Set Vorbis Quality", desc: "Vorbis quality level 5 (~160 kbps) is transparent for most content from CD-quality WAV. Level 3 (~112 kbps) is acceptable for background listening." },
-      { title: "3. Encode to Open Standard", desc: "Your WAV is encoded to OGG Vorbis — a royalty-free codec with no patent licensing requirements for distribution." },
-    ],
-    faqs: [
-      { question: "Is Vorbis better than MP3 at the same bitrate?", answer: "Vorbis consistently outperforms MP3 in listening tests at equivalent bitrates, particularly below 192 kbps where MP3's limitations become audible." },
-      { question: "Can I use OGG in broadcast production?", answer: "OGG is less common in broadcast than MP3 or AAC. For production, keep WAV masters and use OGG only for delivery where specified." },
-      { question: "Does OGG support dynamic range compression metadata?", answer: "OGG supports REPLAYGAIN tags but does not support dynamic range compression (DRC) metadata like AC-3 or AAC do." },
-    ],
   },
   {
     id: "433",
@@ -608,16 +300,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Load WAV Source", desc: "Choose your uncompressed WAV. Opus from WAV produces the highest quality Opus possible since there is no prior lossy encoding to compound." },
-      { title: "2. Set Opus Bitrate", desc: "For transparent encoding, 96-128 kbps Opus matches WAV quality for most listeners. For critical listening, 160 kbps provides headroom." },
-      { title: "3. Modern Compression", desc: "Your WAV is encoded to Opus — the most efficient general-purpose audio codec. Files are 10-15x smaller than WAV with minimal quality loss." },
-    ],
-    faqs: [
-      { question: "Is Opus from WAV better than Opus from FLAC?", answer: "They are identical. Both WAV and FLAC contain lossless PCM input to the Opus encoder. The Opus output depends only on the PCM data, not the source container." },
-      { question: "Can Opus match WAV quality for audio books?", answer: "Yes, and at much lower bitrates. Opus at 48 kbps is excellent for speech — 10x smaller than WAV with no audible difference for spoken content." },
-      { question: "What is the maximum Opus quality from WAV?", answer: "Opus supports up to 510 kbps which exceeds the bitrate of CD-quality WAV (1411 kbps). At 510 kbps, Opus is nearly indistinguishable from the WAV source." },
-    ],
   },
   {
     id: "434",
@@ -628,16 +310,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose WAV Source", desc: "Select uncompressed WAV audio for conversion to WMA. This is useful when preparing audio for Windows-based applications and enterprise media systems." },
-      { title: "2. Set WMA Encoding", desc: "Choose WMA Standard (128-192 kbps, broad compatibility) or WMA Pro (up to 768 kbps, 24-bit, multi-channel up to 7.1)." },
-      { title: "3. Encode for Windows", desc: "Your WAV is encoded to Windows Media Audio optimized for Windows Media Player, Windows Phone, and Xbox ecosystems." },
-    ],
-    faqs: [
-      { question: "Is WMA Pro at 768 kbps transparent from WAV?", answer: "At 768 kbps, WMA Pro is audibly transparent for 24-bit/96 kHz sources. Below 192 kbps, WMA Pro sounds similar to AAC at equivalent bitrates." },
-      { question: "Can WMA preserve WAV's bit depth?", answer: "WMA Standard supports up to 16-bit. WMA Pro supports up to 24-bit. For 32-bit float WAV sources, down-conversion to 24-bit occurs." },
-      { question: "Does WMA support sample rates above 48 kHz?", answer: "WMA Pro supports up to 96 kHz. WMA Standard supports up to 48 kHz. High-resolution content is downsampled for Standard profile." },
-    ],
   },
   {
     id: "435",
@@ -648,17 +320,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online GIF Compressor — reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. Essential for faster website loading and email attachments. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload Your GIF", desc: "Select an animated GIF from your device. The tool shows the current frame count, dimensions, and file size." },
-      { title: "2. Configure Compression", desc: "Adjust color palette reduction (256 to 16 colors), enable frame deduplication to skip identical frames, and toggle lossy optimization for maximum size reduction." },
-      { title: "3. Download the Smaller GIF", desc: "Preview the compressed animation and download. All processing uses FFmpeg WASM locally — your GIF never leaves your browser." },
-    ],
-    faqs: [
-      { question: "How much can GIF compression reduce file size?", answer: "Typical reductions range from 40% to 80%. A 5MB animated GIF can be compressed to under 1MB with frame dedup and color reduction enabled. The most aggressive settings (16 colors + lossy + frame dedup) give the smallest files." },
-      { question: "What's different about GIF compression vs image compression?", answer: "GIFs are limited to 256 colors natively, so compression works differently — by reducing the color palette, removing duplicate frames, and using lossy dithering. Image Compression works on JPG/PNG quality settings. GIF Compressor is specialized for animation optimization." },
-      { question: "Will the animation still look good?", answer: "With moderate settings (128 colors, frame dedup on), quality loss is barely noticeable. Aggressive compression (16 colors) creates a retro/pixel-art look that some users actually prefer. Use the preview to check before downloading." },
-      { question: "Why would I compress a GIF instead of converting to video?", answer: "GIFs are still the most widely supported animation format — they work in email clients, Markdown documents, Slack, Discord, and platforms that don't support video. Compressing the GIF keeps compatibility while reducing loading time." },
-    ]
   },
   {
     id: "436",
@@ -669,34 +330,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Upload an Animated GIF",
-                "desc": "Upload the GIF you want to resize. The original dimensions, frame count, and file size are displayed. Large GIFs with many frames may take a moment to process before editing."
-          },
-          {
-                "title": "2. Set New Dimensions and Quality",
-                "desc": "Enter pixel dimensions or choose a percentage scale. Maintain aspect ratio by default. Adjust the color palette size — reducing from 256 to 64 colors dramatically shrinks file size. Enable frame skipping to reduce frame count."
-          },
-          {
-                "title": "3. Preview and Download",
-                "desc": "Preview the resized GIF in the player. Check that animation smoothness and quality meet expectations. Download the optimized GIF or export as a lightweight WebP animation for faster web loading."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Why does resizing a GIF sometimes create pixelation?",
-                "answer": "GIFs have a fixed 256-color palette. When you shrink dimensions, the dithering pattern compresses and can create moiré or blocky artifacts. Increasing dithering helps smooth the transition."
-          },
-          {
-                "question": "Can I resize only the dimensions without changing quality?",
-                "answer": "Yes, keep the color palette at 256 maximum and disable frame skipping. The resized GIF will look identical at the new size but the file will be proportionally smaller due to fewer pixels."
-          },
-          {
-                "question": "What's the recommended size for GIFs on social media?",
-                "answer": "Twitter and Facebook cap GIFs at 15MB but recommend under 5MB for fast loading. Resize to 480px wide max and reduce colors to 128 for the best balance of quality and social platform compatibility."
-          }
-    ]
   },
   {
     id: "437",
@@ -707,34 +340,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online GIF to APNG Converter — Convert animated GIFs to APNG format with 24-bit color and alpha transparency. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Upload Your GIF Animation",
-                "desc": "Select an animated GIF file from your device. The tool reads all frames and their timing data. GIFs with up to 500 frames are supported. Complex animations with transparency may convert especially well to APNG."
-          },
-          {
-                "title": "2. Configure Conversion Options",
-                "desc": "Choose whether to preserve the original frame delays or set a uniform frame rate. APNG supports full alpha transparency per pixel, so semi-transparent pixels from GIF dithering can be cleaned up."
-          },
-          {
-                "title": "3. Convert and Download",
-                "desc": "The conversion extracts each GIF frame into APNG's frame sequence. Download the APNG file, which offers better color depth and smaller file sizes for animations with transparency compared to GIF."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Will the APNG be smaller than the original GIF?",
-                "answer": "Often yes. APNG uses PNG-style compression which is more efficient than GIF's LZW compression, especially for animations with large uniform areas. Animations with lots of noise or grain may be similar in size."
-          },
-          {
-                "question": "Can I view APNG files in any browser?",
-                "answer": "APNG is supported in all modern browsers except Internet Explorer. Chrome, Firefox, Safari, and Edge all render APNG natively. For legacy compatibility, consider a fallback to a static PNG or GIF."
-          },
-          {
-                "question": "Does APNG support 24-bit color like PNG?",
-                "answer": "Yes, APNG supports full 24-bit RGB color plus 8-bit alpha channel, giving 16.7 million colors versus GIF's 256. This eliminates color banding and produces smoother gradients in animations."
-          }
-    ]
   },
   {
     id: "440",
@@ -745,34 +350,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Upload Your APNG File",
-                "desc": "Upload an animated PNG (APNG) file. The tool parses the frame structure and timing data. APNG files with many frames created from screen recordings or complex animations work well."
-          },
-          {
-                "title": "2. Configure Palette Reduction",
-                "desc": "Since GIF supports only 256 colors, set the color palette size (2-256). Choose a dithering algorithm — Floyd-Steinberg produces the best visual quality. Preview color banding and adjust palette colors manually if needed."
-          },
-          {
-                "title": "3. Set Frame Handling and Export",
-                "desc": "APNG supports per-frame alpha blending, but GIF doesn't. Choose how to composite semi-transparent areas. Set disposal method for each frame. Download the converted GIF with optional optimization."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What happens to APNG transparency in the GIF conversion?",
-                "answer": "GIF supports only binary transparency (on/off per pixel). Semi-transparent pixels in the APNG are either made fully opaque or fully transparent. This can create harsh edges where smooth transparency existed."
-          },
-          {
-                "question": "Why does my converted GIF have color banding?",
-                "answer": "Banding appears because GIF's 256-color palette cannot represent smooth gradients from the APNG's 16.7 million colors. Dithering helps by scattering pixels of different colors to simulate the missing shades."
-          },
-          {
-                "question": "Can I preserve the exact frame timing from the APNG?",
-                "answer": "GIF frame delays have a minimum of 10ms (some browsers enforce 20ms). APNG timings under 10ms are rounded up, which may slightly alter fast animation speed. Frame order and looping are preserved exactly."
-          }
-    ]
   },
   {
     id: "441",
@@ -783,34 +360,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. ',
     dependencies: "Canvas API",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Upload Your Source Image",
-                "desc": "Upload a PNG, JPEG, GIF, or BMP to convert into a Windows icon. Square images work best since ICO format is square-only. For non-square sources, the tool auto-crops to a centered square."
-          },
-          {
-                "title": "2. Select Icon Sizes",
-                "desc": "Choose which icon sizes to include: 16x16, 32x32, 48x48, 64x64, 128x128, and 256x256. Multiple sizes in one ICO file let Windows pick the right size for each context — taskbar, desktop, file explorer."
-          },
-          {
-                "title": "3. Configure and Download",
-                "desc": "Set compression options per size. 32-bit icons include an alpha channel for smooth transparency. Download the .ico file ready for use as a website favicon, application icon, or Windows folder icon."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What resolution should my source image be for the best icon?",
-                "answer": "Upload a 256x256 or larger source image. Smaller images get upscaled for the larger icon sizes and may look blurry. Vector sources converted to PNG before ICO conversion yield the sharpest multi-size icons."
-          },
-          {
-                "question": "Can I include multiple color depths in one ICO file?",
-                "answer": "Yes, the tool can bundle 32-bit (true color with alpha), 24-bit, 8-bit, and 4-bit versions in a single ICO. This provides backward compatibility with older Windows versions that don't support alpha transparency."
-          },
-          {
-                "question": "Will my icon work on macOS and Linux too?",
-                "answer": "ICO is primarily a Windows format. macOS uses .icns and Linux uses .png for icons. However, web browsers use .ico for favicons across all platforms, so it remains the standard format for website icons."
-          }
-    ]
   },
   {
     id: "442",
@@ -820,17 +369,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert colors between Hex, RGB, HSL, HSV, and CMYK formats. Real-time preview, color picker, and copy-to-clipboard.',
     seoDescription: 'Free online Color Converter — Convert colors between Hex, RGB, HSL, HSV, and CMYK. Real-time preview with color picker. ',
     dependencies: "none",
-    instructions: [
-      { title: "1. Enter or Pick a Color", desc: "Type a color value in any format (Hex, RGB, HSL, HSV, CMYK) or use the color picker to select one visually. The tool auto-detects the input format." },
-      { title: "2. View All Color Representations", desc: "See your color converted to all five formats simultaneously — Hex, RGB, HSL, HSV, and CMYK. Each value updates in real time as you adjust the color." },
-      { title: "3. Copy Any Format", desc: "Click the copy icon next to any color format to copy it to your clipboard. Use the values across CSS, design tools, or any application that needs color values." },
-    ],
-    faqs: [
-      { question: "What color formats are supported?", answer: "The converter supports Hex (3, 6, and 8-digit), RGB, RGBA, HSL, HSLA, HSV (HSB), and CMYK. Each format shows its values alongside the others for easy cross-reference." },
-      { question: "Does the color picker work in real time?", answer: "Yes. The color picker and all format inputs are linked — changing any input updates the picker and all other format values instantly. The live preview shows the color swatch." },
-      { question: "When should I use CMYK vs RGB?", answer: "Use RGB (or Hex) for digital designs — websites, apps, and screens. Use CMYK for print designs — brochures, flyers, and business cards. CMYK values help ensure printed colors match your screen." },
-      { question: "What is the difference between HSL and HSV?", answer: "HSL (Hue, Saturation, Lightness) and HSV (Hue, Saturation, Value) are similar but differ in how they define brightness. HSL's lightness goes from black to white, while HSV's value goes from black to the full color. Designers often prefer HSL for intuitive adjustments." },
-    ]
       },
   {
 
@@ -842,34 +380,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Upload QR Code Image",
-                "desc": "Upload a PNG, JPEG, or WEBP image containing a QR code, or paste from clipboard."
-          },
-          {
-                "title": "2. Auto-Decode",
-                "desc": "The tool automatically detects the QR code in the image and decodes its content."
-          },
-          {
-                "title": "3. View Decoded Content",
-                "desc": "The decoded text, URL, or other data is displayed. If it's a URL, a clickable link is shown."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What QR code versions does this reader support?",
-                "answer": "It supports QR code versions 1–40 (21×21 to 177×177 modules) including micro QR codes and all error correction levels (L, M, Q, H)."
-          },
-          {
-                "question": "Can the reader decode damaged or partially obscured QR codes?",
-                "answer": "Yes, the error correction built into QR codes (up to 30% with level H) allows decoding partially damaged codes. The tool reports the error correction level used."
-          },
-          {
-                "question": "Does the tool support batch scanning multiple QR codes in one image?",
-                "answer": "Yes, if the image contains multiple QR codes, the tool decodes all of them and lists each with its content and position in the image."
-          }
-    ]
 },
   {
     id: "444",
@@ -879,17 +389,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.',
     seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in Standard, Cicero, Legal, Startup, Coffee, and Pirate themes. Customizable paragraphs and word count for design mockups and layouts.',
     dependencies: "none",
-    instructions: [
-    { title: "1. Choose Your Style", desc: "Select from Standard Lorem Ipsum (classic scrambled Latin), Cicero (original Latin text from De Finibus), Legal (law-themed), Startup (tech/SaaS), Coffee (cafe-themed), or Pirate (nautical-themed) placeholder text." },
-    { title: "2. Set Output Size", desc: "Adjust the number of paragraphs (1-50) or word count to get the amount of placeholder text you need for your design layout." },
-    { title: "3. Copy for Your Layout", desc: "Click to copy the generated text and paste it into your design mockup, website wireframe, or print layout. No registration or data upload required." },
-  ],
-    faqs: [
-    { question: "What is the difference between Lorem Ipsum and Cicero text?", answer: "Standard Lorem Ipsum is the classic scrambled version of Cicero's 'De Finibus Bonorum et Malorum' — it's the traditional placeholder text used since the 1500s. Cicero text is the actual, unmodified Latin source text from the original philosophical work." },
-    { question: "Can I generate a specific number of words?", answer: "Yes. Toggle between paragraph mode and word-count mode to generate exactly the number of words you need — useful for filling text blocks of specific sizes in design layouts." },
-    { question: "What are the themed versions for?", answer: "Theme variants (Startup, Coffee, Pirate) generate placeholder text that matches the tone of your project — startup-themed text for SaaS mockups, coffee-themed for cafe designs, and legal-themed for law firm layouts, making wireframes more contextually relevant." },
-    { question: "Can I use Lorem Ipsum in production?", answer: "Lorem Ipsum is designed as placeholder text for design mockups and wireframes. Replace it with real content before launching your site — Lorem Ipsum in production content can confuse users and hurt SEO." },
-  ],
     showInCategory: true,
   },
   {
@@ -902,34 +401,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
     dependencies: "none",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Enter Domain or IP",
-                "desc": "Type a domain name (example.com) or IP address to look up."
-          },
-          {
-                "title": "2. Perform Lookup",
-                "desc": "Click Lookup to query the WHOIS database for registration information."
-          },
-          {
-                "title": "3. Review Details",
-                "desc": "View registrar, registration/expiration dates, name servers, and registrant contact information."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What WHOIS data fields are typically returned?",
-                "answer": "Fields include: domain name, registrar, registrant contact (often redacted with GDPR), administrative/technical contacts, name servers, creation/expiration dates, and DNSSEC status."
-          },
-          {
-                "question": "Why is registrant information often hidden in WHOIS results?",
-                "answer": "GDPR and similar privacy regulations require registrars to redact personal contact information. The tool shows 'Redacted for Privacy' or the registrar's proxy/privately-registered service name."
-          },
-          {
-                "question": "Can the tool differentiate between domain WHOIS and IP WHOIS?",
-                "answer": "Yes, domain WHOIS returns domain registration data, while IP WHOIS returns the RIR (ARIN, RIPE, APNIC, LACNIC, AFRINIC) allocation information."
-          }
-    ]
 },
   {
 
@@ -941,34 +412,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "none",
     showInCategory: true,
-    instructions: [
-          {
-                "title": "1. Enter Server URL",
-                "desc": "Type the HTTPS URL (https://example.com) or hostname:port. The tool connects to the server and retrieves the SSL certificate."
-          },
-          {
-                "title": "2. View Certificate Details",
-                "desc": "Review the certificate issuer, subject, validity period (not before/not after), SANs, and signature algorithm."
-          },
-          {
-                "title": "3. Check Chain and Security",
-                "desc": "Verify the certificate chain is complete, check for weak signature algorithms, and ensure the server supports modern TLS protocols."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What does the SSL checker validate in a certificate?",
-                "answer": "It validates the certificate chain (each cert signed by the next), expiration dates, hostname match (SAN coverage), key strength, and revocation status via CRL/OCSP."
-          },
-          {
-                "question": "How does the tool detect weak cipher suites?",
-                "answer": "The tool attempts connections using known weak ciphers (RC4, 3DES, export-grade) and reports which insecure protocols (SSLv2, SSLv3, TLS 1.0) are enabled."
-          },
-          {
-                "question": "Can I check if a certificate supports ECC or is ECDSA-signed?",
-                "answer": "Yes, the tool displays the public key algorithm (RSA, ECDSA, Ed25519) and curve type (P-256, P-384, P-521) for ECC certificates."
-          }
-    ]
 },
   {
     id: "447",
@@ -989,16 +432,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. ',
     dependencies: "pdf-lib, utif",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload TIFF Files", desc: "Select one or more multi-page TIFF files. TIFF is common in scanning and fax workflows." },
-      { title: "2. Set Page Options", desc: "Choose page size, orientation, and compression (JPEG for photos, LZW for line art) for the PDF output." },
-      { title: "3. Convert to PDF", desc: "Each TIFF page becomes a PDF page. Multi-page TIFFs are preserved with all pages in order." },
-    ],
-    faqs: [
-      { question: "Does this handle multi-page TIFF?", answer: "Yes. Multi-page TIFF files are converted in full — each TIFF page becomes a PDF page without losing any content." },
-      { question: "What TIFF compression types are supported?", answer: "Uncompressed, LZW, PackBits, CCITT Group 3/4 (fax), JPEG, and Deflate compressed TIFFs are all supported." },
-      { question: "Can I combine multiple TIFFs into one PDF?", answer: "Yes. Select multiple TIFF files — they merge into a single PDF in the order they are added." },
-    ],
   },
   {
     id: "449",
@@ -1009,17 +442,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Font Converter — Convert between TTF, OTF, WOFF, and WOFF2 formats. Preview with custom text. ',
     dependencies: "opentype.js",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload Your Font", desc: "Select a font file from your device — TTF, OTF, WOFF, or WOFF2 formats are all accepted. The tool reads the font and displays a preview with sample text." },
-      { title: "2. Choose Output Format", desc: "Select the target format — TTF for desktop use, WOFF or WOFF2 for web use, OTF for cross-platform compatibility. WOFF2 offers the best compression for websites." },
-      { title: "3. Preview and Download", desc: "Type custom preview text to see how the font looks in the new format. Once satisfied, download the converted font file for use in your project." },
-    ],
-    faqs: [
-      { question: "What font formats are supported?", answer: "The converter supports TTF (TrueType), OTF (OpenType), WOFF (Web Open Font Format), and WOFF2 (Web Open Font Format 2). These cover all modern desktop and web font use cases." },
-      { question: "Which format should I use for my website?", answer: "Use WOFF2 for the best compression and fastest loading — it's 30-50% smaller than WOFF. Include a WOFF fallback for older browsers. WOFF2 is supported by all modern browsers." },
-      { question: "Can I convert multiple fonts at once?", answer: "This tool converts one font at a time. For batch font conversion, consider using our Bulk Font Subsetter tool which can process multiple fonts simultaneously." },
-      { question: "Are all font features preserved?", answer: "Yes. The conversion preserves OpenType features including ligatures, kerning, alternates, and language-specific glyphs as long as the source and target formats both support them." },
-    ]
   },
   {
     id: "450",
@@ -1030,17 +452,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Font Subsetter — Reduce font file size by removing unused glyphs. Keep only needed characters. ',
     dependencies: "opentype.js",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload Your Font", desc: "Select a TTF, OTF, WOFF, or WOFF2 font file. The tool analyzes the font and shows its current glyph count and file size." },
-      { title: "2. Choose Characters to Keep", desc: "Enter the specific characters, numbers, and symbols your project needs. Common presets include 'A-Z, a-z, 0-9' for English text or you can paste custom text." },
-      { title: "3. Generate and Download", desc: "Click subset to create a smaller font containing only the selected characters. Download the optimized font with dramatically reduced file size." },
-    ],
-    faqs: [
-      { question: "How much can font subsetting reduce file size?", answer: "Font file size reduction depends on how many glyphs are removed. A full font can be 100-500KB. Subsetting to only Latin characters (A-Z, a-z, 0-9) can reduce it to 5-20KB — a 90-95% reduction." },
-      { question: "Why is font subsetting important for web performance?", answer: "Font files are a major contributor to page load time. Subsetting removes unused characters (Cyrillic, Greek, special symbols, etc.) that your site doesn't need, resulting in faster page loads and better Core Web Vitals scores." },
-      { question: "Can I subset for multiple languages?", answer: "Yes. You can include any combination of Unicode characters. For multilingual sites, include character ranges for each language your content uses. The tool preserves all entered characters." },
-      { question: "What happens to ligatures and special features?", answer: "Ligatures and OpenType features for included characters are preserved. Features for removed characters are stripped along with the glyphs. The font format and basic functionality remain intact." },
-    ]
   },
   {
     id: "451",
@@ -1051,16 +462,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload CBZ File", desc: "Select a .cbz comic book archive file. The tool extracts the compressed images (usually PNG, JPEG, or WebP), preserves their page order, and compiles them into a single PDF document." },
-      { title: "2. Arrange Pages", desc: "Review and reorder pages if needed before conversion." },
-      { title: "3. Download PDF", desc: "Convert the CBZ to a single PDF document." },
-    ],
-    faqs: [
-      { question: "What image formats inside CBZ are supported?", answer: "JPEG, PNG, GIF, and WebP images inside CBZ archives are all supported." },
-      { question: "Can I reorder pages?", answer: "Yes. Drag and drop to reorder pages before converting to PDF." },
-      { question: "Are page numbers added?", answer: "Optional. You can add page numbers to the bottom of each PDF page." },
-    ],
   },
   {
     id: "453",
@@ -1070,16 +471,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
     seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
-    instructions: [
-      { title: "1. Paste YAML or JSON", desc: "Enter YAML to convert to JSON, or JSON to convert to YAML." },
-      { title: "2. Direction Auto-Detected", desc: "The tool detects the input format and shows the output in the opposite format." },
-      { title: "3. Copy Result", desc: "Copy the converted output or download it as a file." },
-    ],
-    faqs: [
-      { question: "Is the conversion lossless?", answer: "For simple data types (strings, numbers, booleans, null, arrays, objects), conversion is lossless." },
-      { question: "How are YAML anchors handled?", answer: "YAML anchors and aliases are resolved and expanded in the JSON output." },
-      { question: "What about comments?", answer: "YAML comments are discarded during conversion as JSON does not support comments." },
-    ],
   },
   {
     id: "454",
@@ -1089,16 +480,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.',
     seoDescription: 'Free online XLSX ↔ CSV Converter — Bidirectional conversion between Excel and CSV. Sheet selector, delimiter options, data preview. ',
     dependencies: "xlsx",
-    instructions: [
-      { title: "1. Upload Excel File", desc: "Select an .xlsx or .xls file from your device." },
-      { title: "2. Choose Sheet", desc: "Pick the sheet to convert if the workbook has multiple sheets." },
-      { title: "3. Download CSV", desc: "The converted CSV file is ready for download immediately." },
-    ],
-    faqs: [
-      { question: "Are formulas preserved?", answer: "Formulas are evaluated and the resulting values are exported to CSV, not the formulas themselves." },
-      { question: "What if my Excel file has formatting?", answer: "CSV does not support formatting (colors, fonts, borders). Only the cell values are exported." },
-      { question: "Can I convert specific cells instead of the whole sheet?", answer: "The converter exports all data in the selected sheet. Use a range selection in Excel first if needed." },
-    ],
   },
   {
 
@@ -1109,34 +490,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.',
     seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. ',
     dependencies: "vcard-parser",
-    instructions: [
-          {
-                "title": "1. Upload or Paste VCF Data",
-                "desc": "Import contacts from a .vcf (vCard) file exported from your phone, email client, or CRM. The parser extracts name, phone, email, and address fields."
-          },
-          {
-                "title": "2. Map VCF Fields to Columns",
-                "desc": "Choose which VCF fields map to which CSV columns. Default mapping covers FN, TEL, EMAIL, ADR, ORG, and NOTE fields."
-          },
-          {
-                "title": "3. Download CSV or Reverse",
-                "desc": "Click convert to generate the CSV file. Reverse conversion (CSV to VCF) is also supported for importing contacts back into address books."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What VCF version does the converter support?",
-                "answer": "It supports vCard 2.1, 3.0, and 4.0 formats. Version detection is automatic based on the VERSION property in the file header."
-          },
-          {
-                "question": "Can I convert multiple VCF cards into a single CSV?",
-                "answer": "Yes, the tool processes all vCards in the input file and outputs one row per contact in the CSV. Multiple phone numbers per contact are concatenated."
-          },
-          {
-                "question": "Does the converter handle VCF photos or binary attachments?",
-                "answer": "No, binary photo data is stripped during conversion. Only text fields (name, phone, email, address, organization, notes) are extracted."
-          }
-    ]
 },
   {
 
@@ -1147,34 +500,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.',
     seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. ',
     dependencies: "ical",
-    instructions: [
-          {
-                "title": "1. Import ICS Calendar Data",
-                "desc": "Upload a .ics file from Google Calendar, Apple Calendar, or Outlook, or paste the ICS content directly into the input box."
-          },
-          {
-                "title": "2. Select Event Properties",
-                "desc": "Choose which event fields to include in the CSV output — SUMMARY, DTSTART, DTEND, LOCATION, DESCRIPTION, STATUS, and CATEGORIES."
-          },
-          {
-                "title": "3. Convert and Export",
-                "desc": "Click convert to generate rows for each calendar event. The CSV can be opened in Excel or Google Sheets for analysis and reporting."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What happens to recurring events during conversion?",
-                "answer": "Recurring events are expanded into individual rows for each occurrence. The RRULE is parsed and occurrences within the next 365 days are generated."
-          },
-          {
-                "question": "Can I convert CSV back to ICS format?",
-                "answer": "Yes, reverse conversion is supported. Map CSV columns to ICS properties and download a valid .ics file for import into calendar applications."
-          },
-          {
-                "question": "Does the tool handle multi-value fields like multiple alerts?",
-                "answer": "Multi-value fields are concatenated with a separator in the CSV output. Alarms, attendees, and other multi-value properties are simplified."
-          }
-    ]
 },
   {
     id: "457",
@@ -1185,16 +510,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to MP3 — Convert uncompressed WAV audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Uncompressed WAV", desc: "Choose your WAV file. Encoding MP3 from WAV is the best-case scenario — first-generation MP3 with no prior lossy encoding." },
-      { title: "2. Set MP3 Encoding", desc: "Choose CBR for predictable file sizes, VBR for optimal quality, or ABR for a mix. VBR 0 (~245 kbps avg) is transparent from CD-quality WAV." },
-      { title: "3. Compress to MP3", desc: "Your WAV is encoded to MP3. The first-generation MP3 preserves the best possible quality from your uncompressed source." },
-    ],
-    faqs: [
-      { question: "Is MP3 at 320 kbps indistinguishable from WAV?", answer: "For most people and most music, yes. Some trained listeners can detect MP3 artifacts on certain content (cymbals, applause, sibilance) even at 320 kbps." },
-      { question: "What is the minimum bitrate for acceptable music quality?", answer: "For music, 192 kbps CBR or VBR 2 (~190 kbps) is the minimum for acceptable quality. Below 128 kbps, high-frequency detail and stereo imaging degrade noticeably." },
-      { question: "Should I delete WAV files after creating MP3?", answer: "Keep the WAV files as your lossless archive. Storage is cheap; re-encoding from MP3 to a future format will result in poorer quality." },
-    ],
   },
   {
     id: "458",
@@ -1205,16 +520,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to MP3 — Convert lossless FLAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick Your FLAC Source", desc: "Start with a FLAC file for the best MP3 encoding. Encoding MP3 from a lossless source avoids the generational quality loss of re-encoding from lossy." },
-      { title: "2. Set MP3 Encoding Mode", desc: "Choose CBR (constant bitrate) for predictable file sizes, VBR (variable) for better quality-to-size ratio, or ABR (average) for a compromise." },
-      { title: "3. Export Universal MP3", desc: "Convert FLAC to MP3 — the most widely compatible audio format. Your MP3 will play on anything: from 1990s CD players to modern smart speakers." },
-    ],
-    faqs: [
-      { question: "Is VBR or CBR better for MP3?", answer: "VBR produces better quality at smaller file sizes by allocating more bits to complex passages. CBR is needed for streaming or hardware with strict bitrate requirements." },
-      { question: "What VBR quality setting should I use?", answer: "VBR 0 (highest, ~245 kbps) to VBR 9 (lowest, ~65 kbps). VBR 2 (~190 kbps) is transparent for most listeners. VBR 0 is overkill for portable listening." },
-      { question: "Does MP3 support metadata and album art?", answer: "Yes. MP3 supports ID3v1 and ID3v2 tags including title, artist, album, genre, year, and embedded cover art (JPEG/PNG up to 64MB)." },
-    ],
   },
   {
     id: "459",
@@ -1225,16 +530,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose FLAC Source", desc: "Select a lossless FLAC file for conversion to WMA. Starting from lossless ensures the best possible WMA output quality." },
-      { title: "2. Set WMA Profile", desc: "Choose WMA Standard (128-192 kbps, broad compatibility) or WMA Pro (up to 768 kbps, multi-channel support up to 7.1 surround)." },
-      { title: "3. Encode for Windows", desc: "Convert your FLAC to WMA for seamless playback in Windows Media Player, Windows Phone, and Xbox consoles." },
-    ],
-    faqs: [
-      { question: "Is WMA Pro better than WMA Standard?", answer: "WMA Pro supports higher bitrates, multi-channel audio, and 24-bit depth. Standard WMA is limited to stereo 16-bit. File size is significantly larger for Pro." },
-      { question: "Can WMA match FLAC quality?", answer: "WMA Standard is lossy — it cannot match FLAC's perfect fidelity. WMA 9.2 Lossless exists but is not supported by this converter." },
-      { question: "What bitrate preserves FLAC quality?", answer: "For transparent WMA encoding from FLAC, use 192 kbps VBR or higher. Below 128 kbps, quality loss is audible on good headphones." },
-    ],
   },
   {
     id: "460",
@@ -1245,16 +540,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Bring Your FLAC Source", desc: "Start with a FLAC file to get the best possible Opus encode. Opus is the most advanced lossy codec and benefits most from a clean lossless source." },
-      { title: "2. Select Opus Application", desc: "Choose the encoding mode: 'audio' for music (full bandwidth), 'voice' for speech (optimized for vocal clarity), or 'low-delay' for real-time applications." },
-      { title: "3. Encode to Opus", desc: "Your FLAC is encoded to Opus — the IETF standard for modern audio. Expect 70-80% size reduction at near-transparent quality that rivals the original FLAC." },
-    ],
-    faqs: [
-      { question: "Is Opus better than Vorbis?", answer: "Yes. Opus delivers better quality than Vorbis at all bitrates, especially below 64 kbps. Opus is the only codec that handles both music and speech optimally." },
-      { question: "What is Opus's delay characteristic?", answer: "Opus has algorithmic delay of 26.5 ms (music) to 5 ms (voice), making it suitable for real-time communication. MP3 has ~100 ms delay." },
-      { question: "Does Opus support gapless playback?", answer: "Yes. Opus supports gapless playback natively, unlike MP3 which requires encoder-specific gapless metadata hacks." },
-    ],
   },
   {
     id: "461",
@@ -1265,16 +550,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Your FLAC File", desc: "Pick a FLAC audio file from your lossless collection. FLAC is common for archiving but less supported in Apple's ecosystem than AIFF." },
-      { title: "2. Set AIFF Bit Depth", desc: "Choose 16-bit (CD quality), 24-bit (hi-res), or 32-bit float. AIFF is uncompressed so the file will be much larger than the FLAC source." },
-      { title: "3. Export for Mac Production", desc: "Decode FLAC to AIFF for use in Logic Pro, GarageBand, or Final Cut Pro. AIFF is Apple's preferred uncompressed format for professional audio." },
-    ],
-    faqs: [
-      { question: "Why AIFF over WAV on Mac?", answer: "AIFF uses big-endian byte order native to PowerPC and earlier Macs. macOS handles both equally well, but some legacy Mac software prefers AIFF." },
-      { question: "Does AIFF preserve FLAC's sample rate?", answer: "Yes. AIFF supports sample rates from 8 kHz to 192 kHz and beyond. The converted file matches the source FLAC exactly." },
-      { question: "Can I embed metadata in AIFF?", answer: "AIFF supports basic metadata through Annotation and Name chunks. Unlike FLAC, complex metadata structures may be lost during conversion." },
-    ],
   },
   {
     id: "462",
@@ -1285,16 +560,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose OGG Source", desc: "Select an OGG Vorbis file. Converting to MP3 is essential when the playback device lacks OGG support — common in car stereos and older devices." },
-      { title: "2. Set MP3 Encoding Parameters", desc: "Choose between CBR (constant, predictable size) or VBR (variable, better quality). For OGG at quality 5 (~160 kbps), use MP3 VBR 2 (~190 kbps)." },
-      { title: "3. Generate Compatible MP3", desc: "Your OGG is decoded and re-encoded to MP3. The MP3 plays on virtually any device, at the cost of a small generational quality loss from the double encoding." },
-    ],
-    faqs: [
-      { question: "Is it better to convert OGG to MP3 or use OGG directly?", answer: "If your device plays OGG, use it directly. Double-lossy encoding (OGG→MP3) always degrades quality. Only convert if MP3 is required by your hardware." },
-      { question: "How much quality is lost converting OGG to MP3?", answer: "OGG at quality 6 (~192 kbps) converted to MP3 320 kbps is nearly indistinguishable from the OGG source. Lower OGG quality settings result in more noticeable MP3 artifacts." },
-      { question: "Does the MP3 preserve ReplayGain from OGG?", answer: "MP3 does not support ReplayGain natively. ReplayGain values stored in OGG Vorbis comments are lost during conversion to MP3." },
-    ],
   },
   {
     id: "463",
@@ -1305,16 +570,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose OGG Audio", desc: "Select an OGG Vorbis file. Converting to WMA is primarily for Windows-based applications and corporate audio systems." },
-      { title: "2. Configure WMA Encoding", desc: "Set bitrate (64-192 kbps) and encoding type (CBR or VBR). WMA VBR at 128 kbps provides a good balance of quality and file size for most content." },
-      { title: "3. Encode to WMA", desc: "Your OGG is transcoded to Windows Media Audio. The resulting file plays natively in Windows-based applications, SharePoint, and PowerPoint presentations." },
-    ],
-    faqs: [
-      { question: "Can I play WMA on Linux?", answer: "Yes, through FFmpeg-based players like VLC, Audacious, and SMPlayer. Some distributions require wma-codecs from non-free repositories." },
-      { question: "Does WMA support OGG's quality levels?", answer: "WMA quality is set by bitrate, not a quality scale like Vorbis. WMA at 192 kbps is comparable to OGG quality level 6 (~192 kbps) in listening tests." },
-      { question: "Is WMA suitable for archiving?", answer: "No. WMA is a lossy format not suitable for archiving. For archival, keep the original OGG or convert to FLAC for a lossless archive." },
-    ],
   },
   {
     id: "464",
@@ -1325,16 +580,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select OGG Vorbis File", desc: "Choose your OGG audio. OGG to Opus is a common upgrade path for open-source audio collections, since Opus outperforms Vorbis at all bitrates." },
-      { title: "2. Choose Opus Bandwidth", desc: "Opus supports narrowband (4 kHz), mediumband (7 kHz), wideband (12 kHz), super-wideband (20 kHz), and fullband (48 kHz). Fullband is recommended for music." },
-      { title: "3. Encode to Opus", desc: "Your OGG is transcoded to Opus. The Opus file will be 20-30% smaller than the OGG at equivalent quality, further reducing your audio library's storage footprint." },
-    ],
-    faqs: [
-      { question: "Can I batch convert an OGG library to Opus?", answer: "Yes. The tool supports batch conversion. Be aware that each conversion incurs generational loss since both are lossy codecs." },
-      { question: "Which has lower latency: Opus or Vorbis?", answer: "Opus has significantly lower latency (26.5 ms music, 5 ms voice) compared to Vorbis (~100 ms). This makes Opus suitable for live streaming and communication apps." },
-      { question: "Is Opus decoding faster than Vorbis?", answer: "Opus decoding is computationally similar to Vorbis. Both are efficient on modern hardware. On ARM devices (Raspberry Pi, smartphones), both decode 100x realtime." },
-    ],
   },
   {
     id: "465",
@@ -1345,16 +590,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick OGG File", desc: "Select an OGG Vorbis file. Converting to AIFF is useful when preparing game audio assets for Mac-based audio post-production." },
-      { title: "2. Configure AIFF Output", desc: "Set sample rate and bit depth. Match the OGG source's sample rate to avoid unnecessary resampling. 24-bit depth is recommended for editing headroom." },
-      { title: "3. Export Uncompressed AIFF", desc: "The OGG is decoded to full PCM and wrapped as AIFF. The file is ready for professional audio work in Logic Pro, Pro Tools, or any AIFF-compatible DAW." },
-    ],
-    faqs: [
-      { question: "Can I convert OGG to AIFF without quality loss?", answer: "The OGG-to-PCM decoding is lossless — all audio data present in the OGG is preserved. However, OGG is lossy, so the original quality ceiling is the OGG encode." },
-      { question: "Why is the AIFF file so much larger?", answer: "OGG Vorbis compresses audio 5-10x. AIFF is uncompressed. A 5 MB OGG file may become 30-50 MB as AIFF, with no audible quality improvement." },
-      { question: "Does AIFF support Vorbis comment blocks?", answer: "No. Vorbis comments are specific to OGG containers. AIFF metadata fields are populated from matching Vorbis tags during conversion." },
-    ],
   },
   {
     id: "466",
@@ -1365,16 +600,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload M4A Audio", desc: "Choose the M4A file you want as MP3. Common in workflows where music purchased from iTunes Store needs to play on non-Apple devices." },
-      { title: "2. Choose MP3 Quality Target", desc: "Select from preset quality levels: 128 kbps (small file, voice-grade), 192 kbps (balanced), or 320 kbps (maximum MP3 quality)." },
-      { title: "3. Encode for Universal Playback", desc: "Your M4A is decoded to PCM then encoded to MP3. The resulting file works on any device with MP3 support — from DVD players to smart speakers." },
-    ],
-    faqs: [
-      { question: "Will MP3 from iTunes M4A sound good?", answer: "iTunes Plus M4A files are 256 kbps AAC. Converting to 320 kbps MP3 minimizes quality loss. Avoid converting to 128 kbps MP3 from high-quality M4A sources." },
-      { question: "Can I preserve iTunes metadata?", answer: "Metadata like title, artist, and album are transferred from M4A to MP3 ID3 tags. Some iTunes-specific tags (iTunes account ID) are not carried over." },
-      { question: "Does this work with DRM-protected M4A?", answer: "No. Only DRM-free M4A files (purchased as iTunes Plus or from other DRM-free sources) can be converted. Protected M4A files require authorization first." },
-    ],
   },
   {
     id: "467",
@@ -1385,16 +610,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select M4A File", desc: "Pick the M4A audio to convert for Windows compatibility. Common when moving an iTunes library to a Windows-based media system." },
-      { title: "2. Set WMA Bitrate", desc: "Choose 128 kbps for adequate quality, 192 kbps for good quality on portable devices, or WMA Pro for high-quality multi-channel output." },
-      { title: "3. Export for Windows", desc: "Convert M4A to WMA for native playback in Windows Media Center, Xbox Music, and Windows Phone devices without codec packs." },
-    ],
-    faqs: [
-      { question: "Can Windows Media Player play M4A?", answer: "Windows Media Player 12 plays M4A with the Apple codec installed. WMA requires no additional codecs on Windows." },
-      { question: "Is WMA metadata compatible with iTunes?", answer: "WMA metadata uses Windows Media format. iTunes does not natively write WMA metadata. Tags may not transfer cleanly between ecosystems." },
-      { question: "Does WMA support gapless playback?", answer: "WMA supports gapless playback through the WM/WMContentID attribute. Not all WMA players implement gapless correctly." },
-    ],
   },
   {
     id: "468",
@@ -1405,16 +620,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload Your M4A File", desc: "Select an M4A audio track. Converting to Opus is ideal for reducing storage used by your portable music library." },
-      { title: "2. Set Opus Target Bitrate", desc: "For transparent encoding, 96-128 kbps Opus matches or exceeds 256 kbps AAC quality. For maximum space savings, 64 kbps Opus is acceptable for casual listening." },
-      { title: "3. Encode Modern Audio", desc: "Convert your M4A to Opus. The modern codec delivers better quality at half the bitrate of AAC, freeing storage on phones and portable players." },
-    ],
-    faqs: [
-      { question: "Is Opus decoding supported on iOS?", answer: "iOS does not natively support Opus playback. Third-party apps like VLC for Mobile can play Opus, but Apple Music and the default Music app cannot." },
-      { question: "Can Opus replace AAC for my library?", answer: "For personal use on compatible devices, yes. For sharing with others, AAC remains safer due to universal hardware and OS support." },
-      { question: "Does Opus handle variable bitrate well?", answer: "Opus uses variable bitrate by default and adapts dynamically to audio complexity. VBR in Opus is more efficient than CBR, unlike some older codecs." },
-    ],
   },
   {
     id: "469",
@@ -1425,16 +630,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to AIFF — Convert M4A audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select M4A Source", desc: "Choose an M4A audio file for conversion to AIFF. Useful when preparing audio from iTunes for use in Mac-based audio production." },
-      { title: "2. Choose AIFF Bit Depth", desc: "16-bit for standard exports, 24-bit for professional production headroom. 32-bit float for projects requiring extreme dynamic range." },
-      { title: "3. Export Uncompressed AIFF", desc: "Your M4A is decoded to PCM and wrapped in AIFF. The file is ready for import into Logic Pro, Pro Tools, or any AIFF-compatible DAW." },
-    ],
-    faqs: [
-      { question: "Is AIFF better than M4A for production?", answer: "Yes. AIFF is uncompressed, so the CPU does not need to decode audio during playback in a DAW. This reduces latency and improves track count." },
-      { question: "Does AIFF preserve iTunes metadata?", answer: "Some metadata transfers (title, artist). Album art and play count data do not have standard AIFF fields and will be lost." },
-      { question: "What sampling rates does AIFF support?", answer: "AIFF supports 8 kHz to 192 kHz. Most audio production uses 44.1 kHz (music) or 48 kHz (video/film post-production)." },
-    ],
   },
   {
     id: "470",
@@ -1445,16 +640,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to MP3 — Convert AAC audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose Your AAC Source", desc: "Pick an .aac file. AAC generally achieves better quality than MP3 at the same bitrate, so the source quality matters for the conversion outcome." },
-      { title: "2. Set MP3 Bitrate", desc: "Choose 128 kbps for voice/podcasts, 192 kbps for mixed content, or 320 kbps for music. The AAC stream will be decoded then re-encoded to MP3." },
-      { title: "3. Convert for Compatibility", desc: "Generate an MP3 file compatible with virtually every device — car stereos, older media players, gaming consoles, and basic feature phones." },
-    ],
-    faqs: [
-      { question: "Will AAC to MP3 conversion lose quality?", answer: "Yes — this is a double-lossy conversion. AAC artifacts plus MP3 artifacts compound. For critical listening, start from a lossless source instead." },
-      { question: "Which bitrate matches original AAC quality?", answer: "If your AAC is 256 kbps, use 320 kbps MP3 to minimize perceivable quality loss. Never upconvert from a lower bitrate AAC to higher bitrate MP3." },
-      { question: "Why convert AAC to MP3 instead of using AAC directly?", answer: "MP3 has universal hardware support. Many car audio systems, aircraft entertainment, and legacy devices play MP3 but not AAC." },
-    ],
   },
   {
     id: "471",
@@ -1465,16 +650,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select AAC File", desc: "Choose the AAC audio you want to convert to Windows Media Audio format." },
-      { title: "2. Set WMA Bitrate", desc: "WMA supports CBR from 48-192 kbps. For compatibility with Windows Media Player and portable devices, 128 kbps CBR is the safest choice." },
-      { title: "3. Encode for Windows Ecosystem", desc: "Convert your AAC to WMA format. The resulting file plays natively in Windows Media Player, Windows Phone, and older Zune devices." },
-    ],
-    faqs: [
-      { question: "Is WMA still relevant today?", answer: "WMA is legacy technology but still used in corporate environments with Windows-based audio systems, some e-learning platforms, and embedded Windows applications." },
-      { question: "Does WMA support lossless encoding?", answer: "Yes. WMA Lossless is a variant but this converter produces standard WMA. For lossless on Windows, use WAV or FLAC instead." },
-      { question: "Can I play WMA on non-Windows devices?", answer: "Most modern media players support WMA playback, but iPhones, iPads, and many Linux distributions do not include native WMA support." },
-    ],
   },
   {
     id: "472",
@@ -1485,16 +660,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to Opus — Convert AAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload AAC Source", desc: "Choose the .aac file you want to convert. Opus excels at low bitrates, making this conversion ideal for reducing file size while maintaining quality." },
-      { title: "2. Set Opus Bitrate", desc: "Opus performs well from 32-96 kbps for voice and 96-192 kbps for music. For AAC source at 256 kbps, 128 kbps Opus is virtually transparent." },
-      { title: "3. Modern Encoding", desc: "Convert to Opus — the most advanced lossy audio codec. Opus combines SILK (voice) and CELT (music) algorithms for optimal performance across all content types." },
-    ],
-    faqs: [
-      { question: "Should I replace my AAC library with Opus?", answer: "Opus offers 10-20% better compression than AAC at the same quality. For portable devices with limited storage, Opus is the superior choice." },
-      { question: "What is Opus's bitrate range?", answer: "Opus supports 6 kbps (narrowband voice) to 510 kbps (full-band music). The sweet spot is 96-128 kbps for transparent music encoding." },
-      { question: "Does Opus support surround sound?", answer: "Yes. Opus supports up to 255 channels including 5.1 and 7.1 surround. AAC is limited to 48 channels in its highest profile." },
-    ],
   },
   {
     id: "473",
@@ -1505,16 +670,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Bring Your AAC File", desc: "Select an AAC audio track for conversion to AIFF — Apple's uncompressed audio format used in professional production." },
-      { title: "2. Select AIFF Variant", desc: "Choose between standard AIFF (big-endian, .aif) and AIFF-C (.aifc) which supports compression. Standard AIFF is recommended for maximum compatibility." },
-      { title: "3. Export for Production", desc: "Decode the AAC to PCM and wrap in an AIFF container. AIFF is the standard format in many Mac-based recording studios and Logic Pro workflows." },
-    ],
-    faqs: [
-      { question: "What is the difference between AIFF and WAV?", answer: "AIFF uses big-endian byte ordering (Motorola), WAV uses little-endian (Intel). Both are uncompressed PCM. Audio quality is identical at the same sample rate and bit depth." },
-      { question: "Does AIFF support metadata?", answer: "AIFF supports basic metadata through chunk headers including author, copyright, and annotation fields. It does not support embedded album art natively." },
-      { question: "Is AIFF compatible with Windows?", answer: "Windows supports AIFF playback in most media players, but some Windows audio software may not open AIFF files. WAV is safer for cross-platform work." },
-    ],
   },
   {
     id: "474",
@@ -1525,16 +680,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select WMA for Decoding", desc: "Choose the WMA file to decode to uncompressed WAV. WAV is the universal intermediate format for audio editing and processing." },
-      { title: "2. Set WAV Output Format", desc: "Select the output bit depth (16 or 24 bit) and sample rate. Matching the WMA's original format avoids unnecessary resampling." },
-      { title: "3. Decode to Uncompressed WAV", desc: "Your WMA is decoded to linear PCM and saved as WAV. The file is 5-10x larger than the WMA but ready for editing in any audio application." },
-    ],
-    faqs: [
-      { question: "Is WMA to WAV decoding lossless?", answer: "Yes, the WMA decoder produces a PCM output that fully represents the WMA specification. No quality is lost during decoding." },
-      { question: "Can I recover CD quality from a WMA?", answer: "Only if the WMA was encoded from CD at a high bitrate (lossless or 192+ kbps). A low-bitrate WMA (64 kbps) decoded to WAV still sounds low-quality." },
-      { question: "Why use WAV instead of editing WMA directly?", answer: "WMA editing typically requires decode-reencode, degrading quality each time. WAV editing is lossless — trim, fade, and process without cumulative quality loss." },
-    ],
   },
   {
     id: "475",
@@ -1545,16 +690,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to FLAC — Convert Windows Media Audio (WMA) audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose WMA File", desc: "Select a WMA file. Converting WMA to FLAC allows you to integrate Windows-sourced audio into a lossless-format library for unified management." },
-      { title: "2. Set FLAC Compression", desc: "Level 0 for fastest encoding or level 8 for smallest file. The FLAC file will be 2-3x larger than the WMA since FLAC is lossless." },
-      { title: "3. Wrap in Lossless Container", desc: "Your WMA is decoded and stored in FLAC. While FLAC is lossless, it preserves the WMA's lossy quality — the original uncompressed quality is unrecoverable." },
-    ],
-    faqs: [
-      { question: "Does FLAC from WMA contain original quality?", answer: "No. The WMA's lossy compression removed audio information before FLAC encoding. FLAC stores whatever audio data the WMA decoder outputs — no more, no less." },
-      { question: "Why convert WMA to FLAC instead of keeping WMA?", answer: "FLAC provides richer metadata (cuesheets, pictures, ReplayGain) and broader hardware support (network players, DAPs, car stereos)." },
-      { question: "Is the conversion reversible?", answer: "No. FLAC is bit-exact from the WMA decode, but you cannot reconstruct the original WMA bitstream from FLAC." },
-    ],
   },
   {
     id: "476",
@@ -1565,16 +700,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose WMA File", desc: "Select a WMA audio file. Converting to OGG Vorbis helps migrate audio from proprietary Windows Media into open, royalty-free formats." },
-      { title: "2. Set Vorbis Quality", desc: "Quality level 5 (~160 kbps) for music, level 3 (~112 kbps) for mixed content. Vorbis quality scales differently from WMA, so some experimentation may help." },
-      { title: "3. Encode to Open Format", desc: "Your WMA is transcoded to OGG Vorbis. The resulting file is patent-free and plays on Android, Linux, and web platforms without restrictions." },
-    ],
-    faqs: [
-      { question: "Is OGG Vorbis better than WMA?", answer: "Vorbis outperforms WMA Standard at most bitrates and is competitive with WMA Pro. Vorbis also has the advantage of being completely royalty-free." },
-      { question: "Does OGG support Windows Media metadata?", answer: "Vorbis comments can store most metadata fields, but WMA-specific fields (WM/Genre, WM/Year) need manual mapping." },
-      { question: "Can I use OGG in Windows apps?", answer: "Windows does not include native OGG support. VLC, Foobar2000, and Winamp can play OGG, but Windows Media Player requires codec packs." },
-    ],
   },
   {
     id: "477",
@@ -1585,16 +710,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select WMA Audio", desc: "Choose your WMA file. This conversion is essential for moving a Windows Media-based music library into Apple's ecosystem." },
-      { title: "2. Set M4A Encoding", desc: "Select AAC bitrate: 128 kbps (standard), 192 kbps (good), or 256 kbps (high). The WMA decode feeds clean PCM into the AAC encoder." },
-      { title: "3. Encode for Apple", desc: "Your WMA is transcoded to AAC in an M4A container. The file syncs with iTunes, Apple Music, and all iOS devices without compatibility issues." },
-    ],
-    faqs: [
-      { question: "Can I preserve WMA album art in M4A?", answer: "Yes. If the WMA file contains embedded album art, it is extracted and stored as a covr atom in the M4A container during conversion." },
-      { question: "Does M4A support WMA's lossless mode?", answer: "WMA Lossless is a separate format. This converter handles WMA Standard/Pro. For lossless workflows, use ALAC in M4A from a lossless source." },
-      { question: "Will my WMA play counts transfer to M4A?", answer: "No. Play count data is stored in the Windows Media Player database, not in the file itself. This metadata is lost during conversion." },
-    ],
   },
   {
     id: "478",
@@ -1605,16 +720,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to AAC — Convert Windows Media Audio (WMA) audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload WMA File", desc: "Select a WMA audio file. WMA is common in Windows environments but not supported on Apple devices. AAC provides broad cross-platform compatibility." },
-      { title: "2. Set AAC Quality", desc: "Choose 128 kbps (adequate), 192 kbps (good), or 256 kbps (excellent). AAC generally outperforms WMA at equivalent bitrates." },
-      { title: "3. Convert for Cross-Platform", desc: "Your WMA is decoded and re-encoded to AAC. The resulting file plays on iPhone, iPad, Mac, PlayStation, and smart speakers without WMA codec issues." },
-    ],
-    faqs: [
-      { question: "Is AAC better than WMA?", answer: "AAC achieves better quality than WMA Standard at the same bitrate. WMA Pro approaches AAC quality but has narrower device support." },
-      { question: "Will I lose quality converting WMA to AAC?", answer: "Yes, this is double-lossy (WMA→PCM→AAC). Use the highest available WMA bitrate and target 256 kbps AAC to minimize perceivable loss." },
-      { question: "Can I play AAC on Windows without additional codecs?", answer: "Yes. Windows 10 and 11 include AAC decoder support. Windows Media Player may need the HE-AAC package from the Microsoft Store for full support." },
-    ],
   },
   {
     id: "479",
@@ -1625,16 +730,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select WMA Source", desc: "Pick a WMA file. Converting to Opus from WMA gives you the efficiency benefits of Opus while working with Windows-sourced audio." },
-      { title: "2. Set Opus Bitrate", desc: "96 kbps Opus matches WMA at 128 kbps quality. 128 kbps Opus exceeds WMA at 192 kbps. Opus is significantly more efficient than WMA." },
-      { title: "3. Transcode to Modern Codec", desc: "Your WMA is decoded and encoded to Opus. The Opus file is smaller than the WMA with similar or better quality." },
-    ],
-    faqs: [
-      { question: "Is Opus worth converting WMA for?", answer: "Yes, if device compatibility allows. Opus saves 30-50% storage compared to WMA at equivalent quality. The conversion is one-time per file." },
-      { question: "Does Opus support WMA's multi-channel audio?", answer: "Opus supports up to 255 channels. WMA Pro 5.1/7.1 surround content is preserved during conversion to Opus with multi-channel mapping." },
-      { question: "Can I play the resulting Opus on Xbox?", answer: "Xbox consoles do not natively support Opus. For Xbox playback, keep the original WMA or convert to AAC instead." },
-    ],
   },
   {
     id: "480",
@@ -1645,16 +740,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to AIFF — Convert Windows Media Audio (WMA) audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select WMA Source", desc: "Pick a WMA file for conversion to AIFF. Useful when Windows-format audio needs to be used in Mac-based production environments." },
-      { title: "2. Set AIFF Format", desc: "Choose bit depth (16 or 24 bit). The output sample rate matches the WMA source. 24-bit depth provides headroom for further processing." },
-      { title: "3. Export for Mac Production", desc: "Your WMA is decoded to PCM and saved as AIFF. The file is ready for import into Logic Pro, GarageBand, or Final Cut Pro." },
-    ],
-    faqs: [
-      { question: "Does AIFF from WMA sound better than using WMA directly?", answer: "No. AIFF is uncompressed, but the decoded audio quality is limited by the WMA source. AIFF provides easier editing at the cost of much larger files." },
-      { question: "Can macOS play WMA natively?", answer: "No. macOS does not include WMA support. Converting to AIFF ensures native playback and editing capability on all Mac software." },
-      { question: "Does this preserve WMA metadata?", answer: "Basic metadata (title, artist, album) is transferred. WMA-specific metadata fields (especially Windows Media-specific tags) are dropped during conversion." },
-    ],
   },
   {
     id: "481",
@@ -1665,16 +750,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Import Opus for Decoding", desc: "Select the Opus file to decode to WAV. Opus is efficient but not editable — WAV gives you sample-level access for audio processing." },
-      { title: "2. Set WAV Output Format", desc: "Choose 16-bit for standard delivery or 24-bit for production. The output sample rate can match the Opus source (typically 48 kHz)." },
-      { title: "3. Decode to Raw WAV", desc: "Your Opus file is decoded to uncompressed PCM WAV. The file is suitable for loading into any audio editor for further processing." },
-    ],
-    faqs: [
-      { question: "Is Opus decoding to WAV a lossless process?", answer: "Yes, the Opus decoder produces a PCM output that is fully accurate to the Opus specification. No further loss is introduced during WAV creation." },
-      { question: "Why is the WAV file sample rate 48 kHz?", answer: "Opus uses a 48 kHz internal sampling rate regardless of input. Decoded Opus outputs at 48 kHz. If the original content was 44.1 kHz, resampling occurred during Opus encoding." },
-      { question: "Can I recover the original pre-Opus file by converting to WAV?", answer: "No. Opus is lossy — decoding to WAV reveals only the post-Opus audio. The original uncompressed source is permanently lost." },
-    ],
   },
   {
     id: "482",
@@ -1685,16 +760,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose Opus Source", desc: "Select an Opus audio file. Converting Opus to FLAC is useful for integrating modern Opus-encoded content into a FLAC-based archival library." },
-      { title: "2. Set FLAC Compression", desc: "Compression level 0-8. Despite the matrix of choices, all levels produce identical PCM output. Level 5 is the standard recommendation for everyday use." },
-      { title: "3. Re-package as FLAC", desc: "The Opus file is decoded to PCM and losslessly compressed to FLAC. Metadata is transferred from Opus comments to FLAC Vorbis comments." },
-    ],
-    faqs: [
-      { question: "Is Opus to FLAC a lossless conversion?", answer: "No. Opus is lossy. The FLAC container stores the decoded Opus PCM, which has already lost information during Opus encoding. The FLAC encoding itself is lossless." },
-      { question: "Why would I convert Opus to FLAC instead of keeping Opus?", answer: "FLAC supports richer metadata, embedded cue sheets, and is supported by more hardware players (network streamers, DACs with USB playback)." },
-      { question: "Does FLAC preserve Opus's low-latency advantage?", answer: "No. FLAC is designed for storage, not streaming. FLAC decoding latency is ~100ms+ while Opus has ~26ms latency. FLAC cannot match Opus for real-time use." },
-    ],
   },
   {
     id: "483",
@@ -1705,16 +770,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Choose Opus File", desc: "Select an Opus audio file to convert to OGG Vorbis. This is relevant for compatibility with older software that supports Vorbis but not Opus." },
-      { title: "2. Set Vorbis Quality", desc: "Select Vorbis quality level. For Opus at 96 kbps, use Vorbis level 5 (~160 kbps) to match quality. For Opus at 128 kbps, level 6 (~192 kbps)." },
-      { title: "3. Convert to Vorbis", desc: "Your Opus is transcoded to OGG Vorbis. The file is compatible with older Android versions, some smart TVs, and legacy in-dash navigation systems." },
-    ],
-    faqs: [
-      { question: "Is OGG Vorbis or Opus better?", answer: "Opus is objectively better at all bitrates. OGG Vorbis is older and less efficient. This conversion is only for compatibility, not quality improvement." },
-      { question: "Does OGG support Opus's speech mode?", answer: "No. Opus has a dedicated SILK speech mode that excels at low-bitrate voice. Vorbis uses a single encoding mode for all content types." },
-      { question: "Will the OGG file be larger than the Opus?", answer: "Yes. Vorbis is less efficient than Opus. Expect the OGG file to be 20-40% larger at equivalent quality." },
-    ],
   },
   {
     id: "484",
@@ -1725,16 +780,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to M4A — Convert Opus audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Opus Audio", desc: "Choose an Opus file. Converting to M4A is necessary when the target device or application does not support Opus — Apple devices are a common case." },
-      { title: "2. Choose M4A Quality", desc: "Select AAC quality equivalent: 96 kbps (good for Opus-sourced content), 128 kbps (standard), or 192 kbps (high). Higher bitrates minimize generational loss." },
-      { title: "3. Encode to M4A", desc: "Your Opus is transcoded to AAC in an M4A container. The file is optimized for Apple Music, iTunes, and all iOS devices." },
-    ],
-    faqs: [
-      { question: "Why is Opus not supported on iOS?", answer: "Apple has standardized on AAC for audio. Opus is not supported by Core Audio, the underlying audio framework on iOS and macOS." },
-      { question: "Does M4A from Opus retain Opus metadata?", answer: "Most metadata is transferred. Opus comments (title, artist, album) map to M4A metadata atoms. Opus-specific encoding parameters are not retained." },
-      { question: "Will I notice quality loss converting Opus to M4A?", answer: "If the Opus is >128 kbps and the M4A target is 192 kbps+, the loss is likely imperceptible. Below those thresholds, double-lossy artifacts become audible." },
-    ],
   },
   {
     id: "485",
@@ -1745,16 +790,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload Opus File", desc: "Select an Opus audio file. Opus is excellent for streaming efficiency. Convert to AAC when Apple device or legacy hardware compatibility is needed." },
-      { title: "2. Set AAC Target", desc: "Choose 128 kbps (good for mixed content), 192 kbps (high quality), or 256 kbps (transparent). Since Opus is more efficient than AAC, expect slight file size increase." },
-      { title: "3. Cross-Platform Conversion", desc: "Your Opus file is decoded and re-encoded to AAC. The resulting file is compatible with iPhones, iPads, PlayStation, and most smart speakers." },
-    ],
-    faqs: [
-      { question: "Why does AAC from Opus sound different?", answer: "Opus and AAC use different psychoacoustic models. They mask audio imperfections differently. Some artifacts audible in one codec may be masked in the other." },
-      { question: "Will the AAC file be larger than the Opus?", answer: "Yes, at equivalent perceived quality. Opus is 10-20% more efficient than AAC. A 96 kbps Opus transcoded to 128 kbps AAC produces a ~30% larger file." },
-      { question: "Can I use AAC in web audio APIs?", answer: "Yes. AAC is supported by HTML5 Audio in most browsers. Web Audio API can decode AAC through MediaElementSource or by fetching and decoding the file." },
-    ],
   },
   {
     id: "486",
@@ -1765,16 +800,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Opus Source", desc: "Choose an Opus audio file. Opus to WMA conversion is rarely needed but useful for legacy Windows applications." },
-      { title: "2. Set WMA Bitrate", desc: "Select 128 kbps for acceptable quality or 192 kbps for high quality. WMA Pro at 192 kbps matches Opus quality more closely than WMA Standard." },
-      { title: "3. Encode to WMA", desc: "Your Opus is transcoded to Windows Media Audio. The file integrates with Windows-based media systems, presentation software, and corporate audio libraries." },
-    ],
-    faqs: [
-      { question: "Does WMA preserve Opus's packet loss concealment?", answer: "WMA has its own packet loss concealment mechanisms that differ from Opus. Network resilience features are not transferable between codecs." },
-      { question: "Is WMA or Opus better for streaming?", answer: "Opus is significantly better for streaming due to lower latency, better packet loss handling, and superior quality at streaming bitrates (32-96 kbps)." },
-      { question: "Can I play the resulting WMA on Xbox?", answer: "Yes. Xbox consoles natively support WMA playback through the Media Player app and when streaming from a Windows Media Center server." },
-    ],
   },
   {
     id: "487",
@@ -1785,16 +810,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select Opus File", desc: "Pick an Opus audio file for conversion to AIFF. Useful for integrating high-efficiency Opus streams into professional audio workflows." },
-      { title: "2. Set AIFF Format", desc: "Choose 16, 24, or 32-bit output depth. 24-bit preserves the full dynamic range of the Opus decode for processing in your DAW." },
-      { title: "3. Export AIFF for Production", desc: "Your Opus stream is decoded to PCM and saved as AIFF. The file is ready for use in Mac-based audio production environments." },
-    ],
-    faqs: [
-      { question: "Does AIFF from Opus have lower quality than AIFF from WAV?", answer: "Indirectly, yes. The AIFF contains the decoded Opus data — the quality ceiling is the original Opus encode. It is not the same as AIFF from a lossless source." },
-      { question: "Can I edit AIFF from Opus without quality loss?", answer: "Editing AIFF (trimming, fading, gain changes) does not degrade quality further. Re-exporting as AIFF after editing preserves the edited audio perfectly." },
-      { question: "Is AIFF support universal on Mac?", answer: "Yes. AIFF is Apple's standard uncompressed format. QuickTime, Core Audio, and all Mac audio applications support AIFF natively." },
-    ],
   },
   {
     id: "488",
@@ -1805,16 +820,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Load AIFF File", desc: "Select an AIFF audio file. AIFF to WAV is a container conversion — the PCM data stays the same, only the header format changes." },
-      { title: "2. Choose Output Format", desc: "Select WAV (Microsoft) or RF64 (for files >4GB). Standard WAV is recommended for maximum compatibility." },
-      { title: "3. Container Swap", desc: "The PCM audio data is extracted from AIFF and wrapped in a WAV container with appropriate byte ordering. No audio re-encoding occurs." },
-    ],
-    faqs: [
-      { question: "Is AIFF to WAV a lossless conversion?", answer: "Yes. AIFF and WAV both store PCM audio data. The conversion only changes the container header and byte ordering — the samples are untouched." },
-      { question: "Why convert AIFF to WAV?", answer: "WAV has broader support on Windows, in broadcast environments, and in many audio editors (Audacity, Adobe Audition) that prefer WAV." },
-      { question: "Does file size change between AIFF and WAV?", answer: "WAV files are typically 1-3% smaller than equivalent AIFF due to different header structure and no byte-swap overhead." },
-    ],
   },
   {
     id: "489",
@@ -1825,16 +830,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to FLAC — Convert AIFF audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Load AIFF Audio", desc: "Select your uncompressed AIFF file. AIFF and FLAC both contain PCM audio — FLAC adds lossless compression to reduce file size." },
-      { title: "2. Set FLAC Compression", desc: "Compression level 0 (fast) to 8 (smallest). AIFF-to-FLAC reduces storage by 40-60% without any quality loss." },
-      { title: "3. Compress Losslessly", desc: "Your AIFF is encoded to FLAC. The FLAC file decodes to bit-identical PCM as the original AIFF. Metadata transfers from AIFF to FLAC." },
-    ],
-    faqs: [
-      { question: "Is there any quality difference between AIFF and FLAC?", answer: "No. FLAC is a lossless codec — decoding produces PCM identical to the original AIFF. The difference is only container format and file size." },
-      { question: "Does FLAC support AIFF's sample rates?", answer: "Yes. FLAC supports up to 1,048,570 Hz sample rate and up to 32-bit depth, covering all AIFF formats including DSD and hi-res audio." },
-      { question: "Which is more compatible: AIFF or FLAC?", answer: "FLAC has broader hardware support (network players, DAPs, car stereos). AIFF has better support in Apple's ecosystem and Pro Tools." },
-    ],
   },
   {
     id: "490",
@@ -1845,16 +840,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Upload AIFF File", desc: "Select your uncompressed AIFF audio. Converting to OGG is common for open-source projects requiring smaller file sizes." },
-      { title: "2. Set Vorbis Encoding", desc: "Quality level 5 (~160 kbps) for transparent music from 16-bit AIFF. Level 3 (~112 kbps) for acceptable quality with smaller files." },
-      { title: "3. Encode to Open Format", desc: "Your AIFF is encoded to OGG Vorbis — a patent-free audio format. The Vorbis file is an order of magnitude smaller than the AIFF source." },
-    ],
-    faqs: [
-      { question: "Does Vorbis from AIFF sound identical to the original?", answer: "For transparent settings (level 5+), Vorbis is audibly indistinguishable from AIFF on most playback systems. Differences may appear on high-end monitoring gear." },
-      { question: "Can I use 24-bit AIFF as source for Vorbis?", answer: "Yes. Vorbis supports input up to 24-bit. The encoder handles the full dynamic range of 24-bit sources for high-resolution audio encoding." },
-      { question: "Is OGG a good archival format?", answer: "No. OGG Vorbis is lossy. For archiving, keep the original AIFF or convert to FLAC. Use OGG only for delivery and portable playback." },
-    ],
   },
   {
     id: "491",
@@ -1865,16 +850,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick AIFF Source", desc: "Select an AIFF audio file. AIFF is standard in Mac production — converting to M4A prepares audio for Apple device playback." },
-      { title: "2. Select M4A Codec", desc: "Choose AAC (lossy, small size) or ALAC (lossless, larger). AAC at 256 kbps is recommended for portable listening; ALAC for archival." },
-      { title: "3. Encode for Apple Ecosystem", desc: "Your AIFF is encoded to M4A with your chosen codec. The M4A file is ready for iTunes, Apple Music, AirDrop, and iOS devices." },
-    ],
-    faqs: [
-      { question: "Can I embed AIFF metadata in M4A?", answer: "AIFF metadata (Name, Author, Copyright chunks) is mapped to M4A metadata atoms during conversion. Some format-specific metadata may not transfer." },
-      { question: "Does M4A support AIFF's 32-bit float?", answer: "AAC in M4A does not support 32-bit float. ALAC in M4A supports up to 32-bit integer. Float sources must be dithered to integer during conversion." },
-      { question: "Why convert AIFF to M4A instead of keeping AIFF?", answer: "M4A is 5-10x smaller, supports embedded artwork and chapter markers, and is the native format for Apple Music and iOS." },
-    ],
   },
   {
     id: "492",
@@ -1885,16 +860,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to AAC — Convert AIFF audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select AIFF Source", desc: "Choose an AIFF audio file. AIFF is uncompressed — encoding to AAC from AIFF produces first-generation AAC with optimal quality." },
-      { title: "2. Choose AAC Target", desc: "128 kbps (standard), 192 kbps (good), or 256 kbps (excellent). Since AIFF is uncompressed PCM, this is a single-pass lossy encode." },
-      { title: "3. Compress for Devices", desc: "Your AIFF is encoded to AAC. The AAC file takes 80-90% less space while retaining near-identical quality for portable listening." },
-    ],
-    faqs: [
-      { question: "Should I keep the AIFF after converting to AAC?", answer: "Yes. AIFF is your lossless master. If a better codec emerges in the future, you can re-encode from AIFF without the quality loss of re-encoding from AAC." },
-      { question: "Does AAC match AIFF quality for mastering?", answer: "No. AAC is lossy and not suitable for audio mastering. Always use the AIFF or another uncompressed format for final production decisions." },
-      { question: "What is the bitrate sweet spot for AAC from AIFF?", answer: "256 kbps AAC-LC is considered transparent — most listeners cannot distinguish it from the AIFF source. Higher bitrates offer diminishing returns." },
-    ],
   },
   {
     id: "493",
@@ -1905,16 +870,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to WMA — Convert AIFF audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Pick AIFF Source", desc: "Select your AIFF audio file. Converting to WMA helps integrate Mac-produced audio into Windows-based media systems and corporate applications." },
-      { title: "2. Set WMA Quality", desc: "Choose 128 kbps (adequate for speech), 160 kbps (good), or 192 kbps (high quality). WMA Pro recommended for higher fidelity from 24-bit AIFF sources." },
-      { title: "3. Encode for Windows", desc: "Your AIFF is encoded to WMA for native playback in Windows Media Player, Windows Phone, and Xbox consoles." },
-    ],
-    faqs: [
-      { question: "Is AIFF to WMA a common workflow?", answer: "No, it is uncommon. Most users working with AIFF stay in the Apple ecosystem. This workflow exists for cross-platform asset delivery or corporate requirements." },
-      { question: "Does WMA preserve AIFF's high sample rates?", answer: "WMA Standard supports up to 48 kHz. WMA Pro supports up to 96 kHz. AIFF sources above these rates are downsampled." },
-      { question: "Can I play the resulting WMA on a Mac?", answer: "macOS does not include WMA codecs. Install VLC or a WMA codec pack for macOS playback." },
-    ],
   },
   {
     id: "494",
@@ -1925,16 +880,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
-    instructions: [
-      { title: "1. Select AIFF Source", desc: "Choose your uncompressed AIFF file. Opus from AIFF produces the highest quality Opus encode possible for your audio." },
-      { title: "2. Set Opus Quality", desc: "96 kbps for excellent quality from 16-bit AIFF, 128 kbps for transparent quality, 160 kbps for 24-bit AIFF source preservation." },
-      { title: "3. Encode to Opus", desc: "Your AIFF is encoded to the most efficient lossy codec. Opus achieves 10-15x compression from AIFF with minimal quality loss." },
-    ],
-    faqs: [
-      { question: "Is Opus from AIFF better than Opus from AAC?", answer: "Yes. Opus from AIFF is first-generation from lossless PCM. Opus from AAC would compound AAC and Opus artifacts." },
-      { question: "What Opus bitrate preserves 192 kHz AIFF?", answer: "For 192 kHz content, use 160 kbps or higher Opus to capture ultrasonics. Note that most playback systems cannot reproduce >24 kHz content." },
-      { question: "Does Opus support AIFF channel configurations?", answer: "Opus supports up to 255 channels including various surround configurations. AIFF multi-channel content maps correctly during conversion." },
-    ],
   },
   {
 
@@ -1945,34 +890,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Hex or ASCII Text",
-                "desc": "Type hex bytes (with or without spaces, e.g., 48 65 6C or 48656C) or ASCII text. The tool auto-detects which format you entered."
-          },
-          {
-                "title": "2. Choose Conversion Direction",
-                "desc": "Click Hex to ASCII to decode hex bytes to their character representation, or ASCII to Hex to encode text as hexadecimal byte values."
-          },
-          {
-                "title": "3. View Detailed Breakdown",
-                "desc": "The tool shows each hex byte paired with its ASCII character, decimal value, and binary representation in a comprehensive table."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between hex to ASCII and hex to text conversion?",
-                "answer": "Hex to ASCII interprets each hex byte as an ASCII character code (00–7F for standard ASCII). The same operation is commonly referred to as hex to text since ASCII covers the standard English character set."
-          },
-          {
-                "question": "How does the tool handle hex strings with spaces, colons, or no separators?",
-                "answer": "It accepts hex strings with no delimiters (48656C6C6F), spaces (48 65 6C 6C 6F), colons (48:65:6C:6C:6F), or dashes (48-65-6C-6C-6F). The tool normalizes all formats before conversion."
-          },
-          {
-                "question": "Can the converter handle non-printable ASCII characters and control codes?",
-                "answer": "Yes, the tool displays non-printable bytes (00–1F, 7F) as their control code names (NUL, SOH, STX, etc.) and shows the Unicode replacement character U+FFFD for invalid byte sequences."
-          }
-    ]
 },
   {
 
@@ -1983,34 +900,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste a full URL, URL component, or plain text that needs URL encoding or decoding according to RFC 3986 URI specification standards for web development."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Select encode mode to convert special characters to percent-encoded sequences or decode mode to convert percent-encoded strings back to original characters."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Apply the encoding or decoding operation and review the original versus converted values side by side with specific changes highlighted for clarity."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between URL encoding and URL component encoding in the tool?",
-                "answer": "Full URL encoding encodes the entire URL including colons and slashes making it unusable. Component encoding only encodes characters invalid in a specific URL component."
-          },
-          {
-                "question": "Which characters are always encoded in URL percent-encoding according to RFC 3986 rules?",
-                "answer": "Reserved characters like colon and slash and question mark and hash are encoded. Spaces become percent-encoded sequences or plus signs in form context."
-          },
-          {
-                "question": "How does the tool handle Unicode and non-ASCII characters during URL encoding operations?",
-                "answer": "Non-ASCII characters including Unicode are first encoded as UTF-8 bytes then each byte is percent-encoded. The tool shows the intermediate UTF-8 byte sequence."
-          }
-    ]
 },
   {
 
@@ -2022,34 +911,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online HTML Entity Encoder Decoder — Encode special HTML characters into entities or decode them back to readable text. ',
     dependencies: "None",
     showInCategory: false,
-    instructions: [
-          {
-                "title": "1. Enter HTML Content",
-                "desc": "Paste HTML content, plain text with special characters, or a specific string that needs HTML entity encoding or decoding."
-          },
-          {
-                "title": "2. Choose Encoding Direction",
-                "desc": "Select Encode to convert special characters to HTML entities (&amp;, &lt;, &gt;, &quot;, &#39;), or Decode to convert entities back to their character equivalents."
-          },
-          {
-                "title": "3. Select Entity Format",
-                "desc": "Choose between named entities (&amp;) for common characters, decimal numeric entities (&#38;) for broader compatibility, or hex numeric entities (&#x26;) for Unicode characters."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Which special characters are automatically encoded when converting to HTML entities?",
-                "answer": "The five essential XML/HTML entities: & (&amp;), < (&lt;), > (&gt;), \" (&quot;), and ' (&#39; or &apos;). Additionally, non-ASCII and Unicode characters can be encoded as numeric entities for broader compatibility."
-          },
-          {
-                "question": "How does the tool handle encoding of Unicode characters outside the Latin-1 range?",
-                "answer": "Characters above U+00A0 can be encoded as named entities (if available, e.g., &euro; for €) or as numeric entities (&#8364; or &#x20AC;). The tool also offers a mode where only the 5 required characters are encoded."
-          },
-          {
-                "question": "What is the difference between &amp; and &#38; in HTML and when should each be used?",
-                "answer": "Both represent the same character (&). Named entities (&amp;) are human-readable and preferred for common characters. Numeric entities (&#38;) work in contexts where named entity support is limited, like XML without DTD."
-          }
-    ]
 },
   {
 
@@ -2061,34 +922,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
     showInCategory: false,
-    instructions: [
-          {
-                "title": "1. Enter Text to Escape or Unescape",
-                "desc": "Paste the string you want to escape or unescape. The tool processes special characters like newlines, tabs, quotes, and Unicode characters."
-          },
-          {
-                "title": "2. Select Escape Context",
-                "desc": "Choose the target context: JavaScript string, JSON string, Python string, C string, SQL string, or generic backslash escaping for shell commands."
-          },
-          {
-                "title": "3. Choose Direction and Process",
-                "desc": "Toggle between Escape (add backslashes) and Unescape (remove backslashes). Copy the result for use in your code."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What special characters does the backslash escape tool handle for JavaScript strings?",
-                "answer": "It escapes: single quote (\\'), double quote (\\\"), backslash (\\\\), newline (\\n), carriage return (\\r), tab (\\t), form feed (\\f), backspace (\\b), and Unicode characters above U+FFFF using \\u{XXXXX} syntax."
-          },
-          {
-                "question": "How does escaping differ between JavaScript strings and JSON strings?",
-                "answer": "JSON strings require escaping of double quotes and backslashes, but not single quotes. JavaScript strings additionally escape single quotes and recognize \\v (vertical tab) and \\0 (null character). The tool adjusts per context."
-          },
-          {
-                "question": "Can the tool escape text for use in SQL query literals?",
-                "answer": "Yes, SQL mode escapes single quotes by doubling them ('' instead of ') per ANSI SQL standard, and handles backslash escaping for MySQL where \\' is used. Note: always prefer parameterized queries over manual escaping."
-          }
-    ]
 },
   {
 
@@ -2099,34 +932,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).',
     seoDescription: 'Free online Random String Generator — Generate cryptographically secure random strings with customizable length, count, and character sets. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Select Character Pool",
-                "desc": "Toggle character types on or off — uppercase letters, lowercase letters, digits, and special symbols. At least one type must be selected before generation."
-          },
-          {
-                "title": "2. Set String Length",
-                "desc": "Drag the slider or type a value between 1 and 256 characters. Longer strings are exponentially more unique and suitable for API keys or tokens."
-          },
-          {
-                "title": "3. Generate and Copy",
-                "desc": "Press the generate button to produce a random string from your chosen pool. Click the copy icon next to the output to copy it to your clipboard instantly."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I exclude ambiguous characters like O, 0, I, and l?",
-                "answer": "Yes, toggle the ambiguous characters filter to exclude characters that look similar across different fonts. This is useful for human-readable codes."
-          },
-          {
-                "question": "Does this generator guarantee unique strings on every call?",
-                "answer": "No, uniqueness is probabilistic. Each character is chosen independently so collisions are possible, though astronomically unlikely at 256 characters with a full pool."
-          },
-          {
-                "question": "Can I generate multiple strings at once like a bulk operation?",
-                "answer": "No, this tool generates one string at a time. For bulk string generation, click generate repeatedly or use a dedicated bulk password generator."
-          }
-    ]
 },
   {
 
@@ -2137,34 +942,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
     seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Type a numeric value in any supported base format including decimal, binary, octal, hexadecimal, or base-32 and base-64 for compact number representations."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Specify the input base from 2 to 64 and the target output base. The tool supports conversion between any two bases with arbitrary precision handling."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "View the number displayed in all common bases simultaneously. Additional representations include ASCII interpretation and IEEE 754 float or double decoding."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What number bases does the converter support for conversion between numbering systems?",
-                "answer": "It supports base-2 binary through base-64 with all standard bases including 8 octal, 10 decimal, 16 hexadecimal, 32 Crockford, and 64 with custom character sets."
-          },
-          {
-                "question": "How does the tool handle very large numbers that exceed JavaScript safe integer range?",
-                "answer": "Numbers beyond the maximum safe integer are handled using BigInt for arbitrary precision integer conversion. Floating-point conversion uses string-based algorithms for exact representation."
-          },
-          {
-                "question": "Can the converter display the number in IEEE 754 single and double precision binary formats?",
-                "answer": "Yes, for decimal inputs the tool shows the IEEE 754 binary representation including 32-bit float and 64-bit double with sign exponent and mantissa breakdown."
-          }
-    ]
 },
   {
 
@@ -2175,34 +952,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
     seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Paste Your Data",
-                "desc": "Copy and paste lines of text into the input area. Each line is treated as a separate entry. The tool accepts up to 50,000 rows."
-          },
-          {
-                "title": "2. Choose Sort Options",
-                "desc": "Select sort direction (A-Z or Z-A), case sensitivity (sensitive by default), and whether to trim whitespace before sorting."
-          },
-          {
-                "title": "3. Enable Deduplication",
-                "desc": "Toggle the deduplicate switch to remove exact duplicate lines. After deduplication, a count shows how many duplicates were removed."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I sort by numeric value instead of alphabetically?",
-                "answer": "Yes, toggle to numeric sort mode. Lines are parsed as numbers and sorted by value. Non-numeric lines are gathered at the top or bottom based on the sort direction."
-          },
-          {
-                "question": "How does the tool handle empty lines during sorting?",
-                "answer": "Empty lines are moved to the end of the sorted output regardless of sort direction. You can check an option to strip all empty lines from the result."
-          },
-          {
-                "question": "Can I sort lines by length instead of content?",
-                "answer": "Yes, choose the 'by length' sort mode. Lines are sorted from shortest to longest or vice versa, with ties broken alphabetically."
-          }
-    ]
 },
   {
 
@@ -2213,34 +962,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
     seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste any valid URL including protocol, hostname, port, path, query string, fragment hash, and authentication credentials for complete component parsing."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Parse the URL to extract and display all components such as protocol, hostname, port, pathname, search, hash, username, and password in a structured table."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "View each URL component with its decoded value in a structured table. Individual components can be copied separately for use in your code or debugging tasks."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What URL components does the parser extract from a given URL string or address?",
-                "answer": "It extracts protocol, hostname, port, pathname, search or query string, hash or fragment, origin, username, password, and the full href for complete component analysis."
-          },
-          {
-                "question": "How does the parser handle URLs with internationalized domain names containing Unicode characters?",
-                "answer": "IDN domains are shown in both Unicode form and Punycode-encoded form. The parser validates the IDN and shows conversion details for each method."
-          },
-          {
-                "question": "Can the tool parse and decode query string parameters into a structured key-value table?",
-                "answer": "Yes, the query string is parsed into a table showing each parameter name, its decoded value, and whether it appears multiple times with duplicate keys grouped."
-          }
-    ]
 },
   {
 
@@ -2251,34 +972,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
     seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter String",
-                "desc": "Type or paste any string into the input field."
-          },
-          {
-                "title": "2. View Inspection Results",
-                "desc": "The tool displays: length, character count, word count, line count, byte size (UTF-8, UTF-16), and character composition."
-          },
-          {
-                "title": "3. Review Unicode Details",
-                "desc": "See each character's code point, hex representation, Unicode category, and any combining characters."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What Unicode properties does the string inspector reveal?",
-                "answer": "It shows: code points (U+XXXX), UTF-8/UTF-16/UTF-32 byte representations, Unicode block, general category (L, N, P, S, etc.), and bidirectional class."
-          },
-          {
-                "question": "Does the tool detect zero-width characters or hidden Unicode?",
-                "answer": "Yes, it flags zero-width characters (U+200B, U+200C), bidirectional override characters (U+202E), and other invisible Unicode characters that can be used for homograph attacks."
-          },
-          {
-                "question": "Can the inspector find duplicate characters or analyze character frequency?",
-                "answer": "Yes, it generates a character frequency histogram showing how often each character appears, sorted by frequency."
-          }
-    ]
 },
   {
     id: "504",
@@ -2298,34 +991,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
     seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Paste or Upload Your Code",
-                "desc": "Copy your messy, minified, or poorly indented source code and paste it into the editor area, or upload a file directly from your computer to begin the beautification process."
-          },
-          {
-                "title": "2. Select Language and Indentation",
-                "desc": "Choose the appropriate programming language from the dropdown menu and configure your preferred indentation style using spaces or tabs with custom width settings."
-          },
-          {
-                "title": "3. Click Beautify and Export Result",
-                "desc": "Press the beautify button to instantly reformat your code with proper spacing and line breaks, then copy the cleaned output or download it as a new file."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Does the code beautifier change the logic of my code?",
-                "answer": "No, the beautifier only modifies whitespace, indentation, and line breaks to improve readability. It never alters variable names, function logic, control flow, or any functional part of your source code."
-          },
-          {
-                "question": "Can I customize the indentation style for different languages?",
-                "answer": "Yes, you can configure indentation size from 1 to 8 spaces, choose between tabs and spaces, and select language-specific formatting rules before running the beautifier."
-          },
-          {
-                "question": "Is my source code stored on your servers after beautification?",
-                "answer": "All code processing happens entirely in your browser using client-side JavaScript. Your source code is never transmitted to or stored on any server, ensuring complete privacy and security."
-          }
-    ]
 },
   {
 
@@ -2336,34 +1001,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Converts HTML files to JSX format — web pages, email templates, and content rendering to React component definitions and UI rendering. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste any HTML markup including standard elements, attributes, inline styles, and nested structures that need conversion to JSX syntax for use in React application components."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Configure conversion options such as className versus class, htmlFor versus for, camelCase style attributes, and whether to wrap the output in a functional component template."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Run the conversion to transform HTML into JSX syntax with proper React attribute names and event handlers. Copy the resulting JSX for direct use in your React components."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What HTML attribute transformations are performed when converting to React JSX syntax?",
-                "answer": "Class becomes className, for becomes htmlFor, tabindex becomes tabIndex, style strings become JavaScript objects, and various SVG attributes are converted to their camelCase equivalents."
-          },
-          {
-                "question": "How does the converter handle inline CSS styles during the HTML to JSX conversion process?",
-                "answer": "Inline style strings are parsed and converted to camelCase JavaScript objects. Background-color becomes backgroundColor and font-size becomes fontSize with appropriate value handling."
-          },
-          {
-                "question": "Can the tool convert SVG elements embedded in HTML to proper JSX SVG syntax format?",
-                "answer": "Yes, SVG attributes such as stroke-width becoming strokeWidth and fill-rule becoming fillRule are handled appropriately for inline SVGs within JSX components."
-          }
-    ]
 },
   {
 
@@ -2374,34 +1011,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
     seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Select PHP Tool Mode",
-                "desc": "Choose from: PHP syntax checker, serialize/unserialize, base64 encode/decode, or var_dump formatter."
-          },
-          {
-                "title": "2. Enter PHP Code or Data",
-                "desc": "Paste your PHP code, serialized string, or data depending on the selected mode."
-          },
-          {
-                "title": "3. Process and View Output",
-                "desc": "The tool processes the input and shows the result with syntax highlighting."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What PHP tools are included in this utility pack?",
-                "answer": "PHP syntax linting (parse error detection), serialization format converter, base64 PHP-style encoding (base64_encode/base64_decode), and pretty-print for var_dump output."
-          },
-          {
-                "question": "How does the PHP serialization tool work?",
-                "answer": "It parses PHP serialized strings (a:3:{i:0;s:4:\"test\";...}) and converts them to readable JSON. It also generates PHP serialization from JSON input."
-          },
-          {
-                "question": "Does the syntax checker validate against specific PHP versions?",
-                "answer": "Yes, select PHP 7.4, 8.0, 8.1, 8.2, or 8.3. Each version checks for version-specific syntax (named arguments, readonly properties, enums)."
-          }
-    ]
 },
   {
 
@@ -2412,34 +1021,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste SVG markup including paths, shapes, groups, gradients, patterns, filters, text elements, and transformations that need conversion to CSS properties."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Choose the output format such as CSS background-image as data URI or individual CSS properties from SVG attributes. Toggle base64 encoding versus UTF-8 inline SVG."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Generate the CSS code as a complete declaration block ready for your stylesheet. The output can be used as a background, mask, or clip-path in your web project."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the advantage of converting SVG to CSS data URI versus linking a separate SVG file?",
-                "answer": "Inline data URIs eliminate HTTP requests and work in CSS backgrounds without file path management. However they increase CSS file size by about 33 percent due to base64 encoding."
-          },
-          {
-                "question": "How does the tool handle SVG gradients and filters during the CSS conversion process?",
-                "answer": "SVG gradients are preserved within the inline SVG data URI. CSS-only linear gradient conversion is available for simple two-stop color gradients lacking complex features."
-          },
-          {
-                "question": "Can the converter extract individual SVG path data for use as CSS clip-path shapes?",
-                "answer": "Yes, individual SVG paths can be extracted and converted to CSS clip-path path format. The tool validates that the path is a single continuous shape suitable for clipping."
-          }
-    ]
 },
   {
 
@@ -2450,34 +1031,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste a curl command including flags like X, H, d, F, b, u, and data or header options from any operating system or API documentation for code generation."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Choose the target programming language and HTTP library for the output such as JavaScript fetch, Python requests, Go net/http, or Java OkHttp."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Convert the curl command to equivalent code in the target language. The output includes proper imports, error handling, and async patterns where appropriate for production use."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the converter handle complex curl features like data-binary and form and cookie-jar?",
-                "answer": "Data-binary becomes raw body with binary encoding, form becomes multipart form data construction, and cookie-jar becomes cookie store setup with appropriate functionality."
-          },
-          {
-                "question": "Can the tool generate both synchronous and asynchronous versions of the HTTP call?",
-                "answer": "Yes, toggle between sync and async output. JavaScript supports async fetch versus synchronous XMLHttpRequest and Python supports httpx sync versus async modes."
-          },
-          {
-                "question": "Does the generated code include proper error handling and status code checking logic?",
-                "answer": "Yes, the output includes try-catch blocks, HTTP status validation checking for 2xx responses and throwing on 4xx and 5xx, and connection timeout handling."
-          }
-    ]
 },
   {
     id: "510",
@@ -2487,16 +1040,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Paste JSON", desc: "Enter a JSON object to generate code from." },
-      { title: "2. Select Language", desc: "Choose your target language: TypeScript, Python, Go, Rust, Java, or C#." },
-      { title: "3. Copy Generated Code", desc: "Copy the type definitions or struct code generated from the JSON structure." },
-    ],
-    faqs: [
-      { question: "What languages are supported?", answer: "TypeScript interfaces, Python dataclasses, Go structs, Rust structs, Java classes, and C# records." },
-      { question: "How are nested objects handled?", answer: "Nested objects generate separate type definitions or nested classes depending on the target language." },
-      { question: "Can I customize naming conventions?", answer: "Yes. Choose camelCase, PascalCase, or snake_case for the generated type names." },
-    ],
   },
   {
 
@@ -2507,34 +1050,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
     seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste any JWT token string with the three-part base64url-encoded header, payload, and signature sections separated by dots for inspection and debugging."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "The tool automatically decodes the header and payload displaying them as formatted JSON with syntax highlighting and field-by-field inspection capabilities."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Check token validity including expiration time, not-before time, issuer match, and audience match. Optionally verify the HMAC or RSA signature with your key."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What JWT validation checks does the debugger perform on decoded tokens for security?",
-                "answer": "It checks token structure with three segments, valid base64url encoding, expiration against current time, not-before time, issued-at chronology, and algorithm awareness."
-          },
-          {
-                "question": "How does the tool help debug common JWT issues like expired or malformed tokens?",
-                "answer": "Each validation check has a clear pass or fail or error status. Expired tokens show the exact expiration time and malformed segments show the parsing error position."
-          },
-          {
-                "question": "Can the debugger extract and display nested JSON objects within JWT claims for inspection?",
-                "answer": "Yes, nested claims within the payload are rendered as expandable and collapsible JSON trees. Complex claim structures are fully navigable for deep inspection."
-          }
-    ]
 },
   {
 
@@ -2545,34 +1060,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste any HTML document or fragment including inline CSS and JavaScript. The tool supports HTML5 with canvas, SVG, WebGL, and modern JavaScript APIs for preview."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Set viewport size for desktop, tablet, or mobile preview. Enable responsive mode and toggle dark or light theme simulation for accurate rendering previews."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Preview the rendered HTML in a sandboxed iframe. Interactive elements like forms, buttons, links, and JavaScript all behave as in a real browser environment."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the HTML preview render JavaScript-heavy pages and single-page applications?",
-                "answer": "JavaScript is fully executed in the sandboxed iframe including DOM manipulation, fetch requests, and ES modules. The preview updates in real-time as you edit the source code."
-          },
-          {
-                "question": "Is the preview sandboxed to prevent security risks from untrusted HTML content loading?",
-                "answer": "Yes, the preview loads in a sandboxed iframe with restricted permissions including no form submission to external sites and no access to the parent page origin."
-          },
-          {
-                "question": "Can the tool highlight corresponding source code when an element is hovered in preview?",
-                "answer": "Yes, the inspector mode links the preview and source editor. Clicking an element in the preview scrolls the source to the corresponding HTML for debugging layout issues."
-          }
-    ]
 },
   {
 
@@ -2583,34 +1070,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
     seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Type a standard five-field or six-field cron expression with standard operators including ranges, steps, list values, and special time strings for parsing."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Parse the cron expression to get a human-readable description explaining when the schedule runs and what each field contributes to the overall timing."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Generate the next scheduled execution times based on the cron expression. Verify the schedule accuracy by reviewing the exact dates and times of upcoming runs."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What cron expression syntax features does the parser support for complex schedule definitions?",
-                "answer": "It supports all standard operators including ranges, steps, and lists. Month and weekday names such as JAN or SUN are supported along with special shortcuts like yearly."
-          },
-          {
-                "question": "How does the parser handle non-standard cron features like L for last and W for weekday?",
-                "answer": "L for last day or month or weekday is supported in extended mode. W for nearest weekday is also supported as Quartz-specific extensions for Java scheduling."
-          },
-          {
-                "question": "Can the tool detect invalid or impossible cron expressions and suggest corrections for them?",
-                "answer": "Yes, it validates that field values are within allowed ranges, detects impossible dates like February 30, and flags expressions that would rarely or never execute."
-          }
-    ]
 },
   {
 
@@ -2622,34 +1081,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. ',
     dependencies: "None",
     showInCategory: false,
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Choose from available cryptographic operations such as hash generation, HMAC computation, random byte generation, key derivation, or entropy estimation."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Select the specific algorithm, key size, iteration count, output encoding format, and additional parameters like salt or initialization vector for the operation."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Execute the cryptographic operation in-browser using the Web Crypto API. Copy the result in your preferred encoding format for use in your application or system."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What cryptographic algorithms are available in the crypto kit toolkit for developers?",
-                "answer": "It includes SHA-256 and SHA-384 and SHA-512, HMAC with all SHA variants, PBKDF2 with adjustable iterations, Argon2id via WASM, AES encryption, HKDF key derivation, and random generation."
-          },
-          {
-                "question": "How does the tool ensure cryptographic operations are performed securely in the browser?",
-                "answer": "All operations use the Web Crypto API which is backed by the operating system's cryptographic primitives. Key material and plaintext never leave the browser environment."
-          },
-          {
-                "question": "Can the tool be used to generate cryptographically secure random passwords and tokens?",
-                "answer": "Yes, the random generation module uses crypto.getRandomValues to produce secure random bytes suitable for generating API keys, session tokens, and initialization vectors."
-          }
-    ]
 },
   {
     id: "515",
@@ -2659,16 +1090,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
     seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Paste TOML or JSON", desc: "Enter TOML to convert to JSON, or JSON to convert to TOML." },
-      { title: "2. Auto-Convert", desc: "The tool detects the input format and converts to the other." },
-      { title: "3. Copy Output", desc: "Copy the converted result for your project." },
-    ],
-    faqs: [
-      { question: "Are TOML inline tables supported?", answer: "Yes. Inline tables in TOML are converted to nested JSON objects and vice versa." },
-      { question: "How are TOML dates handled?", answer: "TOML datetimes are converted to ISO 8601 strings in JSON output." },
-      { question: "Is the conversion bidirectional?", answer: "Yes. The tool converts both TOML-to-JSON and JSON-to-TOML in a single interface." },
-    ],
   },
   {
 
@@ -2679,34 +1100,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
     seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Type the full URL of the website you want to inspect. The tool fetches the page and analyzes its HTML structure, CSS, JavaScript, and network resources used."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Review a comprehensive page analysis including title, meta tags, Open Graph tags, headings structure, links count, and images with or without alt text."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Examine technical details such as HTTP headers, HTML document outline, CSS class usage, JavaScript context, form elements, and accessibility landmarks on the page."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What technical information does the web inspector extract from a given website URL?",
-                "answer": "It extracts page metadata, heading structure for SEO analysis, broken links, images missing alt text, Open Graph and Twitter Card tags, HTTP status, and content type headers."
-          },
-          {
-                "question": "Can the inspector analyze the page SEO and accessibility compliance automatically for you?",
-                "answer": "Yes, it checks meta description presence and length, title tag length, heading hierarchy with single h1 and sequential order, alt text on images, and ARIA landmarks."
-          },
-          {
-                "question": "Does the tool detect third-party scripts and trackers and analytics services loaded by pages?",
-                "answer": "Yes, it identifies known third-party scripts such as Google Analytics and Facebook Pixel and CDN libraries showing their source URLs and categories."
-          }
-    ]
 },
   {
 
@@ -2718,34 +1111,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Text Converter & Obfuscator — NATO alphabet, ASCII binary, Unicode viewer, Roman numerals, and string obfuscation with leet, ROT13, Base64, and shuffle. ',
     dependencies: "None",
     showInCategory: false,
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste any text string into the input area. The tool supports Unicode characters including emoji, CJK characters, accented letters, and special symbols for conversion."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Choose from uppercase, lowercase, title case, sentence case, camelCase, snake_case, kebab-case, PascalCase, alternating case, or leetspeak transformation."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Convert the text to the selected case format. The result appears instantly with a visual comparison showing the original and transformed versions side by side."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What text case transformations does the text converter support for formatting strings?",
-                "answer": "It supports uppercase, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, PascalCase, Train-Case, dot.case, alternating case, and inverse case."
-          },
-          {
-                "question": "How does the tool handle special characters and acronyms during case conversion operations?",
-                "answer": "Acronyms in title case such as NASA and USA are preserved. Unicode characters maintain their case properties. Words with numbers are handled intelligently in conversions."
-          },
-          {
-                "question": "Can the tool perform bulk text transformations on multiple lines or a list of strings?",
-                "answer": "Yes, multi-line mode applies the conversion to each line independently for converting lists of variable names or database column names to a different convention."
-          }
-    ]
 },
   {
     id: "mt-1",
@@ -2755,16 +1120,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate travel time from distance and speed — with optional arrival time.',
     seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter Start Time", desc: "Input the departure or start time, then enter the total travel distance and average speed. The calculator estimates arrival time accounting for the distance and speed." },
-      { title: "2. Enter Distance and Speed", desc: "Input the distance to travel and average speed." },
-      { title: "3. Calculate ETA", desc: "View the estimated arrival time based on your inputs." },
-    ],
-    faqs: [
-      { question: "How is ETA calculated?", answer: "ETA = Start Time + (Distance / Speed). The calculation accounts for hours and minutes." },
-      { question: "Can I account for stops?", answer: "This calculator computes driving time only. Add rest stops and breaks separately." },
-      { question: "Does this account for traffic?", answer: "No. The calculator assumes constant speed. Actual arrival time may vary due to traffic and road conditions." },
-    ],
   },
   {
 
@@ -2775,34 +1130,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.',
     seoDescription: 'Free online YAML Re-indenter — Clean up messy YAML with proper indentation, aligned colons, and normalized list formatting. ',
     dependencies: "Vanilla JS",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste YAML data with inconsistent, mixed, or incorrect indentation. The tool accepts any YAML including mappings, sequences, multi-line strings, and complex nested structures."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Set the desired indentation width and use spaces only since tabs are not valid YAML indentation. Configure line wrapping options for long lines."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Reindent the YAML by parsing and regenerating it with consistent indentation. The tool also validates the YAML structure and reports any parsing errors found."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Why does YAML require consistent indentation and what happens when it is incorrect?",
-                "answer": "YAML uses indentation for structure so incorrect indentation changes meaning or causes parse failures. Common issues include mixing tabs and spaces and inconsistent nesting depth."
-          },
-          {
-                "question": "How does the reindenter handle YAML with anchors and aliases that reference different levels?",
-                "answer": "Anchors and aliases are preserved exactly. The reindenter parses the resolved YAML structure and regenerates the document maintaining correct references."
-          },
-          {
-                "question": "Can the tool convert YAML files between different indentation levels in bulk processing mode?",
-                "answer": "Yes, batch mode processes multiple YAML files converting all to the target indentation for consolidating YAML files from different sources into a consistent style."
-          }
-    ]
 },
   {
 
@@ -2813,34 +1140,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate QR codes for WiFi network credentials — scan to connect.',
     seoDescription: 'Free online WiFi QR Generator — Generate QR codes for WiFi network credentials to share with others. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Network Details",
-                "desc": "Type your WiFi network name (SSID), select the security protocol (WPA/WPA2/WPA3 or none), and enter the password. All fields are required for encrypted networks."
-          },
-          {
-                "title": "2. Choose Hidden Network",
-                "desc": "If your network does not broadcast its SSID, check the hidden network box. This adds the hidden flag to the encoded configuration."
-          },
-          {
-                "title": "3. Generate the QR Code",
-                "desc": "Click generate to create a QR code. When scanned by a phone camera, it prompts the user to connect to your WiFi without typing the password."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Which phones can scan WiFi QR codes natively?",
-                "answer": "iPhones (iOS 11+) can scan with the camera app. Android devices vary — Pixel phones and Samsung devices support it natively, others may need a third-party app."
-          },
-          {
-                "question": "Is the WiFi password securely hidden in the QR code?",
-                "answer": "No, the password is encoded as plaintext in the QR code's data string. Anyone who can scan the QR code can read the password."
-          },
-          {
-                "question": "Can I generate a QR code for an open (unencrypted) network?",
-                "answer": "Yes, set security to 'None'. The generated QR code will use the WEP format without a password, allowing direct connection to open networks."
-          }
-    ]
 },
   {
 
@@ -2851,34 +1150,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse and validate international phone numbers with country detection.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter a Phone Number",
-                "desc": "Type a phone number in any format — international (+1 415 555 0123), national (415-555-0123), or with special characters."
-          },
-          {
-                "title": "2. Select Country",
-                "desc": "Choose the country to use for parsing. The tool uses Google's libphonenumber library to analyze and validate the number."
-          },
-          {
-                "title": "3. View Parsed Components",
-                "desc": "The result shows country code, national significant number, area code, subscriber number, number type (mobile, fixed, toll-free), and formatted versions."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can this parser validate a phone number without knowing the country?",
-                "answer": "Yes, enable auto-detect to infer the country from the number's country code prefix. If the country code is ambiguous, the tool shows possible matches."
-          },
-          {
-                "question": "What phone number formats can the parser handle?",
-                "answer": "It handles E.164 international, national, RFC 3966 (tel: URI), and carrier-specific formats for 200+ countries and regions."
-          },
-          {
-                "question": "Does the tool check if a number is currently active or in service?",
-                "answer": "No, validation checks format correctness and number possibility only. It does not make calls or send messages to verify the number is in service."
-          }
-    ]
 },
   {
 
@@ -2889,34 +1160,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate one-time passwords with configurable length and character type. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OTP Generator — Generate one-time passwords with configurable length and character type. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Set OTP Length",
-                "desc": "Choose the number of digits for the OTP — typically 6 or 8 digits. Longer OTPs are harder to guess but harder for users to type."
-          },
-          {
-                "title": "2. Choose Character Type",
-                "desc": "Select digits only (most common for SMS OTPs) or alphanumeric (for backup codes). Alphanumeric codes include uppercase letters and digits."
-          },
-          {
-                "title": "3. Generate and Copy",
-                "desc": "Click generate to create a one-time password. Each generation produces a unique code. Copy it to send to the user or paste into your test flow."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does this differ from a time-based (TOTP) authenticator app?",
-                "answer": "This generates random static codes, not time-windowed codes. TOTP codes change every 30 seconds using a shared secret — this tool is for one-shot generation."
-          },
-          {
-                "question": "Can I generate multiple OTPs in bulk for testing?",
-                "answer": "Yes, set the quantity to generate up to 100 codes at once. Useful for populating test databases or creating backup code lists."
-          },
-          {
-                "question": "Are the generated OTPs cryptographically secure?",
-                "answer": "Yes, the generator uses window.crypto.getRandomValues which is suitable for authentication tokens. Each code is independent and unpredictable."
-          }
-    ]
 },
   {
 
@@ -2927,34 +1170,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Your Text",
-                "desc": "Type or paste any string — a blog post title, product name, or URL component. The input can include spaces, special characters, and mixed casing."
-          },
-          {
-                "title": "2. Configure Slug Options",
-                "desc": "Choose separator character (hyphen, underscore, or none), case style (lowercase only), and whether to strip common words like 'the', 'a', 'an'."
-          },
-          {
-                "title": "3. Copy the Slug",
-                "desc": "The generated slug appears in the output box. Click copy to use it in URLs, filenames, or content management system permalinks."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What characters are removed during slugification?",
-                "answer": "All non-alphanumeric characters except the chosen separator are removed, including punctuation, symbols, and spaces. Accented characters are converted to ASCII equivalents."
-          },
-          {
-                "question": "Can I slugify text with Unicode characters?",
-                "answer": "Yes, Unicode characters are preserved if they are alphanumeric. Non-Latin scripts like Cyrillic or Chinese characters remain in the slug as-is."
-          },
-          {
-                "question": "Does the tool handle very long text (entire articles)?",
-                "answer": "Yes, but slugs are best kept under 80 characters. The tool does not truncate automatically — you should trim input to the relevant key phrase."
-          }
-    ]
 },
   {
 
@@ -2965,34 +1180,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Choose Timestamp Mode",
-                "desc": "Select whether to use the current timestamp, a specific date, or a random timestamp. ULIDs encode time as the first 10 characters for sortability."
-          },
-          {
-                "title": "2. Set Generation Count",
-                "desc": "Specify how many ULIDs to generate — 1 for a single ID, or up to 100 for bulk. Each ULID is globally unique and time-sortable."
-          },
-          {
-                "title": "3. Copy as Array",
-                "desc": "Click the copy button to copy all generated ULIDs as a JavaScript array string, comma-separated list, or one per line for easy pasting into code."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What makes ULIDs different from UUIDs?",
-                "answer": "ULIDs are 26-character, Crockford-base32 encoded identifiers that are lexicographically sortable by time. They are shorter than UUIDs and preserve time ordering."
-          },
-          {
-                "question": "Can ULIDs be used as database primary keys?",
-                "answer": "Yes, their time-sortable nature makes them excellent for B-tree indexed database keys. They avoid fragmentation issues that random UUIDs cause."
-          },
-          {
-                "question": "Are ULIDs cryptographically secure?",
-                "answer": "The random component uses a cryptographically secure PRNG. However, the timestamp component is predictable, so ULIDs should not be used for security tokens."
-          }
-    ]
 },
   {
 
@@ -3003,34 +1190,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter a Word or Phrase",
-                "desc": "Type the text you want to convert into a numeronym. The generator works on single words and multi-word phrases."
-          },
-          {
-                "title": "2. Choose Numeronym Style",
-                "desc": "Select from i18n-style (first letter + count of middle letters + last letter, e.g., i18n), or first-letter style (like a11y, k8s)."
-          },
-          {
-                "title": "3. Generate and Preview",
-                "desc": "Click generate to produce the numeronym. The tool explains how the numeronym was derived by showing each component of the algorithm."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the i18n numeronym pattern?",
-                "answer": "i18n stands for 'internationalization' — A 14-character word abbreviated by taking the first letter 'i', counting the 14 middle letters, and appending the last letter 'n'."
-          },
-          {
-                "question": "Can I generate numeronyms for multiple words at once?",
-                "answer": "Yes, multi-word phrases are processed by concatenating the numeronyms of each word. For example, 'accessibility testing' might become 'a11y t7g'."
-          },
-          {
-                "question": "Does the tool work with numbers in the input text?",
-                "answer": "Yes, digits in the input are preserved. For example, 'HTML5' is treated based on its alphabetic characters while keeping the digit in the output."
-          }
-    ]
 },
   {
 
@@ -3041,34 +1200,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Look up device manufacturer from MAC address OUI prefix.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter a MAC Address",
-                "desc": "Type a MAC address in any common format — xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxxxxxxxxxx. The tool normalizes the input automatically."
-          },
-          {
-                "title": "2. Look Up Vendor",
-                "desc": "Click lookup to query the MAC address against the IEEE OUI database. The result displays the device manufacturer or organization that owns the OUI prefix."
-          },
-          {
-                "title": "3. View Additional Details",
-                "desc": "Results include the OUI registration date, address of the vendor, and whether the MAC is a public or private address."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is an OUI and how is it used?",
-                "answer": "OUI (Organizationally Unique Identifier) is the first 24 bits (3 bytes) of a MAC address assigned to a manufacturer. IEEE maintains the registry used by this tool."
-          },
-          {
-                "question": "Can I look up the full device model from a MAC address?",
-                "answer": "No, the OUI only identifies the manufacturer, not the specific device model. For example, you can identify Apple but not whether it's an iPhone or MacBook."
-          },
-          {
-                "question": "How often is the vendor database updated?",
-                "answer": "The database is updated monthly from the IEEE public OUI listing. The last update date is shown at the top of the results panel."
-          }
-    ]
 },
   {
 
@@ -3079,34 +1210,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.',
     seoDescription: 'Free online List Converter — Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters with auto-detect. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Paste Your List",
-                "desc": "Enter a list of items in the input area — one per line. The tool accepts plain text, numbered lists, or bullet-pointed lists."
-          },
-          {
-                "title": "2. Choose Output Format",
-                "desc": "Select from comma-separated, pipe-separated, tab-separated, JSON array, numbered list, bulleted list, or HTML unordered list format."
-          },
-          {
-                "title": "3. Copy and Use",
-                "desc": "Click copy to copy the converted list to your clipboard. Each format option shows a live preview so you can verify before copying."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I convert a JSON array back to a line-separated list?",
-                "answer": "Yes, paste a JSON array like ['a','b','c'] and select 'Line-separated' as the output format to reverse the conversion."
-          },
-          {
-                "question": "Does the tool handle quoted values with embedded commas?",
-                "answer": "Yes, if pasting a CSV or similar format, the parser respects double-quoted fields so commas within quotes are not treated as delimiters."
-          },
-          {
-                "question": "Can I convert between Markdown table and CSV?",
-                "answer": "No, the tool handles simple delimited lists. For CSV-to-table conversions, use the dedicated CSV Formatter or TSV-CSV Converter."
-          }
-    ]
 },
   {
 
@@ -3117,34 +1220,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
     seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Select Key Bit Length",
-                "desc": "Choose the RSA key size from 1024, 2048, 4096, or 8192 bits. 2048-bit is the current industry minimum for security; 4096-bit provides stronger security at slower generation and encryption speed."
-          },
-          {
-                "title": "2. Choose Output Format",
-                "desc": "Select PEM (base64-encoded with headers) or DER (binary ASN.1) format. PEM is human-readable and widely compatible with OpenSSL, SSH, and most programming languages."
-          },
-          {
-                "title": "3. Generate and Download Keys",
-                "desc": "Click Generate to create a public/private key pair. Download each key separately or copy them individually. Store the private key securely — it cannot be recovered if lost."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I protect the private key with a passphrase?",
-                "answer": "Yes, the tool supports optional AES-256 encryption of the private key using a passphrase. When enabled, the private key is wrapped in OpenSSL's ENCRYPTED PRIVATE KEY PEM format. You must provide the passphrase every time the private key is used. Without the passphrase, the encrypted key file is useless."
-          },
-          {
-                "question": "What is the difference between PKCS#1 and PKCS#8 key formats?",
-                "answer": "PKCS#1 is the older RSA-specific format (BEGIN RSA PRIVATE KEY), while PKCS#8 is a more flexible, standard container (BEGIN PRIVATE KEY) that stores key type, algorithm parameters, and the key material together. PKCS#8 is the modern recommended format and supports encryption at the container level. Most libraries accept both, but PKCS#8 is preferred for new applications."
-          },
-          {
-                "question": "How does the Java/.NET compatibility mode affect the output?",
-                "answer": "When enabled, the tool outputs the private key in PKCS#8 format (required by Java's KeyFactory and .NET's RSACryptoServiceProvider by default) and the public key as a SubjectPublicKeyInfo structure. Without this mode, keys use OpenSSL's traditional format which may require conversion before use in these frameworks."
-          }
-    ]
 },
   {
 
@@ -3155,34 +1230,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browse 400+ emojis organized by category with search and copy.',
     seoDescription: 'Free online Emoji Picker — Browse 400+ emojis organized by category with search and copy to clipboard. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Browse or Search Emojis",
-                "desc": "Scroll through categorized emoji groups (Smileys, People, Animals, Food, Travel, Symbols) or type a keyword like 'heart' or 'wave' to search."
-          },
-          {
-                "title": "2. Preview and Select",
-                "desc": "Hover over any emoji to see its official Unicode name and a larger preview. Click to select it and insert it into the text area at the bottom."
-          },
-          {
-                "title": "3. Copy Multiple Emojis",
-                "desc": "Build a selection of emojis in the text area. Click copy to copy all selected emojis to your clipboard at once for use in messages or social media."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How many emojis are included in the picker?",
-                "answer": "The picker includes over 3,600 emojis from the Unicode 15.0 standard, including skin tone variations, flags, and the newest emoji releases."
-          },
-          {
-                "question": "Can I use the emoji picker in any text field on the page?",
-                "answer": "No, emojis are copied to your clipboard. You cannot click to insert them directly into other applications — paste them manually after copying."
-          },
-          {
-                "question": "Does the picker support emoji modifiers like skin tones?",
-                "answer": "Yes, click and hold on emojis that support skin tone variations to select the desired tone. The modified emoji appears in the text area."
-          }
-    ]
 },
   {
 
@@ -3193,34 +1240,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to ASCII art with multiple font styles.',
     seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Upload or Type Text",
-                "desc": "Enter the text you want to convert into ASCII art. The generator supports letters, numbers, and basic punctuation for font rendering."
-          },
-          {
-                "title": "2. Choose a Font Style",
-                "desc": "Browse through available ASCII fonts — block, banner, bubble, digital, script, or slant. Each font uses a different character grid pattern."
-          },
-          {
-                "title": "3. Customize Width and Adjust",
-                "desc": "Set the output width in characters (10 to 200). Wider settings create more detailed art but take more space. Copy the result to paste into terminal comments or code."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I convert an image to ASCII art instead of text?",
-                "answer": "No, this tool generates ASCII art from text input only. For image-to-ASCII conversion, use a dedicated image processing tool or library."
-          },
-          {
-                "question": "What is the maximum font size I can generate?",
-                "answer": "The maximum output width is 200 characters. The height is automatically calculated based on the font's aspect ratio and the number of input characters."
-          },
-          {
-                "question": "Does the tool support multicolor ASCII art output?",
-                "answer": "No, the output is plain monochrome text. For colored terminal output, add ANSI escape codes manually after copying the ASCII art."
-          }
-    ]
 },
   {
 
@@ -3231,34 +1250,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.',
     seoDescription: 'Free online ASCII Font Generator — Generate large ASCII text banners with multiple font styles for terminal headers and text art. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Type Your Message",
-                "desc": "Enter the text you want to render in an ASCII font style. The generator works with letters A-Z, digits 0-9, and common punctuation."
-          },
-          {
-                "title": "2. Browse Font Gallery",
-                "desc": "Preview your text in over 30 different ASCII font styles. Each font uses a unique set of Unicode characters and line-drawing techniques."
-          },
-          {
-                "title": "3. Copy the Rendered Text",
-                "desc": "Once satisfied with a font, click copy to copy the rendered ASCII art text. You can also click a font name to lock it and then tweak individual characters."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between this and ASCII Art Generator?",
-                "answer": "The ASCII Font Generator renders text using Unicode box-drawing and block characters for richer output, while ASCII Art Generator uses plain ASCII characters."
-          },
-          {
-                "question": "Can I mix different fonts in a single message?",
-                "answer": "No, each generation uses one font for the entire message. To mix fonts, generate separate lines in different fonts and combine them manually."
-          },
-          {
-                "question": "Does the generator work with Chinese or other non-Latin scripts?",
-                "answer": "No, only Latin alphabet characters and digits are supported. Non-Latin characters may display as blank or placeholder characters in the output."
-          }
-    ]
 },
   {
 
@@ -3269,34 +1260,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.',
     seoDescription: 'Free online Browser Benchmark — Measure CPU performance with integer, float, array, string, and mixed workloads. All client-side. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Select Benchmark Type",
-                "desc": "Choose from CPU performance, array operations, mathematical calculations, or string processing. Each type runs a different set of timed tests."
-          },
-          {
-                "title": "2. Set Iterations",
-                "desc": "Define how many iterations each test runs — from 1,000 to 10 million. More iterations produce statistically significant results but take longer."
-          },
-          {
-                "title": "3. Run and Compare",
-                "desc": "Click start to run the benchmark. Results show operations per second, total time, and a comparison to baseline browser performance."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What does the CPU benchmark actually test?",
-                "answer": "It runs prime number calculation, matrix multiplication, and sorting algorithm tests timed with high-resolution performance.now() measurements."
-          },
-          {
-                "question": "How can I save benchmark results for comparison?",
-                "answer": "Click the save button to store the results in your browser's local storage. A history view lets you compare current results against past runs."
-          },
-          {
-                "question": "Does the benchmark affect browser performance during testing?",
-                "answer": "Yes, benchmarks are CPU-intensive. The browser may become unresponsive during the test. Results stabilize after the page is fully loaded and any background processes settle."
-          }
-    ]
 },
   {
     id: "527",
@@ -3307,16 +1270,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF to PNG — Convert PDF pages to PNG, WebP, or BMP images. Extract slides and graphics with customizable DPI and color modes. ',
     dependencies: "pdfjs-dist, jszip",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF file. PNG preserves transparency and sharp edges better than JPG for text-heavy pages." },
-      { title: "2. Set Resolution", desc: "Choose output DPI (72-600). 150 DPI is recommended for screen viewing. 300 DPI for print-ready images." },
-      { title: "3. Download PNGs", desc: "Download individual PNG files. Each PDF page becomes a separate high-quality PNG image." },
-    ],
-    faqs: [
-      { question: "Why use PNG over JPG for PDF conversion?", answer: "PNG supports lossless compression and transparency. Text and line art appear sharper in PNG than JPG at the same resolution." },
-      { question: "What is the file size compared to JPG?", answer: "PNG files are typically 2-5x larger than equivalent JPGs for photo-heavy pages. For text-only pages, the difference is smaller." },
-      { question: "Can I convert to monochrome PNG?", answer: "Yes. Select 'grayscale' or 'black and white' mode to reduce file size. Black and white PNGs are significantly smaller than color." },
-    ],
   },
   {
     id: "528",
@@ -3327,16 +1280,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Create PDF — Generate PDF documents from plain text, CSV tables, JSON data, or XML. Fully customizable with titles and table formatting. ',
     dependencies: "pdf-lib",
     showInCategory: true,
-    instructions: [
-      { title: "1. Choose Content Type", desc: "Select how to create your PDF: from a blank page, from uploaded images, or from pasted text content." },
-      { title: "2. Add Content", desc: "For images: upload and arrange files. For text: type or paste. For blank: set page size and orientation." },
-      { title: "3. Save as PDF", desc: "Your content is assembled into a clean PDF document. Download the result." },
-    ],
-    faqs: [
-      { question: "Can I mix images and text in one PDF?", answer: "Yes. Upload images and add text blocks on the same page for simple document creation without external software." },
-      { question: "What page sizes are available?", answer: "A4, A3, Letter, Legal, and custom dimensions. Orientation can be portrait or landscape." },
-      { question: "Can I rearrange pages after adding content?", answer: "Yes. Thumbnail view allows drag-and-drop reordering of pages before final export." },
-    ],
   },
   {
     id: "529",
@@ -3347,16 +1290,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Info & Analysis — View metadata, page dimensions, extract text, or export JSON from PDF. Document auditing and compliance tool. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF file to inspect its properties and technical details." },
-      { title: "2. View Document Info", desc: "See page count, file size, PDF version, encryption status, fonts used, images count, metadata, and more." },
-      { title: "3. Export Report", desc: "Download the PDF information as a text report or copy individual details to clipboard." },
-    ],
-    faqs: [
-      { question: "What technical details are shown?", answer: "PDF version, page dimensions, font list (embedded or not), image resolutions, color spaces, layer information, and interactive elements." },
-      { question: "Can I check if a PDF is PDF/A compliant?", answer: "Yes. The tool validates the PDF against PDF/A-1, PDF/A-2, and PDF/A-3 requirements and reports compliance status." },
-      { question: "Does this detect malicious PDFs?", answer: "The tool reports JavaScript usage, external references, and embedded files — indicators used in PDF-based attacks — but does not scan for malware." },
-    ],
   },
   {
     id: "530",
@@ -3367,16 +1300,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Cleanup — Remove annotations, strip metadata, delete blank pages, reverse page order, or sanitize PDFs. Combine operations in one pass. ',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF to clean up and optimize. The tool finds and removes unnecessary elements." },
-      { title: "2. Choose Cleanup Options", desc: "Select to remove: metadata, annotations, form fields, embedded files, JavaScript actions, alternate images, and orphaned objects." },
-      { title: "3. Download Cleaned PDF", desc: "Your PDF is optimized with unnecessary data removed. File size is reduced while visible content remains unchanged." },
-    ],
-    faqs: [
-      { question: "What is removed during cleanup?", answer: "Metadata (author, title, creator), hidden annotations, embedded search indexes, duplicate fonts, alternate image versions, and JavaScript actions." },
-      { question: "Is cleanup safe for document integrity?", answer: "Yes. All visible content, text, images, and page layout are preserved. Only hidden or unnecessary data structures are removed." },
-      { question: "How much size reduction can I expect?", answer: "5-30% reduction for typical PDFs. PDFs with heavy metadata, embedded files, or alternate images may see 40%+ reduction." },
-    ],
   },
   {
     id: "531b",
@@ -3386,16 +1309,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF to change or add a background color to." },
-      { title: "2. Choose Color", desc: "Pick a solid background color from the palette or enter a hex code (e.g., #FFF8E7 for warm white)." },
-      { title: "3. Apply & Download", desc: "The background color is applied to selected pages. Text and content remain fully visible over the new background." },
-    ],
-    faqs: [
-      { question: "Why change PDF background color?", answer: "Reduce eye strain with warm or sepia tones for extended reading. Brand documents may require specific background colors." },
-      { question: "Does this affect text readability?", answer: "No. Text and images render above the background. Choose a light background for dark text or dark background for light text." },
-      { question: "Can I apply different colors to different pages?", answer: "Batch apply is uniform. For multi-color backgrounds, process each page range separately." },
-    ],
   },
   {
     id: "531c",
@@ -3405,16 +1318,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position.',
     seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF to insert blank pages into." },
-      { title: "2. Choose Insert Points", desc: "Specify positions to add blank pages: after each page, before specific pages, or at the end of the document." },
-      { title: "3. Download Modified PDF", desc: "The PDF is updated with blank pages inserted at the chosen positions." },
-    ],
-    faqs: [
-      { question: "Why add blank pages?", answer: "Common reasons: duplex printing preparation (add blank page after odd-numbered end page), insert separator pages between chapters, or leave room for notes." },
-      { question: "Can I set the blank page size?", answer: "Yes. Choose the same size as the document or a custom size. Matching size is recommended for uniform document appearance." },
-      { question: "Can I add different blank pages to different positions?", answer: "Yes. Use 'insert after pages 1, 5, 10' to add blank pages at multiple specific positions." },
-    ],
   },
   {
     id: "950",
@@ -3424,16 +1327,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
     seoDescription: 'Free online PDF Bates Numbering — Add sequential Bates numbers to every page. Customize prefix, start number, and position. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF document to add Bates numbering for legal document identification." },
-      { title: "2. Configure Bates Format", desc: "Set prefix (e.g., DEF-), starting number, suffix, number of digits (0001-9999), and position on the page." },
-      { title: "3. Apply Numbering", desc: "Sequential Bates numbers are stamped on every page. Download the numbered PDF for legal discovery or case management." },
-    ],
-    faqs: [
-      { question: "What is Bates numbering used for?", answer: "Bates numbering is the standard in legal discovery for uniquely identifying document pages. Each page gets a unique sequential number." },
-      { question: "Can I add custom text alongside the number?", answer: "Yes. Set prefix and suffix fields. Example: 'DEF-000001-2024' where 'DEF-' is prefix, '000001' is sequential, '-2024' is suffix." },
-      { question: "Does Bates numbering affect existing content?", answer: "Numbers are added in the page margin. Ensure sufficient margin space exists to avoid overlap with content." },
-    ],
   },
   {
     id: "951",
@@ -3443,16 +1336,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF.',
     seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF document to apply stamps to." },
-      { title: "2. Choose Stamp", desc: "Select from built-in stamps (APPROVED, DRAFT, CONFIDENTIAL, RECEIVED, VOID, COPY, SIGNED) or upload a custom stamp image." },
-      { title: "3. Place & Download", desc: "Click on the page to place the stamp. Adjust size, rotation, and opacity. Download the stamped PDF." },
-    ],
-    faqs: [
-      { question: "What stamp formats are available?", answer: "Built-in text stamps in multiple styles, date/time stamps, and custom image stamps (PNG with transparency)." },
-      { question: "Can I stamp multiple pages automatically?", answer: "Yes. Select 'apply to all pages' or specify a page range for batch stamping." },
-      { question: "Are stamps different from watermarks?", answer: "Stamps are placed annotations that can include text, dates, and images. Watermarks typically cover the entire page background." },
-    ],
   },
   {
     id: "952",
@@ -3462,16 +1345,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a generation timestamp to the bottom-right corner of every page in your PDF.',
     seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF document to add a trusted timestamp to." },
-      { title: "2. Apply Timestamp", desc: "The tool connects to a RFC 3161 Time Stamp Authority to generate a cryptographic proof-of-existence for the document." },
-      { title: "3. Download Stamped PDF", desc: "Your PDF now contains a timestamp token that proves the document existed at a specific point in time." },
-    ],
-    faqs: [
-      { question: "What is an RFC 3161 timestamp?", answer: "A cryptographic token issued by a Time Stamp Authority that proves a document existed before or at a specific time. It is verifiable by anyone." },
-      { question: "Is a timestamp legally valid?", answer: "eIDAS Regulation defines qualified timestamps as legally equivalent to handwritten dates in the EU. Validity varies by jurisdiction." },
-      { question: "Does the timestamp expire?", answer: "No. The timestamp remains cryptographically verifiable indefinitely. However, the TSA certificate chain must remain valid." },
-    ],
   },
   {
     id: "953",
@@ -3481,16 +1354,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Insert a table of contents page at the beginning of your PDF document.',
     seoDescription: 'Free online PDF Table of Contents — Insert a table of contents page at the beginning of your PDF. ',
     dependencies: "pdf-lib",
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF to automatically generate a table of contents from its content structure." },
-      { title: "2. Review Suggestions", desc: "The tool analyzes heading styles and font sizes to detect chapter/section structure. Review and adjust auto-detected TOC entries." },
-      { title: "3. Generate TOC", desc: "A new table of contents page is inserted at the beginning of the PDF with clickable links to each section." },
-    ],
-    faqs: [
-      { question: "How are headings detected?", answer: "The tool analyzes font size, weight, and spacing patterns. Large bold fonts at the start of paragraphs are flagged as potential headings." },
-      { question: "Can I manually add missing entries?", answer: "Yes. Click 'add entry' to manually insert TOC items for sections the auto-detection missed." },
-      { question: "Are TOC entries hyperlinked?", answer: "Yes. Each entry contains an internal PDF link that jumps to the corresponding section when clicked." },
-    ],
   },
   {
     id: "532",
@@ -3501,16 +1364,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Advanced PDF Tools — Overlay, alternate-merge, booklet layout, combine pages, invert colors, or extract PDF pages as ZIP images. ',
     dependencies: "pdf-lib, pdfjs-dist, jszip",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF for advanced operations. This tool provides a set of power-user features." },
-      { title: "2. Choose Advanced Feature", desc: "Options include: PDF version conversion, color space conversion, Overprint Preview, transparency flattening, and page box editing." },
-      { title: "3. Apply & Export", desc: "Configure the advanced operation parameters and download the processed PDF." },
-    ],
-    faqs: [
-      { question: "What is page box editing?", answer: "PDFs have multiple boxes: MediaBox (page size), CropBox (visible area), BleedBox (printing), TrimBox (final size), and ArtBox (content area). You can edit all." },
-      { question: "What color space conversions are available?", answer: "Convert between RGB, CMYK, and Grayscale. CMYK is used for print production; RGB for screen display." },
-      { question: "When should I flatten transparency?", answer: "Transparency flattening is needed for PDFs with overlapping transparent objects that cause printing issues on older RIP systems." },
-    ],
   },
   {
     id: "533",
@@ -3521,16 +1374,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Attachments — View, add, and extract embedded files from PDF documents. Supports any file type. ',
     dependencies: "pdf-lib",
     showInCategory: true,
-    instructions: [
-      { title: "1. Upload PDF", desc: "Select a PDF to manage embedded file attachments." },
-      { title: "2. View Current Attachments", desc: "See all files currently embedded in the PDF. Add new attachments or remove existing ones." },
-      { title: "3. Save PDF with Attachments", desc: "Download the PDF with the updated embedded files. Attachments appear in the PDF viewer's attachment panel." },
-    ],
-    faqs: [
-      { question: "What file types can be embedded?", answer: "Any file type: documents (DOCX, XLSX), images, ZIP archives, or other PDFs. The attachment is embedded within the PDF file." },
-      { question: "Can I extract attachments from a PDF?", answer: "Yes. Select an attachment and click 'download' to extract it from the PDF as a separate file." },
-      { question: "Do attachments increase PDF file size?", answer: "Yes, significantly. A 10 MB file attached to a 1 MB PDF results in an 11 MB PDF. Compress files before attaching for smaller output." },
-    ],
   },
   {
     id: "534a",
@@ -3540,16 +1383,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate total study hours over a period and see monthly projections.',
     seoDescription: 'Free online Study Time Calculator \u2014 Calculate total study hours and monthly projections. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter Exam Date", desc: "Set your exam or deadline date using the date picker. The calculator divides your available time into recommended study sessions based on subject difficulty." },
-      { title: "2. Enter Study Hours Needed", desc: "Estimate total study hours required for the subject." },
-      { title: "3. Plan Schedule", desc: "Get a recommended daily study schedule leading up to the exam." },
-    ],
-    faqs: [
-      { question: "How many hours should I study per day?", answer: "The calculator distributes total study hours evenly across available days. Adjust based on your personal capacity." },
-      { question: "Does this account for breaks?", answer: "The schedule shows study time only. Include short breaks between sessions for better retention." },
-      { question: "Can I customize the schedule?", answer: "Yes. Adjust the total hours or days to create a personalized study plan." },
-    ],
   },
   {
     id: "534b",
@@ -3559,16 +1392,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert correct/total answers to percentage and letter grade.',
     seoDescription: 'Free online Test Score Calculator \u2014 Convert correct answers to percentage and letter grade. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter Total Questions", desc: "Input the total number of questions on the test." },
-      { title: "2. Enter Correct Answers", desc: "Input the number of questions you answered correctly." },
-      { title: "3. View Score", desc: "See your percentage score and letter grade." },
-    ],
-    faqs: [
-      { question: "How is the grade determined?", answer: "Percentage = (Correct Answers / Total Questions) x 100. The letter grade follows the standard 90-80-70-60 scale." },
-      { question: "Can I use different grading scales?", answer: "The calculator uses the standard scale. For custom grading, use the Grade Calculator tool." },
-      { question: "Does this account for partial credit?", answer: "No. Each question is either correct or incorrect. For partial credit grading, calculate weighted scores separately." },
-    ],
   },
   {
     id: "534c",
@@ -3578,16 +1401,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate how many pages your word count will take at different font sizes.',
     seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter Document Details", desc: "Input total word count, font size, and line spacing." },
-      { title: "2. Adjust Page Size", desc: "Select page size (A4, Letter, Legal) and margins." },
-      { title: "3. View Estimate", desc: "See estimated pages and adjust formatting to meet page targets." },
-    ],
-    faqs: [
-      { question: "What factors affect words per page?", answer: "Font size, font family, line spacing, margins, and page size all affect how many words fit on a page." },
-      { question: "Is this accurate for all fonts?", answer: "The calculator uses average character widths. Different fonts may produce slightly different results." },
-      { question: "Can I use this for book formatting?", answer: "Yes. This is commonly used for estimating manuscript page counts for publishing." },
-    ],
   },
   {
     id: "534d",
@@ -3597,16 +1410,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate gross profit, net income, and margin from revenue, COGS, and operating expenses.',
     seoDescription: 'Free online Working Capital Calculator \u2014 Calculate gross profit, net income, and margin. ',
     dependencies: "None",
-    instructions: [
-    { title: "1. Enter Assets", desc: "Input current assets including cash, receivables, and inventory." },
-    { title: "2. Enter Liabilities", desc: "Input current liabilities including payables and short-term debt." },
-    { title: "3. Calculate Ratio", desc: "View your working capital and current ratio for liquidity assessment." },
-  ],
-    faqs: [
-    { question: "What is working capital?", answer: "Working capital = Current Assets - Current Liabilities. It measures a company's operational liquidity." },
-    { question: "What is a healthy current ratio?", answer: "A current ratio (current assets / current liabilities) between 1.5 and 3 is generally considered healthy." },
-    { question: "How can I improve working capital?", answer: "Speed up receivables, delay payables (without harming relationships), and reduce inventory levels." },
-  ],
 
   },
   {
@@ -3618,34 +1421,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert inner diameter in millimeters to US ring sizes.',
     seoDescription: 'Free online Ring Size Converter \u2014 Convert inner diameter in mm to US ring sizes. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Choose Measurement Method",
-                "desc": "Select how you want to measure — by inner diameter (mm), inner circumference (mm), or by selecting a known size from one system."
-          },
-          {
-                "title": "2. Enter Your Measurement",
-                "desc": "Input the ring measurement you have. If measuring an existing ring, use the on-screen ring sizer guide with a coin or known object for scale."
-          },
-          {
-                "title": "3. Read Equivalent Sizes",
-                "desc": "US, UK, EU, Japanese, and ISO ring size equivalents are displayed. Width adjustments for wide bands (over 6mm) are shown as a footnote."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What ring size is a 6cm circumference?",
-                "answer": "A 6cm (60mm) circumference corresponds to approximately US size 9, UK size R, or EU size 19. The tool converts this instantly."
-          },
-          {
-                "question": "Should I order a larger size for wide band rings?",
-                "answer": "Yes, wide bands (8mm+) typically require a half to full size larger than standard bands because they fit more snugly due to their width."
-          },
-          {
-                "question": "Can I measure my ring size using a printable sizer?",
-                "answer": "Yes, the tool includes a printable ring sizer PDF. Print it at 100% scale, cut the strip, and wrap it around your finger to find the size."
-          }
-    ]
 },
   {
     id: "534f",
@@ -3655,16 +1430,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Calculate width, height, and area from diagonal screen size and aspect ratio.',
     seoDescription: 'Free online Screen Size Calculator \u2014 Calculate width, height, and area from diagonal and aspect ratio. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter Diagonal Size", desc: "Input the screen diagonal size in inches." },
-      { title: "2. Select Aspect Ratio", desc: "Choose the aspect ratio (16:9, 4:3, 21:9, etc.)." },
-      { title: "3. View Dimensions", desc: "Get screen width and height in inches, centimeters, and pixels." },
-    ],
-    faqs: [
-      { question: "How is screen width and height calculated?", answer: "Using the diagonal size and aspect ratio, the tool applies the Pythagorean theorem to find width and height." },
-      { question: "What is the difference between physical and logical resolution?", answer: "Physical resolution is the actual pixel count. PPI can be calculated from physical size and resolution." },
-      { question: "Can I calculate for any aspect ratio?", answer: "Yes. Choose from common ratios or enter a custom aspect ratio." },
-    ],
   },
   {
 
@@ -3675,34 +1440,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\'s, women\'s, and children\'s size charts.',
     seoDescription: 'Free online Shoe Size Converter \u2014 Convert between US and UK shoe sizes. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Select Gender and Type",
-                "desc": "Choose men's, women's, or kids/unisex sizing. Each category uses a different size scale and conversion table."
-          },
-          {
-                "title": "2. Enter Foot Length or Source Size",
-                "desc": "Enter your foot length in centimeters or inches, or select a known size from one region. The tool calculates the equivalent sizes in all other regions."
-          },
-          {
-                "title": "3. View All Regional Sizes",
-                "desc": "US, UK, EU, Japanese, and Australian sizes are displayed in a row. Mondopoint (cm) and inch measurements are shown for reference."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Why are US men's and women's shoe sizes different?",
-                "answer": "US women's sizing typically runs about 1.5-2 sizes larger than men's. For example, a US men's 8 is approximately a US women's 9.5 based on the same foot length."
-          },
-          {
-                "question": "How do I measure my foot length for accurate conversion?",
-                "answer": "Trace your foot on a piece of paper, measure the distance from heel to longest toe in centimeters, and enter that value. The tool recommends sizes with appropriate wiggle room."
-          },
-          {
-                "question": "Does the converter include half sizes?",
-                "answer": "Yes, half sizes are supported across all regions that use them (US, UK, EU). Half sizes add approximately 4.23mm of length in most systems."
-          }
-    ]
 },
   {
 
@@ -3713,34 +1450,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'View the contents and file sizes inside a ZIP archive without extracting.',
     seoDescription: 'Free online ZIP File Extractor \u2014 View ZIP archive contents and file sizes. ',
     dependencies: "fflate",
-    instructions: [
-          {
-                "title": "1. Upload a ZIP File",
-                "desc": "Click to select a .zip file from your computer. The maximum file size is 200MB. Password-protected ZIP files are not supported."
-          },
-          {
-                "title": "2. Browse Contents",
-                "desc": "After upload, the tool displays the archive's directory tree showing filenames, sizes, compression ratios, and modification dates."
-          },
-          {
-                "title": "3. Extract Files",
-                "desc": "Select individual files or folders to extract. Click download to receive a new ZIP containing only your selected files, or download files individually."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Can I add files to an existing ZIP archive?",
-                "answer": "No, this tool extracts ZIP files only. For creating ZIP archives, use your operating system's built-in compression or a dedicated compression application."
-          },
-          {
-                "question": "Does the extractor support ZIP64 format for large archives?",
-                "answer": "Yes, ZIP64 (supporting files over 4GB and archives over 4GB) is fully supported. The 200MB upload limit applies to the upload, not the format."
-          },
-          {
-                "question": "Are files extracted on the server or in the browser?",
-                "answer": "All extraction happens in the browser using JavaScript. Files are never uploaded to a server, making the tool suitable for sensitive data."
-          }
-    ]
 },
   {
 
@@ -3751,34 +1460,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.',
     seoDescription: 'Free online OAuth Client Setup \u2014 Generate authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Choose from built-in OAuth provider templates including Google, GitHub, Facebook, Microsoft, Twitter, and Apple. Alternatively configure a custom provider with your own endpoints."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Provide your client ID and client secret if confidential. Set the redirect URI, authorized JavaScript origins, and required scopes for your application needs."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Generate the OAuth client configuration with code snippets for multiple languages and environment variables. Download the provider-specific configuration JSON."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What OAuth grant types does the client setup wizard support for different application types?",
-                "answer": "It supports Authorization Code with PKCE for SPAs and mobile apps, Authorization Code with client secret for server-side apps, Client Credentials for machine to machine, and Device Code."
-          },
-          {
-                "question": "How does the tool generate provider-specific configuration for different OAuth platforms?",
-                "answer": "Each provider has a customized template using the correct format for its console. Google uses Google Cloud Console format and GitHub uses OAuth App settings format."
-          },
-          {
-                "question": "Can the generated configuration include environment variable placeholders for sensitive credentials?",
-                "answer": "Yes, client secrets and client IDs are output as environment variable references for secure deployment across different environments without hardcoding credentials."
-          }
-    ]
 },
   {
 
@@ -3789,34 +1470,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
     seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Code Verifier",
-                "desc": "Paste the code_verifier used in the OAuth PKCE flow."
-          },
-          {
-                "title": "2. Enter Code Challenge",
-                "desc": "Paste the code_challenge received from the authorization request."
-          },
-          {
-                "title": "3. Verify Match",
-                "desc": "Select the challenge method (S256 or plain) and click Verify to confirm the verifier matches the challenge."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the PKCE verifier confirm a code_challenge matches a code_verifier?",
-                "answer": "For S256, the tool computes SHA-256 of the verifier and base64url-encodes it, then compares to the challenge. For plain, it compares strings directly."
-          },
-          {
-                "question": "What should I do if the verifier doesn't match the challenge?",
-                "answer": "Check that both values were copied completely (no truncation), verify the challenge method (S256 vs plain), and ensure the verifier uses unreserved characters only."
-          },
-          {
-                "question": "Does the verifier check the code_verifier's RFC 7636 compliance?",
-                "answer": "Yes, it validates: minimum 43 characters, maximum 128 characters, and only unreserved characters (A-Z, a-z, 0-9, -, ., _, ~)."
-          }
-    ]
 },
   {
 
@@ -3827,34 +1480,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
     seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Choose from supported OAuth providers like Google, Microsoft, GitHub, Facebook, Slack, or Spotify. Each provider has its own list of available scopes and permissions."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Browse the categorized scope list for the selected provider. Each scope shows its full name, data access level, and sensitivity rating for informed selection."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Copy the formatted scope string and the full authorization URL with selected scopes. The output is ready for use in your OAuth authorization request to the provider."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the scope builder help determine the minimum scopes needed for an application?",
-                "answer": "Scopes are annotated with the specific API endpoints they enable. The builder shows a dependency tree where broader scopes include narrower ones for least-privilege selection."
-          },
-          {
-                "question": "Can the tool validate that a scope combination is valid for the selected provider and grant type?",
-                "answer": "Yes, it validates scope combinations against provider-specific rules including restricted scopes requiring verification, incompatible pairs, and scopes needing configuration."
-          },
-          {
-                "question": "Does the scope builder support OpenID Connect scopes and custom claims parameters for OIDC?",
-                "answer": "Yes, OIDC scopes are included with explanations of which claims each returns. The builder can also generate a claims parameter for specific claims beyond default mappings."
-          }
-    ]
 },
   {
 
@@ -3865,34 +1490,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Validate OAuth state parameters for format, length, and age.',
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter State Parameter",
-                "desc": "Paste the state parameter value sent in the OAuth authorization request."
-          },
-          {
-                "title": "2. Enter Returned State",
-                "desc": "Paste the state parameter value received in the callback URL after the authorization redirect."
-          },
-          {
-                "title": "3. Validate Match",
-                "desc": "The tool performs a constant-time string comparison to prevent timing attacks. Shows Match or Mismatch result."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Why is the OAuth state parameter important for security?",
-                "answer": "The state parameter prevents CSRF attacks on OAuth flows. It binds the authorization request to the callback, ensuring that the response corresponds to a request the client initiated."
-          },
-          {
-                "question": "What is constant-time comparison and why is it used?",
-                "answer": "Constant-time comparison ensures the comparison takes the same duration regardless of how many characters match, preventing timing side-channel attacks that could leak the state value character by character."
-          },
-          {
-                "question": "Can the tool generate a cryptographically random state parameter?",
-                "answer": "Yes, the tool has a Generate button that creates a random state using crypto.getRandomValues(), base64url-encoded, suitable for OAuth 2.0 authorization requests."
-          }
-    ]
 },
   {
 
@@ -3903,34 +1500,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
     seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Password and Salt",
-                "desc": "Input the password you want to hash and provide either a custom salt or let the tool generate a cryptographically random 16-byte salt. The salt prevents rainbow table precomputation."
-          },
-          {
-                "title": "2. Configure Iterations and Algorithm",
-                "desc": "Set the iteration count (recommended minimum 600,000 for SHA-256 as of 2024) and select the underlying hash algorithm: SHA-1, SHA-256, or SHA-512. Higher iterations increase brute-force cost."
-          },
-          {
-                "title": "3. Select Output Length and Encoding",
-                "desc": "Choose the derived key length in bytes (default 32) and output encoding — hex (64 chars for 32 bytes) or base64. Copy the salt and hash together for storage, as both are needed for verification."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Why do I need to store the salt alongside the PBKDF2 hash?",
-                "answer": "PBKDF2 is deterministic — the same password + salt + iterations always produces the same derived key. The salt must be unique per user and stored in plaintext alongside the hash. During login, you retrieve the stored salt, re-run PBKDF2 with the provided password, and compare the computed hash against the stored hash. Without the salt, verification is impossible."
-          },
-          {
-                "question": "How many PBKDF2 iterations should I use for password hashing in 2024?",
-                "answer": "OWASP recommends at least 720,000 iterations for PBKDF2-HMAC-SHA256 and 600,000 for PBKDF2-HMAC-SHA512 as of 2024. These numbers derive from the time it takes to compute the hash on modern hardware — aim for approximately 0.5 seconds of computation time on your production server. Higher is always better within acceptable latency."
-          },
-          {
-                "question": "What is the difference between PBKDF2 and bcrypt/argon2?",
-                "answer": "PBKDF2 is a key derivation function designed by RSA Laboratories and is FIPS-140 compliant. Unlike bcrypt (which includes adaptive cost and is GPU-resistant) and argon2 (which adds memory-hardness to resist ASIC attacks), PBKDF2 has relatively low memory requirements and is more vulnerable to GPU-based brute force at equivalent iteration counts. Argon2id is the OWASP-recommended choice for new password hashing implementations."
-          }
-    ]
 },
   {
 
@@ -3941,34 +1510,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
     seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Paste Cookie Header",
-                "desc": "Paste the Cookie or Set-Cookie header string from an HTTP request or response."
-          },
-          {
-                "title": "2. Auto-Parse Cookies",
-                "desc": "The tool automatically parses each cookie name-value pair and extracts attributes (Expires, Max-Age, Domain, Path, Secure, HttpOnly, SameSite)."
-          },
-          {
-                "title": "3. Inspect Cookie Properties",
-                "desc": "Review each cookie's parsed details in a table. Expired cookies are flagged. Security issues (missing Secure, missing HttpOnly on session cookies) are warned."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the cookie parser handle multiple Set-Cookie headers?",
-                "answer": "The tool supports multiple Set-Cookie headers by splitting on newlines or concatenated headers. Each cookie is parsed independently and displayed in its own row."
-          },
-          {
-                "question": "What is the difference between a session cookie and a persistent cookie?",
-                "answer": "A session cookie has no Expires or Max-Age attribute and is deleted when the browser closes. A persistent cookie has an Expires or Max-Age attribute defining its lifetime."
-          },
-          {
-                "question": "Does the tool detect security misconfigurations in cookies?",
-                "answer": "Yes, it flags cookies missing the Secure flag (sent over HTTP), missing HttpOnly (accessible to JavaScript), SameSite=None without Secure, and cookies with overly broad Domain attributes."
-          }
-    ]
 },
   {
 
@@ -3979,34 +1520,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
     seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Paste HTML Source",
-                "desc": "Paste your HTML code into the editor. The tool supports HTML5, XHTML, and legacy HTML doctypes."
-          },
-          {
-                "title": "2. Run Lint Check",
-                "desc": "Click Lint to analyze the HTML. The tool checks for unclosed tags, duplicate IDs, invalid nesting, deprecated attributes, and accessibility violations."
-          },
-          {
-                "title": "3. Fix Errors",
-                "desc": "Each error links to the problematic line. Use the Auto-fix button for common issues like unclosed tags or incorrect boolean attributes."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What HTML linting rules does this tool enforce?",
-                "answer": "Rules include: void elements must not have content, ID uniqueness, valid ARIA attributes, heading hierarchy (h1-h6), img alt text, label-for associations, and deprecated tag detection."
-          },
-          {
-                "question": "Does the linter check for accessibility (a11y) issues?",
-                "answer": "Yes, it checks WCAG 2.1 AA requirements: missing alt text on images, missing form labels, insufficient color contrast (when CSS is included), missing lang attribute, and non-semantic structure."
-          },
-          {
-                "question": "Can I customize which linting rules to enable or disable?",
-                "answer": "Yes, the tool has a Rules panel where you can toggle individual rules on/off. Rule configurations can be saved as presets for different projects."
-          }
-    ]
 },
   {
 
@@ -4017,34 +1530,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste XML content for validation and minification. The tool checks well-formedness including proper nesting, matching tags, correct attribute quoting, and character references."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Run validation first to check for XML structure errors. After validation passes, configure minification options to remove whitespace and unnecessary line breaks."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Minify the validated XML to remove whitespace and comments. The compact output is suitable for API payloads and storage where file size matters."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What XML validation checks does the tool perform beyond basic well-formedness checks?",
-                "answer": "It validates namespace prefix declarations match their URIs, element and attribute names follow XML naming rules, CDATA sections are properly terminated, and document structure."
-          },
-          {
-                "question": "How does the minifier handle XML namespaces and preserve essential whitespace content?",
-                "answer": "Namespace declarations are preserved. Whitespace in elements with space equals preserve attribute is kept intact. CDATA sections are preserved but tag whitespace is collapsed."
-          },
-          {
-                "question": "Can the tool validate XML against an XSD schema or DTD for structural correctness checking?",
-                "answer": "Yes, provide an XSD schema or DTD to validate the XML document structure, required elements, attribute types, and data value constraints beyond well-formedness."
-          }
-    ]
 },
   {
     id: "948",
@@ -4055,16 +1540,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. ',
     dependencies: "None",
     showInCategory: false,
-    instructions: [
-      { title: "1. Customize Border Properties", desc: "Adjust border width (px), style (solid, dashed, dotted, etc.), and color using the visual controls. Each change updates the preview in real time." },
-      { title: "2. Set Border Radius", desc: "Use the radius slider to round corners. Enable per-corner control to set different radius values for each corner independently." },
-      { title: "3. Copy the CSS Code", desc: "Once your border looks right, copy the generated CSS code. The tool outputs shorthand and longhand CSS properties ready to paste into your stylesheet." },
-    ],
-    faqs: [
-      { question: "What CSS properties does this tool generate?", answer: "The tool generates border-width, border-style, border-color, border-radius, and the shorthand border property. For radius, it outputs both individual (border-top-left-radius, etc.) and shorthand values." },
-      { question: "Can I set different borders on each side?", answer: "Yes. You can individually control top, right, bottom, and left border width, style, and color. The tool generates the appropriate CSS for per-side borders." },
-      { question: "Is the generated CSS ready for production?", answer: "Yes. The CSS output uses standard properties supported by all modern browsers. Copy and paste directly into your stylesheet — no modification needed." },
-    ]
   },
   {
     id: "949",
@@ -4074,16 +1549,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Typography CSS generator with font-size, line-height, letter-spacing, and font-weight controls with live preview.',
     seoDescription: 'Free online Typography Preview — Generate typography CSS with font-size, line-height, letter-spacing, and font-weight controls with live preview. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Adjust Typography Properties", desc: "Use the sliders and inputs to control font-size, line-height, letter-spacing, font-weight, and font-family. Changes reflect instantly in the live preview text." },
-      { title: "2. Preview with Your Text", desc: "Replace the sample text with your own content to see how your typography choices look with real copy. Test different heading and paragraph combinations." },
-      { title: "3. Copy the CSS", desc: "Once your typography is dialed in, copy the generated CSS. The tool outputs all typography properties ready for your stylesheet." },
-    ],
-    faqs: [
-      { question: "What CSS properties can I preview?", answer: "The tool covers font-size, line-height, letter-spacing (tracking), word-spacing, font-weight, font-style, text-transform, text-decoration, and font-family." },
-      { question: "Can I test with Google Fonts?", answer: "Yes. You can select from popular Google Fonts in the font-family dropdown. The tool loads the font for live preview so you can see exactly how it renders." },
-      { question: "Why is typography important for web design?", answer: "Good typography improves readability, establishes visual hierarchy, and reinforces brand identity. Proper line-height and letter-spacing make content more accessible and pleasant to read." },
-    ]
   },
   {
 
@@ -4094,34 +1559,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode text to Base32 or decode Base32 strings back to text.',
     seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Input Data",
-                "desc": "Type or paste text, or upload a file to encode or decode using the Base32 encoding scheme as defined by RFC 4648."
-          },
-          {
-                "title": "2. Choose Base32 Variant",
-                "desc": "Select Standard Base32 (uppercase A–Z and 2–7) for general use, or Base32hex (0–9 and A–V) for lexicographically sortable output, as used in DNSSEC and NSEC3 records."
-          },
-          {
-                "title": "3. Encode or Decode",
-                "desc": "Click Encode to convert to Base32 or Decode to convert back. View the result with optional padding (= characters) or without."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between Base32 and Base64 encoding in terms of efficiency?",
-                "answer": "Base32 encodes 5 bits per character (40% overhead) while Base64 encodes 6 bits per character (33% overhead). Base32 is less space-efficient but uses only alphanumeric characters, making it suitable for case-insensitive systems."
-          },
-          {
-                "question": "Where is Base32 encoding commonly used in practice?",
-                "answer": "Base32 is used in TOTP/HOTP shared secrets (Google Authenticator encodes secrets in Base32), DNSSEC NSEC3 record hashes, Magnet links (BitTorrent), and Crockford's Base32 for human-friendly identifiers."
-          },
-          {
-                "question": "How does the tool handle padding in Base32 encoded output?",
-                "answer": "Base32 output is padded with = characters to make the output length a multiple of 8 characters. The tool provides options to include padding (standard), omit padding (RFC 4648 section 6), or add padding validation when decoding."
-          }
-    ]
 },
   {
 
@@ -4132,34 +1569,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode Base64 and pretty-print JSON. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Base64-Encoded JSON",
-                "desc": "Paste a Base64 string that contains a JSON payload. This is commonly found in JWT payloads, API tokens, and encoded configuration blobs."
-          },
-          {
-                "title": "2. Decode Automatically",
-                "desc": "The tool decodes the Base64 string to raw text and attempts to parse the result as JSON. If parsing succeeds, the JSON is pretty-printed and syntax-highlighted."
-          },
-          {
-                "title": "3. Inspect Decoded JSON",
-                "desc": "Browse the decoded JSON structure with collapsible tree view. Copy individual field values or the entire decoded object."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What happens if the Base64 decoded content is not valid JSON?",
-                "answer": "The tool still displays the decoded raw text content with character encoding detection. A warning is shown indicating JSON parse failure, along with the position of the syntax error to help you identify the issue."
-          },
-          {
-                "question": "Can the tool decode nested Base64 encoding (Base64 inside a JSON value that is itself Base64-encoded)?",
-                "answer": "Yes, the tool recursively detects and offers to decode nested Base64 strings found within the decoded JSON fields. Each nested level is indented and labeled with its encoding depth."
-          },
-          {
-                "question": "How does the decoder handle different JSON-like formats inside Base64 wrappers?",
-                "answer": "It attempts to parse as standard JSON first. If that fails, it tries JSON5 (comments, trailing commas), HJSON, or YAML. Supported encodings for the Base64 layer include UTF-8, UTF-16LE, and ASCII."
-          }
-    ]
 },
   {
 
@@ -4170,34 +1579,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hex strings and text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Hex String or Plain Text",
-                "desc": "Paste a hex string (e.g., 54686520717569636B) or type plain text. The tool detects the input format automatically for bidirectional conversion."
-          },
-          {
-                "title": "2. Configure Encoding Options",
-                "desc": "Select the text encoding: UTF-8 (standard, variable-width), UTF-16 (fixed 2 bytes per code unit), or Latin-1 (1 byte per character) for hex-text conversion."
-          },
-          {
-                "title": "3. Convert and Inspect",
-                "desc": "View the converted output alongside a detailed byte map showing each character, its hex code point, and its binary representation."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the hex-to-text converter handle UTF-8 encoded characters that are multiple hex bytes long?",
-                "answer": "UTF-8 characters can span 1–4 bytes. The tool properly decodes multi-byte sequences, showing the Unicode code point and the actual rendered character (e.g., U+1F600 rendered as 😀)."
-          },
-          {
-                "question": "What is the difference between this converter and the hex-to-ASCII converter?",
-                "answer": "This tool focuses on full Unicode text conversion using variable-width encodings (UTF-8), while the hex-ASCII converter is limited to 8-bit bytes interpreted as ASCII characters without multi-byte character support."
-          },
-          {
-                "question": "Can the tool convert hex to text for UTF-16 encoded data with BOM?",
-                "answer": "Yes, it detects byte order marks (FEFF for BE, FFFE for LE) and automatically selects the correct byte order. It also handles UCS-2 surrogate pairs for characters outside the Basic Multilingual Plane."
-          }
-    ]
 },
   {
 
@@ -4208,34 +1589,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to BASE64 format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to Base64 Converter \u2014 Convert SVG to data URIs. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Upload SVG File or Paste Code",
-                "desc": "Paste your SVG markup code or upload a .svg file. The tool validates the SVG XML structure before conversion."
-          },
-          {
-                "title": "2. Convert to Base64 or Vice Versa",
-                "desc": "Click SVG to Base64 to convert the SVG code into a data URI. Click Base64 to SVG to decode a base64-encoded SVG back to raw markup."
-          },
-          {
-                "title": "3. Choose Output Format",
-                "desc": "Select the data URI format: svg+xml for browser embedding or image/svg+xml;base64 for CSS background-image and img src usage."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the advantage of using SVG as a data URI vs a separate file?",
-                "answer": "SVG data URIs eliminate an HTTP request and can be inlined in CSS. However, the base64 encoding adds ~33% overhead. For SVGs under 2 KB, inlining as raw SVG (without base64) is more efficient than base64 encoding."
-          },
-          {
-                "question": "How does the tool handle SVG files with external references (fonts, images) during conversion?",
-                "answer": "External references are flagged with warnings. The tool can optionally inline external resources by converting relative URLs to absolute or by embedding small images as data URIs within the SVG."
-          },
-          {
-                "question": "Can the converter optimize the SVG by removing unnecessary attributes before encoding?",
-                "answer": "Yes, the optional cleanup mode strips editor metadata (Inkscape, Illustrator namespaces), removes empty groups, simplifies paths, and removes unused defs before encoding to reduce data URI size."
-          }
-    ]
 },
   {
 
@@ -4246,34 +1599,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
     seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Text or Upload File",
-                "desc": "Type or paste text, or upload a file to detect and convert between character encodings. The tool auto-detects the current encoding from byte patterns."
-          },
-          {
-                "title": "2. Detect Current Encoding",
-                "desc": "Click Detect to analyze the byte sequences and identify the source encoding — UTF-8, Latin-1 (ISO 8859-1), Windows-1252, Shift JIS, EUC-KR, GB2312, etc."
-          },
-          {
-                "title": "3. Convert to Target Encoding",
-                "desc": "Select the target encoding and click Convert. The tool displays the converted text and provides a hex dump comparison showing bytes before and after conversion."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What character encodings does the converter support for detection and conversion?",
-                "answer": "It supports 50+ encodings: UTF-8, UTF-16 (LE/BE), UTF-32 (LE/BE), ISO 8859 series (1–16), Windows codepages (1250–1258), Shift JIS, EUC-JP, EUC-KR, GB2312, GBK, Big5, KOI8-R, KOI8-U, and ISO 2022 variants."
-          },
-          {
-                "question": "How does the tool detect the character encoding of an input with mixed content?",
-                "answer": "It uses byte sequence analysis: UTF-8 BOM detection, valid UTF-8 sequence checking, high-byte pattern matching for single-byte encodings, and character range analysis for CJK multi-byte encodings."
-          },
-          {
-                "question": "What happens when characters in the source encoding have no equivalent in the target encoding?",
-                "answer": "Unmappable characters are replaced with the target encoding's replacement character (usually ? or □). The tool provides a fallback strategy selector: skip, replace with ?, or escape as \\uXXXX."
-          }
-    ]
 },
   {
 
@@ -4284,34 +1609,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste text containing Unicode characters that need conversion between different Unicode normalisation forms such as NFC, NFD, NFKC, or NFKD forms."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Choose the conversion direction and target Unicode form. Select additional options like escape sequence format for JavaScript, HTML, or CSS context compatibility."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Convert the Unicode text to the target form and review the result. The tool highlights differences between the original and converted text for easy verification."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What Unicode normalization forms does the converter support for text transformation?",
-                "answer": "It supports NFC for canonical composition, NFD for canonical decomposition, NFKC for compatibility composition, and NFKD for compatibility decomposition of characters."
-          },
-          {
-                "question": "Can the tool convert Unicode characters to escape sequences for different programming contexts?",
-                "answer": "Yes, it generates escape sequences for JavaScript with backslash-u format, HTML with ampersand-hash format, CSS with backslash format, and Python with backslash-N format."
-          },
-          {
-                "question": "Does the converter detect malformed UTF-8 sequences and suggest proper encoding fixes?",
-                "answer": "Yes, it validates UTF-8 byte sequences and flags malformed sequences. Invalid bytes are highlighted and the tool suggests the correct encoding for problematic characters."
-          }
-    ]
 },
   {
 
@@ -4322,34 +1619,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert Markdown to Slack mrkdwn. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Markdown to Slack Converter \u2014 Convert Markdown to Slack mrkdwn. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste Markdown-formatted text to convert to Slack mrkdwn or paste Slack message text to convert to standard Markdown. Both conversion directions are fully supported."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Choose the conversion direction and review how each element maps between formats. Slack-specific formatting like emoji and mentions have no Markdown equivalent and are preserved."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Execute the conversion and copy the result directly to your Slack message or Markdown editor. The tool highlights which elements were transformed and which were preserved as-is."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What Markdown elements are converted differently when targeting Slack mrkdwn message format?",
-                "answer": "Headings become bold text since Slack has no heading levels, horizontal rules are removed, tables are converted to formatted text, and images become hyperlinks."
-          },
-          {
-                "question": "How does the tool handle Slack-specific formatting that has no equivalent in standard Markdown?",
-                "answer": "Slack emoji shortcuts like smile, channel references like general, and user mentions like username are preserved as-is since they are native to Slack and have no Markdown equivalent."
-          },
-          {
-                "question": "Can the converter handle Slack message attachments and block kit formatting during conversion?",
-                "answer": "Yes, the converter supports Slack message attachment formatting including field titles and values that are converted to Markdown blockquotes or tables with appropriate structure."
-          }
-    ]
 },
   {
 
@@ -4360,34 +1629,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between PX and REM with custom base size. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Type a CSS value with pixels or rem unit such as 16px or 2.5rem to convert between the two units. The tool also accepts comma-separated lists for batch conversion."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Configure the root font size which defaults to 16px for most browsers. Adjust for projects with custom root font sizes like 14px or 10px for mental math."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Get the equivalent value in the target unit with two decimal precision. Copy the converted CSS declaration directly for use in your stylesheet or component."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does the tool calculate the conversion between pixels and rems for CSS values?",
-                "answer": "To convert px to rem you divide by the root font size. To convert rem to px you multiply by the root font size. The default base is 16px making one rem equal to 16px."
-          },
-          {
-                "question": "What is the advantage of using rem units over px in responsive web design strategies?",
-                "answer": "Rem units scale with the user browser font size settings improving accessibility. They also allow global resizing by changing a single root font-size value."
-          },
-          {
-                "question": "Can the converter handle CSS shorthand values with multiple values for batch conversion?",
-                "answer": "Yes, multi-value CSS properties are parsed and each value is converted independently. The tool preserves the order and structure of shorthand declarations."
-          }
-    ]
 },
   {
 
@@ -4398,34 +1639,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify SVG by removing whitespace, comments, and redundant attributes.',
     seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Step 1",
-                "desc": "Paste SVG source code or upload an SVG file with paths, shapes, gradients, fonts, and metadata that needs to be optimized for web and production use."
-          },
-          {
-                "title": "2. Step 2",
-                "desc": "Toggle optimization passes including editor metadata removal, empty group collapsing, path precision reduction, unused ID removal, and path merging operations."
-          },
-          {
-                "title": "3. Step 3",
-                "desc": "Optimize the SVG and compare the original versus optimized size with a visual preview. Download the optimized SVG file for use in your production application."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How much file size reduction can I expect from SVG optimization for web graphics?",
-                "answer": "Typical reduction ranges from 20 to 80 percent depending on the source. SVGs from vector editors have significant metadata overhead of 30 to 60 percent that can be stripped."
-          },
-          {
-                "question": "What SVG elements and attributes are removed during the cleanup optimization pass?",
-                "answer": "Removed elements include editor namespaces, empty groups, unused defs, duplicate IDs, hidden elements, default attribute values, and XML declarations when not needed."
-          },
-          {
-                "question": "Does the optimizer simplify SVG paths by reducing coordinate precision without visible change?",
-                "answer": "Yes, path coordinate precision is reduced to a configurable number of decimal places. A typical path with six decimal places can be reduced without visible quality loss."
-          }
-    ]
 },
   {
 
@@ -4436,34 +1649,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between km/h, mph, m/s, knots, and ft/s. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Speed Converter \u2014 Convert between km/h, mph, m/s, knots, and ft/s. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Speed with Custom Precision",
-                "desc": "Input a speed value and set the decimal precision from 0 to 10 decimal places. This is useful for scientific and engineering calculations."
-          },
-          {
-                "title": "2. Add Altitude and Temperature",
-                "desc": "Optionally enter altitude in meters and temperature in Celsius for an adjusted Mach calculation. The speed of sound changes with both parameters."
-          },
-          {
-                "title": "3. View Full Conversion Table",
-                "desc": "Generate a conversion table showing your value in all speed units simultaneously. Download the table as CSV for use in reports or analysis."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How does altitude affect the Mach conversion?",
-                "answer": "The speed of sound decreases with altitude due to lower air temperature. At 10,000 meters, Mach 1 is approximately 299 m/s versus 343 m/s at sea level."
-          },
-          {
-                "question": "Can I convert between km/h and m/s with this tool?",
-                "answer": "Yes, all standard speed units including km/h, m/s, mph, knots, ft/s, and Mach are supported in both Basic and Advanced modes."
-          },
-          {
-                "question": "What is the difference between this and the basic speed converter?",
-                "answer": "The advanced version adds altitude/temperature inputs for accurate Mach, adjustable decimal precision, and a downloadable conversion table."
-          }
-    ]
 },
   {
 
@@ -4474,34 +1659,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Power Value",
-                "desc": "Type the numerical power value you want to convert. The input accepts values from 0 to 1 billion in any supported unit."
-          },
-          {
-                "title": "2. Select Units",
-                "desc": "Choose from watts, kilowatts, megawatts, gigawatts, horsepower (mechanical and metric), BTUs per hour, and tons of refrigeration."
-          },
-          {
-                "title": "3. Compare Results",
-                "desc": "Converted values display for all units. A contextual reference shows what typical devices consume that much power — from LED bulbs to industrial motors."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between mechanical and metric horsepower?",
-                "answer": "Mechanical horsepower (hp) equals 745.7 watts, while metric horsepower (PS) equals 735.5 watts. Both are supported with distinct labels."
-          },
-          {
-                "question": "Can I convert watt-hours to BTUs for energy calculations?",
-                "answer": "No, this converter handles power (rate of energy), not energy itself. For energy conversion (kWh to BTUs), multiply watts by time separately."
-          },
-          {
-                "question": "Does the tool convert between kW and hp for automotive use?",
-                "answer": "Yes, the kilowatt-to-horsepower conversion is prominently featured. 100 kW equals approximately 134 mechanical horsepower or 136 metric horsepower."
-          }
-    ]
 },
   {
 
@@ -4512,34 +1669,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Pressure Value",
-                "desc": "Input the numeric pressure to convert. The tool accepts values from 0 to 10 million in any unit."
-          },
-          {
-                "title": "2. Choose Units",
-                "desc": "Select from pascals, kilopascals, megapascals, bar, millibar, PSI, atmospheres, torr, mmHg, inHg, and cmH2O."
-          },
-          {
-                "title": "3. Review Results Table",
-                "desc": "All conversions update instantly. Results include scientific notation for very small or large values and standard notation for everyday ranges."
-          }
-    ],
-    faqs: [
-          {
-                "question": "What is the difference between bar and PSI?",
-                "answer": "One bar equals 14.5038 PSI or 100,000 pascals. Bar is commonly used in meteorology and industrial applications, while PSI is standard in automotive tire pressure."
-          },
-          {
-                "question": "Can I convert blood pressure readings (mmHg) to other units?",
-                "answer": "Yes, mmHg (millimeters of mercury) is supported. 120 mmHg equals 15.998 kPa or 0.1579 atm. This is useful for medical data conversion."
-          },
-          {
-                "question": "Does the converter handle vacuum and negative pressure?",
-                "answer": "Yes, negative pressure values (below atmospheric) are supported. Enter values as negative numbers for gauge pressure below zero."
-          }
-    ]
 },
   {
     id: "548a",
@@ -4549,16 +1678,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate color shades and tints from a base color by varying lightness in HSL space.',
     seoDescription: 'Free online Color Shades & Tints \u2014 Generate color shades and tints from a base color. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Choose a Base Color", desc: "Enter a hex color code or use the color picker to select your base color. The tool generates lighter tints and darker shades from this starting point." },
-      { title: "2. Adjust the Range", desc: "Control how many steps of shades and tints to generate (5-20 each) and the lightness step size. More steps give finer gradations between colors." },
-      { title: "3. Copy Individual or All Colors", desc: "Click any color swatch to copy its hex code, or copy all generated colors at once for use in design systems, gradients, or UI palettes." },
-    ],
-    faqs: [
-      { question: "What's the difference between a shade and a tint?", answer: "A tint is created by adding white to a base color (making it lighter). A shade is created by adding black (making it darker). Tones (not shown here) add gray." },
-      { question: "How can I use shades and tints in design?", answer: "Use tints for backgrounds, hover states, and subtle variations. Use shades for borders, text on light backgrounds, and active states. A consistent palette of shades and tints creates visual harmony." },
-      { question: "How many colors does the tool generate?", answer: "By default, the tool generates 10 shades and 10 tints (20 total). You can adjust the count from 5 to 20 in each direction for more or fewer variations." },
-    ]
   },
   {
     id: "548b",
@@ -4568,16 +1687,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Check foreground/background color contrast against WCAG AA and AAA accessibility standards.',
     seoDescription: 'Free online Contrast Ratio Checker \u2014 Check color contrast against WCAG AA and AAA standards. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Set Foreground and Background Colors", desc: "Enter hex color codes or use the color pickers for both the foreground (text) and background colors. The tool calculates the contrast ratio instantly." },
-      { title: "2. Check WCAG Compliance", desc: "View the contrast ratio (e.g., 4.5:1) and see whether it passes WCAG AA and AAA requirements for both normal text and large text categories." },
-      { title: "3. Adjust Until Compliant", desc: "If the ratio fails WCAG AA, adjust your colors using the sliders. The tool shows the minimum ratio needed and provides pass/fail indicators as you tweak." },
-    ],
-    faqs: [
-      { question: "What contrast ratio is required for WCAG AA?", answer: "WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt+ bold). AAA requires 7:1 for normal text and 4.5:1 for large text." },
-      { question: "Why is color contrast important?", answer: "Good color contrast ensures text is readable by users with visual impairments including low vision and color blindness. It's a legal requirement for many websites under accessibility regulations." },
-      { question: "Does this check color blindness too?", answer: "The contrast ratio checker evaluates luminance contrast, not color distinction. For color blindness simulation, use our Color Blindness Simulator tool to see how your colors appear to users with different vision deficiencies." },
-    ]
   },
   {
 
@@ -4588,34 +1697,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate CSS media queries with min/max width and optional device type conditions.',
     seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Define Breakpoint Ranges",
-                "desc": "Configure min-width and max-width values for each breakpoint (e.g., mobile: 0–576px, tablet: 577–768px). The tool supports up to 10 named breakpoints."
-          },
-          {
-                "title": "2. Select Media Type and Features",
-                "desc": "Choose the target media type (screen, print, all) and optional features like resolution, orientation (portrait/landscape), or aspect-ratio for more precise targeting."
-          },
-          {
-                "title": "3. Generate and Export CSS",
-                "desc": "Review the generated @media rule blocks. You can copy individual queries or export the entire stylesheet. Each query includes the appropriate min/max width syntax."
-          }
-    ],
-    faqs: [
-          {
-                "question": "Should I use min-width or max-width queries for mobile-first design?",
-                "answer": "Mobile-first design uses min-width queries exclusively — the base styles target the smallest screen, and each @media (min-width: ...px) block adds enhancements as viewport grows. This is simpler, performs better, and avoids the specificity cascading issues of max-width overrides. The tool defaults to min-width but lets you toggle to max-width as needed."
-          },
-          {
-                "question": "How do I handle high-DPI (Retina) screens with media queries?",
-                "answer": "Use the resolution media feature with -webkit-min-device-pixel-ratio: 2 or min-resolution: 192dpi for Retina targeting. The tool includes a dedicated Retina toggle that generates the vendor-prefixed and standard syntax. This is essential for delivering @2x images or different CSS for high-density displays."
-          },
-          {
-                "question": "Can I generate container queries instead of media queries?",
-                "answer": "This tool generates traditional @media queries, not @container queries. Container queries respond to the size of a parent container rather than the viewport. For container query support, you would need a separate tool — they follow a different syntax (@container (min-width: ...)) and require a contain property on the parent element."
-          }
-    ]
 },
   {
 
@@ -4626,33 +1707,5 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate Markdown table templates with configurable rows and columns.',
     seoDescription: 'Free online Markdown Table Generator \u2014 Generate Markdown table templates with custom dimensions. ',
     dependencies: "None",
-    instructions: [
-          {
-                "title": "1. Enter Table Dimensions",
-                "desc": "Specify the number of rows (including header) and columns. The tool supports tables up to 50×50 cells for practical markdown rendering limits."
-          },
-          {
-                "title": "2. Fill Cell Content",
-                "desc": "Click into each cell and type your content directly in the interactive grid. You can paste tabular data from spreadsheets using the Paste from Clipboard button."
-          },
-          {
-                "title": "3. Choose Alignment and Generate",
-                "desc": "Set column alignment (left/center/right) using the column header controls. The tool generates the separator row with colons (:---, :---:, ---:) accordingly."
-          }
-    ],
-    faqs: [
-          {
-                "question": "How do I handle multiline content in a markdown table cell?",
-                "answer": "Markdown tables do not natively support multiline cells. The workaround is to use <br> HTML tags within cells for line breaks. The tool automatically wraps cell content containing <br> to render correctly. Alternatively, you can split the row into multiple rows with repeating first-column content."
-          },
-          {
-                "question": "What is the maximum table size that renders well in markdown?",
-                "answer": "Most markdown renderers (GitHub, GitLab, Stack Overflow) handle tables up to 20–30 columns and several hundred rows. Beyond that, the raw markdown becomes unreadable and rendering may be slow. This tool limits to 50×50 to maintain performance and output quality."
-          },
-          {
-                "question": "Can I import a CSV file directly into the table grid?",
-                "answer": "Yes, the tool includes a CSV import feature. Paste comma-separated or tab-separated data, and the tool automatically detects the delimiter and populates the grid. The first row is treated as the table header."
-          }
-    ]
 },
 ];
