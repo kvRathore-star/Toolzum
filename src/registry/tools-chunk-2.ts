@@ -376,10 +376,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     id: "442",
     name: "Color Converter",
     slug: "color-converter",
-    category: "Image",
+    category: "Design",
     description: 'Convert colors between Hex, RGB, HSL, HSV, and CMYK formats. Real-time preview, color picker, and copy-to-clipboard.',
     seoDescription: 'Free online Color Converter — Convert colors between Hex, RGB, HSL, HSV, and CMYK. Real-time preview with color picker. ',
     dependencies: "none",
+    instructions: [
+      { title: "1. Enter or Pick a Color", desc: "Type a color value in any format (Hex, RGB, HSL, HSV, CMYK) or use the color picker to select one visually. The tool auto-detects the input format." },
+      { title: "2. View All Color Representations", desc: "See your color converted to all five formats simultaneously — Hex, RGB, HSL, HSV, and CMYK. Each value updates in real time as you adjust the color." },
+      { title: "3. Copy Any Format", desc: "Click the copy icon next to any color format to copy it to your clipboard. Use the values across CSS, design tools, or any application that needs color values." },
+    ],
+    faqs: [
+      { question: "What color formats are supported?", answer: "The converter supports Hex (3, 6, and 8-digit), RGB, RGBA, HSL, HSLA, HSV (HSB), and CMYK. Each format shows its values alongside the others for easy cross-reference." },
+      { question: "Does the color picker work in real time?", answer: "Yes. The color picker and all format inputs are linked — changing any input updates the picker and all other format values instantly. The live preview shows the color swatch." },
+      { question: "When should I use CMYK vs RGB?", answer: "Use RGB (or Hex) for digital designs — websites, apps, and screens. Use CMYK for print designs — brochures, flyers, and business cards. CMYK values help ensure printed colors match your screen." },
+      { question: "What is the difference between HSL and HSV?", answer: "HSL (Hue, Saturation, Lightness) and HSV (Hue, Saturation, Value) are similar but differ in how they define brightness. HSL's lightness goes from black to white, while HSV's value goes from black to the full color. Designers often prefer HSL for intuitive adjustments." },
+    ]
       },
   {
     id: "443",
@@ -396,9 +407,20 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Lorem Ipsum Generator",
     slug: "lorem-ipsum-generator",
     category: "Text",
-    description: 'Generate placeholder text in multiple styles: Standard Lorem Ipsum, Cicero, Legal, Startup, Coffee, and Pirate. Customizable paragraphs and word count.',
-    seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in multiple styles. Custom paragraphs and word count. ',
+    description: 'Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.',
+    seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in Standard, Cicero, Legal, Startup, Coffee, and Pirate themes. Customizable paragraphs and word count for design mockups and layouts.',
     dependencies: "none",
+    instructions: [
+    { title: "1. Choose Your Style", desc: "Select from Standard Lorem Ipsum (classic scrambled Latin), Cicero (original Latin text from De Finibus), Legal (law-themed), Startup (tech/SaaS), Coffee (cafe-themed), or Pirate (nautical-themed) placeholder text." },
+    { title: "2. Set Output Size", desc: "Adjust the number of paragraphs (1-50) or word count to get the amount of placeholder text you need for your design layout." },
+    { title: "3. Copy for Your Layout", desc: "Click to copy the generated text and paste it into your design mockup, website wireframe, or print layout. No registration or data upload required." },
+  ],
+    faqs: [
+    { question: "What is the difference between Lorem Ipsum and Cicero text?", answer: "Standard Lorem Ipsum is the classic scrambled version of Cicero's 'De Finibus Bonorum et Malorum' — it's the traditional placeholder text used since the 1500s. Cicero text is the actual, unmodified Latin source text from the original philosophical work." },
+    { question: "Can I generate a specific number of words?", answer: "Yes. Toggle between paragraph mode and word-count mode to generate exactly the number of words you need — useful for filling text blocks of specific sizes in design layouts." },
+    { question: "What are the themed versions for?", answer: "Theme variants (Startup, Coffee, Pirate) generate placeholder text that matches the tone of your project — startup-themed text for SaaS mockups, coffee-themed for cafe designs, and legal-themed for law firm layouts, making wireframes more contextually relevant." },
+    { question: "Can I use Lorem Ipsum in production?", answer: "Lorem Ipsum is designed as placeholder text for design mockups and wireframes. Replace it with real content before launching your site — Lorem Ipsum in production content can confuse users and hurt SEO." },
+  ],
     showInCategory: true,
   },
   {
@@ -450,6 +472,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Font Converter — Convert between TTF, OTF, WOFF, and WOFF2 formats. Preview with custom text. ',
     dependencies: "opentype.js",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Your Font", desc: "Select a font file from your device — TTF, OTF, WOFF, or WOFF2 formats are all accepted. The tool reads the font and displays a preview with sample text." },
+      { title: "2. Choose Output Format", desc: "Select the target format — TTF for desktop use, WOFF or WOFF2 for web use, OTF for cross-platform compatibility. WOFF2 offers the best compression for websites." },
+      { title: "3. Preview and Download", desc: "Type custom preview text to see how the font looks in the new format. Once satisfied, download the converted font file for use in your project." },
+    ],
+    faqs: [
+      { question: "What font formats are supported?", answer: "The converter supports TTF (TrueType), OTF (OpenType), WOFF (Web Open Font Format), and WOFF2 (Web Open Font Format 2). These cover all modern desktop and web font use cases." },
+      { question: "Which format should I use for my website?", answer: "Use WOFF2 for the best compression and fastest loading — it's 30-50% smaller than WOFF. Include a WOFF fallback for older browsers. WOFF2 is supported by all modern browsers." },
+      { question: "Can I convert multiple fonts at once?", answer: "This tool converts one font at a time. For batch font conversion, consider using our Bulk Font Subsetter tool which can process multiple fonts simultaneously." },
+      { question: "Are all font features preserved?", answer: "Yes. The conversion preserves OpenType features including ligatures, kerning, alternates, and language-specific glyphs as long as the source and target formats both support them." },
+    ]
   },
   {
     id: "450",
@@ -460,6 +493,17 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Font Subsetter — Reduce font file size by removing unused glyphs. Keep only needed characters. ',
     dependencies: "opentype.js",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Your Font", desc: "Select a TTF, OTF, WOFF, or WOFF2 font file. The tool analyzes the font and shows its current glyph count and file size." },
+      { title: "2. Choose Characters to Keep", desc: "Enter the specific characters, numbers, and symbols your project needs. Common presets include 'A-Z, a-z, 0-9' for English text or you can paste custom text." },
+      { title: "3. Generate and Download", desc: "Click subset to create a smaller font containing only the selected characters. Download the optimized font with dramatically reduced file size." },
+    ],
+    faqs: [
+      { question: "How much can font subsetting reduce file size?", answer: "Font file size reduction depends on how many glyphs are removed. A full font can be 100-500KB. Subsetting to only Latin characters (A-Z, a-z, 0-9) can reduce it to 5-20KB — a 90-95% reduction." },
+      { question: "Why is font subsetting important for web performance?", answer: "Font files are a major contributor to page load time. Subsetting removes unused characters (Cyrillic, Greek, special symbols, etc.) that your site doesn't need, resulting in faster page loads and better Core Web Vitals scores." },
+      { question: "Can I subset for multiple languages?", answer: "Yes. You can include any combination of Unicode characters. For multilingual sites, include character ranges for each language your content uses. The tool preserves all entered characters." },
+      { question: "What happens to ligatures and special features?", answer: "Ligatures and OpenType features for included characters are preserved. Features for removed characters are stripped along with the glyphs. The font format and basic functionality remain intact." },
+    ]
   },
   {
     id: "451",
@@ -938,7 +982,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     id: "500",
     name: "Number Base Converter",
     slug: "number-base-converter",
-    category: "Converter",
+    category: "Developer",
     description: 'Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.',
     seoDescription: 'Free online Number Base Converter — Convert numbers between binary, octal, decimal, and hexadecimal bases with instant swap. ',
     dependencies: "None",
@@ -1499,6 +1543,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Border CSS Generator — Generate border CSS with width, style, color, and radius controls with live preview. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Customize Border Properties", desc: "Adjust border width (px), style (solid, dashed, dotted, etc.), and color using the visual controls. Each change updates the preview in real time." },
+      { title: "2. Set Border Radius", desc: "Use the radius slider to round corners. Enable per-corner control to set different radius values for each corner independently." },
+      { title: "3. Copy the CSS Code", desc: "Once your border looks right, copy the generated CSS code. The tool outputs shorthand and longhand CSS properties ready to paste into your stylesheet." },
+    ],
+    faqs: [
+      { question: "What CSS properties does this tool generate?", answer: "The tool generates border-width, border-style, border-color, border-radius, and the shorthand border property. For radius, it outputs both individual (border-top-left-radius, etc.) and shorthand values." },
+      { question: "Can I set different borders on each side?", answer: "Yes. You can individually control top, right, bottom, and left border width, style, and color. The tool generates the appropriate CSS for per-side borders." },
+      { question: "Is the generated CSS ready for production?", answer: "Yes. The CSS output uses standard properties supported by all modern browsers. Copy and paste directly into your stylesheet — no modification needed." },
+    ]
   },
   {
     id: "949",
@@ -1508,6 +1562,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Typography CSS generator with font-size, line-height, letter-spacing, and font-weight controls with live preview.',
     seoDescription: 'Free online Typography Preview — Generate typography CSS with font-size, line-height, letter-spacing, and font-weight controls with live preview. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Adjust Typography Properties", desc: "Use the sliders and inputs to control font-size, line-height, letter-spacing, font-weight, and font-family. Changes reflect instantly in the live preview text." },
+      { title: "2. Preview with Your Text", desc: "Replace the sample text with your own content to see how your typography choices look with real copy. Test different heading and paragraph combinations." },
+      { title: "3. Copy the CSS", desc: "Once your typography is dialed in, copy the generated CSS. The tool outputs all typography properties ready for your stylesheet." },
+    ],
+    faqs: [
+      { question: "What CSS properties can I preview?", answer: "The tool covers font-size, line-height, letter-spacing (tracking), word-spacing, font-weight, font-style, text-transform, text-decoration, and font-family." },
+      { question: "Can I test with Google Fonts?", answer: "Yes. You can select from popular Google Fonts in the font-family dropdown. The tool loads the font for live preview so you can see exactly how it renders." },
+      { question: "Why is typography important for web design?", answer: "Good typography improves readability, establishes visual hierarchy, and reinforces brand identity. Proper line-height and letter-spacing make content more accessible and pleasant to read." },
+    ]
   },
   {
     id: "543a",
@@ -1558,7 +1622,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     id: "543f",
     name: "Unicode Converter",
     slug: "unicode-converter",
-    category: "Utility",
+    category: "Developer",
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
@@ -1622,6 +1686,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate color shades and tints from a base color by varying lightness in HSL space.',
     seoDescription: 'Free online Color Shades & Tints \u2014 Generate color shades and tints from a base color. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Choose a Base Color", desc: "Enter a hex color code or use the color picker to select your base color. The tool generates lighter tints and darker shades from this starting point." },
+      { title: "2. Adjust the Range", desc: "Control how many steps of shades and tints to generate (5-20 each) and the lightness step size. More steps give finer gradations between colors." },
+      { title: "3. Copy Individual or All Colors", desc: "Click any color swatch to copy its hex code, or copy all generated colors at once for use in design systems, gradients, or UI palettes." },
+    ],
+    faqs: [
+      { question: "What's the difference between a shade and a tint?", answer: "A tint is created by adding white to a base color (making it lighter). A shade is created by adding black (making it darker). Tones (not shown here) add gray." },
+      { question: "How can I use shades and tints in design?", answer: "Use tints for backgrounds, hover states, and subtle variations. Use shades for borders, text on light backgrounds, and active states. A consistent palette of shades and tints creates visual harmony." },
+      { question: "How many colors does the tool generate?", answer: "By default, the tool generates 10 shades and 10 tints (20 total). You can adjust the count from 5 to 20 in each direction for more or fewer variations." },
+    ]
   },
   {
     id: "548b",
@@ -1631,6 +1705,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Check foreground/background color contrast against WCAG AA and AAA accessibility standards.',
     seoDescription: 'Free online Contrast Ratio Checker \u2014 Check color contrast against WCAG AA and AAA standards. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set Foreground and Background Colors", desc: "Enter hex color codes or use the color pickers for both the foreground (text) and background colors. The tool calculates the contrast ratio instantly." },
+      { title: "2. Check WCAG Compliance", desc: "View the contrast ratio (e.g., 4.5:1) and see whether it passes WCAG AA and AAA requirements for both normal text and large text categories." },
+      { title: "3. Adjust Until Compliant", desc: "If the ratio fails WCAG AA, adjust your colors using the sliders. The tool shows the minimum ratio needed and provides pass/fail indicators as you tweak." },
+    ],
+    faqs: [
+      { question: "What contrast ratio is required for WCAG AA?", answer: "WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt+ bold). AAA requires 7:1 for normal text and 4.5:1 for large text." },
+      { question: "Why is color contrast important?", answer: "Good color contrast ensures text is readable by users with visual impairments including low vision and color blindness. It's a legal requirement for many websites under accessibility regulations." },
+      { question: "Does this check color blindness too?", answer: "The contrast ratio checker evaluates luminance contrast, not color distinction. For color blindness simulation, use our Color Blindness Simulator tool to see how your colors appear to users with different vision deficiencies." },
+    ]
   },
   {
     id: "548c",

@@ -116,7 +116,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "2",
     name: 'Privacy Cleaner',
     slug: 'privacy-cleaner',
-    category: 'Utility',
+    category: 'Privacy',
     description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. No signup or account required.',
     seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. ',
     dependencies: 'Vanilla JS'
@@ -129,6 +129,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.',
     dependencies: "Google Cloud Translation API",
     seoDescription: 'Free AI translator online — translate text between 100+ languages instantly. Automatic language detection. Uses cloud-based processing.',
+    instructions: [
+      { title: "1. Enter Your Text", desc: "Type or paste the text you want to translate. The tool supports paragraphs, sentences, or single words — it auto-detects the source language." },
+      { title: "2. Select Target Language", desc: "Choose from 100+ supported languages. The tool uses neural machine translation for natural-sounding results. Common languages appear at the top for quick access." },
+      { title: "3. View and Use the Translation", desc: "The translated text appears instantly. Copy the result, listen to pronunciation, or switch the source/target languages to translate back." },
+    ],
+    faqs: [
+      { question: "How many languages are supported?", answer: "The AI Translator supports over 100 languages including major world languages (English, Spanish, Chinese, Hindi, Arabic, French, etc.) and many regional and minority languages." },
+      { question: "How accurate is the translation?", answer: "Translation accuracy varies by language pair and content type. Common language pairs like English-Spanish achieve high accuracy. Technical or idiomatic content may require human review." },
+      { question: "Is my text stored after translation?", answer: "Your text is processed through the translation API and is not permanently stored. We recommend not translating sensitive or confidential information through any cloud-based translation service." },
+      { question: "Can I translate entire documents?", answer: "This tool is optimized for text snippets up to a few paragraphs. For full document translation, consider breaking the document into sections or using a dedicated document translation service." },
+    ]
   },
   {
     id: "9",
@@ -148,6 +159,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Transforms text prompts into high-resolution images using advanced diffusion models. Designers and marketers use it for rapid visual prototyping.',
     dependencies: "Stable Diffusion API",
     seoDescription: 'Generate stunning AI images from text prompts — free online. Turn your ideas into high-resolution visuals instantly. Powered by advanced diffusion models.',
+    instructions: [
+      { title: "1. Write Your Prompt", desc: "Describe the image you want to generate in detail. Include subject, style, setting, colors, and mood. More descriptive prompts produce better results." },
+      { title: "2. Choose Style and Settings", desc: "Select from art styles like photorealistic, oil painting, anime, sketch, or 3D render. Adjust settings like image size and guidance scale for creative control." },
+      { title: "3. Generate and Download", desc: "Click generate to create your image. Review the result and either download it or refine your prompt for a different outcome. Each generation produces a unique image." },
+    ],
+    faqs: [
+      { question: "What is a diffusion model?", answer: "A diffusion model is an AI that learns to generate images by gradually removing noise from random pixels, guided by your text prompt. It creates novel images rather than remixing existing ones." },
+      { question: "How detailed should my prompt be?", answer: "Detailed prompts produce better results. Include the subject (what), setting (where), style (how), colors, lighting, and mood. For example: 'a serene mountain lake at sunset, photorealistic style, warm golden light, misty atmosphere'." },
+      { question: "Can I use the generated images commercially?", answer: "Usage rights depend on the model used. Most standard diffusion models allow personal and commercial use, but check the specific model's license. Generated images may resemble existing works." },
+      { question: "Why did my image not match my prompt?", answer: "Diffusion models interpret prompts in their own way. Try rewording your prompt with more specific terms, adding style keywords, or using negative prompts to exclude unwanted elements." },
+    ]
   },
   {
     id: "11",
@@ -402,6 +424,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
     dependencies: "Mailinator API / Custom Backend",
     showInCategory: false,
+    instructions: [
+      { title: "1. Choose Expiration Time", desc: "Select how long your disposable inbox should last — from 5 minutes up to 48 hours. The inbox and all messages are permanently deleted after expiration." },
+      { title: "2. Generate Your Temporary Email", desc: "Click generate to create a unique disposable email address. Copy the address and use it anywhere you need an email — signups, verifications, or one-time communications." },
+      { title: "3. Check Inbox and Read Messages", desc: "Refresh the inbox to see incoming messages. Click any email to read its contents. No password, no signup, no personal information needed." },
+    ],
+    faqs: [
+      { question: "How long does the temporary email last?", answer: "You can choose from 5 minutes to 48 hours. The email address and all associated messages are permanently deleted once the selected time expires. No recovery is possible." },
+      { question: "Can I reply to emails?", answer: "No. This is a receive-only disposable email service. It's designed for receiving verification emails, one-time links, and testing — not for ongoing correspondence." },
+      { question: "Is this anonymous?", answer: "Yes. No personal information, signup, or login is required to use the temporary email generator. Your IP address may be logged for abuse prevention but is not associated with any account." },
+      { question: "What happens to my data after expiration?", answer: "All messages, attachments, and the email address itself are permanently deleted from the server after the selected expiration time. No backups or copies are retained." },
+    ]
   },
   {
     id: "40",
@@ -410,7 +443,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Extension",
     description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. No signup or account required.',
     seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. ',
-    dependencies: "MediaRecorder API"
+    dependencies: "MediaRecorder API",
+    instructions: [
+      { title: "1. Configure Capture Settings", desc: "Choose what to capture — browser tab, full screen, or application window. Set your preferred resolution and frame rate for the recording." },
+      { title: "2. Generate the Extension", desc: "Click the generate button to create a custom browser extension configured with your capture settings. The tool packages everything into a downloadable extension file." },
+      { title: "3. Install and Record", desc: "Load the extension into your browser's extension manager. Click the extension icon to start and stop recordings — no account or signup required." },
+    ],
+    faqs: [
+      { question: "What browsers does this extension work with?", answer: "The generated extension uses the standard MediaRecorder API supported by Chrome, Firefox, Edge, and other Chromium-based browsers. Safari support may vary depending on your version." },
+      { question: "Can I change the resolution after generating?", answer: "Resolution is configured before generation. If you need a different resolution, simply regenerate the extension with your new settings — the process takes seconds and no account is needed." },
+      { question: "Where are recordings saved?", answer: "Recordings are saved locally to your device's default downloads folder. Nothing is uploaded to any server — everything stays on your computer." },
+    ]
   },
   {
     id: "41",
@@ -476,7 +519,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Transcribe video audio to text using AI-powered speech recognition. Supports multiple languages and speaker diarization.',
     seoDescription: 'Free online Video to Text Transcription — Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. ',
-    dependencies: "Whisper API"
+    dependencies: "Whisper API",
+    instructions: [
+      { title: "1. Upload Your Video", desc: "Select a video file from your device. The tool supports common formats like MP4, MOV, AVI, and MKV. Your file is processed using cloud-based AI speech recognition." },
+      { title: "2. Choose Language and Settings", desc: "Select the spoken language in your video for optimal accuracy. Enable speaker diarization if you need the transcript to distinguish between different speakers." },
+      { title: "3. Generate and Export Transcript", desc: "Click the transcribe button to convert speech to text. Once complete, download your transcript as a text file or copy it directly from the results panel." },
+    ],
+    faqs: [
+      { question: "What video formats are supported?", answer: "The tool supports MP4, MOV, AVI, MKV, WebM, and most common video containers. If your format isn't listed, try converting the video to MP4 first." },
+      { question: "How does speaker diarization work?", answer: "Speaker diarization analyzes audio patterns to identify when different people are speaking. The transcript labels each segment with a speaker identifier (Speaker 1, Speaker 2, etc.) making it easier to follow conversations and meetings." },
+      { question: "How long does transcription take?", answer: "Processing time depends on video length and server load. A 30-minute video typically takes 3-5 minutes to transcribe. Longer videos may take proportionally more time." },
+      { question: "What languages are supported?", answer: "The speech recognition supports multiple languages including English, Spanish, French, German, Hindi, Chinese, Arabic, Portuguese, and many more. Select the spoken language before starting transcription for best accuracy." },
+    ]
   },
   {
     id: "48",
@@ -543,6 +597,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators.',
     dependencies: "HuggingFace",
     seoDescription: 'Free AI paraphrasing tool — rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators. ',
+    instructions: [
+      { title: "1. Enter Your Text", desc: "Type or paste the sentences or paragraphs you want to rewrite. The tool preserves the original meaning while finding new ways to express your content." },
+      { title: "2. Choose Paraphrase Options", desc: "Select your desired style — standard, fluent, formal, or creative. Adjust how much the output differs from the original using a similarity slider." },
+      { title: "3. Review and Copy", desc: "View the rewritten version alongside the original. Copy the paraphrased text or regenerate for an alternative result." },
+    ],
+    faqs: [
+      { question: "How does AI paraphrasing work?", answer: "The AI analyzes your text's meaning, sentence structure, and word choices, then reconstructs it using alternative vocabulary and phrasing while preserving the original message and intent." },
+      { question: "Is the paraphrased text plagiarism-free?", answer: "The tool produces original rewrites, but you should always check the output for accuracy and run it through a plagiarism detector if you're submitting it academically or professionally." },
+      { question: "What is the difference between standard and creative modes?", answer: "Standard mode makes conservative changes — synonym replacement and minor restructuring. Creative mode makes more substantial changes — rewriting entire sentences and changing the flow while keeping the core meaning." },
+      { question: "Can I paraphrase academic papers?", answer: "Yes, but use it as a starting point. Academic writing requires precise terminology that may not survive paraphrasing. Always verify technical accuracy and cite your sources." },
+    ]
   },
   {
     id: "54",
@@ -606,7 +671,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Health",
     description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Height and Weight", desc: "Input your height and weight using either metric (cm/kg) or imperial (ft/in/lbs) units. The tool converts automatically for the BMI calculation." },
+      { title: "2. View Your BMI and Category", desc: "Your BMI value is calculated instantly alongside your weight category — underweight, normal, overweight, or obese. No submission button needed." },
+      { title: "3. Understand Your Result", desc: "Review the BMI chart to see where you fall. Use this as a general health screening tool — all calculations happen locally in your browser." }
+    ],
+    faqs: [
+      { question: 'What is BMI and how is it calculated?', answer: 'BMI (Body Mass Index) is calculated by dividing weight in kilograms by height in meters squared. It provides a general indication of whether your weight is in a healthy range relative to your height.' },
+      { question: 'Is BMI accurate for everyone?', answer: 'BMI is a useful screening tool but doesn\'t account for muscle mass, bone density, or body composition. Athletes may show as overweight despite low body fat. Older adults may have normal BMI but low muscle mass.' },
+      { question: 'What are the BMI ranges?', answer: 'Underweight: below 18.5, Normal: 18.5-24.9, Overweight: 25-29.9, Obese Class I: 30-34.9, Class II: 35-39.9, Class III: 40+. Always consult a healthcare provider for a complete health assessment.' }
+    ]
   },
   {
     id: "64",
@@ -615,7 +690,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Transcribe audio files to text using AI-powered speech recognition. Supports MP3, WAV, M4A, and more formats.',
     seoDescription: 'Free online Audio to Text Transcription — Convert spoken audio from uploaded files into editable text. Uses cloud-based processing.',
-    dependencies: "Whisper API"
+    dependencies: "Whisper API",
+    instructions: [
+      { title: "1. Upload Your Audio File", desc: "Select an audio file from your device. The tool supports MP3, WAV, M4A, FLAC, and OGG formats. Drag and drop or use the file picker." },
+      { title: "2. Select Language and Processing Options", desc: "Choose the spoken language for better recognition accuracy. You can also enable punctuation restoration and automatic paragraph detection for cleaner output." },
+      { title: "3. Transcribe and Export", desc: "Start the transcription process. Once complete, review the text in the editor panel, make any corrections, and download as TXT or copy to clipboard." },
+    ],
+    faqs: [
+      { question: "What audio formats are supported?", answer: "The tool supports MP3, WAV, M4A, FLAC, OGG, and AAC. For best results, use clear audio with minimal background noise and a sample rate of at least 16kHz." },
+      { question: "Is there a file size limit?", answer: "File size limits depend on your browser and the cloud processing backend. Most files under 200MB process without issues. Larger files may need to be split into smaller segments first." },
+      { question: "How accurate is the transcription?", answer: "Accuracy depends on audio quality, speaker clarity, background noise, and language. Clean recordings with single speakers in quiet environments typically achieve 90-95% accuracy. Accents and technical vocabulary may reduce accuracy slightly." },
+      { question: "Can I edit the transcript after processing?", answer: "Yes. The results appear in an editable text panel where you can make corrections, add punctuation, or reformat the content before exporting." },
+    ]
   },
   {
     id: "66",
@@ -653,6 +739,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.',
     dependencies: "Real-ESRGAN",
     seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. ',
+    instructions: [
+      { title: "1. Upload Your Image", desc: "Select a low-resolution image from your device. The tool accepts JPEG, PNG, and WebP formats up to 10MB. For best results, start with the highest quality source available." },
+      { title: "2. Choose Upscale Factor", desc: "Select your target resolution increase — 2x or 4x. 2x offers faster processing with good quality, while 4x provides the maximum detail reconstruction." },
+      { title: "3. Download the Upscaled Image", desc: "Process the image and download the result. The upscaled version retains fine details, sharp edges, and natural textures that standard interpolation methods lose." },
+    ],
+    faqs: [
+      { question: "What is Real-ESRGAN?", answer: "Real-ESRGAN (Enhanced Super-Resolution Generative Adversarial Network) is a deep learning model that reconstructs high-resolution images from low-resolution inputs. It's trained to restore realistic textures, not just stretch pixels." },
+      { question: "How is this different from normal image resizing?", answer: "Normal resizing uses interpolation (bicubic, bilinear) that just stretches pixels, causing blurriness and pixelation. AI upscaling reconstructs missing detail — it adds texture to faces, sharpens text edges, and preserves natural-looking gradients." },
+      { question: "What's the maximum input resolution?", answer: "Input images up to 10MB are supported. The output will be 2x or 4x larger in each dimension (e.g., 512x512 becomes 1024x1024 or 2048x2048). Very large inputs may be resized before processing." },
+      { question: "Can I upscale old family photos?", answer: "Yes. Old or low-quality photos often benefit most from AI upscaling. The model can reconstruct faces, reduce JPEG artifacts, and restore detail in backgrounds. Results vary based on original image quality." },
+    ]
   },
   {
     id: "70",
@@ -794,7 +891,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Productivity",
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pomodoro Timer — Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. ',
-    dependencies: "Web Audio API / Vanilla JS"
+    dependencies: "Web Audio API / Vanilla JS",
+    instructions: [
+      { title: "1. Set Your Intervals", desc: "Configure your focus session length (default 25 min), short break (default 5 min), and long break (default 15 min). Adjust each to match your personal workflow." },
+      { title: "2. Customize Auto-Start Options", desc: "Enable or disable auto-start for both work sessions and breaks. Decide whether the timer moves to the next phase automatically or waits for you." },
+      { title: "3. Start Working", desc: "Click the start button to begin your first focus session. The timer tracks remaining time and plays a notification sound when it's time to switch between focus and breaks." },
+    ],
+    faqs: [
+      { question: "What is the Pomodoro Technique?", answer: "The Pomodoro Technique is a time management method that breaks work into focused intervals (traditionally 25 minutes) separated by short breaks. It helps maintain concentration and prevents burnout by structuring work into manageable sessions." },
+      { question: "Can I customize session lengths?", answer: "Yes. All three intervals — focus session, short break, and long break — are fully customizable. You can set any duration in minutes to match your personal productivity rhythm." },
+      { question: "Does the timer work offline?", answer: "Yes. Everything runs locally in your browser. The Pomodoro Timer uses no server connections and works even without internet access after the initial page load." },
+      { question: "What happens when I complete a full cycle?", answer: "After four focus sessions (a full cycle), the timer suggests a longer break. You can accept the long break or continue working. The cycle counter resets automatically after the long break." },
+    ]
   },
   {
     id: "90",
@@ -803,7 +911,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Uses cloud-based processing.',
     seoDescription: 'Free online YouTube Transcript Generator — YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. ',
-    dependencies: "YouTube Data API"
+    dependencies: "YouTube Data API",
+    instructions: [
+      { title: "1. Enter a YouTube Video URL or ID", desc: "Paste the full YouTube video URL (e.g., youtube.com/watch?v=...) or just the video ID. The tool fetches available captions from the video." },
+      { title: "2. Select Language and Format", desc: "Choose from available caption tracks (auto-generated or manual). Select your output format — plain text, SRT, or VTT subtitle files." },
+      { title: "3. Download the Transcript", desc: "Click generate to fetch and compile the transcript. Download the result in your chosen format or copy it directly to your clipboard." },
+    ],
+    faqs: [
+      { question: "Do I need a YouTube API key?", answer: "No. The tool uses public YouTube caption endpoints. You only need the video URL or ID — no API keys, accounts, or authentication required." },
+      { question: "Are all YouTube videos supported?", answer: "Only videos that have captions enabled by the uploader or auto-generated by YouTube will return transcripts. Videos without captions cannot be processed." },
+      { question: "What if the video has no captions?", answer: "If a video has no available captions, the tool will indicate that no transcript is available. You may want to use the Video to Text Transcription tool to generate captions from the video's audio instead." },
+      { question: "Can I get transcripts in multiple languages?", answer: "If the video has multiple caption tracks (e.g., English, Spanish, Hindi), you can select each language from the dropdown. Auto-generated captions are typically available in the video's spoken language." },
+    ]
   },
   {
     id: "92",
@@ -925,7 +1044,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online EXIF Data Remover — Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. ',
-    dependencies: "exifr / Piexifjs"
+    dependencies: "exifr / Piexifjs",
+    instructions: [
+      { title: "1. Upload Your Image", desc: "Select a JPEG or PNG image from your device. The tool reads all embedded EXIF metadata including GPS coordinates, camera model, timestamp, and software info." },
+      { title: "2. Review Metadata to Remove", desc: "The tool displays all detected metadata fields. You can choose to strip all metadata or selectively remove specific fields like GPS location while keeping others." },
+      { title: "3. Clean and Download", desc: "Click the remove button to strip the selected metadata. Download your cleaned image — all processing happens locally, nothing is uploaded to any server." },
+    ],
+    faqs: [
+      { question: "What EXIF data does this tool remove?", answer: "It strips GPS coordinates, camera make and model, timestamp, software fingerprint, exposure settings, flash information, ISO, focal length, and thumbnail data. You can choose to remove all or select specific fields." },
+      { question: "Is my image uploaded to a server?", answer: "No. Everything runs locally in your browser using JavaScript libraries. Your image is never sent to any server — all EXIF reading and removal happens on your device." },
+      { question: "What image formats are supported?", answer: "JPEG and PNG images are supported. JPEG files typically contain the most EXIF data. PNG files may have limited metadata but the tool can still clean what's present." },
+      { question: "Why should I remove EXIF data before sharing photos?", answer: "EXIF data can reveal sensitive information like your exact home address (GPS coordinates), camera equipment, and when a photo was taken. Removing this metadata protects your privacy when sharing images online." },
+    ]
   },
   {
     id: "110",
@@ -1002,9 +1132,20 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Face Swap",
     slug: "ai-face-swap",
     category: "AI",
-    description: 'Compress video files to reduce size while maintaining quality. Supports MP4, MOV, WebM. Adjust resolution, bitrate, and codec settings.',
-    seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos while matching skin tone, lighting, and head angle. ',
-    dependencies: "InsightFace"
+    description: 'Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle for natural results.',
+    seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle. ',
+    dependencies: "InsightFace",
+    instructions: [
+      { title: "1. Upload the Source and Target Images", desc: "Upload the source image (the face to use) and the target image (where the face will be applied). Both should be clear, front-facing photos for best results." },
+      { title: "2. Align and Process", desc: "The AI detects faces in both images automatically. Review the detected face regions and adjust if needed. The swap algorithm matches skin tone, lighting, angle, and expression." },
+      { title: "3. Preview and Download", desc: "Preview the result before downloading. The tool blends the swapped face naturally with the target image's background, lighting, and composition." },
+    ],
+    faqs: [
+      { question: "What images work best for face swapping?", answer: "Front-facing photos with good lighting and neutral expressions produce the best results. Both faces should be roughly the same size and angle. Avoid heavily angled, obscured, or low-light photos." },
+      { question: "Is this technology safe and ethical?", answer: "AI face swap technology should only be used with consent from all people in the photos. Do not create misleading or harmful content. The tool is intended for creative and entertainment purposes only." },
+      { question: "What face detection model is used?", answer: "The tool uses InsightFace, a state-of-the-art face analysis library that provides accurate face detection, alignment, and swapping with realistic blending." },
+      { question: "Can I use this for video?", answer: "This tool processes still photos. For video face swapping, consider specialized video editing software. Each frame of a video would need individual processing." },
+    ]
   },
   {
     id: "113",
@@ -1030,16 +1171,38 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Uses cloud-based processing.',
     seoDescription: 'Free online Meeting Minutes Generator — Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. ',
-    dependencies: "OpenAI API"
+    dependencies: "OpenAI API",
+    instructions: [
+      { title: "1. Enter Your Meeting Notes", desc: "Paste your raw meeting notes, bullet points, or conversation transcript into the input field. Include any key decisions, action items, and attendee names you want captured." },
+      { title: "2. Customize Output Sections", desc: "Choose which sections you want in the minutes — attendees, decisions, action items, follow-ups, discussion summary, or all of the above. Tailor the structure to your meeting type." },
+      { title: "3. Generate and Export", desc: "Click generate to produce structured meeting minutes. Review, edit, and download the formatted document or copy it to your preferred note-taking tool." },
+    ],
+    faqs: [
+      { question: "What types of notes work best?", answer: "The tool works best with detailed bullet points or paragraph notes that capture key discussion points, decisions, and assignments. Brief keywords are less effective than complete sentences describing outcomes." },
+      { question: "Can I customize the output sections?", answer: "Yes. You can select exactly which sections to include — attendees, agenda, discussion summary, decisions, action items, and follow-ups. This lets you match the format to different meeting types." },
+      { question: "Is my meeting data stored on the server?", answer: "Your notes are processed through the OpenAI API temporarily. We recommend removing sensitive or confidential information before processing. Processed results appear in your browser and you can save or delete them locally." },
+      { question: "How is this different from a transcript?", answer: "Meeting minutes are a structured summary that extracts key decisions, action items, and next steps from raw notes. They're much shorter and more actionable than a full transcript, which captures every word spoken." },
+    ]
   },
   {
     id: "116",
     name: "AI Cover Letter Generator",
     slug: "ai-cover-letter-generator",
     category: "AI",
-    description: 'Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. Uses cloud-based processing.',
-    seoDescription: 'Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer’s. ',
-    dependencies: "OpenAI API"
+    description: "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. Uses cloud-based processing.",
+    seoDescription: "Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. ",
+    dependencies: "OpenAI API",
+    instructions: [
+      { title: "1. Enter Job Description and Resume", desc: "Paste the job description and your resume into the provided fields. The more detail you provide, the more tailored your cover letter will be." },
+      { title: "2. Choose Tone and Style", desc: "Select your preferred tone — professional, enthusiastic, confident, or concise. Choose whether to highlight specific skills or experiences mentioned in the job description." },
+      { title: "3. Generate and Customize", desc: "Click generate to produce a tailored cover letter. Review the output, make personal edits to match your voice, and download or copy the final version." },
+    ],
+    faqs: [
+      { question: "How does the AI tailor the cover letter?", answer: "The AI analyzes keywords and requirements from the job description, then matches them against your resume's experience and skills. The cover letter highlights the most relevant qualifications for each specific role." },
+      { question: "Should I edit the generated letter?", answer: "Yes. The AI provides a strong draft, but adding personal touches, specific anecdotes, and your unique voice makes the letter more authentic and effective. Always proofread before submitting." },
+      { question: "What information should I include in my resume?", answer: "Include your complete work history, education, skills, certifications, and notable achievements. More detailed input helps the AI write a more specific and compelling cover letter." },
+      { question: "Can I generate letters for multiple jobs?", answer: "Yes. Each generation is unique to the job description and resume provided. You can generate as many cover letters as needed for different applications." },
+    ],
   },
   {
     id: "121",
@@ -1084,7 +1247,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Branding",
     description: 'Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Email Signature Generator — Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. ',
-    dependencies: "React"
+    dependencies: "React",
+    instructions: [
+      { title: "1. Enter Your Information", desc: "Fill in your name, title, company, phone, email, and website. The form-based interface builds your signature step by step." },
+      { title: "2. Add Social Links and Branding", desc: "Toggle social media icons (LinkedIn, Twitter, Instagram, etc.) and enter your profile URLs. Choose your brand colors, font, and signature style." },
+      { title: "3. Generate and Install", desc: "Click generate to produce HTML code. Copy the code and paste it into your email client's signature settings (Gmail, Outlook, Apple Mail, etc.)." }
+    ],
+    faqs: [
+      { question: 'What email clients are supported?', answer: 'The generated HTML works in Gmail, Outlook, Apple Mail, Yahoo Mail, Thunderbird, and most webmail clients. Some styling may vary across clients.' },
+      { question: 'Can I add a photo or logo?', answer: 'You can include a logo image by providing a URL. Upload your logo to an image hosting service first, then paste the URL into the signature builder.' },
+      { question: 'Why does my signature look different in different clients?', answer: 'Email clients render HTML differently. Gmail strips certain CSS, Outlook uses Word\'s rendering engine. Test your signature in your target email client.' }
+    ]
   },
   {
     id: "128",
@@ -1171,7 +1344,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.',
     seoDescription: 'Free online Password Strength Checker — Evaluates password strength using zxcvbn entropy analysis with score, crack time estimate, and improvement suggestions. ',
-    dependencies: "zxcvbn"
+    dependencies: "zxcvbn",
+    instructions: [
+      { title: "1. Enter Your Password", desc: "Type or paste a password into the input field. The tool analyzes it in real time using zxcvbn entropy analysis — no submission button needed." },
+      { title: "2. Review Strength Metrics", desc: "View your password's score (0-4), estimated crack time, and detailed feedback including length, character diversity, dictionary word detection, and pattern repetition." },
+      { title: "3. Improve Weak Passwords", desc: "Use the suggestions panel to strengthen your password. The tool highlights specific issues — common patterns, dictionary words, repetitive characters — and shows how each change affects your score." },
+    ],
+    faqs: [
+      { question: "What is zxcvbn?", answer: "zxcvbn is a password strength estimator developed by Dropbox that uses pattern matching and entropy calculation rather than simple rules like 'must include a number.' It provides realistic crack time estimates and actionable feedback." },
+      { question: "Is my password sent anywhere?", answer: "No. Everything runs locally in your browser. The password analysis happens entirely on your device — your password is never transmitted, stored, or logged." },
+      { question: "What makes a strong password?", answer: "A strong password is long (12+ characters), uses a mix of uppercase, lowercase, numbers, and symbols, avoids dictionary words and common patterns (qwerty, 123456, password), and is unique to each service." },
+      { question: "What does the score mean?", answer: "The score ranges from 0 (very weak) to 4 (very strong). A score of 3 or higher indicates a password that would take years to crack with current technology. The estimated crack time gives a more intuitive sense of real-world strength." },
+    ]
   },
   {
     id: "135",
@@ -1197,9 +1381,20 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Text to Handwriting",
     slug: "text-to-handwriting",
     category: "Text",
-    description: 'Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Text to Handwriting — Renders typed text as realistic handwritten output using configurable fonts, ink colors, paper backgrounds, and even simulated pressure variations. ',
-    dependencies: "Canvas API"
+    description: 'Render typed text as realistic handwritten output with configurable fonts, ink colors, paper styles, and simulated pressure variations. Create handwritten-looking notes, letters, and assignments.',
+    seoDescription: 'Free online Text to Handwriting — Convert typed text to realistic handwritten output with customizable fonts, ink colors, paper backgrounds, and pressure variations. Create handwritten notes digitally.',
+    dependencies: "Canvas API",
+    instructions: [
+    { title: "1. Type or Paste Your Content", desc: "Enter the text you want rendered as handwriting. Supports paragraphs, lists, and multi-page content." },
+    { title: "2. Customize Handwriting Style", desc: "Choose from handwriting fonts, ink colors (blue, black, dark blue), paper style (ruled, plain, grid, dotted), and adjust font size and page margins for a natural look." },
+    { title: "3. Download as Image", desc: "Preview the handwritten output and download it as a PNG image. The result mimics real handwriting with natural variations in letter spacing and line alignment." },
+  ],
+    faqs: [
+    { question: "What handwriting fonts are available?", answer: "The tool includes multiple handwriting fonts ranging from neat print-style to casual cursive. Each font simulates natural variations in letter forms with slight randomization for authenticity." },
+    { question: "Can I adjust the handwriting appearance?", answer: "Yes. Customize ink color (choose from realistic pen colors), paper background (ruled notebook, plain white, grid, dotted), font size, line spacing, page margins, and stain/effect overlays for a more authentic look." },
+    { question: "How do I download the result?", answer: "The handwritten output is rendered on a canvas and can be downloaded as a PNG image. For multi-page content, each page can be downloaded individually." },
+    { question: "Can I use this for professional work?", answer: "Text to Handwriting is best for personal projects, creative content, and educational use. For professional documents, use actual word processing tools with handwriting fonts for better formatting control." },
+  ]
   },
   {
     id: "138",
@@ -1217,7 +1412,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "AI",
     description: 'Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Uses cloud-based processing.',
     seoDescription: 'Free online AI Thumbnail Maker — Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. ',
-    dependencies: "Canvas API / OpenAI API"
+    dependencies: "Canvas API / OpenAI API",
+    instructions: [
+      { title: "1. Enter Your Video Title", desc: "Type your video title or topic. The AI analyzes it to suggest relevant imagery, text overlays, and composition that maximize click-through rate." },
+      { title: "2. Customize the Design", desc: "Choose from AI-generated thumbnail templates. Add text, adjust colors, position elements, and apply effects. Preview how the thumbnail looks at YouTube display size." },
+      { title: "3. Export Your Thumbnail", desc: "Download the final thumbnail as a high-resolution PNG or JPEG. The output is optimized for YouTube's 1280x720 recommended thumbnail dimensions." },
+    ],
+    faqs: [
+      { question: "What makes a good YouTube thumbnail?", answer: "Good thumbnails have high contrast, readable text (3-5 words max), expressive faces, bright colors, and clear focal points. They should be understandable at small sizes on mobile devices." },
+      { question: "Can I use my own images?", answer: "Yes. You can upload your own background images, logos, or face shots. The tool composites them into the thumbnail design with text overlays and effects." },
+      { question: "What size should the thumbnail be?", answer: "YouTube recommends 1280x720 pixels (16:9 ratio). The tool outputs at this optimal resolution. Minimum width is 640 pixels." },
+      { question: "Are the AI-generated designs unique?", answer: "Yes. The AI generates unique compositions based on your video title and preferences. Each design is created fresh, not selected from a template library." },
+    ]
   },
   {
     id: "140",
@@ -1226,7 +1432,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. Uses cloud-based processing.',
     seoDescription: 'Free online Secure Note Sharer — Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. ',
-    dependencies: "Crypto API / Redis"
+    dependencies: "Crypto API / Redis",
+    instructions: [
+      { title: "1. Write Your Note", desc: "Type or paste the sensitive information you want to share securely. This could be a password, API key, personal message, or any confidential text." },
+      { title: "2. Set a Passphrase and Options", desc: "Create a passphrase that the recipient must enter to view the note. The note is encrypted with this passphrase before being stored. Optionally set view-once mode." },
+      { title: "3. Share the One-Time Link", desc: "Copy the generated link and send it to your recipient via any channel (email, chat, etc.). Share the passphrase separately. The note self-destructs after being read once." },
+    ],
+    faqs: [
+      { question: "How is the note encrypted?", answer: "The note is encrypted in your browser using the Web Crypto API before being sent to the server. The server never sees the unencrypted content. Only someone with the correct passphrase can decrypt and read it." },
+      { question: "What does one-time view mean?", answer: "Once the recipient opens the link and enters the correct passphrase, the note is permanently deleted from the server. Even if someone gets the same link later, the content is gone." },
+      { question: "How should I share the passphrase?", answer: "Share the link and passphrase through separate channels for security. For example, send the link via email and the passphrase via SMS or messaging app. This prevents anyone intercepting a single channel from accessing both." },
+      { question: "How long is the note stored?", answer: "The note is stored until it is read (in one-time mode) or until it expires (typically 24-48 hours). Unread notes are automatically purged after expiration." },
+    ]
   },
   {
     id: "141",
@@ -1327,7 +1544,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HEX to RGB Converter — Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. ',
     dependencies: "Vanilla JS",
-      },
+    instructions: [
+      { title: "1. Enter a Hex Color Code", desc: "Type or paste a hex color code (e.g., #FF5733, #3498db, or shorthand #F00). The tool accepts 3, 6, or 8-digit hex values with or without the # prefix." },
+      { title: "2. View RGB and RGBA Values", desc: "The tool instantly converts your hex code to RGB (red, green, blue) and RGBA (with alpha channel) values. Each channel shows values from 0-255." },
+      { title: "3. Copy the Results", desc: "Click the copy button next to any format to copy the color value to your clipboard. Use the RGB values in CSS, design software, or anywhere that accepts RGB color notation." },
+    ],
+    faqs: [
+      { question: "What's the difference between RGB and RGBA?", answer: "RGB uses three values (red, green, blue) with no transparency. RGBA adds a fourth alpha channel (0-1) for opacity. For example, rgba(255, 0, 0, 0.5) is semi-transparent red." },
+      { question: "Does this work with 3-digit hex codes?", answer: "Yes. 3-digit shorthand codes like #F00 expand to #FF0000. The tool handles 3-digit, 6-digit, and 8-digit (with alpha) hex formats automatically." },
+      { question: "Can I convert back from RGB to Hex?", answer: 'Yes. Use the Color Converter tool for bidirectional color conversion between Hex, RGB, HSL, HSV, and CMYK formats.' },
+      { question: "Is my color data sent to a server?", answer: "No. All color conversion happens locally in your browser using client-side JavaScript. Nothing is uploaded or stored." },
+    ]
+  },
   {
     id: "157",
     name: "BMR Calculator",
@@ -1335,7 +1563,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Health",
     description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Your Details", desc: "Input your age, sex, height, and weight. The Mifflin-St Jeor equation uses these factors to calculate your Basal Metabolic Rate accurately." },
+      { title: "2. Choose Your Units", desc: "Select metric (cm/kg) or imperial (ft/in/lbs). The calculator handles the conversion so you can use whatever units you're comfortable with." },
+      { title: "3. View Your BMR", desc: "Your BMR — calories burned at complete rest — is displayed instantly. Use this baseline for diet planning and weight management." }
+    ],
+    faqs: [
+      { question: 'What is BMR?', answer: 'Basal Metabolic Rate (BMR) is the calories your body needs at complete rest for vital functions like breathing, circulation, and cell production. It accounts for 60-75% of your daily calorie burn.' },
+      { question: 'What is the Mifflin-St Jeor equation?', answer: 'It\'s the most accurate BMR formula. Men: 10 x weight(kg) + 6.25 x height(cm) - 5 x age + 5. Women: 10 x weight(kg) + 6.25 x height(cm) - 5 x age - 161.' },
+      { question: 'How do I use BMR for weight management?', answer: 'Multiply your BMR by an activity factor (1.2 sedentary to 1.9 very active) to estimate TDEE. To lose weight, eat below TDEE. To gain, eat above. BMR gives you the baseline for these calculations.' }
+    ]
   },
   {
     id: "158",
@@ -1391,7 +1629,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Branding",
     description: 'Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Conversion Rate Calculator — Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Conversions and Visitors", desc: "Input the number of conversions and total visitors. The calculator divides conversions by visitors to find your conversion rate." },
+      { title: "2. Set Decimal Precision", desc: "Choose how many decimal places to show in the result. Standard precision is 2 decimal places." },
+      { title: "3. View Your Rate", desc: "See your conversion rate as a percentage. Use this metric to evaluate campaign performance." }
+    ],
+    faqs: [
+      { question: 'What is conversion rate?', answer: 'Conversion rate is the percentage of visitors who complete a desired action (purchase, signup). Calculated as conversions divided by total visitors times 100.' },
+      { question: 'What is a good conversion rate?', answer: 'Average rates vary: e-commerce 2-3%, B2B SaaS 3-5%, lead gen 5-10%. Above industry average is good.' },
+      { question: 'How to improve conversion rate?', answer: 'Improve page speed, simplify forms, add social proof, use clear CTAs, A/B test, optimize for mobile.' }
+    ]
   },
   {
     id: "163",
@@ -1420,7 +1668,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Branding",
     description: 'ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ROAS Calculator — ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Revenue and Ad Spend", desc: "Input your total ad revenue and total ad spend. The calculator divides revenue by spend." },
+      { title: "2. View Your ROAS", desc: "See your return on ad spend as a ratio (e.g., 4:1 = $4 earned per $1 spent)." },
+      { title: "3. Evaluate Campaigns", desc: "Use ROAS to assess which campaigns and channels are performing best." }
+    ],
+    faqs: [
+      { question: 'What is ROAS?', answer: 'Return on Ad Spend measures revenue generated per dollar spent on advertising. Revenue divided by ad spend.' },
+      { question: 'What is a good ROAS?', answer: '4:1 is generally good. Break-even depends on profit margins. E-commerce targets 3-5:1.' },
+      { question: 'ROAS vs ROI?', answer: 'ROAS focuses on ad revenue vs ad spend. ROI considers total costs and total profit.' }
+    ]
   },
   {
     id: "165",
@@ -1429,7 +1687,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Podcast Transcription processes long-form audio files into text using speech recognition.',
     seoDescription: 'Free online Podcast Transcription — Convert long-form podcast audio files into text. Uses cloud-based processing.',
-    dependencies: "Whisper API"
+    dependencies: "Whisper API",
+    instructions: [
+      { title: "1. Upload Your Podcast Episode", desc: "Select your podcast audio file (MP3, WAV, M4A) from your device. The tool is optimized for long-form audio — episodes up to 3 hours are supported." },
+      { title: "2. Choose Language and Diarization", desc: "Select the episode's primary language. Enable speaker diarization to label different speakers in the transcript — essential for multi-host or interview episodes." },
+      { title: "3. Transcribe and Export", desc: "Start the transcription. Once complete, review the text, identify speakers by name, and export the transcript as TXT, SRT, or VTT for show notes or subtitles." },
+    ],
+    faqs: [
+      { question: "How long does podcast transcription take?", answer: "Processing time scales with episode length. A one-hour podcast typically transcribes in 5-10 minutes depending on server load. Longer episodes take proportionally more time." },
+      { question: "Can I identify speakers by name?", answer: "For best results, provide speaker names in your request. Speaker diarization labels each speaker as Speaker 1, Speaker 2, etc. You can manually rename them after reviewing the transcript." },
+      { question: "What formats can I export to?", answer: "You can export as plain text (TXT), SubRip subtitles (SRT), or WebVTT (VTT). TXT is best for show notes, SRT and VTT are formatted for podcast video subtitles on YouTube or your podcast player." },
+      { question: "Is this suitable for editing podcast show notes?", answer: "Yes. The transcript provides a complete text base that you can edit down into show notes, timestamps, key quotes, and summaries — saving hours of manual transcription and note-taking." },
+    ]
   },
   {
     id: "166",
@@ -1457,16 +1726,37 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Design",
     description: 'Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. No signup or account required.',
     seoDescription: 'Free online Favicon Generator — Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. ',
-    dependencies: "Sharp / jimp"
+    dependencies: "Sharp / jimp",
+    instructions: [
+      { title: "1. Choose Your Input", desc: "Type text initials, upload an image, or select an emoji as your favicon source. Text and emoji options create clean, scalable icons instantly." },
+      { title: "2. Customize the Design", desc: "Adjust colors, background, padding, and border radius to match your brand. Preview the favicon in real time at actual display size (16x16 to 64x64 pixels)." },
+      { title: "3. Download Your Favicon", desc: "Download the favicon as .ico (for all browsers) and .png (for modern browsers and devices). The .ico file contains multiple resolutions for compatibility." },
+    ],
+    faqs: [
+      { question: "What size favicon do I need?", answer: "The tool generates multiple sizes in the .ico file (16x16, 32x32, 48x48) plus a separate 64x64 PNG. Modern browsers use 32x32 while older systems may use 16x16. Having all sizes ensures compatibility." },
+      { question: "What's the difference between .ico and .png?", answer: ".ico is the traditional favicon format supported by all browsers. PNG favicons offer better quality and smaller file sizes but may not work on very old browsers. Most modern sites serve both formats." },
+      { question: "How do I install the favicon on my website?", answer: 'Place the .ico file in your site root (favicon.ico) — browsers find it automatically. For the PNG version, add <link rel="icon" type="image/png" href="/path/to/favicon.png"> to your HTML <head>.' },
+    ]
   },
   {
     id: "170",
     name: "Case Converter",
     slug: "case-converter",
     category: "Text",
-    description: 'Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Case Converter — Transforms text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, and alternating case with a single click. ',
+    description: 'Transform text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, sentence case, and alternating case with a single click. All processing is local.',
+    seoDescription: 'Free online Case Converter — Transform text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, sentence case, and alternating case. Instant local text transformation.',
     dependencies: "Vanilla JS",
+    instructions: [
+    { title: "1. Enter Your Text", desc: "Type or paste the text you want to convert. The tool updates all case variants instantly as you type." },
+    { title: "2. Choose a Case Style", desc: "Click any case format — uppercase (ALL CAPS), lowercase, title case, camelCase, snake_case, kebab-case, sentence case, or alternating (aLtErNaTiNg) case." },
+    { title: "3. Copy the Result", desc: "Click any result to copy it to your clipboard. Use camelCase for JavaScript variables, snake_case for Python, kebab-case for URLs, and sentence case for regular writing." },
+  ],
+    faqs: [
+    { question: "What are all the available case formats?", answer: "The converter supports: UPPERCASE, lowercase, Title Case, camelCase (first word lowercase), PascalCase (first word uppercase), snake_case (underscores), kebab-case (hyphens), CONSTANT_CASE (uppercase underscores), dot.case, sentence case (first letter capital), path/case (slashes), and alternating aLtErNaTiNg case." },
+    { question: "When should I use camelCase vs snake_case?", answer: "camelCase is standard in JavaScript, TypeScript, and Java for variable and function names. snake_case is standard in Python, Ruby, and Rust. PascalCase is used for class names in most languages. kebab-case is standard for URL slugs and CSS class names." },
+    { question: "Does title case capitalize every word?", answer: "Title case capitalizes the first letter of every word by default. For proper AP/Chicago style title case (which keeps articles, prepositions, and conjunctions lowercase), use the Smart Title Case option which follows standard headline capitalization rules." },
+    { question: "Is my text stored or transmitted?", answer: "No. All case conversion happens locally in your browser. Your text never leaves your device — no server requests, no data storage, no tracking." },
+  ]
       },
   {
     id: "171",
@@ -1522,7 +1812,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PGP Key Generator — Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. ',
-    dependencies: "OpenPGP.js"
+    dependencies: "OpenPGP.js",
+    instructions: [
+      { title: "1. Select Key Type and Bit Length", desc: "Choose between RSA (2048 or 4096-bit) or ECDSA (Curve25519) key types. RSA 4096 offers maximum compatibility, while ECDSA Curve25519 provides modern security with smaller key sizes." },
+      { title: "2. Configure User Identity and Expiry", desc: "Enter your name and email address for the key's user ID. Set an expiration date (optional) and optionally enable passphrase protection for the private key." },
+      { title: "3. Generate and Download Your Key Pair", desc: "Click generate to create your PGP key pair. Download both the public key (to share) and private key (keep secret and backed up). Everything runs locally — nothing is uploaded." },
+    ],
+    faqs: [
+      { question: "What's the difference between RSA and ECDSA?", answer: "RSA is the most widely supported PGP key type. 4096-bit RSA offers strong security. ECDSA Curve25519 provides equivalent security with smaller keys and faster generation. Choose RSA for maximum compatibility, ECDSA for modern performance." },
+      { question: "Is my private key exposed to the server?", answer: "No. All key generation happens locally in your browser using OpenPGP.js. Your private key never leaves your device. The generated keys are downloaded directly to your computer." },
+      { question: "Should I set a passphrase on my private key?", answer: "Yes, strongly recommended. A passphrase encrypts your private key so that even if someone obtains the key file, they cannot use it without the passphrase. Choose a strong, memorable passphrase." },
+      { question: "Can I use these keys with popular email clients?", answer: "Yes. The generated keys follow the OpenPGP standard and work with Thunderbird (Enigmail), Outlook (GPGTools), Apple Mail (GPGMail), and command-line GPG. Export compatibility may require converting between formats." },
+    ]
   },
   {
     id: "182",
@@ -1567,9 +1868,20 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Zalgo Text Generator",
     slug: "zalgo-text-generator",
     category: "Text",
-    description: 'Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Zalgo Text Generator — Adds combining diacritical marks above, below, and through each character to create intentionally corrupted ‘zalgo’ glitch text. ',
+    description: 'Create corrupted Zalgo text by adding combining diacritical marks (accents, umlauts, dots) above, below, and through normal letters. Adjustable intensity for subtle or extreme corruption effects.',
+    seoDescription: 'Free online Zalgo Text Generator — Create corrupted text with combining diacritical marks above, below, and through letters. Adjustable intensity for subtle to extreme glitch effects. Copy for usernames and bios.',
     dependencies: "Vanilla JS",
+    instructions: [
+    { title: "1. Enter Your Text", desc: "Type or paste the text you want to corrupt with Zalgo combining marks. Shorter text works best for maximum visual effect." },
+    { title: "2. Adjust Zalgo Intensity", desc: "Use the intensity slider to control how many combining marks are added — low for subtle accents, high for extreme corruptions where the base text is barely visible beneath the marks." },
+    { title: "3. Copy the Zalgo Text", desc: "Click to copy the corrupted text. Use for distorted usernames, creepy-themed bios, horror content, or creative design elements that need a corrupted aesthetic." },
+  ],
+    faqs: [
+    { question: "What is Zalgo text?", answer: "Zalgo text uses Unicode combining diacritical marks — special characters that attach to the preceding letter. By stacking many combining marks (accents, umlauts, cedillas, dots, lines, circles) above, below, and through each letter, normal text becomes visually corrupted and distorted." },
+    { question: "Can I control where the marks appear?", answer: "Yes. Choose which combining marks are added: above-only (accents and diacritics above letters), below-only (marks below), both sides, or through (strikethrough-style marks). Each position creates a different glitch effect." },
+    { question: "Will Zalgo text render everywhere?", answer: "Zalgo text renders differently depending on the platform's Unicode rendering engine. Most modern platforms display the combining marks stacked above/below letters, but some platforms clamp the number of marks per character or display them incorrectly." },
+    { question: "Can I undo Zalgo corruption?", answer: "Zalgo corruption is reversible only if you know the original text. The combining marks are added to the existing characters — removing the diacritical marks reveals the original letters underneath, but the process is not automated in this tool." },
+  ],
     showInCategory: false,
   },
   {
@@ -1577,9 +1889,20 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Invisible Text Generator",
     slug: "invisible-text-generator",
     category: "Text",
-    description: 'Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Invisible Text Generator — Generates blank Unicode characters—zero-width spaces, hair spaces, and invisible separators—that appear as empty text. ',
-    dependencies: "Vanilla JS"
+    description: 'Generate blank Unicode text using zero-width spaces, hair spaces, and invisible separators that render as empty content. Copy for social media bios, messaging apps, and formatting hacks.',
+    seoDescription: 'Free online Invisible Text Generator — Generate blank Unicode text using zero-width spaces, hair spaces, and invisible separators. Create empty bios, messages, and formatting hacks. Instant local generation.',
+    dependencies: "Vanilla JS",
+    instructions: [
+    { title: "1. Choose Invisible Method", desc: "Pick from zero-width space (best for invisible text), hair space (very thin visible gap), or invisible separator characters depending on your use case." },
+    { title: "2. Set Length and Generate", desc: "Set how many invisible characters to generate. A single character may not be registered as content — use 3-10 for most platforms." },
+    { title: "3. Copy and Paste", desc: "Copy the invisible content to your clipboard. Paste into social media bios, messaging apps, or anywhere you need empty text that is not blank." },
+  ],
+    faqs: [
+    { question: "What is invisible text used for?", answer: "Invisible text is commonly used to create empty social media bios (Instagram, Twitter, Telegram) where a completely blank bio is not allowed, to add spacing in messaging apps, and to test how platforms handle zero-width and whitespace characters." },
+    { question: "Do all platforms support invisible characters?", answer: "Most modern platforms support invisible Unicode characters but may strip them during text processing. Test your invisible text on the target platform before relying on it — some platforms trim ZWSP and other zero-width characters from user input." },
+    { question: "Is this the same as blank space?", answer: "Visible blank space is typically created by regular space characters (U+0020) or tab characters. Invisible text uses zero-width characters that take up NO visible space — the text cursor moves but no character appears. This creates truly invisible content rather than blank space." },
+    { question: "How many characters should I generate?", answer: "For social media bios, generate 3-10 invisible characters. A single ZWSP is often rejected as 'empty' by platforms. For testing, 1-2 characters are enough to verify whether a platform supports zero-width characters." },
+  ]
   },
   {
     id: "187",
@@ -1637,7 +1960,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Branding",
     description: 'Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Net Promoter Score Calculator — Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Enter Responses", desc: "Input NPS survey responses (0-10). Categorized into promoters (9-10), passives (7-8), detractors (0-6)." },
+      { title: "2. Calculate NPS", desc: "NPS = % promoters - % detractors. Score ranges from -100 to +100." },
+      { title: "3. Track Over Time", desc: "Record NPS to track changes. Use as benchmark for customer satisfaction." }
+    ],
+    faqs: [
+      { question: 'What is NPS?', answer: 'Net Promoter Score measures customer loyalty based on likelihood to recommend. Scores grouped into detractors, passives, and promoters.' },
+      { question: 'What is a good NPS?', answer: 'Above 0 good, above 20 favorable, above 50 excellent, above 80 world-class.' },
+      { question: 'How many responses needed?', answer: 'Aim for 100+ responses for reliable results. Smaller samples indicate trends.' }
+    ]
   },
   {
     id: "191",
@@ -1665,7 +1998,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Design",
     description: 'SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SVG Editor — SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. ',
-    dependencies: "SVGO / Fabric.js"
+    dependencies: "SVGO / Fabric.js",
+    instructions: [
+      { title: "1. Upload or Create an SVG", desc: "Open an existing SVG file or start from scratch on the blank canvas. The editor supports drag-and-drop for SVG files and raw SVG code input." },
+      { title: "2. Edit Elements Visually", desc: "Select any element on the canvas to see transform handles. Move, resize, rotate, and edit attributes directly. Use the property panel to adjust fill, stroke, opacity, and more." },
+      { title: "3. Export Your SVG", desc: "Download the edited SVG file or copy the optimized SVG code. The tool can also minify your SVG and clean up unnecessary metadata for production use." },
+    ],
+    faqs: [
+      { question: "What SVG features are supported?", answer: "The editor supports shapes (rect, circle, path, text), groups, transforms, gradients, and basic path editing. Complex features like filters, animations, and scripts are preserved but not editable in the visual interface." },
+      { question: "Can I edit SVG code directly?", answer: "Yes. You can switch between visual and code views. Changes in the code editor are reflected on the canvas in real time, giving you both visual and programmatic control." },
+      { question: "Is my SVG uploaded to a server?", answer: "No. Everything runs locally in your browser. Your SVG file is never sent to any server — all editing, rendering, and export happens on your device." },
+      { question: "What export formats are available?", answer: "You can export as SVG (optimized with SVGO), PNG (rasterized at any resolution), or copy the raw SVG code to clipboard. The optimized SVG removes unused attributes and metadata." },
+    ]
   },
   {
     id: "194",
@@ -1731,16 +2075,39 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Privacy",
     description: 'Generates random MAC addresses in six common formats with optional OUI prefix. Supports Unix, Windows, Cisco, and dot-separated styles.',
     seoDescription: 'Free online MAC Address Generator — Generates random MAC addresses in six common formats (Unix, Windows, Cisco, colon-separated, hyphen-separated, and dot-separated) with optional OUI. ',
-    dependencies: "Vanilla JS"
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Choose Output Format", desc: "Select your preferred MAC address format — colon-separated (AA:BB:CC:DD:EE:FF), hyphen-separated (AA-BB-CC-DD-EE-FF), Cisco style (AABB.CCDD.EEFF), or dot-separated format." },
+      { title: "2. Set OUI Prefix (Optional)", desc: "Optionally enter an OUI (Organizationally Unique Identifier) prefix to generate MAC addresses from a specific vendor. Leave blank for completely random addresses." },
+      { title: "3. Generate Multiple Addresses", desc: "Choose how many addresses to generate (1-50 at a time). Click generate and copy the results or download them as a text file for use in network configuration or testing." },
+    ],
+    faqs: [
+      { question: "What is a MAC address used for?", answer: "MAC addresses are unique hardware identifiers assigned to network interfaces. They're used in network configuration, device identification, access control lists, MAC filtering, and testing network software." },
+      { question: "What is an OUI prefix?", answer: "An OUI (Organizationally Unique Identifier) is the first 24 bits (6 hex characters) of a MAC address that identifies the hardware manufacturer. Using a specific OUI generates addresses that appear to belong to a particular vendor." },
+      { question: "Are these addresses usable on real networks?", answer: "These addresses are randomly generated and should only be used for testing, development, or configuration examples. Do not assign random MAC addresses to real network devices as this may cause network conflicts." },
+      { question: "What formats are supported?", answer: "Six formats are supported: Unix (colons), Windows (hyphens), Cisco (dot-separated in groups of 4), dot-separated (groups of 2), space-separated, and no-separator (continuous hex string)." },
+    ]
   },
   {
     id: "198",
     name: "IP Anonymizer",
     slug: "ip-anonymizer",
     category: "Privacy",
-    description: "Anonymize IP addresses in logs Everything runs locally in your browser — nothing is uploaded.",
-    seoDescription: 'Free online IP Anonymizer — Anonymize IP addresses in logs ',
-    dependencies: "Vanilla JS"
+    description: "Anonymize IP addresses in logs. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: 'Free online IP Anonymizer — Anonymize IP addresses in server logs and datasets. Preserves network prefix while removing the host portion for privacy compliance. ',
+    dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste Your IP Addresses", desc: "Enter or paste IP addresses (IPv4 or IPv6), one per line. The tool accepts raw IPs or log lines containing IP addresses — it extracts and anonymizes each one." },
+      { title: "2. Choose Anonymization Method", desc: "Select how much of the IP to preserve — full network prefix (/24 for IPv4), partial masking (replace last octet with XXX), or full zeroing of the host portion." },
+      { title: "3. Process and Export", desc: "Click anonymize to process all entries. Review the anonymized output, copy to clipboard, or download as a text file for use in log analysis or data sharing." },
+    ],
+    faqs: [
+      { question: "What does IP anonymization mean?", answer: "IP anonymization removes or masks the host portion of an IP address while preserving the network prefix. For example, 192.168.1.42 becomes 192.168.1.0. This makes individual devices unidentifiable while retaining geographic and network information." },
+      { question: "Why anonymize IP addresses?", answer: "IP addresses are considered personally identifiable information (PII) under GDPR, CCPA, and other privacy regulations. Anonymizing IPs before sharing logs, analytics, or datasets helps comply with privacy requirements." },
+      { question: "Can I reverse the anonymization?", answer: "No. IP anonymization is a one-way process. The removed host portion is discarded and cannot be recovered. This is intentional — it ensures the anonymized data cannot be deanonymized later." },
+      { question: "Does it work with log files?", answer: "Yes. The tool can process structured log files (Apache, Nginx, syslog, etc.) with embedded IP addresses. It identifies and anonymizes IPs within lines of text while preserving the surrounding log content." },
+      { question: "What's the difference between IPv4 and IPv6 handling?", answer: "For IPv4, the tool typically preserves the first 24 bits (/24 notation, first 3 octets). For IPv6, it preserves the first 64 bits (/64, the network prefix) and zeros out the interface identifier." },
+    ]
   },
   {
     id: "199",
@@ -1757,36 +2124,61 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Braille Translator",
     slug: "braille-translator",
     category: "Text",
-    description: 'Bidirectional converter between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille.',
-    seoDescription: 'Free online Braille Translator — Bidirectional converter between standard English text and Grade 1 or Grade 2 Braille. ',
-    dependencies: "Vanilla JS"
+    description: 'Bidirectional translator between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille. Each Braille character is displayed as a visual dot pattern with proper Unicode Braille characters.',
+    seoDescription: 'Free online Braille Translator — Bidirectional translation between English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille. Visual dot patterns shown for each character.',
+    dependencies: "Vanilla JS",
+    instructions: [
+    { title: "1. Choose Translation Direction", desc: "Select text-to-Braille or Braille-to-text mode. For text-to-Braille, type English text. For Braille-to-text, paste or type Braille characters (Unicode)." },
+    { title: "2. Select Braille Grade", desc: "Choose Grade 1 (uncontracted — one character per letter) for word-by-word translation, or Grade 2 (contracted — uses abbreviations and shorthand) for natural Braille used by experienced readers." },
+    { title: "3. Read and Copy", desc: "View the translated output with visual dot patterns. The Braille output shows both the Unicode characters and the dot positions. Copy for printing or digital use." },
+  ],
+    faqs: [
+    { question: "What is the difference between Grade 1 and Grade 2 Braille?", answer: "Grade 1 Braille (uncontracted) spells out every letter and word individually — easier for beginners but slower to read. Grade 2 Braille (contracted) uses shorthand contractions, abbreviations, and special signs to reduce space and increase reading speed — this is the standard used in most published Braille materials." },
+    { question: "Can I translate Braille back to English?", answer: "Yes. The tool works bidirectionally — paste Braille Unicode characters to get the English text translation. Grade 1 Braille translates exactly character-by-character. Grade 2 Braille translation uses standard Braille contraction rules." },
+    { question: "How are Braille dots represented?", answer: "Each Braille character is a 2x3 dot grid (6 dots total). Dots are numbered 1-3 (top to bottom, left column) and 4-6 (top to bottom, right column). The visual display shows which dots are raised for each character." },
+    { question: "What Braille standards does this follow?", answer: "The translator follows Unified English Braille (UEB) standards for Grade 1 and Grade 2 Braille, which is the current standard used in English-speaking countries including the US, UK, Canada, Australia, and New Zealand." },
+  ]
   },
   {
     id: "201",
     name: "Passport Photo Maker (India)",
     slug: "passport-photo-india",
     category: "indian-utilities",
-    description: "3.5x4.5 cm cropper for Indian passport photos",
-    seoDescription: 'Free online Passport Photo Maker (India) — 3.5x4.5 cm cropper for Indian passport photos.',
-    dependencies: "Canvas API / react-cropper"
+    description: 'Create a compliant 3.5x4.5 cm Indian passport photo from any uploaded image. Auto-crops with proper face positioning and background standards for passport, visa, and OCI card applications.',
+    seoDescription: 'Free online Indian Passport Photo Maker — Create compliant 3.5x4.5 cm passport photos with auto face detection and proper background. Crop, resize, and download instantly in your browser.',
+    dependencies: "Canvas API / react-cropper",
+    instructions: [
+    { title: "1. Upload Your Photo", desc: "Select a front-facing, well-lit photo from your device. The tool accepts JPEG and PNG files and works with any background color — the auto-detection finds your face region regardless." },
+    { title: "2. Auto-Crop to Passport Size", desc: "The tool automatically detects your face using image analysis and crops the photo to the precise 3.5x4.5 cm Indian passport standard. Adjust the crop box if needed." },
+    { title: "3. Download the Result", desc: "Preview the final passport-size photo with proper dimensions. Download it as a high-quality JPEG ready for printing or online submission. No data leaves your browser." },
+  ],
+    faqs: [
+    { question: "What are the exact dimensions for an Indian passport photo?", answer: "The standard Indian passport photo size is 3.5 cm wide by 4.5 cm tall (35 mm x 45 mm). The face should occupy approximately 70-80% of the frame with the top of the head to chin centered." },
+    { question: "Can I use this photo for visa or OCI applications?", answer: "Yes. The 3.5x4.5 cm size is the standard for Indian passports, OCI cards, and most visa applications. However, always check the specific photo guidelines for the particular visa or application type." },
+    { question: "What background color should I use?", answer: "Indian passport photos require a plain white or off-white background. The tool preserves your original background — ensure it's a solid light color before uploading for best results." },
+    { question: "Does this work on mobile?", answer: "Yes. Upload directly from your phone's camera roll. The tool runs entirely in your browser and works on any device with a modern web browser." },
+    { question: "Is my photo stored or uploaded anywhere?", answer: "No. All processing happens locally in your browser. Your photo file never leaves your device, ensuring complete privacy for your identification documents." },
+  ]
   },
   {
     id: "202",
     name: "Aadhaar Wallet Cropper",
     slug: "aadhaar-wallet-cropper",
     category: "indian-utilities",
-    description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Aadhaar Wallet Cropper — Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size, automatically detecting the face region using OpenCV Haar cascades. ',
-    dependencies: "Canvas API"
-  },
-  {
-    id: "203",
-    name: "PAN Card Resizer",
-    slug: "pan-card-resizer",
-    category: "indian-utilities",
-    description: 'Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online PAN Card Resizer — Resizes PAN card images to 3 x 4 cm (the standard size for laminated identification) while maintaining legibility of the printed text and hologram. ',
-    dependencies: "Canvas API"
+    description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size with automatic face detection using OpenCV Haar cascades. All processing is local and private.',
+    seoDescription: 'Free online Aadhaar Wallet Cropper — Crop Aadhaar card photos to standard 3.5x3.5 cm wallet size with auto face detection using OpenCV Haar cascades. 100% private, no uploads.',
+    dependencies: "Canvas API",
+    instructions: [
+    { title: "1. Upload Your Aadhaar Photo", desc: "Select the Aadhaar card image or the face photo you want to crop. The tool accepts common image formats and processes everything locally in your browser." },
+    { title: "2. Auto-Detect and Crop", desc: "The tool uses OpenCV Haar cascade classifiers to automatically detect the face region. It then crops the image to the standard 3.5 x 3.5 cm wallet-photo dimensions while keeping the face centered." },
+    { title: "3. Download the Wallet Photo", desc: "Preview the cropped result and download the final image. The output is ready for printing at standard photo sizes or for use in forms requiring a 3.5x3.5 cm photo." },
+  ],
+    faqs: [
+    { question: "What is the standard wallet photo size in India?", answer: "The standard wallet photo size for Indian identification documents and forms is 3.5 x 3.5 cm (35 mm x 35 mm). This size is commonly required for Aadhaar-related applications and other government forms." },
+    { question: "How does the face detection work?", answer: "The tool uses a pre-trained OpenCV Haar cascade classifier — the same computer vision technology used in digital cameras and photo editing software. It detects facial features like eyes, nose, and mouth to locate and center the face in the crop." },
+    { question: "What if the face detection doesn't work on my image?", answer: "Face detection works best on clear, front-facing photos with good lighting. If detection fails, ensure the image is well-lit and the face is clearly visible. You can manually adjust the crop area if needed." },
+    { question: "Is my Aadhaar image kept private?", answer: "Absolutely. All image processing runs locally in your browser using client-side JavaScript and WebAssembly. Your Aadhaar image is never uploaded to any server." },
+  ]
   },
   {
     id: "210",
@@ -1795,7 +2187,19 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. No signup or account required.',
     seoDescription: 'Free online Live Transcription — Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. ',
-    dependencies: "Web Speech API"
+    dependencies: "Web Speech API",
+    instructions: [
+      { title: "1. Allow Microphone Access", desc: "Click the start button and grant browser permission to access your microphone. The tool uses the Web Speech API for real-time speech recognition directly in your browser." },
+      { title: "2. Speak Naturally", desc: "Begin speaking — your words appear on screen in real time as continuous streaming text. No need to pause between sentences; the tool handles natural speech patterns." },
+      { title: "3. Copy or Save Your Transcript", desc: "When finished, click stop. Review the transcribed text, make any corrections directly in the output area, then copy to clipboard or download as a text file." },
+    ],
+    faqs: [
+      { question: "What browsers support live transcription?", answer: "The Web Speech API is supported in Chrome, Edge, and Safari. Firefox has limited support. Chrome on desktop and Android provides the most reliable real-time transcription experience." },
+      { question: "Is my speech sent to a server?", answer: "Speech processing depends on your browser. Chrome sends audio to Google's servers for processing. Edge uses Microsoft's servers. Safari processes on-device where possible. Check your browser's privacy policy for details." },
+      { question: "Can I use this for meetings or lectures?", answer: "Yes. Live Transcription works well for meetings, lectures, interviews, and any scenario where you need real-time captions. Position your microphone close to the speakers for best accuracy." },
+      { question: "How accurate is real-time transcription?", answer: "Accuracy depends on microphone quality, background noise, and speaker clarity. In quiet environments with a good microphone, accuracy is typically 85-95%. Clear articulation and minimal background noise produce the best results." },
+      { question: "Does it support multiple languages?", answer: "Yes. You can select from supported languages before starting. The Web Speech API supports dozens of languages and dialects including English, Spanish, French, German, Hindi, Japanese, and many more." },
+    ]
   },
   {
     id: "211",
@@ -1878,6 +2282,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.',
     dependencies: "CF Vectorize",
     seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool. Uses cloud-based processing.',
+    instructions: [
+      { title: "1. Upload Your Documents", desc: "Upload PDFs, Word files, or plain-text documents. The tool indexes all content into a vector store for fast, accurate retrieval across your entire document set." },
+      { title: "2. Ask Questions in Natural Language", desc: "Type any question about your documents in plain English (or other languages). The AI retrieves relevant passages and generates answers based on the document contents." },
+      { title: "3. Review Answers with Source Citations", desc: "Each answer includes citations showing which document and section the information came from. Verify claims and explore source material directly." },
+    ],
+    faqs: [
+      { question: "What is RAG (Retrieval-Augmented Generation)?", answer: "RAG combines document retrieval with AI text generation. When you ask a question, the system first finds relevant passages from your documents, then the AI generates an answer based only on those retrieved passages — reducing AI hallucinations." },
+      { question: "What document formats are supported?", answer: "The tool supports PDF, DOCX (Word), and plain text files. PDFs work best for structured documents. You can upload multiple documents and ask questions across all of them simultaneously." },
+      { question: "Is my document data stored on the server?", answer: "Your documents are processed and indexed temporarily to answer your questions. The vector store is session-based and documents are not retained after your session ends." },
+      { question: "How many documents can I upload at once?", answer: "You can upload multiple documents per session. There's a reasonable file size limit per document. Large document sets may take longer to index before you can start asking questions." },
+    ]
   },
   {
     id: "217",
@@ -1888,14 +2303,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. ',
     dependencies: "Whisper API",
     showInCategory: false,
-  },
-  {
-    name: 'Subtitle Generator',
-    slug: 'subtitle-generator',
-    description: 'Generate SRT subtitle files from video automatically. Supports multiple languages with accurate timestamp alignment for your videos.',
-    seoDescription: 'Free online Subtitle Generator — Generate SRT files from video. ',
-    category: 'Video',
-    id:  "219",
-    dependencies: 'None'
+    instructions: [
+      { title: "1. Upload Your Video", desc: "Select a video file (MP4, MOV, WebM, AVI). The AI transcribes the spoken audio and generates timestamped subtitles synchronized to each utterance." },
+      { title: "2. Choose Subtitle Language", desc: "Select the spoken language in your video. The transcription matches the speech language. Additional language translation support may be available for subtitle output." },
+      { title: "3. Export SRT or VTT Subtitles", desc: "Download the generated subtitles as SRT or VTT format. Both formats include precise timestamps for use with video players, YouTube, or social media platforms." },
+    ],
+    faqs: [
+      { question: "How accurate is the subtitle timing?", answer: "Subtitles are synchronized at the utterance level with frame-accurate timing. Each subtitle segment matches the natural pauses and speech rhythm of the spoken content." },
+      { question: "What subtitle formats are available?", answer: "You can download subtitles in SRT (SubRip) and VTT (WebVTT) formats. SRT is widely supported by video players. VTT supports additional styling and is used by HTML5 video players." },
+      { question: "Can I edit the subtitles after generation?", answer: "Yes. The generated subtitles appear in an editable text area before export. You can correct transcription errors, adjust timing, or reformat text before downloading." },
+      { question: "What video formats are supported?", answer: "MP4, MOV, WebM, and AVI files are supported. The tool extracts the audio track for transcription and preserves the original video for subtitle synchronization." },
+    ]
   },
 ];

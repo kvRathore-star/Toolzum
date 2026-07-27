@@ -287,6 +287,46 @@ const categoryInstructionTemplates: Record<string, { title: string; desc: string
     { title: "2. Configure the AI", desc: "Select your preferred AI provider and model from the settings. An API key may be required." },
     { title: "3. Generate & Refine", desc: "Review the AI output, make adjustments, and regenerate as needed. Copy or download the final result." },
   ],
+  "Utility": [
+    { title: "1. Set Your Parameters", desc: "Configure the tool by entering a value, selecting options, or uploading a file depending on the specific operation." },
+    { title: "2. Run the Operation", desc: "Click the primary action button — generate, convert, analyze, or calculate — to process your input instantly." },
+    { title: "3. Use the Output", desc: "Copy the result to your clipboard, download it as a file, or apply it directly from the tool interface." },
+  ],
+  "Health": [
+    { title: "1. Enter Your Health Data", desc: "Fill in your age, weight, height, gender, and other relevant metrics. All inputs are processed locally." },
+    { title: "2. View Instant Results", desc: "Your health metrics — BMI, BMR, calorie needs, or body composition — are calculated instantly as you adjust your inputs." },
+    { title: "3. Track or Export", desc: "Copy your results or take a screenshot for personal reference. No data is stored or shared." },
+  ],
+  "Calculator": [
+    { title: "1. Input Your Numbers", desc: "Enter the values you want to calculate — amounts, measurements, dates, or mathematical expressions." },
+    { title: "2. Compute Automatically", desc: "Results update in real time as you type. Every formula uses standard mathematical or financial logic." },
+    { title: "3. Copy or Compare", desc: "Copy individual results or try different input combinations to compare outcomes side by side." },
+  ],
+  "Branding": [
+    { title: "1. Enter Your Brand Details", desc: "Provide your brand name, tagline, colors, or social links depending on the tool you are using." },
+    { title: "2. Customize the Design", desc: "Adjust layouts, fonts, colors, and formatting options to match your brand identity." },
+    { title: "3. Export Your Asset", desc: "Download your brand asset as an image, PDF, or text file ready to use on your website or social media." },
+  ],
+  "Design": [
+    { title: "1. Upload or Create Content", desc: "Start with an existing file or use the tool's built-in editor to create something new from scratch." },
+    { title: "2. Adjust Design Properties", desc: "Modify dimensions, colors, typography, and layout using the visual controls provided." },
+    { title: "3. Export in Your Format", desc: "Download your design in your preferred format — SVG, PNG, CSS, or HTML — at the quality you need." },
+  ],
+  "Transcription": [
+    { title: "1. Upload Your Audio or Video", desc: "Select an audio or video file from your device. Supported formats include MP3, WAV, MP4, MOV, and M4A." },
+    { title: "2. Transcribe Automatically", desc: "Click transcribe to convert speech to text. Processing time depends on file length and your device." },
+    { title: "3. Copy or Export the Text", desc: "Review the generated transcript, make any corrections, and copy it to your clipboard or download as a text file." },
+  ],
+  "Productivity": [
+    { title: "1. Organize Your Items", desc: "Add tasks, notes, or items you want to manage using the simple input interface." },
+    { title: "2. Arrange and Prioritize", desc: "Reorder, categorize, or mark items as needed. Changes are saved locally in your browser." },
+    { title: "3. Export Your Progress", desc: "Copy your organized items, export them as text, or keep using the tool for ongoing productivity." },
+  ],
+  "Converter": [
+    { title: "1. Provide Source Data", desc: "Upload a file, paste content, or enter the data you want to convert into the tool." },
+    { title: "2. Select Input and Output Formats", desc: "Choose the source format and the target format from the available options." },
+    { title: "3. Convert and Download", desc: "Click convert to process your file locally, then download the output in your chosen format." },
+  ],
 };
 
 export const categoryFaqTemplates: Record<string, { question: string; answer: string }[]> = {
@@ -374,6 +414,62 @@ export const categoryFaqTemplates: Record<string, { question: string; answer: st
     { question: "What browsers are supported?", answer: "Generated extensions follow the Manifest V3 standard, compatible with Chrome, Edge, Brave, and other Chromium-based browsers." },
     { question: "Will the extension work offline?", answer: "Most generated extensions work offline, but some features (like downloaders) require internet connectivity." },
   ],
+  "Utility": [
+    { question: "Is this utility tool free to use?", answer: "Yes, every utility tool on Toolzum is completely free with no usage limits, registration, or hidden charges." },
+    { question: "Can I use this tool on mobile?", answer: "Yes. All utility tools are fully responsive and work on any device — phone, tablet, or desktop." },
+    { question: "How is my privacy protected?", answer: "Your data never leaves your browser. All processing runs locally and nothing is stored or uploaded." },
+    { question: "Does this tool work offline?", answer: "Yes. After the initial page load, the tool runs entirely offline in your browser." },
+    { question: "Are there any file size limits?", answer: "Most tools don't impose limits. For file-based tools, performance depends on your device's available memory." },
+  ],
+  "Health": [
+    { question: "Is this a substitute for professional medical advice?", answer: "No. These calculators provide estimates for educational and personal reference. Always consult a healthcare professional for medical decisions." },
+    { question: "How accurate are the calculations?", answer: "Calculations follow established medical formulas (Mifflin-St Jeor, Harris-Benedict, etc.) and are accurate within standard clinical parameters." },
+    { question: "Is my health data private?", answer: "Absolutely. All health data is processed locally in your browser. Nothing is stored, saved, or transmitted." },
+    { question: "What measurements do I need?", answer: "Most health calculators require basic data like age, gender, height, weight, and activity level — all processed instantly as you type." },
+    { question: "Can I save or track my results over time?", answer: "Some tools save your last calculation locally. For ongoing tracking, export your results or use a dedicated health tracking app." },
+  ],
+  "Calculator": [
+    { question: "How accurate are these calculators?", answer: "All calculators use standard mathematical and financial formulas with high precision. Results are rounded according to the specific calculator's conventions." },
+    { question: "Can I use these calculators for professional purposes?", answer: "Yes for general calculations, but verify critical results independently. Specialized scenarios may require professional-grade tools." },
+    { question: "Is my data stored or saved?", answer: "No. All calculations happen in your browser and no data is stored on any server." },
+    { question: "Do I need to sign up or register?", answer: "No registration is needed. All calculators are free to use with no account required." },
+    { question: "Can I use these offline?", answer: "Yes. All calculator tools work completely offline after the initial page load." },
+  ],
+  "Branding": [
+    { question: "Can I customize the templates?", answer: "Yes. Every brand asset tool lets you customize colors, fonts, layouts, and content to match your brand identity." },
+    { question: "What file formats can I download?", answer: "Output formats vary by tool and typically include PNG, SVG, PDF, HTML, and plain text depending on the asset type." },
+    { question: "Are there brand usage guidelines included?", answer: "Some tools include usage recommendations. For professional branding, consult a brand guidelines document for consistency." },
+    { question: "Is my brand information stored?", answer: "No. All content is processed locally in your browser and nothing is saved on external servers." },
+    { question: "Can I use these for commercial projects?", answer: "Yes. All generated brand assets are yours to use for personal or commercial projects with no restrictions." },
+  ],
+  "Design": [
+    { question: "What file formats are supported?", answer: "Most design tools support PNG, JPG, SVG, WebP, and CSS output. Input support varies by tool." },
+    { question: "Will I lose quality during export?", answer: "Export quality depends on your settings. SVG and lossless PNG preserve full quality, while JPG/WebP offer compression at adjustable quality levels." },
+    { question: "Can I use the designs commercially?", answer: "Yes. All designs you create are yours to use for any personal or commercial project." },
+    { question: "Is my design data saved?", answer: "No. All design processing runs in your browser. Save your work by downloading before leaving the page." },
+    { question: "Do I need design experience?", answer: "No. The tools are designed to be intuitive. Adjust visual controls and see changes in real time." },
+  ],
+  "Transcription": [
+    { question: "How accurate is the transcription?", answer: "Accuracy depends on audio quality, speaker clarity, background noise, and the specific engine used. Clean recordings produce the best results." },
+    { question: "What audio formats are supported?", answer: "Most transcription tools support MP3, WAV, M4A, FLAC, and video formats with audio tracks like MP4 and MOV." },
+    { question: "Is there a file length limit?", answer: "File length limits vary by tool. Longer files may have size constraints or require more processing time depending on your device." },
+    { question: "Is my audio data private?", answer: "Transcription runs locally using WebAssembly speech recognition where possible. Audio data stays on your device." },
+    { question: "Can I edit the transcript after processing?", answer: "Yes. The generated text is editable — you can correct errors, add punctuation, and format it before copying or downloading." },
+  ],
+  "Productivity": [
+    { question: "Does this tool save my data automatically?", answer: "Data is saved locally in your browser's storage. Clearing your browser data will remove saved information." },
+    { question: "Can I export my data?", answer: "Yes. Most productivity tools offer copy-to-clipboard or download options to export your tasks, notes, or lists." },
+    { question: "Do I need an account?", answer: "No. All productivity tools work without registration or login. Everything stays on your device." },
+    { question: "Can I use this on multiple devices?", answer: "Data is stored per device in your local browser. Cross-device sync is not available since no account or cloud storage is used." },
+    { question: "Does this work offline?", answer: "Yes. All productivity tools work fully offline after the initial page load." },
+  ],
+  "Converter": [
+    { question: "What formats can I convert between?", answer: "Format support depends on the specific converter tool. Check the tool description for supported input and output formats." },
+    { question: "Will I lose quality during conversion?", answer: "Quality depends on the format pair. Lossless conversions preserve original quality, while compressed formats apply adjustable quality settings." },
+    { question: "Is there a file size limit?", answer: "No artificial limits are imposed. Very large files may process slower depending on your device's memory and processing power." },
+    { question: "Are my files private during conversion?", answer: "Yes. All conversions happen locally in your browser using WebAssembly. Files never leave your device." },
+    { question: "Can I batch convert multiple files?", answer: "Batch conversion availability depends on the specific tool. Check the tool interface for multi-file upload support." },
+  ],
 };
 
 const defaultInstructions = [
@@ -397,6 +493,7 @@ function getCategoryPath(category: string): string {
 function getCategoryKey(category: string): string {
   const map: Record<string, string> = {
     "pdf": "PDF",
+    "calculator": "Calculator",
     "image": "Image",
     "text": "Text",
     "developer": "Developer",

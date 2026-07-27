@@ -186,27 +186,60 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Text Replacer",
     slug: "text-replacer",
     category: "Text",
-    description: 'Find and replace text in any string with one click. Fast bulk text replacement for content editing and data cleanup. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Text Replacer — Find and replace text in any string with one click. Fast bulk text replacement for content editing and data cleanup. ',
+    description: 'Find and replace text in any string instantly. Supports case-sensitive and case-insensitive matching, whole-word replacement, and regex patterns for advanced text manipulation.',
+    seoDescription: 'Free online Text Replacer — Find and replace text instantly with case-sensitive or case-insensitive matching, whole-word replacement, and regex support. Fast bulk replacement for editing and data cleanup.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Your Text", desc: "Paste the text you want to modify into the editor. This can be a sentence, paragraph, document, or any string of text." },
+    { title: "2. Set Find and Replace Values", desc: "Enter the text to find and the replacement text. Choose options: case-sensitive (match exact case), whole-word only (avoid partial matches), or regex mode for pattern-based replacement." },
+    { title: "3. Replace and Copy", desc: "Click replace to apply the change. Review the result and copy the modified text. All replacements happen instantly with no server processing." },
+  ],
+    faqs: [
+    { question: "Can I use regular expressions?", answer: "Yes. Enable regex mode to use regular expressions for complex find-and-replace patterns — wildcards, character classes, groups, backreferences, and quantifiers are all supported via JavaScript regex syntax." },
+    { question: "Does it replace all occurrences or just the first?", answer: "By default, the tool replaces ALL occurrences of the find text. Use single-replace mode to replace only the first occurrence found in the text." },
+    { question: "What is the difference between case-sensitive and case-insensitive?", answer: "Case-sensitive matches the exact letter case — 'Apple' only matches 'Apple,' not 'apple' or 'APPLE.' Case-insensitive matches any capitalization — 'apple' matches 'Apple,' 'APPLE,' 'aPpLe,' and any other combination." },
+    { question: "Can I replace across multiple lines?", answer: "Yes. The tool works with multi-line text. In regex mode, use the `s` flag for the dot to match newlines, or match `\n` explicitly for newline characters." },
+  ]
   },
   {
     id: "806",
     name: "Text Sorter",
     slug: "text-sorter",
     category: "Text",
-    description: 'Sort text lines alphabetically (A-Z, Z-A), by length, randomize, or remove duplicates. Essential for list organization and data cleanup. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Text Sorter — Sort text lines alphabetically (A-Z, Z-A), by length, randomize, or remove duplicates. Essential for list organization and data cleanup. ',
+    description: 'Sort text lines alphabetically (A-Z, Z-A), by length (shortest-first or longest-first), randomize order, or remove duplicates. Essential for organizing lists, cleaning data, and preparing content.',
+    seoDescription: 'Free online Text Sorter — Sort text lines A-Z or Z-A, by length, randomize order, or remove duplicates. Essential for organizing lists, cleaning data, and preparing content. Instant local processing.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Lines", desc: "Paste the text lines you want to sort. Each line is treated as a separate item. The tool handles lists, data columns, and bulk content." },
+    { title: "2. Choose Sort Method", desc: "Select from A-Z (ascending alphabetical), Z-A (descending alphabetical), shortest first, longest first, randomize (shuffle), or remove duplicates (sorts unique lines alphabetically)." },
+    { title: "3. Copy the Sorted Result", desc: "Review the sorted output and copy it. Use for organizing to-do lists, sorting CSV data columns, arranging keywords alphabetically, or any line-based sorting need." },
+  ],
+    faqs: [
+    { question: "What sort methods are available?", answer: "The sorter supports: A-Z (ascending alphabetical), Z-A (descending alphabetical), shortest first (by character count ascending), longest first (by character count descending), shuffle (random order), and unique sort (removes duplicates and sorts A-Z)." },
+    { question: "Is the sort case-sensitive?", answer: "By default, sorting is case-insensitive — 'apple' and 'Apple' sort together regardless of case. Enable case-sensitive mode for precise alphabetical ordering where uppercase and lowercase are treated distinctly." },
+    { question: "Can I sort numerically?", answer: "Numeric sort is available for lines that contain numbers. Enable numeric sort mode to sort by the numeric value at the start of each line rather than alphabetical order." },
+    { question: "Does it handle trailing/leading spaces?", answer: "Yes. The sorter can trim whitespace from each line before sorting (optional toggle). This prevents leading spaces from affecting sort order and produces cleaner output." },
+  ]
   },
   {
     id: "807",
     name: "Text Deduplicator",
     slug: "text-deduplicator",
     category: "Text",
-    description: 'Remove duplicate lines from text instantly. Perfect for cleaning up lists, CSV data, and removing redundant entries. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Text Deduplicator — Remove duplicate lines from text instantly. Perfect for cleaning up lists, CSV data, and removing redundant entries. ',
+    description: 'Remove duplicate lines from text instantly while preserving the order of first occurrences. Perfect for cleaning up lists, CSV data, log files, and removing redundant entries from any line-based data.',
+    seoDescription: 'Free online Text Deduplicator — Remove duplicate lines from text instantly while preserving first occurrence order. Clean up lists, CSV data, logs, and redundant entries. 100% local processing.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Lines", desc: "Paste text containing duplicate lines you want to clean up. The tool works with any line-based text — lists, CSV data, log files, or email lists." },
+    { title: "2. Deduplicate", desc: "Click to remove duplicate lines. The first occurrence of each line is preserved; subsequent duplicates are removed while keeping the original order of lines." },
+    { title: "3. Copy Unique Lines", desc: "Copy the deduplicated output. Use for cleaning mailing lists, removing duplicate CSV rows, consolidating log entries, or deduplicating keyword lists." },
+  ],
+    faqs: [
+    { question: "How is this different from Duplicate Word Remover?", answer: "Text Deduplicator removes entire duplicate LINES from your text — each line is compared as a whole. Duplicate Word Remover removes repeated WORDS within text, keeping only the first occurrence of each word." },
+    { question: "Is the deduplication case-sensitive?", answer: "By default, the deduplication is case-sensitive — 'Hello' and 'hello' are treated as different lines. Enable case-insensitive mode to treat them as duplicates." },
+    { question: "Can I ignore leading/trailing whitespace when comparing?", answer: "Yes. Enable 'trim before compare' to remove leading and trailing whitespace from each line before checking for duplicates — useful when your data has inconsistent spacing." },
+    { question: "Does it preserve the original line order?", answer: "Yes. The tool always preserves the order of first occurrences. If line A appears first, then line B, then line A again, the output is A, B — keeping the original order of unique entries." },
+  ]
   },
   {
     id: "809",
@@ -231,9 +264,20 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Markdown Previewer",
     slug: "markdown-previewer",
     category: "Text",
-    description: 'Preview markdown text as rendered HTML in real time. Supports headings, bold, italic, code blocks, blockquotes, and lists. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Markdown Previewer — Preview markdown text as rendered HTML in real time. Supports headings, bold, italic, code blocks, blockquotes, and lists. ',
+    description: 'Preview Markdown text as rendered HTML in real time. Supports headings, bold, italic, blockquotes, code blocks, inline code, links, images, lists, tables, and strikethrough. All processing is local.',
+    seoDescription: 'Free online Markdown Previewer — Preview Markdown as rendered HTML in real time. Supports headings, bold, italic, code blocks, tables, blockquotes, and links. 100% local processing with instant preview.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Write or Paste Markdown", desc: "Type Markdown syntax in the editor panel or paste existing Markdown content. The preview panel updates in real time as you type." },
+    { title: "2. Check the Rendered Output", desc: "See your Markdown rendered as HTML in the preview panel. Headings, lists, code blocks, tables, and links are all formatted according to standard Markdown rules." },
+    { title: "3. Copy HTML or Markdown", desc: "Copy the rendered HTML for use in web pages or email, or copy the Markdown source for use in GitHub, Notion, or other Markdown editors." },
+  ],
+    faqs: [
+    { question: "What Markdown flavor does this follow?", answer: "The previewer follows GitHub Flavored Markdown (GFM) — the most widely used standard. It supports tables with alignment, strikethrough, task lists, fenced code blocks with syntax highlighting, and auto-linking of URLs." },
+    { question: "Can I export the rendered HTML?", answer: "Yes. The previewer provides a 'Copy HTML' button that copies the fully rendered HTML output to your clipboard — useful for pasting formatted content into CMS editors, emails, or web pages." },
+    { question: "Does it support syntax highlighting in code blocks?", answer: "Yes. Code blocks with language identifiers (like ```javascript or ```python) are rendered with syntax highlighting using the Prism.js library, supporting 50+ programming languages." },
+    { question: "Is my Markdown content stored anywhere?", answer: "No. All Markdown parsing and preview rendering happens locally in your browser. Your content never leaves your device." },
+  ]
   },
   {
     id: "813",
@@ -687,6 +731,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Body Fat Estimator \u2014 Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Details", desc: "Weight, height, age, and gender for BMI-based estimation." },
+      { title: "2. View Estimate", desc: "Body fat percentage and fitness category." },
+      { title: "3. Interpret Results", desc: "Track changes over time for fitness progress." }
+    ],
+    faqs: [
+      { question: 'How accurate is BMI-based estimation?', answer: 'Less accurate than direct methods but provides a reasonable estimate for most people.' },
+      { question: 'How does age affect it?', answer: 'The formula applies age-specific corrections as body composition changes with age.' },
+      { question: 'What\'s a healthy range?', answer: 'Men: athletes 6-13%, fit 14-17%, average 18-24%. Women: athletes 14-20%, fit 21-24%, average 25-31%.' }
+    ]
   },
   {
     id: "874",
@@ -696,6 +750,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Daily Calorie Needs \u2014 Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Details", desc: "Weight, height, age, gender, and activity level for BMR/TDEE." },
+      { title: "2. View Targets", desc: "Maintenance, cutting, and bulking calorie targets." },
+      { title: "3. Plan Diet", desc: "Use targets for daily food intake. Adjust based on results." }
+    ],
+    faqs: [
+      { question: 'Difference between BMR and TDEE?', answer: 'BMR = calories at rest. TDEE = BMR x activity factor. Use TDEE for weight management.' },
+      { question: 'How much to cut?', answer: '300-500 calorie deficit = 0.5-1 lb loss per week. Larger deficits risk muscle loss.' },
+      { question: 'When to recalculate?', answer: 'Every 5-10 lbs weight change or when activity level changes significantly.' }
+    ]
   },
   {
     id: "875",
@@ -705,6 +769,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Daily Macronutrients \u2014 Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Calorie Target", desc: "Your daily calorie goal. Uses 30/40/30 split." },
+      { title: "2. View Macro Breakdown", desc: "Daily grams of protein, carbs, and fat." },
+      { title: "3. Plan Meals", desc: "Distribute macros across meals for balanced nutrition." }
+    ],
+    faqs: [
+      { question: 'What is the 30/40/30 split?', answer: '30% protein, 40% carbs, 30% fat of total calories. A balanced starting point.' },
+      { question: 'Convert percentages to grams?', answer: 'Protein g = (cal x 0.30)/4. Carb g = (cal x 0.40)/4. Fat g = (cal x 0.30)/9.' },
+      { question: 'Should I adjust ratios?', answer: 'Starting point only. Athletes may need more carbs. Adjust based on goals and response.' }
+    ]
   },
   {
     id: "877",
@@ -714,6 +788,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Sleep Requirements \u2014 Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Age", desc: "Sleep needs change across life stages." },
+      { title: "2. View Recommendation", desc: "CDC and NSF guideline-based sleep hours for your age." },
+      { title: "3. Assess Sleep", desc: "Compare current habits against recommendations." }
+    ],
+    faqs: [
+      { question: 'Hours by age?', answer: 'Newborns: 14-17h. Adults 18-64: 7-9h. Seniors 65+: 7-8h.' },
+      { question: 'Effects of sleep deprivation?', answer: 'Increased risk of obesity, diabetes, CVD, weakened immunity, cognitive decline.' },
+      { question: 'Can you catch up?', answer: 'Partially recoverable short-term. Consistent schedules are best.' }
+    ]
   },
   {
     id: "879",
@@ -723,6 +807,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Ideal Body Weight \u2014 Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Height and Gender", desc: "Devine and Robinson formulas use height as primary factor." },
+      { title: "2. View Range", desc: "Ideal weight from both formulas plus healthy range." },
+      { title: "3. Use as Reference", desc: "Individual healthy weights vary with muscle mass and frame." }
+    ],
+    faqs: [
+      { question: 'What is the Devine formula?', answer: 'Men: 50 kg + 2.3 kg/inch over 5ft. Women: 45.5 kg + 2.3 kg/inch over 5ft.' },
+      { question: 'What is the Robinson formula?', answer: 'Men: 52 kg + 1.9 kg/inch over 5ft. Women: 49 kg + 1.7 kg/inch over 5ft.' },
+      { question: 'Are these accurate?', answer: 'Reference points only. Don\'t account for muscle mass or frame size. Use the range, not a single number.' }
+    ]
   },
   {
     id: "881",
@@ -732,6 +826,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Steps to Distance \u2014 Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Steps", desc: "Step count from tracker or phone." },
+      { title: "2. Enter Height", desc: "Step length estimated from height." },
+      { title: "3. View Distance", desc: "Distance in km and miles plus calories." }
+    ],
+    faqs: [
+      { question: 'How is step length determined?', answer: 'Estimated as 41-45% of height. A general approximation.' },
+      { question: 'Steps per mile?', answer: 'About 2,000 steps per mile for average height person.' },
+      { question: 'Daily step goal?', answer: '7,000-8,000 steps provides most health benefits.' }
+    ]
   },
   {
     id: "882",
@@ -741,6 +845,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Calories Burned Calculator \u2014 Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Select Activity", desc: "Choose from running, walking, cycling, swimming, yoga, lifting, jump rope." },
+      { title: "2. Enter Duration and Weight", desc: "Minutes of activity and body weight." },
+      { title: "3. View Calories", desc: "Estimated expenditure using MET values." }
+    ],
+    faqs: [
+      { question: 'How are calories estimated?', answer: 'Calories = MET x weight(kg) x duration(hours). MET values from the Compendium of Physical Activities.' },
+      { question: 'Which activity burns most?', answer: 'Running and jump rope typically burn most per minute. Higher intensity = more calories.' },
+      { question: 'How accurate?', answer: 'Estimates vary 20-30% based on individual metabolism and intensity.' }
+    ]
   },
   {
     id: "883",
@@ -750,6 +864,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Blood Alcohol Estimator \u2014 Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Drink Info", desc: "Number of standard drinks, weight, and gender." },
+      { title: "2. Enter Time Elapsed", desc: "Hours since first drink. Metabolism ~0.015 BAC/hour." },
+      { title: "3. View Estimate", desc: "Estimated BAC. FOR EDUCATIONAL PURPOSES ONLY." }
+    ],
+    faqs: [
+      { question: 'What is a standard drink?', answer: '14g alcohol: 12 oz beer (5%), 5 oz wine (12%), or 1.5 oz spirits (40%).' },
+      { question: 'How accurate?', answer: 'ESTIMATE only. Never use to decide if you can drive. Actual BAC varies significantly.' },
+      { question: 'Legal BAC limit?', answer: 'Most US states: 0.08% for 21+. Commercial: 0.04%. Under 21: zero tolerance.' }
+    ]
   },
   {
     id: "885",
@@ -759,6 +883,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Ovulation Tracker \u2014 Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter LMP", desc: "First day of last period and average cycle length." },
+      { title: "2. View Fertile Window", desc: "Estimated ovulation date and fertile window." },
+      { title: "3. Plan Accordingly", desc: "Use info for family planning. Track multiple cycles." }
+    ],
+    faqs: [
+      { question: 'How is ovulation calculated?', answer: 'Ovulation ~14 days before next period. For 28-day cycle: day 14.' },
+      { question: 'What is the fertile window?', answer: '6 days: 5 days before ovulation + ovulation day. Sperm survives 5 days, egg 24 hours.' },
+      { question: 'How to track more accurately?', answer: 'Combine with BBT tracking, cervical mucus, OPKs. Track multiple cycles.' }
+    ]
   },
   {
     id: "887",
@@ -1197,9 +1331,20 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "ASCII Table Generator",
     slug: "ascii-table-generator",
     category: "Text",
-    description: 'Generate ASCII art tables from CSV or tabular text data with customizable formatting.',
-    seoDescription: 'Free online ASCII Table Generator \u2014 Generate ASCII art tables from CSV or tabular text data. ',
+    description: 'Generate clean ASCII art tables from CSV, TSV, or pipe-delimited data. Configurable header alignment, border styles, column padding, and export options for documentation, code comments, and terminal output.',
+    seoDescription: 'Free online ASCII Table Generator — Generate clean ASCII art tables from CSV, TSV, or delimited data. Customizable borders, alignment, and padding for code comments, docs, and terminal output.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Data", desc: "Paste tabular data in CSV, TSV, or pipe-delimited format. The parser auto-detects the delimiter and column count from your input." },
+    { title: "2. Customize Table Style", desc: "Choose alignment (left, center, right) per column, adjust padding, and select border style — from minimal compact to full grid layouts." },
+    { title: "3. Copy the ASCII Table", desc: "Copy the generated ASCII table to your clipboard. Paste it directly into code comments, README files, documentation, or terminal output." },
+  ],
+    faqs: [
+    { question: "What data formats does this tool accept?", answer: "The ASCII table generator accepts CSV (comma-separated), TSV (tab-separated), pipe-delimited, and space-delimited data. The first row is treated as the table header unless you choose otherwise." },
+    { question: "Can I customize column alignment?", answer: "Yes. Set alignment per column to left, center, or right. Numeric columns typically use right alignment, text columns use left, and headers can be centered for visual balance." },
+    { question: "What border styles are available?", answer: "The tool offers compact (minimal characters), grid (full box-drawing characters), markdown (pipe-table style compatible with GitHub), and rounded (rounded corners using Unicode box drawing) border styles." },
+    { question: "Can I use these tables in code comments?", answer: "Yes. ASCII tables are perfect for code comments, README files, and documentation since they render correctly in any plain-text environment — terminals, GitHub, GitLab, IDEs, and code review tools." },
+  ]
   },
   {
     id: "935",
@@ -1316,6 +1461,17 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'A freeform vector drawing tool with freehand pen, shapes (rectangle, ellipse, line), multi-page canvas, color picker, and SVG/PNG export. Draw diagrams and illustrations entirely in your browser.',
     seoDescription: 'Free online Vector Pen Canvas \u2014 Draw vector graphics with freehand pen, shapes, and multi-page canvas. Export as SVG or PNG.',
     dependencies: "fabric.js",
+    instructions: [
+      { title: "1. Choose Your Drawing Tool", desc: "Select from freehand pen, rectangle, ellipse, or line tools. Use the color picker to set stroke and fill colors before drawing on the canvas." },
+      { title: "2. Draw on Multiple Pages", desc: "Add multiple canvas pages to create multi-page diagrams or illustrations. Each page is an independent drawing surface with its own elements." },
+      { title: "3. Export as SVG or PNG", desc: "Download your drawing as SVG (vector, scalable) or PNG (raster, suitable for web). SVG preserves all editability for future modification." },
+    ],
+    faqs: [
+      { question: "Can I edit elements after drawing them?", answer: "Yes. Select any element on the canvas to resize, move, recolor, or delete it. The property panel lets you adjust stroke width, fill color, opacity, and position." },
+      { question: "What's the difference between SVG and PNG export?", answer: "SVG is a vector format — infinitely scalable without quality loss, editable in vector software, and smaller for simple graphics. PNG is a raster format — pixel-based with fixed resolution, better for complex illustrations with many details." },
+      { question: "How many pages can I create?", answer: "There's no hard limit. Each page is independent with its own set of drawing elements. Use pages for different sections of a diagram, storyboard frames, or separate illustrations." },
+      { question: "Is my drawing saved?", answer: "Your drawing is stored in your browser's memory during the session. Download your work as SVG or PNG before closing the page. We recommend SVG for preserving editability." },
+    ]
   },
   {
     id: "956",
@@ -1416,6 +1572,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Calorie Tracker — Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Log Foods", desc: "Select from the built-in common foods database." },
+      { title: "2. Track Throughout Day", desc: "Add meals as you eat. Running total shows accumulated intake." },
+      { title: "3. Review Daily Intake", desc: "Compare consumption against your target." }
+    ],
+    faqs: [
+      { question: 'What foods are in the database?', answer: 'Common foods across all major food groups with standardized portions.' },
+      { question: 'Is data saved?', answer: 'Stored in browser localStorage. Not uploaded to any server.' },
+      { question: 'Can I add custom foods?', answer: 'Choose the closest match from the database and adjust portion size.' }
+    ]
   },
   {
     id: "967",
@@ -1425,6 +1591,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Waist-to-Hip Ratio Calculator — Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Take Measurements", desc: "Measure waist at narrowest and hips at widest points." },
+      { title: "2. Select Gender", desc: "Risk categories differ between men and women." },
+      { title: "3. View Ratio", desc: "WHR and associated health risk category." }
+    ],
+    faqs: [
+      { question: 'What is waist-to-hip ratio?', answer: 'Waist circumference divided by hip circumference. Measures fat distribution and health risk.' },
+      { question: 'What\'s a healthy ratio?', answer: 'Men: below 0.90 low risk. Women: below 0.80 low risk. Higher = apple-shaped = higher risk.' },
+      { question: 'Why is WHR important?', answer: 'Strong predictor of cardiovascular disease and diabetes. Central obesity is more dangerous than fat elsewhere.' }
+    ]
   },
   {
     id: "969",
@@ -1482,27 +1658,60 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Duplicate Word Remover",
     slug: "duplicate-word-remover",
     category: "Text",
-    description: 'Remove duplicate words from text while preserving first occurrence and original order. For removing duplicate lines, use Text Deduplicator.',
-    seoDescription: 'Free online Duplicate Word Remover — Remove duplicate words from text while preserving first occurrence and original order. ',
+    description: 'Remove duplicate words from text while preserving the first occurrence and original word order. Leaves line structure intact — only targets repeated words, not lines.',
+    seoDescription: 'Free online Duplicate Word Remover — Remove repeated words from text while preserving first occurrence and original order. Keeps line structure intact. Instant local processing.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Text", desc: "Type or paste the text containing duplicate words. The tool works on any text with repeated words — paragraphs, lists, or single lines." },
+    { title: "2. Remove Duplicates", desc: "Click to remove duplicate words. Each words first occurrence is kept; subsequent repeats are removed while preserving original word order and line breaks." },
+    { title: "3. Copy the Clean Text", desc: "Review the deduplicated text and copy it. Use for cleaning up repeated words in articles, product descriptions, or any content where word repetition is undesirable." },
+  ],
+    faqs: [
+    { question: "How is this different from Text Deduplicator?", answer: "Duplicate Word Remover targets repeated WORDS within text, keeping only the first occurrence of each word. Text Deduplicator removes entire duplicate LINES from a text, which is useful for cleaning up lists and CSV data." },
+    { question: "Does it preserve capitalization?", answer: "Duplicate detection is case-sensitive by default — 'The' and 'the' are treated as different words. An optional case-insensitive mode treats them as duplicates of each other." },
+    { question: "Can I exclude certain words from removal?", answer: "Yes. The tool lets you specify words to exclude from duplicate removal — useful for common words like 'the,' 'and,' 'of' that naturally appear multiple times in normal text." },
+    { question: "Is my text stored or transmitted?", answer: "No. All word removal processing happens locally in your browser. Your text never leaves your device." },
+  ]
   },
   {
     id: "976",
     name: "Text Cleaner",
     slug: "text-cleaner",
     category: "Text",
-    description: 'Normalize whitespace, trim lines, remove excess newlines, and clean up messy text with one click.',
-    seoDescription: 'Free online Text Cleaner — Normalize whitespace, trim lines, remove excess newlines, and clean up messy text. ',
+    description: 'Normalize whitespace, trim trailing spaces, remove excess newlines, strip empty lines, and clean up messy text with one click. Handles mixed line endings and irregular spacing.',
+    seoDescription: 'Free online Text Cleaner — Normalize whitespace, trim trailing spaces, remove excess newlines, strip empty lines, and fix messy text with one click. Handles mixed line endings.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Messy Text", desc: "Paste text with inconsistent spacing, extra newlines, trailing spaces, or mixed line endings. The cleaner detects common formatting issues automatically." },
+    { title: "2. Choose Cleaning Options", desc: "Select which cleanups to apply: normalize whitespace (tabs to spaces, consolidate multiple spaces), trim trailing spaces, remove excess blank lines, strip empty lines, fix line endings (CRLF to LF)." },
+    { title: "3. Copy the Clean Result", desc: "Review the cleaned text and copy it. Use for preparing data before processing, cleaning up copied text from PDFs, or formatting content for publishing." },
+  ],
+    faqs: [
+    { question: "What issues does Text Cleaner fix?", answer: "Text Cleaner handles: trailing whitespace at line ends, multiple consecutive spaces, tabs vs spaces inconsistency, excess blank lines, mixed CRLF/LF line endings, non-printable characters, BOM (byte order mark) removal, and Unicode normalization." },
+    { question: "Can I choose which cleanups to apply?", answer: "Yes. Each cleaning operation has a toggle — enable only the cleanups your text needs. For example, enable 'trim trailing spaces' and 'remove blank lines' without touching spacing if you only need those fixes." },
+    { question: "Will this preserve my paragraph breaks?", answer: "Yes. The cleaner distinguishes between single line breaks (within paragraphs) and double/multiple line breaks (paragraph separators). Single line breaks can be kept or converted to spaces based on your preference." },
+    { question: "Is my text stored or transmitted?", answer: "No. All text cleaning happens locally in your browser. Your text never leaves your device." },
+  ]
   },
   {
     id: "977",
     name: "Text Splitter",
     slug: "text-splitter",
     category: "Text",
-    description: 'Split text by any delimiter and get numbered parts. Perfect for parsing CSV-like data and structured text. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Text Splitter — Split text by any delimiter and get numbered parts. Perfect for parsing CSV-like data and structured text. ',
+    description: 'Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Essential for parsing CSV data, extracting fields, and breaking structured text into components.',
+    seoDescription: 'Free online Text Splitter — Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Parse CSV data, extract fields, and break structured text into components.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Paste Your Text", desc: "Paste the structured text you want to split — a CSV row, a comma-separated list, a tab-delimited record, or any delimited content." },
+    { title: "2. Choose a Delimiter", desc: "Select the delimiter that separates your text parts: comma, space, tab, newline, pipe, semicolon, or a custom delimiter of your choice." },
+    { title: "3. View and Copy Parts", desc: "Each split part is shown with its position number for easy reference. Copy individual parts or the complete split output for data entry or further processing." },
+  ],
+    faqs: [
+    { question: "What delimiters can I use?", answer: "The splitter supports common delimiters: comma (,), space, tab, newline, pipe (|), semicolon (;), colon (:), and a custom delimiter option where you can enter any character or string as the separator." },
+    { question: "Can I split multiple lines at once?", answer: "Yes. The splitter works on multi-line text. Each line is split individually, and the numbered parts are displayed for each line separately — useful for parsing multi-row CSV or TSV data." },
+    { question: "How are empty parts handled?", answer: "Empty parts between consecutive delimiters (e.g., 'a,,b' split by comma) are shown as empty fields with their position number. Optional 'skip empty' mode removes these blank entries from the output." },
+    { question: "Can I quote or escape delimiters?", answer: "Yes. Enable quote handling to treat delimiters inside quotes as literal characters (e.g., splitting CSV where 'Smith, John' is kept as one field despite the comma). Both single and double quotes are supported." },
+  ]
   },
   {
     id: "978",

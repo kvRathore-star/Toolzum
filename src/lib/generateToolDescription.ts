@@ -324,9 +324,99 @@ function generateGenericDescription(tool: ToolMetadata): DescriptionVariants {
   } else if (text.includes('convert') || text.includes('conversion')) {
     action = 'converts';
     target = 'data between formats';
+  } else if (text.includes('crop') || text.includes('trim')) {
+    action = 'crops';
+    target = text.includes('video') ? 'video clips to your desired length and dimensions' : text.includes('audio') ? 'audio segments to remove unwanted silence' : 'images to remove unwanted edges and resize';
+  } else if (text.includes('rotate') || text.includes('flip')) {
+    action = 'rotates';
+    target = 'media files — images, videos, or PDFs — to the correct orientation';
+  } else if (text.includes('watermark')) {
+    action = 'adds';
+    target = 'visible or invisible watermarks to protect your media files';
+  } else if (text.includes('cutter') || text.includes('cut') || text.includes('slice')) {
+    action = 'cuts';
+    target = 'media files into smaller segments or clips';
+  } else if (text.includes('normaliz') || text.includes('normalise')) {
+    action = 'normalizes';
+    target = 'audio volume levels to a consistent standard across your files';
+  } else if (text.includes('timer')) {
+    action = 'provides';
+    target = 'a customizable countdown timer with alerts and presets';
+  } else if (text.includes('picker') || text.includes('selector') || (text.includes('color') && text.includes('tool'))) {
+    action = 'helps you pick';
+    target = 'colors, values, or options with a visual interface';
+  } else if (text.includes('editor') || text.includes('edit')) {
+    action = 'provides';
+    target = 'editing capabilities for modifying and refining your content';
+  } else if (text.includes('styling') || text.includes('style') || text.includes('beautify')) {
+    action = 'helps style';
+    target = 'text with decorative formatting, fonts, and visual effects';
+  } else if (text.includes('minif') || text.includes('minify') || text.includes('compress') || text.includes('resize') || text.includes('reduce') || text.includes('optimiz') || text.includes('optimise')) {
+    action = 'optimizes';
+    target = text.includes('image') ? 'image file sizes while preserving visual quality' : text.includes('pdf') ? 'PDF file sizes for easier sharing' : text.includes('video') ? 'video file sizes with adjustable quality' : text.includes('audio') ? 'audio file sizes with configurable bitrate' : 'file sizes while preserving as much quality as possible';
+  } else if (text.includes('linter') || text.includes('lint')) {
+    action = 'lints';
+    target = 'your code against best practices and style rules';
+  } else if (text.includes('finder') || text.includes('find') || text.includes('locate')) {
+    action = 'finds';
+    target = 'information from your input — domains, patterns, or matching records';
+  } else if (text.includes('obfuscat')) {
+    action = 'obfuscates';
+    target = 'your code to protect it from reverse engineering';
+  } else if (text.includes('replac') || text.includes('substitut') || text.includes('switcher')) {
+    action = 'replaces';
+    target = 'text patterns, values, or characters with your specified alternatives';
+  } else if (text.includes('anonymiz') || text.includes('anonymiser')) {
+    action = 'anonymizes';
+    target = 'sensitive data by masking or removing personal information';
+  } else if (text.includes('reverser') || text.includes('reverse')) {
+    action = 'reverses';
+    target = 'text, strings, or arrays to produce the mirrored output';
+  } else if (text.includes('repeater') || text.includes('repeat') || text.includes('duplicate')) {
+    action = 'repeats';
+    target = 'text or patterns a specified number of times';
+  } else if (text.includes('repair') || text.includes('fix')) {
+    action = 'repairs';
+    target = 'corrupted or malformed files to restore their usability';
+  } else if (text.includes('stamp')) {
+    action = 'stamps';
+    target = 'documents with dates, text, or images for official records';
+  } else if (text.includes('annotat')) {
+    action = 'annotates';
+    target = 'documents with comments, highlights, and markup';
+  } else if (text.includes('obfuscat')) {
+    action = 'obfuscates';
+    target = 'code to make it harder to read while preserving functionality';
   } else {
-    action = 'processes';
-    target = 'your data';
+    const catLower = (tool.category || '').toLowerCase();
+    const catTargets: Record<string, [string, string]> = {
+      'utility': ['provides', 'everyday tools — generators, converters, calculators, and analyzers'],
+      'calculator': ['calculates', 'mathematical, financial, and statistical values with precision'],
+      'health': ['calculates', 'health and fitness metrics based on your personal data'],
+      'branding': ['helps create', 'brand assets — logos, color palettes, and marketing materials'],
+      'design': ['provides', 'design and visualization tools for creative projects'],
+      'transcription': ['converts', 'speech and audio content into written text'],
+      'productivity': ['helps manage', 'tasks, time, and daily workflows'],
+      'converter': ['converts', 'data between different formats and file types'],
+      'developer': ['provides', 'development utilities — formatters, validators, and code tools'],
+      'image': ['processes', 'images with editing, conversion, and optimization'],
+      'audio': ['processes', 'audio files with conversion, editing, and analysis'],
+      'video': ['processes', 'video files with conversion, editing, and compression'],
+      'pdf': ['processes', 'PDF documents with conversion, editing, and optimization'],
+      'text': ['processes', 'text content with transformation, analysis, and conversion'],
+      'seo': ['helps optimize', 'website content for search engine performance'],
+      'finance': ['calculates', 'financial metrics, rates, and projections'],
+      'privacy': ['helps protect', 'sensitive data with encryption and security tools'],
+      'ai': ['provides', 'AI-powered content generation and analysis'],
+      'indian-utilities': ['provides', 'India-specific utility tools for everyday needs'],
+      'extension': ['generates', 'browser extension source code for your needs'],
+    };
+    if (catLower in catTargets) {
+      [action, target] = catTargets[catLower];
+    } else {
+      action = 'processes';
+      target = 'your data';
+    }
   }
 
   return {

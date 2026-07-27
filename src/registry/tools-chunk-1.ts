@@ -22,20 +22,43 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'GST Invoice Generator',
     slug: 'gst-invoice-generator',
-    description: 'Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online GST Invoice Generator — Generates PDF invoices fully compliant with Indian GST rules, including mandatory fields like HSN/SAC codes, GSTIN, place of supply. ',
+    description: 'Generates compliant PDF invoices with mandatory Indian GST fields — HSN/SAC codes, GSTIN, place of supply, and tax breakdown. Everything runs locally in your browser.',
+    seoDescription: 'Free online GST Invoice Generator — Create compliant GST invoices with HSN/SAC codes, GSTIN, place of supply, and tax breakdown. Download as PDF. 100% local and private.',
     category: 'indian-utilities',
     id:  "227",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Enter Business and Customer Details", desc: "Fill in your business information (name, GSTIN, address) and your customer's details. The tool auto-formats these into the standard GST invoice layout." },
+    { title: "2. Add Invoice Items with HSN/SAC", desc: "List each item or service with its HSN or SAC code, quantity, rate, and GST tax rate. The tool automatically calculates taxable value, CGST, SGST/UTGST, and total amount." },
+    { title: "3. Download the GST-Compliant PDF", desc: "Preview the generated invoice and download it as a PDF. The invoice includes all mandatory fields required under GST law — invoice number, date, place of supply, and tax breakup." },
+  ],
+    faqs: [
+    { question: "What GST fields are included in the invoice?", answer: "The invoice includes all mandatory fields under GST rules: supplier and recipient GSTIN, invoice number and date, HSN/SAC codes, taxable value, CGST, SGST/IGST amounts, place of supply, and invoice value in words." },
+    { question: "Can I use this for regular GST filing?", answer: "Yes, the generated invoices are compliant with GST invoice rules and can be used for your regular GST returns (GSTR-1). However, validate with your CA for any business-specific requirements." },
+    { question: "Is the data stored on any server?", answer: "No. All invoice data is processed locally in your browser. The PDF generation happens client-side using jsPDF. Your business and customer data never leaves your device." },
+    { question: "What HSN/SAC codes are supported?", answer: "You can enter any HSN code for goods or SAC code for services. The tool doesn't restrict the codes — enter the appropriate code for your product or service as per the GST tariff." },
+    { question: "Can I customize the invoice layout?", answer: "The invoice follows the standard GST invoice format. The generated PDF includes your business logo (if uploaded), all mandatory fields, and a clean professional layout optimized for printing and digital sharing." },
+  ]
   },
   {
     name: 'ITR Filing Helper',
     slug: 'itr-filing-helper',
-    description: 'Step-by-step assistant for India Income Tax Return filing. Guides you through ITR forms, deductions, and calculations.',
-    seoDescription: 'Free online ITR Filing Helper — Helper for India Income Tax Returns. ',
+    description: 'Step-by-step assistant for India Income Tax Return filing. ITR form selection, 80C/80D deductions, salary and house property income.',
+    seoDescription: 'Free online ITR Filing Helper — Guide to Indian income tax return filing. ITR form selection, 80C/80D deductions, salary and house property income. Simplify your tax filing.',
     category: 'indian-utilities',
     id:  "228",
     dependencies: 'None',
+    instructions: [
+    { title: "1. Select Your ITR Form", desc: "Choose the correct ITR form based on your income sources — ITR-1 (salaried), ITR-2 (capital gains), ITR-3 (business/profession), or ITR-4 (presumptive). The tool explains which form applies to you." },
+    { title: "2. Enter Your Income Details", desc: "Fill in your salary income, house property income, capital gains, or business income. The tool walks you through each section with explanations and applicable deduction limits." },
+    { title: "3. Review and File", desc: "Review your total income, deductions under 80C through 80U, and the computed tax liability. Get a checklist of documents needed for filing — Form 16, bank statements, investment proofs." },
+  ],
+    faqs: [
+    { question: "Which ITR form should I use?", answer: "ITR-1 (Sahaj) is for salaried individuals with income up to Rs. 50 lakh from salary, one house property, and other sources. ITR-2 is for capital gains or multiple properties. ITR-3 for business/profession income. ITR-4 for presumptive business income." },
+    { question: "What deductions can I claim?", answer: "Section 80C (up to Rs. 1.5 lakh) covers PPF, ELSS, life insurance, and tuition fees. Section 80D covers health insurance premiums. Section 24(b) covers home loan interest. NPS under 80CCD(1B) offers an additional Rs. 50,000 deduction." },
+    { question: "What documents do I need for filing?", answer: "Form 16 from your employer, bank statements, investment proofs (PPF, ELSS, insurance), home loan certificate, rent receipts (for HRA), and Aadhaar. The tool provides a customized document checklist." },
+    { question: "Can this tool file my return directly?", answer: "This tool helps you prepare and organize your tax information. For actual e-filing, you'll need to use the official Income Tax e-filing portal. The tool ensures you have all the data ready before you start." },
+  ],
     showInCategory: false,
   },
   {
@@ -78,74 +101,162 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Aadhaar Card Masker',
     slug: 'aadhaar-card-masker',
-    description: 'Mask the first 8 digits of your Aadhaar card for secure sharing. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Aadhaar Card Masker — Mask the first 8 digits of your Aadhaar card for secure sharing. ',
+    description: 'Securely masks the first 8 digits of your 12-digit Aadhaar number on card images, leaving only the last 4 digits visible for safe sharing. Fully local processing.',
+    seoDescription: 'Free online Aadhaar Card Masker — Mask first 8 digits of your Aadhaar number on card images. Leave only last 4 digits visible for secure sharing. 100% local, no uploads.',
     category: 'indian-utilities',
     id:  "234",
-    dependencies: 'Canvas API'
+    dependencies: 'Canvas API',
+    instructions: [
+    { title: "1. Upload Your Aadhaar Card Image", desc: "Select a scanned image or photo of your Aadhaar card from your device. The tool accepts JPEG and PNG formats." },
+    { title: "2. Auto-Mask the First 8 Digits", desc: "The tool automatically detects the Aadhaar number region on the card and applies a mask to the first 8 digits, leaving only the last 4 digits visible — exactly like banking OTP masking." },
+    { title: "3. Download for Safe Sharing", desc: "Preview the masked Aadhaar image and download it. Share this masked version with service providers, landlords, or online platforms instead of your full Aadhaar number." },
+  ],
+    faqs: [
+    { question: "Why should I mask my Aadhaar number?", answer: "UIDAI recommends sharing only the last 4 digits of your Aadhaar for verification purposes. Masking the first 8 digits protects you from identity theft and unauthorized use while still allowing verification." },
+    { question: "What parts of the card are masked?", answer: "The tool masks the first 8 digits of the 12-digit Aadhaar number printed on the card. Your name, photo, and other details remain visible — only the number is partially masked." },
+    { question: "Is this reversible?", answer: "No. The masking is applied directly to the image pixels and is irreversible. Once the image is saved with the mask, the original 8 digits cannot be recovered from the masked image." },
+    { question: "Is my Aadhaar image transmitted anywhere?", answer: "No. All image processing is done locally in your browser using the Canvas API. Your Aadhaar image and number never leave your device, ensuring complete privacy and security." },
+  ]
   },
   {
     name: 'PAN Card Verification',
     slug: 'pan-verification',
-    description: 'Verify PAN format and extract taxpayer category locally. No signup or account required.',
-    seoDescription: 'Free online PAN Card Verification — Verify PAN format and extract taxpayer category locally. ',
+    description: 'Verifies PAN card number format and structure locally. Extracts the taxpayer category from the PAN code — Individual, Company, Trust, etc. No data is sent to any server.',
+    seoDescription: 'Free online PAN Card Verification — Verify PAN number format and extract taxpayer category (Individual, Company, HUF, Trust, etc.). 100% local validation with no data uploads.',
     category: 'indian-utilities',
     id:  "235",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Enter the PAN Number", desc: "Type or paste the 10-character PAN (Permanent Account Number) into the input field. The format is always 5 letters + 4 digits + 1 letter (e.g., ABCPS1234D)." },
+    { title: "2. Verify Format and Category", desc: "Click verify to check the PAN structure — validates the character positions, checksum logic, and taxpayer category code. The tool identifies if it's an Individual, Company, HUF, Trust, or other entity type." },
+    { title: "3. Review the Results", desc: "See a detailed breakdown of the PAN: the first 3 alphabetic characters (AAA series), the 4th character (entity type), the 5th character (last name initial), and the numeric sequence. All validation runs locally." },
+  ],
+    faqs: [
+    { question: "What does the PAN structure tell me?", answer: "A PAN has 10 characters: the first 5 are letters, next 4 are numbers, last is a letter. The 4th character reveals the taxpayer category — P for Individual, C for Company, H for HUF, B for AOP/BOI, F for Partnership Firm, J for Artificial Judicial Person, T for Trust, G for Government." },
+    { question: "Can this verify if a PAN is actually issued by the IT department?", answer: "This tool validates the PAN format and structure locally. For verifying whether a PAN is actually active and issued, use the official Income Tax e-filing portal's PAN verification feature." },
+    { question: "Is my PAN number stored or transmitted?", answer: "No. All validation is done locally in your browser. The PAN you enter is never sent to any server and is not stored anywhere." },
+    { question: "What does the 4th character (entity type code) mean?", answer: "The 4th character of PAN indicates the taxpayer category: A = AOP (Association of Persons), B = Body of Individuals, C = Company, F = Partnership Firm, G = Government, H = HUF, J = Artificial Judicial Person, L = Local Authority, P = Individual, T = Trust." },
+  ]
   },
   {
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
-    description: 'Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. No signup or account required.',
-    seoDescription: 'Free online IFSC Code Lookup — Accepts an 11-character IFSC code and returns the corresponding bank name, branch address, city, district, state, and contact details. ',
+    description: 'Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Uses the built-in IFSC database for instant results.',
+    seoDescription: 'Free online IFSC Code Lookup — Find bank name, branch, address, city, district, and contact details from any 11-character IFSC code. Instant lookup with comprehensive bank database.',
     category: 'indian-utilities',
     id:  "236",
-    dependencies: 'IFSC API'
+    dependencies: 'IFSC API',
+    instructions: [
+    { title: "1. Enter the IFSC Code", desc: "Type the 11-character IFSC code (e.g., SBIN0001234) into the search field. The code consists of 4 letters identifying the bank, followed by 7 characters (0 for the 5th, then 6-digit branch code)." },
+    { title: "2. View Bank and Branch Details", desc: "The tool instantly displays the bank name, branch name, full address with city and district, state, and contact information from the built-in IFSC database." },
+    { title: "3. Copy or Use the Details", desc: "Copy any field — IFSC code, MICR code, or branch address — for use in NEFT, RTGS, or IMPS transfers. The details are accurate and sourced from the official RBI database." },
+  ],
+    faqs: [
+    { question: "What does IFSC stand for?", answer: "IFSC stands for Indian Financial System Code. It is an 11-character alphanumeric code that uniquely identifies a bank branch participating in NEFT, RTGS, and IMPS electronic fund transfer systems in India." },
+    { question: "How is the IFSC code structured?", answer: "The first 4 characters are letters representing the bank (e.g., SBIN for State Bank of India, HDFC for HDFC Bank). The 5th character is always 0 (zero). The last 6 characters identify the specific branch and can be alphanumeric." },
+    { question: "Is the database up to date?", answer: "The IFSC database is built into the tool and updated periodically with the latest RBI data. For the most critical verifications, you can cross-check with the official RBI website." },
+    { question: "Can I use this offline?", answer: "The IFSC lookup data is stored in the page itself, so it works without an internet connection after the initial page load. The database covers all major banks operating in India." },
+  ]
   },
   {
     name: 'Voter ID Form Helper',
     slug: 'voter-id-form-helper',
-    description: 'Get document checklists and guidance for Form 6/7/8 registration. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Voter ID Form Helper — Get document checklists and guidance for Form 6/7/8 registration. ',
+    description: 'Get document checklists and step-by-step guidance for Indian voter registration forms — Form 6 (new enrollment), Form 7 (correction/objection), and Form 8 (name transfer within constituency).',
+    seoDescription: 'Free online Voter ID Form Helper — Guide for Indian voter registration Forms 6, 7, and 8. Document checklists, step-by-step instructions for new enrollment, corrections, and name transfers.',
     category: 'indian-utilities',
     id:  "237",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Select Your Form Type", desc: "Choose the appropriate Election Commission form: Form 6 for new voter registration, Form 7 for objections or corrections, or Form 8 for name transfer within the same constituency." },
+    { title: "2. Review the Document Checklist", desc: "Get a tailored list of documents needed for your specific form. This includes proof of age, address proof, passport-size photos, and any additional documents required by your state's election office." },
+    { title: "3. Follow the Filing Guide", desc: "Read the step-by-step instructions for filling each section of the form. The guide explains how to submit online via the National Voters' Service Portal (NVSP) or offline at your local ERO office." },
+  ],
+    faqs: [
+    { question: "Which form do I need?", answer: "Form 6 is for new voter registration (first-time voter or enrolling in a new constituency). Form 7 is for objections to entries in the electoral roll or corrections to existing entries. Form 8 is for name transfer when you move within the same constituency." },
+    { question: "What documents are needed for Form 6 (new registration)?", answer: "You need proof of age (birth certificate, school leaving certificate, or passport), address proof (Aadhaar, ration card, utility bill, or bank statement), and one passport-size photograph. You must be at least 18 years old." },
+    { question: "Can I apply online?", answer: "Yes. Forms can be submitted online through the National Voters' Service Portal (NVSP) website or via the Voter Helpline mobile app. You'll need to upload scanned copies of your supporting documents." },
+    { question: "How long does voter registration take?", answer: "After submitting Form 6, the Electoral Registration Officer (ERO) typically processes applications within 30 days. You can track the status online using the reference number provided after submission." },
+  ]
   },
   {
     name: 'India Pincode Finder',
     slug: 'india-pincode-finder',
-    description: 'Search pincodes and post office branches across India. No signup or account required.',
-    seoDescription: 'Free online India Pincode Finder — Search pincodes and post office branches across India. ',
+    description: 'Search Indian pincodes and post office branches by pincode, location name, or area. Find delivery status, office type, and contact details for any post office in India.',
+    seoDescription: 'Free online India Pincode Finder — Search 6-digit pincodes and post office branches across India. Find delivery status, office type, district, state, and contact details instantly.',
     category: 'indian-utilities',
     id:  "238",
-    dependencies: 'Postal API'
+    dependencies: 'Postal API',
+    instructions: [
+    { title: "1. Enter a Pincode or Location", desc: "Type a 6-digit pincode, a city name, or a post office name into the search box. The tool instantly searches its database of post offices across India." },
+    { title: "2. Browse Search Results", desc: "View matching post offices with their full details — name, pincode, office type (Head Office, Sub Office, Branch Office), delivery status (Delivery/Non-Delivery), district, state, and contact number." },
+    { title: "3. Copy or Use the Information", desc: "Copy the pincode or office details for shipping labels, form filling, or address verification. The data is sourced from India Post's official database." },
+  ],
+    faqs: [
+    { question: "How are Indian pincodes structured?", answer: "Indian pincodes are 6-digit codes. The first digit indicates the postal zone (1-8 for different regions, 9 for Army), the second digit indicates the sub-zone/state, the third digit combined with the first two identifies the sorting district, and the last 3 digits identify the specific post office." },
+    { question: "Can I search by area or landmark name?", answer: "Yes. The search accepts city names, area names, and post office names in addition to pincodes. Partial matches are supported for flexible searching." },
+    { question: "Is the pincode database complete?", answer: "The database covers all operational post offices in India, categorized into Head Offices (HO), Sub Offices (SO), and Branch Offices (BO). It includes both delivery and non-delivery offices." },
+    { question: "Can I use this for e-commerce shipping?", answer: "Yes. The pincode and office type information helps verify serviceability for courier and e-commerce deliveries. Check the delivery status field to confirm whether a location is serviced." },
+  ]
   },
   {
     name: 'Hindi / Regional Font Generator',
     slug: 'hindi-regional-font-generator',
-    description: 'Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Hindi / Regional Font Generator — Generate stylish unicode fonts for Hindi, Tamil, Telugu, and other regional scripts. ',
+    description: 'Generate stylish Unicode fonts for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and other Indian regional scripts. Copy-paste styled text for social media, WhatsApp, and more.',
+    seoDescription: 'Free online Hindi & Regional Font Generator — Generate stylish Unicode fonts for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and more. Copy-paste for social media, WhatsApp, and designs.',
     category: 'indian-utilities',
     id:  "239",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Type or Paste Your Text", desc: "Enter the text you want to style in the input box. The tool supports Devanagari (Hindi, Marathi, Sanskrit), Tamil, Telugu, Kannada, Malayalam, Bengali, Gujarati, Gurmukhi, and Odia scripts." },
+    { title: "2. Choose a Font Style", desc: "Browse through the available font styles for your selected script. Preview each style applied to your text in real time. Styles range from bold and italic to decorative and handwritten." },
+    { title: "3. Copy and Use Anywhere", desc: "Click on your preferred styled text to copy it to your clipboard. Paste it directly into WhatsApp, Instagram, Facebook, Twitter, or any app that supports Unicode text." },
+  ],
+    faqs: [
+    { question: "Which Indian regional scripts are supported?", answer: "The tool supports Devanagari (Hindi, Marathi, Sanskrit, Nepali, Konkani), Tamil, Telugu, Kannada, Malayalam, Bengali (Bangla), Gujarati, Gurmukhi (Punjabi), and Odia (Oriya) scripts." },
+    { question: "Will the styled text work on all apps and devices?", answer: "The generated text uses Unicode characters, which are supported on modern smartphones (Android, iOS), desktops (Windows, Mac, Linux), and most apps including WhatsApp, Instagram, Facebook, Twitter, and Telegram." },
+    { question: "Is this different from changing the font in an app?", answer: "Yes. Instead of changing the app's display font (which only you see), this generates actual Unicode characters that render with the chosen style for all viewers — even those without the specific font installed." },
+    { question: "Can I use these fonts commercially?", answer: "Yes. The styled Unicode text can be used for social media posts, profile bios, digital designs, and personal projects. Output depends on Unicode rendering availability on each platform." },
+  ]
   },
   {
     name: 'Indian Age Calculator',
     slug: 'indian-age-calculator',
-    description: 'Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Indian Age Calculator — Calculate exact age as per DOB in DD/MM/YYYY format with eligibility check. ',
+    description: 'Calculate exact age in years, months, and days from a date of birth in DD/MM/YYYY format. Includes eligibility check for Indian government age requirements.',
+    seoDescription: 'Free online Indian Age Calculator — Exact age in years, months, and days from DOB. Includes eligibility checks for Indian age requirements. Instant results, no data upload.',
     category: 'indian-utilities',
     id:  "240",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Enter Your Date of Birth", desc: "Type or select your date of birth in DD/MM/YYYY format. Use the date picker or type the date directly." },
+    { title: "2. Get Your Exact Age", desc: "The tool instantly displays your exact age in years, months, and days. The calculation uses the standard calendar system and accounts for leap years and month lengths." },
+    { title: "3. Check Eligibility", desc: "View the eligibility check section that compares your age against common Indian requirements — minimum age for voter registration (18), driving license (18/20), marriage (18/21), and more." },
+  ],
+    faqs: [
+    { question: "How is the exact age calculated?", answer: "The calculation subtracts the birth date from the current date, accounting for varying month lengths and leap years. The result shows completed years, remaining months, and remaining days for maximum accuracy." },
+    { question: "What age eligibility checks are included?", answer: "The tool compares your age against Indian legal thresholds: 18 for voting and driving license, 18 for women marriage age, 21 for men marriage age, 21 for liquor consumption in most states, and 60 for senior citizen benefits." },
+    { question: "Is my date of birth stored or shared?", answer: "No. All calculation is done locally in your browser. Your date of birth is never transmitted, stored, or shared with anyone." },
+    { question: "Can I calculate age for a past or future date?", answer: "Yes. You can specify any reference date to calculate age as of that date, not just today. This is useful for checking eligibility as of a specific application deadline." },
+  ]
   },
   {
     name: 'CGPA to Percentage Converter',
     slug: 'cgpa-to-percentage-converter',
-    description: 'Convert CGPA to percentage based on CBSE, MU, and university formulas. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage based on CBSE, MU, and university formulas. ',
+    description: 'Convert CGPA to percentage using CBSE, Mumbai University (MU), Anna University, and other Indian university conversion formulas. Supports 10-point, 7-point, and 4-point CGPA scales.',
+    seoDescription: 'Free online CGPA to Percentage Converter — Convert CGPA to percentage using CBSE (9.5x), Mumbai University (7.1x+11), Anna University, and other India-specific formulas. Supports 10/7/4 point scales.',
     category: 'indian-utilities',
     id:  "241",
-    dependencies: 'None'
+    dependencies: 'None',
+    instructions: [
+    { title: "1. Enter Your CGPA", desc: "Type your Cumulative Grade Point Average (CGPA) in the input field. Enter a value between 0 and your university's maximum CGPA (typically 10, 7, or 4)." },
+    { title: "2. Select Your University or Board", desc: "Choose the conversion formula that applies to you — CBSE (multiply by 9.5), Mumbai University (7.1x + 11 for 7-point, 7.3x + 5.5 for 10-point), Anna University, VTU, AKTU, UPTU, or a custom formula." },
+    { title: "3. Get Your Percentage", desc: "View your equivalent percentage instantly. The tool displays the conversion formula used so you can verify the calculation. Copy the result for your applications." },
+  ],
+    faqs: [
+    { question: "How does CBSE convert CGPA to percentage?", answer: "CBSE uses the formula: Percentage = CGPA x 9.5. For example, a CGPA of 9.0 equals 85.5%. This formula was derived by CBSE based on the results of previous board examinations." },
+    { question: "How is Mumbai University CGPA calculated?", answer: "Mumbai University uses formula-specific conversion: for the 7-point scale, Percentage = 7.1 x CGPA + 11. For the 10-point scale under the Choice Based Credit System, Percentage = 7.3 x CGPA + 5.5." },
+    { question: "Can I use a custom formula?", answer: "Yes. If your university uses a specific conversion formula not listed, you can enter the custom values manually — specify the multiplier and additive constant used by your institution." },
+    { question: "Is this calculation accurate for job applications?", answer: "Most Indian companies and higher education institutions accept the CBSE 9.5 formula or the specific conversion published by your university. Verify with the HR department or admissions office if your university uses a unique formula." },
+  ]
   },
   {
     name: 'PDF to HTML',
@@ -175,16 +286,6 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'pdf-lib'
   },
   {
-    name: 'WebP to PNG Converter',
-    slug: 'webp-to-png',
-    showInCategory: false,
-    description: 'Converts WebP files to PNG format — modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
-    seoDescription: 'Free online WebP to PNG Converter — Converts WebP images to standard PNG format with full transparency support. Designers and web developers use it when they need to use WebP-sourced. ',
-    category: 'Image',
-    id:  "245",
-    dependencies: 'Canvas API'
-  },
-  {
     name: 'JFIF to PNG Converter',
     slug: 'jfif-to-png',
     showInCategory: false,
@@ -193,16 +294,6 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Image',
     id:  "246",
     dependencies: 'Canvas API'
-  },
-  {
-    name: 'HEIC to PNG Converter',
-    slug: 'heic-to-png',
-    showInCategory: false,
-    description: 'Converts HEIC files to PNG format — Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits.',
-    seoDescription: 'Free online HEIC to PNG Converter — Converts Apple HEIC/HEIF images to universally compatible PNG format with a batch queue for processing multiple photos. ',
-    category: 'Image',
-    id:  "247",
-    dependencies: 'libheif WASM'
   },
   {
     name: 'Image to JPG Converter',
@@ -253,20 +344,42 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Marriage Biodata Maker',
     slug: 'marriage-biodata-maker',
-    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Marriage Biodata Maker — Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. ',
+    description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Download as PDF for sharing on matrimonial platforms.',
+    seoDescription: 'Free online Marriage Biodata Maker — Create printable matrimonial biodata forms for Shaadi.com, BharatMatrimony, and other platforms. Personal details, family background, education, career, and partner preferences.',
     category: 'indian-utilities',
     id:  "257",
-    dependencies: 'jsPDF'
+    dependencies: 'jsPDF',
+    instructions: [
+    { title: "1. Fill in Personal Details", desc: "Enter basic information — name, date of birth, height, complexion, gotra, and horoscope details (manglik, nakshatra, rashi). All fields are organized in the traditional Indian biodata format." },
+    { title: "2. Add Family Background", desc: "Complete the family section with father's name and occupation, mother's name, siblings (brothers/sisters), and family type (nuclear/joint) and values (orthodox/traditional/liberal)." },
+    { title: "3. Add Career and Preferences", desc: "Enter your education qualifications, occupation, annual income, and city details. Specify partner preferences — age range, education, profession, city preference, and any other expectations." },
+  ],
+    faqs: [
+    { question: "What sections are included in the biodata?", answer: "The biodata includes Personal Details (name, DOB, height, gotra, horoscope), Family Background (parents, siblings, family type), Education and Career (qualifications, occupation, income), and Partner Preferences (age, education, profession, location, community)." },
+    { question: "Can I download the biodata as PDF?", answer: "Yes. The tool generates a professionally formatted PDF that you can download and share on matrimonial platforms like Shaadi.com, BharatMatrimony, Jeevansathi, or via WhatsApp and email with family contacts." },
+    { question: "Can I add photos to the biodata?", answer: "Yes. The template includes a photo section where you can upload a recent photograph. The photo is embedded in the PDF and positioned in the standard biodata format." },
+    { question: "Is my data saved anywhere?", answer: "No. All information is processed locally in your browser for PDF generation. Nothing is stored, uploaded, or shared. Your personal and family data remains completely private." },
+  ]
   },
   {
     name: 'Rental Agreement Generator',
     slug: 'rental-agreement-generator',
-    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Rental Agreement Generator — Generates customizable rental lease and license agreements compliant with Indian property laws including leave-and-license and tenancy formats. ',
+    description: 'Generates customizable rental lease and license agreements compliant with Indian property laws. Supports leave-and-license agreements and standard tenancy formats for residential and commercial properties.',
+    seoDescription: 'Free online Rental Agreement Generator — Create rental lease and license agreements compliant with Indian property laws. Leave-and-license and tenancy formats for residential/commercial properties. Download as PDF.',
     category: 'indian-utilities',
     id:  "258",
-    dependencies: 'jsPDF'
+    dependencies: 'jsPDF',
+    instructions: [
+    { title: "1. Enter Property and Party Details", desc: "Fill in landlord and tenant details (names, addresses), property address and description, and the agreement type — leave-and-license (popular in Maharashtra) or standard tenancy agreement." },
+    { title: "2. Set Financial Terms", desc: "Specify the monthly rent amount, security deposit, rent escalation percentage and frequency, lock-in period, and notice period. The tool formats all financial terms clearly in the agreement." },
+    { title: "3. Review and Download PDF", desc: "Preview the complete agreement with all sections — parties, property description, term, rent, deposit, utilities, maintenance responsibilities, and termination clauses. Download as a PDF ready for stamp paper and registration." },
+  ],
+    faqs: [
+    { question: "What is the difference between leave-and-license and tenancy?", answer: "A leave-and-license agreement grants permission to use the property (license) without creating tenancy rights. It is easier to terminate and does not create inheritance rights. A tenancy agreement creates a landlord-tenant relationship with stronger legal protections under the Rent Control Act." },
+    { question: "Is this agreement legally valid?", answer: "Yes. The agreement follows standard Indian property law formats. For legal enforceability, print it on adequate-value stamp paper (value varies by state) and register with the sub-registrar if the lease period exceeds 12 months." },
+    { question: "What states does this cover?", answer: "The agreement is drafted under Indian law and suitable for all Indian states. Key state-specific variations like stamp duty rates and registration requirements differ — check with a local lawyer for your state's specific requirements." },
+    { question: "Can I modify the terms after generating?", answer: "Yes. You can regenerate the PDF with updated terms anytime. The agreement includes standard clauses for maintenance, utility bills, painting charges, and dispute resolution — all customizable." },
+  ]
   },
   {
     name: 'Resume ATS Score Checker',
@@ -275,7 +388,18 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Resume ATS Score Checker — Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. ',
     category: 'AI',
     id:  "259",
-    dependencies: 'AI API'
+    dependencies: 'AI API',
+    instructions: [
+      { title: "1. Upload Your Resume", desc: "Upload your resume in PDF or DOCX format. The tool parses the content and extracts your skills, experience, education, and certifications." },
+      { title: "2. Paste the Job Description", desc: "Enter the job description you're applying for. The AI analyzes both documents to identify keyword matches, skill gaps, and overall compatibility." },
+      { title: "3. Review Your Score and Suggestions", desc: "View your ATS compatibility score out of 100, along with actionable suggestions to improve your resume — missing keywords, formatting issues, and skills to highlight." },
+    ],
+    faqs: [
+      { question: "What is an ATS score?", answer: "An Applicant Tracking System (ATS) score measures how well your resume matches a job description. Companies use ATS software to filter candidates before human review. A higher score means your resume is more likely to pass automated screening." },
+      { question: "What factors affect my score?", answer: "The score considers keyword matching (skills, qualifications, tools), formatting compatibility, section headers, and overall relevance. Missing industry-specific keywords and improper formatting are common reasons for low scores." },
+      { question: "How can I improve my ATS score?", answer: "Use standard section headers (Experience, Education, Skills), include keywords from the job description naturally in your experience bullets, use a clean format without tables or graphics, and quantify achievements with numbers." },
+      { question: "Is my resume stored or shared?", answer: "No. Your resume and job description are processed once and not stored. We recommend not uploading sensitive personal information beyond what's needed for the analysis." },
+    ]
   },
   {
     name: 'WhatsApp Toolkit',
@@ -289,20 +413,42 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Indian Document Enhancer',
     slug: 'indian-document-enhancer',
-    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Indian Document Enhancer — Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. ',
+    description: 'Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. Adjusts contrast, brightness, and sharpness locally.',
+    seoDescription: 'Free online Indian Document Enhancer — Enhance scanned images of Aadhaar, PAN, Voter ID, and Driving License for government portal uploads. Improve contrast, brightness, and sharpness. 100% local processing.',
     category: 'indian-utilities',
     id:  "262",
-    dependencies: 'Canvas API'
+    dependencies: 'Canvas API',
+    instructions: [
+    { title: "1. Upload Your Document Image", desc: "Select a scanned image or photo of your identification document — Aadhaar, PAN card, Voter ID, or Driving License. The tool accepts photos taken from your phone as well as scanner output." },
+    { title: "2. Auto-Enhance the Image", desc: "The tool automatically adjusts contrast, brightness, and sharpness to meet government portal upload guidelines. It improves text legibility, reduces shadows, and normalizes the document appearance." },
+    { title: "3. Download the Enhanced Version", desc: "Preview the enhanced document image side-by-side with the original. Download the improved version and upload it to the relevant government portal." },
+  ],
+    faqs: [
+    { question: "Which government portals require enhanced document scans?", answer: "Many Indian government portals require clear, legible document scans: DigiLocker document uploads, Income Tax e-filing portal (PAN card), UIDAI Aadhaar updates, Voter ID online applications, and various state government service portals." },
+    { question: "What enhancements are applied to the image?", answer: "The tool applies adaptive contrast stretching, brightness normalization, sharpness enhancement (unsharp mask), shadow reduction, and noise reduction. These adjustments are calibrated for Indian ID document formats." },
+    { question: "What file formats and sizes are supported?", answer: "The tool accepts JPEG and PNG images. The enhanced output preserves the original resolution while improving visual quality. Recommended minimum resolution is 300 DPI for print-original documents." },
+    { question: "Is my identification document stored anywhere?", answer: "No. All image processing happens locally in your browser using the Canvas API. Your identification document image is never uploaded to any server." },
+  ]
   },
   {
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
-    description: 'Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. No signup or account required.',
-    seoDescription: 'Free online Indian Voice Transcriber — Transcribes recorded audio into text with support for 12 Indian languages using browser-based speech recognition. ',
+    description: 'Transcribes recorded audio to text with support for 12 Indian languages using browser-based Web Speech API recognition. Works offline with no data uploads for supported languages.',
+    seoDescription: 'Free online Indian Voice Transcriber — Transcribe audio to text in 12 Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, English). Browser-based, no uploads.',
     category: 'indian-utilities',
     id:  "264",
-    dependencies: 'Web Speech API'
+    dependencies: 'Web Speech API',
+    instructions: [
+    { title: "1. Upload or Record Audio", desc: "Upload a pre-recorded audio file from your device or use the built-in recorder to capture audio directly in your browser. Supported formats include MP3, WAV, M4A, and WebM." },
+    { title: "2. Choose the Language", desc: "Select the language of your audio from 12 supported Indian languages — Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, and English." },
+    { title: "3. Review and Export the Transcript", desc: "The transcription appears in real time as the audio is processed. Review the text, make any corrections, and copy it to your clipboard or download as a text file." },
+  ],
+    faqs: [
+    { question: "What are the 12 supported Indian languages?", answer: "The tool supports Hindi, Tamil, Telugu, Bengali (Bangla), Marathi, Gujarati, Kannada, Malayalam, Punjabi (Gurmukhi), Odia (Oriya), Urdu, and English — covering all 22 official languages of India except for languages not yet supported by the Web Speech API." },
+    { question: "How accurate is the transcription?", answer: "Accuracy varies based on audio quality, speaker clarity, background noise levels, and the specific language. Clean recordings with minimal background noise produce the best results." },
+    { question: "Is my audio data transmitted to any server?", answer: "For some languages, the transcription uses your browser's built-in Web Speech API which may process audio locally or through cloud-based recognition depending on the browser." },
+    { question: "Can I transcribe audio from a video file?", answer: "Yes. If the video file contains a clear audio track, you can upload it and the tool will extract the audio for transcription. Supported video formats include MP4 and WebM with audio tracks." },
+  ]
   },
   {
     name: 'Bank Statement Analyser',
@@ -436,11 +582,22 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
-    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. Uses cloud-based processing.',
-    seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key. ',
+    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.',
+    seoDescription: 'Free online PDF AI Summariser — Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights. ',
     category: 'AI',
     id:  "276",
-    dependencies: 'AI API, PDF.js'
+    dependencies: 'AI API, PDF.js',
+    instructions: [
+      { title: "1. Upload Your PDF", desc: "Select a PDF file from your device. The tool extracts text using native PDF parsing for digital PDFs and OCR for scanned documents." },
+      { title: "2. Choose Summary Length", desc: "Select your preferred summary length — brief (1 paragraph), concise (3-5 bullet points), or detailed (section-by-section overview)." },
+      { title: "3. Generate and Export", desc: "Click summarize to produce an AI-generated summary. Review the output and copy or download it as text for use in reports, notes, or research." },
+    ],
+    faqs: [
+      { question: "Does this support scanned PDFs?", answer: "Yes. The tool uses OCR (Optical Character Recognition) to extract text from scanned documents and images within PDFs. Text quality depends on the scan resolution and clarity." },
+      { question: "How long does summarization take?", answer: "Processing time depends on document length. Short documents (1-10 pages) take seconds. Longer documents (50+ pages) may take a minute or more for text extraction and LLM processing." },
+      { question: "Can I summarize any type of PDF?", answer: "The tool works best with text-heavy PDFs like articles, reports, research papers, and books. Highly graphical PDFs with minimal text may produce less useful summaries." },
+      { question: "What information does the summary contain?", answer: "The summary extracts key points, main arguments, conclusions, and important findings. The level of detail depends on your chosen summary length setting." },
+    ]
   },
   {
     id: "278",
@@ -1595,36 +1752,80 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Tax Saving Calculator",
     slug: "tax-saving-calculator",
     category: "indian-utilities",
-    description: "Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. Everything runs locally in your browser — nothing is uploaded.",
-    seoDescription: 'Free online Tax Saving Calculator — Compares Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees. ',
+    description: 'Compares Old vs New tax regime liability with Section 80C, 80D, NPS, HRA, and home loan deductions. Generates a personalized tax-saving report for Indian salaried employees.',
+    seoDescription: 'Free online Indian Tax Saving Calculator — Compare Old vs New tax regime liability with 80C, 80D, NPS, HRA, and home loan deductions. Generates personalized tax-saving report for Indian salaried employees.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Your Salary Details", desc: "Input your annual gross salary, HRA component, and any other income sources. The calculator works for both salaried employees and self-employed individuals under the Indian tax system." },
+    { title: "2. Add Your Investments and Deductions", desc: "Enter amounts under Section 80C (PPF, ELSS, life insurance), 80D (health insurance), 80CCD(1B) NPS, HRA rent paid, and home loan interest under Section 24(b). The tool tracks 80C's Rs. 1.5 lakh ceiling." },
+    { title: "3. Compare Regimes and Save Report", desc: "Instantly compare your total tax liability under the Old tax regime (with deductions) vs the New tax regime (lower rates, no deductions). Download a personalized tax-saving report as a PDF." },
+  ],
+    faqs: [
+    { question: "What is the difference between Old and New tax regimes?", answer: "The Old tax regime has higher tax rates but allows deductions (80C up to Rs. 1.5L, 80D, HRA, home loan). The New tax regime has lower rates but no deductions except for employer NPS contribution (80CCD(2)). The best choice depends on your investment and deduction amounts." },
+    { question: "What deductions are covered in the comparison?", answer: "The calculator covers Section 80C (PPF, ELSS, LIC, EPF, tuition fees), Section 80D (health insurance premiums), Section 80CCD(1B) NPS (additional Rs. 50,000), HRA exemption, home loan interest under Section 24(b), and standard deduction." },
+    { question: "Which regime is better for me?", answer: "Generally, if your total deductions exceed Rs. 3-4 lakh (80C plus HRA plus home loan plus 80D), the Old regime likely saves more tax. For those with minimal investments, the New regime with lower rates may be better. The calculator shows both side-by-side." },
+    { question: "Can I use this for FY 2025-26 calculations?", answer: "Yes. The calculator uses the latest tax slabs and rebate limits under Section 87A for the current financial year. Tax slabs and limits are updated as per the latest Union Budget announcements." },
+  ]
   },
   {
     id: "308",
     name: "GSTIN Lookup",
     slug: "gstin-lookup",
     category: "indian-utilities",
-    description: "Verify any GSTIN instantly — get legal name, trade name, address, registration date, and filing status. Bulk verification via CSV export for accounts teams.",
-    seoDescription: 'Free online GSTIN Lookup — Verify any GSTIN instantly with legal name, trade name, address, registration date, and filing status. ',
+    description: 'Verifies any GSTIN (Goods and Services Tax Identification Number) instantly — returns legal name, trade name, address, registration date, and filing status. Supports bulk CSV export for accounts teams.',
+    seoDescription: 'Free online GSTIN Lookup — Verify any GSTIN instantly. Get legal name, trade name, address, registration date, constitution, and filing status. Bulk CSV verification for accounts and vendor onboarding.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter a GSTIN to Look Up", desc: "Type a valid 15-character GSTIN (format: 2-digit state code plus 10-digit PAN plus 1 entity code plus 1 check digit plus 1 default Z). The tool validates the format and queries the GST database." },
+    { title: "2. View Complete GST Details", desc: "See the legal name, trade name (if applicable), registered address, date of registration, business constitution (proprietorship, partnership, company), GSTIN status (active/cancelled), and filing compliance status." },
+    { title: "3. Export for Vendor Verification", desc: "Export individual or bulk lookups as CSV for vendor verification workflows. This is especially useful for accounts payable and vendor onboarding teams validating multiple GSTINs." },
+  ],
+    faqs: [
+    { question: "What information does a GSTIN contain?", answer: "A GSTIN is 15 characters: first 2 digits = state code (01-37), next 10 = PAN of the business, 13th character = entity code (number of registrations under same PAN in same state), 14th = check digit, 15th = Z (default). Example: 27AABCS1234A1Z5." },
+    { question: "Can I verify GSTINs in bulk?", answer: "Yes. The tool supports bulk verification — enter multiple GSTINs or upload a CSV file. The results can be exported as CSV with columns for legal name, address, status, and filing details." },
+    { question: "Is the data from the official GST portal?", answer: "The tool queries the GST common portal database to retrieve registered taxpayer details. Data availability depends on the GST portal's API response and the taxpayer's registration status." },
+    { question: "Can I use this for vendor onboarding?", answer: "Yes. GSTIN verification is a critical step in vendor onboarding. The bulk CSV export includes all fields needed for vendor master records — legal name, address, constitution, registration date, and compliance status." },
+  ]
   },
   {
     id: "309",
     name: "Seller Profit Calculator",
     slug: "seller-profit-calculator",
     category: "indian-utilities",
-    description: "Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. Made for Indian e-commerce sellers.",
-    seoDescription: 'Free online Seller Profit Calculator — Calculate exact profit after Meesho/Amazon/Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side. ',
+    description: 'Calculates exact profit after marketplace commissions (Meesho, Amazon, Flipkart), GST, shipping costs, returns, and packaging. Compare platform profitability side-by-side for Indian e-commerce sellers.',
+    seoDescription: 'Free online Seller Profit Calculator for India — Calculate exact profit after Meesho, Amazon, Flipkart commissions, GST, shipping, returns, and packaging. Compare platforms side-by-side for Indian e-commerce sellers.',
     dependencies: "None",
+    instructions: [
+    { title: "1. Enter Product Cost and Pricing", desc: "Enter your product cost (procurement or manufacturing price), the selling price on the marketplace, and the category commission rate applicable to your product category." },
+    { title: "2. Add Marketplace-Specific Fees", desc: "Input the marketplace commission percentage (varies by platform and category), fixed fee per order, payment processing fee, shipping cost, and GST on seller fees. Each marketplace has a different fee structure." },
+    { title: "3. Compare and Optimize", desc: "View your net profit after all deductions for each platform. Compare Meesho vs Amazon vs Flipkart side-by-side. Adjust pricing or choose the best platform for each product to maximize margins." },
+  ],
+    faqs: [
+    { question: "What costs does the calculator include?", answer: "It includes product cost, GST input tax credit, marketplace commission (category-specific), fixed fees, payment gateway fees, shipping costs, collection/packaging charges, and return/wastage estimates." },
+    { question: "How do marketplace commissions vary by category?", answer: "Commissions vary significantly across platforms and categories. For example, Amazon charges 5-25 percent depending on category (electronics ~5 percent, apparel ~15 percent, beauty ~20 percent). Flipkart has similar category-based tiers. Meesho charges 0-20 percent depending on category and seller tier." },
+    { question: "Can I compare multiple platforms in one calculation?", answer: "Yes. Enter the same product details once and set different commission structures for each platform. The calculator shows a side-by-side comparison of your net profit on Meesho, Amazon, and Flipkart." },
+    { question: "Is this specific to Indian e-commerce taxes?", answer: "Yes. The calculator accounts for Indian GST on seller fees (18 percent on platform fees), TDS under Section 194-O (1 percent on sales), and the GST input tax credit mechanism specific to the Indian tax system." },
+  ]
   },
   {
     id: "310",
     name: "Complaint Letter Generator",
     slug: "complaint-letter-generator",
     category: "indian-utilities",
-    description: "Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). AI-powered with your API key.",
-    seoDescription: 'Free online Complaint Letter Generator — Generates legally correct formal complaint letters citing Indian consumer law (Consumer Protection Act 2019, RERA, TRAI, RBI). ',
+    description: 'Generates legally correct formal complaint letters citing Indian consumer law — Consumer Protection Act 2019, RERA, TRAI, or RBI regulations. AI-powered with your API key.',
+    seoDescription: 'Free online Complaint Letter Generator India — Create formal complaint letters citing Consumer Protection Act 2019, RERA, TRAI, RBI. Draft legal notices for telecom, banking, real estate, and e-commerce issues.',
     dependencies: "AI API",
+    instructions: [
+    { title: "1. Select Complaint Type and Enter Details", desc: "Choose the category of your complaint — telecom (TRAI), banking/RBI, real estate (RERA), e-commerce (Consumer Act), insurance (IRDAI), or general consumer complaint. Enter your name, address, and contact details." },
+    { title: "2. Describe the Issue in Detail", desc: "Provide a detailed description of the problem — dates, amounts, communication history, and any reference numbers (ticket IDs, complaint numbers, FIR details). The more specific you are, the stronger the letter." },
+    { title: "3. Generate and Download the Letter", desc: "The tool drafts a formal complaint letter citing the applicable law and sections. Review the draft, edit if needed, and download as PDF. The letter includes the addressee's designation, subject line, and a clear prayer/relief section." },
+  ],
+    faqs: [
+    { question: "Which consumer laws are cited in the letters?", answer: "The generator cites the relevant law based on your complaint type: Consumer Protection Act 2019 (e-commerce, product defects, services), TRAI Act (telecom, broadband issues), RBI guidelines (banking, credit card, UPI disputes), RERA (real estate delays, property issues), and IRDAI (insurance claim delays)." },
+    { question: "Do I need an API key for this tool?", answer: "Yes. The complaint letter generation uses AI models to draft legally-appropriate content. You will need to provide your own AI API key (OpenAI, Anthropic, or OpenRouter) in the tool settings. Your API key is stored locally in your browser." },
+    { question: "Is this a legally binding document?", answer: "A well-drafted complaint letter serves as a formal record of your grievance and is admissible in consumer forums and other legal proceedings. However, for critical legal matters, consider having the letter reviewed by a lawyer before sending." },
+    { question: "Where do I send the generated letter?", answer: "The letter includes the proper addressee. For consumer complaints, send via registered post with acknowledgment due to the company's grievance officer. For escalated complaints, approach the relevant consumer forum, TRAI ombudsman, RBI banking ombudsman, or RERA authority." },
+  ]
   },
   {
     id: "auto-10030",
@@ -1652,6 +1853,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "A persistent task manager with priorities and filters. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: "Free online To-Do List — A persistent task manager with priorities and filters. ",
     dependencies: "None",
+    instructions: [
+      { title: "1. Add a Task", desc: "Type your task into the input field and press Enter or click the add button. Each task can include a priority level to help you sort what matters most." },
+      { title: "2. Organize with Priorities and Filters", desc: "Assign priority levels (high, medium, low) to each task. Use the filter options to view all tasks, only high-priority items, or focus on incomplete work." },
+      { title: "3. Track and Complete", desc: "Check off tasks as you finish them. Your task list persists in your browser's local storage so your data remains available even after closing and reopening the page." },
+    ],
+    faqs: [
+      { question: "Is my task list saved between sessions?", answer: "Yes. Your tasks are stored locally in your browser's localStorage. They persist across page refreshes and browser sessions. Clearing your browser data will remove saved tasks." },
+      { question: "Can I delete completed tasks?", answer: "You can clear completed tasks with one click to declutter your list. Completed tasks are visually marked but remain visible until you choose to clear them." },
+      { question: "Does this tool work offline?", answer: "Yes. The To-Do List is a fully client-side application. Everything runs locally in your browser with no server calls required after the initial page load." },
+    ]
   },
   {
     id: "auto-10050",
@@ -1667,9 +1878,20 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Pronunciation Tool",
     slug: "pronunciation-tool",
     category: "Text",
-    description: "Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed.",
-    seoDescription: "Free online Pronunciation Tool — Hear the correct pronunciation of any word or phrase in multiple accents. Type any text and listen to clear audio pronunciation with adjustable speed. Works in your browser.",
+    description: 'Hear the correct pronunciation of any word or phrase in multiple English accents using browser-based speech synthesis. Adjustable playback speed with clear audio output.',
+    seoDescription: 'Free online Pronunciation Tool — Hear correct pronunciation of words and phrases in multiple English accents using browser speech synthesis. Adjustable speed and clear audio.',
     dependencies: "Web Speech API",
+    instructions: [
+    { title: "1. Enter Your Word or Phrase", desc: "Type the word or phrase you want to hear pronounced. The tool works with any English text — from single words to full sentences." },
+    { title: "2. Choose an Accent", desc: "Select from available English accents including US English, UK English, Australian English, Indian English, and others supported by your browser's speech synthesis engine." },
+    { title: "3. Listen and Adjust", desc: "Click the play button to hear the pronunciation. Use the speed slider to slow down or speed up the audio — slow mode helps identify individual sounds in unfamiliar words." },
+  ],
+    faqs: [
+    { question: "What accents are available?", answer: "Available accents depend on your browser and operating system. Most modern browsers support US English, UK English, Australian English, Indian English, and Canadian English. For the widest accent selection, use Chrome on desktop." },
+    { question: "How accurate is the pronunciation?", answer: "The tool uses your browser's built-in speech synthesis (Text-to-Speech) engine. Pronunciation accuracy is excellent for common words and standard English. For specialized terminology, proper names, or uncommon words, accuracy may vary." },
+    { question: "Can I slow down the pronunciation?", answer: "Yes. The speed slider lets you adjust playback from 0.5x (half speed, good for learning) to 2x (double speed). Slower speeds help distinguish individual sounds and syllables in difficult words." },
+    { question: "Does this work offline?", answer: "Yes. Most browsers cache speech synthesis voices after initial download. After the first use, pronunciation playback typically works offline without an internet connection." },
+  ]
   },
   {
     id: "video-converter-1",
@@ -1715,7 +1937,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "document-converter-1",
     name: "Document Converter",
     slug: "document-converter",
-    category: "PDF",
+    category: "Converter",
     description: 'Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format — your files never leave your device.',
     seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. ',
     dependencies: "pdf-lib / pdf2docx / SheetJS / PptxGenJS",
@@ -2170,6 +2392,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AI Chat with PDF — Ask questions and get answers from your PDF documents. Intelligent document search. ',
     dependencies: "pdfjs-dist",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload Your PDF", desc: "Select a PDF file to upload. The tool extracts text from all pages and indexes it for intelligent search and question answering." },
+      { title: "2. Ask Questions About the Document", desc: "Type any question about the PDF content in natural language. The AI searches the document and provides answers with relevant context." },
+      { title: "3. Explore with Follow-up Questions", desc: "Ask follow-up questions to dive deeper. The tool maintains conversation context, so you can explore the document naturally like talking to an expert." },
+    ],
+    faqs: [
+      { question: "What types of PDFs work best?", answer: "Text-based PDFs work best — reports, contracts, research papers, books, and manuals. Scanned PDFs with OCR text also work, but accuracy depends on OCR quality." },
+      { question: "What's the difference from PDF AI Summariser?", answer: "PDF AI Summariser generates a static summary of the entire document. AI Chat PDF lets you ask specific questions and get targeted answers — it's interactive rather than a one-shot summary." },
+      { question: "Can I ask questions across multiple PDFs?", answer: "This tool processes one PDF at a time. For querying multiple documents simultaneously, use the AI Document Chat (RAG) tool which supports multiple document uploads." },
+      { question: "How does the AI find answers in the PDF?", answer: "The tool extracts text from the PDF and uses vector search to find the most relevant sections for your question. The AI then generates an answer based on those specific passages." },
+    ]
   },
   {
     id: "356",
@@ -2180,6 +2413,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Grammar Checker — Check and correct grammar, spelling, and punctuation. Detects homophones, misspellings, and more. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter or Paste Your Text", desc: "Type or paste the text you want to check. The tool analyzes your writing in real time and highlights errors as you type." },
+      { title: "2. Review Detected Errors", desc: "Each error is highlighted with a suggestion for correction. Categories include spelling, grammar, punctuation, homophones (their/there/they're), and run-on sentences." },
+      { title: "3. Apply Corrections", desc: "Click on any highlighted error to see suggestions. Accept corrections individually or apply all fixes at once. Copy the corrected text when done." },
+    ],
+    faqs: [
+      { question: "What types of errors does this detect?", answer: "The Grammar Checker detects spelling mistakes, grammar errors (subject-verb agreement, tense), punctuation issues (missing commas, apostrophes), homophone confusion (your/you're, its/it's), and run-on sentences." },
+      { question: "Is this as accurate as Grammarly or other tools?", answer: "This tool covers common grammar and spelling errors effectively. For advanced stylistic suggestions, tone analysis, and genre-specific writing advice, specialized writing assistants may offer more depth." },
+      { question: "Does it work offline?", answer: "The tool runs analysis using client-side processing where possible. Some advanced grammar checks may require cloud processing depending on your browser capabilities." },
+      { question: "Can I check text in other languages?", answer: "The primary language support is English. Basic spell checking may work for other Latin-alphabet languages, but grammar rules are optimized for English." },
+    ]
   },
   {
     id: "357",
@@ -2190,6 +2434,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AI Humanizer — Make AI text sound natural. Casual, professional, friendly, or storytelling tones. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Paste AI-Generated Text", desc: "Paste text that was generated by ChatGPT, Claude, or any AI writing tool. The humanizer analyzes patterns that make it sound robotic — repetitive phrasing, overly formal structure, and predictable transitions." },
+      { title: "2. Choose a Tone", desc: "Select your desired output tone — casual (conversational), professional (business-appropriate), friendly (warm and approachable), natural (balanced), or storytelling (narrative flow)." },
+      { title: "3. Humanize and Refine", desc: "Click humanize to rewrite the text. Review the output, make additional edits, and regenerate if needed until it sounds natural and authentic." },
+    ],
+    faqs: [
+      { question: "What makes AI text sound robotic?", answer: "AI text often uses repetitive sentence structures, overly formal transitions (furthermore, moreover, consequently), redundant adjectives, predictable paragraph patterns, and lack of personal voice or colloquialisms." },
+      { question: "Can this bypass AI detectors?", answer: "The humanizer is designed to improve readability and naturalness, not specifically to evade AI detection. While more natural text may be less detectable, we don't guarantee it will bypass any particular AI detector." },
+      { question: "What tones are available?", answer: "Five tones are available: casual (conversational, uses contractions), professional (polished, business-ready), friendly (warm, approachable), natural (balanced, versatile), and storytelling (narrative, engaging)." },
+      { question: "How much of the original meaning is preserved?", answer: "The core meaning, facts, and key messages are preserved. Phrasing, sentence structure, transitions, and word choice are rewritten to sound more natural." },
+    ]
   },
   {
     id: "358",
@@ -2200,6 +2455,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AI Detector — Analyze text to detect AI-written content. Burstiness, repetition, and trigger phrase analysis. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Paste the Text to Analyze", desc: "Enter the text you want to check. The tool analyzes multiple linguistic dimensions to determine the likelihood of AI authorship." },
+      { title: "2. Review the AI Probability Score", desc: "View a percentage score (0-100%) indicating how likely the text is AI-generated. The breakdown shows scores for burstiness, repetition, variance, and trigger phrases." },
+      { title: "3. Examine Section-by-Section Results", desc: "The tool highlights specific paragraphs or sentences that show AI-like patterns. Use this detailed breakdown to understand which parts appear machine-written." },
+    ],
+    faqs: [
+      { question: "How does AI detection work?", answer: "The detector analyzes burstiness (variation in sentence length — humans write with more variation than AI), repetition patterns, sentence structure variance, vocabulary diversity, and common AI trigger phrases." },
+      { question: "How accurate is this detector?", answer: "AI detection is not 100% accurate. Short texts, highly edited AI content, and certain writing styles can produce false positives or negatives. Use the score as a guide, not definitive proof." },
+      { question: "What is burstiness?", answer: "Burstiness measures the variation in sentence length throughout a text. Human writing naturally varies — short sentences mixed with long ones. AI text tends to have more uniform sentence length distribution." },
+      { question: "Can AI-generated text pass as human?", answer: "Yes. Heavily edited AI text, AI text processed through a humanizer, or text on formulaic topics can score as human. The detector is most reliable with raw, unedited AI output." },
+    ]
   },
   {
     id: "359",
@@ -2210,6 +2476,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AI Article Writer — Generate structured articles on any topic. Multiple tones, audience types, and export formats. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter Your Topic", desc: "Type your article topic or a brief description. Include key points you want covered, target audience, and any specific angle or perspective." },
+      { title: "2. Choose Tone, Audience, and Length", desc: "Select the tone (professional, conversational, persuasive, informative), target audience (general, technical, business, academic), and article length (short, medium, long)." },
+      { title: "3. Generate and Export", desc: "Click generate to produce a structured article with introduction, body sections, conclusion, FAQ, and key takeaways. Export as plain text, Markdown, or HTML." },
+    ],
+    faqs: [
+      { question: "What article structures does the tool support?", answer: "The tool generates articles with a standard structure: title, introduction, body paragraphs with subheadings, conclusion, FAQ section, and key takeaways. This structure works well for blogs, guides, and educational content." },
+      { question: "Can I specify the outline or sections?", answer: "You can provide key points or an outline in the topic description. The AI will incorporate your structure preferences into the generated article while maintaining coherent flow." },
+      { question: "What export formats are available?", answer: "You can export as plain text (TXT), Markdown (MD) for CMS platforms like WordPress or Ghost, or HTML for direct web publishing." },
+      { question: "How long does article generation take?", answer: "Most articles generate within 30-60 seconds. Longer articles with detailed requirements may take slightly longer." },
+    ]
   },
   {
     id: "360",
@@ -2220,6 +2497,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Social Media Caption Generator — Create engaging captions for Instagram, Twitter, LinkedIn, Facebook, TikTok, Pinterest. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Describe Your Post", desc: "Enter a brief description of your post — what you're sharing, the vibe, and any key details you want to include in the caption." },
+      { title: "2. Choose Platform and Mood", desc: "Select your target platform (Instagram, Twitter, LinkedIn, Facebook, TikTok, or Pinterest) and the mood (funny, inspirational, professional, casual, promotional, educational)." },
+      { title: "3. Generate and Customize", desc: "Click generate to produce a caption with relevant hashtags and emoji. Edit, regenerate, or copy the caption directly to your social media app." },
+    ],
+    faqs: [
+      { question: "How are captions tailored per platform?", answer: "Each platform has different norms and best practices. Instagram captions are longer with more hashtags. Twitter/X captions are concise. LinkedIn captions are professional. TikTok captions are casual with trending phrases." },
+      { question: "Does it suggest hashtags?", answer: "Yes. The caption generator suggests relevant hashtags based on your post content and selected platform. Hashtag suggestions are more prominent for Instagram and TikTok posts." },
+      { question: "Can I customize the tone?", answer: "Yes. Choose from multiple moods — funny, inspirational, professional, casual, promotional, educational, or storytelling — to match your brand voice and post intention." },
+      { question: "Are multiple caption variations generated?", answer: "You can regenerate as many times as needed to get the perfect caption. Each generation produces a unique caption with different phrasing, hashtags, and structure." },
+    ]
   },
   {
     id: "361",
@@ -2656,45 +2944,100 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "UPI ID Validator & QR Generator",
     slug: "upi-id-validator",
     category: "indian-utilities",
-    description: 'Validate UPI IDs (@paytm, @okhdfcbank, @ybl, @sbi), check format rules, and generate UPI payment QR codes with amount. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online UPI ID Validator & QR Generator — Validate UPI IDs (@paytm, @okhdfcbank, @ybl, @sbi), check format rules, and generate UPI payment QR codes with amount. ',
-    dependencies: "QRCode.js"
+    description: 'Validates UPI ID format rules for all popular handles (@paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici) and generates UPI payment QR codes with merchant name and amount. All local processing.',
+    seoDescription: 'Free online UPI ID Validator and QR Generator — Validate UPI IDs for @paytm, @okhdfcbank, @ybl, @sbi handles. Generate UPI payment QR codes with merchant name, amount, and transaction note. Local processing, no uploads.',
+    dependencies: "QRCode.js",
+    instructions: [
+    { title: "1. Enter the UPI ID", desc: "Type the UPI ID to validate (format: username@handle, e.g., name@paytm). The tool checks format rules including minimum length, allowed characters, and supported handles." },
+    { title: "2. Validate and View Details", desc: "Click validate to check the UPI ID against format rules for all major payment service providers — Paytm, Google Pay (oksbi/okaxis/okicici/okhdfcbank), PhonePe (ybl), Amazon Pay, BHIM/sbi, and more." },
+    { title: "3. Generate Payment QR Code", desc: "Optionally enter a merchant name, amount, and transaction note to generate a UPI payment QR code. The QR code can be scanned using any UPI app to make a payment with pre-filled details." },
+  ],
+    faqs: [
+    { question: "What is a UPI ID format?", answer: "A UPI ID follows the format username@handle. The username is typically your phone number or a custom name, and the handle is the payment service provider (PSP) — @paytm, @ybl (PhonePe), @oksbi/@okhdfcbank/@okicici/@okaxis (Google Pay), @sbi (BHIM/SBI Pay), @axl (Amazon Pay), @upi (NPCI)." },
+    { question: "Can I generate a QR code for any UPI ID?", answer: "Yes. Enter any valid UPI ID and optionally add a merchant name, payment amount, and transaction note. The generated QR code works with any UPI app (Google Pay, PhonePe, Paytm, BHIM) to make the payment." },
+    { question: "Is this UPI QR code compliant with NPCI standards?", answer: "Yes. The generated QR code follows the UPI deep link format (upi://pay) as specified by NPCI standards. It can be scanned and processed by any NPCI-compliant UPI application." },
+    { question: "Is my payment information stored?", answer: "No. All validation and QR code generation happens locally in your browser. The UPI details you enter are never transmitted or stored on any server." },
+  ]
   },
   {
     id: "405",
     name: "Indian Address Parser",
     slug: "indian-address-parser",
     category: "indian-utilities",
-    description: 'Parse free-text Indian addresses into structured fields — line 1, line 2, city, district, state, pincode. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Indian Address Parser — Parse free-text Indian addresses into structured fields — line 1, line 2, city, district, state, pincode. ',
-    dependencies: "None"
+    description: 'Parses free-text Indian addresses into structured fields — line 1, line 2, city, district, state, and pincode. Handles multiple Indian address formats with state and city recognition. Local processing only.',
+    seoDescription: 'Free online Indian Address Parser — Parse unstructured Indian addresses into fields: line 1, line 2, city, district, state, pincode. Recognizes Indian states, cities, and address patterns. 100 percent local parsing.',
+    dependencies: "None",
+    instructions: [
+    { title: "1. Paste the Raw Address", desc: "Copy and paste the unstructured Indian address into the input field. The parser accepts addresses in various formats — single-line, multi-line, with or without pincode — as commonly found in forms, spreadsheets, and databases." },
+    { title: "2. Parse Automatically", desc: "Click parse to extract structured components. The parser identifies the pincode (if present), matches state names (including abbreviations), recognizes major and minor cities, district names, and splits the remaining text into address line 1 and line 2." },
+    { title: "3. Review and Copy Structured Data", desc: "View the parsed address components in structured fields. Copy individual fields or the complete structured output for use in forms, shipping labels, or database entries." },
+  ],
+    faqs: [
+    { question: "What Indian address formats does the parser handle?", answer: "The parser handles common Indian address formats including: house/building plus street/area plus landmark plus city plus state plus pincode, apartment/society plus locality plus city plus pincode, and PO box plus village/town plus district plus state formats. It recognizes all 28 state names, 8 UT names, and common abbreviations." },
+    { question: "Does it work without a pincode?", answer: "Yes. The parser works with or without a pincode. Without a pincode, it relies on state, city, and district name recognition to structure the address. Including a pincode improves accuracy." },
+    { question: "Can I use this for bulk address data?", answer: "The tool parses one address at a time. For bulk address cleanup, process each address individually and copy the structured output. Parsing is instant since all processing is local." },
+    { question: "Is my address data stored?", answer: "No. Address parsing happens entirely in your browser. The text you enter is never transmitted, stored, or logged by any server." },
+  ]
   },
   {
     id: "406",
     name: "Vehicle Registration Checker",
     slug: "vehicle-registration-checker",
     category: "indian-utilities",
-    description: 'Parse Indian vehicle registration numbers, identify state/UT codes, RTO codes, and series. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Vehicle Registration Checker — Parse Indian vehicle registration numbers, identify state/UT codes, RTO codes, and series. ',
-    dependencies: "None"
+    description: 'Parses Indian vehicle registration numbers to identify state/UT codes, RTO codes, and series. Decodes the format of license plates from all Indian states and union territories.',
+    seoDescription: 'Free online Vehicle Registration Number Checker — Parse Indian vehicle registration numbers. Identify state/UT codes, RTO codes, and series for all Indian states and union territories. Instant local parsing.',
+    dependencies: "None",
+    instructions: [
+    { title: "1. Enter the Vehicle Registration Number", desc: "Type the full vehicle registration number as printed on the license plate (e.g., KA-01-AB-1234 or TN 10 C 5678). The parser handles both old and new format plates with or without hyphens." },
+    { title: "2. Parse the Number", desc: "Click parse to decode the registration number. The tool identifies the state/union territory code (first 2 letters), the RTO code (2-digit number), the series letter(s), and the unique sequence number." },
+    { title: "3. View Complete Details", desc: "See the decoded components with full state name, RTO office location (if known), and series information. Use this to identify the vehicle's registered state and RTO jurisdiction." },
+  ],
+    faqs: [
+    { question: "How are Indian vehicle registration numbers structured?", answer: "Indian registration plates follow the format: XX-YY-ZZ-NNNN. The first two letters (XX) indicate the state or UT (e.g., KA = Karnataka, DL = Delhi, MH = Maharashtra, TN = Tamil Nadu, GJ = Gujarat, UP = Uttar Pradesh). The next two digits (YY) are the RTO code. The following letters (ZZ) form the series. The last digits (NNNN) are the unique sequence number." },
+    { question: "Does this validate if the registration is genuine?", answer: "This tool decodes the format and structure of the registration number. It can identify invalid state codes or incorrect formats. For official verification of vehicle ownership and registration status, use the government's VAHAN portal." },
+    { question: "What are the Indian state codes for registration?", answer: "Key codes include: AP (Andhra Pradesh), AR (Arunachal), AS (Assam), BR (Bihar), CG (Chhattisgarh), DL (Delhi), GA (Goa), GJ (Gujarat), HR (Haryana), HP (Himachal), KA (Karnataka), KL (Kerala), MP (Madhya Pradesh), MH (Maharashtra), MN (Manipur), ML (Meghalaya), MZ (Mizoram), NL (Nagaland), OD (Odisha), PB (Punjab), RJ (Rajasthan), SK (Sikkim), TN (Tamil Nadu), TS (Telangana), TR (Tripura), UK (Uttarakhand), UP (Uttar Pradesh), WB (West Bengal)." },
+    { question: "What about new BH (Bharat) series plates?", answer: "The BH (Bharat) series is a new registration format for central government employees and defense personnel who transfer across states. The format is BH-NNNN-YY-XXXXX, where BH is the series identifier." },
+  ]
   },
   {
     id: "407",
     name: "Aadhaar Number Validator",
     slug: "aadhaar-number-validator",
     category: "indian-utilities",
-    description: 'Validate Aadhaar numbers with Verhoeff checksum verification. Check format rules, detect fake UIDs, and understand Aadhaar structure. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Aadhaar Number Validator — Validate Aadhaar numbers with Verhoeff checksum verification. ',
-    dependencies: "None"
+    description: 'Validates Aadhaar numbers using Verhoeff checksum verification. Checks format rules, detects fake UIDs, and explains Aadhaar number structure. Fully local validation with no data upload.',
+    seoDescription: 'Free online Aadhaar Number Validator — Validate 12-digit Aadhaar numbers with Verhoeff checksum. Check format, detect fake UIDs, and understand Aadhaar structure. 100 percent local validation, no data upload.',
+    dependencies: "None",
+    instructions: [
+    { title: "1. Enter the Aadhaar Number", desc: "Type the 12-digit Aadhaar number to validate. The input accepts numbers in both continuous (123456789012) and spaced (1234 5678 9012) formats." },
+    { title: "2. Validate Using Verhoeff Checksum", desc: "Click validate to run the Verhoeff checksum algorithm — the same mathematical verification used by UIDAI. The algorithm detects single-digit errors, transpositions, and other common entry mistakes." },
+    { title: "3. Review Validation Results", desc: "View whether the Aadhaar number passes the Verhoeff checksum (indicating a structurally valid number), along with the digit position breakdown and the check digit analysis." },
+  ],
+    faqs: [
+    { question: "How does Aadhaar number validation work?", answer: "Aadhaar numbers use the Verhoeff checksum algorithm for verification. This mathematical scheme detects all single-digit errors and adjacent transposition errors. The 12th digit is the check digit computed from the first 11 digits. The tool runs this algorithm to verify structural validity." },
+    { question: "Does passing validation mean the Aadhaar is genuine?", answer: "No. Passing the Verhoeff checksum means the number is structurally valid — it could be a real Aadhaar number. It does not confirm that the number is actually issued by UIDAI or linked to any individual. For verifying active Aadhaar status, use the official UIDAI portal." },
+    { question: "What is the Verhoeff algorithm?", answer: "The Verhoeff algorithm is a checksum formula designed to detect all single-digit errors and all adjacent transposition errors in numeric sequences. It was chosen by UIDAI for Aadhaar because it provides better error detection than simple checksums like Luhn (used by credit cards)." },
+    { question: "Is my Aadhaar number stored?", answer: "No. All validation happens locally in your browser. The Aadhaar number you enter is never transmitted, stored, or logged anywhere. Your privacy is fully protected." },
+  ]
   },
   {
     id: "408",
     name: "SIP / PPF / EPF Calculator",
     slug: "indian-investment-calculator",
     category: "indian-utilities",
-    description: 'Calculate Indian investment returns — SIP (lumpsum + monthly), PPF (15-year maturity), and EPF (employee provident fund). Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online SIP / PPF / EPF Calculator — Calculate Indian investment returns — SIP (lumpsum + monthly), PPF (15-year maturity), and EPF (employee provident fund). ',
-    dependencies: "None"
+    description: 'Calculate Indian investment returns — SIP with lumpsum and monthly options, PPF with 15-year maturity, and EPF employee provident fund projections. All calculations are local with no data uploads.',
+    seoDescription: 'Free online Indian Investment Calculator — SIP, PPF, and EPF return calculator for Indian investors. SIP lumpsum plus monthly, PPF 15-year maturity, EPF projections with current interest rates. 100 percent local.',
+    dependencies: "None",
+    instructions: [
+    { title: "1. Choose Your Investment Type", desc: "Select from SIP (mutual funds), PPF (Public Provident Fund), or EPF (Employee Provident Fund). Each calculator is tailored to the specific rules and returns of that investment type." },
+    { title: "2. Enter Investment Parameters", desc: "For SIP: enter monthly investment amount, expected annual return rate, and investment duration. For PPF: enter the yearly deposit (minimum Rs. 500, maximum Rs. 1.5 lakh) and current interest rate. For EPF: enter basic salary, employee/employer contribution percentage (currently 12 percent), and current PF interest rate." },
+    { title: "3. View Projected Returns", desc: "See the maturity amount with a detailed year-wise breakup. The SIP calculator shows total invested vs estimated returns. PPF shows the 15-year maturity schedule. EPF shows employee contribution, employer contribution, interest earned, and total corpus." },
+  ],
+    faqs: [
+    { question: "What SIP calculation methods are supported?", answer: "The SIP calculator supports both lumpsum (one-time investment) and monthly SIP options. It uses the compound interest formula with monthly compounding. You can adjust expected returns (typically 10-15 percent for equity funds, 6-9 percent for debt funds) and investment duration." },
+    { question: "What are the current PPF rules?", answer: "PPF has a 15-year lock-in period with partial withdrawals allowed from year 7. The minimum annual deposit is Rs. 500 and maximum is Rs. 1.5 lakh. The interest rate (currently 7.1 percent for Q1 2025, revised quarterly by the government) is tax-free under Section 80C." },
+    { question: "How is EPF calculated?", answer: "EPF uses the current interest rate (typically 8-8.5 percent per annum, set by the EPFO). The employee contributes 12 percent of basic salary plus DA. The employer also contributes 12 percent in total (3.67 percent goes to EPF, 8.33 percent goes to EPS). The calculator shows the total EPF corpus at retirement age (58 years)." },
+    { question: "Are these calculations accurate for tax planning?", answer: "Yes. The calculations use current interest rates and standard formulas. However, actual returns depend on future interest rate revisions by the government (for PPF/EPF) and market performance (for SIP). Use these projections as estimates for your financial planning." },
+  ]
   },
   {
     id: "409",

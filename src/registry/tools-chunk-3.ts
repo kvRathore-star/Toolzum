@@ -603,6 +603,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate BMI for children with age and gender considerations. Track childhood growth and weight status. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online BMI Calculator for Kids — Calculate BMI for children with age and gender considerations. Track childhood growth and weight status. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Child's Details", desc: "Input your child's age, gender, height, and weight. BMI for children uses percentile charts rather than adult categories." },
+      { title: "2. View BMI Percentile", desc: "See your child's BMI percentile compared to CDC growth charts for their age and gender." },
+      { title: "3. Track Over Time", desc: "Monitor growth patterns with regular tracking. Consistent percentiles indicate healthy growth." }
+    ],
+    faqs: [
+      { question: 'How is kids\' BMI different from adults?', answer: 'Children\'s BMI is age and gender-specific, plotted on percentile charts instead of fixed categories. A child\'s body composition changes with growth.' },
+      { question: 'What BMI percentile is healthy?', answer: 'Underweight: below 5th, Healthy: 5th-84th, Overweight: 85th-94th, Obese: 95th+. Based on CDC growth charts.' },
+      { question: 'How often should I check?', answer: 'Pediatricians typically check at annual well-child visits. More frequent tracking may help if there are growth concerns.' }
+    ]
   },
   {
     id: "649",
@@ -612,6 +622,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Body Fat Percentage Calculator — Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Take Measurements", desc: "Measure waist, neck, and height (plus hips for women). Use a flexible tape at the narrowest waist point." },
+      { title: "2. Enter Your Details", desc: "Input measurements with your height and gender. The US Navy method uses circumference values." },
+      { title: "3. View Your Estimate", desc: "See your estimated body fat percentage and fitness category. All calculations run locally." }
+    ],
+    faqs: [
+      { question: 'How accurate is the US Navy method?', answer: 'Accuracy is about 2-3% compared to DEXA scans when measurements are correct. It\'s one of the most reliable tape-measure methods.' },
+      { question: 'What measurements do I need?', answer: 'Men: waist at navel, neck, height. Women: waist, neck, hip, height. Use a non-stretchable tape.' },
+      { question: 'What is a healthy body fat percentage?', answer: 'Essential: 2-5% (men), 10-13% (women). Athletes: 6-13% (men), 14-20% (women). Fitness: 14-17% (men), 21-24% (women). Acceptable: 18-24% (men), 25-31% (women).' }
+    ]
   },
   {
     id: "650",
@@ -621,6 +641,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Body Surface Area Calculator — Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Height and Weight", desc: "Input height and weight. The Mosteller formula calculates BSA from these two values." },
+      { title: "2. Select Units", desc: "Choose metric or imperial. BSA is always expressed in square meters." },
+      { title: "3. View Your BSA", desc: "Body Surface Area is displayed for medical and fitness reference." }
+    ],
+    faqs: [
+      { question: 'What is BSA used for?', answer: 'Commonly used for chemotherapy dosing, burn treatment, and certain medication calculations. Also used in fitness for metabolic rate estimates.' },
+      { question: 'What is the Mosteller formula?', answer: 'BSA (m²) = square root of (height in cm x weight in kg / 3600). One of the simplest and most widely used formulas.' },
+      { question: 'What is normal BSA?', answer: 'Average adult BSA: 1.6-1.9 m². Men average: 1.9 m². Women average: 1.6 m².' }
+    ]
   },
   {
     id: "651",
@@ -630,6 +660,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Baby Formula Calculator — Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Baby's Weight and Age", desc: "Input weight and age in months. Calculator uses pediatric guidelines for formula needs." },
+      { title: "2. View Recommendation", desc: "See recommended ounces and mL per feeding and per day, tailored to your baby." },
+      { title: "3. Plan Feedings", desc: "Use amounts to plan portions. Adjust based on baby's hunger cues." }
+    ],
+    faqs: [
+      { question: 'How is formula amount calculated?', answer: 'General guideline: 2-2.5 oz per pound of body weight per day, divided across feedings. Adjusted for age.' },
+      { question: 'Should I follow these exactly?', answer: 'These are guidelines. Watch for hunger and fullness cues. Consult your pediatrician.' },
+      { question: 'How do needs change with age?', answer: 'Newborns: 1-3 oz per feeding. 2 months: 4-5 oz. 4 months: 4-6 oz. 6 months: 6-8 oz.' }
+    ]
   },
   {
     id: "652",
@@ -639,6 +679,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Measurements", desc: "Input baby's weight, height, and age. Compared against CDC growth chart data." },
+      { title: "2. View Percentiles", desc: "See where your baby falls on weight and height growth curves vs. peers." },
+      { title: "3. Monitor Trends", desc: "Track measurements over time to identify growth patterns." }
+    ],
+    faqs: [
+      { question: 'What do percentiles mean?', answer: '50th percentile = average. 90th = bigger than 90% of peers. 5th-95th is typically normal.' },
+      { question: 'Should I worry about extremes?', answer: 'The trend matters more than the number. Consistent tracking over time is key.' },
+      { question: 'How often to measure?', answer: 'Pediatricians measure at well-child visits. Home measurements are fine but less precise.' }
+    ]
   },
   {
     id: "653",
@@ -648,6 +698,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Baby Sleep Schedule Calculator — Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Baby's Age", desc: "Input age in months. Sleep needs change significantly in the first year." },
+      { title: "2. View Recommendations", desc: "See total sleep hours, nap count, and nighttime duration by age." },
+      { title: "3. Plan Schedule", desc: "Structure daily sleep with nap timing and bedtime windows." }
+    ],
+    faqs: [
+      { question: 'How much sleep is needed?', answer: 'Newborns: 14-17h. Infants 4-11m: 12-15h. Toddlers 1-2y: 11-14h.' },
+      { question: 'When to drop naps?', answer: '2 naps around 6-9 months, 1 nap around 12-18 months. Watch for fighting naps.' },
+      { question: 'What\'s a good bedtime?', answer: 'Most babies thrive with 6:30-8:00 PM bedtime. Earlier for younger babies.' }
+    ]
   },
   {
     id: "654",
@@ -657,6 +717,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Breastfeeding Calorie Calculator — Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Baby's Age", desc: "Calorie expenditure changes as baby grows and feeding evolves." },
+      { title: "2. Enter Feedings Per Day", desc: "Average daily breastfeeding sessions to estimate calorie burn." },
+      { title: "3. View Results", desc: "See daily and weekly calorie estimates from breastfeeding." }
+    ],
+    faqs: [
+      { question: 'How many calories does breastfeeding burn?', answer: 'About 300-500 calories per day. Exclusive breastfeeding burns ~500, partial ~200-300.' },
+      { question: 'Should I eat extra calories?', answer: 'Most providers recommend an additional 300-500 calories per day. Focus on nutrient-dense foods.' },
+      { question: 'Will I lose weight?', answer: 'Many women lose some pregnancy weight through breastfeeding. Results vary individually.' }
+    ]
   },
   {
     id: "656",
@@ -666,6 +736,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Child Height Predictor — Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Parents' Heights", desc: "Input both parents' heights for the mid-parental calculation." },
+      { title: "2. Select Child's Gender", desc: "Formula adjusts by adding/subtracting from the parental average." },
+      { title: "3. View Prediction", desc: "See estimated adult height with a confidence range." }
+    ],
+    faqs: [
+      { question: 'How accurate is this method?', answer: 'Margin of error about 4 inches. Nutrition and environment also affect final height.' },
+      { question: 'What is the formula?', answer: 'Boys: (father + mother + 5 inches) / 2. Girls: (father + mother - 5 inches) / 2.' },
+      { question: 'Can nutrition affect height?', answer: 'Yes. Proper nutrition is essential for reaching genetic height potential.' }
+    ]
   },
   {
     id: "657",
@@ -675,6 +755,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Cycling Calorie Calculator — Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Your Weight", desc: "Heavier riders burn more calories at the same speed and duration." },
+      { title: "2. Enter Duration and Speed", desc: "Minutes cycled and average speed in km/h or mph." },
+      { title: "3. View Calories", desc: "Estimated calorie expenditure for the cycling session." }
+    ],
+    faqs: [
+      { question: 'How accurate are these estimates?', answer: 'Based on MET values. Actual burn varies with terrain, wind, and bike type.' },
+      { question: 'Calories per hour cycling?', answer: 'Moderate pace (12-14 mph): ~500-600 cal/hr for a 155-lb person.' },
+      { question: 'Cycling vs running calories?', answer: 'Running burns more per hour but cycling allows longer sessions with lower impact.' }
+    ]
   },
   {
     id: "657b",
@@ -684,6 +774,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your Total Daily Energy Expenditure (TDEE) from BMR and activity level. Find how many calories you burn per day.',
     seoDescription: 'Free online TDEE Calculator \u2014 Calculate your Total Daily Energy Expenditure from BMR and activity level. Find how many calories you burn per day. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter or Calculate BMR", desc: "Use your BMR value from the BMR Calculator tool on this site." },
+      { title: "2. Select Activity Level", desc: "Choose from sedentary to very active based on your lifestyle." },
+      { title: "3. View Your TDEE", desc: "Total daily calories burned including all activity." }
+    ],
+    faqs: [
+      { question: 'What is TDEE?', answer: 'Total Daily Energy Expenditure = BMR + activity + thermic effect of food. The full picture of daily calorie burn.' },
+      { question: 'How is it calculated?', answer: 'TDEE = BMR x activity factor. Sedentary: 1.2 to Extra active: 1.9.' },
+      { question: 'How to use TDEE?', answer: 'To lose: eat 300-500 below TDEE. To maintain: eat at TDEE. To gain: eat 300-500 above.' }
+    ]
   },
   {
     id: "658",
@@ -693,6 +793,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Heart Rate Zone Calculator — Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Your Age", desc: "Max heart rate estimated as 220 minus your age." },
+      { title: "2. View Your Zones", desc: "Heart rate ranges for each training intensity level." },
+      { title: "3. Train by Zone", desc: "Use zones to guide exercise intensity for specific fitness goals." }
+    ],
+    faqs: [
+      { question: 'What are heart rate zones?', answer: 'Zone 1 (50-60%): warm-up. Zone 2 (60-70%): fat burn. Zone 3 (70-80%): cardio. Zone 4 (80-90%): threshold. Zone 5 (90-100%): peak.' },
+      { question: 'How is max HR calculated?', answer: 'Standard formula: 220 - age. More accurate: 208 - (0.7 x age).' },
+      { question: 'Which zone to train in?', answer: 'Zone 2 for aerobic base and fat burn. Zone 3-4 for cardiovascular fitness. Mix zones in your training plan.' }
+    ]
   },
   {
     id: "660",
@@ -702,6 +812,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Keto Calculator — Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Details", desc: "Weight, height, age, gender, and activity level for base calorie needs." },
+      { title: "2. Set Goal", desc: "Choose lose, maintain, or gain. Macros adjust accordingly." },
+      { title: "3. View Keto Macros", desc: "Personalized daily protein, fat, and carb targets for ketosis." }
+    ],
+    faqs: [
+      { question: 'What are standard keto macros?', answer: '70-80% fat, 15-25% protein, 5-10% carbs (under 20-50g net carbs/day).' },
+      { question: 'How to know if in ketosis?', answer: 'Increased thirst, metallic taste, reduced appetite, increased energy. Use urine strips or blood meters.' },
+      { question: 'Can ratios be customized?', answer: 'Calculator uses standard ratios. Adjust based on response. Consult a healthcare provider.' }
+    ]
   },
   {
     id: "661",
@@ -711,6 +831,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Lean Body Mass Calculator — Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Total Weight", desc: "Your complete body weight including all mass." },
+      { title: "2. Enter Body Fat %", desc: "Estimated body fat percentage. Use our Body Fat Calculator if needed." },
+      { title: "3. View Lean Mass", desc: "LBM = total weight minus fat mass. Includes muscle, bone, organs, and water." }
+    ],
+    faqs: [
+      { question: 'What is lean body mass?', answer: 'Total body weight minus fat mass. Includes muscle, bones, organs, and water.' },
+      { question: 'Why is LBM important?', answer: 'Higher LBM = higher metabolism. Tracking LBM shows fat loss vs muscle loss.' },
+      { question: 'How to increase LBM?', answer: 'Resistance training with adequate protein (1.6-2.2g/kg body weight). Progressive overload.' }
+    ]
   },
   {
     id: "662",
@@ -720,6 +850,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Macro Calculator — Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Details", desc: "Weight, height, age, gender, and activity level for calorie needs." },
+      { title: "2. Select Goal", desc: "Weight loss, maintenance, or muscle gain affects macro ratios." },
+      { title: "3. View Targets", desc: "Daily protein, fat, and carb grams for your goal." }
+    ],
+    faqs: [
+      { question: 'What macro split is used?', answer: 'Protein 25-35%, fat 20-35%, carbs 35-50%. Adjusted based on your goal.' },
+      { question: 'How to track macros?', answer: 'Use a food tracking app. Weigh portions. Hit protein first, then adjust fats and carbs.' },
+      { question: 'Different macros on workout days?', answer: 'Some benefit from higher carbs around workouts. Calculator provides daily averages.' }
+    ]
   },
   {
     id: "664",
@@ -729,6 +869,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pregnancy Due Date Calculator — Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter LMP Date", desc: "First day of last menstrual period. Uses 280-day pregnancy duration." },
+      { title: "2. View Due Date", desc: "Estimated due date and trimester breakdown with milestones." },
+      { title: "3. Track Progress", desc: "Use trimester info to understand each stage of pregnancy." }
+    ],
+    faqs: [
+      { question: 'How is due date calculated?', answer: '280 days (40 weeks) from the first day of your LMP. Based on a 28-day cycle.' },
+      { question: 'How accurate is it?', answer: 'Only 4% born on exact date. Most arrive within 2 weeks before or after.' },
+      { question: 'Trimester breakdown?', answer: 'First: weeks 1-12. Second: 13-27. Third: 28-40+. Each has distinct milestones.' }
+    ]
   },
   {
     id: "665",
@@ -738,6 +888,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Protein Calculator — Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Weight", desc: "Protein recommendations are weight-based." },
+      { title: "2. Select Activity Level", desc: "Active individuals need significantly more protein." },
+      { title: "3. View Target", desc: "Daily protein in grams from minimum to optimal." }
+    ],
+    faqs: [
+      { question: 'How much protein daily?', answer: 'Sedentary: 0.8g/kg. Recreational athletes: 1.2-1.6g/kg. Strength athletes: 1.6-2.2g/kg.' },
+      { question: 'Can you eat too much?', answer: 'Above 2.5-3g/kg is unnecessary. Generally safe for healthy individuals.' },
+      { question: 'When to eat protein?', answer: 'Distribute evenly across meals (20-40g each). Post-workout within 2 hours.' }
+    ]
   },
   {
     id: "666",
@@ -747,6 +907,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Running Pace Calculator — Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Distance and Time", desc: "Input distance run and total time. Pace is calculated automatically." },
+      { title: "2. Choose Units", desc: "Kilometers or miles for pace display." },
+      { title: "3. View Results", desc: "Average pace, speed, and race distance splits." }
+    ],
+    faqs: [
+      { question: 'What\'s a good pace?', answer: 'Beginner: 6-8 min/km. Intermediate: 5-6 min/km. Advanced: 4-5 min/km.' },
+      { question: 'How to improve pace?', answer: 'Interval training, tempo runs, consistent mileage, strength training.' },
+      { question: 'What pace for a race?', answer: 'Use goal time to determine target pace. Add 10-15 sec/km for longer races.' }
+    ]
   },
   {
     id: "667",
@@ -756,6 +926,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Sleep Calculator — Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set Wake-Up Time", desc: "Calculator works backward using 90-minute sleep cycles." },
+      { title: "2. View Bedtimes", desc: "Recommended bedtimes aligned with full sleep cycles." },
+      { title: "3. Choose Your Time", desc: "Pick a bedtime that fits your schedule for refreshed mornings." }
+    ],
+    faqs: [
+      { question: 'How does it work?', answer: 'Waking at cycle end (light sleep) feels refreshing. Calculator finds aligned bedtimes.' },
+      { question: 'How many cycles needed?', answer: 'Most adults need 5-6 cycles (7.5-9 hours). Minimum 4 cycles (6 hours).' },
+      { question: 'Can\'t fall asleep at target time?', answer: 'Use as a target. Adjust based on sleep hygiene and how you feel.' }
+    ]
   },
   {
     id: "668",
@@ -765,6 +945,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Steps to Calories Calculator — Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Steps", desc: "Daily step count from your tracker or phone." },
+      { title: "2. Enter Weight", desc: "Heavier individuals burn more calories per step." },
+      { title: "3. View Results", desc: "Estimated calories burned and distance walked." }
+    ],
+    faqs: [
+      { question: 'Calories for 10,000 steps?', answer: 'Approximately 300-500 calories depending on weight and walking speed.' },
+      { question: 'How is distance calculated?', answer: 'Using average step length (about 41-45% of height). ~2,000 steps = 1 mile.' },
+      { question: 'Is 10,000 steps necessary?', answer: 'Health benefits from 7,000-8,000 steps. Any increase from baseline is beneficial.' }
+    ]
   },
   {
     id: "669",
@@ -774,6 +964,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Water Intake Calculator — Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter Weight", desc: "Water recommendations are weight-based." },
+      { title: "2. Add Exercise", desc: "Daily exercise minutes increase water needs through sweat." },
+      { title: "3. View Goal", desc: "Daily water target in ounces, mL, and cups." }
+    ],
+    faqs: [
+      { question: 'Daily water recommendation?', answer: 'Men: 3.7L (125 oz). Women: 2.7L (91 oz) from all sources.' },
+      { question: 'Exercise water needs?', answer: 'Add 12-16 oz per 30 minutes of exercise. Adjust for heat and sweat.' },
+      { question: 'Can you drink too much?', answer: 'Rare but possible. Spread intake throughout the day.' }
+    ]
   },
   {
     id: "670",
