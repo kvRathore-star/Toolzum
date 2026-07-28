@@ -850,7 +850,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'saas-quick-ratio': dynamic(() => import('@/components/tools/modules/ExtraTools').then(m => ({ default: m.SaasQuickRatio })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-quick-ratio" /> }),
   'saas-rule-of-40': dynamic(() => import('@/components/tools/modules/ExtraTools').then(m => ({ default: m.SaasRuleOf40 })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-rule-of-40" /> }),
   'swift-formatter': dynamic(() => import('@/components/tools/modules/ExtraTools').then(m => ({ default: m.SwiftFormatter })), { ssr: false, loading: () => <DynamicImportFallback slug="swift-formatter" /> }),
-  'pdf-to-docx': dynamic(() => import('@/components/tools/modules/ExtraTools').then(m => ({ default: m.PdfToDocx })), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-docx" /> }),
+  'pdf-to-docx': dynamic(() => import('@/components/tools/modules/DocumentConverter').then(m => ({ default: m.PdfToDocx })), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-docx" /> }),
   'pdf-to-txt': dynamic(() => import('@/components/tools/modules/ExtraTools').then(m => ({ default: m.PdfToTxt })), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-txt" /> }),
 
   // Bulk tools

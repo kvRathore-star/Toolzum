@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import * as mammoth from 'mammoth';
 import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -345,75 +344,6 @@ export function TemperatureConverter() {
       {result !== null && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
           <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
-        </div>
-      )}
-    </Section>
-  );
-}
-
-export function PdfToDocx() {
-  const [file, setFile] = useState<File | null>(null);
-  const [docxBlob, setDocxBlob] = useState<Blob | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handleFileSelect = (f: File) => {
-    setFile(f);
-    setDocxBlob(null);
-  };
-
-  const convert = async () => {
-    if (!file) return;
-    setIsProcessing(true);
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const result = await mammoth.convertToHtml({ arrayBuffer });
-      const html = result.value;
-      
-      const docxContent = `
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-          <w:body>
-            ${html.split('\n').map(line => `<w:p><w:r><w:t xml:space="preserve">${line.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')}</w:t></w:r></w:p>`).join('')}
-          </w:body>
-        </w:document>
-      `;
-      
-      const blob = new Blob([docxContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      setDocxBlob(blob);
-    } catch (err) {
-      console.error(err);
-      toast.error('Failed to convert PDF to DOCX');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  return (
-    <Section title="PDF to DOCX Converter">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert PDF documents to editable DOCX format. Runs in your browser using mammoth.js.</p>
-      <FileUploader 
-        accept="application/pdf" 
-        onFileSelect={handleFileSelect} 
-        title="Upload PDF File"
-        subtitle="Supports PDF files (Max 50MB)"
-      />
-      {file && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl space-y-3">
-          <p className="text-sm font-medium">Selected: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)</p>
-          <button onClick={convert} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl transition-colors disabled:opacity-50">
-            {isProcessing ? 'Converting...' : 'Convert to DOCX'}
-          </button>
-        </div>
-      )}
-      {docxBlob && (
-        <div className="mt-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex justify-between items-center">
-          <div>
-            <p className="font-medium text-emerald-400">Conversion Complete!</p>
-            <p className="text-sm text-[var(--text-secondary)]">Download your DOCX file</p>
-          </div>
-          <button onClick={() => downloadOrShare(URL.createObjectURL(docxBlob), file?.name.replace('.pdf', '.docx') || 'converted.docx')} className="bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap">
-            Download DOCX
-          </button>
         </div>
       )}
     </Section>

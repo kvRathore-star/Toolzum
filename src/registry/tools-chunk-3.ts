@@ -36,8 +36,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "MessagePack Inspector",
     slug: "msgpack-inspector",
     category: "Developer",
-    description: 'Simulate MessagePack encoding by inspecting JSON as UTF-8 bytes and hex.',
-    seoDescription: 'Free online MessagePack Inspector \u2014 Simulate MessagePack encoding from JSON. ',
+    description: 'Encode JSON as real MessagePack binary and inspect the resulting bytes. Supports both encode and decode modes.',
+    seoDescription: 'Free online MessagePack Inspector \u2014 Encode JSON as real MessagePack binary and inspect the resulting bytes. ',
     dependencies: "None",
 },
   {
@@ -46,8 +46,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "CBOR Inspector",
     slug: "cbor-inspector",
     category: "Developer",
-    description: 'Simulate CBOR encoding by inspecting JSON as UTF-8 bytes with major type analysis.',
-    seoDescription: 'Free online CBOR Inspector \u2014 Simulate CBOR encoding from JSON. ',
+    description: 'Encode JSON as real CBOR binary and inspect the resulting bytes with major type analysis. Supports both encode and decode modes.',
+    seoDescription: 'Free online CBOR Inspector \u2014 Encode JSON as real CBOR binary and inspect the resulting bytes. ',
     dependencies: "None",
 },
   {

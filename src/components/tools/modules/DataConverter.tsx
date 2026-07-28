@@ -5,9 +5,8 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import Papa from 'papaparse';
 import { parseStringPromise, Builder } from 'xml2js';
 import * as YAML from 'yaml';
-import * as XLSX from 'xlsx';
 
-const FORMATS = ['JSON', 'CSV', 'XML', 'YAML', 'TSV', 'SQL', 'Parquet'];
+const FORMATS = ['JSON', 'CSV', 'XML', 'YAML', 'TSV'];
 
 function parseInput(input: string, format: string): Promise<any> {
   const trimmed = input.trim();
@@ -109,10 +108,6 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
         case 'YAML':
           parsed = YAML.parse(input.trim());
           break;
-        case 'SQL':
-          throw new Error('SQL parsing not supported yet');
-        case 'Parquet':
-          throw new Error('Parquet parsing requires server-side processing');
       }
 
       const normalized = normalizeForFormat(parsed, dstFormat);
@@ -135,10 +130,6 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
         case 'YAML':
           result = YAML.stringify(normalized);
           break;
-        case 'SQL':
-          throw new Error('SQL generation not supported yet');
-        case 'Parquet':
-          throw new Error('Parquet generation requires server-side processing');
         default:
           throw new Error(`Unknown format: ${dstFormat}`);
       }

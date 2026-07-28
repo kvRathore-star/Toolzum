@@ -69,13 +69,7 @@ const MODES: Record<string, ConvertMode> = {
       return ['SUMMARY,DTSTART,DTEND,LOCATION', ...rows.map(r => r.map(c => `"${c}"`).join(','))].join('\n');
     },
   },
-  "parquet-to-csv-converter": {
-    slug: "parquet-to-csv-converter", name: "Parquet → CSV Preview",
-    description: "Paste Parquet schema/ data preview as text to convert to CSV",
-    inputLabel: "Parquet Preview",
-    convert: (i) => i.replace(/\t/g, ','),
-  },
-};
+  };
 
 export default function ImportToCsvConverter({ slug }: { slug: string }) {
   const mode = MODES[slug];

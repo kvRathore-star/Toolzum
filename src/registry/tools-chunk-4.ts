@@ -1312,15 +1312,6 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
 },
   {
-    id: "938",
-    name: "Parquet to CSV Converter",
-    slug: "parquet-to-csv-converter",
-    category: "Converter",
-    description: 'Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Parquet to CSV Converter \u2014 Simulate Parquet to CSV conversion and learn about columnar vs row-based data formats. ',
-    dependencies: "None",
-  },
-  {
     id: "939",
     name: "SaaS Payback Period",
     slug: "saas-payback-period",
@@ -1367,15 +1358,6 @@ export const entries_chunk_4: ToolMetadata[] = [
     category: "Converter",
     description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
-    dependencies: "None",
-  },
-  {
-    id: "944",
-    name: "PDF to DOCX",
-    slug: "pdf-to-docx",
-    category: "PDF",
-    description: 'Converts PDF files to DOCX format — document sharing, printing, and archival with consistent formatting to word processing, collaboration, and document editing. All conversion happens locally in your browser with no file size limits.',
-    seoDescription: 'Free online PDF to DOCX Converter \u2014 Simulate PDF to Word conversion with estimated output size and format details. ',
     dependencies: "None",
   },
   {

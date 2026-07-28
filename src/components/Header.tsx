@@ -121,6 +121,7 @@ export function Header() {
   const MOBILE_NAV_LINKS = [
     { label: "Tools", href: "/tools" },
     { label: "Extension", href: "/extension" },
+    { label: "Pro", href: "/premium-tools" },
     { label: "Pricing", href: "/pricing" },
     { label: "Sign in", href: "/login" },
   ];
@@ -178,7 +179,7 @@ export function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
-                    className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-[100%] mt-4 w-screen max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000] md:w-[600px] lg:w-[900px] xl:w-[1100px]"
+                    className="fixed left-1/2 -translate-x-1/2 top-[60px] mt-2 w-screen max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000] md:w-[600px] lg:w-[900px] xl:w-[1100px]"
                   >
                     {/* Inline Search — opens CommandMenu */}
                     <button

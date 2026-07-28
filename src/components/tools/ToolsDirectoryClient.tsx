@@ -30,7 +30,7 @@ const GROUP_ICONS: Record<string, React.ReactNode> = {
   'Lifestyle': <Compass className="w-3.5 h-3.5" />,
 };
 
-export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMetadata[] }) {
+export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools?: ToolMetadata[]; toolCount?: number }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -262,7 +262,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
       <div className="border-b border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            {(initialTools ?? toolsRegistry).length}+ Free Online Tools
+            {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ Free Online Tools
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl">
             Most tools run in your browser with zero uploads. AI features use secure cloud processing — clearly marked on every tool.
@@ -294,7 +294,7 @@ export function ToolsDirectoryClient({ initialTools }: { initialTools?: ToolMeta
               <h2 className="text-xl font-medium text-[var(--text-primary)]">
                 {activeCategory === "All" ? "All Tools" : activeCategory}
               </h2>
-              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} tools · {(initialTools ?? toolsRegistry).length}+ total</span>
+              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} tools · {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total</span>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}

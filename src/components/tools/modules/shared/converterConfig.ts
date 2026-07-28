@@ -89,7 +89,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "xlsx-csv-converter": { category: "import-to-csv" },
   "vcf-csv-converter": { category: "import-to-csv" },
   "ics-csv-converter": { category: "import-to-csv" },
-  "parquet-to-csv-converter": { category: "import-to-csv" },
   // Color converters
   "color-converter": { category: "color" },
   "hex-to-rgb-converter": { category: "color" },

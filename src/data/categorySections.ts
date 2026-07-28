@@ -610,7 +610,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "pdf-to-markdown", "markdown-to-pdf",
         "pdf-to-png", "pdf-to-tiff", "tiff-to-pdf",
-        "pdf-to-docx", "pdf-to-txt",
+        "pdf-to-txt",
         "pdf-to-pdfa",
         "url-to-pdf", "eml-to-pdf",
         "bulk-image-to-pdf",
@@ -744,7 +744,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Data Converters",
       description: "Convert between data formats — JSON, CSV, XML, Parquet, and more.",
       slugs: [
-        "data-converter", "parquet-to-csv-converter",
+        "data-converter",
         "json-toon-converter", "csv-html-table-converter",
         "yaml-json-converter", "json-to-yaml-converter",
         "json-to-ini-converter", "json-to-toml-converter",
