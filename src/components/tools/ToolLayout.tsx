@@ -18,6 +18,7 @@ import { ShareTool } from '@/components/ShareTool';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
+import { TOOL_RELATIONSHIPS } from '@/registry/tool-relationships';
 import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
 
@@ -97,9 +98,12 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
   const relatedTools = useMemo(() => {
     if (!tool) return [];
-    const markdownSlugs = ['markdown-to-html', 'html-to-markdown', 'text-to-markdown', 'markdown-to-text'];
-    if (markdownSlugs.includes(tool.slug)) {
-      return toolsRegistry.filter(t => markdownSlugs.includes(t.slug) && t.slug !== tool.slug);
+    const curated = TOOL_RELATIONSHIPS[tool.slug];
+    if (curated && curated.length > 0) {
+      return curated
+        .map(slug => toolsRegistry.find(t => t.slug === slug))
+        .filter((t): t is NonNullable<typeof t> => t != null)
+        .slice(0, 6);
     }
     return toolsRegistry
       .filter(t => t.category === tool.category && t.slug !== tool.slug)

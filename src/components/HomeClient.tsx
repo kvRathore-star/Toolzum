@@ -274,7 +274,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {CATEGORIES.map((cat, i) => {
-            const count = toolsRegistry.filter(t => t.category === cat.label || t.category === cat.id).length;
+            const count = toolsRegistry.filter(t => (t.category === cat.label || t.category === cat.id) && t.showInCategory !== false).length;
             return (
               <motion.div
                 key={cat.id}
