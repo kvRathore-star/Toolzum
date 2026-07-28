@@ -108,7 +108,7 @@ export function WordsPerPageCalculator() {
   );
 }
 
-export function WorkingCapitalCalculator() {
+export function ProfitLossCalculator() {
   const [revenue, setRevenue] = useState('100000');
   const [cogs, setCogs] = useState('60000');
   const [opExp, setOpExp] = useState('25000');

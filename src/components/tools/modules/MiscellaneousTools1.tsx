@@ -1505,9 +1505,9 @@ export function CalorieIntakeCalculator() {
     </Section>
   );
 }
-// --- MacronutrientCalculator ---
-export function MacronutrientCalculator() {
-  const clr = ac('MacronutrientCalculator');
+// --- MacroSplitCalculator ---
+export function MacroSplitCalculator() {
+  const clr = ac('MacroSplitCalculator');
   const [calories, setCalories] = useState('2000');
   const c = Number(calories);
   return (

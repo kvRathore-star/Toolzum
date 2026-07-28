@@ -8,6 +8,7 @@ const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 
 function normalizeCategory(category: string): string {
   if (category === "marketing") return "Branding";
+  if (category === "growth-metrics") return "Growth & Marketing Metrics";
   const match = toolsRegistry.find(
     t => t.category.toLowerCase().replace(/\s+/g, '-') === category
   );
@@ -17,7 +18,7 @@ function normalizeCategory(category: string): string {
 export async function generateStaticParams() {
   const categories = [...new Set(toolsRegistry.map(t => t.category))];
   const params = categories.map((cat) => ({
-    category: cat.toLowerCase().replace(/\s+/g, '-'),
+    category: cat === "Growth & Marketing Metrics" ? "growth-metrics" : cat.toLowerCase().replace(/\s+/g, '-'),
   }));
   params.push({ category: 'marketing' });
   return params;
@@ -50,6 +51,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Health: { title: 'Free Health Tools – BMI, Calorie & Wellness', description: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.' },
     Extension: { title: 'Free Browser Extension Tools', description: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.' },
     Calculator: { title: 'Free Online Calculators – Math, Date & Academic Tools', description: 'Free online calculators — percentages, fractions, date differences, grade averages, and math tools. All computations happen locally in your browser.' },
+    'Growth & Marketing Metrics': { title: 'Free Growth & Marketing Metrics Tools – SaaS & Performance', description: 'Free growth and marketing metrics tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics. All calculations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.` };
   const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.png`;

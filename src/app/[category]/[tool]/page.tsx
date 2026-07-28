@@ -7,14 +7,19 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
 
+function catToUrlSlug(cat: string): string {
+  if (cat === "Growth & Marketing Metrics") return "growth-metrics";
+  return cat.toLowerCase().replace(/\s+/g, '-');
+}
+
 export async function generateStaticParams() {
   const redirectPages = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
-    category: target.category,
+    category: catToUrlSlug(target.category),
     tool: slug,
   }));
   return [
     ...toolsRegistry.map((tool) => ({
-      category: tool.category.toLowerCase().replace(/\s+/g, '-'),
+      category: catToUrlSlug(tool.category),
       tool: tool.slug,
     })),
     ...redirectPages,
@@ -54,7 +59,10 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
 
   const redirect = TOOL_REDIRECTS[params.tool];
   if (redirect) {
-    permanentRedirect(`/${redirect.category}/${redirect.slug}/`);
+    const targetSlug = catToUrlSlug(redirect.category);
+    if (targetSlug !== params.category) {
+      permanentRedirect(`/${targetSlug}/${redirect.slug}/`);
+    }
   }
 
   const toolMetadata = getToolByCategoryAndSlug(params.category, params.tool);

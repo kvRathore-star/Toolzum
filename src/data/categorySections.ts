@@ -222,6 +222,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ssh-key-generator",
         "jwk-generator",
         "image-placeholder-generator",
+        "fluid-typography-calculator", "semver-calculator",
         "bulk-font-subsetter",
         "markdown-table-generator",
         "website-screenshot",
@@ -266,15 +267,13 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
               "screen-size-converter",
         "proportion-calculator", "ppi-calculator",
         "pythagorean-theorem-calculator", "rectangle-area-calculator",
-        "square-root-calculator", "fluid-typography-calculator",
-        "semver-calculator", "standard-deviation-calculator",
-        "decimal-to-fraction-calculator", "rule-of-three-calculator",
+        "square-root-calculator", "standard-deviation-calculator",
+        "decimal-to-fraction-calculator",
         "permutation-calculator", "factorial-calculator",
         "prime-factorization-calculator", "least-common-multiple-calculator",
         "logarithm-calculator", "trigonometry-calculator",
         "scientific-notation-converter", "rounding-calculator",
-        "coordinate-calculator", "midpoint-calculator",
-        "distance-calculator", "triangle-area-calculator",
+        "coordinate-calculator", "triangle-area-calculator",
 ],
     },
     {
@@ -790,7 +789,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "xml-sitemap-generator",
         "seo-meta-tag-generator",
         "robots-txt-generator",
-        "meta-tag-generator", "seo-slug-generator",
+        "seo-slug-generator",
       ],
     },
   ],
@@ -821,7 +820,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "breastfeeding-calorie-calculator",
         "protein-calculator",
         "keto-calculator", "macro-calculator",
-        "macronutrient-calculator", "calories-burned-calculator",
+        "macro-split-calculator", "calories-burned-calculator",
         "calorie-tracker", "steps-to-calories-calculator",
       ],
     },
@@ -901,7 +900,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "word-counter", "character-counter",
         "ascii-table-generator",
         "writing-tools",
-        "reverse-text-generator", "text-reverser",
+        "text-reverser",
       ],
     },
     {
@@ -932,9 +931,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "invisible-text-generator",
         "lorem-ipsum-generator",
         "pronunciation-tool",
-        "text-styling", "small-text-generator", "big-text-generator",
+        "small-text-generator", "big-text-generator",
         "citation-generator",
-        "text-style-generator",
         "upside-down-text", "glitch-text", "invisible-character",
       ],
     },
@@ -953,16 +951,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "link-in-bio-builder",
         "brand-kit",
       ],
-    },
-    {
-      id: "calculate",
-      heading: "Marketing Calculators",
-      description: "Calculate CPM, RPM, ROAS, conversion rates, and net promoter scores.",
-      slugs: [
-        "cpm-calculator",
-        "roas-calculator", "conversion-rate-calculator",
-        "net-promoter-score-calculator",
-],
     },
     {
       id: "generate",
@@ -1003,34 +991,12 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
 
   Finance: [
     {
-      id: "saas-metrics",
-      heading: "SaaS Metrics & Analytics",
-      description: "ARR, MRR, LTV, CAC, churn, NPS, runway, and SaaS financial dashboards.",
-      slugs: [
-        "saas-metrics-dashboard",
-        "ltv-calculator",
-        "churn-rate-calculator",
-        "runway-calculator",
-        "saas-pricing-calculator",
-        "ab-test-calculator",
-        "customer-ltv-calculator",
-        "acv-calculator",
-        "saas-payback-period",
-        "cac-calculator", "burn-rate-calculator",
-        "employee-turnover-calculator", "arr-calculator",
-        "mrr-calculator", "revenue-growth-calculator",
-        "seat-license-calculator", "saas-quick-ratio",
-        "saas-rule-of-40",
-      ],
-    },
-    {
       id: "loans-mortgages",
       heading: "Loans & Mortgages",
       description: "Mortgage, EMI, car loan, car lease, and rent vs buy calculators.",
       slugs: [
         "mortgage-calculator",
         "car-lease-calculator",
-        "working-capital-calculator",
         "emi-calculator", "car-loan-calculator",
       ],
     },
@@ -1047,7 +1013,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "cagr-calculator",
         "margin-calculator", "roi-calculator",
         "simple-interest-calculator", "retirement-calculator",
-        "rent-vs-buy-calculator",
+        "rent-vs-buy-calculator", "profit-loss-calculator",
       ],
     },
     {
@@ -1074,8 +1040,62 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "invoice-generator",
         "bulk-invoice-receipt-parser",
         "receipt-generator", "iban-validator", "discount-calculator",
-        "inflation-calculator", "trial-conversion-calculator",
+        "inflation-calculator",
         "markup-calculator",
+      ],
+    },
+  ],
+
+  "Growth & Marketing Metrics": [
+    {
+      id: "saas-revenue",
+      heading: "SaaS Revenue & Growth",
+      description: "ARR, MRR, revenue growth, ACV, quick ratio, rule of 40, seat license costs, and SaaS pricing models.",
+      slugs: [
+        "saas-metrics-dashboard",
+        "arr-calculator",
+        "mrr-calculator",
+        "revenue-growth-calculator",
+        "acv-calculator",
+        "saas-quick-ratio",
+        "saas-rule-of-40",
+        "seat-license-calculator",
+        "saas-pricing-calculator",
+      ],
+    },
+    {
+      id: "customer-economics",
+      heading: "Customer Economics",
+      description: "LTV, CAC, payback period, churn rate, and employee turnover metrics.",
+      slugs: [
+        "ltv-calculator",
+        "customer-ltv-calculator",
+        "cac-calculator",
+        "saas-payback-period",
+        "churn-rate-calculator",
+        "employee-turnover-calculator",
+      ],
+    },
+    {
+      id: "cash-runway",
+      heading: "Cash & Runway",
+      description: "Runway and burn rate calculators for startup financial planning.",
+      slugs: [
+        "runway-calculator",
+        "burn-rate-calculator",
+      ],
+    },
+    {
+      id: "marketing-performance",
+      heading: "Marketing Performance & Testing",
+      description: "A/B test significance, trial conversion rates, CPM, ROAS, conversion rates, and NPS.",
+      slugs: [
+        "ab-test-calculator",
+        "trial-conversion-calculator",
+        "conversion-rate-calculator",
+        "cpm-calculator",
+        "roas-calculator",
+        "net-promoter-score-calculator",
       ],
     },
   ],
@@ -1234,11 +1254,11 @@ export const CATEGORY_INTROS: Record<string, string> = {
   Text:
     "Text tools for counting words, converting case, generating fancy fonts, translating to braille, and analyzing content. All processing happens locally in your browser. No sign-up, no limits, no uploads.",
   Branding:
-    "Branding and marketing tools — create logos, design business cards, generate email signatures, calculate CPM and ROAS, and schedule social media content. Every tool runs locally in your browser.",
+    "Branding and design tools — create logos, design business cards, generate email signatures, build brand kits, and schedule social media content. Every tool runs locally in your browser.",
   Design:
     "Design tools for color conversion, typography preview, SVG editing, font subsetting, and CSS code generation. All processing happens locally — no uploads, no accounts, no data collection.",
   Finance:
-    "Financial calculators and tools — currency conversion, invoice generation, IBAN validation, SaaS metrics (ACV, payback period, quick ratio), and more. Every calculation runs in your browser.",
+    "Financial calculators and tools — currency conversion, invoice generation, IBAN validation, loan calculators, savings tools, tax calculators, and more. Every calculation runs in your browser.",
   Privacy:
     "Privacy tools for encrypting data, generating PGP keys, removing EXIF metadata from photos, checking password strength, and sharing notes securely. All processing happens locally with nothing uploaded.",
   "indian-utilities":
@@ -1247,6 +1267,8 @@ export const CATEGORY_INTROS: Record<string, string> = {
     "Browser-based transcription tools — convert speech to text from audio and video files, generate YouTube transcripts, and create meeting minutes. All processing happens locally on your device.",
   Extension:
     "Browser extension generator tools — create screen recorder extensions and other browser-level utilities. All processing happens locally in your browser with no server uploads.",
+  "Growth & Marketing Metrics":
+    "Growth and marketing metrics tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics dashboards. All calculations run in your browser with nothing uploaded.",
   Productivity:
     "Productivity tools — pomodoro timers, to-do lists, and focus management utilities to help you get things done. All processing happens locally in your browser.",
 };

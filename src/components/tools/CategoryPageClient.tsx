@@ -20,6 +20,7 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'ai': 'AI Tools',
   'converter': 'File Converter',
   'indian-utilities': 'Indian Utilities',
+  'growth-metrics': 'Growth & Marketing Metrics',
 };
 
 function getIconBg(tool: ToolMetadata) {
@@ -106,8 +107,7 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   ],
   Branding: [
     { label: 'Design', icon: '🎨' },
-    { label: 'Calculate', icon: '🧮' },
-    { label: 'Generate', icon: '✨' },
+    { label: 'Utilities', icon: '🔧' },
   ],
   Health: [
     { label: 'Calculate', icon: '🧮' },
@@ -123,6 +123,12 @@ const SUB_CATEGORIES: Record<string, { label: string; icon: string }[]> = {
   Calculator: [
     { label: 'Math', icon: '📐' },
     { label: 'Date/Time', icon: '📅' },
+  ],
+  'Growth & Marketing Metrics': [
+    { label: 'SaaS Revenue', icon: '📈' },
+    { label: 'Customers', icon: '👥' },
+    { label: 'Cash', icon: '💰' },
+    { label: 'Marketing', icon: '📊' },
   ],
 };
 
@@ -403,6 +409,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   Design: 'Free design tools — color palette generator, gradient maker, typography checker, and design utilities for creators.',
   Health: 'Free health tools — BMI calculator, calorie tracker, water reminder, and wellness utilities for a healthier life.',
   Extension: 'Free browser extension tools — enhance your browsing with utility extensions. All local, no data collection.',
+  'Growth & Marketing Metrics': 'Free growth and marketing metrics tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics. All calculations run in your browser.',
 }[category] ?? `Free ${category.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.`}
           </p>
           {intro && (

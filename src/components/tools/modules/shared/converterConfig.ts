@@ -64,7 +64,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "fancy-text-generator": { category: "text-style" },
   "cursive-text-generator": { category: "text-style" },
   "zalgo-text-generator": { category: "text-style" },
-  "text-style-generator": { category: "text-style" },
   // Unit converters
   "length-converter": { category: "unit" },
   "weight-converter": { category: "unit" },

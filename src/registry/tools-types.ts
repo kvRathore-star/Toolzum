@@ -18,7 +18,8 @@ export type ToolCategory =
   | "indian-utilities"
   | "AI"
   | "Health"
-  | "Calculator";
+  | "Calculator"
+  | "Growth & Marketing Metrics";
 
 export interface ToolMetadata {
   id: string;

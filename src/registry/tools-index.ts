@@ -27,6 +27,7 @@ for (const p of SEO_PERMUTATIONS) {
     description: p.description,
     seoDescription: p.seoDescription,
     dependencies: "Browser API (landing page)",
+    showInCategory: false,
   });
 }
 
@@ -37,4 +38,8 @@ export const toolsRegistry: ToolMetadata[] = rawToolsRegistry.map(tool => ({
 
 export const getToolBySlug = (slug: string) => toolsRegistry.find(t => t.slug === slug);
 export const getToolsByCategory = (category: string) => toolsRegistry.filter(t => t.category === category && t.showInCategory !== false);
-export const getToolByCategoryAndSlug = (category: string, slug: string) => toolsRegistry.find(t => t.category.toLowerCase().replace(/\s+/g, '-') === category && t.slug === slug);
+function catToSlug(cat: string): string {
+  if (cat === "Growth & Marketing Metrics") return "growth-metrics";
+  return cat.toLowerCase().replace(/\s+/g, '-');
+}
+export const getToolByCategoryAndSlug = (category: string, slug: string) => toolsRegistry.find(t => catToSlug(t.category) === category && t.slug === slug);

@@ -1404,8 +1404,8 @@ export const entries_chunk_2: ToolMetadata[] = [
   },
   {
     id: "534d",
-    name: "Working Capital Calculator",
-    slug: "working-capital-calculator",
+    name: "Profit & Loss Calculator",
+    slug: "profit-loss-calculator",
     category: "Finance",
     description: 'Calculate gross profit, net income, and margin from revenue, COGS, and operating expenses.',
     seoDescription: 'Free online Working Capital Calculator \u2014 Calculate gross profit, net income, and margin. ',

@@ -16,6 +16,7 @@ import {
   DollarSign,
   CheckSquare,
   Calculator as CalculatorIcon,
+  BarChart3,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -142,6 +143,12 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     bgTint: "bg-fuchsia-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-fuchsia-500/5",
   },
+  "Growth & Marketing Metrics": {
+    icon: BarChart3,
+    iconColor: "text-emerald-500",
+    bgTint: "bg-emerald-500/10",
+    gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-emerald-500/5",
+  },
   Calculator: {
     icon: CalculatorIcon,
     iconColor: "text-orange-500",
@@ -171,6 +178,7 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
   Extension: { label: 'Developer & Tech', order: 3 },
   Finance: { label: 'Business & Finance', order: 4 },
   Branding: { label: 'Business & Finance', order: 4 },
+  "Growth & Marketing Metrics": { label: 'Business & Finance', order: 4 },
   Utility: { label: 'Tools & Converters', order: 5 },
   Converter: { label: 'Tools & Converters', order: 5 },
   Calculator: { label: 'Tools & Converters', order: 5 },
@@ -183,7 +191,8 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
 export const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'ai': 'AI Tools',
   'transcription': 'Transcription',
-  'branding': 'Branding & Marketing',
+  'branding': 'Branding',
+  'growth-metrics': 'Growth & Marketing Metrics',
   'productivity': 'Productivity',
   'indian-utilities': 'Indian Utilities',
   'calculator': 'Calculator',

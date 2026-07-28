@@ -773,16 +773,6 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: true,
 },
   {
-    id: "text-style-generator-hub",
-    name: "Text Style Generator",
-    slug: "text-style-generator",
-    category: "Text",
-    description: 'Transform plain text into bold, italic, monospace, double-struck, script, gothic, small caps, circled, squared, fullwidth, and parenthesized Unicode variants. Copy for social media, designs, and formatting.',
-    seoDescription: 'Free online Text Style Generator — Transform text into bold, italic, monospace, double-struck, script, gothic, small caps, circled, squared, fullwidth, and parenthesized Unicode styles. Copy and paste anywhere.',
-    dependencies: "None",
-    showInCategory: true,
-  },
-  {
     id: "import-to-csv-hub",
     name: "Import to CSV",
     slug: "import-to-csv",
@@ -1837,15 +1827,6 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "None",
   },
   {
-    id: "1094",
-    name: "Text Styling Studio",
-    slug: "text-styling",
-    category: "Text",
-    description: 'Transform plain text into 13+ Unicode styles — bold, italic, monospace, double-struck, script, gothic, small caps, circled, squared, fullwidth, superscript, subscript, and parenthesized. Copy for any platform.',
-    seoDescription: 'Free online Text Styling Studio — Transform text into 13+ Unicode styles: bold, italic, monospace, double-struck, script, gothic, small caps, circled, squared, fullwidth, superscript, subscript, and parenthesized.',
-    dependencies: "None",
-  },
-  {
     id: "1095",
     name: "Small Text Generator",
     slug: "small-text-generator",
@@ -1886,8 +1867,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "Text Reverser",
     slug: "text-reverser",
     category: "Text",
-    description: 'Reverse text by characters, words, or lines. Also flip text upside down using Unicode rot180 flipped characters. Perfect for creating puzzles, fun social media content, and creative writing exercises.',
-    seoDescription: 'Free online Text Reverser — Reverse text by characters, words, or lines. Flip upside down using Unicode rot180 characters. Create puzzles, secret messages, and fun social media content instantly.',
+    description: 'Reverse text by characters, words, or lines; flip upside down using Unicode rot180; mirror horizontally; or rotate 180 degrees. Six transformation modes for creating puzzles, secret messages, and unique social media content.',
+    seoDescription: 'Free online Text Reverser — Reverse text by characters, words, or lines. Flip upside down, mirror horizontally, or rotate 180 degrees. Create puzzles, secret messages, and unique social content.',
     dependencies: "None",
   },
   {
