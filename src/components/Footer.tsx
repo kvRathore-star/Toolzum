@@ -105,6 +105,7 @@ export function Footer() {
               <li><Link href="/tools" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">All Tools</Link></li>
               <li><Link href="/pricing" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
               <li><Link href="/extension" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Chrome Extension</Link></li>
+              <li><Link href="/indian-utilities" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Indian Utilities</Link></li>
               <li><Link href="/changelog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Changelog</Link></li>
               <li><Link href="/status" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Status</Link></li>
               <li><Link href="/faq" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">FAQ</Link></li>
