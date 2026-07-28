@@ -88,6 +88,11 @@ export const CLOUD_API_PATTERNS: readonly string[] = [
   "Calibre",
   "DNS API",
   "Fetch API",
+  "HuggingFace",
+  "IFSC API",
+  "InsightFace",
+  "Postal API",
+  "Vectorize",
 ];
 
 /**
@@ -253,35 +258,49 @@ const LOCAL_SAFE_PATTERNS: readonly string[] = [
   "Mapbox GL",
   "jsPDF",
   "html2pdf.js",
+  "fflate",
+  "Potrace",
+  "qpdf",
+  "Web Speech API",
+  "fetch API",
 ];
 
-export type DependencyVerdict = "cloud" | "local" | "unverified";
+export type DependencyVerdict = "cloud" | "local" | "hybrid" | "unverified";
 
-/**
- * Trust-claim copy constants.
- *
- * IMPORTANT: Any piece of trust-relevant copy that needs to say the same
- * true thing in multiple places must live here and be referenced everywhere,
- * never independently authored per surface. These are the claims where
- * wording drift isn't just untidy — it's a claim inconsistency a careful
- * user or reviewer could catch and flag.
- */
 export const LOCAL_TRUST_CLAIM = "Everything runs locally in your browser — nothing is uploaded.";
 export const CLOUD_TRUST_CLAIM = "Uses cloud-based processing.";
+export const HYBRID_TRUST_CLAIM = "Most processing runs locally; specific features use cloud AI.";
 
 /**
- * Classifies a tool's dependencies into one of three verdicts:
+ * Classifies a tool's dependencies into one of four verdicts.
  *
- * - "cloud":      deps match a known cloud pattern → data leaves browser
- * - "local":      deps match a known local-safe pattern → data stays in browser
- * - "unverified": deps is non-empty but doesn't match either set → needs manual review
+ * WHY THIS EXISTS
+ * The site previously used hand-written claims like "100% local" and "zero servers"
+ * in individual page copy. When a tool's dependency was updated (e.g. a formerly-local
+ * tool added a cloud API), those claims would silently drift — no build failure, no
+ * warning, just a broken trust statement. This function is the single source of truth
+ * for whether a tool processes data locally, via cloud, or both. Every page that makes
+ * a privacy claim now computes it from this function, and a CI test
+ * (claims-integrity.test.ts) fails the build if any tool's description contradicts
+ * its verdict.
  *
- * When deps is empty or "None", returns "local" (no dependencies = no server calls).
+ * THE FOUR VERDICTS
+ * - "local":      deps empty or match only local-safe patterns → data stays in browser
+ * - "cloud":      deps match only cloud patterns → data leaves browser entirely
+ * - "hybrid":     deps match both cloud and local patterns (e.g. Whisper API + Web Speech)
+ * - "unverified": deps don't match either set → flagged for manual review, no trust
+ *                 claim is emitted (generateToolDescription returns empty suffix) and
+ *                 the per-tool badge renders gray "Unverified" instead of green/amber.
+ *                 A tool should never remain in this state — add its dependency to
+ *                 LOCAL_SAFE_PATTERNS or CLOUD_API_PATTERNS above.
  */
 export function classifyDependencies(deps: string): DependencyVerdict {
   const trimmed = deps.trim();
   if (!trimmed || trimmed === "None") return "local";
-  if (requiresCloudApi(trimmed)) return "cloud";
-  if (LOCAL_SAFE_PATTERNS.some((p) => trimmed.includes(p))) return "local";
+  const isCloud = requiresCloudApi(trimmed);
+  const isLocal = LOCAL_SAFE_PATTERNS.some((p) => trimmed.includes(p));
+  if (isCloud && isLocal) return "hybrid";
+  if (isCloud) return "cloud";
+  if (isLocal) return "local";
   return "unverified";
 }

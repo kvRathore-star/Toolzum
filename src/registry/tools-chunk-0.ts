@@ -1549,7 +1549,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     isPro: false,
     description: 'Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.',
     seoDescription: 'Free online API Builder & Tester — Full-featured API client that runs in your browser. Make HTTP requests, save collections, generate code snippets. Privacy-first — your API keys never touch a server.',
-    dependencies: "Browser Fetch API",
+    dependencies: "Browser API",
 },
   {
     id: "196",

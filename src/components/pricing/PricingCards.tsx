@@ -105,7 +105,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>100% private, on-device processing — zero server uploads</span>
+                <span>On-device processing for local tools — cloud AI tools clearly marked</span>
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
@@ -194,7 +194,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                <span>100% Client-Side Private Processing — fully secure for enterprise data</span>
+                <span>Client-Side Private Processing — your data stays on your device</span>
               </li>
             </ul>
           </div>

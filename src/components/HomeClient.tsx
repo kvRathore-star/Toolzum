@@ -18,10 +18,12 @@ import {
 } from '@/data/homepage';
 import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
-const { totalImplemented } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
+const localPct = Math.round((localTools / totalImplemented) * 100);
 const categoryCount = CATEGORIES.length;
 const WHY_CHOOSE = getWhyChoose(totalImplemented);
-const STATS_BAR = getStatsBar(totalImplemented, categoryCount);
+const STATS_BAR = getStatsBar(totalImplemented, categoryCount, localTools);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -80,7 +82,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] mb-8"
             >
               <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
-              <span>{totalImplemented.toLocaleString()}+ free tools · 100% local · no signup</span>
+              <span>{totalImplemented.toLocaleString()} free tools · {localPct}% local · no signup</span>
             </motion.div>
 
             <motion.h1
@@ -99,7 +101,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-md mb-10 leading-relaxed"
             >
-              {totalImplemented.toLocaleString()}+ free tools — PDF, images, video, code, converters. 100% local. Zero uploads. Zero servers. Instant utility.
+              {totalImplemented.toLocaleString()} free tools — PDF, images, video, code, converters. {localPct}% local. Cloud AI tools marked.
             </motion.p>
 
             <motion.div
@@ -131,12 +133,12 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                 <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Free Tools</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--success)] font-semibold">100%</span>
+                <span className="font-mono text-2xl text-[var(--success)] font-semibold">{localPct}%</span>
                 <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Local</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-2xl text-[var(--warning)] font-semibold">0</span>
-                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Uploads</span>
+                <span className="font-mono text-2xl text-[var(--warning)] font-semibold">{totalCloud}</span>
+                <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider mt-1">Cloud AI</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">24/7</span>
@@ -193,10 +195,10 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             <Zap className="w-4 h-4" /> How It Works
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl text-[var(--text-primary)] mb-4">
-            Three clicks. Zero servers.
+            Three clicks. Process locally.
           </h2>
           <p className="text-lg text-[var(--text-secondary)] max-w-xl mx-auto">
-            No accounts, no upload queues, no privacy trade-offs.
+            No accounts, no upload queues, privacy first.
           </p>
         </motion.div>
 
@@ -519,7 +521,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-50MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools (PDF, images, video)</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Bulk batch processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>AI generation & extraction</span></li>
             </ul>
@@ -536,7 +538,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited monthly uses</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Bulk batch processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>AI generation & extraction</span></li>
             </ul>
@@ -790,7 +792,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
             </div>
             <div className="text-center">
               <p className="text-sm font-medium text-[var(--text-primary)]">Drop file here</p>
-              <p className="text-xs text-[var(--text-muted)] mt-1">100% client-side processing</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">Private, client-side processing</p>
             </div>
           </>
         )}

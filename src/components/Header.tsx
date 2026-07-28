@@ -13,7 +13,8 @@ import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
 
-const { freeTierTotal } = getCachedToolCounts();
+const { freeTierTotal, localTools, cloudTools, hybridTools } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
 
 const MENU_COLUMN_DEFS = [
   { title: "Image", icon: "🖼", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg"] },
@@ -345,7 +346,7 @@ export function Header() {
                     </p>
                     <div className="space-y-0.5">
                       {[
-                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. Zero servers, zero uploads.`)}&url=${encodeURIComponent('https://toolzum.com')}` },
+                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. ${localTools} run locally, ${totalCloud} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'LinkedIn', emoji: 'in', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'Facebook', emoji: 'f', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}` },
@@ -472,7 +473,7 @@ export function Header() {
                 <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">Share Toolzum</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   {[
-                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. Zero servers, zero uploads.`)}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
+                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. ${localTools} run locally, ${totalCloud} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
                     { emoji: 'in', title: 'Share on LinkedIn', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-blue-600 hover:border-blue-500/30' },
                     { emoji: 'f', title: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-indigo-600 hover:border-indigo-500/30' },
                     { emoji: 'IG', title: 'Share on Instagram', href: 'https://www.instagram.com/', hover: 'hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 hover:border-pink-500/30' },

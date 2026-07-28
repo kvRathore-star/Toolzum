@@ -1,7 +1,13 @@
 import { toolsRegistry } from './tools-index';
 import { proSlugs, SEO_PERMUTATIONS, TOOL_REDIRECTS } from './tools-constants';
+import { classifyDependencies } from '@/lib/cloudPatterns';
+import type { ToolMetadata } from './tools-types';
+import type { DependencyVerdict } from '@/lib/cloudPatterns';
 
-// Automatic tool counts - no hardcoded numbers
+export function classifyTool(tool: ToolMetadata): DependencyVerdict {
+  return classifyDependencies(tool.dependencies);
+}
+
 export function getToolCounts() {
   const implementedTools = toolsRegistry.filter(t => !t.id?.startsWith('seo-') && t.category !== 'Extension');
   
@@ -10,7 +16,7 @@ export function getToolCounts() {
   ).length;
 
   const hiddenDuplicates = implementedTools.filter(t => 
-    t.showInCategory === false
+    t.showInCategory === false && !proSlugs.includes(t.slug)
   ).length;
 
   const proTools = implementedTools.filter(t => 
@@ -19,8 +25,20 @@ export function getToolCounts() {
 
   const seoVariants = SEO_PERMUTATIONS.length;
   
-  const totalImplemented = visibleFree + hiddenDuplicates + proTools;
+  const totalImplemented = implementedTools.length;
   const totalIndexed = toolsRegistry.length;
+  const localTools = implementedTools.filter(t => {
+    return classifyDependencies(t.dependencies) === "local";
+  }).length;
+  const cloudTools = implementedTools.filter(t => {
+    return classifyDependencies(t.dependencies) === "cloud";
+  }).length;
+  const hybridTools = implementedTools.filter(t => {
+    return classifyDependencies(t.dependencies) === "hybrid";
+  }).length;
+  const unverifiedTools = implementedTools.filter(t => {
+    return classifyDependencies(t.dependencies) === "unverified";
+  }).length;
 
   return {
     visibleFree,
@@ -29,7 +47,10 @@ export function getToolCounts() {
     seoVariants,
     totalImplemented,
     totalIndexed,
-    // Free tier = visible free + hidden duplicates (both free)
+    localTools,
+    cloudTools,
+    hybridTools,
+    unverifiedTools,
     freeTierTotal: visibleFree + hiddenDuplicates,
   };
 }

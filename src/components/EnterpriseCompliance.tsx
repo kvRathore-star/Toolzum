@@ -6,12 +6,12 @@ const complianceItems = [
   {
     icon: Shield,
     title: 'Zero-Trust Architecture',
-    desc: 'All file processing runs 100% in your browser via WebAssembly. Your data never touches any server — not ours, not a third party.',
+    desc: 'Local-processing tools run in your browser via WebAssembly. Your data never touches our servers.',
   },
   {
     icon: Lock,
-    title: 'GDPR-Friendly by Architecture',
-    desc: 'Because files never leave your device, no data processing agreement is needed. Toolzum\'s browser-native architecture aligns with GDPR requirements and keeps protected data local.',
+    title: 'No Data to Regulate',
+    desc: 'Because files never leave your device, there is no data to regulate. Toolzum\'s browser-native architecture processes everything locally.',
   },
   {
     icon: Server,
@@ -25,13 +25,13 @@ const complianceItems = [
   },
   {
     icon: Building2,
-    title: 'Legal & Finance Grade',
-    desc: 'Law firms process confidential contracts. Accountants handle tax documents. Healthcare workers manage patient records — all without violating compliance mandates.',
+    title: 'Confidential by Design',
+    desc: 'Documents stay in your browser session — they never reach a server. Suited for contracts, financial records, and other sensitive material.',
   },
   {
     icon: Globe,
-    title: 'Works Offline & Air-Gapped',
-    desc: 'After initial page load, Toolzum functions without internet access. Suitable for classified environments, government networks, and remote field operations.',
+    title: 'Works Offline',
+    desc: 'After initial page load, Toolzum functions without internet access (local-processing tools). No network dependency for file operations.',
   },
 ];
 
@@ -40,14 +40,14 @@ export function EnterpriseCompliance() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
       <div className="text-center mb-12">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-4">
-          <Shield className="w-3.5 h-3.5" /> Enterprise & GDPR Compliance
+          <Shield className="w-3.5 h-3.5" /> Privacy Architecture
         </span>
         <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] mb-3">
-          Built for the Most Regulated Environments
+          Built for Sensitive Work
         </h2>
         <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
           Corporate policies forbid uploading financial data, medical records, or sensitive contracts to external servers.{' '}
-          <strong>Because Toolzum runs 100% locally in your browser, your files never leave your machine.</strong>
+          <strong>Toolzum runs locally in your browser — your files never leave your machine.</strong>
         </p>
       </div>
 
@@ -68,8 +68,11 @@ export function EnterpriseCompliance() {
 
       <div className="mt-10 p-6 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-[var(--radius-xl)] text-center">
         <p className="text-sm text-emerald-700 dark:text-emerald-300">
-          <strong className="font-semibold">Zero data leaves your device.</strong> No accounts needed for processing. No cloud uploads. No logs. No tracking.{' '}
-          <a href="/pricing" className="underline hover:no-underline font-semibold">Toolzum is safe for enterprise use.</a>
+          <strong className="font-semibold">Local-processing tools keep data on your device.</strong> No accounts needed for most tools. No logs. No tracking.{' '}
+          <a href="/pricing" className="underline hover:no-underline font-semibold">Toolzum is designed with privacy as the default.</a>
+        </p>
+        <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-3">
+          Toolzum does not provide legal or regulatory compliance certification. Consult your compliance team for your specific requirements.
         </p>
       </div>
     </section>

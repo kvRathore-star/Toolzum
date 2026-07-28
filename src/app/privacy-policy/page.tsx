@@ -64,9 +64,10 @@ export default function PrivacyPolicyPage() {
           </h3>
           <p className="text-sm text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
             Unlike traditional services that upload your documents to cloud servers and promise to delete them later, 
-            Toolzum <strong>never sends your files anywhere</strong>. Every tool loads, processes, and outputs data 
-            entirely within your browser's memory via WebAssembly. There is no server-side copy of your file — 
-            not even temporarily. This is not a feature; it is the foundation of our architecture.
+            Toolzum <strong>never sends your files to our servers</strong>. Most tools load, process, and output data 
+            entirely within your browser's memory via WebAssembly. A small number of AI-powered tools send data directly 
+            from your browser to a third-party AI API — these are clearly marked on every tool page. 
+            Either way, your file <strong>never reaches our infrastructure</strong>.
           </p>
         </div>
 
@@ -137,13 +138,13 @@ export default function PrivacyPolicyPage() {
             <section id="local-processing" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">2. Client-Side Processing Pledge</h3>
               <p className="mb-4">
-                <strong>Our Core Philosophy is simple:</strong> We do not upload your media.
+                <strong>Our Core Philosophy is simple:</strong> We do not upload your media to our servers.
               </p>
               <p className="mb-4">
                 Traditional utility sites transmit user documents to backend queues to run formatting scripts. Toolzum compiles C++ libraries and JavaScript tools into WebAssembly binaries that execute locally inside a sandboxed client thread.
               </p>
               <p>
-                This ensures that your files (such as confidential business PDFs, identification files, or private photo pixels) never exit your device to traverse the internet.
+                For the majority of tools, your files (such as confidential business PDFs, identification files, or private photo pixels) never exit your device to traverse the internet. A small number of AI tools send data directly from your browser to third-party AI APIs — these are clearly marked so you always know what happens with your data.
               </p>
             </section>
 

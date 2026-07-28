@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
 import { getToolByCategoryAndSlug, toolsRegistry } from '@/registry/tools';
+import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
 import { ToolPaywall } from './ToolPaywall';
 import { useFreeUsage } from '@/hooks/useFreeUsage';
@@ -186,10 +187,10 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           {/* Badges row */}
           <div className="flex items-center gap-3 sm:gap-4 mb-12 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full shadow-sm hover:border-[var(--border-default)] transition-colors flex-wrap justify-center">
-            {!SERVER_SIDE_SLUGS.has(slug) && <><span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-[var(--success)]" /> 100% Private</span>
-            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
-            <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>
-            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" /></>}
+            {tool && <PerToolBadge tool={tool} />}
+            {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
+            {tool && <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>}
+            {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <ShareTool title={title} slug={slug} category={category} />

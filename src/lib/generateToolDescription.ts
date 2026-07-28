@@ -1,5 +1,5 @@
 import type { ToolMetadata } from "@/registry/tools";
-import { requiresCloudApi, classifyDependencies, LOCAL_TRUST_CLAIM, CLOUD_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
+import { requiresCloudApi, classifyDependencies, LOCAL_TRUST_CLAIM, CLOUD_TRUST_CLAIM, HYBRID_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
 
 function parseFormatPair(slug: string): { from: string; to: string } | null {
   const match = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
@@ -447,6 +447,8 @@ export function generateToolDescription(tool: ToolMetadata): DescriptionVariants
   let suffix: string;
   if (depVerdict === "cloud") {
     suffix = ` ${CLOUD_TRUST_CLAIM}`;
+  } else if (depVerdict === "hybrid") {
+    suffix = ` ${HYBRID_TRUST_CLAIM}`;
   } else if (depVerdict === "unverified") {
     // Don't make a trust claim we can't back — omit the suffix entirely
     // and flag for manual review via the description audit

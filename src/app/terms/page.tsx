@@ -47,7 +47,7 @@ export default function TermsOfServicePage() {
       content: (
         <>
           <p className="mb-3">
-            Toolzum is an offline-first browser utility catalog. All processing (including PDF compilation, code formatting, canvas editing, and image transformation) occurs client-side inside your browser sandbox.
+            Toolzum is an offline-first browser utility catalog. Most processing (including PDF compilation, code formatting, canvas editing, and image transformation) occurs client-side inside your browser sandbox. AI-powered tools that use cloud processing are clearly marked.
           </p>
           <p>
             We reserve the right to modify, suspend, or terminate any component of the Service (including individual tools) at any time without notice.
@@ -183,7 +183,7 @@ export default function TermsOfServicePage() {
             <HelpCircle className="w-5 h-5 text-[var(--accent)]" /> Have questions?
           </h3>
           <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto mb-6">
-            If you need legal clearances, DPA guidelines, or local deployment details, feel free to contact us.
+            If you have questions about these terms, feel free to contact us.
           </p>
           <Link href="/contact">
             <Button size="sm">Contact Support</Button>

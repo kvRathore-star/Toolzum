@@ -102,7 +102,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
           {[
             { value: proCount, label: 'Pro Tools', sub: 'Across 9+ categories' },
-            { value: toolCount, label: 'Total Tools', sub: '100% browser-based' },
+            { value: toolCount, label: 'Total Tools', sub: 'Privacy-first, client-side' },
             { value: '500', label: 'Batch Files', sub: 'Per operation' },
             { value: '2GB', label: 'Max File Size', sub: 'Per upload' },
           ].map((stat, i) => (
@@ -236,7 +236,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-50MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Batch processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>AI tools</span></li>
             </ul>
@@ -253,7 +253,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited monthly uses</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>100% local processing</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>All AI tools</span></li>
             </ul>

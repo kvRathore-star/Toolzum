@@ -63,13 +63,13 @@ export const CATEGORIES: CategoryDef[] = [
 
 export const STEPS: StepDef[] = [
   { num: '01', icon: Upload, title: 'Open a Tool', desc: 'Browse hundreds of utilities. Pick one. No sign-up needed.' },
-  { num: '02', icon: Zap, title: 'Process Instantly', desc: 'Everything runs in your browser via WebAssembly & TF.js. Zero uploads.' },
+  { num: '02', icon: Zap, title: 'Process Instantly', desc: 'Most tools run in your browser via WebAssembly. Cloud AI tools clearly marked.' },
   { num: '03', icon: Download, title: 'Download Results', desc: 'Your data never leaves your machine. Export clean, processed files.' },
 ];
 
 export function getWhyChoose(toolCount: number): WhyChooseDef[] {
   return [
-    { icon: Lock, title: 'Zero Data Leaving', desc: 'All processing happens client-side. No servers, no logs, no uploads.' },
+    { icon: Lock, title: 'Zero Data Leaving', desc: 'Local-processing tools run entirely client-side. No servers, no logs, no uploads.' },
     { icon: Zap, title: 'Edge-Accelerated', desc: 'Powered by Cloudflare Workers & WebAssembly for near-instant execution.' },
     { icon: Layers, title: `${toolCount}+ Tools`, desc: `From PDF compression to AI image generation — ${toolCount} tools and counting.` },
     { icon: Globe, title: 'Works Offline', desc: 'Many tools remain functional even without an internet connection.' },
@@ -79,7 +79,7 @@ export function getWhyChoose(toolCount: number): WhyChooseDef[] {
 }
 
 export const FEATURES: FeatureDef[] = [
-  { icon: ShieldCheck, title: "100% Private", desc: "Files never leave your device. Every tool runs locally via WebAssembly." },
+  { icon: ShieldCheck, title: "Privacy First", desc: "Most tools never upload your files — they run locally via WebAssembly." },
   { icon: Zap, title: "Lightning Fast", desc: "Zero upload times. Processing starts the moment you select a file." },
   { icon: Server, title: "Edge Powered", desc: "Powered by Cloudflare Workers for instant load times worldwide." },
 ];
@@ -112,11 +112,12 @@ export const USE_CASES: UseCaseDef[] = [
   },
 ];
 
-export function getStatsBar(toolCount: number, categoryCount: number) {
+export function getStatsBar(toolCount: number, categoryCount: number, localTools: number) {
+  const pct = Math.round((localTools / toolCount) * 100);
   return [
     { value: `${toolCount}+`, label: 'Free Tools', sub: 'And counting every week' },
     { value: `${categoryCount}`, label: 'Categories', sub: 'From PDF to AI generation' },
-    { value: '100%', label: 'Client-Side', sub: 'Zero data leaves your device' },
+    { value: `${pct}%`, label: 'Client-Side', sub: `${localTools} tools, zero uploads` },
     { value: 'Free', label: 'To Start', sub: 'No credit card required' },
   ];
 }

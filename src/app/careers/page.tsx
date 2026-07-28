@@ -31,7 +31,7 @@ export default function CareersPage() {
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
             We are building a future where file processing happens on the client, not the server. 
-            Every tool we build eliminates a server upload that competing products take for granted. 
+            Most of our tools eliminate the server uploads that competing products take for granted. 
             Join a fully remote team dedicated to privacy-first architecture.
           </p>
         </div>

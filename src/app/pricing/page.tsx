@@ -3,7 +3,8 @@ import { getCachedToolCounts } from "@/registry/tools-helpers";
 import { EnterpriseCompliance } from "@/components/EnterpriseCompliance";
 import { PricingCards } from "@/components/pricing/PricingCards";
 
-const { freeTierTotal, proTools, totalImplemented } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, freeTierTotal, totalImplemented } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
 
 export default function PricingPage() {
   return (
@@ -35,7 +36,7 @@ export default function PricingPage() {
             One Plan. Total Freedom.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlock the power of all {totalImplemented}+ tools with zero limits. No maintenance, zero server logs, completely runs on your device.
+            Unlock the power of all {totalImplemented} tools with zero limits. {localTools} run locally on your device. No maintenance, no server logs.
           </p>
         </div>
 

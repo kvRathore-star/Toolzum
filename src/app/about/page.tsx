@@ -10,7 +10,9 @@ import {
 } from "lucide-react";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
 
-const { totalImplemented, seoVariants } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
+const localPct = Math.round((localTools / totalImplemented) * 100);
 
 export default function AboutPage() {
 
@@ -33,7 +35,7 @@ export default function AboutPage() {
             The browser is the new server.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            We believe your files should never leave your device. Toolzum brings server-grade processing to your browser via WebAssembly — zero uploads, zero data retention, zero compromise.
+            We believe your files should never leave your device. Toolzum brings server-grade processing to your browser via WebAssembly — {localTools} tools run entirely on your device, zero uploads required.
           </p>
         </div>
 
@@ -43,29 +45,29 @@ export default function AboutPage() {
             The Browser is the Data Center.
           </p>
           <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl mx-auto">
-            Every tool compiles to WebAssembly and executes on your machine. No server racks, no cloud bills, no data leaving your device.
+            Most tools compile to WebAssembly and execute on your machine. No server racks, no cloud bills, no data leaving your device.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">{totalImplemented}</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Active Tools</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--accent)] mb-2">{totalImplemented}</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Active Tools</div>
+            </div>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--success)] mb-2">{localTools}</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Local Tools</div>
+            </div>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-blue-400 mb-2">{localPct}%</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Client-Side</div>
+            </div>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-400 mb-2">&#60; 1s</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Execution Speed</div>
+            </div>
           </div>
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-[var(--success)] mb-2">0</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Bytes Uploaded</div>
-          </div>
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-blue-400 mb-2">100%</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Client-Side</div>
-          </div>
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-            <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-400 mb-2">&lt; 1s</div>
-            <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Execution Speed</div>
-          </div>
-        </div>
 
         {/* The Story */}
         <div className="max-w-3xl mx-auto mb-20 text-center">
@@ -76,10 +78,10 @@ export default function AboutPage() {
           <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             Built by a solo developer who was tired of uploading confidential PDFs and images to random cloud servers 
             just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{totalImplemented}+ tools</strong> 
-            that never touch a server. The browser is all you need.
+            — {localTools} run entirely in your browser, no server needed.
           </p>
           <p className="text-sm text-[var(--text-muted)] mt-4">
-            Bootstrapped. Zero VC funding. Zero servers. Zero compromises.
+            Bootstrapped. Zero VC funding. Privacy-first by design.
           </p>
         </div>
 
@@ -88,25 +90,24 @@ export default function AboutPage() {
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-4">
             <Ban className="w-4 h-4" /> The Difference
           </span>
-          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">No Upload. No Server. No Data to Breach.</h2>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Your Data Stays on Your Machine.</h2>
           <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
-            Every other online tool asks you to upload files to their server. They process it, then promise to delete it. 
-            That 2-hour deletion window is a liability — a breach waiting to happen. Toolzum eliminates the server 
-            entirely. Your file loads into your browser, gets processed locally, and downloads directly. 
-            There is no server copy to delete because there was never an upload.
+            Traditional online tools ask you to upload files to their server. Toolzum flips that model — {localTools} of our {totalImplemented} tools 
+            process entirely in your browser. Your file loads into browser memory, gets processed locally, and downloads directly. 
+            Cloud AI tools ({totalCloud}) are clearly marked so you always know what happens with your data.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-[var(--bg-elevated)] border border-emerald-200 dark:border-emerald-900 rounded-[var(--radius-lg)] p-4 text-center">
-              <div className="text-sm font-semibold text-emerald-500">Zero Uploads</div>
+              <div className="text-sm font-semibold text-emerald-500">{localTools} Local Tools</div>
               <div className="text-[11px] text-[var(--text-muted)] mt-1">Files never leave your device</div>
             </div>
             <div className="bg-[var(--bg-elevated)] border border-emerald-200 dark:border-emerald-900 rounded-[var(--radius-lg)] p-4 text-center">
-              <div className="text-sm font-semibold text-emerald-500">Zero Retention</div>
-              <div className="text-[11px] text-[var(--text-muted)] mt-1">No server copy exists at any point</div>
+              <div className="text-sm font-semibold text-emerald-500">{totalCloud} Cloud AI</div>
+              <div className="text-[11px] text-[var(--text-muted)] mt-1">Marked on every tool page</div>
             </div>
             <div className="bg-[var(--bg-elevated)] border border-emerald-200 dark:border-emerald-900 rounded-[var(--radius-lg)] p-4 text-center">
               <div className="text-sm font-semibold text-emerald-500">Zero Breach Surface</div>
-              <div className="text-[11px] text-[var(--text-muted)] mt-1">No server, no data to steal</div>
+              <div className="text-[11px] text-[var(--text-muted)] mt-1">No server to breach for local tools</div>
             </div>
           </div>
         </div>
@@ -145,7 +146,7 @@ export default function AboutPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Offline by Design</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                After the initial load, Toolzum requires no internet connection for most operations. Perfect for off-grid work, air-gapped networks, and environments where data cannot leave the premises.
+                After the initial load, Toolzum requires no internet connection for most operations. Perfect for off-grid work and environments with restricted network access.
               </p>
             </div>
           </div>

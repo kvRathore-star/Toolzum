@@ -18,7 +18,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
 
-const { totalImplemented } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
 
 const CATEGORIES = [
   {
@@ -104,13 +105,13 @@ export default function ProductPage() {
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
-            <Sparkles className="w-4 h-4" /> {totalImplemented}+ Client-Side Tools
+            <Sparkles className="w-4 h-4" /> {totalImplemented} Tools — {localTools} Local
           </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl mb-6 tracking-tight leading-tight">
             The offline utility command center.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            A comprehensive catalog of processing tools running entirely inside your browser. No files uploaded. No server queues. Just lightning-fast performance.
+            A comprehensive catalog of tools — {localTools} run entirely in your browser, {totalCloud} cloud AI tools clearly marked. No server queues. Just lightning-fast performance.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/tools">
@@ -133,9 +134,9 @@ export default function ProductPage() {
             <div className="w-12 h-12 rounded-[var(--radius-md)] bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
               <ShieldCheck className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-medium mb-3">100% Privacy Sealed</h3>
+            <h3 className="text-xl font-medium mb-3">Privacy Sealed</h3>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-              Every operation runs locally using client-side WebAssembly, JS, and HTML5 Web APIs. Files never leave your computer.
+              Most operations run locally using WebAssembly, JS, and HTML5 Web APIs — your files never reach our servers. Cloud AI tools clearly marked.
             </p>
           </div>
 

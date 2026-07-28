@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Are my files uploaded to any server?",
-    a: "No. All processing happens entirely in your browser using WebAssembly and JavaScript. Your files never leave your device. We have no servers that receive or store your data.",
+    a: "For the majority of tools: no — all processing happens entirely in your browser using WebAssembly and JavaScript. Your files never reach our servers. A small number of AI-powered tools send data directly from your browser to a third-party AI API; these are clearly marked on every tool page. Either way, your files never touch Toolzum's infrastructure.",
   },
   {
     q: "Do I need to create an account?",

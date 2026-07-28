@@ -4,6 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Globe, Moon, Sun, Check } from "lucide-react";
 import { useTheme } from "next-themes";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
+
+const { localTools, cloudTools, hybridTools, unverifiedTools } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
 
 const LANGUAGES = [
   { code: "en", label: "English", native: "English" },
@@ -81,7 +85,7 @@ export function Footer() {
               <span className="font-bold text-2xl tracking-tight text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">zum</span></span>
             </Link>
             <p className="text-base leading-relaxed mb-6 text-[var(--text-secondary)] max-w-[240px]">
-              Privacy-first tools. All in one place. Zero servers, zero uploads, zero storage.
+              Privacy-first tools. All in one place. {localTools} local · {totalCloud} cloud · {unverifiedTools} under review — clearly marked.
             </p>
             <div className="flex flex-col gap-3">
               <h4 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</h4>
@@ -141,7 +145,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-[var(--text-muted)] text-center md:text-left">
             <span>&copy; {currentYear} Toolzum Inc.</span>
             <span className="hidden md:block w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
-            <span>All processing happens in your browser — your files never leave your device.</span>
+            <span>{localTools} local · {totalCloud} cloud · {unverifiedTools} under review — each tool clearly marked.</span>
           </div>
 
           <div className="flex items-center gap-4">

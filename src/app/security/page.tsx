@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { Shield, Lock, Cpu, Globe, FileCheck, Download, Server, EyeOff, Wifi, Ban } from 'lucide-react';
 import { EnterpriseCompliance } from '@/components/EnterpriseCompliance';
+import { getCachedToolCounts } from '@/registry/tools-helpers';
+
+const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
+const totalCloud = cloudTools + hybridTools;
+const pct = Math.round((localTools / totalImplemented) * 100);
 
 export const metadata: Metadata = {
   title: "Security & Data Protection",
   description:
-    "Toolzum processes files in your browser — zero uploads, zero server storage, zero data retention. No data to breach.",
+    `${localTools} of ${totalImplemented} Toolzum tools process files in your browser — zero uploads, zero server storage.`,
   alternates: { canonical: "https://toolzum.com/security/" },
   openGraph: {
     title: "Security & Data Protection | Toolzum",
@@ -13,10 +18,10 @@ export const metadata: Metadata = {
 };
 
 const trustMetrics = [
-  { value: "0", label: "Bytes Uploaded", sub: "All processing is client-side" },
-  { value: "100%", label: "Client-Side", sub: "No server round trips" },
+  { value: `${pct}%`, label: "Client-Side", sub: `${localTools} tools — no server needed` },
   { value: "0s", label: "Data Retention", sub: "Processed then garbage collected" },
-  { value: "Always", label: "Offline Capable", sub: "No internet required after load" },
+  { value: totalCloud.toString(), label: "Cloud Processing", sub: `${hybridTools > 0 ? `${hybridTools} hybrid, ` : ''}clearly marked` },
+  { value: `${totalImplemented}`, label: "Total Tools", sub: "all free, no signup" },
 ];
 
 const comparisonPoints = [
@@ -37,8 +42,8 @@ const comparisonPoints = [
   },
   {
     icon: Wifi,
-    title: "Works Offline & Air-Gapped",
-    desc: "After the initial page load, Toolzum functions without any internet connection. Suitable for classified environments, government networks, and remote field operations."
+    title: "Works Offline",
+    desc: "After the initial page load, Toolzum functions without any internet connection (local-processing tools). No network dependency during file operations."
   },
 ];
 
@@ -63,17 +68,16 @@ const securitySections = [
       "All network communication encrypted via TLS 1.3 with HSTS"
     ],
   },
-  {
-    icon: Globe,
-    title: "Infrastructure & Compliance",
-    items: [
-      "Global edge CDN with 330+ locations for fast static delivery — no application servers",
-      "GDPR-friendly architecture — no data processing agreement needed (zero data to process)",
-      "Healthcare-safe — no PHI ever leaves your device",
-      "Client-side compute architecture — inherently auditable and transparent",
-      "CCPA compliant — no personal data collected from file operations"
-    ],
-  },
+    {
+        icon: Globe,
+        title: "Infrastructure & Privacy",
+        items: [
+          "Global edge CDN with 330+ locations for fast static delivery — no application servers",
+          "Local-processing tools keep your files entirely in your browser — no server round trip",
+          "Client-side compute architecture — inherently auditable and transparent",
+          "Cloud AI tools are clearly marked so you always know when data leaves your device"
+        ],
+      },
   {
     icon: FileCheck,
     title: "Enterprise Security Controls",
