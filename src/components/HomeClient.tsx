@@ -19,7 +19,7 @@ import {
 import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
 
 const { totalImplemented } = getCachedToolCounts();
-const categoryCount = CATEGORIES.filter(cat => cat.id !== 'Extension').length;
+const categoryCount = CATEGORIES.length;
 const WHY_CHOOSE = getWhyChoose(totalImplemented);
 const STATS_BAR = getStatsBar(totalImplemented, categoryCount);
 
@@ -271,7 +271,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {CATEGORIES.filter(cat => cat.id !== 'Extension').map((cat, i) => {
+          {CATEGORIES.map((cat, i) => {
             const count = toolsRegistry.filter(t => t.category === cat.label || t.category === cat.id).length;
             return (
               <motion.div

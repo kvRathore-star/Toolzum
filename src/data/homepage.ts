@@ -3,7 +3,7 @@ import {
   Upload, Download, Lock, Layers, Globe, Palette, BarChart3,
   FileType, Image as ImageIcon, Video, Mic, Cpu, FileText, Code,
   Type, Shield, Search, Wrench, DollarSign, Heart, CheckSquare,
-  Calculator as CalculatorIcon, Puzzle
+  Calculator as CalculatorIcon, MapPin
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -58,7 +58,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: 'Branding', label: 'Branding', icon: BarChart3, desc: 'NPS, CPM, profit margin & business calculators' },
   { id: 'Transcription', label: 'Transcription', icon: Mic, desc: 'Speech-to-text, subtitles & caption tools' },
   { id: 'Productivity', label: 'Productivity', icon: CheckSquare, desc: 'Todo lists, habit trackers & time tools' },
-  { id: 'Extension', label: 'Extension', icon: Puzzle, desc: 'Browser extensions & add-on tools' },
+  { id: 'indian-utilities', label: 'Indian Utilities', icon: MapPin, desc: 'Aadhaar, PAN, GST, IFSC & India-specific tools' },
 ];
 
 export const STEPS: StepDef[] = [
