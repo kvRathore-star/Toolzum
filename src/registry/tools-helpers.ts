@@ -3,7 +3,7 @@ import { proSlugs, SEO_PERMUTATIONS, TOOL_REDIRECTS } from './tools-constants';
 
 // Automatic tool counts - no hardcoded numbers
 export function getToolCounts() {
-  const implementedTools = toolsRegistry.filter(t => !t.id?.startsWith('seo-'));
+  const implementedTools = toolsRegistry.filter(t => !t.id?.startsWith('seo-') && t.category !== 'Extension');
   
   const visibleFree = implementedTools.filter(t => 
     t.showInCategory !== false && !proSlugs.includes(t.slug)
