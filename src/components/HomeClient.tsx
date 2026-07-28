@@ -101,7 +101,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-md mb-10 leading-relaxed"
             >
-              {totalImplemented.toLocaleString()} free tools — PDF, images, video, code, converters. {localPct}% local. Cloud AI tools marked.
+              {totalImplemented.toLocaleString()}+ Privacy-first tools — PDF, images, video, converters, AI & more. All in one place.
             </motion.p>
 
             <motion.div

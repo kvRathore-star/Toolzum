@@ -246,7 +246,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   };
 
   const allCategories = React.useMemo(() => {
-    return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort();
+    return Array.from(new Set(tools.map(t => t.category).filter(Boolean))).sort().filter(c => c !== 'Extension');
   }, [tools]);
 
   const groupedCategories = React.useMemo(() => {

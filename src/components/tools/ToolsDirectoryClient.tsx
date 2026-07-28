@@ -96,7 +96,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
 
   const allCategories = useMemo(() => {
     const cats = Array.from(new Set(visibleTools.map(t => t.category).filter(Boolean)));
-    return ["All", ...cats.sort()];
+    return ["All", ...cats.sort().filter(c => c !== 'Extension')];
   }, [initialTools]);
 
   useEffect(() => {
