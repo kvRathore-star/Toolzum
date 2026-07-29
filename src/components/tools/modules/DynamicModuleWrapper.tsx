@@ -880,6 +880,12 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/image/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-webp-avif-modernizer" /> }),
   'bulk-image-converter': dynamic(() => import('@/components/tools/modules/image/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-converter" /> }),
 
+  // Converter modules
+  'data-converter': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: m.DataConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="data-converter" /> }),
+  'document-converter': dynamic(() => import('@/components/tools/modules/converter/DocumentConverter').then(m => ({ default: m.DocumentConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="document-converter" /> }),
+  'xlsx-csv-converter': dynamic(() => import('@/components/tools/modules/converter/XlsxCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="xlsx-csv-converter" /> }),
+  'json-to-code': dynamic(() => import('@/components/tools/modules/converter/JsonToCode'), { ssr: false, loading: () => <DynamicImportFallback slug="json-to-code" /> }),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'css-minifier': dynamic(() => import('@/components/tools/modules/developer/CssMinifier'), { ssr: false, loading: () => <DynamicImportFallback slug="css-minifier" /> }),

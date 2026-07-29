@@ -107,6 +107,20 @@ const YAML_TO_JSON = (i: string) => {
   } catch { return 'Invalid YAML'; }
 };
 
+const JSON_TO_YAML = (i: string) => {
+  try {
+    const o = JSON.parse(i);
+    const fmt = (obj: Record<string, any>, prefix = ''): string =>
+      Object.entries(obj).map(([k, v]) => {
+        if (typeof v === 'object' && v !== null && !Array.isArray(v))
+          return `${prefix}${k}:\n${fmt(v, prefix + '  ')}`;
+        const val = typeof v === 'string' ? `"${v}"` : String(v);
+        return `${prefix}${k}: ${val}`;
+      }).join('\n');
+    return fmt(o);
+  } catch { return 'Invalid JSON'; }
+};
+
 const INI_TO_JSON = (i: string) => {
   try {
     const o: Record<string, any> = {}; let s = '';
@@ -139,37 +153,6 @@ const TOML_TO_JSON = (i: string) => {
   } catch { return 'Invalid TOML'; }
 };
 
-const JSON_TO_YAML = (i: string) => {
-  try {
-    const o = JSON.parse(i);
-    const fmt = (obj: Record<string, any>, prefix = ''): string =>
-      Object.entries(obj).map(([k, v]) => {
-        if (typeof v === 'object' && v !== null && !Array.isArray(v))
-          return `${prefix}${k}:\n${fmt(v, prefix + '  ')}`;
-        const val = typeof v === 'string' ? `"${v}"` : String(v);
-        return `${prefix}${k}: ${val}`;
-      }).join('\n');
-    return fmt(o);
-  } catch { return 'Invalid JSON'; }
-};
-
-const JSON_TO_INI = (i: string) => {
-  try {
-    const o = JSON.parse(i);
-    const out: string[] = [];
-    for (const [k, v] of Object.entries(o)) {
-      if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
-        out.push(`[${k}]`);
-        for (const [sk, sv] of Object.entries(v as Record<string, any>))
-          out.push(`${sk}=${sv}`);
-      } else {
-        out.push(`${k}=${v}`);
-      }
-    }
-    return out.join('\n');
-  } catch { return 'Invalid JSON'; }
-};
-
 const JSON_TO_TOML = (i: string) => {
   try {
     const o = JSON.parse(i);
@@ -186,6 +169,23 @@ const JSON_TO_TOML = (i: string) => {
           out.push(`${sk} = ${fmt(sv)}`);
       } else {
         out.push(`${k} = ${fmt(v)}`);
+      }
+    }
+    return out.join('\n');
+  } catch { return 'Invalid JSON'; }
+};
+
+const JSON_TO_INI = (i: string) => {
+  try {
+    const o = JSON.parse(i);
+    const out: string[] = [];
+    for (const [k, v] of Object.entries(o)) {
+      if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+        out.push(`[${k}]`);
+        for (const [sk, sv] of Object.entries(v as Record<string, any>))
+          out.push(`${sk}=${sv}`);
+      } else {
+        out.push(`${k}=${v}`);
       }
     }
     return out.join('\n');
