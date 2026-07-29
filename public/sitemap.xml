@@ -679,18 +679,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/utility/color-tools</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/utility/number-words-tools</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/design/color-blindness-simulator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1573,12 +1561,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/utility/dice-roller-tool</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/utility/number-guessing-game</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1904,12 +1886,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/utility/minutes-to-hours-converter</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/utility/hours-to-minutes-tool</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -4429,12 +4405,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/utility/speed-converter-advanced</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://toolzum.com/utility/power-converter</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -5923,7 +5893,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/finance/gst-calculator</loc>
+    <loc>https://toolzum.com/indian-utilities/gst-calculator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

@@ -7,3 +7,5 @@ scripts/deep-audit.js
 scripts/full-audit.js
 scripts/gen-missing.js
 scripts/precise-audit.js
+.DS_Store
+
