@@ -70,7 +70,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "volume-converter": { category: "unit" },
   "area-converter": { category: "unit" },
   "speed-converter": { category: "unit" },
-  "speed-converter-advanced": { category: "unit" },
   "power-converter": { category: "unit" },
   "pressure-converter": { category: "unit" },
   "temperature-converter": { category: "unit" },
@@ -348,6 +347,5 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
 
   // Hub/consolidated converter entries
   "import-to-csv": { category: "import-to-csv", description: "Convert TSV, XLSX, VCF, ICS, and Parquet files to CSV format. Fast and private." },
-  "color-tools": { category: "color", description: "Convert between HEX, RGB, and HSL color formats. Parse and generate colors visually." },
-  "number-words-tools": { category: "number", description: "Convert numbers to words, words to numbers, and to Roman numerals." },
+
 };

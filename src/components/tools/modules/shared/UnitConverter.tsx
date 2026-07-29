@@ -85,16 +85,6 @@ const UNIT_FAMILIES: Record<string, FamilyConfig> = {
     ],
     multipliers: { kmh: 1, mph: 0.621371, ms: 0.277778, knots: 0.539957, fps: 0.911344 },
   },
-  "speed-converter-advanced": {
-    title: "Speed Converter", desc: "Convert between km/h, mph, knots, and more",
-    baseUnit: "km/h", showAll: false,
-    units: [
-      { key: "kmh", label: "km/h" }, { key: "mph", label: "mph" },
-      { key: "ms", label: "m/s" }, { key: "knots", label: "Knots" },
-      { key: "fps", label: "ft/s" },
-    ],
-    multipliers: { kmh: 1, mph: 0.621371, ms: 0.277778, knots: 0.539957, fps: 0.911344 },
-  },
   "power-converter": {
     title: "Power Converter", desc: "Convert between kilowatts, horsepower, BTU/hr, and more",
     baseUnit: "kW", showAll: false,

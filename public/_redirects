@@ -382,3 +382,15 @@
 /developer/tabata-timer    /utility/tabata-timer/   301
 /developer/world-clock/   /utility/world-clock/   301
 /developer/world-clock    /utility/world-clock/   301
+
+# Removed utility duplicates — redirect to canonical
+/utility/dice-roller-tool/   /utility/dice-roller/   301
+/utility/dice-roller-tool    /utility/dice-roller/   301
+/utility/hours-to-minutes-tool/   /utility/hours-to-minutes-converter/   301
+/utility/hours-to-minutes-tool    /utility/hours-to-minutes-converter/   301
+/utility/speed-converter-advanced/   /utility/speed-converter/   301
+/utility/speed-converter-advanced    /utility/speed-converter/   301
+/utility/number-words-tools/   /utility/number-to-words-converter/   301
+/utility/number-words-tools    /utility/number-to-words-converter/   301
+/utility/color-tools/   /utility/color-picker/   301
+/utility/color-tools    /utility/color-picker/   301

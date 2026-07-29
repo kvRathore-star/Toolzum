@@ -1214,8 +1214,7 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "decision-maker": ["yes-no-picker", "random-decision-maker", "wheel-of-names"],
   "yes-no-picker": ["decision-maker", "coin-flipper"],
   "coin-flipper": ["dice-roller", "yes-no-picker"],
-  "dice-roller": ["dice-roller-tool", "coin-flipper"],
-  "dice-roller-tool": ["dice-roller", "coin-flipper"],
+  "dice-roller": ["coin-flipper"],
   "ulid-generator": ["random-string-generator", "random-port-generator"],
   "random-color-generator": ["color-palette-generator", "color-picker"],
   "random-date-generator": ["random-time-generator", "sequence-generator"],
@@ -1253,22 +1252,19 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "morse-code-translator": ["nato-phonetic-converter", "unicode-viewer"],
   "nato-phonetic-converter": ["morse-code-translator"],
   "unicode-viewer": ["morse-code-translator"],
-  "number-to-words-converter": ["number-words-tools"],
-  "number-words-tools": ["number-to-words-converter"],
+  "number-to-words-converter": [],
 
   // Unit Converters
-  "speed-converter": ["speed-converter-advanced", "length-converter"],
+  "speed-converter": ["length-converter"],
   "weight-converter": ["volume-converter", "unit-converter"],
   "data-size-converter": ["unit-converter"],
   "cooking-measurement-converter": ["volume-converter"],
   "fuel-consumption-converter": ["speed-converter", "weight-converter"],
   "clothing-size-converter": ["shoe-size-converter"],
-  "hours-to-minutes-converter": ["hours-to-minutes-tool", "time-converter"],
-  "hours-to-minutes-tool": ["hours-to-minutes-converter", "time-converter"],
+  "hours-to-minutes-converter": ["time-converter"],
   "time-converter": ["unix-time-converter", "hours-to-minutes-converter"],
   "unix-time-converter": ["time-converter", "time-zone-converter"],
   "vcf-csv-converter": ["ics-csv-converter"],
-  "speed-converter-advanced": ["speed-converter", "length-converter"],
   "unit-converter": ["length-converter", "weight-converter", "volume-converter"],
   "power-converter": ["unit-converter", "pressure-converter"],
   "pressure-converter": ["power-converter", "unit-converter"],
@@ -1299,11 +1295,11 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "ics-csv-converter": ["vcf-csv-converter", "ical-event-generator"],
 
   // Color & Design Tools
-  "color-picker": ["color-palette-generator", "color-tools"],
+  "color-picker": ["color-palette-generator"],
   "color-palette-generator": ["color-picker", "gradient-generator"],
   "gradient-generator": ["color-palette-generator", "contrast-checker"],
   "contrast-checker": ["gradient-generator", "color-picker"],
-  "color-tools": ["color-picker", "random-color-generator"],
+
 
   // Everyday Utilities
   "speed-test": ["benchmark-builder", "ip-address-lookup"],

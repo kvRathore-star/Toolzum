@@ -1642,16 +1642,6 @@ export const entries_chunk_2: ToolMetadata[] = [
 },
   {
 
-    id: "543j",
-    name: "Speed Converter (Advanced)",
-    slug: "speed-converter-advanced",
-    category: "Utility",
-    description: 'Convert between km/h, mph, m/s, knots, and ft/s. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Speed Converter \u2014 Convert between km/h, mph, m/s, knots, and ft/s. ',
-    dependencies: "None",
-},
-  {
-
     id: "543k",
     name: "Power Converter",
     slug: "power-converter",

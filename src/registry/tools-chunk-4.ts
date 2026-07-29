@@ -336,16 +336,6 @@ export const entries_chunk_4: ToolMetadata[] = [
 },
   {
 
-    id: "822",
-    name: "Dice Roller Tool",
-    slug: "dice-roller-tool",
-    category: "Utility",
-    description: 'Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Dice Roller Tool \u2014 Roll virtual dice with customizable number of dice and sides (d4, d6, d8, d10, d12, d20). Shows individual and total results. ',
-    dependencies: "None",
-},
-  {
-
     id: "823",
     name: "Number Guessing Game",
     slug: "number-guessing-game",
@@ -639,7 +629,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Speed Converter \u2014 Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. ',
     dependencies: "None",
-},
+  },
+
   {
 
     id: "867",
@@ -844,6 +835,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Hours & Minutes Calculator \u2014 Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. ',
     dependencies: "None",
   },
+
   {
 
     id: "895",
@@ -852,16 +844,6 @@ export const entries_chunk_4: ToolMetadata[] = [
     category: "Utility",
     description: 'Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. ',
-    dependencies: "None",
-},
-  {
-
-    id: "896",
-    name: "Hours to Minutes Tool",
-    slug: "hours-to-minutes-tool",
-    category: "Utility",
-    description: 'Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Hours to Minutes Tool \u2014 Convert hours in decimal format to total minutes. Great for time conversion when working with timesheets. ',
     dependencies: "None",
 },
   {

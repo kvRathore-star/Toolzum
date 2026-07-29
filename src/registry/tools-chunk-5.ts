@@ -782,29 +782,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "None",
     showInCategory: true,
   },
+
   {
 
-    id: "color-tools-hub",
-    name: "Color Tools",
-    slug: "color-tools",
-    category: "Utility",
-    description: 'Convert between HEX, RGB, and HSL color formats. Parse color codes and get instant conversions with a single tool.',
-    seoDescription: 'Free online Color Converter — Convert between HEX, RGB, and HSL color formats. Parse and convert colors instantly. ',
-    dependencies: "None",
-    showInCategory: true,
-},
-  {
-
-    id: "number-words-hub",
-    name: "Number & Words Tools",
-    slug: "number-words-tools",
-    category: "Utility",
-    description: 'Convert between numbers and Roman numerals, and write numbers as English words. Two essential number tools in one place.',
-    seoDescription: 'Free online Number Converter — Convert between numbers and Roman numerals, and convert numbers to English words. ',
-    dependencies: "None",
-    showInCategory: true,
-},
-  {
     id: "cb-1",
     name: "Color Blindness Simulator",
     slug: "color-blindness-simulator",

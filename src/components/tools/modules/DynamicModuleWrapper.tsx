@@ -784,7 +784,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'list-sorter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListSorter })), { ssr: false, loading: () => <DynamicImportFallback slug="list-sorter" /> }),
   'decision-maker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.DecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="decision-maker" /> }),
   'yes-no-picker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.YesNoPicker })), { ssr: false, loading: () => <DynamicImportFallback slug="yes-no-picker" /> }),
-  'dice-roller-tool': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.DiceRollerTool })), { ssr: false, loading: () => <DynamicImportFallback slug="dice-roller-tool" /> }),
+
   'number-guessing-game': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.NumberGuessingGame })), { ssr: false, loading: () => <DynamicImportFallback slug="number-guessing-game" /> }),
   'rock-paper-scissors': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.RockPaperScissors })), { ssr: false, loading: () => <DynamicImportFallback slug="rock-paper-scissors" /> }),
   'hangman-game': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.HangmanGame })), { ssr: false, loading: () => <DynamicImportFallback slug="hangman-game" /> }),
@@ -833,7 +833,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'work-hours-calculator': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.WorkHoursCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="work-hours-calculator" /> }),
   'hours-minutes-calculator': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.HoursMinutesCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="hours-minutes-calculator" /> }),
   'minutes-to-hours-converter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.MinutesToHoursConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="minutes-to-hours-converter" /> }),
-  'hours-to-minutes-tool': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.HoursToMinutesTool })), { ssr: false, loading: () => <DynamicImportFallback slug="hours-to-minutes-tool" /> }),
+
   'seconds-to-minutes-converter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.SecondsToMinutesConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="seconds-to-minutes-converter" /> }),
 
 
