@@ -48,7 +48,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "json-to-xml",
     dependencies: "xml2js",
-    showInCategory: true,
+    showInCategory: false,
   },
   {
 
@@ -952,6 +952,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts JSON files to CSV format — APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
+    showInCategory: false,
   },
   {
     id: "122",
@@ -1149,6 +1150,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts CSV files to JSON format — spreadsheets, database exports, and data imports to APIs, configuration files, and data exchange between web services. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
+    showInCategory: false,
   },
   {
     id: "151b",

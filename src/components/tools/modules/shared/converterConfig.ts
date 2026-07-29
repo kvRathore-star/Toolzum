@@ -9,8 +9,11 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // Consolidated converters
   "video-converter": { category: "video-format", description: "Convert between MKV, MP4, MOV, WebM, and AVI video formats." },
   "audio-converter": { category: "audio-format", description: "Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats." },
+  "mp4-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MP4 video files." },
+  "mov-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MOV video files." },
+  "webm-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from WebM video files." },
   "image-format-converter": { category: "image-format", description: "Convert between PNG, JPG, WebP, HEIC, and AVIF image formats." },
-  "data-converter": { category: "data", description: "Convert between JSON, CSV, and XML data formats." },
+  "data-format-converter": { category: "data", description: "Convert between JSON, CSV, and XML data formats." },
   "svg-to-png-converter": { category: "image-format", description: "<strong>SVG to PNG Converter:</strong> Convert vector SVG graphics into raster PNG images at any resolution. Perfect for exporting icons, logos, and illustrations for web and print use. Your files never leave your device." },
   "document-converter": { category: "document", description: "Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats." },
   // Text transformers

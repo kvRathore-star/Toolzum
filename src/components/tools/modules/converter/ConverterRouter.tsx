@@ -5,7 +5,7 @@ import VideoFormatConverter from '../shared/VideoFormatConverter';
 import VideoToAudioConverter from '../shared/VideoToAudioConverter';
 import AudioFormatConverter from '../shared/AudioFormatConverter';
 import ImageCatchAllConverter from '../shared/ImageCatchAllConverter';
-import DataFormatConverter from '../shared/DataFormatConverter';
+import { DataConverterFromSlug } from '../converter/DataConverter';
 import DocumentFormatConverter from '../shared/DocumentFormatConverter';
 import TextTransformConverter from '../shared/TextTransformConverter';
 import HtmlTextHub from '../shared/HtmlTextHub';
@@ -27,7 +27,7 @@ const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; des
   "video-to-audio": VideoToAudioConverter,
   "audio-format": AudioFormatConverter,
   "image-format": ImageCatchAllConverter,
-  "data": DataFormatConverter,
+  "data": DataConverterFromSlug,
   "document": DocumentFormatConverter,
   "text-transform": TextTransformConverter,
   "html-text": HtmlTextHub,

@@ -1165,18 +1165,18 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "document-converter": ["odt-rtf-to-pdf", "epub-to-pdf"],
 
   // Data
-  "data-converter": ["yaml-json-converter", "csv-to-json", "toml-converter"],
+  "data-format-converter": ["yaml-json-converter", "csv-to-json", "toml-converter"],
   "json-toon-converter": ["toon-to-json", "yaml-to-toon"],
   "csv-html-table-converter": ["xlsx-csv-converter", "csv-to-json"],
   "yaml-json-converter": ["json-to-yaml-converter", "toml-converter"],
   "json-to-yaml-converter": ["yaml-json-converter", "toml-converter"],
   "json-to-ini-converter": ["ini-json-converter", "json-to-toml-converter"],
   "json-to-toml-converter": ["toml-converter", "json-to-yaml-converter"],
-  "ini-json-converter": ["json-to-ini-converter", "data-converter"],
+  "ini-json-converter": ["json-to-ini-converter", "data-format-converter"],
   "toml-converter": ["yaml-json-converter", "json-to-toml-converter"],
-  "json-to-code": ["data-converter", "json-to-xml"],
-  "json-to-xml": ["data-converter", "csv-to-json"],
-  "csv-to-json": ["json-to-csv", "data-converter", "csv-html-table-converter"],
+  "json-to-code": ["data-format-converter", "json-to-xml"],
+  "json-to-xml": ["data-format-converter", "csv-to-json"],
+  "csv-to-json": ["json-to-csv", "data-format-converter", "csv-html-table-converter"],
   "xlsx-csv-converter": ["csv-html-table-converter", "import-to-csv"],
   "html-to-text-converter": ["text-to-html-converter", "markdown-tools"],
 

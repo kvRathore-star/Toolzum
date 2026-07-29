@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
@@ -14,6 +15,12 @@ type ConvertMode = {
 };
 
 const MODES: Record<string, ConvertMode> = {
+  "import-to-csv": {
+    slug: "import-to-csv", name: "Import to CSV",
+    description: "Convert TSV, Excel XLSX, vCard VCF, and iCalendar ICS files to CSV format.",
+    inputLabel: "TSV Input",
+    convert: (i) => i.replace(/\t/g, ','),
+  },
   "tsv-csv-converter": {
     slug: "tsv-csv-converter", name: "TSV → CSV",
     description: "Convert tab-separated values to comma-separated values",
@@ -77,6 +84,8 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
 
+  const modeList = useMemo(() => Object.values(MODES), []);
+
   if (!mode) return <div className="text-red-500">Unknown mode: {slug}</div>;
 
   const handleConvert = () => {
@@ -89,6 +98,21 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 justify-center">
+        {modeList.map(m => (
+          <Link
+            key={m.slug}
+            href={`/converter/${m.slug}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              m.slug === slug
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
+            }`}
+          >
+            {m.name}
+          </Link>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{mode.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{mode.description}</p>

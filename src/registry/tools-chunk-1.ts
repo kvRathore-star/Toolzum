@@ -726,12 +726,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "video-converter-1",
     name: "Video Format Converter",
     slug: "video-converter",
-    category: "Video",
+    category: "Converter",
     description: 'Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format from the dropdown — your files never leave your device.',
     seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
-
-    showInCategory: false,
+    showInCategory: true,
   },
   {
     id: "audio-converter-1",
@@ -754,9 +753,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     showInCategory: true,
   },
   {
-    id: "data-converter-1",
-    name: "Data Converter",
-    slug: "data-converter",
+    id: "data-format-converter-1",
+    name: "Data Format Converter",
+    slug: "data-format-converter",
     category: "Converter",
     description: 'Convert between JSON, CSV, XML, YAML, and TSV data formats. Pick any input and output format — your files never leave your device.',
     seoDescription: 'Free online Data Converter — Convert between JSON, CSV, XML, YAML, and TSV data formats. Pick any input and output format. ',

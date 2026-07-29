@@ -364,6 +364,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'seller-profit-calculator': dynamic(() => import('@/components/tools/modules/indian-utilities/SellerProfitCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="seller-profit-calculator" /> }),
   'complaint-letter-generator': dynamic(() => import('@/components/tools/modules/indian-utilities/ComplaintLetterGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="complaint-letter-generator" /> }),
   'markdown-tools': dynamic(() => import('@/components/tools/modules/converter/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-tools" /> }),
+  'markdown-to-html': dynamic(() => import('@/components/tools/modules/converter/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-html" /> }),
+  'html-to-markdown': dynamic(() => import('@/components/tools/modules/converter/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="html-to-markdown" /> }),
+  'text-to-markdown': dynamic(() => import('@/components/tools/modules/converter/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-markdown" /> }),
+  'markdown-to-text': dynamic(() => import('@/components/tools/modules/converter/MarkdownTools'), { ssr: false, loading: () => <DynamicImportFallback slug="markdown-to-text" /> }),
   'pdf-to-markdown': dynamic(() => import('@/components/tools/modules/pdf/PdfToMarkdown'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-markdown" /> }),
   'extract-pages-from-pdf': dynamic(() => import('@/components/tools/modules/pdf/ExtractPagesFromPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="extract-pages-from-pdf" /> }),
   'scan-to-pdf': dynamic(() => import('@/components/tools/modules/pdf/ScanToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="scan-to-pdf" /> }),
@@ -880,7 +884,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-image-converter': dynamic(() => import('@/components/tools/modules/image/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-converter" /> }),
 
   // Converter modules
-  'data-converter': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: m.DataConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="data-converter" /> }),
+  'data-format-converter': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: m.DataConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="data-format-converter" /> }),
   'document-converter': dynamic(() => import('@/components/tools/modules/converter/DocumentConverter').then(m => ({ default: m.DocumentConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="document-converter" /> }),
   'xlsx-csv-converter': dynamic(() => import('@/components/tools/modules/converter/XlsxCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="xlsx-csv-converter" /> }),
   'json-to-code': dynamic(() => import('@/components/tools/modules/converter/JsonToCode'), { ssr: false, loading: () => <DynamicImportFallback slug="json-to-code" /> }),
