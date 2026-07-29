@@ -18,6 +18,7 @@ import UnitConverter from '../shared/UnitConverter';
 import ImportToCsvConverter from '../shared/ImportToCsvConverter';
 import ColorConverter from '../shared/ColorConverter';
 import NumberWordsConverter from '../shared/NumberWordsConverter';
+import ToonConverter from './DataFormatTools';
 import { ComponentType } from 'react';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
@@ -39,6 +40,7 @@ const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; des
   "import-to-csv": ImportToCsvConverter,
   "color": ColorConverter,
   "number": NumberWordsConverter,
+  "toon": ToonConverter,
 };
 
 type ConverterRouterProps = {

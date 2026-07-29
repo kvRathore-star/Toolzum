@@ -883,6 +883,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert YAML data into a human-readable Toon format using → arrows. Perfect for quick visualization of hierarchical YAML structures.',
     seoDescription: 'Free online YAML → Toon Converter — Convert YAML data into a human-readable Toon format using arrows for quick visualization of hierarchical structures. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "ttj-1",
@@ -892,6 +893,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Toon format (→ arrows) back into JSON. Reverse of the JSON → Toon converter for round-trip data transformation.',
     seoDescription: 'Free online Toon → JSON Converter — Convert Toon format back into JSON for round-trip data transformation. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "tty-1",
@@ -901,6 +903,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Toon format (→ arrows) back into YAML. Complete the round-trip from any source format.',
     seoDescription: 'Free online Toon → YAML Converter — Convert Toon format back into YAML for complete round-trip data transformation. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "1003",

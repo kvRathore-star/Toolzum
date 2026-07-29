@@ -435,7 +435,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'cbz-to-pdf': dynamic(() => import('@/components/tools/modules/converter/CbzToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="cbz-to-pdf" /> }),
   'epub-to-pdf': dynamic(() => import('@/components/tools/modules/converter/EpubToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="epub-to-pdf" /> }),
 
-  'json-toon-converter': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: m.JsonToonConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="json-toon-converter" /> }),
 
   'yaml-validator': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: m.YamlValidator })), { ssr: false, loading: () => <DynamicImportFallback slug="yaml-validator" /> }),
   'html-entity-encoder': dynamic(() => import('@/components/tools/modules/developer/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="html-entity-encoder" /> }),

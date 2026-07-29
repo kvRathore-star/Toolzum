@@ -1,4 +1,4 @@
-export type ConverterCategory = "video-format" | "video-to-audio" | "audio-format" | "image-format" | "data" | "document" | "text-transform" | "html-text" | "css-preprocessor" | "serializer" | "json-output" | "csv-output" | "text-style" | "unit" | "import-to-csv" | "color" | "number";
+export type ConverterCategory = "video-format" | "video-to-audio" | "audio-format" | "image-format" | "data" | "document" | "text-transform" | "html-text" | "css-preprocessor" | "serializer" | "json-output" | "csv-output" | "text-style" | "unit" | "import-to-csv" | "color" | "number" | "toon";
 
 export type ConverterConfigEntry = {
   category: ConverterCategory;
@@ -347,5 +347,11 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
 
   // Hub/consolidated converter entries
   "import-to-csv": { category: "import-to-csv", description: "Convert TSV, XLSX, VCF, ICS, and Parquet files to CSV format. Fast and private." },
+
+  // Toon converters
+  "json-toon-converter": { category: "toon" },
+  "yaml-to-toon": { category: "toon" },
+  "toon-to-json": { category: "toon" },
+  "toon-to-yaml": { category: "toon" },
 
 };

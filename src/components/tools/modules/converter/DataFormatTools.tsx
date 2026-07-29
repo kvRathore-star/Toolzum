@@ -78,8 +78,19 @@ export function TsvCsvConverter() {
   );
 }
 
-export function JsonToonConverter() {
-  const [mode, setMode] = useState<'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'>('json-to-toon');
+const SLUG_TO_MODE: Record<string, 'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'> = {
+  'json-toon-converter': 'json-to-toon',
+  'yaml-to-toon': 'yaml-to-toon',
+  'toon-to-json': 'toon-to-json',
+  'toon-to-yaml': 'toon-to-yaml',
+};
+
+export default function ToonConverter({ slug }: { slug: string }) {
+  return <JsonToonConverter initialMode={SLUG_TO_MODE[slug] || 'json-to-toon'} />;
+}
+
+export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml' }) {
+  const [mode, setMode] = useState<'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'>(initialMode || 'json-to-toon');
   const [input, setInput] = useState('{\n  "name": "Alice",\n  "age": 30,\n  "city": "New York"\n}');
   const [output, setOutput] = useState('');
 
