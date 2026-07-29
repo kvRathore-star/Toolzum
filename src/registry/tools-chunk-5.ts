@@ -680,6 +680,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert plain CSS to SCSS syntax with nesting and parent selector references. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to SCSS Converter — Convert plain CSS to SCSS syntax with nesting and parent selector references. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "css-5",
@@ -689,6 +690,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Less to CSS Converter — Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
 
@@ -1750,6 +1752,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to YAML format with proper key-value formatting and nested structure support. Everything runs locally in your browser.',
     seoDescription: 'Free online JSON to YAML Converter — Convert JSON objects to YAML format with proper key-value formatting. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "1088",
@@ -1759,6 +1762,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to INI config file format with section headers and key-value pairs. Perfect for configuration file generation.',
     seoDescription: 'Free online JSON to INI Converter — Convert JSON to INI config format with section headers and key-value pairs. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "1089",
@@ -1768,6 +1772,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JSON objects to TOML configuration format with proper typing and section support. Everything runs locally in your browser.',
     seoDescription: 'Free online JSON to TOML Converter — Convert JSON to TOML configuration format with proper typing. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "1090",
@@ -1777,6 +1782,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSS to Less syntax by transforming CSS variables to Less variables (@). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to Less Converter — Convert CSS variables to Less syntax with proper transformation. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "1091",
@@ -1786,6 +1792,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSS braces and semicolons to Stylus indentation-based syntax. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSS to Stylus Converter — Convert CSS to Stylus indentation syntax. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
 

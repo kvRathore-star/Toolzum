@@ -739,7 +739,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       slugs: [
         "data-converter",
         "json-toon-converter", "csv-html-table-converter",
-        "yaml-json-converter", "json-to-code",
+        "yaml-json-converter",
         "temperature-converter", "archive-converter",
         "markdown-tools",
         "roman-numeral-converter",

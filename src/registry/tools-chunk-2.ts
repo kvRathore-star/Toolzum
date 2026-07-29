@@ -1040,6 +1040,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
 
@@ -1090,6 +1091,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.',
     seoDescription: 'Free online TOML Converter — Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON to TOML, TOML to JSON, YAML to TOML, and TOML to YAML. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
 

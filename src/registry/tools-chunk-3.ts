@@ -29,6 +29,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert INI configs to JSON. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
 
@@ -167,6 +168,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Stylus syntax to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "553c",

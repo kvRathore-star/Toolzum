@@ -225,6 +225,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to HTML Converter — Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. ',
     dependencies: "None",
+    showInCategory: false,
   },
   {
     id: "810",
