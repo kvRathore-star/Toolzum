@@ -225,7 +225,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bmi-calculator': dynamic(() => import('@/components/tools/modules/health/BmiCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="bmi-calculator" /> }),
   'audio-to-text-transcription': dynamic(() => import('@/components/tools/modules/transcription/AudioToTextTranscription'), { ssr: false, loading: () => <DynamicImportFallback slug="audio-to-text-transcription" /> }),
   'meme-generator': dynamic(() => import('@/components/tools/modules/image/MemeGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="meme-generator" /> }),
-  'gst-calculator': dynamic(() => import('@/components/tools/modules/finance/GstCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="gst-calculator" /> }),
+  'gst-calculator': dynamic(() => import('@/components/tools/modules/indian-utilities/GstCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="gst-calculator" /> }),
   'image-resizer': dynamic(() => import('@/components/tools/modules/image/ImageResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="image-resizer" /> }),
   'diff-checker': dynamic(() => import('@/components/tools/modules/developer/DiffChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="diff-checker" /> }),
   'ip-address-lookup': dynamic(() => import('@/components/tools/modules/utility/IpAddressLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="ip-address-lookup" /> }),
