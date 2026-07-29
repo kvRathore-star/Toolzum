@@ -596,7 +596,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "70",
     name: "GST Calculator",
     slug: "gst-calculator",
-    category: "Finance",
+    category: "indian-utilities",
     description: 'Computes GST-inclusive and GST-exclusive amounts for Indian tax slabs (5%, 12%, 18%, 28%) with automatic HSN/SAC code hints.',
     dependencies: "Vanilla JS",
     seoDescription: 'Free online GST calculator for India — compute GST inclusive and exclusive prices for 5%, 12%, 18%, and 28% slabs. Instant, accurate, and 100% client-side.',
