@@ -109,6 +109,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://toolzum.com/branding</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://toolzum.com/calculator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -158,12 +164,6 @@
   </url>
   <url>
     <loc>https://toolzum.com/indian-utilities</loc>
-    <lastmod>2026-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://toolzum.com/marketing</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -4663,7 +4663,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/social-media-calendar</loc>
+    <loc>https://toolzum.com/branding/social-media-calendar</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -4681,7 +4681,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/link-in-bio-builder</loc>
+    <loc>https://toolzum.com/branding/link-in-bio-builder</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -4897,13 +4897,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/brand-color-palette-generator</loc>
+    <loc>https://toolzum.com/branding/brand-color-palette-generator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/brand-kit</loc>
+    <loc>https://toolzum.com/branding/brand-kit</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -5665,7 +5665,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/logo-maker</loc>
+    <loc>https://toolzum.com/branding/logo-maker</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -5827,7 +5827,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/social-media-post-maker</loc>
+    <loc>https://toolzum.com/branding/social-media-post-maker</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -6025,7 +6025,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/business-card-maker</loc>
+    <loc>https://toolzum.com/branding/business-card-maker</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -6169,7 +6169,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/marketing/email-signature-generator</loc>
+    <loc>https://toolzum.com/branding/email-signature-generator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
