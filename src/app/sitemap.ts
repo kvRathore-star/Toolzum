@@ -18,7 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/extension`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
   ];
 
-  const categories = [...new Set(toolsRegistry.map(t => t.category?.toLowerCase().replace(/\s+/g, '-')).filter(Boolean))];
+  function catSlug(cat: string): string {
+    return cat === "Growth & Marketing" ? "growth-metrics" : cat.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  const categories = [...new Set(toolsRegistry.map(t => t.category ? catSlug(t.category) : undefined).filter(Boolean))];
 
   const categoryPages = categories.map(cat => ({
     url: `${baseUrl}/${cat}`,
@@ -28,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const toolPages = toolsRegistry.map(tool => ({
-    url: `${baseUrl}/${tool.category?.toLowerCase().replace(/\s+/g, '-') || 'tools'}/${tool.slug}`,
+    url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}`,
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
