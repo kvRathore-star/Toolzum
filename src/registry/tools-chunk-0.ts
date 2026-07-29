@@ -356,7 +356,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Uses cloud-based processing.',
     seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
     dependencies: "Mailinator API / Custom Backend",
-    showInCategory: false,
   },
   {
     id: "40",

@@ -1,6 +1,9 @@
-# Old Privacy Policy page moved
-/privacy/   /privacy-policy/   301
-/privacy    /privacy-policy/   301
+
+# Legacy category URLs — redirect to canonical slugs
+/growth-&-marketing   /growth-metrics/   301
+/growth-&-marketing/   /growth-metrics/   301
+/growth & marketing   /growth-metrics/   301
+/growth & marketing/   /growth-metrics/   301
 
 # Removed tools — redirect to their replacements
 /developer/jwt-decoder/   /developer/jwt-debugger/   301

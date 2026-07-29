@@ -11,6 +11,7 @@ import { CommandMenu } from "./CommandMenu";
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { Button } from "./ui/button";
 import { toolsRegistry } from "@/registry/tools";
+import type { ToolMetadata } from "@/registry/tools";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
 
 const { freeTierTotal, localTools, cloudTools, hybridTools } = getCachedToolCounts();
@@ -35,14 +36,17 @@ const MENU_COLUMN_DEFS = [
 
 function buildMegamenuColumns() {
   return MENU_COLUMN_DEFS.map(({ title, icon, category, allHref, slugs }) => {
-    const tools = slugs
-      .slice(0, 7)
+    const featured = slugs.slice(0, 7);
+    const featuredTools = featured
       .map(slug => toolsRegistry.find(t => t.slug === slug))
-      .filter(Boolean)
-      .map(t => ({ name: t!.name, href: `/${t!.category.toLowerCase().replace(/\s+/g, '-')}/${t!.slug}` }));
-    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length + (
-      category === 'Converter' ? toolsRegistry.filter(t => ['video-converter', 'audio-converter', 'image-format-converter', 'document-converter'].includes(t.slug)).length : 0
-    );
+      .filter(Boolean) as ToolMetadata[];
+    const featuredSlugsSet = new Set(featuredTools.map(t => t.slug));
+    const fillers = toolsRegistry
+      .filter(t => t.category === category && t.showInCategory !== false && !featuredSlugsSet.has(t.slug))
+      .slice(0, 7 - featuredTools.length);
+    const tools = [...featuredTools, ...fillers]
+      .map(t => ({ name: t.name, href: `/${t.category.toLowerCase().replace(/\s+/g, '-')}/${t.slug}` }));
+    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
     const isIndia = title === "India";
     return { title, icon, tools, allCount, allHref, isIndia };
   });

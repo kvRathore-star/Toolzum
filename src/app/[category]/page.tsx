@@ -8,7 +8,7 @@ const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 
 function normalizeCategory(category: string): string {
   if (category === "marketing") return "Branding";
-  if (category === "growth-metrics") return "Growth & Marketing";
+  if (category === "growth-metrics" || category === "growth & marketing") return "Growth & Marketing";
   const match = toolsRegistry.find(
     t => t.category.toLowerCase().replace(/\s+/g, '-') === category
   );
@@ -61,6 +61,8 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     alternates: {
       canonical: categoryKey === "Branding" && params.category === "marketing"
         ? "https://toolzum.com/branding/"
+        : params.category === "growth & marketing"
+        ? "https://toolzum.com/growth-metrics/"
         : `https://toolzum.com/${params.category}/`,
     },
     openGraph: {

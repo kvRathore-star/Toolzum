@@ -79,7 +79,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
   }, []);
 
   const visibleTools = useMemo(() => {
-    return (initialTools ?? toolsRegistry).filter(tool => tool.showInCategory !== false);
+    return (initialTools ?? toolsRegistry).filter(tool => tool.showInCategory !== false && tool.category !== 'Extension');
   }, [initialTools]);
 
   const groupedCategories = useMemo(() => {
