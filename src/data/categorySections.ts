@@ -1060,6 +1060,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "saas-rule-of-40",
         "seat-license-calculator",
         "saas-pricing-calculator",
+        "saas-payback-period",
       ],
     },
     {
@@ -1070,7 +1071,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ltv-calculator",
         "customer-ltv-calculator",
         "cac-calculator",
-        "saas-payback-period",
         "churn-rate-calculator",
         "employee-turnover-calculator",
       ],
