@@ -19,7 +19,7 @@ export type ToolCategory =
   | "AI"
   | "Health"
   | "Calculator"
-  | "Growth & Marketing Metrics";
+  | "Growth & Marketing";
 
 export interface ToolMetadata {
   id: string;

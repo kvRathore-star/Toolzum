@@ -1046,7 +1046,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     },
   ],
 
-  "Growth & Marketing Metrics": [
+  "Growth & Marketing": [
     {
       id: "saas-revenue",
       heading: "SaaS Revenue & Growth",
@@ -1267,7 +1267,7 @@ export const CATEGORY_INTROS: Record<string, string> = {
     "Browser-based transcription tools — convert speech to text from audio and video files, generate YouTube transcripts, and create meeting minutes. All processing happens locally on your device.",
   Extension:
     "Browser extension generator tools — create screen recorder extensions and other browser-level utilities. All processing happens locally in your browser with no server uploads.",
-  "Growth & Marketing Metrics":
+  "Growth & Marketing":
     "Growth and marketing metrics tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics dashboards. All calculations run in your browser with nothing uploaded.",
   Productivity:
     "Productivity tools — pomodoro timers, to-do lists, and focus management utilities to help you get things done. All processing happens locally in your browser.",

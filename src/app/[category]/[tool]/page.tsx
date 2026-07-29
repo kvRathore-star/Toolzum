@@ -8,7 +8,7 @@ import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
 
 function catToUrlSlug(cat: string): string {
-  if (cat === "Growth & Marketing Metrics") return "growth-metrics";
+  if (cat === "Growth & Marketing") return "growth-metrics";
   return cat.toLowerCase().replace(/\s+/g, '-');
 }
 

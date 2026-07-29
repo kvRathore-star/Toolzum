@@ -56,7 +56,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: 'SEO', label: 'SEO', icon: Search, desc: 'Keyword tools, meta tags, robots.txt & audits' },
   { id: 'Design', label: 'Design', icon: Palette, desc: 'Color palettes, gradients & typography tools' },
   { id: 'Branding', label: 'Branding', icon: BarChart3, desc: 'Logos, business cards, brand kits & social media assets' },
-  { id: 'Growth & Marketing Metrics', label: 'Growth & Marketing', icon: BarChart3, desc: 'ARR, MRR, LTV, CAC, CPM, ROAS & SaaS analytics' },
+  { id: 'Growth & Marketing', label: 'Growth & Marketing', icon: BarChart3, desc: 'ARR, MRR, LTV, CAC, CPM, ROAS & SaaS analytics' },
   { id: 'Transcription', label: 'Transcription', icon: Mic, desc: 'Speech-to-text, subtitles & caption tools' },
   { id: 'Productivity', label: 'Productivity', icon: CheckSquare, desc: 'Todo lists, habit trackers & time tools' },
   { id: 'indian-utilities', label: 'Indian Utilities', icon: MapPin, desc: 'Aadhaar, PAN, GST, IFSC & India-specific tools' },

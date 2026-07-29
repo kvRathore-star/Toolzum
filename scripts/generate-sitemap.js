@@ -42,8 +42,7 @@ function parseToolsRegistry() {
 
 function slugifyCategory(cat) {
   // Must match the slugification in src/app/[category]/[tool]/page.tsx and [category]/page.tsx
-  if (cat === "Growth & Marketing Metrics") return "growth-metrics";
-  if (cat === "Branding" || cat === "Marketing") return "marketing";
+  if (cat === "Growth & Marketing") return "growth-metrics";
   return cat.toLowerCase().replace(/\s+/g, '-');
 }
 

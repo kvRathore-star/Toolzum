@@ -143,7 +143,7 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
     bgTint: "bg-fuchsia-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-fuchsia-500/5",
   },
-  "Growth & Marketing Metrics": {
+  "Growth & Marketing": {
     icon: BarChart3,
     iconColor: "text-emerald-500",
     bgTint: "bg-emerald-500/10",
@@ -178,7 +178,7 @@ export const CATEGORY_GROUPS: Record<string, { label: string; order: number }> =
   Extension: { label: 'Developer & Tech', order: 3 },
   Finance: { label: 'Business & Finance', order: 4 },
   Branding: { label: 'Business & Finance', order: 4 },
-  "Growth & Marketing Metrics": { label: 'Business & Finance', order: 4 },
+  "Growth & Marketing": { label: 'Business & Finance', order: 4 },
   Utility: { label: 'Tools & Converters', order: 5 },
   Converter: { label: 'Tools & Converters', order: 5 },
   Calculator: { label: 'Tools & Converters', order: 5 },
