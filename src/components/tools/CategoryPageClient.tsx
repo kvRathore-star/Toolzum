@@ -397,7 +397,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   Converter: 'Free file converter — convert video, audio, image, data, and document formats instantly. Nothing uploaded, 100% browser-based.',
   Developer: 'Free developer tools — format JSON, minify CSS/JS, debug regex, encode/decode, and more. All processing happens in your browser.',
   Text: 'Free text tools — word counter, case converter, text diff, markdown editor, and text generators. Nothing leaves your device.',
-  Finance: 'Free finance tools — GST calculator, EMI calculator, currency converter, and financial utilities. Accurate calculations in your browser.',
+  Finance: 'Free finance tools — EMI calculator, currency converter, investment calculators, and financial utilities. Accurate calculations in your browser.',
   Privacy: 'Free privacy tools — encrypt text, redact images, generate secure passwords, and more. Everything stays local to your device.',
   SEO: 'Free SEO tools — meta tag analyzer, keyword density checker, sitemap generator, and SEO audit utilities to improve your rankings.',
   Utility: 'Free utility tools — unit converters, QR code generator, color picker, and everyday essentials for quick tasks online.',

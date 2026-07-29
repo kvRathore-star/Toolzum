@@ -1019,9 +1019,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     {
       id: "tax-salary",
       heading: "Tax & Salary",
-      description: "GST, income tax, TDS, VAT, salary, hourly rate, and net worth calculators.",
+      description: "VAT, income tax, TDS, salary, hourly rate, and net worth calculators.",
       slugs: [
-        "gst-calculator",
         "vat-calculator",
         "net-worth-calculator",
         "debt-payoff-calculator",
@@ -1147,6 +1146,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Finance & Tax Tools",
       description: "Calculate GST, look up GSTIN/IFSC, file ITR, and save on taxes.",
       slugs: [
+        "gst-calculator",
         "gst-invoice-generator",
         "tax-saving-calculator",
         "gstin-lookup",

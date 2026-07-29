@@ -7,6 +7,10 @@
 /growth & marketing   /growth-metrics/   301
 /growth & marketing/   /growth-metrics/   301
 
+# Category migration — tool moved from Finance to Indian Utilities
+/finance/gst-calculator/   /indian-utilities/gst-calculator/   301
+/finance/gst-calculator    /indian-utilities/gst-calculator/   301
+
 # Removed tools — redirect to their replacements
 /developer/jwt-decoder/   /developer/jwt-debugger/   301
 /developer/jwt-decoder    /developer/jwt-debugger/   301
