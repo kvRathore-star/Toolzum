@@ -2,11 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE_URL = 'https://toolzum.com';
-const TOOLS_REGISTRY_PATH = path.join(__dirname, '../src/registry/tools.ts');
 const PUBLIC_DIR = path.join(__dirname, '../public');
 
 function parseToolsRegistry() {
-  const content = fs.readFileSync(TOOLS_REGISTRY_PATH, 'utf-8');
+  const glob = require('glob');
+  const chunkFiles = glob.sync(path.join(__dirname, '../src/registry/tools-chunk-*.ts'));
+  let content = '';
+  for (const f of chunkFiles) {
+    content += fs.readFileSync(f, 'utf-8') + '\n';
+  }
 
   const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
   const categoryRegex = /category:\s*['"]([^'"]+)['"]/g;
@@ -36,8 +40,11 @@ function parseToolsRegistry() {
   return tools;
 }
 
-function slugify(text) {
-  return text.toLowerCase().replace(/\s+/g, '-');
+function slugifyCategory(cat) {
+  // Must match the slugification in src/app/[category]/[tool]/page.tsx and [category]/page.tsx
+  if (cat === "Growth & Marketing Metrics") return "growth-metrics";
+  if (cat === "Branding" || cat === "Marketing") return "marketing";
+  return cat.toLowerCase().replace(/\s+/g, '-');
 }
 
 function generateSitemap() {
@@ -61,7 +68,7 @@ function generateSitemap() {
     'product', 'roadmap', 'status', 'terms', 'tools',
   ];
 
-  const uniqueCategories = [...new Set(uniqueTools.map(t => slugify(t.category)))];
+  const uniqueCategories = [...new Set(uniqueTools.map(t => slugifyCategory(t.category)))];
 
   const seenUrls = new Set();
   const allUrls = [];
@@ -86,7 +93,7 @@ function generateSitemap() {
 
   // Tool pages
   for (const tool of uniqueTools) {
-    const categorySlug = slugify(tool.category);
+    const categorySlug = slugifyCategory(tool.category);
     const loc = `${BASE_URL}/${categorySlug}/${tool.slug}`;
     if (!seenUrls.has(loc)) {
       seenUrls.add(loc);
@@ -101,7 +108,7 @@ function generateSitemap() {
 
   for (const url of allUrls) {
     xml += `  <url>\n`;
-    xml += `    <loc>${url.loc}</loc>\n`;
+    xml += `    <loc>${url.loc.replace(/&/g, '&amp;')}</loc>\n`;
     xml += `    <lastmod>${lastmod}</lastmod>\n`;
     xml += `    <changefreq>${url.changefreq}</changefreq>\n`;
     xml += `    <priority>${url.priority}</priority>\n`;
