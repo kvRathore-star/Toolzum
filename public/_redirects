@@ -1,7 +1,9 @@
 
 # Legacy category URLs — redirect to canonical slugs
+/growth-&-marketing/*   /growth-metrics/:splat   301
 /growth-&-marketing   /growth-metrics/   301
 /growth-&-marketing/   /growth-metrics/   301
+/growth & marketing/*   /growth-metrics/:splat   301
 /growth & marketing   /growth-metrics/   301
 /growth & marketing/   /growth-metrics/   301
 
