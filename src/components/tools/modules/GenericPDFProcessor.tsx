@@ -6,6 +6,8 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { PDFDocument, Rotation, degrees } from 'pdf-lib';
 import { Download, FileText, RefreshCw, Sparkles, Settings, RotateCw, FileDown, Hash, Trash2 } from 'lucide-react';
+import { getErrorMessage } from '@/utils/error';
+import { createDownloadBlob } from '@/utils/blob';
 
 type Operation = 'compress' | 'rotate' | 'remove-metadata';
 
@@ -77,13 +79,13 @@ export default function GenericPDFProcessor() {
       setStatusText("Saving processed PDF...");
       const pdfBytes = await pdfDoc.save({ useObjectStreams: operation === 'compress' });
 
-      const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(pdfBytes, 'application/pdf');
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
 
       const savings = operation === 'compress' ? ` (${((1 - pdfBytes.length / arrayBuffer.byteLength) * 100).toFixed(1)}% smaller)` : '';
       toast.success(`PDF processed successfully${savings}!`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       toast.error("Failed to process PDF. The file may be encrypted or corrupted.");
     } finally {

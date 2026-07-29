@@ -5,6 +5,7 @@ import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Music, Upload, Download, Loader2, Crown } from 'lucide-react';
 import Link from 'next/link';
+import { createDownloadBlob } from '@/utils/blob';
 
 const DAILY_LIMIT = 3;
 
@@ -57,8 +58,7 @@ export default function VideoToMp3() {
       await ffmpeg.exec(['-i', inputName, '-q:a', '0', '-map', 'a', outputName]);
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: 'audio/mp3' });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, 'audio/mp3'));
       setOutputUrl(url);
 
       await ffmpeg.deleteFile(inputName);

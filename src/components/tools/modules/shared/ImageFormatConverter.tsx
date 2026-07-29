@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 type ImageFormatConfig = {
   accept: string;
@@ -61,8 +62,8 @@ export default function ImageFormatConverter({ config }: ImageFormatConverterPro
         setTimeout(() => URL.revokeObjectURL(url), 100);
         toast.success('Converted successfully!');
       }, config.mimeType, config.quality);
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed'));
     } finally {
       setIsProcessing(false);
     }

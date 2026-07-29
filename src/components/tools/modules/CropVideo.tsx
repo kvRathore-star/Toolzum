@@ -5,6 +5,7 @@ import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Crop, Upload, Download, Loader2, Smartphone, Square, Monitor, Crown } from 'lucide-react';
 import Link from 'next/link';
+import { createDownloadBlob } from '@/utils/blob';
 
 const RATIOS = [
   { label: '9:16 Reel/Shorts', w: 1080, h: 1920, icon: Smartphone },
@@ -68,8 +69,7 @@ export default function ReelShortsMaker() {
 
       await ffmpeg.exec(['-i', inputName, '-vf', cropFilter, '-c:a', 'copy', outputName]);
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: 'video/mp4' });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, 'video/mp4'));
       setOutputUrl(url);
       trackUsage(usage + 1);
       await ffmpeg.deleteFile(inputName);

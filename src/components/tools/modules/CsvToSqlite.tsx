@@ -5,6 +5,8 @@ import { Upload, Play, Trash2, Table, Database, Download, FileText, ChevronDown,
 import { toast } from 'react-hot-toast';
 import initSqlJs, { Database as SqlDb, SqlJsStatic } from 'sql.js';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function CsvToSqlite() {
   const [db, setDb] = useState<SqlDb | null>(null);
@@ -127,8 +129,8 @@ export default function CsvToSqlite() {
 
       setQuery('SELECT * FROM data LIMIT 50;');
       executeQuery(database, 'SELECT * FROM data LIMIT 50;');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to load file.');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Failed to load file.'));
     }
   };
 
@@ -161,9 +163,9 @@ export default function CsvToSqlite() {
         refreshSchema(targetDb);
         toast.success(`Query executed. ${modified} row(s) affected.`);
       }
-    } catch (err: any) {
-      setError(err.message || 'SQL execution error.');
-      toast.error(err.message || 'SQL execution error.');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, 'SQL execution error.'));
+      toast.error(getErrorMessage(err, 'SQL execution error.'));
     }
   };
 
@@ -187,7 +189,7 @@ export default function CsvToSqlite() {
   const handleExportDb = () => {
     if (!db) return;
     const data = db.export();
-    const blob = new Blob([data as BlobPart], { type: 'application/x-sqlite3' });
+    const blob = createDownloadBlob(data, 'application/x-sqlite3');
     const url = URL.createObjectURL(blob);
     downloadOrShare(url, 'database.sqlite');
     toast.success('Database exported!');

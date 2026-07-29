@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import * as XLSX from 'xlsx';
+import { getErrorMessage } from '@/utils/error';
 
 type Direction = 'xlsx-to-csv' | 'csv-to-xlsx';
 type Delimiter = ',' | '\t' | ';' | '|';
@@ -90,8 +91,8 @@ export default function XlsxCsvConverter() {
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
       toast.success('Converted successfully!');
-    } catch (e: any) {
-      const msg = e.message || 'Conversion failed';
+    } catch (e: unknown) {
+      const msg = getErrorMessage(e, 'Conversion failed');
       setError(msg);
       toast.error(msg);
     } finally {
@@ -132,8 +133,8 @@ export default function XlsxCsvConverter() {
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
       toast.success('Converted successfully!');
-    } catch (e: any) {
-      const msg = e.message || 'Conversion failed';
+    } catch (e: unknown) {
+      const msg = getErrorMessage(e, 'Conversion failed');
       setError(msg);
       toast.error(msg);
     } finally {

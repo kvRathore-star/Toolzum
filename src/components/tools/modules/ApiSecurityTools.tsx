@@ -1,0 +1,323 @@
+"use client";
+import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { inputClass, labelClass, btnClass, cardClass, headingClass, resultClass } from './ApiTools.shared';
+
+export function ApiKeyGenerator() {
+  const [prefix, setPrefix] = useState('sk');
+  const [length, setLength] = useState('32');
+  const [result, setResult] = useState('');
+  const [copied, setCopied] = useState(false);
+  const presets = [
+    { label: 'Stripe-like', prefix: 'sk', len: '32' },
+    { label: 'GitHub PAT', prefix: 'ghp', len: '40' },
+    { label: 'Simple Key', prefix: 'key', len: '24' },
+  ];
+  const calc = () => {
+    const len = parseInt(length);
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let key = '';
+    for (let i = 0; i < len; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+    setResult(prefix ? `${prefix}_${key}` : key);
+  };
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Generator</h2>
+        <div className="flex flex-wrap gap-1.5">
+          {presets.map(p => (
+            <button key={p.label} onClick={() => { setPrefix(p.prefix); setLength(p.len); setResult(''); }}
+              className="px-2.5 py-1 text-[11px] font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg hover:border-rose-400 text-[var(--text-secondary)] hover:text-rose-600 transition-colors">{p.label}</button>
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Prefix</label>
+            <input type="text" value={prefix} onChange={e => { setPrefix(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
+            <input type="number" value={length} onChange={e => { setLength(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          </div>
+        </div>
+        <button onClick={calc} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
+        {result && (
+          <div className="relative">
+            <pre className="bg-gray-900 text-rose-300 rounded-xl p-4 text-sm font-mono overflow-x-auto break-all">{result}</pre>
+            <button onClick={() => { navigator.clipboard.writeText(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+              className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ApiKeyHasher() {
+  const [apiKey, setApiKey] = useState('sk_test_abc123def456');
+  const [result, setResult] = useState('');
+  const [copied, setCopied] = useState(false);
+  const calc = async () => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(apiKey);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    setResult(hashHex);
+  };
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Hasher</h2>
+        <div>
+          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
+          <input type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        </div>
+        <button onClick={calc} className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Hash (SHA-256)</button>
+        {result && (
+          <div className="relative">
+            <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto break-all">{result}</pre>
+            <button onClick={() => { navigator.clipboard.writeText(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+              className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ApiKeyValidator() {
+  const [apiKey, setApiKey] = useState('sk_test_abc123def456ghi789');
+  const [result, setResult] = useState<{ valid: boolean; checks: { label: string; pass: boolean }[] } | null>(null);
+  const calc = () => {
+    const checks = [
+      { label: `Length (16-128): ${apiKey.length}`, pass: apiKey.length >= 16 && apiKey.length <= 128 },
+      { label: 'Has prefix separator (_)', pass: apiKey.includes('_') },
+      { label: 'Valid characters (a-zA-Z0-9_-)', pass: /^[a-zA-Z0-9_-]+$/.test(apiKey) },
+      { label: 'Character diversity', pass: (apiKey.match(/[a-z]/g)?.length || 0) + (apiKey.match(/[A-Z]/g)?.length || 0) + (apiKey.match(/[0-9]/g)?.length || 0) >= 3 },
+    ];
+    setResult({ valid: checks.every(c => c.pass), checks });
+  };
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Validator</h2>
+        <div>
+          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
+          <input type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        </div>
+        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Validate</button>
+        {result && (
+          <div className="space-y-2">
+            <div className={`flex items-center gap-2 p-3 rounded-xl text-sm font-bold ${result.valid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
+              <span className="text-lg">{result.valid ? '✓' : '✗'}</span>
+              {result.valid ? 'Valid API Key' : 'Invalid API Key'}
+            </div>
+            <div className="space-y-1.5">
+              {result.checks.map((c, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs">
+                  <span className={c.pass ? 'text-green-500' : 'text-red-400'}>{c.pass ? '✓' : '✗'}</span>
+                  <span className="text-[var(--text-secondary)]">{c.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ApiCostEstimator() {
+  const [requests, setRequests] = useState('1000000');
+  const [pricePerMillion, setPricePerMillion] = useState('0.50');
+  const [users, setUsers] = useState('10000');
+  const [result, setResult] = useState<{ cost: number; costPerUser: number; reqPerUser: number; monthlyPerUser: number } | null>(null);
+  const presets = [
+    { label: 'OpenAI GPT-4o', req: '1000000', ppm: '10.00', users: '5000' },
+    { label: 'Stripe API', req: '500000', ppm: '0.50', users: '10000' },
+    { label: 'Small Startup', req: '100000', ppm: '1.00', users: '1000' },
+  ];
+  const calc = () => {
+    const req = parseFloat(requests);
+    const ppm = parseFloat(pricePerMillion);
+    const u = parseFloat(users);
+    setResult({
+      cost: (req / 1000000) * ppm,
+      costPerUser: ((req / 1000000) * ppm) / u,
+      reqPerUser: req / u,
+      monthlyPerUser: (req / u) * ppm / 1000000,
+    });
+  };
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Cost Estimator</h2>
+        <div className="flex flex-wrap gap-1.5">
+          {presets.map(p => (
+            <button key={p.label} onClick={() => { setRequests(p.req); setPricePerMillion(p.ppm); setUsers(p.users); setResult(null); }}
+              className="px-2.5 py-1 text-[11px] font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg hover:border-green-400 text-[var(--text-secondary)] hover:text-green-600 transition-colors">{p.label}</button>
+          ))}
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Monthly Requests</label>
+            <input type="number" value={requests} onChange={e => { setRequests(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Price/Million ($)</label>
+            <input type="number" value={pricePerMillion} onChange={e => { setPricePerMillion(e.target.value); setResult(null); }} step="0.01" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Users</label>
+            <input type="number" value={users} onChange={e => { setUsers(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+        </div>
+        <button onClick={calc} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Estimate Cost</button>
+        {result && (
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Total Monthly Cost</p>
+              <p className="text-2xl font-black text-green-500">${result.cost.toFixed(2)}</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Cost Per User</p>
+              <p className="text-2xl font-black text-blue-500">${result.costPerUser.toFixed(4)}</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Requests Per User</p>
+              <p className="text-xl font-bold text-purple-500">{result.reqPerUser.toFixed(1)}</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Monthly Cost/User</p>
+              <p className="text-xl font-bold text-amber-500">${result.monthlyPerUser.toFixed(4)}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ApiGatewayRateCalculator() {
+  const [maxRps, setMaxRps] = useState('100');
+  const [burstSize, setBurstSize] = useState('200');
+  const [windowSec, setWindowSec] = useState('60');
+  const [result, setResult] = useState<{ maxPerWindow: number; sustainedRate: number; throttledRate: number } | null>(null);
+  const calc = () => {
+    const rps = parseFloat(maxRps);
+    const burst = parseFloat(burstSize);
+    const windowS = parseFloat(windowSec);
+    setResult({
+      maxPerWindow: rps * windowS,
+      sustainedRate: (rps * windowS) / windowS,
+      throttledRate: Math.round(rps * 0.8),
+    });
+  };
+  const wSec = parseFloat(windowSec) || 60;
+  const maxVal = result ? Math.max(result.maxPerWindow, result.sustainedRate * wSec, result.throttledRate * wSec) || 1 : 1;
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Gateway Rate Calculator</h2>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Max RPS</label>
+            <input type="number" value={maxRps} onChange={e => { setMaxRps(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Burst Size</label>
+            <input type="number" value={burstSize} onChange={e => { setBurstSize(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Window (s)</label>
+            <input type="number" value={windowSec} onChange={e => { setWindowSec(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+        </div>
+        <button onClick={calc} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate</button>
+        {result && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-2">
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Per Window</p>
+                <p className="text-lg font-bold text-cyan-500">{result.maxPerWindow.toLocaleString()}</p>
+              </div>
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Sustained</p>
+                <p className="text-lg font-bold text-blue-500">{result.sustainedRate} req/s</p>
+              </div>
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Throttle (80%)</p>
+                <p className="text-lg font-bold text-amber-500">{result.throttledRate} req/s</p>
+              </div>
+            </div>
+            <div className="h-3 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden relative">
+              <div className="h-full bg-cyan-500 rounded-full transition-all absolute left-0 top-0" style={{ width: `${(result.sustainedRate / parseFloat(maxRps)) * 100}%`, maxWidth: '100%' }} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ApiRateLimiterCalculator() {
+  const [limit, setLimit] = useState('100');
+  const [windowMins, setWindowMins] = useState('15');
+  const [burst, setBurst] = useState('20');
+  const [result, setResult] = useState<{ ratePerSec: number; ratePerMin: number; burstWindow: number; retryAfter: number } | null>(null);
+  const calc = () => {
+    const l = parseInt(limit);
+    const w = parseInt(windowMins);
+    const b = parseInt(burst);
+    const ratePerSec = l / (w * 60);
+    setResult({
+      ratePerSec,
+      ratePerMin: l / w,
+      burstWindow: Math.ceil(b / ratePerSec),
+      retryAfter: Math.ceil(w / l * 60),
+    });
+  };
+  return (
+    <div className="max-w-2xl mx-auto space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Rate Limiter Calculator</h2>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Rate Limit</label>
+            <input type="number" value={limit} onChange={e => setLimit(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Window (min)</label>
+            <input type="number" value={windowMins} onChange={e => setWindowMins(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Burst</label>
+            <input type="number" value={burst} onChange={e => setBurst(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          </div>
+        </div>
+        <button onClick={calc} className="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate</button>
+        {result && (
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Per Second</p>
+              <p className="text-xl font-bold text-violet-500">{result.ratePerSec.toFixed(3)} req/s</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Per Minute</p>
+              <p className="text-xl font-bold text-blue-500">{result.ratePerMin.toFixed(1)} req/min</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Burst Window</p>
+              <p className="text-xl font-bold text-amber-500">~{result.burstWindow}s</p>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Retry-After</p>
+              <p className="text-xl font-bold text-emerald-500">{result.retryAfter}s</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

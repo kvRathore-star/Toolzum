@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TRANSFORM_CONFIG } from './textTransformConfig';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 const FORMAT_SLUGS = [
   "yaml-json-converter",
@@ -40,8 +41,8 @@ export default function FormatSerializerHub({ slug: defaultSlug }: { slug: strin
     try {
       const result = config.convert(input);
       setOutput(result);
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

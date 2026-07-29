@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TRANSFORM_CONFIG } from './textTransformConfig';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 const CSS_PREPROCESSOR_SLUGS = [
   "css-to-scss-converter",
@@ -38,8 +39,8 @@ export default function CssPreprocessorHub({ slug: defaultSlug }: { slug: string
     try {
       const result = config.convert(input);
       setOutput(result);
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

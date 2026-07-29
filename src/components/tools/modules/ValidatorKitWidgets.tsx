@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Clipboard } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 function CopyBtn({ text, label }: { text: string; label?: string }) {
   return (

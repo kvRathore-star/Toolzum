@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 type FilterVal = boolean | { enabled: boolean; [k: string]: boolean | number };
 
@@ -177,7 +178,7 @@ export default function VideoFilters() {
         await ff.writeFile(inputName, await fetchFile(file));
         await ff.exec(['-i', inputName, '-vframes', '1', '-q:v', '2', 'thumb.png']);
         const data = await ff.readFile('thumb.png');
-        const blob = new Blob([data as unknown as BlobPart], { type: 'image/png' });
+        const blob = createDownloadBlob(data, 'image/png');
         const url = URL.createObjectURL(blob);
         setThumbnailUrl(url);
         await ff.deleteFile(inputName);
@@ -211,7 +212,7 @@ export default function VideoFilters() {
       args.push('thumb_out.png');
       await ff.exec(args);
       const data = await ff.readFile('thumb_out.png');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'image/png' });
+      const blob = createDownloadBlob(data, 'image/png');
       const url = URL.createObjectURL(blob);
       setThumbnailUrl(url);
       await ff.deleteFile(inputName);
@@ -248,7 +249,7 @@ export default function VideoFilters() {
       await ff.exec(args);
       const data = await ff.readFile(outputName);
       const mime = ext === 'mp4' ? 'video/mp4' : ext === 'webm' ? 'video/webm' : 'image/gif';
-      const blob = new Blob([data as unknown as BlobPart], { type: mime });
+      const blob = createDownloadBlob(data, mime);
       const url = URL.createObjectURL(blob);
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(url);

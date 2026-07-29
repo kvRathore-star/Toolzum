@@ -5,6 +5,7 @@ import { FileUploader } from '../FileUploader';
 import type { FFmpeg } from '@ffmpeg/ffmpeg';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 type OutputFormat = 'webp' | 'webm' | 'both';
 type FpsOption = 'auto' | 10 | 15 | 24 | 30;
@@ -128,7 +129,7 @@ export default function GifToWebpWebm() {
           'output.webp',
         ]);
         const data = await ffmpeg.readFile('output.webp');
-        const blob = new Blob([data as unknown as BlobPart], { type: 'image/webp' });
+        const blob = createDownloadBlob(data, 'image/webp');
         setOutputUrl(URL.createObjectURL(blob));
         await ffmpeg.deleteFile('output.webp');
       }
@@ -143,7 +144,7 @@ export default function GifToWebpWebm() {
           'output.webm',
         ]);
         const data = await ffmpeg.readFile('output.webm');
-        const blob = new Blob([data as unknown as BlobPart], { type: 'video/webm' });
+        const blob = createDownloadBlob(data, 'video/webm');
         const url = URL.createObjectURL(blob);
         if (outputFormat === 'both') {
           setOutputUrl2(url);

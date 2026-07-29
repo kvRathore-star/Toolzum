@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Phone, ShieldCheck, HelpCircle, Loader2, AlertCircle, Building, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
+import { getErrorMessage } from '@/utils/error';
 
 const COMMON_BANKS: Record<string, string> = {
   SBIN: 'State Bank of India',
@@ -74,8 +75,8 @@ export default function IfscLookup() {
       setData(json);
       trackUsage(usage + 1);
       toast.success('Branch details retrieved successfully!');
-    } catch (err: any) {
-      setError(err.message || 'An error occurred during lookup.');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, 'An error occurred during lookup.'));
       const bankCode = cleanIfsc.substring(0, 4);
       const bankName = COMMON_BANKS[bankCode];
       if (bankName) {

@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { getErrorMessage } from '@/utils/error';
+import { createDownloadBlob } from '@/utils/blob';
 import { Download, FileText, RefreshCw, Sparkles, FileEdit, Grid, Presentation, FileImage, Code, BookOpen } from 'lucide-react';
 
 type DocFormatPair = {
@@ -633,7 +635,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const page = pdfDoc.addPage([image.width, image.height]);
           page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
           const pdfBytes = await pdfDoc.save();
-          blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+          blob = createDownloadBlob(pdfBytes, 'application/pdf');
           break;
         }
       }
@@ -643,9 +645,9 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         setOutputUrl(URL.createObjectURL(blob));
         toast.success(pair.successMessage);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error(err.message || 'Conversion failed. Check your input file.');
+      toast.error(getErrorMessage(err, 'Conversion failed. Check your input file.'));
     } finally {
       setIsProcessing(false);
       setProgress(100);

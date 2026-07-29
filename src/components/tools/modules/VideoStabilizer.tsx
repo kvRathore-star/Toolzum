@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 type Strength = 'minimal' | 'moderate' | 'strong' | 'extreme';
 type Method = 'regular' | 'quick';
@@ -105,8 +106,7 @@ export default function VideoStabilizer() {
       }
 
       const data = await ffmpeg.readFile(`output.${outExt}`);
-      const blob = new Blob([data as unknown as BlobPart], { type: outMime });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, outMime));
       setOutputUrl(url);
       toast.success('Stabilization complete!');
     } catch (e) {

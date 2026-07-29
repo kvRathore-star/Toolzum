@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 // Using standard JSON.parse for basic formatting. jsonlint could be added for detailed error lines if needed.
 
 export default function JsonFormatter() {
@@ -18,8 +19,8 @@ export default function JsonFormatter() {
       const formatted = JSON.stringify(parsed, null, spaces);
       setOutput(formatted);
       setError(null);
-    } catch (e: any) {
-      setError(e.message || "Invalid JSON format");
+    } catch (e: unknown) {
+      setError(getErrorMessage(e, "Invalid JSON format"));
       toast.error("Invalid JSON format");
     }
   };
@@ -31,8 +32,8 @@ export default function JsonFormatter() {
       const minified = JSON.stringify(parsed);
       setOutput(minified);
       setError(null);
-    } catch (e: any) {
-      setError(e.message || "Invalid JSON format");
+    } catch (e: unknown) {
+      setError(getErrorMessage(e, "Invalid JSON format"));
       toast.error("Invalid JSON format");
     }
   };

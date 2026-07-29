@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import Link from 'next/link';
+import { getErrorMessage } from '@/utils/error';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const FREE_PAGE_LIMIT = 3;
@@ -80,8 +81,8 @@ export default function PdfAiSummariser() {
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.3);
       setSummary(response);
       toast.success('Summary generated!');
-    } catch (e: any) {
-      toast.error(e.message || 'Failed to generate summary');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Failed to generate summary'));
     } finally { setIsSummarizing(false); }
   };
 

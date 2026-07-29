@@ -7,6 +7,7 @@ import { Palette, Clipboard, Download, Sparkles } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { getErrorMessage } from '@/utils/error';
 
 const STYLES = [
   'Minimal & Modern', 'Bold & Vibrant', 'Luxury & Elegant', 
@@ -59,8 +60,8 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
       }
       
       toast.success('Palette generated!');
-    } catch (e: any) {
-      toast.error(e.message || "Failed to generate");
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, "Failed to generate"));
     } finally {
       setIsProcessing(false);
     }

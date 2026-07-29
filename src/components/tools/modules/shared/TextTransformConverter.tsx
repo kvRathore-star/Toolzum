@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { TRANSFORM_CONFIG } from './textTransformConfig';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 export default function TextTransformConverter({ slug }: { slug: string; description?: string }) {
   const config = TRANSFORM_CONFIG[slug];
@@ -17,8 +18,8 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
     try {
       const result = config.convert(input);
       setOutput(result);
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

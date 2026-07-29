@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 type CsvMode = {
   slug: string;
@@ -142,8 +143,8 @@ export default function CsvOutputConverter({ slug }: { slug: string; description
     try {
       const { headers, rows } = parseCsv(input);
       setOutput(mode.transform(headers, rows));
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

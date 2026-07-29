@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { createDownloadBlob } from '@/utils/blob';
 
 type Mode = 'mute' | 'replace' | 'volume';
 
@@ -105,8 +106,7 @@ export default function MuteVideo() {
       }
 
       const data = await ffmpeg.readFile('output.mp4');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'video/mp4' });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, 'video/mp4'));
       setOutputUrl(url);
 
       await ffmpeg.deleteFile('input.mp4');

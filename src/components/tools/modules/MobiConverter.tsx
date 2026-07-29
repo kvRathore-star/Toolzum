@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import JSZip from 'jszip';
 import * as pdfjsLib from 'pdfjs-dist';
+import { getErrorMessage } from '@/utils/error';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -349,8 +350,8 @@ export default function MobiConverter() {
         setFile(selectedFile);
         toast.success(`Loaded PDF: "${title}"`);
       }
-    } catch (e: any) {
-      toast.error(e.message || 'Failed to read file');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Failed to read file'));
     }
   };
 
@@ -569,9 +570,9 @@ ${htmlContent}
         setOutputUrl(URL.createObjectURL(blob));
         toast.success('MOBI file created!');
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      toast.error(e.message || 'Conversion failed');
+      toast.error(getErrorMessage(e, 'Conversion failed'));
     } finally {
       setIsProcessing(false);
     }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from 'react';
+import { getErrorMessage } from '@/utils/error';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -954,7 +955,7 @@ export function Validator() {
       else if (fmt === 'yaml') {
         setResult('✓ Valid YAML (basic syntax check passed)'); setIsValid(true);
       }
-    } catch (e: any) { setResult(`✗ ${fmt.toUpperCase()} syntax error: ${e.message}`); setIsValid(false); }
+    } catch (e: unknown) { setResult(`✗ ${fmt.toUpperCase()} syntax error: ${getErrorMessage(e)}`); setIsValid(false); }
   };
   const setPreset = (fmt: string, val: string) => { setFormat(fmt); setInput(val); setResult(''); setIsValid(null); };
   return (
@@ -991,7 +992,7 @@ export function JsonValidator() {
     const txt = t !== undefined ? t : input;
     if (t !== undefined) setInput(t);
     try { const p = JSON.parse(txt || '{}'); setResult(JSON.stringify(p, null, 2).substring(0, 2000)); setIsValid(true); }
-    catch (e: any) { setResult(`${e.message}`); setIsValid(false); }
+    catch (e: unknown) { setResult(getErrorMessage(e)); setIsValid(false); }
   };
   const [copied, setCopied] = useState(false);
   const copy = () => { if (result && isValid) { navigator.clipboard.writeText(result).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };

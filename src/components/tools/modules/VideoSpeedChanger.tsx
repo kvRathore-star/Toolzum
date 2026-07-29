@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function VideoSpeedChanger() {
   const [file, setFile] = useState<File | null>(null);
@@ -107,8 +108,7 @@ export default function VideoSpeedChanger() {
       await ffmpeg.exec(args);
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: mimeType });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, mimeType));
       setOutputUrl(url);
 
       toast.success(`Speed changed to ${speed}x!`);

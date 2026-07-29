@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 type TabId = 'markdown-to-html' | 'text-to-markdown' | 'html-to-markdown' | 'markdown-to-text';
 
@@ -28,8 +29,8 @@ function MarkdownToHtmlTab() {
       const parsed = marked.parse(input);
       setOutput(typeof parsed === 'string' ? parsed : await parsed);
       toast.success('Converted to HTML!');
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed.'));
     } finally {
       setIsProcessing(false);
     }
@@ -95,8 +96,8 @@ function TextToMarkdownTab() {
       const result = input.split('\n').map(line => line.trim()).filter(Boolean).join('\n\n');
       setOutput(result);
       toast.success('Converted to Markdown!');
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed.'));
     } finally {
       setIsProcessing(false);
     }
@@ -165,8 +166,8 @@ function HtmlToMarkdownTab() {
       const result = turndown.turndown(input);
       setOutput(result);
       toast.success('Converted to Markdown!');
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed.'));
     } finally {
       setIsProcessing(false);
     }
@@ -244,8 +245,8 @@ function MarkdownToTextTab() {
         .trim();
       setOutput(result);
       toast.success('Converted to Text!');
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed.'));
     } finally {
       setIsProcessing(false);
     }

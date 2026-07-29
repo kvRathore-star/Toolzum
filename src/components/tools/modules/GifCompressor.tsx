@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function GifCompressor() {
   const [file, setFile] = useState<File | null>(null);
@@ -125,7 +126,7 @@ export default function GifCompressor() {
         'output.gif',
       ]);
       const data = await ffmpeg.readFile('output.gif');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'image/gif' });
+      const blob = createDownloadBlob(data, 'image/gif');
       setOutputSize(blob.size);
       setOutputUrl(URL.createObjectURL(blob));
       await ffmpeg.deleteFile('output.gif');

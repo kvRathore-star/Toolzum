@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function VideoTrimmer() {
   const [file, setFile] = useState<File | null>(null);
@@ -44,8 +45,7 @@ export default function VideoTrimmer() {
       await ffmpeg.exec(['-i', 'input.mp4', '-ss', startTime, '-t', duration, '-c:v', 'copy', '-c:a', 'copy', 'output.mp4']);
       
       const data = await ffmpeg.readFile('output.mp4');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'video/mp4' });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, 'video/mp4'));
       setOutputUrl(url);
       
       toast.success("Trimming complete!");

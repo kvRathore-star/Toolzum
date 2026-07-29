@@ -6,6 +6,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { diff_match_patch, DIFF_DELETE, DIFF_INSERT, DIFF_EQUAL } from 'diff-match-patch';
 import { Files, ArrowLeft, RefreshCw, FileText, CheckCircle, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { getErrorMessage } from '@/utils/error';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -71,9 +72,9 @@ export default function ComparePdfFiles() {
       setCurrentPage(0);
       setCompared(true);
       toast.success("PDFs analyzed successfully!");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error(err.message || "Failed to parse text from the PDF files.");
+      toast.error(getErrorMessage(err, "Failed to parse text from the PDF files."));
     } finally {
       setIsProcessing(false);
     }

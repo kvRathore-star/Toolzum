@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 
 type FormatDef = {
@@ -257,8 +258,8 @@ export default function ImageFormatConverter({ slug, description }: ImageFormatC
       downloadOrShare(url, `converted.${outputFmt.ext}`);
       setTimeout(() => URL.revokeObjectURL(url), 100);
       toast.success(`Converted to ${outputFmt.label} successfully!`);
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed. Check your input.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed. Check your input.'));
     } finally {
       setIsProcessing(false);
     }

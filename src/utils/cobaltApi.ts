@@ -67,7 +67,7 @@ export async function fetchCobaltDownload(options: CobaltOptions): Promise<Cobal
 
       const data: CobaltResponse = await response.json();
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(`Failed on endpoint ${endpoint}:`, error);
       lastError = error;
       continue; // Try next fallback

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 import { Crown, Upload, Trash2, Download, Eye } from 'lucide-react';
 import Link from 'next/link';
 
@@ -236,7 +237,7 @@ export default function GstInvoiceGenerator() {
       page.drawLine({ start: { x: width - 160, y: fy + 20 }, end: { x: width - 40, y: fy + 20 }, thickness: 0.5, color: rgb(0.6, 0.6, 0.6) });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(pdfBytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       downloadOrShare(url, `${invoiceNo}.pdf`);
       trackUsage(usage + 1);

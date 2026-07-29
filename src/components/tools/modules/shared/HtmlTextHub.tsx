@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TRANSFORM_CONFIG } from './textTransformConfig';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 const MODES = ["html-to-text-converter", "text-to-html-converter"];
 
@@ -24,7 +25,7 @@ export default function HtmlTextHub({ slug: defaultSlug }: { slug: string; descr
   if (!config) return <div className="text-red-500">Unknown transform: {mode}</div>;
 
   const handleConvert = () => {
-    try { setOutput(config.convert(input)); } catch (e: any) { setOutput(`Error: ${e.message}`); }
+    try { setOutput(config.convert(input)); } catch (e: unknown) { setOutput(`Error: ${getErrorMessage(e)}`); }
   };
 
   const handleCopy = () => {

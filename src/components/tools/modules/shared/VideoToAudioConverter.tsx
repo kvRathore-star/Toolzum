@@ -7,6 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { createDownloadBlob } from '@/utils/blob';
 
 
 type FormatPair = {
@@ -85,7 +86,7 @@ export default function VideoToAudioConverter({ slug, description }: VideoToAudi
       ]);
 
       const data = await ffmpeg.readFile('output.mp3');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'audio/mp3' });
+      const blob = createDownloadBlob(data, 'audio/mp3');
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));

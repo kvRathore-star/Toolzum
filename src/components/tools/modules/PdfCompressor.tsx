@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { FileUploader } from '../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function PdfOptimizer() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -40,7 +41,7 @@ export default function PdfOptimizer() {
 
       const optimizedPdfBytes = await pdf.save({ useObjectStreams: true });
       
-      const blob = new Blob([optimizedPdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(optimizedPdfBytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
       setOutputSize(blob.size);

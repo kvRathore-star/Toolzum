@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 type ModeDef = {
   slug: string;
@@ -126,8 +127,8 @@ export default function JsonOutputConverter({ slug }: { slug: string; descriptio
     try {
       const parsed = slug === 'ndjson-to-json' ? null : JSON.parse(input);
       setOutput(mode.transform(parsed, input));
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

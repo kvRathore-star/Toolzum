@@ -7,6 +7,7 @@ import {
   RotateCw, ChevronUp, ChevronDown, FileUp,
   Zap
 } from 'lucide-react';
+import { getErrorMessage } from '@/utils/error';
 
 type PdfTab = 'merge' | 'split' | 'fill' | 'pages' | 'optimize' | 'metadata';
 
@@ -134,7 +135,7 @@ export function PdfWorkflowBuilder() {
       }
       download(await merged.save(), 'merged.pdf');
       showSuccess(`Merged ${mergeFiles.length} PDFs (${merged.getPageCount()} pages)`);
-    } catch (err: any) { showError(err?.message || 'Merge failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Merge failed')); }
     finally { setLoading(false); }
   }, [mergeFiles, download, showError, showSuccess]);
 
@@ -162,7 +163,7 @@ export function PdfWorkflowBuilder() {
       (await newDoc.copyPages(doc, indices)).forEach(p => newDoc.addPage(p));
       download(await newDoc.save(), splitFile.name.replace(/\.pdf$/i, '_extracted.pdf'));
       showSuccess(`Extracted ${indices.length} of ${doc.getPageCount()} pages`);
-    } catch (err: any) { showError(err?.message || 'Split failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Split failed')); }
     finally { setLoading(false); }
   }, [splitFile, splitRanges, download, showError, showSuccess]);
 
@@ -201,7 +202,7 @@ export function PdfWorkflowBuilder() {
       doc.getForm().flatten();
       download(await doc.save(), `filled_${fillFileName}`);
       showSuccess(`Filled ${fields.length} form field(s)`);
-    } catch (err: any) { showError(err?.message || 'Fill failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Fill failed')); }
     finally { setLoading(false); }
   }, [fillFile, formFields, fillFileName, download, showError, showSuccess]);
 
@@ -255,7 +256,7 @@ export function PdfWorkflowBuilder() {
         download(await doc.save(), `rotated_${pagesFileName}`);
         showSuccess(`Rotated ${indices.length} page(s) by ${angle}°`);
       }
-    } catch (err: any) { showError(err?.message || 'Page operation failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Page operation failed')); }
     finally { setLoading(false); }
   }, [pagesFile, selectedPages, pageCount, pageMode, rotateAngle, pagesFileName, download, showError, showSuccess]);
 
@@ -284,7 +285,7 @@ export function PdfWorkflowBuilder() {
       doc.setSubject(metaSubject); doc.setKeywords(metaKeywords.split(',').map(s => s.trim()).filter(Boolean));
       download(await doc.save(), `updated_${metaFileName}`);
       showSuccess('Metadata updated');
-    } catch (err: any) { showError(err?.message || 'Metadata update failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Metadata update failed')); }
     finally { setLoading(false); }
   }, [metaFile, metaTitle, metaAuthor, metaSubject, metaKeywords, metaFileName, download, showError, showSuccess]);
 
@@ -304,7 +305,7 @@ export function PdfWorkflowBuilder() {
       const saved = before - after;
       setOptimizeResult(`${(before / 1024).toFixed(1)} KB → ${(after / 1024).toFixed(1)} KB (${((saved / before) * 100).toFixed(1)}% smaller)`);
       showSuccess(`Optimized ${file.name}`);
-    } catch (err: any) { showError(err?.message || 'Optimization failed'); }
+    } catch (err: unknown) { showError(getErrorMessage(err, 'Optimization failed')); }
     finally { setLoading(false); }
     e.target.value = '';
   }, [readFile, download, showError, showSuccess]);

@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { createDownloadBlob } from '@/utils/blob';
 
 type OutputFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
 
@@ -116,8 +117,7 @@ export default function AudioCompressor() {
       await ffmpeg.exec(['-i', inputName, '-af', filter, outputName]);
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: fmt.mime });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, fmt.mime));
       setOutputUrl(url);
 
       await ffmpeg.deleteFile(inputName);

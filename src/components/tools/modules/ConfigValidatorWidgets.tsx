@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

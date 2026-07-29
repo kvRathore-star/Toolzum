@@ -2,6 +2,7 @@
 
 import imageCompression from 'browser-image-compression';
 import * as pdfjsLib from 'pdfjs-dist';
+import { getErrorMessage } from '@/utils/error';
 
 const dev = process.env.NODE_ENV === 'development';
 const log = dev ? console.log : () => {};
@@ -32,8 +33,8 @@ export async function runSanityCheck() {
     } else {
       throw new Error("Output size was 0 bytes.");
     }
-  } catch (e: any) {
-    err(`❌ browser-image-compression failed: ${e.message}`);
+  } catch (e: unknown) {
+    err(`❌ browser-image-compression failed: ${getErrorMessage(e)}`);
     errors++;
   }
 
@@ -44,8 +45,8 @@ export async function runSanityCheck() {
     const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
     pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
     log(`✅ pdfjs-dist passed! (Worker path configured: ${workerSrc})`);
-  } catch (e: any) {
-    err(`❌ pdfjs-dist failed: ${e.message}`);
+  } catch (e: unknown) {
+    err(`❌ pdfjs-dist failed: ${getErrorMessage(e)}`);
     errors++;
   }
 

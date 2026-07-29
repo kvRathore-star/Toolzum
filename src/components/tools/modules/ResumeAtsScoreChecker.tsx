@@ -64,7 +64,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
       const parsed: AtsResult = JSON.parse(cleaned);
       setResult(parsed);
       toast.success(`Score: ${parsed.score}/100`);
-    } catch (e: any) {
+    } catch (e: unknown) {
       toast.error('AI returned invalid data. Showing raw response.');
       setRawOutput(response => response || '');
     } finally {

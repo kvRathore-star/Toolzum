@@ -6,6 +6,7 @@ import { FileUploader } from '../FileUploader';
 import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { createDownloadBlob } from '@/utils/blob';
 
 // Configure pdfjs worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
@@ -187,7 +188,7 @@ export default function EsignPdf() {
       });
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(pdfBytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
     } catch (e) {

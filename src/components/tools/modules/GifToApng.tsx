@@ -7,6 +7,7 @@ import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import NextImage from "next/image";
+import { createDownloadBlob } from '@/utils/blob';
 
 type Mode = 'gif-to-apng' | 'apng-to-gif';
 
@@ -94,7 +95,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
         const vf = `-vf=fps=10,scale=${gifInfo!.width}:${gifInfo!.height}:flags=lanczos`;
         await ffmpeg.exec(['-i', 'input.gif', vf, '-c:v', 'apng', 'output.png']);
         const data = await ffmpeg.readFile('output.png');
-        const blob = new Blob([data as unknown as BlobPart], { type: 'image/png' });
+        const blob = createDownloadBlob(data, 'image/png');
         setOutputSize(blob.size);
         setOutputUrl(URL.createObjectURL(blob));
         await ffmpeg.deleteFile('output.png');
@@ -108,7 +109,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
         const filter = `fps=${fps},scale=${scale}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
         await ff.exec(['-i', 'input.png', '-vf', filter, '-loop', '0', 'output.gif']);
         const data = await ff.readFile('output.gif');
-        const blob = new Blob([data as unknown as BlobPart], { type: 'image/gif' });
+        const blob = createDownloadBlob(data, 'image/gif');
         if (outputUrl) URL.revokeObjectURL(outputUrl);
         setOutputUrl(URL.createObjectURL(blob));
         toast.success('GIF created!');

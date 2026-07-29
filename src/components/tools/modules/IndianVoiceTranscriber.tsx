@@ -7,6 +7,7 @@ import AiSettings from '@/components/tools/AiSettings';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getErrorMessage } from '@/utils/error';
 
 const INDIAN_LANGUAGES = [
   { code: 'hi', label: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
@@ -83,8 +84,8 @@ export default function IndianVoiceTranscriber() {
       const text = await response.text();
       setTranscript(text);
       toast.success('Transcription complete!');
-    } catch (err: any) {
-      toast.error(err.message || 'Transcription failed');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Transcription failed'));
     } finally {
       setIsTranscribing(false);
     }

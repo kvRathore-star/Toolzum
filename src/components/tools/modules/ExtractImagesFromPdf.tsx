@@ -124,7 +124,7 @@ export default function ExtractImagesFromPdf() {
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(zipBlob));
       toast.success(`Successfully extracted ${extractedCount} images!`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       toast.error("Failed to parse and extract images from PDF.");
     } finally {

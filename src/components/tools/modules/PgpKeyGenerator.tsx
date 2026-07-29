@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import * as openpgp from 'openpgp';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { getErrorMessage } from '@/utils/error';
 
 export default function PgpKeyGenerator() {
   const [name, setName] = useState('John Doe');
@@ -35,9 +36,9 @@ export default function PgpKeyGenerator() {
       setPublicKey(pubKey);
       setPrivateKey(privKey);
       toast.success('PGP Keys successfully generated!');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      toast.error('Failed to generate key pair: ' + err.message);
+      toast.error('Failed to generate key pair: ' + getErrorMessage(err));
     } finally {
       setIsGenerating(false);
     }

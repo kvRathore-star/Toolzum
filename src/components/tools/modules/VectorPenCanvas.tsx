@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Download, Pencil, Square, Circle, Minus, MousePointer2, Undo2, Trash2, Plus, Layers, Palette, AlertTriangle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 export default function VectorPenCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -197,8 +198,8 @@ export default function VectorPenCanvas() {
         downloadOrShare(url, `drawing-page-${currentPage + 1}.png`);
         toast.success('PNG exported!');
       }
-    } catch (err: any) {
-      toast.error(err.message || 'Export failed');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Export failed'));
     }
   };
 

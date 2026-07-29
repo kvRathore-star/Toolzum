@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { FileUploader, UploadedFile } from '@/components/FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function PdfMerger() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -62,7 +63,7 @@ export default function PdfMerger() {
       }
 
       const mergedPdfBytes = await mergedPdf.save();
-      const blob = new Blob([mergedPdfBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(mergedPdfBytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
     } catch (e) {

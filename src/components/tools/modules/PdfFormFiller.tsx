@@ -5,6 +5,7 @@ import { FileUploader } from '../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 interface FormFieldData {
   name: string;
@@ -90,7 +91,7 @@ export default function PdfFormFiller() {
       });
       
       const savedBytes = await pdfDoc.save();
-      const blob = new Blob([savedBytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(savedBytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       setOutputUrl(url);
       toast.success("PDF filled successfully!");

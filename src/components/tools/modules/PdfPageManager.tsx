@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, degrees } from 'pdf-lib';
 import { FileText, Download, Crop, Move, Scissors, RotateCw, Trash2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { createDownloadBlob } from '@/utils/blob';
 
 type Tab = 'crop' | 'organize' | 'extract' | 'rotate' | 'delete';
 
@@ -73,7 +74,7 @@ export default function PdfPageManager() {
       const doc = await PDFDocument.load(fileBuffer);
       doc.getPages().forEach(p => { const { width, height } = p.getSize(); p.setCropBox(margin, margin, width - margin * 2, height - margin * 2); });
       const bytes = await doc.save();
-      const blob = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(bytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       downloadOrShare(url, file.name.replace('.pdf', '_cropped.pdf'));
       toast.success('PDF cropped!');
@@ -90,7 +91,7 @@ export default function PdfPageManager() {
       const copied = await newDoc.copyPages(doc, pages);
       copied.forEach(p => newDoc.addPage(p));
       const bytes = await newDoc.save();
-      const blob = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(bytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       downloadOrShare(url, file.name.replace('.pdf', '_reorganized.pdf'));
       toast.success('PDF reorganized!');
@@ -117,7 +118,7 @@ export default function PdfPageManager() {
       const copied = await newDoc.copyPages(doc, idx);
       copied.forEach(p => newDoc.addPage(p));
       const bytes = await newDoc.save();
-      const blob = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(bytes, 'application/pdf');
       downloadOrShare(URL.createObjectURL(blob), file.name.replace('.pdf', '_extracted.pdf'));
       toast.success(`Extracted ${idx.length} pages!`);
     } catch { toast.error('Failed to extract'); } finally { setIsProcessing(false); }
@@ -131,7 +132,7 @@ export default function PdfPageManager() {
       const doc = await PDFDocument.load(fileBuffer);
       doc.getPages().forEach(p => { p.setRotation(degrees(p.getRotation().angle + rotation)); });
       const bytes = await doc.save();
-      const blob = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(bytes, 'application/pdf');
       const url = URL.createObjectURL(blob);
       downloadOrShare(url, file.name.replace('.pdf', '_rotated.pdf'));
       toast.success('PDF rotated!');
@@ -150,7 +151,7 @@ export default function PdfPageManager() {
       const sorted = [...toRemove].sort((a, b) => b - a);
       for (const i of sorted) doc.removePage(i);
       const bytes = await doc.save();
-      const blob = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
+      const blob = createDownloadBlob(bytes, 'application/pdf');
       downloadOrShare(URL.createObjectURL(blob), file.name.replace('.pdf', '_cleaned.pdf'));
       toast.success(`${toRemove.length} page(s) deleted!`);
     } catch { toast.error('Failed to delete pages'); } finally { setIsProcessing(false); }

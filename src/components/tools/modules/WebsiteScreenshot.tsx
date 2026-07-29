@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import DOMPurify from 'dompurify';
+import { getErrorMessage } from '@/utils/error';
 
 export default function WebsiteScreenshot() {
   const [url, setUrl] = useState('');
@@ -172,10 +173,10 @@ export default function WebsiteScreenshot() {
       if (screenshotUrl?.startsWith('blob:')) URL.revokeObjectURL(screenshotUrl);
       setScreenshotUrl(URL.createObjectURL(blob));
       toast.success('Screenshot captured!');
-    } catch (e: any) {
-      const msg = e?.name === 'TimeoutError'
+    } catch (e: unknown) {
+      const msg = (e instanceof Error && e.name === 'TimeoutError')
         ? 'Request timed out. The site may be slow or blocked.'
-        : (e?.message || 'Failed to capture screenshot');
+        : getErrorMessage(e, 'Failed to capture screenshot');
       setError(msg);
       toast.error(msg);
     } finally {

@@ -4,6 +4,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Upload, Download, ImagePlus, Layers, RefreshCw, Trash2, Palette, Check, Archive } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 interface ImageItem {
   id: string;
@@ -126,8 +127,8 @@ export default function BulkBgChanger() {
         count++;
       }
       toast.success(`Processed ${count} images!`);
-    } catch (err: any) {
-      toast.error('Processing failed: ' + (err.message || 'Unknown error'));
+    } catch (err: unknown) {
+      toast.error('Processing failed: ' + getErrorMessage(err, 'Unknown error'));
     } finally {
       setIsProcessing(false);
     }

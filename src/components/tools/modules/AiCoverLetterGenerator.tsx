@@ -7,6 +7,7 @@ import { Clipboard, Download, Sparkles } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { getErrorMessage } from '@/utils/error';
 
 export default function AiCoverLetterGenerator() {
   const { generateCompletion } = useAiProvider();
@@ -29,8 +30,8 @@ export default function AiCoverLetterGenerator() {
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.7);
       setOutputText(response);
       toast.success('Successfully generated!');
-    } catch (e: any) {
-      toast.error(e.message || "Failed to generate");
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, "Failed to generate"));
     } finally {
       setIsProcessing(false);
     }

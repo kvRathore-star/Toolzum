@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { Upload, Download, Type, ArrowRight, Loader2, FileText } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 type FontFormat = 'ttf' | 'otf' | 'woff' | 'woff2';
 
@@ -237,8 +238,8 @@ export default function FontConverter() {
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
       toast.success('Font loaded successfully');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to parse font file. Try TTF, OTF, or WOFF format.');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Failed to parse font file. Try TTF, OTF, or WOFF format.'));
       setFile(null);
     } finally {
       setIsProcessing(false);
@@ -266,8 +267,8 @@ export default function FontConverter() {
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
       toast.success('Font loaded successfully');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to parse font file');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Failed to parse font file'));
       setFile(null);
     } finally {
       setIsProcessing(false);
@@ -302,8 +303,8 @@ export default function FontConverter() {
 
       const baseName = file.name.replace(/\.[^.]+$/, '');
       toast.success(`${baseName}.${ext} ready for download`);
-    } catch (err: any) {
-      toast.error(err.message || 'Conversion failed');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Conversion failed'));
     } finally {
       setIsConverting(false);
     }

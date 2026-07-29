@@ -148,8 +148,8 @@ export default function SslChecker() {
       const message = parsed.status === 'valid' ? 'Certificate is valid' : parsed.status === 'expiring' ? 'Certificate expiring soon' : 'Certificate expired';
       if (parsed.status === 'valid') toast.success(message);
       else toast(message, { icon: parsed.status === 'expiring' ? '⚠️' : '🚫' });
-    } catch (err: any) {
-      if (err.name === 'AbortError') return;
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === 'AbortError') return;
       try {
         const crtRes = await fetch(`https://crt.sh/?q=${target}&output=json`, { signal: controller.signal });
         if (!crtRes.ok) throw new Error('crt.sh failed');

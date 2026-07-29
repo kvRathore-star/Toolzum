@@ -6,6 +6,7 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { createDownloadBlob } from '@/utils/blob';
 
 export default function Mp3Compressor() {
   const [file, setFile] = useState<File | null>(null);
@@ -48,8 +49,7 @@ export default function Mp3Compressor() {
       await ffmpeg.exec(['-i', 'input.mp3', '-b:a', bitrate, 'output.mp3']);
       
       const data = await ffmpeg.readFile('output.mp3');
-      const blob = new Blob([data as unknown as BlobPart], { type: 'audio/mpeg' });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(createDownloadBlob(data, 'audio/mpeg'));
       setOutputUrl(url);
       
       toast.success("Compression complete!");

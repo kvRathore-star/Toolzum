@@ -6,6 +6,7 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import Link from 'next/link';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { getErrorMessage } from '@/utils/error';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('');
@@ -51,8 +52,8 @@ export default function RegexTester() {
       setPattern(cleaned);
       setAiTab('manual');
       toast.success('Regex generated! Test it below.');
-    } catch (e: any) {
-      toast.error(e.message || 'Failed to generate regex');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Failed to generate regex'));
     } finally { setIsGenerating(false); }
   };
 

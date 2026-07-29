@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { Upload, Download, Type, Loader2, FileText, WholeWord } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 type FontFormat = 'ttf' | 'woff';
 
@@ -240,8 +241,8 @@ export default function FontSubsetter() {
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
       toast.success('Font loaded successfully');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to parse font. Use TTF or OTF format.');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Failed to parse font. Use TTF or OTF format.'));
       setFile(null);
     } finally {
       setIsProcessing(false);
@@ -266,8 +267,8 @@ export default function FontSubsetter() {
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
       toast.success('Font loaded successfully');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to parse font');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Failed to parse font'));
       setFile(null);
     } finally {
       setIsProcessing(false);
@@ -351,8 +352,8 @@ export default function FontSubsetter() {
 
       const baseName = file.name.replace(/\.[^.]+$/, '');
       toast.success(`Subset font created: ${glyphs.length} glyphs, ${formatFileSize(resultBuffer.byteLength)}`);
-    } catch (err: any) {
-      toast.error(err.message || 'Subsetting failed');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Subsetting failed'));
     } finally {
       setIsProcessing(false);
     }

@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import toast from 'react-hot-toast';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { createDownloadBlob } from '@/utils/blob';
 
 const LEVELS = ['mild', 'moderate', 'strong', 'extreme'] as const;
 type Level = typeof LEVELS[number];
@@ -143,10 +144,9 @@ export default function NoiseReducer() {
       }
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: MIME_TYPES[outputFormat] });
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
-      setOutputUrl(URL.createObjectURL(blob));
+      setOutputUrl(URL.createObjectURL(createDownloadBlob(data, MIME_TYPES[outputFormat])));
 
       await ffmpeg.deleteFile(inputName);
       await ffmpeg.deleteFile(outputName);

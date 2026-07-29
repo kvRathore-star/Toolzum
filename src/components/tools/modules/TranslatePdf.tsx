@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
 import { FileText, Languages, Download, Copy, Check, ArrowRight, Globe, RefreshCw } from 'lucide-react';
+import { getErrorMessage } from '@/utils/error';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -99,9 +100,9 @@ export default function TranslatePdf() {
       } else {
         throw new Error(data.responseDetails || "Translation failed");
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      toast.error(e.message || "Translation failed. Please try again.");
+      toast.error(getErrorMessage(e, "Translation failed. Please try again."));
     } finally {
       setIsTranslating(false);
     }

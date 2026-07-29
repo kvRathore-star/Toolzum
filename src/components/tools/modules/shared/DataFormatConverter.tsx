@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 
 type FormatDef = {
@@ -136,8 +137,8 @@ export default function DataFormatConverter({ slug, description }: DataFormatCon
       }
       setOutput(result);
       toast.success('Converted successfully!');
-    } catch (e: any) {
-      toast.error(e.message || 'Conversion failed. Check your input.');
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, 'Conversion failed. Check your input.'));
     } finally {
       setIsProcessing(false);
     }

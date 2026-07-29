@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { createDownloadBlob } from '@/utils/blob';
 
 
 type FormatDef = {
@@ -166,10 +167,9 @@ export default function AudioFormatConverter({ slug, description }: AudioFormatC
       await ffmpeg.exec(['-i', inputName, outputName]);
 
       const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data as unknown as BlobPart], { type: outputFmt.mime });
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
-      setOutputUrl(URL.createObjectURL(blob));
+      setOutputUrl(URL.createObjectURL(createDownloadBlob(data, outputFmt.mime)));
       toast.success(`Converted to ${outputFmt.label} successfully!`);
     } catch (e) {
       console.error(e);

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { getErrorMessage } from '@/utils/error';
 
 export default function UrlToPdf() {
   const [url, setUrl] = useState('');
@@ -51,8 +52,8 @@ export default function UrlToPdf() {
 
       setIsLoaded(true);
       toast.success('Page loaded');
-    } catch (e: any) {
-      const msg = e?.name === 'TimeoutError' ? 'Request timed out. Try the proxy option.' : (e?.message || 'Failed to load URL');
+    } catch (e: unknown) {
+      const msg = (e instanceof Error && e.name === 'TimeoutError') ? 'Request timed out. Try the proxy option.' : getErrorMessage(e, 'Failed to load URL');
       setError(msg);
       toast.error(msg);
     } finally {

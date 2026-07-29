@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Mic, Square, Pause, Play, Download, RotateCcw, Edit3, AlertCircle, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
 
 export default function VoiceRecorder() {
   const [isRecording, setIsRecording] = useState(false);
@@ -48,14 +49,14 @@ export default function VoiceRecorder() {
       streamRef.current = stream;
       setHasPermission(true);
       return stream;
-    } catch (err: any) {
+    } catch (err: unknown) {
       setHasPermission(false);
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+      if (err instanceof Error && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')) {
         toast.error('Microphone access denied. Allow permissions in browser settings and reload.');
-      } else if (err.name === 'NotFoundError') {
+      } else if (err instanceof Error && err.name === 'NotFoundError') {
         toast.error('No microphone found. Connect a microphone and try again.');
       } else {
-        toast.error('Microphone error: ' + (err.message || 'Unknown error'));
+        toast.error('Microphone error: ' + getErrorMessage(err, 'Unknown error'));
       }
       return null;
     }

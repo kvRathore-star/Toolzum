@@ -7,6 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { createDownloadBlob } from '@/utils/blob';
 
 
 type FormatDef = {
@@ -182,7 +183,7 @@ export default function VideoFormatConverter({ slug, description }: VideoFormatC
 
       const data = await ffmpeg.readFile(`output${outputFmt.ext}`);
       const mimeType = outputFmt.ext === '.mp4' ? 'video/mp4' : 'application/octet-stream';
-      const blob = new Blob([data as unknown as BlobPart], { type: mimeType });
+      const blob = createDownloadBlob(data, mimeType);
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));

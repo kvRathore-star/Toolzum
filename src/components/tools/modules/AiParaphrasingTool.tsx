@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { getErrorMessage } from '@/utils/error';
 
 export default function AiParaphrasingTool() {
   const { generateCompletion } = useAiProvider();
@@ -19,8 +20,8 @@ export default function AiParaphrasingTool() {
       const prompt = "You are an expert copywriter. Paraphrase the following text. Make it more engaging, fix any grammatical errors, and ensure it sounds completely human-written while retaining the original meaning.\n\nOriginal Text:\n" + inputText;
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.7);
       setOutputText(response);
-    } catch (e: any) {
-      toast.error(e.message || "Failed");
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, "Failed"));
     } finally {
       setIsProcessing(false);
     }

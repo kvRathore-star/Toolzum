@@ -47,7 +47,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
 
       if (!isProtect) {
         try { await pdfjsLib.getDocument({ data: buf }).promise; toast.success('PDF is not password protected.'); }
-        catch (e: any) { if (e.name === 'PasswordException') toast.success('Password-protected PDF detected.'); }
+        catch (e: unknown) { if (e instanceof Error && e.name === 'PasswordException') toast.success('Password-protected PDF detected.'); }
       }
     } catch { toast.error('Failed to load PDF.'); }
   };
@@ -98,8 +98,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       toast.success(isProtect ? 'PDF protected!' : 'PDF unlocked!');
-    } catch (err: any) {
-      if (err.name === 'PasswordException') toast.error('Incorrect password.');
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === 'PasswordException') toast.error('Incorrect password.');
       else toast.error(isProtect ? 'Failed to protect PDF.' : 'Failed to unlock PDF.');
     } finally {
       setIsProcessing(false);

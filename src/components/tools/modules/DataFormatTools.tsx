@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { getErrorMessage } from '@/utils/error';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -141,8 +142,8 @@ export function JsonToonConverter() {
         const yaml = require('js-yaml').dump(obj, { indent: 2, lineWidth: 120, noRefs: true });
         setOutput(yaml);
       }
-    } catch (e: any) {
-      setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+      setOutput(`Error: ${getErrorMessage(e)}`);
     }
   };
 

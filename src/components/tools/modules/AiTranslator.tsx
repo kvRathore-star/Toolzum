@@ -6,6 +6,7 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../AiSettings';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { getErrorMessage } from '@/utils/error';
 
 export default function AITranslator() {
   const { generateCompletion } = useAiProvider();
@@ -40,8 +41,8 @@ ${inputText}`;
 
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.3);
       setOutputText(response);
-    } catch (e: any) {
-      toast.error(e.message || "Translation failed");
+    } catch (e: unknown) {
+      toast.error(getErrorMessage(e, "Translation failed"));
     } finally {
       setIsTranslating(false);
     }
