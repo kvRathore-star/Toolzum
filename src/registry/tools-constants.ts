@@ -222,6 +222,11 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "csv-formatter": { category: "converter", slug: "csv-formatter", sourceCategory: "utility" },
   "csv-statistics": { category: "converter", slug: "csv-statistics", sourceCategory: "developer" },
   "csv-data-cleaner": { category: "converter", slug: "csv-data-cleaner", sourceCategory: "developer" },
+  // Color tools moved from Utility to Design
+  "color-picker": { category: "design", slug: "color-picker", sourceCategory: "utility" },
+  "color-palette-generator": { category: "design", slug: "color-palette-generator", sourceCategory: "utility" },
+  "gradient-generator": { category: "design", slug: "gradient-generator", sourceCategory: "utility" },
+  "data-type-converter": { category: "converter", slug: "data-type-converter", sourceCategory: "utility" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },

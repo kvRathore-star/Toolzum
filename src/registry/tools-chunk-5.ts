@@ -396,7 +396,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     id: "dt-3",
     name: "Data Type Converter",
     slug: "data-type-converter",
-    category: "Utility",
+    category: "Converter",
     description: 'Convert CSV column data types between number, string, integer, and float. Ensure consistent typing across your dataset.',
     seoDescription: 'Free online CSV Data Type Converter — Convert CSV column data to number, string, integer, or float. Consistent typing across your dataset. ',
     dependencies: "Vanilla JS",

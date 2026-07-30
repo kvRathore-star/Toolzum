@@ -407,15 +407,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       ],
     },
     {
-      id: "color-design",
-      heading: "Color & Design Tools",
-      description: "Pick colors, generate palettes, and check contrast ratios for accessible designs.",
-      slugs: [
-        "color-picker", "color-palette-generator",
-        "gradient-generator",
-      ],
-    },
-    {
       id: "everyday",
       heading: "Everyday Utilities",
       description: "Speed test, resume builder, bank statement analyzer, and more.",
@@ -744,6 +735,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "text-tools",
         "tsv-csv-converter", "ics-csv-converter", "vcf-csv-converter",
         "csv-formatter", "csv-statistics", "csv-data-cleaner",
+        "data-type-converter",
       ],
     },
   ],
@@ -955,6 +947,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "contrast-ratio-checker",
         "color-converter",
         "color-blindness-simulator",
+        "color-picker", "color-palette-generator",
+        "gradient-generator",
 ],
     },
     {
