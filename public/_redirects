@@ -3,9 +3,6 @@
 /growth-&-marketing/*   /growth-metrics/:splat   301
 /growth-&-marketing   /growth-metrics/   301
 /growth-&-marketing/   /growth-metrics/   301
-/growth & marketing/*   /growth-metrics/:splat   301
-/growth & marketing   /growth-metrics/   301
-/growth & marketing/   /growth-metrics/   301
 
 # Category migration — tool moved from Finance to Indian Utilities
 /finance/gst-calculator/   /indian-utilities/gst-calculator/   301

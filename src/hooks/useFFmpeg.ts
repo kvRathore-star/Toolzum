@@ -10,10 +10,10 @@ let hasLoadedOnce = false;
 const LOAD_TIMEOUT_MS = 60_000;
 
 const CDN_FALLBACKS: { baseURL: string; mt?: boolean }[] = [
-  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd', mt: false },
-  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd', mt: false },
-  { baseURL: 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/umd', mt: true },
-  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-mt@0.12.6/dist/umd', mt: true },
+  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd', mt: false },
+  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.9/dist/umd', mt: false },
+  { baseURL: 'https://unpkg.com/@ffmpeg/core-mt@0.12.9/dist/umd', mt: true },
+  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-mt@0.12.9/dist/umd', mt: true },
 ];
 
 export function useFFmpeg() {
@@ -69,7 +69,7 @@ export function useFFmpeg() {
       const [coreURL, wasmURL, classWorkerURL] = await Promise.all([
         toBlobURL(`${entry.baseURL}/ffmpeg-core.js`, 'text/javascript'),
         toBlobURL(`${entry.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        toBlobURL('https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/814.ffmpeg.js', 'text/javascript'),
+        toBlobURL('https://unpkg.com/@ffmpeg/ffmpeg@0.12.15/dist/esm/worker.js', 'text/javascript'),
       ]);
 
       await ffmpegGlobal.load({ coreURL, wasmURL, classWorkerURL });
