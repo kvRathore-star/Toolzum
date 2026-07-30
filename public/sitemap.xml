@@ -1351,6 +1351,30 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://toolzum.com/converter/markdown-to-html</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolzum.com/converter/html-to-markdown</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolzum.com/converter/text-to-markdown</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolzum.com/converter/markdown-to-text</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://toolzum.com/developer/serial-number-generator</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -4897,7 +4921,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/video/video-converter</loc>
+    <loc>https://toolzum.com/converter/video-converter</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -4915,7 +4939,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://toolzum.com/converter/data-converter</loc>
+    <loc>https://toolzum.com/converter/data-format-converter</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

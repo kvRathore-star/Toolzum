@@ -214,9 +214,18 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },
   "image-converter": { category: "image", slug: "bulk-image-compressor" },
-  "video-converter": { category: "video", slug: "video-compressor" },
+  "video-converter": { category: "converter", slug: "video-converter" },
   "ai-video-subtitler": { category: "video", slug: "subtitle-generator" },
   "temporary-email-generator": { category: "privacy", slug: "privacy-cleaner" },
+  // Video-to-audio redirects — from /video/ to /converter/ for proper routing
+  "mp4-to-mp3": { category: "converter", slug: "mp4-to-mp3" },
+  "mov-to-mp3": { category: "converter", slug: "mov-to-mp3" },
+  "webm-to-mp3": { category: "converter", slug: "webm-to-mp3" },
+  // Suppressed data format tools — redirect to hub
+  "json-to-xml": { category: "converter", slug: "data-format-converter" },
+  "json-to-csv": { category: "converter", slug: "data-format-converter" },
+  "csv-to-json": { category: "converter", slug: "data-format-converter" },
+  "csv-to-xml": { category: "converter", slug: "data-format-converter" },
   // Thin wrappers — redirect to parent tool
   "html-minifier": { category: "developer", slug: "js-minifier" },
   "css-minifier": { category: "developer", slug: "js-minifier" },

@@ -58,11 +58,8 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
   const params = await props.params;
 
   const redirect = TOOL_REDIRECTS[params.tool];
-  if (redirect) {
-    const targetSlug = catToUrlSlug(redirect.category);
-    if (targetSlug !== params.category) {
-      permanentRedirect(`/${targetSlug}/${redirect.slug}/`);
-    }
+  if (redirect && (catToUrlSlug(redirect.category) !== params.category || redirect.slug !== params.tool)) {
+    permanentRedirect(`/${catToUrlSlug(redirect.category)}/${redirect.slug}/`);
   }
 
   const toolMetadata = getToolByCategoryAndSlug(params.category, params.tool);
