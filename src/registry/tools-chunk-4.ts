@@ -324,6 +324,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: "Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: "Free online Decision Maker \u2014 Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. ",
     dependencies: "None",
+    showInCategory: false,
 },
   {
 
@@ -334,6 +335,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Yes / No Picker \u2014 Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
 
