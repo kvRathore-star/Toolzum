@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
-type CsvMode = {
+export type CsvMode = {
   slug: string;
   name: string;
   description: string;
@@ -13,7 +13,7 @@ type CsvMode = {
   transform: (headers: string[], rows: string[][]) => string;
 };
 
-const parseCsv = (text: string): { headers: string[]; rows: string[][] } => {
+export const parseCsv = (text: string): { headers: string[]; rows: string[][] } => {
   const lines = text.trim().split('\n').filter(Boolean);
   if (!lines.length) return { headers: [], rows: [] };
   const parseLine = (l: string) => {
@@ -32,7 +32,7 @@ const parseCsv = (text: string): { headers: string[]; rows: string[][] } => {
   return { headers, rows };
 };
 
-const MODES: Record<string, CsvMode> = {
+export const MODES: Record<string, CsvMode> = {
   "csv-to-markdown": {
     slug: "csv-to-markdown", name: "CSV → Markdown Table",
     description: "Convert CSV data to a Markdown table",

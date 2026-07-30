@@ -490,7 +490,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Transpose CSV data — swap rows and columns. Convert horizontal data to vertical and vice versa for reformatting.',
     seoDescription: 'Free online CSV Transpose — Swap rows and columns in CSV data. Convert horizontal to vertical and vice versa. ',
     dependencies: "Vanilla JS",
-},
+    showInCategory: false,
+  },
   {
     id: "dt-13",
     name: "CSV to Markdown Table",
@@ -499,6 +500,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
     dependencies: "Vanilla JS",
+    showInCategory: false,
   },
   {
 
@@ -509,6 +511,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
     dependencies: "Vanilla JS",
+    showInCategory: false,
 },
   {
 
@@ -519,6 +522,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Converts CSV files to SQL format — spreadsheets, database exports, and data imports to relational database operations, data analysis, and reporting. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online CSV to SQL INSERT — Generate SQL INSERT statements from CSV data with custom table names. ',
     dependencies: "Vanilla JS",
+    showInCategory: false,
 },
   {
 
@@ -768,7 +772,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     id: "csv-formatter-hub",
     name: "CSV Output Tools",
     slug: "csv-formatter",
-    category: "Utility",
+    category: "Converter",
     description: 'Convert CSV data to Markdown tables, NDJSON, SQL INSERT statements, HTML tables, or analyze statistics and find data quality issues.',
     seoDescription: 'Free online CSV Output Tools — Convert CSV to Markdown, NDJSON, SQL, HTML tables, or analyze statistics and data quality. ',
     dependencies: "None",

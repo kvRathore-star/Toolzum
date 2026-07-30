@@ -11,7 +11,7 @@ import Image from "next/image";
 type Mode = 'video' | 'gif';
 
 export default function VideoCompressor() {
-  const { ffmpeg, isLoaded, isLoading, progress, isFirstLoad, loadFFmpeg } = useFFmpeg();
+  const { ffmpeg, isLoaded, isLoading, progress, isFirstLoad, loadError, loadFFmpeg } = useFFmpeg();
   const [mode, setMode] = useState<Mode>('video');
   const [file, setFile] = useState<File | null>(null);
   const [crf, setCrf] = useState(28);
@@ -84,6 +84,20 @@ export default function VideoCompressor() {
   };
 
   if (!isLoaded) {
+    if (loadError) {
+      return (
+        <div className="flex flex-col items-center justify-center p-12 space-y-4 text-center">
+          <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+            <svg className="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          </div>
+          <p className="text-red-500 font-medium">Failed to load video engine</p>
+          <p className="text-xs text-[var(--text-muted)] max-w-sm">{loadError}</p>
+          <button onClick={loadFFmpeg} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-xl transition-colors">
+            Retry
+          </button>
+        </div>
+      );
+    }
     return (
       <div className="flex flex-col items-center justify-center p-12 space-y-4">
         <svg className="w-12 h-12 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">

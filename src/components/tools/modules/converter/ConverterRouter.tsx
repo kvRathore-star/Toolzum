@@ -12,7 +12,7 @@ import HtmlTextHub from '../shared/HtmlTextHub';
 import CssPreprocessorHub from '../shared/CssPreprocessorHub';
 import FormatSerializerHub from '../shared/FormatSerializerHub';
 import JsonOutputConverter from '../shared/JsonOutputConverter';
-import CsvOutputConverter from '../shared/CsvOutputConverter';
+import CsvHubConverter from '../shared/CsvHubConverter';
 import TextStylingConverter from '../shared/TextStylingConverter';
 import UnitConverter from '../shared/UnitConverter';
 import ImportToCsvConverter from '../shared/ImportToCsvConverter';
@@ -34,7 +34,7 @@ const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; des
   "css-preprocessor": CssPreprocessorHub,
   "serializer": FormatSerializerHub,
   "json-output": JsonOutputConverter,
-  "csv-output": CsvOutputConverter,
+  "csv-output": CsvHubConverter,
   "text-style": TextStylingConverter,
   "unit": UnitConverter,
   "import-to-csv": ImportToCsvConverter,

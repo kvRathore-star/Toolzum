@@ -388,7 +388,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     {
       id: "data-csv",
       heading: "CSV Tools",
-      description: "Clean, sort, filter, and transform CSV data — deduplicate, pivot, rename columns, validate formats, and more.",
+      description: "Clean, sort, filter, transform, and analyze CSV data — deduplicate, pivot, rename columns, validate formats, compute statistics, and more.",
       slugs: [
         "column-extractor",
         "deduplicator",
@@ -399,7 +399,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "column-renamer",
         "format-validator", "pivot-generator", "row-filter",
         "csv-merger", "csv-splitter", "csv-transpose",
-        "csv-analyzer", "csv-data-cleaner", "csv-statistics", "csv-formatter",
+        "csv-analyzer",
       ],
     },
     {
@@ -735,7 +735,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert between data formats — JSON, CSV, XML, Parquet, and more.",
       slugs: [
         "data-format-converter",
-        "csv-to-markdown", "csv-html-table-converter", "csv-to-ndjson",
+        "csv-formatter",
         "import-to-csv",
         "xlsx-csv-converter",
         "json-toon-converter",
@@ -750,7 +750,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "tsv-csv-converter", "ics-csv-converter", "vcf-csv-converter",
         "bulk-csv-excel-to-json",
         "csv-to-sqlite",
-        "csv-to-sql",
         "text-to-binary",
         "binary-to-text",
         "number-base-converter",
@@ -905,7 +904,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     {
       id: "convert",
       heading: "Text Converters",
-      description: "Convert text between formats — case converter, reverse text, braille, and more.",
+      description: "Convert text between formats — case converter, reverse text, deduplicate, split, clean, and more.",
       slugs: [
         "case-converter",
         "text-to-handwriting",
@@ -1238,7 +1237,7 @@ export const CATEGORY_INTROS: Record<string, string> = {
   Calculator:
     "Online calculators for math, date/time, and academic calculations — percentages, fractions, quadratic equations, date differences, grade averages, and more. Every calculation runs in your browser with nothing sent to a server. No sign-up, no data collection, just fast, accurate results.",
   Utility:
-    "Everyday utility tools — random generators, unit converters, color pickers, CSV tools, and fun games. All processing happens locally in your browser. Generate a strong password, convert kilograms to pounds, pick a random team, or analyze a CSV file without uploading anything.",
+    "Everyday utility tools — random generators, unit converters, CSV tools, timers, and fun games. All processing happens locally in your browser. Generate a strong password, convert kilograms to pounds, pick a random team, or analyze a CSV file without uploading anything.",
   Audio:
     "Browser-based audio tools — convert between MP3, WAV, FLAC, OGG, AAC, and more, trim audio clips, reduce noise, merge tracks, and apply effects. Powered by FFmpeg WASM running entirely on your device. No files are ever uploaded to any server.",
   Image:
@@ -1256,7 +1255,7 @@ export const CATEGORY_INTROS: Record<string, string> = {
   AI:
     "AI-powered tools for generating images, summarizing documents, checking grammar, detecting AI-written content, and enhancing photos. Browser-based AI keeps your data private — nothing is uploaded to any server.",
   Text:
-    "Text tools for counting words, converting case, generating fancy fonts, translating to braille, and analyzing content. All processing happens locally in your browser. No sign-up, no limits, no uploads.",
+    "Text tools for counting words, converting case, generating fancy fonts, analyzing content, and more. All processing happens locally in your browser. No sign-up, no limits, no uploads.",
   Branding:
     "Branding and design tools — create logos, design business cards, generate email signatures, build brand kits, and schedule social media content. Every tool runs locally in your browser.",
   Design:

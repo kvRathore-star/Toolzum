@@ -1487,20 +1487,21 @@ export const entries_chunk_4: ToolMetadata[] = [
     id: "971",
     name: "CSV Data Cleaner",
     slug: "csv-data-cleaner",
-    category: "Utility",
+    category: "Converter",
     description: 'Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV Data Cleaner — Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
-
     id: "972",
     name: "CSV Statistics",
     slug: "csv-statistics",
-    category: "Utility",
+    category: "Converter",
     description: 'Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV Statistics — Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
     id: "973",
@@ -1510,9 +1511,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Bidirectional converter between CSV data and HTML table markup with live preview. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. ',
     dependencies: "None",
-  },
+    showInCategory: false,
+},
   {
-
     id: "974",
     name: "YAML Validator",
     slug: "yaml-validator",

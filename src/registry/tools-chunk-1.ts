@@ -4,8 +4,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Unit Converter',
     slug: 'unit-converter',
-    description: 'Convert between hundreds of units — length, mass, volume, temperature, currency, and more with a single click.',
-    seoDescription: 'Free online Unit Converter — Universal unit conversion tool. ',
+    description: 'Convert between hundreds of units — length, mass, volume, temperature, area, speed, time, digital data, and more with a single click.',
+    seoDescription: 'Free online Unit Converter — Universal unit conversion tool handling length, mass, volume, temperature, area, speed, time, and digital data. ',
     category: 'Utility',
     id:  "224",
     dependencies: 'None'

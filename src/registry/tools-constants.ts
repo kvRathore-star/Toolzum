@@ -218,9 +218,9 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "tsv-csv-converter": { category: "converter", slug: "tsv-csv-converter", sourceCategory: "utility" },
   "ics-csv-converter": { category: "converter", slug: "ics-csv-converter", sourceCategory: "utility" },
   "vcf-csv-converter": { category: "converter", slug: "vcf-csv-converter", sourceCategory: "utility" },
-  "csv-formatter": { category: "utility", slug: "csv-formatter", sourceCategory: "converter" },
-  "csv-statistics": { category: "utility", slug: "csv-statistics", sourceCategory: "converter" },
-  "csv-data-cleaner": { category: "utility", slug: "csv-data-cleaner", sourceCategory: "converter" },
+  "csv-formatter": { category: "converter", slug: "csv-formatter", sourceCategory: "utility" },
+  "csv-statistics": { category: "converter", slug: "csv-statistics", sourceCategory: "utility" },
+  "csv-data-cleaner": { category: "converter", slug: "csv-data-cleaner", sourceCategory: "utility" },
   // Developer → Converter (category migration)
   "bulk-csv-excel-to-json": { category: "converter", slug: "bulk-csv-excel-to-json", sourceCategory: "developer" },
   "csv-to-sqlite": { category: "converter", slug: "csv-to-sqlite", sourceCategory: "developer" },
