@@ -505,7 +505,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     id: "dt-14",
     name: "CSV to NDJSON",
     slug: "csv-to-ndjson",
-    category: "Utility",
+    category: "Converter",
     description: 'Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSV to NDJSON — Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. ',
     dependencies: "Vanilla JS",

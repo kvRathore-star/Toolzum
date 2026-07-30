@@ -738,7 +738,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert between data formats — JSON, CSV, XML, Parquet, and more.",
       slugs: [
         "data-format-converter",
-        "csv-to-markdown", "csv-html-table-converter",
+        "csv-to-markdown", "csv-html-table-converter", "csv-to-ndjson",
         "import-to-csv",
         "xlsx-csv-converter",
         "json-toon-converter",
