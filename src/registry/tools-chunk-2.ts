@@ -1142,6 +1142,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate QR codes for WiFi network credentials — scan to connect.',
     seoDescription: 'Free online WiFi QR Generator — Generate QR codes for WiFi network credentials to share with others. ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
 

@@ -332,7 +332,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "random-port-generator",
         "random-picker-generator", "random-username-generator",
         "nickname-generator", "emoji-picker", "otp-generator",
-        "wifi-qr-generator", "random-time-generator",
+        "random-time-generator",
         "random-sentence-generator",
 ],
     },
