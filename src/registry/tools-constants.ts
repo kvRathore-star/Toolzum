@@ -116,7 +116,7 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
   { slug: "bulk-pdf-flatten", name: "Bulk PDF Flatten", category: "PDF", description: "Flatten form fields and annotations in multiple PDFs at once. Convert fillable PDF forms into static documents in one batch. Everything runs locally in your browser — nothing is uploaded.", seoDescription: 'Free online Bulk PDF Flatten — Flatten form fields and annotations in multiple PDFs at once. Convert fillable PDF forms into static documents. ', parentSlug: "bulk-pdf-suite" },
 ];
 
-export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> = {
+export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; sourceCategory?: string }> = {
   "base64-encoder-decoder": { category: "developer", slug: "base64-encode-decode" },
   "jwt-decoder": { category: "developer", slug: "jwt-debugger" },
   "body-fat-estimator": { category: "health", slug: "body-fat-calculator" },
@@ -216,12 +216,12 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   // Duplicate — redirect to Design's contrast-ratio-checker
   "contrast-checker": { category: "design", slug: "contrast-ratio-checker" },
   // CSV tools moved from Utility/Developer to Converter
-  "tsv-csv-converter": { category: "converter", slug: "tsv-csv-converter" },
-  "ics-csv-converter": { category: "converter", slug: "ics-csv-converter" },
-  "vcf-csv-converter": { category: "converter", slug: "vcf-csv-converter" },
-  "csv-formatter": { category: "converter", slug: "csv-formatter" },
-  "csv-statistics": { category: "converter", slug: "csv-statistics" },
-  "csv-data-cleaner": { category: "converter", slug: "csv-data-cleaner" },
+  "tsv-csv-converter": { category: "converter", slug: "tsv-csv-converter", sourceCategory: "utility" },
+  "ics-csv-converter": { category: "converter", slug: "ics-csv-converter", sourceCategory: "utility" },
+  "vcf-csv-converter": { category: "converter", slug: "vcf-csv-converter", sourceCategory: "utility" },
+  "csv-formatter": { category: "converter", slug: "csv-formatter", sourceCategory: "utility" },
+  "csv-statistics": { category: "converter", slug: "csv-statistics", sourceCategory: "developer" },
+  "csv-data-cleaner": { category: "converter", slug: "csv-data-cleaner", sourceCategory: "developer" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },
@@ -230,9 +230,9 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "ai-video-subtitler": { category: "video", slug: "subtitle-generator" },
   "temporary-email-generator": { category: "privacy", slug: "privacy-cleaner" },
   // Video-to-audio redirects — from /video/ to /converter/ for proper routing
-  "mp4-to-mp3": { category: "converter", slug: "mp4-to-mp3" },
-  "mov-to-mp3": { category: "converter", slug: "mov-to-mp3" },
-  "webm-to-mp3": { category: "converter", slug: "webm-to-mp3" },
+  "mp4-to-mp3": { category: "converter", slug: "mp4-to-mp3", sourceCategory: "video" },
+  "mov-to-mp3": { category: "converter", slug: "mov-to-mp3", sourceCategory: "video" },
+  "webm-to-mp3": { category: "converter", slug: "webm-to-mp3", sourceCategory: "video" },
   // Suppressed data format tools — redirect to hub
   "json-to-xml": { category: "converter", slug: "data-format-converter" },
   "json-to-csv": { category: "converter", slug: "data-format-converter" },

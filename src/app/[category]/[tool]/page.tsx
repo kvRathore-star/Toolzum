@@ -13,17 +13,21 @@ function catToUrlSlug(cat: string): string {
 }
 
 export async function generateStaticParams() {
-  const redirectPages = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
+  const toolParams = toolsRegistry.map((tool) => ({
+    category: catToUrlSlug(tool.category),
+    tool: tool.slug,
+  }));
+  const redirectTargetParams = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
     category: catToUrlSlug(target.category),
     tool: slug,
   }));
-  return [
-    ...toolsRegistry.map((tool) => ({
-      category: catToUrlSlug(tool.category),
-      tool: tool.slug,
-    })),
-    ...redirectPages,
-  ];
+  const redirectSourceParams = Object.entries(TOOL_REDIRECTS)
+    .filter(([, target]) => target.sourceCategory)
+    .map(([slug, target]) => ({
+      category: catToUrlSlug(target.sourceCategory!),
+      tool: slug,
+    }));
+  return [...toolParams, ...redirectTargetParams, ...redirectSourceParams];
 }
 
 export async function generateMetadata(props: { params: Promise<{ category: string; tool: string }> }) {
