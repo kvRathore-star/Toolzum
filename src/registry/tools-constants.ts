@@ -215,6 +215,13 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "yes-no-picker": { category: "utility", slug: "random-decision-maker" },
   // Duplicate — redirect to Design's contrast-ratio-checker
   "contrast-checker": { category: "design", slug: "contrast-ratio-checker" },
+  // CSV tools moved from Utility/Developer to Converter
+  "tsv-csv-converter": { category: "converter", slug: "tsv-csv-converter" },
+  "ics-csv-converter": { category: "converter", slug: "ics-csv-converter" },
+  "vcf-csv-converter": { category: "converter", slug: "vcf-csv-converter" },
+  "csv-formatter": { category: "converter", slug: "csv-formatter" },
+  "csv-statistics": { category: "converter", slug: "csv-statistics" },
+  "csv-data-cleaner": { category: "converter", slug: "csv-data-cleaner" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },

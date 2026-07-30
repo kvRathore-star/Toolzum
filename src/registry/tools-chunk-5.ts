@@ -768,7 +768,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     id: "csv-formatter-hub",
     name: "CSV Output Tools",
     slug: "csv-formatter",
-    category: "Utility",
+    category: "Converter",
     description: 'Convert CSV data to Markdown tables, NDJSON, SQL INSERT statements, HTML tables, or analyze statistics and find data quality issues.',
     seoDescription: 'Free online CSV Output Tools — Convert CSV to Markdown, NDJSON, SQL, HTML tables, or analyze statistics and data quality. ',
     dependencies: "None",
