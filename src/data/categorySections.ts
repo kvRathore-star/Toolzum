@@ -697,6 +697,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Audio & Video Converters",
       description: "Convert audio files between popular formats and convert video to/from various formats for playback on any device.",
       slugs: [
+        "audio-converter",
         "video-converter",
         "gif-to-mp4",
         "mkv-to-mp4", "mov-to-mp4", "webm-to-mp4", "avi-to-mp4",
