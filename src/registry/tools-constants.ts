@@ -213,6 +213,8 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   // Merged into Random Decision Maker — redirect to unified tool
   "decision-maker": { category: "utility", slug: "random-decision-maker" },
   "yes-no-picker": { category: "utility", slug: "random-decision-maker" },
+  // Duplicate — redirect to Design's contrast-ratio-checker
+  "contrast-checker": { category: "design", slug: "contrast-ratio-checker" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },

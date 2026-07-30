@@ -416,7 +416,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Pick colors, generate palettes, and check contrast ratios for accessible designs.",
       slugs: [
         "color-picker", "color-palette-generator",
-        "gradient-generator",         "contrast-checker",
+        "gradient-generator",
       ],
     },
     {

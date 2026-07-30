@@ -284,6 +284,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Contrast Checker \u2014 Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
 

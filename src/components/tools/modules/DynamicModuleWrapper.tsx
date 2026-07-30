@@ -781,7 +781,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // Miscellaneous Tools 1
   'color-picker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ColorPicker })), { ssr: false, loading: () => <DynamicImportFallback slug="color-picker" /> }),
   'gradient-generator': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.GradientGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="gradient-generator" /> }),
-  'contrast-checker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ContrastChecker })), { ssr: false, loading: () => <DynamicImportFallback slug="contrast-checker" /> }),
   'counter-tool': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.CounterTool })), { ssr: false, loading: () => <DynamicImportFallback slug="counter-tool" /> }),
   'list-randomizer': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListRandomizer })), { ssr: false, loading: () => <DynamicImportFallback slug="list-randomizer" /> }),
   'list-sorter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListSorter })), { ssr: false, loading: () => <DynamicImportFallback slug="list-sorter" /> }),
