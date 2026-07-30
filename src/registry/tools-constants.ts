@@ -227,6 +227,10 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "color-palette-generator": { category: "design", slug: "color-palette-generator", sourceCategory: "utility" },
   "gradient-generator": { category: "design", slug: "gradient-generator", sourceCategory: "utility" },
   "data-type-converter": { category: "converter", slug: "data-type-converter", sourceCategory: "utility" },
+  // CSV-adjacent tools moved from Utility CSV Tools → Developer
+  "phone-parser": { category: "developer", slug: "phone-parser", sourceCategory: "utility" },
+  "mac-vendor-lookup": { category: "developer", slug: "mac-vendor-lookup", sourceCategory: "utility" },
+  "large-text-viewer": { category: "developer", slug: "large-text-viewer", sourceCategory: "utility" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },

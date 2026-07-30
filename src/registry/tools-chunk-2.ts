@@ -1149,7 +1149,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     id: "ou-2",
     name: "Phone Number Parser",
     slug: "phone-parser",
-    category: "Utility",
+    category: "Developer",
     description: 'Parse and validate international phone numbers with country detection.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
@@ -1157,8 +1157,8 @@ export const entries_chunk_2: ToolMetadata[] = [
   {
 
     id: "ou-3",
-    name: "OTP Generator",
-    slug: "otp-generator",
+    name: "Slugify",
+    slug: "slugify-tool",
     category: "Utility",
     description: 'Generate one-time passwords with configurable length and character type. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online OTP Generator — Generate one-time passwords with configurable length and character type. ',
@@ -1199,7 +1199,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     id: "mg-3",
     name: "MAC Vendor Lookup",
     slug: "mac-vendor-lookup",
-    category: "Utility",
+    category: "Developer",
     description: 'Look up device manufacturer from MAC address OUI prefix.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",

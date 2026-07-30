@@ -336,7 +336,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     id: "ce-5",
     name: "Large Text File Viewer",
     slug: "large-text-viewer",
-    category: "Utility",
+    category: "Developer",
     description: 'View and search large text files (logs, CSVs, JSON) up to 100K characters in the browser with text search and match counting. No file upload needed — all client-side.',
     seoDescription: 'Free online Large Text File Viewer — View and search large text files up to 100K characters with text search. All client-side, no uploads. ',
     dependencies: "FileReader API",
