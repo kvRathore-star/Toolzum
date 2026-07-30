@@ -318,7 +318,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "qr-code-generator", "barcode-generator",
  "wheel-of-names",
         "counter-tool", "list-randomizer", "list-sorter",
-        "decision-maker",
+        "random-decision-maker",
         "coin-flipper", "dice-roller",
         "ulid-generator",
               "random-color-generator",
