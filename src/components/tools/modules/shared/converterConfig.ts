@@ -8,6 +8,7 @@ export type ConverterConfigEntry = {
 export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // Consolidated converters
   "video-converter": { category: "video-format", description: "Convert between MKV, MP4, MOV, WebM, and AVI video formats." },
+  "video-converter-tool": { category: "video-format", description: "Convert video files between MP4, AVI, MKV, MOV, WebM, and more formats." },
   "audio-converter": { category: "audio-format", description: "Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats." },
   "mp4-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MP4 video files." },
   "mov-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MOV video files." },

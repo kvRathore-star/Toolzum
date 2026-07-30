@@ -524,7 +524,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "294",
     name: "Bulk CSV/Excel to JSON",
     slug: "bulk-csv-excel-to-json",
-    category: "Developer",
+    category: "Converter",
     description: "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk CSV/Excel to JSON — Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. ',
     dependencies: "SheetJS",

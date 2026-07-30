@@ -1558,7 +1558,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     id: "du-6",
     name: "CSV Analyzer",
     slug: "csv-analyzer",
-    category: "Developer",
+    category: "Utility",
     description: 'Analyze CSV structure — column types, counts, unique values, and empty cells.',
     seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
