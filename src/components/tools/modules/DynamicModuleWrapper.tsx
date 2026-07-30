@@ -785,8 +785,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'counter-tool': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.CounterTool })), { ssr: false, loading: () => <DynamicImportFallback slug="counter-tool" /> }),
   'list-randomizer': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListRandomizer })), { ssr: false, loading: () => <DynamicImportFallback slug="list-randomizer" /> }),
   'list-sorter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListSorter })), { ssr: false, loading: () => <DynamicImportFallback slug="list-sorter" /> }),
-  'decision-maker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.DecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="decision-maker" /> }),
-  'yes-no-picker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.YesNoPicker })), { ssr: false, loading: () => <DynamicImportFallback slug="yes-no-picker" /> }),
+  'decision-maker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="random-decision-maker" /> }),
+  'yes-no-picker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="random-decision-maker" /> }),
 
   'number-guessing-game': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.NumberGuessingGame })), { ssr: false, loading: () => <DynamicImportFallback slug="number-guessing-game" /> }),
   'rock-paper-scissors': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.RockPaperScissors })), { ssr: false, loading: () => <DynamicImportFallback slug="rock-paper-scissors" /> }),

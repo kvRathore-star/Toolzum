@@ -194,21 +194,64 @@ export function RandomPickerGenerator() {
   );
 }
 
-// === 7. RandomDecisionMaker ===
-const DECISIONS = ['Yes', 'No', 'Maybe', 'Ask Again', 'Definitely', 'Absolutely Not', 'Try Later', 'I Doubt It', 'Go For It!', 'Not Now', 'Without a Doubt', 'Better Not Tell You'];
+// === 7. RandomDecisionMaker (unified — replaces DecisionMaker & YesNoPicker) ===
 export function RandomDecisionMaker() {
-  const [question, setQuestion] = useState(''); const [spinning, setSpinning] = useState(false); const [decision, setDecision] = useState(''); const [history, setHistory] = useState<string[]>([]);
-  const decide = () => { if (!question.trim()) return; setSpinning(true); setDecision(''); let count = 0; const interval = setInterval(() => { setDecision(randItem(DECISIONS)); count++; if (count > 12) { clearInterval(interval); setSpinning(false); setHistory(prev => [`Q: ${question} → ${randItem(DECISIONS)}`, ...prev].slice(0, 10)); } }, 100); };
+  const [question, setQuestion] = useState('');
+  const [options, setOptions] = useState('Yes\nNo\nMaybe');
+  const [choice, setChoice] = useState('');
+  const [spinning, setSpinning] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [history, setHistory] = useState<string[]>([]);
+
+  const decide = () => {
+    const items = options.split('\n').map(s => s.trim()).filter(Boolean);
+    if (items.length === 0) return;
+    setSpinning(true);
+    setChoice('');
+    let i = 0;
+    const interval = setInterval(() => {
+      setChoice(items[i % items.length]);
+      i++;
+      if (i > items.length * 5) {
+        clearInterval(interval);
+        setSpinning(false);
+        const final = items[Math.floor(Math.random() * items.length)];
+        setChoice(final);
+        const label = question.trim() ? `Q: ${question} → ${final}` : final;
+        setHistory(prev => [label, ...prev].slice(0, 10));
+      }
+    }, 80);
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !choice) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const cx = canvas.width / 2, cy = canvas.height / 2, r = 70;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#3b82f6';
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(choice, cx, cy);
+  }, [choice]);
 
   return (
     <Section title="Random Decision Maker">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
-          <Input label="Your Question" value={question} onChange={v => setQuestion(v)} placeholder="Ask a yes/no question..." />
-          <button onClick={decide} disabled={spinning} className={`px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors ${spinning ? 'opacity-60' : ''}`}>{spinning ? 'Thinking...' : 'Ask the Magic 8-Ball'}</button>
+          <Input label="What are you deciding? (optional)" value={question} onChange={v => setQuestion(v)} placeholder="e.g. Should I go out tonight?" />
+          <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
+          <button onClick={decide} disabled={spinning} className={`px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors ${spinning ? 'opacity-60' : ''}`}>{spinning ? 'Spinning...' : 'Decide'}</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
-          {decision ? (<><p className="text-5xl font-extrabold text-amber-500 text-center">{decision}</p><button onClick={() => { clipboardWrite(decision); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm text-center">Ask a question to get started</p>)}
+          <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
+          {choice && <button onClick={() => { clipboardWrite(choice); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3"><Copy size={14} /></button>}
         </div>
       </div>
       {history.length > 0 && (<div className="border-t border-[var(--border-subtle)] pt-4"><div className="flex items-center justify-between mb-3"><h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">History</h4><button onClick={() => setHistory([])} className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent)]"><RotateCcw size={12} /> Clear</button></div><div className="space-y-1">{history.map((h, i) => (<div key={i} className="p-2 bg-[var(--bg-surface)] rounded-lg text-xs text-[var(--text-secondary)]">{h}</div>))}</div></div>)}

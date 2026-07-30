@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
-import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
+import { ac, btnClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
 
@@ -67,67 +67,7 @@ export function ListSorter() {
     </Section>
   );
 }
-// --- DecisionMaker ---
-export function DecisionMaker() {
-  const clr = ac('DecisionMaker');
-  const [options, setOptions] = useState('');
-  const [choice, setChoice] = useState('');
-  const [spinning, setSpinning] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pick = () => {
-    const items = options.split('\n').map(s => s.trim()).filter(Boolean);
-    if (items.length === 0) return;
-    setSpinning(true);
-    let i = 0;
-    const interval = setInterval(() => {
-      setChoice(items[i % items.length]);
-      i++;
-      if (i > items.length * 5) { clearInterval(interval); setSpinning(false); setChoice(items[Math.floor(Math.random() * items.length)]); }
-    }, 80);
-  };
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || !choice) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const cx = canvas.width / 2, cy = canvas.height / 2, r = 70;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = '#3b82f6';
-    ctx.fill();
-    ctx.fillStyle = '#fff';
-    ctx.font = 'bold 14px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(choice, cx, cy);
-  }, [choice]);
-  return (
-    <Section title="Decision Maker">
-      <Input label="Enter options (one per line)" value={options} onChange={setOptions} rows={5} />
-      <button className={btnClass(clr)} onClick={pick} disabled={spinning}>{spinning ? 'Spinning...' : 'Pick One'}</button>
-      <div className="flex justify-center"><canvas ref={canvasRef} width={160} height={160} className="max-w-full" /></div>
-    </Section>
-  );
-}
-// --- YesNoPicker ---
-export function YesNoPicker() {
-  const clr = ac('YesNoPicker');
-  const [result, setResult] = useState('');
-  const outcomes = ['Yes', 'No', 'Maybe', 'Ask again later', 'Definitely', "Don't count on it", 'Absolutely', 'Very doubtful', 'Outlook good', 'Cannot predict now'];
-  const pick = () => {
-    let i = 0;
-    const interval = setInterval(() => { setResult(outcomes[i % outcomes.length]); i++; if (i > outcomes.length * 3) clearInterval(interval); }, 80);
-  };
-  return (
-    <Section title="Yes / No / Maybe">
-      <div className="text-center">
-        <div className="text-5xl font-bold mb-4 text-blue-600 h-16">{result}</div>
-        <button className={btnClass(clr)} onClick={pick}>Ask</button>
-      </div>
-    </Section>
-  );
-}
+
 // --- CoinFlipper ---
 export function CoinFlipper() {
   const clr = ac('CoinFlipper');

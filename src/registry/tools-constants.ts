@@ -210,6 +210,9 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string }> 
   "wifi-qr-generator": { category: "utility", slug: "qr-code-generator" },
   "bulk-link-shortener": { category: "utility", slug: "bulk-url-shortener" },
   "bulk-short-link-generator": { category: "utility", slug: "bulk-url-shortener" },
+  // Merged into Random Decision Maker — redirect to unified tool
+  "decision-maker": { category: "utility", slug: "random-decision-maker" },
+  "yes-no-picker": { category: "utility", slug: "random-decision-maker" },
   // Coming-soon stubs — redirect to nearest working tool or category
   "background-remover": { category: "image", slug: "ai-bg-changer" },
   "bg-changer": { category: "image", slug: "ai-bg-changer" },
