@@ -402,7 +402,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "csv-row-sorter",
         "csv-json-row-generator",
         "line-sorter", "list-converter", "phone-parser",
-        "mac-vendor-lookup", "column-renamer", "data-type-converter",
+        "mac-vendor-lookup", "column-renamer",
         "format-validator", "pivot-generator", "row-filter",
       ],
     },
