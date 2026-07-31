@@ -551,12 +551,12 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "bulk-exif-stripper-injector": ["blur-face", "bulk-face-anonymizer"],
 
   // ── Audio Converters ──────────────────────────────────────────
-  "audio-format-converter": ["bulk-audio-converter", "mp3-compressor"],
-  "bulk-audio-converter": ["audio-format-converter", "bulk-mp3-to-wav"],
+  "audio-converter": ["bulk-audio-converter", "mp3-compressor"],
+  "bulk-audio-converter": ["audio-converter", "bulk-mp3-to-wav"],
   "apple-music-preview-extractor": ["audio-cutter"],
 
   // ── Audio Compressors ─────────────────────────────────────────
-  "mp3-compressor": ["audio-compressor", "audio-format-converter"],
+  "mp3-compressor": ["audio-compressor", "audio-converter"],
   "audio-compressor": ["mp3-compressor", "audio-equalizer"],
 
   // ── Audio Trim & Cut ─────────────────────────────────────────
@@ -573,8 +573,8 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "bulk-audio-normalizer": ["audio-compressor", "bulk-audio-converter"],
 
   // ── AI & Speech Tools ────────────────────────────────────────
-  "text-to-speech": ["speech-to-text"],
-  "speech-to-text": ["text-to-speech", "voice-recorder"],
+  "text-to-speech-tts": ["speech-to-text"],
+  "speech-to-text": ["text-to-speech-tts", "voice-recorder"],
 
   // ── Other Audio Tools ────────────────────────────────────────
   "bulk-mp3-to-wav": ["bulk-wav-to-mp3", "bulk-audio-converter"],
@@ -582,13 +582,13 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
 
   // ── Video Compressors ─────────────────────────────────────────
   "video-compressor": ["bulk-video-compressor", "video-converter", "video-trimmer"],
-  "bulk-video-compressor": ["video-compressor", "bulk-mp4-compressor", "bulk-video-size-reducer"],
-  "bulk-video-size-reducer": ["bulk-video-compressor", "video-compressor", "bulk-mp4-compressor"],
+  "bulk-video-compressor": ["video-compressor", "bulk-compress-mp4", "bulk-video-size-reducer"],
+  "bulk-video-size-reducer": ["bulk-video-compressor", "video-compressor", "bulk-compress-mp4"],
 
   // ── Video Converters ─────────────────────────────────────────
-  "video-converter": ["video-compressor", "video-to-gif", "video-to-mp3-converter"],
+  "video-converter": ["video-compressor", "video-to-gif", "video-to-mp3"],
   "video-to-gif": ["video-trimmer", "crop-video", "video-converter"],
-  "video-to-mp3-converter": ["video-converter", "mute-video"],
+  "video-to-mp3": ["video-converter", "mute-video"],
 
   // ── Video Trimmers ────────────────────────────────────────────
   "crop-video": ["video-trimmer", "video-filters", "video-compressor"],
@@ -597,7 +597,7 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   // ── Video Editors & Effects ──────────────────────────────────
   "video-speed-changer": ["reverse-video", "video-trimmer", "video-filters"],
   "reverse-video": ["video-speed-changer", "video-filters"],
-  "mute-video": ["video-to-mp3-converter", "video-watermark-adder"],
+  "mute-video": ["video-to-mp3", "video-watermark-adder"],
   "video-stabilizer": ["video-trimmer", "video-filters", "video-compressor"],
   "video-filters": ["video-stabilizer", "video-watermark-adder", "video-speed-changer"],
   "video-screenshot": ["video-trimmer", "video-filters"],
@@ -611,10 +611,10 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "bulk-subtitle-time-shifter": ["subtitle-translator", "bulk-video-subtitle-burner"],
 
   // ── Other Video Tools ─────────────────────────────────────────
-  "bulk-mkv-to-mp4": ["bulk-mp4-compressor", "video-converter"],
+  "bulk-mkv-to-mp4": ["bulk-compress-mp4", "video-converter"],
 
-  // bulk-mp4-compressor merged from two sections (compressors + other)
-  "bulk-mp4-compressor": ["bulk-video-compressor", "bulk-video-size-reducer", "bulk-mkv-to-mp4", "video-compressor"],
+  // bulk-compress-mp4 merged from two sections (compressors + other)
+  "bulk-compress-mp4": ["bulk-video-compressor", "bulk-video-size-reducer", "bulk-mkv-to-mp4", "video-compressor"],
 
   // ── Text: Counters & Analyzers ─────────────────────────────────
   "word-counter": ["writing-tools", "character-counter", "text-cleaner"],
