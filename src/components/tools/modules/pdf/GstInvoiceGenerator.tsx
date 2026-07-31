@@ -46,7 +46,7 @@ function numberToWords(num: number): string {
     return s.trim();
   }
   let rupees = Math.floor(num);
-  let paise = Math.round((num - rupees) * 100);
+  const paise = Math.round((num - rupees) * 100);
   let word = "";
   if (rupees >= 10000000) { word += c(Math.floor(rupees / 10000000)) + " Crore "; rupees %= 10000000; }
   if (rupees >= 100000) { word += c(Math.floor(rupees / 100000)) + " Lakh "; rupees %= 100000; }

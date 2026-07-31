@@ -16,7 +16,7 @@ export function ScssToCssConverter() {
   const [output, setOutput] = useState('');
 
   const convert = () => {
-    let result = input
+    const result = input
       .replace(/\$(\w+):\s*([^;]+);/g, '/* $1: $2 */')
       .replace(/&/g, '')
       .replace(/\n\s*/g, ' ')
@@ -236,7 +236,7 @@ export function TypeScriptFormatter() {
   const [output, setOutput] = useState('');
 
   const format = () => {
-    let result = input.replace(/;\s*/g, ';\n').replace(/\{\s*/g, ' {\n').replace(/\}\s*/g, '}\n').replace(/\n\s*\n/g, '\n').trim();
+    const result = input.replace(/;\s*/g, ';\n').replace(/\{\s*/g, ' {\n').replace(/\}\s*/g, '}\n').replace(/\n\s*\n/g, '\n').trim();
     const lines = result.split('\n');
     let depth = 0;
     const formatted = lines.map(line => {

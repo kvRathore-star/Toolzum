@@ -110,7 +110,7 @@ export function ColorConverter() {
     let { r, g, b } = toRgb(h);
     r /= 255; g /= 255; b /= 255;
     const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
-    let hh = 0, s = 0, l = (mx + mn) / 2;
+    let hh = 0, s = 0; const l = (mx + mn) / 2;
     if (d) {
       s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
       hh = mx === r ? ((g - b) / d + (g < b ? 6 : 0)) * 60 : mx === g ? ((b - r) / d + 2) * 60 : ((r - g) / d + 4) * 60;
@@ -118,7 +118,7 @@ export function ColorConverter() {
     return { h: Math.round(hh), s: Math.round(s * 100), l: Math.round(l * 100) };
   };
   const toCmyk = (h: string) => {
-    let { r, g, b } = toRgb(h);
+    const { r, g, b } = toRgb(h);
     const c = 1 - r / 255, m = 1 - g / 255, y = 1 - b / 255, k = Math.min(c, m, y);
     return { c: Math.round((c - k) / (1 - k) * 100), m: Math.round((m - k) / (1 - k) * 100), y: Math.round((y - k) / (1 - k) * 100), k: Math.round(k * 100) };
   };
@@ -126,7 +126,7 @@ export function ColorConverter() {
     let { r, g, b } = toRgb(h);
     r /= 255; g /= 255; b /= 255;
     const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
-    let hh = 0, s = mx ? d / mx : 0, v = mx;
+    let hh = 0; const s = mx ? d / mx : 0, v = mx;
     if (d) hh = mx === r ? ((g - b) / d + (g < b ? 6 : 0)) * 60 : mx === g ? ((b - r) / d + 2) * 60 : ((r - g) / d + 4) * 60;
     return { h: Math.round(hh), s: Math.round(s * 100), v: Math.round(v * 100) };
   };
@@ -175,7 +175,7 @@ export function ColorPaletteGenerator() {
     const rad = (deg) * Math.PI / 180;
     const rr = r / 255, gg = g / 255, bb = b / 255;
     const mx = Math.max(rr, gg, bb), mn = Math.min(rr, gg, bb), d = mx - mn;
-    let hh = 0, s = 0, l = (mx + mn) / 2;
+    let hh = 0, s = 0; const l = (mx + mn) / 2;
     if (d) { s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn); hh = mx === rr ? ((gg - bb) / d + (gg < bb ? 6 : 0)) * 60 : mx === gg ? ((bb - rr) / d + 2) * 60 : ((rr - gg) / d + 4) * 60; }
     const newH = (hh + deg) % 360;
     const c2 = (1 - Math.abs(2 * l - 1)) * s;

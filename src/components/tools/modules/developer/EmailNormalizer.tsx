@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
 function normalizeEmail(email: string): string {
-  let e = email.trim().toLowerCase();
+  const e = email.trim().toLowerCase();
   const atIdx = e.indexOf('@');
   if (atIdx === -1) return e;
   let local = e.slice(0, atIdx);

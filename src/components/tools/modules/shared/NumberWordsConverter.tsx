@@ -21,7 +21,7 @@ const toRoman = (n: number): string => {
 
 const fromRoman = (s: string): number => {
   const vals: Record<string, number> = { M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1 };
-  let t = 0, i = s.toUpperCase();
+  let t = 0; const i = s.toUpperCase();
   for (let c = 0; c < i.length; c++) {
     const cur = vals[i[c]] || 0, next = vals[i[c + 1]] || 0;
     t += cur < next ? -cur : cur;
@@ -52,7 +52,7 @@ const toWords = (n: number): string => {
     return parts.join(' ');
   };
   const groups = ['', 'Thousand', 'Million', 'Billion'];
-  let result: string[] = [], remaining = Math.floor(n);
+  const result: string[] = []; let remaining = Math.floor(n);
   for (let g = 0; remaining > 0 && g < groups.length; g++) {
     const part = remaining % 1000;
     if (part) {

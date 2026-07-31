@@ -4,8 +4,8 @@ async function verifyRegistry() {
   console.log("Starting rigorous diagnostic pass over 200 tools...");
   
   let errors = 0;
-  let missingModules = 0;
-  let categories = new Set();
+  const missingModules = 0;
+  const categories = new Set();
   
   for (const tool of toolsRegistry) {
     if (!tool.name || tool.name.trim() === '') {

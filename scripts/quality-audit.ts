@@ -227,7 +227,7 @@ function discoverModules(): { slug: string; filepath: string }[] {
     const fp = resolve(modulesDir, f);
     if (!statSync(fp).isFile()) continue;
 
-    let slug = f.replace(/\.tsx$/, "").replace(/\.ts$/, "");
+    const slug = f.replace(/\.tsx$/, "").replace(/\.ts$/, "");
     // Handle multi-tool files: Calculators.tsx, CodeKit.tsx, etc.
     modules.push({ slug: slug.toLowerCase(), filepath: fp });
   }

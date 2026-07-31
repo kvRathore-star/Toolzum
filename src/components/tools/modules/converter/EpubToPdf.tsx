@@ -288,7 +288,7 @@ export default function EpubToPdf() {
       };
 
       if (includeCover && parsedData.title) {
-        let currentPage = addNewPage();
+        const currentPage = addNewPage();
         const titleY = pageHeight / 2 + 40;
         currentPage.drawText(parsedData.title, {
           x: marginPt,

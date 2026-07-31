@@ -786,7 +786,7 @@ export function WaterIntakeCalculator() {
     const w = parseFloat(weight) || 0;
     const act = parseFloat(activity) || 0;
     if (!w) { setResult(''); return; }
-    let baseMl = w * 35;
+    const baseMl = w * 35;
     const actMl = Math.round(act * 12);
     const climateFactor = climate === 'hot' ? 1.3 : climate === 'cold' ? 0.9 : 1;
     const total = Math.round((baseMl + actMl) * climateFactor);

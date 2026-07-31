@@ -69,7 +69,7 @@ function decompressPalmDoc(compressed: Uint8Array): Uint8Array {
     if (c === 0x00) {
       out.push(0x00);
     } else if (c <= 0x08) {
-      let length = c;
+      const length = c;
       let offset: number;
       if (c === 0x01 || c === 0x08) {
         if (ip + 1 >= compressed.length) break;

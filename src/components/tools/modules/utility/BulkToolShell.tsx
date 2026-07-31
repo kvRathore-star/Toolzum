@@ -278,7 +278,7 @@ export function BulkToolShell({
             <Cpu className="w-3.5 h-3.5" />
             <span>Processing mode: <strong>{isPro ? `Parallel (${maxConcurrency} threads)` : 'Sequential (1 file at a time)'}</strong></span>
             {!isPro && (
-              <a href="/pricing" className="text-amber-500 hover:underline ml-auto">Upgrade to Pro for 6× parallel processing</a>
+              <Link href="/pricing" className="text-amber-500 hover:underline ml-auto">Upgrade to Pro for 6× parallel processing</Link>
             )}
           </div>
         )}
@@ -300,12 +300,12 @@ export function BulkToolShell({
                   {progress.done}/{progress.total} files completed
                 </p>
               </div>
-              <a
+              <Link
                 href="/pricing"
                 className="shrink-0 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold rounded-[var(--radius-lg)] transition-all hover:scale-105 shadow-sm"
               >
                 ⚡ Upgrade to Pro for 10× faster Multi-Threaded Parallel Processing
-              </a>
+              </Link>
             </div>
             <div className="h-1.5 w-full bg-amber-200/50 dark:bg-amber-900/30 rounded-full overflow-hidden">
               <div

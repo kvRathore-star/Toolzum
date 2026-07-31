@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ShieldCheck, Eye, EyeOff } from 'lucide-react';
-// @ts-ignore
+// @ts-expect-error zxcvbn has no bundled types
 import zxcvbn from 'zxcvbn';
 
 export default function PasswordStrengthChecker() {

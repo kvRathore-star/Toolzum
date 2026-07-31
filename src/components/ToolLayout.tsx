@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -25,9 +26,9 @@ export function ToolLayout({
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumb + Category */}
       <nav className="mb-6 flex items-center gap-2 text-sm text-zinc-500">
-        <a href="/" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+        <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-100">
           Toolzum
-        </a>
+        </Link>
         <span>/</span>
         <span className="capitalize">{category}</span>
         <span>/</span>

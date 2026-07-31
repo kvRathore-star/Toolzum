@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback, useEffect } from 'react';
+import NextLink from 'next/link';
 import { Copy, Download, Hash, Type, BarChart3, Search, FileText, Globe, Edit3, ListOrdered, GitCompare, ArrowLeftRight, SpellCheck, Scissors, Trash2, Link, Rows3, Sigma } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
@@ -444,7 +445,7 @@ export function DuplicateWordRemover() {
 
   return (
     <Section title="Duplicate Word Remover">
-      <p className="text-sm text-[var(--text-secondary)]">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <a href="/developer/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</a>.</p>
+      <p className="text-sm text-[var(--text-secondary)]">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4"><Input label={`Text (${inWords} words)`} value={text} onChange={setText} rows={6} /><button onClick={remove} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicate Words</button></div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste text to remove duplicate words</p>)}</div>

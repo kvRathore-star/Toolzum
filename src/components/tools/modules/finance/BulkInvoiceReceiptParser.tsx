@@ -11,7 +11,7 @@ export default function BulkInvoiceReceiptParser() {
       accept="image/*,.pdf"
       processFile={async (file, config) => {
         const lang = (config as Record<string, string>).lang || 'eng';
-        let imageFile = file;
+        const imageFile = file;
         if (file.name.endsWith('.pdf')) {
           const { PDFDocument } = await import('pdf-lib');
           const arrayBuf = await file.arrayBuffer();

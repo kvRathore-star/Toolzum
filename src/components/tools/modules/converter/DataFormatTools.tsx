@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { getErrorMessage } from '@/utils/error';
+import YAML from 'js-yaml';
+import Link from 'next/link';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -139,7 +141,7 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
       } else if (mode === 'yaml-to-toon') {
         let yaml: any;
         try {
-          yaml = require('js-yaml').load(input);
+          yaml = YAML.load(input);
         } catch {
           yaml = JSON.parse(input);
         }
@@ -150,7 +152,7 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
         setOutput(JSON.stringify(obj, null, 2));
       } else {
         const obj = detoonify(input);
-        const yaml = require('js-yaml').dump(obj, { indent: 2, lineWidth: 120, noRefs: true });
+        const yaml = YAML.dump(obj, { indent: 2, lineWidth: 120, noRefs: true });
         setOutput(yaml);
       }
     } catch (e: unknown) {
@@ -328,7 +330,7 @@ export function CsvHtmlTableConverter() {
       rows.forEach(tr => {
         const cells = tr.querySelectorAll('th, td');
         const row = Array.from(cells).map(c => {
-          let text = c.textContent || '';
+          const text = c.textContent || '';
           return text.includes(',') ? `"${text}"` : text;
         }).join(',');
         result.push(row);
@@ -414,7 +416,7 @@ export function YamlValidator() {
         <Input label="YAML Input" value={input} onChange={setInput} rows={6} placeholder="name: Alice\nage: 30" />
         <button onClick={process} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">{mode === 'validate' ? 'Validate' : mode === 'to-json' ? 'Convert to JSON' : 'Minify'}</button>
         <Output value={output} label={mode === 'validate' ? 'Validation Results' : mode === 'to-json' ? 'JSON Output' : 'Minified YAML'} />
-        <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <a href="/tools/yaml-json-converter" className="text-blue-600 dark:text-blue-400 hover:underline">YAML↔JSON Converter</a>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <Link href="/converter/yaml-json-converter" className="text-blue-600 dark:text-blue-400 hover:underline">YAML↔JSON Converter</Link>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
       </Section>
     </div>
   );

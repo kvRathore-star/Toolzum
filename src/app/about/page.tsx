@@ -8,6 +8,7 @@ import {
   Lock,
   Ban
 } from "lucide-react";
+import Link from "next/link";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
 
 const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
@@ -162,11 +163,11 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="mt-6">
-            <a href="/contact">
+            <Link href="/contact">
               <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
                 <HelpCircle className="w-4 h-4" /> Send Feedback
               </div>
-            </a>
+            </Link>
           </div>
         </div>
 

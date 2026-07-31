@@ -55,6 +55,9 @@ const SkeletonLoader = () => (
   </div>
 );
 
+// Heterogeneous registry — dynamic() returns vary per-component prop types; all are
+// rendered here with no props, so `any` is the honest common type.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'passport-photo-india': dynamic(() => import('@/components/tools/modules/indian-utilities/PassportPhotoIndia'), { 
     ssr: false, 

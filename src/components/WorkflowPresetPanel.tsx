@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { Save, FolderOpen, Trash2, X, Crown, Check, ChevronDown, Lock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useWorkflowPresets } from '@/hooks/useWorkflowPresets';
@@ -175,12 +176,12 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                         </div>
                       ))}
                     </div>
-                    <a
+                    <Link
                       href="/pricing"
                       className="block text-center text-xs text-[var(--accent)] hover:underline font-medium pt-1"
                     >
                       Upgrade to Pro →
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>

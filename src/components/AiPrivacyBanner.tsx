@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export function AiPrivacyBanner({ service = 'Google Gemini', serverLabel = 'our server' }: { service?: string; serverLabel?: string }) {
   return (
     <div className="flex items-start gap-3 p-4 rounded-[var(--radius-xl)] bg-amber-500/10 border border-amber-500/20 mb-6">
@@ -10,7 +12,7 @@ export function AiPrivacyBanner({ service = 'Google Gemini', serverLabel = 'our 
         <p className="font-medium mb-0.5">Data leaves your browser</p>
         <p className="text-amber-500/80 dark:text-amber-400/80 text-xs leading-relaxed">
           This tool sends your content to {serverLabel} for processing with {service}.{" "}
-           <a href="/privacy-policy" className="underline hover:no-underline">Privacy policy</a>
+           <Link href="/privacy-policy" className="underline hover:no-underline">Privacy policy</Link>
         </p>
       </div>
     </div>

@@ -160,7 +160,7 @@ function HtmlToMarkdownTab() {
     if (!input.trim()) { setOutput(''); return; }
     setIsProcessing(true);
     try {
-      // @ts-ignore
+      // @ts-expect-error turndown has no bundled types
       const TurndownService = (await import('turndown')).default;
       const turndown = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
       const result = turndown.turndown(input);

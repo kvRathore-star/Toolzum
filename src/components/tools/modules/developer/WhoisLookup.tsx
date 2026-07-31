@@ -114,7 +114,7 @@ export default function WhoisLookup() {
     setResult(null);
 
     try {
-      let res = await fetch(`https://rdap.org/domain/${target}`);
+      const res = await fetch(`https://rdap.org/domain/${target}`);
       if (!res.ok) throw new Error('RDAP failed');
       const data: RDAPResponse = await res.json();
       setResult(parseRDAP(data, target));

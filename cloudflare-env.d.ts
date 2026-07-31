@@ -19,7 +19,7 @@ declare global {
   }
 
   namespace NodeJS {
-    interface ProcessEnv extends Cloudflare.Env {}
+    type ProcessEnv = Cloudflare.Env;
   }
 }
 

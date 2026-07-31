@@ -781,7 +781,7 @@ function parseExpr(input: string): number {
       pos++;
       return parseFactor();
     }
-    let start = pos;
+    const start = pos;
     while (pos < s.length && (s[pos] >= '0' && s[pos] <= '9' || s[pos] === '.')) pos++;
     if (start === pos) throw new Error('Expected number');
     return parseFloat(s.slice(start, pos));

@@ -48,7 +48,7 @@ export default function CompressImageTo50kb() {
       }
 
       // Iterative compression loop to hit under 50KB
-      let maxAttempts = 5;
+      const maxAttempts = 5;
       let attempt = 0;
       
       while (compressedFile.size > targetSize && attempt < maxAttempts) {

@@ -236,7 +236,7 @@ export default function ProductPage() {
               </div>
               
               <div className="space-y-3 text-[var(--text-secondary)]">
-                <div className="text-[var(--accent)] font-semibold">// Running local sandbox compiler...</div>
+                <div className="text-[var(--accent)] font-semibold">{"// Running local sandbox compiler..."}</div>
                 <div>{"{"}</div>
                 <div className="pl-4">"status": "ready",</div>
                 <div className="pl-4">"environment": "client_sandbox",</div>

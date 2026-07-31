@@ -8,7 +8,7 @@ export default function SalaryCalculator() {
 
   // Simple progressive standard income tax logic for simulation
   const calculateTax = (income: number) => {
-    let taxable = Math.max(0, income - deductions);
+    const taxable = Math.max(0, income - deductions);
     let tax = 0;
     
     if (taxable > 1500000) {

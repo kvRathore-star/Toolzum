@@ -15,6 +15,7 @@ import {
   Info,
   ExternalLink
 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
 
@@ -321,14 +322,14 @@ export default function ChromeExtensionPage() {
             Available Extension Tools
           </h2>
           <div className="space-y-4">
-            <a href="/extension/browser-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
+            <Link href="/extension/browser-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
               <h4 className="font-semibold group-hover:text-[var(--accent)] transition-colors">Browser Extension</h4>
               <p className="text-sm text-[var(--text-secondary)] mt-1">Access Toolzum tools directly from your browser toolbar — color picker, QR generator, and more.</p>
-            </a>
-            <a href="/extension/screen-recorder-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
+            </Link>
+            <Link href="/extension/screen-recorder-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
               <h4 className="font-semibold group-hover:text-[var(--accent)] transition-colors">Screen Recorder Extension</h4>
               <p className="text-sm text-[var(--text-secondary)] mt-1">Record your screen, tab, or window directly from the extension popup — no separate app needed.</p>
-            </a>
+            </Link>
           </div>
         </div>
 

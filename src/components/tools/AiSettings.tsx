@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function AiSettings() {
   return (
     <div className="flex items-start gap-3 p-4 rounded-[var(--radius-xl)] bg-blue-500/10 border border-blue-500/20 mb-6">
@@ -10,7 +12,7 @@ export default function AiSettings() {
         <p className="font-medium mb-0.5">Powered by Google Gemini</p>
         <p className="text-blue-500/80 dark:text-blue-400/80 text-xs leading-relaxed">
           AI features are free and server-powered — no API key needed. Your data is sent to our server for processing with Gemini.
-           {" "}<a href="/privacy-policy" className="underline hover:no-underline">Privacy policy</a>
+           {" "}<Link href="/privacy-policy" className="underline hover:no-underline">Privacy policy</Link>
         </p>
       </div>
     </div>

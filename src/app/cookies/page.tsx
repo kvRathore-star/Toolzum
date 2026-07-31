@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  Cookie, 
-  FileText, 
-  ShieldCheck, 
+import {
+  Cookie,
+  FileText,
+  ShieldCheck,
   Settings,
   EyeOff,
   ArrowUp
 } from "lucide-react";
+import Link from "next/link";
 
 const SECTIONS = [
   { id: "intro", title: "1. Introduction" },
@@ -113,7 +114,7 @@ export default function CookiePolicyPage() {
                 Toolzum respects your privacy. This Cookie Policy explains how and why we use cookies and similar storage technologies on our website.
               </p>
               <p>
-                We believe in minimal, transparent data practices. Our approach to cookies reflects our core commitment: your data stays yours. This policy works alongside our <a href="/privacy-policy" className="text-[var(--accent)] hover:underline">Privacy Policy</a> and <a href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</a>.
+                We believe in minimal, transparent data practices. Our approach to cookies reflects our core commitment: your data stays yours. This policy works alongside our <Link href="/privacy-policy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link> and <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</Link>.
               </p>
             </section>
 

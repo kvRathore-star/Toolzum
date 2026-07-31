@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
@@ -136,7 +137,7 @@ export function HeartRateCalculator() {
         <div>Zone 4 (80-90%): {Math.round(max * 0.8)}-{Math.round(max * 0.9)} bpm</div>
         <div>Zone 5 (90-100%): {Math.round(max * 0.9)}-{max} bpm</div>
       </div>
-      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <a href="/calculator/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</a>.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses %-of-max HR method. For a more precise calculation using your resting HR, see <Link href="/health/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator (Karvonen)</Link>.</p>
     </Section>
   );
 }
@@ -186,7 +187,7 @@ export function StepsCalculator() {
     <Section title="Steps to Distance">
       <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input label="Value" type="number" value={steps} onChange={setSteps} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div></div>
       <div className="text-xs space-y-1"><div>Distance: {distKm.toFixed(2)} km</div><div>Distance: {distMi.toFixed(2)} miles</div><div>Calories (est): {(s * 0.04).toFixed(0)} kcal</div></div>
-      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <a href="/calculator/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</a>.</p>
+      <p className="text-xs text-[var(--text-secondary)] mt-2">Uses height-based stride estimate (stride = height × 0.415). For a weight-based calorie calculation, see <Link href="/health/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</Link>.</p>
     </Section>
   );
 }

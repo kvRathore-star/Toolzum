@@ -124,7 +124,7 @@ for (const file of allFiles) {
 
     const prefix = quoteMatch[1];
     const oldQuote = quoteMatch[2];
-    let rest = quoteMatch[3];
+    const rest = quoteMatch[3];
 
     // Find where the value ends: look for `',` or `",` or just `'` or `"` at end
     let closeQuoteIdx = rest.lastIndexOf(oldQuote === "'" ? "'," : '",');

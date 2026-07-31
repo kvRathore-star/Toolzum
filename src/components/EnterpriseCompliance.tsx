@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { Shield, Lock, Server, FileCheck, Building2, Globe } from 'lucide-react';
 
 const complianceItems = [
@@ -69,7 +70,7 @@ export function EnterpriseCompliance() {
       <div className="mt-10 p-6 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-[var(--radius-xl)] text-center">
         <p className="text-sm text-emerald-700 dark:text-emerald-300">
           <strong className="font-semibold">Local-processing tools keep data on your device.</strong> No accounts needed for most tools. No logs. No tracking.{' '}
-          <a href="/pricing" className="underline hover:no-underline font-semibold">Toolzum is designed with privacy as the default.</a>
+          <Link href="/pricing" className="underline hover:no-underline font-semibold">Toolzum is designed with privacy as the default.</Link>
         </p>
         <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-3">
           Toolzum does not provide legal or regulatory compliance certification. Consult your compliance team for your specific requirements.

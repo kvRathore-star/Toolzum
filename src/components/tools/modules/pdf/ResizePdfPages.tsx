@@ -86,8 +86,8 @@ export default function ResizePdfPages() {
 
       for (const page of pages) {
         const { width: origW, height: origH } = page.getSize();
-        let newW = target.width;
-        let newH = target.height;
+        const newW = target.width;
+        const newH = target.height;
 
         if (newW >= origW && newH >= origH) {
           const offsetX = (newW - origW) / 2;
