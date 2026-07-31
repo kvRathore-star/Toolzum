@@ -1,6 +1,7 @@
 import { createRequire } from "module";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { resolve } from "path";
+import { fileURLToPath } from "url";
 import { toolsRegistry } from "../src/registry/tools";
 
 const require = createRequire(import.meta.url);
@@ -17,7 +18,7 @@ const geistFont = readFileSync(geistPath);
 
 const OUT = resolve("public/og");
 
-interface ToolInfo {
+export interface ToolInfo {
   name: string;
   slug: string;
   category: string;
@@ -30,7 +31,7 @@ function h(type: string, props: Record<string, any> | null, ...children: any[]) 
   return React.createElement(type, props, ...children);
 }
 
-function toolOG(tool: ToolInfo) {
+export function toolOG(tool: ToolInfo) {
   const descTrunc =
     tool.description.length > 80
       ? tool.description.slice(0, 77) + "..."
@@ -67,20 +68,6 @@ function toolOG(tool: ToolInfo) {
         "div",
         { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
         "toolzum"
-      ),
-      h(
-        "div",
-        {
-          style: {
-            fontSize: 16,
-            fontWeight: 500,
-            padding: "8px 20px",
-            borderRadius: 100,
-            background: "rgba(255,255,255,0.08)",
-            color: "#a1a1aa",
-          },
-        },
-        `${toolsRegistry.length}+ free tools`
       )
     ),
     h(
@@ -160,7 +147,7 @@ function toolOG(tool: ToolInfo) {
   );
 }
 
-function categoryOG(category: string, count: number) {
+export function categoryOG(category: string, count: number) {
   return h(
     "div",
     {
@@ -192,20 +179,6 @@ function categoryOG(category: string, count: number) {
         "div",
         { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
         "toolzum"
-      ),
-      h(
-        "div",
-        {
-          style: {
-            fontSize: 16,
-            fontWeight: 500,
-            padding: "8px 20px",
-            borderRadius: 100,
-            background: "rgba(255,255,255,0.08)",
-            color: "#a1a1aa",
-          },
-        },
-        `${toolsRegistry.length}+ free tools`
       )
     ),
     h(
@@ -272,7 +245,10 @@ function categoryOG(category: string, count: number) {
           fontWeight: 400,
         },
       },
-      "toolzum.com \u2014 277+ free browser utilities"
+      // Manual round number, bumped a few times a year. MUST NOT reference
+      // toolsRegistry.length — that would regenerate every category image on
+      // any registry change (the 1140-file diff bug this script used to cause).
+      "toolzum.com \u2014 1,000+ free browser utilities"
     )
   );
 }
@@ -290,25 +266,33 @@ async function generateImage(element: any, outPath: string) {
   writeFileSync(outPath, buf);
 }
 
-async function main() {
-  console.log(`Generating OG images for ${toolsRegistry.length} tools and ${categories.length} categories...`);
-
-  for (const tool of toolsRegistry) {
-    const outPath = `${OUT}/${tool.category.toLowerCase()}/${tool.slug}.png`;
-    await generateImage(toolOG(tool), outPath);
-    if (toolsRegistry.indexOf(tool) % 25 === 0) {
-      console.log(`  [${toolsRegistry.indexOf(tool) + 1}/${toolsRegistry.length}] tools done...`);
+export async function generateAll(
+  tools: ToolInfo[],
+  categories: string[],
+  outDir: string
+): Promise<void> {
+  for (let i = 0; i < tools.length; i++) {
+    const outPath = `${outDir}/${tools[i].category.toLowerCase()}/${tools[i].slug}.png`;
+    await generateImage(toolOG(tools[i]), outPath);
+    if (i % 25 === 0) {
+      console.log(`  [${i + 1}/${tools.length}] tools done...`);
     }
   }
 
   for (const cat of categories) {
-    const count = toolsRegistry.filter((t) => t.category === cat).length;
-    const outPath = `${OUT}/${cat.toLowerCase()}/index.png`;
+    const count = tools.filter((t) => t.category === cat).length;
+    const outPath = `${outDir}/${cat.toLowerCase()}/index.png`;
     await generateImage(categoryOG(cat, count), outPath);
     console.log(`  Category: ${cat} (${count} tools)`);
   }
+}
 
+async function main() {
+  console.log(`Generating OG images for ${toolsRegistry.length} tools and ${categories.length} categories...`);
+  await generateAll(toolsRegistry, categories, OUT);
   console.log("Done! All OG images generated.");
 }
 
-main().catch(console.error);
+const isDirectRun =
+  process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isDirectRun) main().catch(console.error);
