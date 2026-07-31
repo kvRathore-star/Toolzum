@@ -294,7 +294,12 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
               <h2 className="text-xl font-medium text-[var(--text-primary)]">
                 {activeCategory === "All" ? "All Tools" : activeCategory}
               </h2>
-              <span className="text-sm text-[var(--text-muted)] font-mono">{filteredTools.length} tools · {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total</span>
+              <span
+                className="text-sm text-[var(--text-muted)] font-mono"
+                title={`${filteredTools.length} tools are listed in this grid; the ${(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total also includes SEO landing pages and consolidated duplicates reachable by direct URL or search engine.`}
+              >
+                {filteredTools.length} tools shown · {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total
+              </span>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}
