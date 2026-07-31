@@ -296,7 +296,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
               </h2>
               <span
                 className="text-sm text-[var(--text-muted)] font-mono"
-                title={`${filteredTools.length} tools are listed in this grid; the ${(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total also includes SEO landing pages and consolidated duplicates reachable by direct URL or search engine.`}
+                title={`${filteredTools.length} tools are listed in this grid; the ${(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total also includes hidden and consolidated tools reachable by direct URL.`}
               >
                 {filteredTools.length} tools shown · {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total
               </span>
