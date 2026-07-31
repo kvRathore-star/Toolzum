@@ -119,17 +119,6 @@ export const MODES: Record<string, CsvMode> = {
       return issues.length ? issues.join('\n') : 'No issues found.';
     },
   },
-  "csv-formatter": {
-    slug: "csv-formatter", name: "CSV Output Formatter",
-    description: "Convert CSV data to Markdown, NDJSON, SQL, HTML, statistics, or find issues",
-    outputLabel: "Preview",
-    transform: (headers, rows) => {
-      const h = `| ${headers.join(' | ')} |`;
-      const sep = `| ${headers.map(() => '---').join(' | ')} |`;
-      const r = rows.slice(0, 5).map(r => `| ${headers.map((_, i) => r[i] || '').join(' | ')} |`).join('\n');
-      return `${h}\n${sep}\n${r}\n\n(${rows.length} rows, ${headers.length} columns — try one of the specific CSV output tools above)`;
-    },
-  },
 };
 
 export default function CsvOutputConverter({ slug }: { slug: string; description?: string }) {

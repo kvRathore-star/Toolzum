@@ -278,11 +278,11 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Indian Voice Transcriber',
     slug: 'indian-voice-transcriber',
-    description: 'Transcribes recorded audio to text with support for 12 Indian languages using browser-based Web Speech API recognition. Works offline with no data uploads for supported languages.',
-    seoDescription: 'Free online Indian Voice Transcriber — Transcribe audio to text in 12 Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, English). Browser-based, no uploads.',
+    description: 'Transcribes recorded audio to text with support for 12 Indian languages using AI speech recognition. Record or upload a voice note and audio is sent to our server for transcription.',
+    seoDescription: 'Free online Indian Voice Transcriber — Transcribe audio to text in 12 Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, English) using cloud-based AI.',
     category: 'indian-utilities',
     id:  "264",
-    dependencies: 'Web Speech API',
+    dependencies: 'Gemini API',
   },
   {
     name: 'Bank Statement Analyser',
@@ -535,8 +535,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk URL Status Checker",
     slug: "bulk-url-status-checker",
     category: "SEO",
-    description: "Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. No signup or account required.",
-    seoDescription: 'Free online Bulk URL Status Checker — Check 5,000 URLs for HTTP status codes (200, 301, 404, 500), extract title/meta descriptions, and flag slow pages. SEO agencies use it instead of $50/mo crawling tools. ',
+    description: "Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times, then flag broken links and slow pages. Checks run server-side, so results are accurate. SEO agencies use it instead of $50/mo crawling tools.",
+    seoDescription: 'Free online Bulk URL Status Checker — Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times. Flags broken links and slow pages via accurate server-side checks. ',
     dependencies: "fetch API",
   
     },

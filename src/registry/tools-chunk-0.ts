@@ -419,9 +419,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Video to Text Transcription",
     slug: "video-to-text-transcription",
     category: "Transcription",
-    description: 'Transcribe video audio to text using AI-powered speech recognition. Supports multiple languages and speaker diarization.',
-    seoDescription: 'Free online Video to Text Transcription — Video to Text Transcription extracts speech from uploaded video files using on-device speech recognition. ',
-    dependencies: "Whisper API",
+    description: 'Structure raw video audio logs into clean scripts, articles, or outlines using AI. Paste your video transcription logs and pick a target format.',
+    seoDescription: 'Free online Video to Text Transcription — Turn messy video transcription logs into clean, structured scripts, articles, or outlines with AI.',
+    dependencies: "Gemini API",
   },
   {
     id: "48",
@@ -550,9 +550,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Audio to Text Transcription",
     slug: "audio-to-text-transcription",
     category: "Transcription",
-    description: 'Transcribe audio files to text using AI-powered speech recognition. Supports MP3, WAV, M4A, and more formats.',
-    seoDescription: 'Free online Audio to Text Transcription — Convert spoken audio from uploaded files into editable text. Uses cloud-based processing.',
-    dependencies: "Whisper API",
+    description: 'Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.',
+    seoDescription: 'Free online Audio to Text Transcription — Turn messy, unformatted audio transcription text into clean, readable articles or scripts with AI.',
+    dependencies: "Gemini API",
   },
   {
     id: "66",
@@ -1291,9 +1291,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Podcast Transcription",
     slug: "podcast-transcription",
     category: "Transcription",
-    description: 'Podcast Transcription processes long-form audio files into text using speech recognition.',
-    seoDescription: 'Free online Podcast Transcription — Convert long-form podcast audio files into text. Uses cloud-based processing.',
-    dependencies: "Whisper API",
+    description: 'Convert a podcast episode audio file into a full text transcript using AI speech recognition.',
+    seoDescription: 'Free online Podcast Transcription — Upload a podcast episode audio file and get a full text transcript using AI speech recognition.',
+    dependencies: "Gemini API",
   },
   {
 

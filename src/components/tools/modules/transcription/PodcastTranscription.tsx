@@ -4,42 +4,65 @@ import React, { useState } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { getErrorMessage } from '@/utils/error';
+import AiSettings from '../../AiSettings';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 export default function PodcastTranscription() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [output, setOutput] = useState('');
 
-  const processAudio = () => {
-    try {
+  const processAudio = async () => {
     if (!file) return;
+
     setIsProcessing(true);
-    
-    toast("Uploading large podcast to Whisper API. Note: Backend API is not connected.", { icon: '⏳' });
-    
-    setTimeout(() => {
-      setOutput("(API Stub) This is the transcribed text of your podcast episode. Please configure OpenAI Whisper API for the backend to get real results.\
-\
-SPEAKER 1: Welcome to the podcast.\
-SPEAKER 2: Thanks for having me!");
+    setOutput('');
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('response_format', 'text');
+
+      const response = await fetch('/api/ai/transcribe', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        let message = `Transcription failed (${response.status})`;
+        try {
+          const parsed = JSON.parse(text) as { error?: string };
+          if (parsed.error) message = parsed.error;
+        } catch {
+          // keep default message
+        }
+        throw new Error(message);
+      }
+
+      const text = await response.text();
+      setOutput(text);
+      toast.success('Transcription complete!');
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err, 'Transcription failed'));
+    } finally {
       setIsProcessing(false);
-      toast.error("API Key Missing.");
-    }, 2000);
-  } catch (err: unknown) {
-      setIsProcessing(false);
-      toast.error(err instanceof Error ? err.message : 'Transcription failed');
     }
   };
 
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
-          <strong>Long-form Audio:</strong> Specially tuned for transcribing multi-speaker podcast episodes over 1 hour.
+        <AiPrivacyBanner />
+        <AiSettings />
+        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-600 dark:text-emerald-400 text-sm">
+          Upload a podcast episode and get a full text transcript. Audio is sent to our server for transcription with Gemini — nothing is stored.
         </div>
-        <FileUploader 
-          accept="audio/*,video/*" 
-          onFileSelect={(f) => setFile(f)} 
+        <FileUploader
+          accept="audio/*,video/*"
+          maxSizeMB={50}
+          onFileSelect={(f) => setFile(f)}
           title="Upload Podcast File"
         />
       </div>
@@ -48,12 +71,14 @@ SPEAKER 2: Thanks for having me!");
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <AiPrivacyBanner />
+      <AiSettings />
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
           <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
-        <button 
+        <button
           onClick={() => { setFile(null); setOutput(''); }}
           className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
@@ -65,13 +90,13 @@ SPEAKER 2: Thanks for having me!");
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <h4 className="text-[var(--text-primary)] font-medium">Original Podcast</h4>
           <audio src={URL.createObjectURL(file)} controls className="w-full" />
-          
-          <button 
+
+          <button
             onClick={processAudio}
             disabled={isProcessing}
             className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
-            {isProcessing ? "Transcribing (Diarization)..." : "Transcribe Podcast"}
+            {isProcessing ? "Transcribing..." : "Transcribe Podcast"}
           </button>
         </div>
 
@@ -79,22 +104,22 @@ SPEAKER 2: Thanks for having me!");
           <div className="flex justify-between items-center mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Full Transcript</h4>
             {output && (
-              <button 
+              <button
                 onClick={() => {
                   const blob = new Blob([output], { type: 'text/plain' });
                   downloadOrShare(URL.createObjectURL(blob), `transcript_${file.name}.txt`);
-                }} 
+                }}
                 className="text-sm text-emerald-400 hover:text-emerald-300"
               >
                 Download .TXT
               </button>
             )}
           </div>
-          <textarea 
+          <textarea
             className="flex-1 w-full bg-white dark:bg-black border border-emerald-500/30 rounded-lg px-4 py-3 text-[var(--text-primary)] font-serif leading-relaxed outline-none resize-none min-h-[300px]"
             readOnly
             value={output}
-            placeholder="Your podcast transcript will stream here..."
+            placeholder={isProcessing ? "Transcribing your podcast..." : "Your podcast transcript will appear here..."}
           />
         </div>
       </div>

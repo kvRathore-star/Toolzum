@@ -85,6 +85,7 @@ export const CLOUD_API_PATTERNS: readonly string[] = [
   "Redis",
   "AI API",
   "Google Translate",
+  "Gemini API",
   "Calibre",
   "DNS API",
   "Fetch API",
