@@ -35,7 +35,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Minifiers & Compressors",
       description: "Reduce file sizes of JavaScript, CSS, HTML, and JSON for faster load times.",
       slugs: [
-        "js-minifier", "css-minifier", "html-minifier",
+        "js-minifier",
       ],
     },
     {
@@ -44,12 +44,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Generate CSS code visually — box shadows, gradients, grids, animations, filters, and more.",
       slugs: [
         "css-generator",
-        "css-filter-generator",
         "media-query-generator",
-        "box-shadow-generator", "border-radius-generator",
-        "flexbox-css-generator", "css-grid-generator",
-        "text-shadow-generator", "css-transform-generator",
-        "css-animation-generator", "glassmorphism-generator",
       ],
     },
     {
@@ -85,7 +80,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "Security & Encryption",
       description: "Encryption, hashing, key generation, JWT, SSL/TLS, CORS, CSP, and security header tools.",
       slugs: [
-        "crypto-kit", "password-entropy-calculator", "two-factor-auth-generator",
+        "password-entropy-calculator", "two-factor-auth-generator",
         "brute-force-time-estimator", "hash-verifier",
         "hash-password-generator", "hash-file-generator", "hmac-generator",
         "md5-hash-generator",
@@ -106,7 +101,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "ip-allowlist-generator",
         "cidr-calculator",
               "aws-iam-policy-analyzer",
-        "ssl-checker", "aes-decrypt", "dns-record-validator",
+        "ssl-checker", "dns-record-validator",
         "jwt-encoder-signer", "domain-availability-checker",
         "rate-limit-header-parser",
 ],
@@ -119,9 +114,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "url-encoder-decoder",
         "hex-ascii-converter",
         "base32-encoder", "base64-json-decoder", "hex-text-converter",
-        "base64-encode-decode", "base64-to-image",
-        "html-entity-encoder", "backslash-escape",
-        "encoder-decoder", "text-converter",
 ],
     },
     {
@@ -426,16 +418,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert audio files between formats — MP3, WAV, FLAC, OGG, AAC, M4A, and more. 100% browser-based.",
       slugs: [
         "audio-converter", "bulk-audio-converter",
-        "aac-to-flac", "aac-to-m4a", "aac-to-mp3", "aac-to-ogg", "aac-to-opus", "aac-to-wav", "aac-to-wma",
-        "aiff-to-aac", "aiff-to-flac", "aiff-to-m4a", "aiff-to-mp3", "aiff-to-ogg", "aiff-to-opus", "aiff-to-wav", "aiff-to-wma",
-        "flac-to-aac", "flac-to-aiff", "flac-to-m4a", "flac-to-mp3", "flac-to-ogg", "flac-to-opus", "flac-to-wav", "flac-to-wma",
-        "m4a-to-aac", "m4a-to-aiff", "m4a-to-flac", "m4a-to-mp3", "m4a-to-ogg", "m4a-to-opus", "m4a-to-wav", "m4a-to-wma",
-        "mp3-to-aac", "mp3-to-aiff", "mp3-to-flac", "mp3-to-m4a", "mp3-to-ogg", "mp3-to-opus", "mp3-to-wav", "mp3-to-wma",
-        "ogg-to-aac", "ogg-to-aiff", "ogg-to-flac", "ogg-to-m4a", "ogg-to-mp3", "ogg-to-opus", "ogg-to-wav", "ogg-to-wma",
-        "opus-to-aac", "opus-to-aiff", "opus-to-flac", "opus-to-m4a", "opus-to-mp3", "opus-to-ogg", "opus-to-wav", "opus-to-wma",
-        "wav-to-aac", "wav-to-aiff", "wav-to-flac", "wav-to-m4a", "wav-to-mp3", "wav-to-ogg", "wav-to-opus", "wav-to-wma",
-        "wma-to-aac", "wma-to-aiff", "wma-to-flac", "wma-to-m4a", "wma-to-mp3", "wma-to-ogg", "wma-to-opus", "wma-to-wav",
-        "aac-to-aiff", "apple-music-preview-extractor",
+        "apple-music-preview-extractor",
       ],
     },
     {
@@ -507,17 +490,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "image-to-ico",
         "bulk-heic-to-jpg", "bulk-svg-to-png",
         "bulk-image-converter",
-        "avif-to-bmp", "avif-to-gif", "avif-to-heic", "avif-to-ico", "avif-to-jpg", "avif-to-jxl", "avif-to-png", "avif-to-svg", "avif-to-tiff", "avif-to-webp",
-        "bmp-to-avif", "bmp-to-gif", "bmp-to-heic", "bmp-to-ico", "bmp-to-jpg", "bmp-to-jxl", "bmp-to-png", "bmp-to-svg", "bmp-to-tiff", "bmp-to-webp",
-        "convert-to-jpg", "gif-to-avif", "gif-to-bmp", "gif-to-heic", "gif-to-ico", "gif-to-jpg", "gif-to-jxl", "gif-to-png", "gif-to-svg", "gif-to-tiff", "gif-to-webp",
-        "heic-to-avif", "heic-to-bmp", "heic-to-gif", "heic-to-ico", "heic-to-jpg", "heic-to-jxl", "heic-to-png", "heic-to-svg", "heic-to-tiff", "heic-to-webp",
-        "ico-to-avif", "ico-to-bmp", "ico-to-gif", "ico-to-heic", "ico-to-jpg", "ico-to-jxl", "ico-to-png", "ico-to-svg", "ico-to-tiff", "ico-to-webp",
-        "jfif-to-png", "jpg-to-avif", "jpg-to-bmp", "jpg-to-gif", "jpg-to-heic", "jpg-to-ico", "jpg-to-jxl", "jpg-to-png", "jpg-to-svg", "jpg-to-tiff", "jpg-to-webp",
-        "jxl-to-avif", "jxl-to-bmp", "jxl-to-gif", "jxl-to-heic", "jxl-to-ico", "jxl-to-jpg", "jxl-to-png", "jxl-to-svg", "jxl-to-tiff", "jxl-to-webp",
-        "png-to-avif", "png-to-bmp", "png-to-gif", "png-to-heic", "png-to-ico", "png-to-jpg", "png-to-jxl", "png-to-tiff", "png-to-webp",
-        "rotate-image", "svg-to-avif", "svg-to-bmp", "svg-to-gif", "svg-to-heic", "svg-to-ico", "svg-to-jpg", "svg-to-jxl", "svg-to-png", "svg-to-tiff", "svg-to-webp",
-        "tiff-to-avif", "tiff-to-bmp", "tiff-to-gif", "tiff-to-heic", "tiff-to-ico", "tiff-to-jpg", "tiff-to-jxl", "tiff-to-png", "tiff-to-svg", "tiff-to-webp",
-        "webp-to-avif", "webp-to-bmp", "webp-to-gif", "webp-to-heic", "webp-to-ico", "webp-to-jpg", "webp-to-jxl", "webp-to-png", "webp-to-svg", "webp-to-tiff",
+        "rotate-image",
       ],
     },
     {
@@ -531,7 +504,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "image-colorizer",
  "unblur-sharpen",
   
-        "collage-maker", "chart-maker",
+        "collage-maker",
         "gif-editor", "gif-compressor", "gif-resizer",
         "meme-generator",
         "bulk-image-watermark", "bulk-face-anonymizer",
@@ -587,10 +560,8 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-to-pdfa",
         "url-to-pdf", "eml-to-pdf",
         "bulk-image-to-pdf",
-        "excel-to-pdf", "html-to-pdf", "jpg-to-pdf",
-        "pdf-to-epub", "pdf-to-excel", "pdf-to-html",
-        "pdf-to-jpg", "pdf-to-ppt", "pdf-to-word",
-        "ppt-to-pdf",
+        "html-to-pdf",
+        "pdf-to-html",
       ],
     },
     {
@@ -598,7 +569,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       heading: "PDF Editors & Utilities",
       description: "Edit, annotate, sign, watermark, redact, and organize PDF documents.",
       slugs: [
-        "protect-pdf", "watermark-pdf",
+        "watermark-pdf",
         "rotate-pdf", "crop-pdf", "redact-pdf",
         "flatten-pdf", "grayscale-pdf", "whiteout-pdf",
         "resize-pdf-pages",
@@ -645,11 +616,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "video-converter-tool",
         "video-to-gif",
         "video-to-mp3",
-        "avi-to-mkv", "avi-to-mov", "avi-to-webm",
-        "mkv-to-avi", "mkv-to-webm",
-        "mov-to-avi", "mov-to-webm",
-        "mp4-to-avi", "mp4-to-webm",
-        "webm-to-avi", "webm-to-mkv", "webm-to-mov",
       ],
     },
     {
@@ -920,7 +886,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Generate fancy text, cursive fonts, zalgo text, invisible text, and lorem ipsum.",
       slugs: [
         "fancy-text-generator", "font-generator",
-        "cursive-text-generator", "zalgo-text-generator",
+        "cursive-text-generator",
         "invisible-text-generator",
         "lorem-ipsum-generator",
         "pronunciation-tool",
@@ -1271,3 +1237,4 @@ export const CATEGORY_INTROS: Record<string, string> = {
   Productivity:
     "Productivity tools — pomodoro timers, to-do lists, and focus management utilities to help you get things done. All processing happens locally in your browser.",
 };
+

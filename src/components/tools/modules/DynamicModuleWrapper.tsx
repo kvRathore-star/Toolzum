@@ -202,11 +202,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'tds-calculator-india': dynamic(() => import('@/components/tools/modules/Calculators').then(m => ({ default: m.TdsCalculatorIndia })), { ssr: false, loading: () => <DynamicImportFallback slug="tds-calculator-india" /> }),
   'trial-conversion-calculator': dynamic(() => import('@/components/tools/modules/Calculators').then(m => ({ default: m.TrialConversionCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="trial-conversion-calculator" /> }),
 
-  'background-remover': dynamic(() => import('@/components/tools/modules/image/BackgroundRemover'), { ssr: false, loading: () => <DynamicImportFallback slug="background-remover" /> }),
-
   'wheel-of-names': dynamic(() => import('@/components/tools/modules/utility/WheelOfNames'), { ssr: false, loading: () => <DynamicImportFallback slug="wheel-of-names" /> }),
   'object-remover': dynamic(() => import('@/components/tools/modules/image/ObjectRemover'), { ssr: false, loading: () => <DynamicImportFallback slug="object-remover" /> }),
-  'temporary-email-generator': dynamic(() => import('@/components/tools/modules/privacy/TemporaryEmailGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="temporary-email-generator" /> }),
   'screen-recorder-extension': dynamic(() => import('@/components/tools/modules/extension/ScreenRecorderExtension'), { ssr: false, loading: () => <DynamicImportFallback slug="screen-recorder-extension" /> }),
   'to-do-list': dynamic(() => import('@/components/tools/modules/productivity/ToDoList'), { ssr: false, loading: () => <DynamicImportFallback slug="to-do-list" /> }),
   'emi-calculator': dynamic(() => import('@/components/tools/modules/finance/EmiCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="emi-calculator" /> }),
@@ -274,8 +271,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'sql-formatter': dynamic(() => import('@/components/tools/modules/developer/CodeFormatter').then(m => ({ default: m.SqlFormatter })), { ssr: false, loading: () => <DynamicImportFallback slug="sql-formatter" /> }),
   'uuid-generator': dynamic(() => import('@/components/tools/modules/developer/UuidGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="uuid-generator" /> }),
   'bmr-calculator': dynamic(() => import('@/components/tools/modules/health/BmrCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="bmr-calculator" /> }),
-  'meta-tag-generator': dynamic(() => import('@/components/tools/modules/developer/MetaTagGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="meta-tag-generator" /> }),
- 
+
+
   'conversion-rate-calculator': dynamic(() => import('@/components/tools/modules/growth-marketing-metrics/ConversionRateCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="conversion-rate-calculator" /> }),
   'cpm-calculator': dynamic(() => import('@/components/tools/modules/growth-marketing-metrics/CpmCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="cpm-calculator" /> }),
   'roas-calculator': dynamic(() => import('@/components/tools/modules/growth-marketing-metrics/RoasCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="roas-calculator" /> }),
@@ -292,7 +289,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'roman-numeral-converter': dynamic(() => import('@/components/tools/modules/converter/RomanNumeralConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="roman-numeral-converter" /> }),
 
   'md5-hash-generator': dynamic(() => import('@/components/tools/modules/developer/Md5HashGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="md5-hash-generator" /> }),
-  'html-minifier': dynamic(() => import('@/components/tools/modules/developer/HtmlMinifier'), { ssr: false, loading: () => <DynamicImportFallback slug="html-minifier" /> }),
   'jfif-to-png': dynamic(() => import('@/components/tools/modules/image/JfifToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="jfif-to-png" /> }),
   'convert-to-jpg': dynamic(() => import('@/components/tools/modules/image/ConvertToJpg'), { ssr: false, loading: () => <DynamicImportFallback slug="convert-to-jpg" /> }),
   'rotate-image': dynamic(() => import('@/components/tools/modules/image/RotateImage'), { ssr: false, loading: () => <DynamicImportFallback slug="rotate-image" /> }),
@@ -393,7 +389,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'raw-image-converter': dynamic(() => import('@/components/tools/modules/image/RawImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="raw-image-converter" /> }),
   'collage-maker': dynamic(() => import('@/components/tools/modules/image/CollageMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="collage-maker" /> }),
   'chart-maker': dynamic(() => import('@/components/tools/modules/image/ChartMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="chart-maker" /> }),
-  'bg-changer': dynamic(() => import('@/components/tools/modules/image/BgChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="bg-changer" /> }),
   'unblur-sharpen': dynamic(() => import('@/components/tools/modules/image/UnblurSharpen'), { ssr: false, loading: () => <DynamicImportFallback slug="unblur-sharpen" /> }),
   'gif-editor': dynamic(() => import('@/components/tools/modules/image/GifEditor'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-editor" /> }),
   'video-speed-changer': dynamic(() => import('@/components/tools/modules/video/VideoSpeedChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="video-speed-changer" /> }),
@@ -465,7 +460,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'docker-run-to-compose': dynamic(() => import('@/components/tools/modules/developer/DockerRunToCompose'), { ssr: false, loading: () => <DynamicImportFallback slug="docker-run-to-compose" /> }),
   'email-normalizer': dynamic(() => import('@/components/tools/modules/developer/EmailNormalizer'), { ssr: false, loading: () => <DynamicImportFallback slug="email-normalizer" /> }),
   'yaml-reindenter': dynamic(() => import('@/components/tools/modules/developer/CodeFormatter').then(m => ({ default: m.YamlFormatter })), { ssr: false, loading: () => <DynamicImportFallback slug="yaml-reindenter" /> }),
-  'wifi-qr-generator': dynamic(() => import('@/components/tools/modules/utility/QrCodeGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="qr-code-generator" /> }),
   'phone-parser': dynamic(() => import('@/components/tools/modules/utility/OtherUtilitiesWidgets').then(m => ({ default: m.PhoneParser })), { ssr: false, loading: () => <DynamicImportFallback slug="phone-parser" /> }),
   'otp-generator': dynamic(() => import('@/components/tools/modules/utility/OtherUtilitiesWidgets').then(m => ({ default: m.OTPGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="otp-generator" /> }),
   'slugify-tool': dynamic(() => import('@/components/tools/modules/utility/OtherUtilitiesWidgets').then(m => ({ default: m.SlugifyTool })), { ssr: false, loading: () => <DynamicImportFallback slug="slugify-tool" /> }),
@@ -616,6 +610,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
 
   'border-css-generator': dynamic(() => import('@/components/tools/modules/design/CssGenerators').then(m => { const W = () => <m.default defaultMode="border-css" />; return { default: W }; }), { ssr: false, loading: () => <DynamicImportFallback slug="border-css-generator" /> }),
   'typography-preview': dynamic(() => import('@/components/tools/modules/design/TypographyPreview'), { ssr: false, loading: () => <DynamicImportFallback slug="typography-preview" /> }),
+  'color-blindness-simulator': dynamic(() => import('@/components/tools/modules/design/ColorBlindnessSimulator'), { ssr: false, loading: () => <DynamicImportFallback slug="color-blindness-simulator" /> }),
   'secret-scanner': dynamic(() => import('@/components/tools/modules/developer/SecurityWidgets').then(m => ({ default: m.SecretScanner })), { ssr: false, loading: () => <DynamicImportFallback slug="secret-scanner" /> }),
   'security-txt-generator': dynamic(() => import('@/components/tools/modules/developer/SecurityWidgets').then(m => ({ default: m.SecurityTxtGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="security-txt-generator" /> }),
   'robots-txt-validator': dynamic(() => import('@/components/tools/modules/developer/SecurityWidgets').then(m => ({ default: m.RobotsTxtValidator })), { ssr: false, loading: () => <DynamicImportFallback slug="robots-txt-validator" /> }),
@@ -711,8 +706,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ssl-certificate-decoder': dynamic(() => import('@/components/tools/modules/developer/SecurityTools').then(m => ({ default: m.SslCertificateDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="ssl-certificate-decoder" /> }),
   'subdomain-finder': dynamic(() => import('@/components/tools/modules/developer/SecurityTools').then(m => ({ default: m.SubdomainFinder })), { ssr: false, loading: () => <DynamicImportFallback slug="subdomain-finder" /> }),
 
-  'image-converter': dynamic(() => import('@/components/tools/modules/image/ImageConverter').then(m => ({ default: m.ImageEffectsStudio })), { ssr: false, loading: () => <DynamicImportFallback slug="image-converter" /> }),
-
   'encoder-decoder': dynamic(() => import('@/components/tools/modules/developer/EncoderDecoder').then(m => ({ default: m.EncoderDecoder })), { ssr: false, loading: () => <DynamicImportFallback slug="encoder-decoder" /> }),
 
   // Generators
@@ -784,8 +777,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'counter-tool': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.CounterTool })), { ssr: false, loading: () => <DynamicImportFallback slug="counter-tool" /> }),
   'list-randomizer': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListRandomizer })), { ssr: false, loading: () => <DynamicImportFallback slug="list-randomizer" /> }),
   'list-sorter': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.ListSorter })), { ssr: false, loading: () => <DynamicImportFallback slug="list-sorter" /> }),
-  'decision-maker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="random-decision-maker" /> }),
-  'yes-no-picker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="random-decision-maker" /> }),
 
   'number-guessing-game': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.NumberGuessingGame })), { ssr: false, loading: () => <DynamicImportFallback slug="number-guessing-game" /> }),
   'rock-paper-scissors': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.RockPaperScissors })), { ssr: false, loading: () => <DynamicImportFallback slug="rock-paper-scissors" /> }),
@@ -848,7 +839,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'saas-quick-ratio': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SaasQuickRatio })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-quick-ratio" /> }),
   'saas-rule-of-40': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SaasRuleOf40 })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-rule-of-40" /> }),
   'swift-formatter': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SwiftFormatter })), { ssr: false, loading: () => <DynamicImportFallback slug="swift-formatter" /> }),
-  'pdf-to-docx': dynamic(() => import('@/components/tools/modules/converter/DocumentConverter').then(m => ({ default: m.PdfToDocx })), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-docx" /> }),
   'pdf-to-txt': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.PdfToTxt })), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-to-txt" /> }),
 
   // Bulk tools
@@ -879,7 +869,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-svg-to-png': dynamic(() => import('@/components/tools/modules/image/BulkSvgToPng'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-svg-to-png" /> }),
   'bulk-url-status-checker': dynamic(() => import('@/components/tools/modules/seo/BulkUrlStatusChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-status-checker" /> }),
   'bulk-url-shortener': dynamic(() => import('@/components/tools/modules/utility/BulkUrlShortener'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-url-shortener" /> }),
-  'bulk-webp-avif-modernizer': dynamic(() => import('@/components/tools/modules/image/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-webp-avif-modernizer" /> }),
   'bulk-image-converter': dynamic(() => import('@/components/tools/modules/image/BulkImageConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-converter" /> }),
 
   // Converter modules
@@ -892,7 +881,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
 
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
-  'css-minifier': dynamic(() => import('@/components/tools/modules/developer/CssMinifier'), { ssr: false, loading: () => <DynamicImportFallback slug="css-minifier" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
   'pdf-ai-summariser': dynamic(() => import('@/components/tools/modules/pdf/PdfAiSummariser'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-ai-summariser" /> }),
   'pdf-page-manager': dynamic(() => import('@/components/tools/modules/pdf/PdfPageManager'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-page-manager" /> }),

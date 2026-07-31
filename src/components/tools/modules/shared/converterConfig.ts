@@ -14,9 +14,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "mov-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MOV video files." },
   "webm-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from WebM video files." },
   "image-format-converter": { category: "image-format", description: "Convert between PNG, JPG, WebP, HEIC, and AVIF image formats." },
-  "data-format-converter": { category: "data", description: "Convert between JSON, CSV, and XML data formats." },
-  "svg-to-png-converter": { category: "image-format", description: "<strong>SVG to PNG Converter:</strong> Convert vector SVG graphics into raster PNG images at any resolution. Perfect for exporting icons, logos, and illustrations for web and print use. Your files never leave your device." },
-  "document-converter": { category: "document", description: "Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats." },
   // Text transformers
   "text-tools": { category: "text-transform" },
   "css-to-scss-converter": { category: "css-preprocessor" },
@@ -31,7 +28,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "html-to-text-converter": { category: "html-text" },
   "text-to-html-converter": { category: "html-text" },
   "code-to-curl-converter": { category: "text-transform" },
-  "json-to-code": { category: "serializer" },
   "binary-to-text": { category: "text-binary" },
   "text-to-binary": { category: "text-binary" },
   "text-binary-converter": { category: "text-binary" },
@@ -48,7 +44,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "time-zone-converter": { category: "text-transform" },
   "unix-time-converter": { category: "text-transform" },
   // JSON output converters
-  "json-formatter": { category: "json-output" },
   "json-to-zod": { category: "json-output" },
   "json-to-url-params": { category: "json-output" },
   "json-flattener": { category: "json-output" },
@@ -85,18 +80,13 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "paper-size-converter": { category: "unit" },
   "clothing-size-converter": { category: "unit" },
   "shoe-size-converter": { category: "unit" },
-  "unit-converter": { category: "unit" },
   "degree-radian-converter": { category: "unit" },
   // Import-to-CSV converters
   "tsv-csv-converter": { category: "import-to-csv" },
-  "xlsx-csv-converter": { category: "import-to-csv" },
-  "vcf-csv-converter": { category: "import-to-csv" },
-  "ics-csv-converter": { category: "import-to-csv" },
   // Color converters
   "color-converter": { category: "color" },
   "hex-to-rgb-converter": { category: "color" },
   // Number converters
-  "roman-numeral-converter": { category: "number" },
   "number-to-words-converter": { category: "number" },
   // Video format converters
   "mkv-to-mp4": {
@@ -265,7 +255,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "tiff-to-avif": { category: "image-format", description: "<strong>TIFF to AVIF Converter:</strong> Convert TIFF images into next-gen AVIF format for best-in-class compression. Ideal for archiving high-resolution scans and photography at a fraction of the original file size. Your files never leave your device." },
   "webp-to-avif": { category: "image-format", description: "<strong>WebP to AVIF Converter:</strong> Convert WebP images into next-gen AVIF format for even better compression. Future-proof your web images by migrating from WebP to AVIF's superior compression technology. Your files never leave your device." },
   "png-to-heic": { category: "image-format", description: "<strong>PNG to HEIC Converter:</strong> Convert PNG files into HEIC/HEIF format for high-efficiency photo format from Apple devices. Your files never leave your device." },
-  "png-to-svg": { category: "image-format", description: "<strong>PNG to SVG Converter:</strong> Convert PNG files into SVG format for scalable vector graphics for logos and icons. Your files never leave your device." },
   "png-to-bmp": { category: "image-format", description: "<strong>PNG to BMP Converter:</strong> Convert PNG files into BMP format for uncompressed bitmap image heritage format. Your files never leave your device." },
   "png-to-tiff": { category: "image-format", description: "<strong>PNG to TIFF Converter:</strong> Convert PNG files into TIFF format for high-resolution image archival and publishing. Your files never leave your device." },
   "png-to-ico": { category: "image-format", description: "<strong>PNG to ICO Converter:</strong> Convert PNG files into ICO format for Windows icon format for favicons and app icons. Your files never leave your device." },
@@ -346,7 +335,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "pdf-to-jpg": { category: "document" },
   "html-to-pdf": { category: "document" },
   "pdf-to-html": { category: "document" },
-  "epub-to-pdf": { category: "document" },
   "pdf-to-epub": { category: "document" },
   "heic-to-pdf": { category: "document" },
 
