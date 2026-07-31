@@ -11,8 +11,8 @@ const eslintConfig = defineConfig([
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       // Demoted to warning: broad style rules that would otherwise block CI on
       // legacy code written before they were introduced. Visible, not fatal.
-      // (Triage-before-demote items set-state-in-effect / exhaustive-deps are
-      // intentionally LEFT as errors pending review — not style noise.)
+      // (set-state-in-effect is intentionally LEFT as an error pending review —
+      // it flags real cascading-render anti-patterns, not style noise.)
       "@typescript-eslint/no-explicit-any": "warn",
       "react/no-unescaped-entities": "warn",
       "react-hooks/static-components": "warn",
