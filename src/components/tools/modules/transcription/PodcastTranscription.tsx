@@ -5,6 +5,7 @@ import { FileUploader } from '../../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { submitTranscription } from '@/utils/transcribe';
 import AiSettings from '../../AiSettings';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
@@ -20,28 +21,7 @@ export default function PodcastTranscription() {
     setOutput('');
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('response_format', 'text');
-
-      const response = await fetch('/api/ai/transcribe', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const text = await response.text();
-        let message = `Transcription failed (${response.status})`;
-        try {
-          const parsed = JSON.parse(text) as { error?: string };
-          if (parsed.error) message = parsed.error;
-        } catch {
-          // keep default message
-        }
-        throw new Error(message);
-      }
-
-      const text = await response.text();
+      const text = await submitTranscription(file);
       setOutput(text);
       toast.success('Transcription complete!');
     } catch (err: unknown) {

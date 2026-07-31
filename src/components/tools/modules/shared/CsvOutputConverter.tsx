@@ -121,6 +121,15 @@ export const MODES: Record<string, CsvMode> = {
   },
 };
 
+export const CSV_HUB_TABS = [
+  { slug: 'csv-to-markdown', label: 'Markdown' },
+  { slug: 'csv-to-ndjson', label: 'NDJSON' },
+  { slug: 'csv-to-sql', label: 'SQL' },
+  { slug: 'csv-html-table-converter', label: 'HTML' },
+  { slug: 'csv-statistics', label: 'Stats' },
+  { slug: 'csv-data-cleaner', label: 'Clean' },
+];
+
 export default function CsvOutputConverter({ slug }: { slug: string; description?: string }) {
   const mode = MODES[slug];
   const [input, setInput] = useState('name,price,stock\nWidget,29.99,100\nGadget,49.99,50\nDoohickey,19.99,200');

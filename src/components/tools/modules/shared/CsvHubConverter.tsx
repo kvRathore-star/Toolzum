@@ -4,16 +4,9 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
-import { MODES, parseCsv } from './CsvOutputConverter';
+import { MODES, parseCsv, CSV_HUB_TABS } from './CsvOutputConverter';
 
-const HUB_TABS = [
-  { slug: 'csv-to-markdown', label: 'Markdown' },
-  { slug: 'csv-to-ndjson', label: 'NDJSON' },
-  { slug: 'csv-to-sql', label: 'SQL' },
-  { slug: 'csv-html-table-converter', label: 'HTML' },
-  { slug: 'csv-statistics', label: 'Stats' },
-  { slug: 'csv-data-cleaner', label: 'Clean' },
-];
+const HUB_TABS = CSV_HUB_TABS;
 
 function slugToMode(slug: string): string {
   for (const t of HUB_TABS) {
