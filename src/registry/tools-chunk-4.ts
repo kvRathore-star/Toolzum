@@ -1313,7 +1313,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     id: "943",
     name: "Temperature Converter",
     slug: "temperature-converter",
-    category: "Converter",
+    category: "Utility",
     description: 'Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Temperature Converter \u2014 Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. ',
     dependencies: "None",
@@ -1472,6 +1472,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online TSV ↔ CSV Converter — Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. ',
     dependencies: "None",
+    showInCategory: false,
 },
   {
     id: "970",

@@ -9,6 +9,7 @@ import { DataConverterFromSlug } from '../converter/DataConverter';
 import DocumentFormatConverter from '../shared/DocumentFormatConverter';
 import TextTransformConverter from '../shared/TextTransformConverter';
 import HtmlTextHub from '../shared/HtmlTextHub';
+import TextBinaryHub from '../shared/TextBinaryHub';
 import CssPreprocessorHub from '../shared/CssPreprocessorHub';
 import FormatSerializerHub from '../shared/FormatSerializerHub';
 import JsonOutputConverter from '../shared/JsonOutputConverter';
@@ -31,6 +32,7 @@ const COMPONENT_MAP: Record<ConverterCategory, ComponentType<{ slug: string; des
   "document": DocumentFormatConverter,
   "text-transform": TextTransformConverter,
   "html-text": HtmlTextHub,
+  "text-binary": TextBinaryHub,
   "css-preprocessor": CssPreprocessorHub,
   "serializer": FormatSerializerHub,
   "json-output": JsonOutputConverter,

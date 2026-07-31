@@ -1228,6 +1228,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text to Binary — Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. ',
     dependencies: "Vanilla JS",
+    showInCategory: false,
 },
   {
 
@@ -1237,6 +1238,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     description: 'Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Binary to Text — Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. ',
+    dependencies: "Vanilla JS",
+    showInCategory: false,
+},
+  {
+    id: "text-binary-hub",
+    name: "Text ↔ Binary Converter",
+    slug: "text-binary-converter",
+    category: "Converter",
+    description: 'Convert between plain text and binary in both directions — encode text into its base-2 representation or decode binary strings back to readable text, byte by byte. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Text ↔ Binary Converter — Encode text to binary or decode binary back to text in both directions, byte by byte. ',
     dependencies: "Vanilla JS",
 },
   {

@@ -1,4 +1,4 @@
-export type ConverterCategory = "video-format" | "video-to-audio" | "audio-format" | "image-format" | "data" | "document" | "text-transform" | "html-text" | "css-preprocessor" | "serializer" | "json-output" | "csv-output" | "text-style" | "unit" | "import-to-csv" | "color" | "number" | "toon";
+export type ConverterCategory = "video-format" | "video-to-audio" | "audio-format" | "image-format" | "data" | "document" | "text-transform" | "html-text" | "css-preprocessor" | "serializer" | "json-output" | "csv-output" | "text-style" | "unit" | "import-to-csv" | "color" | "number" | "toon" | "text-binary";
 
 export type ConverterConfigEntry = {
   category: ConverterCategory;
@@ -32,8 +32,9 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "text-to-html-converter": { category: "html-text" },
   "code-to-curl-converter": { category: "text-transform" },
   "json-to-code": { category: "serializer" },
-  "binary-to-text": { category: "text-transform" },
-  "text-to-binary": { category: "text-transform" },
+  "binary-to-text": { category: "text-binary" },
+  "text-to-binary": { category: "text-binary" },
+  "text-binary-converter": { category: "text-binary" },
   "hex-text-converter": { category: "text-transform" },
   "hex-ascii-converter": { category: "text-transform" },
   "number-base-converter": { category: "text-transform" },

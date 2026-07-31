@@ -286,8 +286,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
     const Base64ToImage = () => <m.Base64ImageTool defaultMode="base64-to-image" />;
     return { default: Base64ToImage };
   }), { ssr: false, loading: () => <DynamicImportFallback slug="base64-to-image" /> }),
-  'text-to-binary': dynamic(() => import('@/components/tools/modules/developer/TextConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="text-to-binary" /> }),
   'nato-phonetic-converter': dynamic(() => import('@/components/tools/modules/utility/NatoPhoneticConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="nato-phonetic-converter" /> }),
+
   'unicode-viewer': dynamic(() => import('@/components/tools/modules/utility/UnicodeViewer'), { ssr: false, loading: () => <DynamicImportFallback slug="unicode-viewer" /> }),
   'roman-numeral-converter': dynamic(() => import('@/components/tools/modules/converter/RomanNumeralConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="roman-numeral-converter" /> }),
 
@@ -886,6 +886,8 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'data-format-converter': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: m.DataConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="data-format-converter" /> }),
   'document-converter': dynamic(() => import('@/components/tools/modules/converter/DocumentConverter').then(m => ({ default: m.DocumentConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="document-converter" /> }),
   'xlsx-csv-converter': dynamic(() => import('@/components/tools/modules/converter/XlsxCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="xlsx-csv-converter" /> }),
+  'vcf-csv-converter': dynamic(() => import('@/components/tools/modules/utility/VcfCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="vcf-csv-converter" /> }),
+  'ics-csv-converter': dynamic(() => import('@/components/tools/modules/utility/IcsCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="ics-csv-converter" /> }),
   'json-to-code': dynamic(() => import('@/components/tools/modules/converter/JsonToCode'), { ssr: false, loading: () => <DynamicImportFallback slug="json-to-code" /> }),
 
   // Standalone tools

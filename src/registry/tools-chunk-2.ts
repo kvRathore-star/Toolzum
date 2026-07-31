@@ -490,6 +490,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.',
     seoDescription: 'Free online VCF ↔ CSV Converter — Bidirectional conversion between vCard and CSV. Field mapping, multi-value support. ',
     dependencies: "vcard-parser",
+    showInCategory: false,
 },
   {
 
@@ -500,6 +501,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.',
     seoDescription: 'Free online ICS ↔ CSV Converter — Bidirectional conversion between iCalendar and CSV. Multiple date formats, field mapping. ',
     dependencies: "ical",
+    showInCategory: false,
 },
   {
     id: "457",
