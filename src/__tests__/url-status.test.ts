@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect } from 'vitest';
 import { parseUrlList, chunkArray, buildResultsCsv, summarizeResults, MAX_URLS_PER_CHECK, BATCH_SIZE } from '@/utils/urlStatus';
 
