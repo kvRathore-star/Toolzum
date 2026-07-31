@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { getErrorMessage } from '@/utils/error';
-import YAML from 'js-yaml';
+import * as YAML from 'js-yaml';
 import Link from 'next/link';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
