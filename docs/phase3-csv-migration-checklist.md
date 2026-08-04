@@ -11,14 +11,30 @@ redirect sources or targets, so no TOOL_REDIRECTS interaction.
 
 1. **Update the smoke test parser BEFORE adding registry entries.**
    `ENTRY_RE` in `src/__tests__/registry-render-smoke.test.ts` and
-   `src/__tests__/registry-integrity.test.ts` (and `scripts/gen-route-baseline.js`)
-   only recognize `dynamic(...) ..., { ssr: false }` entries. CSV closures must
-   **omit `ssr: false`** to preserve SSR (converters are currently server-rendered;
-   `ssr: false` would swap their HTML for the loading fallback and strip SEO content).
-   If the parser is not extended first, the new entries will be **silently skipped**
-   by the smoke test — a coverage gap that looks like a passing test. Update the
-   regex to accept entries with and without `ssr: false` before adding any closures,
-   and assert the expected count.
+   `scripts/gen-route-baseline.js` only recognize `dynamic(...) ..., { ssr: false }`
+   entries. CSV closures must **omit `ssr: false`** to preserve SSR (converters are
+   currently server-rendered; `ssr: false` would swap their HTML for the loading
+   fallback and strip SEO content). If the parser is not extended first, the new
+   entries will be **silently skipped** by the smoke test — a coverage gap that
+   looks like a passing test.
+
+   The parser fix needs its own verification, two parts:
+   - **Accept both flags:** update `ENTRY_RE` (smoke test + baseline script) to
+     match entries with and without `ssr: false`.
+   - **Preserve slug/description closures:** the current closure regex only handles
+     `defaultMode="..."`. CSV closures are `() => <m.default slug="csv-to-markdown"
+     description="..." />` — the parser must capture `slug` (and `description`) and
+     `resolveComponent` must forward them. Otherwise the smoke test renders the hub's
+     **default pair** for every CSV slug and still passes (it only asserts no-throw) —
+     silently missing the very thing `converter-closure-parity.test.ts` proves.
+
+   **Assert the counts, don't just trust the regex:** after adding the 7 closures the
+   smoke test's registry count must go **750 -> 757** (`expect(Object.keys(registry)
+   .length).toBe(757)`); the converter pass stays 290; parity stays 290. The
+   integrity suite's parser is already `ssr`-agnostic
+   (`/^\s*'([^']+)':\s*dynamic\(/gm` in `registry-integrity.test.ts`) — confirm its
+   parsed total tracks to 757 too. A regex that "compiles" without moving the count
+   is a regex that did nothing.
 
 2. **Use the parity-proven closure pattern.** Wrap each slug as:
    `dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-to-markdown" description="..." /> })))`
@@ -28,6 +44,10 @@ redirect sources or targets, so no TOOL_REDIRECTS interaction.
 
 3. **Remove the 7 slugs from CONVERTER_CONFIG** after the registry entries are in
    (registry-integrity #9 asserts no slug is routed by both).
+   **Atomicity:** add + remove happen in the **same commit** (whole csv-output
+   category in one commit), so the double-routed state never lands on `main`.
+   `registry-integrity #9` should correctly fail in that window, so the window must
+   never reach a commit.
 
 4. **Bundle measurement.** Run a real `next build` bundle comparison before/after
    (chunk count + per-route sizes). ConverterRouter currently statically imports
