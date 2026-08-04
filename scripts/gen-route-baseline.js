@@ -11,13 +11,28 @@ function baseName(p) {
 }
 
 const registry = {};
-const ENTRY_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)(.*?),\s*\{\s*ssr: false/sg;
-for (const [, slug, modPath, rawTail] of WRAPPER.matchAll(ENTRY_RE)) {
+// No-options closures (SSR-preserving, e.g. migrated converter slugs) first:
+// strip them from the source so the ssr regex below cannot swallow them while
+// scanning forward for a later `, { ssr: false`.
+const CLOSURE_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)\.then\(m => \(\{ default: \(\) => <m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+="[^"]*")*) \/> \}\)\)\)/g;
+const closureBlocks = [];
+for (const match of WRAPPER.matchAll(CLOSURE_RE)) {
+  const [, slug, modPath, exportName, propsStr] = match;
+  const props = {};
+  for (const pm of (propsStr ?? '').matchAll(/([A-Za-z0-9_]+)="([^"]*)"/g)) props[pm[1]] = pm[2];
+  registry[slug] = { path: modPath, export: exportName, mode: props.defaultMode, slug: props.slug };
+  closureBlocks.push(match[0]);
+}
+const SSG_SRC = closureBlocks.reduce((s, b) => s.replace(b, ''), WRAPPER);
+const SSG_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)(.*?),\s*\{\s*ssr: false/sg;
+for (const [, slug, modPath, rawTail] of SSG_SRC.matchAll(SSG_RE)) {
   const tail = rawTail.trim();
   let entry;
   if (tail.startsWith('.then(m => {')) {
-    const jsx = tail.match(/<m\.(default|[A-Za-z0-9_]+)(?:\s+defaultMode="([^"]+)")?/);
-    entry = { path: modPath, export: jsx ? jsx[1] : 'default', mode: jsx ? jsx[2] : undefined };
+    const jsx = tail.match(/<m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+="[^"]*")*)/);
+    const props = {};
+    if (jsx) for (const pm of (jsx[2] ?? '').matchAll(/([A-Za-z0-9_]+)="([^"]*)"/g)) props[pm[1]] = pm[2];
+    entry = { path: modPath, export: jsx ? jsx[1] : 'default', mode: props.defaultMode, slug: props.slug };
   } else {
     const named = tail.match(/\.then\(m => \(\{ default: m\.([A-Za-z0-9_]+) \}\)\)/);
     entry = { path: modPath, export: named ? named[1] : 'default' };
@@ -64,6 +79,7 @@ function componentLabel(slug) {
     let label = baseName(r.path);
     if (r.export !== 'default') label += ` -> ${r.export}`;
     if (r.mode) label += ` [${r.mode}]`;
+    else if (r.slug) label += ` [slug=${r.slug}]`;
     return label;
   }
   const cat = categoryOf[slug];

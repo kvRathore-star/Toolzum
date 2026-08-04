@@ -882,6 +882,17 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ics-csv-converter': dynamic(() => import('@/components/tools/modules/utility/IcsCsvConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="ics-csv-converter" /> }),
   'json-to-code': dynamic(() => import('@/components/tools/modules/converter/JsonToCode'), { ssr: false, loading: () => <DynamicImportFallback slug="json-to-code" /> }),
 
+  // CSV output hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — the slug closure forwards slug, description stays undefined
+  // to match the previous ConverterRouter render exactly).
+  'csv-to-markdown': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-to-markdown" /> }))),
+  'csv-to-ndjson': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-to-ndjson" /> }))),
+  'csv-to-sql': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-to-sql" /> }))),
+  'csv-html-table-converter': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-html-table-converter" /> }))),
+  'csv-statistics': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-statistics" /> }))),
+  'csv-data-cleaner': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-data-cleaner" /> }))),
+  'csv-formatter': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-formatter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

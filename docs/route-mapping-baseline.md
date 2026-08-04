@@ -12,10 +12,10 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 750 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 290 |
+| MODULE_REGISTRY (direct dynamic import) | 757 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 283 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (51 MODULE_REGISTRY + 12 CONVERTER_CONFIG) |
+| Category-move redirects (same slug, old->new category) | 63 (55 MODULE_REGISTRY + 8 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
@@ -230,10 +230,17 @@
 | css-transform-generator | CssGenerators [transform] |
 | css-validator | CssKit -> CssValidator |
 | csv-analyzer | DataUtilitiesWidgets -> CsvAnalyzer |
+| csv-data-cleaner | CsvHubConverter [slug=csv-data-cleaner] |
+| csv-formatter | CsvHubConverter [slug=csv-formatter] |
+| csv-html-table-converter | CsvHubConverter [slug=csv-html-table-converter] |
 | csv-json-row-generator | DataToolkitWidgets -> CsvJsonRowGenerator |
 | csv-merger | DataToolkitWidgets -> CsvMerger |
 | csv-row-sorter | DataToolkitWidgets -> Sorter |
 | csv-splitter | DataToolkitWidgets -> Splitter |
+| csv-statistics | CsvHubConverter [slug=csv-statistics] |
+| csv-to-markdown | CsvHubConverter [slug=csv-to-markdown] |
+| csv-to-ndjson | CsvHubConverter [slug=csv-to-ndjson] |
+| csv-to-sql | CsvHubConverter [slug=csv-to-sql] |
 | csv-to-sqlite | CsvToSqlite |
 | csv-transpose | DataToolkitWidgets -> Transpose |
 | curl-to-code-converter | FormatAndDataKitWidgets -> CurlToCodeConverter |
@@ -836,13 +843,6 @@
 | css-to-less-converter | css-preprocessor | CssPreprocessorHub |
 | css-to-scss-converter | css-preprocessor | CssPreprocessorHub |
 | css-to-stylus-converter | css-preprocessor | CssPreprocessorHub |
-| csv-data-cleaner | csv-output | CsvHubConverter |
-| csv-formatter | csv-output | CsvHubConverter |
-| csv-html-table-converter | csv-output | CsvHubConverter |
-| csv-statistics | csv-output | CsvHubConverter |
-| csv-to-markdown | csv-output | CsvHubConverter |
-| csv-to-ndjson | csv-output | CsvHubConverter |
-| csv-to-sql | csv-output | CsvHubConverter |
 | cursive-text-generator | text-style | TextStylingConverter |
 | data-size-converter | unit | UnitConverter |
 | degree-radian-converter | unit | UnitConverter |

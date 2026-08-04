@@ -52,14 +52,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "json-size-analyzer": { category: "json-output" },
   "ndjson-to-json": { category: "json-output" },
   "json-formatter-tool": { category: "json-output" },
-  // CSV output converters
-  "csv-to-markdown": { category: "csv-output" },
-  "csv-to-ndjson": { category: "csv-output" },
-  "csv-to-sql": { category: "csv-output" },
-  "csv-html-table-converter": { category: "csv-output" },
-  "csv-statistics": { category: "csv-output" },
-  "csv-data-cleaner": { category: "csv-output" },
-  "csv-formatter": { category: "csv-output" },
+  // csv-output category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // csv-to-markdown, csv-to-ndjson, csv-to-sql, csv-html-table-converter,
+  // csv-statistics, csv-data-cleaner, csv-formatter render CsvHubConverter
+  // via slug closures (SSR-preserving). Removed here to keep single-source.
   // Text style generators
   "fancy-text-generator": { category: "text-style" },
   "cursive-text-generator": { category: "text-style" },
