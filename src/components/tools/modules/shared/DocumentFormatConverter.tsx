@@ -21,7 +21,7 @@ type DocFormatPair = {
   iconLabel: string;
 };
 
-const FORMAT_PAIRS: DocFormatPair[] = [
+export const FORMAT_PAIRS: DocFormatPair[] = [
   { slug: 'word-to-pdf', title: 'Convert Word to PDF', description: 'Parse Word XML and render PDF outputs entirely locally.', accept: '.docx', uploadTitle: 'Upload Word Document (.docx)', uploadSubtitle: 'Supports standard .docx formatting and paragraphs', actionLabel: 'Convert to PDF', successMessage: 'Word file converted to PDF successfully!', outputFileName: (n) => `${n.replace('.docx', '')}.pdf`, iconLabel: 'DOCX' },
   { slug: 'pdf-to-word', title: 'Convert PDF to Word', description: 'Extract paragraphs, layouts, and lines directly into editable Word documents.', accept: 'application/pdf', uploadTitle: 'Upload PDF to convert to Word', uploadSubtitle: 'Supports text extraction into editable DOC formats', actionLabel: 'Convert to Word Document', successMessage: 'PDF converted to Word successfully!', outputFileName: (n) => `${n.replace('.pdf', '')}.doc`, iconLabel: 'PDF' },
   { slug: 'excel-to-pdf', title: 'Convert Sheet to PDF Table', description: 'Convert sheets (XLSX, XLS, CSV) into clean PDF tables locally.', accept: '.xlsx,.xls,.csv', uploadTitle: 'Upload Spreadsheet (.xlsx, .xls, .csv)', uploadSubtitle: 'Converts grid sheets to landscape PDF layouts', actionLabel: 'Convert to PDF Document', successMessage: 'Spreadsheet converted to PDF successfully!', outputFileName: (n) => `${n.replace(/\.[^/.]+$/, "")}.pdf`, iconLabel: 'XLSX' },
@@ -44,7 +44,7 @@ type FormatDef = {
   accept: string;
 };
 
-const FORMATS: Record<string, FormatDef> = {
+export const FORMATS: Record<string, FormatDef> = {
   pdf: { key: 'pdf', label: 'PDF', ext: '.pdf', accept: 'application/pdf' },
   word: { key: 'word', label: 'Word', ext: '.docx', accept: '.docx' },
   excel: { key: 'excel', label: 'Excel', ext: '.xlsx', accept: '.xlsx,.xls,.csv' },

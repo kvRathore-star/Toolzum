@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
-const FORMAT_SLUGS = [
+export const FORMAT_SLUGS = [
   "yaml-json-converter",
   "json-to-yaml-converter",
   "ini-json-converter",

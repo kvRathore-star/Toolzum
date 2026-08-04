@@ -119,7 +119,6 @@ export function JsonPathQueryBuilder() {
 
 export function JsonTreeViewer() {
   const [json, setJson] = useState('{"name":"John","age":30,"address":{"city":"NYC","zip":"10001"},"hobbies":["reading","coding"]}');
-  const [error, setError] = useState('');
 
   const renderTree = (data: any, depth = 0): string => {
     const indent = '  '.repeat(depth);
@@ -134,7 +133,13 @@ export function JsonTreeViewer() {
     return keys.map(k => `${indent}${k}: ${typeof data[k] === 'object' ? '\n' + renderTree(data[k], depth + 1) : renderTree(data[k], depth)}`).join('\n');
   };
 
-  const parsed = (() => { try { setError(''); return JSON.parse(json); } catch { setError('Invalid JSON'); return null; }})();
+  const { parsed, error } = (() => {
+    try {
+      return { parsed: JSON.parse(json), error: '' };
+    } catch {
+      return { parsed: null, error: 'Invalid JSON' };
+    }
+  })();
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">

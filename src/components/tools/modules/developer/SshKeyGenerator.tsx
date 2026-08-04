@@ -12,7 +12,7 @@ function mod(a: bigint, p: bigint): bigint {
   return r < BigInt(0) ? r + p : r;
 }
 function modinv(x: bigint, p: bigint): bigint {
-  return mod(x ** (p - BigInt(2)), p);
+  return modPow(x, p - BigInt(2), p);
 }
 function modPow(base: bigint, exp: bigint, m: bigint): bigint {
   let result = BigInt(1);

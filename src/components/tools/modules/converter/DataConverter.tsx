@@ -376,7 +376,7 @@ export function JsonToYaml() { return <DataConverter defaultFrom="JSON" defaultT
 export function CsvToTsv() { return <DataConverter defaultFrom="CSV" defaultTo="TSV" />; }
 export function TsvToCsv() { return <DataConverter defaultFrom="TSV" defaultTo="CSV" />; }
 
-const SLUG_MAP: Record<string, [string, string]> = {
+export const SLUG_MAP: Record<string, [string, string]> = {
   'json-to-csv': ['JSON', 'CSV'],
   'csv-to-json': ['CSV', 'JSON'],
   'json-to-xml': ['JSON', 'XML'],

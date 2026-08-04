@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
-const MODES = ["html-to-text-converter", "text-to-html-converter"];
+export const MODES = ["html-to-text-converter", "text-to-html-converter"];
 
 const LABELS: Record<string, string> = {
   "html-to-text-converter": "HTML → Text",

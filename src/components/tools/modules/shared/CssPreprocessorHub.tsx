@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
-const CSS_PREPROCESSOR_SLUGS = [
+export const CSS_PREPROCESSOR_SLUGS = [
   "css-to-scss-converter",
   "scss-to-css-converter",
   "less-to-css-converter",

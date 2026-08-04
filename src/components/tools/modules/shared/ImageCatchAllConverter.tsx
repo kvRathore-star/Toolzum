@@ -15,7 +15,7 @@ type FormatDef = {
   hasAlpha: boolean;
 };
 
-const FORMATS: Record<string, FormatDef> = {
+export const FORMATS: Record<string, FormatDef> = {
   png: { key: 'png', label: 'PNG', ext: 'png', mime: 'image/png', accept: '.png', hasAlpha: true },
   jpg: { key: 'jpg', label: 'JPG', ext: 'jpg', mime: 'image/jpeg', accept: '.jpg,.jpeg', hasAlpha: false },
   webp: { key: 'webp', label: 'WebP', ext: 'webp', mime: 'image/webp', accept: '.webp', hasAlpha: true },
@@ -36,7 +36,7 @@ type FormatPair = {
   label: string;
 };
 
-const FORMAT_PAIRS: FormatPair[] = [
+export const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'png-to-jpg', input: 'png', output: 'jpg', label: 'PNG \u2192 JPG' },
   { slug: 'jpg-to-png', input: 'jpg', output: 'png', label: 'JPG \u2192 PNG' },
   { slug: 'png-to-webp', input: 'png', output: 'webp', label: 'PNG \u2192 WebP' },
