@@ -153,7 +153,7 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   it('every CONVERTER_CONFIG slug renders through ConverterRouter without throwing', async () => {
     const { default: ConverterRouter } = await import('@/components/tools/modules/converter/ConverterRouter');
     const failures: string[] = [];
-    expect(converterSlugs.length).toBe(297);
+    expect(converterSlugs.length).toBe(290);
     const started = Date.now();
     for (const slug of converterSlugs) {
       nav.slug = slug;

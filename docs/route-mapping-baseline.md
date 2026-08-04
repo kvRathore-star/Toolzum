@@ -13,16 +13,16 @@
 | Mechanism | Slugs |
 |---|---|
 | MODULE_REGISTRY (direct dynamic import) | 750 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 297 |
-| Redirect-only sources (in neither map) | 82 (22 registry tools + 60 legacy URLs) |
+| CONVERTER_CONFIG -> ConverterRouter hub | 290 |
+| Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (51 MODULE_REGISTRY + 12 CONVERTER_CONFIG) |
-| Redirect-shadowed CONVERTER_CONFIG routes | 7 |
+| Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
 - Zero overlap between MODULE_REGISTRY and CONVERTER_CONFIG (asserted by registry-integrity #9).
 - Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.
 - **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (750) and every
-  CONVERTER_CONFIG slug (297) through the real resolution path with no throw. Two real bugs were found and fixed:
+  CONVERTER_CONFIG slug (290) through the real resolution path with no throw. Two real bugs were found and fixed:
   - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.
   - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.
 
@@ -840,11 +840,9 @@
 | csv-formatter | csv-output | CsvHubConverter |
 | csv-html-table-converter | csv-output | CsvHubConverter |
 | csv-statistics | csv-output | CsvHubConverter |
-| csv-to-json | data | DataConverterFromSlug |
 | csv-to-markdown | csv-output | CsvHubConverter |
 | csv-to-ndjson | csv-output | CsvHubConverter |
 | csv-to-sql | csv-output | CsvHubConverter |
-| csv-to-xml | data | DataConverterFromSlug |
 | cursive-text-generator | text-style | TextStylingConverter |
 | data-size-converter | unit | UnitConverter |
 | degree-radian-converter | unit | UnitConverter |
@@ -915,11 +913,9 @@
 | json-ld-generator | json-output | JsonOutputConverter |
 | json-schema-generator | json-output | JsonOutputConverter |
 | json-size-analyzer | json-output | JsonOutputConverter |
-| json-to-csv | data | DataConverterFromSlug |
 | json-to-ini-converter | serializer | FormatSerializerHub |
 | json-to-toml-converter | serializer | FormatSerializerHub |
 | json-to-url-params | json-output | JsonOutputConverter |
-| json-to-xml | data | DataConverterFromSlug |
 | json-to-yaml-converter | serializer | FormatSerializerHub |
 | json-to-zod | json-output | JsonOutputConverter |
 | json-toon-converter | toon | ToonConverter |
@@ -1037,8 +1033,6 @@
 | time-converter | unit | UnitConverter |
 | time-zone-converter | text-transform | TextTransformConverter |
 | toml-converter | serializer | FormatSerializerHub |
-| toon-to-json | toon | ToonConverter |
-| toon-to-yaml | toon | ToonConverter |
 | tsv-csv-converter | import-to-csv | ImportToCsvConverter |
 | unix-time-converter | text-transform | TextTransformConverter |
 | video-converter | video-format | VideoFormatConverter |
@@ -1080,7 +1074,6 @@
 | xml-to-csv | data | DataConverterFromSlug |
 | xml-to-json | data | DataConverterFromSlug |
 | yaml-json-converter | serializer | FormatSerializerHub |
-| yaml-to-toon | toon | ToonConverter |
 | zalgo-text-generator | text-style | TextStylingConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
@@ -1248,23 +1241,6 @@ These 63 slugs render normally at their new category; the redirect only fires fr
 | vcf-csv-converter | vcf-csv-converter |
 | video-converter | video-converter |
 | webm-to-mp3 | webm-to-mp3 |
-
-## Redirect-shadowed CONVERTER_CONFIG routes
-
-These 7 slugs ARE routed in CONVERTER_CONFIG but a TOOL_REDIRECTS entry diverts their canonical URL (
-`redirect.slug !== slug` always fires), so the hub route is never rendered via URL. The redirect lands on the consolidated
-tool that renders the same logic. Note: `registry-integrity #9` only checks MODULE_REGISTRY, not CONVERTER_CONFIG, for
-unreachable routes — these are intentionally shadowed.
-
-| Slug | CONVERTER_CONFIG category | Redirect target |
-|---|---|---|
-| csv-to-json | data | data-format-converter |
-| csv-to-xml | data | data-format-converter |
-| json-to-csv | data | data-format-converter |
-| json-to-xml | data | data-format-converter |
-| toon-to-json | toon | json-toon-converter |
-| toon-to-yaml | toon | json-toon-converter |
-| yaml-to-toon | toon | json-toon-converter |
 
 ## Special cases
 

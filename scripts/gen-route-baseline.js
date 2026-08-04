@@ -85,7 +85,14 @@ const known22 = [
   'wifi-qr-generator','yes-no-picker',
 ];
 const comingSoon22 = redirectSources.filter((s) => known22.includes(s));
-const legacyRedirects = redirectSources.filter((s) => !known22.includes(s));
+const CHUNK_RE = /slug: "([a-z0-9-]+)"/g;
+const registryList = [];
+for (const cf of fs.readdirSync('src/registry').filter((f) => /^tools-chunk-\d+\.ts$/.test(f))) {
+  const chunk = fs.readFileSync(`src/registry/${cf}`, 'utf8');
+  for (const [, slug] of chunk.matchAll(CHUNK_RE)) registryList.push(slug);
+}
+const registryRedirectOnly = redirectSources.filter((s) => !known22.includes(s) && registryList.includes(s));
+const legacyRedirects = redirectSources.filter((s) => !known22.includes(s) && !registryList.includes(s));
 const registrySet = new Set(Object.keys(registry));
 const categorySet = new Set(Object.keys(categoryOf));
 const categoryMove = Object.keys(redirects).filter((s) => redirects[s] === s);
@@ -108,7 +115,7 @@ lines.push('| Mechanism | Slugs |');
 lines.push('|---|---|');
 lines.push(`| MODULE_REGISTRY (direct dynamic import) | ${Object.keys(registry).length} |`);
 lines.push(`| CONVERTER_CONFIG -> ConverterRouter hub | ${Object.keys(categoryOf).length} |`);
-lines.push(`| Redirect-only sources (in neither map) | ${redirectSources.length} (${comingSoon22.length} registry tools + ${legacyRedirects.length} legacy URLs) |`);
+lines.push(`| Redirect-only sources (in neither map) | ${redirectSources.length} (${comingSoon22.length} ComingSoon registry tools + ${registryRedirectOnly.length} registry tools redirecting to a hub + ${legacyRedirects.length} legacy URLs) |`);
 lines.push(`| Category-move redirects (same slug, old->new category) | ${categoryMove.length} (${categoryMove.filter((s) => registrySet.has(s)).length} MODULE_REGISTRY + ${categoryMove.filter((s) => categorySet.has(s)).length} CONVERTER_CONFIG) |`);
 lines.push(`| Redirect-shadowed CONVERTER_CONFIG routes | ${shadowed.length} |`);
 lines.push(`| SEO permutation landing slugs (redirected in page.tsx) | ${seoCount} |`);
@@ -116,7 +123,7 @@ lines.push('');
 lines.push('- Zero overlap between MODULE_REGISTRY and CONVERTER_CONFIG (asserted by registry-integrity #9).');
 lines.push('- Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.');
 lines.push('- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (750) and every');
-lines.push('  CONVERTER_CONFIG slug (297) through the real resolution path with no throw. Two real bugs were found and fixed:');
+lines.push('  CONVERTER_CONFIG slug (290) through the real resolution path with no throw. Two real bugs were found and fixed:');
 lines.push('  - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.');
 lines.push('  - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.');
 lines.push('');
@@ -158,17 +165,19 @@ lines.push('| Slug | Redirect target |');
 lines.push('|---|---|');
 for (const s of categoryMove.sort()) lines.push(`| ${s} | ${redirects[s]} |`);
 lines.push('');
-lines.push('## Redirect-shadowed CONVERTER_CONFIG routes');
-lines.push('');
-lines.push(`These ${shadowed.length} slugs ARE routed in CONVERTER_CONFIG but a TOOL_REDIRECTS entry diverts their canonical URL (`);
-lines.push('`redirect.slug !== slug` always fires), so the hub route is never rendered via URL. The redirect lands on the consolidated');
-lines.push('tool that renders the same logic. Note: `registry-integrity #9` only checks MODULE_REGISTRY, not CONVERTER_CONFIG, for');
-lines.push('unreachable routes — these are intentionally shadowed.');
-lines.push('');
-lines.push('| Slug | CONVERTER_CONFIG category | Redirect target |');
-lines.push('|---|---|---|');
-for (const s of shadowed.sort()) lines.push(`| ${s} | ${categoryOf[s]} | ${redirects[s]} |`);
-lines.push('');
+if (shadowed.length > 0) {
+  lines.push('## Redirect-shadowed CONVERTER_CONFIG routes');
+  lines.push('');
+  lines.push(`These ${shadowed.length} slugs ARE routed in CONVERTER_CONFIG but a TOOL_REDIRECTS entry diverts their canonical URL (`);
+  lines.push('`redirect.slug !== slug` always fires), so the hub route is never rendered via URL. The redirect lands on the consolidated');
+  lines.push('tool that renders the same logic. Note: `registry-integrity #9` only checks MODULE_REGISTRY, not CONVERTER_CONFIG, for');
+  lines.push('unreachable routes — these are intentionally shadowed.');
+  lines.push('');
+  lines.push('| Slug | CONVERTER_CONFIG category | Redirect target |');
+  lines.push('|---|---|---|');
+  for (const s of shadowed.sort()) lines.push(`| ${s} | ${categoryOf[s]} | ${redirects[s]} |`);
+  lines.push('');
+}
 lines.push('## Special cases');
 lines.push('');
 lines.push('1. **`image-format-converter`** routes to ImageCatchAllConverter with no matching FORMAT_PAIRS entry; it intentionally renders the default pair (png-to-jpg). Allowed by hub-contracts.test.ts.');
