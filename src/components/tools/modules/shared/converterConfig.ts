@@ -19,12 +19,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // code-to-curl-converter, hex-text-converter, hex-ascii-converter,
   // number-base-converter, case-converter, time-zone-converter,
   // unix-time-converter render TextTransformConverter via slug closures.
-  "css-to-scss-converter": { category: "css-preprocessor" },
-  "scss-to-css-converter": { category: "css-preprocessor" },
-  "less-to-css-converter": { category: "css-preprocessor" },
-  "css-to-less-converter": { category: "css-preprocessor" },
-  "stylus-to-css-converter": { category: "css-preprocessor" },
-  "css-to-stylus-converter": { category: "css-preprocessor" },
+  // css-preprocessor category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // css-to-scss-converter, scss-to-css-converter, less-to-css-converter,
+  // css-to-less-converter, stylus-to-css-converter, css-to-stylus-converter render
+  // CssPreprocessorHub via slug closures (SSR-preserving).
   "html-to-text-converter": { category: "html-text" },
   "text-to-html-converter": { category: "html-text" },
   "binary-to-text": { category: "text-binary" },

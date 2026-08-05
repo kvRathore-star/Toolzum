@@ -966,6 +966,16 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'toml-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="toml-converter" /> }))),
   'json-to-toml-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="json-to-toml-converter" /> }))),
 
+  // CSS preprocessor hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — CssPreprocessorHub destructures only slug, matching the previous
+  // ConverterRouter render exactly).
+  'css-to-scss-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="css-to-scss-converter" /> }))),
+  'scss-to-css-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="scss-to-css-converter" /> }))),
+  'less-to-css-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="less-to-css-converter" /> }))),
+  'css-to-less-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="css-to-less-converter" /> }))),
+  'stylus-to-css-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="stylus-to-css-converter" /> }))),
+  'css-to-stylus-converter': dynamic(() => import('@/components/tools/modules/shared/CssPreprocessorHub').then(m => ({ default: () => <m.default slug="css-to-stylus-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

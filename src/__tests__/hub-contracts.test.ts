@@ -31,18 +31,15 @@ describe('hub contract: every routed slug resolves to a real hub mode', () => {
     }
   });
 
-  it('CssPreprocessorHub — css-preprocessor category matches its tabs exactly and each tab has a transform', () => {
-    expect(categorySlugs('css-preprocessor')).toEqual(sorted(CSS_PREPROCESSOR_SLUGS));
+  it('CssPreprocessorHub — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG css-preprocessor routes); pairs contract lives in css-preprocessor-pairs.test.ts', () => {
+    expect(categorySlugs('css-preprocessor')).toEqual([]);
     for (const mode of CSS_PREPROCESSOR_SLUGS) {
       expect(TRANSFORM_CONFIG[mode], `css-preprocessor tab ${mode} has no transform config`).toBeDefined();
     }
   });
 
-  it('FormatSerializerHub — every serializer slug is a tab and every tab has a transform', () => {
-    const serializer = categorySlugs('serializer');
-    for (const slug of serializer) {
-      expect(FORMAT_SLUGS, `serializer slug ${slug} missing from hub tabs`).toContain(slug);
-    }
+  it('FormatSerializerHub — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG serializer routes); pairs contract lives in serializer-pairs.test.ts', () => {
+    expect(categorySlugs('serializer')).toEqual([]);
     for (const mode of FORMAT_SLUGS) {
       expect(TRANSFORM_CONFIG[mode], `serializer tab ${mode} has no transform config`).toBeDefined();
     }

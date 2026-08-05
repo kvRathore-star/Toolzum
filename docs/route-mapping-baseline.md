@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 810 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 230 |
+| MODULE_REGISTRY (direct dynamic import) | 816 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 224 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -232,6 +232,9 @@
 | css-generator | CssGenerators |
 | css-grid-generator | CssGenerators [grid] |
 | css-specificity-calculator | CssKit -> CssSpecificityCalculator |
+| css-to-less-converter | CssPreprocessorHub [slug=css-to-less-converter] |
+| css-to-scss-converter | CssPreprocessorHub [slug=css-to-scss-converter] |
+| css-to-stylus-converter | CssPreprocessorHub [slug=css-to-stylus-converter] |
 | css-transform-generator | CssGenerators [transform] |
 | css-validator | CssKit -> CssValidator |
 | csv-analyzer | DataUtilitiesWidgets -> CsvAnalyzer |
@@ -447,6 +450,7 @@
 | leap-year-calculator | Calculators -> LeapYearCalculator |
 | least-common-multiple-calculator | MiscellaneousTools1 -> LeastCommonMultipleCalculator |
 | length-converter | UnitConverter [slug=length-converter] |
+| less-to-css-converter | CssPreprocessorHub [slug=less-to-css-converter] |
 | license-key-generator | GeneratorWidgets -> LicenseKeyGenerator |
 | line-sorter | LineSorter |
 | link-in-bio-builder | LinkInBioBuilder |
@@ -667,6 +671,7 @@
 | screen-recorder-extension | ScreenRecorderExtension |
 | screen-size-converter | CalcFileKitWidgets -> ScreenSizeConverter |
 | scss-formatter | CodeFormatter -> ScssFormatter |
+| scss-to-css-converter | CssPreprocessorHub [slug=scss-to-css-converter] |
 | seat-license-calculator | Calculators -> SeatLicenseCalculator |
 | seconds-to-minutes-converter | MiscellaneousTools1 -> SecondsToMinutesConverter |
 | secret-scanner | SecurityWidgets -> SecretScanner |
@@ -713,6 +718,7 @@
 | string-inspector | StringInspector |
 | string-template-tester | StyleCodeKitWidgets -> StringTemplateTester |
 | study-time-calculator | CalcFileKitWidgets -> StudyTimeCalculator |
+| stylus-to-css-converter | CssPreprocessorHub [slug=stylus-to-css-converter] |
 | subdomain-finder | SecurityTools -> SubdomainFinder |
 | subnet-calculator | SecurityTools -> SubnetCalculator |
 | subnet-visualizer | SecurityTools -> SubnetVisualizer |
@@ -888,9 +894,6 @@
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
 | color-converter | color | ColorConverter |
-| css-to-less-converter | css-preprocessor | CssPreprocessorHub |
-| css-to-scss-converter | css-preprocessor | CssPreprocessorHub |
-| css-to-stylus-converter | css-preprocessor | CssPreprocessorHub |
 | cursive-text-generator | text-style | TextStylingConverter |
 | fancy-text-generator | text-style | TextStylingConverter |
 | flac-to-aac | audio-format | AudioFormatConverter |
@@ -956,7 +959,6 @@
 | jxl-to-svg | image-format | ImageCatchAllConverter |
 | jxl-to-tiff | image-format | ImageCatchAllConverter |
 | jxl-to-webp | image-format | ImageCatchAllConverter |
-| less-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | m4a-to-aac | audio-format | AudioFormatConverter |
 | m4a-to-aiff | audio-format | AudioFormatConverter |
 | m4a-to-flac | audio-format | AudioFormatConverter |
@@ -1013,8 +1015,6 @@
 | png-to-jxl | image-format | ImageCatchAllConverter |
 | png-to-tiff | image-format | ImageCatchAllConverter |
 | png-to-webp | image-format | ImageCatchAllConverter |
-| scss-to-css-converter | css-preprocessor | CssPreprocessorHub |
-| stylus-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | svg-to-avif | image-format | ImageCatchAllConverter |
 | svg-to-bmp | image-format | ImageCatchAllConverter |
 | svg-to-gif | image-format | ImageCatchAllConverter |
@@ -1273,7 +1273,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | Hub | Category | Routed slugs | Contract |
 |---|---|---|---|
 | HtmlTextHub | html-text | 2 | category == tabs; each tab has TRANSFORM_CONFIG |
-| CssPreprocessorHub | css-preprocessor | 6 | category == tabs; each tab has TRANSFORM_CONFIG |
+| CssPreprocessorHub | css-preprocessor | 6 | every routed slug is a TRANSFORM_CONFIG entry and a CSS_PREPROCESSOR_SLUGS tab (mode table: textTransformConfig.ts) |
 | FormatSerializerHub | serializer | 6 | every routed slug is a TRANSFORM_CONFIG entry and a FORMAT_SLUGS tab (json-to-code tab stays registry-routed via JsonToCode) |
 | DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |
 | DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |
