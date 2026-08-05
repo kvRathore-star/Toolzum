@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 821 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 219 |
+| MODULE_REGISTRY (direct dynamic import) | 822 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 218 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -512,6 +512,7 @@
 | null-value-handler | DataToolkitWidgets -> NullValueHandler |
 | number-base-converter | TextTransformConverter [slug=number-base-converter] |
 | number-guessing-game | MiscellaneousTools1 -> NumberGuessingGame |
+| number-to-words-converter | NumberWordsConverter [slug=number-to-words-converter] |
 | numeronym-generator | MiniGeneratorsWidgets -> NumeronymGenerator |
 | nup-pdf | NupPdf |
 | oauth-client-setup | SecurityToolkitWidgets -> OauthClientSetup |
@@ -991,7 +992,6 @@
 | mp4-to-mov | video-format | VideoFormatConverter |
 | mp4-to-mp3 | video-to-audio | VideoToAudioConverter |
 | mp4-to-webm | video-format | VideoFormatConverter |
-| number-to-words-converter | number | NumberWordsConverter |
 | ogg-to-aac | audio-format | AudioFormatConverter |
 | ogg-to-aiff | audio-format | AudioFormatConverter |
 | ogg-to-flac | audio-format | AudioFormatConverter |

@@ -71,7 +71,7 @@ type NumMode = {
   convert: (input: string) => string;
 };
 
-const MODES: Record<string, NumMode> = {
+export const MODES: Record<string, NumMode> = {
   "roman-numeral-converter": {
     slug: "roman-numeral-converter", name: "Roman Numeral Converter",
     description: "Convert between numbers and Roman numerals (1-3999)",

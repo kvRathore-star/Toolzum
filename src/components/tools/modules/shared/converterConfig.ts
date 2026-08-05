@@ -59,8 +59,9 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // Color converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // color-converter, hex-to-rgb-converter render ColorConverter via slug
   // closures (SSR-preserving). Removed here to keep single-source.
-  // Number converters
-  "number-to-words-converter": { category: "number" },
+  // Number converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // number-to-words-converter renders NumberWordsConverter via slug closure
+  // (SSR-preserving). roman-numeral-converter was already a MODULE_REGISTRY slug.
   // Video format converters
   "mkv-to-mp4": {
     category: "video-format",

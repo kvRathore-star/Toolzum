@@ -988,6 +988,11 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'color-converter': dynamic(() => import('@/components/tools/modules/shared/ColorConverter').then(m => ({ default: () => <m.default slug="color-converter" /> }))),
   'hex-to-rgb-converter': dynamic(() => import('@/components/tools/modules/shared/ColorConverter').then(m => ({ default: () => <m.default slug="hex-to-rgb-converter" /> }))),
 
+  // Number hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // NumberWordsConverter destructures only slug; roman-numeral-converter stays a
+  // MODULE_REGISTRY slug, so only number-to-words-converter is routed here).
+  'number-to-words-converter': dynamic(() => import('@/components/tools/modules/shared/NumberWordsConverter').then(m => ({ default: () => <m.default slug="number-to-words-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
