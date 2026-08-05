@@ -40,3 +40,23 @@ review list, not a pass/fail gate.
 - `GEMINI_API_KEY` was **unset** in Cloudflare Pages at audit time → `/api/ai/generate` and
   `/api/ai/transcribe` returned 500 in production (all AI tools).
 - Status: **set by the user on 2026-07-31**. No further action unless rate limits appear.
+
+## 4. 8 real registry tools have never had OG images committed (candidate)
+
+- Surfaced 2026-08-05 as a build aside during the Phase 3.2 (text-transform) migration, not
+  caused by it. After `npm run build` regenerates `public/og/**`, these 8 files stay
+  **untracked** every time — every other tool's OG image is committed:
+  - `public/og/converter/csv-data-cleaner.png`
+  - `public/og/converter/csv-formatter.png`
+  - `public/og/converter/csv-statistics.png`
+  - `public/og/converter/mov-to-mp3.png`
+  - `public/og/converter/mp4-to-mp3.png`
+  - `public/og/converter/text-binary-converter.png`
+  - `public/og/converter/webm-to-mp3.png`
+  - `public/og/utility/temperature-converter.png`
+- All 8 correspond to **real slugs** present in the routing sources (MODULE_REGISTRY /
+  CONVERTER_CONFIG) and in `public/sitemap.xml`, so they are not stray artifacts — production
+  is simply missing committed OG images for them.
+- Verdict: pre-existing gap, unrelated to routing consolidation. **Logged, not fixed**; decide
+  separately whether to commit the images (they regenerate deterministically at build) or
+  leave them generated-on-deploy.

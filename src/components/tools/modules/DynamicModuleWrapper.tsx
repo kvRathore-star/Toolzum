@@ -909,6 +909,21 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'pdf-to-epub': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-epub" /> }))),
   'heic-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="heic-to-pdf" /> }))),
 
+  // Text transform hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — TextTransformConverter destructures only slug, so description
+  // being undefined matches the previous ConverterRouter render exactly).
+  'text-tools': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="text-tools" /> }))),
+  'tailwind-to-css-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="tailwind-to-css-converter" /> }))),
+  'svg-to-css': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="svg-to-css" /> }))),
+  'html-to-jsx': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="html-to-jsx" /> }))),
+  'code-to-curl-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="code-to-curl-converter" /> }))),
+  'hex-text-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="hex-text-converter" /> }))),
+  'hex-ascii-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="hex-ascii-converter" /> }))),
+  'number-base-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="number-base-converter" /> }))),
+  'case-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="case-converter" /> }))),
+  'time-zone-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="time-zone-converter" /> }))),
+  'unix-time-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="unix-time-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

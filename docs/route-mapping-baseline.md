@@ -12,10 +12,10 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 769 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 271 |
+| MODULE_REGISTRY (direct dynamic import) | 780 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 260 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (55 MODULE_REGISTRY + 8 CONVERTER_CONFIG) |
+| Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
@@ -169,6 +169,7 @@
 | canonical-url-checker | TextSeoTools -> CanonicalUrlChecker |
 | car-lease-calculator | Calculators -> CarLeaseCalculator |
 | car-loan-calculator | Calculators -> CarLoanCalculator |
+| case-converter | TextTransformConverter [slug=case-converter] |
 | cbor-inspector | FormatAndDataKitWidgets -> CborInspector |
 | cbz-to-pdf | CbzToPdf |
 | cgpa-to-percentage-converter | CgpaToPercentage |
@@ -184,6 +185,7 @@
 | code-beautifier | CodeFormatter |
 | code-formatter | CodeFormatter |
 | code-obfuscator | CodeKit -> CodeObfuscator |
+| code-to-curl-converter | TextTransformConverter [slug=code-to-curl-converter] |
 | code-to-curl-parser | CodeKit -> CodeToCurlParser |
 | coin-flipper | CoinFlipper |
 | collage-maker | CollageMaker |
@@ -348,6 +350,8 @@
 | header-footer-pdf | HeaderFooterPdf |
 | heart-rate-zone-calculator | Calculators -> HeartRateZoneCalculator |
 | heic-to-pdf | DocumentFormatConverter [slug=heic-to-pdf] |
+| hex-ascii-converter | TextTransformConverter [slug=hex-ascii-converter] |
+| hex-text-converter | TextTransformConverter [slug=hex-text-converter] |
 | hindi-regional-font-generator | RegionalFontGenerator |
 | hmac-generator | SecurityTools -> HmacGenerator |
 | hourly-to-salary-calculator | Calculators -> HourlyToSalaryCalculator |
@@ -359,6 +363,7 @@
 | html-linter | ValidatorKitWidgets -> HtmlLinter |
 | html-preview | HtmlPreview |
 | html-to-image | HtmlToImage |
+| html-to-jsx | TextTransformConverter [slug=html-to-jsx] |
 | html-to-markdown | MarkdownTools |
 | html-to-pdf | DocumentFormatConverter [slug=html-to-pdf] |
 | http-cache-header-generator | ConfigTools -> HttpCacheHeaderGenerator |
@@ -479,6 +484,7 @@
 | nickname-generator | Generators -> NicknameGenerator |
 | noise-reducer | NoiseReducer |
 | null-value-handler | DataToolkitWidgets -> NullValueHandler |
+| number-base-converter | TextTransformConverter [slug=number-base-converter] |
 | number-guessing-game | MiscellaneousTools1 -> NumberGuessingGame |
 | numeronym-generator | MiniGeneratorsWidgets -> NumeronymGenerator |
 | nup-pdf | NupPdf |
@@ -691,10 +697,12 @@
 | svg-base64-converter | ConverterToolkitWidgets -> SvgToBase64Converter |
 | svg-editor | SvgEditor |
 | svg-optimizer | ConverterToolkitWidgets -> SvgOptimizer |
+| svg-to-css | TextTransformConverter [slug=svg-to-css] |
 | swagger-openapi-generator | ApiTools -> SwaggerOpenapiGenerator |
 | swift-formatter | ExtraTools -> SwiftFormatter |
 | syntax-validator | SecurityTools -> Validator |
 | tabata-timer | Timers -> TabataTimer |
+| tailwind-to-css-converter | TextTransformConverter [slug=tailwind-to-css-converter] |
 | tax-calculator | Calculators -> TaxCalculator |
 | tax-saving-calculator | TaxSavingCalculator |
 | tds-calculator-india | Calculators -> TdsCalculatorIndia |
@@ -711,11 +719,13 @@
 | text-to-handwriting | TextToHandwriting |
 | text-to-markdown | MarkdownTools |
 | text-to-speech-tts | TextToSpeechTts |
+| text-tools | TextTransformConverter [slug=text-tools] |
 | tiff-to-pdf | TiffToPdf |
 | time-addition-calculator | Timers -> TimeAdditionCalculator |
 | time-duration-calculator | Timers -> TimeDurationCalculator |
 | time-since-calculator | MiscellaneousTools1 -> TimeSinceCalculator |
 | time-until-calculator | Timers -> TimeUntilCalculator |
+| time-zone-converter | TextTransformConverter [slug=time-zone-converter] |
 | timer | Timers -> Timer |
 | tip-calculator | MiscellaneousTools1 -> TipCalculator |
 | tls-cipher-checker | SecurityTools -> TlsCipherChecker |
@@ -735,6 +745,7 @@
 | unicode-converter | ConverterToolkitWidgets -> UnicodeConverter |
 | unicode-viewer | UnicodeViewer |
 | unit-converter | UnitConverter -> UnitConverter |
+| unix-time-converter | TextTransformConverter [slug=unix-time-converter] |
 | unlock-pdf | ProtectPdf -> PdfSecurityTool [unlock] |
 | upi-id-validator | UpiValidator |
 | upside-down-text | UpsideDownText |
@@ -847,9 +858,7 @@
 | bmp-to-svg | image-format | ImageCatchAllConverter |
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
-| case-converter | text-transform | TextTransformConverter |
 | clothing-size-converter | unit | UnitConverter |
-| code-to-curl-converter | text-transform | TextTransformConverter |
 | color-converter | color | ColorConverter |
 | cooking-measurement-converter | unit | UnitConverter |
 | css-to-less-converter | css-preprocessor | CssPreprocessorHub |
@@ -888,10 +897,7 @@
 | heic-to-svg | image-format | ImageCatchAllConverter |
 | heic-to-tiff | image-format | ImageCatchAllConverter |
 | heic-to-webp | image-format | ImageCatchAllConverter |
-| hex-ascii-converter | text-transform | TextTransformConverter |
-| hex-text-converter | text-transform | TextTransformConverter |
 | hex-to-rgb-converter | color | ColorConverter |
-| html-to-jsx | text-transform | TextTransformConverter |
 | html-to-text-converter | html-text | HtmlTextHub |
 | ico-to-avif | image-format | ImageCatchAllConverter |
 | ico-to-bmp | image-format | ImageCatchAllConverter |
@@ -970,7 +976,6 @@
 | mp4-to-mp3 | video-to-audio | VideoToAudioConverter |
 | mp4-to-webm | video-format | VideoFormatConverter |
 | ndjson-to-json | json-output | JsonOutputConverter |
-| number-base-converter | text-transform | TextTransformConverter |
 | number-to-words-converter | number | NumberWordsConverter |
 | ogg-to-aac | audio-format | AudioFormatConverter |
 | ogg-to-aiff | audio-format | AudioFormatConverter |
@@ -1006,7 +1011,6 @@
 | stylus-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | svg-to-avif | image-format | ImageCatchAllConverter |
 | svg-to-bmp | image-format | ImageCatchAllConverter |
-| svg-to-css | text-transform | TextTransformConverter |
 | svg-to-gif | image-format | ImageCatchAllConverter |
 | svg-to-heic | image-format | ImageCatchAllConverter |
 | svg-to-ico | image-format | ImageCatchAllConverter |
@@ -1015,12 +1019,10 @@
 | svg-to-png | image-format | ImageCatchAllConverter |
 | svg-to-tiff | image-format | ImageCatchAllConverter |
 | svg-to-webp | image-format | ImageCatchAllConverter |
-| tailwind-to-css-converter | text-transform | TextTransformConverter |
 | temperature-converter | unit | UnitConverter |
 | text-binary-converter | text-binary | TextBinaryHub |
 | text-to-binary | text-binary | TextBinaryHub |
 | text-to-html-converter | html-text | HtmlTextHub |
-| text-tools | text-transform | TextTransformConverter |
 | tiff-to-avif | image-format | ImageCatchAllConverter |
 | tiff-to-bmp | image-format | ImageCatchAllConverter |
 | tiff-to-gif | image-format | ImageCatchAllConverter |
@@ -1032,10 +1034,8 @@
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
 | time-converter | unit | UnitConverter |
-| time-zone-converter | text-transform | TextTransformConverter |
 | toml-converter | serializer | FormatSerializerHub |
 | tsv-csv-converter | import-to-csv | ImportToCsvConverter |
-| unix-time-converter | text-transform | TextTransformConverter |
 | video-converter | video-format | VideoFormatConverter |
 | video-converter-tool | video-format | VideoFormatConverter |
 | volume-converter | unit | UnitConverter |
@@ -1276,6 +1276,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | FormatSerializerHub | serializer | 6 | every routed slug is a tab; each tab has TRANSFORM_CONFIG |
 | DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |
 | DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |
+| TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |
 | ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |
 
 ## Confidence & limitations

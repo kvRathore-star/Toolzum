@@ -216,6 +216,7 @@ lines.push('| CssPreprocessorHub | css-preprocessor | 6 | category == tabs; each
 lines.push('| FormatSerializerHub | serializer | 6 | every routed slug is a tab; each tab has TRANSFORM_CONFIG |');
 lines.push('| DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |');
 lines.push('| DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |');
+lines.push('| TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |');
 lines.push('| ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |');
 lines.push('');
 lines.push('## Confidence & limitations');
