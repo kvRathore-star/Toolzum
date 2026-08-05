@@ -983,6 +983,11 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'text-to-binary': dynamic(() => import('@/components/tools/modules/shared/TextBinaryHub').then(m => ({ default: () => <m.default slug="text-to-binary" /> }))),
   'text-binary-converter': dynamic(() => import('@/components/tools/modules/shared/TextBinaryHub').then(m => ({ default: () => <m.default slug="text-binary-converter" /> }))),
 
+  // Color hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // ColorConverter destructures only slug; every routed slug is a MODES entry).
+  'color-converter': dynamic(() => import('@/components/tools/modules/shared/ColorConverter').then(m => ({ default: () => <m.default slug="color-converter" /> }))),
+  'hex-to-rgb-converter': dynamic(() => import('@/components/tools/modules/shared/ColorConverter').then(m => ({ default: () => <m.default slug="hex-to-rgb-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

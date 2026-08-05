@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 819 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 221 |
+| MODULE_REGISTRY (direct dynamic import) | 821 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 219 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -194,6 +194,7 @@
 | collage-maker | CollageMaker |
 | college-gpa-calculator | Calculators -> CollegeGpaCalculator |
 | color-blindness-simulator | ColorBlindnessSimulator |
+| color-converter | ColorConverter [slug=color-converter] |
 | color-palette-generator | ColorAndStyleKitWidgets -> ColorPaletteGenerator |
 | color-picker | MiscellaneousTools1 -> ColorPicker |
 | color-shades-tints | ColorAndStyleKitWidgets -> ColorShadesTints |
@@ -362,6 +363,7 @@
 | heic-to-pdf | DocumentFormatConverter [slug=heic-to-pdf] |
 | hex-ascii-converter | TextTransformConverter [slug=hex-ascii-converter] |
 | hex-text-converter | TextTransformConverter [slug=hex-text-converter] |
+| hex-to-rgb-converter | ColorConverter [slug=hex-to-rgb-converter] |
 | hindi-regional-font-generator | RegionalFontGenerator |
 | hmac-generator | SecurityTools -> HmacGenerator |
 | hourly-to-salary-calculator | Calculators -> HourlyToSalaryCalculator |
@@ -895,7 +897,6 @@
 | bmp-to-svg | image-format | ImageCatchAllConverter |
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
-| color-converter | color | ColorConverter |
 | cursive-text-generator | text-style | TextStylingConverter |
 | fancy-text-generator | text-style | TextStylingConverter |
 | flac-to-aac | audio-format | AudioFormatConverter |
@@ -926,7 +927,6 @@
 | heic-to-svg | image-format | ImageCatchAllConverter |
 | heic-to-tiff | image-format | ImageCatchAllConverter |
 | heic-to-webp | image-format | ImageCatchAllConverter |
-| hex-to-rgb-converter | color | ColorConverter |
 | html-to-text-converter | html-text | HtmlTextHub |
 | ico-to-avif | image-format | ImageCatchAllConverter |
 | ico-to-bmp | image-format | ImageCatchAllConverter |
@@ -1280,7 +1280,6 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |
 | UnitConverter | unit | 16 | every routed slug is a UNIT_FAMILIES entry (mode table: UnitConverter.tsx UNIT_FAMILIES) |
 | JsonOutputConverter | json-output | 8 | every routed slug is a MODES entry (mode table: JsonOutputConverter.tsx MODES; json-formatter mode stays registry-routed via JsonFormatter) |
-| TextBinaryHub | text-binary | 3 | 2 tab slugs are MODES entries; text-binary-converter is the catch-all fallback (renders default mode text-to-binary) |
 | ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |
 
 ## Confidence & limitations

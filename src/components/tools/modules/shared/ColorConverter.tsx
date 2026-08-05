@@ -49,7 +49,7 @@ type ColorMode = {
   convert: (input: string) => string;
 };
 
-const MODES: Record<string, ColorMode> = {
+export const MODES: Record<string, ColorMode> = {
   "color-converter": {
     slug: "color-converter", name: "Color Converter",
     description: "Convert between HEX, RGB, and HSL color formats",

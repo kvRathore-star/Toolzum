@@ -56,9 +56,9 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // closures (SSR-preserving). Removed here to keep single-source.
   // Import-to-CSV converters
   "tsv-csv-converter": { category: "import-to-csv" },
-  // Color converters
-  "color-converter": { category: "color" },
-  "hex-to-rgb-converter": { category: "color" },
+  // Color converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // color-converter, hex-to-rgb-converter render ColorConverter via slug
+  // closures (SSR-preserving). Removed here to keep single-source.
   // Number converters
   "number-to-words-converter": { category: "number" },
   // Video format converters
