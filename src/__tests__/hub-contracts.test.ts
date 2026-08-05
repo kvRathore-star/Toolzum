@@ -24,8 +24,8 @@ function sorted(list: string[]): string[] {
 }
 
 describe('hub contract: every routed slug resolves to a real hub mode', () => {
-  it('HtmlTextHub — html-text category matches its tabs exactly and each tab has a transform', () => {
-    expect(categorySlugs('html-text')).toEqual(sorted(HTML_TEXT_MODES));
+  it('HtmlTextHub — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG html-text routes); pairs contract lives in html-text-pairs.test.ts', () => {
+    expect(categorySlugs('html-text')).toEqual([]);
     for (const mode of HTML_TEXT_MODES) {
       expect(TRANSFORM_CONFIG[mode], `html-text tab ${mode} has no transform config`).toBeDefined();
     }

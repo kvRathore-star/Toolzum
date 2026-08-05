@@ -993,6 +993,11 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // MODULE_REGISTRY slug, so only number-to-words-converter is routed here).
   'number-to-words-converter': dynamic(() => import('@/components/tools/modules/shared/NumberWordsConverter').then(m => ({ default: () => <m.default slug="number-to-words-converter" /> }))),
 
+  // HTML-text hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // HtmlTextHub destructures only slug and every routed slug is a MODES tab).
+  'html-to-text-converter': dynamic(() => import('@/components/tools/modules/shared/HtmlTextHub').then(m => ({ default: () => <m.default slug="html-to-text-converter" /> }))),
+  'text-to-html-converter': dynamic(() => import('@/components/tools/modules/shared/HtmlTextHub').then(m => ({ default: () => <m.default slug="text-to-html-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

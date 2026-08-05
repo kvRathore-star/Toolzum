@@ -23,8 +23,9 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // css-to-scss-converter, scss-to-css-converter, less-to-css-converter,
   // css-to-less-converter, stylus-to-css-converter, css-to-stylus-converter render
   // CssPreprocessorHub via slug closures (SSR-preserving).
-  "html-to-text-converter": { category: "html-text" },
-  "text-to-html-converter": { category: "html-text" },
+  // html-text category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // html-to-text-converter, text-to-html-converter render HtmlTextHub via
+  // slug closures (SSR-preserving). Removed here to keep single-source.
   // text-binary category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // binary-to-text, text-to-binary, text-binary-converter render TextBinaryHub via
   // slug closures (SSR-preserving). Note text-binary-converter is not a MODES tab;

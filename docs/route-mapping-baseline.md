@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 822 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 218 |
+| MODULE_REGISTRY (direct dynamic import) | 824 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 216 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -378,6 +378,7 @@
 | html-to-jsx | TextTransformConverter [slug=html-to-jsx] |
 | html-to-markdown | MarkdownTools |
 | html-to-pdf | DocumentFormatConverter [slug=html-to-pdf] |
+| html-to-text-converter | HtmlTextHub [slug=html-to-text-converter] |
 | http-cache-header-generator | ConfigTools -> HttpCacheHeaderGenerator |
 | http-header-analyzer | ConfigTools -> HttpHeaderAnalyzer |
 | http-headers-generator | ConfigTools -> HttpHeadersGenerator |
@@ -754,6 +755,7 @@
 | text-splitter | TextSeoTools -> TextSplitter |
 | text-to-binary | TextBinaryHub [slug=text-to-binary] |
 | text-to-handwriting | TextToHandwriting |
+| text-to-html-converter | HtmlTextHub [slug=text-to-html-converter] |
 | text-to-markdown | MarkdownTools |
 | text-to-speech-tts | TextToSpeechTts |
 | text-tools | TextTransformConverter [slug=text-tools] |
@@ -928,7 +930,6 @@
 | heic-to-svg | image-format | ImageCatchAllConverter |
 | heic-to-tiff | image-format | ImageCatchAllConverter |
 | heic-to-webp | image-format | ImageCatchAllConverter |
-| html-to-text-converter | html-text | HtmlTextHub |
 | ico-to-avif | image-format | ImageCatchAllConverter |
 | ico-to-bmp | image-format | ImageCatchAllConverter |
 | ico-to-gif | image-format | ImageCatchAllConverter |
@@ -1027,7 +1028,6 @@
 | svg-to-png | image-format | ImageCatchAllConverter |
 | svg-to-tiff | image-format | ImageCatchAllConverter |
 | svg-to-webp | image-format | ImageCatchAllConverter |
-| text-to-html-converter | html-text | HtmlTextHub |
 | tiff-to-avif | image-format | ImageCatchAllConverter |
 | tiff-to-bmp | image-format | ImageCatchAllConverter |
 | tiff-to-gif | image-format | ImageCatchAllConverter |
