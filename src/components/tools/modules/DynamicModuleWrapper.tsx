@@ -1005,6 +1005,13 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'cursive-text-generator': dynamic(() => import('@/components/tools/modules/shared/TextStylingConverter').then(m => ({ default: () => <m.default slug="cursive-text-generator" /> }))),
   'zalgo-text-generator': dynamic(() => import('@/components/tools/modules/shared/TextStylingConverter').then(m => ({ default: () => <m.default slug="zalgo-text-generator" /> }))),
 
+  // Import-to-CSV hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // ImportToCsvConverter destructures only slug and every routed slug is a MODES
+  // tab. xlsx/vcf/ics-csv-converter are separate MODULE_REGISTRY components and
+  // are not routed here).
+  'import-to-csv': dynamic(() => import('@/components/tools/modules/shared/ImportToCsvConverter').then(m => ({ default: () => <m.default slug="import-to-csv" /> }))),
+  'tsv-csv-converter': dynamic(() => import('@/components/tools/modules/shared/ImportToCsvConverter').then(m => ({ default: () => <m.default slug="tsv-csv-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

@@ -22,7 +22,7 @@ type ConvertMode = {
   };
 };
 
-const MODES: Record<string, ConvertMode> = {
+export const MODES: Record<string, ConvertMode> = {
   "import-to-csv": {
     slug: "import-to-csv", name: "Import to CSV",
     description: "Convert TSV, Excel XLSX, vCard VCF, and iCalendar ICS files to CSV format.",

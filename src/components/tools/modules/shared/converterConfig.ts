@@ -55,8 +55,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // fuel-consumption-converter, paper-size-converter, clothing-size-converter,
   // shoe-size-converter, degree-radian-converter render UnitConverter via slug
   // closures (SSR-preserving). Removed here to keep single-source.
-  // Import-to-CSV converters
-  "tsv-csv-converter": { category: "import-to-csv" },
+  // Import-to-CSV converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // import-to-csv, tsv-csv-converter render ImportToCsvConverter via slug
+  // closures (SSR-preserving). xlsx/vcf/ics-csv-converter were already separate
+  // MODULE_REGISTRY components. Removed here to keep single-source.
   // Color converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // color-converter, hex-to-rgb-converter render ColorConverter via slug
   // closures (SSR-preserving). Removed here to keep single-source.
@@ -306,7 +308,6 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // MODULE_REGISTRY slug (EpubToPdf) and an in-app FORMAT_PAIRS tab.
 
   // Hub/consolidated converter entries
-  "import-to-csv": { category: "import-to-csv", description: "Convert TSV, XLSX, VCF, ICS, and Parquet files to CSV format. Fast and private." },
 
   // Toon converters.
   // yaml-to-toon, toon-to-json, toon-to-yaml are NOT routed here: they are

@@ -12,10 +12,10 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 827 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 213 |
+| MODULE_REGISTRY (direct dynamic import) | 829 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 211 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
+| Category-move redirects (same slug, old->new category) | 63 (59 MODULE_REGISTRY + 4 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
@@ -400,6 +400,7 @@
 | image-resizer | ImageResizer |
 | image-to-base64 | ImageToBase64 |
 | image-to-ico | ImageToIco |
+| import-to-csv | ImportToCsvConverter [slug=import-to-csv] |
 | india-pincode-finder | PincodeFinder |
 | indian-address-parser | IndianAddressParser |
 | indian-age-calculator | IndianAgeCalculator |
@@ -779,6 +780,7 @@
 | triangle-area-calculator | Calculators -> TriangleAreaCalculator |
 | trigonometry-calculator | MiscellaneousTools1 -> TrigonometryCalculator |
 | tsconfig-analyzer | StyleCodeKitWidgets -> TsconfigAnalyzer |
+| tsv-csv-converter | ImportToCsvConverter [slug=tsv-csv-converter] |
 | tsx-formatter | CodeFormatter -> TsxFormatter |
 | two-factor-auth-generator | SecurityTools -> TwoFactorAuthGenerator |
 | typescript-formatter | StyleCodeKitWidgets -> TypeScriptFormatter |
@@ -942,7 +944,6 @@
 | ico-to-tiff | image-format | ImageCatchAllConverter |
 | ico-to-webp | image-format | ImageCatchAllConverter |
 | image-format-converter | image-format | ImageCatchAllConverter |
-| import-to-csv | import-to-csv | ImportToCsvConverter |
 | jpg-to-avif | image-format | ImageCatchAllConverter |
 | jpg-to-bmp | image-format | ImageCatchAllConverter |
 | jpg-to-gif | image-format | ImageCatchAllConverter |
@@ -1039,7 +1040,6 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| tsv-csv-converter | import-to-csv | ImportToCsvConverter |
 | video-converter | video-format | VideoFormatConverter |
 | video-converter-tool | video-format | VideoFormatConverter |
 | wav-to-aac | audio-format | AudioFormatConverter |
