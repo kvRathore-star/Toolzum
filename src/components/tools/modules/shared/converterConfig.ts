@@ -44,10 +44,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // csv-to-markdown, csv-to-ndjson, csv-to-sql, csv-html-table-converter,
   // csv-statistics, csv-data-cleaner, csv-formatter render CsvHubConverter
   // via slug closures (SSR-preserving). Removed here to keep single-source.
-  // Text style generators
-  "fancy-text-generator": { category: "text-style" },
-  "cursive-text-generator": { category: "text-style" },
-  "zalgo-text-generator": { category: "text-style" },
+  // Text style generators migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // fancy-text-generator, cursive-text-generator, zalgo-text-generator render
+  // TextStylingConverter via slug closures (SSR-preserving). Removed here to
+  // keep single-source.
   // Unit converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // length-converter, weight-converter, volume-converter, area-converter,
   // speed-converter, power-converter, pressure-converter, temperature-converter,

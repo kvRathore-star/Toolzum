@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 824 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 216 |
+| MODULE_REGISTRY (direct dynamic import) | 827 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 213 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -255,6 +255,7 @@
 | csv-transpose | DataToolkitWidgets -> Transpose |
 | curl-to-code-converter | FormatAndDataKitWidgets -> CurlToCodeConverter |
 | currency-converter | CurrencyConverter |
+| cursive-text-generator | TextStylingConverter [slug=cursive-text-generator] |
 | customer-ltv-calculator | Calculators -> LtvCalculator |
 | cve-lookup | SecurityTools -> CveLookup |
 | cycling-calorie-calculator | Calculators -> CyclingCalorieCalculator |
@@ -309,6 +310,7 @@
 | fake-credit-card-generator | Generators -> FakeCreditCardGenerator |
 | fake-data-generator | Generators -> FakeDataGenerator |
 | fake-identity-generator | Generators -> FakeIdentityGenerator |
+| fancy-text-generator | TextStylingConverter [slug=fancy-text-generator] |
 | favicon-generator | FaviconGenerator |
 | final-grade-calculator | Calculators -> FinalGradeCalculator |
 | flatten-pdf | FlattenPdf |
@@ -853,6 +855,7 @@
 | yaml-syntax-validator | SecurityTools -> YamlValidator |
 | yaml-validator | DataFormatTools -> YamlValidator |
 | youtube-transcript-generator | YoutubeTranscriptGenerator |
+| zalgo-text-generator | TextStylingConverter [slug=zalgo-text-generator] |
 | zip-file-extractor | CalcFileKitWidgets -> ZipFileExtractor |
 
 ## CONVERTER_CONFIG slugs (hub-routed)
@@ -900,8 +903,6 @@
 | bmp-to-svg | image-format | ImageCatchAllConverter |
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
-| cursive-text-generator | text-style | TextStylingConverter |
-| fancy-text-generator | text-style | TextStylingConverter |
 | flac-to-aac | audio-format | AudioFormatConverter |
 | flac-to-aiff | audio-format | AudioFormatConverter |
 | flac-to-m4a | audio-format | AudioFormatConverter |
@@ -1074,7 +1075,6 @@
 | wma-to-wav | audio-format | AudioFormatConverter |
 | xml-to-csv | data | DataConverterFromSlug |
 | xml-to-json | data | DataConverterFromSlug |
-| zalgo-text-generator | text-style | TextStylingConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 

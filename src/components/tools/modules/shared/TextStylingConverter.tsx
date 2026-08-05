@@ -319,6 +319,8 @@ function ZalgoView() {
   );
 }
 
+export const STYLING_SLUGS = ["fancy-text-generator", "cursive-text-generator", "zalgo-text-generator"] as const;
+
 export default function TextStylingConverter({ slug }: { slug: string }) {
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">

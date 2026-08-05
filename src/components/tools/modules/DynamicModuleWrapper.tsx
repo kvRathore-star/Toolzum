@@ -998,6 +998,13 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'html-to-text-converter': dynamic(() => import('@/components/tools/modules/shared/HtmlTextHub').then(m => ({ default: () => <m.default slug="html-to-text-converter" /> }))),
   'text-to-html-converter': dynamic(() => import('@/components/tools/modules/shared/HtmlTextHub').then(m => ({ default: () => <m.default slug="text-to-html-converter" /> }))),
 
+  // Text-style hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // TextStylingConverter destructures only slug and renders one view per slug.
+  // text-style-generator is not a CONVERTER_CONFIG entry and is not routed here).
+  'fancy-text-generator': dynamic(() => import('@/components/tools/modules/shared/TextStylingConverter').then(m => ({ default: () => <m.default slug="fancy-text-generator" /> }))),
+  'cursive-text-generator': dynamic(() => import('@/components/tools/modules/shared/TextStylingConverter').then(m => ({ default: () => <m.default slug="cursive-text-generator" /> }))),
+  'zalgo-text-generator': dynamic(() => import('@/components/tools/modules/shared/TextStylingConverter').then(m => ({ default: () => <m.default slug="zalgo-text-generator" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
