@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 796 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 244 |
+| MODULE_REGISTRY (direct dynamic import) | 804 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 236 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -417,9 +417,16 @@
 | js-syntax-checker | CodeKit -> JsSyntaxChecker |
 | json-diff-checker | JSONDiffChecker |
 | json-escape-unescape | DataToolkitWidgets -> JsonEscapeUnescape |
+| json-flattener | JsonOutputConverter [slug=json-flattener] |
 | json-formatter | JsonFormatter |
+| json-formatter-tool | JsonOutputConverter [slug=json-formatter-tool] |
+| json-ld-generator | JsonOutputConverter [slug=json-ld-generator] |
 | json-path-query-builder | DataUtilitiesWidgets -> JsonPathQueryBuilder |
+| json-schema-generator | JsonOutputConverter [slug=json-schema-generator] |
+| json-size-analyzer | JsonOutputConverter [slug=json-size-analyzer] |
 | json-to-code | JsonToCode |
+| json-to-url-params | JsonOutputConverter [slug=json-to-url-params] |
+| json-to-zod | JsonOutputConverter [slug=json-to-zod] |
 | json-tree-viewer | DataUtilitiesWidgets -> JsonTreeViewer |
 | jsonl-formatter | DataToolkitWidgets -> JsonlFormatter |
 | jsonrpc-builder | FormatAndDataKitWidgets -> JsonRpcBuilder |
@@ -484,6 +491,7 @@
 | msgpack-inspector | FormatAndDataKitWidgets -> MessagePackInspector |
 | mute-video | MuteVideo |
 | nato-phonetic-converter | NatoPhoneticConverter |
+| ndjson-to-json | JsonOutputConverter [slug=ndjson-to-json] |
 | net-promoter-score-calculator | NetPromoterScoreCalculator |
 | net-worth-calculator | Calculators -> NetWorthCalculator |
 | neumorphism-generator | CssGenerators [neumorphism] |
@@ -932,16 +940,9 @@
 | jpg-to-svg | image-format | ImageCatchAllConverter |
 | jpg-to-tiff | image-format | ImageCatchAllConverter |
 | jpg-to-webp | image-format | ImageCatchAllConverter |
-| json-flattener | json-output | JsonOutputConverter |
-| json-formatter-tool | json-output | JsonOutputConverter |
-| json-ld-generator | json-output | JsonOutputConverter |
-| json-schema-generator | json-output | JsonOutputConverter |
-| json-size-analyzer | json-output | JsonOutputConverter |
 | json-to-ini-converter | serializer | FormatSerializerHub |
 | json-to-toml-converter | serializer | FormatSerializerHub |
-| json-to-url-params | json-output | JsonOutputConverter |
 | json-to-yaml-converter | serializer | FormatSerializerHub |
-| json-to-zod | json-output | JsonOutputConverter |
 | json-toon-converter | toon | ToonConverter |
 | jxl-to-avif | image-format | ImageCatchAllConverter |
 | jxl-to-bmp | image-format | ImageCatchAllConverter |
@@ -984,7 +985,6 @@
 | mp4-to-mov | video-format | VideoFormatConverter |
 | mp4-to-mp3 | video-to-audio | VideoToAudioConverter |
 | mp4-to-webm | video-format | VideoFormatConverter |
-| ndjson-to-json | json-output | JsonOutputConverter |
 | number-to-words-converter | number | NumberWordsConverter |
 | ogg-to-aac | audio-format | AudioFormatConverter |
 | ogg-to-aiff | audio-format | AudioFormatConverter |
@@ -1246,9 +1246,10 @@ These 63 slugs render normally at their new category; the redirect only fires fr
 
 1. **`image-format-converter`** routes to ImageCatchAllConverter with no matching FORMAT_PAIRS entry; it intentionally renders the default pair (png-to-jpg). Allowed by hub-contracts.test.ts.
 2. **`json-to-code`** is a MODULE_REGISTRY slug but also a tab inside FormatSerializerHub (FORMAT_SLUGS). The hub tab is only reachable in-app, not by slug.
-3. **`epub-to-pdf`** is a MODULE_REGISTRY slug but also a pair inside DocumentFormatConverter (FORMAT_PAIRS).
-4. **`png-to-svg`** is a pair inside ImageCatchAllConverter (FORMAT_PAIRS) but routed via MODULE_REGISTRY.
-5. **Closure-wrapped registry entries** (14) render `<m.X defaultMode="...">` pre-selecting a mode:
+3. **`json-formatter`** is a MODULE_REGISTRY slug (renders JsonFormatter) but also a mode inside JsonOutputConverter (MODES). The mode is only reachable in-app as a hub tab, not by slug.
+4. **`epub-to-pdf`** is a MODULE_REGISTRY slug but also a pair inside DocumentFormatConverter (FORMAT_PAIRS).
+5. **`png-to-svg`** is a pair inside ImageCatchAllConverter (FORMAT_PAIRS) but routed via MODULE_REGISTRY.
+6. **Closure-wrapped registry entries** (14) render `<m.X defaultMode="...">` pre-selecting a mode:
    - `apng-to-gif` -> GifToApng mode="apng-to-gif"
    - `base64-to-image` -> ImageToBase64 mode="base64-to-image"
    - `border-css-generator` -> CssGenerators mode="border-css"
@@ -1278,6 +1279,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |
 | TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |
 | UnitConverter | unit | 16 | every routed slug is a UNIT_FAMILIES entry (mode table: UnitConverter.tsx UNIT_FAMILIES) |
+| JsonOutputConverter | json-output | 8 | every routed slug is a MODES entry (mode table: JsonOutputConverter.tsx MODES; json-formatter mode stays registry-routed via JsonFormatter) |
 | ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |
 
 ## Confidence & limitations

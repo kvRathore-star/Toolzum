@@ -36,15 +36,11 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "json-to-ini-converter": { category: "serializer" },
   "toml-converter": { category: "serializer" },
   "json-to-toml-converter": { category: "serializer" },
-  // JSON output converters
-  "json-to-zod": { category: "json-output" },
-  "json-to-url-params": { category: "json-output" },
-  "json-flattener": { category: "json-output" },
-  "json-ld-generator": { category: "json-output" },
-  "json-schema-generator": { category: "json-output" },
-  "json-size-analyzer": { category: "json-output" },
-  "ndjson-to-json": { category: "json-output" },
-  "json-formatter-tool": { category: "json-output" },
+  // JSON output converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // json-to-zod, json-to-url-params, json-flattener, json-ld-generator,
+  // json-schema-generator, json-size-analyzer, ndjson-to-json, json-formatter-tool
+  // render JsonOutputConverter via slug closures (SSR-preserving). Removed here to
+  // keep single-source.
   // csv-output category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // csv-to-markdown, csv-to-ndjson, csv-to-sql, csv-html-table-converter,
   // csv-statistics, csv-data-cleaner, csv-formatter render CsvHubConverter

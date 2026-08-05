@@ -13,7 +13,7 @@ type ModeDef = {
   transform: (data: any, input: string) => string;
 };
 
-const MODES: Record<string, ModeDef> = {
+export const MODES: Record<string, ModeDef> = {
   "json-formatter": {
     slug: "json-formatter", name: "JSON Formatter",
     description: "Pretty-print JSON with configurable indentation",

@@ -944,6 +944,18 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'shoe-size-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="shoe-size-converter" /> }))),
   'degree-radian-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="degree-radian-converter" /> }))),
 
+  // JSON output hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — JsonOutputConverter destructures only slug, matching the
+  // previous ConverterRouter render exactly).
+  'json-to-zod': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-to-zod" /> }))),
+  'json-to-url-params': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-to-url-params" /> }))),
+  'json-flattener': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-flattener" /> }))),
+  'json-ld-generator': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-ld-generator" /> }))),
+  'json-schema-generator': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-schema-generator" /> }))),
+  'json-size-analyzer': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-size-analyzer" /> }))),
+  'ndjson-to-json': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="ndjson-to-json" /> }))),
+  'json-formatter-tool': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-formatter-tool" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
