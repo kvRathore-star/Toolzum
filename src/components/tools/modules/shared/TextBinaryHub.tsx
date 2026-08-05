@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
-const MODES = ["text-to-binary", "binary-to-text"] as const;
+export const MODES = ["text-to-binary", "binary-to-text"] as const;
 type Mode = (typeof MODES)[number];
 
 const toBinary = (s: string) =>

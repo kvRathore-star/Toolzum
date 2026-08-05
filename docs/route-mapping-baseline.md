@@ -12,10 +12,10 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 816 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 224 |
+| MODULE_REGISTRY (direct dynamic import) | 819 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 221 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
+| Category-move redirects (same slug, old->new category) | 63 (58 MODULE_REGISTRY + 5 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
@@ -106,6 +106,7 @@
 | batch-image-editor | BatchImageEditor |
 | benchmark-builder | BenchmarkBuilder |
 | big-text-generator | BigTextGenerator |
+| binary-to-text | TextBinaryHub [slug=binary-to-text] |
 | blood-alcohol-calculator | MiscellaneousTools1 -> BloodAlcoholCalculator |
 | blur-face | BlurFace |
 | bmi-calculator | BmiCalculator |
@@ -739,6 +740,7 @@
 | temperature-converter | UnitConverter [slug=temperature-converter] |
 | test-data-generator | StyleCodeKitWidgets -> TestDataGenerator |
 | test-score-calculator | CalcFileKitWidgets -> TestScoreCalculator |
+| text-binary-converter | TextBinaryHub [slug=text-binary-converter] |
 | text-cleaner | TextSeoTools -> TextCleaner |
 | text-deduplicator | TextSeoTools -> TextDeduplicator |
 | text-repeater | TextRepeater |
@@ -747,6 +749,7 @@
 | text-shadow-generator | CssGenerators [text-shadow] |
 | text-sorter | TextSeoTools -> TextSorter |
 | text-splitter | TextSeoTools -> TextSplitter |
+| text-to-binary | TextBinaryHub [slug=text-to-binary] |
 | text-to-handwriting | TextToHandwriting |
 | text-to-markdown | MarkdownTools |
 | text-to-speech-tts | TextToSpeechTts |
@@ -882,7 +885,6 @@
 | avif-to-svg | image-format | ImageCatchAllConverter |
 | avif-to-tiff | image-format | ImageCatchAllConverter |
 | avif-to-webp | image-format | ImageCatchAllConverter |
-| binary-to-text | text-binary | TextBinaryHub |
 | bmp-to-avif | image-format | ImageCatchAllConverter |
 | bmp-to-gif | image-format | ImageCatchAllConverter |
 | bmp-to-heic | image-format | ImageCatchAllConverter |
@@ -1025,8 +1027,6 @@
 | svg-to-png | image-format | ImageCatchAllConverter |
 | svg-to-tiff | image-format | ImageCatchAllConverter |
 | svg-to-webp | image-format | ImageCatchAllConverter |
-| text-binary-converter | text-binary | TextBinaryHub |
-| text-to-binary | text-binary | TextBinaryHub |
 | text-to-html-converter | html-text | HtmlTextHub |
 | tiff-to-avif | image-format | ImageCatchAllConverter |
 | tiff-to-bmp | image-format | ImageCatchAllConverter |
@@ -1280,6 +1280,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |
 | UnitConverter | unit | 16 | every routed slug is a UNIT_FAMILIES entry (mode table: UnitConverter.tsx UNIT_FAMILIES) |
 | JsonOutputConverter | json-output | 8 | every routed slug is a MODES entry (mode table: JsonOutputConverter.tsx MODES; json-formatter mode stays registry-routed via JsonFormatter) |
+| TextBinaryHub | text-binary | 3 | 2 tab slugs are MODES entries; text-binary-converter is the catch-all fallback (renders default mode text-to-binary) |
 | ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |
 
 ## Confidence & limitations

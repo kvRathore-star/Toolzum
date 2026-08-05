@@ -25,9 +25,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // CssPreprocessorHub via slug closures (SSR-preserving).
   "html-to-text-converter": { category: "html-text" },
   "text-to-html-converter": { category: "html-text" },
-  "binary-to-text": { category: "text-binary" },
-  "text-to-binary": { category: "text-binary" },
-  "text-binary-converter": { category: "text-binary" },
+  // text-binary category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // binary-to-text, text-to-binary, text-binary-converter render TextBinaryHub via
+  // slug closures (SSR-preserving). Note text-binary-converter is not a MODES tab;
+  // it renders the default mode (text-to-binary), matching the previous ConverterRouter render.
   // serializer category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // yaml-json-converter, json-to-yaml-converter, ini-json-converter,
   // json-to-ini-converter, toml-converter, json-to-toml-converter render
