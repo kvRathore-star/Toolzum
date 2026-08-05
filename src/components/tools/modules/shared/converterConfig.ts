@@ -320,19 +320,11 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "xml-to-json": { category: "data" },
   "xml-to-csv": { category: "data" },
 
-  // Document converters
-  "word-to-pdf": { category: "document" },
-  "pdf-to-word": { category: "document" },
-  "excel-to-pdf": { category: "document" },
-  "pdf-to-excel": { category: "document" },
-  "ppt-to-pdf": { category: "document" },
-  "pdf-to-ppt": { category: "document" },
-  "jpg-to-pdf": { category: "document" },
-  "pdf-to-jpg": { category: "document" },
-  "html-to-pdf": { category: "document" },
-  "pdf-to-html": { category: "document" },
-  "pdf-to-epub": { category: "document" },
-  "heic-to-pdf": { category: "document" },
+  // Document converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // word-to-pdf, pdf-to-word, excel-to-pdf, pdf-to-excel, ppt-to-pdf, pdf-to-ppt,
+  // jpg-to-pdf, pdf-to-jpg, html-to-pdf, pdf-to-html, pdf-to-epub, heic-to-pdf
+  // render DocumentFormatConverter via slug closures. epub-to-pdf remains a
+  // MODULE_REGISTRY slug (EpubToPdf) and an in-app FORMAT_PAIRS tab.
 
   // Hub/consolidated converter entries
   "import-to-csv": { category: "import-to-csv", description: "Convert TSV, XLSX, VCF, ICS, and Parquet files to CSV format. Fast and private." },

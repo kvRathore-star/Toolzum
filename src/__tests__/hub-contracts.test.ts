@@ -9,10 +9,7 @@ import {
   FORMAT_PAIRS as IMAGE_PAIRS,
   FORMATS as IMAGE_FORMATS,
 } from '@/components/tools/modules/shared/ImageCatchAllConverter';
-import {
-  FORMAT_PAIRS as DOC_PAIRS,
-  FORMATS as DOC_FORMATS,
-} from '@/components/tools/modules/shared/DocumentFormatConverter';
+import { FORMAT_PAIRS as DOC_PAIRS } from '@/components/tools/modules/shared/DocumentFormatConverter';
 import { SLUG_MAP } from '@/components/tools/modules/converter/DataConverter';
 import { TOOL_REDIRECTS } from '@/registry/tools';
 
@@ -64,20 +61,14 @@ describe('hub contract: every routed slug resolves to a real hub mode', () => {
     }
   });
 
-  it('DocumentFormatConverter — every document slug is a known pair with valid format keys', () => {
-    const docSlugs = categorySlugs('document');
+  it('DocumentFormatConverter — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG document routes); pairs contract lives in document-pairs.test.ts', () => {
+    // All 12 document slugs now route via MODULE_REGISTRY slug closures; epub-to-pdf
+    // remains a MODULE_REGISTRY slug (EpubToPdf). FORMAT_PAIRS validity is asserted
+    // in document-pairs.test.ts.
+    expect(categorySlugs('document')).toEqual([]);
     const pairSlugs = new Set(DOC_PAIRS.map((p) => p.slug));
-    for (const slug of docSlugs) {
-      expect(pairSlugs.has(slug), `document slug ${slug} missing from FORMAT_PAIRS (renders pdf-to-word fallback)`).toBe(true);
-    }
-    const seen = new Set<string>();
-    for (const p of DOC_PAIRS) {
-      expect(seen.has(p.slug), `duplicate FORMAT_PAIRS slug ${p.slug}`).toBe(false);
-      seen.add(p.slug);
-      const [input, output] = p.slug.split('-to-');
-      expect(DOC_FORMATS[input], `pair ${p.slug} has unknown input format ${input}`).toBeDefined();
-      expect(DOC_FORMATS[output], `pair ${p.slug} has unknown output format ${output}`).toBeDefined();
-    }
+    expect(pairSlugs.has('epub-to-pdf')).toBe(true);
+    expect(pairSlugs.has('word-to-pdf')).toBe(true);
   });
 
   it('ImageCatchAllConverter — every image-format slug is a known pair except the intentional catch-all', () => {

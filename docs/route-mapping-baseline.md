@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 757 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 283 |
+| MODULE_REGISTRY (direct dynamic import) | 769 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 271 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (55 MODULE_REGISTRY + 8 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -287,6 +287,7 @@
 | esign-pdf | EsignPdf |
 | eslint-config-generator | ConfigTools -> EslintConfigGenerator |
 | eta-calculator | MathToolsWidgets -> EtaCalculator |
+| excel-to-pdf | DocumentFormatConverter [slug=excel-to-pdf] |
 | exif-data-remover | ExifDataRemover |
 | exponent-calculator | Calculators -> ExponentCalculator |
 | extract-images-from-pdf | ExtractImagesFromPdf |
@@ -346,6 +347,7 @@
 | hash-verifier | SecurityTools -> HashVerifier |
 | header-footer-pdf | HeaderFooterPdf |
 | heart-rate-zone-calculator | Calculators -> HeartRateZoneCalculator |
+| heic-to-pdf | DocumentFormatConverter [slug=heic-to-pdf] |
 | hindi-regional-font-generator | RegionalFontGenerator |
 | hmac-generator | SecurityTools -> HmacGenerator |
 | hourly-to-salary-calculator | Calculators -> HourlyToSalaryCalculator |
@@ -358,6 +360,7 @@
 | html-preview | HtmlPreview |
 | html-to-image | HtmlToImage |
 | html-to-markdown | MarkdownTools |
+| html-to-pdf | DocumentFormatConverter [slug=html-to-pdf] |
 | http-cache-header-generator | ConfigTools -> HttpCacheHeaderGenerator |
 | http-header-analyzer | ConfigTools -> HttpHeaderAnalyzer |
 | http-headers-generator | ConfigTools -> HttpHeadersGenerator |
@@ -398,6 +401,7 @@
 | itr-filing-helper | ItrFilingHelper |
 | javascript-formatter | CodeFormatter -> JavascriptFormatter |
 | jfif-to-png | JfifToPng |
+| jpg-to-pdf | DocumentFormatConverter [slug=jpg-to-pdf] |
 | js-minifier | JsMinifier |
 | js-syntax-checker | CodeKit -> JsSyntaxChecker |
 | json-diff-checker | JSONDiffChecker |
@@ -519,11 +523,17 @@
 | pdf-stamp | PdfStamp |
 | pdf-table-of-contents | PdfTableOfContents |
 | pdf-timestamp | PdfTimestamp |
+| pdf-to-epub | DocumentFormatConverter [slug=pdf-to-epub] |
+| pdf-to-excel | DocumentFormatConverter [slug=pdf-to-excel] |
+| pdf-to-html | DocumentFormatConverter [slug=pdf-to-html] |
+| pdf-to-jpg | DocumentFormatConverter [slug=pdf-to-jpg] |
 | pdf-to-markdown | PdfToMarkdown |
 | pdf-to-pdfa | PdfToPdfa |
 | pdf-to-png | PdfToPng |
+| pdf-to-ppt | DocumentFormatConverter [slug=pdf-to-ppt] |
 | pdf-to-tiff | PdfToTiff |
 | pdf-to-txt | ExtraTools -> PdfToTxt |
+| pdf-to-word | DocumentFormatConverter [slug=pdf-to-word] |
 | pdf-workflow-builder | PdfWorkflowBuilder -> PdfWorkflowBuilder |
 | percentage-calculator | PercentageCalculator |
 | percentage-difference-calculator | MiscellaneousTools1 -> PercentageDifferenceCalculator |
@@ -542,6 +552,7 @@
 | postman-collection-generator | ApiTools -> PostmanCollectionGenerator |
 | postman-to-openapi-converter | ApiTools -> PostmanToOpenapiConverter |
 | ppi-calculator | Calculators -> PpiCalculator |
+| ppt-to-pdf | DocumentFormatConverter [slug=ppt-to-pdf] |
 | pregnancy-due-date-calculator | Calculators -> PregnancyDueDateCalculator |
 | pricing-tier-builder | DevUtilityWidgets -> PricingTierBuilder |
 | prime-factorization-calculator | MiscellaneousTools1 -> PrimeFactorizationCalculator |
@@ -771,6 +782,7 @@
 | whois-lookup | WhoisLookup |
 | word-counter | TextSeoTools -> WordCounter |
 | word-frequency-counter | TextSeoTools -> WordFrequencyCounter |
+| word-to-pdf | DocumentFormatConverter [slug=word-to-pdf] |
 | words-per-page-calculator | CalcFileKitWidgets -> WordsPerPageCalculator |
 | work-hours-calculator | MiscellaneousTools1 -> WorkHoursCalculator |
 | world-clock | Timers -> WorldClock |
@@ -846,7 +858,6 @@
 | cursive-text-generator | text-style | TextStylingConverter |
 | data-size-converter | unit | UnitConverter |
 | degree-radian-converter | unit | UnitConverter |
-| excel-to-pdf | document | DocumentFormatConverter |
 | fancy-text-generator | text-style | TextStylingConverter |
 | flac-to-aac | audio-format | AudioFormatConverter |
 | flac-to-aiff | audio-format | AudioFormatConverter |
@@ -873,7 +884,6 @@
 | heic-to-ico | image-format | ImageCatchAllConverter |
 | heic-to-jpg | image-format | ImageCatchAllConverter |
 | heic-to-jxl | image-format | ImageCatchAllConverter |
-| heic-to-pdf | document | DocumentFormatConverter |
 | heic-to-png | image-format | ImageCatchAllConverter |
 | heic-to-svg | image-format | ImageCatchAllConverter |
 | heic-to-tiff | image-format | ImageCatchAllConverter |
@@ -882,7 +892,6 @@
 | hex-text-converter | text-transform | TextTransformConverter |
 | hex-to-rgb-converter | color | ColorConverter |
 | html-to-jsx | text-transform | TextTransformConverter |
-| html-to-pdf | document | DocumentFormatConverter |
 | html-to-text-converter | html-text | HtmlTextHub |
 | ico-to-avif | image-format | ImageCatchAllConverter |
 | ico-to-bmp | image-format | ImageCatchAllConverter |
@@ -903,7 +912,6 @@
 | jpg-to-heic | image-format | ImageCatchAllConverter |
 | jpg-to-ico | image-format | ImageCatchAllConverter |
 | jpg-to-jxl | image-format | ImageCatchAllConverter |
-| jpg-to-pdf | document | DocumentFormatConverter |
 | jpg-to-png | image-format | ImageCatchAllConverter |
 | jpg-to-svg | image-format | ImageCatchAllConverter |
 | jpg-to-tiff | image-format | ImageCatchAllConverter |
@@ -981,12 +989,6 @@
 | opus-to-wav | audio-format | AudioFormatConverter |
 | opus-to-wma | audio-format | AudioFormatConverter |
 | paper-size-converter | unit | UnitConverter |
-| pdf-to-epub | document | DocumentFormatConverter |
-| pdf-to-excel | document | DocumentFormatConverter |
-| pdf-to-html | document | DocumentFormatConverter |
-| pdf-to-jpg | document | DocumentFormatConverter |
-| pdf-to-ppt | document | DocumentFormatConverter |
-| pdf-to-word | document | DocumentFormatConverter |
 | png-to-avif | image-format | ImageCatchAllConverter |
 | png-to-bmp | image-format | ImageCatchAllConverter |
 | png-to-gif | image-format | ImageCatchAllConverter |
@@ -997,7 +999,6 @@
 | png-to-tiff | image-format | ImageCatchAllConverter |
 | png-to-webp | image-format | ImageCatchAllConverter |
 | power-converter | unit | UnitConverter |
-| ppt-to-pdf | document | DocumentFormatConverter |
 | pressure-converter | unit | UnitConverter |
 | scss-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | shoe-size-converter | unit | UnitConverter |
@@ -1070,7 +1071,6 @@
 | wma-to-ogg | audio-format | AudioFormatConverter |
 | wma-to-opus | audio-format | AudioFormatConverter |
 | wma-to-wav | audio-format | AudioFormatConverter |
-| word-to-pdf | document | DocumentFormatConverter |
 | xml-to-csv | data | DataConverterFromSlug |
 | xml-to-json | data | DataConverterFromSlug |
 | yaml-json-converter | serializer | FormatSerializerHub |

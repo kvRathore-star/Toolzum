@@ -893,6 +893,22 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'csv-data-cleaner': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-data-cleaner" /> }))),
   'csv-formatter': dynamic(() => import('@/components/tools/modules/shared/CsvHubConverter').then(m => ({ default: () => <m.default slug="csv-formatter" /> }))),
 
+  // Document format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — DocumentFormatConverter destructures only slug, so description
+  // being undefined matches the previous ConverterRouter render exactly).
+  'word-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="word-to-pdf" /> }))),
+  'pdf-to-word': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-word" /> }))),
+  'excel-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="excel-to-pdf" /> }))),
+  'pdf-to-excel': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-excel" /> }))),
+  'ppt-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="ppt-to-pdf" /> }))),
+  'pdf-to-ppt': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-ppt" /> }))),
+  'jpg-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="jpg-to-pdf" /> }))),
+  'pdf-to-jpg': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-jpg" /> }))),
+  'html-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="html-to-pdf" /> }))),
+  'pdf-to-html': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-html" /> }))),
+  'pdf-to-epub': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="pdf-to-epub" /> }))),
+  'heic-to-pdf': dynamic(() => import('@/components/tools/modules/shared/DocumentFormatConverter').then(m => ({ default: () => <m.default slug="heic-to-pdf" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
