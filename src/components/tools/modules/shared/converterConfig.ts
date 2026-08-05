@@ -53,23 +53,13 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "fancy-text-generator": { category: "text-style" },
   "cursive-text-generator": { category: "text-style" },
   "zalgo-text-generator": { category: "text-style" },
-  // Unit converters
-  "length-converter": { category: "unit" },
-  "weight-converter": { category: "unit" },
-  "volume-converter": { category: "unit" },
-  "area-converter": { category: "unit" },
-  "speed-converter": { category: "unit" },
-  "power-converter": { category: "unit" },
-  "pressure-converter": { category: "unit" },
-  "temperature-converter": { category: "unit" },
-  "time-converter": { category: "unit" },
-  "data-size-converter": { category: "unit" },
-  "cooking-measurement-converter": { category: "unit" },
-  "fuel-consumption-converter": { category: "unit" },
-  "paper-size-converter": { category: "unit" },
-  "clothing-size-converter": { category: "unit" },
-  "shoe-size-converter": { category: "unit" },
-  "degree-radian-converter": { category: "unit" },
+  // Unit converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // length-converter, weight-converter, volume-converter, area-converter,
+  // speed-converter, power-converter, pressure-converter, temperature-converter,
+  // time-converter, data-size-converter, cooking-measurement-converter,
+  // fuel-consumption-converter, paper-size-converter, clothing-size-converter,
+  // shoe-size-converter, degree-radian-converter render UnitConverter via slug
+  // closures (SSR-preserving). Removed here to keep single-source.
   // Import-to-CSV converters
   "tsv-csv-converter": { category: "import-to-csv" },
   // Color converters

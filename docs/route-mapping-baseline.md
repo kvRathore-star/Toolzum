@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 780 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 260 |
+| MODULE_REGISTRY (direct dynamic import) | 796 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 244 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -77,6 +77,7 @@
 | apng-to-gif | GifToApng -> AnimationConverter [apng-to-gif] |
 | apple-music-preview-extractor | AppleMusicPreviewExtractor |
 | archive-converter | ArchiveConverter |
+| area-converter | UnitConverter [slug=area-converter] |
 | arr-calculator | Calculators -> ArrCalculator |
 | article-writer | AiArticleWriter |
 | ascii-art-generator | CreativeToolsWidgets -> ASCIIArtGenerator |
@@ -182,6 +183,7 @@
 | cidr-calculator | MiscUtilitiesKitWidgets -> CidrCalculator |
 | circle-calculator | Calculators -> CircleCalculator |
 | citation-generator | CitationGenerator |
+| clothing-size-converter | UnitConverter [slug=clothing-size-converter] |
 | code-beautifier | CodeFormatter |
 | code-formatter | CodeFormatter |
 | code-obfuscator | CodeKit -> CodeObfuscator |
@@ -207,6 +209,7 @@
 | conversion-rate-calculator | ConversionRateCalculator |
 | convert-to-jpg | ConvertToJpg |
 | cookie-parser | SecurityToolkitWidgets -> CookieParser |
+| cooking-measurement-converter | UnitConverter [slug=cooking-measurement-converter] |
 | coordinate-calculator | MiscellaneousTools1 -> CoordinateCalculator |
 | cors-header-generator | SecurityTools -> CorsHeaderGenerator |
 | cors-inspector | SecurityTools -> CorsInspector |
@@ -252,6 +255,7 @@
 | cycling-calorie-calculator | Calculators -> CyclingCalorieCalculator |
 | data-anonymizer | FormatAndDataKitWidgets -> DataAnonymizer |
 | data-format-converter | DataConverter -> DataConverter |
+| data-size-converter | UnitConverter [slug=data-size-converter] |
 | data-type-converter | DataToolkitWidgets -> DataTypeConverter |
 | date-addition-calculator | MiscellaneousTools1 -> DateAdditionCalculator |
 | date-difference-calculator | MiscellaneousTools1 -> DateDifferenceCalculator |
@@ -261,6 +265,7 @@
 | debt-payoff-calculator | Calculators -> DebtPayoffCalculator |
 | decimal-to-fraction-calculator | MiscellaneousTools1 -> DecimalToFractionCalculator |
 | deduplicator | DataToolkitWidgets -> Deduplicator |
+| degree-radian-converter | UnitConverter [slug=degree-radian-converter] |
 | deskew-pdf | PdfDeskew |
 | dice-roller | DiceRoller |
 | diff-checker | DiffChecker |
@@ -310,6 +315,7 @@
 | format-validator | DataToolkitWidgets -> FormatValidator |
 | fraction-calculator | Calculators -> FractionCalculator |
 | fraction-to-decimal-calculator | MiscellaneousTools1 -> FractionToDecimalCalculator |
+| fuel-consumption-converter | UnitConverter [slug=fuel-consumption-converter] |
 | gas-mileage-calculator | Calculators -> GasMileageCalculator |
 | generic-pdf-processor | GenericPDFProcessor |
 | geojson-validator | ConfigValidatorWidgets -> GeoJsonValidator |
@@ -429,6 +435,7 @@
 | lean-body-mass-calculator | Calculators -> LeanBodyMassCalculator |
 | leap-year-calculator | Calculators -> LeapYearCalculator |
 | least-common-multiple-calculator | MiscellaneousTools1 -> LeastCommonMultipleCalculator |
+| length-converter | UnitConverter [slug=length-converter] |
 | license-key-generator | GeneratorWidgets -> LicenseKeyGenerator |
 | line-sorter | LineSorter |
 | link-in-bio-builder | LinkInBioBuilder |
@@ -504,6 +511,7 @@
 | package-json-validator | FormatAndDataKitWidgets -> PackageJsonValidator |
 | pan-card-resizer | PanCardResizer |
 | pan-verification | PanVerification |
+| paper-size-converter | UnitConverter [slug=paper-size-converter] |
 | passport-photo-india | PassportPhotoIndia |
 | password-entropy-calculator | SecurityTools -> PasswordEntropyCalculator |
 | password-generator | PasswordGenerator |
@@ -557,9 +565,11 @@
 | port-number-lookup | DevUtilityWidgets -> PortNumberLookup |
 | postman-collection-generator | ApiTools -> PostmanCollectionGenerator |
 | postman-to-openapi-converter | ApiTools -> PostmanToOpenapiConverter |
+| power-converter | UnitConverter [slug=power-converter] |
 | ppi-calculator | Calculators -> PpiCalculator |
 | ppt-to-pdf | DocumentFormatConverter [slug=ppt-to-pdf] |
 | pregnancy-due-date-calculator | Calculators -> PregnancyDueDateCalculator |
+| pressure-converter | UnitConverter [slug=pressure-converter] |
 | pricing-tier-builder | DevUtilityWidgets -> PricingTierBuilder |
 | prime-factorization-calculator | MiscellaneousTools1 -> PrimeFactorizationCalculator |
 | prime-number-checker | MiscellaneousTools1 -> PrimeNumberChecker |
@@ -659,6 +669,7 @@
 | seo-slug-generator | TextSeoTools -> SeoSlugGenerator |
 | sequence-generator | Generators -> SequenceGenerator |
 | serial-number-generator | Generators -> SerialNumberGenerator |
+| shoe-size-converter | UnitConverter [slug=shoe-size-converter] |
 | significant-figures-calculator | MiscellaneousTools1 -> SignificantFiguresCalculator |
 | simple-interest-calculator | Calculators -> SimpleInterestCalculator |
 | sip-calculator | SipCalculator |
@@ -673,6 +684,7 @@
 | social-media-calendar | SocialMediaCalendar |
 | social-media-post-maker | SocialMediaPostMaker |
 | speech-to-text | SpeechToText |
+| speed-converter | UnitConverter [slug=speed-converter] |
 | speed-test | SpeedTest |
 | sql-formatter | CodeFormatter -> SqlFormatter |
 | sql-injection-detector | SecurityTools -> SqlInjectionDetector |
@@ -706,6 +718,7 @@
 | tax-calculator | Calculators -> TaxCalculator |
 | tax-saving-calculator | TaxSavingCalculator |
 | tds-calculator-india | Calculators -> TdsCalculatorIndia |
+| temperature-converter | UnitConverter [slug=temperature-converter] |
 | test-data-generator | StyleCodeKitWidgets -> TestDataGenerator |
 | test-score-calculator | CalcFileKitWidgets -> TestScoreCalculator |
 | text-cleaner | TextSeoTools -> TextCleaner |
@@ -722,6 +735,7 @@
 | text-tools | TextTransformConverter [slug=text-tools] |
 | tiff-to-pdf | TiffToPdf |
 | time-addition-calculator | Timers -> TimeAdditionCalculator |
+| time-converter | UnitConverter [slug=time-converter] |
 | time-duration-calculator | Timers -> TimeDurationCalculator |
 | time-since-calculator | MiscellaneousTools1 -> TimeSinceCalculator |
 | time-until-calculator | Timers -> TimeUntilCalculator |
@@ -774,6 +788,7 @@
 | video-watermark-adder | VideoWatermarkAdder |
 | vocal-remover | VocalRemover |
 | voice-recorder | VoiceRecorder |
+| volume-converter | UnitConverter [slug=volume-converter] |
 | voter-id-form-helper | VoterIdHelper |
 | waist-to-hip-ratio-calculator | HealthTools -> WaistToHipRatioCalculator |
 | water-intake-calculator | Calculators -> WaterIntakeCalculator |
@@ -787,6 +802,7 @@
 | webhook-validator | ApiTools -> WebhookValidator |
 | website-screenshot | WebsiteScreenshot |
 | week-number-calculator | MiscellaneousTools1 -> WeekNumberCalculator |
+| weight-converter | UnitConverter [slug=weight-converter] |
 | whatsapp-toolkit | WhatsAppToolkit |
 | wheel-of-names | WheelOfNames |
 | whiteout-pdf | WhiteoutPdf |
@@ -831,7 +847,6 @@
 | aiff-to-opus | audio-format | AudioFormatConverter |
 | aiff-to-wav | audio-format | AudioFormatConverter |
 | aiff-to-wma | audio-format | AudioFormatConverter |
-| area-converter | unit | UnitConverter |
 | audio-converter | audio-format | AudioFormatConverter |
 | avi-to-mkv | video-format | VideoFormatConverter |
 | avi-to-mov | video-format | VideoFormatConverter |
@@ -858,15 +873,11 @@
 | bmp-to-svg | image-format | ImageCatchAllConverter |
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
-| clothing-size-converter | unit | UnitConverter |
 | color-converter | color | ColorConverter |
-| cooking-measurement-converter | unit | UnitConverter |
 | css-to-less-converter | css-preprocessor | CssPreprocessorHub |
 | css-to-scss-converter | css-preprocessor | CssPreprocessorHub |
 | css-to-stylus-converter | css-preprocessor | CssPreprocessorHub |
 | cursive-text-generator | text-style | TextStylingConverter |
-| data-size-converter | unit | UnitConverter |
-| degree-radian-converter | unit | UnitConverter |
 | fancy-text-generator | text-style | TextStylingConverter |
 | flac-to-aac | audio-format | AudioFormatConverter |
 | flac-to-aiff | audio-format | AudioFormatConverter |
@@ -876,7 +887,6 @@
 | flac-to-opus | audio-format | AudioFormatConverter |
 | flac-to-wav | audio-format | AudioFormatConverter |
 | flac-to-wma | audio-format | AudioFormatConverter |
-| fuel-consumption-converter | unit | UnitConverter |
 | gif-to-avif | image-format | ImageCatchAllConverter |
 | gif-to-bmp | image-format | ImageCatchAllConverter |
 | gif-to-heic | image-format | ImageCatchAllConverter |
@@ -943,7 +953,6 @@
 | jxl-to-svg | image-format | ImageCatchAllConverter |
 | jxl-to-tiff | image-format | ImageCatchAllConverter |
 | jxl-to-webp | image-format | ImageCatchAllConverter |
-| length-converter | unit | UnitConverter |
 | less-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | m4a-to-aac | audio-format | AudioFormatConverter |
 | m4a-to-aiff | audio-format | AudioFormatConverter |
@@ -993,7 +1002,6 @@
 | opus-to-ogg | audio-format | AudioFormatConverter |
 | opus-to-wav | audio-format | AudioFormatConverter |
 | opus-to-wma | audio-format | AudioFormatConverter |
-| paper-size-converter | unit | UnitConverter |
 | png-to-avif | image-format | ImageCatchAllConverter |
 | png-to-bmp | image-format | ImageCatchAllConverter |
 | png-to-gif | image-format | ImageCatchAllConverter |
@@ -1003,11 +1011,7 @@
 | png-to-jxl | image-format | ImageCatchAllConverter |
 | png-to-tiff | image-format | ImageCatchAllConverter |
 | png-to-webp | image-format | ImageCatchAllConverter |
-| power-converter | unit | UnitConverter |
-| pressure-converter | unit | UnitConverter |
 | scss-to-css-converter | css-preprocessor | CssPreprocessorHub |
-| shoe-size-converter | unit | UnitConverter |
-| speed-converter | unit | UnitConverter |
 | stylus-to-css-converter | css-preprocessor | CssPreprocessorHub |
 | svg-to-avif | image-format | ImageCatchAllConverter |
 | svg-to-bmp | image-format | ImageCatchAllConverter |
@@ -1019,7 +1023,6 @@
 | svg-to-png | image-format | ImageCatchAllConverter |
 | svg-to-tiff | image-format | ImageCatchAllConverter |
 | svg-to-webp | image-format | ImageCatchAllConverter |
-| temperature-converter | unit | UnitConverter |
 | text-binary-converter | text-binary | TextBinaryHub |
 | text-to-binary | text-binary | TextBinaryHub |
 | text-to-html-converter | html-text | HtmlTextHub |
@@ -1033,12 +1036,10 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| time-converter | unit | UnitConverter |
 | toml-converter | serializer | FormatSerializerHub |
 | tsv-csv-converter | import-to-csv | ImportToCsvConverter |
 | video-converter | video-format | VideoFormatConverter |
 | video-converter-tool | video-format | VideoFormatConverter |
-| volume-converter | unit | UnitConverter |
 | wav-to-aac | audio-format | AudioFormatConverter |
 | wav-to-aiff | audio-format | AudioFormatConverter |
 | wav-to-flac | audio-format | AudioFormatConverter |
@@ -1062,7 +1063,6 @@
 | webp-to-png | image-format | ImageCatchAllConverter |
 | webp-to-svg | image-format | ImageCatchAllConverter |
 | webp-to-tiff | image-format | ImageCatchAllConverter |
-| weight-converter | unit | UnitConverter |
 | wma-to-aac | audio-format | AudioFormatConverter |
 | wma-to-aiff | audio-format | AudioFormatConverter |
 | wma-to-flac | audio-format | AudioFormatConverter |
@@ -1277,6 +1277,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 | DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |
 | DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |
 | TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |
+| UnitConverter | unit | 16 | every routed slug is a UNIT_FAMILIES entry (mode table: UnitConverter.tsx UNIT_FAMILIES) |
 | ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |
 
 ## Confidence & limitations

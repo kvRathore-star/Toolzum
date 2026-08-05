@@ -924,6 +924,26 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'time-zone-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="time-zone-converter" /> }))),
   'unix-time-converter': dynamic(() => import('@/components/tools/modules/shared/TextTransformConverter').then(m => ({ default: () => <m.default slug="unix-time-converter" /> }))),
 
+  // Unit converter hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — UnitConverter destructures only slug, matching the previous
+  // ConverterRouter render exactly).
+  'length-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="length-converter" /> }))),
+  'weight-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="weight-converter" /> }))),
+  'volume-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="volume-converter" /> }))),
+  'area-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="area-converter" /> }))),
+  'speed-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="speed-converter" /> }))),
+  'power-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="power-converter" /> }))),
+  'pressure-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="pressure-converter" /> }))),
+  'temperature-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="temperature-converter" /> }))),
+  'time-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="time-converter" /> }))),
+  'data-size-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="data-size-converter" /> }))),
+  'cooking-measurement-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="cooking-measurement-converter" /> }))),
+  'fuel-consumption-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="fuel-consumption-converter" /> }))),
+  'paper-size-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="paper-size-converter" /> }))),
+  'clothing-size-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="clothing-size-converter" /> }))),
+  'shoe-size-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="shoe-size-converter" /> }))),
+  'degree-radian-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="degree-radian-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

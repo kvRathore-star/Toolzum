@@ -19,7 +19,7 @@ type FamilyConfig = {
   showAll?: boolean;
 };
 
-const UNIT_FAMILIES: Record<string, FamilyConfig> = {
+export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
   "unit-converter": {
     title: "Unit Converter", desc: "Convert between length, weight, volume, area, speed, power, pressure, temperature, time, data size, and everyday units",
     baseUnit: "m", showAll: true,

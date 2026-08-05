@@ -217,6 +217,7 @@ lines.push('| FormatSerializerHub | serializer | 6 | every routed slug is a tab;
 lines.push('| DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |');
 lines.push('| DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |');
 lines.push('| TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |');
+lines.push('| UnitConverter | unit | 16 | every routed slug is a UNIT_FAMILIES entry (mode table: UnitConverter.tsx UNIT_FAMILIES) |');
 lines.push('| ImageCatchAllConverter | image-format | 110 | every routed slug is a FORMAT_PAIRS entry except image-format-converter |');
 lines.push('');
 lines.push('## Confidence & limitations');
