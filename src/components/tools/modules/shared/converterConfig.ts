@@ -30,12 +30,11 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "binary-to-text": { category: "text-binary" },
   "text-to-binary": { category: "text-binary" },
   "text-binary-converter": { category: "text-binary" },
-  "yaml-json-converter": { category: "serializer" },
-  "json-to-yaml-converter": { category: "serializer" },
-  "ini-json-converter": { category: "serializer" },
-  "json-to-ini-converter": { category: "serializer" },
-  "toml-converter": { category: "serializer" },
-  "json-to-toml-converter": { category: "serializer" },
+  // serializer category migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // yaml-json-converter, json-to-yaml-converter, ini-json-converter,
+  // json-to-ini-converter, toml-converter, json-to-toml-converter render
+  // FormatSerializerHub via slug closures (SSR-preserving). json-to-code stays a
+  // MODULE_REGISTRY slug (JsonToCode), only reachable as an in-app FORMAT_SLUGS tab.
   // JSON output converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // json-to-zod, json-to-url-params, json-flattener, json-ld-generator,
   // json-schema-generator, json-size-analyzer, ndjson-to-json, json-formatter-tool

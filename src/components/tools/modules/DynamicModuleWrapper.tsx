@@ -956,6 +956,16 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ndjson-to-json': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="ndjson-to-json" /> }))),
   'json-formatter-tool': dynamic(() => import('@/components/tools/modules/shared/JsonOutputConverter').then(m => ({ default: () => <m.default slug="json-formatter-tool" /> }))),
 
+  // Format/serializer hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept,
+  // so no ssr: false — FormatSerializerHub destructures only slug, matching the previous
+  // ConverterRouter render exactly. json-to-code stays a MODULE_REGISTRY slug below.)
+  'yaml-json-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="yaml-json-converter" /> }))),
+  'json-to-yaml-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="json-to-yaml-converter" /> }))),
+  'ini-json-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="ini-json-converter" /> }))),
+  'json-to-ini-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="json-to-ini-converter" /> }))),
+  'toml-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="toml-converter" /> }))),
+  'json-to-toml-converter': dynamic(() => import('@/components/tools/modules/shared/FormatSerializerHub').then(m => ({ default: () => <m.default slug="json-to-toml-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

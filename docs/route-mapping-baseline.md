@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 804 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 236 |
+| MODULE_REGISTRY (direct dynamic import) | 810 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 230 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (56 MODULE_REGISTRY + 7 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -398,6 +398,7 @@
 | indian-investment-calculator | IndianInvestmentCalculator |
 | indian-voice-transcriber | IndianVoiceTranscriber |
 | inflation-calculator | Calculators -> InflationCalculator |
+| ini-json-converter | FormatSerializerHub [slug=ini-json-converter] |
 | interval-timer | Timers -> IntervalTimer |
 | invisible-character | InvisibleCharacter |
 | invisible-text-generator | InvisibleTextGenerator |
@@ -425,7 +426,10 @@
 | json-schema-generator | JsonOutputConverter [slug=json-schema-generator] |
 | json-size-analyzer | JsonOutputConverter [slug=json-size-analyzer] |
 | json-to-code | JsonToCode |
+| json-to-ini-converter | FormatSerializerHub [slug=json-to-ini-converter] |
+| json-to-toml-converter | FormatSerializerHub [slug=json-to-toml-converter] |
 | json-to-url-params | JsonOutputConverter [slug=json-to-url-params] |
+| json-to-yaml-converter | FormatSerializerHub [slug=json-to-yaml-converter] |
 | json-to-zod | JsonOutputConverter [slug=json-to-zod] |
 | json-tree-viewer | DataUtilitiesWidgets -> JsonTreeViewer |
 | jsonl-formatter | DataToolkitWidgets -> JsonlFormatter |
@@ -752,6 +756,7 @@
 | tip-calculator | MiscellaneousTools1 -> TipCalculator |
 | tls-cipher-checker | SecurityTools -> TlsCipherChecker |
 | to-do-list | ToDoList |
+| toml-converter | FormatSerializerHub [slug=toml-converter] |
 | trailing-space-remover | TextSeoTools -> TrailingSpaceRemover |
 | translate-pdf | TranslatePdf |
 | trial-conversion-calculator | Calculators -> TrialConversionCalculator |
@@ -829,6 +834,7 @@
 | xpath-validator | ConfigValidatorWidgets -> XpathValidator |
 | xss-protection-checker | SecurityTools -> XssProtectionChecker |
 | yaml-formatter | CodeFormatter -> YamlFormatter |
+| yaml-json-converter | FormatSerializerHub [slug=yaml-json-converter] |
 | yaml-reindenter | CodeFormatter -> YamlFormatter |
 | yaml-syntax-validator | SecurityTools -> YamlValidator |
 | yaml-validator | DataFormatTools -> YamlValidator |
@@ -929,7 +935,6 @@
 | ico-to-webp | image-format | ImageCatchAllConverter |
 | image-format-converter | image-format | ImageCatchAllConverter |
 | import-to-csv | import-to-csv | ImportToCsvConverter |
-| ini-json-converter | serializer | FormatSerializerHub |
 | jpg-to-avif | image-format | ImageCatchAllConverter |
 | jpg-to-bmp | image-format | ImageCatchAllConverter |
 | jpg-to-gif | image-format | ImageCatchAllConverter |
@@ -940,9 +945,6 @@
 | jpg-to-svg | image-format | ImageCatchAllConverter |
 | jpg-to-tiff | image-format | ImageCatchAllConverter |
 | jpg-to-webp | image-format | ImageCatchAllConverter |
-| json-to-ini-converter | serializer | FormatSerializerHub |
-| json-to-toml-converter | serializer | FormatSerializerHub |
-| json-to-yaml-converter | serializer | FormatSerializerHub |
 | json-toon-converter | toon | ToonConverter |
 | jxl-to-avif | image-format | ImageCatchAllConverter |
 | jxl-to-bmp | image-format | ImageCatchAllConverter |
@@ -1036,7 +1038,6 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| toml-converter | serializer | FormatSerializerHub |
 | tsv-csv-converter | import-to-csv | ImportToCsvConverter |
 | video-converter | video-format | VideoFormatConverter |
 | video-converter-tool | video-format | VideoFormatConverter |
@@ -1073,7 +1074,6 @@
 | wma-to-wav | audio-format | AudioFormatConverter |
 | xml-to-csv | data | DataConverterFromSlug |
 | xml-to-json | data | DataConverterFromSlug |
-| yaml-json-converter | serializer | FormatSerializerHub |
 | zalgo-text-generator | text-style | TextStylingConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
@@ -1274,7 +1274,7 @@ category routing matches hub tabs exactly (except documented fallbacks above):
 |---|---|---|---|
 | HtmlTextHub | html-text | 2 | category == tabs; each tab has TRANSFORM_CONFIG |
 | CssPreprocessorHub | css-preprocessor | 6 | category == tabs; each tab has TRANSFORM_CONFIG |
-| FormatSerializerHub | serializer | 6 | every routed slug is a tab; each tab has TRANSFORM_CONFIG |
+| FormatSerializerHub | serializer | 6 | every routed slug is a TRANSFORM_CONFIG entry and a FORMAT_SLUGS tab (json-to-code tab stays registry-routed via JsonToCode) |
 | DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |
 | DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |
 | TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |

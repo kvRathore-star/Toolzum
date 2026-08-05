@@ -214,7 +214,7 @@ lines.push('| Hub | Category | Routed slugs | Contract |');
 lines.push('|---|---|---|---|');
 lines.push('| HtmlTextHub | html-text | 2 | category == tabs; each tab has TRANSFORM_CONFIG |');
 lines.push('| CssPreprocessorHub | css-preprocessor | 6 | category == tabs; each tab has TRANSFORM_CONFIG |');
-lines.push('| FormatSerializerHub | serializer | 6 | every routed slug is a tab; each tab has TRANSFORM_CONFIG |');
+lines.push('| FormatSerializerHub | serializer | 6 | every routed slug is a TRANSFORM_CONFIG entry and a FORMAT_SLUGS tab (json-to-code tab stays registry-routed via JsonToCode) |');
 lines.push('| DataConverterFromSlug | data | 6 | category == SLUG_MAP; pairs are valid formats |');
 lines.push('| DocumentFormatConverter | document | 12 | every routed slug is a FORMAT_PAIRS entry |');
 lines.push('| TextTransformConverter | text-transform | 11 | every routed slug is a TRANSFORM_CONFIG entry (mode table: textTransformConfig.ts) |');
