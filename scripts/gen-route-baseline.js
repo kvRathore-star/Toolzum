@@ -138,11 +138,51 @@ lines.push(`| SEO permutation landing slugs (redirected in page.tsx) | ${seoCoun
 lines.push('');
 lines.push('- Zero overlap between MODULE_REGISTRY and CONVERTER_CONFIG (asserted by registry-integrity #9).');
 lines.push('- Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.');
-lines.push('- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (750) and every');
-lines.push('  CONVERTER_CONFIG slug (290) through the real resolution path with no throw. Two real bugs were found and fixed:');
+lines.push(`- **Render baseline:** \`registry-render-smoke.test.ts\` renders every MODULE_REGISTRY slug (${Object.keys(registry).length}) through the real resolution path with no throw. Two real bugs were found and fixed:`);
 lines.push('  - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.');
 lines.push('  - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.');
 lines.push('');
+lines.push('## Phase 3 migration ledger (CONVERTER_CONFIG -> MODULE_REGISTRY closures)');
+lines.push('');
+lines.push('> Canonical record of every converter category migrated to SSR-preserving MODULE_REGISTRY slug closures.');
+lines.push('> Counts are closure slugs per hub module (migrated only — excludes pre-existing standalone entries and the');
+lines.push('> 14 pre-existing multi-line ssr:false closure-form tools: ProtectPdf, ImageToBase64, GifToApng, 11 CssGenerators).');
+lines.push('> Sum = 290 migrated closures; registry-render-smoke reports 304 `closure`-kind = 290 + 14 pre-existing.');
+lines.push('');
+lines.push('| Category | Hub closure module | Slugs | Commit(s) |');
+lines.push('|---|---|---|---|');
+const migrationLedger = [
+  ['csv-output', 'CsvHubConverter', 7, '`3991605`'],
+  ['document', 'DocumentFormatConverter', 12, '`66a8da4`'],
+  ['text-transform', 'TextTransformConverter', 11, '`173376b`'],
+  ['unit', 'UnitConverter', 16, '`75e5ff3`'],
+  ['json-output', 'JsonOutputConverter', 8, '`dfb2c98`'],
+  ['serializer', 'FormatSerializerHub', 6, '`4165d8c`'],
+  ['css-preprocessor', 'CssPreprocessorHub', 6, '`b04510c`'],
+  ['text-binary', 'TextBinaryHub', 3, '`ae9916b`'],
+  ['color', 'ColorConverter', 2, '`7881d68`'],
+  ['number', 'NumberWordsConverter', 1, '`e092b28`'],
+  ['html-text', 'HtmlTextHub', 2, '`90838e9`'],
+  ['text-style', 'TextStylingConverter', 3, '`b51dcf1`'],
+  ['import-to-csv', 'ImportToCsvConverter', 2, '`ef87d7b`'],
+  ['data/toon', 'DataConverterFromSlug + DataFormatTools', 3, '`c9829d6`'],
+  ['video (video-format + video-to-audio)', 'VideoFormatConverter + VideoToAudioConverter', 25, '`8f59ce8`'],
+  ['audio-format', 'AudioFormatConverter', 73, '`b458338`'],
+  ['image-format', 'ImageCatchAllConverter', 110, '`e821e8d` `8d715f2` `1d89f5c`'],
+];
+let migratedTotal = 0;
+for (const [cat, mod, n, commit] of migrationLedger) {
+  lines.push(`| ${cat} | ${mod} | ${n} | ${commit} |`);
+  migratedTotal += n;
+}
+lines.push(`| **Total migrated closures** |  | **${migratedTotal}** |  |`);
+lines.push('');
+lines.push('- `unit-converter` (the standalone `converter/UnitConverter` ssr:false entry) is NOT in the 16 unit closures — it predates the migration.');
+lines.push('- `png-to-svg` is NOT in the 110 image closures — it was always a standalone `PngToSvg` ssr:false slug, never CONVERTER_CONFIG-routed.');
+lines.push('- `HUB_DESCRIPTIONS` (`src/components/tools/modules/shared/hubDescriptions.ts`) is the transitional 208-entry description map the big-hub closures pass; parity vs CONVERTER_CONFIG is asserted by `hub-descriptions-parity.test.ts`. TODO Phase 4: fold into hub-owned data and delete.');
+lines.push('- CONVERTER_CONFIG / ConverterRouter are now empty (0 routes); still referenced by `changelog/page.tsx` and `ToolPageSEOContent.tsx`. Phase 4 retires them and resolves Design B (7 lossy toon/data redirects).');
+lines.push('');
+
 lines.push('## MODULE_REGISTRY slugs (direct components)');
 lines.push('');
 lines.push('| Slug | Component |');
