@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { MODES as COLOR_MODES } from '@/components/tools/modules/shared/ColorConverter';
 
 const COLOR_CLOSURE_SLUGS = ['color-converter', 'hex-to-rgb-converter'];
@@ -17,12 +16,9 @@ function routedColorSlugs(): string[] {
 }
 
 describe('ColorConverter slug-closure contract', () => {
-  it('routes exactly the 2 color slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 2 color slugs via MODULE_REGISTRY', () => {
     const routed = routedColorSlugs().sort();
     expect(routed).toEqual(COLOR_CLOSURE_SLUGS.slice().sort());
-    for (const slug of COLOR_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `color slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed color slug is a ColorConverter MODES entry', () => {

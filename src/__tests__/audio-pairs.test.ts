@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
 import { FORMAT_PAIRS } from '@/components/tools/modules/shared/AudioFormatConverter';
 
@@ -43,12 +42,9 @@ function routedSlugs(modulePath: string): string[] {
 }
 
 describe('audio hub slug-closure contract', () => {
-  it('routes every audio-format slug via AudioFormatConverter and drops all from CONVERTER_CONFIG', () => {
+  it('routes every audio-format slug via AudioFormatConverter', () => {
     const routed = routedSlugs('@/components/tools/modules/shared/AudioFormatConverter').sort();
     expect(routed).toEqual(AUDIO_FORMAT_SLUGS.slice().sort());
-    for (const slug of AUDIO_FORMAT_SLUGS) {
-      expect(CONVERTER_CONFIG, `audio slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every audio slug has a HUB_DESCRIPTIONS entry (banner preserved)', () => {

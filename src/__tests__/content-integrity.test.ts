@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry, SEO_PERMUTATIONS } from '@/registry/tools';
 import { deriveSeoInstructionType, categoryFaqTemplates, deriveInputAnswer } from '@/components/tools/ToolPageSEOContent';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
+import { UNIT_FAMILIES } from '@/components/tools/modules/shared/unitFamilies';
 
 const stopwords = new Set([
   'to', 'and', 'the', 'in', 'for', 'of', 'a', 'an', 'is', 'it', 'its', 'on', 'or', 'with',
@@ -261,10 +261,8 @@ describe('tool description content integrity', () => {
     expect(failures, failures.join('\n')).toHaveLength(0);
   });
 
-  it('unit converters (CONVERTER_CONFIG unit category) do not get "upload a file" as their input type', () => {
-    const unitSlugs = Object.entries(CONVERTER_CONFIG)
-      .filter(([, cfg]) => cfg.category === 'unit')
-      .map(([slug]) => slug);
+  it('unit converters (UNIT_FAMILIES) do not get "upload a file" as their input type', () => {
+    const unitSlugs = Object.keys(UNIT_FAMILIES);
     const failures: string[] = [];
     for (const slug of unitSlugs) {
       const tool = toolsRegistry.find(t => t.slug === slug);

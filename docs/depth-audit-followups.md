@@ -94,6 +94,6 @@ review list, not a pass/fail gate.
   no `http-equiv="refresh"` on any of the 7 pages, and each renders its correct pair (e.g.
   `yaml-to-toon` shows YAML→Toon with YAML input; `json-to-csv` shows JSON→CSV preselected).
   Registry 1040→1047, redirect-only 89→82, full suite 122 green, tsc clean.
-- Status: **closed.** Remaining Phase 4 work: retire ConverterRouter/converterConfig/
-  ConverterCategory, fold `HUB_DESCRIPTIONS` into hub-owned data, add CI/lint rule blocking new
-  tool registration outside MODULE_REGISTRY.
+- Status: **closed.** Phase 4 retirement complete: ConverterRouter/converterConfig/
+  ConverterCategory deleted (commit `…`); `HUB_DESCRIPTIONS` still to fold into hub-owned data
+  and a CI/lint rule blocking new tool registration outside MODULE_REGISTRY remains outstanding.

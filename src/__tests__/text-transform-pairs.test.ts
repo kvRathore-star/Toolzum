@@ -3,12 +3,11 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { TRANSFORM_CONFIG } from '@/components/tools/modules/shared/textTransformConfig';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 // The 11 text-transform slugs migrated to MODULE_REGISTRY slug closures.
 // TRANSFORM_CONFIG is broader than this list (28 entries — it also drives
 // css-preprocessor / html-text / text-binary / serializer / json-output slugs
-// that remain routed via CONVERTER_CONFIG), so the routed set is explicit here.
+// ), so the routed set is explicit here.
 const TT_CLOSURE_SLUGS = [
   'text-tools',
   'tailwind-to-css-converter',
@@ -33,12 +32,9 @@ function routedTextTransformSlugs(): string[] {
 }
 
 describe('TextTransformConverter slug-closure contract', () => {
-  it('routes exactly the 11 text-transform slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 11 text-transform slugs via MODULE_REGISTRY', () => {
     const routed = routedTextTransformSlugs().sort();
     expect(routed).toEqual(TT_CLOSURE_SLUGS.slice().sort());
-    for (const slug of TT_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `text-transform slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed text-transform closure resolves to a real TRANSFORM_CONFIG entry', () => {

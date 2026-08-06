@@ -3,7 +3,6 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { MODES } from '@/components/tools/modules/shared/TextBinaryHub';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 // The 3 text-binary slugs migrated to MODULE_REGISTRY slug closures.
 const TEXT_BINARY_CLOSURE_SLUGS = ['binary-to-text', 'text-to-binary', 'text-binary-converter'];
@@ -25,12 +24,9 @@ function routedTextBinarySlugs(): string[] {
 }
 
 describe('TextBinaryHub slug-closure contract', () => {
-  it('routes exactly the 3 text-binary slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 3 text-binary slugs via MODULE_REGISTRY', () => {
     const routed = routedTextBinarySlugs().sort();
     expect(routed).toEqual(TEXT_BINARY_CLOSURE_SLUGS.slice().sort());
-    for (const slug of TEXT_BINARY_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `text-binary slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed slug is a MODES tab or the documented catch-all fallback', () => {

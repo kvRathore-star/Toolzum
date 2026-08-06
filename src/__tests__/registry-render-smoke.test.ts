@@ -135,12 +135,9 @@ async function resolveComponent(entry: Entry): Promise<React.ComponentType<Recor
 
 describe('Tier 2.1 full-registry render smoke test', () => {
   let registry: Record<string, Entry>;
-  let converterSlugs: string[];
 
   beforeAll(async () => {
     registry = parseRegistry();
-    const { CONVERTER_CONFIG } = await import('@/components/tools/modules/shared/converterConfig');
-    converterSlugs = Object.keys(CONVERTER_CONFIG);
   });
 
   it('parses every MODULE_REGISTRY slug as resolvable (default / named / closure)', () => {
@@ -164,23 +161,6 @@ describe('Tier 2.1 full-registry render smoke test', () => {
       }
     }
     console.log(`registry render pass took ${((Date.now() - started) / 1000).toFixed(1)}s`);
-    expect(failures, `render failures:\n${failures.join('\n')}`).toEqual([]);
-  }, 180000);
-
-  it('every CONVERTER_CONFIG slug renders through ConverterRouter without throwing', async () => {
-    const { default: ConverterRouter } = await import('@/components/tools/modules/converter/ConverterRouter');
-    const failures: string[] = [];
-    expect(converterSlugs.length).toBe(0);
-    const started = Date.now();
-    for (const slug of converterSlugs) {
-      nav.slug = slug;
-      try {
-        renderToString(React.createElement(ConverterRouter, { slug }));
-      } catch (e) {
-        failures.push(`${slug}: ${(e as Error).message.split('\n')[0]}`);
-      }
-    }
-    console.log(`converter render pass took ${((Date.now() - started) / 1000).toFixed(1)}s`);
     expect(failures, `render failures:\n${failures.join('\n')}`).toEqual([]);
   }, 180000);
 });

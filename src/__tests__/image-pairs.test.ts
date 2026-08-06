@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
 import { FORMAT_PAIRS } from '@/components/tools/modules/shared/ImageCatchAllConverter';
 
@@ -47,16 +46,11 @@ function routedSlugs(modulePath: string): string[] {
 }
 
 describe('image hub slug-closure contract', () => {
-  it('every migrated image slug is closure-routed and dropped from CONVERTER_CONFIG', () => {
+  it('every migrated image slug is closure-routed via ImageCatchAllConverter', () => {
     const routed = routedSlugs('@/components/tools/modules/shared/ImageCatchAllConverter');
     const canonical = new Set(IMAGE_FORMAT_SLUGS);
     for (const slug of routed) {
       expect(canonical.has(slug), `image slug ${slug} routed but not in canonical 110`).toBe(true);
-      expect(CONVERTER_CONFIG, `image slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
-    // every image slug still in CONFIG must NOT be closure-routed yet
-    for (const slug of Object.keys(CONVERTER_CONFIG)) {
-      expect(routed.includes(slug), `image slug ${slug} still in CONFIG but already routed`).toBe(false);
     }
   });
 

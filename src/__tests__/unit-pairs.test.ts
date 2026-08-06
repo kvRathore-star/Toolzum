@@ -2,8 +2,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { UNIT_FAMILIES } from '@/components/tools/modules/shared/UnitConverter';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
+import { UNIT_FAMILIES } from '@/components/tools/modules/shared/unitFamilies';
 
 // The 16 unit slugs migrated to MODULE_REGISTRY slug closures.
 // UNIT_FAMILIES is broader than this list (17 keys — it also holds the "unit-converter"
@@ -37,12 +36,9 @@ function routedUnitSlugs(): string[] {
 }
 
 describe('UnitConverter slug-closure contract', () => {
-  it('routes exactly the 16 unit slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 16 unit slugs via MODULE_REGISTRY', () => {
     const routed = routedUnitSlugs().sort();
     expect(routed).toEqual(UNIT_CLOSURE_SLUGS.slice().sort());
-    for (const slug of UNIT_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `unit slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed unit closure resolves to a real UNIT_FAMILIES entry', () => {

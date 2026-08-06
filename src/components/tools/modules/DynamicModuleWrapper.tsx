@@ -1371,8 +1371,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
 const ComingSoonTool = dynamic(() => import('@/components/tools/modules/utility/ComingSoonTool'), { ssr: false, loading: () => <SkeletonLoader /> });
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { CONVERTER_CONFIG } from './shared/converterConfig';
-import ConverterRouter from './converter/ConverterRouter';
 
 export function DynamicModuleWrapper({ slug, category }: { slug: string, category: string }) {
   const DynamicModule = MODULE_REGISTRY[slug];
@@ -1383,10 +1381,6 @@ export function DynamicModuleWrapper({ slug, category }: { slug: string, categor
         <DynamicModule />
       </ErrorBoundary>
     );
-  }
-
-  if (CONVERTER_CONFIG[slug]) {
-    return <ConverterRouter slug={slug} />;
   }
 
   const toolName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');

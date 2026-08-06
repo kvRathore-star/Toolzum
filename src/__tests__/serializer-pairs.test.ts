@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { FORMAT_SLUGS } from '@/components/tools/modules/shared/FormatSerializerHub';
 import { TRANSFORM_CONFIG } from '@/components/tools/modules/shared/textTransformConfig';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 // The 6 serializer slugs migrated to MODULE_REGISTRY slug closures.
 // FORMAT_SLUGS is broader than this list (7 tabs — it also holds "json-to-code",
@@ -29,12 +28,9 @@ function routedSerializerSlugs(): string[] {
 }
 
 describe('FormatSerializerHub slug-closure contract', () => {
-  it('routes exactly the 6 serializer slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 6 serializer slugs via MODULE_REGISTRY', () => {
     const routed = routedSerializerSlugs().sort();
     expect(routed).toEqual(SERIALIZER_CLOSURE_SLUGS.slice().sort());
-    for (const slug of SERIALIZER_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `serializer slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed serializer closure resolves to a real TRANSFORM_CONFIG entry', () => {
@@ -53,7 +49,6 @@ describe('FormatSerializerHub slug-closure contract', () => {
   it('the json-to-code cross-listed tab stays registry-routed (not reachable via CONFIG)', () => {
     expect(FORMAT_SLUGS).toContain('json-to-code');
     expect(SERIALIZER_CLOSURE_SLUGS).not.toContain('json-to-code');
-    expect(CONVERTER_CONFIG).not.toHaveProperty('json-to-code');
   });
 
   it('migrated TRANSFORM_CONFIG entries are internally consistent', () => {

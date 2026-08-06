@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
 
 const VIDEO_FORMAT_SLUGS = [
@@ -28,12 +27,9 @@ function routedSlugs(modulePath: string): string[] {
 }
 
 describe('video hub slug-closure contract', () => {
-  it('routes every video-format slug via VideoFormatConverter and drops all from CONVERTER_CONFIG', () => {
+  it('routes every video-format slug via VideoFormatConverter', () => {
     const routed = routedSlugs('@/components/tools/modules/shared/VideoFormatConverter').sort();
     expect(routed).toEqual(VIDEO_FORMAT_SLUGS.slice().sort());
-    for (const slug of ALL_SLUGS) {
-      expect(CONVERTER_CONFIG, `video slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('routes every video-to-audio slug via VideoToAudioConverter', () => {

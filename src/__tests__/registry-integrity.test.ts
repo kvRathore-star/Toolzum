@@ -3,7 +3,6 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { join, resolve, relative, dirname } from 'node:path';
 import { toolsRegistry, TOOL_REDIRECTS, SEO_PERMUTATIONS } from '@/registry/tools';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { CATEGORY_SECTIONS } from '@/data/categorySections';
 
 const VALID_CATEGORIES = new Set(Object.keys(CATEGORY_SECTIONS));
@@ -218,24 +217,9 @@ describe('registry integrity #9: routing consistency', () => {
   let rm: RegExpExecArray | null;
   while ((rm = regRe.exec(wrapperSource)) !== null) moduleRegistrySlugs.push(rm[1]);
 
-  const configSlugs = Object.keys(CONVERTER_CONFIG);
   const registrySlugSet = new Set(toolsRegistry.map(t => t.slug));
   const permSlugSet = new Set(SEO_PERMUTATIONS.map(p => p.slug));
   const redirectKeySet = new Set(Object.keys(TOOL_REDIRECTS));
-
-  it('no slug is routed by both MODULE_REGISTRY and CONVERTER_CONFIG (single source of truth)', () => {
-    const dupes = moduleRegistrySlugs.filter(s => configSlugs.includes(s));
-    expect(
-      dupes.map(s => `${s}: MODULE_REGISTRY entry shadows CONVERTER_CONFIG entry (${CONVERTER_CONFIG[s].category})`)
-    ).toEqual([]);
-  });
-
-  it('every CONVERTER_CONFIG slug maps to a real registry tool', () => {
-    const failures = configSlugs.filter(s => !registrySlugSet.has(s));
-    expect(
-      failures.map(s => `${s}: CONVERTER_CONFIG routes a slug with no registry entry`)
-    ).toEqual([]);
-  });
 
   it('every MODULE_REGISTRY slug resolves to a real page slug', () => {
     const failures = moduleRegistrySlugs.filter(
@@ -260,7 +244,7 @@ describe('registry integrity #9: routing consistency', () => {
     const failures: string[] = [];
     for (const tool of toolsRegistry) {
       if (tool.showInCategory === false) continue;
-      if (moduleRegistrySlugs.includes(tool.slug) || configSlugs.includes(tool.slug)) continue;
+      if (moduleRegistrySlugs.includes(tool.slug)) continue;
       if (TOOL_REDIRECTS[tool.slug]) continue;
       const perm = SEO_PERMUTATIONS.find(p => p.slug === tool.slug);
       if (perm && registrySlugSet.has(perm.parentSlug)) continue;

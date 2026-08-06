@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { SLUG_MAP as DATA_SLUG_MAP } from '@/components/tools/modules/converter/DataConverter';
 
 const DATA_CLOSURE_SLUGS = ['xml-to-json', 'xml-to-csv', 'json-to-xml', 'json-to-csv', 'csv-to-json', 'csv-to-xml'];
@@ -17,12 +16,9 @@ function routedDataSlugs(): string[] {
 }
 
 describe('DataConverter slug-closure contract', () => {
-  it('routes all six per-pair DataConverter slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes all six per-pair DataConverter slugs via MODULE_REGISTRY', () => {
     const routed = routedDataSlugs().sort();
     expect(routed).toEqual(DATA_CLOSURE_SLUGS.slice().sort());
-    for (const slug of DATA_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `data slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed slug is a DataConverter SLUG_MAP entry (Design B: former redirect sources are now per-pair pages)', () => {

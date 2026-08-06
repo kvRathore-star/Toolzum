@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CSS_PREPROCESSOR_SLUGS } from '@/components/tools/modules/shared/CssPreprocessorHub';
 import { TRANSFORM_CONFIG } from '@/components/tools/modules/shared/textTransformConfig';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 // The 6 css-preprocessor slugs migrated to MODULE_REGISTRY slug closures.
 // CSS_PREPROCESSOR_SLUGS is exactly this set (no cross-listed tabs like the
@@ -28,12 +27,9 @@ function routedCssPreprocessorSlugs(): string[] {
 }
 
 describe('CssPreprocessorHub slug-closure contract', () => {
-  it('routes exactly the 6 css-preprocessor slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes exactly the 6 css-preprocessor slugs via MODULE_REGISTRY', () => {
     const routed = routedCssPreprocessorSlugs().sort();
     expect(routed).toEqual(CSS_PREPROCESSOR_CLOSURE_SLUGS.slice().sort());
-    for (const slug of CSS_PREPROCESSOR_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `css-preprocessor slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed css-preprocessor closure resolves to a real TRANSFORM_CONFIG entry', () => {

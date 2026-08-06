@@ -21,7 +21,6 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const TOOLS_PATH = path.join(ROOT, "src/registry/tools.ts");
 const WRAPPER_PATH = path.join(ROOT, "src/components/tools/modules/DynamicModuleWrapper.tsx");
-const CONFIG_PATH = path.join(ROOT, "src/components/tools/modules/shared/converterConfig.ts");
 const CATEGORY_PAGES_PATH = path.join(ROOT, "src/app/[category]/page.tsx");
 const SITEMAP_PATH = path.join(ROOT, "public/sitemap.xml");
 
@@ -70,16 +69,14 @@ function parseRegistry() {
 
 function parseModules() {
   const wrapper = readOrNull(WRAPPER_PATH);
-  const config = readOrNull(CONFIG_PATH);
   const tools = readOrNull(TOOLS_PATH);
-  if (!wrapper && !config) return { moduleKeys: [], configKeys: [], redirectSlugs: [], seoSlugs: [] };
+  if (!wrapper) return { moduleKeys: [], redirectSlugs: [], seoSlugs: [] };
 
   const moduleKeys = wrapper ? [...wrapper.matchAll(/'([a-z0-9-]+)': dynamic/g)].map(m => m[1]) : [];
-  const configKeys = config ? [...config.matchAll(/^  "([a-z0-9-]+)":/gm)].map(m => m[1]) : [];
   const redirectSlugs = tools ? [...tools.matchAll(/"([a-z0-9-]+)": { category:/g)].map(m => m[1]) : [];
   const seoSlugs = tools ? [...tools.matchAll(/slug: "([^"]+)", name: "([^"]+)",/g)].map(m => ({ slug: m[1], name: m[2] })) : [];
 
-  return { moduleKeys, configKeys, redirectSlugs, seoSlugs };
+  return { moduleKeys, redirectSlugs, seoSlugs };
 }
 
 // ─── 2. Checks ──────────────────────────────────────────────────────────────
@@ -101,12 +98,11 @@ function checkDuplicateNames(entries) {
     }));
 }
 
-function checkComingSoon(entries, { moduleKeys, configKeys, redirectSlugs, seoSlugs }) {
+function checkComingSoon(entries, { moduleKeys, redirectSlugs, seoSlugs }) {
   const results = [];
   for (const e of entries) {
     if (!e.slug) continue;
     const hasModule = moduleKeys.includes(e.slug)
-      || configKeys.includes(e.slug)
       || redirectSlugs.includes(e.slug)
       || seoSlugs.some(s => s.slug === e.slug);
     if (!hasModule) {
@@ -214,13 +210,13 @@ function checkCategoryKeywords(entries) {
 
 // ─── 4. Tool Quality Bar Score ──────────────────────────────────────────────
 
-function qualityScore(entry, { moduleKeys, configKeys }) {
+function qualityScore(entry, { moduleKeys }) {
   let score = 0;
   const maxScore = 10;
   const reasons = [];
 
   // Has a real module (not Coming Soon)
-  const hasRealModule = moduleKeys.includes(entry.slug) || configKeys.includes(entry.slug);
+  const hasRealModule = moduleKeys.includes(entry.slug);
   if (hasRealModule) { score += 2; reasons.push("has_module"); }
   else { reasons.push("no_module"); }
 

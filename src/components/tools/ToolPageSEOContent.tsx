@@ -3,7 +3,7 @@ import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-r
 import { toolsRegistry, ToolMetadata } from "@/registry/tools";
 import { getShortDescription } from "@/lib/generateToolDescription";
 import { requiresCloudApi, LOCAL_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
-import { CONVERTER_CONFIG } from './modules/shared/converterConfig';
+import { UNIT_FAMILIES } from './modules/shared/unitFamilies';
 
 interface ToolPageSEOContentProps {
   tool: ToolMetadata;
@@ -37,7 +37,7 @@ export function deriveInputAnswer(tool: ToolMetadata): string {
 
   const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract'];
 
-  if (CONVERTER_CONFIG[slug]?.category === 'unit') {
+  if (UNIT_FAMILIES[slug]) {
     return 'Enter a numeric value to convert — all unit conversions update instantly.';
   }
 
@@ -89,7 +89,7 @@ function deriveToolType(slug: string, name: string, description: string, categor
     transformer: "converter", extractor: "extractor",
   };
   if (types[suffix]) {
-    if (suffix === 'converter' && CONVERTER_CONFIG[slug]?.category === 'unit') {
+    if (suffix === 'converter' && UNIT_FAMILIES[slug]) {
       return "calculator";
     }
     if (broadTypes.has(types[suffix])) {

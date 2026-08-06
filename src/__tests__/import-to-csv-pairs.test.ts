@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { MODES as IMPORT_CSV_MODES } from '@/components/tools/modules/shared/ImportToCsvConverter';
 
 const IMPORT_CSV_CLOSURE_SLUGS = ['import-to-csv', 'tsv-csv-converter'];
@@ -18,12 +17,9 @@ function routedImportCsvSlugs(): string[] {
 }
 
 describe('ImportToCsvConverter slug-closure contract', () => {
-  it('routes import-to-csv and tsv-csv-converter via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
+  it('routes import-to-csv and tsv-csv-converter via MODULE_REGISTRY', () => {
     const routed = routedImportCsvSlugs().sort();
     expect(routed).toEqual(IMPORT_CSV_CLOSURE_SLUGS.slice().sort());
-    for (const slug of IMPORT_CSV_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `import-to-csv slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('the closure-routed slugs are MODES entries; xlsx/vcf/ics stay separate module components', () => {

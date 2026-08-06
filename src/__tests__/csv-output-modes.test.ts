@@ -3,7 +3,6 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { MODES, parseCsv, CSV_HUB_TABS } from '@/components/tools/modules/shared/CsvOutputConverter';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 const HUB_SLUGS = CSV_HUB_TABS.map(t => t.slug);
 
@@ -30,7 +29,6 @@ describe('CsvOutputConverter MODES contract', () => {
     }
     expect(Object.keys(MODES).sort()).toEqual(HUB_SLUGS.slice().sort());
     expect(MODES['csv-formatter']).toBeUndefined();
-    expect(CONVERTER_CONFIG).not.toHaveProperty('csv-formatter');
   });
 
   it('every MODULE_REGISTRY csv-output closure resolves to a valid mode via the hub fallback', () => {

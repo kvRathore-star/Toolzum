@@ -2,7 +2,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { MODES as NUMBER_MODES } from '@/components/tools/modules/shared/NumberWordsConverter';
 
 const NUMBER_CLOSURE_SLUGS = ['number-to-words-converter'];
@@ -17,12 +16,9 @@ function routedNumberSlugs(): string[] {
 }
 
 describe('NumberWordsConverter slug-closure contract', () => {
-  it('routes exactly the number-to-words-converter slug via MODULE_REGISTRY and drops it from CONVERTER_CONFIG', () => {
+  it('routes exactly the number-to-words-converter slug via MODULE_REGISTRY', () => {
     const routed = routedNumberSlugs().sort();
     expect(routed).toEqual(NUMBER_CLOSURE_SLUGS.slice().sort());
-    for (const slug of NUMBER_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `number slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('the routed slug is a NumberWordsConverter MODES entry; roman-numeral-converter stays registry-routed', () => {

@@ -3,7 +3,6 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { FORMAT_PAIRS, FORMATS } from '@/components/tools/modules/shared/DocumentFormatConverter';
-import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 
 const PAIR_SLUGS = FORMAT_PAIRS.map(p => p.slug);
 // epub-to-pdf is a FORMAT_PAIRS tab but stays a MODULE_REGISTRY slug via EpubToPdf,
@@ -20,12 +19,9 @@ function routedDocumentSlugs(): string[] {
 }
 
 describe('DocumentFormatConverter pairs contract', () => {
-  it('routes every document slug via MODULE_REGISTRY closures and drops them from CONVERTER_CONFIG', () => {
+  it('routes every document slug via MODULE_REGISTRY closures', () => {
     const routed = routedDocumentSlugs().sort();
     expect(routed).toEqual(DOC_CLOSURE_SLUGS.slice().sort());
-    for (const slug of DOC_CLOSURE_SLUGS) {
-      expect(CONVERTER_CONFIG, `document slug ${slug} still routed by CONVERTER_CONFIG`).not.toHaveProperty(slug);
-    }
   });
 
   it('every routed document closure resolves to a real FORMAT_PAIRS entry', () => {
