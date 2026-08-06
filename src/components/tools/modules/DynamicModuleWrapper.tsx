@@ -1012,6 +1012,17 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'import-to-csv': dynamic(() => import('@/components/tools/modules/shared/ImportToCsvConverter').then(m => ({ default: () => <m.default slug="import-to-csv" /> }))),
   'tsv-csv-converter': dynamic(() => import('@/components/tools/modules/shared/ImportToCsvConverter').then(m => ({ default: () => <m.default slug="tsv-csv-converter" /> }))),
 
+  // Data hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // DataConverterFromSlug resolves the slug through SLUG_MAP. json-to-csv,
+  // csv-to-json, json-to-xml, csv-to-xml are TOOL_REDIRECTS sources that stay
+  // registry entries -> data-format-converter and are not routed here).
+  'xml-to-json': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="xml-to-json" /> }))),
+  'xml-to-csv': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="xml-to-csv" /> }))),
+
+  // Toon hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // ToonConverter maps the slug to a JsonToonConverter initialMode).
+  'json-toon-converter': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="json-toon-converter" /> }))),
+
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),

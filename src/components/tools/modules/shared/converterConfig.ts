@@ -293,13 +293,13 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   "jxl-to-bmp": { category: "image-format", description: "<strong>JXL to BMP Converter:</strong> Convert JPEG XL files into BMP format for uncompressed bitmap image heritage format. Your files never leave your device." },
   "jxl-to-tiff": { category: "image-format", description: "<strong>JXL to TIFF Converter:</strong> Convert JPEG XL files into TIFF format for high-resolution image archival and publishing. Your files never leave your device." },
   "jxl-to-ico": { category: "image-format", description: "<strong>JXL to ICO Converter:</strong> Convert JPEG XL files into ICO format for Windows icon format for favicons and app icons. Your files never leave your device." },
-  // Data converters.
-  // json-to-csv, csv-to-json, json-to-xml, csv-to-xml are NOT routed here:
-  // they are TOOL_REDIRECTS sources (-> data-format-converter), so any
-  // CONVERTER_CONFIG entry for them would be unreachable. They remain
-  // available in-app as format pairs on the DataConverter hub.
-  "xml-to-json": { category: "data" },
-  "xml-to-csv": { category: "data" },
+  // Data converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // xml-to-json, xml-to-csv render DataConverterFromSlug (DataConverter) via
+  // slug closures (SSR-preserving). json-to-csv, csv-to-json, json-to-xml,
+  // csv-to-xml are NOT routed here: they are TOOL_REDIRECTS sources
+  // (-> data-format-converter), so any CONVERTER_CONFIG entry for them would
+  // be unreachable. They remain available in-app as format pairs on the
+  // DataConverter hub.
 
   // Document converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // word-to-pdf, pdf-to-word, excel-to-pdf, pdf-to-excel, ppt-to-pdf, pdf-to-ppt,
@@ -309,10 +309,10 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
 
   // Hub/consolidated converter entries
 
-  // Toon converters.
-  // yaml-to-toon, toon-to-json, toon-to-yaml are NOT routed here: they are
-  // TOOL_REDIRECTS sources (-> json-toon-converter). Their modes remain
-  // available in-app on the ToonConverter hub.
-  "json-toon-converter": { category: "toon" },
+  // Toon converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // json-toon-converter renders ToonConverter via slug closure
+  // (SSR-preserving). yaml-to-toon, toon-to-json, toon-to-yaml are NOT routed
+  // here: they are TOOL_REDIRECTS sources (-> json-toon-converter). Their
+  // modes remain available in-app on the ToonConverter hub.
 
 };

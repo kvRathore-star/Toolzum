@@ -80,7 +80,7 @@ export function TsvCsvConverter() {
   );
 }
 
-const SLUG_TO_MODE: Record<string, 'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'> = {
+export const SLUG_TO_MODE: Record<string, 'json-to-toon' | 'yaml-to-toon' | 'toon-to-json' | 'toon-to-yaml'> = {
   'json-toon-converter': 'json-to-toon',
   'yaml-to-toon': 'yaml-to-toon',
   'toon-to-json': 'toon-to-json',

@@ -11,7 +11,6 @@ import {
 } from '@/components/tools/modules/shared/ImageCatchAllConverter';
 import { FORMAT_PAIRS as DOC_PAIRS } from '@/components/tools/modules/shared/DocumentFormatConverter';
 import { SLUG_MAP } from '@/components/tools/modules/converter/DataConverter';
-import { TOOL_REDIRECTS } from '@/registry/tools';
 
 function categorySlugs(category: string): string[] {
   return Object.keys(CONVERTER_CONFIG)
@@ -45,12 +44,9 @@ describe('hub contract: every routed slug resolves to a real hub mode', () => {
     }
   });
 
-  it('DataConverter — data category routes exactly the SLUG_MAP pairs that are not redirect-owned, and all pairs are valid', () => {
+  it('DataConverter — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG data routes); pairs contract lives in data-pairs.test.ts', () => {
+    expect(categorySlugs('data')).toEqual([]);
     const formats = ['JSON', 'CSV', 'XML', 'YAML', 'TSV'];
-    const routablePairs = Object.keys(SLUG_MAP)
-      .filter((s) => !TOOL_REDIRECTS[s])
-      .sort();
-    expect(categorySlugs('data')).toEqual(routablePairs);
     for (const [slug, [from, to]] of Object.entries(SLUG_MAP)) {
       expect(formats, `SLUG_MAP ${slug} has invalid from ${from}`).toContain(from);
       expect(formats, `SLUG_MAP ${slug} has invalid to ${to}`).toContain(to);

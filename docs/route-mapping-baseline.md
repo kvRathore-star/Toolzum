@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 829 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 211 |
+| MODULE_REGISTRY (direct dynamic import) | 832 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 208 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (59 MODULE_REGISTRY + 4 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -441,6 +441,7 @@
 | json-to-url-params | JsonOutputConverter [slug=json-to-url-params] |
 | json-to-yaml-converter | FormatSerializerHub [slug=json-to-yaml-converter] |
 | json-to-zod | JsonOutputConverter [slug=json-to-zod] |
+| json-toon-converter | DataFormatTools [slug=json-toon-converter] |
 | json-tree-viewer | DataUtilitiesWidgets -> JsonTreeViewer |
 | jsonl-formatter | DataToolkitWidgets -> JsonlFormatter |
 | jsonrpc-builder | FormatAndDataKitWidgets -> JsonRpcBuilder |
@@ -849,6 +850,8 @@
 | xml-formatter | CodeFormatter -> XmlFormatter |
 | xml-minifier-validator | ValidatorKitWidgets -> XmlMinifierValidator |
 | xml-sitemap-generator | XmlSitemapGenerator |
+| xml-to-csv | DataConverter -> DataConverterFromSlug [slug=xml-to-csv] |
+| xml-to-json | DataConverter -> DataConverterFromSlug [slug=xml-to-json] |
 | xpath-validator | ConfigValidatorWidgets -> XpathValidator |
 | xss-protection-checker | SecurityTools -> XssProtectionChecker |
 | yaml-formatter | CodeFormatter -> YamlFormatter |
@@ -954,7 +957,6 @@
 | jpg-to-svg | image-format | ImageCatchAllConverter |
 | jpg-to-tiff | image-format | ImageCatchAllConverter |
 | jpg-to-webp | image-format | ImageCatchAllConverter |
-| json-toon-converter | toon | ToonConverter |
 | jxl-to-avif | image-format | ImageCatchAllConverter |
 | jxl-to-bmp | image-format | ImageCatchAllConverter |
 | jxl-to-gif | image-format | ImageCatchAllConverter |
@@ -1073,8 +1075,6 @@
 | wma-to-ogg | audio-format | AudioFormatConverter |
 | wma-to-opus | audio-format | AudioFormatConverter |
 | wma-to-wav | audio-format | AudioFormatConverter |
-| xml-to-csv | data | DataConverterFromSlug |
-| xml-to-json | data | DataConverterFromSlug |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 
