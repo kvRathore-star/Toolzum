@@ -95,5 +95,5 @@ review list, not a pass/fail gate.
   `yaml-to-toon` shows YAML→Toon with YAML input; `json-to-csv` shows JSON→CSV preselected).
   Registry 1040→1047, redirect-only 89→82, full suite 122 green, tsc clean.
 - Status: **closed.** Phase 4 retirement complete: ConverterRouter/converterConfig/
-  ConverterCategory deleted (commit `…`); `HUB_DESCRIPTIONS` still to fold into hub-owned data
+  ConverterCategory deleted (commit `9d5ab83`); `HUB_DESCRIPTIONS` still to fold into hub-owned data
   and a CI/lint rule blocking new tool registration outside MODULE_REGISTRY remains outstanding.
