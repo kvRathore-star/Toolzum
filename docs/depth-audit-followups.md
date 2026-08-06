@@ -96,5 +96,5 @@ review list, not a pass/fail gate.
   Registry 1040→1047, redirect-only 89→82, full suite 122 green, tsc clean.
 - Status: **closed.** Phase 4 retirement complete: ConverterRouter/converterConfig/
   ConverterCategory deleted (commit `9d5ab83`); `HUB_DESCRIPTIONS` folded into hub-owned
-  `DESCRIPTIONS` maps (commit `…`). Only a CI/lint rule blocking new tool registration
+  `DESCRIPTIONS` maps (commit `346949c`). Only a CI/lint rule blocking new tool registration
   outside MODULE_REGISTRY remains outstanding.
