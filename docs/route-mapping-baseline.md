@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 970 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 70 |
+| MODULE_REGISTRY (direct dynamic import) | 1010 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 30 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -111,6 +111,16 @@
 | avi-to-mov | VideoFormatConverter [slug=avi-to-mov] |
 | avi-to-mp4 | VideoFormatConverter [slug=avi-to-mp4] |
 | avi-to-webm | VideoFormatConverter [slug=avi-to-webm] |
+| avif-to-bmp | ImageCatchAllConverter [slug=avif-to-bmp] |
+| avif-to-gif | ImageCatchAllConverter [slug=avif-to-gif] |
+| avif-to-heic | ImageCatchAllConverter [slug=avif-to-heic] |
+| avif-to-ico | ImageCatchAllConverter [slug=avif-to-ico] |
+| avif-to-jpg | ImageCatchAllConverter [slug=avif-to-jpg] |
+| avif-to-jxl | ImageCatchAllConverter [slug=avif-to-jxl] |
+| avif-to-png | ImageCatchAllConverter [slug=avif-to-png] |
+| avif-to-svg | ImageCatchAllConverter [slug=avif-to-svg] |
+| avif-to-tiff | ImageCatchAllConverter [slug=avif-to-tiff] |
+| avif-to-webp | ImageCatchAllConverter [slug=avif-to-webp] |
 | avro-schema-generator | ConvertersEverydayWidgets -> AvroSchemaGenerator |
 | avro-to-json-sample | ConvertersEverydayWidgets -> AvroToJsonSample |
 | aws-iam-policy-analyzer | MiscUtilitiesKitWidgets -> AwsIamPolicyAnalyzer |
@@ -132,6 +142,16 @@
 | blur-face | BlurFace |
 | bmi-calculator | BmiCalculator |
 | bmi-calculator-for-kids | Calculators -> BmiCalculatorForKids |
+| bmp-to-avif | ImageCatchAllConverter [slug=bmp-to-avif] |
+| bmp-to-gif | ImageCatchAllConverter [slug=bmp-to-gif] |
+| bmp-to-heic | ImageCatchAllConverter [slug=bmp-to-heic] |
+| bmp-to-ico | ImageCatchAllConverter [slug=bmp-to-ico] |
+| bmp-to-jpg | ImageCatchAllConverter [slug=bmp-to-jpg] |
+| bmp-to-jxl | ImageCatchAllConverter [slug=bmp-to-jxl] |
+| bmp-to-png | ImageCatchAllConverter [slug=bmp-to-png] |
+| bmp-to-svg | ImageCatchAllConverter [slug=bmp-to-svg] |
+| bmp-to-tiff | ImageCatchAllConverter [slug=bmp-to-tiff] |
+| bmp-to-webp | ImageCatchAllConverter [slug=bmp-to-webp] |
 | bmr-calculator | BmrCalculator |
 | body-fat-calculator | MiscellaneousTools1 -> BodyFatCalculator |
 | body-fat-percentage-calculator | Calculators -> BodyFatPercentageCalculator |
@@ -841,7 +861,17 @@
 | svg-base64-converter | ConverterToolkitWidgets -> SvgToBase64Converter |
 | svg-editor | SvgEditor |
 | svg-optimizer | ConverterToolkitWidgets -> SvgOptimizer |
+| svg-to-avif | ImageCatchAllConverter [slug=svg-to-avif] |
+| svg-to-bmp | ImageCatchAllConverter [slug=svg-to-bmp] |
 | svg-to-css | TextTransformConverter [slug=svg-to-css] |
+| svg-to-gif | ImageCatchAllConverter [slug=svg-to-gif] |
+| svg-to-heic | ImageCatchAllConverter [slug=svg-to-heic] |
+| svg-to-ico | ImageCatchAllConverter [slug=svg-to-ico] |
+| svg-to-jpg | ImageCatchAllConverter [slug=svg-to-jpg] |
+| svg-to-jxl | ImageCatchAllConverter [slug=svg-to-jxl] |
+| svg-to-png | ImageCatchAllConverter [slug=svg-to-png] |
+| svg-to-tiff | ImageCatchAllConverter [slug=svg-to-tiff] |
+| svg-to-webp | ImageCatchAllConverter [slug=svg-to-webp] |
 | swagger-openapi-generator | ApiTools -> SwaggerOpenapiGenerator |
 | swift-formatter | ExtraTools -> SwiftFormatter |
 | syntax-validator | SecurityTools -> Validator |
@@ -868,7 +898,17 @@
 | text-to-markdown | MarkdownTools |
 | text-to-speech-tts | TextToSpeechTts |
 | text-tools | TextTransformConverter [slug=text-tools] |
+| tiff-to-avif | ImageCatchAllConverter [slug=tiff-to-avif] |
+| tiff-to-bmp | ImageCatchAllConverter [slug=tiff-to-bmp] |
+| tiff-to-gif | ImageCatchAllConverter [slug=tiff-to-gif] |
+| tiff-to-heic | ImageCatchAllConverter [slug=tiff-to-heic] |
+| tiff-to-ico | ImageCatchAllConverter [slug=tiff-to-ico] |
+| tiff-to-jpg | ImageCatchAllConverter [slug=tiff-to-jpg] |
+| tiff-to-jxl | ImageCatchAllConverter [slug=tiff-to-jxl] |
 | tiff-to-pdf | TiffToPdf |
+| tiff-to-png | ImageCatchAllConverter [slug=tiff-to-png] |
+| tiff-to-svg | ImageCatchAllConverter [slug=tiff-to-svg] |
+| tiff-to-webp | ImageCatchAllConverter [slug=tiff-to-webp] |
 | time-addition-calculator | Timers -> TimeAdditionCalculator |
 | time-converter | UnitConverter [slug=time-converter] |
 | time-duration-calculator | Timers -> TimeDurationCalculator |
@@ -1005,26 +1045,6 @@
 
 | Slug | Category | Hub component |
 |---|---|---|
-| avif-to-bmp | image-format | ImageCatchAllConverter |
-| avif-to-gif | image-format | ImageCatchAllConverter |
-| avif-to-heic | image-format | ImageCatchAllConverter |
-| avif-to-ico | image-format | ImageCatchAllConverter |
-| avif-to-jpg | image-format | ImageCatchAllConverter |
-| avif-to-jxl | image-format | ImageCatchAllConverter |
-| avif-to-png | image-format | ImageCatchAllConverter |
-| avif-to-svg | image-format | ImageCatchAllConverter |
-| avif-to-tiff | image-format | ImageCatchAllConverter |
-| avif-to-webp | image-format | ImageCatchAllConverter |
-| bmp-to-avif | image-format | ImageCatchAllConverter |
-| bmp-to-gif | image-format | ImageCatchAllConverter |
-| bmp-to-heic | image-format | ImageCatchAllConverter |
-| bmp-to-ico | image-format | ImageCatchAllConverter |
-| bmp-to-jpg | image-format | ImageCatchAllConverter |
-| bmp-to-jxl | image-format | ImageCatchAllConverter |
-| bmp-to-png | image-format | ImageCatchAllConverter |
-| bmp-to-svg | image-format | ImageCatchAllConverter |
-| bmp-to-tiff | image-format | ImageCatchAllConverter |
-| bmp-to-webp | image-format | ImageCatchAllConverter |
 | gif-to-avif | image-format | ImageCatchAllConverter |
 | gif-to-bmp | image-format | ImageCatchAllConverter |
 | gif-to-heic | image-format | ImageCatchAllConverter |
@@ -1055,26 +1075,6 @@
 | jxl-to-svg | image-format | ImageCatchAllConverter |
 | jxl-to-tiff | image-format | ImageCatchAllConverter |
 | jxl-to-webp | image-format | ImageCatchAllConverter |
-| svg-to-avif | image-format | ImageCatchAllConverter |
-| svg-to-bmp | image-format | ImageCatchAllConverter |
-| svg-to-gif | image-format | ImageCatchAllConverter |
-| svg-to-heic | image-format | ImageCatchAllConverter |
-| svg-to-ico | image-format | ImageCatchAllConverter |
-| svg-to-jpg | image-format | ImageCatchAllConverter |
-| svg-to-jxl | image-format | ImageCatchAllConverter |
-| svg-to-png | image-format | ImageCatchAllConverter |
-| svg-to-tiff | image-format | ImageCatchAllConverter |
-| svg-to-webp | image-format | ImageCatchAllConverter |
-| tiff-to-avif | image-format | ImageCatchAllConverter |
-| tiff-to-bmp | image-format | ImageCatchAllConverter |
-| tiff-to-gif | image-format | ImageCatchAllConverter |
-| tiff-to-heic | image-format | ImageCatchAllConverter |
-| tiff-to-ico | image-format | ImageCatchAllConverter |
-| tiff-to-jpg | image-format | ImageCatchAllConverter |
-| tiff-to-jxl | image-format | ImageCatchAllConverter |
-| tiff-to-png | image-format | ImageCatchAllConverter |
-| tiff-to-svg | image-format | ImageCatchAllConverter |
-| tiff-to-webp | image-format | ImageCatchAllConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 

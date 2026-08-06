@@ -144,11 +144,11 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   });
 
   it('parses every MODULE_REGISTRY slug as resolvable (default / named / closure)', () => {
-    expect(Object.keys(registry).length).toBe(970);
+    expect(Object.keys(registry).length).toBe(1010);
     const kinds = Object.values(registry).map((e) => e.kind);
     expect(kinds.filter((k) => k === 'default').length).toBe(320);
     expect(kinds.filter((k) => k === 'named').length).toBe(416);
-    expect(kinds.filter((k) => k === 'closure').length).toBe(234);
+    expect(kinds.filter((k) => k === 'closure').length).toBe(274);
   });
 
   it('every MODULE_REGISTRY slug renders its resolved component without throwing', async () => {
@@ -170,7 +170,7 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   it('every CONVERTER_CONFIG slug renders through ConverterRouter without throwing', async () => {
     const { default: ConverterRouter } = await import('@/components/tools/modules/converter/ConverterRouter');
     const failures: string[] = [];
-    expect(converterSlugs.length).toBe(70);
+    expect(converterSlugs.length).toBe(30);
     const started = Date.now();
     for (const slug of converterSlugs) {
       nav.slug = slug;
