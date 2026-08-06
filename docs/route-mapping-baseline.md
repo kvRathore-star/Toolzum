@@ -1318,3 +1318,29 @@ category routing matches hub tabs exactly (except documented fallbacks above):
   and browser-only libs (`@ffmpeg/ffmpeg`, `@ffmpeg/util`, `heic2any`, `openpgp`) stubbed for the harness.
 - renderToString exercises the render phase only (no effects). Effect-phase crashes are not caught by the smoke test.
 - Hub contract suites run in the node environment and do not render; they validate the slug->mode mapping.
+
+## Phase 5 — retroactive type-safety scan (any-casts in the routing layer)
+
+Scanned (2026-08-06) whether any `no-explicit-any` demotions from the lint-restoration work
+(`f2b3830`) were routing-layer casualties that the single MODULE_REGISTRY path resolves. Result:
+**no routing-layer type-safety casualties exist.**
+
+- The old 3-way path was already type-clean: `converterConfig.ts`, `ConverterRouter.tsx`,
+  `ConverterCategory.ts` carried **zero** type-level `any` (one comment mention only), and the
+  pre-retirement wrapper had the same single registry `any` the post-retirement one does.
+- The routing layer today (`[category]/[tool]/page.tsx`, `DynamicModuleWrapper.tsx`, the
+  `tools-chunk-*.ts` registry, `ToolPageSEOContent`, all pair-closure hubs) contains exactly
+  **one** `any`: `MODULE_REGISTRY: Record<string, React.ComponentType<any>>` — the honest common
+  type for a heterogeneous `dynamic()` registry rendered with no props, marked with an
+  eslint-disable and an explanatory comment (wrapper line ~58-61).
+- All hub prop boundaries are fully typed: closures pass `{ slug: string }`,
+  `{ defaultFrom?, defaultTo? }`, `AudioFormatConverterProps`, etc. No `as any`, `as unknown as`,
+  `@ts-ignore`, or `@ts-expect-error` anywhere in the routing layer.
+- The ~200 remaining `any`-casts live inside tool *components* and are all **parser outputs**
+  (`JSON.parse`, `Papa.parse`, `XLSX.sheet_to_json`, `heic2any`, pdf/ffmpeg stream objects) —
+  inherent to consuming untyped external data, not a symptom of routing ambiguity. The only
+  non-module `any`s are third-party untyped-lib declarations (`types/modules.d.ts`: utif, ical,
+  vcard-parser), Cloudflare `context.request.cf` typing gaps in `functions/`, and a fetch body in
+  `src/utils/cobaltApi.ts` — all unrelated to routing.
+- **Verdict:** the single registration path (Phase 4, guarded by commit `b04f253`) did not leave
+  or conceal any routing-layer type-safety holes. No further routing work needed for Tier 1.1.
