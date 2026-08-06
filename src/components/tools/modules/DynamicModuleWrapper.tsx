@@ -1205,6 +1205,50 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
 
   'aiff-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-opus" description={HUB_DESCRIPTIONS['aiff-to-opus']} /> }))),
 
+  // Image-format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // ImageFormatConverter renders a per-tool info banner from the description prop, so
+  // each closure passes HUB_DESCRIPTIONS[slug] to keep pre-migration HTML byte-identical).
+  'image-format-converter': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="image-format-converter" description={HUB_DESCRIPTIONS['image-format-converter']} /> }))),
+  'png-to-jpg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-jpg" description={HUB_DESCRIPTIONS['png-to-jpg']} /> }))),
+  'png-to-webp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-webp" description={HUB_DESCRIPTIONS['png-to-webp']} /> }))),
+  'png-to-avif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-avif" description={HUB_DESCRIPTIONS['png-to-avif']} /> }))),
+  'png-to-gif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-gif" description={HUB_DESCRIPTIONS['png-to-gif']} /> }))),
+  'png-to-jxl': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-jxl" description={HUB_DESCRIPTIONS['png-to-jxl']} /> }))),
+  'png-to-heic': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-heic" description={HUB_DESCRIPTIONS['png-to-heic']} /> }))),
+  'png-to-bmp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-bmp" description={HUB_DESCRIPTIONS['png-to-bmp']} /> }))),
+  'png-to-tiff': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-tiff" description={HUB_DESCRIPTIONS['png-to-tiff']} /> }))),
+  'png-to-ico': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="png-to-ico" description={HUB_DESCRIPTIONS['png-to-ico']} /> }))),
+  'jpg-to-png': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-png" description={HUB_DESCRIPTIONS['jpg-to-png']} /> }))),
+  'jpg-to-webp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-webp" description={HUB_DESCRIPTIONS['jpg-to-webp']} /> }))),
+  'jpg-to-avif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-avif" description={HUB_DESCRIPTIONS['jpg-to-avif']} /> }))),
+  'jpg-to-gif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-gif" description={HUB_DESCRIPTIONS['jpg-to-gif']} /> }))),
+  'jpg-to-jxl': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-jxl" description={HUB_DESCRIPTIONS['jpg-to-jxl']} /> }))),
+  'jpg-to-heic': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-heic" description={HUB_DESCRIPTIONS['jpg-to-heic']} /> }))),
+  'jpg-to-svg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-svg" description={HUB_DESCRIPTIONS['jpg-to-svg']} /> }))),
+  'jpg-to-bmp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-bmp" description={HUB_DESCRIPTIONS['jpg-to-bmp']} /> }))),
+  'jpg-to-tiff': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-tiff" description={HUB_DESCRIPTIONS['jpg-to-tiff']} /> }))),
+  'jpg-to-ico': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="jpg-to-ico" description={HUB_DESCRIPTIONS['jpg-to-ico']} /> }))),
+  'webp-to-png': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-png" description={HUB_DESCRIPTIONS['webp-to-png']} /> }))),
+  'webp-to-jpg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-jpg" description={HUB_DESCRIPTIONS['webp-to-jpg']} /> }))),
+  'webp-to-gif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-gif" description={HUB_DESCRIPTIONS['webp-to-gif']} /> }))),
+  'webp-to-avif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-avif" description={HUB_DESCRIPTIONS['webp-to-avif']} /> }))),
+  'webp-to-heic': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-heic" description={HUB_DESCRIPTIONS['webp-to-heic']} /> }))),
+  'webp-to-svg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-svg" description={HUB_DESCRIPTIONS['webp-to-svg']} /> }))),
+  'webp-to-bmp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-bmp" description={HUB_DESCRIPTIONS['webp-to-bmp']} /> }))),
+  'webp-to-tiff': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-tiff" description={HUB_DESCRIPTIONS['webp-to-tiff']} /> }))),
+  'webp-to-ico': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-ico" description={HUB_DESCRIPTIONS['webp-to-ico']} /> }))),
+  'webp-to-jxl': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="webp-to-jxl" description={HUB_DESCRIPTIONS['webp-to-jxl']} /> }))),
+  'heic-to-jpg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-jpg" description={HUB_DESCRIPTIONS['heic-to-jpg']} /> }))),
+  'heic-to-png': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-png" description={HUB_DESCRIPTIONS['heic-to-png']} /> }))),
+  'heic-to-webp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-webp" description={HUB_DESCRIPTIONS['heic-to-webp']} /> }))),
+  'heic-to-avif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-avif" description={HUB_DESCRIPTIONS['heic-to-avif']} /> }))),
+  'heic-to-gif': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-gif" description={HUB_DESCRIPTIONS['heic-to-gif']} /> }))),
+  'heic-to-svg': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-svg" description={HUB_DESCRIPTIONS['heic-to-svg']} /> }))),
+  'heic-to-bmp': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-bmp" description={HUB_DESCRIPTIONS['heic-to-bmp']} /> }))),
+  'heic-to-tiff': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-tiff" description={HUB_DESCRIPTIONS['heic-to-tiff']} /> }))),
+  'heic-to-ico': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-ico" description={HUB_DESCRIPTIONS['heic-to-ico']} /> }))),
+  'heic-to-jxl': dynamic(() => import('@/components/tools/modules/shared/ImageCatchAllConverter').then(m => ({ default: () => <m.default slug="heic-to-jxl" description={HUB_DESCRIPTIONS['heic-to-jxl']} /> }))),
+
 
 
   // Standalone tools

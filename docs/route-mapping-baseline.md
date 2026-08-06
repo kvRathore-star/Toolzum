@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 930 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 110 |
+| MODULE_REGISTRY (direct dynamic import) | 970 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 70 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -391,7 +391,17 @@
 | hash-verifier | SecurityTools -> HashVerifier |
 | header-footer-pdf | HeaderFooterPdf |
 | heart-rate-zone-calculator | Calculators -> HeartRateZoneCalculator |
+| heic-to-avif | ImageCatchAllConverter [slug=heic-to-avif] |
+| heic-to-bmp | ImageCatchAllConverter [slug=heic-to-bmp] |
+| heic-to-gif | ImageCatchAllConverter [slug=heic-to-gif] |
+| heic-to-ico | ImageCatchAllConverter [slug=heic-to-ico] |
+| heic-to-jpg | ImageCatchAllConverter [slug=heic-to-jpg] |
+| heic-to-jxl | ImageCatchAllConverter [slug=heic-to-jxl] |
 | heic-to-pdf | DocumentFormatConverter [slug=heic-to-pdf] |
+| heic-to-png | ImageCatchAllConverter [slug=heic-to-png] |
+| heic-to-svg | ImageCatchAllConverter [slug=heic-to-svg] |
+| heic-to-tiff | ImageCatchAllConverter [slug=heic-to-tiff] |
+| heic-to-webp | ImageCatchAllConverter [slug=heic-to-webp] |
 | hex-ascii-converter | TextTransformConverter [slug=hex-ascii-converter] |
 | hex-text-converter | TextTransformConverter [slug=hex-text-converter] |
 | hex-to-rgb-converter | ColorConverter [slug=hex-to-rgb-converter] |
@@ -425,6 +435,7 @@
 | image-colorizer | ImageColorizer |
 | image-compressor | ImageCompressor |
 | image-enhancer | ImageEnhancer |
+| image-format-converter | ImageCatchAllConverter [slug=image-format-converter] |
 | image-placeholder-generator | GeneratorWidgets -> ImagePlaceholderGenerator |
 | image-resizer | ImageResizer |
 | image-to-base64 | ImageToBase64 |
@@ -452,7 +463,17 @@
 | itr-filing-helper | ItrFilingHelper |
 | javascript-formatter | CodeFormatter -> JavascriptFormatter |
 | jfif-to-png | JfifToPng |
+| jpg-to-avif | ImageCatchAllConverter [slug=jpg-to-avif] |
+| jpg-to-bmp | ImageCatchAllConverter [slug=jpg-to-bmp] |
+| jpg-to-gif | ImageCatchAllConverter [slug=jpg-to-gif] |
+| jpg-to-heic | ImageCatchAllConverter [slug=jpg-to-heic] |
+| jpg-to-ico | ImageCatchAllConverter [slug=jpg-to-ico] |
+| jpg-to-jxl | ImageCatchAllConverter [slug=jpg-to-jxl] |
 | jpg-to-pdf | DocumentFormatConverter [slug=jpg-to-pdf] |
+| jpg-to-png | ImageCatchAllConverter [slug=jpg-to-png] |
+| jpg-to-svg | ImageCatchAllConverter [slug=jpg-to-svg] |
+| jpg-to-tiff | ImageCatchAllConverter [slug=jpg-to-tiff] |
+| jpg-to-webp | ImageCatchAllConverter [slug=jpg-to-webp] |
 | js-minifier | JsMinifier |
 | js-syntax-checker | CodeKit -> JsSyntaxChecker |
 | json-diff-checker | JSONDiffChecker |
@@ -659,7 +680,16 @@
 | pin-generator | GeneratorWidgets -> PinGenerator |
 | pivot-generator | DataToolkitWidgets -> PivotGenerator |
 | pkce-verifier | SecurityToolkitWidgets -> PkceVerifier |
+| png-to-avif | ImageCatchAllConverter [slug=png-to-avif] |
+| png-to-bmp | ImageCatchAllConverter [slug=png-to-bmp] |
+| png-to-gif | ImageCatchAllConverter [slug=png-to-gif] |
+| png-to-heic | ImageCatchAllConverter [slug=png-to-heic] |
+| png-to-ico | ImageCatchAllConverter [slug=png-to-ico] |
+| png-to-jpg | ImageCatchAllConverter [slug=png-to-jpg] |
+| png-to-jxl | ImageCatchAllConverter [slug=png-to-jxl] |
 | png-to-svg | PngToSvg |
+| png-to-tiff | ImageCatchAllConverter [slug=png-to-tiff] |
+| png-to-webp | ImageCatchAllConverter [slug=png-to-webp] |
 | podcast-transcription | PodcastTranscription |
 | pomodoro-timer | Timers -> PomodoroTimer |
 | port-number-lookup | DevUtilityWidgets -> PortNumberLookup |
@@ -922,6 +952,16 @@
 | webm-to-mov | VideoFormatConverter [slug=webm-to-mov] |
 | webm-to-mp3 | VideoToAudioConverter [slug=webm-to-mp3] |
 | webm-to-mp4 | VideoFormatConverter [slug=webm-to-mp4] |
+| webp-to-avif | ImageCatchAllConverter [slug=webp-to-avif] |
+| webp-to-bmp | ImageCatchAllConverter [slug=webp-to-bmp] |
+| webp-to-gif | ImageCatchAllConverter [slug=webp-to-gif] |
+| webp-to-heic | ImageCatchAllConverter [slug=webp-to-heic] |
+| webp-to-ico | ImageCatchAllConverter [slug=webp-to-ico] |
+| webp-to-jpg | ImageCatchAllConverter [slug=webp-to-jpg] |
+| webp-to-jxl | ImageCatchAllConverter [slug=webp-to-jxl] |
+| webp-to-png | ImageCatchAllConverter [slug=webp-to-png] |
+| webp-to-svg | ImageCatchAllConverter [slug=webp-to-svg] |
+| webp-to-tiff | ImageCatchAllConverter [slug=webp-to-tiff] |
 | website-screenshot | WebsiteScreenshot |
 | week-number-calculator | MiscellaneousTools1 -> WeekNumberCalculator |
 | weight-converter | UnitConverter [slug=weight-converter] |
@@ -995,16 +1035,6 @@
 | gif-to-svg | image-format | ImageCatchAllConverter |
 | gif-to-tiff | image-format | ImageCatchAllConverter |
 | gif-to-webp | image-format | ImageCatchAllConverter |
-| heic-to-avif | image-format | ImageCatchAllConverter |
-| heic-to-bmp | image-format | ImageCatchAllConverter |
-| heic-to-gif | image-format | ImageCatchAllConverter |
-| heic-to-ico | image-format | ImageCatchAllConverter |
-| heic-to-jpg | image-format | ImageCatchAllConverter |
-| heic-to-jxl | image-format | ImageCatchAllConverter |
-| heic-to-png | image-format | ImageCatchAllConverter |
-| heic-to-svg | image-format | ImageCatchAllConverter |
-| heic-to-tiff | image-format | ImageCatchAllConverter |
-| heic-to-webp | image-format | ImageCatchAllConverter |
 | ico-to-avif | image-format | ImageCatchAllConverter |
 | ico-to-bmp | image-format | ImageCatchAllConverter |
 | ico-to-gif | image-format | ImageCatchAllConverter |
@@ -1015,17 +1045,6 @@
 | ico-to-svg | image-format | ImageCatchAllConverter |
 | ico-to-tiff | image-format | ImageCatchAllConverter |
 | ico-to-webp | image-format | ImageCatchAllConverter |
-| image-format-converter | image-format | ImageCatchAllConverter |
-| jpg-to-avif | image-format | ImageCatchAllConverter |
-| jpg-to-bmp | image-format | ImageCatchAllConverter |
-| jpg-to-gif | image-format | ImageCatchAllConverter |
-| jpg-to-heic | image-format | ImageCatchAllConverter |
-| jpg-to-ico | image-format | ImageCatchAllConverter |
-| jpg-to-jxl | image-format | ImageCatchAllConverter |
-| jpg-to-png | image-format | ImageCatchAllConverter |
-| jpg-to-svg | image-format | ImageCatchAllConverter |
-| jpg-to-tiff | image-format | ImageCatchAllConverter |
-| jpg-to-webp | image-format | ImageCatchAllConverter |
 | jxl-to-avif | image-format | ImageCatchAllConverter |
 | jxl-to-bmp | image-format | ImageCatchAllConverter |
 | jxl-to-gif | image-format | ImageCatchAllConverter |
@@ -1036,15 +1055,6 @@
 | jxl-to-svg | image-format | ImageCatchAllConverter |
 | jxl-to-tiff | image-format | ImageCatchAllConverter |
 | jxl-to-webp | image-format | ImageCatchAllConverter |
-| png-to-avif | image-format | ImageCatchAllConverter |
-| png-to-bmp | image-format | ImageCatchAllConverter |
-| png-to-gif | image-format | ImageCatchAllConverter |
-| png-to-heic | image-format | ImageCatchAllConverter |
-| png-to-ico | image-format | ImageCatchAllConverter |
-| png-to-jpg | image-format | ImageCatchAllConverter |
-| png-to-jxl | image-format | ImageCatchAllConverter |
-| png-to-tiff | image-format | ImageCatchAllConverter |
-| png-to-webp | image-format | ImageCatchAllConverter |
 | svg-to-avif | image-format | ImageCatchAllConverter |
 | svg-to-bmp | image-format | ImageCatchAllConverter |
 | svg-to-gif | image-format | ImageCatchAllConverter |
@@ -1065,16 +1075,6 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| webp-to-avif | image-format | ImageCatchAllConverter |
-| webp-to-bmp | image-format | ImageCatchAllConverter |
-| webp-to-gif | image-format | ImageCatchAllConverter |
-| webp-to-heic | image-format | ImageCatchAllConverter |
-| webp-to-ico | image-format | ImageCatchAllConverter |
-| webp-to-jpg | image-format | ImageCatchAllConverter |
-| webp-to-jxl | image-format | ImageCatchAllConverter |
-| webp-to-png | image-format | ImageCatchAllConverter |
-| webp-to-svg | image-format | ImageCatchAllConverter |
-| webp-to-tiff | image-format | ImageCatchAllConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 
