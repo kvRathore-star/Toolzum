@@ -64,15 +64,13 @@ describe('hub contract: every routed slug resolves to a real hub mode', () => {
     expect(pairSlugs.has('word-to-pdf')).toBe(true);
   });
 
-  it('ImageCatchAllConverter — every remaining image-format slug is a known pair; closure/fallback contract lives in image-pairs.test.ts', () => {
-    // Migrating in three sub-groups (G1/G2/G3). image-format-converter (the
-    // intentional catch-all fallback) migrated in G1; its fallback contract is
-    // asserted in image-pairs.test.ts. This block checks only the slugs still in
-    // CONVERTER_CONFIG: none may be an unexpected fallback.
-    const imageSlugs = categorySlugs('image-format');
+  it('ImageCatchAllConverter — fully migrated to MODULE_REGISTRY (no CONVERTER_CONFIG image-format routes); pairs contract lives in image-pairs.test.ts', () => {
+    expect(categorySlugs('image-format')).toEqual([]);
+    // image-format-converter is the only FORMAT_PAIRS fallback slug; asserted in
+    // image-pairs.test.ts. png-to-svg stays a standalone PngToSvg slug, not here.
     const pairSlugs = new Set(IMAGE_PAIRS.map((p) => p.slug));
-    const unexpectedFallbacks = imageSlugs.filter((s) => !pairSlugs.has(s));
-    expect(unexpectedFallbacks, `image-format slugs missing from FORMAT_PAIRS: ${unexpectedFallbacks.join(', ')}`).toEqual([]);
+    expect(pairSlugs.has('png-to-jpg')).toBe(true);
+    expect(pairSlugs.has('image-format-converter')).toBe(false);
   });
 
   it('ImageCatchAllConverter — FORMAT_PAIRS are internally consistent (valid formats, matching slug, unique)', () => {

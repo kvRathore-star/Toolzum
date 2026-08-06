@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 1010 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 30 |
+| MODULE_REGISTRY (direct dynamic import) | 1040 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 0 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -380,7 +380,17 @@
 | gif-editor | GifEditor |
 | gif-resizer | GifResizer |
 | gif-to-apng | GifToApng |
+| gif-to-avif | ImageCatchAllConverter [slug=gif-to-avif] |
+| gif-to-bmp | ImageCatchAllConverter [slug=gif-to-bmp] |
+| gif-to-heic | ImageCatchAllConverter [slug=gif-to-heic] |
+| gif-to-ico | ImageCatchAllConverter [slug=gif-to-ico] |
+| gif-to-jpg | ImageCatchAllConverter [slug=gif-to-jpg] |
+| gif-to-jxl | ImageCatchAllConverter [slug=gif-to-jxl] |
 | gif-to-mp4 | GifToMp4 |
+| gif-to-png | ImageCatchAllConverter [slug=gif-to-png] |
+| gif-to-svg | ImageCatchAllConverter [slug=gif-to-svg] |
+| gif-to-tiff | ImageCatchAllConverter [slug=gif-to-tiff] |
+| gif-to-webp | ImageCatchAllConverter [slug=gif-to-webp] |
 | gif-to-webp-webm | GifToWebpWebm |
 | git-commit-linter | ExtraTools -> GitCommitLinter |
 | github-actions-validator | ConfigValidatorWidgets -> GithubActionsValidator |
@@ -448,6 +458,16 @@
 | http-status-code-checker | ConfigTools -> HttpStatusCodeChecker |
 | iban-validator | IbanValidator |
 | ical-event-generator | ConvertersEverydayWidgets -> IcalEventGenerator |
+| ico-to-avif | ImageCatchAllConverter [slug=ico-to-avif] |
+| ico-to-bmp | ImageCatchAllConverter [slug=ico-to-bmp] |
+| ico-to-gif | ImageCatchAllConverter [slug=ico-to-gif] |
+| ico-to-heic | ImageCatchAllConverter [slug=ico-to-heic] |
+| ico-to-jpg | ImageCatchAllConverter [slug=ico-to-jpg] |
+| ico-to-jxl | ImageCatchAllConverter [slug=ico-to-jxl] |
+| ico-to-png | ImageCatchAllConverter [slug=ico-to-png] |
+| ico-to-svg | ImageCatchAllConverter [slug=ico-to-svg] |
+| ico-to-tiff | ImageCatchAllConverter [slug=ico-to-tiff] |
+| ico-to-webp | ImageCatchAllConverter [slug=ico-to-webp] |
 | ics-csv-converter | IcsCsvConverter |
 | ideal-weight-calc | MiscellaneousTools1 -> IdealWeightCalc |
 | ifsc-code-lookup | IfscLookup |
@@ -519,6 +539,16 @@
 | jwk-generator | DataToolkitWidgets -> JwkGenerator |
 | jwt-debugger | JwtDebugger |
 | jwt-inspector | SecurityTools -> JwtInspector |
+| jxl-to-avif | ImageCatchAllConverter [slug=jxl-to-avif] |
+| jxl-to-bmp | ImageCatchAllConverter [slug=jxl-to-bmp] |
+| jxl-to-gif | ImageCatchAllConverter [slug=jxl-to-gif] |
+| jxl-to-heic | ImageCatchAllConverter [slug=jxl-to-heic] |
+| jxl-to-ico | ImageCatchAllConverter [slug=jxl-to-ico] |
+| jxl-to-jpg | ImageCatchAllConverter [slug=jxl-to-jpg] |
+| jxl-to-png | ImageCatchAllConverter [slug=jxl-to-png] |
+| jxl-to-svg | ImageCatchAllConverter [slug=jxl-to-svg] |
+| jxl-to-tiff | ImageCatchAllConverter [slug=jxl-to-tiff] |
+| jxl-to-webp | ImageCatchAllConverter [slug=jxl-to-webp] |
 | keto-calculator | Calculators -> KetoCalculator |
 | keyword-density-checker | TextSeoTools -> KeywordDensityChecker |
 | keyword-planner-tool | TextSeoTools -> KeywordPlannerTool |
@@ -1045,36 +1075,6 @@
 
 | Slug | Category | Hub component |
 |---|---|---|
-| gif-to-avif | image-format | ImageCatchAllConverter |
-| gif-to-bmp | image-format | ImageCatchAllConverter |
-| gif-to-heic | image-format | ImageCatchAllConverter |
-| gif-to-ico | image-format | ImageCatchAllConverter |
-| gif-to-jpg | image-format | ImageCatchAllConverter |
-| gif-to-jxl | image-format | ImageCatchAllConverter |
-| gif-to-png | image-format | ImageCatchAllConverter |
-| gif-to-svg | image-format | ImageCatchAllConverter |
-| gif-to-tiff | image-format | ImageCatchAllConverter |
-| gif-to-webp | image-format | ImageCatchAllConverter |
-| ico-to-avif | image-format | ImageCatchAllConverter |
-| ico-to-bmp | image-format | ImageCatchAllConverter |
-| ico-to-gif | image-format | ImageCatchAllConverter |
-| ico-to-heic | image-format | ImageCatchAllConverter |
-| ico-to-jpg | image-format | ImageCatchAllConverter |
-| ico-to-jxl | image-format | ImageCatchAllConverter |
-| ico-to-png | image-format | ImageCatchAllConverter |
-| ico-to-svg | image-format | ImageCatchAllConverter |
-| ico-to-tiff | image-format | ImageCatchAllConverter |
-| ico-to-webp | image-format | ImageCatchAllConverter |
-| jxl-to-avif | image-format | ImageCatchAllConverter |
-| jxl-to-bmp | image-format | ImageCatchAllConverter |
-| jxl-to-gif | image-format | ImageCatchAllConverter |
-| jxl-to-heic | image-format | ImageCatchAllConverter |
-| jxl-to-ico | image-format | ImageCatchAllConverter |
-| jxl-to-jpg | image-format | ImageCatchAllConverter |
-| jxl-to-png | image-format | ImageCatchAllConverter |
-| jxl-to-svg | image-format | ImageCatchAllConverter |
-| jxl-to-tiff | image-format | ImageCatchAllConverter |
-| jxl-to-webp | image-format | ImageCatchAllConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 
