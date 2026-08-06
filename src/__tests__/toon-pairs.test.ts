@@ -5,8 +5,7 @@ import path from 'node:path';
 import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { SLUG_TO_MODE as TOON_SLUG_TO_MODE } from '@/components/tools/modules/converter/DataFormatTools';
 
-const TOON_CLOSURE_SLUGS = ['json-toon-converter'];
-const TOON_REDIRECT_SOURCE_SLUGS = ['yaml-to-toon', 'toon-to-json', 'toon-to-yaml'];
+const TOON_CLOSURE_SLUGS = ['json-toon-converter', 'yaml-to-toon', 'toon-to-json', 'toon-to-yaml'];
 
 function routedToonSlugs(): string[] {
   const src = fs.readFileSync(
@@ -18,7 +17,7 @@ function routedToonSlugs(): string[] {
 }
 
 describe('ToonConverter slug-closure contract', () => {
-  it('routes json-toon-converter via MODULE_REGISTRY and drops it from CONVERTER_CONFIG', () => {
+  it('routes all four ToonConverter slugs via MODULE_REGISTRY and drops them from CONVERTER_CONFIG', () => {
     const routed = routedToonSlugs().sort();
     expect(routed).toEqual(TOON_CLOSURE_SLUGS.slice().sort());
     for (const slug of TOON_CLOSURE_SLUGS) {
@@ -26,12 +25,9 @@ describe('ToonConverter slug-closure contract', () => {
     }
   });
 
-  it('json-toon-converter is a SLUG_TO_MODE entry; redirect-source modes are not closure-routed', () => {
+  it('every routed slug is a SLUG_TO_MODE entry (Design B: former redirect sources are now per-pair pages with their own mode)', () => {
     for (const slug of TOON_CLOSURE_SLUGS) {
       expect(TOON_SLUG_TO_MODE, `slug ${slug} not a ToonConverter SLUG_TO_MODE entry`).toHaveProperty(slug);
-    }
-    for (const slug of TOON_REDIRECT_SOURCE_SLUGS) {
-      expect(routedToonSlugs()).not.toContain(slug);
     }
   });
 });

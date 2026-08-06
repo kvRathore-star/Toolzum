@@ -12,16 +12,16 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 1040 |
+| MODULE_REGISTRY (direct dynamic import) | 1047 |
 | CONVERTER_CONFIG -> ConverterRouter hub | 0 |
-| Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
+| Redirect-only sources (in neither map) | 82 (22 ComingSoon registry tools + 0 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
 - Zero overlap between MODULE_REGISTRY and CONVERTER_CONFIG (asserted by registry-integrity #9).
 - Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.
-- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1040) through the real resolution path with no throw. Two real bugs were found and fixed:
+- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1047) through the real resolution path with no throw. Two real bugs were found and fixed:
   - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.
   - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.
 
@@ -321,10 +321,12 @@
 | csv-row-sorter | DataToolkitWidgets -> Sorter |
 | csv-splitter | DataToolkitWidgets -> Splitter |
 | csv-statistics | CsvHubConverter [slug=csv-statistics] |
+| csv-to-json | DataConverter -> DataConverterFromSlug [slug=csv-to-json] |
 | csv-to-markdown | CsvHubConverter [slug=csv-to-markdown] |
 | csv-to-ndjson | CsvHubConverter [slug=csv-to-ndjson] |
 | csv-to-sql | CsvHubConverter [slug=csv-to-sql] |
 | csv-to-sqlite | CsvToSqlite |
+| csv-to-xml | DataConverter -> DataConverterFromSlug [slug=csv-to-xml] |
 | csv-transpose | DataToolkitWidgets -> Transpose |
 | curl-to-code-converter | FormatAndDataKitWidgets -> CurlToCodeConverter |
 | currency-converter | CurrencyConverter |
@@ -558,9 +560,11 @@
 | json-schema-generator | JsonOutputConverter [slug=json-schema-generator] |
 | json-size-analyzer | JsonOutputConverter [slug=json-size-analyzer] |
 | json-to-code | JsonToCode |
+| json-to-csv | DataConverter -> DataConverterFromSlug [slug=json-to-csv] |
 | json-to-ini-converter | FormatSerializerHub [slug=json-to-ini-converter] |
 | json-to-toml-converter | FormatSerializerHub [slug=json-to-toml-converter] |
 | json-to-url-params | JsonOutputConverter [slug=json-to-url-params] |
+| json-to-xml | DataConverter -> DataConverterFromSlug [slug=json-to-xml] |
 | json-to-yaml-converter | FormatSerializerHub [slug=json-to-yaml-converter] |
 | json-to-zod | JsonOutputConverter [slug=json-to-zod] |
 | json-toon-converter | DataFormatTools [slug=json-toon-converter] |
@@ -982,6 +986,8 @@
 | tls-cipher-checker | SecurityTools -> TlsCipherChecker |
 | to-do-list | ToDoList |
 | toml-converter | FormatSerializerHub [slug=toml-converter] |
+| toon-to-json | DataFormatTools [slug=toon-to-json] |
+| toon-to-yaml | DataFormatTools [slug=toon-to-yaml] |
 | trailing-space-remover | TextSeoTools -> TrailingSpaceRemover |
 | translate-pdf | TranslatePdf |
 | trial-conversion-calculator | Calculators -> TrialConversionCalculator |
@@ -1098,6 +1104,7 @@
 | yaml-json-converter | FormatSerializerHub [slug=yaml-json-converter] |
 | yaml-reindenter | CodeFormatter -> YamlFormatter |
 | yaml-syntax-validator | SecurityTools -> YamlValidator |
+| yaml-to-toon | DataFormatTools [slug=yaml-to-toon] |
 | yaml-validator | DataFormatTools -> YamlValidator |
 | youtube-transcript-generator | YoutubeTranscriptGenerator |
 | zalgo-text-generator | TextStylingConverter [slug=zalgo-text-generator] |

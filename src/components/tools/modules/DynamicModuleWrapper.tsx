@@ -1014,15 +1014,24 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'tsv-csv-converter': dynamic(() => import('@/components/tools/modules/shared/ImportToCsvConverter').then(m => ({ default: () => <m.default slug="tsv-csv-converter" /> }))),
 
   // Data hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
-  // DataConverterFromSlug resolves the slug through SLUG_MAP. json-to-csv,
-  // csv-to-json, json-to-xml, csv-to-xml are TOOL_REDIRECTS sources that stay
-  // registry entries -> data-format-converter and are not routed here).
+  // DataConverterFromSlug resolves each slug through SLUG_MAP. json-to-csv,
+  // csv-to-json, json-to-xml, csv-to-xml are former TOOL_REDIRECTS sources
+  // (Design B) now resolved as real per-pair pages).
   'xml-to-json': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="xml-to-json" /> }))),
   'xml-to-csv': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="xml-to-csv" /> }))),
+  'json-to-xml': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="json-to-xml" /> }))),
+  'json-to-csv': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="json-to-csv" /> }))),
+  'csv-to-json': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="csv-to-json" /> }))),
+  'csv-to-xml': dynamic(() => import('@/components/tools/modules/converter/DataConverter').then(m => ({ default: () => <m.DataConverterFromSlug slug="csv-to-xml" /> }))),
 
   // Toon hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
-  // ToonConverter maps the slug to a JsonToonConverter initialMode).
+  // ToonConverter maps the slug to a JsonToonConverter initialMode. yaml-to-toon,
+  // toon-to-json, toon-to-yaml are former TOOL_REDIRECTS sources (Design B) now
+  // resolved as real per-pair pages with their own initialMode).
   'json-toon-converter': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="json-toon-converter" /> }))),
+  'yaml-to-toon': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="yaml-to-toon" /> }))),
+  'toon-to-json': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="toon-to-json" /> }))),
+  'toon-to-yaml': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="toon-to-yaml" /> }))),
 
   // Video format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
   // VideoFormatConverter renders a per-tool info banner from the description prop, so

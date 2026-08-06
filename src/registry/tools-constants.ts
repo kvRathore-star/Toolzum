@@ -203,9 +203,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "php-beautifier": { category: "developer", slug: "code-beautifier" },
   "ruby-formatter": { category: "developer", slug: "code-beautifier" },
   "rust-formatter": { category: "developer", slug: "code-beautifier" },
-  "yaml-to-toon": { category: "converter", slug: "json-toon-converter" },
-  "toon-to-json": { category: "converter", slug: "json-toon-converter" },
-  "toon-to-yaml": { category: "converter", slug: "json-toon-converter" },
   "wifi-qr-generator": { category: "utility", slug: "qr-code-generator" },
   "bulk-link-shortener": { category: "utility", slug: "bulk-url-shortener" },
   "bulk-short-link-generator": { category: "utility", slug: "bulk-url-shortener" },
@@ -268,11 +265,6 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "mp4-to-mp3": { category: "converter", slug: "mp4-to-mp3", sourceCategory: "video" },
   "mov-to-mp3": { category: "converter", slug: "mov-to-mp3", sourceCategory: "video" },
   "webm-to-mp3": { category: "converter", slug: "webm-to-mp3", sourceCategory: "video" },
-  // Suppressed data format tools — redirect to hub
-  "json-to-xml": { category: "converter", slug: "data-format-converter" },
-  "json-to-csv": { category: "converter", slug: "data-format-converter" },
-  "csv-to-json": { category: "converter", slug: "data-format-converter" },
-  "csv-to-xml": { category: "converter", slug: "data-format-converter" },
   // Thin wrappers — redirect to parent tool
   "html-minifier": { category: "developer", slug: "js-minifier" },
   "css-minifier": { category: "developer", slug: "js-minifier" },
