@@ -61,6 +61,22 @@ review list, not a pass/fail gate.
   separately whether to commit the images (they regenerate deterministically at build) or
   leave them generated-on-deploy.
 
+## 4b. OG images regenerate on every build (backlog — Tier 3 / performance, related to #4)
+
+- Surfaced 2026-08-06 as a build-speed tangent during Phase 4. `npm run build` runs
+  `scripts/generate-og-images.ts` first (`gen:og`), which rewrites **all** `public/og/**`
+  PNGs each time. Observations:
+  - Slow-but-successful builds can *look* hung because the OG step writes many files with no
+    progress output, and the pipeline can look stalled at 0% CPU due to pipe buffering.
+  - `og-images.test.ts` (vitest) **also** regenerates `public/og/` PNGs on every suite run,
+    which causes tracked-PNG churn + untracked PNGs after each local `npm test` — a recurring
+    commit-pollution trap (bit the fold-in commit round).
+- Verdict: legitimate but **Tier 3 / performance territory**, not a Phase 4 correctness item.
+  **Logged, not built.** Ideas for a future round (do not start now):
+  - Cache/skip generation when PNGs are unchanged (content-hash compare) instead of rewriting.
+  - Move `gen:og` off the hot build path, or dedupe the two generators (build vs. test).
+  - Add progress output to `generate-og-images.ts` so slow runs don't look dead.
+
 ## 5. data/toon migration vs Design B (lossy redirects) — RESOLVED (2026-08-06)
 
 - Context: during Phase 3, `data` (`xml-to-json`, `xml-to-csv`) and `toon`
@@ -94,7 +110,11 @@ review list, not a pass/fail gate.
   no `http-equiv="refresh"` on any of the 7 pages, and each renders its correct pair (e.g.
   `yaml-to-toon` shows YAML→Toon with YAML input; `json-to-csv` shows JSON→CSV preselected).
   Registry 1040→1047, redirect-only 89→82, full suite 122 green, tsc clean.
-- Status: **closed.** Phase 4 retirement complete: ConverterRouter/converterConfig/
-  ConverterCategory deleted (commit `9d5ab83`); `HUB_DESCRIPTIONS` folded into hub-owned
-  `DESCRIPTIONS` maps (commit `346949c`). Only a CI/lint rule blocking new tool registration
-  outside MODULE_REGISTRY remains outstanding.
+- Status: **closed.** Phase 4 fully complete (2026-08-06):
+  - ConverterRouter/converterConfig/ConverterCategory deleted (commit `9d5ab83`).
+  - `HUB_DESCRIPTIONS` folded into hub-owned `DESCRIPTIONS` maps (commit `346949c`).
+  - Single-registration-path guard landed (commit `b04f253`): lint-time
+    `no-restricted-imports` blocking `@/components/tools/modules/**` outside the wrapper,
+    plus a CI-time structural test that also catches relative-import paths. A parallel
+    registration path (the old converterConfig/ConverterRouter shape) is now blocked both
+    at authoring time and in CI.
