@@ -56,6 +56,31 @@ const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'avi-to-webm', input: 'avi', output: 'webm', label: 'AVI \u2192 WebM' },
 ];
 
+export const DESCRIPTIONS: Record<string, string> = {
+  'video-converter': "Convert between MKV, MP4, MOV, WebM, and AVI video formats.",
+  'video-converter-tool': "Convert video files between MP4, AVI, MKV, MOV, WebM, and more formats.",
+  'mkv-to-mp4': "<strong>MKV to MP4 Converter:</strong> Re-encapsulates Matroska (.mkv) video files into the more universally compatible MP4 container without re-encoding the underlying video stream. Your files never leave your device.",
+  'mov-to-mp4': "<strong>Apple QuickTime Converter:</strong> Transcode QuickTime .MOV files (usually from iPhones or Macs) into universal MP4 format optimized for web playback and social media uploads. Your files never leave your device.",
+  'webm-to-mp4': "<strong>WEBM to MP4 Converter:</strong> Transcode modern WebM videos (often from screen recorders or web exports) into universal MP4 files. Critical for users whose editing software or sharing platforms reject WebM. Your files never leave your device.",
+  'avi-to-mp4': "<strong>AVI to MP4 Converter:</strong> Upgrade your old AVI video files into modern universal MP4 format with H.264 encoding for drastically smaller file sizes. Perfect for archiving and compatibility. Your files never leave your device.",
+  'mp4-to-mkv': "<strong>MP4 to MKV Converter:</strong> Re-encapsulates MP4 video files into the versatile MKV container format without re-encoding. MKV supports advanced subtitle tracks, chapter markers, and multiple audio streams. Your files never leave your device.",
+  'mp4-to-mov': "<strong>MP4 to MOV Converter:</strong> Convert MP4 video files to QuickTime MOV format while preserving quality. Ideal for Apple ecosystem workflows including Final Cut Pro, iMovie, and macOS QuickTime Player. Your files never leave your device.",
+  'mkv-to-mov': "<strong>MKV to MOV Converter:</strong> Transcode Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications. Perfect when you have high-quality MKV files but need to work in Final Cut Pro or iMovie. Your files never leave your device.",
+  'mov-to-mkv': "<strong>MOV to MKV Converter:</strong> Convert QuickTime MOV videos into the open-source MKV container format. MKV offers broader codec support, embedded subtitles, and chapter markers — perfect for media archiving. Your files never leave your device.",
+  'mkv-to-webm': "<strong>MKV to WebM Converter:</strong> Convert Matroska MKV files into WebM format for modern web-optimized video format for streaming. Your files never leave your device.",
+  'mkv-to-avi': "<strong>MKV to AVI Converter:</strong> Convert Matroska MKV files into AVI format for legacy video format compatibility. Your files never leave your device.",
+  'mp4-to-webm': "<strong>MP4 to WebM Converter:</strong> Convert MP4 files into WebM format for modern web-optimized video format for streaming. Your files never leave your device.",
+  'mp4-to-avi': "<strong>MP4 to AVI Converter:</strong> Convert MP4 files into AVI format for legacy video format compatibility. Your files never leave your device.",
+  'mov-to-webm': "<strong>MOV to WebM Converter:</strong> Convert QuickTime MOV files into WebM format for modern web-optimized video format for streaming. Your files never leave your device.",
+  'mov-to-avi': "<strong>MOV to AVI Converter:</strong> Convert QuickTime MOV files into AVI format for legacy video format compatibility. Your files never leave your device.",
+  'webm-to-mkv': "<strong>WebM to MKV Converter:</strong> Convert WebM files into MKV format for versatile video container with advanced subtitle and chapter support. Your files never leave your device.",
+  'webm-to-mov': "<strong>WebM to MOV Converter:</strong> Convert WebM files into QuickTime MOV format for Apple ecosystem editing and playback compatibility. Your files never leave your device.",
+  'webm-to-avi': "<strong>WebM to AVI Converter:</strong> Convert WebM files into AVI format for legacy video format compatibility. Your files never leave your device.",
+  'avi-to-mkv': "<strong>AVI to MKV Converter:</strong> Convert AVI files into MKV format for versatile video container with advanced subtitle and chapter support. Your files never leave your device.",
+  'avi-to-mov': "<strong>AVI to MOV Converter:</strong> Convert AVI files into QuickTime MOV format for Apple ecosystem editing and playback compatibility. Your files never leave your device.",
+  'avi-to-webm': "<strong>AVI to WebM Converter:</strong> Convert AVI files into WebM format for modern web-optimized video format for streaming. Your files never leave your device.",
+};
+
 const RELATED: Record<string, string[]> = {
   'mkv-to-mp4': ['mov-to-mp4', 'webm-to-mp4', 'avi-to-mp4', 'mp4-to-mkv'],
   'mov-to-mp4': ['mkv-to-mp4', 'webm-to-mp4', 'avi-to-mp4', 'mp4-to-mov'],
@@ -98,7 +123,6 @@ function getFfmpegOutputArgs(outputKey: string): string[] {
 
 type VideoFormatConverterProps = {
   slug: string;
-  description?: string;
 };
 
 function resolveSlug(input: string, output: string): string {
@@ -107,8 +131,9 @@ function resolveSlug(input: string, output: string): string {
 
 const FORMAT_KEYS = Object.keys(FORMATS);
 
-export default function VideoFormatConverter({ slug, description }: VideoFormatConverterProps) {
+export default function VideoFormatConverter({ slug }: VideoFormatConverterProps) {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+  const description = DESCRIPTIONS[slug];
 
   const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
 

@@ -2,7 +2,10 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
+import { DESCRIPTIONS as VIDEO_FORMAT_DESCRIPTIONS } from '@/components/tools/modules/shared/VideoFormatConverter';
+import { DESCRIPTIONS as VIDEO_TO_AUDIO_DESCRIPTIONS } from '@/components/tools/modules/shared/VideoToAudioConverter';
+
+const ALL_DESCRIPTIONS = { ...VIDEO_FORMAT_DESCRIPTIONS, ...VIDEO_TO_AUDIO_DESCRIPTIONS };
 
 const VIDEO_FORMAT_SLUGS = [
   'video-converter', 'video-converter-tool',
@@ -37,10 +40,10 @@ describe('video hub slug-closure contract', () => {
     expect(routed).toEqual(VIDEO_TO_AUDIO_SLUGS.slice().sort());
   });
 
-  it('every video slug has a HUB_DESCRIPTIONS entry (banner preserved)', () => {
+  it('every video slug has a hub-owned DESCRIPTIONS entry (banner preserved)', () => {
     for (const slug of ALL_SLUGS) {
-      expect(HUB_DESCRIPTIONS, `video slug ${slug} missing from HUB_DESCRIPTIONS`).toHaveProperty(slug);
-      expect(HUB_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
+      expect(ALL_DESCRIPTIONS, `video slug ${slug} missing from hub DESCRIPTIONS`).toHaveProperty(slug);
+      expect(ALL_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
     }
   });
 });

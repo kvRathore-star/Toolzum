@@ -2,8 +2,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
-import { FORMAT_PAIRS } from '@/components/tools/modules/shared/AudioFormatConverter';
+import { FORMAT_PAIRS, DESCRIPTIONS as AUDIO_DESCRIPTIONS } from '@/components/tools/modules/shared/AudioFormatConverter';
 
 // Slugs with no own FORMAT_PAIRS entry; the hub's `|| FORMAT_PAIRS[0]` fallback
 // (mp3-to-wav) applies. audio-converter is the consolidated hub; the six
@@ -47,10 +46,10 @@ describe('audio hub slug-closure contract', () => {
     expect(routed).toEqual(AUDIO_FORMAT_SLUGS.slice().sort());
   });
 
-  it('every audio slug has a HUB_DESCRIPTIONS entry (banner preserved)', () => {
+  it('every audio slug has a hub-owned DESCRIPTIONS entry (banner preserved)', () => {
     for (const slug of AUDIO_FORMAT_SLUGS) {
-      expect(HUB_DESCRIPTIONS, `audio slug ${slug} missing from HUB_DESCRIPTIONS`).toHaveProperty(slug);
-      expect(HUB_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
+      expect(AUDIO_DESCRIPTIONS, `audio slug ${slug} missing from hub DESCRIPTIONS`).toHaveProperty(slug);
+      expect(AUDIO_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
     }
   });
 

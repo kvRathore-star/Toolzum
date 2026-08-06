@@ -2,8 +2,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
-import { FORMAT_PAIRS } from '@/components/tools/modules/shared/ImageCatchAllConverter';
+import { FORMAT_PAIRS, DESCRIPTIONS as IMAGE_DESCRIPTIONS } from '@/components/tools/modules/shared/ImageCatchAllConverter';
 
 // All 110 image-format slugs in CONVERTER_CONFIG order (from before the split).
 const IMAGE_FORMAT_SLUGS = [
@@ -54,11 +53,11 @@ describe('image hub slug-closure contract', () => {
     }
   });
 
-  it('every migrated image slug has a HUB_DESCRIPTIONS entry (banner preserved)', () => {
+  it('every migrated image slug has a hub-owned DESCRIPTIONS entry (banner preserved)', () => {
     const routed = routedSlugs('@/components/tools/modules/shared/ImageCatchAllConverter');
     for (const slug of routed) {
-      expect(HUB_DESCRIPTIONS, `image slug ${slug} missing from HUB_DESCRIPTIONS`).toHaveProperty(slug);
-      expect(HUB_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
+      expect(IMAGE_DESCRIPTIONS, `image slug ${slug} missing from hub DESCRIPTIONS`).toHaveProperty(slug);
+      expect(IMAGE_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
     }
   });
 

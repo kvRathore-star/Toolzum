@@ -25,6 +25,12 @@ const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'webm-to-mp3', inputExt: '.webm', inputLabel: 'WebM', label: 'WebM \u2192 MP3', accept: 'video/webm' },
 ];
 
+export const DESCRIPTIONS: Record<string, string> = {
+  'mp4-to-mp3': "Extract MP3 audio from MP4 video files.",
+  'mov-to-mp3': "Extract MP3 audio from MOV video files.",
+  'webm-to-mp3': "Extract MP3 audio from WebM video files.",
+};
+
 const RELATED: Record<string, string[]> = {
   'mp4-to-mp3': ['video-to-mp3', 'mov-to-mp3', 'webm-to-mp3'],
   'video-to-mp3': ['mp4-to-mp3', 'mov-to-mp3', 'webm-to-mp3'],
@@ -34,11 +40,11 @@ const RELATED: Record<string, string[]> = {
 
 type VideoToAudioConverterProps = {
   slug: string;
-  description?: string;
 };
 
-export default function VideoToAudioConverter({ slug, description }: VideoToAudioConverterProps) {
+export default function VideoToAudioConverter({ slug }: VideoToAudioConverterProps) {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+  const description = DESCRIPTIONS[slug];
 
   const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
 

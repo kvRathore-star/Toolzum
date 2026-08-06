@@ -104,6 +104,82 @@ export const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'wma-to-wav', input: 'wma', output: 'wav', label: 'WMA \u2192 WAV' },
 ];
 
+export const DESCRIPTIONS: Record<string, string> = {
+  'audio-converter': "Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats.",
+  'mp3-to-wav': "<strong>MP3 to WAV Converter:</strong> Transform compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity — essential for music production, podcast mastering, and audio restoration. Your files never leave your device.",
+  'wav-to-mp3': "<strong>WAV to MP3 Converter:</strong> Compress large WAV audio files into space-saving MP3 format. Perfect for sharing music, podcasts, and voice recordings online where file size matters. Your files never leave your device.",
+  'flac-to-mp3': "<strong>FLAC to MP3 Converter:</strong> Convert lossless FLAC audio files into universally compatible MP3 format. Ideal for loading high-res audio onto devices with limited storage or sharing on platforms that don't support FLAC. Your files never leave your device.",
+  'ogg-to-mp3': "<strong>OGG to MP3 Converter:</strong> Convert OGG Vorbis audio files into the more widely supported MP3 format. Perfect when you need universal playback compatibility across devices, media players, and platforms. Your files never leave your device.",
+  'm4a-to-mp3': "<strong>M4A to MP3 Converter:</strong> Convert M4A audio files (AAC/ALAC) into MP3 format for broader device compatibility. Ideal for moving Apple ecosystem audio to non-Apple devices and platforms. Your files never leave your device.",
+  'aac-to-mp3': "<strong>AAC to MP3 Converter:</strong> Convert AAC audio files into universally compatible MP3 format. Perfect when your audio software, device, or platform needs MP3 but you have AAC files. Your files never leave your device.",
+  'wma-to-mp3': "<strong>WMA to MP3 Converter:</strong> Convert Windows Media Audio (WMA) files into universally compatible MP3 format. Essential for playing WMA audio on non-Windows devices, media players, and streaming platforms. Your files never leave your device.",
+  'opus-to-mp3': "<strong>Opus to MP3 Converter:</strong> Convert Opus audio files into the more widely supported MP3 format. Opus offers excellent compression but isn't universally supported — perfect for broad compatibility. Your files never leave your device.",
+  'aiff-to-mp3': "<strong>AIFF to MP3 Converter:</strong> Convert Apple's AIFF audio files into space-saving MP3 format. AIFF files are uncompressed and massive — MP3 conversion dramatically reduces size while preserving good audio quality. Your files never leave your device.",
+  'mp3-to-flac': "<strong>MP3 to FLAC Converter:</strong> Convert MP3 audio files into lossless FLAC format. Perfect for archiving purposes or when you need an uncompressed format for further editing and processing. Your files never leave your device.",
+  'mp3-to-ogg': "<strong>MP3 to OGG Converter:</strong> Convert MP3 audio files into open-source OGG Vorbis format. OGG offers better quality at the same bitrate — ideal for open-source software and game development. Your files never leave your device.",
+  'mp3-to-m4a': "<strong>MP3 to M4A Converter:</strong> Convert MP3 audio files into M4A format for better Apple ecosystem compatibility. M4A with AAC codec offers superior quality at similar bitrates — perfect for iTunes and Apple devices. Your files never leave your device.",
+  'mp3-to-aac': "<strong>MP3 to AAC Converter:</strong> Convert MP3 audio files into AAC format with superior compression efficiency. AAC delivers better sound quality than MP3 at the same bitrate — the standard for modern streaming. Your files never leave your device.",
+  'mp3-to-wma': "<strong>MP3 to WMA Converter:</strong> Convert MP3 audio files into Windows Media Audio format. Useful for compatibility with legacy Windows applications, media centers, and devices that primarily support WMA. Your files never leave your device.",
+  'mp3-to-opus': "<strong>MP3 to Opus Converter:</strong> Convert MP3 audio files into cutting-edge Opus format for best-in-class compression. Opus delivers superior quality at lower bitrates — perfect for streaming and voice applications. Your files never leave your device.",
+  'mp3-to-aiff': "<strong>MP3 to AIFF Converter:</strong> Convert MP3 audio files into Apple's AIFF format for professional audio editing. AIFF is uncompressed and lossless — essential for music production and audio post-processing. Your files never leave your device.",
+  'wav-to-flac': "<strong>WAV to FLAC Converter:</strong> Convert uncompressed WAV audio files into lossless FLAC format with significant space savings. FLAC cuts file sizes by up to 60% while preserving every bit of audio quality — perfect for music archives. Your files never leave your device.",
+  'wav-to-ogg': "<strong>WAV to OGG Converter:</strong> Convert WAV audio files into space-efficient OGG Vorbis format. OGG provides excellent compression for high-quality audio — ideal for web streaming and portable devices. Your files never leave your device.",
+  'wav-to-m4a': "<strong>WAV to M4A Converter:</strong> Convert WAV audio files into M4A format for excellent compression with Apple compatibility. M4A dramatically reduces file size while maintaining high audio quality. Your files never leave your device.",
+  'wav-to-aac': "<strong>WAV to AAC Converter:</strong> Convert WAV audio files into efficient AAC format. AAC is the industry standard for audio compression — perfect for streaming, mobile devices, and modern media players. Your files never leave your device.",
+  'wav-to-wma': "<strong>WAV to WMA Converter:</strong> Convert WAV audio files into Windows Media Audio format to reduce file size. WMA is ideal for Windows-based media libraries, legacy devices, and business applications. Your files never leave your device.",
+  'wav-to-opus': "<strong>WAV to Opus Converter:</strong> Convert WAV audio files into Opus format for the most efficient compression available. Opus excels at voice and music — great for podcasts, VoIP, and streaming. Your files never leave your device.",
+  'wav-to-aiff': "<strong>WAV to AIFF Converter:</strong> Convert WAV audio files into Apple's AIFF format for seamless integration with macOS audio workflows. AIFF is essential for Logic Pro, GarageBand, and professional audio production. Your files never leave your device.",
+  'flac-to-wav': "<strong>FLAC to WAV Converter:</strong> Convert FLAC audio files into uncompressed WAV format for professional audio editing and DAW compatibility. WAV is the universal standard for audio production software. Your files never leave your device.",
+  'flac-to-ogg': "<strong>FLAC to OGG Converter:</strong> Convert FLAC audio files into space-efficient OGG Vorbis format. Ideal for streaming or portable use where you need smaller files than lossless FLAC while maintaining good quality. Your files never leave your device.",
+  'flac-to-m4a': "<strong>FLAC to M4A Converter:</strong> Convert FLAC audio files into M4A format for Apple device compatibility. Perfect for playing your lossless FLAC collection on iPhones, iPads, and iTunes. Your files never leave your device.",
+  'flac-to-aac': "<strong>FLAC to AAC Converter:</strong> Convert FLAC audio files into high-efficiency AAC format. Great for creating space-saving copies of your lossless music library for portable devices and streaming. Your files never leave your device.",
+  'ogg-to-wav': "<strong>OGG to WAV Converter:</strong> Convert OGG Vorbis audio files into uncompressed WAV format for professional editing. Essential when your audio production software requires WAV input but you have OGG source files. Your files never leave your device.",
+  'ogg-to-flac': "<strong>OGG to FLAC Converter:</strong> Convert OGG Vorbis audio files into lossless FLAC format for archival purposes. FLAC preserves audio quality without compression loss — ideal for long-term storage. Your files never leave your device.",
+  'ogg-to-m4a': "<strong>OGG to M4A Converter:</strong> Convert OGG Vorbis audio files into M4A format for Apple ecosystem compatibility. Perfect for playing open-source audio files on iPhones, iPads, and Macs. Your files never leave your device.",
+  'ogg-to-aac': "<strong>OGG to AAC Converter:</strong> Convert OGG Vorbis audio files into universal AAC format. AAC is supported by virtually all modern devices — essential for broad compatibility. Your files never leave your device.",
+  'm4a-to-wav': "<strong>M4A to WAV Converter:</strong> Convert M4A audio files into uncompressed WAV format for professional editing. Perfect when you need to edit Apple audio files in software that requires WAV input. Your files never leave your device.",
+  'm4a-to-flac': "<strong>M4A to FLAC Converter:</strong> Convert M4A audio files into lossless FLAC format for archiving and audiophile use. FLAC is open-source and preserves every detail of your audio without compression loss. Your files never leave your device.",
+  'm4a-to-ogg': "<strong>M4A to OGG Converter:</strong> Convert M4A audio files into open-source OGG Vorbis format. Ideal for moving Apple ecosystem audio to open platforms, Linux systems, and games. Your files never leave your device.",
+  'm4a-to-aac': "<strong>M4A to AAC Converter:</strong> Convert M4A audio files to pure AAC format. While M4A often uses AAC encoding, extracting the raw AAC stream ensures maximum compatibility with all devices. Your files never leave your device.",
+  'aac-to-wav': "<strong>AAC to WAV Converter:</strong> Convert AAC audio files into uncompressed WAV format for professional audio editing. WAV is the standard format for DAWs, audio restoration, and post-production. Your files never leave your device.",
+  'aac-to-flac': "<strong>AAC to FLAC Converter:</strong> Convert AAC audio files into lossless FLAC format for archival storage. FLAC preserves every audio detail — perfect for backing up your AAC collection without quality loss. Your files never leave your device.",
+  'aac-to-ogg': "<strong>AAC to OGG Converter:</strong> Convert AAC audio files into open-source OGG Vorbis format. OGG is perfect for Linux, open-source software, and game development environments. Your files never leave your device.",
+  'aac-to-m4a': "<strong>AAC to M4A Converter:</strong> Convert AAC audio files into the M4A container format. M4A offers better metadata support, album art, and chapter markers compared to raw AAC. Your files never leave your device.",
+  'aac-to-opus': "<strong>AAC to Opus Converter:</strong> Convert AAC audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+  'aac-to-wma': "<strong>AAC to WMA Converter:</strong> Convert AAC audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'aac-to-aiff': "<strong>AAC to AIFF Converter:</strong> Convert AAC audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'flac-to-wma': "<strong>FLAC to WMA Converter:</strong> Convert lossless FLAC audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'flac-to-opus': "<strong>FLAC to Opus Converter:</strong> Convert lossless FLAC audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+  'flac-to-aiff': "<strong>FLAC to AIFF Converter:</strong> Convert lossless FLAC audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'ogg-to-wma': "<strong>OGG to WMA Converter:</strong> Convert OGG Vorbis audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'ogg-to-opus': "<strong>OGG to Opus Converter:</strong> Convert OGG Vorbis audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+  'ogg-to-aiff': "<strong>OGG to AIFF Converter:</strong> Convert OGG Vorbis audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'm4a-to-wma': "<strong>M4A to WMA Converter:</strong> Convert M4A audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'm4a-to-opus': "<strong>M4A to Opus Converter:</strong> Convert M4A audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+  'm4a-to-aiff': "<strong>M4A to AIFF Converter:</strong> Convert M4A audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'wma-to-wav': "<strong>WMA to WAV Converter:</strong> Convert Windows Media Audio (WMA) audio files into uncompressed WAV format for professional audio editing and production. Your files never leave your device.",
+  'wma-to-flac': "<strong>WMA to FLAC Converter:</strong> Convert Windows Media Audio (WMA) audio files into lossless FLAC format for archival storage and audiophile playback. Your files never leave your device.",
+  'wma-to-ogg': "<strong>WMA to OGG Converter:</strong> Convert Windows Media Audio (WMA) audio files into OGG Vorbis format for open-source platforms and applications. Your files never leave your device.",
+  'wma-to-m4a': "<strong>WMA to M4A Converter:</strong> Convert Windows Media Audio (WMA) audio files into M4A format for Apple ecosystem compatibility. Your files never leave your device.",
+  'wma-to-aac': "<strong>WMA to AAC Converter:</strong> Convert Windows Media Audio (WMA) audio files into AAC format for modern device and platform compatibility. Your files never leave your device.",
+  'wma-to-opus': "<strong>WMA to Opus Converter:</strong> Convert Windows Media Audio (WMA) audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+  'wma-to-aiff': "<strong>WMA to AIFF Converter:</strong> Convert Windows Media Audio (WMA) audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'opus-to-wav': "<strong>Opus to WAV Converter:</strong> Convert Opus audio files into uncompressed WAV format for professional audio editing and production. Your files never leave your device.",
+  'opus-to-flac': "<strong>Opus to FLAC Converter:</strong> Convert Opus audio files into lossless FLAC format for archival storage and audiophile playback. Your files never leave your device.",
+  'opus-to-ogg': "<strong>Opus to OGG Converter:</strong> Convert Opus audio files into OGG Vorbis format for open-source platforms and applications. Your files never leave your device.",
+  'opus-to-m4a': "<strong>Opus to M4A Converter:</strong> Convert Opus audio files into M4A format for Apple ecosystem compatibility. Your files never leave your device.",
+  'opus-to-aac': "<strong>Opus to AAC Converter:</strong> Convert Opus audio files into AAC format for modern device and platform compatibility. Your files never leave your device.",
+  'opus-to-wma': "<strong>Opus to WMA Converter:</strong> Convert Opus audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'opus-to-aiff': "<strong>Opus to AIFF Converter:</strong> Convert Opus audio files into AIFF format for Apple professional audio workflows. Your files never leave your device.",
+  'aiff-to-wav': "<strong>AIFF to WAV Converter:</strong> Convert AIFF audio files into uncompressed WAV format for professional audio editing and production. Your files never leave your device.",
+  'aiff-to-flac': "<strong>AIFF to FLAC Converter:</strong> Convert AIFF audio files into lossless FLAC format for archival storage and audiophile playback. Your files never leave your device.",
+  'aiff-to-ogg': "<strong>AIFF to OGG Converter:</strong> Convert AIFF audio files into OGG Vorbis format for open-source platforms and applications. Your files never leave your device.",
+  'aiff-to-m4a': "<strong>AIFF to M4A Converter:</strong> Convert AIFF audio files into M4A format for Apple ecosystem compatibility. Your files never leave your device.",
+  'aiff-to-aac': "<strong>AIFF to AAC Converter:</strong> Convert AIFF audio files into AAC format for modern device and platform compatibility. Your files never leave your device.",
+  'aiff-to-wma': "<strong>AIFF to WMA Converter:</strong> Convert AIFF audio files into Windows Media Audio format for Windows ecosystem compatibility. Your files never leave your device.",
+  'aiff-to-opus': "<strong>AIFF to Opus Converter:</strong> Convert AIFF audio files into Opus format for superior compression efficiency. Your files never leave your device.",
+};
+
 const FORMAT_KEYS = Object.keys(FORMATS);
 
 function resolveSlug(input: string, output: string): string {
@@ -112,11 +188,11 @@ function resolveSlug(input: string, output: string): string {
 
 type AudioFormatConverterProps = {
   slug: string;
-  description?: string;
 };
 
-export default function AudioFormatConverter({ slug, description }: AudioFormatConverterProps) {
+export default function AudioFormatConverter({ slug }: AudioFormatConverterProps) {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+  const description = DESCRIPTIONS[slug];
 
   const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
 
