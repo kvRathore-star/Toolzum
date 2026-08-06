@@ -12,10 +12,10 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 832 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 208 |
+| MODULE_REGISTRY (direct dynamic import) | 857 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 183 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (59 MODULE_REGISTRY + 4 CONVERTER_CONFIG) |
+| Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
@@ -90,6 +90,10 @@
 | audio-merger | AudioMerger |
 | audio-to-text-transcription | AudioToTextTranscription |
 | avatar-generator | Generators -> AvatarGenerator |
+| avi-to-mkv | VideoFormatConverter [slug=avi-to-mkv] |
+| avi-to-mov | VideoFormatConverter [slug=avi-to-mov] |
+| avi-to-mp4 | VideoFormatConverter [slug=avi-to-mp4] |
+| avi-to-webm | VideoFormatConverter [slug=avi-to-webm] |
 | avro-schema-generator | ConvertersEverydayWidgets -> AvroSchemaGenerator |
 | avro-to-json-sample | ConvertersEverydayWidgets -> AvroToJsonSample |
 | aws-iam-policy-analyzer | MiscUtilitiesKitWidgets -> AwsIamPolicyAnalyzer |
@@ -497,12 +501,26 @@
 | merge-patch-generator | DataToolkitWidgets -> MergePatchGenerator |
 | mime-finder | FormatAndDataKitWidgets -> MimeFinder |
 | minutes-to-hours-converter | MiscellaneousTools1 -> MinutesToHoursConverter |
+| mkv-to-avi | VideoFormatConverter [slug=mkv-to-avi] |
+| mkv-to-mov | VideoFormatConverter [slug=mkv-to-mov] |
+| mkv-to-mp4 | VideoFormatConverter [slug=mkv-to-mp4] |
+| mkv-to-webm | VideoFormatConverter [slug=mkv-to-webm] |
 | mobi-converter | MobiConverter |
 | mock-api-response-generator | ApiTools -> MockApiResponseGenerator |
 | modulo-calculator | MiscellaneousTools1 -> ModuloCalculator |
 | morse-code-translator | MorseCodeTranslator |
 | mortgage-calculator | Calculators -> MortgageCalculator |
+| mov-to-avi | VideoFormatConverter [slug=mov-to-avi] |
+| mov-to-mkv | VideoFormatConverter [slug=mov-to-mkv] |
+| mov-to-mp3 | VideoToAudioConverter [slug=mov-to-mp3] |
+| mov-to-mp4 | VideoFormatConverter [slug=mov-to-mp4] |
+| mov-to-webm | VideoFormatConverter [slug=mov-to-webm] |
 | mp3-compressor | Mp3Compressor |
+| mp4-to-avi | VideoFormatConverter [slug=mp4-to-avi] |
+| mp4-to-mkv | VideoFormatConverter [slug=mp4-to-mkv] |
+| mp4-to-mov | VideoFormatConverter [slug=mp4-to-mov] |
+| mp4-to-mp3 | VideoToAudioConverter [slug=mp4-to-mp3] |
+| mp4-to-webm | VideoFormatConverter [slug=mp4-to-webm] |
 | mrr-calculator | Calculators -> MrrCalculator |
 | msgpack-inspector | FormatAndDataKitWidgets -> MessagePackInspector |
 | mute-video | MuteVideo |
@@ -809,6 +827,8 @@
 | vector-pen-canvas | VectorPenCanvas |
 | vehicle-registration-checker | VehicleRegChecker |
 | video-compressor | VideoCompressor |
+| video-converter | VideoFormatConverter [slug=video-converter] |
+| video-converter-tool | VideoFormatConverter [slug=video-converter-tool] |
 | video-filters | VideoFilters |
 | video-screenshot | VideoScreenshot |
 | video-speed-changer | VideoSpeedChanger |
@@ -832,6 +852,11 @@
 | webhook-signature-verifier | ApiTools -> WebhookSignatureVerifier |
 | webhook-tester | ApiTools -> WebhookTester |
 | webhook-validator | ApiTools -> WebhookValidator |
+| webm-to-avi | VideoFormatConverter [slug=webm-to-avi] |
+| webm-to-mkv | VideoFormatConverter [slug=webm-to-mkv] |
+| webm-to-mov | VideoFormatConverter [slug=webm-to-mov] |
+| webm-to-mp3 | VideoToAudioConverter [slug=webm-to-mp3] |
+| webm-to-mp4 | VideoFormatConverter [slug=webm-to-mp4] |
 | website-screenshot | WebsiteScreenshot |
 | week-number-calculator | MiscellaneousTools1 -> WeekNumberCalculator |
 | weight-converter | UnitConverter [slug=weight-converter] |
@@ -884,10 +909,6 @@
 | aiff-to-wav | audio-format | AudioFormatConverter |
 | aiff-to-wma | audio-format | AudioFormatConverter |
 | audio-converter | audio-format | AudioFormatConverter |
-| avi-to-mkv | video-format | VideoFormatConverter |
-| avi-to-mov | video-format | VideoFormatConverter |
-| avi-to-mp4 | video-format | VideoFormatConverter |
-| avi-to-webm | video-format | VideoFormatConverter |
 | avif-to-bmp | image-format | ImageCatchAllConverter |
 | avif-to-gif | image-format | ImageCatchAllConverter |
 | avif-to-heic | image-format | ImageCatchAllConverter |
@@ -975,15 +996,6 @@
 | m4a-to-opus | audio-format | AudioFormatConverter |
 | m4a-to-wav | audio-format | AudioFormatConverter |
 | m4a-to-wma | audio-format | AudioFormatConverter |
-| mkv-to-avi | video-format | VideoFormatConverter |
-| mkv-to-mov | video-format | VideoFormatConverter |
-| mkv-to-mp4 | video-format | VideoFormatConverter |
-| mkv-to-webm | video-format | VideoFormatConverter |
-| mov-to-avi | video-format | VideoFormatConverter |
-| mov-to-mkv | video-format | VideoFormatConverter |
-| mov-to-mp3 | video-to-audio | VideoToAudioConverter |
-| mov-to-mp4 | video-format | VideoFormatConverter |
-| mov-to-webm | video-format | VideoFormatConverter |
 | mp3-to-aac | audio-format | AudioFormatConverter |
 | mp3-to-aiff | audio-format | AudioFormatConverter |
 | mp3-to-flac | audio-format | AudioFormatConverter |
@@ -992,11 +1004,6 @@
 | mp3-to-opus | audio-format | AudioFormatConverter |
 | mp3-to-wav | audio-format | AudioFormatConverter |
 | mp3-to-wma | audio-format | AudioFormatConverter |
-| mp4-to-avi | video-format | VideoFormatConverter |
-| mp4-to-mkv | video-format | VideoFormatConverter |
-| mp4-to-mov | video-format | VideoFormatConverter |
-| mp4-to-mp3 | video-to-audio | VideoToAudioConverter |
-| mp4-to-webm | video-format | VideoFormatConverter |
 | ogg-to-aac | audio-format | AudioFormatConverter |
 | ogg-to-aiff | audio-format | AudioFormatConverter |
 | ogg-to-flac | audio-format | AudioFormatConverter |
@@ -1042,8 +1049,6 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| video-converter | video-format | VideoFormatConverter |
-| video-converter-tool | video-format | VideoFormatConverter |
 | wav-to-aac | audio-format | AudioFormatConverter |
 | wav-to-aiff | audio-format | AudioFormatConverter |
 | wav-to-flac | audio-format | AudioFormatConverter |
@@ -1052,11 +1057,6 @@
 | wav-to-ogg | audio-format | AudioFormatConverter |
 | wav-to-opus | audio-format | AudioFormatConverter |
 | wav-to-wma | audio-format | AudioFormatConverter |
-| webm-to-avi | video-format | VideoFormatConverter |
-| webm-to-mkv | video-format | VideoFormatConverter |
-| webm-to-mov | video-format | VideoFormatConverter |
-| webm-to-mp3 | video-to-audio | VideoToAudioConverter |
-| webm-to-mp4 | video-format | VideoFormatConverter |
 | webp-to-avif | image-format | ImageCatchAllConverter |
 | webp-to-bmp | image-format | ImageCatchAllConverter |
 | webp-to-gif | image-format | ImageCatchAllConverter |

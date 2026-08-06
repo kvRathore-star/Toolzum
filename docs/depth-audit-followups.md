@@ -60,3 +60,38 @@ review list, not a pass/fail gate.
 - Verdict: pre-existing gap, unrelated to routing consolidation. **Logged, not fixed**; decide
   separately whether to commit the images (they regenerate deterministically at build) or
   leave them generated-on-deploy.
+
+## 5. data/toon migration vs Design B (lossy redirects) — verified unchanged, still to resolve (tracked)
+
+- Context: during Phase 3, `data` (`xml-to-json`, `xml-to-csv`) and `toon`
+  (`json-toon-converter`) were migrated into MODULE_REGISTRY slug closures in
+  `DynamicModuleWrapper.tsx` (commit `c9829d6`). These two categories were flagged
+  "Design B entangled: avoid" because of the **lossy-redirect** problem:
+  - `yaml-to-toon`, `toon-to-json`, `toon-to-yaml` → `permanentRedirect` to
+    `/converter/json-toon-converter/`, which renders `JsonToonConverter` with the
+    **JSON→Toon default** (`SLUG_TO_MODE['json-toon-converter'] = 'json-to-toon'`), not the
+    actual source pair.
+  - `json-to-csv`, `csv-to-json`, `json-to-xml`, `csv-to-xml` → `permanentRedirect` to
+    `/converter/data-format-converter/` (generic `DataConverter` hub, no pair preselected).
+- Verification (2026-08-06, post-`c9829d6`): the migration **did not resolve Design B and did
+  not regress it**. Redirects live in `TOOL_REDIRECTS` (`src/registry/tools-constants.ts`) and
+  fire in `src/app/[category]/[tool]/page.tsx:64-67` — a path independent of
+  CONVERTER_CONFIG/ConverterRouter, untouched by the migration. Built output confirms all 7
+  source pages still emit `http-equiv="refresh"` to their same targets. Target rendering is
+  byte-identical before/after: `json-toon-converter`'s closure renders the same
+  `ToonConverter` (JSON→Toon default) ConverterRouter did, and `data-format-converter` was
+  already a pre-existing `ssr:false` MODULE_REGISTRY entry.
+- Re-checked invariant: `registry-integrity.test.ts:249-257` ("no MODULE_REGISTRY slug
+  redirects away") passes against the **post-migration** registry, so the 7 sources remain
+  redirect-only / unreachable-as-pages — the earlier "verified unreachable" finding still
+  holds on the new resolution path.
+- Guard added: `src/__tests__/data-pairs.test.ts` and `src/__tests__/toon-pairs.test.ts`
+  assert the redirect-source slugs are **not** closure-routed, so a future accidental wiring
+  of a redirect source into MODULE_REGISTRY fails CI instead of silently worsening the
+  lossiness.
+- Status: **open, must be resolved before Phase 4** (deleting ConverterRouter/converterConfig).
+  Design B = split the 7 sources into per-pair pages (e.g. `yaml-to-toon` renders
+  `JsonToonConverter initialMode='yaml-to-toon'`; `json-to-csv` renders
+  `DataConverterFromSlug slug='json-to-csv'`), which requires removing their
+  `TOOL_REDIRECTS` entries and adding per-pair routes + pairs tests, then re-running the
+  integrity suite.

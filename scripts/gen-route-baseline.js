@@ -14,12 +14,12 @@ const registry = {};
 // No-options closures (SSR-preserving, e.g. migrated converter slugs) first:
 // strip them from the source so the ssr regex below cannot swallow them while
 // scanning forward for a later `, { ssr: false`.
-const CLOSURE_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)\.then\(m => \(\{ default: \(\) => <m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+="[^"]*")*) \/> \}\)\)\)/g;
+const CLOSURE_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)\.then\(m => \(\{ default: \(\) => <m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+=(?:"[^"]*"|\{[^}]*\}))*) \/> \}\)\)\)/g;
 const closureBlocks = [];
 for (const match of WRAPPER.matchAll(CLOSURE_RE)) {
   const [, slug, modPath, exportName, propsStr] = match;
   const props = {};
-  for (const pm of (propsStr ?? '').matchAll(/([A-Za-z0-9_]+)="([^"]*)"/g)) props[pm[1]] = pm[2];
+  for (const pm of (propsStr ?? '').matchAll(/([A-Za-z0-9_]+)=(?:"([^"]*)"|\{([^}]*)\})/g)) props[pm[1]] = pm[2] ?? pm[3];
   registry[slug] = { path: modPath, export: exportName, mode: props.defaultMode, slug: props.slug };
   closureBlocks.push(match[0]);
 }

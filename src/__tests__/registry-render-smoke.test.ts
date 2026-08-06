@@ -83,13 +83,13 @@ function parseRegistry(): Record<string, Entry> {
   // No-options closures (SSR-preserving, e.g. migrated converter slugs) first:
   // strip them from the source so the ssr regex below cannot swallow them while
   // scanning forward for a later `, { ssr: false`.
-  const CLOSURE_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)\.then\(m => \(\{ default: \(\) => <m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+="[^"]*")*) \/> \}\)\)\)/g;
+  const CLOSURE_RE = /'([a-z0-9-]+)': dynamic\(\(\) => import\('([^']+)'\)\.then\(m => \(\{ default: \(\) => <m\.(default|[A-Za-z0-9_]+)((?:\s+[A-Za-z0-9_]+=(?:"[^"]*"|\{[^}]*\}))*) \/> \}\)\)\)/g;
   const closureBlocks: string[] = [];
   for (const match of src.matchAll(CLOSURE_RE)) {
     const [, slug, modPath, exportName, propsStr] = match;
     const props: Record<string, string> = {};
-    const propRe = /([A-Za-z0-9_]+)="([^"]*)"/g;
-    for (const pm of (propsStr ?? '').matchAll(propRe)) props[pm[1]] = pm[2];
+    const propRe = /([A-Za-z0-9_]+)=(?:"([^"]*)"|\{([^}]*)\})/g;
+    for (const pm of (propsStr ?? '').matchAll(propRe)) props[pm[1]] = pm[2] ?? pm[3];
     out[slug] = { kind: 'closure', path: modPath, export: exportName, props };
     closureBlocks.push(match[0]);
   }
@@ -144,11 +144,11 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   });
 
   it('parses every MODULE_REGISTRY slug as resolvable (default / named / closure)', () => {
-    expect(Object.keys(registry).length).toBe(832);
+    expect(Object.keys(registry).length).toBe(857);
     const kinds = Object.values(registry).map((e) => e.kind);
     expect(kinds.filter((k) => k === 'default').length).toBe(320);
     expect(kinds.filter((k) => k === 'named').length).toBe(416);
-    expect(kinds.filter((k) => k === 'closure').length).toBe(96);
+    expect(kinds.filter((k) => k === 'closure').length).toBe(121);
   });
 
   it('every MODULE_REGISTRY slug renders its resolved component without throwing', async () => {
@@ -170,7 +170,7 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   it('every CONVERTER_CONFIG slug renders through ConverterRouter without throwing', async () => {
     const { default: ConverterRouter } = await import('@/components/tools/modules/converter/ConverterRouter');
     const failures: string[] = [];
-    expect(converterSlugs.length).toBe(208);
+    expect(converterSlugs.length).toBe(183);
     const started = Date.now();
     for (const slug of converterSlugs) {
       nav.slug = slug;

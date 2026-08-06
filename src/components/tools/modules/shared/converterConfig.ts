@@ -7,12 +7,10 @@ export type ConverterConfigEntry = {
 
 export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // Consolidated converters
-  "video-converter": { category: "video-format", description: "Convert between MKV, MP4, MOV, WebM, and AVI video formats." },
-  "video-converter-tool": { category: "video-format", description: "Convert video files between MP4, AVI, MKV, MOV, WebM, and more formats." },
   "audio-converter": { category: "audio-format", description: "Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats." },
-  "mp4-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MP4 video files." },
-  "mov-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from MOV video files." },
-  "webm-to-mp3": { category: "video-to-audio", description: "Extract MP3 audio from WebM video files." },
+  // video-to-audio migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // mp4-to-mp3, mov-to-mp3, webm-to-mp3 render VideoToAudioConverter via slug
+  // closures (SSR-preserving); descriptions live in HUB_DESCRIPTIONS.
   "image-format-converter": { category: "image-format", description: "Convert between PNG, JPG, WebP, HEIC, and AVIF image formats." },
   // Text transformers migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // text-tools, tailwind-to-css-converter, svg-to-css, html-to-jsx,
@@ -65,51 +63,13 @@ export const CONVERTER_CONFIG: Record<string, ConverterConfigEntry> = {
   // Number converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
   // number-to-words-converter renders NumberWordsConverter via slug closure
   // (SSR-preserving). roman-numeral-converter was already a MODULE_REGISTRY slug.
-  // Video format converters
-  "mkv-to-mp4": {
-    category: "video-format",
-    description: "<strong>MKV to MP4 Converter:</strong> Re-encapsulates Matroska (.mkv) video files into the more universally compatible MP4 container without re-encoding the underlying video stream. Your files never leave your device.",
-  },
-  "mov-to-mp4": {
-    category: "video-format",
-    description: "<strong>Apple QuickTime Converter:</strong> Transcode QuickTime .MOV files (usually from iPhones or Macs) into universal MP4 format optimized for web playback and social media uploads. Your files never leave your device.",
-  },
-  "webm-to-mp4": {
-    category: "video-format",
-    description: "<strong>WEBM to MP4 Converter:</strong> Transcode modern WebM videos (often from screen recorders or web exports) into universal MP4 files. Critical for users whose editing software or sharing platforms reject WebM. Your files never leave your device.",
-  },
-  "avi-to-mp4": {
-    category: "video-format",
-    description: "<strong>AVI to MP4 Converter:</strong> Upgrade your old AVI video files into modern universal MP4 format with H.264 encoding for drastically smaller file sizes. Perfect for archiving and compatibility. Your files never leave your device.",
-  },
-  "mp4-to-mkv": {
-    category: "video-format",
-    description: "<strong>MP4 to MKV Converter:</strong> Re-encapsulates MP4 video files into the versatile MKV container format without re-encoding. MKV supports advanced subtitle tracks, chapter markers, and multiple audio streams. Your files never leave your device.",
-  },
-  "mp4-to-mov": {
-    category: "video-format",
-    description: "<strong>MP4 to MOV Converter:</strong> Convert MP4 video files to QuickTime MOV format while preserving quality. Ideal for Apple ecosystem workflows including Final Cut Pro, iMovie, and macOS QuickTime Player. Your files never leave your device.",
-  },
-  "mkv-to-mov": {
-    category: "video-format",
-    description: "<strong>MKV to MOV Converter:</strong> Transcode Matroska MKV files into QuickTime MOV format for seamless editing in macOS applications. Perfect when you have high-quality MKV files but need to work in Final Cut Pro or iMovie. Your files never leave your device.",
-  },
-  "mov-to-mkv": {
-    category: "video-format",
-    description: "<strong>MOV to MKV Converter:</strong> Convert QuickTime MOV videos into the open-source MKV container format. MKV offers broader codec support, embedded subtitles, and chapter markers — perfect for media archiving. Your files never leave your device.",
-  },
-  "mkv-to-webm": { category: "video-format", description: "<strong>MKV to WebM Converter:</strong> Convert Matroska MKV files into WebM format for modern web-optimized video format for streaming. Your files never leave your device." },
-  "mkv-to-avi": { category: "video-format", description: "<strong>MKV to AVI Converter:</strong> Convert Matroska MKV files into AVI format for legacy video format compatibility. Your files never leave your device." },
-  "mp4-to-webm": { category: "video-format", description: "<strong>MP4 to WebM Converter:</strong> Convert MP4 files into WebM format for modern web-optimized video format for streaming. Your files never leave your device." },
-  "mp4-to-avi": { category: "video-format", description: "<strong>MP4 to AVI Converter:</strong> Convert MP4 files into AVI format for legacy video format compatibility. Your files never leave your device." },
-  "mov-to-webm": { category: "video-format", description: "<strong>MOV to WebM Converter:</strong> Convert QuickTime MOV files into WebM format for modern web-optimized video format for streaming. Your files never leave your device." },
-  "mov-to-avi": { category: "video-format", description: "<strong>MOV to AVI Converter:</strong> Convert QuickTime MOV files into AVI format for legacy video format compatibility. Your files never leave your device." },
-  "webm-to-mkv": { category: "video-format", description: "<strong>WebM to MKV Converter:</strong> Convert WebM files into MKV format for versatile video container with advanced subtitle and chapter support. Your files never leave your device." },
-  "webm-to-mov": { category: "video-format", description: "<strong>WebM to MOV Converter:</strong> Convert WebM files into QuickTime MOV format for Apple ecosystem editing and playback compatibility. Your files never leave your device." },
-  "webm-to-avi": { category: "video-format", description: "<strong>WebM to AVI Converter:</strong> Convert WebM files into AVI format for legacy video format compatibility. Your files never leave your device." },
-  "avi-to-mkv": { category: "video-format", description: "<strong>AVI to MKV Converter:</strong> Convert AVI files into MKV format for versatile video container with advanced subtitle and chapter support. Your files never leave your device." },
-  "avi-to-mov": { category: "video-format", description: "<strong>AVI to MOV Converter:</strong> Convert AVI files into QuickTime MOV format for Apple ecosystem editing and playback compatibility. Your files never leave your device." },
-  "avi-to-webm": { category: "video-format", description: "<strong>AVI to WebM Converter:</strong> Convert AVI files into WebM format for modern web-optimized video format for streaming. Your files never leave your device." },
+  // Video format converters migrated to MODULE_REGISTRY (DynamicModuleWrapper):
+  // mkv-to-mp4, mov-to-mp4, webm-to-mp4, avi-to-mp4, mp4-to-mkv, mp4-to-mov,
+  // mkv-to-mov, mov-to-mkv, mkv-to-webm, mkv-to-avi, mp4-to-webm, mp4-to-avi,
+  // mov-to-webm, mov-to-avi, webm-to-mkv, webm-to-mov, webm-to-avi, avi-to-mkv,
+  // avi-to-mov, avi-to-webm, video-converter, video-converter-tool render
+  // VideoFormatConverter via slug closures (SSR-preserving); descriptions live
+  // in HUB_DESCRIPTIONS.
   // Audio format converters
   "mp3-to-wav": { category: "audio-format", description: "<strong>MP3 to WAV Converter:</strong> Transform compressed MP3 audio files into uncompressed WAV format for professional audio editing. WAV preserves full audio fidelity — essential for music production, podcast mastering, and audio restoration. Your files never leave your device." },
   "wav-to-mp3": { category: "audio-format", description: "<strong>WAV to MP3 Converter:</strong> Compress large WAV audio files into space-saving MP3 format. Perfect for sharing music, podcasts, and voice recordings online where file size matters. Your files never leave your device." },

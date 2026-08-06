@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import { HUB_DESCRIPTIONS } from './shared/hubDescriptions';
 
 const IMPORT_TIMEOUT_MS = 15_000;
 
@@ -1022,6 +1023,39 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // Toon hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
   // ToonConverter maps the slug to a JsonToonConverter initialMode).
   'json-toon-converter': dynamic(() => import('@/components/tools/modules/converter/DataFormatTools').then(m => ({ default: () => <m.default slug="json-toon-converter" /> }))),
+
+  // Video format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // VideoFormatConverter renders a per-tool info banner from the description prop, so
+  // each closure passes HUB_DESCRIPTIONS[slug] to keep pre-migration HTML byte-identical).
+  'video-converter': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="video-converter" description={HUB_DESCRIPTIONS['video-converter']} /> }))),
+  'video-converter-tool': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="video-converter-tool" description={HUB_DESCRIPTIONS['video-converter-tool']} /> }))),
+  'mkv-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-mp4" description={HUB_DESCRIPTIONS['mkv-to-mp4']} /> }))),
+  'mov-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-mp4" description={HUB_DESCRIPTIONS['mov-to-mp4']} /> }))),
+  'webm-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-mp4" description={HUB_DESCRIPTIONS['webm-to-mp4']} /> }))),
+  'avi-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="avi-to-mp4" description={HUB_DESCRIPTIONS['avi-to-mp4']} /> }))),
+  'mp4-to-mkv': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-mkv" description={HUB_DESCRIPTIONS['mp4-to-mkv']} /> }))),
+  'mp4-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-mov" description={HUB_DESCRIPTIONS['mp4-to-mov']} /> }))),
+  'mkv-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-mov" description={HUB_DESCRIPTIONS['mkv-to-mov']} /> }))),
+  'mov-to-mkv': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-mkv" description={HUB_DESCRIPTIONS['mov-to-mkv']} /> }))),
+  'mkv-to-webm': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-webm" description={HUB_DESCRIPTIONS['mkv-to-webm']} /> }))),
+  'mkv-to-avi': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-avi" description={HUB_DESCRIPTIONS['mkv-to-avi']} /> }))),
+  'mp4-to-webm': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-webm" description={HUB_DESCRIPTIONS['mp4-to-webm']} /> }))),
+  'mp4-to-avi': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-avi" description={HUB_DESCRIPTIONS['mp4-to-avi']} /> }))),
+  'mov-to-webm': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-webm" description={HUB_DESCRIPTIONS['mov-to-webm']} /> }))),
+  'mov-to-avi': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-avi" description={HUB_DESCRIPTIONS['mov-to-avi']} /> }))),
+  'webm-to-mkv': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-mkv" description={HUB_DESCRIPTIONS['webm-to-mkv']} /> }))),
+  'webm-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-mov" description={HUB_DESCRIPTIONS['webm-to-mov']} /> }))),
+  'webm-to-avi': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-avi" description={HUB_DESCRIPTIONS['webm-to-avi']} /> }))),
+  'avi-to-mkv': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="avi-to-mkv" description={HUB_DESCRIPTIONS['avi-to-mkv']} /> }))),
+  'avi-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="avi-to-mov" description={HUB_DESCRIPTIONS['avi-to-mov']} /> }))),
+  'avi-to-webm': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="avi-to-webm" description={HUB_DESCRIPTIONS['avi-to-webm']} /> }))),
+
+  // Video-to-audio hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // VideoToAudioConverter renders a per-tool info banner from the description prop, so
+  // each closure passes HUB_DESCRIPTIONS[slug] to keep pre-migration HTML byte-identical).
+  'mp4-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="mp4-to-mp3" description={HUB_DESCRIPTIONS['mp4-to-mp3']} /> }))),
+  'mov-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="mov-to-mp3" description={HUB_DESCRIPTIONS['mov-to-mp3']} /> }))),
+  'webm-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="webm-to-mp3" description={HUB_DESCRIPTIONS['webm-to-mp3']} /> }))),
 
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
