@@ -12,8 +12,8 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 857 |
-| CONVERTER_CONFIG -> ConverterRouter hub | 183 |
+| MODULE_REGISTRY (direct dynamic import) | 930 |
+| CONVERTER_CONFIG -> ConverterRouter hub | 110 |
 | Redirect-only sources (in neither map) | 89 (22 ComingSoon registry tools + 7 registry tools redirecting to a hub + 60 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY + 0 CONVERTER_CONFIG) |
 | Redirect-shadowed CONVERTER_CONFIG routes | 0 |
@@ -30,6 +30,14 @@
 
 | Slug | Component |
 |---|---|
+| aac-to-aiff | AudioFormatConverter [slug=aac-to-aiff] |
+| aac-to-flac | AudioFormatConverter [slug=aac-to-flac] |
+| aac-to-m4a | AudioFormatConverter [slug=aac-to-m4a] |
+| aac-to-mp3 | AudioFormatConverter [slug=aac-to-mp3] |
+| aac-to-ogg | AudioFormatConverter [slug=aac-to-ogg] |
+| aac-to-opus | AudioFormatConverter [slug=aac-to-opus] |
+| aac-to-wav | AudioFormatConverter [slug=aac-to-wav] |
+| aac-to-wma | AudioFormatConverter [slug=aac-to-wma] |
 | aadhaar-card-masker | AadhaarMasker |
 | aadhaar-number-validator | AadhaarValidator |
 | aadhaar-wallet-cropper | AadhaarWalletCropper |
@@ -53,6 +61,14 @@
 | ai-paraphrasing-tool | AiParaphrasingTool |
 | ai-thumbnail-maker | AiThumbnailMaker |
 | ai-translator | AiTranslator |
+| aiff-to-aac | AudioFormatConverter [slug=aiff-to-aac] |
+| aiff-to-flac | AudioFormatConverter [slug=aiff-to-flac] |
+| aiff-to-m4a | AudioFormatConverter [slug=aiff-to-m4a] |
+| aiff-to-mp3 | AudioFormatConverter [slug=aiff-to-mp3] |
+| aiff-to-ogg | AudioFormatConverter [slug=aiff-to-ogg] |
+| aiff-to-opus | AudioFormatConverter [slug=aiff-to-opus] |
+| aiff-to-wav | AudioFormatConverter [slug=aiff-to-wav] |
+| aiff-to-wma | AudioFormatConverter [slug=aiff-to-wma] |
 | algebra-calculator | MiscellaneousTools1 -> AlgebraCalculator |
 | api-builder | ApiBuilder -> ApiBuilder |
 | api-changelog-generator | ApiTools -> ApiChangelogGenerator |
@@ -85,6 +101,7 @@
 | ascii-table-generator | ExtraTools -> AsciiTableGenerator |
 | aspect-ratio-calculator | Calculators -> AspectRatioCalculator |
 | audio-compressor | AudioCompressor |
+| audio-converter | AudioFormatConverter [slug=audio-converter] |
 | audio-cutter | AudioCutter |
 | audio-equalizer | AudioEqualizer |
 | audio-merger | AudioMerger |
@@ -317,6 +334,14 @@
 | fancy-text-generator | TextStylingConverter [slug=fancy-text-generator] |
 | favicon-generator | FaviconGenerator |
 | final-grade-calculator | Calculators -> FinalGradeCalculator |
+| flac-to-aac | AudioFormatConverter [slug=flac-to-aac] |
+| flac-to-aiff | AudioFormatConverter [slug=flac-to-aiff] |
+| flac-to-m4a | AudioFormatConverter [slug=flac-to-m4a] |
+| flac-to-mp3 | AudioFormatConverter [slug=flac-to-mp3] |
+| flac-to-ogg | AudioFormatConverter [slug=flac-to-ogg] |
+| flac-to-opus | AudioFormatConverter [slug=flac-to-opus] |
+| flac-to-wav | AudioFormatConverter [slug=flac-to-wav] |
+| flac-to-wma | AudioFormatConverter [slug=flac-to-wma] |
 | flatten-pdf | FlattenPdf |
 | flexbox-css-generator | CssGenerators [flexbox] |
 | fluid-typography-calculator | Calculators -> FluidTypographyCalculator |
@@ -476,6 +501,14 @@
 | logo-placeholder-generator | GeneratorWidgets -> LogoPlaceholderGenerator |
 | lorem-ipsum-generator | Generators -> LoremIpsumGenerator |
 | ltv-calculator | LtvCalculator |
+| m4a-to-aac | AudioFormatConverter [slug=m4a-to-aac] |
+| m4a-to-aiff | AudioFormatConverter [slug=m4a-to-aiff] |
+| m4a-to-flac | AudioFormatConverter [slug=m4a-to-flac] |
+| m4a-to-mp3 | AudioFormatConverter [slug=m4a-to-mp3] |
+| m4a-to-ogg | AudioFormatConverter [slug=m4a-to-ogg] |
+| m4a-to-opus | AudioFormatConverter [slug=m4a-to-opus] |
+| m4a-to-wav | AudioFormatConverter [slug=m4a-to-wav] |
+| m4a-to-wma | AudioFormatConverter [slug=m4a-to-wma] |
 | mac-address-generator | MacAddressGenerator |
 | mac-vendor-lookup | MiniGeneratorsWidgets -> MACVendorLookup |
 | macro-calculator | Calculators -> MacroCalculator |
@@ -516,6 +549,14 @@
 | mov-to-mp4 | VideoFormatConverter [slug=mov-to-mp4] |
 | mov-to-webm | VideoFormatConverter [slug=mov-to-webm] |
 | mp3-compressor | Mp3Compressor |
+| mp3-to-aac | AudioFormatConverter [slug=mp3-to-aac] |
+| mp3-to-aiff | AudioFormatConverter [slug=mp3-to-aiff] |
+| mp3-to-flac | AudioFormatConverter [slug=mp3-to-flac] |
+| mp3-to-m4a | AudioFormatConverter [slug=mp3-to-m4a] |
+| mp3-to-ogg | AudioFormatConverter [slug=mp3-to-ogg] |
+| mp3-to-opus | AudioFormatConverter [slug=mp3-to-opus] |
+| mp3-to-wav | AudioFormatConverter [slug=mp3-to-wav] |
+| mp3-to-wma | AudioFormatConverter [slug=mp3-to-wma] |
 | mp4-to-avi | VideoFormatConverter [slug=mp4-to-avi] |
 | mp4-to-mkv | VideoFormatConverter [slug=mp4-to-mkv] |
 | mp4-to-mov | VideoFormatConverter [slug=mp4-to-mov] |
@@ -545,10 +586,26 @@
 | oauth2-debugger | SecurityTools -> Oauth2Debugger |
 | object-remover | ObjectRemover |
 | odt-rtf-to-pdf | OdtRtfConverter |
+| ogg-to-aac | AudioFormatConverter [slug=ogg-to-aac] |
+| ogg-to-aiff | AudioFormatConverter [slug=ogg-to-aiff] |
+| ogg-to-flac | AudioFormatConverter [slug=ogg-to-flac] |
+| ogg-to-m4a | AudioFormatConverter [slug=ogg-to-m4a] |
+| ogg-to-mp3 | AudioFormatConverter [slug=ogg-to-mp3] |
+| ogg-to-opus | AudioFormatConverter [slug=ogg-to-opus] |
+| ogg-to-wav | AudioFormatConverter [slug=ogg-to-wav] |
+| ogg-to-wma | AudioFormatConverter [slug=ogg-to-wma] |
 | open-graph-generator | GeneratorWidgets -> OpenGraphGenerator |
 | openapi-mock-generator | ApiTools -> OpenapiMockGenerator |
 | openapi-to-postman | ApiTools -> OpenapiToPostman |
 | openapi-validator | ApiTools -> OpenapiValidator |
+| opus-to-aac | AudioFormatConverter [slug=opus-to-aac] |
+| opus-to-aiff | AudioFormatConverter [slug=opus-to-aiff] |
+| opus-to-flac | AudioFormatConverter [slug=opus-to-flac] |
+| opus-to-m4a | AudioFormatConverter [slug=opus-to-m4a] |
+| opus-to-mp3 | AudioFormatConverter [slug=opus-to-mp3] |
+| opus-to-ogg | AudioFormatConverter [slug=opus-to-ogg] |
+| opus-to-wav | AudioFormatConverter [slug=opus-to-wav] |
+| opus-to-wma | AudioFormatConverter [slug=opus-to-wma] |
 | otp-generator | OtherUtilitiesWidgets -> OTPGenerator |
 | ovulation-tracker | MiscellaneousTools1 -> OvulationTracker |
 | package-json-validator | FormatAndDataKitWidgets -> PackageJsonValidator |
@@ -845,6 +902,14 @@
 | waist-to-hip-ratio-calculator | HealthTools -> WaistToHipRatioCalculator |
 | water-intake-calculator | Calculators -> WaterIntakeCalculator |
 | watermark-pdf | WatermarkPdf |
+| wav-to-aac | AudioFormatConverter [slug=wav-to-aac] |
+| wav-to-aiff | AudioFormatConverter [slug=wav-to-aiff] |
+| wav-to-flac | AudioFormatConverter [slug=wav-to-flac] |
+| wav-to-m4a | AudioFormatConverter [slug=wav-to-m4a] |
+| wav-to-mp3 | AudioFormatConverter [slug=wav-to-mp3] |
+| wav-to-ogg | AudioFormatConverter [slug=wav-to-ogg] |
+| wav-to-opus | AudioFormatConverter [slug=wav-to-opus] |
+| wav-to-wma | AudioFormatConverter [slug=wav-to-wma] |
 | waveform-generator | WaveformGenerator |
 | web-inspector | WebInspector |
 | webhook-payload-generator | ApiTools -> WebhookPayloadGenerator |
@@ -864,6 +929,14 @@
 | wheel-of-names | WheelOfNames |
 | whiteout-pdf | WhiteoutPdf |
 | whois-lookup | WhoisLookup |
+| wma-to-aac | AudioFormatConverter [slug=wma-to-aac] |
+| wma-to-aiff | AudioFormatConverter [slug=wma-to-aiff] |
+| wma-to-flac | AudioFormatConverter [slug=wma-to-flac] |
+| wma-to-m4a | AudioFormatConverter [slug=wma-to-m4a] |
+| wma-to-mp3 | AudioFormatConverter [slug=wma-to-mp3] |
+| wma-to-ogg | AudioFormatConverter [slug=wma-to-ogg] |
+| wma-to-opus | AudioFormatConverter [slug=wma-to-opus] |
+| wma-to-wav | AudioFormatConverter [slug=wma-to-wav] |
 | word-counter | TextSeoTools -> WordCounter |
 | word-frequency-counter | TextSeoTools -> WordFrequencyCounter |
 | word-to-pdf | DocumentFormatConverter [slug=word-to-pdf] |
@@ -892,23 +965,6 @@
 
 | Slug | Category | Hub component |
 |---|---|---|
-| aac-to-aiff | audio-format | AudioFormatConverter |
-| aac-to-flac | audio-format | AudioFormatConverter |
-| aac-to-m4a | audio-format | AudioFormatConverter |
-| aac-to-mp3 | audio-format | AudioFormatConverter |
-| aac-to-ogg | audio-format | AudioFormatConverter |
-| aac-to-opus | audio-format | AudioFormatConverter |
-| aac-to-wav | audio-format | AudioFormatConverter |
-| aac-to-wma | audio-format | AudioFormatConverter |
-| aiff-to-aac | audio-format | AudioFormatConverter |
-| aiff-to-flac | audio-format | AudioFormatConverter |
-| aiff-to-m4a | audio-format | AudioFormatConverter |
-| aiff-to-mp3 | audio-format | AudioFormatConverter |
-| aiff-to-ogg | audio-format | AudioFormatConverter |
-| aiff-to-opus | audio-format | AudioFormatConverter |
-| aiff-to-wav | audio-format | AudioFormatConverter |
-| aiff-to-wma | audio-format | AudioFormatConverter |
-| audio-converter | audio-format | AudioFormatConverter |
 | avif-to-bmp | image-format | ImageCatchAllConverter |
 | avif-to-gif | image-format | ImageCatchAllConverter |
 | avif-to-heic | image-format | ImageCatchAllConverter |
@@ -929,14 +985,6 @@
 | bmp-to-svg | image-format | ImageCatchAllConverter |
 | bmp-to-tiff | image-format | ImageCatchAllConverter |
 | bmp-to-webp | image-format | ImageCatchAllConverter |
-| flac-to-aac | audio-format | AudioFormatConverter |
-| flac-to-aiff | audio-format | AudioFormatConverter |
-| flac-to-m4a | audio-format | AudioFormatConverter |
-| flac-to-mp3 | audio-format | AudioFormatConverter |
-| flac-to-ogg | audio-format | AudioFormatConverter |
-| flac-to-opus | audio-format | AudioFormatConverter |
-| flac-to-wav | audio-format | AudioFormatConverter |
-| flac-to-wma | audio-format | AudioFormatConverter |
 | gif-to-avif | image-format | ImageCatchAllConverter |
 | gif-to-bmp | image-format | ImageCatchAllConverter |
 | gif-to-heic | image-format | ImageCatchAllConverter |
@@ -988,38 +1036,6 @@
 | jxl-to-svg | image-format | ImageCatchAllConverter |
 | jxl-to-tiff | image-format | ImageCatchAllConverter |
 | jxl-to-webp | image-format | ImageCatchAllConverter |
-| m4a-to-aac | audio-format | AudioFormatConverter |
-| m4a-to-aiff | audio-format | AudioFormatConverter |
-| m4a-to-flac | audio-format | AudioFormatConverter |
-| m4a-to-mp3 | audio-format | AudioFormatConverter |
-| m4a-to-ogg | audio-format | AudioFormatConverter |
-| m4a-to-opus | audio-format | AudioFormatConverter |
-| m4a-to-wav | audio-format | AudioFormatConverter |
-| m4a-to-wma | audio-format | AudioFormatConverter |
-| mp3-to-aac | audio-format | AudioFormatConverter |
-| mp3-to-aiff | audio-format | AudioFormatConverter |
-| mp3-to-flac | audio-format | AudioFormatConverter |
-| mp3-to-m4a | audio-format | AudioFormatConverter |
-| mp3-to-ogg | audio-format | AudioFormatConverter |
-| mp3-to-opus | audio-format | AudioFormatConverter |
-| mp3-to-wav | audio-format | AudioFormatConverter |
-| mp3-to-wma | audio-format | AudioFormatConverter |
-| ogg-to-aac | audio-format | AudioFormatConverter |
-| ogg-to-aiff | audio-format | AudioFormatConverter |
-| ogg-to-flac | audio-format | AudioFormatConverter |
-| ogg-to-m4a | audio-format | AudioFormatConverter |
-| ogg-to-mp3 | audio-format | AudioFormatConverter |
-| ogg-to-opus | audio-format | AudioFormatConverter |
-| ogg-to-wav | audio-format | AudioFormatConverter |
-| ogg-to-wma | audio-format | AudioFormatConverter |
-| opus-to-aac | audio-format | AudioFormatConverter |
-| opus-to-aiff | audio-format | AudioFormatConverter |
-| opus-to-flac | audio-format | AudioFormatConverter |
-| opus-to-m4a | audio-format | AudioFormatConverter |
-| opus-to-mp3 | audio-format | AudioFormatConverter |
-| opus-to-ogg | audio-format | AudioFormatConverter |
-| opus-to-wav | audio-format | AudioFormatConverter |
-| opus-to-wma | audio-format | AudioFormatConverter |
 | png-to-avif | image-format | ImageCatchAllConverter |
 | png-to-bmp | image-format | ImageCatchAllConverter |
 | png-to-gif | image-format | ImageCatchAllConverter |
@@ -1049,14 +1065,6 @@
 | tiff-to-png | image-format | ImageCatchAllConverter |
 | tiff-to-svg | image-format | ImageCatchAllConverter |
 | tiff-to-webp | image-format | ImageCatchAllConverter |
-| wav-to-aac | audio-format | AudioFormatConverter |
-| wav-to-aiff | audio-format | AudioFormatConverter |
-| wav-to-flac | audio-format | AudioFormatConverter |
-| wav-to-m4a | audio-format | AudioFormatConverter |
-| wav-to-mp3 | audio-format | AudioFormatConverter |
-| wav-to-ogg | audio-format | AudioFormatConverter |
-| wav-to-opus | audio-format | AudioFormatConverter |
-| wav-to-wma | audio-format | AudioFormatConverter |
 | webp-to-avif | image-format | ImageCatchAllConverter |
 | webp-to-bmp | image-format | ImageCatchAllConverter |
 | webp-to-gif | image-format | ImageCatchAllConverter |
@@ -1067,14 +1075,6 @@
 | webp-to-png | image-format | ImageCatchAllConverter |
 | webp-to-svg | image-format | ImageCatchAllConverter |
 | webp-to-tiff | image-format | ImageCatchAllConverter |
-| wma-to-aac | audio-format | AudioFormatConverter |
-| wma-to-aiff | audio-format | AudioFormatConverter |
-| wma-to-flac | audio-format | AudioFormatConverter |
-| wma-to-m4a | audio-format | AudioFormatConverter |
-| wma-to-mp3 | audio-format | AudioFormatConverter |
-| wma-to-ogg | audio-format | AudioFormatConverter |
-| wma-to-opus | audio-format | AudioFormatConverter |
-| wma-to-wav | audio-format | AudioFormatConverter |
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 

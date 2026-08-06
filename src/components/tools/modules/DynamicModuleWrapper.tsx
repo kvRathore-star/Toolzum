@@ -1056,6 +1056,156 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'mp4-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="mp4-to-mp3" description={HUB_DESCRIPTIONS['mp4-to-mp3']} /> }))),
   'mov-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="mov-to-mp3" description={HUB_DESCRIPTIONS['mov-to-mp3']} /> }))),
   'webm-to-mp3': dynamic(() => import('@/components/tools/modules/shared/VideoToAudioConverter').then(m => ({ default: () => <m.default slug="webm-to-mp3" description={HUB_DESCRIPTIONS['webm-to-mp3']} /> }))),
+  // Audio-format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
+  // AudioFormatConverter renders a per-tool info banner from the description prop, so
+  // each closure passes HUB_DESCRIPTIONS[slug] to keep pre-migration HTML byte-identical).
+  'audio-converter': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="audio-converter" description={HUB_DESCRIPTIONS['audio-converter']} /> }))),
+
+  'mp3-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-wav" description={HUB_DESCRIPTIONS['mp3-to-wav']} /> }))),
+
+  'wav-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-mp3" description={HUB_DESCRIPTIONS['wav-to-mp3']} /> }))),
+
+  'flac-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-mp3" description={HUB_DESCRIPTIONS['flac-to-mp3']} /> }))),
+
+  'ogg-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-mp3" description={HUB_DESCRIPTIONS['ogg-to-mp3']} /> }))),
+
+  'm4a-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-mp3" description={HUB_DESCRIPTIONS['m4a-to-mp3']} /> }))),
+
+  'aac-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-mp3" description={HUB_DESCRIPTIONS['aac-to-mp3']} /> }))),
+
+  'wma-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-mp3" description={HUB_DESCRIPTIONS['wma-to-mp3']} /> }))),
+
+  'opus-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-mp3" description={HUB_DESCRIPTIONS['opus-to-mp3']} /> }))),
+
+  'aiff-to-mp3': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-mp3" description={HUB_DESCRIPTIONS['aiff-to-mp3']} /> }))),
+
+  'mp3-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-flac" description={HUB_DESCRIPTIONS['mp3-to-flac']} /> }))),
+
+  'mp3-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-ogg" description={HUB_DESCRIPTIONS['mp3-to-ogg']} /> }))),
+
+  'mp3-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-m4a" description={HUB_DESCRIPTIONS['mp3-to-m4a']} /> }))),
+
+  'mp3-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-aac" description={HUB_DESCRIPTIONS['mp3-to-aac']} /> }))),
+
+  'mp3-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-wma" description={HUB_DESCRIPTIONS['mp3-to-wma']} /> }))),
+
+  'mp3-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-opus" description={HUB_DESCRIPTIONS['mp3-to-opus']} /> }))),
+
+  'mp3-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="mp3-to-aiff" description={HUB_DESCRIPTIONS['mp3-to-aiff']} /> }))),
+
+  'wav-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-flac" description={HUB_DESCRIPTIONS['wav-to-flac']} /> }))),
+
+  'wav-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-ogg" description={HUB_DESCRIPTIONS['wav-to-ogg']} /> }))),
+
+  'wav-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-m4a" description={HUB_DESCRIPTIONS['wav-to-m4a']} /> }))),
+
+  'wav-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-aac" description={HUB_DESCRIPTIONS['wav-to-aac']} /> }))),
+
+  'wav-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-wma" description={HUB_DESCRIPTIONS['wav-to-wma']} /> }))),
+
+  'wav-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-opus" description={HUB_DESCRIPTIONS['wav-to-opus']} /> }))),
+
+  'wav-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wav-to-aiff" description={HUB_DESCRIPTIONS['wav-to-aiff']} /> }))),
+
+  'flac-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-wav" description={HUB_DESCRIPTIONS['flac-to-wav']} /> }))),
+
+  'flac-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-ogg" description={HUB_DESCRIPTIONS['flac-to-ogg']} /> }))),
+
+  'flac-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-m4a" description={HUB_DESCRIPTIONS['flac-to-m4a']} /> }))),
+
+  'flac-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-aac" description={HUB_DESCRIPTIONS['flac-to-aac']} /> }))),
+
+  'ogg-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-wav" description={HUB_DESCRIPTIONS['ogg-to-wav']} /> }))),
+
+  'ogg-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-flac" description={HUB_DESCRIPTIONS['ogg-to-flac']} /> }))),
+
+  'ogg-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-m4a" description={HUB_DESCRIPTIONS['ogg-to-m4a']} /> }))),
+
+  'ogg-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-aac" description={HUB_DESCRIPTIONS['ogg-to-aac']} /> }))),
+
+  'm4a-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-wav" description={HUB_DESCRIPTIONS['m4a-to-wav']} /> }))),
+
+  'm4a-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-flac" description={HUB_DESCRIPTIONS['m4a-to-flac']} /> }))),
+
+  'm4a-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-ogg" description={HUB_DESCRIPTIONS['m4a-to-ogg']} /> }))),
+
+  'm4a-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-aac" description={HUB_DESCRIPTIONS['m4a-to-aac']} /> }))),
+
+  'aac-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-wav" description={HUB_DESCRIPTIONS['aac-to-wav']} /> }))),
+
+  'aac-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-flac" description={HUB_DESCRIPTIONS['aac-to-flac']} /> }))),
+
+  'aac-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-ogg" description={HUB_DESCRIPTIONS['aac-to-ogg']} /> }))),
+
+  'aac-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-m4a" description={HUB_DESCRIPTIONS['aac-to-m4a']} /> }))),
+
+  'aac-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-opus" description={HUB_DESCRIPTIONS['aac-to-opus']} /> }))),
+
+  'aac-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-wma" description={HUB_DESCRIPTIONS['aac-to-wma']} /> }))),
+
+  'aac-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aac-to-aiff" description={HUB_DESCRIPTIONS['aac-to-aiff']} /> }))),
+
+  'flac-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-wma" description={HUB_DESCRIPTIONS['flac-to-wma']} /> }))),
+
+  'flac-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-opus" description={HUB_DESCRIPTIONS['flac-to-opus']} /> }))),
+
+  'flac-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="flac-to-aiff" description={HUB_DESCRIPTIONS['flac-to-aiff']} /> }))),
+
+  'ogg-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-wma" description={HUB_DESCRIPTIONS['ogg-to-wma']} /> }))),
+
+  'ogg-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-opus" description={HUB_DESCRIPTIONS['ogg-to-opus']} /> }))),
+
+  'ogg-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="ogg-to-aiff" description={HUB_DESCRIPTIONS['ogg-to-aiff']} /> }))),
+
+  'm4a-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-wma" description={HUB_DESCRIPTIONS['m4a-to-wma']} /> }))),
+
+  'm4a-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-opus" description={HUB_DESCRIPTIONS['m4a-to-opus']} /> }))),
+
+  'm4a-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="m4a-to-aiff" description={HUB_DESCRIPTIONS['m4a-to-aiff']} /> }))),
+
+  'wma-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-wav" description={HUB_DESCRIPTIONS['wma-to-wav']} /> }))),
+
+  'wma-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-flac" description={HUB_DESCRIPTIONS['wma-to-flac']} /> }))),
+
+  'wma-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-ogg" description={HUB_DESCRIPTIONS['wma-to-ogg']} /> }))),
+
+  'wma-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-m4a" description={HUB_DESCRIPTIONS['wma-to-m4a']} /> }))),
+
+  'wma-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-aac" description={HUB_DESCRIPTIONS['wma-to-aac']} /> }))),
+
+  'wma-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-opus" description={HUB_DESCRIPTIONS['wma-to-opus']} /> }))),
+
+  'wma-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="wma-to-aiff" description={HUB_DESCRIPTIONS['wma-to-aiff']} /> }))),
+
+  'opus-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-wav" description={HUB_DESCRIPTIONS['opus-to-wav']} /> }))),
+
+  'opus-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-flac" description={HUB_DESCRIPTIONS['opus-to-flac']} /> }))),
+
+  'opus-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-ogg" description={HUB_DESCRIPTIONS['opus-to-ogg']} /> }))),
+
+  'opus-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-m4a" description={HUB_DESCRIPTIONS['opus-to-m4a']} /> }))),
+
+  'opus-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-aac" description={HUB_DESCRIPTIONS['opus-to-aac']} /> }))),
+
+  'opus-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-wma" description={HUB_DESCRIPTIONS['opus-to-wma']} /> }))),
+
+  'opus-to-aiff': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="opus-to-aiff" description={HUB_DESCRIPTIONS['opus-to-aiff']} /> }))),
+
+  'aiff-to-wav': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-wav" description={HUB_DESCRIPTIONS['aiff-to-wav']} /> }))),
+
+  'aiff-to-flac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-flac" description={HUB_DESCRIPTIONS['aiff-to-flac']} /> }))),
+
+  'aiff-to-ogg': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-ogg" description={HUB_DESCRIPTIONS['aiff-to-ogg']} /> }))),
+
+  'aiff-to-m4a': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-m4a" description={HUB_DESCRIPTIONS['aiff-to-m4a']} /> }))),
+
+  'aiff-to-aac': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-aac" description={HUB_DESCRIPTIONS['aiff-to-aac']} /> }))),
+
+  'aiff-to-wma': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-wma" description={HUB_DESCRIPTIONS['aiff-to-wma']} /> }))),
+
+  'aiff-to-opus': dynamic(() => import('@/components/tools/modules/shared/AudioFormatConverter').then(m => ({ default: () => <m.default slug="aiff-to-opus" description={HUB_DESCRIPTIONS['aiff-to-opus']} /> }))),
+
+
 
   // Standalone tools
   'break-even-calculator': dynamic(() => import('@/components/tools/modules/finance/BreakEvenCalculator'), { ssr: false, loading: () => <DynamicImportFallback slug="break-even-calculator" /> }),
