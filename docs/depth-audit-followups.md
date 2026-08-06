@@ -89,9 +89,15 @@ review list, not a pass/fail gate.
   assert the redirect-source slugs are **not** closure-routed, so a future accidental wiring
   of a redirect source into MODULE_REGISTRY fails CI instead of silently worsening the
   lossiness.
-- Status: **open, must be resolved before Phase 4** (deleting ConverterRouter/converterConfig).
-  Design B = split the 7 sources into per-pair pages (e.g. `yaml-to-toon` renders
+- Status: **open, in scope for Phase 4** (not a separate prerequisite). Phase 4 =
+  retire ConverterRouter/converterConfig **and** resolve Design B. Resolution plan:
+  split the 7 sources into per-pair pages (e.g. `yaml-to-toon` renders
   `JsonToonConverter initialMode='yaml-to-toon'`; `json-to-csv` renders
-  `DataConverterFromSlug slug='json-to-csv'`), which requires removing their
-  `TOOL_REDIRECTS` entries and adding per-pair routes + pairs tests, then re-running the
-  integrity suite.
+  `DataConverterFromSlug slug='json-to-csv'`), which requires:
+  1. removing their `TOOL_REDIRECTS` entries in `src/registry/tools-constants.ts`;
+  2. adding per-pair MODULE_REGISTRY closures + `*‑pairs.test.ts` contracts;
+  3. updating the guards that currently codify the redirect state — `registry-integrity.test.ts:249-257` ("no MODULE_REGISTRY slug redirects away") and the "not closure-routed" assertions in `data-pairs.test.ts`/`toon-pairs.test.ts` — since the 7 sources become real pages, not redirect-only;
+  4. re-running the full integrity suite + build/measure for the 7 new pages.
+  Phase 4 must not delete `ConverterRouter`/`CONVERTER_CONFIG` until Design B lands,
+  because those sources currently resolve only via `TOOL_REDIRECTS`; deleting the
+  redirect mechanism before creating the per-pair pages would 404 them.
