@@ -302,4 +302,59 @@ describe('registry integrity #9: routing consistency', () => {
       orphans.map(f => relative(SRC_ROOT, f))
     ).toEqual([]);
   });
+
+  it('MODULE_REGISTRY is the single registration path: no non-module file imports a module component except DynamicModuleWrapper', () => {
+    const MODULES_DIR = join(SRC_ROOT, 'components/tools/modules');
+    const WRAPPER_FILE = join(MODULES_DIR, 'DynamicModuleWrapper.tsx');
+
+    const moduleFiles = walk(MODULES_DIR);
+    const importable = new Map<string, string>();
+    for (const f of moduleFiles) {
+      const rel = relative(SRC_ROOT, f).replace(/\.(ts|tsx)$/, '');
+      importable.set('@/' + rel, f);
+    }
+
+    function resolveSpecifier(importer: string, spec: string): string | null {
+      if (spec.startsWith('@/')) {
+        return importable.get(spec) || importable.get(spec.replace(/\.tsx?$/, '')) || null;
+      }
+      if (spec.startsWith('.')) {
+        const base = resolve(dirname(importer), spec);
+        for (const ext of ['', '.tsx', '.ts']) {
+          const candidate = importable.get('@/' + relative(SRC_ROOT, base + ext));
+          if (candidate) return candidate;
+        }
+        return null;
+      }
+      return null;
+    }
+
+    // Every file in src EXCEPT: the modules dir itself, the wrapper (its own
+    // definition site), and tests. If any of these imports a module COMPONENT
+    // (.tsx — a renderable) directly, a second registration path is being built.
+    // Pure data modules (.ts, e.g. unitFamilies for SEO text) are not a render
+    // path and are allowed — a router cannot exist without importing components.
+    const importerFiles = walk(SRC_ROOT)
+      .filter(f => !f.startsWith(MODULES_DIR))
+      .filter(f => !f.includes(join('__tests__')));
+
+    const violations: string[] = [];
+    const impRe = /(?:from\s+|import\(\s*)['"]([^'"]+)['"]/g;
+    for (const f of importerFiles) {
+      const content = readFileSync(f, 'utf8');
+      let m: RegExpExecArray | null;
+      while ((m = impRe.exec(content)) !== null) {
+        const target = resolveSpecifier(f, m[1]);
+        if (!target) continue;
+        if (target === WRAPPER_FILE) continue; // the sanctioned gateway
+        if (target.startsWith(MODULES_DIR) && target.endsWith('.tsx')) {
+          violations.push(
+            `${relative(SRC_ROOT, f)} imports ${relative(SRC_ROOT, target)} directly — module components are reachable only via MODULE_REGISTRY (DynamicModuleWrapper.tsx)`
+          );
+        }
+      }
+    }
+
+    expect(violations, violations.join('\n')).toEqual([]);
+  });
 });

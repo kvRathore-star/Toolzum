@@ -24,6 +24,29 @@ const eslintConfig = defineConfig([
     },
   },
   {
+    // Routing is single-source: MODULE_REGISTRY in DynamicModuleWrapper.tsx is
+    // the ONLY sanctioned importer of tool module components. A parallel
+    // registration path (the historical converterConfig.ts + ConverterRouter.tsx
+    // shape) is blocked at authoring time by refusing direct module imports from
+    // anywhere else in src. Register new tools in MODULE_REGISTRY instead.
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/components/tools/modules/**", "src/__tests__/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/components/tools/modules/**", "!@/components/tools/modules/DynamicModuleWrapper"],
+              message:
+                "Tool module components are reachable only through MODULE_REGISTRY in DynamicModuleWrapper.tsx. Register the slug there — do not import a module component directly (this is how a second registration path starts).",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     // Node scripts are CommonJS — require() is correct there, not a bug.
     files: ["scripts/**/*.js"],
     rules: {
