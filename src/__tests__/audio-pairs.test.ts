@@ -4,6 +4,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CONVERTER_CONFIG } from '@/components/tools/modules/shared/converterConfig';
 import { HUB_DESCRIPTIONS } from '@/components/tools/modules/shared/hubDescriptions';
+import { FORMAT_PAIRS } from '@/components/tools/modules/shared/AudioFormatConverter';
+
+// Slugs with no own FORMAT_PAIRS entry; the hub's `|| FORMAT_PAIRS[0]` fallback
+// (mp3-to-wav) applies. audio-converter is the consolidated hub; the six
+// m4a<->wma/opus/aiff pairs are simply absent from FORMAT_PAIRS. Both cases are
+// pre-existing ConverterRouter behavior (same component + slug prop), preserved
+// byte-identically by the closures.
+const FALLBACK_SLUGS = [
+  'audio-converter', 'm4a-to-wma', 'm4a-to-opus', 'm4a-to-aiff',
+  'wma-to-m4a', 'opus-to-m4a', 'aiff-to-m4a',
+];
 
 const AUDIO_FORMAT_SLUGS = [
   'audio-converter', 'mp3-to-wav', 'wav-to-mp3', 'flac-to-mp3', 'ogg-to-mp3', 'm4a-to-mp3',
@@ -45,5 +56,15 @@ describe('audio hub slug-closure contract', () => {
       expect(HUB_DESCRIPTIONS, `audio slug ${slug} missing from HUB_DESCRIPTIONS`).toHaveProperty(slug);
       expect(HUB_DESCRIPTIONS[slug].length).toBeGreaterThan(10);
     }
+  });
+
+  it('every routed audio slug resolves to its own FORMAT_PAIRS entry or the documented fallback', () => {
+    const pairSlugs = FORMAT_PAIRS.map(p => p.slug);
+    const noOwnEntry = AUDIO_FORMAT_SLUGS.filter(s => !pairSlugs.includes(s));
+    expect(noOwnEntry.slice().sort(), 'audio slugs without their own FORMAT_PAIRS entry').toEqual(
+      FALLBACK_SLUGS.slice().sort(),
+    );
+    // the fallback target is FORMAT_PAIRS[0], the same pair ConverterRouter produced
+    expect(FORMAT_PAIRS[0].slug).toBe('mp3-to-wav');
   });
 });

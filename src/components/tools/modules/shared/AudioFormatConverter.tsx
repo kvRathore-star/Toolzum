@@ -35,7 +35,7 @@ type FormatPair = {
   label: string;
 };
 
-const FORMAT_PAIRS: FormatPair[] = [
+export const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'mp3-to-wav', input: 'mp3', output: 'wav', label: 'MP3 \u2192 WAV' },
   { slug: 'wav-to-mp3', input: 'wav', output: 'mp3', label: 'WAV \u2192 MP3' },
   { slug: 'flac-to-mp3', input: 'flac', output: 'mp3', label: 'FLAC \u2192 MP3' },
