@@ -113,4 +113,42 @@ describe('OG image generation: per-tool images are decoupled from the global too
       rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  it('writes a cache manifest that survives a fully-skipped re-run (no cache wipe)', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'og-test-'));
+    const cacheFile = join(dir, 'og-cache.json');
+    try {
+      const tools = [mkTool('Alpha Tool', 'alpha', 'Converter', 'A')];
+      await generateAll(tools, ['Converter'], dir);
+      const cacheAfterCold = JSON.parse(readFileSync(cacheFile, 'utf8'));
+      expect(Object.keys(cacheAfterCold).length).toBe(2); // alpha.png + index.png
+
+      await generateAll(tools, ['Converter'], dir);
+      const cacheAfterWarm = JSON.parse(readFileSync(cacheFile, 'utf8'));
+      expect(cacheAfterWarm).toEqual(cacheAfterCold);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('invalidates only the changed tool hash in the cache', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'og-test-'));
+    const cacheFile = join(dir, 'og-cache.json');
+    try {
+      const tools = [
+        mkTool('Alpha Tool', 'alpha', 'Converter', 'A'),
+        mkTool('Beta Tool', 'beta', 'Converter', 'B'),
+      ];
+      await generateAll(tools, ['Converter'], dir);
+
+      tools[0] = { ...tools[0], description: 'Changed A' };
+      await generateAll(tools, ['Converter'], dir);
+
+      const cache = JSON.parse(readFileSync(cacheFile, 'utf8'));
+      expect(cache['converter/beta.png']).toBeTruthy();
+      expect(cache['converter/alpha.png']).not.toBe(sha1(join(dir, 'converter/alpha.png')));
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });

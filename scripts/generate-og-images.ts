@@ -1,4 +1,5 @@
 import { createRequire } from "module";
+import { createHash } from "crypto";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
@@ -17,6 +18,36 @@ const geistPath = resolve(
 const geistFont = readFileSync(geistPath);
 
 const OUT = resolve("public/og");
+
+// Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
+const TEMPLATE_VERSION = "og-template-v1";
+
+const CACHE_FILE = "og-cache.json";
+
+function sha1(input: string): string {
+  return createHash("sha1").update(input).digest("hex");
+}
+
+function toolHash(tool: ToolInfo): string {
+  return sha1(`${TEMPLATE_VERSION}|${tool.name}|${tool.slug}|${tool.category}|${tool.description}`);
+}
+
+function categoryHash(category: string, count: number): string {
+  return sha1(`${TEMPLATE_VERSION}|cat:${category}|${count}`);
+}
+
+function loadCache(cachePath: string): Map<string, string> {
+  if (!existsSync(cachePath)) return new Map();
+  try {
+    return new Map(Object.entries(JSON.parse(readFileSync(cachePath, "utf8"))));
+  } catch {
+    return new Map();
+  }
+}
+
+function writeCache(cachePath: string, cache: Map<string, string>): void {
+  writeFileSync(cachePath, JSON.stringify(Object.fromEntries(cache), null, 2));
+}
 
 export interface ToolInfo {
   name: string;
@@ -253,44 +284,109 @@ export function categoryOG(category: string, count: number) {
   );
 }
 
-async function generateImage(element: any, outPath: string) {
-  const dir = outPath.substring(0, outPath.lastIndexOf("/"));
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+async function renderImage(element: any): Promise<Buffer> {
   const img = new ImageResponse(element, {
     width: 1200,
     height: 630,
     fonts: [{ name: "Geist", data: geistFont, weight: 400, style: "normal" }],
   });
   const resp = await img;
-  const buf = Buffer.from(await resp.arrayBuffer());
+  return Buffer.from(await resp.arrayBuffer());
+}
+
+async function writeImage(outPath: string, buf: Buffer): Promise<void> {
+  const dir = outPath.substring(0, outPath.lastIndexOf("/"));
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   writeFileSync(outPath, buf);
+}
+
+async function runPool<T>(
+  items: T[],
+  concurrency: number,
+  worker: (item: T, index: number) => Promise<void>
+): Promise<void> {
+  let next = 0;
+  const tasks = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (next < items.length) {
+      const i = next++;
+      await worker(items[i], i);
+    }
+  });
+  await Promise.all(tasks);
 }
 
 export async function generateAll(
   tools: ToolInfo[],
   categories: string[],
-  outDir: string
+  outDir: string,
+  concurrency = DEFAULT_CONCURRENCY,
+  cachePath = `${outDir}/${CACHE_FILE}`
 ): Promise<void> {
-  for (let i = 0; i < tools.length; i++) {
-    const outPath = `${outDir}/${tools[i].category.toLowerCase()}/${tools[i].slug}.png`;
-    await generateImage(toolOG(tools[i]), outPath);
-    if (i % 25 === 0) {
-      console.log(`  [${i + 1}/${tools.length}] tools done...`);
-    }
+  const cache = loadCache(cachePath);
+
+  interface Job {
+    element: any;
+    outPath: string;
+    hash: string;
+  }
+
+  const jobs: Job[] = [];
+  const livePaths = new Set<string>();
+  const rel = (outPath: string) => outPath.slice(outDir.length + 1);
+  const addJob = (element: any, outPath: string, hash: string) => {
+    livePaths.add(rel(outPath));
+    if (cache.get(rel(outPath)) === hash && existsSync(outPath)) return;
+    jobs.push({ element, outPath, hash });
+  };
+
+  for (const tool of tools) {
+    const outPath = `${outDir}/${tool.category.toLowerCase()}/${tool.slug}.png`;
+    addJob(toolOG(tool), outPath, toolHash(tool));
   }
 
   for (const cat of categories) {
     const count = tools.filter((t) => t.category === cat).length;
     const outPath = `${outDir}/${cat.toLowerCase()}/index.png`;
-    await generateImage(categoryOG(cat, count), outPath);
+    addJob(categoryOG(cat, count), outPath, categoryHash(cat, count));
     console.log(`  Category: ${cat} (${count} tools)`);
   }
+
+  const total = tools.length + categories.length;
+  const skipped = total - jobs.length;
+  const start = Date.now();
+  let done = 0;
+
+  await runPool(jobs, concurrency, async (job) => {
+    const buf = await renderImage(job.element);
+    await writeImage(job.outPath, buf);
+    done++;
+    if (done % 25 === 0) {
+      console.log(`  [${done}/${jobs.length}] rendered...`);
+    }
+  });
+
+  for (const job of jobs) cache.set(rel(job.outPath), job.hash);
+  for (const cachedPath of cache.keys()) {
+    if (!livePaths.has(cachedPath)) cache.delete(cachedPath);
+  }
+  writeCache(cachePath, cache);
+
+  const ms = Date.now() - start;
+  const perImage = ms / Math.max(jobs.length, 1);
+  console.log(
+    `  Rendered ${jobs.length}/${total} images in ${(ms / 1000).toFixed(1)}s (${skipped} skipped, ~${perImage.toFixed(0)}ms/render, pool=${concurrency}).`
+  );
 }
+
+const DEFAULT_CONCURRENCY = Number(process.env.OG_CONCURRENCY) || 4;
+const CACHE = resolve("og-cache.json");
 
 async function main() {
   console.log(`Generating OG images for ${toolsRegistry.length} tools and ${categories.length} categories...`);
-  await generateAll(toolsRegistry, categories, OUT);
-  console.log("Done! All OG images generated.");
+  const start = Date.now();
+  await generateAll(toolsRegistry, categories, OUT, DEFAULT_CONCURRENCY, CACHE);
+  const totalMs = Date.now() - start;
+  console.log(`Done! All OG images generated in ${(totalMs / 1000).toFixed(1)}s total.`);
 }
 
 const isDirectRun =
