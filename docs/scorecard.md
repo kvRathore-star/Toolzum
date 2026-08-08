@@ -75,7 +75,7 @@ heuristic is the accepted coverage; full manual 1,151-tool audit not cost-justif
 **6e FIXED** (`GEMINI_API_KEY` documented in `.env.example`);
 **6f non-issue confirmed**; **6g Depth scope decision recorded**.
 
-### Lint-debt resolution (2026-08-08)
+### Lint-debt resolution (2026-08-08, commit `c28c661`, pushed)
 
 All 62 `react-hooks/set-state-in-effect` errors resolved and the CI lint gate is green.
 
