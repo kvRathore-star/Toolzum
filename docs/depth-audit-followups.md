@@ -110,6 +110,54 @@ review list, not a pass/fail gate.
   no `http-equiv="refresh"` on any of the 7 pages, and each renders its correct pair (e.g.
   `yaml-to-toon` shows YAML→Toon with YAML input; `json-to-csv` shows JSON→CSV preselected).
   Registry 1040→1047, redirect-only 89→82, full suite 122 green, tsc clean.
+## 6. Cross-Tier Review sweep findings (2026-08-08) — logged, not fixed
+
+> From the Cross-Tier Review & Scorecard Verification Sweep (audit tier). Each finding below is
+> logged for a future tier; none were fixed as part of the audit per its constraints.
+
+- **6a. 113 stale tracked OG PNGs (~6MB).** `public/og/` contains 113 PNGs that no longer
+  correspond to any live registry slug at that path: **93 category-moved** (slug live, but the
+  PNG sits in the pre-restructure directory, e.g. `public/og/utility/csv-formatter.png` is
+  git-tracked while the live tool is `converter/csv-formatter`) + **19 true orphans** (slug not
+  in registry at all, e.g. `pdf/pdf-to-docx`, `image/bulk-webp-avif-modernizer`). Root cause:
+  `generateAll` in `scripts/generate-og-images.ts` prunes the **manifest** for paths no longer
+  in `livePaths` (:368-372) but **never deletes the PNG file on disk**. Not a routing/SEO
+  defect — every live tool has a current PNG (0 missing) — but the repo tracks 6MB of dead
+  images, and the old `growth & marketing metrics/` directory is a leftover category name.
+  Fix would be a one-time `git rm` of the 112 tracked strays + a harden in `generateAll` to
+  delete orphan files. **Logged for a future tier.**
+- **6b. `og-cache.json` is NOT git-tracked despite `docs/build-performance-phase2.md:22,26`
+  claiming it is.** `git ls-files | grep og-cache.json` → empty; it is just untracked (and not
+  gitignored). Consequence: on a fresh CI/CF checkout the manifest is absent and `gen:og` does a
+  cold full render every time — the warm-cache optimization (~0.3s vs ~129s) only helps local
+  builds where the file persists. Doc-vs-reality contradiction; either commit the manifest or
+  fix the doc claim. **Logged.**
+- **6c. No test covers the registry/routing × OG combination.** `og-images.test.ts` exercises
+  `generateAll` only with synthetic tools; `registry-integrity.test.ts` never reads
+  `public/og/` or `og-cache.json`. A slug rename, category move, or removal that leaves a stale
+  tracked PNG would sail through CI green (6a is the live proof). A cheap guard: assert every
+  git-tracked `public/og/**/*.png` maps to a live registry slug at that path. **Logged.**
+- **6d. `functions/api/ai/transcribe.ts` has no upload size limit** and base64-encodes via
+  `String.fromCharCode(...new Uint8Array(arrayBuffer))` (:28) — a spread on an unbounded array
+  (stack/memory risk for large audio). url-status-check.ts budgets everything; transcribe does
+  not. Add a size cap (e.g. reject >50MB) and chunk the base64 conversion. **Logged.**
+- **6e. `GEMINI_API_KEY` is not in `.env.example` / wrangler config docs** for the transcribe
+  handler, so the required secret is undocumented (the handler 500s if unset — cf. follow-up
+  #3 above which found it unset in prod at audit time). **Logged.**
+- **6f. Sitemap generator `scripts/generate-sitemap.js` globs only `tools-chunk-*.ts`** and
+  never reads `tools-constants.ts` — 82 SEO_PERMUTATION bulk slugs are absent from the sitemap.
+  This is **correct behavior** (all 82 are `parentSlug` entries that `permanentRedirect` to
+  their hub via `page.tsx:75-93`, so omitting them from the sitemap is intentional). Verified
+  non-issue; recorded so nobody "fixes" the sitemap into adding 301 sources. **No action.**
+- **6g. Broader Depth heuristics found no new stubs** (Phase 3). Ran: short implementation
+  files (<3KB → 35, all real thin wrappers), stub-language scan (`coming soon|stub|placeholder`
+  → 14 false positives, e.g. placeholder *generators* and `background-remover` which is a
+  TOOL_REDIRECTS → `ai-bg-changer`). The `description === seoDescription` heuristic
+  (`scan.test.ts`) remains the only productive one, flagging the 5 known cosmetic items (#1,
+  #2). **Decision: accept current Depth-audit scope** — full manual 1,151-tool functional
+  audit is not cost-justified; the structural gate (every MODULE_REGISTRY slug renders, zero
+  orphans) + description-identity heuristic is the accepted coverage.
+
 - Status: **closed.** Phase 4 fully complete (2026-08-06):
   - ConverterRouter/converterConfig/ConverterCategory deleted (commit `9d5ab83`).
   - `HUB_DESCRIPTIONS` folded into hub-owned `DESCRIPTIONS` maps (commit `346949c`).
