@@ -16,7 +16,7 @@ import {
   CATEGORIES, STEPS, FEATURES, USE_CASES, INDIA_TOOLS,
   getWhyChoose, getStatsBar
 } from '@/data/homepage';
-import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
+import { useIsIndia } from '@/hooks/useIsIndia';
 
 const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
 const totalCloud = cloudTools + hybridTools;
@@ -40,15 +40,7 @@ const itemVariants = {
 
 export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
   const [activeTab, setActiveTab] = useState("compress");
-  const [showIndia, setShowIndia] = useState(isIndia);
-
-  React.useEffect(() => {
-    if (isIndia || isIndiaFromCookie() || isIndiaFromTz()) {
-      setShowIndia(true);
-      return;
-    }
-    isIndiaFromIp().then(setShowIndia);
-  }, [isIndia]);
+  const showIndia = useIsIndia(isIndia);
 
   const popularTools = useMemo(() => {
     const featuredSlugs = ['pdf-compressor', 'image-compressor', 'background-remover', 'qr-code-generator', 'gst-calculator', 'word-counter',
@@ -836,6 +828,7 @@ function SocialProofTicker() {
   useEffect(() => {
     try {
       const val = parseInt(localStorage.getItem('toolzum:processedCount') || '0', 10);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate processed-count badge from localStorage on mount
       setCount(val);
     } catch {}
   }, []);

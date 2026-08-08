@@ -34,6 +34,7 @@ export default function TextToSpeechTts() {
         window.speechSynthesis.cancel();
       };
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detect speechSynthesis support once on mount
       setIsSupported(false);
     }
   }, []);

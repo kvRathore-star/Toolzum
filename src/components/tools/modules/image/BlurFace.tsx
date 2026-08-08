@@ -14,6 +14,7 @@ export default function BlurFace() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- start loading the AI face-detection model on mount
     setModelLoading(true);
     const loadToast = toast.loading("Loading AI face detection model...");
     blazeface.load().then(m => {

@@ -12,6 +12,7 @@ export function GdprConsentBanner() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CONSENT_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- show banner only after reading consent from localStorage
       if (!stored) setVisible(true);
     } catch { /* noop */ }
   }, []);

@@ -65,6 +65,7 @@ export function Footer() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mark mounted to avoid hydration mismatch in theme-aware footer
     setMounted(true);
   }, []);
 

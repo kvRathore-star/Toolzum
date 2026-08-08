@@ -217,7 +217,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'ai-paraphrasing-tool': dynamic(() => import('@/components/tools/modules/ai/AiParaphrasingTool'), { ssr: false, loading: () => <DynamicImportFallback slug="ai-paraphrasing-tool" /> }),
   'url-shortener': dynamic(() => import('@/components/tools/modules/utility/UrlShortener'), { ssr: false, loading: () => <DynamicImportFallback slug="url-shortener" /> }),
   'unlock-pdf': dynamic(() => import('@/components/tools/modules/pdf/ProtectPdf').then(m => {
-    const UnlockPdf = () => <m.PdfSecurityTool defaultMode="unlock" />;
+    const UnlockPdf = () => <m.PdfSecurityTool key="unlock" defaultMode="unlock" />;
     return { default: UnlockPdf };
   }), { ssr: false, loading: () => <DynamicImportFallback slug="unlock-pdf" /> }),
   'image-enhancer': dynamic(() => import('@/components/tools/modules/image/ImageEnhancer'), { ssr: false, loading: () => <DynamicImportFallback slug="image-enhancer" /> }),
@@ -283,7 +283,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'compare-pdf-files': dynamic(() => import('@/components/tools/modules/pdf/ComparePdfFiles'), { ssr: false, loading: () => <DynamicImportFallback slug="compare-pdf-files" /> }),
   'favicon-generator': dynamic(() => import('@/components/tools/modules/design/FaviconGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="favicon-generator" /> }),
   'base64-to-image': dynamic(() => import('@/components/tools/modules/developer/ImageToBase64').then(m => {
-    const Base64ToImage = () => <m.Base64ImageTool defaultMode="base64-to-image" />;
+    const Base64ToImage = () => <m.Base64ImageTool key="base64-to-image" defaultMode="base64-to-image" />;
     return { default: Base64ToImage };
   }), { ssr: false, loading: () => <DynamicImportFallback slug="base64-to-image" /> }),
   'nato-phonetic-converter': dynamic(() => import('@/components/tools/modules/utility/NatoPhoneticConverter'), { ssr: false, loading: () => <DynamicImportFallback slug="nato-phonetic-converter" /> }),
@@ -423,7 +423,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'gif-resizer': dynamic(() => import('@/components/tools/modules/image/GifResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-resizer" /> }),
   'gif-to-apng': dynamic(() => import('@/components/tools/modules/image/GifToApng'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-to-apng" /> }),
   'apng-to-gif': dynamic(() => import('@/components/tools/modules/image/GifToApng').then(m => {
-    const ApngToGif = () => <m.AnimationConverter defaultMode="apng-to-gif" />;
+    const ApngToGif = () => <m.AnimationConverter key="apng-to-gif" defaultMode="apng-to-gif" />;
     return { default: ApngToGif };
   }), { ssr: false, loading: () => <DynamicImportFallback slug="apng-to-gif" /> }),
   'image-to-ico': dynamic(() => import('@/components/tools/modules/image/ImageToIco'), { ssr: false, loading: () => <DynamicImportFallback slug="image-to-ico" /> }),

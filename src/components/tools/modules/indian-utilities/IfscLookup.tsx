@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Phone, ShieldCheck, HelpCircle, Loader2, AlertCircle, Building, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 import { getErrorMessage } from '@/utils/error';
 
 const COMMON_BANKS: Record<string, string> = {
@@ -33,24 +34,8 @@ export default function IfscLookup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
-  const [usage, setUsage] = useState(0);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('ifscLookupUsage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('ifscLookupUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('ifscLookupUsage');
 
   const validateIFSC = (code: string) => /^[A-Z]{4}0[A-Z0-9]{6}$/i.test(code);
 

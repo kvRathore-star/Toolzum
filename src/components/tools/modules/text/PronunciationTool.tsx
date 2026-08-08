@@ -64,6 +64,7 @@ export default function PronunciationTool() {
 
   useEffect(() => {
     const saved = localStorage.getItem('toolzum_pronounce_favorites');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate favorites from localStorage on mount
     if (saved) setFavorites(JSON.parse(saved));
     const hist = localStorage.getItem('toolzum_pronounce_history');
     if (hist) setHistory(JSON.parse(hist));

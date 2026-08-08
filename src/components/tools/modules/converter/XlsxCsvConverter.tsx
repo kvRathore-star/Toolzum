@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import * as XLSX from 'xlsx';
@@ -155,11 +155,12 @@ export default function XlsxCsvConverter() {
     e.target.value = '';
   }, [direction, sheetName, delimiter, includeHeader, range, csvSheetName, processXlsxFile, processCsvFile, resetState]);
 
-  useEffect(() => {
+  const switchDirection = (dir: Direction) => {
+    setDirection(dir);
     resetState();
     setFile(null);
     setFileInfo(null);
-  }, [direction, resetState]);
+  };
 
   const downloadOutput = useCallback(() => {
     if (!outputUrl) return;
@@ -178,13 +179,13 @@ export default function XlsxCsvConverter() {
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-1">
           <button
-            onClick={() => setDirection('xlsx-to-csv')}
+            onClick={() => switchDirection('xlsx-to-csv')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'xlsx-to-csv' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             XLSX → CSV
           </button>
           <button
-            onClick={() => setDirection('csv-to-xlsx')}
+            onClick={() => switchDirection('csv-to-xlsx')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'csv-to-xlsx' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
           >
             CSV → XLSX

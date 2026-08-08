@@ -6,6 +6,7 @@ export function OfflineIndicator() {
   const [offline, setOffline] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- seed initial online/offline state before subscribing to browser events
     setOffline(!navigator.onLine);
     const on = () => setOffline(false);
     const off = () => setOffline(true);

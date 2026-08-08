@@ -5,6 +5,7 @@ export function useObjectURL(blob: Blob | null): string | null {
 
   useEffect(() => {
     if (!blob) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- clear object URL when source blob is removed
       setUrl(null);
       return;
     }

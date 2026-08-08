@@ -58,6 +58,7 @@ export default function CurrencyConverter() {
     const saved = localStorage.getItem('currency_history');
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate conversion history from localStorage on mount
         setHistory(JSON.parse(saved));
       } catch (e) {}
     }

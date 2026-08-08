@@ -336,6 +336,7 @@ export default function MarkdownToPdf() {
   }, [pdfUrl]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- render markdown -> HTML preview asynchronously on input change
     if (!markdown.trim()) { setHtmlPreview(''); return; }
     Promise.resolve(marked.parse(markdown)).then(setHtmlPreview).catch(() => {});
   }, [markdown]);

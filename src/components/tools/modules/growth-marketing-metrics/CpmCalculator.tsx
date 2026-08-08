@@ -27,6 +27,15 @@ export default function CpmCalculator() {
   const [estCpm, setEstCpm] = useState(5);
   const [estRpm, setEstRpm] = useState(2);
 
+  const [prevPlatform, setPrevPlatform] = useState(platform);
+  if (prevPlatform !== platform) {
+    setPrevPlatform(platform);
+    if (platform !== 'custom') {
+      setEstCpm(platformPresets[platform].cpm);
+      setEstRpm(platformPresets[platform].rpm);
+    }
+  }
+
   const cpm = impressions > 0 ? (cost / impressions) * 1000 : 0;
   const rpm = impressions > 0 ? (revenue / impressions) * 1000 : 0;
 
@@ -36,13 +45,6 @@ export default function CpmCalculator() {
   const platformLabel = platform !== 'custom' ? platformPresets[platform]?.note?.split(':')[0] : '';
   const presetCpm = platform !== 'custom' ? platformPresets[platform]?.cpm : null;
   const presetRpm = platform !== 'custom' ? platformPresets[platform]?.rpm : null;
-
-  React.useEffect(() => {
-    if (platform !== 'custom') {
-      setEstCpm(platformPresets[platform].cpm);
-      setEstRpm(platformPresets[platform].rpm);
-    }
-  }, [platform]);
 
   return (
     <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">

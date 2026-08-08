@@ -46,6 +46,7 @@ export default function SocialMediaCalendar() {
 
   useEffect(() => {
     const saved = localStorage.getItem('social_media_calendar');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate saved posts from localStorage on mount
     if (saved) { try { setPosts(JSON.parse(saved)); } catch {} }
   }, []);
 

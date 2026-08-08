@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -38,7 +38,6 @@ export default function AudioMerger() {
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [isLoadingFFmpeg, setIsLoadingFFmpeg] = useState(false);
-  const [totalDuration, setTotalDuration] = useState(0);
   const [durations, setDurations] = useState<number[]>([]);
   const [progress, setProgress] = useState(0);
 
@@ -102,14 +101,11 @@ export default function AudioMerger() {
     return () => { cancelled = true; };
   }, [files]);
 
-  useEffect(() => {
-    if (order.length === 0 || durations.length === 0) {
-      setTotalDuration(0);
-      return;
-    }
+  const totalDuration = useMemo(() => {
+    if (order.length === 0 || durations.length === 0) return 0;
     const sum = order.reduce((acc, idx) => acc + (durations[idx] || 0), 0);
     const overlap = crossfade * Math.max(0, order.length - 1);
-    setTotalDuration(Math.max(0, sum - overlap));
+    return Math.max(0, sum - overlap);
   }, [durations, order, crossfade]);
 
   const addFiles = (newFiles: File[]) => {

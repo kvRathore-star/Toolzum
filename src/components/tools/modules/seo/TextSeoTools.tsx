@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import NextLink from 'next/link';
 import { Copy, Download, Hash, Type, BarChart3, Search, FileText, Globe, Edit3, ListOrdered, GitCompare, ArrowLeftRight, SpellCheck, Scissors, Trash2, Link, Rows3, Sigma } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -395,7 +395,6 @@ export function TextDiffChecker() {
 // === 16/17. TextToHtmlConverter / HtmlToTextConverter ===
 function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-text' }) {
   const [mode, setMode] = useState(defaultMode); const [input, setInput] = useState(''); const [result, setResult] = useState('');
-  useEffect(() => { setMode(defaultMode); setInput(''); setResult(''); }, [defaultMode]);
   const convert = () => { const val = input.trim(); if (!val) { setResult(''); return; } try { if (mode === 'text-to-html') { const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim()); setResult(paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n')); } else { setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n\s*\n/g, '\n\n').trim()); } } catch { setResult(''); } };
   const isTextToHtml = mode === 'text-to-html';
 
@@ -411,8 +410,8 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
     </Section>
   );
 }
-export function TextToHtmlConverter() { return <TextHtmlTool defaultMode="text-to-html" />; }
-export function HtmlToTextConverter() { return <TextHtmlTool defaultMode="html-to-text" />; }
+export function TextToHtmlConverter() { return <TextHtmlTool key="text-to-html" defaultMode="text-to-html" />; }
+export function HtmlToTextConverter() { return <TextHtmlTool key="html-to-text" defaultMode="html-to-text" />; }
 
 // === 18. MarkdownPreviewer ===
 export function MarkdownPreviewer() {

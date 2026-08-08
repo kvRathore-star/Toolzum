@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Crop, Upload, Download, Loader2, Smartphone, Square, Monitor, Crown } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const RATIOS = [
   { label: '9:16 Reel/Shorts', w: 1080, h: 1920, icon: Smartphone },
@@ -26,24 +27,8 @@ export default function ReelShortsMaker() {
   const [customH, setCustomH] = useState('480');
   const [xOffset, setXOffset] = useState('0');
   const [yOffset, setYOffset] = useState('0');
-  const [usage, setUsage] = useState(0);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('reelShortsUsage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch (e) { console.error(e); setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('reelShortsUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('reelShortsUsage');
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];

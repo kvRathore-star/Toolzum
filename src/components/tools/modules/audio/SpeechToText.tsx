@@ -18,6 +18,7 @@ export default function SpeechToText() {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     
     if (!SpeechRecognition) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detect SpeechRecognition support once on mount
       setIsSupported(false);
       return;
     }

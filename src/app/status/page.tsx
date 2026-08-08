@@ -67,6 +67,7 @@ export default function StatusPage() {
   ]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- set initial "last checked" timestamp on mount
     setLastCheck(new Date().toLocaleTimeString());
   }, []);
 

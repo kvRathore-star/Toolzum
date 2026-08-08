@@ -34,6 +34,7 @@ export function useWorkflowPresets(toolSlug: string) {
   const [presets, setPresets] = useState<WorkflowPreset[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- load presets for this tool slug from localStorage on mount/switch
     setPresets(loadPresets().filter(p => p.toolSlug === toolSlug));
   }, [toolSlug]);
 

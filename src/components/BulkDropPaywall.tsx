@@ -3,19 +3,7 @@ import React, { useState } from 'react';
 import { FileText, Crown, X } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
-
-function useIsIndia(): boolean {
-  const [isIndia, setIsIndia] = useState(false);
-  React.useEffect(() => {
-    if (isIndiaFromCookie() || isIndiaFromTz()) {
-      setIsIndia(true);
-      return;
-    }
-    isIndiaFromIp().then(setIsIndia);
-  }, []);
-  return isIndia;
-}
+import { useIsIndia } from '@/hooks/useIsIndia';
 
 export function BulkDropPaywall() {
   const [files, setFiles] = useState<File[]>([]);

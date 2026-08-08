@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clipboardWrite } from "@/lib/clipboard";
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const DAILY_LIMIT = 20;
 
@@ -18,30 +19,18 @@ export default function PincodeFinder() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<any[] | null>(null);
-  const [usage, setUsage] = useState(0);
   const [showHistory, setShowHistory] = useState(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
+  const { usage, trackUsage } = useUsageCounter('pincodeFinderUsage');
+
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('pincodeFinderUsage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
-    }
     const history = localStorage.getItem('pincodeSearchHistory');
     if (history) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate search history from localStorage on mount
       try { setSearchHistory(JSON.parse(history)); } catch {}
     }
   }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('pincodeFinderUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
 
   const addToHistory = (query: string) => {
     const updated = [query, ...searchHistory.filter(h => h !== query)].slice(0, 10);

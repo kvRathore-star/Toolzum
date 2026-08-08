@@ -20,7 +20,8 @@ export default function BrandKit() {
   useEffect(() => {
     const savedColors = localStorage.getItem('brandKit_colors');
     const savedFonts = localStorage.getItem('brandKit_fonts');
-    if (savedColors) setColors(JSON.parse(savedColors));
+    if (savedColors) // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate colors from localStorage on mount
+      setColors(JSON.parse(savedColors));
     if (savedFonts) setFonts(JSON.parse(savedFonts));
   }, []);
 

@@ -27,12 +27,6 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
     return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
   }, [outputUrl]);
 
-  useEffect(() => {
-    setMode(defaultMode);
-    setFile(null); setFileBuffer(null); setOutputUrl(null);
-    setPassword(''); setConfirmPassword(''); setProgress(0);
-  }, [defaultMode]);
-
   const isProtect = mode === 'protect';
 
   const handleFileSelect = async (selectedFile: File) => {
@@ -254,4 +248,4 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
   );
 }
 
-export default function ProtectPdf() { return <PdfSecurityTool defaultMode="protect" />; }
+export default function ProtectPdf() { return <PdfSecurityTool key="protect" defaultMode="protect" />; }

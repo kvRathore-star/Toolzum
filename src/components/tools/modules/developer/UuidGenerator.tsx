@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4, v1 as uuidv1 } from 'uuid';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -13,29 +13,58 @@ export default function UuidGenerator() {
   const [quantity, setQuantity] = useState(10);
   const [uppercase, setUppercase] = useState(false);
   const [hyphens, setHyphens] = useState(true);
-  const [uuids, setUuids] = useState<string[]>([]);
 
-  const generateUuids = () => {
+  const buildUuids = (v: UuidVersion, q: number, up: boolean, hy: boolean): string[] => {
     const list: string[] = [];
-    for (let i = 0; i < quantity; i++) {
-      let id = version === 'v4' ? uuidv4() : uuidv1();
-      
-      if (!hyphens) {
+    for (let i = 0; i < q; i++) {
+      let id = v === 'v4' ? uuidv4() : uuidv1();
+
+      if (!hy) {
         id = id.replace(/-/g, '');
       }
-      if (uppercase) {
+      if (up) {
         id = id.toUpperCase();
       }
       list.push(id);
     }
+    return list;
+  };
+
+  const [uuids, setUuids] = useState<string[]>(() => buildUuids('v4', 10, false, true));
+
+  const setVersionAndRegenerate = (v: UuidVersion) => {
+    setVersion(v);
+    const list = buildUuids(v, quantity, uppercase, hyphens);
     setUuids(list);
     toast.success(`Generated ${quantity} UUIDs!`);
   };
 
-  // Run automatically on mount
-  useEffect(() => {
-    generateUuids();
-  }, [version, quantity, uppercase, hyphens]);
+  const setQuantityAndRegenerate = (q: number) => {
+    setQuantity(q);
+    const list = buildUuids(version, q, uppercase, hyphens);
+    setUuids(list);
+    toast.success(`Generated ${q} UUIDs!`);
+  };
+
+  const setUppercaseAndRegenerate = (up: boolean) => {
+    setUppercase(up);
+    const list = buildUuids(version, quantity, up, hyphens);
+    setUuids(list);
+    toast.success(`Generated ${quantity} UUIDs!`);
+  };
+
+  const setHyphensAndRegenerate = (hy: boolean) => {
+    setHyphens(hy);
+    const list = buildUuids(version, quantity, uppercase, hy);
+    setUuids(list);
+    toast.success(`Generated ${quantity} UUIDs!`);
+  };
+
+  const regenerate = () => {
+    const list = buildUuids(version, quantity, uppercase, hyphens);
+    setUuids(list);
+    toast.success(`Generated ${quantity} UUIDs!`);
+  };
 
   const copyAll = async () => {
     if (uuids.length === 0) return;
@@ -84,7 +113,7 @@ export default function UuidGenerator() {
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">UUID Version</label>
             <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)]">
               <button
-                onClick={() => setVersion('v4')}
+                onClick={() => setVersionAndRegenerate('v4')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                   version === 'v4' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
                 }`}
@@ -92,7 +121,7 @@ export default function UuidGenerator() {
                 v4 (Random)
               </button>
               <button
-                onClick={() => setVersion('v1')}
+                onClick={() => setVersionAndRegenerate('v1')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                   version === 'v1' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
                 }`}
@@ -112,7 +141,7 @@ export default function UuidGenerator() {
               min={1}
               max={100}
               value={quantity}
-              onChange={e => setQuantity(Number(e.target.value))}
+              onChange={e => setQuantityAndRegenerate(Number(e.target.value))}
               className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3"
             />
           </div>
@@ -123,7 +152,7 @@ export default function UuidGenerator() {
               <input
                 type="checkbox"
                 checked={uppercase}
-                onChange={e => setUppercase(e.target.checked)}
+                onChange={e => setUppercaseAndRegenerate(e.target.checked)}
                 className="rounded border-zinc-300 dark:border-zinc-800 text-blue-600 focus:ring-blue-500 h-4 w-4"
               />
               Capitalize (UPPER)
@@ -132,7 +161,7 @@ export default function UuidGenerator() {
               <input
                 type="checkbox"
                 checked={hyphens}
-                onChange={e => setHyphens(e.target.checked)}
+                onChange={e => setHyphensAndRegenerate(e.target.checked)}
                 className="rounded border-zinc-300 dark:border-zinc-800 text-blue-600 focus:ring-blue-500 h-4 w-4"
               />
               Include Hyphens
@@ -142,7 +171,7 @@ export default function UuidGenerator() {
           {/* Action button */}
           <div className="flex items-end">
             <button
-              onClick={generateUuids}
+              onClick={regenerate}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 text-sm"
             >
               🔄 Regenerate List

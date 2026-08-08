@@ -166,7 +166,8 @@ export default function AiSocialCaption() {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
-    try { const s = localStorage.getItem(FAV_KEY); if (s) setFavorites(JSON.parse(s)); } catch {}
+    try { const s = localStorage.getItem(FAV_KEY); // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate favorites from localStorage on mount
+    if (s) setFavorites(JSON.parse(s)); } catch {}
     return () => { setCaptions([]); setIsLoading(false); };
   }, []);
 

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
 import { Crown, Upload, Trash2, Download, Eye } from 'lucide-react';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 import Link from 'next/link';
 
 interface LineItem {
@@ -83,29 +84,11 @@ export default function GstInvoiceGenerator() {
   const [newItemPrice, setNewItemPrice] = useState(0);
   const [newItemGst, setNewItemGst] = useState(18);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [usage, setUsage] = useState(0);
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const now = new Date();
-    const monthKey = `${now.getFullYear()}-${now.getMonth()}`;
-    const stored = localStorage.getItem('gstInvoiceUsage');
-    if (stored) {
-      try { const { month, count } = JSON.parse(stored); setUsage(month === monthKey ? count : 0); }
-      catch { setUsage(0); }
-    }
-  }, []);
+  const { usage, trackUsage } = useUsageCounter('gstInvoiceUsage', 'month');
 
-  const trackUsage = (count: number) => {
-    const now = new Date();
-    const monthKey = `${now.getFullYear()}-${now.getMonth()}`;
-    localStorage.setItem('gstInvoiceUsage', JSON.stringify({ month: monthKey, count }));
-    setUsage(count);
-  };
-
-  const [totals, setTotals] = useState({ taxableVal: 0, cgst: 0, sgst: 0, igst: 0, totalTax: 0, grandTotal: 0 });
-
-  useEffect(() => {
+  const totals = useMemo(() => {
     let taxableVal = 0, cgst = 0, sgst = 0, igst = 0;
     const isIntrastate = billerState === clientState;
     items.forEach(item => {
@@ -114,7 +97,7 @@ export default function GstInvoiceGenerator() {
       const itemTax = itemTaxable * (item.gstRate / 100);
       if (isIntrastate) { cgst += itemTax / 2; sgst += itemTax / 2; } else { igst += itemTax; }
     });
-    setTotals({ taxableVal, cgst, sgst, igst, totalTax: cgst + sgst + igst, grandTotal: taxableVal + cgst + sgst + igst });
+    return { taxableVal, cgst, sgst, igst, totalTax: cgst + sgst + igst, grandTotal: taxableVal + cgst + sgst + igst };
   }, [items, billerState, clientState]);
 
   const addLineItem = () => {

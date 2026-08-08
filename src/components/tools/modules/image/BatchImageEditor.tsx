@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { toast } from "react-hot-toast";
 import { Layers, Upload, Download, Settings2, Loader2, Crown } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const FREE_LIMIT = 3;
 
@@ -12,26 +13,10 @@ export default function BatchImageEditor() {
   const [maxWidth, setMaxWidth] = useState(1920);
   const [watermark, setWatermark] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [usage, setUsage] = useState(0);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('batchEditorUsage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('batchEditorUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('batchEditorUsage');
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fList = e.target.files;

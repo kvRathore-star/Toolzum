@@ -129,7 +129,8 @@ export default function FadeInOut() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (!file) { setDuration(0); return; }
+    if (!file) { // eslint-disable-next-line react-hooks/set-state-in-effect -- reset duration when no file selected
+      setDuration(0); return; }
     const url = URL.createObjectURL(file);
     const el = new Audio(url);
     let r = false;

@@ -90,6 +90,7 @@ export default function UpiValidator() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(HISTORY_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate validation history from localStorage on mount
       if (stored) setHistory(JSON.parse(stored));
     } catch {}
   }, []);

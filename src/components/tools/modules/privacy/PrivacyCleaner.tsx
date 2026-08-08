@@ -73,6 +73,7 @@ export default function PrivacyCleaner() {
     }, 500);
   };
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- run initial storage scan on mount
   useEffect(() => { scanStorage(); }, []);
 
   const clearStorage = () => {

@@ -424,7 +424,8 @@ function QuickRepliesTab() {
   useEffect(() => {
     const saved = localStorage.getItem('whatsapp_quick_replies');
     if (saved) {
-      try { setTemplates(JSON.parse(saved)); } catch {}
+      try { // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate quick replies from localStorage on mount
+        setTemplates(JSON.parse(saved)); } catch {}
     }
   }, []);
 

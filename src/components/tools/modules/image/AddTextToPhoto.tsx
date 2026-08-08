@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { Type, Upload, Download, Settings2, Camera, Crown } from 'lucide-react';
 import Link from 'next/link';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const PRESETS = [
   { label: 'Instagram Post', w: 1080, h: 1080 },
@@ -24,27 +25,11 @@ export default function SocialMediaImageCreator() {
   const [preset, setPreset] = useState(0);
   const [customW, setCustomW] = useState('1080');
   const [customH, setCustomH] = useState('1080');
-  const [usage, setUsage] = useState(0);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('socialImageCreatorUsage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('socialImageCreatorUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('socialImageCreatorUsage');
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

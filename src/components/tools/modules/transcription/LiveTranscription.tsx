@@ -28,6 +28,7 @@ export default function LiveTranscription() {
     if (typeof window !== 'undefined') {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detect SpeechRecognition support once on mount
         setIsSupported(false);
       } else {
         recognitionRef.current = new SpeechRecognition();

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Type, Copy, Check, Star } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
@@ -239,7 +239,6 @@ function CursiveView() {
 
 function ZalgoView() {
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
   const [intensity, setIntensity] = useState(8);
   const [goUp, setGoUp] = useState(true);
   const [goMid, setGoMid] = useState(true);
@@ -247,8 +246,8 @@ function ZalgoView() {
 
   const getRand = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 
-  useEffect(() => {
-    if (!input) { setOutput(''); return; }
+  const output = useMemo(() => {
+    if (!input) return '';
     let result = '';
     for (const char of input) {
       if (char === '\n' || char === ' ') { result += char; continue; }
@@ -260,7 +259,7 @@ function ZalgoView() {
         if (goDown && Math.random() > 0.3) result += getRand(ZALGO_DOWN);
       }
     }
-    setOutput(result);
+    return result;
   }, [input, intensity, goUp, goMid, goDown]);
 
   const loadSample = () => { setInput("This text is corrupt and cursed! Join the darkness."); toast.success("Loaded sample text!"); };

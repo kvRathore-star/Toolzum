@@ -24,6 +24,7 @@ export default function ComparePdfFiles() {
 
   // Reset comparison on files change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset diff state when a new file is selected
     setCompared(false);
     setTextPagesA([]);
     setTextPagesB([]);

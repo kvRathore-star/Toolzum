@@ -35,6 +35,7 @@ export default function GifResizer() {
   useEffect(() => {
     if (!file) return;
     const url = URL.createObjectURL(file);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- preview uploaded file and parse its metadata
     setUploadedUrl(url);
     const loadInfo = async () => {
       try {

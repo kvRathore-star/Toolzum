@@ -33,6 +33,7 @@ export function useToolHistory() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate recently-used tools from localStorage on mount
     setHistory(readHistory());
   }, []);
 

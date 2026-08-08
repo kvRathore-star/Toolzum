@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Music, Upload, Download, Loader2, Crown } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const DAILY_LIMIT = 3;
 
@@ -14,24 +15,8 @@ export default function VideoToMp3() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [usage, setUsage] = useState(0);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('videoToMp3Usage');
-    if (stored) {
-      try {
-        const { date, count } = JSON.parse(stored);
-        setUsage(date === today ? count : 0);
-      } catch { setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('videoToMp3Usage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('videoToMp3Usage');
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];

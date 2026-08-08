@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Shield, Copy } from 'lucide-react';
 import CryptoJS from 'crypto-js';
@@ -46,8 +46,6 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
   const [input, setInput] = useState('');
   const [pass, setPass] = useState('');
   const [result, setResult] = useState('');
-
-  useEffect(() => { setMode(defaultMode); setInput(''); setPass(''); setResult(''); }, [defaultMode]);
 
   const handleAction = () => {
     if (!input.trim() || !pass.trim()) { toast.error('Enter both text and passphrase'); return; }
@@ -100,5 +98,5 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
   );
 }
 
-export function AesEncrypt() { return <AesTool defaultMode="encrypt" />; }
-export function AesDecrypt() { return <AesTool defaultMode="decrypt" />; }
+export function AesEncrypt() { return <AesTool key="encrypt" defaultMode="encrypt" />; }
+export function AesDecrypt() { return <AesTool key="decrypt" defaultMode="decrypt" />; }

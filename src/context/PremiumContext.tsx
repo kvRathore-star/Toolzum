@@ -60,6 +60,7 @@ export function PremiumProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const token = localStorage.getItem('toolzum_pro_token');
     if (token) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- verify a persisted pro token on mount and update license state
       verifyLicense(token).then(valid => {
         if (!valid) {
           localStorage.removeItem('toolzum_pro_token');

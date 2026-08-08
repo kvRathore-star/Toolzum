@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from "next/image";
 import QRCode from 'qrcode';
 import JSZip from 'jszip';
@@ -7,6 +7,7 @@ import { Download, Upload, Crown, FileSpreadsheet, Loader2 } from 'lucide-react'
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Link from 'next/link';
+import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const DAILY_LIMIT = 5;
 const PRO_MAX = 100;
@@ -15,25 +16,11 @@ export default function BulkQrCodeGenerator() {
   const [mode, setMode] = useState<'single' | 'bulk'>('single');
   const [text, setText] = useState('https://example.com');
   const [csvData, setCsvData] = useState<{ label: string; value: string }[]>([]);
-  const [usage, setUsage] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [singleQrUrl, setSingleQrUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem('bulkQrUsage');
-    if (stored) {
-      try { const { date, count } = JSON.parse(stored); setUsage(date === today ? count : 0); }
-      catch { setUsage(0); }
-    }
-  }, []);
-
-  const trackUsage = (count: number) => {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem('bulkQrUsage', JSON.stringify({ date: today, count }));
-    setUsage(count);
-  };
+  const { usage, trackUsage } = useUsageCounter('bulkQrUsage');
 
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

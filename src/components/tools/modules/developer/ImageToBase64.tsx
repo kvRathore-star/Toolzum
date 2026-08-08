@@ -18,11 +18,6 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setMode(defaultMode);
-    setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null);
-  }, [defaultMode]);
-
-  useEffect(() => {
     return () => { if (imageUrl && imageUrl.startsWith('blob:')) URL.revokeObjectURL(imageUrl); };
   }, [imageUrl]);
 
@@ -186,4 +181,4 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
   );
 }
 
-export default function ImageToBase64() { return <Base64ImageTool defaultMode="image-to-base64" />; }
+export default function ImageToBase64() { return <Base64ImageTool key="image-to-base64" defaultMode="image-to-base64" />; }

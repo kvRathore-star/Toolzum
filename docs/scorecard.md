@@ -47,7 +47,7 @@ the four landed tiers. **Last full review: 2026-08-08 (commit `d57ff94` + this s
 
 | Dimension | Verdict | Evidence |
 |---|---|---|
-| Code quality (78) | **Confirmed** | `tsc --noEmit --strict` clean. Lint: 62 errors / 2411 warnings — **identical frozen set** (pre-existing Tier 1.1 carry-over, unchanged). ConverterRouter/converterConfig/ConverterCategory retired (empty `find`). 9 dead slugs → `TOOL_REDIRECTS`. Zero orphan components (registry-integrity #9, 17/17 green). |
+| Code quality (78) | **Confirmed** | `tsc --noEmit --strict` clean. Lint: 62 errors / 2411 warnings — **identical frozen set** (pre-existing Tier 1.1 carry-over, unchanged). ConverterRouter/converterConfig/ConverterCategory retired (empty `find`). 9 dead slugs → `TOOL_REDIRECTS`. Zero orphan components (registry-integrity #9, 17/17 green). *(Post-Phase-2: all 62 errors resolved 2026-08-08 — see "Lint-debt resolution" below; 2,411 warnings remain.)* |
 | Security (78) | **Confirmed, 2 findings (both fixed 2026-08-08)** | CSP coherent (allows exactly the CDNs tools load: unpkg/jsdelivr for FFmpeg WASM + pdf.js workers). `url-status-check.ts`: robust — http/https-only SSRF filter, 2048-char cap, dedup, 45-URL limit, subrequest budget (45/50), 8s timeout, D1 rate limit (15/min/IP). `transcribe.ts`: **6d FIXED** — added 50MB upload cap (413) + chunked 32KB base64 (no unbounded spread); **6e FIXED** — `GEMINI_API_KEY` documented in `.env.example`. |
 | UX consistency (72) | **Confirmed** | csv-formatter consolidated to `CsvHubConverter` fallback (hub intact); copy downgrades landed (transcription tools, bulk-url-status-checker); Design B lossy redirects fully resolved in Phase 4. No new duplicates. |
 | SEO foundation (88) | **Confirmed** | Sitemap 2,208 URLs; the 82 registry slugs absent are all `SEO_PERMUTATIONS` `parentSlug` redirects (301 → hub, correctly omitted). 0 visible tools missing using the generator's own slugify. Per-tool SEO content + OG intact. |
@@ -75,11 +75,26 @@ heuristic is the accepted coverage; full manual 1,151-tool audit not cost-justif
 **6e FIXED** (`GEMINI_API_KEY` documented in `.env.example`);
 **6f non-issue confirmed**; **6g Depth scope decision recorded**.
 
+### Lint-debt resolution (2026-08-08)
+
+All 62 `react-hooks/set-state-in-effect` errors resolved and the CI lint gate is green.
+
+| Category | Count | Fix |
+|---|---|---|
+| (a) State-deriving effects → `useMemo` | 5 | RegexTester, TextStylingConverter (ZalgoView), GstInvoiceGenerator (totals), AudioMerger (total duration); CpmCalculator converted to render-time adjustment (`setPrevPlatform` idiom) instead of an effect |
+| (a) Reset-on-state/prop-change → `key` remount / event-handler reset | 8 | AesTool, Base64ImageTool, PdfSecurityTool, AnimationConverter, TextHtmlTool (`key={defaultMode}` at mount sites incl. `DynamicModuleWrapper`); XlsxCsvConverter (`switchDirection` handler), ToolsDirectoryClient (page reset folded into filter handlers), UuidGenerator (lazy init + regenerate handlers) |
+| (b) Legitimate-but-flagged → scoped `// eslint-disable-next-line react-hooks/set-state-in-effect -- <reason>` | 40 | localStorage hydration on mount, browser feature-detection, event/subscription setup, object-URL lifecycle — each with an inline justification comment |
+| Shared-hook consolidation | 2 new hooks | `src/hooks/useUsageCounter.ts` (8 daily/monthly usage blocks), `src/hooks/useIsIndia.ts` (4 geo blocks) — each carries 1 scoped disable internally |
+
+**Measured:** `eslint . --format json` errors **62 → 0** (intermediate: 53 after Step 1–2, 48 after 4a, 40 after 4b). `tsc --noEmit --strict` clean. Full suite **30 files / 123 tests / 123 passed** including the full-registry render smoke test. The 2,411 pre-existing warnings (no-unused-vars / no-explicit-any / no-console) were intentionally untouched per scope.
+
+**Gate re-enabled:** CI `quality` job's Lint step (`.github/workflows/ci.yml`) now passes and is again meaningful as a merge gate; local `pre-push` hook extended to `npm run lint && npm run typecheck && npm run test`.
+
 ## Residual risks (unchanged)
 
-- **CI Lint step red**: 62 pre-existing `react-hooks/set-state-in-effect` errors (Tier 1.1 carry-over,
-  frozen out of scope). Until fixed, no CI check is meaningful as a merge gate.
 - **Performance/build 5-min target**: remaining gap is the in-build TS phase (~3.9 min), which only
   leaves the critical path via `ignoreBuildErrors` + a required CI gate — blocked by free-plan
   branch protection (403). Never set `ignoreBuildErrors` until that gate exists.
 - **Testing**: no browser-level E2E; `Depth` full-catalog audit outstanding.
+- **Warnings backlog**: 2,411 lint warnings (no-unused-vars / no-explicit-any / no-console) remain —
+  errors are at zero so CI is meaningful again, but a warnings pass is still out of scope.

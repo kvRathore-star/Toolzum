@@ -32,14 +32,9 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
   const toApng = mode === 'gif-to-apng';
 
   useEffect(() => {
-    setMode(defaultMode);
-    setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null);
-    setProgress(0); setOutputSize(0);
-  }, [defaultMode]);
-
-  useEffect(() => {
     if (!file || !toApng) return;
     const url = URL.createObjectURL(file);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- preview uploaded GIF and parse its metadata
     setUploadedUrl(url);
     const loadInfo = async () => {
       try {
@@ -312,4 +307,4 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
   );
 }
 
-export default function GifToApng() { return <AnimationConverter defaultMode="gif-to-apng" />; }
+export default function GifToApng() { return <AnimationConverter key="gif-to-apng" defaultMode="gif-to-apng" />; }

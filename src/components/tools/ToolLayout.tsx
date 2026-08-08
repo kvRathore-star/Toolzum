@@ -56,6 +56,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   useEffect(() => {
     if (!isPending && sessionData?.user) {
       const user = sessionData.user as unknown as SessionUser;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync plan into local state once session resolves
       setUserPlan(user.plan || "free");
     } else if (!isPending) {
       setUserPlan("free");

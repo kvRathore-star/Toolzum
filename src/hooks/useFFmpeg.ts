@@ -28,6 +28,7 @@ export function useFFmpeg() {
 
   useEffect(() => {
     if (ffmpegGlobal && ffmpegGlobal.loaded) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reflect already-loaded shared ffmpeg instance into local state
       setIsLoaded(true);
       setLoadError(null);
       ffmpegRef.current = ffmpegGlobal;

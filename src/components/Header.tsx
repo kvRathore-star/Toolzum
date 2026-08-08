@@ -68,6 +68,7 @@ export function Header() {
   const MEGAMENU_COLUMNS = useMemo(() => buildMegamenuColumns(), []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted flag before attaching scroll listener (avoids hydration mismatch)
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);

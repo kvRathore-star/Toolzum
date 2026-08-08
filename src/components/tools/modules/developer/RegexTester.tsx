@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Search, Info, Settings2, Sparkles, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
@@ -12,19 +12,16 @@ export default function RegexTester() {
   const [pattern, setPattern] = useState('');
   const [flags, setFlags] = useState('g');
   const [testString, setTestString] = useState('Enter text here to test your regular expression.\n\nSample: user@example.com is a valid email address.\nPhone: 123-456-7890.');
-  const [matches, setMatches] = useState<{ match: string; index: number }[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   const [aiTab, setAiTab] = useState<'manual' | 'ai'>('manual');
   const [description, setDescription] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const { generateCompletion } = useAiProvider();
 
-  useEffect(() => {
-    if (aiTab !== 'manual' || !pattern) { if (!pattern) { setMatches([]); setError(null); } return; }
+  const { matches, error } = useMemo(() => {
+    if (aiTab !== 'manual' || !pattern) return { matches: [] as { match: string; index: number }[], error: null as string | null };
     try {
       const regex = new RegExp(pattern, flags);
-      setError(null);
       const newMatches: { match: string; index: number }[] = [];
       let match;
       if (flags.includes('g')) {
@@ -38,8 +35,10 @@ export default function RegexTester() {
         match = regex.exec(testString);
         if (match) newMatches.push({ match: match[0], index: match.index });
       }
-      setMatches(newMatches);
-    } catch (e) { setError((e as Error).message); setMatches([]); }
+      return { matches: newMatches, error: null };
+    } catch (e) {
+      return { matches: [] as { match: string; index: number }[], error: (e as Error).message };
+    }
   }, [pattern, flags, testString, aiTab]);
 
   const handleGenerate = async () => {

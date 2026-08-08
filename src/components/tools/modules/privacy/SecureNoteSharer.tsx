@@ -28,6 +28,7 @@ export default function SecureNoteSharer() {
           const bytes = CryptoJS.AES.decrypt(decoded, pass);
           const decrypted = bytes.toString(CryptoJS.enc.Utf8);
           if (decrypted) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- decrypt + self-destruct a shared note from its URL param
             setDecryptedNote(decrypted);
             setHasDestructed(true);
             // Destruct: immediately clear hash parameter from window URL

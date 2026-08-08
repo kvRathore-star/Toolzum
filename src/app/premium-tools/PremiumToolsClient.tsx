@@ -10,7 +10,7 @@ import {
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import type { ToolMetadata } from '@/registry/tools';
 import { Button } from '@/components/ui/button';
-import { isIndiaFromCookie, isIndiaFromTz, isIndiaFromIp } from '@/lib/geo';
+import { useIsIndia } from '@/hooks/useIsIndia';
 
 const BENEFITS = [
   { icon: Upload, title: 'Batch up to 500 files', desc: 'Process hundreds of files at once — images, PDFs, audio, and video.' },
@@ -45,15 +45,7 @@ const CATEGORY_SUMMARIES: Record<string, { icon: React.ElementType; desc: string
 const CATEGORY_ORDER = ['AI', 'PDF', 'Image', 'Video', 'Audio', 'Developer', 'SEO', 'Privacy', 'E-commerce'];
 
 export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools: ToolMetadata[]; proCount: number; toolCount: number }) {
-  const [isIndia, setIsIndia] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isIndiaFromCookie() || isIndiaFromTz()) {
-      setIsIndia(true);
-      return;
-    }
-    isIndiaFromIp().then(setIsIndia);
-  }, []);
+  const isIndia = useIsIndia();
 
   const proPrice = isIndia ? "₹249" : "$14.99";
   const proPriceSuffix = isIndia ? "/month" : "/month, cancel anytime";

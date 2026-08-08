@@ -143,6 +143,7 @@ export default function WebInspector() {
   useEffect(() => {
     const n = navigator;
     const s = window.screen;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- snapshot browser device info into state once on mount
     setDeviceInfo({
       'User Agent': n.userAgent,
       'Platform': n.platform || 'N/A',

@@ -38,6 +38,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
 
   const setCategory = (cat: string) => {
     setActiveCategory(cat);
+    setCurrentPage(1);
     const params = new URLSearchParams(window.location.search);
     if (cat === "All") {
       params.delete("category");
@@ -58,6 +59,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
 
   useEffect(() => {
     const saved = localStorage.getItem('toolzum:navMode');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate persisted nav mode on mount
     if (saved === 'sidebar' || saved === 'menubar') setNavMode(saved);
   }, []);
 
@@ -105,6 +107,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
       const categoryParam = urlParams.get("category");
       if (categoryParam) {
         const match = allCategories.find(c => c.toLowerCase() === categoryParam.toLowerCase());
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- deep-link ?category= param sets active category on load
         if (match) setActiveCategory(match);
       }
     }
@@ -130,10 +133,6 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredTools.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredTools, currentPage]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, activeCategory, proFilter, sortBy]);
 
   const CategoryMenubar = () => (
     <div ref={menuRef} className="mb-8">
@@ -275,7 +274,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 placeholder="Search directory..."
                 aria-label="Search tools"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
                 className="w-full h-12 pl-12 pr-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all text-base"
               />
           </div>
@@ -304,13 +303,13 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
             <div className="flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
-                <button onClick={() => setProFilter('all')} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
+                <button onClick={() => { setProFilter('all'); setCurrentPage(1); }} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
                   All
                 </button>
-                <button onClick={() => setProFilter('free')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
+                <button onClick={() => { setProFilter('free'); setCurrentPage(1); }} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
                   <Sparkles className="w-3 h-3" /> Free
                 </button>
-                <button onClick={() => setProFilter('pro')} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
+                <button onClick={() => { setProFilter('pro'); setCurrentPage(1); }} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
                   <Crown className="w-3 h-3" /> Pro
                 </button>
               </div>
@@ -322,10 +321,10 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 </button>
                 {showSortMenu && (
                   <div className="absolute right-0 top-full mt-1 w-36 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-1 z-50">
-                    <button onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                    <button onClick={() => { setSortBy('name-asc'); setCurrentPage(1); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
                       A → Z
                     </button>
-                    <button onClick={() => { setSortBy('name-desc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                    <button onClick={() => { setSortBy('name-desc'); setCurrentPage(1); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
                       Z → A
                     </button>
                   </div>
@@ -362,7 +361,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 <Search className="w-6 h-6 text-[var(--text-muted)]" />
               </div>
               <p className="text-[var(--text-muted)] mb-4">No tools found matching your criteria.</p>
-              <Button variant="secondary" onClick={() => { setSearchQuery(""); setCategory("All"); }}>
+              <Button variant="secondary" onClick={() => { setSearchQuery(""); setCategory("All"); setCurrentPage(1); }}>
                 Clear filters
               </Button>
             </div>

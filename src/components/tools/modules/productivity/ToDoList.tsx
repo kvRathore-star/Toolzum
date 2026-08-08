@@ -21,6 +21,7 @@ export default function ToDoList() {
     const saved = localStorage.getItem('toolzum_todo_list');
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate to-do items from localStorage on mount
         setItems(JSON.parse(saved));
       } catch (_e) {
         // ignore

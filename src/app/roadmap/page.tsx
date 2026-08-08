@@ -112,6 +112,7 @@ export default function RoadmapPage() {
     const savedVotes = localStorage.getItem("th_roadmap_votes");
     const savedUserVotes = localStorage.getItem("th_roadmap_user_votes");
     if (savedVotes) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate from localStorage on mount (intentional one-time sync)
       setVotes(JSON.parse(savedVotes));
     }
     if (savedUserVotes) {
