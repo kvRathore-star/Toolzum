@@ -88,6 +88,8 @@ All 62 `react-hooks/set-state-in-effect` errors resolved and the CI lint gate is
 
 **Measured:** `eslint . --format json` errors **62 → 0** (intermediate: 53 after Step 1–2, 48 after 4a, 40 after 4b). `tsc --noEmit --strict` clean. Full suite **30 files / 123 tests / 123 passed** including the full-registry render smoke test. The 2,411 pre-existing warnings (no-unused-vars / no-explicit-any / no-console) were intentionally untouched per scope.
 
+**Decision recorded — `UuidGenerator` (was flagged borderline (a)/(b), explicitly decided, not silently reclassified):** treated as **(a)** via lazy `useState` initializer + regenerate-in-handlers, not a scoped disable. Rationale: `uuids` is a pure function of `[version, quantity, uppercase, hyphens]` — auto-gen-on-mount and auto-regenerate-on-option-change are the derived-value pattern (the existing effect was a state-derivation-in-effect), so the idiomatic fix is deriving at init + on input change, which also preserves the per-change toast. A disable would have left a known anti-pattern in place.
+
 **Gate re-enabled:** CI `quality` job's Lint step (`.github/workflows/ci.yml`) now passes and is again meaningful as a merge gate; local `pre-push` hook extended to `npm run lint && npm run typecheck && npm run test`.
 
 ## Residual risks (unchanged)
