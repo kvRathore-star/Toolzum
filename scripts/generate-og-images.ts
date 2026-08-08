@@ -1,6 +1,13 @@
 import { createRequire } from "module";
 import { createHash } from "crypto";
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  existsSync,
+  readdirSync,
+  rmSync,
+} from "fs";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { toolsRegistry } from "../src/registry/tools";
@@ -371,11 +378,34 @@ export async function generateAll(
   }
   writeCache(cachePath, cache);
 
+  pruneOrphanedImages(outDir, livePaths);
+
   const ms = Date.now() - start;
   const perImage = ms / Math.max(jobs.length, 1);
   console.log(
     `  Rendered ${jobs.length}/${total} images in ${(ms / 1000).toFixed(1)}s (${skipped} skipped, ~${perImage.toFixed(0)}ms/render, pool=${concurrency}).`
   );
+}
+
+function pruneOrphanedImages(outDir: string, livePaths: Set<string>): void {
+  let removed = 0;
+  const walk = (dir: string): void => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const abs = `${dir}/${entry.name}`;
+      if (entry.isDirectory()) {
+        walk(abs);
+        if (readdirSync(abs).length === 0) rmSync(abs, { recursive: true });
+      } else if (entry.isFile() && entry.name.endsWith(".png")) {
+        const relPath = abs.slice(outDir.length + 1);
+        if (!livePaths.has(relPath)) {
+          rmSync(abs);
+          removed++;
+        }
+      }
+    }
+  };
+  walk(outDir);
+  if (removed > 0) console.log(`  Removed ${removed} orphaned image file(s) not in the live set.`);
 }
 
 const DEFAULT_CONCURRENCY = Number(process.env.OG_CONCURRENCY) || 4;

@@ -37,18 +37,18 @@ the four landed tiers. **Last full review: 2026-08-08 (commit `d57ff94` + this s
 
 | Check | Result |
 |---|---|
-| Full test suite (authoritative count) | **30 files / 122 tests / 122 passed.** (Historical quotes 38/38, 60/60 were intermediate snapshots; 122 is current.) |
+| Full test suite (authoritative count) | **30 files / 123 tests / 123 passed.** (Historical quotes 38/38, 60/60 were intermediate snapshots; 123 includes the new orphan-prune test.) |
 | gen:og + test suite together | Warm cache: **0/1172 rendered, 0.3s, zero new churn**; suite green after. Maintainability × Performance holds. |
-| OG cache × Depth tool changes | Manifest is self-healing (0 stale manifest entries, 0 misses — every live slug has a current PNG). **But 113 stale tracked PNGs (~6MB) remain on disk** — 93 category-moved + 19 orphans; `generateAll` prunes the manifest, never the file. Logged `6a`. |
+| OG cache × Depth tool changes | Manifest is self-healing (0 stale manifest entries, 0 misses — every live slug has a current PNG). **113 stale tracked PNGs (~6MB) removed (2026-08-08)** via `pruneOrphanedImages` harden in `generateAll` + regression test. Logged `6a`, now fixed. |
 | Routing/registry × rankRelated/OG | Single `toolsRegistry` source of truth shared by both pipelines (same module instance); no shared mutable state, no import cycles. `MODULE_REGISTRY` is the separate routing surface, guarded by `registry-integrity` #9 (17 tests). No divergence found. |
-| `og-cache.json` tracking | **Doc contradiction:** phase2 doc claims "git-tracked, portable", but the file is untracked. Fresh CI checkouts cold-render every time. Logged `6b`. |
+| `og-cache.json` tracking | **Doc contradiction resolved (2026-08-08):** phase2 doc claimed "git-tracked, portable" but the file is untracked. Claim corrected with dated note. **Decision: manifest stays untracked** (build artifact; CF runs `gen:og` during build anyway, so committing would not warm CI and would churn the repo). Production acceptance numbers predate Item 1 and were measured with no cache — already conservative, no score revision. Logged `6b`, now closed. |
 
 ### Phase 2 — re-verified stale dimensions
 
 | Dimension | Verdict | Evidence |
 |---|---|---|
 | Code quality (78) | **Confirmed** | `tsc --noEmit --strict` clean. Lint: 62 errors / 2411 warnings — **identical frozen set** (pre-existing Tier 1.1 carry-over, unchanged). ConverterRouter/converterConfig/ConverterCategory retired (empty `find`). 9 dead slugs → `TOOL_REDIRECTS`. Zero orphan components (registry-integrity #9, 17/17 green). |
-| Security (78) | **Confirmed, 2 findings** | CSP coherent (allows exactly the CDNs tools load: unpkg/jsdelivr for FFmpeg WASM + pdf.js workers). `url-status-check.ts`: robust — http/https-only SSRF filter, 2048-char cap, dedup, 45-URL limit, subrequest budget (45/50), 8s timeout, D1 rate limit (15/min/IP). `transcribe.ts`: **no upload size cap + unbounded `String.fromCharCode(...)` spread (6d)**; **`GEMINI_API_KEY` undocumented in env config (6e)**. |
+| Security (78) | **Confirmed, 2 findings (both fixed 2026-08-08)** | CSP coherent (allows exactly the CDNs tools load: unpkg/jsdelivr for FFmpeg WASM + pdf.js workers). `url-status-check.ts`: robust — http/https-only SSRF filter, 2048-char cap, dedup, 45-URL limit, subrequest budget (45/50), 8s timeout, D1 rate limit (15/min/IP). `transcribe.ts`: **6d FIXED** — added 50MB upload cap (413) + chunked 32KB base64 (no unbounded spread); **6e FIXED** — `GEMINI_API_KEY` documented in `.env.example`. |
 | UX consistency (72) | **Confirmed** | csv-formatter consolidated to `CsvHubConverter` fallback (hub intact); copy downgrades landed (transcription tools, bulk-url-status-checker); Design B lossy redirects fully resolved in Phase 4. No new duplicates. |
 | SEO foundation (88) | **Confirmed** | Sitemap 2,208 URLs; the 82 registry slugs absent are all `SEO_PERMUTATIONS` `parentSlug` redirects (301 → hub, correctly omitted). 0 visible tools missing using the generator's own slugify. Per-tool SEO content + OG intact. |
 | Deployment/CI (85) | **Confirmed** | CI workflow (quality+build parallel) present; last push deployed clean; zero build timeouts across 322 production deploys. |
@@ -65,11 +65,15 @@ structural gate (every MODULE_REGISTRY slug renders; zero orphans) + description
 heuristic is the accepted coverage; full manual 1,151-tool audit not cost-justified. Recorded
 `docs/depth-audit-followups.md` §6g.
 
-### New findings logged (none fixed — audit tier)
+### Findings resolution (2026-08-08 same-day follow-up)
 
-6a–6g in `docs/depth-audit-followups.md` §6: stale tracked OG PNGs, og-cache.json tracking
-contradiction, missing registry×OG test guard, transcribe size-limit/secret gaps, sitemap
-non-issue confirmation, Depth scope decision.
+6a–6g in `docs/depth-audit-followups.md` §6: **6a FIXED** (orphan PNG cleanup via
+`pruneOrphanedImages` + regression test; 113 stale files removed, repo self-cleans now);
+**6b CLOSED** (doc claim corrected; manifest stays untracked by decision; no score revision);
+**6c logged** (registry×OG test guard still open — 6a's regression test partially covers it);
+**6d FIXED** (50MB cap + chunked base64 — was HIGH-severity DoS surface);
+**6e FIXED** (`GEMINI_API_KEY` documented in `.env.example`);
+**6f non-issue confirmed**; **6g Depth scope decision recorded**.
 
 ## Residual risks (unchanged)
 

@@ -2,6 +2,16 @@ interface Env {
   GEMINI_API_KEY: string;
 }
 
+const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
+
+function toBase64(bytes: Uint8Array): string {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  return btoa(binary);
+}
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const geminiKey = context.env.GEMINI_API_KEY;
@@ -24,8 +34,20 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
+    if (file.size > MAX_UPLOAD_BYTES) {
+      return new Response(
+        JSON.stringify({
+          error: `File too large: ${file.size} bytes (max ${MAX_UPLOAD_BYTES})`,
+        }),
+        {
+          status: 413,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     const arrayBuffer = await file.arrayBuffer();
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    const base64 = toBase64(new Uint8Array(arrayBuffer));
     const mimeType = file.type || 'audio/mpeg';
 
     const langInstruction = language && language !== 'en'

@@ -113,7 +113,10 @@ review list, not a pass/fail gate.
 ## 6. Cross-Tier Review sweep findings (2026-08-08) — logged, not fixed
 
 > From the Cross-Tier Review & Scorecard Verification Sweep (audit tier). Each finding below is
-> logged for a future tier; none were fixed as part of the audit per its constraints.
+> logged; **6a was fixed same-day** (2026-08-08) via the audit tier's trivial-fix exception
+> (one-line `rm` of orphaned files + permanent `generateAll` harden). **6b** was closed as
+> doc-only (claim corrected, no score revision; see below). **6d** is the one real production
+> risk (see severity marker).
 
 - **6a. 113 stale tracked OG PNGs (~6MB).** `public/og/` contains 113 PNGs that no longer
   correspond to any live registry slug at that path: **93 category-moved** (slug live, but the
@@ -124,14 +127,25 @@ review list, not a pass/fail gate.
   in `livePaths` (:368-372) but **never deletes the PNG file on disk**. Not a routing/SEO
   defect — every live tool has a current PNG (0 missing) — but the repo tracks 6MB of dead
   images, and the old `growth & marketing metrics/` directory is a leftover category name.
-  Fix would be a one-time `git rm` of the 112 tracked strays + a harden in `generateAll` to
-  delete orphan files. **Logged for a future tier.**
+  **FIXED (2026-08-08, same-day, trivial-fix exception):** added `pruneOrphanedImages` to
+  `generateAll` (walks `outDir`, deletes any `*.png` not in `livePaths`, removes emptied dirs);
+  added a regression test to `og-images.test.ts` ("deletes orphaned PNG files not in the live
+  set"); ran `gen:og` → 113 orphans removed, warm run still 0.6s/1172 skipped. The 113
+  deletions + harden + test are committed; any future slug/category change now self-cleans.
 - **6b. `og-cache.json` is NOT git-tracked despite `docs/build-performance-phase2.md:22,26`
   claiming it is.** `git ls-files | grep og-cache.json` → empty; it is just untracked (and not
   gitignored). Consequence: on a fresh CI/CF checkout the manifest is absent and `gen:og` does a
   cold full render every time — the warm-cache optimization (~0.3s vs ~129s) only helps local
   builds where the file persists. Doc-vs-reality contradiction; either commit the manifest or
-  fix the doc claim. **Logged.**
+  fix the doc claim. **CLOSED (2026-08-08):** doc claim corrected at
+  `docs/build-performance-phase2.md` with a dated correction note. **Decision: do NOT commit
+  the manifest** — it is a build artifact keyed to absolute machine state; committing it would
+  not warm CI anyway (CF checkouts run `gen:og` during build regardless) and would churn the
+  repo on every template/content change. No Performance/build score revision needed: the
+  production acceptance numbers in the phase2 doc predate Item 1 (deploy window 2026-05-21 →
+  2026-08-06 vs Item 1 landing 2026-08-08) and were measured on builds with **no cache at
+  all**, so they are already conservative / include the full cold render cost. The warm-cache
+  win is a documented local-only optimization.
 - **6c. No test covers the registry/routing × OG combination.** `og-images.test.ts` exercises
   `generateAll` only with synthetic tools; `registry-integrity.test.ts` never reads
   `public/og/` or `og-cache.json`. A slug rename, category move, or removal that leaves a stale
@@ -140,10 +154,19 @@ review list, not a pass/fail gate.
 - **6d. `functions/api/ai/transcribe.ts` has no upload size limit** and base64-encodes via
   `String.fromCharCode(...new Uint8Array(arrayBuffer))` (:28) — a spread on an unbounded array
   (stack/memory risk for large audio). url-status-check.ts budgets everything; transcribe does
-  not. Add a size cap (e.g. reject >50MB) and chunk the base64 conversion. **Logged.**
+  not. Add a size cap (e.g. reject >50MB) and chunk the base64 conversion.
+  **SEVERITY: HIGH — production resource-exhaustion / DoS surface.** The handler is
+  unauthenticated and accepts any-size multipart upload; a large request forces the spread onto
+  the JS stack (RangeError) and unbounded memory in the Worker isolate, and it front-runs the
+  paid Gemini API (cost amplification). **FIXED (2026-08-08, same-night):** added
+  `MAX_UPLOAD_BYTES` (50MB → 413) guard before any `arrayBuffer()`/decode, and chunked the
+  base64 conversion (`toBase64`, 32KB slices) so no unbounded spread reaches the stack. Mirrors
+  `url-status-check.ts` budgeting. See `functions/api/ai/transcribe.ts`.
 - **6e. `GEMINI_API_KEY` is not in `.env.example` / wrangler config docs** for the transcribe
   handler, so the required secret is undocumented (the handler 500s if unset — cf. follow-up
-  #3 above which found it unset in prod at audit time). **Logged.**
+  #3 above which found it unset in prod at audit time). **SEVERITY: LOW (ops hygiene).**
+  **FIXED (2026-08-08):** documented in `.env.example` with a note that it is required for the
+  transcribe endpoint and must be set as a Cloudflare Pages secret (else 500).
 - **6f. Sitemap generator `scripts/generate-sitemap.js` globs only `tools-chunk-*.ts`** and
   never reads `tools-constants.ts` — 82 SEO_PERMUTATION bulk slugs are absent from the sitemap.
   This is **correct behavior** (all 82 are `parentSlug` entries that `permanentRedirect` to

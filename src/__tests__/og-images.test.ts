@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, rmSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, readdirSync, statSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { generateAll, type ToolInfo } from '../../scripts/generate-og-images';
@@ -147,6 +147,27 @@ describe('OG image generation: per-tool images are decoupled from the global too
       const cache = JSON.parse(readFileSync(cacheFile, 'utf8'));
       expect(cache['converter/beta.png']).toBeTruthy();
       expect(cache['converter/alpha.png']).not.toBe(sha1(join(dir, 'converter/alpha.png')));
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('deletes orphaned PNG files not in the live set (stale image cleanup)', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'og-test-'));
+    try {
+      const tools = [
+        mkTool('Alpha Tool', 'alpha', 'Converter', 'A'),
+        mkTool('Beta Tool', 'beta', 'Converter', 'B'),
+      ];
+      await generateAll(tools, ['Converter'], dir);
+
+      const stray = join(dir, 'converter', 'stale-tool.png');
+      writeFileSync(stray, readFileSync(join(dir, 'converter', 'alpha.png')));
+
+      await generateAll([tools[0]], ['Converter'], dir);
+      expect(existsSync(stray)).toBe(false);
+      expect(existsSync(join(dir, 'converter', 'alpha.png'))).toBe(true);
+      expect(existsSync(join(dir, 'converter', 'index.png'))).toBe(true);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

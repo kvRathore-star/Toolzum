@@ -19,11 +19,20 @@
    2-vCPU CI too.
 2. **Content-hash skip** — every output PNG is keyed by a sha1 of its inputs
    (`toolHash`/`categoryHash`, including a `TEMPLATE_VERSION` that invalidates all entries on
-   template redesign). A committed `og-cache.json` manifest maps relative path → hash; files that
+   template redesign). A `og-cache.json` manifest maps relative path → hash; files that
    match are skipped entirely (no render, no write). Stale entries (tool removed from registry)
    are pruned.
 
-The manifest lives at repo root (`og-cache.json`, git-tracked, relative paths) so it is portable
+> **Correction (2026-08-08, finding 6b):** the manifest is **not** git-tracked — `git ls-files`
+> reports 0 matches for `og-cache.json` (see `docs/depth-audit-followups.md` §6b). Its warm-cache
+> win therefore applies only to local builds that already have the file; every fresh CI checkout
+> cold-renders all 1,172 images. The production acceptance numbers in this doc predate Item 1
+> (deploy window 2026-05-21 → 2026-08-06 vs Item 1 landing 2026-08-08) and were measured on
+> builds with **no cache at all**, so they are conservative — they already include the full cold
+> render cost. Orphaned PNG cleanup (finding 6a) was fixed in `generateAll` via
+> `pruneOrphanedImages`.
+
+The manifest lives at repo root (`og-cache.json`, relative paths) so it is portable
 across machines and works on fresh CI checkouts. `generateAll` accepts optional
 `concurrency`/`cachePath` args; the test suite keeps using temp dirs, so it stays isolated.
 
