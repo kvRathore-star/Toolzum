@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { generateMetadata } from '@/app/[category]/[tool]/page';
+import { metadata as notFoundMetadata } from '@/app/not-found';
 import { TOOL_REDIRECTS } from '@/registry/tools';
 
 function catToUrlSlug(cat: string): string {
@@ -22,7 +23,7 @@ function readCoveredSources(): Set<string> {
   return covered;
 }
 
-describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, never a bare 404', () => {
+describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, never a soft-404', () => {
   it('TOOL_REDIRECTS sourceCategory + slug-rename sources are all present in _redirects (no fallback-only paths)', () => {
     const covered = readCoveredSources();
     const missing: string[] = [];
@@ -41,9 +42,34 @@ describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, ne
     expect(missing, `TOOL_REDIRECTS sources missing from _redirects:\n${missing.join('\n')}`).toEqual([]);
   });
 
-  it('a hypothetical path (not a live tool, not a redirect source) returns noindex + self-canonical', async () => {
-    const md = await generateMetadata({ params: Promise.resolve({ category: 'hypothetical-category', tool: 'not-a-real-tool' }) });
-    expect(md.robots).toEqual({ index: false, follow: false });
-    expect(md.alternates?.canonical).toBe('https://toolzum.com/hypothetical-category/not-a-real-tool/');
+  it('every pre-rendered redirect-source path returns noindex + self-canonical, not a soft-404', async () => {
+    // These paths ARE statically generated (redirectSourceParams) but resolve to no
+    // live tool at that category+slug — so the page serves the noindex fallback.
+    // Pick a real sourceCategory source to exercise the actual serving mechanism.
+    const examples = Object.entries(TOOL_REDIRECTS)
+      .filter(([, t]) => t.sourceCategory)
+      .slice(0, 5)
+      .map(([slug, t]) => {
+        const cats = Array.isArray(t.sourceCategory) ? t.sourceCategory : [t.sourceCategory!];
+        return cats.map(c => ({ category: catToUrlSlug(c), tool: slug, slug, target: t }));
+      })
+      .flat();
+
+    expect(examples.length).toBeGreaterThan(0);
+    for (const ex of examples) {
+      const md = await generateMetadata({ params: Promise.resolve(ex) });
+      expect(md.robots, `${ex.category}/${ex.tool} should be noindex`).toEqual({ index: false, follow: false });
+      expect(md.alternates?.canonical, `${ex.category}/${ex.tool} should self-canonical`).toBe(
+        `https://toolzum.com/${ex.category}/${ex.tool}/`
+      );
+    }
+  });
+
+  it('the static export 404 page (unlisted, non-prerendered paths) is noindex with no homepage canonical', () => {
+    // Truly unmatched URLs in a static export are served 404.html from not-found.tsx,
+    // NOT the [tool] page's generateMetadata. Assert that page is a clean noindex and
+    // does not inherit the layout's homepage canonical (which would soft-404 to /).
+    expect(notFoundMetadata.robots).toEqual({ index: false, follow: false });
+    expect(notFoundMetadata.alternates).toBeNull();
   });
 });
