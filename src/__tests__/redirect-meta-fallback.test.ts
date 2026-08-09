@@ -72,4 +72,24 @@ describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, ne
     expect(notFoundMetadata.robots).toEqual({ index: false, follow: false });
     expect(notFoundMetadata.alternates).toBeNull();
   });
+
+  it('_redirects keeps all dynamic rules (splats/placeholders) after every static rule', () => {
+    // Cloudflare's _redirects parser treats everything after the FIRST splat/placeholder
+    // as dynamic and silently drops the tail past 100 dynamic rules (workers-sdk #14694).
+    // The generator must sink dynamic rules to the end so all 2,000-static budget applies.
+    const file = readFileSync(join(process.cwd(), 'public/_redirects'), 'utf8');
+    const rules = file
+      .split('\n')
+      .map(l => l.trim())
+      .filter(l => l && !l.startsWith('#') && l.split(/\s+/).length >= 3);
+    const dynamic = /\*|:[\w-]/;
+    let seenDynamic = false;
+    const dynamicBeforeStatic: string[] = [];
+    for (const rule of rules) {
+      if (dynamic.test(rule)) seenDynamic = true;
+      else if (seenDynamic) dynamicBeforeStatic.push(rule);
+    }
+    expect(dynamicBeforeStatic, `static rules appear after the first dynamic rule:\n${dynamicBeforeStatic.join('\n')}`).toEqual([]);
+    expect(rules.filter(r => dynamic.test(r)).length).toBeLessThanOrEqual(100);
+  });
 });

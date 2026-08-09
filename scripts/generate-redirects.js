@@ -72,20 +72,35 @@ function deriveRules(entries) {
   return rules;
 }
 
+const DYNAMIC_RULE_PATTERN = /\*|:[\w-]/;
+
+function isDynamicRule(line) {
+  return DYNAMIC_RULE_PATTERN.test(line.trim());
+}
+
 function parseStaticRules(content) {
   const staticLines = [];
   const staticSources = new Set();
+  const dynamicRules = [];
+  let inGeneratedSection = false;
   for (const line of content.split('\n')) {
-    if (line.trim().startsWith(GENERATED_MARKER)) break;
+    if (line.trim().startsWith(GENERATED_MARKER)) {
+      inGeneratedSection = true;
+      continue;
+    }
     if (line.trim() && !line.trim().startsWith('#')) {
       const parts = line.trim().split(/\s+/);
       if (parts.length >= 3) {
-        staticSources.add(parts[0].replace(/\/$/, ''));
+        if (isDynamicRule(line)) {
+          dynamicRules.push(line.trim());
+          if (!inGeneratedSection) continue; // drop from static block; re-appended at end
+        }
+        if (!inGeneratedSection) staticSources.add(parts[0].replace(/\/$/, ''));
       }
     }
-    staticLines.push(line);
+    if (!inGeneratedSection) staticLines.push(line);
   }
-  return { staticLines, staticSources };
+  return { staticLines, staticSources, dynamicRules };
 }
 
 function generateRedirects() {
@@ -96,9 +111,13 @@ function generateRedirects() {
   console.log(`Derived ${derived.size} redirect rules from ${entries.length} TOOL_REDIRECTS entries`);
 
   const existing = fs.existsSync(REDIRECTS_PATH) ? fs.readFileSync(REDIRECTS_PATH, 'utf-8') : '';
-  const { staticLines, staticSources } = parseStaticRules(existing);
+  const { staticLines, staticSources, dynamicRules } = parseStaticRules(existing);
 
-  // Keep the static section verbatim (including trailing blank line before marker, if any)
+  // Keep the static section verbatim (including trailing blank line before marker, if any).
+  // Dynamic rules (splats/placeholders) are removed from it and re-appended at the very end:
+  // Cloudflare's _redirects parser treats everything after the first dynamic rule as dynamic
+  // and silently drops the tail once 100 dynamic rules are exceeded. Static-first ordering
+  // keeps all static rules on the 2,000-static budget.
   const staticBlock = staticLines.join('\n').replace(/\s+$/, '') + '\n';
 
   const generatedRules = [];
@@ -108,8 +127,12 @@ function generateRedirects() {
     generatedRules.push(`${src}    ${dest}   301`);
   }
 
-  const output = generatedRules.length
-    ? `${staticBlock}\n${GENERATED_MARKER}\n# Auto-generated from TOOL_REDIRECTS. Run: npm run gen:redirects\n${generatedRules.join('\n')}\n`
+  const dynamicBlock = dynamicRules.length
+    ? `# ==== DYNAMIC RULES (keep last — everything after the first splat/placeholder counts as dynamic) ====\n${dynamicRules.join('\n')}\n`
+    : '';
+
+  const output = (generatedRules.length || dynamicRules.length)
+    ? `${staticBlock}\n${GENERATED_MARKER}\n# Auto-generated from TOOL_REDIRECTS. Run: npm run gen:redirects\n${generatedRules.join('\n')}\n${dynamicBlock}`
     : staticBlock;
 
   if (!fs.existsSync(PUBLIC_DIR)) {

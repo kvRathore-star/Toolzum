@@ -1,6 +1,5 @@
 
 # Legacy category URLs — redirect to canonical slugs
-/growth-&-marketing/*   /growth-metrics/:splat   301
 /growth-&-marketing   /growth-metrics/   301
 /growth-&-marketing/   /growth-metrics/   301
 
@@ -748,3 +747,5 @@
 /video/video-converter    /converter/video-converter/   301
 /video/webm-to-mp3/   /converter/webm-to-mp3/   301
 /video/webm-to-mp3    /converter/webm-to-mp3/   301
+# ==== DYNAMIC RULES (keep last — everything after the first splat/placeholder counts as dynamic) ====
+/growth-&-marketing/*   /growth-metrics/:splat   301
