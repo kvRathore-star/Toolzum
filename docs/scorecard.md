@@ -93,11 +93,67 @@ All 62 `react-hooks/set-state-in-effect` errors resolved and the CI lint gate is
 
 **Gate re-enabled:** CI `quality` job's Lint step (`.github/workflows/ci.yml`) now passes and is again meaningful as a merge gate; local `pre-push` hook extended to `npm run lint && npm run typecheck && npm run test`.
 
-## Residual risks (unchanged)
+## Residual risks (2026-08-09 triage)
 
-- **Performance/build 5-min target**: remaining gap is the in-build TS phase (~3.9 min), which only
-  leaves the critical path via `ignoreBuildErrors` + a required CI gate — blocked by free-plan
-  branch protection (403). Never set `ignoreBuildErrors` until that gate exists.
-- **Testing**: no browser-level E2E; `Depth` full-catalog audit outstanding.
-- **Warnings backlog**: 2,411 lint warnings (no-unused-vars / no-explicit-any / no-console) remain —
-  errors are at zero so CI is meaningful again, but a warnings pass is still out of scope.
+Each open item below is now in one of three honest states: **closed (accepted constraint)**,
+**triaged + sized**, or **deliberately parked**. Nothing here is silently carried forward.
+
+### 1. Performance/build gate — CLOSED (accepted constraint)
+
+The in-build TS phase (~3.9 min) only leaves the critical path via `ignoreBuildErrors`, which the
+CI requires a protected-branch status check for. That gate is genuinely unavailable, not merely
+unconfigured: this repo is **private**, and GitHub Free branch protection applies only to **public**
+repos (protected branches on private repos require Pro/Team). Re-verified 2026-08-09 via the
+GitHub API (unauthenticated repo lookup returns 404 ⇒ private) + GitHub Free plan docs.
+Alternatives considered: merge queue (requires the same protected-branch prerequisite on Free),
+CODEOWNERS-based required review (also a protected-branch feature). None substitute on Free.
+
+**Accepted final state:** pre-push hook (`lint && typecheck && test`) + CI `quality` job (lint +
+typecheck) are the enforced gates; they run on every push and merge. `ignoreBuildErrors` must
+**never** be set until a branch-protection gate exists (move to Pro/Team, or make the repo public).
+This risk is now a documented, deliberate tradeoff — not an oversight.
+
+### 2. Warnings backlog — TRIAGED + SIZED (not fixed, per scope)
+
+Recounted 2026-08-09 with the CI-equivalent invocation (bare `eslint --format json`): **2,418**
+warnings (the previously quoted 2,411 came from `eslint .`; the 7-warning delta is a
+counting-scope difference — both represent the same backlog, errors remain at zero).
+
+| Bucket | Count | Location | Verdict |
+|---|---|---|---|
+| `no-unused-vars` + `@typescript-eslint/no-unused-vars` | 1,543 | 1,441 src / 72 scripts / 4 functions / 26 public | Mostly mechanical — the dominant pattern is a never-used handler arg (`'request' is defined but never used`, `argsIgnorePattern` is `^_` so args lacking the `_` prefix trip it) plus `assigned but never used` locals. Spot-checked: arg-prefix or removal is safe; the `assigned but never used` ones need a 5-second confirm that removal has no side effects. |
+| `@typescript-eslint/no-explicit-any` | 276 | src + scripts (generate-og-images, _middleware, geo-country, Api*Tools) | Needs judgment per site — real typing work, not autofix. |
+| `no-console` | 205 | **195 in `scripts/`** (legit CLI/audit logging), 10 in src | 195 of these should be a **config override** (`scripts/**` already has one for require; add `no-console: off` there) — zero code changes. The 10 in src are judgment (warn/error are already allowed; these are `log`). |
+| `no-unused-expressions` | 78 | 74 in `public/` (generated sw.js/workbox) | Config fix — add `public/**` to `globalIgnores`. These are generated PWA artifacts, not source. |
+| `@next/next/no-img-element` | 68 | src | Semi-mechanical — most are `<img>`→`next/image`; a few (canvas/blob-drawn previews in Ai*Tools) need judgment. |
+| `react/no-unescaped-entities` | 72 | src | Mechanical escape; low risk. |
+| react-hooks family (exhaustive-deps / static-components / refs / purity / immutability / preserve-manual-memoization) | 170 | src | Needs judgment per site — these flag real behavior, must not be blind-autofixed. |
+| `jsx-a11y/alt-text` + `import/no-anonymous-default-export` | 6 | src | Trivial/mechanical. |
+| **Total** | **2,418** | — | — |
+
+Top offenders by file: `MiscNumberMathTools.tsx` (92), `MiscDateTimeAndConverterTools.tsx` (55),
+`MiscHealthTools.tsx` (43), `generateToolDescription.ts` (42), `Generators.tsx` (41),
+`TextSeoTools.tsx` (37), `RentalAgreementGenerator.tsx` (32), `ApiRestTools.tsx` (28) —
+unused-vars dominates in these; scripts/quality-audit.js (62) is mostly console + unused-vars.
+
+**Size estimate for a real pass (not done — triage only):**
+- ~30 min of config-only wins: `public/**` ignore + `scripts/**` no-console → removes ~295
+  (~100 public artifacts + ~195 script consoles), zero code risk.
+- ~2–3 hrs mechanical: arg-prefix/removal for unused-vars in src, unescaped-entities, alt-text,
+  remaining no-unused-expressions.
+- ~5–8 hrs judgment: remaining src unused-vars, `no-explicit-any` (276), react-hooks family (170),
+  no-img-element (68) — each needs read-and-decide, with typecheck+test re-runs.
+- **Total realistic: ~10–14 hrs / 1.5–2 focused days**, green build maintained throughout.
+Full backlog records: `/tmp/lint-warn-ci.json` (per-run artifact; regenerate with
+`npx eslint --format json` — do not commit).
+
+### 3. E2E + full-catalog Depth audit — PARKED (deliberate)
+
+These need dedicated future sessions and are not foldable into the above:
+- **No browser-level E2E** (Playwright): only 30 files / 123 tests, all contract/behavioral +
+  render-smoke; zero browser automation. Worth a dedicated session, not a drive-by add.
+- **Full 1,151-tool functional audit**: the productive heuristic (`description === seoDescription`)
+  covers ~5 flagged tools; the structural gate (every MODULE_REGISTRY slug renders, zero orphans)
+  is accepted coverage. A full manual catalog audit is not cost-justified today — re-evaluate if a
+  tool regresses to stub-like behavior.
+- Both tracked in `docs/depth-audit-followups.md`; do not re-open during routine tool work.
