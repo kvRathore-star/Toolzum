@@ -56,8 +56,12 @@ describe('registry integrity #1: categories', () => {
 
   it('every redirect sourceCategory resolves to a known category', () => {
     const failures = Object.entries(TOOL_REDIRECTS)
-      .filter(([, t]) => t.sourceCategory && !VALID_CATEGORY_SLUGS.has(catToUrlSlug(t.sourceCategory)))
-      .map(([slug, t]) => `${slug}: unknown sourceCategory "${t.sourceCategory}"`);
+      .filter(([, t]) => {
+        if (!t.sourceCategory) return false;
+        const cats = Array.isArray(t.sourceCategory) ? t.sourceCategory : [t.sourceCategory];
+        return cats.some(c => !VALID_CATEGORY_SLUGS.has(catToUrlSlug(c)));
+      })
+      .map(([slug, t]) => `${slug}: unknown sourceCategory "${JSON.stringify(t.sourceCategory)}"`);
     expect(failures, failures.join('\n')).toEqual([]);
   });
 });
@@ -136,8 +140,12 @@ describe('registry integrity #5: redirects resolve to the live tool in the right
 
   it('sourceCategory (old path) differs from the redirect category', () => {
     const failures = Object.entries(TOOL_REDIRECTS)
-      .filter(([, t]) => t.sourceCategory && catToUrlSlug(t.sourceCategory) === catToUrlSlug(t.category))
-      .map(([slug, t]) => `${slug}: sourceCategory "${t.sourceCategory}" equals category "${t.category}"`);
+      .filter(([, t]) => {
+        if (!t.sourceCategory) return false;
+        const cats = Array.isArray(t.sourceCategory) ? t.sourceCategory : [t.sourceCategory];
+        return cats.some(c => catToUrlSlug(c) === catToUrlSlug(t.category));
+      })
+      .map(([slug, t]) => `${slug}: sourceCategory "${JSON.stringify(t.sourceCategory)}" equals category "${t.category}"`);
     expect(failures, failures.join('\n')).toEqual([]);
   });
 });
@@ -190,8 +198,8 @@ describe('registry integrity #6: category moves require a matching redirect', ()
       if (catToUrlSlug(redir.category) !== catToUrlSlug(mv.next)) {
         failures.push(`${mv.slug}: redirect category "${redir.category}" != new category "${mv.next}"`);
       }
-      if (redir.sourceCategory !== mv.old) {
-        failures.push(`${mv.slug}: redirect sourceCategory "${redir.sourceCategory}" != old category "${mv.old}"`);
+      if (Array.isArray(redir.sourceCategory) ? !redir.sourceCategory.includes(mv.old) : redir.sourceCategory !== mv.old) {
+        failures.push(`${mv.slug}: redirect sourceCategory "${JSON.stringify(redir.sourceCategory)}" != old category "${mv.old}"`);
       }
     }
     expect(failures, failures.join('\n')).toEqual([]);

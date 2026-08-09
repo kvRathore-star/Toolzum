@@ -23,10 +23,13 @@ export async function generateStaticParams() {
   }));
   const redirectSourceParams = Object.entries(TOOL_REDIRECTS)
     .filter(([, target]) => target.sourceCategory)
-    .map(([slug, target]) => ({
-      category: catToUrlSlug(target.sourceCategory!),
-      tool: slug,
-    }));
+    .flatMap(([slug, target]) => {
+      const cats = Array.isArray(target.sourceCategory) ? target.sourceCategory : [target.sourceCategory!];
+      return cats.map(sourceCategory => ({
+        category: catToUrlSlug(sourceCategory),
+        tool: slug,
+      }));
+    });
   return [...toolParams, ...redirectTargetParams, ...redirectSourceParams];
 }
 
@@ -34,7 +37,13 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   const params = await props.params;
   const toolMetadata = getToolByCategoryAndSlug(params.category, params.tool);
   
-  if (!toolMetadata) return { title: 'Not Found' };
+  if (!toolMetadata) {
+    return {
+      title: 'Not Found',
+      robots: { index: false, follow: false },
+      alternates: { canonical: `https://toolzum.com/${params.category}/${params.tool}/` },
+    };
+  }
 
   const desc = getMetaDescription(toolMetadata);
   const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.png`;

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "gen:og": "npx tsx scripts/generate-og-images.ts",
-    "build": "npm run gen:og && node scripts/generate-sitemap.js && next build",
+    "gen:redirects": "node scripts/generate-redirects.js",
+    "build": "npm run gen:redirects && npm run gen:og && node scripts/generate-sitemap.js && next build",
     "start": "npx serve out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --strict",

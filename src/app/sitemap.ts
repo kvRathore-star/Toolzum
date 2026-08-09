@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { toolsRegistry, TOOL_REDIRECTS } from '@/registry/tools';
+import { toolsRegistry } from '@/registry/tools';
 
 export const dynamic = 'force-static';
 
@@ -37,11 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const redirectPages = Object.entries(TOOL_REDIRECTS).map(([slug, target]) => ({
-    url: `${baseUrl}/${target.category}/${slug}`,
-    changeFrequency: 'monthly' as const,
-    priority: 0.3,
-  }));
-
-  return [...staticPages, ...categoryPages, ...toolPages, ...redirectPages];
+  return [...staticPages, ...categoryPages, ...toolPages];
 }
