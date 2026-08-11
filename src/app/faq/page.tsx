@@ -61,29 +61,48 @@ const faqs = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
+
 export default function FaqPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
-      <div className="max-w-[800px] mx-auto pt-24 pb-24 px-4 sm:px-6">
-        <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl mb-4 tracking-tight leading-tight">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-[var(--text-secondary)] text-lg mb-12">
-          Everything you need to know about Toolzum.
-        </p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
+        <div className="max-w-[800px] mx-auto pt-24 pb-24 px-4 sm:px-6">
+          <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl mb-4 tracking-tight leading-tight">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-[var(--text-secondary)] text-lg mb-12">
+            Everything you need to know about Toolzum.
+          </p>
 
-        <div className="space-y-6">
-          {faqs.map((faq) => (
-            <div
-              key={faq.q}
-              className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6"
-            >
-              <h2 className="font-semibold text-[var(--text-primary)] mb-2">{faq.q}</h2>
-              <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
-            </div>
-          ))}
+          <div className="space-y-6">
+            {faqs.map((faq) => (
+              <div
+                key={faq.q}
+                className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6"
+              >
+                <h2 className="font-semibold text-[var(--text-primary)] mb-2">{faq.q}</h2>
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
