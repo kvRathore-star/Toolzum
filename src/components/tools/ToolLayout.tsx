@@ -11,6 +11,8 @@ import { ToolPaywall } from './ToolPaywall';
 import { useFreeUsage } from '@/hooks/useFreeUsage';
 import { PostDownloadBar } from '@/components/PostDownloadBar';
 import { PostDownloadSurvey } from '@/components/PostDownloadSurvey';
+import { DownloadQuotaBadge } from '@/components/tools/DownloadQuotaBadge';
+import { DownloadLimitModal } from '@/components/tools/DownloadLimitModal';
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import { ShareTool } from '@/components/ShareTool';
@@ -63,7 +65,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     }
   }, [sessionData, isPending]);
 
-  const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn, freeMaxSizeMB, freeMaxBatch } = useFreeUsage(category);
+  const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn } = useFreeUsage(category);
   const { recordTool } = useToolHistory();
 
   const tool = getToolByCategoryAndSlug(category, slug);
@@ -199,6 +201,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <ShareTool title={title} slug={slug} category={category} />
+            <DownloadQuotaBadge />
           </div>
 
           {/* Tool Container */}
@@ -261,6 +264,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           <PostDownloadBar />
           <PostDownloadSurvey />
+          <DownloadLimitModal />
         </div>
       </>
     );

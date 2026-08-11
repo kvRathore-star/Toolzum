@@ -9,7 +9,7 @@ const ANON_LIMIT = 3;
 const SIGNED_IN_EXTRA = 7;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 
-function getFingerprint(): string {
+export function getFingerprint(): string {
   if (typeof window === "undefined") return "ssr";
   const raw = [
     navigator.userAgent,
