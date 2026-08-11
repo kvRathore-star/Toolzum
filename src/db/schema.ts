@@ -66,7 +66,7 @@ export const payments = sqliteTable("payment", {
 });
 
 export const downloadUsage = sqliteTable("download_usage", {
-  id: text("id").primaryKey(),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   fingerprint: text("fingerprint").notNull(),
   date: text("date").notNull(), // "YYYY-M-D"
   count: integer("count").notNull().default(0),

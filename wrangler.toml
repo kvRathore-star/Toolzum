@@ -7,4 +7,5 @@ pages_build_output_dir = "out"
 binding = "DB"
 database_name = "toolhub-db"
 database_id = "be7bd039-a6e8-45fd-a6fd-df56e6a20469"
+migrations_dir = "src/db/migrations"
 
