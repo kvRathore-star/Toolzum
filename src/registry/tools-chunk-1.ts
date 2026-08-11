@@ -731,6 +731,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
     showInCategory: true,
+    faqs: [
+      {
+        question: "Which video formats does this converter support?",
+        answer: "You can convert between MKV, MP4, MOV, WebM, and AVI. Pick any input and any output from the dropdowns. Common use cases include MKV to MP4 for universal playback, MP4 to WebM for the web, and MKV to MOV for Final Cut Pro or iMovie."
+      },
+      {
+        question: "Will converting re-encode my video and lower its quality?",
+        answer: "Not necessarily. When the underlying codec is compatible, the tool re-encapsulates the file — copying the video and audio streams into a new container without re-encoding — so quality and file size stay the same. This is how fast conversions like MKV to MP4 work. If the source codec isn't supported by the target format, the video is transcoded, which takes longer and can change quality."
+      },
+      {
+        question: "Why is my converted file not smaller?",
+        answer: "Container conversions (like MKV to MP4) copy the existing streams rather than re-encoding them, so the file size stays roughly the same. To actually shrink a video, use the Video Compressor tool instead, which re-encodes with adjustable quality and target size settings."
+      },
+      {
+        question: "Does the converter preserve subtitles and multiple audio tracks?",
+        answer: "When re-encapsulating to a container that supports them — MKV and MOV hold multiple audio tracks, chapters, and subtitle streams — those tracks are carried over. MP4's subtitle support is more limited, so subtitle tracks may not survive a conversion to MP4."
+      },
+      {
+        question: "Is my video uploaded anywhere?",
+        answer: "No. All processing runs locally in your browser via FFmpeg — your video never leaves your device, nothing is stored, and there are no file size limits. Your videos are completely private."
+      },
+    ],
   },
   {
     id: "audio-converter-1",
@@ -751,6 +773,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. ',
     dependencies: "Sharp / Browser Canvas",
     showInCategory: true,
+    faqs: [
+      {
+        question: "Which image formats can I convert between?",
+        answer: "This tool converts between PNG, JPG, WebP, HEIC, and AVIF. Pick any input format and any output format from the two dropdowns. If you need to batch many files at once, use the dedicated Bulk Image Converter — this tool handles a single image at a time."
+      },
+      {
+        question: "Will converting to JPG reduce the quality of my image?",
+        answer: "JPG uses lossy compression, so converting from a lossless format like PNG will discard some detail that cannot be recovered. Converting between lossless formats (for example PNG to WebP lossless) preserves quality. If you need lossless output, choose PNG, WebP, or AVIF as the destination format."
+      },
+      {
+        question: "Why doesn't my image have a transparent background after converting to JPG?",
+        answer: "JPG does not support transparency. When you convert an image with an alpha channel (such as a PNG with a transparent background) to JPG, the transparent areas are flattened to a solid background. Convert to PNG, WebP, or AVIF instead to keep transparency intact."
+      },
+      {
+        question: "Can I open HEIC or AVIF files on all devices?",
+        answer: "HEIC is Apple's default photo format and works best on iPhone, iPad, and Mac — many Windows apps and older software cannot open it. AVIF is a modern, open standard supported by current browsers like Chrome, Firefox, and Safari. Converting to JPG or PNG gives you the widest possible compatibility across devices and software."
+      },
+      {
+        question: "Is my image uploaded to a server during conversion?",
+        answer: "No. Conversion happens entirely in your browser using canvas rendering — your image never leaves your device, and there is no file size limit imposed by the tool. It is fully private and works offline after the page loads."
+      },
+    ],
   },
   {
     id: "data-format-converter-1",
@@ -1104,6 +1148,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Vocal Remover — Remove vocals from songs to create karaoke tracks. Extract instrumentals or acapella. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    faqs: [
+      {
+        question: "How does Vocal Remover actually remove vocals?",
+        answer: "It uses center channel removal. The tool subtracts the left and right audio channels, which cancels out everything panned to the center of the stereo mix — typically where vocals sit — while leaving side-panned instruments intact. It runs entirely in your browser using FFmpeg, so your audio never leaves your device."
+      },
+      {
+        question: "Why does my instrumental still contain some vocals, or sound strange?",
+        answer: "Center channel removal works best on studio stereo recordings where vocals are cleanly centered. Mono recordings, live performances, and songs with heavily panned or reverb-heavy vocals will produce artifacts and bleed-through. There is no way around this with a frequency-based tool — for perfect separation you would need AI-based stem splitting."
+      },
+      {
+        question: "Can I get both the instrumental and the vocals at once?",
+        answer: "Yes. Select the 'Both Tracks' mode and the tool generates and downloads two files: an instrumental (karaoke) version and an acapella (vocals-only) version. You can also request just one of them in 'Instrumental' or 'Acapella' mode."
+      },
+      {
+        question: "Which output formats are available?",
+        answer: "MP3, WAV, M4A (AAC), FLAC, and OGG Vorbis. Choose MP3 for small, universally playable files, WAV or FLAC when you need lossless quality for further editing, and OGG or M4A when you need better compression than MP3 at the same bitrate."
+      },
+      {
+        question: "Does Vocal Remover work offline?",
+        answer: "Yes. The FFmpeg engine loads once and then all processing happens locally in your browser. Your audio file is never uploaded, making this tool safe for unpublished songs or sensitive recordings."
+      },
+    ],
   },
   {
     id: "344",

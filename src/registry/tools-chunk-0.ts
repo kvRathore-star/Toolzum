@@ -237,9 +237,31 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Age Calculator",
     slug: "age-calculator",
     category: "Calculator",
-    description: 'Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Age Calculator — Computes exact age in years, months, days, hours, minutes, and seconds from a given birth date relative to any target date. ',
+    description: 'Computes exact age in years, months, and days from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Age Calculator — Computes exact age in years, months, and days from a given birth date relative to any target date. ',
     dependencies: "Date-fns / Moment.js",
+    faqs: [
+      {
+        question: "How does the Age Calculator count my age exactly?",
+        answer: "It computes your exact age in years, months, and days by comparing your date of birth to a target date. If you leave the target date untouched, it defaults to today. The calculation handles month lengths correctly — for example, if today is the 15th and your birthday falls on the 31st, it borrows days from the previous month so the result always reflects calendar reality rather than simple subtraction."
+      },
+      {
+        question: "Can I calculate my age on a specific date, not just today?",
+        answer: "Yes. Set any date in the 'Target Date' field — for example a future event, a past signing date, or a deadline — and the tool returns your exact age as of that date. This is useful for age eligibility checks, contract dates, or anniversary calculations."
+      },
+      {
+        question: "Does the calculation account for leap years?",
+        answer: "Yes. Because the tool works with calendar dates rather than fixed 365-day years, February 29th and leap-day birthdays are handled naturally. If your target date is not a leap year, the day count borrows from the actual length of the preceding month."
+      },
+      {
+        question: "What happens if I enter a future date of birth or a target date before my birth?",
+        answer: "The calculator expects the target date to be on or after the date of birth. Entering dates in the wrong order produces a nonsensical result, so double-check that your date of birth is earlier than the target date before clicking Calculate Exact Age."
+      },
+      {
+        question: "Is my date of birth sent anywhere?",
+        answer: "No. The calculation runs entirely in your browser — your date of birth never leaves your device and nothing is stored or uploaded. This tool is fully private and works offline after the page loads."
+      },
+    ],
   },
   {
     id: "27",
@@ -1199,7 +1221,29 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). ',
     dependencies: "uuid",
-},
+    faqs: [
+      {
+        question: "What is the difference between UUID v4 and v1?",
+        answer: "v4 generates cryptographically random identifiers, so every UUID is unpredictable and virtually guaranteed to be unique. v1 generates time-based UUIDs that encode the current timestamp and your device's MAC-derived node value, which makes them sequential and sortable but reveals when each ID was created. Use v4 for database keys, tokens, and anything security-sensitive; use v1 when you need chronologically sortable identifiers."
+      },
+      {
+        question: "Are the generated UUIDs really unique? Could there ever be a collision?",
+        answer: "Yes, they are RFC 4122 compliant. v4 uses 122 bits of randomness from a cryptographically secure source, so the odds of a collision are astronomically small — roughly 1 in 2^122. Even generating 1 billion UUIDs per second, you would need to run for about 86 years to reach a 50% chance of one duplicate. The tool uses the same industry-standard uuid library that powers millions of databases."
+      },
+      {
+        question: "Can I generate UUIDs without dashes or in uppercase?",
+        answer: "Yes. The 'Include Hyphens' toggle strips the dashes to produce a 32-character compact hex string, useful for filenames, URLs, or systems that reject the standard format. The 'Capitalize (UPPER)' toggle converts all letters to uppercase. Both options regenerate the entire list instantly and work with either UUID version."
+      },
+      {
+        question: "How many UUIDs can I generate at once?",
+        answer: "Between 1 and 100 per batch. Use the Quantity slider to pick the count, and every change regenerates a fresh list. You can then copy all of them to the clipboard at once or download the full list as a .txt file."
+      },
+      {
+        question: "Does UUID Generator upload my data?",
+        answer: "No. Everything runs entirely in your browser using the crypto API — no UUID is ever sent to a server, and no files or data leave your device. You can even use it after disconnecting from the internet once the page has loaded."
+      },
+    ],
+  },
   {
     id: "156",
     name: "HEX to RGB Converter",
