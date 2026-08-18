@@ -6,7 +6,7 @@ import { GdprConsentBanner } from "@/components/GdprConsentBanner";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { toolsRegistry } from "@/registry/tools";
+import { TOOL_COUNT } from "@/registry/site-data.generated";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-const toolCount = toolsRegistry.length;
+const toolCount = TOOL_COUNT;
 
 
 

@@ -157,3 +157,15 @@ These need dedicated future sessions and are not foldable into the above:
   is accepted coverage. A full manual catalog audit is not cost-justified today — re-evaluate if a
   tool regresses to stub-like behavior.
 - Both tracked in `docs/depth-audit-followups.md`; do not re-open during routine tool work.
+
+## Operational notes
+
+### 2026-08-18 — synthetic `download_usage` test row from quota E2E
+
+Live browser E2E of the download-quota flow (badge → decrement → modal at limit) on the
+deployed site recorded one synthetic row in the production `download_usage` D1 table:
+**3 downloads, count=3, under a throwaway browser-fingerprint key** (`browser-quota-<timestamp>-<rand>`).
+Fingerprint-keyed and isolated to the daily bucket, so it never affects real users — but it
+will show up as one odd fingerprint if anyone runs analytics on the table. Leave as-is; do
+not delete (no local wrangler auth). Future quota E2Es should reuse a throwaway fingerprint
+and expect this class of leftover row.

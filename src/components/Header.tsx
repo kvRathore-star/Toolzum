@@ -1,56 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { CommandMenu } from "./CommandMenu";
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { Button } from "./ui/button";
-import { toolsRegistry } from "@/registry/tools";
-import type { ToolMetadata } from "@/registry/tools";
-import { getCachedToolCounts } from "@/registry/tools-helpers";
+import { MEGAMENU_COLUMNS, SITE_STATS } from "@/registry/site-data.generated";
 
-const { freeTierTotal, localTools, cloudTools, hybridTools } = getCachedToolCounts();
-const totalCloud = cloudTools + hybridTools;
-
-const MENU_COLUMN_DEFS = [
-  { title: "Image", icon: "🖼", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg"] },
-  { title: "PDF", icon: "📄", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel", "word-to-pdf", "jpg-to-pdf"] },
-  { title: "Video", icon: "📹", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-to-mp3", "crop-video", "subtitle-translator", "video-trimmer"] },
-  { title: "Audio", icon: "🎵", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter", "apple-music-preview-extractor", "bulk-audio-converter"] },
-  { title: "AI", icon: "🤖", category: "AI", allHref: "/ai", slugs: ["ai-image-generator", "ai-paraphrasing-tool", "ai-translator", "ai-image-upscaler", "ai-face-swap", "ai-cover-letter-generator", "ai-thumbnail-maker"] },
-  { title: "Developer", icon: "💻", category: "Developer", allHref: "/developer", slugs: ["json-formatter", "sql-formatter", "css-minifier", "diff-checker", "base64-encode-decode", "regex-tester", "js-minifier"] },
-  { title: "Text", icon: "✍", category: "Text", allHref: "/text", slugs: ["character-counter", "word-counter", "fancy-text-generator", "font-generator", "cursive-text-generator", "text-to-handwriting", "case-converter"] },
-  { title: "Finance", icon: "💰", category: "Finance", allHref: "/finance", slugs: ["currency-converter", "percentage-calculator", "emi-calculator", "sip-calculator", "compound-interest-calculator", "invoice-generator", "profit-margin-calculator"] },
-  { title: "Utility", icon: "🔧", category: "Utility", allHref: "/utility", slugs: ["qr-code-generator", "password-generator", "age-calculator", "wheel-of-names", "random-number-generator", "resume-builder", "dice-roller"] },
-  { title: "Converter", icon: "🔄", category: "Converter", allHref: "/converter", slugs: ["mkv-to-mp4", "mp3-to-wav", "png-to-jpg", "json-to-csv", "markdown-tools"] },
-  { title: "Privacy", icon: "🔒", category: "Privacy", allHref: "/tools", slugs: ["temporary-email-generator", "password-strength-checker", "exif-data-remover", "secure-note-sharer", "pgp-key-generator", "ip-anonymizer"] },
-  { title: "SEO", icon: "📈", category: "SEO", allHref: "/seo", slugs: ["keyword-density-checker", "meta-tag-generator", "xml-sitemap-generator", "robots-txt-generator", "bulk-url-status-checker"] },
-  { title: "Branding", icon: "🎨", category: "Branding", allHref: "/branding", slugs: ["logo-maker", "social-media-post-maker", "business-card-maker", "email-signature-generator", "url-shortener", "social-media-calendar", "link-in-bio-builder"] },
-  { title: "India", icon: "🇮🇳", category: "indian-utilities", allHref: "/indian-utilities", slugs: ["passport-photo-india", "aadhaar-wallet-cropper", "gst-calculator", "gst-invoice-generator", "gstin-lookup"] },
-];
-
-function buildMegamenuColumns() {
-  return MENU_COLUMN_DEFS.map(({ title, icon, category, allHref, slugs }) => {
-    const featured = slugs.slice(0, 7);
-    const featuredTools = featured
-      .map(slug => toolsRegistry.find(t => t.slug === slug))
-      .filter(Boolean) as ToolMetadata[];
-    const featuredSlugsSet = new Set(featuredTools.map(t => t.slug));
-    const fillers = toolsRegistry
-      .filter(t => t.category === category && t.showInCategory !== false && !featuredSlugsSet.has(t.slug))
-      .slice(0, 7 - featuredTools.length);
-    const tools = [...featuredTools, ...fillers]
-      .map(t => ({ name: t.name, href: `/${t.category.toLowerCase().replace(/\s+/g, '-')}/${t.slug}` }));
-    const allCount = toolsRegistry.filter(t => t.category === category && t.showInCategory !== false).length;
-    const isIndia = title === "India";
-    return { title, icon, tools, allCount, allHref, isIndia };
-  });
-}
+// Lazy chunk: cmdK search + full registry pulled out of the root-layout bundle.
+// Rendered only when the user opens search — cmdk + toolsRegistry stay off the
+// network path until ⌘K / the search pill / a search shortcut is actually used.
+const CommandMenu = dynamic(() => import("./CommandMenu").then((m) => m.CommandMenu));
 
 export function Header() {
   const [mounted, setMounted] = useState(false);
@@ -59,13 +24,12 @@ export function Header() {
   const [shareOpen, setShareOpen] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const { history } = useToolHistory();
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
-
-  const MEGAMENU_COLUMNS = useMemo(() => buildMegamenuColumns(), []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted flag before attaching scroll listener (avoids hydration mismatch)
@@ -75,6 +39,24 @@ export function Header() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Open CommandMenu (loads cmdk + registry on demand) from any trigger:
+  // ⌘K, the search pill, and the megamenu/mobile "Search tools..." shortcuts.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setCmdOpen((o) => !o);
+      }
+    };
+    const onCommand = () => setCmdOpen(true);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("opencode-command", onCommand);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("opencode-command", onCommand);
+    };
   }, []);
 
   useEffect(() => {
@@ -351,10 +333,10 @@ export function Header() {
                     </p>
                     <div className="space-y-0.5">
                       {[
-                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. ${localTools} run locally, ${totalCloud} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}` },
+                        { name: 'X (Twitter)', emoji: '𝕏', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${SITE_STATS.freeTierTotal}+ free privacy-first browser tools. ${SITE_STATS.localTools} run locally, ${SITE_STATS.cloudTools + SITE_STATS.hybridTools} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'LinkedIn', emoji: 'in', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}` },
                         { name: 'Facebook', emoji: 'f', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}` },
-                        { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}` },
+                        { name: 'WhatsApp', emoji: 'WA', href: `https://wa.me/?text=${encodeURIComponent(`${SITE_STATS.freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}` },
                       ].map(p => (
                         <a
                           key={p.name}
@@ -392,7 +374,20 @@ export function Header() {
 
         {/* Right Section */}
         <div className="flex items-center gap-2 sm:gap-4">
-          <CommandMenu />
+          <button
+            onClick={() => setCmdOpen(true)}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer w-48 hover:w-64 focus:w-64 justify-between"
+            aria-label="Open search"
+          >
+            <span className="flex items-center gap-1.5">
+              <Search className="w-3.5 h-3.5" />
+              <span>Search tools...</span>
+            </span>
+            <kbd className="font-mono text-[10px] bg-[var(--bg-elevated)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)] text-[var(--text-muted)]">
+              ⌘K
+            </kbd>
+          </button>
+          {cmdOpen && <CommandMenu open onClose={() => setCmdOpen(false)} />}
 
           {/* Theme toggle */}
           <button
@@ -478,11 +473,10 @@ export function Header() {
                 <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">Share Toolzum</p>
                 <div className="flex items-center gap-2 flex-wrap">
                   {[
-                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools. ${localTools} run locally, ${totalCloud} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
+                    { emoji: '𝕏', title: 'Share on X', href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${SITE_STATS.freeTierTotal}+ free privacy-first browser tools. ${SITE_STATS.localTools} run locally, ${SITE_STATS.cloudTools + SITE_STATS.hybridTools} cloud AI.`)}&url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-zinc-800 hover:border-white/30' },
                     { emoji: 'in', title: 'Share on LinkedIn', href: `https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-blue-600 hover:border-blue-500/30' },
                     { emoji: 'f', title: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://toolzum.com')}`, hover: 'hover:text-white hover:bg-indigo-600 hover:border-indigo-500/30' },
-                    { emoji: 'IG', title: 'Share on Instagram', href: 'https://www.instagram.com/', hover: 'hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 hover:border-pink-500/30' },
-                    { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
+                    { emoji: 'WA', title: 'Share on WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${SITE_STATS.freeTierTotal}+ free privacy-first browser tools: https://toolzum.com`)}`, hover: 'hover:text-white hover:bg-emerald-600 hover:border-emerald-500/30' },
                     { emoji: 'RD', title: 'Share on Reddit', href: `https://reddit.com/submit?url=https://toolzum.com&title=Toolzum+—+privacy-first+browser+tools`, hover: 'hover:text-white hover:bg-orange-600 hover:border-orange-500/30' },
                     { emoji: 'TG', title: 'Share on Telegram', href: `https://t.me/share/url?url=https://toolzum.com&text=${encodeURIComponent('Check out Toolzum — privacy-first browser tools')}`, hover: 'hover:text-white hover:bg-sky-600 hover:border-sky-500/30' },
                   ].map(p => (

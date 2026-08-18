@@ -1,41 +1,30 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Search, Sparkles, Zap, Layout, Sun, Moon, Home, CornerDownLeft } from "lucide-react";
+import { Search, Sparkles, Zap, Layout, Sun, Moon, Home } from "lucide-react";
 import { toolsRegistry } from "@/registry/tools";
 
-export function CommandMenu() {
-  const [open, setOpen] = useState(false);
+interface CommandMenuProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+// Loaded on demand via next/dynamic from Header — cmdk + the full toolsRegistry
+// stay out of the initial bundle until the user actually opens search.
+export function CommandMenu({ open, onClose }: CommandMenuProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
-      }
-    };
-    const onCommand = () => setOpen(true);
-
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("opencode-command", onCommand);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("opencode-command", onCommand);
-    };
-  }, []);
-
   const runCommand = (command: () => void) => {
-    setOpen(false);
+    onClose();
     command();
   };
 
   // Group tools by category
-  const categories = React.useMemo(() => {
+  const categories = useMemo(() => {
     const groups: Record<string, typeof toolsRegistry> = {};
     toolsRegistry.forEach((tool) => {
       if (!groups[tool.category]) {
@@ -46,46 +35,13 @@ export function CommandMenu() {
     return groups;
   }, []);
 
-  if (!open) {
-    // We register the global trigger button check inside other components.
-    // The dialog itself only mounts or registers here.
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="hidden md:flex items-center gap-2 px-3 py-1.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer w-48 hover:w-64 focus:w-64 justify-between"
-      >
-        <span className="flex items-center gap-1.5">
-          <Search className="w-3.5 h-3.5" />
-          <span>Search tools...</span>
-        </span>
-        <kbd className="font-mono text-[10px] bg-[var(--bg-elevated)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)] text-[var(--text-muted)]">
-          ⌘K
-        </kbd>
-      </button>
-    );
-  }
+  if (!open) return null;
 
   return (
-    <>
-      {/* Search Button for display */}
-      <button
-        onClick={() => setOpen(true)}
-        className="hidden md:flex items-center gap-2 px-3 py-1.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer w-48 hover:w-64 focus:w-64 justify-between"
-      >
-        <span className="flex items-center gap-1.5">
-          <Search className="w-3.5 h-3.5" />
-          <span>Search tools...</span>
-        </span>
-        <kbd className="font-mono text-[10px] bg-[var(--bg-elevated)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)] text-[var(--text-muted)]">
-          ⌘K
-        </kbd>
-      </button>
-
-      {/* Cmdk Dialog Overlay */}
-      <div 
-        className="fixed inset-0 z-[100] bg-[var(--bg-base)]/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] p-4"
-        onClick={() => setOpen(false)}
-      >
+    <div
+      className="fixed inset-0 z-[100] bg-[var(--bg-base)]/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] p-4"
+      onClick={onClose}
+    >
         <div 
           className="w-[calc(100%-2rem)] max-w-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col max-h-[60vh] mt-[10vh]"
           onClick={(e) => e.stopPropagation()}
@@ -176,6 +132,5 @@ export function CommandMenu() {
           </Command>
         </div>
       </div>
-    </>
   );
 }
