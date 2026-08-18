@@ -45,6 +45,10 @@ export function Header() {
   // ⌘K, the search pill, and the megamenu/mobile "Search tools..." shortcuts.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setCmdOpen(false);
+        return;
+      }
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setCmdOpen((o) => !o);
