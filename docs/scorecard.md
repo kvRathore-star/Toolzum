@@ -169,3 +169,62 @@ Fingerprint-keyed and isolated to the daily bucket, so it never affects real use
 will show up as one odd fingerprint if anyone runs analytics on the table. Leave as-is; do
 not delete (no local wrangler auth). Future quota E2Es should reuse a throwaway fingerprint
 and expect this class of leftover row.
+
+### 2026-08-18 — perf: registry out of root layout + on-demand cmdK search (3 small fixes)
+
+Deployed (`70ec253`, `f7963c5`): (a) root layout uses a generated `TOOL_COUNT`
+constant instead of `toolsRegistry.length`; (b) `CommandMenu` is now loaded on
+demand via `next/dynamic` and rendered only when opened (⌘K / search pill /
+shortcuts); (c) Header megamenu columns + share counts come from generated
+`src/registry/site-data.generated.ts` (`npm run gen:site-data`, parity-tested in
+`src/__tests__/site-data.test.ts`). Header chunk confirmed live with **zero**
+registry data; cmdk + registry chunks only fetch on search-open (1153 items,
+0 JS errors, ⌘K/Esc verified on deployed site).
+
+Measured on the deployed site (medians, cache disabled) — JS bytes / files:
+- Home: 441 KB / 21 → **400 KB / 15** (−9%)
+- `/converter/video-converter`: 465 KB / 17 → **450 KB / 17** (−3%)
+- `/calculator/age-calculator`: 526 KB / 27 → **450 KB / 17** (−14%)
+
+Timing metrics (FCP/LCP/TBT/CLS) from the after-run are **not recorded** — system
+load average was ~200 (swap thrash) at measurement time, so they were noise. The
+byte deltas are network-accounting and load-independent, so the win is real.
+If a future Lighthouse/measure run asks "why did perf improve", this is the trail.
+Baseline: `/var/folders/7y/v2j_q1jn68b6qfz08n2yjk1h0000gn/T/opencode/baseline.json` (may be
+gone; the numbers above are the summary). A fresh Chrome CDP instance is kept at
+port 9334 (`/tmp/chrome-fresh`) for any future timing re-run.
+
+### NEXT PERF TARGET (scoped, not drive-by) — home + tool pages still ship the 503 KB registry chunk
+
+`HomeClient.tsx` (home page) and `tools/ToolLayout.tsx` (every tool page) still
+`import { toolsRegistry }` directly, so home and all tool pages fetch the 503 KB
+registry chunk on initial load regardless of the fixes above. The 3 fixes shipped
+mainly help pages that never need the registry (About, static pages). This is the
+highest-traffic surface and the real next target, but it is **bigger surgery**: it
+touches two core layout components (HomeClient featured/filter scans + ToolLayout
+related-tools + counts), not isolated utility files. Treat like the FFmpeg/D1 work:
+scope as its own reviewed piece, not "one more small fix".
+
+### 2026-08-19 — duplicate-tools merge: video-converter-tool → video-converter (301)
+
+Cluster 1 (`curl-to-code`) was merged earlier (stub removed, redirect kept). This
+commit merges cluster 2 (video pair): `/video/video-converter-tool` removed from
+`MODULE_REGISTRY` and 301'd to `/converter/video-converter` via `TOOL_REDIRECTS`
+(+ `sourceCategory: "video"` for the cross-category edge rule) + generated
+`_redirects`. Registry: 1150 → 1149 tools. GSC data over 3 months was noise (0
+clicks, ~10 impressions site-wide across all 3 remaining clusters), so the
+keep/301 calls rested on structure, not clicks:
+- **video pair (merged):** same `VideoFormatConverter` component, one-sided
+  relationship signal (5 refs vs 0), `-tool` suffix artifact. → 301.
+- **image trio (kept):** three distinct components; `bulk-image-converter` is a
+  parent hub for ~100 child tools — merging it would break the family. The real
+  issue is name cannibalization (`image-format-converter` vs `image-bulk-converter`
+  vs `bulk-image-converter` all chase "bulk image converter" queries) → distinct
+  H1/intro copy per tool, not a 301.
+- **json pair (kept):** `json-formatter` (dedicated `JsonFormatter`) vs
+  `json-formatter-tool` (distinct "JSON Output Tools" mode) — different components,
+  different features. Optionally make the names/descriptions more distinct.
+
+GSC export: `docs/toolzum.com-Performance-on-Search-2026-08-19/` (untracked,
+reference only). Only the video pair was a real duplicate; the other two "duplicates"
+from the original audit were pattern-matched names, not shared code.

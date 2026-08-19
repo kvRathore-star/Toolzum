@@ -1035,7 +1035,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // Video format hub (migrated from CONVERTER_CONFIG -> ConverterRouter; SSR kept —
   // VideoFormatConverter resolves each slug's description from its own DESCRIPTIONS map.
   'video-converter': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="video-converter" /> }))),
-  'video-converter-tool': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="video-converter-tool" /> }))),
   'mkv-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-mp4" /> }))),
   'mov-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-mp4" /> }))),
   'webm-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-mp4" /> }))),

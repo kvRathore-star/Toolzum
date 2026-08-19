@@ -58,7 +58,6 @@ const FORMAT_PAIRS: FormatPair[] = [
 
 export const DESCRIPTIONS: Record<string, string> = {
   'video-converter': "Convert between MKV, MP4, MOV, WebM, and AVI video formats.",
-  'video-converter-tool': "Convert video files between MP4, AVI, MKV, MOV, WebM, and more formats.",
   'mkv-to-mp4': "<strong>MKV to MP4 Converter:</strong> Re-encapsulates Matroska (.mkv) video files into the more universally compatible MP4 container without re-encoding the underlying video stream. Your files never leave your device.",
   'mov-to-mp4': "<strong>Apple QuickTime Converter:</strong> Transcode QuickTime .MOV files (usually from iPhones or Macs) into universal MP4 format optimized for web playback and social media uploads. Your files never leave your device.",
   'webm-to-mp4': "<strong>WEBM to MP4 Converter:</strong> Transcode modern WebM videos (often from screen recorders or web exports) into universal MP4 files. Critical for users whose editing software or sharing platforms reject WebM. Your files never leave your device.",

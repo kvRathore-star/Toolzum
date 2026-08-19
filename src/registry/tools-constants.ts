@@ -195,6 +195,7 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
 
   // Stub entries with no module — redirect to nearest equivalent
   "curl-to-code": { category: "developer", slug: "curl-to-code-converter" },
+  "video-converter-tool": { category: "converter", slug: "video-converter", sourceCategory: "video" },
   "jwt-encoder-signer": { category: "developer", slug: "jwt-debugger" },
   "memorable-password-generator": { category: "utility", slug: "password-generator" },
   "cpp-formatter": { category: "developer", slug: "code-beautifier" },

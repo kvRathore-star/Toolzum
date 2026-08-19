@@ -17,11 +17,11 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1150;
+export const TOOL_COUNT = 1149;
 
 export const SITE_STATS = {
-  freeTierTotal: 1028,
-  localTools: 1029,
+  freeTierTotal: 1027,
+  localTools: 1028,
   cloudTools: 31,
   hybridTools: 4,
 } as const;
@@ -134,7 +134,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/video/video-watermark-adder"
       }
     ],
-    "allCount": 20,
+    "allCount": 19,
     "allHref": "/video",
     "isIndia": false
   },

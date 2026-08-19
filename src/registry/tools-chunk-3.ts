@@ -1532,18 +1532,6 @@ export const entries_chunk_3: ToolMetadata[] = [
     showInCategory: false,
   },
   {
-    id: "747",
-    name: "Video Converter",
-    slug: "video-converter-tool",
-    category: "Video",
-    description: 'Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats with format auto-detection.',
-    seoDescription: 'Free online Video Format Converter — Convert video files between MP4, AVI, MKV, MOV, WMV, FLV, WebM, 3GP, MPEG, and VOB formats. All processing happens locally.',
-    dependencies: "None",
-
-    showInCategory: true,
-  },
-  {
-
     id: "750",
     name: "Encoder / Decoder",
     slug: "encoder-decoder",

@@ -435,6 +435,8 @@
 /converter/text-converter    /converter/text-to-binary/   301
 /converter/time-converter/   /utility/time-converter/   301
 /converter/time-converter    /utility/time-converter/   301
+/converter/video-converter-tool/   /converter/video-converter/   301
+/converter/video-converter-tool    /converter/video-converter/   301
 /design/contrast-checker/   /design/contrast-ratio-checker/   301
 /design/contrast-checker    /design/contrast-ratio-checker/   301
 /design/css-gradient-generator/   /design/gradient-generator/   301
@@ -745,6 +747,8 @@
 /video/mp4-to-mp3    /converter/mp4-to-mp3/   301
 /video/video-converter/   /converter/video-converter/   301
 /video/video-converter    /converter/video-converter/   301
+/video/video-converter-tool/   /converter/video-converter/   301
+/video/video-converter-tool    /converter/video-converter/   301
 /video/webm-to-mp3/   /converter/webm-to-mp3/   301
 /video/webm-to-mp3    /converter/webm-to-mp3/   301
 # ==== DYNAMIC RULES (keep last — everything after the first splat/placeholder counts as dynamic) ====

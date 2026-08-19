@@ -46,12 +46,12 @@ describe('hub-owned DESCRIPTIONS parity vs MODULE_REGISTRY closures', () => {
     }
   });
 
-  it('total DESCRIPTIONS entries is stable at 208', () => {
+  it('total DESCRIPTIONS entries is stable at 207', () => {
     const total =
       Object.keys(AUDIO_DESCRIPTIONS).length +
       Object.keys(IMAGE_DESCRIPTIONS).length +
       Object.keys(VIDEO_DESCRIPTIONS).length +
       Object.keys(V2A_DESCRIPTIONS).length;
-    expect(total).toBe(208);
+    expect(total).toBe(207);
   });
 });

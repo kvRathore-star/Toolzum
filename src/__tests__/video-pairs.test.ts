@@ -8,7 +8,7 @@ import { DESCRIPTIONS as VIDEO_TO_AUDIO_DESCRIPTIONS } from '@/components/tools/
 const ALL_DESCRIPTIONS = { ...VIDEO_FORMAT_DESCRIPTIONS, ...VIDEO_TO_AUDIO_DESCRIPTIONS };
 
 const VIDEO_FORMAT_SLUGS = [
-  'video-converter', 'video-converter-tool',
+  'video-converter',
   'mkv-to-mp4', 'mov-to-mp4', 'webm-to-mp4', 'avi-to-mp4', 'mp4-to-mkv', 'mp4-to-mov',
   'mkv-to-mov', 'mov-to-mkv', 'mkv-to-webm', 'mkv-to-avi', 'mp4-to-webm', 'mp4-to-avi',
   'mov-to-webm', 'mov-to-avi', 'webm-to-mkv', 'webm-to-mov', 'webm-to-avi', 'avi-to-mkv',

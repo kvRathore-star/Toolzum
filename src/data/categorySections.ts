@@ -613,7 +613,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Convert video between formats — MP4, GIF, WebM, and extract audio from video.",
       slugs: [
  "video-converter",
-        "video-converter-tool",
         "video-to-gif",
         "video-to-mp3",
       ],

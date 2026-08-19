@@ -141,11 +141,11 @@ describe('Tier 2.1 full-registry render smoke test', () => {
   });
 
   it('parses every MODULE_REGISTRY slug as resolvable (default / named / closure)', () => {
-    expect(Object.keys(registry).length).toBe(1047);
+    expect(Object.keys(registry).length).toBe(1046);
     const kinds = Object.values(registry).map((e) => e.kind);
     expect(kinds.filter((k) => k === 'default').length).toBe(320);
     expect(kinds.filter((k) => k === 'named').length).toBe(416);
-    expect(kinds.filter((k) => k === 'closure').length).toBe(311);
+    expect(kinds.filter((k) => k === 'closure').length).toBe(310);
   });
 
   it('every MODULE_REGISTRY slug renders its resolved component without throwing', async () => {
