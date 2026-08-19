@@ -545,8 +545,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Bulk Image Format Converter",
     slug: "bulk-image-converter",
     category: "Image",
-    description: "Convert images between JPG, PNG, WebP, AVIF, HEIC, HEIF, GIF, BMP, ICO, SVG. Batch convert with quality control. 100% local, zero uploads.",
-    seoDescription: 'Free online Bulk Image Converter — Convert JPG, PNG, WebP, AVIF, HEIC, GIF, BMP, ICO, SVG in bulk. Quality control, directory preservation, zero uploads. ',
+    description: 'Find the exact bulk conversion you need: PNG→WebP, JPG→AVIF, HEIC→JPG, and 100+ more — each format pair is its own dedicated, optimized tool with quality control and folder-preserving ZIP output.',
+    seoDescription: 'Free bulk image converter — pick your exact format-pair tool (PNG→WebP, JPG→AVIF, HEIC→JPG, and 100+ more). 100% local, zero uploads. ',
     dependencies: "Canvas API, jszip, heic2any",
   
     },
@@ -769,8 +769,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Image Format Converter",
     slug: "image-format-converter",
     category: "Image",
-    description: 'Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format — your files never leave your device.',
-    seoDescription: 'Free online Image Format Converter — Convert between PNG, JPG, WebP, HEIC, and AVIF image formats. Pick any input and output format. ',
+    description: 'Convert one image from any format to any other — PNG, JPG, WebP, HEIC, AVIF, SVG, TIFF, GIF, and more. Pick your input, pick your output, done. Nothing is uploaded; every conversion runs in your browser.',
+    seoDescription: 'Free single-image converter — turn one photo from any format (PNG, JPG, WebP, HEIC, AVIF…) into any other, right in your browser. No uploads, no signup. ',
     dependencies: "Sharp / Browser Canvas",
     showInCategory: true,
     faqs: [

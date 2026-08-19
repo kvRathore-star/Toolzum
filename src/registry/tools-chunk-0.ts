@@ -1666,11 +1666,11 @@ export const entries_chunk_0: ToolMetadata[] = [
   },
   {
     id: "211",
-    name: "Image Bulk Converter",
+    name: "Batch Image Converter",
     slug: "image-bulk-converter",
     category: "Image",
-    description: 'Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. No signup or account required.',
-    seoDescription: 'Free online Image Bulk Converter — Processes an arbitrary number of uploaded images sequentially, converting between JPEG, PNG, WebP, AVIF, GIF, and TIFF in a single batch. ',
+    description: 'Convert dozens of images at once. Drop in your whole folder, pick one output format (JPG, PNG, WebP, AVIF, GIF, or TIFF), and get them all back as a single ZIP — processed locally, nothing leaves your device.',
+    seoDescription: 'Free batch image converter — convert multiple images in one go (JPG, PNG, WebP, AVIF, GIF, TIFF) and download them as a ZIP. Private, no signup, all local. ',
     dependencies: "browser-image-compression / jszip",
     isPro: true,
   

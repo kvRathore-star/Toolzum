@@ -150,7 +150,7 @@ export const FORMAT_PAIRS: FormatPair[] = [
 ];
 
 export const DESCRIPTIONS: Record<string, string> = {
-  'image-format-converter': "Convert between PNG, JPG, WebP, HEIC, and AVIF image formats.",
+  'image-format-converter': "Convert one image from any format to any other — PNG, JPG, WebP, HEIC, AVIF, SVG, TIFF, GIF, and more. Everything runs in your browser; nothing is uploaded.",
   'png-to-jpg': "<strong>PNG to JPG Converter:</strong> Convert lossless PNG images into space-efficient JPEG files. Ideal for photographs and complex images where the smaller file size outweighs the loss of transparency. Your files never leave your device.",
   'png-to-webp': "<strong>PNG to WebP Converter:</strong> Convert PNG images into modern WebP format for drastically smaller file sizes with the same quality. WebP is supported by all modern browsers — essential for website performance. Your files never leave your device.",
   'png-to-avif': "<strong>PNG to AVIF Converter:</strong> Convert PNG images into next-gen AVIF format for superior compression. AVIF offers better quality at smaller sizes than both JPEG and WebP — the future of web imagery. Your files never leave your device.",
