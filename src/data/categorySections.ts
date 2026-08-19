@@ -71,7 +71,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "code-to-curl-converter", "curl-to-code-converter",
         "jsonrpc-builder",
         "api-builder",
-        "curl-to-code", "http-headers-generator",
+        "http-headers-generator",
         "http-status-code-checker", "pricing-tier-builder",
 ],
     },

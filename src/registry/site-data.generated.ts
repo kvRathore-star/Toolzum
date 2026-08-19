@@ -17,11 +17,11 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1151;
+export const TOOL_COUNT = 1150;
 
 export const SITE_STATS = {
-  freeTierTotal: 1029,
-  localTools: 1030,
+  freeTierTotal: 1028,
+  localTools: 1029,
   cloudTools: 31,
   hybridTools: 4,
 } as const;
@@ -245,7 +245,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/developer/js-minifier"
       }
     ],
-    "allCount": 245,
+    "allCount": 244,
     "allHref": "/developer",
     "isIndia": false
   },

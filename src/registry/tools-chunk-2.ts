@@ -1025,16 +1025,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
 },
   {
-
-    id: "509",
-    name: "cURL to Code",
-    slug: "curl-to-code",
-    category: "Developer",
-    description: 'Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online cURL to Code Converter — Convert cURL commands to JavaScript fetch, axios, XHR, Python requests, and PHP cURL code. ',
-    dependencies: "None",
-},
-  {
     id: "510",
     name: "JSON to Code Generator",
     slug: "json-to-code",
