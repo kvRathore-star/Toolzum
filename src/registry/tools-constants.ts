@@ -118,6 +118,7 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
 
 export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; sourceCategory?: string | string[] }> = {
   "base64-encoder-decoder": { category: "developer", slug: "base64-encode-decode" },
+  "yaml-syntax-validator": { category: "developer", slug: "yaml-validator" },
   "jwt-decoder": { category: "developer", slug: "jwt-debugger" },
   "body-fat-estimator": { category: "health", slug: "body-fat-calculator" },
   "due-date-calculator": { category: "health", slug: "pregnancy-due-date-calculator" },

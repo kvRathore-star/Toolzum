@@ -569,6 +569,8 @@
 /developer/xml-to-json    /converter/xml-to-json/   301
 /developer/yaml-json-converter/   /converter/yaml-json-converter/   301
 /developer/yaml-json-converter    /converter/yaml-json-converter/   301
+/developer/yaml-syntax-validator/   /developer/yaml-validator/   301
+/developer/yaml-syntax-validator    /developer/yaml-validator/   301
 /finance/acv-calculator/   /growth-metrics/acv-calculator/   301
 /finance/acv-calculator    /growth-metrics/acv-calculator/   301
 /finance/burn-rate-calculator/   /growth-metrics/burn-rate-calculator/   301

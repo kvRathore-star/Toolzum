@@ -122,7 +122,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
       description: "Validate, convert, and transform data formats — YAML, JSON, CSV, TOML, XML, HTML, and code.",
       slugs: [
         "diff-checker", "regex-tester",
-        "syntax-validator", "yaml-syntax-validator", "yaml-validator",
+        "syntax-validator", "yaml-validator",
         "git-commit-linter", "gitignore-generator",
         "json-path-query-builder", "json-diff-checker",
         "json-tree-viewer",

@@ -1211,16 +1211,6 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
 },
   {
-
-    id: "932",
-    name: "YAML Syntax Validator",
-    slug: "yaml-syntax-validator",
-    category: "Developer",
-    description: 'Validate YAML syntax, check for indentation errors, and preview the parsed structure. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online YAML Validator \u2014 Validate YAML syntax, check for indentation errors, and preview the parsed structure. ',
-    dependencies: "None",
-},
-  {
     id: "933",
     name: "Annual Contract Value Calculator",
     slug: "acv-calculator",
