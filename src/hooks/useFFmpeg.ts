@@ -67,13 +67,15 @@ export function useFFmpeg() {
       ffmpegRef.current = ffmpegGlobal;
       setupListeners(ffmpegGlobal);
 
-      const [coreURL, wasmURL, classWorkerURL] = await Promise.all([
+      const [coreURL, wasmURL] = await Promise.all([
         toBlobURL(`${entry.baseURL}/ffmpeg-core.js`, 'text/javascript'),
         toBlobURL(`${entry.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        toBlobURL('https://unpkg.com/@ffmpeg/ffmpeg@0.12.15/dist/esm/worker.js', 'text/javascript'),
       ]);
 
-      await ffmpegGlobal.load({ coreURL, wasmURL, classWorkerURL });
+      // Do NOT pass classWorkerURL — a blob-URL module worker can't resolve
+      // worker.js's relative imports, so load() never resolves. Let @ffmpeg/ffmpeg
+      // use its bundled worker instead (same path as the known-good VocalRemover).
+      await ffmpegGlobal.load({ coreURL, wasmURL });
       return true;
     } catch (err) {
       if (entry.mt && process.env.NODE_ENV !== 'production') console.warn('Multi-threaded fallback also failed:', err);
@@ -83,14 +85,14 @@ export function useFFmpeg() {
     }
   };
 
-  const loadFFmpeg = async () => {
+  const loadFFmpeg = async (): Promise<FFmpeg | null> => {
     if (ffmpegGlobal?.loaded) {
       setIsLoaded(true);
       setLoadError(null);
-      return;
+      return ffmpegGlobal;
     }
 
-    if (isLoading) return;
+    if (isLoading) return null;
     if (!hasLoadedOnce) setIsFirstLoad(true);
     setIsLoading(true);
     setLoadError(null);
@@ -103,7 +105,7 @@ export function useFFmpeg() {
           setIsLoaded(true);
           hasLoadedOnce = true;
           setIsFirstLoad(false);
-          return;
+          return ffmpegGlobal;
         }
       }
       throw new Error('All FFmpeg CDN sources failed to load');
@@ -111,6 +113,7 @@ export function useFFmpeg() {
       const msg = e instanceof Error ? e.message : 'Failed to load FFmpeg WASM';
       console.error("FFmpeg load failed:", e);
       setLoadError(msg);
+      return null;
     } finally {
       setIsLoading(false);
     }
