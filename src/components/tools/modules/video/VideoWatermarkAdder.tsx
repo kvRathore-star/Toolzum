@@ -1,23 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function VideoWatermarkAdder() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
-  
+
   const [watermarkText, setWatermarkText] = useState('Toolzum.ai');
   const [position, setPosition] = useState('bottomRight');
-  
-  const ffmpegRef = useRef(new FFmpeg());
+
+  const { ffmpeg, isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   useEffect(() => {
     return () => {
@@ -28,17 +27,14 @@ export default function VideoWatermarkAdder() {
   const processVideo = async () => {
     if (!file) return;
     setIsProcessing(true);
-    setProgress(0);
-    
+
     try {
-      const ffmpeg = ffmpegRef.current;
-      if (!ffmpeg.loaded) {
-        ffmpeg.on('progress', ({ progress }) => {
-          setProgress(progress * 100);
-        });
-        await ffmpeg.load();
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
       }
-      
+
       await ffmpeg.writeFile('input.mp4', await fetchFile(file));
       
       let x = 'w-tw-10';
@@ -141,7 +137,7 @@ export default function VideoWatermarkAdder() {
 
             <button 
               onClick={processVideo}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

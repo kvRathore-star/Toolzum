@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type FilterVal = boolean | { enabled: boolean; [k: string]: boolean | number };
 
@@ -117,11 +117,9 @@ export default function VideoFilters() {
   const [outputFormat, setOutputFormat] = useState<'mp4' | 'webm' | 'gif'>('mp4');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const { ffmpeg, isLoaded, loadFFmpeg, progress } = useFFmpeg();
   const thumbTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const loadCalled = useRef(false);
 
@@ -168,12 +166,8 @@ export default function VideoFilters() {
     loadCalled.current = true;
     (async () => {
       try {
-        const ff = ffmpegRef.current;
-        if (!ff.loaded) {
-          ff.on('progress', ({ progress: p }) => setProgress(Math.round(p * 100)));
-          await ff.load();
-        }
-        setFfmpegLoaded(true);
+        const ff = await loadFFmpeg();
+        if (!ff) return;
         const inputName = `in_${Date.now()}`;
         await ff.writeFile(inputName, await fetchFile(file));
         await ff.exec(['-i', inputName, '-vframes', '1', '-q:v', '2', 'thumb.png']);
@@ -190,7 +184,7 @@ export default function VideoFilters() {
   }, [file]);
 
   useEffect(() => {
-    if (!file || !ffmpegLoaded) return;
+    if (!file || !isLoaded) return;
     if (thumbTimer.current) clearTimeout(thumbTimer.current);
     thumbTimer.current = setTimeout(() => {
       generateThumbnail();
@@ -199,9 +193,9 @@ export default function VideoFilters() {
   }, [filters]);
 
   const generateThumbnail = async () => {
-    if (!file || !ffmpegRef.current.loaded) return;
+    if (!file || !ffmpeg?.loaded) return;
     try {
-      const ff = ffmpegRef.current;
+      const ff = ffmpeg;
       const inputName = `thumb_in_${Date.now()}`;
       const vf = filterStr(filters);
       await ff.writeFile(inputName, await fetchFile(file));
@@ -223,11 +217,10 @@ export default function VideoFilters() {
   };
 
   const processVideo = async () => {
-    if (!file || !ffmpegRef.current.loaded) return;
+    if (!file || !ffmpeg?.loaded) return;
     setIsProcessing(true);
-    setProgress(0);
     try {
-      const ff = ffmpegRef.current;
+      const ff = ffmpeg;
       const inputName = `proc_in_${Date.now()}`;
       const vf = filterStr(filters);
       await ff.writeFile(inputName, await fetchFile(file));
@@ -365,7 +358,7 @@ export default function VideoFilters() {
           </div>
           <button
             onClick={generateThumbnail}
-            disabled={!ffmpegLoaded}
+            disabled={!isLoaded}
             className="w-full text-sm text-violet-600 dark:text-violet-400 border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-900/20 hover:bg-violet-100 dark:hover:bg-violet-900/40 font-semibold px-4 py-2.5 rounded-xl transition-all disabled:opacity-40"
           >
             Refresh Preview
@@ -403,7 +396,7 @@ export default function VideoFilters() {
             </div>
             <button
               onClick={processVideo}
-              disabled={isProcessing || !ffmpegLoaded}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

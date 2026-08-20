@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import type { FFmpeg } from '@ffmpeg/ffmpeg';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Quality = '720p' | '1080p' | '1440p';
 
@@ -29,6 +29,7 @@ export default function ScreenRecorder() {
   const [quality, setQuality] = useState<Quality>('1080p');
   const [isProcessing, setIsProcessing] = useState(false);
   const [ffmpegProgress, setFfmpegProgress] = useState(0);
+  const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
@@ -196,20 +197,16 @@ export default function ScreenRecorder() {
     setIsProcessing(true);
     setFfmpegProgress(0);
 
-    const { FFmpeg: FFmpegClass } = await import('@ffmpeg/ffmpeg');
-    const { fetchFile, toBlobURL } = await import('@ffmpeg/util');
-    let ffmpeg: FFmpeg | null = null;
+    const { fetchFile } = await import('@ffmpeg/util');
+    const ffmpeg = await loadFFmpeg();
+    if (!ffmpeg) {
+      setIsProcessing(false);
+      toast.error('Failed to load FFmpeg engine.');
+      return;
+    }
     try {
-      ffmpeg = new FFmpegClass();
-
       ffmpeg.on('progress', ({ progress }) => {
         setFfmpegProgress(Math.round(progress * 100));
-      });
-
-      const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
       });
 
       const inputName = 'input.webm';
@@ -365,7 +362,7 @@ export default function ScreenRecorder() {
               </button>
               <button
                 onClick={convertToMp4}
-                disabled={isProcessing}
+                disabled={isProcessing || !isLoaded}
                 className="px-4 py-4 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-bold rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>

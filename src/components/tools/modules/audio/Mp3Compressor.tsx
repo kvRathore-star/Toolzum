@@ -1,21 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function Mp3Compressor() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
   const [bitrate, setBitrate] = useState('64k');
   
-  const ffmpegRef = useRef(new FFmpeg());
+  const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
 
   useEffect(() => {
     return () => {
@@ -23,26 +22,13 @@ export default function Mp3Compressor() {
     };
   }, [outputUrl]);
 
-  const loadFFmpeg = async () => {
-    const ffmpeg = ffmpegRef.current;
-    if (!ffmpeg.loaded) {
-      ffmpeg.on('progress', ({ progress, time }) => {
-        setProgress(progress * 100);
-      });
-      await ffmpeg.load(); // Uses default CDN for core files if not specified
-    }
-  };
-
   const processAudio = async () => {
     if (!file) return;
+    if (!ffmpeg?.loaded) await loadFFmpeg();
+    if (!ffmpeg) return;
     setIsProcessing(true);
-    setProgress(0);
-    
+
     try {
-      toast("Loading compressor engine...");
-      await loadFFmpeg();
-      
-      const ffmpeg = ffmpegRef.current;
       await ffmpeg.writeFile('input.mp3', await fetchFile(file));
       
       toast("Compressing audio...");
@@ -71,7 +57,7 @@ export default function Mp3Compressor() {
           accept="audio/mpeg,audio/mp3,audio/*" 
           onFileSelect={(f) => setFile(f)} 
           title="Upload Audio File"
-          subtitle="Supports MP3, WAV, AAC (Max 50MB)"
+          subtitle="Supports MP3, WAV, AAC (50MB free, 100MB signed in)"
         />
       </div>
     );
@@ -112,7 +98,7 @@ export default function Mp3Compressor() {
 
           <button 
             onClick={processAudio}
-            disabled={isProcessing}
+            disabled={isProcessing || !isLoaded}
             className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
           >
             {isProcessing && (

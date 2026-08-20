@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { Music, Loader2, Download, Volume2, Play, Square, Trash2 } from 'lucide-react';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type FadeCurve = 'linear' | 'logarithmic' | 'exponential' | 's-curve';
 type OutputFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
@@ -22,25 +22,6 @@ const FORMATS: OutputFormat[] = ['mp3', 'wav', 'm4a', 'flac', 'ogg'];
 const FORMAT_LABELS: Record<OutputFormat, string> = { mp3: 'MP3', wav: 'WAV', m4a: 'M4A', flac: 'FLAC', ogg: 'OGG' };
 const FFMPEG_CURVE: Record<FadeCurve, string> = { linear: 'tri', logarithmic: 'qsin', exponential: 'esin', 's-curve': 'sinc' };
 const MIME: Record<OutputFormat, string> = { mp3: 'audio/mpeg', wav: 'audio/wav', m4a: 'audio/mp4', flac: 'audio/flac', ogg: 'audio/ogg' };
-
-let ff: FFmpeg | null = null;
-let ffPromise: Promise<void> | null = null;
-
-async function loadFF(): Promise<FFmpeg> {
-  if (ff?.loaded) return ff;
-  if (ffPromise) { await ffPromise; return ff!; }
-  ff = new FFmpeg();
-  ffPromise = (async () => {
-    const b = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-    const [c, w] = await Promise.all([
-      toBlobURL(`${b}/ffmpeg-core.js`, 'text/javascript'),
-      toBlobURL(`${b}/ffmpeg-core.wasm`, 'application/wasm'),
-    ]);
-    await ff!.load({ coreURL: c, wasmURL: w });
-  })();
-  await ffPromise;
-  return ff!;
-}
 
 function cv(t: number, c: FadeCurve): number {
   switch (c) {
@@ -120,10 +101,10 @@ export default function FadeInOut() {
   const [outputFmt, setOutputFmt] = useState<OutputFormat>('mp3');
   const [processing, setProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffLoaded, setFfLoaded] = useState(false);
   const [duration, setDuration] = useState(0);
   const [playing, setPlaying] = useState(false);
 
+  const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const origUrl = useRef<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -239,27 +220,28 @@ export default function FadeInOut() {
     setFile(f); setOutputUrl(null);
     if (origUrl.current) { URL.revokeObjectURL(origUrl.current); origUrl.current = null; }
     origUrl.current = URL.createObjectURL(f);
-    if (!ffLoaded) try { await loadFF(); setFfLoaded(true); } catch { toast.error('Failed to load FFmpeg engine'); }
-  }, [ffLoaded]);
+    if (!isLoaded) try { await loadFFmpeg(); } catch { toast.error('Failed to load FFmpeg engine'); }
+  }, [isLoaded]);
 
   const process = async () => {
-    if (!file || !ff?.loaded) return;
+    if (!file || !ffmpeg?.loaded) return;
     const fi = fadeInSec(), fo = fadeOutSec();
     if (!fadeIn && !fadeOut) { toast.error('Enable at least one fade effect'); return; }
     setProcessing(true);
     try {
+      const ff = ffmpeg;
       const inName = file.name.replace(/\s+/g, '_'), outName = `output.${outputFmt}`;
-      await ff!.writeFile(inName, await fetchFile(file));
+      await ff.writeFile(inName, await fetchFile(file));
       const filters: string[] = [];
       if (fadeIn) filters.push(`afade=t=in:st=0:d=${fi}:curve=${FFMPEG_CURVE[fadeInCurve]}`);
       if (fadeOut) filters.push(`afade=t=out:st=${Math.max(0, duration - fo)}:d=${fo}:curve=${FFMPEG_CURVE[fadeOutCurve]}`);
-      await ff!.exec(['-i', inName, '-af', filters.join(','), outName]);
-      const data = await ff!.readFile(outName);
+      await ff.exec(['-i', inName, '-af', filters.join(','), outName]);
+      const data = await ff.readFile(outName);
       const blob = new Blob([data as BlobPart], { type: MIME[outputFmt] });
       const url = URL.createObjectURL(blob);
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(url);
-      await ff!.deleteFile(inName); await ff!.deleteFile(outName);
+      await ff.deleteFile(inName); await ff.deleteFile(outName);
       toast.success('Fade effect applied successfully!');
     } catch (e) { console.error(e); toast.error('Failed to apply fade effect.'); }
     finally { setProcessing(false); }
@@ -355,8 +337,8 @@ export default function FadeInOut() {
               </div>
             )}
 
-            {!ffLoaded && !processing && (
-              <button onClick={async () => { try { await loadFF(); setFfLoaded(true); } catch { toast.error('Failed to load FFmpeg'); } }}
+            {!isLoaded && !processing && (
+              <button onClick={loadFFmpeg}
                 className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs transition-all">
                 Load FFmpeg Engine
               </button>

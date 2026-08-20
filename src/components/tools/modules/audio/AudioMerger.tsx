@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 const FORMATS = ['mp3', 'wav', 'm4a', 'flac', 'ogg'] as const;
 type Format = typeof FORMATS[number];
@@ -36,36 +36,14 @@ export default function AudioMerger() {
   const [normalize, setNormalize] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [isLoadingFFmpeg, setIsLoadingFFmpeg] = useState(false);
   const [durations, setDurations] = useState<number[]>([]);
-  const [progress, setProgress] = useState(0);
 
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const { isLoaded, isLoading, loadFFmpeg, progress } = useFFmpeg();
   const addMoreRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    (async () => {
-      if (ffmpegLoaded || isLoadingFFmpeg) return;
-      setIsLoadingFFmpeg(true);
-      try {
-        const ff = new FFmpeg();
-        const base = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-        const [coreURL, wasmURL] = await Promise.all([
-          toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
-          toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
-        ]);
-        await ff.load({ coreURL, wasmURL });
-        ff.on('progress', (p: { progress: number }) => setProgress(Math.round(p.progress * 100)));
-        ffmpegRef.current = ff;
-        setFfmpegLoaded(true);
-      } catch {
-        toast.error('Failed to load FFmpeg engine.');
-      } finally {
-        setIsLoadingFFmpeg(false);
-      }
-    })();
+    loadFFmpeg();
   }, []);
 
   useEffect(() => {
@@ -164,14 +142,13 @@ export default function AudioMerger() {
       toast.error('Add at least 2 audio files to merge.');
       return;
     }
-    const ff = ffmpegRef.current;
-    if (!ff || !ffmpegLoaded) {
+    const ff = await loadFFmpeg();
+    if (!ff) {
       toast.error('FFmpeg is not ready yet.');
       return;
     }
 
     setIsProcessing(true);
-    setProgress(0);
     setOutputUrl(null);
     try {
       const outputName = `merged.${EXTENSIONS[outputFormat]}`;
@@ -234,7 +211,7 @@ export default function AudioMerger() {
     }
   };
 
-  if (!ffmpegLoaded) {
+  if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center p-16 space-y-4">
         <svg className="w-10 h-10 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -242,7 +219,7 @@ export default function AudioMerger() {
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
         <p className="text-[var(--text-secondary)] text-sm font-medium animate-pulse">
-          {isLoadingFFmpeg ? 'Loading audio engine...' : 'Initializing...'}
+          {isLoading ? 'Loading audio engine...' : 'Initializing...'}
         </p>
       </div>
     );

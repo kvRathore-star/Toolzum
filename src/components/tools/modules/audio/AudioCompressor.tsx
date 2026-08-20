@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type OutputFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
 
@@ -54,8 +54,7 @@ export default function AudioCompressor() {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('mp3');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const ffmpegRef = useRef(new FFmpeg());
+  const { isLoaded, isLoading, loadFFmpeg, progress } = useFFmpeg();
   const originalUrl = useRef<string | null>(null);
 
   useEffect(() => {
@@ -87,26 +86,17 @@ export default function AudioCompressor() {
     }
   };
 
-  const loadFFmpeg = async () => {
-    const ffmpeg = ffmpegRef.current;
-    if (ffmpeg.loaded) { setFfmpegLoaded(true); return; }
-    const base = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-    ffmpeg.on('progress', () => {});
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
   const processAudio = async () => {
     if (!file) return;
     setIsProcessing(true);
     try {
       toast.loading('Loading compressor engine...');
-      await loadFFmpeg();
+      const ffmpeg = await loadFFmpeg();
       toast.dismiss();
-      const ffmpeg = ffmpegRef.current;
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
       const inputName = `input_${file.name.replace(/\s+/g, '_')}`;
       const fmt = OUTPUT_FORMATS.find(f => f.value === outputFormat)!;
       const outputName = `output.${fmt.ext}`;
@@ -148,7 +138,7 @@ export default function AudioCompressor() {
             setOutputUrl(null);
           }}
           title="Upload Audio File"
-          subtitle="Supports MP3, WAV, M4A, FLAC, OGG (Max 100MB)"
+          subtitle="Supports MP3, WAV, M4A, FLAC, OGG (50MB free, 100MB signed in)"
         />
       </div>
     );
@@ -222,7 +212,7 @@ export default function AudioCompressor() {
             </div>
           </div>
 
-          {!ffmpegLoaded && !isProcessing && (
+          {!isLoaded && !isLoading && !isProcessing && (
             <button
               onClick={processAudio}
               className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]"
@@ -231,14 +221,14 @@ export default function AudioCompressor() {
             </button>
           )}
 
-          {!ffmpegLoaded && isProcessing && (
+          {(isLoading || (!isLoaded && isProcessing)) && (
             <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
               <svg className="w-5 h-5 animate-spin text-amber-500" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
               <span className="text-[10px]">Loading FFmpeg Engine...</span>
             </div>
           )}
 
-          {ffmpegLoaded && !isProcessing && !outputUrl && (
+          {isLoaded && !isProcessing && !outputUrl && (
             <button
               onClick={processAudio}
               className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]"
@@ -247,7 +237,7 @@ export default function AudioCompressor() {
             </button>
           )}
 
-          {isProcessing && ffmpegLoaded && (
+          {isProcessing && isLoaded && (
             <div className="space-y-3">
               <div className="flex justify-between text-[10px] font-semibold text-amber-600 dark:text-amber-400">
                 <span>Processing...</span>

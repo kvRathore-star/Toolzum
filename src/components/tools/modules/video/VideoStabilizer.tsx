@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Strength = 'minimal' | 'moderate' | 'strong' | 'extreme';
 type Method = 'regular' | 'quick';
@@ -29,30 +29,14 @@ export default function VideoStabilizer() {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('mp4');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
-
-  const ffmpegRef = useRef(new FFmpeg());
+  const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
 
   useEffect(() => {
     return () => {
       if (outputUrl) URL.revokeObjectURL(outputUrl);
     };
   }, [outputUrl]);
-
-  const loadFfmpeg = async () => {
-    if (ffmpegLoaded) return;
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on('progress', ({ progress }) => {
-      setProgress(Math.round(progress * 100));
-    });
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
 
   const processVideo = async () => {
     if (!file) return;
@@ -61,8 +45,14 @@ export default function VideoStabilizer() {
     setOutputUrl(null);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      await loadFfmpeg();
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
+      ffmpeg.on('progress', ({ progress }) => {
+        setProgress(Math.round(progress * 100));
+      });
 
       const ext = file.name.split('.').pop()?.toLowerCase() || 'mp4';
       await ffmpeg.writeFile(`input.${ext}`, await fetchFile(file));
@@ -284,7 +274,7 @@ export default function VideoStabilizer() {
 
             <button
               onClick={processVideo}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import NextImage from "next/image";
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Mode = 'gif-to-apng' | 'apng-to-gif';
 
@@ -20,14 +20,12 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
   const [gifInfo, setGifInfo] = useState<{ width: number; height: number; frameCount: number; fileSize: number } | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [outputSize, setOutputSize] = useState(0);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [fps, setFps] = useState(10);
   const [width, setWidth] = useState(320);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const { isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   const toApng = mode === 'gif-to-apng';
 
@@ -62,28 +60,18 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
     return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
   }, [outputUrl]);
 
-  const loadFfmpeg = async () => {
-    if (ffmpegLoaded) return;
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on('progress', ({ progress: p }) => setProgress(Math.round(p * 100)));
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
   const processConversion = async () => {
     if (!file) return;
     setIsProcessing(true);
-    setProgress(0);
     setOutputUrl(null);
     setOutputSize(0);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      await loadFfmpeg();
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
 
       if (toApng) {
         await ffmpeg.writeFile('input.gif', await fetchFile(file));
@@ -97,8 +85,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
         await ffmpeg.deleteFile('input.gif');
         toast.success('APNG created!');
       } else {
-        const ff = ffmpegRef.current;
-        if (!ff.loaded) await loadFfmpeg();
+        const ff = ffmpeg;
         await ff.writeFile('input.png', await fetchFile(file));
         const scale = `${width}:-1`;
         const filter = `fps=${fps},scale=${scale}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
@@ -230,7 +217,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
               </div>
             )}
 
-            <button onClick={processConversion} disabled={isProcessing}
+            <button onClick={processConversion} disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden">
               {isProcessing && <div className="absolute inset-y-0 left-0 bg-white/20 transition-all duration-300" style={{ width: `${progress}%` }} />}
               <span className="relative z-10">{isProcessing ? `Converting ${Math.round(progress)}%` : `Convert to ${toApng ? 'APNG' : 'GIF'}`}</span>

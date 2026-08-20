@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type WaveformStyle = 'bars' | 'line' | 'filled' | 'circular';
 
@@ -15,42 +15,6 @@ const STYLE_OPTIONS: { value: WaveformStyle; label: string }[] = [
   { value: 'filled', label: 'Filled' },
   { value: 'circular', label: 'Circular' },
 ];
-
-const CDN_SOURCES = [
-  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd' },
-  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd' },
-];
-
-let ffmpegSingleton: FFmpeg | null = null;
-let ffmpegLoadPromise: Promise<void> | null = null;
-
-async function getFFmpeg(): Promise<FFmpeg> {
-  if (ffmpegSingleton?.loaded) return ffmpegSingleton;
-  if (ffmpegLoadPromise) {
-    await ffmpegLoadPromise;
-    if (ffmpegSingleton?.loaded) return ffmpegSingleton;
-  }
-  ffmpegLoadPromise = (async () => {
-    for (const src of CDN_SOURCES) {
-      try {
-        const ff = new FFmpeg();
-        const [coreURL, wasmURL] = await Promise.all([
-          toBlobURL(`${src.baseURL}/ffmpeg-core.js`, 'text/javascript'),
-          toBlobURL(`${src.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        ]);
-        await ff.load({ coreURL, wasmURL });
-        ffmpegSingleton = ff;
-        return;
-      } catch {
-        // try next CDN
-      }
-    }
-    throw new Error('All FFmpeg CDN sources failed to load.');
-  })();
-  await ffmpegLoadPromise;
-  if (!ffmpegSingleton?.loaded) throw new Error('FFmpeg failed to load.');
-  return ffmpegSingleton;
-}
 
 function downsample(data: Float32Array, target: number): Float32Array {
   const result = new Float32Array(target);
@@ -228,6 +192,7 @@ export default function WaveformGenerator() {
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [hasSamples, setHasSamples] = useState(false);
 
+  const { loadFFmpeg } = useFFmpeg();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cachedRef = useRef<Float32Array | null>(null);
   const outUrlRef = useRef<string | null>(null);
@@ -262,7 +227,11 @@ export default function WaveformGenerator() {
     setIsProcessing(true);
     try {
       if (!cachedRef.current) {
-        const ff = await getFFmpeg();
+        const ff = await loadFFmpeg();
+        if (!ff) {
+          toast.error('Failed to load FFmpeg engine.');
+          return;
+        }
         const inputName = `wg_${Date.now()}`;
         await ff.writeFile(inputName, await fetchFile(file));
         await ff.exec(['-i', inputName, '-ac', '1', '-ar', '22050', '-f', 'f32le', 'wg_out.raw']);

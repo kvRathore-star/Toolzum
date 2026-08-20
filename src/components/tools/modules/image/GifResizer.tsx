@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Interpolation = 'lanczos' | 'bilinear' | 'neighbor';
 
@@ -26,11 +26,9 @@ export default function GifResizer() {
   const [gifInfo, setGifInfo] = useState<{ width: number; height: number; frameCount: number; fileSize: number } | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const { isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   useEffect(() => {
     if (!file) return;
@@ -95,20 +93,6 @@ export default function GifResizer() {
     };
   }, [outputUrl]);
 
-  const loadFfmpeg = async () => {
-    if (ffmpegLoaded) return;
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on('progress', ({ progress: p }) => {
-      setProgress(Math.round(p * 100));
-    });
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
   const handleWidthChange = (val: number) => {
     setWidth(val);
     if (maintainAspect && gifInfo && gifInfo.width > 0) {
@@ -123,12 +107,14 @@ export default function GifResizer() {
   const processResize = async () => {
     if (!file || !gifInfo || !width || !height) return;
     setIsProcessing(true);
-    setProgress(0);
     setOutputUrl(null);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      await loadFfmpeg();
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
       await ffmpeg.writeFile('input.gif', await fetchFile(file));
 
       const flagsMap: Record<Interpolation, string> = {
@@ -264,7 +250,7 @@ export default function GifResizer() {
 
             <button
               onClick={processResize}
-              disabled={isProcessing || !width || !height}
+              disabled={isProcessing || !width || !height || !isLoaded}
               className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

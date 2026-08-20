@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import type { FFmpeg } from '@ffmpeg/ffmpeg';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type OutputFormat = 'webp' | 'webm' | 'both';
 type FpsOption = 'auto' | 10 | 15 | 24 | 30;
@@ -21,10 +21,8 @@ export default function GifToWebpWebm() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputUrl2, setOutputUrl2] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
 
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const { isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   useEffect(() => {
     if (!file) return;
@@ -82,36 +80,19 @@ export default function GifToWebpWebm() {
     };
   }, [outputUrl, outputUrl2]);
 
-  const loadFfmpeg = async () => {
-    if (ffmpegLoaded) return;
-    const { FFmpeg } = await import('@ffmpeg/ffmpeg');
-    const { toBlobURL } = await import('@ffmpeg/util');
-    if (!ffmpegRef.current) {
-      ffmpegRef.current = new FFmpeg();
-    }
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on('progress', ({ progress: p }) => {
-      setProgress(Math.round(p * 100));
-    });
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
   const processConversion = async () => {
     if (!file || !gifInfo) return;
     setIsProcessing(true);
-    setProgress(0);
     setOutputUrl(null);
     setOutputUrl2(null);
 
     try {
       const { fetchFile } = await import('@ffmpeg/util');
-      await loadFfmpeg();
-      const ffmpeg = ffmpegRef.current!;
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
       await ffmpeg.writeFile('input.gif', await fetchFile(file));
 
       const scale = `scale=${gifInfo.width}:${gifInfo.height}:flags=lanczos`;
@@ -296,7 +277,7 @@ export default function GifToWebpWebm() {
 
             <button
               onClick={processConversion}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

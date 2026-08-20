@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import toast from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 const LEVELS = ['mild', 'moderate', 'strong', 'extreme'] as const;
 type Level = typeof LEVELS[number];
@@ -52,10 +52,8 @@ export default function NoiseReducer() {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('wav');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [processingProgress, setProcessingProgress] = useState(0);
 
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const { isLoaded, isLoading, loadFFmpeg, progress } = useFFmpeg();
   const originalUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -65,42 +63,17 @@ export default function NoiseReducer() {
     };
   }, [outputUrl]);
 
-  const loadFFmpeg = async () => {
-    if (ffmpegRef.current?.loaded) return;
-    try {
-      const ffmpeg = new FFmpeg();
-      ffmpegRef.current = ffmpeg;
-
-      ffmpeg.on('progress', (p) => {
-        setProcessingProgress(Math.round(p.progress * 100));
-      });
-
-      const base = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-      const [coreURL, wasmURL] = await Promise.all([
-        toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
-        toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
-      ]);
-
-      await ffmpeg.load({ coreURL, wasmURL });
-      setFfmpegLoaded(true);
-    } catch {
-      toast.error('Failed to load audio processing engine.');
-    }
-  };
-
   const handleFileSelect = async (_file: File, _dataUrl: string) => {
     if (originalUrlRef.current) URL.revokeObjectURL(originalUrlRef.current);
     setFile(_file);
     setOutputUrl(null);
-    setProcessingProgress(0);
     originalUrlRef.current = URL.createObjectURL(_file);
-    if (!ffmpegRef.current?.loaded) await loadFFmpeg();
+    if (!isLoaded) await loadFFmpeg();
   };
 
   const removeFile = () => {
     setFile(null);
     setOutputUrl(null);
-    setProcessingProgress(0);
     if (originalUrlRef.current) {
       URL.revokeObjectURL(originalUrlRef.current);
       originalUrlRef.current = null;
@@ -108,10 +81,14 @@ export default function NoiseReducer() {
   };
 
   const processAudio = async () => {
-    if (!file || !ffmpegRef.current) return;
+    if (!file) return;
     setIsProcessing(true);
-    setProcessingProgress(0);
-    const ffmpeg = ffmpegRef.current;
+    const ffmpeg = await loadFFmpeg();
+    if (!ffmpeg) {
+      toast.error('Failed to load audio processing engine.');
+      setIsProcessing(false);
+      return;
+    }
 
     try {
       const ts = Date.now();
@@ -179,7 +156,7 @@ export default function NoiseReducer() {
             title="Upload Audio Recording"
             subtitle="MP3, WAV, M4A, FLAC, OGG, WebM"
           />
-        ) : !ffmpegLoaded ? (
+        ) : !isLoaded ? (
           <div className="flex flex-col items-center justify-center py-16 space-y-4">
             <svg className="w-10 h-10 text-violet-500 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -294,10 +271,10 @@ export default function NoiseReducer() {
               <div className="space-y-2">
                 <div className="flex justify-between text-[10px] font-semibold text-violet-600 dark:text-violet-400">
                   <span>{useNoiseProfile ? 'Analyzing noise profile & processing...' : 'Reducing noise...'}</span>
-                  <span>{processingProgress}%</span>
+                  <span>{progress}%</span>
                 </div>
                 <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
-                  <div className="bg-violet-500 h-full transition-all duration-300 rounded-full" style={{ width: `${processingProgress}%` }}></div>
+                  <div className="bg-violet-500 h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }}></div>
                 </div>
               </div>
             )}

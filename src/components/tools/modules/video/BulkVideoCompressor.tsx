@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import { Upload, Loader2, Download, Film, Settings2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -8,6 +8,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 const CRF_OPTIONS = [
   { value: '23', label: '23 — Good quality (default)' },
@@ -18,26 +19,21 @@ const CRF_OPTIONS = [
 
 export default function BulkVideoCompressor() {
   const [crf, setCrf] = useState('23');
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
-  const ffRef = useRef<Awaited<import('@ffmpeg/ffmpeg').FFmpeg> | null>(null);
   const batch = useBatchProgress();
+  const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
+  const batchRef = useRef(batch);
+  batchRef.current = batch;
 
-  const loadFfmpeg = useCallback(async () => {
-    if (ffRef.current) return ffRef.current;
-    const { FFmpeg } = await import('@ffmpeg/ffmpeg');
-    const { fetchFile } = await import('@ffmpeg/util');
-    const ff = new FFmpeg();
-    ff.on('progress', ({ progress: p }) => {
-      const activeFile = batch.files.find(f => f.status === 'processing');
-      if (activeFile) batch.updateFile(activeFile.id, { progress: Math.round(p * 100) });
-    });
-    await ff.load();
-    ffRef.current = ff;
-    setFfmpegLoaded(true);
-    toast.success('FFmpeg loaded');
-    return ff;
-  }, [batch.files, batch.updateFile]);
+  useEffect(() => {
+    if (!ffmpeg) return;
+    const handleProgress = ({ progress: p }: { progress: number; time: number }) => {
+      const activeFile = batchRef.current.files.find(f => f.status === 'processing');
+      if (activeFile) batchRef.current.updateFile(activeFile.id, { progress: Math.round(p * 100) });
+    };
+    ffmpeg.on('progress', handleProgress);
+    return () => { ffmpeg.off('progress', handleProgress); };
+  }, [ffmpeg]);
 
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
@@ -47,7 +43,7 @@ export default function BulkVideoCompressor() {
   };
 
   const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
-    const ff = ffRef.current!;
+    const ff = ffmpeg!;
     const idx = batch.files.findIndex(f => f.file === file);
     const input = `input_${idx}_${file.name}`;
     const output = `output_${idx}.mp4`;
@@ -68,7 +64,7 @@ export default function BulkVideoCompressor() {
 
   const handleProcess = async () => {
     if (batch.files.length === 0) { toast.error('Upload videos first'); return; }
-    if (!ffRef.current) {
+    if (!ffmpeg) {
       toast.error('Load FFmpeg engine first');
       return;
     }
@@ -136,13 +132,13 @@ export default function BulkVideoCompressor() {
           </div>
         </div>
 
-        {!ffmpegLoaded && batch.files.length > 0 && (
-          <button onClick={loadFfmpeg} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-zinc-700 text-white font-medium rounded-[var(--radius-lg)] hover:bg-zinc-600 transition-all">
+        {!isLoaded && batch.files.length > 0 && (
+          <button onClick={loadFFmpeg} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-zinc-700 text-white font-medium rounded-[var(--radius-lg)] hover:bg-zinc-600 transition-all">
             <Loader2 className="w-4 h-4" /> Load FFmpeg Engine (~30MB)
           </button>
         )}
 
-        {ffmpegLoaded && (
+        {isLoaded && (
           <button onClick={handleProcess} disabled={batch.isProcessing || batch.files.length === 0} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all">
             {batch.isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Film className="w-4 h-4" />}
             {batch.isProcessing ? 'Compressing...' : `Compress ${batch.files.length} video(s)`}

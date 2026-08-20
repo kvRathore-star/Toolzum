@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Mode = 'instrumental' | 'acapella' | 'both';
 type OutFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
@@ -38,42 +38,6 @@ const FORMAT_MIME: Record<OutFormat, string> = {
   ogg: 'audio/ogg',
 };
 
-const CDN_SOURCES = [
-  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd' },
-  { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd' },
-];
-
-let ffmpegSingleton: FFmpeg | null = null;
-let ffmpegLoadPromise: Promise<void> | null = null;
-
-async function getFFmpeg(): Promise<FFmpeg> {
-  if (ffmpegSingleton?.loaded) return ffmpegSingleton;
-  if (ffmpegLoadPromise) {
-    await ffmpegLoadPromise;
-    if (ffmpegSingleton?.loaded) return ffmpegSingleton;
-  }
-  ffmpegLoadPromise = (async () => {
-    for (const src of CDN_SOURCES) {
-      try {
-        const ff = new FFmpeg();
-        const [coreURL, wasmURL] = await Promise.all([
-          toBlobURL(`${src.baseURL}/ffmpeg-core.js`, 'text/javascript'),
-          toBlobURL(`${src.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        ]);
-        await ff.load({ coreURL, wasmURL });
-        ffmpegSingleton = ff;
-        return;
-      } catch {
-        // try next CDN fallback
-      }
-    }
-    throw new Error('All FFmpeg CDN sources failed to load.');
-  })();
-  await ffmpegLoadPromise;
-  if (!ffmpegSingleton?.loaded) throw new Error('FFmpeg failed to load.');
-  return ffmpegSingleton;
-}
-
 export default function VocalRemover() {
   const [file, setFile] = useState<File | null>(null);
   const [mode, setMode] = useState<Mode>('instrumental');
@@ -81,29 +45,8 @@ export default function VocalRemover() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputUrl2, setOutputUrl2] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const ffRef = useRef<FFmpeg | null>(null);
-  const mounted = useRef(true);
 
-  useEffect(() => {
-    mounted.current = true;
-    getFFmpeg()
-      .then((ff) => {
-        if (!mounted.current) return;
-        ffRef.current = ff;
-        ff.on('progress', ({ progress: p }) => {
-          if (mounted.current) setProgress(Math.round(p * 100));
-        });
-        setFfmpegLoaded(true);
-      })
-      .catch(() => {
-        if (mounted.current) toast.error('Failed to load audio engine. Please refresh.');
-      });
-    return () => {
-      mounted.current = false;
-    };
-  }, []);
+  const { ffmpeg, isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   useEffect(() => {
     return () => {
@@ -112,11 +55,14 @@ export default function VocalRemover() {
     };
   }, [outputUrl, outputUrl2]);
 
+  useEffect(() => {
+    loadFFmpeg();
+  }, []);
+
   const handleFileSelect = (f: File) => {
     setFile(f);
     setOutputUrl(null);
     setOutputUrl2(null);
-    setProgress(0);
   };
 
   const handleRemove = () => {
@@ -125,17 +71,20 @@ export default function VocalRemover() {
     setFile(null);
     setOutputUrl(null);
     setOutputUrl2(null);
-    setProgress(0);
   };
 
   const ext = FORMAT_EXT[outputFormat];
   const baseName = file ? file.name.replace(/\.[^/.]+$/, '') : '';
 
   const processAudio = async () => {
-    if (!file || !ffRef.current) return;
+    if (!file || !isLoaded) return;
     setIsProcessing(true);
-    setProgress(0);
-    const ff = ffRef.current;
+    const ff = await loadFFmpeg();
+    if (!ff) {
+      toast.error('Failed to load audio engine.');
+      setIsProcessing(false);
+      return;
+    }
     const inputName = `in_${Date.now()}.${file.name.split('.').pop() || 'mp3'}`;
     try {
       await ff.writeFile(inputName, await fetchFile(file));
@@ -183,11 +132,10 @@ export default function VocalRemover() {
       toast.error('Failed to process audio. Try a different file or format.');
     } finally {
       setIsProcessing(false);
-      setProgress(0);
     }
   };
 
-  if (!ffmpegLoaded) {
+  if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center py-16 space-y-4">
         <div className="w-10 h-10 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />

@@ -2,22 +2,20 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function VideoSpeedChanger() {
   const [file, setFile] = useState<File | null>(null);
   const [speed, setSpeed] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [originalDuration, setOriginalDuration] = useState(0);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const { ffmpeg, isLoaded, loadFFmpeg, progress } = useFFmpeg();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -70,16 +68,12 @@ export default function VideoSpeedChanger() {
       return;
     }
     setIsProcessing(true);
-    setProgress(0);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      if (!ffmpeg.loaded) {
-        ffmpeg.on('progress', ({ progress }) => {
-          setProgress(Math.round(progress * 100));
-        });
-        await ffmpeg.load();
-        setFfmpegLoaded(true);
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
       }
 
       const ext = (file.name.split('.').pop() || 'mp4').toLowerCase();
@@ -228,7 +222,7 @@ export default function VideoSpeedChanger() {
 
             <button
               onClick={processVideo}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

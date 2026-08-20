@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function GifCompressor() {
   const [file, setFile] = useState<File | null>(null);
@@ -18,11 +18,9 @@ export default function GifCompressor() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputSize, setOutputSize] = useState(0);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
 
-  const ffmpegRef = useRef(new FFmpeg());
+  const { isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
   useEffect(() => {
     if (!file) return;
@@ -85,36 +83,18 @@ export default function GifCompressor() {
     };
   }, [outputUrl]);
 
-  const loadFfmpeg = async () => {
-    if (ffmpegLoaded) return;
-    const ffmpeg = ffmpegRef.current;
-    ffmpeg.on('progress', ({ progress: p }) => {
-      setProgress(Math.round(p * 100));
-    });
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
-  const estimatedSize = (() => {
-    if (!gifInfo) return 0;
-    const ratio = colors / 256;
-    return Math.round(gifInfo.fileSize * (ratio * 0.6 + 0.1));
-  })();
-
   const processCompression = async () => {
     if (!file || !gifInfo) return;
     setIsProcessing(true);
-    setProgress(0);
     setOutputUrl(null);
     setOutputSize(0);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      await loadFfmpeg();
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
       await ffmpeg.writeFile('input.gif', await fetchFile(file));
 
       const dedupFilter = removeDuplicates ? 'mpdecimate,setpts=N/FRAME_RATE/TB,' : '';
@@ -140,6 +120,12 @@ export default function GifCompressor() {
       setIsProcessing(false);
     }
   };
+
+  const estimatedSize = (() => {
+    if (!gifInfo) return 0;
+    const ratio = colors / 256;
+    return Math.round(gifInfo.fileSize * (ratio * 0.6 + 0.1));
+  })();
 
   if (!file) {
     return (
@@ -250,7 +236,7 @@ export default function GifCompressor() {
 
             <button
               onClick={processCompression}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

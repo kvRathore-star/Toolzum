@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FileUploader } from '@/components/tools/FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 const BANDS = [31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const BAND_LABELS = ['31Hz', '62Hz', '125Hz', '250Hz', '500Hz', '1kHz', '2kHz', '4kHz', '8kHz', '16kHz'];
@@ -39,11 +39,9 @@ export default function AudioEqualizer() {
   const [outputFormat, setOutputFormat] = useState<typeof OUTPUT_FORMATS[number]>('mp3');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [ffmpegLoading, setFfmpegLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const { isLoaded, isLoading, loadFFmpeg, progress } = useFFmpeg();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -53,38 +51,13 @@ export default function AudioEqualizer() {
     };
   }, [outputUrl, previewUrl]);
 
-  const loadFFmpeg = useCallback(async () => {
-    if (ffmpegRef.current?.loaded || ffmpegLoading) return;
-    setFfmpegLoading(true);
-    try {
-      const ff = new FFmpeg();
-      const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-      const [coreURL, wasmURL] = await Promise.all([
-        toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-      ]);
-      await ff.load({ coreURL, wasmURL });
-      ff.on('progress', (p: { progress: number }) => {
-        const pct = p.progress;
-        if (typeof pct === 'number') {
-          const v = Math.round(pct * 100);
-          if (v >= 0 && v <= 100) {
-            const el = document.getElementById('eq-progress');
-            if (el) el.style.width = `${v}%`;
-            const tl = document.getElementById('eq-progress-text');
-            if (tl) tl.textContent = `${v}%`;
-          }
-        }
-      });
-      ffmpegRef.current = ff;
-      setFfmpegLoaded(true);
-    } catch (e) {
-      console.error(e);
-      toast.error('Failed to load audio engine.');
-    } finally {
-      setFfmpegLoading(false);
-    }
-  }, [ffmpegLoading]);
+  useEffect(() => {
+    if (!isProcessing) return;
+    const el = document.getElementById('eq-progress');
+    if (el) el.style.width = `${progress}%`;
+    const tl = document.getElementById('eq-progress-text');
+    if (tl) tl.textContent = `${progress}%`;
+  }, [progress, isProcessing]);
 
   const getGainAtFreq = useCallback((f: number, f0: number, gain: number, bw = 1.0) => {
     if (gain === 0) return 0;
@@ -233,7 +206,6 @@ export default function AudioEqualizer() {
     setPreset('Flat');
     loadFFmpeg();
   };
-
   const handleReset = () => {
     if (outputUrl) URL.revokeObjectURL(outputUrl);
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -260,39 +232,44 @@ export default function AudioEqualizer() {
   };
 
   const processAudio = async () => {
-    if (!file || !ffmpegRef.current || !ffmpegRef.current.loaded) {
+    if (!file || !isLoaded) {
       toast.error('Audio engine not ready.');
       return;
     }
     setIsProcessing(true);
     try {
+      const ff = await loadFFmpeg();
+      if (!ff) {
+        toast.error('Audio engine not ready.');
+        return;
+      }
       const ext = file.name.split('.').pop() || 'mp3';
       const inputName = `input.${ext}`;
       const outputName = `output.${outputFormat}`;
 
-      await ffmpegRef.current.writeFile(inputName, await fetchFile(file));
+      await ff.writeFile(inputName, await fetchFile(file));
 
       const filterParts = bands
         .map((g, i) => (g !== 0 ? `equalizer=f=${BANDS[i]}:width_type=o:width=1.0:g=${g}` : null))
         .filter(Boolean) as string[];
 
       if (filterParts.length > 0) {
-        await ffmpegRef.current.exec([
+        await ff.exec([
           '-i', inputName,
           '-af', filterParts.join(','),
           outputName,
         ]);
       } else {
-        await ffmpegRef.current.exec(['-i', inputName, '-c', 'copy', outputName]);
+        await ff.exec(['-i', inputName, '-c', 'copy', outputName]);
       }
 
-      const data = await ffmpegRef.current.readFile(outputName);
+      const data = await ff.readFile(outputName);
       const blob = new Blob([data as BlobPart], { type: OUTPUT_MIME[outputFormat] });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
 
-      await ffmpegRef.current.deleteFile(inputName);
-      await ffmpegRef.current.deleteFile(outputName);
+      await ff.deleteFile(inputName);
+      await ff.deleteFile(outputName);
       toast.success('Equalized successfully!');
     } catch (e) {
       console.error(e);
@@ -321,7 +298,7 @@ export default function AudioEqualizer() {
             title="Upload Audio File"
             subtitle="MP3, WAV, M4A, FLAC, OGG"
           />
-          {ffmpegLoading && (
+          {isLoading && (
             <div className="flex items-center justify-center gap-2 py-3 text-xs text-[var(--text-muted)]">
               <svg className="w-4 h-4 animate-spin text-violet-500" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -368,14 +345,14 @@ export default function AudioEqualizer() {
           </button>
         </div>
 
-        {!ffmpegLoaded && !ffmpegLoading && (
+        {!isLoaded && !isLoading && (
           <button onClick={loadFFmpeg}
             className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-2.5 rounded-xl text-xs">
             Load Audio Engine
           </button>
         )}
 
-        {ffmpegLoading && (
+        {isLoading && (
           <div className="flex items-center justify-center gap-2 py-4 text-xs text-[var(--text-muted)]">
             <svg className="w-4 h-4 animate-spin text-violet-500" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -435,7 +412,7 @@ export default function AudioEqualizer() {
             </select>
           </div>
 
-          {!isProcessing && !outputUrl && ffmpegLoaded && (
+          {!isProcessing && !outputUrl && isLoaded && (
             <button onClick={processAudio}
               className="bg-violet-500 hover:bg-violet-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition-all active:scale-[0.98]">
               Apply Equalizer

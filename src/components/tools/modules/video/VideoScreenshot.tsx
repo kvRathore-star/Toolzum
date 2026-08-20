@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function VideoScreenshot() {
   const [file, setFile] = useState<File | null>(null);
@@ -19,10 +19,9 @@ export default function VideoScreenshot() {
   const [height, setHeight] = useState(0);
   const [screenshots, setScreenshots] = useState<Array<{ blobUrl: string; timestamp: string }>>([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
+  const { loadFFmpeg } = useFFmpeg();
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const ffmpegRef = useRef(new FFmpeg());
   const screenshotsRef = useRef(screenshots);
   screenshotsRef.current = screenshots;
 
@@ -31,18 +30,6 @@ export default function VideoScreenshot() {
       screenshotsRef.current.forEach(s => URL.revokeObjectURL(s.blobUrl));
     };
   }, []);
-
-  const loadFFmpeg = async () => {
-    const ffmpeg = ffmpegRef.current;
-    if (ffmpeg.loaded) { setFfmpegLoaded(true); return; }
-    const base = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-    ffmpeg.on('progress', () => {});
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
 
   const parseTimeToSeconds = (t: string): number => {
     const parts = t.split(':').map(Number);
@@ -63,8 +50,11 @@ export default function VideoScreenshot() {
     if (!file) return;
     setIsProcessing(true);
     try {
-      await loadFFmpeg();
-      const ffmpeg = ffmpegRef.current;
+      const ffmpeg = await loadFFmpeg();
+      if (!ffmpeg) {
+        toast.error('Failed to load FFmpeg engine.');
+        return;
+      }
       await ffmpeg.writeFile('input.mp4', await fetchFile(file));
 
       const ext = getExt();

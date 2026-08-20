@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { fetchFile } from '@ffmpeg/util';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 type Mode = 'mute' | 'replace' | 'volume';
 
@@ -17,11 +17,9 @@ export default function MuteVideo() {
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [syncMode, setSyncMode] = useState<'shortest' | 'first'>('shortest');
+  const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
 
-  const ffmpegRef = useRef(new FFmpeg());
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -30,35 +28,16 @@ export default function MuteVideo() {
     };
   }, [outputUrl]);
 
-  const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-
-  const loadFFmpeg = async () => {
-    const ffmpeg = ffmpegRef.current;
-    if (ffmpeg.loaded) {
-      setFfmpegLoaded(true);
-      return;
-    }
-    ffmpeg.on('progress', ({ progress: p }) => {
-      setProgress(Math.round(p * 100));
-    });
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    });
-    setFfmpegLoaded(true);
-  };
-
   useEffect(() => {
-    if (file && !ffmpegLoaded) {
+    if (file && !isLoaded) {
       loadFFmpeg();
     }
-  }, [file]);
+  }, [file, isLoaded]);
 
   const reset = () => {
     setFile(null);
     setAudioFile(null);
     setOutputUrl(null);
-    setProgress(0);
   };
 
   const processVideo = async () => {
@@ -68,11 +47,10 @@ export default function MuteVideo() {
       return;
     }
     setIsProcessing(true);
-    setProgress(0);
 
     try {
-      const ffmpeg = ffmpegRef.current;
-      if (!ffmpeg.loaded) await loadFFmpeg();
+      if (!ffmpeg?.loaded) await loadFFmpeg();
+      if (!ffmpeg) return;
 
       await ffmpeg.writeFile('input.mp4', await fetchFile(file));
 
@@ -139,7 +117,7 @@ export default function MuteVideo() {
   }
 
   const getButtonLabel = () => {
-    if (isProcessing) return `Processing ${progress}%`;
+    if (isProcessing) return 'Processing...';
     switch (mode) {
       case 'mute': return 'Mute Video';
       case 'replace': return 'Replace Audio';
@@ -211,7 +189,7 @@ export default function MuteVideo() {
 
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{getModeDescription()}</p>
 
-            {!ffmpegLoaded && (
+            {!isLoaded && (
               <div className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] rounded-xl">
                 <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
                 <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Loading FFmpeg engine...</span>
@@ -282,7 +260,7 @@ export default function MuteVideo() {
 
             <button
               onClick={processVideo}
-              disabled={isProcessing || !ffmpegLoaded || (mode === 'replace' && !audioFile)}
+              disabled={isProcessing || !isLoaded || (mode === 'replace' && !audioFile)}
               className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

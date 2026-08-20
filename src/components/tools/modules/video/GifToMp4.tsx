@@ -1,21 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import Image from "next/image";
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function GifToMp4() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
-  
-  const ffmpegRef = useRef(new FFmpeg());
+  const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
 
   useEffect(() => {
     return () => {
@@ -25,18 +23,11 @@ export default function GifToMp4() {
 
   const processVideo = async () => {
     if (!file) return;
+    if (!ffmpeg?.loaded) await loadFFmpeg();
+    if (!ffmpeg) return;
     setIsProcessing(true);
-    setProgress(0);
-    
+
     try {
-      const ffmpeg = ffmpegRef.current;
-      if (!ffmpeg.loaded) {
-        ffmpeg.on('progress', ({ progress }) => {
-          setProgress(progress * 100);
-        });
-        await ffmpeg.load();
-      }
-      
       await ffmpeg.writeFile('input.gif', await fetchFile(file));
       
       toast("Converting to MP4...");
@@ -102,7 +93,7 @@ export default function GifToMp4() {
 
             <button 
               onClick={processVideo}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
