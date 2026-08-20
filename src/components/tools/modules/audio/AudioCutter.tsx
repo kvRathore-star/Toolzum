@@ -105,7 +105,7 @@ export default function AudioCutter() {
           <strong>Perfect Ringtones Offline:</strong> Cut and trim any audio file directly in your browser. Fully secure and private.
         </div>
         <FileUploader 
-          accept="audio/mp3,audio/wav,audio/mpeg,audio/ogg"
+          accept="audio/mp3,audio/wav,audio/mpeg,audio/ogg,audio/mp4,audio/x-m4a,audio/aac,audio/mp4a-latm,audio/flac"
           onFileSelect={handleFileSelect} 
           title="Upload Audio File"
           subtitle="Select a track to trim"

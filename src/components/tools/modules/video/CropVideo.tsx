@@ -48,11 +48,16 @@ export default function ReelShortsMaker() {
       await ffmpeg.writeFile(inputName, await fetchFile(file));
 
       const r = RATIOS[ratioIdx];
-      const cw = r.label === 'Custom' ? customW : String(r.w);
-      const ch = r.label === 'Custom' ? customH : String(r.h);
-      const cropFilter = `crop=${cw}:${ch}:${xOffset}:${yOffset}`;
+      const cw = Math.floor((r.label === 'Custom' ? Number(customW) : r.w) / 2) * 2;
+      const ch = Math.floor((r.label === 'Custom' ? Number(customH) : r.h) / 2) * 2;
+      const ox = Number(xOffset) || 0;
+      const oy = Number(yOffset) || 0;
+      // Scale source to cover the target frame (works even when the source is
+      // smaller), then crop to the requested aspect ratio + offsets. Output uses
+      // libx264 + yuv420p + faststart so browsers can actually play it.
+      const cropFilter = `scale=${cw}:${ch}:force_original_aspect_ratio=increase,crop=${cw}:${ch}:${ox}:${oy}`;
 
-      await ffmpeg.exec(['-i', inputName, '-vf', cropFilter, '-c:a', 'copy', outputName]);
+      await ffmpeg.exec(['-i', inputName, '-vf', cropFilter, '-c:v', 'libx264', '-preset', 'fast', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-c:a', 'copy', outputName]);
       const data = await ffmpeg.readFile(outputName);
       const url = URL.createObjectURL(createDownloadBlob(data, 'video/mp4'));
       setOutputUrl(url);

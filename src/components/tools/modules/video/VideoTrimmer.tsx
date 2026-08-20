@@ -1,23 +1,26 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
 
 export default function VideoTrimmer() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
+  const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
   
-  const [startTime, setStartTime] = useState('00:00:00');
-  const [duration, setDuration] = useState('10'); // seconds to keep
+  const [startTime, setStartTime] = useState(0);
+  const [endTime, setEndTime] = useState(10);
+  const [videoDuration, setVideoDuration] = useState(0);
   
-  const ffmpegRef = useRef(new FFmpeg());
+  useEffect(() => {
+    loadFFmpeg();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -25,24 +28,54 @@ export default function VideoTrimmer() {
     };
   }, [outputUrl]);
 
+  const handleFileSelect = (f: File) => {
+    setFile(f);
+    setOutputUrl(null);
+    // Read the video's real duration so sliders clamp to it.
+    const objectUrl = URL.createObjectURL(f);
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    video.onloadedmetadata = () => {
+      const dur = video.duration;
+      setVideoDuration(dur);
+      setStartTime(0);
+      setEndTime(Math.min(10, dur));
+      URL.revokeObjectURL(objectUrl);
+    };
+    video.src = objectUrl;
+  };
+
+  const fmtTime = (s: number) => {
+    const secs = Math.max(0, Math.floor(s));
+    const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+    const sec = String(secs % 60).padStart(2, '0');
+    return `${h}:${m}:${sec}`;
+  };
+
   const processVideo = async () => {
     if (!file) return;
+    if (!ffmpeg?.loaded) await loadFFmpeg();
+    if (!ffmpeg) return;
+    if (startTime >= endTime) {
+      toast.error("Start time must be before end time.");
+      return;
+    }
     setIsProcessing(true);
-    setProgress(0);
-    
+
     try {
-      const ffmpeg = ffmpegRef.current;
-      if (!ffmpeg.loaded) {
-        ffmpeg.on('progress', ({ progress }) => {
-          setProgress(progress * 100);
-        });
-        await ffmpeg.load();
-      }
-      
       await ffmpeg.writeFile('input.mp4', await fetchFile(file));
       
       toast("Trimming video...");
-      await ffmpeg.exec(['-i', 'input.mp4', '-ss', startTime, '-t', duration, '-c:v', 'copy', '-c:a', 'copy', 'output.mp4']);
+      await ffmpeg.exec([
+        '-ss', fmtTime(startTime),
+        '-i', 'input.mp4',
+        '-t', (endTime - startTime).toFixed(3),
+        '-c:v', 'copy', '-c:a', 'copy',
+        '-avoid_negative_ts', 'make_zero',
+        '-movflags', '+faststart',
+        'output.mp4'
+      ]);
       
       const data = await ffmpeg.readFile('output.mp4');
       const url = URL.createObjectURL(createDownloadBlob(data, 'video/mp4'));
@@ -51,7 +84,7 @@ export default function VideoTrimmer() {
       toast.success("Trimming complete!");
     } catch (e) {
       console.error(e);
-      toast.error("Trimming failed.");
+      toast.error("Trimming failed. Try a start time aligned to a keyframe.");
     } finally {
       setIsProcessing(false);
     }
@@ -64,8 +97,8 @@ export default function VideoTrimmer() {
           <strong>Lossless Trimming:</strong> Cut video clips natively in your browser using WASM. No video data is uploaded.
         </div>
         <FileUploader 
-          accept="video/*" 
-          onFileSelect={(f) => setFile(f)} 
+          accept="video/mp4,video/quicktime,video/webm,video/x-matroska"
+          onFileSelect={(f) => handleFileSelect(f)} 
           title="Upload Video"
         />
       </div>
@@ -95,34 +128,63 @@ export default function VideoTrimmer() {
         <div className="space-y-6">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
             <h4 className="text-[var(--text-primary)] font-medium">Trim Settings</h4>
-            
+
+            <div className="flex justify-between text-sm">
+              <span className="text-zinc-500 dark:text-[var(--text-muted)]">Video duration: <span className="font-mono text-[var(--text-primary)]">{fmtTime(videoDuration)}</span></span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Clip length: <span className="font-mono">{fmtTime(endTime - startTime)}</span></span>
+            </div>
+
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Start Time (HH:MM:SS)</label>
+                <div className="flex justify-between mb-2">
+                  <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Start Time</label>
+                  <span className="font-mono text-sm text-blue-500">{fmtTime(startTime)}</span>
+                </div>
                 <input 
-                  type="text" 
+                  type="range" 
+                  min={0}
+                  max={videoDuration || 1}
+                  step={0.1}
                   value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                  placeholder="00:00:00"
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  onChange={(e) => {
+                    const v = Number(e.target.value);
+                    setStartTime(v);
+                    if (v >= endTime) setEndTime(Math.min(videoDuration, v + 1));
+                  }}
+                  className="w-full accent-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Duration (Seconds)</label>
+                <div className="flex justify-between mb-2">
+                  <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">End Time</label>
+                  <span className="font-mono text-sm text-blue-500">{fmtTime(endTime)}</span>
+                </div>
                 <input 
-                  type="number" 
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  placeholder="10"
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  type="range" 
+                  min={0}
+                  max={videoDuration || 1}
+                  step={0.1}
+                  value={endTime}
+                  onChange={(e) => {
+                    const v = Number(e.target.value);
+                    setEndTime(v);
+                    if (v <= startTime) setStartTime(Math.max(0, v - 1));
+                  }}
+                  className="w-full accent-blue-500"
                 />
               </div>
+
+              {progress === 0 && isProcessing && (
+                <p className="text-xs text-zinc-500 dark:text-[var(--text-muted)]">
+                  Seeking to keyframe... this can take a moment on large files.
+                </p>
+              )}
             </div>
 
             <button 
               onClick={processVideo}
-              disabled={isProcessing}
+              disabled={isProcessing || !isLoaded}
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (

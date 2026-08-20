@@ -142,8 +142,17 @@ export default function VideoToGif() {
 
       {isProcessing && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-2">
-          <div className="flex justify-between text-[10px] font-semibold text-pink-600 dark:text-pink-400"><span>Generating GIF...</span><span>{progress}%</span></div>
-          <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+          <div className="flex justify-between text-[10px] font-semibold text-pink-600 dark:text-pink-400">
+            <span>{progress === 0 ? 'Analyzing colors & encoding frames... (large videos take a while)' : 'Generating GIF...'}</span>
+            <span>{progress === 0 ? '—' : `${progress}%`}</span>
+          </div>
+          {progress === 0 ? (
+            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+              <div className="bg-pink-500 h-full rounded-full animate-pulse" style={{ width: '100%' }}></div>
+            </div>
+          ) : (
+            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+          )}
         </div>
       )}
 
