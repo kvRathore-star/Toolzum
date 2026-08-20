@@ -60,7 +60,7 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
             <div className="grid grid-cols-2 gap-2 mb-6 text-left">
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
                 <Upload className="w-3.5 h-3.5 text-emerald-400 mb-1" />
-                <div className="text-[11px] font-medium text-white">Up to 2GB</div>
+                <div className="text-[11px] font-medium text-white">Up to 500MB</div>
                 <div className="text-[10px] text-zinc-400">file size limit</div>
               </div>
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">

@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { useSession } from '@/lib/auth-client';
-import { PRO_MAX_BATCH, ANON_MAX_BATCH, SIGNED_MAX_BATCH } from '@/hooks/useFreeUsage';
 
 export interface ProcessFile<T = unknown> {
   file: File;

@@ -3,6 +3,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useSession } from '@/lib/auth-client';
+import { smartMax } from '@/utils/fileSizeLimits';
 
 interface FileUploaderProps {
   accept?: string;
@@ -11,13 +12,6 @@ interface FileUploaderProps {
   onFileSelect: (file: File, dataUrl: string) => void;
   title?: string;
   subtitle?: string;
-}
-
-function smartMax(accept: string): { signed: number; free: number } {
-  if (accept.includes('video/')) return { signed: 500, free: 50 };
-  if (accept.includes('application/pdf')) return { signed: 50, free: 20 };
-  if (accept.includes('audio/')) return { signed: 100, free: 50 };
-  return { signed: 20, free: 10 };
 }
 
 export function FileUploader({ 

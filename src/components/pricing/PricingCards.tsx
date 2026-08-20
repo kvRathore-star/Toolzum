@@ -89,7 +89,7 @@ export function PricingCards() {
             <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>Single-file processing — 10MB limit (25MB after signing in)</span>
+                <span>Single-file processing — 10-50MB per file (20-500MB after signing in)</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
@@ -105,7 +105,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                <span className="line-through">Pro: 1-Click ZIP downloads, workflow presets, 2GB files</span>
+                <span className="line-through">Pro: 1-Click ZIP downloads, workflow presets, 500MB files</span>
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />

@@ -114,7 +114,7 @@ export default function AiDocumentChat() {
             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" 
             onFileSelect={(f) => setFile(f)} 
             title="Upload Document"
-            subtitle="Supports PDF, DOCX, TXT (Max 50MB)"
+            subtitle="Supports PDF, DOCX, TXT (20MB free, 50MB signed in)"
           />
         ) : (
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl text-center space-y-6">
