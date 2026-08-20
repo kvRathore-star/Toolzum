@@ -1,9 +1,11 @@
 import { getToolByCategoryAndSlug, toolsRegistry } from "@/registry/tools";
+import { getCachedToolCounts } from "@/registry/tools-helpers";
 
 export const contentType = 'image/svg+xml';
 export const size = { width: 1200, height: 630 };
 
-const toolCount = toolsRegistry.length;
+const { totalImplemented } = getCachedToolCounts();
+const toolCount = totalImplemented;
 const proCount = toolsRegistry.filter(t => t.isPro).length;
 
 export async function generateStaticParams() {
