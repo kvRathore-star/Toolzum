@@ -29,7 +29,19 @@ export default function ImageCompressor() {
     );
   }, [registerConfig, quality, scale]);
 
-  const handleFileSelect = (file: File, url: string) => {
+  const handleFileSelect = async (file: File, url: string) => {
+    try {
+      const probe = new Image();
+      probe.src = url;
+      await new Promise((resolve, reject) => {
+        probe.onload = resolve;
+        probe.onerror = () => reject(new Error('decode failed'));
+      });
+      if (!probe.naturalWidth || !probe.naturalHeight) throw new Error('decode failed');
+    } catch {
+      toast.error('Could not read this image. The file may be corrupted or unsupported.');
+      return;
+    }
     setImageFile(file);
     setOriginalUrl(url);
     setCompressedUrl(null);
@@ -50,8 +62,9 @@ export default function ImageCompressor() {
       // 1. Calculate target dimensions based on scale
       const tempImg = new Image();
       tempImg.src = originalUrl || '';
-      await new Promise((resolve) => {
+      await new Promise((resolve, reject) => {
         tempImg.onload = resolve;
+        tempImg.onerror = () => reject(new Error('image decode failed'));
       });
 
       const targetWidth = tempImg.naturalWidth * scale;
@@ -94,7 +107,7 @@ export default function ImageCompressor() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
+        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
           <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
           <span><strong>100% Client-Side:</strong> All compression runs locally inside your browser. Your images are never sent to a server.</span>
         </div>
@@ -180,7 +193,7 @@ export default function ImageCompressor() {
           <button
             onClick={handleCompress}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -223,19 +236,19 @@ alt="Uploaded image preview"
           </div>
 
           {compressedUrl && compressedSize && (
-            <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300">
+            <div className="mt-6 p-4 bg-emerald-700/10 border border-emerald-500/20 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300">
               <div className="space-y-0.5">
                 <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold block">Compressed Successfully</span>
                 <div className="text-sm text-[var(--text-primary)]">
                   New Size: <strong className="text-[var(--text-primary)]">{(compressedSize / 1024).toFixed(1)} KB</strong>
                   {compressionRatio && (
-                    <span className="text-emerald-400 font-bold ml-1.5">(-{compressionRatio}%)</span>
+                    <span className="text-emerald-700 dark:text-emerald-400 font-bold ml-1.5">(-{compressionRatio}%)</span>
                   )}
                 </div>
               </div>
               <button
                 onClick={handleDownload}
-                className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow"
+                className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow"
               >
                 <Download className="w-4 h-4" />
                 Download Output

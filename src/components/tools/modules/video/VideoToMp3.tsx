@@ -7,6 +7,8 @@ import { Music, Upload, Download, Loader2, Crown } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useSession } from '@/lib/auth-client';
+import { smartMax } from '@/utils/fileSizeLimits';
 
 const DAILY_LIMIT = 3;
 
@@ -15,12 +17,25 @@ export default function VideoToMp3() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
 
   const { usage, trackUsage } = useUsageCounter('videoToMp3Usage');
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (f) {
+      const limits = smartMax('video/*');
+      const effectiveLimit = isSignedIn ? limits.signed : limits.free;
+      if (f.size > effectiveLimit * 1024 * 1024) {
+        toast.error(
+          isSignedIn
+            ? `File exceeds ${effectiveLimit}MB limit`
+            : `Free users limited to ${effectiveLimit}MB. Sign in for up to ${limits.signed}MB.`,
+        );
+        e.target.value = '';
+        return;
+      }
       setFile(f);
       setOutputUrl(null);
       if (!isLoaded) await loadFFmpeg();
