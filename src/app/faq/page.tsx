@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: "Is my data tracked or sold?",
-    a: "Never. We use privacy-first analytics (PostHog, self-hosted) with no cookies, no tracking pixels, and no IP logging. We have no incentive or mechanism to sell user data.",
+    a: "Never. We use privacy-first, cookieless analytics with no tracking pixels, no fingerprinting, and no IP logging. Only strictly-necessary cookies power core functionality. We have no incentive or mechanism to sell user data.",
   },
   {
     q: "What happens if I close the browser during processing?",
