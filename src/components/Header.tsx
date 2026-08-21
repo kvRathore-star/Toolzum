@@ -123,7 +123,7 @@ export function Header() {
       <div className="mx-auto flex max-w-[1280px] h-full items-center justify-between px-4 sm:px-6">
         
         {/* Left Section: Logo & Links */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
           <Link href="/" className="flex items-center gap-2.5 group select-none">
             <svg width="26" height="26" viewBox="0 0 100 100" fill="none" className="shrink-0">
               <rect x="0" y="0" width="100" height="100" rx="24" fill="#6366F1"/>
@@ -309,7 +309,7 @@ export function Header() {
               Pricing
             </Link>
 
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <button
                 onClick={(e) => { e.stopPropagation(); setShareOpen(!shareOpen); }}
                 onMouseEnter={() => setShareOpen(true)}
@@ -377,15 +377,15 @@ export function Header() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-4">
           <button
             onClick={() => setCmdOpen(true)}
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer w-48 hover:w-64 focus:w-64 justify-between"
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-secondary)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer w-auto lg:w-48 hover:w-64 focus:w-64 justify-between"
             aria-label="Open search"
           >
             <span className="flex items-center gap-1.5">
               <Search className="w-3.5 h-3.5" />
-              <span>Search tools...</span>
+              <span className="hidden lg:inline">Search tools...</span>
             </span>
             <kbd className="font-mono text-[10px] bg-[var(--bg-elevated)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)] text-[var(--text-muted)]">
               ⌘K
@@ -414,9 +414,9 @@ export function Header() {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 lg:gap-3">
 
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" asChild className="hidden lg:flex">
               <Link href="/login" className="hover:scale-105 active:scale-95 transition-transform">Sign in</Link>
             </Button>
             
