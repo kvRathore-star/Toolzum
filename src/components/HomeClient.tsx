@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sun } from 'lucide-react';
@@ -9,7 +9,7 @@ import {
   Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb,
   Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
-import { toolsRegistry } from '@/registry/tools';
+import type { PopularTool, CategoryCount } from '@/registry/tools';
 import { getCachedToolCounts } from '@/registry/tools-helpers';
 import { Button } from '@/components/ui/button';
 import { getCategoryTheme } from '@/lib/categoryTheme';
@@ -39,22 +39,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
-export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
+export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { isIndia?: boolean; popularTools: PopularTool[]; categoryCounts: CategoryCount[] }) {
   const [activeTab, setActiveTab] = useState("compress");
   const showIndia = useIsIndia(isIndia);
-
-  const popularTools = useMemo(() => {
-    const featuredSlugs = ['pdf-compressor', 'image-compressor', 'background-remover', 'qr-code-generator', 'gst-calculator', 'word-counter',
-      'ai-image-generator', 'video-compressor', 'text-to-speech-tts',
-    ];
-    const tools = featuredSlugs.map(slug => toolsRegistry.find(t => t.slug === slug)).filter(Boolean) as typeof toolsRegistry;
-    if (tools.length < 9) {
-      const remaining = 9 - tools.length;
-      const additional = toolsRegistry.filter(t => !featuredSlugs.includes(t.slug)).slice(0, remaining);
-      return [...tools, ...additional];
-    }
-    return tools;
-  }, []);
 
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -267,7 +254,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {CATEGORIES.map((cat, i) => {
-            const count = toolsRegistry.filter(t => (t.category === cat.label || t.category === cat.id) && t.showInCategory !== false).length;
+            const count = categoryCounts.find(c => c.category === cat.label || c.category === cat.id)?.count ?? 0;
             return (
               <motion.div
                 key={cat.id}

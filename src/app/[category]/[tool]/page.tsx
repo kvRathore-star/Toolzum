@@ -1,5 +1,6 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import { toolsRegistry, getToolByCategoryAndSlug, TOOL_REDIRECTS, SEO_PERMUTATIONS } from "@/registry/tools";
+import { getToolLayoutData } from "@/registry/tools-helpers";
 import { ToolLayout } from "@/components/tools/ToolLayout";
 import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
@@ -109,6 +110,8 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         description={getShortDescription(toolMetadata)}
         category={params.category}
         slug={toolMetadata.slug}
+        tool={toolMetadata}
+        {...getToolLayoutData(params.category, toolMetadata.slug)}
         seoSection={<ToolPageSEOContent tool={toolMetadata} />}
       >
         <MemoryWatchdog />

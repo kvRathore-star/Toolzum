@@ -1,8 +1,9 @@
 import { HomeClient } from "@/components/HomeClient";
-import { getCachedToolCounts } from "@/registry/tools-helpers";
+import { getCachedToolCounts, getHomeClientData } from "@/registry/tools-helpers";
 import type { Metadata } from "next";
 
 const { totalImplemented } = getCachedToolCounts();
+const { popularTools, categoryCounts } = getHomeClientData();
 
 export const metadata: Metadata = {
   title: `Toolzum — ${totalImplemented}+ Privacy-First Browser Tools`,
@@ -17,5 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <HomeClient />;
+  return <HomeClient popularTools={popularTools} categoryCounts={categoryCounts} />;
 }

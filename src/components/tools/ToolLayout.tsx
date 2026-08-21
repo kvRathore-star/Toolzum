@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
-import { getToolByCategoryAndSlug, toolsRegistry } from '@/registry/tools';
+import type { RelatedTool, ToolMetadata } from '@/registry/tools';
 import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
 import { ToolPaywall } from './ToolPaywall';
@@ -20,7 +20,6 @@ import { ShareTool } from '@/components/ShareTool';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
-import { TOOL_RELATIONSHIPS } from '@/registry/tool-relationships';
 import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
 
@@ -31,10 +30,12 @@ interface ToolLayoutProps {
   slug: string;
   children: React.ReactNode;
   seoSection?: React.ReactNode;
+  tool?: ToolMetadata | null;
+  proToolCount: number;
+  toolCount: number;
+  relatedTools: RelatedTool[];
 }
 
-const proToolCount = toolsRegistry.filter(t => t.isPro).length;
-const toolCount = toolsRegistry.length;
 const SITE_URL = "https://toolzum.com";
 const SERVER_SIDE_SLUGS = new Set([
   'ai-translator', 'ai-paraphrasing-tool', 'ai-cover-letter-generator', 'ai-image-generator',
@@ -51,7 +52,7 @@ function getRelativePath(category: string, slug: string): string {
   return `/${getCategoryPath(category)}/${slug}`;
 }
 
-export function ToolLayout({ title, description, category, slug, children, seoSection }: ToolLayoutProps) {
+export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp }: ToolLayoutProps) {
   const [userPlan, setUserPlan] = useState<string | null>(null);
   const { data: sessionData, isPending } = useSession();
 
@@ -68,7 +69,6 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn } = useFreeUsage(category);
   const { recordTool } = useToolHistory();
 
-  const tool = getToolByCategoryAndSlug(category, slug);
   const isPro = tool?.isPro || false;
   const isProLocked = isPro && userPlan !== "pro";
   const isLocked = isProLocked && userPlan !== "free";
@@ -99,19 +99,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     },
   } : null;
 
-  const relatedTools = useMemo(() => {
-    if (!tool) return [];
-    const curated = TOOL_RELATIONSHIPS[tool.slug];
-    if (curated && curated.length > 0) {
-      return curated
-        .map(slug => toolsRegistry.find(t => t.slug === slug))
-        .filter((t): t is NonNullable<typeof t> => t != null)
-        .slice(0, 6);
-    }
-    return toolsRegistry
-      .filter(t => t.category === tool.category && t.slug !== tool.slug)
-      .slice(0, 6);
-  }, [tool]);
+  const relatedTools = relatedToolsProp;
 
   const nextTool = useMemo(() => {
     return relatedTools.length > 0 ? relatedTools[0] : null;
