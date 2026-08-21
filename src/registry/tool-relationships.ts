@@ -547,7 +547,8 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "bulk-bg-changer": ["ai-bg-changer"],
   "background-remover": ["bg-changer", "ai-bg-changer"],
   "bg-changer": ["background-remover", "ai-bg-changer"],
-  "bulk-image-watermark": ["batch-image-editor", "bulk-image-converter"],
+  "bulk-image-watermark": ["batch-image-editor", "bulk-image-converter", "gemini-watermark-remover"],
+  "gemini-watermark-remover": ["bulk-image-watermark", "object-remover"],
   "bulk-exif-stripper-injector": ["blur-face", "bulk-face-anonymizer"],
 
   // ── Audio Converters ──────────────────────────────────────────

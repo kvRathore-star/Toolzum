@@ -393,6 +393,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'collage-maker': dynamic(() => import('@/components/tools/modules/image/CollageMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="collage-maker" /> }),
   'chart-maker': dynamic(() => import('@/components/tools/modules/image/ChartMaker'), { ssr: false, loading: () => <DynamicImportFallback slug="chart-maker" /> }),
   'unblur-sharpen': dynamic(() => import('@/components/tools/modules/image/UnblurSharpen'), { ssr: false, loading: () => <DynamicImportFallback slug="unblur-sharpen" /> }),
+  'gemini-watermark-remover': dynamic(() => import('@/components/tools/modules/image/GeminiWatermarkRemover'), { ssr: false, loading: () => <DynamicImportFallback slug="gemini-watermark-remover" /> }),
   'gif-editor': dynamic(() => import('@/components/tools/modules/image/GifEditor'), { ssr: false, loading: () => <DynamicImportFallback slug="gif-editor" /> }),
   'video-speed-changer': dynamic(() => import('@/components/tools/modules/video/VideoSpeedChanger'), { ssr: false, loading: () => <DynamicImportFallback slug="video-speed-changer" /> }),
   'reverse-video': dynamic(() => import('@/components/tools/modules/video/ReverseVideo'), { ssr: false, loading: () => <DynamicImportFallback slug="reverse-video" /> }),

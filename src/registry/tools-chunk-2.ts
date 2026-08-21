@@ -1683,4 +1683,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Markdown Table Generator \u2014 Generate Markdown table templates with custom dimensions. ',
     dependencies: "None",
 },
+{
+    id: "500",
+    name: "Gemini Watermark Remover",
+    slug: "gemini-watermark-remover",
+    category: "Image",
+    description: "Remove the visible sparkle watermark from Gemini AI-generated images using reverse alpha blending. Supports single image and batch processing with ZIP download. 100% client-side — nothing is uploaded.",
+    seoDescription: "Free online Gemini Watermark Remover — Remove visible AI sparkle watermarks from Gemini-generated images using mathematically precise reverse alpha blending. ",
+    dependencies: "Canvas API, jszip",
+    showInCategory: true,
+},
 ];
