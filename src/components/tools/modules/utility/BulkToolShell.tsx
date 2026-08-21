@@ -64,13 +64,28 @@ export function BulkToolShell({
     return () => window.removeEventListener('beforeunload', handler);
   }, [isProcessing]);
 
-  const handleFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFiles = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
     if (accepted.length === 0) return;
-    const valid = accepted.filter(f => f.size <= maxSizeMB * 1024 * 1024);
-    if (valid.length !== accepted.length) {
-      toast.error(`Some files exceed ${maxSizeMB}MB limit. ${valid.length} of ${accepted.length} accepted.`);
+    const withinSize = accepted.filter(f => f.size <= maxSizeMB * 1024 * 1024);
+    if (withinSize.length !== accepted.length) {
+      toast.error(`Some files exceed ${maxSizeMB}MB limit. ${withinSize.length} of ${accepted.length} accepted.`);
     }
+    // Validate file content — reject files that claim to be images but aren't
+    const validated = await Promise.all(withinSize.map(async (f) => {
+      if (accept === '*/*') return f; // skip validation for non-image tools
+      if (f.size === 0) return f; // empty files caught later by processFile
+      try {
+        const bitmap = await createImageBitmap(f);
+        bitmap.close();
+        return f;
+      } catch {
+        toast.error(`"${f.name}" is not a valid image — skipped.`);
+        return null;
+      }
+    }));
+    const valid = validated.filter((f): f is File => f !== null);
+    if (valid.length === 0) return;
     setFiles(prev => [...prev, ...valid]);
     valid.forEach(f => {
       const url = URL.createObjectURL(f);
@@ -85,7 +100,9 @@ export function BulkToolShell({
         toast.error(`Low device memory (${mem.available}). Large files may cause crashes. Try smaller batches.`);
       }
     }
-  }, [maxSizeMB]);
+    // Reset input so re-uploading same file triggers onChange
+    if (fileRef.current) fileRef.current.value = '';
+  }, [maxSizeMB, accept]);
 
   const removeFile = useCallback((idx: number) => {
     setFiles(prev => prev.filter((_, i) => i !== idx));
