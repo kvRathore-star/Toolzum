@@ -1693,4 +1693,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "Canvas API, jszip",
     showInCategory: true,
 },
+{
+    id: "501",
+    name: "Bulk AVIF Optimizer",
+    slug: "bulk-avif-optimizer",
+    category: "Image",
+    description: "Convert and compress images to AVIF format in bulk with quality presets and max-width controls. AVIF provides 50% smaller files than JPEG with better quality. 100% client-side.",
+    seoDescription: "Free online Bulk AVIF Optimizer — Convert and compress images to AVIF format in batch with quality presets. ",
+    dependencies: "Canvas API, jszip",
+    showInCategory: true,
+},
 ];

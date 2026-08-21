@@ -854,6 +854,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'bulk-face-anonymizer': dynamic(() => import('@/components/tools/modules/image/BulkFaceAnonymizer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-face-anonymizer" /> }),
   'bulk-font-subsetter': dynamic(() => import('@/components/tools/modules/developer/BulkFontSubsetter'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-font-subsetter" /> }),
   'bulk-heic-to-jpg': dynamic(() => import('@/components/tools/modules/image/BulkHeicToJpg'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-heic-to-jpg" /> }),
+  'bulk-avif-optimizer': dynamic(() => import('@/components/tools/modules/image/BulkAvifOptimizer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-avif-optimizer" /> }),
   'bulk-image-compressor': dynamic(() => import('@/components/tools/modules/image/BulkImageCompressor'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-compressor" /> }),
   'bulk-image-resizer': dynamic(() => import('@/components/tools/modules/image/BulkImageResizer'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-resizer" /> }),
   'bulk-image-to-pdf': dynamic(() => import('@/components/tools/modules/pdf/BulkImageToPdf'), { ssr: false, loading: () => <DynamicImportFallback slug="bulk-image-to-pdf" /> }),
