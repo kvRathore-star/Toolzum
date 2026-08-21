@@ -407,6 +407,8 @@ export function Header() {
             ref={menuButtonRef}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex md:hidden items-center justify-center w-9 h-9 rounded-[var(--radius-md)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-all cursor-pointer"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -443,6 +445,10 @@ export function Header() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
             ref={drawerRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
             className="fixed inset-x-0 top-[60px] bottom-0 z-[999] md:hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-y-auto"
           >
             <div className="p-4 space-y-1">

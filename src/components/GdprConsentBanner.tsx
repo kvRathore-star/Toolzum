@@ -37,9 +37,9 @@ export function GdprConsentBanner() {
           <div id="gdpr-title" className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
             We use only essential cookies and privacy-preserving analytics (no personal data collected).
             By using Toolzum, you agree to our{' '}
-            <Link href="/privacy-policy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>,{' '}
-            <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link>, and{' '}
-            <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms of Service</Link>.
+            <Link href="/privacy-policy" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Privacy Policy</Link>,{' '}
+            <Link href="/cookies" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Cookie Policy</Link>, and{' '}
+            <Link href="/terms" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Terms of Service</Link>.
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0">

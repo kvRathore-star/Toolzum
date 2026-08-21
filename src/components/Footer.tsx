@@ -85,7 +85,7 @@ export function Footer() {
               Privacy-first tools — PDF, images, video, converters, AI & more. All in one place.
             </p>
             <div className="flex flex-col gap-3">
-              <h4 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</h4>
+              <p className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</p>
               <div className="flex items-center gap-1.5 flex-wrap">
                 <a href="https://twitter.com/intent/tweet?text=Check+out+Toolzum+—+privacy-first+browser+tools,+all+free.&url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-white/30 hover:bg-zinc-800 transition-all" title="Share on X/Twitter">𝕏</a>
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-blue-500/30 hover:bg-blue-600 transition-all" title="Share on LinkedIn">in</a>
@@ -100,7 +100,7 @@ export function Footer() {
 
           {/* Column 2: Product */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Product</h4>
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Product</p>
             <ul className="flex flex-col gap-3">
               <li><Link href="/tools" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">All Tools</Link></li>
               <li><Link href="/pricing" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
@@ -114,7 +114,7 @@ export function Footer() {
 
           {/* Column 3: Company */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Company</h4>
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Company</p>
             <ul className="flex flex-col gap-3">
               <li><Link href="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">About</Link></li>
               <li><Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Blog</Link></li>
@@ -126,7 +126,7 @@ export function Footer() {
 
           {/* Column 4: Legal */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</h4>
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
             <ul className="flex flex-col gap-3">
               <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>

@@ -127,7 +127,7 @@ export function FileUploader({
       >
         <input 
           type="file" 
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+          aria-label={title} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
           accept={accept}
           onChange={onFileInput}
         />

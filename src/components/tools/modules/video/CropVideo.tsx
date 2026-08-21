@@ -80,7 +80,7 @@ export default function ReelShortsMaker() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Smartphone className="w-5 h-5 text-[var(--accent)]" />
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">Reel & Shorts Maker</h3>
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">Reel & Shorts Maker</h2>
         </div>
         <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
       </div>
@@ -101,7 +101,7 @@ export default function ReelShortsMaker() {
 
         {!file ? (
           <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
-            <input type="file" accept="video/mp4,video/webm" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+            <input type="file" accept="video/mp4,video/webm" onChange={handleUpload} aria-label="Select video file" className="absolute inset-0 opacity-0 cursor-pointer" />
             <div className="text-[var(--text-secondary)] flex flex-col items-center"><Upload className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mb-2" />Select Video</div>
           </div>
         ) : (

@@ -59,21 +59,21 @@ export default function CookiePolicyPage() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
             <ShieldCheck className="w-8 h-8 text-[var(--accent)] shrink-0" />
             <div>
-              <h4 className="font-semibold text-sm">Essential Only</h4>
+              <h2 className="font-semibold text-sm">Essential Only</h2>
               <p className="text-xs text-[var(--text-secondary)] mt-1">We only use strictly necessary cookies for basic functionality. No tracking cookies, no fingerprinting.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
             <EyeOff className="w-8 h-8 text-emerald-700 dark:text-emerald-400 shrink-0" />
             <div>
-              <h4 className="font-semibold text-sm">No Personal Data</h4>
+              <h2 className="font-semibold text-sm">No Personal Data</h2>
               <p className="text-xs text-[var(--text-secondary)] mt-1">Our privacy-first analytics collect zero personal information. No cookies are used for analytics.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
             <Settings className="w-8 h-8 text-purple-700 dark:text-purple-400 shrink-0" />
             <div>
-              <h4 className="font-semibold text-sm">Full Control</h4>
+              <h2 className="font-semibold text-sm">Full Control</h2>
               <p className="text-xs text-[var(--text-secondary)] mt-1">You can accept or decline non-essential cookies at any time via our consent banner.</p>
             </div>
           </div>

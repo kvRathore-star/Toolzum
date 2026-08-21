@@ -216,15 +216,15 @@ export default function QrCodeGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
-          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-b border-[var(--border-subtle)] pb-2">
+          <h2 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-b border-[var(--border-subtle)] pb-2">
             <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Content
-          </h4>
+          </h2>
 
           {qrType === 'url' && (
             <div className="space-y-1 text-xs">
               <span className="font-bold text-[var(--text-secondary)] uppercase block">Website URL</span>
-              <input type="url" value={urlContent} onChange={e => setUrlContent(e.target.value)} className={inpCls} />
+              <input type="url" value={urlContent} onChange={e => setUrlContent(e.target.value)} aria-label="Website URL" className={inpCls} />
             </div>
           )}
 
@@ -311,25 +311,25 @@ export default function QrCodeGenerator() {
             </div>
           )}
 
-          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
+          <h2 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
             <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Style
-          </h4>
+          </h2>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div className="space-y-1">
               <span className="text-[var(--text-secondary)] font-bold block">Foreground</span>
-              <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)} className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent" />
+              <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)} aria-label="Foreground color" className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent" />
             </div>
             <div className="space-y-1">
               <span className="text-[var(--text-secondary)] font-bold block">Background</span>
-              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent" />
+              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} aria-label="Background color" className="w-full h-10 border border-[var(--border-subtle)] rounded-lg cursor-pointer bg-transparent" />
             </div>
           </div>
 
           <div className="space-y-1 text-xs">
             <span className="font-bold text-[var(--text-secondary)] uppercase block">Size: {size}px</span>
-            <input type="range" min={128} max={512} step={1} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full" />
+            <input type="range" min={128} max={512} step={1} value={size} onChange={e => setSize(Number(e.target.value))} aria-label={`QR code size: ${size}px`} className="w-full" />
           </div>
 
           <div className="space-y-1 text-xs">
