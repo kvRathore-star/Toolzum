@@ -1694,6 +1694,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
 },
 {
+    id: "502",
+    name: "Bulk HEIC Converter",
+    slug: "bulk-heic-converter",
+    category: "Image",
+    description: "Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Fully client-side — your photos never leave your device.",
+    seoDescription: "Free online Bulk HEIC Converter — Convert iPhone HEIC photos to JPG, PNG, or WebP in batch. ",
+    dependencies: "heic2any, jszip",
+    showInCategory: true,
+},
+{
     id: "501",
     name: "Bulk AVIF Optimizer",
     slug: "bulk-avif-optimizer",
