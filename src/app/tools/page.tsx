@@ -5,11 +5,11 @@ const { totalImplemented, seoVariants } = getCachedToolCounts();
 
 export const metadata = {
   title: `${totalImplemented}+ Free Online Tools — Browser-Based Utilities Directory | Toolzum`,
-  description: `Browse ${totalImplemented}+ free online tools for PDF, images, video, audio, AI, text, code, and more. All process locally in your browser — nothing is uploaded.`,
+  description: `Browse ${totalImplemented}+ free online tools for PDF, images, video, audio, AI, text, code, and more. Most process locally in your browser — nothing uploaded for local tools.`,
   alternates: { canonical: "https://toolzum.com/tools/" },
   openGraph: {
     title: `Free Online Tools — ${totalImplemented}+ Browser-Based Utilities | Toolzum`,
-    description: `Stop uploading files to servers. ${totalImplemented}+ free tools for PDF, images, video, audio, AI, text, and code — all process locally in your browser. Nothing leaves your device.`,
+    description: `Stop uploading files to servers. ${totalImplemented}+ free tools for PDF, images, video, audio, AI, text, and code — most process locally in your browser. Nothing leaves your device for local tools.`,
   },
 };
 

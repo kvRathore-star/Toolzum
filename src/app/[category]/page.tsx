@@ -53,7 +53,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     Calculator: { title: 'Free Online Calculators – Math, Date & Academic Tools', description: 'Free online calculators — percentages, fractions, date differences, grade averages, and math tools. All computations happen locally in your browser.' },
     'Growth & Marketing': { title: 'Free Growth & Marketing Tools – SaaS & Performance', description: 'Free growth and marketing tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics. All calculations happen locally in your browser.' },
   };
-  const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — all processed locally in your browser with nothing uploaded to any server.` };
+  const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — most processed locally in your browser with nothing uploaded for local tools.` };
   const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.png`;
   return {
     title: seo.title,

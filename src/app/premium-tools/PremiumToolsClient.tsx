@@ -272,7 +272,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
           {[
             { q: 'How does the Pro plan work?', a: 'Pro gives you unlimited access to all premium tools, batch processing, larger file sizes, and AI features. All for a single monthly price.' },
             { q: 'Can I try before buying?', a: 'Free tools are available without any payment. When you hit a limit (batch size, file size, or AI usage), you will see an option to upgrade.' },
-            { q: 'What happens to my files?', a: 'Nothing. Every tool processes files entirely in your browser. Files never leave your device. We cannot see or store your data.' },
+            { q: 'What happens to my files?', a: 'Nothing. Most tools process files entirely in your browser — files never leave your device. A few tools (AI Image Generator, Text-to-Speech) use cloud APIs for features that require server-side processing. We cannot see or store your data for local tools.' },
             { q: 'Is there a free plan?', a: 'Yes. Free users get unlimited access to all standard tools with single-file processing, basic file size limits, and limited AI usage.' },
             { q: 'Can I cancel anytime?', a: 'Yes. You can cancel your subscription at any time. Your Pro access continues until the end of your billing period.' },
           ].map((faq, i) => (

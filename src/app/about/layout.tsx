@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   title: "About Us",
   alternates: { canonical: "https://toolzum.com/about/" },
   description:
-    "About Toolzum — privacy-first web tools powered by WebAssembly. Everything runs in your browser, nothing uploaded ever.",
+    "About Toolzum — privacy-first web tools powered by WebAssembly. Most run in your browser, nothing uploaded for local tools.",
   openGraph: {
     title: "About Us | Toolzum",
     description:
-      "About Toolzum — privacy-first web tools powered by WebAssembly. Everything runs in your browser, nothing uploaded ever.",
+      "About Toolzum — privacy-first web tools powered by WebAssembly. Most run in your browser, nothing uploaded for local tools.",
   },
 };
 
