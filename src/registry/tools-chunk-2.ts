@@ -47,7 +47,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What players support OGG?", answer: "VLC, foobar2000, Chrome, Firefox, and most open-source media players. Windows Media Player and iTunes do not natively support OGG." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "408",
@@ -65,7 +64,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate and bit depth. AAC at 44.1kHz will output WAV at 44.1kHz with 16-bit or 32-bit depth." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "409",
@@ -123,7 +121,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate. Common values: 44.1kHz (CD quality), 48kHz (standard), 96kHz (high-res). The output matches the source properties." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "414",
@@ -181,7 +178,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are preserved?", answer: "The converter preserves the original sample rate. Common MP3 rates: 44.1kHz, 48kHz. The AIFF output matches the source properties." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "419",
@@ -389,7 +385,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it preserve animation speed?", answer: "Yes. Frame timing from the APNG source is preserved in the GIF output. The animation plays at the same speed as the original." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No files are uploaded." },
     ],
-    showInCategory: true,
   },
   {
     id: "441",
@@ -626,7 +621,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What is the typical file size comparison?", answer: "WMA and OGG have similar compression efficiency. File sizes are generally comparable at equivalent quality settings, though WMA may be slightly larger at low bitrates." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "464",
@@ -654,7 +648,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect roughly 5-10x the OGG file size. A 5MB OGG may become 30-50MB as AIFF. This is normal for lossless audio formats." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "466",
@@ -952,7 +945,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What browsers support Opus?", answer: "All modern browsers support Opus natively in WebM containers. For standalone .opus files, most media players (VLC, foobar2000) support them." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
-    showInCategory: false,
   },
   {
 
@@ -1125,7 +1117,6 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I customize the output?", answer: "Some generators offer options like naming conventions (camelCase, PascalCase), whether to use interfaces vs types, and whether to include JSDoc comments." },
       { question: "Is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
 

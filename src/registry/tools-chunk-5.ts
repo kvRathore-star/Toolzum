@@ -578,7 +578,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What about large CSV files?", answer: "Files up to 1MB are processed smoothly. Very large CSVs may slow the browser. For huge datasets, split the CSV first or use a command-line tool." },
       { question: "Is my CSV data stored?", answer: "No. All conversion happens locally in your browser. No CSV data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
 
@@ -791,7 +790,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I control the nesting depth?", answer: "The converter uses logical nesting based on selector hierarchy. Deeply nested selectors (4+ levels) may be flattened to keep the SCSS readable." },
       { question: "Is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "css-5",
@@ -1250,7 +1248,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Which browsers support AVIF?", answer: "Chrome, Firefox, Safari 16.4+, and Edge all support AVIF. For older browsers, provide a JPG fallback using the <picture> element." },
       { question: "Is the conversion done locally?", answer: "Yes. The JPG to AVIF conversion runs entirely in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1022",
@@ -1288,7 +1285,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Will the file size increase?", answer: "TIFF files are generally larger than PNG because TIFF uses less aggressive compression. This is expected — the tradeoff is better compatibility with print and professional tools." },
       { question: "Is the conversion done locally?", answer: "Yes. All PNG to TIFF conversion runs in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1025",
@@ -1316,7 +1312,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What quality settings are available?", answer: "Adjust HEIC compression quality from 1-100. Higher values produce larger files with more detail. The default provides a good balance." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "1027",
@@ -1344,7 +1339,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I then edit the BMP without quality loss?", answer: "Yes. BMP is lossless, so editing (cropping, resizing, color adjustment) does not introduce additional compression artifacts like repeated JPG saves would." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1029",
@@ -1382,7 +1376,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What quality settings are available?", answer: "You can adjust the HEIC compression quality. Higher values produce larger files with more detail. The default provides a good balance for most use cases." },
       { question: "Is the conversion done locally?", answer: "Yes. All WEBP to HEIC conversion runs entirely in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1032",
@@ -1400,7 +1393,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What are the size implications?", answer: "SVG files with embedded raster images may be larger than the original WEBP. SVG is most efficient for simple shapes and icons, not photographic content." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1033",
@@ -1418,7 +1410,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I edit the BMP output?", answer: "Yes. BMP is universally supported by image editors (Paint, GIMP, Photoshop). You can open, crop, resize, and apply effects to the converted file." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1034",
@@ -1446,7 +1437,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I customize which sizes are included?", answer: "Some converters offer size selection. Check if this tool allows picking specific sizes to reduce the final ICO file size." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "1036",
@@ -1464,7 +1454,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What quality settings are available?", answer: "You can adjust compression quality from 1-100. JXL's lossy mode is more efficient than WEBP at the same quality level, often producing smaller files with better visual fidelity." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1037",
@@ -1492,7 +1481,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "How large will the BMP file be?", answer: "BMP is uncompressed, so expect significantly larger files. A 1MB HEIC may become 10-20MB as BMP depending on resolution and color depth." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No HEIC files are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1039",
@@ -1600,7 +1588,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I use this for web favicons?", answer: "Yes. Link the ICO in your HTML with <link rel='icon' href='/favicon.ico'>. Browsers automatically select the appropriate size." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "1049",
@@ -1678,7 +1665,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I open HEIC on non-Apple devices?", answer: "Windows requires the HEIF Image Extension from Microsoft Store. Android support varies by manufacturer. For maximum compatibility, consider converting to JPG or WebP instead." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1056",
@@ -1716,7 +1702,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I use this for web favicons?", answer: "Yes. Link the ICO with <link rel='icon' href='/favicon.ico'>. Browsers automatically select the appropriate size for tabs and bookmarks." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "1059",
@@ -1784,7 +1769,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+. For older browsers, provide TIFF or PNG fallbacks." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "1065",
@@ -1822,7 +1806,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does BMP support GIF's 256-color palette?", answer: "BMP supports millions of colors (24/32-bit). The converter expands GIF's 256-color palette to full color depth, though no new color information is created." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1068",
@@ -1850,7 +1833,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I use the ICO as a favicon?", answer: "Yes. Link it in your HTML with <link rel='icon' href='/favicon.ico'> and browsers will automatically select the appropriate size for tabs, bookmarks, and taskbars." },
       { question: "Is the conversion done locally?", answer: "Yes. All GIF to ICO conversion runs in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1070",
@@ -1928,7 +1910,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What color depth is used?", answer: "GIF is limited to 256 colors. The converter uses an optimal palette to represent the ICO's color data with minimal visual quality loss." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1077",
@@ -1946,7 +1927,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I use JXL for web favicons?", answer: "JXL is not supported as a favicon format by browsers. Keep ICO or PNG for favicons and use JXL for decorative icon imagery on supported pages." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1078",
@@ -2044,7 +2024,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I convert back from YAML to JSON?", answer: "Yes. Use the YAML to JSON Converter tool for the reverse direction." },
       { question: "Is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1088",
@@ -2072,7 +2051,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I use this for Cargo.toml or pyproject.toml?", answer: "Yes. The output is valid TOML that can be used directly in Cargo.toml, pyproject.toml, or any TOML-based configuration file." },
       { question: "Is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1090",
@@ -2090,7 +2068,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Will the output work with Less?", answer: "Yes. The generated Less code uses standard Less syntax and can be compiled with the Less compiler (npm install -g less && lessc style.less)." },
       { question: "Is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "1091",

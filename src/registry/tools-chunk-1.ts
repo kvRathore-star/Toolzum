@@ -906,7 +906,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What is the output quality?", answer: "Images are embedded at their original resolution. The PDF preserves the full quality of each source image without recompression." },
       { question: "Is my data stored?", answer: "No. All processing happens locally in your browser using pdf-lib. No images or PDFs are uploaded to any server." },
     ],
-    showInCategory: true,
   },
   {
     id: "314",
@@ -1470,7 +1469,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does it handle animated PNGs?", answer: "Animated PNG (APNG) files need the dedicated APNG to GIF converter. This tool handles single-frame PNGs only." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "366",
@@ -1488,7 +1486,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does GIF support JPG's quality?", answer: "No. GIF is lossless but palette-limited. Photographic JPGs may show color banding in GIF output. For photos, JPG or PNG is generally preferred." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "367",
@@ -1516,7 +1513,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Will repeated JPG saves degrade quality?", answer: "Yes. JPG is lossy, so each re-save introduces small artifacts. Edit the BMP original and convert to JPG only for the final output." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "369",
@@ -1695,7 +1691,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What about BMP transparency?", answer: "GIF supports 1-bit transparency (fully transparent or fully opaque). Semi-transparent areas in 32-bit BMPs will be rendered as either transparent or opaque." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
-    showInCategory: false,
   },
   {
     id: "386",
@@ -1713,7 +1708,6 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Which browsers support WebP?", answer: "Chrome, Firefox, Edge, Safari 14+, and all modern browsers. WebP is the recommended format for web images." },
       { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
-    showInCategory: false,
   },
   {
     id: "387",

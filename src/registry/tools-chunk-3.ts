@@ -197,7 +197,6 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I convert back from CSS to Stylus?", answer: "Use the CSS to Stylus Converter tool for the reverse direction, which adds Stylus-style indentation and syntax." },
       { question: "Is my Stylus data stored?", answer: "No. All conversion happens locally in your browser. No Stylus data is transmitted." },
     ],
-    showInCategory: false,
   },
   {
     id: "553c",
@@ -1614,7 +1613,6 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What browsers support flexbox?", answer: "All modern browsers (Chrome, Firefox, Safari, Edge) fully support flexbox. For legacy IE11 support, the generator can output fallback syntax where needed." },
       { question: "Is the generated CSS production-ready?", answer: "Yes. The output is clean, standard CSS that you can copy directly into your stylesheets. No vendor prefixes are needed for modern browsers." },
     ],
-    showInCategory: false,
   },
   {
 
