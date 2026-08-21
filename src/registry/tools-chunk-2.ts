@@ -1704,6 +1704,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
 },
 {
+    id: "503",
+    name: "Bulk Image Upscaler",
+    slug: "bulk-image-upscaler",
+    category: "Image",
+    description: "Batch upscale AI-generated and regular images by 2x, 3x, or 4x with Lanczos, Bicubic, or Bilinear algorithms. Side-by-side comparison preview. 100% client-side.",
+    seoDescription: "Free online Bulk Image Upscaler — Batch upscale images by 2x-4x with multiple algorithms and comparison preview. ",
+    dependencies: "Canvas API, jszip",
+    showInCategory: true,
+},
+{
     id: "501",
     name: "Bulk AVIF Optimizer",
     slug: "bulk-avif-optimizer",

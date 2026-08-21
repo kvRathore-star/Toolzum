@@ -14,7 +14,7 @@ export interface MegamenuColumnDef {
 // generation time (see scripts/generate-site-data.ts); the Header only consumes
 // the precomputed result in site-data.generated.ts.
 export const MENU_COLUMN_DEFS: MegamenuColumnDef[] = [
-  { title: "Image", icon: "🖼", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg", "gemini-watermark-remover", "bulk-avif-optimizer", "bulk-heic-converter"] },
+  { title: "Image", icon: "🖼", category: "Image", allHref: "/image", slugs: ["image-compressor", "image-resizer", "background-remover", "crop-image", "image-enhancer", "batch-image-editor", "png-to-jpg", "gemini-watermark-remover", "bulk-avif-optimizer", "bulk-heic-converter", "bulk-image-upscaler"] },
   { title: "PDF", icon: "📄", category: "PDF", allHref: "/pdf", slugs: ["pdf-compressor", "pdf-merger", "pdf-splitter", "pdf-to-word", "pdf-to-excel", "word-to-pdf", "jpg-to-pdf"] },
   { title: "Video", icon: "📹", category: "Video", allHref: "/video", slugs: ["video-compressor", "video-to-gif", "video-to-mp3", "crop-video", "subtitle-translator", "video-trimmer"] },
   { title: "Audio", icon: "🎵", category: "Audio", allHref: "/audio", slugs: ["text-to-speech-tts", "audio-cutter", "speech-to-text", "audio-converter", "apple-music-preview-extractor", "bulk-audio-converter"] },
