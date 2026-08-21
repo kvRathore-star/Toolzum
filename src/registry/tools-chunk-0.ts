@@ -9,6 +9,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     slug: "add-text-to-photo",
     dependencies: "Canvas API",
+    faqs: [
+      { question: "What font options are available for adding text to photos?", answer: "You can choose from a wide selection of web-safe fonts including Arial, Helvetica, Times New Roman, Georgia, and more. Font size, color, opacity, and rotation are all adjustable." },
+      { question: "Can I add multiple text layers to a single image?", answer: "Yes. You can add as many text overlays as needed, each with independent font, color, size, position, and rotation settings." },
+      { question: "What image formats are supported for input and output?", answer: "Input: PNG, JPG, WebP, GIF, BMP. Output: PNG (with transparency support) or JPG (with quality control)." },
+      { question: "Is my image uploaded to a server?", answer: "No. All text overlay processing happens entirely in your browser using Canvas API. Your image never leaves your device." },
+      { question: "Can I adjust text opacity and rotation?", answer: "Yes. Full control over opacity (0-100%) and rotation angle (0-360°) is available for each text layer." },
+    ],
   },
   {
     id: "batch-edit-1",
@@ -19,6 +26,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "batch-image-editor",
     dependencies: "Canvas API, jszip",
     isPro: true,
+    faqs: [
+      { question: "How many images can I batch process at once?", answer: "There's no hard limit. You can process dozens of images simultaneously. Processing time depends on your device's CPU and the operations selected." },
+      { question: "What operations can I apply in batch mode?", answer: "Resize, crop, rotate, format conversion (PNG/JPG/WebP/AVIF), and compression quality adjustment — all applied to every selected image." },
+      { question: "Can I set different output formats for different images?", answer: "Currently all images in a batch share the same output format and settings. For different formats, process them in separate batches." },
+      { question: "Will batch processing affect image quality?", answer: "Lossless operations (rotate, crop) preserve quality. Compression and format conversion may reduce quality depending on your settings. Higher quality settings = larger files." },
+      { question: "Are my images uploaded during batch processing?", answer: "No. All batch processing runs locally in your browser using Web APIs. No image data is transmitted." },
+    ],
   },
   {
     id: "vid-mp3-1",
@@ -28,27 +42,45 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     slug: "video-to-mp3",
     dependencies: "ffmpeg",
-
+    faqs: [
+      { question: "What video formats can I convert to MP3?", answer: "MP4, MOV, AVI, WebM, MKV, and other common video formats. The tool extracts the audio track and encodes it as MP3." },
+      { question: "Can I choose the MP3 bitrate?", answer: "Yes. You can select from common bitrates (128kbps, 192kbps, 256kbps, 320kbps) to balance file size and audio quality." },
+      { question: "Does the conversion reduce audio quality?", answer: "Quality depends on the bitrate you choose. 320kbps produces near-original quality. Lower bitrates reduce file size but may introduce audible artifacts." },
+      { question: "Is there a maximum video file size?", answer: "There's no imposed limit, but very large files (1GB+) may require significant RAM and could process slowly on older devices." },
+      { question: "Can I convert videos offline?", answer: "Yes. After the initial page load, the converter uses FFmpeg WASM running locally. No internet connection needed during conversion." },
+    ],
   },
   {
-    id: "vid-crop-1",
+    id: "crop-vid-1",
     name: "Crop Video",
-    description: "Crop the visual area of your MP4 video entirely in the browser. No signup or account required.",
-    seoDescription: 'Free online Crop Video — Crop the visual area of your MP4 video entirely in the browser. ',
+    description: 'Crop the visual area of your MP4 video entirely in the browser. No signup or account required.',
+    seoDescription: 'Free online Crop Video — Crop the visual area of your MP4 video entirely in the browser. No signup or account required. ',
     category: "Video",
     slug: "crop-video",
     dependencies: "ffmpeg",
-
+    faqs: [
+      { question: "What video formats are supported for cropping?", answer: "MP4, MOV, AVI, WebM, and MKV files. The tool uses FFmpeg WASM to handle cropping without re-encoding when possible." },
+      { question: "Can I crop to a specific aspect ratio?", answer: "Yes. You can select preset aspect ratios (16:9, 4:3, 1:1, 9:16) or draw a custom crop region freely." },
+      { question: "Does cropping reduce video quality?", answer: "If the codec supports it, cropping happens without re-encoding, preserving original quality. Otherwise, slight quality loss may occur during re-encoding." },
+      { question: "What's the maximum video length I can crop?", answer: "There's no strict limit, but longer videos (30+ minutes) may take several minutes to process depending on your device." },
+      { question: "Is the cropped video downloaded automatically?", answer: "Yes. After processing completes, the cropped video is downloaded to your device. No server storage involved." },
+    ],
   },
   {
-    id: "dev-json-xml-1",
+    id: "json-xml-1",
     name: "JSON to XML",
-    description: 'Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formats like DOCX and SVG. All conversion happens locally in your browser with no file size limits.',
-    seoDescription: 'Free online JSON to XML — Transforms valid JSON documents into well-formed XML using customizable root-element naming and array-handling rules. ',
+    description: 'Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formatting, and legacy integration pipelines.',
+    seoDescription: 'Free online JSON to XML — Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formatting, and legacy integration pipelines. ',
     category: "Converter",
     slug: "json-to-xml",
-    dependencies: "xml2js",
-    showInCategory: false,
+    dependencies: "fast-xml-parser",
+    faqs: [
+      { question: "Can I control the XML output format?", answer: "Yes. Options include indentation style (tabs/spaces), XML declaration inclusion, attribute vs element encoding, and custom root element names." },
+      { question: "How are JSON arrays represented in XML?", answer: "Arrays can be encoded as repeated child elements or as a single element with comma-separated values. Choose your preferred style in settings." },
+      { question: "Is there a file size limit for conversion?", answer: "No hard limit. Very large JSON files (100MB+) may cause slower processing, but most files convert instantly." },
+      { question: "Does the converter handle nested JSON objects?", answer: "Yes. Deeply nested JSON structures are converted to properly nested XML elements with correct hierarchy." },
+      { question: "Can I use this offline?", answer: "Yes. All conversion happens locally in the browser. After the initial page load, no internet connection is required." },
+    ],
   },
   {
 
@@ -59,6 +91,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Utility",
     slug: "time-converter",
     dependencies: "None",
+    faqs: [
+      { question: "What time units can I convert between?", answer: "Seconds, minutes, hours, days, weeks, months (30 days), and years (365 days). Results include decimal precision." },
+      { question: "How accurate are month and year conversions?", answer: "Months are treated as exactly 30 days and years as exactly 365 days. For calendar-accurate conversions, use a date calculator." },
+      { question: "Can I convert fractional time values?", answer: "Yes. You can enter decimal values like 1.5 hours or 0.5 days for precise conversions." },
+      { question: "Is my input data stored?", answer: "No. Your input values are processed locally and never leave your browser." },
+      { question: "Can I use this offline?", answer: "Yes. The converter works entirely offline after the initial page load." },
+    ],
 },
   {
 
@@ -69,6 +108,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. Useful for network testing, Docker port mapping, and firewall configuration.',
     seoDescription: 'Free online Random Port Generator — Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What port ranges can I generate from?", answer: "Well-known (0-1023), registered (1024-49151), dynamic/private (49152-65535), or any combination of these ranges." },
+      { question: "Can I exclude specific ports?", answer: "Yes. You can specify ports to exclude (e.g., 80, 443, 3000) to avoid conflicts with commonly used services." },
+      { question: "How many ports can I generate at once?", answer: "You can generate 1 to 100 random ports in a single batch. Results are displayed as a list you can copy." },
+      { question: "Are the generated ports guaranteed to be available?", answer: "No. The tool generates random port numbers, but it cannot check if ports are currently in use on your system. Use a port scanner for that." },
+      { question: "Can I filter by TCP or UDP?", answer: "Yes. You can generate ports specifically for TCP, UDP, or both protocols." },
+    ],
 },
   {
 
@@ -79,6 +125,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert between numeric (755) and symbolic (u=rwx,g=rx,o=rx) chmod permission formats. See detailed breakdown for owner, group, and others.',
     seoDescription: 'Free online Chmod Calculator — Convert between numeric and symbolic chmod permission formats with detailed breakdown. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What's the difference between numeric and symbolic notation?", answer: "Numeric uses octal digits (e.g., 755), while symbolic uses letters (e.g., u=rwx,g=rx,o=rx). Both represent the same permissions." },
+      { question: "What permissions does each digit represent?", answer: "Read (4), write (2), and execute (1). Add them together: 4+2+1=7 (full), 4+0+1=5 (read+execute), etc." },
+      { question: "Can I convert from symbolic to numeric?", answer: "Yes. Enter symbolic notation like u=rwx,g=rx,o=r and get the numeric equivalent (754)." },
+      { question: "Does this work for directories too?", answer: "The permission values are the same for files and directories, but the execute bit means different things (traverse for directories, execute for files)." },
+      { question: "Can I use this offline?", answer: "Yes. The calculator works entirely offline after the initial page load." },
+    ],
 },
   {
 
@@ -89,6 +142,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert docker run commands to docker-compose.yml format. Supports ports, volumes, environment variables, networks, restart policies, and container names.',
     seoDescription: 'Free online Docker Run to Compose Converter — Convert docker run commands to docker-compose.yml format. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What docker run options are supported?", answer: "Ports (-p), volumes (-v), environment variables (-e), networks, restart policies, container names, image tags, and more." },
+      { question: "Can I convert complex multi-option commands?", answer: "Yes. The converter parses chained flags like -p 8080:80 -v /data:/app/data -e NODE_ENV=production into proper compose syntax." },
+      { question: "Does it handle Docker Compose v3 syntax?", answer: "Yes. Output uses Compose Specification syntax compatible with docker-compose v2+ and Docker Compose v2." },
+      { question: "Can I customize the output format?", answer: "You can choose between YAML and JSON output formats, and set the compose file version." },
+      { question: "Is the docker run command sent to a server?", answer: "No. All parsing and conversion happens locally in your browser. No command data is transmitted." },
+    ],
 },
   {
 
@@ -99,6 +159,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.',
     seoDescription: 'Free online Email Normalizer — Normalize email addresses by removing dots, stripping +tags, and lowercasing. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What normalizations are applied?", answer: "Lowercasing the domain, removing dots from Gmail addresses (before @), stripping +tags, and trimming whitespace." },
+      { question: "Why remove dots from Gmail addresses?", answer: "Gmail ignores dots in the local part. john.doe@gmail.com and johndoe@gmail.com are the same inbox. This helps deduplicate." },
+      { question: "Can I normalize multiple emails at once?", answer: "Yes. Paste a list of emails (one per line or comma-separated) and all will be normalized in batch." },
+      { question: "Does this work with all email providers?", answer: "Gmail-specific rules (dot removal, +tag stripping) are applied only to Gmail/Googlemail addresses. Other providers get standard normalization." },
+      { question: "Are my email addresses stored?", answer: "No. All normalization happens locally in your browser. No email data is transmitted or stored." },
+    ],
 },
   {
     id: "arch-conv-1",
