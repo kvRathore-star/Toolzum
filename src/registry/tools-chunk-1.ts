@@ -101,6 +101,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "236",
     dependencies: 'IFSC API',
+    faqs: [
+      { question: "What details does the IFSC lookup return?", answer: "Bank name, branch name, full address, city, district, state, contact number, and MICR code. The IFSC code uniquely identifies a specific bank branch in India." },
+      { question: "What is an IFSC code?", answer: "IFSC (Indian Financial System Code) is an 11-character alphanumeric code assigned by the RBI to identify bank branches for electronic fund transfers (NEFT, RTGS, IMPS). Format: AAAA0NNNNNN (first 4 = bank, 5th = 0, last 6 = branch)." },
+      { question: "Does it cover all Indian banks?", answer: "Yes. The database includes IFSC codes for all RBI-registered banks — SBI, HDFC, ICICI, Axis, PNB, Bank of India, cooperative banks, and regional rural banks." },
+      { question: "Can I use this for UPI or NEFT transfers?", answer: "The lookup verifies IFSC details before initiating transfers. Use it to confirm the correct branch code before sending money via NEFT, RTGS, or IMPS to avoid failed transactions." },
+      { question: "Is the lookup done offline?", answer: "The tool uses a local IFSC database for instant results. No bank data is transmitted during lookup." },
+    ],
   },
   {
     name: 'Voter ID Form Helper',
@@ -210,7 +217,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. ',
     category: 'Image',
     id:  "250",
-    dependencies: 'AI API'
+    dependencies: 'AI API',
+    faqs: [
+      { question: "How does face detection work?", answer: "The tool uses an AI-powered computer vision model to detect faces in the image. It identifies face bounding boxes and applies a configurable Gaussian blur effect to each detected region." },
+      { question: "Can I adjust the blur intensity?", answer: "Yes. An adjustable blur slider lets you control the intensity from subtle to completely unrecognizable. Preview the effect before downloading." },
+      { question: "How many faces can it detect?", answer: "The tool can detect multiple faces in a single image. All detected faces are blurred simultaneously with the same intensity setting." },
+      { question: "What image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is typically JPG or PNG with the blurred face regions." },
+      { question: "Is my image uploaded to a server?", answer: "Face detection and blurring happen locally in your browser using AI models. No image data is transmitted to external servers." },
+    ],
   },
   {
     name: 'HTML to Image Converter',
@@ -219,7 +233,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online HTML to Image Converter — Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. ',
     category: 'Converter',
     id:  "251",
-    dependencies: 'html2canvas'
+    dependencies: 'html2canvas',
+    faqs: [
+      { question: "What HTML can I convert to an image?", answer: "Any valid HTML and CSS — including text, layout, gradients, shadows, borders, and images. Complex layouts with flexbox and grid are supported." },
+      { question: "What output formats are available?", answer: "PNG (best for transparency and quality), JPG (smaller file size), and SVG (vector output for scalable graphics). Choose based on your use case." },
+      { question: "Does it render external fonts and images?", answer: "External fonts may render if they are loaded via CSS @font-face. External images are generally not included due to CORS restrictions — use inline base64 images for best results." },
+      { question: "What is the maximum output size?", answer: "Output is limited by browser memory. Most modern browsers handle images up to 4096x4096 pixels. Very large HTML may need to be scaled down." },
+      { question: "Is my HTML data stored?", answer: "No. All rendering happens locally in your browser using html2canvas. No HTML data is sent to any server." },
+    ],
   },
   {
     name: 'Apple Music Preview Extractor',
@@ -265,6 +286,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Utility',
     id:  "261",
     dependencies: 'QRCode.js',
+    faqs: [
+      { question: "What tools are included?", answer: "Click-to-chat link generator (wa.me), group invite link generator, QR code creator for quick connections, chat text formatter (bold, italic, strikethrough), and status text templates." },
+      { question: "How do click-to-chat links work?", answer: "Enter a phone number (with country code) and a message. The tool generates a wa.me link that opens WhatsApp directly with the message pre-filled." },
+      { question: "Can I generate QR codes for WhatsApp?", answer: "Yes. Generate QR codes for phone numbers, group invites, or click-to-chat links. Scan with any phone camera to open WhatsApp directly." },
+      { question: "Does the chat analyzer read my messages?", answer: "No. The analyzer works on text you paste locally. It analyzes sentiment, word count, and message patterns without accessing your WhatsApp account." },
+      { question: "Is my data stored?", answer: "No. All generation and analysis happens locally in your browser. No WhatsApp data is transmitted." },
+    ],
   },
   {
     name: 'Indian Document Enhancer',
@@ -274,6 +302,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "262",
     dependencies: 'Canvas API',
+    faqs: [
+      { question: "Which Indian documents does it support?", answer: "Aadhaar card, PAN card, Voter ID (EPIC), Driving License, and other government-issued ID cards. The enhancer adjusts contrast, brightness, and sharpness for upload compliance." },
+      { question: "Why do government portals reject my scan?", answer: "Government upload portals often require minimum DPI, specific file sizes, and clear contrast. The enhancer improves scan quality to meet these requirements without changing document content." },
+      { question: "Can I adjust contrast and brightness manually?", answer: "Yes. Manual sliders for contrast, brightness, sharpness, and crop let you fine-tune the enhancement for each document." },
+      { question: "Does it change the document content?", answer: "No. The enhancer only adjusts image properties (contrast, brightness, sharpness). No text, numbers, or document details are modified." },
+      { question: "Is my document image stored?", answer: "No. All enhancement happens locally in your browser using Canvas API. No document images are uploaded to any server." },
+    ],
   },
   {
     name: 'Indian Voice Transcriber',
@@ -359,6 +394,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js',
+    faqs: [
+      { question: "How does the summarization work?", answer: "The tool extracts text from your PDF (native text or OCR for scanned docs), then sends it to an LLM which generates a condensed summary highlighting key points, main arguments, and actionable insights." },
+      { question: "Does it work with scanned PDFs?", answer: "Yes. For scanned documents, the tool uses OCR to extract text before summarization. Image quality affects OCR accuracy — clear scans produce better summaries." },
+      { question: "What is the maximum PDF size?", answer: "PDFs up to 50 pages are supported for optimal summarization. Longer documents may be truncated or summarized in sections." },
+      { question: "Is my PDF content private?", answer: "PDF text is sent to the AI API for summarization. No PDF files are stored permanently. Check the privacy policy for API-specific data handling." },
+      { question: "What summary formats are available?", answer: "Bullet-point summary, paragraph summary, and executive summary. Choose the format that matches your use case — quick reference, detailed review, or high-level overview." },
+    ],
   },
   {
     id: "278",
@@ -438,8 +480,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Image Resizer — Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. ',
     dependencies: "Canvas API, jszip",
-  
-    },
+    faqs: [
+      { question: "How many images can I resize at once?", answer: "There is no hard limit. You can select hundreds of images and resize them all in a single batch. Processing time depends on image sizes and your device performance." },
+      { question: "What resize options are available?", answer: "Resize by exact pixel dimensions (width x height), by percentage scale, or to preset sizes (thumbnail, medium, large). Aspect ratio lock prevents distortion." },
+      { question: "What output formats are supported?", answer: "Output formats include PNG, JPG, and WebP. You can choose the format and compression quality for the entire batch." },
+      { question: "Are my images uploaded during processing?", answer: "No. All resizing happens locally in your browser using Canvas API. Images are processed in memory and downloaded as a ZIP file when complete." },
+      { question: "Will resizing affect image quality?", answer: "Upscaling may introduce pixelation. Downscaling preserves quality well. Use the preview to check results before downloading the batch." },
+    ],
+  },
   {
     id: "286",
     name: "Bulk Video Compressor",
@@ -538,8 +586,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times, then flag broken links and slow pages. Checks run server-side, so results are accurate. SEO agencies use it instead of $50/mo crawling tools.",
     seoDescription: 'Free online Bulk URL Status Checker — Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times. Flags broken links and slow pages via accurate server-side checks. ',
     dependencies: "fetch API",
-  
-    },
+    faqs: [
+      { question: "How many URLs can I check at once?", answer: "Up to 5,000 URLs per batch. Paste one URL per line and the tool checks them sequentially with concurrent requests for speed." },
+      { question: "What status codes does it detect?", answer: "All HTTP status codes: 200 (OK), 301/302 (redirects), 404 (not found), 500 (server error), and others. Redirects show the final destination URL after following the chain." },
+      { question: "Does it follow redirects?", answer: "Yes. The tool follows redirect chains (301, 302, 307, 308) and reports both the original status and the final destination URL. This helps identify redirect loops and chains." },
+      { question: "How are response times measured?", answer: "Response time is measured from the initial request to the first byte received. This identifies slow-loading pages that may hurt SEO and user experience." },
+      { question: "Are the checks done server-side?", answer: "Yes. URL checks use server-side fetch requests, providing accurate status codes. Client-side checks in a browser would be affected by CORS restrictions." },
+    ],
+  },
   {
     id: "296",
     name: "Bulk Image Format Converter",
@@ -844,6 +898,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
+    showInCategory: true,
+    faqs: [
+      { question: "What image formats can I use?", answer: "JPG, PNG, WebP, BMP, and TIFF images. The tool combines multiple images into a multi-page PDF document." },
+      { question: "Can I reorder pages before combining?", answer: "Yes. Drag and drop to reorder pages. Arrange them in the correct sequence before generating the final PDF." },
+      { question: "Does it auto-enhance scanned images?", answer: "The basic tool combines images as-is. For scan enhancement (contrast, brightness, skew correction), use the Indian Document Enhancer first." },
+      { question: "What is the output quality?", answer: "Images are embedded at their original resolution. The PDF preserves the full quality of each source image without recompression." },
+      { question: "Is my data stored?", answer: "No. All processing happens locally in your browser using pdf-lib. No images or PDFs are uploaded to any server." },
+    ],
     showInCategory: true,
   },
   {
@@ -1324,6 +1386,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AI Detector — Analyze text to detect AI-written content. Burstiness, repetition, and trigger phrase analysis. ',
     dependencies: "none",
     showInCategory: true,
+    faqs: [
+      { question: "How does AI detection work?", answer: "The tool analyzes burstiness (variation in sentence length), repetition patterns, sentence structure variance, and known AI trigger phrases. These markers indicate whether text was likely generated by AI." },
+      { question: "What is a burstiness score?", answer: "Burstiness measures variation in sentence length. Human writing has high burstiness (mix of short and long sentences). AI text tends to have uniform sentence length, resulting in low burstiness." },
+      { question: "What percentage score is considered AI-written?", answer: "Scores above 70% suggest likely AI authorship. Scores below 30% suggest human authorship. Scores between 30-70% are inconclusive and should be interpreted cautiously." },
+      { question: "Can AI-generated text evade detection?", answer: "Yes. Sophisticated prompts, human editing, and paraphrasing can reduce detection accuracy. This tool is one indicator, not a definitive judgment on authorship." },
+      { question: "Is my text stored or transmitted?", answer: "No. All analysis happens locally in your browser. No text is sent to any server." },
+    ],
   },
   {
     id: "359",
@@ -1394,6 +1463,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert PNG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't handle PNG. Converting ensures compatibility." },
+      { question: "Does PNG transparency survive?", answer: "PNG supports full alpha transparency. GIF supports only 1-bit transparency (fully on/off). Semi-transparent areas become either transparent or opaque." },
+      { question: "Will the file size change?", answer: "PNG uses lossless compression. GIF also uses lossless compression but with a 256-color limit. Simple graphics may be smaller as GIF; complex images may be larger." },
+      { question: "Does it handle animated PNGs?", answer: "Animated PNG (APNG) files need the dedicated APNG to GIF converter. This tool handles single-frame PNGs only." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+    ],
+    showInCategory: false,
   },
   {
     id: "366",
@@ -1403,6 +1480,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JPG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. ',
     dependencies: "Canvas API",
+    showInCategory: false,
+    faqs: [
+      { question: "Why convert JPG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't accept JPG. Converting ensures compatibility while keeping visual quality acceptable." },
+      { question: "Does JPG's color depth survive the conversion?", answer: "JPG supports millions of colors (24-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss for photos." },
+      { question: "Will the file size change?", answer: "GIF is typically larger than JPG for photos because it uses lossless compression. GIF is better suited for simple graphics with flat colors, not photographic content." },
+      { question: "Does GIF support JPG's quality?", answer: "No. GIF is lossless but palette-limited. Photographic JPGs may show color banding in GIF output. For photos, JPG or PNG is generally preferred." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+    ],
     showInCategory: false,
   },
   {
@@ -1423,6 +1508,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. ',
     dependencies: "Canvas API",
+    showInCategory: false,
+    faqs: [
+      { question: "Why convert BMP to JPG?", answer: "BMP files are uncompressed and very large. Converting to JPG reduces file size by 90%+ while maintaining good visual quality. JPG is universally supported for web, email, and social media." },
+      { question: "What quality settings are available?", answer: "Adjust JPG quality from 1-100. Higher values preserve more detail but produce larger files. 85 is a good default — visually lossless at a fraction of BMP size." },
+      { question: "Does JPG support transparency?", answer: "No. BMP files with transparency will have transparent areas rendered against a white background in the JPG output." },
+      { question: "Will repeated JPG saves degrade quality?", answer: "Yes. JPG is lossy, so each re-save introduces small artifacts. Edit the BMP original and convert to JPG only for the final output." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+    ],
     showInCategory: false,
   },
   {
@@ -1595,6 +1688,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert BMP to GIF?", answer: "GIF is supported by legacy platforms, older browsers, and some messaging apps that don't handle BMP. Converting ensures compatibility while keeping file sizes manageable." },
+      { question: "Does GIF support all BMP colors?", answer: "BMP supports millions of colors (24-bit/32-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss." },
+      { question: "Can I convert animated BMP to animated GIF?", answer: "Multi-frame BMPs are not standard. The converter processes the first frame. For animated content, use the GIF-to-other-format converters instead." },
+      { question: "What about BMP transparency?", answer: "GIF supports 1-bit transparency (fully transparent or fully opaque). Semi-transparent areas in 32-bit BMPs will be rendered as either transparent or opaque." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+    ],
+    showInCategory: false,
   },
   {
     id: "386",
@@ -1604,6 +1705,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert BMP images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. ',
     dependencies: "Canvas API",
+    showInCategory: false,
+    faqs: [
+      { question: "How much smaller are WebP files?", answer: "WebP typically produces 25-35% smaller files than BMP at equivalent visual quality. A 5MB BMP may become 1-2MB as WebP." },
+      { question: "Does WebP support transparency?", answer: "Yes. WebP supports alpha channel transparency, so any transparent areas in the BMP source are preserved in the WebP output." },
+      { question: "What quality settings are available?", answer: "Adjust lossy compression quality from 1-100. Lossless mode is also available for pixel-perfect output." },
+      { question: "Which browsers support WebP?", answer: "Chrome, Firefox, Edge, Safari 14+, and all modern browsers. WebP is the recommended format for web images." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+    ],
     showInCategory: false,
   },
   {
@@ -1784,6 +1893,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Validates UPI ID format rules for all popular handles (@paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici) and generates UPI payment QR codes with merchant name and amount. All local processing.',
     seoDescription: 'Free online UPI ID Validator and QR Generator — Validate UPI IDs for @paytm, @okhdfcbank, @ybl, @sbi handles. Generate UPI payment QR codes with merchant name, amount, and transaction note. Local processing, no uploads.',
     dependencies: "QRCode.js",
+    faqs: [
+      { question: "Which UPI handles are validated?", answer: "All major Indian UPI handles: @paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici, @okaxis, @oksbi, @payzapp, @amazonpay, and more. The validator checks format rules specific to each handle." },
+      { question: "What does the validator check?", answer: "It verifies the UPI ID format: valid characters, handle suffix, minimum/maximum length, and correct structure. A valid format does not guarantee the UPI ID is active — it only confirms it follows the correct pattern." },
+      { question: "Can I generate a payment QR code?", answer: "Yes. Enter the validated UPI ID, merchant name, and optionally an amount to generate a scannable UPI payment QR code. The QR encodes the UPI payment URL in the standard format." },
+      { question: "Is this connected to any bank or UPI system?", answer: "No. This is a client-side validation and QR generation tool. It does not initiate, process, or verify any actual UPI transactions." },
+      { question: "Is my UPI data stored or transmitted?", answer: "No. All validation and QR generation happens locally in your browser. No UPI IDs or payment data is sent to any server." },
+    ],
   },
   {
     id: "405",
@@ -1793,6 +1909,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Parses free-text Indian addresses into structured fields — line 1, line 2, city, district, state, and pincode. Handles multiple Indian address formats with state and city recognition. Local processing only.',
     seoDescription: 'Free online Indian Address Parser — Parse unstructured Indian addresses into fields: line 1, line 2, city, district, state, pincode. Recognizes Indian states, cities, and address patterns. 100 percent local parsing.',
     dependencies: "None",
+    faqs: [
+      { question: "What fields does it extract?", answer: "Line 1 (door number, building), line 2 (street, area), city, district, state, and 6-digit pincode. The parser handles various Indian address formats and orders." },
+      { question: "Does it recognize all Indian states?", answer: "Yes. All 28 states and 8 union territories are recognized by their names and common abbreviations. The parser maps cities to their correct states and districts." },
+      { question: "Can it parse addresses in Hindi or regional languages?", answer: "The parser works with English transliterations of Indian addresses. Hindi or regional script addresses should be transliterated to English first." },
+      { question: "How accurate is the pincode extraction?", answer: "The parser extracts 6-digit pincodes from the address text. For validation against actual India Post data, use the PIN Code Finder tool." },
+      { question: "Is my address data stored?", answer: "No. All parsing happens locally in your browser. No address data is sent to any server." },
+    ],
   },
   {
     id: "406",
@@ -1802,6 +1925,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Parses Indian vehicle registration numbers to identify state/UT codes, RTO codes, and series. Decodes the format of license plates from all Indian states and union territories.',
     seoDescription: 'Free online Vehicle Registration Number Checker — Parse Indian vehicle registration numbers. Identify state/UT codes, RTO codes, and series for all Indian states and union territories. Instant local parsing.',
     dependencies: "None",
+    faqs: [
+      { question: "What information does it extract from a registration number?", answer: "State/UT code (e.g., MH for Maharashtra, DL for Delhi), RTO code (e.g., 01 for South Mumbai), series letters, and unique number. It decodes the standard Indian license plate format." },
+      { question: "Which states and UTs are covered?", answer: "All 28 states and 8 union territories. The database includes RTO codes for every registered RTO across India, from major metros to smaller districts." },
+      { question: "Does it verify if a registration number is valid?", answer: "It checks if the format follows Indian registration standards (state code + RTO + series + number). It does not verify if the vehicle is currently registered with the transport department." },
+      { question: "Can I look up vehicle owner details?", answer: "No. Owner details are protected under the Motor Vehicles Act. This tool only decodes the registration number format and identifies the issuing RTO." },
+      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser using a local database. No registration numbers are sent to any server." },
+    ],
   },
   {
     id: "407",
@@ -1820,6 +1950,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Calculate Indian investment returns — SIP with lumpsum and monthly options, PPF with 15-year maturity, and EPF employee provident fund projections. All calculations are local with no data uploads.',
     seoDescription: 'Free online Indian Investment Calculator — SIP, PPF, and EPF return calculator for Indian investors. SIP lumpsum plus monthly, PPF 15-year maturity, EPF projections with current interest rates. 100 percent local.',
     dependencies: "None",
+    faqs: [
+      { question: "What investment types does it calculate?", answer: "SIP (Systematic Investment Plan) with lumpsum and monthly options, PPF (Public Provident Fund) with 15-year maturity, and EPF (Employee Provident Fund) with employer contribution projections." },
+      { question: "What are the current interest rates used?", answer: "The calculator uses the latest announced rates: SIP returns are based on assumed annual returns (typically 10-12%), PPF at 7.1% (as of latest GOI notification), and EPF at 8.25%." },
+      { question: "Can I compare SIP vs lumpsum?", answer: "Yes. The SIP calculator shows returns for both monthly SIP and one-time lumpsum investments. You can compare which approach generates higher returns for your investment horizon." },
+      { question: "Does PPF include the 15-year lock-in?", answer: "Yes. The PPF calculator accounts for the 15-year mandatory lock-in period, partial withdrawal rules after 7 years, and the compounding structure with annual additions." },
+      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted or stored." },
+    ],
   },
   {
     id: "409",

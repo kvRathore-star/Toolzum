@@ -40,6 +40,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert AAC to OGG?", answer: "OGG Vorbis is open-source and royalty-free, while AAC has patent licensing requirements. Converting to OGG is useful for open-source projects, web games, and platforms that prefer free formats." },
+      { question: "Is there quality loss?", answer: "Both AAC and OGG are lossy formats. Converting between them introduces generation loss. At equivalent bitrates, OGG and AAC have similar quality. Higher OGG bitrates compensate for the re-encoding." },
+      { question: "What bitrate is recommended?", answer: "192-256 kbps OGG Vorbis provides quality comparable to 128-192 kbps AAC. For speech, 96-128 kbps is sufficient." },
+      { question: "What players support OGG?", answer: "VLC, foobar2000, Chrome, Firefox, and most open-source media players. Windows Media Player and iTunes do not natively support OGG." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+    ],
+    showInCategory: false,
   },
   {
     id: "408",
@@ -49,6 +57,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
+    showInCategory: false,
+    faqs: [
+      { question: "Why convert AAC to WAV?", answer: "WAV is uncompressed and universally supported by audio editing software (Audacity, Pro Tools, Logic Pro). Converting AAC to WAV provides lossless output for professional editing and mastering workflows." },
+      { question: "Will the audio quality improve?", answer: "Converting from lossy AAC to lossless WAV does not restore lost quality. The WAV file will be larger but fidelity is limited by the original AAC compression. Useful for editing, not quality enhancement." },
+      { question: "How large will the WAV file be?", answer: "WAV is uncompressed, so expect 5-10x the AAC file size. A 5MB AAC may become 30-50MB as WAV. This is normal for lossless audio." },
+      { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate and bit depth. AAC at 44.1kHz will output WAV at 44.1kHz with 16-bit or 32-bit depth." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+    ],
     showInCategory: false,
   },
   {
@@ -100,6 +116,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "What is the difference between M4A and AAC?", answer: "M4A is a container format (MPEG-4) that typically holds AAC audio. AAC is the raw audio codec. Converting M4A to AAC strips the container, producing a raw .aac file for direct playback or editing." },
+      { question: "When would I need raw AAC instead of M4A?", answer: "Some audio players, DAWs, and embedded systems require raw .aac files. Streaming services and certain hardware players may not recognize the M4A container but play AAC directly." },
+      { question: "Does conversion affect audio quality?", answer: "No quality loss occurs. Both M4A and AAC use the same audio encoding. The conversion only changes the container format, not the audio data itself." },
+      { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate. Common values: 44.1kHz (CD quality), 48kHz (standard), 96kHz (high-res). The output matches the source properties." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+    ],
+    showInCategory: false,
   },
   {
     id: "414",
@@ -149,6 +173,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert MP3 audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
+    showInCategory: false,
+    faqs: [
+      { question: "Why convert MP3 to AIFF?", answer: "AIFF is uncompressed and supported by professional DAWs (Logic Pro, Pro Tools). Converting MP3 to AIFF provides lossless output for editing workflows, though quality is limited by the original MP3 compression." },
+      { question: "Will the audio quality improve?", answer: "No. Converting from lossy MP3 to lossless AIFF does not restore lost data. The AIFF file will be larger but fidelity is limited by the MP3 source." },
+      { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect 5-10x the MP3 file size. A 5MB MP3 may become 30-50MB as AIFF." },
+      { question: "What sample rates are preserved?", answer: "The converter preserves the original sample rate. Common MP3 rates: 44.1kHz, 48kHz. The AIFF output matches the source properties." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+    ],
     showInCategory: false,
   },
   {
@@ -350,6 +382,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    faqs: [
+      { question: "What is APNG?", answer: "APNG (Animated PNG) is an extension of PNG that supports animation. It offers better quality than GIF with full alpha transparency and 24-bit color, but has limited browser support." },
+      { question: "Why convert APNG to GIF?", answer: "GIF is universally supported by all browsers, messaging apps, and platforms. Converting APNG to GIF ensures your animation plays everywhere." },
+      { question: "Will quality decrease?", answer: "GIF is limited to 256 colors and 1-bit transparency. APNG's full-color, full-transparency animation will lose quality. The converter optimizes the palette to minimize visible loss." },
+      { question: "Does it preserve animation speed?", answer: "Yes. Frame timing from the APNG source is preserved in the GIF output. The animation plays at the same speed as the original." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No files are uploaded." },
+    ],
+    showInCategory: true,
   },
   {
     id: "441",
@@ -471,6 +511,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
     seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
+    faqs: [
+      { question: "How does auto-detection work?", answer: "Paste any content and the converter detects whether it's JSON or YAML based on syntax patterns (curly braces for JSON, indentation-based for YAML). It then converts to the other format." },
+      { question: "What YAML features are supported?", answer: "Objects, arrays, strings, numbers, booleans, null, anchors (&), aliases (*), multi-line strings (| and >), and comments. The converter preserves all YAML-specific features." },
+      { question: "Can I convert back and forth?", answer: "Yes. The tool is bidirectional. Paste YAML to get JSON, or paste JSON to get YAML. Real-time preview shows the output as you type." },
+      { question: "Does it handle large files?", answer: "Files up to 1MB convert instantly. Larger files may slow the browser. For very large config files, consider CLI tools." },
+      { question: "Is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
+    ],
   },
   {
     id: "454",
@@ -572,6 +619,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert OGG to WMA?", answer: "WMA is the native audio format for Windows Media Player and older Windows applications. Converting OGG to WMA ensures playback on legacy Windows devices and software that don't support OGG." },
+      { question: "Does WMA support multiple channels?", answer: "Yes. WMA supports mono, stereo, and surround sound. The converter preserves the original channel configuration from the OGG source." },
+      { question: "Will there be quality loss?", answer: "WMA supports both lossy and lossless modes. Lossy WMA at high bitrates produces quality comparable to OGG. For lossless output, choose WMA Lossless if the tool supports it." },
+      { question: "What is the typical file size comparison?", answer: "WMA and OGG have similar compression efficiency. File sizes are generally comparable at equivalent quality settings, though WMA may be slightly larger at low bitrates." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+    ],
+    showInCategory: false,
   },
   {
     id: "464",
@@ -591,6 +646,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
+    showInCategory: false,
+    faqs: [
+      { question: "Why convert OGG to AIFF?", answer: "AIFF is an uncompressed audio format widely supported by professional audio software, DAWs (Logic Pro, Pro Tools), and Apple devices. Converting from OGG provides lossless quality for editing and mastering." },
+      { question: "Will the audio quality improve?", answer: "Converting from lossy OGG to lossless AIFF does not restore lost quality. The AIFF file will be larger but the audio fidelity is limited by the original OGG compression. It is useful for editing workflows, not quality enhancement." },
+      { question: "What sample rates and bit depths are supported?", answer: "The converter preserves the original sample rate and bit depth. Common values: 44.1kHz/16-bit (CD quality), 48kHz/24-bit (professional). The output matches the source properties." },
+      { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect roughly 5-10x the OGG file size. A 5MB OGG may become 30-50MB as AIFF. This is normal for lossless audio formats." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+    ],
     showInCategory: false,
   },
   {
@@ -882,6 +945,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert AIFF to Opus?", answer: "Opus offers excellent quality at very low bitrates, making it ideal for streaming, VoIP, and web audio. Converting from large AIFF files to Opus dramatically reduces file size." },
+      { question: "What bitrate should I use?", answer: "64-128 kbps is recommended for music. 32-64 kbps works well for speech. Higher bitrates preserve more detail but produce larger files." },
+      { question: "Does Opus support all sample rates?", answer: "Opus supports 8kHz to 48kHz. AIFF files at higher sample rates (96kHz, 192kHz) are resampled to 48kHz maximum during conversion." },
+      { question: "What browsers support Opus?", answer: "All modern browsers support Opus natively in WebM containers. For standalone .opus files, most media players (VLC, foobar2000) support them." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+    ],
+    showInCategory: false,
   },
   {
 
@@ -954,6 +1025,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
     seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
+    faqs: [
+      { question: "What sort options are available?", answer: "Alphabetical A→Z, reverse Z→A, reverse order (last line first), random shuffle, and duplicate removal. All operations work on one line per entry." },
+      { question: "Does it handle case-sensitive sorting?", answer: "By default, sorting is case-insensitive. Some implementations offer case-sensitive mode where uppercase letters sort before lowercase." },
+      { question: "How does deduplication work?", answer: "Exact string matching removes duplicate lines. The first occurrence of each unique line is kept, subsequent duplicates are removed." },
+      { question: "Can I sort numbers in text lines?", answer: "Numeric sorting is available for lines that contain numbers. Alphabetical sorting treats numbers as text (e.g., '10' sorts before '2')." },
+      { question: "Is my data stored?", answer: "No. All processing happens locally in your browser. No text data is transmitted." },
+    ],
 },
   {
 
@@ -1023,6 +1101,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does SVG to CSS conversion do?", answer: "It converts SVG markup into a CSS data URI that can be used directly in background-image properties. This eliminates the need for a separate SVG file and reduces HTTP requests." },
+      { question: "When should I use SVG as CSS data URI?", answer: "For small icons, logos, and decorative SVGs embedded in stylesheets. It reduces server requests and allows CSS-based theming (color changes via currentColor). Not ideal for large or complex SVGs." },
+      { question: "Can I still style the SVG with CSS?", answer: "Limited. Inline SVG in HTML is fully styleable. Data URI SVGs in CSS backgrounds cannot be styled with CSS selectors. Use currentColor for basic color theming." },
+      { question: "Does encoding affect SVG quality?", answer: "No. Base64 or URL-encoded SVGs in CSS are rendered identically to external SVG files. The encoding is transparent to the browser." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No SVG data is sent to any server." },
+    ],
 },
   {
     id: "510",
@@ -1032,6 +1117,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
+    showInCategory: false,
+    faqs: [
+      { question: "Which programming languages are supported?", answer: "TypeScript (interfaces/types), Java (POJO classes), C# (classes), Python (dataclasses/pydantic), Go (structs), Rust (structs), and Kotlin (data classes)." },
+      { question: "How does it handle nested JSON?", answer: "Nested objects generate separate type/class definitions for each level. Arrays of objects create array-typed fields with the correct element type." },
+      { question: "Does it infer optional fields?", answer: "Yes. Fields that can be null or missing in the JSON sample are marked as optional (nullable) in the generated types." },
+      { question: "Can I customize the output?", answer: "Some generators offer options like naming conventions (camelCase, PascalCase), whether to use interfaces vs types, and whether to include JSDoc comments." },
+      { question: "Is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
+    ],
     showInCategory: false,
   },
   {
@@ -1145,6 +1238,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse and validate international phone numbers with country detection.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
+    faqs: [
+      { question: "What information does it extract?", answer: "Country code, national number, area code, carrier prefix, and formatted display. The parser detects the country from the number format or +CC prefix." },
+      { question: "Which countries are supported?", answer: "All countries with international dialing codes. The parser handles US, UK, India, Germany, Japan, Australia, and 200+ other country formats." },
+      { question: "Does it validate if the number is real?", answer: "It validates format and structure but cannot verify if a number is currently active. Format validation confirms the number follows the correct pattern for its country." },
+      { question: "Can I format numbers in different styles?", answer: "Yes. Output formats include E.164 (+1234567890), national (123 456 7890), and international (+1 123 456 7890) styles." },
+      { question: "Is my phone data stored?", answer: "No. All parsing happens locally in your browser. No phone numbers are transmitted." },
+    ],
 },
   {
 
@@ -1155,6 +1255,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
     dependencies: "None",
+    faqs: [
+      { question: "What separator options are available?", answer: "Choose from hyphen (-), underscore (_), dot (.), or space as the separator. Hyphens are the default and most SEO-friendly option for URL slugs." },
+      { question: "How does it handle special characters?", answer: "Special characters, accented letters, and symbols are removed or transliterated. Unicode characters like 'é' become 'e', and symbols are stripped entirely." },
+      { question: "Can I convert slugs back to text?", answer: "This tool converts text to slugs, not the reverse. For slug-to-text conversion, use the URL Parser or String Inspector tools." },
+      { question: "Is the conversion case-sensitive?", answer: "By default, slugs are lowercased. You can optionally preserve case if your use case requires it (e.g., for anchor IDs)." },
+      { question: "Is my text stored or transmitted?", answer: "No. All slug generation happens locally in your browser. No text data is sent to any server." },
+    ],
 },
   {
 
@@ -1165,6 +1272,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is a ULID?", answer: "ULID (Universally Unique Lexicographically Sortable Identifier) is a 26-character string that is time-ordered and collision-resistant. Format: 48-bit timestamp + 80-bit randomness in Crockford base32." },
+      { question: "How is ULID different from UUID?", answer: "ULIDs are lexicographically sortable by creation time. UUIDs (v4) are random and not sortable. ULIDs are shorter (26 chars vs 36) and more database-friendly." },
+      { question: "Can I extract the timestamp from a ULID?", answer: "Yes. The first 10 characters encode the Unix timestamp in milliseconds. You can decode them to find the exact creation time of any ULID." },
+      { question: "How many ULIDs can I generate?", answer: "Generate 1 to 1000 ULIDs at once. Each ULID is unique even at millisecond granularity due to the 80-bit random component." },
+      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
+    ],
 },
   {
 
@@ -1175,6 +1289,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is a numeronym?", answer: "A numeronym replaces some letters in a word with a number representing the count of skipped letters. For example, 'accessibility' becomes 'a11y' (a + 11 letters + y). 'Internationalization' becomes 'i18n'." },
+      { question: "Can I generate both numeronyms and acronyms?", answer: "Yes. The tool generates numeronyms (letter-number-letter format) and standard acronyms (first letters of each word). Toggle between modes as needed." },
+      { question: "How are numeronyms calculated?", answer: "The tool counts the letters between the first and last character. If there are 3+ letters in between, it replaces them with the count. For shorter words, it returns the original or an acronym." },
+      { question: "What are common use cases?", answer: "Numeronyms are widely used in tech: a11y (accessibility), i18n (internationalization), l10n (localization), n11n (normalization). They save space in code, URLs, and variable names." },
+      { question: "Is my text stored or transmitted?", answer: "No. All generation happens locally in your browser. No text data is sent to any server." },
+    ],
 },
   {
 
@@ -1185,6 +1306,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Look up device manufacturer from MAC address OUI prefix.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is a MAC address OUI?", answer: "The OUI (Organizationally Unique Identifier) is the first 3 octets (6 hex characters) of a MAC address. It uniquely identifies the device manufacturer or vendor, assigned by IEEE." },
+      { question: "What information does the lookup return?", answer: "The vendor/manufacturer name associated with the MAC address OUI prefix. For example, looking up 00:1A:2B returns the manufacturer who owns that OUI block." },
+      { question: "Can I identify the device model?", answer: "The OUI identifies the manufacturer but not the specific model. To identify the exact device, you need additional information like network scanning or device fingerprinting." },
+      { question: "How comprehensive is the vendor database?", answer: "The database includes thousands of OUI entries covering major manufacturers (Apple, Samsung, Cisco, Intel, etc.) and smaller vendors. It's updated regularly with new IEEE assignments." },
+      { question: "Is the lookup done locally?", answer: "Yes. The OUI database is stored locally. No MAC address data is transmitted during lookups." },
+    ],
 },
   {
 
@@ -1225,6 +1353,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to ASCII art with multiple font styles.',
     seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
+    faqs: [
+      { question: "What font styles are available?", answer: "Block, bubble, fancy, digital, shadow, and slant styles. Each style creates a different visual effect for your text, from bold block letters to ornate decorative text." },
+      { question: "What text length works best?", answer: "Short text (1-15 characters) produces the best results. Longer text may wrap or become too small to read in ASCII art format." },
+      { question: "Can I copy the output?", answer: "Yes. The generated ASCII art can be copied to clipboard as plain text for use in terminal outputs, text files, code comments, or chat messages." },
+      { question: "Does it support special characters?", answer: "Basic Latin letters and numbers work best. Special characters, emojis, and non-Latin scripts may not render correctly in ASCII art styles." },
+      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No text data is sent to any server." },
+    ],
 },
   {
 
@@ -1294,6 +1429,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
+    faqs: [
+      { question: "What does this tool do?", answer: "Adds a colored background layer to every page in a PDF. Choose any color and the tool inserts a full-page colored rectangle behind the existing content." },
+      { question: "Does it cover the text?", answer: "No. The background color is placed behind the existing content. Text and images remain visible on top of the colored background." },
+      { question: "Can I apply different colors to different pages?", answer: "The basic tool applies one color to all pages. For per-page colors, process pages individually or use a PDF editor." },
+      { question: "What file size impact does adding color have?", answer: "Minimal. The color layer adds very little data. File size may increase by 1-5% depending on page count." },
+      { question: "Is my PDF data stored?", answer: "No. All processing happens locally in your browser using pdf-lib. No PDF data is uploaded to any server." },
+    ],
   },
   {
     id: "531c",
@@ -1386,6 +1528,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate how many pages your word count will take at different font sizes.',
     seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is the estimate calculated?", answer: "The tool uses standard formulas: ~250 words per single-spaced page and ~500 words per double-spaced page at 12pt font. Adjustments are made for font size, margins, and line spacing." },
+      { question: "What formatting options affect the count?", answer: "Font size (10pt-16pt), line spacing (single, 1.5, double), and margin width all affect words per page. Smaller fonts and tighter spacing fit more words per page." },
+      { question: "Can I calculate pages from word count or vice versa?", answer: "Both directions work. Enter word count to get page count, or enter page count to estimate required word count for your target length." },
+      { question: "Does it account for headings and images?", answer: "The estimate is for text-only content. Headings, images, charts, and tables take additional space. Add 10-20% extra pages for content with formatting elements." },
+      { question: "Is my text data stored?", answer: "No. All calculations run locally in your browser. No text data is transmitted." },
+    ],
   },
   {
     id: "534d",
@@ -1445,6 +1594,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.',
     seoDescription: 'Free online OAuth Client Setup \u2014 Generate authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn. ',
     dependencies: "None",
+    faqs: [
+      { question: "Which providers are supported?", answer: "Google, GitHub, Facebook, Microsoft, and LinkedIn. Each provider's OAuth 2.0 authorization endpoint is configured with the correct parameters." },
+      { question: "What parameters do I need to provide?", answer: "Client ID (from provider dashboard), redirect URI (your callback URL), and requested scopes. The tool assembles the complete authorization URL." },
+      { question: "Does it generate the full OAuth flow?", answer: "It generates the authorization URL (step 1). You still need to handle the callback, token exchange, and token storage in your application code." },
+      { question: "Can I include PKCE code challenge?", answer: "Some providers support PKCE. The tool can generate the code_verifier and code_challenge for enhanced security in public clients." },
+      { question: "Is my client data stored?", answer: "No. All URL generation happens locally in your browser. No client IDs or secrets are transmitted." },
+    ],
 },
   {
 
@@ -1465,6 +1621,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
     seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does the scope builder do?", answer: "It takes individual OAuth scope values (comma-separated) and builds a properly formatted scope string with URL encoding. It also breaks down existing scope strings into individual permissions." },
+      { question: "Which providers' scopes does it support?", answer: "Google, GitHub, Facebook, Microsoft, LinkedIn, and generic OAuth. The builder includes scope names and descriptions for each provider's common permissions." },
+      { question: "How does URL encoding work?", answer: "OAuth scopes often contain spaces and special characters. The builder URL-encodes the scope string for use in authorization URLs while showing the decoded version for readability." },
+      { question: "Can I paste an existing scope string to decode it?", answer: "Yes. Paste a URL-encoded scope string and the builder decodes it into individual scopes with descriptions." },
+      { question: "Is my scope data stored?", answer: "No. All building happens locally in your browser. No scope data is transmitted." },
+    ],
 },
   {
 
@@ -1505,6 +1668,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
     seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does the linter check?", answer: "Missing DOCTYPE declaration, unclosed tags, unexpected closing tags, duplicate attributes, deprecated elements, and accessibility issues." },
+      { question: "Does it validate HTML5 syntax?", answer: "Yes. The linter checks HTML5 DOCTYPE, valid element nesting, required attributes, and semantic structure compliance." },
+      { question: "Can it fix issues automatically?", answer: "No. The linter identifies issues with line numbers and descriptions. You must manually edit the HTML to fix reported problems." },
+      { question: "Does it check for accessibility?", answer: "Basic accessibility checks include missing alt attributes on images, missing form labels, and heading hierarchy issues." },
+      { question: "Is my HTML data stored?", answer: "No. All linting happens locally in your browser. No HTML data is transmitted." },
+    ],
 },
   {
 
@@ -1614,6 +1784,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between PX and REM with custom base size. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is the default base size?", answer: "16px = 1rem (the browser default). You can customize the base size to match your project's root font-size setting." },
+      { question: "Can I convert in both directions?", answer: "Yes. PX to REM and REM to PX conversion are both supported. Enter values in either field and the other updates instantly." },
+      { question: "Why use REM instead of PX?", answer: "REM is relative to the root font-size, making designs scalable and accessible. Users who change their browser font-size will see your layout adapt." },
+      { question: "Does it handle negative values and decimals?", answer: "Yes. Both positive and negative values, as well as decimal PX and REM values (e.g., 0.75rem, 12.5px), are converted accurately." },
+      { question: "Is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
 },
   {
 
@@ -1634,6 +1811,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
+    faqs: [
+      { question: "What power units are supported?", answer: "Kilowatts (kW), horsepower (hp and bhp), watts (W), megawatts (MW), and BTU per hour (BTU/hr). All conversions are bidirectional." },
+      { question: "What is the difference between hp and bhp?", answer: "Horsepower (hp) is mechanical power. Brake horsepower (bhp) is the power at the engine's output shaft before drivetrain losses. bhp is slightly lower than hp in most contexts." },
+      { question: "When would I need BTU/hr conversion?", answer: "BTU/hr is used for HVAC systems, heaters, and cooling units. Converting kW to BTU/hr helps size heating/cooling equipment for rooms and buildings." },
+      { question: "Are the conversion factors accurate?", answer: "Yes. The converter uses standard SI conversion factors: 1 kW = 1.341 hp, 1 hp = 745.7 W, 1 kW = 3412 BTU/hr." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversions run in your browser. No data is transmitted." },
+    ],
 },
   {
 
@@ -1644,6 +1828,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
     dependencies: "None",
+    faqs: [
+      { question: "What pressure units are supported?", answer: "Kilopascals (kPa), pounds per square inch (psi), bar, atmosphere (atm), Torr (mmHg), and millibar (mbar). All conversions are bidirectional." },
+      { question: "When would I use each unit?", answer: "kPa: SI standard, meteorology. psi: tire pressure, US hydraulics. bar: industrial, European. atm: chemistry. Torr: vacuum systems. mbar: weather." },
+      { question: "What are the conversion factors?", answer: "1 atm = 101.325 kPa = 14.696 psi = 1.01325 bar = 760 Torr = 1013.25 mbar. These are exact SI definitions." },
+      { question: "Can I convert gauge pressure?", answer: "The converter uses absolute pressure by default. For gauge pressure, add atmospheric pressure (101.325 kPa) before converting." },
+      { question: "Is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
 },
   {
     id: "548a",
@@ -1672,6 +1863,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate CSS media queries with min/max width and optional device type conditions.',
     seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
     dependencies: "None",
+    faqs: [
+      { question: "What breakpoints can I set?", answer: "Min-width and max-width breakpoints in px, em, rem, or vw units. Preset common breakpoints: mobile (480px), tablet (768px), laptop (1024px), desktop (1200px)." },
+      { question: "Can I target specific devices?", answer: "Yes. Add device-type conditions: screen, print, handheld. Combine with orientation (portrait/landscape) and hover capability (hover: none/hover)." },
+      { question: "What output format is generated?", answer: "Standard CSS @media rules with your specified conditions. Copy the output directly into your stylesheet." },
+      { question: "Does it support modern media features?", answer: "Supports prefers-color-scheme, prefers-reduced-motion, aspect-ratio, and other Level 4 media features for responsive design." },
+      { question: "Is my CSS data stored?", answer: "No. All generation happens locally in your browser. No CSS data is transmitted." },
+    ],
 },
   {
 

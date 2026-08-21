@@ -120,6 +120,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate package.json for required fields, semver format, and dependency presence.',
     seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
     dependencies: "None",
+    faqs: [
+      { question: "What fields does it validate?", answer: "Required fields (name, version), semver format compliance, valid dependency declarations, script definitions, and common best practices like license and description fields." },
+      { question: "Does it check for security issues?", answer: "It validates dependency syntax and detects common issues like missing version ranges, duplicate dependencies, and invalid package names. For vulnerability scanning, use npm audit." },
+      { question: "Can it validate private packages?", answer: "Yes. Private package names (scoped with @scope/name) are validated correctly. The validator ensures the name follows npm naming conventions." },
+      { question: "Does it check semver version ranges?", answer: "Yes. Version ranges in dependencies (e.g., ^1.2.3, ~1.2.3, >=1.0.0) are validated for correct semver syntax." },
+      { question: "Is my package.json data stored?", answer: "No. All validation happens locally in your browser. No data is sent to any server." },
+    ],
 },
   {
 
@@ -150,7 +157,14 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.',
     seoDescription: 'Free online AWS IAM Policy Analyzer \u2014 Check IAM policies for wildcard resources, overly broad actions, and admin access. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What security issues does it detect?", answer: "It flags wildcard resources (Resource: *), overly broad actions (Action: *), full admin access (AdministratorAccess), and policies that grant access to sensitive services like IAM, STS, or Organizations without restrictions." },
+      { question: "What format should the policy be in?", answer: "Paste the IAM policy as valid JSON. This can be an inline policy, an attached managed policy, or the policy document from the AWS IAM console." },
+      { question: "Does it check for SCP or permission boundary issues?", answer: "The analyzer focuses on IAM policy content — wildcard detection, action breadth, and resource scope. For SCP and permission boundary analysis, use the AWS Policy Simulator." },
+      { question: "Can it fix the policy for me?", answer: "No. It identifies issues and provides recommendations. You must manually edit the policy in the AWS IAM console or via CLI to apply the suggested fixes." },
+      { question: "Is my policy data stored or transmitted?", answer: "No. All analysis runs locally in your browser. Your IAM policy JSON is never sent to any server." },
+    ],
+  },
   {
     id: "553a",
     name: "SCSS to CSS Converter",
@@ -159,6 +173,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert SCSS variables and nesting to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
+    faqs: [
+      { question: "What SCSS features are converted?", answer: "Variables ($var to var(--var)), nesting (flattened to descendant selectors), @extend (inlined), @mixin (expanded), and @import (included). Output is plain CSS3." },
+      { question: "Does it handle SCSS mixins?", answer: "Yes. @mixin definitions are expanded at each @include point. The output CSS contains the actual CSS properties from the mixin body, not CSS-level abstractions." },
+      { question: "Will the output look different from hand-written CSS?", answer: "Functionally identical. The generated CSS may have more selectors due to nesting expansion, but the visual result is exactly the same as the SCSS source." },
+      { question: "Can I convert back from CSS to SCSS?", answer: "Use the CSS to SCSS Converter for the reverse direction. It adds nesting and variables to flat CSS." },
+      { question: "Is my SCSS data stored?", answer: "No. All conversion happens locally in your browser. No SCSS data is sent to any server." },
+    ],
   },
   {
     id: "553b",
@@ -169,6 +190,14 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
     showInCategory: false,
+    faqs: [
+      { question: "What Stylus features are converted?", answer: "Stylus syntax (indentation-based, optional braces/semicolons, variable $prefix) is converted to standard CSS with braces, colons, and proper nesting expansion." },
+      { question: "Does it handle Stylus variables?", answer: "Yes. Stylus variables (varName = value) are converted to CSS custom properties (--var-name: value) or hardcoded values depending on the use case." },
+      { question: "Does it support Stylus mixins?", answer: "Basic mixin expansion is supported. Complex Stylus-specific features like conditionals and loops may require manual conversion." },
+      { question: "Can I convert back from CSS to Stylus?", answer: "Use the CSS to Stylus Converter tool for the reverse direction, which adds Stylus-style indentation and syntax." },
+      { question: "Is my Stylus data stored?", answer: "No. All conversion happens locally in your browser. No Stylus data is transmitted." },
+    ],
+    showInCategory: false,
   },
   {
     id: "553c",
@@ -178,6 +207,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Tailwind utility classes to plain CSS. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
+    faqs: [
+      { question: "What Tailwind features are converted?", answer: "Utility classes (flex, p-4, text-lg, bg-blue-500) are converted to their CSS equivalents (display: flex, padding: 1rem, font-size: 1.125rem, background-color: #3b82f6)." },
+      { question: "Does it handle responsive prefixes?", answer: "Yes. sm:, md:, lg:, xl: prefixes are converted to the appropriate @media queries in the output CSS." },
+      { question: "Does it support Tailwind v4?", answer: "The converter supports common Tailwind v3 utilities. Some v4-specific features may not be fully supported yet as the ecosystem evolves." },
+      { question: "Can I convert custom Tailwind configs?", answer: "Custom theme values from tailwind.config.js are not automatically detected. The converter uses default Tailwind values. Custom colors and spacing may need manual adjustment." },
+      { question: "Is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
+    ],
   },
   {
 
@@ -267,7 +303,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "What compounding frequencies are supported?", answer: "Annual, semi-annual, quarterly, monthly, and daily compounding. More frequent compounding produces slightly higher returns — the calculator shows the difference between each frequency." },
+      { question: "Can I include regular contributions?", answer: "Yes. Add monthly or annual contributions to see how consistent investing accelerates growth. The tool calculates compound interest on both the principal and accumulated contributions." },
+      { question: "What does the growth chart show?", answer: "A visual breakdown of your investment over time: principal contributions (blue), compound interest earned (green), and total value. Hover over any point to see exact values." },
+      { question: "Can I compare different scenarios?", answer: "Yes. Adjust interest rate, contribution amount, and compounding frequency to compare scenarios side by side. This helps optimize your savings strategy." },
+      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
+    ],
   },
   {
     id: "605",
@@ -387,7 +429,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "What inputs does it need?", answer: "Current age, retirement age, current savings, monthly contribution, expected annual return rate, and inflation rate. The calculator projects savings growth to your retirement date." },
+      { question: "Does it account for inflation?", answer: "Yes. Enter an inflation rate to see the real purchasing power of your retirement savings. The tool shows both nominal and inflation-adjusted projections." },
+      { question: "Can I model different scenarios?", answer: "Yes. Adjust contribution amounts, return rates, and retirement age to compare scenarios. See how small changes in monthly savings impact your final nest egg." },
+      { question: "Does it show monthly income in retirement?", answer: "The calculator projects total savings at retirement. For monthly income estimates, divide by your expected withdrawal period (e.g., 25 years for age 65-90)." },
+      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No retirement data is transmitted." },
+    ],
   },
   {
     id: "619",
@@ -397,7 +445,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Revenue Growth Calculator — Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "How is revenue growth calculated?", answer: "Growth rate = (Current Revenue - Previous Revenue) / Previous Revenue × 100. Positive values show growth, negative values show decline." },
+      { question: "Can I calculate month-over-month and year-over-year?", answer: "Yes. Enter any two periods — monthly, quarterly, or annual — to calculate the growth rate between them. MoM and YoY comparisons are common use cases." },
+      { question: "Does it show growth trends?", answer: "Some versions include a trend chart showing growth rate over multiple periods, helping identify acceleration or deceleration patterns." },
+      { question: "Can I use this for MRR/ARR calculations?", answer: "Yes. Enter MRR (Monthly Recurring Revenue) values for consecutive months to calculate MRR growth rate. Annualize with the ARR calculator." },
+      { question: "Is my revenue data stored?", answer: "No. All calculations run locally in your browser. No revenue data is transmitted." },
+    ],
   },
   {
     id: "620",
@@ -652,6 +706,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Body Fat Percentage Calculator — Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. ',
     dependencies: "None",
+    faqs: [
+      { question: "How does the Navy method work?", answer: "It uses circumference measurements (waist, neck, hips) and height to estimate body fat percentage using formulas developed by the US Navy. It's a reliable non-caliper method." },
+      { question: "What measurements do I need?", answer: "For men: waist and neck circumference. For women: waist, neck, and hip circumference. All measurements should be taken at the narrowest point." },
+      { question: "How accurate is this method?", answer: "The Navy method is within 3-4% of DEXA scan results for most body types. It's accurate for general fitness tracking but not for clinical诊断." },
+      { question: "What are the body fat categories?", answer: "Essential fat (2-5% men, 10-13% women), athletes (6-13% men, 14-20% women), fitness (14-17% men, 21-24% women), acceptable (18-24% men, 25-31% women), obese (25%+ men, 32%+ women)." },
+      { question: "Is my measurement data stored?", answer: "No. All calculations run locally in your browser. No body measurements are transmitted." },
+    ],
   },
   {
     id: "650",
@@ -679,6 +740,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. ',
     dependencies: "None",
+    faqs: [
+      { question: "What growth metrics does it calculate?", answer: "Weight-for-age, height-for-age, and weight-for-height percentiles based on WHO Child Growth Standards. These compare your baby's measurements to a reference population of the same age and sex." },
+      { question: "What do the percentile numbers mean?", answer: "A 50th percentile means your baby is average for their age. 25th means 25% of babies are smaller, 75th means 75% are smaller. Consistent growth along a percentile line is what matters most." },
+      { question: "Which age range is supported?", answer: "From birth to 24 months (2 years) using WHO standards. For older children, the WHO school-age growth references apply." },
+      { question: "Should I be worried if my baby is below 50th percentile?", answer: "Not necessarily. What matters is consistent growth over time, not a single measurement. A baby growing steadily at the 25th percentile is healthy. Consult your pediatrician for concerns." },
+      { question: "Is my baby's data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+    ],
   },
   {
     id: "653",
@@ -823,7 +891,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "What is the simple interest formula?", answer: "SI = P × R × T / 100, where P = principal, R = annual interest rate (%), T = time in years. Total amount = P + SI." },
+      { question: "How is this different from compound interest?", answer: "Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest. Simple interest produces lower returns over time." },
+      { question: "What time units are supported?", answer: "Years, months, and days. The calculator converts all time inputs to years for consistent calculation." },
+      { question: "When is simple interest used?", answer: "Short-term loans, car loans, some personal loans, and educational examples. Most mortgages and long-term investments use compound interest." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
+    ],
   },
   {
     id: "671",
@@ -833,7 +907,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "What does this calculator show?", answer: "Future value of your savings based on monthly contributions, interest rate, and time horizon. Shows total contributions, interest earned, and final balance with a growth chart." },
+      { question: "Does it include compound interest?", answer: "Yes. Interest compounds based on your selected frequency (monthly, quarterly, annually). More frequent compounding produces slightly higher returns." },
+      { question: "Can I set a savings goal and see how long it takes?", answer: "Some calculators include a goal mode where you enter a target amount and see how many months/years it takes to reach it at your current savings rate." },
+      { question: "What interest rates should I use?", answer: "Savings accounts: 2-5%. Fixed deposits: 5-7%. Index funds: 8-12% (historical average, not guaranteed). Use conservative estimates for realistic planning." },
+      { question: "Is my savings data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
+    ],
   },
   {
     id: "672",
@@ -843,7 +923,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Seat License Calculator — Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "What inputs are needed?", answer: "Number of seats (users/licenses), price per seat (monthly or annual), and contract duration. The calculator computes total cost, per-period cost, and cost per user per month." },
+      { question: "Can I compare monthly vs annual pricing?", answer: "Yes. Enter both monthly and annual per-seat prices to see the savings from annual commitments. Most SaaS vendors offer 15-25% discounts for annual billing." },
+      { question: "Does it handle tiered pricing?", answer: "For volume discounts, calculate each tier separately and sum the results. The tool shows the linear cost; apply vendor-specific discount tiers manually." },
+      { question: "Can I factor in currency conversion?", answer: "Enter the price in your target currency. The calculator handles the arithmetic; use a separate currency converter for exchange rate conversion if needed." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No pricing or budget data is transmitted." },
+    ],
   },
   {
     id: "673",
@@ -962,6 +1048,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate JSON Server configuration files from endpoint definitions. Set up a fully functional mock API server in seconds.',
     seoDescription: 'Free online API Mock Server Config — Generate JSON Server configuration files from endpoint definitions. Set up a mock API server. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does this tool generate?", answer: "It generates a db.json file and route configuration for JSON Server — a fake REST API. Define your endpoints and the tool outputs ready-to-use config files for instant mock server setup." },
+      { question: "What is JSON Server?", answer: "JSON Server is a Node.js tool that creates a full REST API from a JSON file. It supports GET, POST, PUT, PATCH, DELETE, filtering, pagination, and sorting — no backend code needed." },
+      { question: "Can I define nested resources?", answer: "Yes. Define relationships like /posts/:id/comments by using nested object structures in the endpoint definitions. JSON Server handles the relational routing automatically." },
+      { question: "Does it generate sample data?", answer: "The tool generates the config structure. For sample data, pair it with the Fake Data Generator or populate the db.json manually with realistic entries." },
+      { question: "How do I start the mock server?", answer: "Install JSON Server (npm install -g json-server), then run json-server --watch db.json. The server starts on port 3000 with full CRUD endpoints." },
+    ],
 },
   {
 
@@ -1112,6 +1205,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.',
     seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. ',
     dependencies: "None",
+    faqs: [
+      { question: "Why convert GraphQL Schema to JSON Schema?", answer: "JSON Schema is used by OpenAPI, form validators, and REST API tools. Converting GraphQL schemas enables code generation, validation, and documentation in ecosystems that don't natively support GraphQL." },
+      { question: "What GraphQL features are mapped?", answer: "Scalar types, object types, interfaces, unions, enums, input types, non-null markers, and list types are mapped to their JSON Schema equivalents with appropriate type constraints." },
+      { question: "Does it handle nested types?", answer: "Yes. Nested object types, recursive references, and deeply nested structures are correctly converted with JSON Schema's $ref mechanism for complex types." },
+      { question: "Can I use the output with OpenAPI?", answer: "Yes. The generated JSON Schema can be embedded in OpenAPI definitions, used with schema validators, or fed into code generators that consume JSON Schema." },
+      { question: "Is my schema data stored?", answer: "No. All conversion happens locally in your browser. No schema data is sent to any server." },
+    ],
 },
   {
 
@@ -1132,6 +1232,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build GraphQL subscription queries with custom event names and payload fields. Generate ready-to-use subscription strings.',
     seoDescription: 'Free online GraphQL Subscription Builder — Build GraphQL subscription queries with custom event names and payload fields. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is a GraphQL subscription?", answer: "Subscriptions provide real-time updates over WebSocket connections. When data changes on the server, the server pushes updates to connected clients. They use the same syntax as queries but with the subscription keyword." },
+      { question: "What does this builder generate?", answer: "It generates ready-to-use GraphQL subscription strings with your chosen event name, payload fields, and optional variables. Copy the output directly into your client-side code." },
+      { question: "Can I include nested fields and fragments?", answer: "Yes. The builder supports nested field selection, inline fragments, and variable definitions. Construct complex subscription payloads with the visual field picker." },
+      { question: "Which WebSocket libraries work with the output?", answer: "The generated subscriptions work with Apollo Client, urql, graphql-ws, and any standards-compliant GraphQL WebSocket client." },
+      { question: "Is my schema data stored?", answer: "No. All generation happens locally in your browser. No subscription definitions or schema data is sent to any server." },
+    ],
 },
   {
 
@@ -1142,6 +1249,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test GraphQL queries with variables. Format queries and variables, and preview formatted responses for development and debugging.',
     seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does this tool do?", answer: "Paste a GraphQL query and optional JSON variables, then preview the formatted query and expected response structure. It validates syntax and formats the query for readability." },
+      { question: "Does it execute queries against a real server?", answer: "No. The tester formats and validates queries locally. It does not make network requests to GraphQL servers. Use it for query preparation and debugging." },
+      { question: "Can I test queries with variables?", answer: "Yes. Paste JSON variables alongside your query. The tester parses both, validates variable types against the query, and shows the complete request as it would be sent." },
+      { question: "Does it format the response?", answer: "Yes. If you paste a sample response JSON, it formats and validates it, showing the structure with proper indentation for easy inspection." },
+      { question: "Is my query data stored?", answer: "No. All testing happens locally in your browser. No query or variable data is sent to any server." },
+    ],
 },
   {
 
@@ -1232,6 +1346,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Swagger UI / OpenAPI specs from a simple description. Enter title, version, and endpoints to produce a complete spec JSON.',
     seoDescription: 'Free online Swagger/OpenAPI Generator — Generate Swagger UI / OpenAPI specs from a simple description. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does this tool generate?", answer: "A complete OpenAPI 3.0 spec JSON file with info, servers, paths, and schemas. Enter your API title, version, and endpoints to produce a ready-to-use specification." },
+      { question: "Can I define request/response schemas?", answer: "Yes. For each endpoint, define the HTTP method, path, request body schema, response schemas, and status codes." },
+      { question: "Does it generate Swagger UI?", answer: "The output is an OpenAPI spec JSON that can be loaded into Swagger UI, Redoc, or any OpenAPI-compatible documentation tool." },
+      { question: "Can I import an existing API?", answer: "Enter your endpoints manually. For existing APIs, describe each route and its parameters. The tool structures it into valid OpenAPI format." },
+      { question: "Is my API data stored?", answer: "No. All generation happens locally in your browser. No API data is transmitted." },
+    ],
 },
   {
 
@@ -1332,7 +1453,14 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation for templates and email designs.',
     seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What formatting rules does it apply?", answer: "Proper indentation (configurable 2 or 4 spaces), attribute alignment, closing tag consistency, logical nesting hierarchy, and blank line separation between major sections." },
+      { question: "Does it handle inline styles and scripts?", answer: "Yes. HTML with inline styles, script tags, and embedded CSS is formatted correctly. The content inside script and style tags is preserved without modification." },
+      { question: "Can it format minified HTML?", answer: "Yes. Paste minified or compressed HTML and the formatter will expand it with proper indentation and structure for readability." },
+      { question: "Will it change my HTML semantics?", answer: "No. The formatter only adjusts whitespace, indentation, and formatting. It does not add, remove, or reorder any HTML elements or attributes." },
+      { question: "Is my HTML stored or transmitted?", answer: "No. All formatting happens locally in your browser. No markup is sent to any server." },
+    ],
+  },
   {
 
     id: "721",
@@ -1342,6 +1470,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting for maintainable styles.',
     seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. ',
     dependencies: "None",
+    faqs: [
+      { question: "What formatting rules does it apply?", answer: "Consistent 2 or 4 space indentation, property grouping (layout, visual, typography), one property per line, aligned colons, and logical selector hierarchy for readable stylesheets." },
+      { question: "Can it format minified CSS?", answer: "Yes. Paste minified or compressed CSS and the formatter expands it with proper indentation and structure for readability and maintainability." },
+      { question: "Does it handle SCSS/LESS syntax?", answer: "The formatter is optimized for standard CSS. For SCSS or LESS with nesting and variables, use the dedicated SCSS Formatter or CSS to Less Converter tools." },
+      { question: "Will it change my CSS logic?", answer: "No. The formatter only adjusts whitespace, indentation, and property ordering. It does not merge, remove, or modify any CSS rules or selectors." },
+      { question: "Is my CSS data stored?", answer: "No. All formatting happens locally in your browser. No CSS data is sent to any server." },
+    ],
 },
   {
 
@@ -1392,7 +1527,14 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats Python code with PEP 8 compliant indentation, consistent spacing, and readable structure for scripts and modules.',
     seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What formatting rules does it apply?", answer: "PEP 8 compliant formatting: 4-space indentation, consistent spacing around operators, proper blank lines between functions/classes, trailing commas, and line length awareness." },
+      { question: "Does it handle Python 2 and 3 syntax?", answer: "Yes. The formatter understands both Python 2 and Python 3 syntax, including f-strings, type hints, walrus operators, match statements, and other modern constructs." },
+      { question: "Can it format partial code or snippets?", answer: "Yes. You can paste code snippets, functions, or complete modules. The formatter works on whatever valid Python syntax you provide." },
+      { question: "Will it change my code logic?", answer: "No. The formatter only adjusts whitespace, indentation, and spacing. It does not rename variables, reorder statements, or modify any code logic." },
+      { question: "Is my code stored or transmitted?", answer: "No. All formatting happens locally in your browser. No code is sent to any server." },
+    ],
+  },
   {
 
     id: "729",
@@ -1465,7 +1607,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. ',
     dependencies: "None",
     showInCategory: false,
-},
+    faqs: [
+      { question: "What Flexbox properties can I configure?", answer: "All major flexbox properties: flex-direction, flex-wrap, justify-content, align-items, align-content, align-self, gap, and individual item grow/shrink/basis values." },
+      { question: "Does it show a live preview?", answer: "Yes. The generator shows a real-time preview of your flex layout with colored boxes, so you can see exactly how your CSS configuration arranges elements before copying the code." },
+      { question: "Can I generate CSS for individual flex items?", answer: "Yes. Select any item in the preview to set its individual align-self, order, flex-grow, flex-shrink, and flex-basis properties independently from the container." },
+      { question: "What browsers support flexbox?", answer: "All modern browsers (Chrome, Firefox, Safari, Edge) fully support flexbox. For legacy IE11 support, the generator can output fallback syntax where needed." },
+      { question: "Is the generated CSS production-ready?", answer: "Yes. The output is clean, standard CSS that you can copy directly into your stylesheets. No vendor prefixes are needed for modern browsers." },
+    ],
+    showInCategory: false,
+  },
   {
 
     id: "737",
@@ -1550,6 +1700,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Analyze CSV structure — column types, counts, unique values, and empty cells.',
     seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
+    faqs: [
+      { question: "What analysis does it perform?", answer: "Column types (text, number, date), row count, unique value count, empty/null cell count per column, and data distribution. Identifies data quality issues before analysis." },
+      { question: "Can it detect data types automatically?", answer: "Yes. The analyzer inspects column values and classifies columns as numeric, text, date, or boolean. This helps determine which columns can be used for calculations vs categories." },
+      { question: "Does it show unique values?", answer: "Yes. For each column, the analyzer shows the count of unique values and can list them. This identifies cardinality — whether a column has few categories or many unique entries." },
+      { question: "Can I use this to validate CSV before import?", answer: "Yes. Check for empty cells, unexpected data types, and encoding issues before importing into databases, spreadsheets, or analysis tools." },
+      { question: "Is my CSV data stored?", answer: "No. All analysis happens locally in your browser. No CSV data is sent to any server." },
+    ],
 },
   {
 
@@ -1570,6 +1727,13 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.',
     seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. ',
     dependencies: "None",
+    faqs: [
+      { question: "What does the tree view show?", answer: "JSON structure as an expandable/collapsible tree with nested objects, arrays, and leaf values. Colors distinguish keys (strings), numbers, booleans, and null values." },
+      { question: "Can I expand and collapse branches?", answer: "Yes. Click any object or array node to expand or collapse it. This helps navigate large JSON documents by hiding irrelevant branches." },
+      { question: "Can I copy values from the tree?", answer: "Yes. Click on any leaf value to copy it to clipboard. The tree preserves the full path for context." },
+      { question: "Does it validate the JSON?", answer: "Yes. If the JSON is malformed, the viewer shows an error with the line number and position of the syntax issue." },
+      { question: "Is my JSON data stored?", answer: "No. All visualization happens locally in your browser. No JSON data is sent to any server." },
+    ],
 },
   {
 

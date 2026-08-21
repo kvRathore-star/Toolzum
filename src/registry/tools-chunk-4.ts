@@ -40,7 +40,14 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Timer — Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What time ranges can I set?", answer: "Set any duration from 1 second to 23 hours 59 minutes 59 seconds. Use presets for common intervals: 1 min, 5 min, 10 min, 15 min, 25 min (Pomodoro), 30 min, 45 min, 60 min." },
+      { question: "What happens when the timer reaches zero?", answer: "An alert sound plays and the timer stops. The visual progress bar reaches 100% and the display shows 00:00:00." },
+      { question: "Can I pause and resume?", answer: "Yes. Start, pause, resume, and reset controls are available. The timer remembers the remaining time when paused." },
+      { question: "Does it work in the background?", answer: "The timer continues running if you switch browser tabs. However, some browsers may throttle JavaScript in background tabs, which could cause slight timing drift." },
+      { question: "Is my data stored?", answer: "No. The timer runs entirely in your browser. No data is transmitted or stored." },
+    ],
+  },
   {
 
     id: "783",
@@ -99,6 +106,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Time Duration Calculator — Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. ',
     dependencies: "None",
+    faqs: [
+      { question: "How do I use it?", answer: "Enter a start time and end time in HH:MM format (12-hour or 24-hour). The calculator shows the exact duration in hours, minutes, and seconds." },
+      { question: "Does it handle overnight durations?", answer: "Yes. If end time is before start time (e.g., 10:00 PM to 6:00 AM), it calculates the overnight span correctly as 8 hours." },
+      { question: "Can I use it for flight times or travel?", answer: "Yes. Enter departure and arrival times to calculate exact travel duration, accounting for time zone differences if you adjust the times manually." },
+      { question: "What precision is the output?", answer: "Results are shown in hours, minutes, and seconds. For example, 3 hours 27 minutes 45 seconds (3:27:45)." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No time data is transmitted." },
+    ],
   },
   {
     id: "791",
@@ -395,6 +409,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Percentage Difference Calculator \u2014 Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is percentage difference calculated?", answer: "Formula: |A - B| / ((A + B) / 2) × 100. It uses the average of both values as the denominator, making it symmetric — the result is the same regardless of which value is first." },
+      { question: "How is this different from percentage change?", answer: "Percentage difference compares two values symmetrically. Percentage change compares a new value to an original value: (New - Old) / Old × 100. Use percentage change for before/after comparisons." },
+      { question: "When should I use percentage difference?", answer: "Comparing two measurements, prices, or data points where neither is the 'original'. Example: comparing two product prices, test scores, or experimental results." },
+      { question: "What does a 0% result mean?", answer: "Both values are identical. The percentage difference is zero when there is no difference between the two numbers." },
+      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
   },
   {
     id: "832",
@@ -404,7 +425,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tip Calculator \u2014 Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. ',
     dependencies: "None",
-
+    faqs: [
+      { question: "How does the tip splitting work?", answer: "Enter the bill amount, select a tip percentage, and specify how many people are splitting. The calculator shows the tip amount, total bill, and per-person amount including both bill and tip." },
+      { question: "What tip percentages are available?", answer: "Common presets: 10%, 15%, 18%, 20%, 25%. You can also enter any custom percentage for specific situations like buffets (10%) or exceptional service (25%+)." },
+      { question: "Can I round up the per-person amount?", answer: "The calculator shows exact amounts. You can manually round up the per-person figure to make splitting easier — the extra goes toward a larger tip." },
+      { question: "Does it handle large groups?", answer: "Yes. Split among any number of people. The calculator handles the arithmetic whether it's 2 people or 20." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No bill amounts or tip data are transmitted." },
+    ],
   },
   {
     id: "833",
@@ -444,6 +471,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert fractions to decimal numbers. Shows the step-by-step division process. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Fraction to Decimal Calculator \u2014 Convert fractions to decimal numbers. Shows the step-by-step division process. ',
     dependencies: "None",
+    faqs: [
+      { question: "Does it show the division steps?", answer: "Yes. The calculator displays the step-by-step long division process, showing how the numerator divided by the denominator produces the decimal result." },
+      { question: "Does it handle mixed numbers?", answer: "Yes. Enter mixed numbers (e.g., 3 1/2) and the tool converts them to decimals. It first converts the mixed number to an improper fraction, then divides." },
+      { question: "How does it handle repeating decimals?", answer: "The tool identifies repeating decimal patterns (e.g., 1/3 = 0.333...) and displays them with a bar notation or rounded value." },
+      { question: "What precision is used?", answer: "Results are displayed to 6-10 decimal places depending on the fraction. You can see both the exact fraction and the decimal approximation." },
+      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
   },
   {
     id: "841",
@@ -471,6 +505,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Permutation Calculator \u2014 Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is a permutation?", answer: "A permutation counts the number of ways to arrange k items from n items where order matters. For example, arranging 3 books on a shelf from 5 options = P(5,3) = 60 permutations." },
+      { question: "What is the formula used?", answer: "nPr = n! / (n-k)!. The calculator shows each step: the numerator (n factorial), denominator ((n-k) factorial), and the final division result." },
+      { question: "Does it show the step-by-step calculation?", answer: "Yes. The tool expands the factorial terms, shows the intermediate values, and demonstrates how the division produces the final count." },
+      { question: "How is this different from combinations?", answer: "Permutations count arrangements where order matters (ABC ≠ BCA). Combinations count selections where order doesn't matter (ABC = BCA). Use the Combination Calculator for selections." },
+      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
   },
   {
     id: "847",
@@ -480,6 +521,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Factorial Calculator \u2014 Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is n! (factorial)?", answer: "n! = n × (n-1) × (n-2) × ... × 2 × 1. For example, 5! = 5 × 4 × 3 × 2 × 1 = 120. By definition, 0! = 1." },
+      { question: "How large a number can it handle?", answer: "JavaScript handles numbers up to 2^53. Factorials grow very fast — 18! is the largest exact integer factorial. Beyond that, the tool shows approximate scientific notation." },
+      { question: "Does it show the multiplication steps?", answer: "Yes. The tool displays the full expansion (e.g., 6! = 6 × 5 × 4 × 3 × 2 × 1 = 720) so you can follow the calculation." },
+      { question: "What are common uses of factorials?", answer: "Permutations, combinations, probability calculations, Taylor series, binomial distribution, and various mathematical formulas in statistics and algebra." },
+      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
   },
   {
     id: "848",
@@ -489,6 +537,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check if any number is prime. Also shows all factors and whether the number is odd or even. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. ',
     dependencies: "None",
+    faqs: [
+      { question: "How does it check for primality?", answer: "The tool tests divisibility from 2 up to the square root of the number. If no divisors are found, the number is prime. This is efficient for numbers up to 10^12." },
+      { question: "Does it show all factors?", answer: "Yes. For non-prime numbers, all factors are listed. For prime numbers, the only factors are 1 and the number itself." },
+      { question: "What is the largest number it can check?", answer: "JavaScript handles numbers up to 2^53. The primality test works efficiently for numbers up to about 10^12. Larger numbers may require more time." },
+      { question: "Does it identify prime factors?", answer: "Yes. For composite numbers, the tool can show the prime factorization — the product of prime numbers that equals the original." },
+      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+    ],
   },
   {
     id: "849",
@@ -693,6 +748,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Body Fat Estimator \u2014 Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is body fat estimated from BMI?", answer: "The formula uses BMI, age, and gender to estimate body fat percentage: BF% = (1.20 × BMI) + (0.23 × Age) - (10.8 × Gender) - 5.4, where Gender = 1 for male, 0 for female." },
+      { question: "How accurate is BMI-based estimation?", answer: "Within 3-5% of DEXA scans for most body types. Less accurate for athletes with high muscle mass, elderly, or very lean individuals. Use as a general indicator." },
+      { question: "What fitness categories are shown?", answer: "Essential fat, athletes, fitness, acceptable, and obese categories for both men and women. These follow WHO and ACSM guidelines." },
+      { question: "What inputs do I need?", answer: "Height, weight, age, and gender. The tool calculates BMI internally and applies the age/gender adjustment." },
+      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
+    ],
   },
   {
     id: "874",
@@ -702,6 +764,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Daily Calorie Needs \u2014 Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is BMR calculated?", answer: "BMR (Basal Metabolic Rate) is calculated using the Mifflin-St Jeor equation: for men (10 × weight + 6.25 × height - 5 × age + 5), for women (10 × weight + 6.25 × height - 5 × age - 161)." },
+      { question: "What activity levels are available?", answer: "Sedentary (office job), lightly active (1-3 days exercise), moderately active (3-5 days), very active (6-7 days), and extra active (physical job + daily exercise)." },
+      { question: "What are maintenance, cutting, and bulking?", answer: "Maintenance = calories to maintain current weight. Cutting = 500 calorie deficit for fat loss (~0.5 kg/week). Bulking = 300-500 surplus for muscle gain." },
+      { question: "Does it account for body composition?", answer: "The basic calculator uses weight, height, age, and gender. For more precision based on body fat percentage, use the Katch-McArdle formula variant." },
+      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
+    ],
   },
   {
     id: "875",
@@ -720,6 +789,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Sleep Requirements \u2014 Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. ',
     dependencies: "None",
+    faqs: [
+      { question: "What age groups are covered?", answer: "Newborn (0-3 months), infant (4-11 months), toddler (1-2 years), preschool (3-5 years), school-age (6-13 years), teenager (14-17 years), young adult (18-25 years), adult (26-64 years), and older adult (65+ years)." },
+      { question: "What are the recommended hours?", answer: "Ranges vary by age: newborns need 14-17 hours, infants 12-15, toddlers 11-14, preschoolers 10-13, school-age 9-11, teenagers 8-10, adults 7-9, and older adults 7-8 hours per 24-hour period." },
+      { question: "Where do these guidelines come from?", answer: "Recommendations follow the CDC and National Sleep Foundation guidelines based on peer-reviewed research on sleep needs across the lifespan." },
+      { question: "Does it include nap recommendations?", answer: "The total includes all sleep in a 24-hour period. For infants and toddlers, this includes naps. For adults, the recommendation is for consolidated nighttime sleep." },
+      { question: "Is this medical advice?", answer: "No. This is informational only based on published guidelines. Individual needs may vary. Consult a healthcare provider for specific sleep concerns." },
+    ],
   },
   {
     id: "879",
@@ -756,6 +832,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Blood Alcohol Estimator \u2014 Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is BAC estimated?", answer: "The Widmark formula estimates BAC based on alcohol consumed, body weight, gender (body water percentage), and time elapsed since drinking started. It provides an approximate BAC percentage." },
+      { question: "What drink sizes does it use?", answer: "Standard drink equivalents: 12 oz beer (5% ABV), 5 oz wine (12% ABV), 1.5 oz spirits (40% ABV). Enter the number of standard drinks consumed." },
+      { question: "How accurate is this estimate?", answer: "This is a rough estimate only. Actual BAC varies with metabolism, food intake, genetics, medications, and hydration. Never use this to decide if you can drive." },
+      { question: "What are the legal BAC limits?", answer: "Most US states: 0.08% for drivers. Commercial drivers: 0.04%. Many European countries: 0.05%. Zero tolerance for drivers under 21." },
+      { question: "Is this medical advice?", answer: "No. This is an educational tool only. Do not use it to make safety decisions. If you've been drinking, do not drive." },
+    ],
   },
   {
     id: "885",
@@ -829,6 +912,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Work Hours Calculator \u2014 Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. ',
     dependencies: "None",
+    faqs: [
+      { question: "How does the break deduction work?", answer: "Enter your start time, end time, and break duration in minutes. The calculator subtracts break time from total hours to give your actual worked hours." },
+      { question: "Can I calculate weekly totals?", answer: "Enter daily start/end times for each day of the week and the tool sums total hours. Useful for filling timesheets and calculating weekly pay." },
+      { question: "Does it handle overnight shifts?", answer: "Yes. If your end time is earlier than your start time (e.g., 10 PM to 6 AM), the calculator correctly handles the overnight span." },
+      { question: "Can I enter decimal hours for breaks?", answer: "Break duration is typically entered in minutes. The tool converts everything to decimal hours for consistent timesheet calculations." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No work hours or timesheet data are transmitted." },
+    ],
   },
   {
     id: "894",
@@ -869,7 +959,14 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate password entropy in bits to measure password strength against brute-force attacks. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Password Entropy Calculator \u2014 Calculate password entropy in bits to measure password strength against brute-force attacks. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What is password entropy?", answer: "Entropy measures password randomness in bits. Higher entropy = harder to crack. It accounts for password length and character set size. 40 bits is weak, 60 bits is moderate, 80+ bits is strong." },
+      { question: "How is entropy calculated?", answer: "Entropy = log2(character_pool_size ^ password_length). For example, an 8-character password using lowercase + uppercase + digits + symbols (95 chars) has log2(95^8) = 52.6 bits of entropy." },
+      { question: "What does the crack time estimate mean?", answer: "The tool estimates how long a brute-force attack would take at various guessing speeds (10/sec, 10K/sec, 1B/sec). This shows the real-world impact of entropy on security." },
+      { question: "Should I aim for maximum entropy?", answer: "Balance entropy with memorability. A 16-character passphrase with moderate entropy (Diceware-style) is often more practical than a short high-entropy random string. Use a password manager for truly random passwords." },
+      { question: "Is my password data stored or transmitted?", answer: "No. All calculations run locally in your browser. No password or entropy data is sent to any server." },
+    ],
+  },
   {
 
     id: "899",
@@ -1109,7 +1206,14 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate cryptographically secure CSRF tokens with configurable length and encoding. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online CSRF Token Generator \u2014 Generate cryptographically secure CSRF tokens with configurable length and encoding. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What is a CSRF token?", answer: "A CSRF (Cross-Site Request Forgery) token is a unique, unpredictable value embedded in forms to verify that submissions originate from your site, not a malicious third party." },
+      { question: "How are these tokens generated?", answer: "The tool uses the Web Crypto API to generate cryptographically secure random bytes, then encodes them in your chosen format (hex, base64, or base64url). The output is suitable for production use." },
+      { question: "What encoding should I choose?", answer: "Base64url is recommended for URL-safe tokens in form fields. Hex is human-readable and easy to debug. Base64 is compact but may need URL-encoding in some contexts." },
+      { question: "What token length is secure?", answer: "32 bytes (256 bits) is the recommended minimum for cryptographic security. This provides 2^256 possible values, making brute-force attacks computationally infeasible." },
+      { question: "Is the token generation done locally?", answer: "Yes. Tokens are generated using the browser's Web Crypto API. No token data is sent to any server." },
+    ],
+  },
   {
 
     id: "922",
@@ -1452,6 +1556,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Waist-to-Hip Ratio Calculator — Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is waist-to-hip ratio calculated?", answer: "WHR = waist circumference / hip circumference. Measure waist at the narrowest point (above belly button) and hips at the widest point (around buttocks)." },
+      { question: "What do the risk categories mean?", answer: "Men: low risk (<0.90), moderate (0.90-0.99), high (1.00+). Women: low risk (<0.80), moderate (0.80-0.84), high (0.85+). Higher WHR indicates greater cardiovascular and diabetes risk." },
+      { question: "How does this compare to BMI?", answer: "WHR measures fat distribution (apple vs pear shape). BMI measures overall weight relative to height. WHR is a better predictor of cardiovascular risk than BMI alone." },
+      { question: "Should I use cm or inches?", answer: "The ratio is the same regardless of unit. Use whichever measuring tape you have — the WHR value is unit-agnostic." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No measurement data is transmitted." },
+    ],
   },
   {
 
@@ -1539,6 +1650,13 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Essential for parsing CSV data, extracting fields, and breaking structured text into components.',
     seoDescription: 'Free online Text Splitter — Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Parse CSV data, extract fields, and break structured text into components.',
     dependencies: "None",
+    faqs: [
+      { question: "What delimiters are supported?", answer: "Comma, space, tab, newline, pipe (|), semicolon, colon, and any custom delimiter string. Choose the one that matches your data format." },
+      { question: "How are the results displayed?", answer: "Each split part is shown as a numbered item. You can see the total count and copy individual parts or the entire result." },
+      { question: "Can I split by multiple delimiters?", answer: "Use a custom delimiter with regex-like patterns, or split sequentially — first by one delimiter, then by another on the results." },
+      { question: "Does it handle quoted CSV fields?", answer: "For basic splitting, quoted fields may be split incorrectly. For proper CSV parsing with quotes, use the CSV Analyzer or CSV tools instead." },
+      { question: "Is my text data stored?", answer: "No. All splitting happens locally in your browser. No text data is sent to any server." },
+    ],
   },
   {
 
